@@ -1,0 +1,81 @@
+= Upgrade Instructions =
+[[TracGuideToc]]
+
+A [TracEnvironment Trac environment] needs to be upgraded before it can be used with Trac 0.11. This document describes the steps necessary to upgrade an environment.
+
+Environment upgrades are not necessary for minor version releases unless otherwise noted. 
+
+== Instructions ==
+
+Typically, there are four steps involved in upgrading to a newer version of Trac:
+
+=== Update the Trac Code ===
+
+Get the new version as described in TracInstall, or your operating system specific procedure.
+
+If you do a manual (not operating system specific) upgrade, you may also later on want to remove the existing Trac code by deleting the `trac` directory from the Python `lib/site-packages` directory.
+
+The location of the site-packages directory depends on the operating system, and the location in which Python was installed. However, the following locations are common:
+ * If you’re using Linux: /usr/lib/python2.X/site-packages
+ * If you’re using Windows: C:\Python2.X\lib\site-packages
+ * If you’re using MacOSX: /Library/Python2.X/site-packages
+
+You may also want to remove the Trac `cgi-bin`, `htdocs`, `templates` and `wiki-default` directories that are commonly found in a directory called `share/trac` (the exact location depends on your platform).
+
+If you had the webadmin plugin installed, you can now uninstall it as it is now part of the Trac code base.
+
+=== Upgrade the Trac Environment ===
+
+After restarting, Trac should show the instances which need a manual upgrade via the automated upgrade scripts to ease the pain. These scripts are run via [TracAdmin trac-admin]:
+{{{
+trac-admin /path/to/projenv upgrade
+}}}
+
+This command will do nothing if the environment is already up-to-date.
+
+Note that if you are using a PostgreSQL database, this command will fail with the message that the environment can only be backed up when you use an SQLite database. This means that you will have to backup the repository and the database manually. Then, to perform the actual upgrade, run:
+{{{
+trac-admin /path/to/projenv upgrade --no-backup
+}}}
+
+If you are using custom CSS styles or modified templates in the templates directory of the TracEnvironment, you will need to convert them to the Genshi way of doing things. To continue to use your style sheet, follow the instructions at TracInterfaceCustomization#SiteAppearance.
+
+=== Update the Trac Documentation ===
+
+Every [TracEnvironment Trac environment] includes a copy of the Trac documentation for the installed version. As you probably want to keep the included documentation in sync with the installed version of Trac, [TracAdmin trac-admin] provides a command to upgrade the documentation:
+{{{
+trac-admin /path/to/projenv wiki upgrade
+}}}
+
+Note that this procedure will of course leave your `WikiStart` page intact.
+
+=== Trac Macros, Plugins ===
+The Trac macros will need to be adapted, as the old-style wiki-macros are not supported anymore (due to the drop of ClearSilver and the HDF); they need to be converted to the new-style macros, see WikiMacros. When they are converted to the new style, they need to be placed into the plugins directory instead and not wiki-macros, which is no longer scanned for macros or plugins.
+
+=== Restart the Web Server ===
+If you are not running [wiki:TracCgi CGI], reload the new Trac code by restarting your web server.
+
+== Known Issues ==
+=== parent dir ===
+If you use a trac parent env configuration and one of the plugins in one child does not work, none of the children work.
+=== some core modules won't load === 
+This can happen in particular with Python 2.3 on Windows when upgrading without uninstalling first.
+Some modules were previously capitalized and were changed to lower case, e.g. trac/About.py became trac/about.py. You may find such messages in the Trac log:
+{{{
+ERROR: Skipping "trac.about = trac.about": (can't import "No module named about")
+}}}
+Remove the `Lib/site-packages/trac` folder and reinstall.
+=== Wiki Upgrade ===
+`trac-admin` will not delete or remove pages that were in version 0.10 but now are not in version 0.11, such as WikiMacros.
+
+== Changing Database Backend ==
+== SQLite to PostgreSQL ==
+
+The [http://trac-hacks.org/wiki/SqliteToPgScript sqlite2pg] script on [http://trac-hacks.org trac-hacks.org] has been written to assist in migrating a SQLite database to a PostgreSQL database
+
+== Older Versions ==
+
+For upgrades from former versions refer to wiki:0.10/TracUpgrade.
+
+-----
+See also: TracGuide, TracInstall
