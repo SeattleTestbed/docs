@@ -1,0 +1,40 @@
+= The Trac Repository Browser =
+[[TracGuideToc]]
+
+The Trac repository browser can be used to browse directories 
+and specific revisions of files stored in the repository of the configured
+version control system.
+
+Directory entries are displayed in a list with sortable columns. The list 
+entries can be sorted by ''name'', ''size'' or ''age'' by clicking on the column
+headers. The sort order can be reversed by clicking on a given column
+header again.
+
+The browser can be used to navigate through the directory structure 
+by clicking on the directory names. Clicking on a file name will show
+the contents of the file. Clicking on the revision number of a file or
+directory will take you to the TracRevisionLog for that file.
+Note that there's also a ''Revision Log'' navigation link that will do
+the same for the path currently being examined.
+
+It's also possible to browse directories or files as they were in history,
+at any given repository revision. The default behavior is to display the
+latest revision but another revision number can easily be selected using
+the ''View revision'' input field at the top of the page.
+
+''(since 0.11)'':
+
+At the top of the browser page, there's a drop-down menu which you can use 
+to select some interesting places in the repository, for example branches or tags. 
+This is sometimes referred to as the ''browser quickjump'' facility.
+The precise meaning and content of this menu depends on your backend.
+For Subversion, this list contains by default a few branches (`trunk` and any sub-folder of the latest `branches` top-level folder) and a few tags (any sub-folder of the latest `tags` top-level folder). This can be [TracIni#svn-section configured] for more advanced cases.
+
+If you're using a Javascript enabled brower, you'll be able to expand and collapse folders in-place by clicking on the arrow head at the right side of a folder. Alternatively, the keyboard can also be used for this: use 'j' and 'k' to go to the next or previous entry, and 'o' (or 'Enter') to toggle between expanded and collapsed state of the selected folder or for visiting the selected file.
+
+For the Subversion backend, some additional features are available:
+ - support for `svn:needs-lock` property
+ - support for `svn:externals` property (which can be [TracIni#svn:externals-section configured])
+
+----
+See also: TracGuide, TracChangeset, TracFineGrainedPermissions
