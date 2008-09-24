@@ -2,7 +2,7 @@
 
 
 
-* Talks
+* [Talks]
 
 
 Trac is a '''minimalistic''' approach to '''web-based''' management of
