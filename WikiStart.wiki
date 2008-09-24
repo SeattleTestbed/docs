@@ -2,7 +2,7 @@
 
 
 
-* [Talks]
+ * SeattleTalks -- Upcoming talks about Seattle 
 
 
 Trac is a '''minimalistic''' approach to '''web-based''' management of
