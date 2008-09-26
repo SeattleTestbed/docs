@@ -1,9 +1,9 @@
 = Anonymous Access =
 
-  svn co http://seattle.cs.washington.edu/svn/seattle/trunk/
+  svn co !http://seattle.cs.washington.edu/svn/seattle/trunk/
 
 or browse the repository through a web-browser:
-  http://seattle.cs.washington.edu/svn/seattle/trunk/
+  !http://seattle.cs.washington.edu/svn/seattle/trunk/
 
 = Developer Access =
 
