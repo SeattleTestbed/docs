@@ -5,7 +5,7 @@
 
 ----
 
-== Starting Points ==
+== How to use this site ==
  * WikiFormatting -- Wiki formatting commands
  * TracGuide --  Built-in Documentation
  * [http://trac.edgewall.org/wiki/TracFaq Trac FAQ] -- Frequently Asked Questions
