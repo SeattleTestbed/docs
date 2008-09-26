@@ -3,15 +3,9 @@
  * SeattleTalks -- Upcoming talks about Seattle 
  * RepoAccess -- SVN access instructions
 
-= Welcome to Trac 0.11.1 =
+----
 
-Trac is a '''minimalistic''' approach to '''web-based''' management of
-'''software projects'''. Its goal is to simplify effective tracking and handling of software issues, enhancements and overall progress.
-
-All aspects of Trac have been designed with the single goal to 
-'''help developers write great software''' while '''staying out of the way'''
-and imposing as little as possible on a team's established process and
-culture.
+= !HowTo =
 
 As all Wiki pages, this page is editable, this means that you can
 modify the contents of this page simply by using your
