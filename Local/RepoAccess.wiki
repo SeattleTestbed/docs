@@ -9,18 +9,18 @@ or browse the repository through a web-browser:
 
 To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email ivan@cs. Once you can ssh into the machine, you can use the following line to co the trunk:
 
-  svn co svn+ssh://seattle.cs.washington.edu/svn/seattle/trunk/
+  svn co !svn+ssh://seattle.cs.washington.edu/svn/seattle/trunk/
 
 = Quick Guide to SVN =
 
 To take a look inside the repository without checking anything out:
-  svn list svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy
+  svn list !svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy
 
 To check out the entire seattle repository:
-  svn checkout svn+ssh://testbed-ubuntu.cs.washington.edu/seattle
+  svn checkout !svn+ssh://testbed-ubuntu.cs.washington.edu/seattle
 
 To check out a portion of it, e.g. just the repy code sub-folder:
-  svn checkout svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy
+  svn checkout !svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy
 
 Once you make edits inside the repo, typical CVS usage applies. First do an update, then a commit:
   svn update
