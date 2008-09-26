@@ -1,7 +1,11 @@
-== Seattle Talks ==
+== Seattle Events ==
 
- * Oct 15th, 3:30-4:30   Paul Allen 605      Database Seminar                 Justin
+|| When || Where || For Whom || Who || What
 
- * Oct 26th, ?           San Fransisco       GENI Engineering Conference      Justin
+|| Oct 15th, 3:30-4:30 || Paul Allen 605 ||  Database Seminar || Justin || Talk
 
- * Nov 6-8th, ?          Paul Allen Commons  (PN-ASEE/WCERTE)                 Justin
+|| Oct 20th ||  UW  ||   Used in Graduate Networking class || || Classroom use
+
+|| Oct 26th, ? || San Fransisco || GENI Engineering Conference || Justin || Talk
+
+|| Nov 6-8th, ? || Paul Allen Commons || (PN-ASEE/WCERTE) || Justin || Talk
