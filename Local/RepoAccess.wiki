@@ -33,4 +33,4 @@ To add new or remove existing files/directories use:
   {{{svn remove [filename]}}}
 
 If you have conflicts, you must tell SV explicitly that you have resolved them, otherwise SVN will fail to commit\update these files:
-svn resolve [filename]
+  {{{svn resolve [filename]}}}
