@@ -1,0 +1,87 @@
+
+= Building a reference monitor =  
+
+This assignment illustrates how to attack reference monitors. It is a natural extension of '''[https://seattle.cs.washington.edu/wiki/EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne]'''.
+
+'''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
+
+[[TOC(inline)]]
+
+
+[[BR]]
+== Overview ==
+----
+In the first part of the assignment, students are asked to write a reference monitor. The reference monitor is supposed to disallows "MZ" to be written to the first two characters of a file.  Then students will create test files, to insure their security layer accomplishes the intended task. In the second half of the assignment students will be sent reference monitors from other students in the class.  They will attack these reference monitors by writing a series of robust test cases. These cases will attempt to write "MZ" to the first two characters of a file.
+
+Through this assignment students will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+
+ * Accuracy: Students are expected to only disallow "MZ" to the be the first two characters. Hence all other characters should be allowed.
+ * Efficiency: Students are expected to disallow this write with a minimum amount of code.
+ * Security: The attacker should not be able to get around the security layer.
+
+'''Note:''' A full discourse of how to write test cases and security layers is given below.      
+
+[[BR]]
+== Prerequisites ==
+
+[[BR]]
+=== Getting to know Python/Repy ===
+----
+Students will need Python and the Repy API in order to complete this assignment.  Repy can be downloaded '''[https://seattle.cs.washington.edu/geni/download/flibble/ here]'''.  Once obtained students should read the Repy tutorial found [wiki:RepyTutorial here].
+[[BR]]
+=== Helpful links ===
+----
+The following links will aid students in becoming comfortable with Python, Repy and seattle:
+ * Python tutorial: '''[http://docs.python.org/tutorial/ here]'''
+ * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy here]'''
+[[BR]]
+== Implementation ==
+
+[[BR]]
+=== Building a security layer  ===
+----
+Students are now ready to build a reference monitor.  A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
+[[BR]]
+=== Attacking other security layers ===
+----
+In the second half of the assignment students will create programs which write "MZ" to the first two characters of a file.  These programs should be similar to the test cases used in the first half of the assignment.  Attacks should include several methods of attempting to write "MZ" to a file.  Students will then test their attack on a collection of reference monitors supplied by the instructor.  Students should attack at least five other reference monitors.  Students should be graded based on how well their reference monitor performs when attacked by others.  Also students should be graded on how well they critique the reference monitors of others.
+
+'''Note:''' These other reference monitors should come from the other students.
+
+Credit should be given to students for successfully attacking other students reference monitors and critiquing other student's reference monitors.  In addition instructors may choose to remove points if student's reference monitor is successfully attacked.
+
+  
+[[BR]]
+== Notes and Resources ==
+----
+   
+ * The following link is an excellent source for information about security layers: http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf
+
+ * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
+
+ * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
+
+ * Students are able to add multiple security layers to Repy, this may be useful for testing different mitigations separately.
+
+ * It may be instructive to have students attack more than five reference monitors.
+
+ * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
+
+
+[[BR]]
+== Extra Credit ==
+----
+As extra credit, students may make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  This is a natural extension of the first exercise.  In the second half of the assignment, students can attack these extra credit reference monitors for more extra credit.  Students should also be supplied with the extra credit reference monitors written by classmates, if possible.
+[[BR]]
+== What to turn in? ==
+----
+
+In the first half of the assignment:
+ * Turn in a repy file called reference_monitor_[student's name or id number].repy
+ * For extra credit turn in a second repy file called extra_credit_[student's name or id number].repy
+
+
+For the second half of the assignment:
+ 
+ * Turn in the test cases used to attack a given reference monitor.  
+ * Turn in the write up of each reference monitor attacked, with critique of the reference monitor.  Critique should include all test cases that worked.

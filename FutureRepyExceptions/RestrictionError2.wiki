@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, RestrictionError occurs when a repy program calls a function or method that is either restricted, or has restricted arguments.

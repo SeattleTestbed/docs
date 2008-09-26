@@ -1,0 +1,264 @@
+ = bundle.repy =
+----
+bundler.py provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.  Not all bundles must be self-extracting, as you can also create bundles (e.g. in your program via the API) to facilitate file transfer.  Aside from self-extraction, there is no difference between a self-extracting bundle and a non-self-extracting bundle.  All of the actions described in this document can be performed on either bundle type, and will produce the same results.
+
+Bundles are identified by a '''.bundle''' extension.  Self-extracting bundles are identified by a '''.bundle.repy''' extension.
+
+[[TOC(inline)]]
+
+[[BR]]
+ == Quickstart Guide ==
+----
+To create a bundle '''myprog.bundle.repy''', containing the files '''a.txt''', '''bfile''' and '''cdat''' within the program '''myprog.repy''', do the following:
+
+{{{
+#!sh
+python bundler.py c myprog.repy myprog.bundle.repy # Create a bundle myprog.bundle.repy containing the contents of myprog.repy.
+python bundler.py a myprog.bundle.repy a.txt bfile cdat # list the files that we want to add
+}}}
+
+[[BR]]
+ == How to Use ==
+----
+ === Command-Line ===
+----
+A command-line wrapper of this class is available, and is accessed via the Python program '''bundler.py'''.  The functionality provided is largely identical to that provided by the API.
+
+|| Action || Syntax || Description ||
+|| c      || $ python bundler.py c source_fname output_fname || Creates a bundle.  You can either create the bundle as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. ||
+|| a      || $ python bundler.py a bundle_fname file1 file2 ... || Adds the specified files to the bundle. ||
+|| e      || $ python bundler.py e bundle_fname file1 file2 ... || Extracts the specified files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| e*     || $ python bundler.py e* bundle_fname || Extracts all files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| l      || $ python bundler.py l bundle_fname || Lists the contents of the bundle. ||
+|| r      || $ python bundler.py r bundle_fname file1 file2 ... || Removes the specified files from the bundle.  Note: This data cannot be recovered! ||
+|| r*     || $ python bundler.py r* source_fname output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  You can either save the result as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. || 
+
+
+[[BR]]
+ == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
+----
+We have a repy program '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
+
+Assume that we have the following files in the current directory:
+ * httpserver.repy - This is our simple http server that serves the files '''logo.png''' and '''index.html'''.
+ * logo.png
+ * index.html
+ * error.log
+[[BR]]
+=== Creating a Data Bundle ===
+----
+First, we must create a data bundle.  The data bundle contains the script for auto-extraction, but lacks the dependencies needed to perform the operation.  We can pass this bundle through the repy preprocessor to enable the auto-extraction feature later, when we are done inserting files.
+{{{
+#!sh
+$ python bundler.py c httpserver.repy server.bundle
+}}}
+[[BR]]
+=== Adding Files to a Bundle ===
+----
+Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
+{{{
+#!sh
+$ python bundler.py a server.bundle logo.png index.html error.log
+}}}
+
+
+[[BR]]
+=== Removing Elements from a Bundle ===
+----
+It seems like we've accidentally included '''error.log'''!  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
+{{{
+#!sh
+$ python bundler.py r server.bundle error.log
+}}}
+
+[[BR]]
+=== Checking a Bundle's Contents ===
+----
+Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''logo.png''' and '''index.html'''.  The listed file sizes are their sizes within the bundle.
+{{{
+#!sh
+$ python bundler.py l server.bundle
+}}}
+And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
+{{{
+Bundle contents:
+Filename   Size (bytes)
+logo.png   23536
+index.html 1338
+}}}
+
+[[BR]]
+=== Generating the Auto-Extracting Bundle ===
+----
+Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
+Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
+{{{
+#!sh
+$ python repypp.py server.bundle httpserver.bundle.repy
+}}}
+
+Congratulations, you now have an auto-extracting bundle named httpserver.bundle.repy!
+
+[[BR]]
+=== Extracting Files from a Bundle ===
+----
+Even though the most useful feature of the bundler is its self-extraction feature, you can also extract files from the bundle manually.  You can do it in two ways:
+
+You can do it on a file-by-file basis:
+{{{
+#!sh
+$ python bundler.py e httpserver.bundle.repy logo.png index.html
+}}}
+
+Or you can tell the bundler to extract everything simultaneously:
+{{{
+#!sh
+$ python bundler.py e* httpserver.bundle.repy
+}}}
+
+[[BR]]
+=== Clearing a Bundle / Source File Recovery ===
+----
+However, now suppose you need access to the original httpserver code.  However, you only have access to the bundle, as a colleague of yours never bothered to include a version of the original source code.  You can use the clear function to remove all traces of a bundle from a file.
+{{{
+#!sh
+$ python bundler.py r* httpserver.bundle.repy original_httpserver.repy
+}}}
+
+
+
+[[BR]]
+== API Usage Example: Creating an Automated Experiment Script ==
+----
+Suppose you plan to use several hundred vessels to parse a two related data sets. You have the test script ('''experiment.repy''') written and ready for deployment. You have a script ('''generate_experiment.py''') that partitions the data into 1000 pairs ('''rawdataAXXX''', '''rawdataBXXX''') that the test script will utilize. The vessels will generate three types of output per update, '''UsageDataXXX_YYY''', '''PerformanceDataXXX_YYY''', and '''DatasetQualityXXX_YYY''', where XXX is the experiment #, and YYY is the update #. These vessels will periodically send the results back to the main server, so that not all data is lost if these vessels go down.
+
+For this demonstration, we will work with generating chunk !#143.
+
+[[BR]]
+=== Creating a Data Bundle ===
+----
+In order to create an auto-extracting bundle, we must first create a data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate a data bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''.  There are two ways we can go about creating bundles, though only the first method is applicable for the current task:
+
+{{{
+#!repy
+# We assume that the experiment doesn't already exist in the current directory.
+experiment_bundle = bundle_bundle('experiment143.bundle', 'w', source='experiment.repy')
+
+# Not always the best idea, overwrite the original file.
+experiment_bundle = bundle_bundle('experiment143.bundle', 'w', overwrite=True)
+}}}
+
+
+[[BR]]
+=== Adding Files to a Bundle ===
+----
+Now, we add the experiment data to the experiment script. These data elements are '''rawDataA143''' and '''rawDataB143'''.  For sake of demonstration, we assume that the data elements will be first written to files in the current directory, named '''rawDataA143''' and '''rawDataB143'''. We will bundle these files into '''experiment143.bundle'''.
+
+{{{
+#!repy
+# The filenames of the files to add
+dataFnames = ['rawDataA143', 'rawDataB143']
+experiment_bundle.add_files(dataFnames)
+}}}
+
+
+[[BR]]
+=== Generating the Auto-Extracting Bundle ===
+----
+The experiment bundle is now finalized. We are ready convert it to an auto-extract bundle. To do this, we need to utilize the repy preprocessor. The output auto-extracting bundle will be called '''experiment143.bundle.repy'''.
+
+{{{
+#!repy
+import sys
+import subprocess
+generation_process = subprocess.Popen(
+    [sys.executable, 'repypp.py', 'experiment143.bundle', 'experiment143.bundle.repy'], 
+    stdout=subprocess.PIPE, 
+    stdin=subprocess.PIPE, 
+    stderr=subprocess.PIPE)
+generation_process.wait()
+}}}
+
+[[BR]]
+=== Adding Strings to a Bundle ===
+----
+We will assume that you have a script that will acquire the vessels and start the experiment for you.  '''experiment143.bundle.repy''' will automatically extract the files that were bundled with it, and start executing. Now suppose that the experiment script is ready to dump its first set of data, '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.  These datum are already in strings.  Additionally, we have already instantiated a bundle in the variable '''outputbundle'''.
+
+{{{
+#!repy
+outputbundle.add_string('parsed_usage_data143_000', parsed_usage_data)
+outputbundle.add_string('parsed_performance_data143_000', parsed_performance_data)
+outputbundle.add_string('dataset_quality143_000', dataset_quality)
+}}}
+
+[[BR]]
+=== Removing Elements from a Bundle ===
+----
+We don’t have unlimited disk space on our vessel, so we prefer to overwrite our bundle instead of generating thousands of files. To do this, we will first remove our old bundled data, and then add the new strings into it. We will only demonstrate the removal of the data, as adding them back is done the same way as described above. Once again, the data elements in question are in the bundle with the filenames '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.
+{{{
+#!repy
+old_filenames = ['parsed_usage_data143_000', 'parsed_performance_data143_000', 'dataset_quality143_000']
+outputbundle.remove_files(old_filenames)
+}}}
+
+[[BR]]
+=== Checking a Bundle’s Contents ===
+----
+Assume that we have a script that will fetch the parsed bundles and place them in the current directory. The collection service will periodically check the current directory for new updates, and extract the parsed data from them. Since we only need to retrieve data, we’ll open this bundle in read-only mode. First we need to check the bundle contents to find which update this is.
+
+{{{
+#!repy
+bundle_contents = obtainedbundle.contents()
+}}}
+
+Printing bundle_contents might produce the following output:
+{{{
+#!python
+{'parsed_usage_data143_000': {'length': 623}, 'parsed_performance_data143_000': {'length': 1342}, 'dataset_quality143_000': {'length': 987231}}
+}}}
+
+[[BR]]
+=== Reading Strings from a Bundle ===
+----
+Now, after we extracted the experiment # and update #, we can extract the actual data. The experiment # and update # are stored in '''experiment_number''' and '''update_number''', respectively.
+{{{
+#!python
+parsed_usage_data = obtainedbundle.extract_string('parsed_usage_data143_000')
+parsed_performance_data = obtainedbundle.extract_string('parsed_performance_data143_000')
+dataset_quality = obtainedbundle.extract_string('dataset_quality143_000')
+}}}
+
+=== Extracting Files from a Bundle ===
+In addition, we can also extract these files into files directly. 
+We can do them one by one...
+{{{
+#!python
+fnames_to_extract = ['parsed_usage_data143_000', 'parsed_performance_data143_000', 'dataset_quality143_000']
+obtainedbundle.extract_files(fnames_to_extract)
+}}}
+
+Or do them all simultaneously.
+{{{
+#!python
+obtainedbundle.extract_all_files()
+}}}
+
+
+=== Clearing a Bundle / Original Source File Recovery ===
+Now suppose you forgot to back up all your experiment data, and the only thing you have left is a experiment bundle '''experiment143.bundle.repy''' that you've previously deployed to a vessel, and you'd like to recover the original experiment script to the file '''experiment_copy.repy'''.  There are two ways to go about this:
+
+{{{
+#!repy
+# Safe recovery, we save the results to an external file
+bundle_clear_bundle_contents('experiment143.bundle.repy', 'experiment_copy.repy')
+
+# Not always the best idea, we overwrite the original file
+bundle_clear_bundle_contents('experiment143.bundle.repy', overwrite=True)
+
+}}}
+
+ [[BR]]
+== Includes ==
+----
+ * [wiki:SeattleLib/base64.repy]
+ * [wiki:SeattleLib/serialize.repy]

@@ -1,0 +1,104 @@
+= Behavior of the Mobility Shim and Related Shims =
+
+As it stands now, the mobility shim doesn't really work, and there are additional issues that prevent it from working well with other shims to handle disconnections when IPs change or NATs are involved.
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+
+== Shims ==
+----
+
+[[BR]]
+
+=== Mobility Shim ===
+----
+The mobility shim is suppose to detect disconnections and reconnect, giving the layer above it the illusion that there was never any disconnection. It also adjusts if it sees it's own IP change, and is suppose to work with the coordination shim to support reestablishing connections when the server's IP changes.
+
+==== Behavior ====
+ * If the client detects that it has been disconnected, it will attempt to reconnect to the server
+ * If a call to a given server socket's getconnection method sees a new connection from a remote IP and remote port combination which corresponds to an unclosed socket, then it updates that socket to use the new connection
+ * If the client is disconnected and sees that it's IP has changed, it will use the new IP to reconnect
+ * If the server's IP changes, it will update the server socket to listen on the new IP
+
+==== Issues ====
+ * The client detects disconnection by seeing if it's been more then 10 seconds since it's been able to send and receive, but this results in it closing and trying to reconnect idle connections
+ * Disconnections seem to result in !SocketClosedRemote being raised, which closes the mobility shim sockets and prevents them from trying to reconnect if there was an actual disconnection
+ * If the server never calls getconnection on the specific server socket which returned a given socket, then there is no way for the server to update a disconnected socket with the new connection made by the client reconnecting
+ * When the client is trying to reconnect, it may take awhile since the operating system needs to clean up the old socket before the client can reconnect
+ * If the client changes IP, the server won't recognize the new connection as coming from the same place as the previous connection, so the client will think it has reestablished a connection, but the server will think it is a new connection
+ * If the server changes IP, then the client will still try to reconnect to the server's old address since it doesn't know the server has changed IP
+ * If the client is behind a NAT, then even if it doesn't change IP, the server will see each reconnection as coming from a different port, so it will mistake the reconnection for a new connection
+
+[[BR]]
+
+=== NAT Punch Shim ===
+----
+The NAT shim allows a server to be behind a NAT by forwarding all traffic through a NAT forwarder.
+
+==== Behavior ====
+ * When listening for connections, the server connects to and registers itself with a forwarder, and is identified by IP and port the server is using locally
+ * Client talks to forwarder to request connection to server, and is identified by the remote IP and remote port the forwarder sees for the client
+ * Forwarder relays traffic between server and client
+
+==== Issues ====
+ * If the connection between the server and the forwarder is broken by a disconnection, then the server socket will raise !SocketClosedLocal if getconnection is called, which I'm fairly sure shouldn't happen if the socket hasn't actually been closed locally.
+ * The NAT shim uses a small enough timeout when connecting to a forwarder to register itself as a server, and the coordination shim is slow enough when first connecting, that in practice you can't listen for connections unless you increase the DEFAULT_TIMEOUT value in natpunchshim.repy
+
+[[BR]]
+
+=== Coordination Shim ===
+----
+The coordination shim makes sure that the client's shim stack is balanced with the stack of the server it is connecting to, and allows a server to listen on a [wiki:Zenodotus Zenodotus] hostname
+
+==== Behavior ====
+ * The server advertises the shim stack it is using
+ * The client looks up the server's shim stack before connecting, and then connects with the advertised shim stack so the server and client are balanced
+ * If the server listens for connections on a Zenodotus hostname, then the coordination shim will advertise that name, allowing a client to find the server though that hostname, even if the server's IP changes
+
+==== Issues ====
+ * The coordination shim is suppose to somehow help the mobility shim recover from disconnections if the server changes it's IP, but there's really no support for the client opening a connection to a given Zenodotus hostname, and even if there was, the coordination shim is suppose to be at the top of the shim stack, so that really won't help a mobility shim below it reconnect
+ * Allowing the application to pass a Zenodotus hostname into listenforconnection as the local IP changes semantics, since the local IP is suppose to be an IP
+
+[[BR]]
+== Situations and Results ==
+----
+
+[[BR]]
+
+=== No NATs ===
+----
+
+Disconnection
+ * You should just be able to use the mobility shim. Currently this wouldn't work due to issues with the mobility shim, though.
+
+Client changes IP
+ * The mobility shim has no way to handle this now, but it would make sense to have the client pass the server some kind of connection ID when it reconnects, which will also resolve all the issues where the client is reconnecting but the server thinks it is a new connection
+
+Server changes IP
+ * When the client reconnects, it won't be able to find the server, so you need something beyond the mobility shim to handle this
+ * The combination of the mobility shim and coordination shim is suppose to handle this case, but it doesn't seem to be able to
+ * We can fix the coordination shim so it works as intended, make the mobility shim handle this, or move the Zenodotus advertising functionality to a new shim
+
+[[BR]]
+
+=== Client behind a NAT ===
+----
+
+Disconnection or Client changes IP
+ * Between fixing the general issues with the mobility shim handling disconnects and changing the mobility shim to use connection IDs of some sort to identify the client, the mobility shim will be able to handle these cases
+
+Server changes IP
+ * Given the changes necessary for handling disconnections when the client is behind a NAT, any general solution for handling the server changing IP should also work here
+
+[[BR]]
+
+=== Server behind a NAT ===
+----
+If the server is behind a NAT, then you need to use the NAT shim somewhere in the shim stack. Shims can then either be above the NAT shim or between the NAT shim and the NAT forwarder.
+
+If we put the mobility shim above the NAT shim, then we run into problems with disconnections breaking the connection created by the NAT shim's listenforconnection method to get new connections from the server. Additionally, if the server changes IP, then we still have problems reconnecting.
+
+If we put the mobility shim between the NAT shim and the forwarder, then the changes which support the client being behind a NAT would work here. This follows from the fact that the NAT forwarder doesn't open any connections to either the server or the client. We could even have both the client and the server being behind NATs and changing IP address, and the configuration would still be able to recover from disconnections. This is, of course, assuming the NAT forwarder's IP address doesn't change.

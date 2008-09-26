@@ -1,0 +1,36 @@
+= Centralized Advertise Service =
+
+The Centralized Advertise daemon implements a centralized DHT. This DHT is used by Seattle nodes when OpenDHT is not available. This service runs on seattle.cs, which is also known as satya.cs
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== Configuration ==
+----
+
+ * The advertise server is deployed in /home/justinc/advertiseserver
+
+[[BR]]
+== Deployment ==
+----
+
+TODO: We do not have a deployment script for the advertiseserver
+
+[[BR]]
+== Starting/Stopping the Service ==
+----
+
+To start the advertise server run the following command from within the directory in which the service is deployed:
+
+{{{
+$ python repy.py restrictions.advertiseserver advertiseserver.py
+}}}
+
+To stop the service, perform a '''kill $PID''' where $PID is the process id of the command above, which you can find using the following command:
+
+{{{
+$ ps auwx | grep advertise | grep -v grep
+}}}
+

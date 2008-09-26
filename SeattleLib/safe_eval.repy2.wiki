@@ -1,0 +1,36 @@
+= safe_eval.repy =
+
+Provides a method to safely evaluate a string. See usage for more information.
+
+
+=== Functions === 
+
+
+{{{
+def safe_eval(code, context=None):
+}}}
+   Allows code to be safely evaluated.
+
+   Notes:[[BR]]
+   * code is the code to be evaluated.
+   * context is the context to evaluate the code in. If not specified, an empty context is used.
+
+
+=== Usage ===
+
+
+{{{
+    To perform the evaluation, a new entry '_result' is added into the
+    context prior to execution and removed afterward. This will override any
+    existing value. The code is evaluated by prepending '_result = ', so
+    make sure the code still is sane after this. See safe_exec.
+
+    As an example:
+      val = safe_eval('123')
+      print val # 123
+
+      val = safe_eval('10 * 20 / 5')
+      print val # 40
+
+      val = safe_eval('print "Hi!"') # Exception, _result = print "Hi!" is not valid.
+}}}

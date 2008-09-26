@@ -1,0 +1,8 @@
+= repypp.py =
+
+A preprocessor for repy.  It includes dependent files as needed.
+This is used to help the programmer avoid the need to use import.   They
+can instead use "include X" which works somewhat like "from X import *".
+However, include must be the first character on the line (no indentation!)
+
+...to be continued...?

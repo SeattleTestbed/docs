@@ -1,0 +1,111 @@
+= signeddata.repy =
+
+This modules allows data to be signed in order to prevent attacks. By signing the data, we can create signatures, which greatly increase security since data signatures can then be checked at the start and at the end of the transfer.
+
+We are trying to prevent four main types of attacks. They are described below.
+
+'''Replay attack''': When someone provides information you signed before to try to get you to perform an old action again. For example, A sends messages to the node manager to provide a vessel to B (B intercepts this traffic). Later A acquires the vessel again. B should not be able to replay the messages A sent to the node manager to have the vessel transferred to B again.[[BR]]
+'''Freeze attack''': When an attacker can act as a man-in-the-middle and provide stale information to an attacker. For example, B can intercept all traffic between the node manager and A. If C makes a change on the node manager, then B should not be able to prevent A from seeing the change (at least within some time bound).[[BR]]
+'''Out of sequence attack''': When someone can skip sending some messages but deliver others. For example, A wants to stop the current program, upload a new copy of the program, and start the program again. It should be possible for A to specify that these actions must be performed in order and without skipping any of the prior actions (regardless of failures, etc.).[[BR]]
+'''Misdelivery attack''': Messages should only be acted upon by the nodes that the user intended. A malicious party should not be able to "misdeliver" a message and have a different node perform the action.[[BR]]
+
+
+=== Functions ===
+
+{{{
+def signeddata_is_valid_expirationtime(expirationtime):
+def signeddata_is_valid_timestamp(timestamp):
+}}}
+   Checks the timestamps and returns a boolean in both cases.
+
+
+{{{
+def signeddata_is_valid_sequencenumber(sequencenumber):
+}}}
+   Checks if the sequence numbers are valid. They must be in the form 'tag:num' where tag doesn't contain ':','\n', or '!' # and num is a number.
+
+
+{{{
+def signeddata_is_valid_destination(destination):
+}}}
+   Destination is an "opaque string" or None.  Should not contain a '!' or '\n'.
+
+{{{
+def signeddata_split_signature(data):
+}}}
+   Returns the [data, signature] as a tuple.
+
+{{{
+def signeddata_signdata(data, privatekey, publickey, timestamp=None, expiration=None, sequenceno=None,destination=None):
+}}}
+   Applies a signature to a given message (parameter data) and returns the signed message.
+
+
+{{{
+def signeddata_create_signature(data, privatekey, publickey):
+}}}
+   Creates a signature for the given data string and returns it.
+
+
+{{{
+def signeddata_issignedcorrectly(data, publickey=None):
+}}}
+   Checks the signature. If the public key is specified, it must match the key that is located in the file.
+
+
+{{{
+def signeddata_has_good_sequence_transition(oldsequence, newsequence):
+}}}
+   Checks whether or not the two sequences match.
+
+
+{{{
+def signeddata_destined_for_me(destination):
+}}}
+   Returns if the data was requested by the receiver or if the receiver is expected the data.
+
+
+{{{
+def signeddata_shouldtrustmeta(oldsignature, newsigneddata, publickey=None):
+}}}
+   Checks to see if the metadata is valid for the piece of data being examined.
+
+
+{{{
+def signeddata_shouldtrust(oldsigneddata, newsigneddata, publickey=None, oldsigneddata_is_fullrequest=True):
+}}}
+   Checks to see if the data itself can be trusted.
+
+
+=== Usage ===
+
+{{{
+  # get some signed data
+  mydata = "asdfjklalsdfjkasdlflasdkfjalsdfjasdflk"*100
+  mysigneddata = signeddata_signdata(mydata,keys[1],keys[0])
+  # a simple attempt, is the data signed right
+  assert(signeddata_issignedcorrectly(mysigneddata))
+  # does the key match?
+  assert(signeddata_issignedcorrectly(mysigneddata, keys[0]))
+  # If I add data to the beginning, it should fail...
+  assert(signeddata_issignedcorrectly('a'+mysigneddata, keys[0]) == False)
+  print signeddata_split(mysigneddata)[1:]
+
+  #destination checking
+  signeddata_set_identity("myid42")
+  print "checking if signeddata_destined_for_me works as expected"
+  #check that if packet is not destined for me we detect it
+  assert(not signeddata_destined_for_me("notmyid"))
+  assert(not signeddata_destined_for_me("notmyid1:notmyid2"))
+  
+  #check that if packet is destined for me we return true
+  assert(signeddata_destined_for_me("myid42"))
+  assert(signeddata_destined_for_me("notmyid1:myid42"))
+}}}
+
+
+=== Includes ===
+
+[wiki:sha.repy]
+[wiki:rsa.repy]
+[wiki:time.repy]

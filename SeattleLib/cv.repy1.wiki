@@ -1,0 +1,54 @@
+= cv.repy =
+
+Much like how [wiki:semaphores.repy] provide a level of abstraction to locks, this module provides an even higher level in terms of conditional variables. A programmer could use this to implement locking within a program. For instance, the [wiki:parallelize.repy] module requires locking to prevent errors.
+
+=== Functions ===
+
+{{{
+def cv_create():
+}}}
+   Create a new condition variable and return it to the user. Returns the semaphore handle.
+
+
+{{{
+def cv_destroy(handle):
+}}}
+   Destroy the condition variable.
+      
+   Notes: [[BR]]
+   * handle is the condition variable handle.
+   * All threads waiting on this condition variable have been notified by a call to notify_one or notify_all. No other function calls in this module should be called concurrently or after. The fact that some other function call in this module might raise an exception  while the condition variable is getting destroyed implies a design error in client's code.
+   * Raises ValueError if the condition variable handle is invalid.
+   
+{{{
+def cv_wait(handle):
+}}}
+   Wait for a condition.
+
+   Notes: [[BR]]
+   * handle is the condition variable handle.
+   * Raises ValueError if the condition variable handle is invalid.
+
+
+{{{
+def cv_notify_one(handle):
+}}}
+   Notify the next thread in line that the condition was met.
+
+   Notes: [[BR]]
+   * handle is the condition variable handle.
+   * Raises ValueError if the condition variable handle is invalid.
+
+
+{{{
+def cv_notify_all(handle):
+}}}
+   Notify all waiting threads that the condition was met.
+
+   Notes: [[BR]]
+   * handle is the condition variable handle.
+   * Raises ValueError if the condition variable handle is invalid.
+
+=== Includes ===
+
+[wiki:semaphores.repy] 

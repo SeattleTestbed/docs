@@ -1,0 +1,5 @@
+=== Description ===
+
+Seattle supports various cryptography choices. Since Seattle includes a lot of network communication, encrypting data is very important. Many of the modules in this category are ported directly from Python equivalents, so it may be useful to view the documentation for those pages instead.
+
+Note also a few modules are very experimental in nature and may not have full functionality. See the descriptions for more details.

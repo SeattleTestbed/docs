@@ -1,0 +1,11 @@
+=== Description ===
+
+Seattle uses a node based service where available resources are stored by value and key pairs. All available resources (otherwise known as nodes) are thus hashed to a global store (otherwise known as advertising). The Seattle Standard Library provides three different methods of advertising nodes: [wiki:centralizedadvertise.repy], [wiki:openDHTadvertise.repy], or [wiki:DORadvertise.repy].
+
+[wiki:centralizedadvertise.repy] uses a centralized hash table to store all the values. This may be desirable to users who do not want to depend on the OpenDHT client.
+
+[wiki:openDHTadvertise.repy] uses the OpenDHT client to store key value pairs.
+
+[wiki:DORadvertise.repy] uses the CNRI service.
+
+One of these services may be chosen for exclusive use, but [wiki:Advertise.repy] is the most common choice, as it combines all three services and allows the user to pick a specific implementation of node advertising.

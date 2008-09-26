@@ -1,0 +1,19 @@
+It is easy to include Seattle alongside your application.  These instructions are not absolute; they can be tweaked to suit your specific use case.
+
+Bundling Seattle for iOS and Android are slightly more complicated, and will be included here in the future.  Getting a Python interpreter to run from a specific application on those platforms is not as trivial as it is with Windows/OSX/Linux.
+
+[[BR]]
+ == Requirements ==
+----
+In order for Seattle to function, you need to make sure that Python 2.5 or Python 2.6 is installed on your target system.  The Windows installer has Python 2.5 bundled alongside with it.
+
+[[BR]]
+ == Bundling Seattle ==
+----
+ 1. Download the [https://seattleclearinghouse.poly.edu/html/getdonations Seattle installer] under your Clearinghouse account.  This will provide your Clearinghouse account with donation credits for each installation.  You need to include this Seattle installer alongside your application's installer.
+
+ 2. After installing your application, unzip/untar the Seattle installer and run its installer.  This can be done by running {{{install.sh}}} or {{{install.bat}}}, depending on the operating system you are on.
+
+ 3. After this is done, start Seattle by running {{{start_seattle.sh}}} or {{{start_seattle.bat}}}, again depending on the target operating system.  This will start 2 scripts: {{{nmmain.py}}} and {{{softwareupdater.py}}}.  nmmain.py is the node manager that interacts with Seattle and also manages the vessels that will run on your target system.  softwareupdater.py will periodically check for the latest version of Seattle, and update your target systems as necessary.
+
+ 4. Before uninstalling your application, be sure to stop and then uninstall Seattle before doing so.  This can be done by running the {{{stop_seattle.sh}}} and {{{uninstall.sh}}} scripts for Unix-like systems, or {{{stop_seattle.bat}}} and {{{uninstall.bat}}} for Windows.

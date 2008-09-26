@@ -1,0 +1,7 @@
+This page lists potential conferences and workshops that might be relevant to the Beraber project. Maintained sorted by Deadline.
+
+||Genre||Venue||Full Name||Deadline||Location||
+|| Systems || [http://www.sigops.org/sosp/sosp09/ SOSP] || Symposium on Operating Systems Principles || March 2, 2009 || Big Sky, MT ||
+|| Virtualization || [http://conferences.sigcomm.org/sigcomm/2009/workshops/visa/ SIGCOMM VISA Workshop] || Virtualized Infastructure Systems and Architectures || March 6, 2009 || Barcelona ||
+|| Mobile Systems || [http://conferences.sigcomm.org/sigcomm/2009/workshops/mobihand/ SIGCOMM MobiHand Workshop] || Networking, Systems, Applications on Mobile Handhelds || March 24, 2009 || Barcelona ||
+|| Mobile Systems || [http://mobicase.org/ MobiCASE Conference] || Mobile Computing, Applications, and Services || May 1, 2009 || San Diego ||

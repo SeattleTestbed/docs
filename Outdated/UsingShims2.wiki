@@ -1,0 +1,26 @@
+= Using Shims =
+
+This tutorial shows you how to use the shims library, as well as how to create a shim correctly.
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== What are shims ==
+----
+
+Blah blah blah
+
+
+[[BR]]
+== Using shims in your application ==
+----
+
+Blah blah blah
+
+
+[[BR]]
+== Creating your own shims ==
+----
+Blah blah blah

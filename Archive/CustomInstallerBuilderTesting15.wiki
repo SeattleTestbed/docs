@@ -1,0 +1,51 @@
+= Testing the Custom Installer Builder =
+This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on one of the Seattle project systems. It should be easy to apply a similar procedure to test the Custom Installer Builder on your own system. For production-level deployment on a real web server, reference [CustomInstallerBuilderDeployment these instructions] instead.
+
+ * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
+
+{{{
+$ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/custominstallerbuilder/
+}}}
+
+ * '''Step 2:''' From within the "custominstallerbuilder" directory, copy the "local_template" folder to "local".
+
+{{{
+$ cd custominstallerbuilder
+$ cp -R local_template local
+}}}
+
+ * '''Step 3:''' Edit "local/settings.py" to match your local configuration. On blackbox.cs, it is sufficient to change the following lines:
+
+{{{
+SECRET_KEY = '***** This should be changed to a random string *****'
+...
+SERVE_STATIC = False
+...
+BASE_URL = 'http://domain.com/'
+...
+PROJECT_URL = BASE_URL + 'custominstallerbuilder/'
+}}}
+
+to the following:
+
+{{{
+SECRET_KEY = 'RANDOM_STRING'
+...
+SERVE_STATIC = True
+...
+BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
+...
+PROJECT_URL = BASE_URL
+}}}
+
+{{{RANDOM_STRING}}} should be a random string of your own choosing — do not share it with others. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
+
+ * '''Step 4:''' Still within the "custominstallerbuilder" directory, run the django test server:
+
+{{{
+$ ./manage.py runserver 0.0.0.0:PORT
+}}}
+
+This command assumes that the Seattle standard library (located in 'trunk/seattlelib') is in your Python path.
+
+You should now be able to access your Custom Installer Builder test server at the address specified for BASE_URL above.

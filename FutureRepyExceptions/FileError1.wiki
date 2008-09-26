@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, FileError encompasses the collection of errors related to files in repy.

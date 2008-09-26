@@ -1,0 +1,13 @@
+Add suggestions for project names here:
+
+midichlorian
+
+pebbles - Conveys a large collection of autonomous objects. Also conveys sturdiness/hardiness. Cute.
+
+hitchhiker
+
+interloper
+
+global mesh
+
+NetHive - hive reminds me of autonomous ants, and Net conveys the scale of the project

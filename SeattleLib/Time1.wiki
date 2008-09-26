@@ -1,0 +1,5 @@
+=== Description ===
+
+Like many services, Seattle contains its own time module, which provides various time related functions like getting the time and updating the time.
+
+Seattle provides both TCP and NTP time services, and programmers should include [wiki:time.repy], which ties both services into one.

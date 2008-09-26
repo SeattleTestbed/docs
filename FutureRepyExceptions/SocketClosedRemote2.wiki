@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, SocketClosedRemote is identical to SocketClosedLocal, except that it was the remote end who closed the socket.

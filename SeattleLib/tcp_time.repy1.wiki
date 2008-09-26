@@ -1,0 +1,27 @@
+= tcp_time.repy =
+
+This module is an implementation of time_interface.repy
+
+To use this module, make one call to time_updatetime() to get the time from the server. This function also implicitly sets the time. Then call time_gettime() every time the current time is needed.
+
+=== Functions ===
+
+{{{
+tcp_time_updatetime(localport)
+}}}
+   Opens a connection with a server hosting time_server.repy, which obtains the current time via a NTP, then calls time_settime(float(currenttime)) to set the current time to the received value form the server. [[BR]]
+
+   Notes:
+   * Exception raised if advertise_lookup("time_server") fails after ten tries.
+   * Exception raised when a connection is not able to be established with any of the servers running time_server.repy.
+
+=== Usage ===
+
+?
+
+=== Includes ===
+
+[wiki:time_interface.repy]
+[wiki:include advertise.repy]
+[wiki:include random.repy]
+[wiki:include sockettimeout.repy]

@@ -1,0 +1,18 @@
+= uniqueid.repy =
+
+This is a simple module which provides an unique integer id for each function call. This exists to reduce redundancy in other libraries.
+
+This service can be utilized directly, but is used in contexts like [wiki:parallelize.repy].
+	
+NOTE: This will give unique ids PER FILE. If you have multiple python modules that include this, they will have the potential to generate the same ID.
+
+=== Functions ===
+
+{{{
+def uniqueid_getid():
+}}}
+    Return a unique ID in a threadsafe way
+
+=== Includes ===
+
+[wiki:uniqueid.repy]

@@ -1,0 +1,150 @@
+
+= Building a Security Layer =  
+
+This assignment is geared towards understanding security mechanisms.  Specifically, this assignment illustrates how to create, use and test security layers. The vehicle for this security layer is a reference monitor.   A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system. 
+
+'''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
+
+[[TOC(inline)]]
+
+
+[[BR]]
+= Overview =
+----
+Through this assignment you will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+ * Security: The attacker should not be able to circumvent the security layer.     
+
+[[BR]]
+= Prerequisites =
+=== Getting to know Python/Repy ===
+----
+Python and the Repy API are required to complete this assignment.  Python comes with most linux distributions.  Python for Mac OS can be downloaded at [http://www.python.org/getit/mac/]. Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
+
+=== A basic tutorial on how to get RepyV2 ===
+----
+First, make sure you have RepyV2.  Run the following command to get it (if you don't already have it):
+
+{{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
+
+'''Note:'''If you are using windows, you will need python in your path variables.  A tutorial can be found [http://www.computerhope.com/issues/ch000549.htm here]
+
+  
+Next run to unpack the files:
+
+{{{python preparetest.py [destdir]}}}
+
+To run repy files use the following syntax:
+
+{{{python repy.py restrictions.default [progname].repy}}} 
+
+Please note Repy files end in extension `.repy`.   
+[[BR]]
+=== Tutorials for Repy and Python ===
+----
+ * Python tutorial: '''[http://docs.python.org/tutorial/]'''
+ * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
+[[BR]]
+= Implementation =
+=== Building the security layer  ===
+----
+=== Assignment specifications ===
+
+The goal of this assignment is to prevent "MZ" from being written to the first two characters of a file. The security layer will do this by adding 'security' rules to existing code.  Repy has specific syntax for how to wrap functions.  '''[wiki:RepyV2SecurityLayers]''' will give you a feel for the syntax used to build security layers.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.
+[[BR]]
+=== A basic defense ===
+
+Time to start coding!  Let's inspect a basic security layer.  Below is some code that prevents "MZ" to be written in a very simple way.
+
+{{{
+def writeat(self,data,offset):
+	append("SecureFile.writeat")
+	if data.startswith("MZ") and (offset == 0):	
+		raise ValueError("Cannot start file with MZ!")
+	else:
+		append("SecureFile.writeat")
+		return self.file.writeat(data,offset)
+
+}}} 
+
+Before this code is analyzed and explained, it should be noted that this code is not intended to be exhaustive of all the security protocols you should implement.  For example, a good security layer should be thread safe.  If you don't know what that means please look at [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+[[BR]]
+=== Code analysis === 
+First lets talk about the structure of the code.  Notice that the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
+
+Next lets look at the details of the if statement.  Notice that `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store data which will be written to the file.  The method `startswith()` checks to see if the file starts with certain characters, in this case "MZ".  
+
+Last, lets look at `(offset == 0)`.  The offset tells the computer how many spaces into the file we should start writing.  Thus offset = 0, means we start at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  This is due to the fact that the natural numbers start with zero.
+[[BR]]
+=== Testing your security layer ===
+----
+Once the security layer is written its time to test it.  This is done by 'attacks'.  Attacks should include several methods of attempting to write "MZ" to a file.  An example of an attack could be:
+{{{
+# Open a file
+x=openfile("something.file",True)
+ 
+# Attempt to write "MZ" to the file
+try:
+  x.writeat("MZ",0)
+ 
+# It raised an Exception (as it was supposed to):
+except ValueError:
+  pass
+ 
+# No Exception was raised:
+else:
+  log("Wrote an MZ!!!")
+ 
+finally:
+  # Close the file after our attempt.
+  x.close()
+}}}
+
+This simple attack attempts to write "MZ" to a file in directly.  This attack is not intended to be exhaustive of all possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
+
+'''Note:''' There is good reason for preventing MZ to the be the first two characters of a given file.  If a file begins with MZ then the computer could interpret it as an executable.  For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
+[[BR]]
+=== Running your security layer ===
+----
+Finally, in order to run a security layer with some code type
+
+{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
+
+into the terminal.
+
+Make sure you have preparetest.py unpacked or this won't work!
+[[BR]]
+= Notes and Resources =
+----
+   
+ * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
+
+ * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html]'''
+
+ * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on '''how to test security layers'''. 
+
+ * For a complete list of syntax in Repyv2 pleas visit: '''[wiki:FutureRepyAPI]'''
+ 
+* The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
+
+ * '''[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py]''' is an empty security layer that doesn't perform any operations.
+
+ * '''[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py]''' is security layer that works for logging functions.
+
+ * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
+
+{{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
+
+ * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
+[[BR]]
+= Extra Credit =
+----
+For extra credit, make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  You will need to follow all the instructions above in order to do the extra credit.  However, there is clearly more that needs to be figured out.  
+[[BR]]
+= What to turn in? =
+----
+
+ * Turn in a repy file called reference_monitor_[ name or id number].repy
+ * For extra credit turn in a second repy file called extra_credit_[ name or id number].repy
