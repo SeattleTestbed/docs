@@ -2,6 +2,7 @@
 
  * SeattleTalks -- Upcoming talks about Seattle 
  * RepoAccess -- SVN access instructions
+ * DeveloperSetup -- Running the code from SVN
 
 ----
 
