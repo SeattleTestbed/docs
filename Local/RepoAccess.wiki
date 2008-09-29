@@ -24,6 +24,9 @@ To check out the entire seattle repository:
 To check out a portion of it, e.g. just the repy code sub-folder:
   {{{svn checkout svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy}}}
 
+To find out some basic information about a checked out copy, such as the repository root, last changed rev/author/date do:
+  {{{svn info}}}
+
 Once you make edits inside the repo, typical CVS usage applies. First do an update, then a commit:
   {{{svn update}}}
   {{{svn commit}}}
