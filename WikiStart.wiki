@@ -6,6 +6,42 @@
 
 ----
 
+== What is Seattle? ==
+Seattle is a free, community-driven, educational platform for cloud computing. It is safe, easy to learn (based on a subset of [http://www.python.org/ Python]), and provides students and researchers the opportunity to run applications across large clouds
+
+Seattle can run on multiple platforms in a safe and contained manner. Users can install and run Seattle with little to no impact on system security and performance.  Sandboxes are established on user's computers to limit the use of resources such as cpu load, memory/disk usage, and network access. The idea is to allow researchers and students to run code on the cloud without significantly affecting the systems running Seattle, while still offering a useful platform for running distributed applications.
+
+The potential application contexts range from cloud computing, networking, and distributed systems, to parallel programming, grid computing, and peer-to-peer computing. 
+ 
+== Is Seattle For Me? ==
+Seattle is ideal for students, researchers, and companies that want to prototype and test code on a large cloud 
+
+It is also ideal for 
+
+Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would nullify any notions of security and performance isolation
+
+== What Makes Seattle Special? ==
+There is a variety of cloud and grid computing platforms readily available from a wide range of companies, with an equally expansive set of project goals. 
+
+For example, [http://boinc.berkeley.edu/ BOINC] also allows users to donate resources for cloud computing. However, to BOINC getting 1% of the time on 1000 computers is similar to getting 100% on 10 computers (for similar computers). With Seattle it is much more useful to get 1% on 1000 computers because the research and educational programs are trying to understand how to write scalable programs that run on many computers at the same time.
+
+== Features ==
+ * Free!
+ * Community Driven
+ * Non-intrusive and safe
+ * Already installed on about 1000 machines across hundreds of universities worldwide
+ * Python based
+ * Cross platform
+   * Windows 
+   * Mac OS-X
+   * Linux
+   * FreeBSD
+   * Portable devices
+     * Nokia N800s 
+     * jailbroken iPhones
+
+----
+
 == How to use this site ==
  * WikiFormatting -- Wiki formatting commands
  * TracGuide --  Built-in Documentation
