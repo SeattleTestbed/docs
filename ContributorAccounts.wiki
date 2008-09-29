@@ -1,6 +1,6 @@
 == Overview ==
 
-To gain SVN and Wiki commit access, contact Ivan (ivan@cs). Send him your desired username, along with an MD5 hash of a desired password for the wiki (see below).
+To gain SVN and Wiki commit access, contact Ivan (ivan@cs) and send him your desired username.
 
 == SVN ==
 
@@ -8,6 +8,4 @@ For SVN access you will be granted a Unix account on seattle.cs.washington.edu. 
 
 == Wiki ==
 
-Wiki access is authenticated through an htpasswd file. If you would not like me to generate for you a random password, you can send me an MD5 hash of the password that you would prefer to use. Use the command below to generate this hash:
-
-  {{{htpasswd -m -n [username]}}}
+Once you are granted Wiki access, you can use the Trac software to change your password. Simply Login, then go to the Preferences tab, and select the Account tab.
