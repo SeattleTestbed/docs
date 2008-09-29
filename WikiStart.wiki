@@ -3,7 +3,7 @@
  * SeattleTalks -- Upcoming talks about Seattle 
  * RepoAccess -- SVN access instructions
  * DeveloperSetup -- Running the code from SVN
- * WikiSVNAccounts -- How to gain commit access to Seattle SVN and Wiki
+ * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
 
 ----
 
