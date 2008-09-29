@@ -1,0 +1,13 @@
+== Overview ==
+
+To gain SVN and Wiki commit access, contact Ivan (ivan@cs). Send him your desired username, along with an MD5 hash of a desired password for the wiki (see below).
+
+== SVN ==
+
+For SVN access you will be granted a Unix account on seattle.cs.washington.edu. You '''must''' change your password to something else after your temporary password is emailed to you. This machine hosts the Wiki and the SVN repository. Use it for Seattle development.
+
+== Wiki ==
+
+Wiki access is authenticated through an htpasswd file. If you would not like me to generate for you a random password, you can send me an MD5 hash of the password that you would prefer to use. Use the command below to generate this hash:
+
+  {{{htpasswd -m -n [username]}}}
