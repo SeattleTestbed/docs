@@ -37,6 +37,7 @@ If you have conflicts, you must tell SVN explicitly that you have resolved them,
 
 If you do an "svn status" in a folder, it recursively lists all the Modified (M), Deleted (D) and Added (A) files. It will also show up files that are in conflict (C) and those about which svn does not know (?). To see what modifications were made to individual files marked with an M, you'd do an "svn diff": 
   {{{svn status}}}
+
   {{{svn diff [filename]}}}
 
 = Links =
