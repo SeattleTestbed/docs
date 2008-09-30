@@ -15,9 +15,7 @@ Seattle can run on multiple platforms in a safe and contained manner. Users can 
 The potential application contexts range from cloud computing, networking, and distributed systems, to parallel programming, grid computing, and peer-to-peer computing. 
  
 == Is Seattle For Me? ==
-Seattle is ideal for students, researchers, and companies that want to prototype and test code on varying topologies.   The same code may easily be run on a variety of operating systems, architectures, and network environments to test their impact on performance.
-
-It is also ideal for 
+Seattle is ideal for students, researchers, and companies that want to prototype and test code on varying topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and capacity variations, as well as availability can all be characterized with Seattle.
 
 Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would nullify any notions of security and performance isolation.
 
