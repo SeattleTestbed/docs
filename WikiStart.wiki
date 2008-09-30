@@ -8,7 +8,7 @@
 ----
 
 == What is Seattle? ==
-Seattle is a free, community-driven, educational platform for cloud computing. It is safe, easy to learn (based on a subset of [http://www.python.org/ Python]), and provides students and researchers the opportunity to run applications across large clouds
+Seattle is a free, community-driven, educational platform for cloud computing. It is safe, easy to learn (based on a subset of [http://www.python.org/ Python]), and provides students and researchers the opportunity to run applications across large collections of computers spread around the world.
 
 Seattle can run on multiple platforms in a safe and contained manner. Users can install and run Seattle with little to no impact on system security and performance.  Sandboxes are established on user's computers to limit the use of resources such as cpu load, memory/disk usage, and network access. The idea is to allow researchers and students to run code on the cloud without significantly affecting the systems running Seattle, while still offering a useful platform for running distributed applications.
 
