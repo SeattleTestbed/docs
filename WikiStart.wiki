@@ -1,50 +1,42 @@
 = Seattle =
 
- * SeattleTalks -- Upcoming talks about Seattle 
- * RepoAccess -- SVN access instructions
- * DeveloperSetup -- Running the code from SVN and generating a public / private key pair
- * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
-
-----
-
 == What is Seattle? ==
-Seattle is a free, community-driven, educational platform for cloud computing. It is safe, easy to learn (based on a subset of [http://www.python.org/ Python]), and provides students and researchers the opportunity to run applications across large collections of computers spread around the world.
+Seattle is a research driven platform for cloud computing. It's free, community-driven, and easy to learn (based on a subset of [http://www.python.org/ Python]). Seattle works by operating on clouds comprised of resources donated by users and institutions. Seattle is currently being targeted toward educators and researchers interested in the field of cloud/distributed computing, although a wide range of applications of Seattle exist. It provides students and researchers the opportunity to run applications across large collections of computers spread around the world.
 
-Seattle can run on multiple platforms in a safe and contained manner. Users can install and run Seattle with little to no impact on system security and performance.  Sandboxes are established on user's computers to limit the use of resources such as cpu load, memory/disk usage, and network access. The idea is to allow researchers and students to run code on the cloud without significantly affecting the systems running Seattle, while still offering a useful platform for running distributed applications.
+Seattle can run on end user systems on multiple platforms in a safe and contained manner. Users can install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computers to limit the use of resources such as cpu load, memory/disk usage, and network access. Programs aren't allowed to operate outside of the sandbox, to ensure that files are kept private and safe. The idea is to allow researchers and students to run code on the cloud without significantly affecting the systems running Seattle, while still offering a useful platform for running distributed applications.
 
-The potential application contexts range from cloud computing, networking, and distributed systems, to parallel programming, grid computing, and peer-to-peer computing. 
+The potential educational application contexts range from cloud computing, networking, and distributed systems, to parallel programming, grid computing, and peer-to-peer computing. 
  
 == Is Seattle For Me? ==
-Seattle is ideal for students, researchers, and companies that want to prototype and test code on varying topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and capacity variations, as well as availability can all be characterized with Seattle.
+Seattle is ideal for students, researchers, and companies that want to prototype and test code on varying topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
 
-Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would nullify any notions of security and performance isolation.
+Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would make it difficult to ensure security and performance isolation.
 
 == What Makes Seattle Different? ==
-There is a variety of cloud and grid computing platforms readily available from a wide range of companies, with an equally expansive set of project goals. 
-
-For example, [http://boinc.berkeley.edu/ BOINC] also allows users to donate resources for cloud computing. However, to BOINC getting 1% of the time on 1000 computers is similar to getting 100% on 10 computers (for similar computers). With Seattle it is much more useful to get 1% on 1000 computers because the research and educational programs are trying to understand how to write scalable programs that run on many computers at the same time.
+There are a wide variety of cloud and grid computing platforms readily available from a wide range of source companies, with an equally expansive set of project goals. Some related projects and their differences include: 
+ * [http://boinc.berkeley.edu/ BOINC] also allows users to donate resources for cloud computing. However, to BOINC getting 1% of the time on 1000 computers is similar to getting 100% on 10 computers (for similar computers). With Seattle it is much more useful to get 1% on 1000 computers because the research and educational programs are trying to understand how to write scalable programs that run on many computers at the same time.
+ * [http://aws.amazon.com/ec2/ EC2] is similar in purpose to Seattle, but provides a virtual machine rather than a programming language instance
+ * [http://code.google.com/appengine/ AppEngine] executes programs written in a constrained version of Python and supports high level abstractions (such as a global database). This is useful for building locality-oblivious web applications, however it's transparent handling of scalability and locality make it unsuitable for those wishing to teach/implement these fundamental distributed system topics
 
 == Features ==
- * Free!
+ * It's Free!
  * Community Driven
- * Non-intrusive and safe
+ * Non-intrusive and safe for end users
  * Already installed on about 1000 machines across hundreds of universities worldwide
- * Python based
+ * Easy to learn (Python based)
+ * Simple and Clean programs
+   * UDP Ping client is just 6 lines of code. Server is just 4 lines
+   * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation is under 1000 lines (including whitespace and comments)
  * Cross platform
-   * Windows 
+   * Windows (XP/Vista)
    * Mac OS-X
    * Linux
    * FreeBSD
-   * Portable devices
-     * Nokia N800s 
-     * jailbroken iPhones
+   * OLPC (One Laptop Per Child) XO
+   * Portable devices (Nokia N800s, jailbroken iPhones)
 
-----
-
-== How to use this site ==
- * WikiFormatting -- Wiki formatting commands
- * TracGuide --  Built-in Documentation
- * [http://trac.edgewall.org/wiki/TracFaq Trac FAQ] -- Frequently Asked Questions
- * TracSupport --  Trac Support
-
-For a complete list of local wiki pages, see TitleIndex.
+== How to I Learn More? ==
+ * StudentsPage
+ * DevelopersPage
+ * EducatorsPage
+ * Contact justinc -AT- cs -DOT- washington -DOT- edu 
