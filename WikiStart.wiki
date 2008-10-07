@@ -1,9 +1,9 @@
 = Seattle =
 
 == What is Seattle? ==
-Seattle is a research driven platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world. Seattle works by operating on resources donated by users and institutions. It's currently being targeted toward educators teaching networking and distributed systems classes. The global distribution the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, and distributed systems.
+Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world. Seattle works by operating on resources donated by users and institutions. It's currently being targeted toward educators teaching networking and distributed systems classes. The global distribution the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, and distributed systems.
 
-Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu load, memory/disk usage, and network bandwidth. Programs are only allowed to operate outside of the sandbox, ensuring that other files and programs are the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
+Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs are the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
  
 == Is Seattle For Me? ==
 Seattle is ideal for students, researchers, and companies that want to prototype and test code on testbeds that have varying scale, diversity, and topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
@@ -11,13 +11,13 @@ Seattle is ideal for students, researchers, and companies that want to prototype
 Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would make it difficult to ensure safety and performance isolation for end users.
 
 == What Makes Seattle Different? ==
-There are a wide variety of similar platforms and testbeds readily available from a wide range of sources, with an equally expansive set of project goals. Some related projects and their differences include: 
- * [http://www.planet-lab.org/ PlanetLab] is similar in that it offers a platform using donated resources from all over the world. However, PlanetLab nodes are more standardized in their setup. Seattle aims to be more widely distributed with a larger established network, because of the small impact it has on end users, and it's wide range of compatible platforms.
- * [http://boinc.berkeley.edu/ BOINC] also allows users to donate resources. However, to BOINC the emphasis is on computational power; getting resources from 1000 cheap computers is the same as getting resources from a supercomputer. Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
- * [http://satellitelab.mpi-sws.mpg.de/ SatelliteLab] is useful for studying network characteristics, however it does not allow third party code to be run on nodes.
- * [http://www.emulab.net/ Emulab] provides emulated network environments for researchers to conduct experiments. The host systems and networks for Seattle's nodes are much more diverse. Running Seattle gives a more representative model of the state and conditions of the internet.
- * [http://aws.amazon.com/ec2/ Amazon's EC2] is similar in purpose to Seattle, but provides a virtual machine rather than a programming language instance. The computational resources are owned and operated by Amazon, and Ec2 is a paid service. 
- * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high level abstractions (such as a global database). This is useful for building locality-oblivious web applications, however it's transparent handling of scalability and locality make it unsuitable for those wishing to teach/implement these fundamental distributed system topics. AppEngine is also a paid service.
+There are a wide variety of other platforms and testbeds readily available from a wide range of sources, with an equally expansive set of project goals. Some related projects and their differences include: 
+ * [http://www.planet-lab.org/ PlanetLab] is similar in that it offers a platform using donated resources from all over the world. However, PlanetLab nodes are dedicated to PlanetLab, while Seattle computers may be multi-use.   PlanetLab's computers and network connectivity are also very heterogeneous. Seattle aims to be more widely distributed with a larger established network and much more diversity.
+ * [http://satellitelab.mpi-sws.mpg.de/ SatelliteLab] is useful for studying network characteristics and aims to bring heterogeneity to PlanetLab.   However, due to the reliance on PlanetLab nodes to forward traffic, SatelliteLab has fidelity limitations and is not intended or able to scale to the sorts of diversity and size of Seattle.
+ * [http://www.emulab.net/ Emulab] provides emulated network environments for researchers to conduct experiments.   While emulation allows more control of network hardware and topology, it does not capture the behavior of the Internet.   Running Seattle allows more realistic experimentation by running on the Internet and support larger scale.
+ * [http://boinc.berkeley.edu/ BOINC] also allows users to donate resources. However, to BOINC the emphasis is on computational power; getting resources from 1000 cheap computers is less preferable than getting resources from a supercomputer.   Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
+ * [http://aws.amazon.com/ec2/ Amazon's EC2] provides a paid service that provides operating system virtual machines.   Seattle instead relies on donated resources and provides programming language virtual machines. 
+ * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high level abstractions (such as a global database). This is useful for building locality-oblivious web applications, however it's transparent handling of scalability and locality make it unsuitable for those wishing to teach/implement these fundamental distributed system topics. AppEngine is run by resources controlled by Google instead of donated resources.
 
 == Features ==
  * It's Free!
@@ -27,9 +27,9 @@ There are a wide variety of similar platforms and testbeds readily available fro
  * Already installed on about 1000 machines across hundreds of universities worldwide
  * Easy to learn (based on a subset of [http://www.python.org/ Python])
  * Simple and Clean programs
-   * A UDP Ping client is just 6 lines of code. The server is just 4 lines
+   * A UDP ping client is just 6 lines of code. A UDP ping server is just 4 lines
    * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation is about 300 lines of code
- * Provides access to a wide array of network topologies and diversity
+ * Provides access to systems behind a wide array of network technologies
  * Cross platform
    * Windows (XP/Vista)
    * Mac OS-X
