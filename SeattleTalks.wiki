@@ -2,10 +2,10 @@
 
 || When || Where || For Whom || Who || What
 
-|| Oct 15th, 3:30-4:30 || Paul Allen 605 ||  Database Seminar || Justin || Talk
+|| Oct 15th, 3:30-4:30 || Paul Allen 605 ||  Database Seminar || Justin || Talk / Live Demo
 
 || Oct 20th ||  UW  ||   Used in Graduate Networking class || || Classroom use
 
-|| Oct 26th, ? || San Fransisco || GENI Engineering Conference || Justin || Talk
+|| Oct 29th, 2:00-2:30 || San Fransisco || GENI Engineering Conference 3 || Tom || Talk
 
 || Nov 6-8th, ? || Paul Allen Commons || (PN-ASEE/WCERTE) || Justin || Talk
