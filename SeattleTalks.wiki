@@ -8,4 +8,4 @@
 
 || Oct 29th, 2:00-2:30 || San Fransisco || GENI Engineering Conference 3 || Tom || Talk
 
-|| Nov 6-8th, ? || Paul Allen Commons || (PN-ASEE/WCERTE) || Justin || Talk
+|| Nov 6-8th, ? || Paul Allen Commons || (PN-ASEE/WCERTE) || Justin || Talk /  Live Demo
