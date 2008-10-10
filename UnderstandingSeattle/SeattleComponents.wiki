@@ -3,6 +3,8 @@ Seattle's Components
 
 There are three main components it's important to understand to understand how Seattle works.
 
+[[Image(SeattlePicture1.jpg)]]
+
  * Vessel ---   A vessel is a programming language virtual machine that runs a user's code (currently the only language supported is RestrictedPython).   Vessels prevent the program running in them from performing unsafe actions (like opening the user's credit card information).   Vessels also have a specified number of resources they are allowed to consume.   The vessel restricts the program from consuming more than the allowed number of resources.   
 
  
