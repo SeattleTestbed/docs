@@ -15,4 +15,4 @@ Note: You must have Python 2.5 installed
  1. [http://seattle.cs.washington.edu/dist/seattle_linux.tgz Download] the Seattle tarball to your computer
  1. Extract the tarball and navigate to the extracted folder
  1. Run the script '''RUNME.sh''' [[BR]]
-To check that Seattle is running, ''try running: ps -f | grep nmmain.py | grep -v grep''
+To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
