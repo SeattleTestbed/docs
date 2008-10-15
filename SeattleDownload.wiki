@@ -1,7 +1,9 @@
+= Seattle Demo=
 To install a demo version of Seattle, follow the instructions below for your operating system.
 
 == Windows ==
 ----
+
  1. [http://seattle.cs.washington.edu/dist/seattle_win.zip Download] the zip file to your computer
  1. Extract the zip file
  1. Navigate to the extracted folder.
@@ -11,6 +13,7 @@ To check that Seattle is running, look in Task Manager for the process "pythonw.
 
 == Linux ==
 ----
+
  1. Download seattle_linux.tgz and save it somewhere handy.
  1. Extract the tarball into a folder that you want to work in.
  1. Navigate to that folder and run RUNME.sh.
