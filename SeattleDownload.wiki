@@ -1,5 +1,5 @@
 = Seattle Demo =
-Follow the instructions below for your operating system to install a demo version of Seattle.
+Follow the instructions below for your operating system to run a demo version of Seattle.
 [[BR]]
 
 == Windows ==
@@ -7,7 +7,6 @@ Follow the instructions below for your operating system to install a demo versio
  1. Extract the zip file and navigate to the extracted folder
  1. Double click and run '''RUNME.bat'''[[BR]]
  
-     Seattle should now be running! [[BR]]
 To check that Seattle is running, look in Task Manager for the process ''pythonw.exe''.
 [[BR]]
 
@@ -16,7 +15,5 @@ Note: You must have Python 2.5 installed
  1. [http://seattle.cs.washington.edu/dist/seattle_linux.tgz Download] the Seattle tarball to your computer
  1. Extract the tarball and navigate to the extracted folder
  1. Run the script '''RUNME.sh''' [[BR]]
-
-     Seattle should now be running! [[BR]]
 
 To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
