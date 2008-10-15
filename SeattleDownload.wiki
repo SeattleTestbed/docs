@@ -1,0 +1,14 @@
+At the bottom of the page, you will find packages available for download. Unfortunately we haven't quite finished an installer yet, but you are welcome to try running what we've got - it's just not ready to be permanently installed on your computer. If you'd like to run Seattle anyway, just follow the directions for your OS.
+
+WINDOWS:
+ 1. Download seattle_win.zip and save it somewhere handy.
+ 1. Extract the contents of the folder to wherever you'd like to run the program from, for now.
+ 1. Navigate to the folder you just extracted all the files into, and double click RUNME.bat.
+ 1. Seattle should now be running! To double check that it is, look in your Task Manager for the process "pythonw.exe".
+
+LINUX:
+ 1. Download seattle_linux.tgz and save it somewhere handy.
+ 1. Extract the tarball into a folder that you want to work in.
+ 1. Navigate to that folder and run RUNME.sh.
+ 1. If you have Python 2.5, the program will start, otherwise it will fail, since 2.5 is the only version we support right now.
+ 1. To check that seattle is running, try "ps -f | grep nmmain.py | grep -v grep" or something similar.
