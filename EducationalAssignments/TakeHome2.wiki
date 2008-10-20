@@ -1,0 +1,219 @@
+= Seattle Take Home Assignment =
+
+
+The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet. For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle toolkit. Altogether there are 11 steps to this assignment. Let's begin!
+
+== Step 1 ==
+
+You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle GENI website at https://seattle.cs.washington.edu/geni
+Once you've logged in, you'll see resources contributed by your instructor. In the middle area, you'll see that you currently aren't using any resources. Click on the add resources button, under the Quick Start tab. Then click on LAN, and choose 10 computers, and click "Go!".  You should now see that ten computers have been added for you to use.
+
+== Step 2 ==
+
+Now click in the bottom pane click to download your Private Key and Public Key (need to save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py".   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+
+== Step 3 ==
+
+Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt,
+
+{{{  !> loadkeys username }}}
+
+Then, type
+
+!> as username
+
+This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, at the " username@ !> " prompt type
+
+username @ !> browse
+
+This will search for vessels that you control (so that the shell can locate them).  You should see several vessels added (if not, you should wait a minute and try again, as sometimes it takes ll
+time for the vessel information to propagate).  The output from browse command will look something like the following:
+
+username@ !> browse            
+Added targets: %1(IP address:port:vesselname), %2(IP address:port:vesselname), %3(IP address:port:vesselname), ...
+Added group 'browsegood' with X targets      
+
+This tells you that the seash has discovered the computers you selected and verified that they are ready to run your code.
+
+== Step 4 ==
+
+In the above print-out response to the browse command, the %1, %2, %3, etc are an easy way to refer to a computer.  For example, we can run a "hello world" program on computer %1 by typing:
+
+username @ !> on %1 run helloworld.py
+
+To see the results of this command on computer %1 we would type
+
+username @ !> on %1 show log
+
+would show you the output from that (%1) computer, which hopefully looks something like "Hello World". If you're going to deal with a specific computer over and over, then constantly typing "on %1" before every command can be very annoying.   You can instead set the default target by simply typing
+
+username @ !> on %1
+
+and hitting enter.  This will change your prompt to be:
+
+username@%1 !>
+
+to indicate that you're acting as your username and you're acting on %1 (unless otherwise specified).  Try typing
+
+username @%1 !> run helloworld.py
+
+and then type
+
+username @%1 !> show log
+
+You'll see two "Hello World" lines now because you've run the program twice.  
+
+== Step 5 ==
+
+Now we'd like to run commands on more than one computer at a time.  To do this, we'll use the result of our previous browse command as a group.  If you recall the output from the command said "Added group 'browsegood' with X targets".  This means that the nodes it found the last time you browsed are now in a group called browsegood.   Type
+
+username @%1 !> on browsegood
+
+and you'll see the prompt:
+
+username@browsegood !>
+
+Now type two commands:
+
+username@browsegood !> run helloworld.py
+username@browsegood !> show log
+
+You'll see that the command was run on a bunch of different computers.  Let's add the computers in browsegood to a group with a more convenient name by typing
+
+username@browsegood !> add browsegood to LAN
+
+and then type
+
+username@browsegood !> on LAN
+
+to use the LAN group.
+
+== Step 6 ==
+
+We'll cover one last function of the shell before we start measuring network connectivity: stopping a running program. Some programs don't exit immediately like the hello world program.   At your " username@LAN !> " prompt type
+
+username@LAN !> run pingserver.py
+
+This deploys a program that waits for UDP ping packets and sends a response if a packet arrives.   If you now try to do "run helloworld.py" you'll see that the shell doesn't run the program since the pingserver is already running.  To stop the ping server type
+
+username@LAN !> stop
+
+You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).  
+
+
+== Step 7 ==
+
+Now we're ready to measure the connectivity between computers!   We'll measure connectivity by sending UDP pings from a target computer to a destination. At the " username@LAN !> " prompt type
+
+username@LAN !> list
+
+This will allow you to see the IP of %2.  Now type
+
+username@LAN !> on %2 run pingserver.py
+
+You can ping from %1 to %2 by typing
+
+username@LAN !> on %1 run ping.py IP address of %2
+
+Then if you type
+
+username@LAN !> on %1 show log
+
+You will see that %1 was able to send UDP ping packets to %2. You can also type
+
+username@LAN !> on %2 show log
+
+to see that %2 received the ping packets. Okay, now stop the pingserver on computer two by typing
+
+username@LAN !> on %2 stop
+
+
+== Step 8 ==
+
+Instead of manually pinging between each of the computers in the LAN group (if your prompt isn't " username@LAN !> " type: "on LAN" to reset it), you can run a program that does an UDP ping between all of the computers in a group.  First we need to generate a list of all nodes. Type
+
+username@LAN !> list
+
+and then write the IP addresses into a file called "neighboriplist.txt" on your computer.   Save the file to the directory where seash.py is running.   Now type
+
+username@LAN !> upload neighboriplist.txt
+
+This adds the file with nodes to ping to the all the computers in the LAN group. Now type
+
+username@LAN !> run allpairsping.py
+
+You can see the result of all of the nodes pinging each other by typing
+
+username@LAN !> show log
+
+Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).
+
+
+== Step 9 ==
+
+Now we'll run the same experiment as Step 6, but on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed. Click on "remove all nodes".  Now that you've given back some of your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
+
+Back in the shell, type
+
+username@LAN !> browse
+
+You will see that the WAN nodes are now detected and given names.  For convenience, let's add the nodes to a group called WAN by typing
+
+username@LAN !> add browsegood to WAN
+
+Now type
+
+username@LAN !> on WAN
+
+and the prompt should now say "username@WAN !>".  Now let's examine the all pairs connectivity again. First type
+
+username@WAN !> list
+
+and as before write the IP addresses you see to a local file called 'neighboriplist.txt'. Then type
+
+username@WAN !> upload neighboriplist.txt
+
+Then type
+
+username@WAN !> run allpairsping.py
+
+Finally, run
+
+username@WAN !> show log
+
+What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  (if the connectivity graph is complete, try to remove your nodes on the Seattle GENI website and choose different ones, repeating the commands in this step).
+
+== Step 10 ==
+
+Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly.   This is an effect called "non-transitive connectivity"... (explanation follows)   Write down the IP addresses of the intermediate node (as intermediateIP) To get packets from one to another, we can have a node in the middle forward packets.   Find the %number of a node who can talk to both nodes.   Then type
+
+username@WAN !> on %number run forward.py node1IP node2IP
+
+Now start the pingserver on node1 and run
+
+username@WAN !> on %node2 ping.py intermediateIP
+
+You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.
+
+
+== Step 11 (On your home computer) ==
+
+The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.   Install Seattle on your home computer by logging into your Seattle GENI account.   In the top area where it shows contributed nodes, click "download personal installer".   Run the installer on your local system.   Now click on your user name at the bottom and select "download keys".    Run the shell from a terminal by typing "python seash.py".  Load your keys for your identity (which is your username at the GENI website) by typing
+
+!> loadkeys identity
+
+Then type
+
+!> as identity
+
+and you'll see the prompt changes to "username@ !>". Check on the Seattle GENI website to see if you still have nodes to use. If not, click on the add resources button, under the Quick Start tab, click on WAN, choose 1 computers, and click "Go!".  
+
+Now under your shell at the " username@ !>" prompt, type
+
+username@ !> browse
+
+You should see your local node and the WAN node you just added. Write down the IP address of your computer and the IP address of the WAN node.   Start the pingserver on the WAN node (by running "on %WANnode run pingserver.py").   Ping the WAN node from your local computer (by running "on %localcomputer ping WANIP").   Now look at the logs, in particular the log of the WAN computer.   Does it have your computer's IP address listed as the source address?  
+
+Now try to ping in the opposite direction.  First, stop the pingserver on the WAN node (by running "on %WANnode stop").   Then start the ping server on the local computer (by running "on %localnode run pingserver.py").   Next ping the local node from the WAN node (by running "on %WANnode ping localIP").   Then check the logs (by running "on %WANnode show log", and "on %localnode show log").   Did it work?
+
+If you have a NAT device on your home network your computer can initiate connections out, but the packets will be translated so they have a different IP address than the local IP.   This also typically means that nodes on the outside of the NAT cannot initiate connections to inside nodes (which is why the WAN node could not ping your computer).
