@@ -1,11 +1,11 @@
-= Seattle Demo =
-Follow the instructions below for your operating system to run a demo version of Seattle.
+= Installing Seattle =
+Follow the instructions below for your operating system to install Seattle on your computer.
 [[BR]]
 
 == Windows ==
  1. [http://seattle.cs.washington.edu/dist/seattle_win.zip Download] the Seattle zip file to your computer
- 1. Extract the zip file and navigate to the extracted folder
- 1. Double click and run '''RUNME.bat'''[[BR]]
+ 1. Extract the zip file to the directory in which you would like to install Seattle.
+ 1. Double click (or run from the command line) '''install.bat'''.[[BR]]
  
 To check that Seattle is running, look in Task Manager for the process ''pythonw.exe''.
 [[BR]]
@@ -13,7 +13,15 @@ To check that Seattle is running, look in Task Manager for the process ''pythonw
 == Linux ==
 Note: You must have Python 2.5 installed
  1. [http://seattle.cs.washington.edu/dist/seattle_linux.tgz Download] the Seattle tarball to your computer
- 1. Extract the tarball and navigate to the extracted folder
- 1. Run the script '''RUNME.sh''' [[BR]]
+ 1. Extract the tarball to the directory in which you would like to install Seattle.
+ 1. Navigate to that directory and run '''./install.sh''' (or '''python install.py''').[[BR]]
+
+To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
+
+== Mac ==
+Note: You must have Python 2.5 installed
+ 1. [http://seattle.cs.washington.edu/dist/seattle_mac.tgz Download] the Seattle tarball to your computer
+ 1. Extract the tarball to the directory in which you would like to install Seattle.
+ 1. Navigate to that directory and run '''./install.sh''' (or '''python install.py''').[[BR]]
 
 To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
