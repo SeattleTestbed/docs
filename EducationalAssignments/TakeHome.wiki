@@ -19,6 +19,7 @@ Once you've logged in, you'll see resources contributed by your instructor. In t
 Now click in the bottom pane click to download your Private Key and Public Key (need to save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py".   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 == Step 3 : Browsing available resources ==
+----
 
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt,
 
@@ -54,6 +55,7 @@ Added group 'browsegood' with X targets
 This tells you that the seash has discovered the computers you selected and verified that they are ready to run your code.
 
 == Step 4 : Hello World! on a single computer ==
+----
 
 In the above print-out response to the browse command, the %1, %2, %3, etc are an easy way to refer to a computer.  For example, we can run a "hello world" program on computer %1 by typing:
 
@@ -100,6 +102,7 @@ username @%1 !> show log
 You'll see two "Hello World" lines now because you've run the program twice.  
 
 == Step 5 : Hello World! on many computers ==
+----
 
 Now we'd like to run commands on more than one computer at a time.  To do this, we'll use the result of our previous browse command as a group.  If you recall the output from the command said "Added group 'browsegood' with X targets".  This means that the nodes it found the last time you browsed are now in a group called browsegood.   Type
 
@@ -140,6 +143,7 @@ username@browsegood !> on LAN
 to use the LAN group.
 
 == Step 6 : Stopping programs ==
+----
 
 We'll cover one last function of the shell before we start measuring network connectivity: stopping a running program. Some programs don't exit immediately like the hello world program.   At your " username@LAN !> " prompt type
 
@@ -158,8 +162,9 @@ username@LAN !> stop
 You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).  
 
 
-= Measuring Connectivity =
+== Measuring Connectivity ==
 == Step 7 : Sending UDP pings manually ==
+----
 
 Now we're ready to measure the connectivity between computers!   We'll measure connectivity by sending UDP pings from a target computer to a destination. At the " username@LAN !> " prompt type
 
@@ -208,6 +213,7 @@ username@LAN !> on %2 stop
 
 
 == Step 8 : Sending pings between a group of computers ==
+----
 
 Instead of manually pinging between each of the computers in the LAN group (if your prompt isn't " username@LAN !> " type: "on LAN" to reset it), you can run a program that does an UDP ping between all of the computers in a group.  First we need to generate a list of all nodes. Type
 
@@ -241,6 +247,7 @@ Each node reports a matrix showing its connectivity. You will see that every nod
 
 
 == Step 9 : Pinging behavior in the wide-area ==
+----
 
 Now we'll run the same experiment as Step 6, but on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed. Click on "remove all nodes".  Now that you've given back some of your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
 
@@ -296,6 +303,7 @@ username@WAN !> show log
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  (if the connectivity graph is complete, try to remove your nodes on the Seattle GENI website and choose different ones, repeating the commands in this step).
 
 == Step 10 : Packet forwarding ==
+----
 
 Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity"... '''(explanation follows)'''   Write down the IP addresses of the intermediate node (as intermediateIP) To get packets from one to another, we can have a node in the middle forward packets.   Find the %number of a node who can talk to both nodes.   Then type
 
@@ -315,6 +323,7 @@ You can look at the log on node1 and node2 to see that the packets were delivere
 
 
 == Step 11 : Observed behavior from your home computer ==
+----
 
 The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.   Install Seattle on your home computer by logging into your Seattle GENI account.   In the top area where it shows contributed nodes, click "download personal installer".   Run the installer on your local system.   Now click on your user name at the bottom and select "download keys".    Run the shell from a terminal by typing "python seash.py".  Load your keys for your identity (which is your username at the GENI website) by typing
 
