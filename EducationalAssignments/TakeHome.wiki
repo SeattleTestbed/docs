@@ -181,6 +181,7 @@ Then if you type
 {{{
 #!python
 username@LAN !> on %1 show log
+}}}
 
 You will see that %1 was able to send UDP ping packets to %2. You can also type
 
