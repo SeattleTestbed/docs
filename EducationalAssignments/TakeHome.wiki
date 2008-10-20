@@ -14,6 +14,7 @@ You should have been given a user name and password from the instructor or the c
 Once you've logged in, you'll see resources contributed by your instructor. In the middle area, you'll see that you currently aren't using any resources. Click on the add resources button, under the Quick Start tab. Then click on LAN, and choose 10 computers, and click "Go!".  You should now see that ten computers have been added for you to use.
 
 == Step 2 : Running Seattle shell ==
+----
 
 Now click in the bottom pane click to download your Private Key and Public Key (need to save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py".   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
