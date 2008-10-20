@@ -14,7 +14,7 @@ To check that Seattle is running, look in Task Manager for the process ''pythonw
 Note: You must have Python 2.5 installed
  1. [http://seattle.cs.washington.edu/dist/seattle_linux.tgz Download] the Seattle tarball to your computer
  1. Extract the tarball to the directory in which you would like to install Seattle.
- 1. Navigate to that directory and run '''./install.sh''' (or '''python install.py''').[[BR]]
+ 1. Navigate to that directory and run ''./install.sh'' (or ''python install.py'').[[BR]]
 
 To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
 
@@ -22,6 +22,6 @@ To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -
 Note: You must have Python 2.5 installed
  1. [http://seattle.cs.washington.edu/dist/seattle_mac.tgz Download] the Seattle tarball to your computer
  1. Extract the tarball to the directory in which you would like to install Seattle.
- 1. Navigate to that directory and run '''./install.sh''' (or '''python install.py''').[[BR]]
+ 1. Navigate to that directory and run ''./install.sh'' (or ''python install.py'').[[BR]]
 
 To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -v grep''
