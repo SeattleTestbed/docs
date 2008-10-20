@@ -16,7 +16,10 @@ Now click in the bottom pane click to download your Private Key and Public Key (
 
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt,
 
-{{{  !> loadkeys username }}}
+{{{
+#!python
+!> loadkeys username
+}}}
 
 Then, type
 
