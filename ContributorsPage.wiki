@@ -5,3 +5,4 @@ This page contains information useful to developers working on Seattle
  * RepoAccess -- SVN access instructions
  * DeveloperSetup -- Running the code from SVN and generating a public / private key pair
  * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
+ * DocFormatToDo -- ToDos for formatting documentation on Trac
