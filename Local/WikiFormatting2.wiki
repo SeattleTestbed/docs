@@ -1,0 +1,4 @@
+ * TOC inline
+ * Special formatting for seash and python commands -- syntax highlighting and being able to detect seash command line
+ * More space between headings and prior sections -- less space between header and horizontal line
+ * (back to top) link on each header
