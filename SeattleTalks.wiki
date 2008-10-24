@@ -4,8 +4,12 @@
 
 || Oct 22nd, 2:30-3:30 || Paul Allen 605 ||  Database Seminar || Justin || Talk / Live Demo
 
+|| Oct 23rd, 1:30-4 || Networks Lab (390) || Affiliates || Justin || Poster
+
 || Oct 27th ||  UW  ||   Used in Graduate Networking class || || Classroom use
 
 || Oct 29th, 2:00-2:30 || San Fransisco || GENI Engineering Conference 3 || Tom || Talk
+
+|| Nov 5th, 1:30-2:30 || EE 025 || Systems Seminar 590S || Justin || Talk / Live Demo
 
 || Nov 6-8th, ? || Paul Allen Commons || (PN-ASEE/WCERTE) || Justin || Talk /  Live Demo
