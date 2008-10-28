@@ -351,9 +351,9 @@ Python array has not only the same indexing structure as other languages but als
 
 In the example above,
 
-||       Value      ||  1  ||  2  ||  3  ||
-||   Normal Index   ||  0  ||  1  ||  2  ||
-|| Additional Index || -3  || -2  ||  -1 ||
+||      Value     ||  1  ||  2  ||  3  ||
+|| Positive Index ||  0  ||  1  ||  2  ||
+|| Negative Index || -3  || -2  || -1  ||
 
 
 [[BR]]
