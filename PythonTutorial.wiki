@@ -357,6 +357,7 @@ In the example above,
 
 
 [[BR]]
+
 {{{
 #!python
 x.extend([-4, 5])
@@ -372,8 +373,7 @@ Result:
 del x[2]
 
 Result: 
-{{{
-#!python
+
 [1, 2, -4, 5]
 }}}
 
