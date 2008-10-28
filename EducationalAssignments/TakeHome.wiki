@@ -6,7 +6,6 @@ The purpose of this assignment is to illustrate several important networking con
 == Using the GENI website and the Seattle shell ==
 
 == Step 1 : Adding resources ==
-
 ----
 
 
