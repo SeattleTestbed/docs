@@ -149,13 +149,17 @@ Help command helps you look up the commands you can use in repy.
 Instead of executing this program from the command line in batch mode, you could enter and run the code in interactive mode.
 
 Although Repy doesn't have the interactive mode, and uses different function names from regular python, you can test only simple function operations in the interactive mode.
+
+{{{
+#!python
 % python
 
-!>>> print “Hello, World”
+>>> print “Hello, World”
 
 Hello, World
 
-!>>>
+>>>
+}}}
 
 While in interactive mode, you can test your simple code before executing and look up the command history by using the arrow keys.
 To exit interactive mode, hit ctrl-d. Different on different OSes... -Justincappos 10/21/08 4:30 PM 
