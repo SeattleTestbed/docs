@@ -361,10 +361,8 @@ In the example above,
 {{{
 #!python
 x.extend([-4, 5])
-}}}
+
 Result: 
-{{{
-#!python
 [1, 2, 3, -4, 5]
 }}}
 
@@ -373,73 +371,54 @@ Result:
 del x[2]
 
 Result: 
-
 [1, 2, -4, 5]
 }}}
 
 {{{
 #!python
 x.remove(5)
-}}}
 
 Result: 
-{{{
-#!python
 [1, 2, -4]
 }}}
 
 {{{
 #!python
 z = x[1:3] # array "slicing": elements 1 through 3-1 = 2
-}}}
 
 Result: 
-{{{
-#!python
 [2, -4]
 }}}
 
 {{{
 #!python
 x[1:] # all elements starting with index 3
-}}}
 
 Result: 
-{{{
-#!python
 [2, -4]
 }}}
 
 {{{
 #!python
 x[:2] # all elements up to but excluding index 2
-}}}
 
 Result: 
-{{{
-#!python
 [1, 2]
 }}}
 
 {{{
 #!python
 x.index(-4)
-}}}
 
 Result: 
-{{{
-#!python
 2
 }}}
 
 {{{
 #!python
 2 in x
-}}}
 
 Result: 
-{{{
-#!python
 True
 }}}
 
@@ -448,11 +427,8 @@ True
 x = 10
 y = 20
 [x, y] = [x, y]
-}}}
 
 Result: 
-{{{
-#!python
 x = 20, y =10
 }}} 
 
@@ -464,29 +440,44 @@ Tuples are like lists, but are immutable, i.e. unchangeable. They are enclosed b
 
 The same operations can be used, except those which would change the tuple. So for example
 
+{{{
+#!python
 x = (1,2,’abc’)
 print x[1] # prints 2
 print len(x) # prints 3
 x.pop() # illegal, due to immutability
-
+}}}
 
 == 3-3. Strings ==
 
 Strings are essentially tuples of character elements. But they are quoted instead of surrounded by parentheses, and have more ﬂexibility than tuples of character elements would have.
 
+{{{
+#!python
 x = ‘abcde’
 x[2]
-Result: ‘c’
 
+Result:
+‘c’
+}}}
+
+{{{
+#!python
 x = x[0:3] + ‘z’ + x[3:5]
-Result: ‘abczde’
+
+Result: 
+‘abczde’
+}}}
 
 
 == 3-4. Dictionaries (Hashes) ==
 
 Dictionaries are associative arrays. The statement
 
+{{{
+#!python
 x = {’abc’:12,’sailing’:’away’}
+}}}
 
 sets x to what amounts to a 2-element array with x[’abc’] being 12 and x[’sailing’] equal to ’away’. We say that ’abc’ and ’sailing’ are keys, and 12 and ’away’ are values. Keys can be any immmutable object, i.e. numbers, tuples or strings.16 Use of tuples as keys is quite common in Python applications, and you should keep in mind that this valuable tool is available.
 
@@ -494,20 +485,42 @@ Internal storage is organized as a hash table. This is why Perl’s analog of Py
 
 Here are examples of usage of some of the member functions of the dictionary class:
 
+{{{
+#!python
 x = {’abc’:12,’sailing’:’away’}
+}}}
 
+{{{
+#!python
 x[’abc’]
-Result: 12
 
+Result:
+12
+}}}
+
+{{{
+#!python
 y = x.keys()
-Result: [’abc’, ’sailing’]
 
+Result: 
+[’abc’, ’sailing’]
+}}}
+
+{{{
+#!python
 z = x.values()
-Result: [12, ’away’]
 
+Result: 
+[12, ’away’]
+}}}
+
+{{{
+#!python
 x[’uv’] = 2
-Result: {’abc’: 12, ’uv’: 2, ’sailing’: ’away’}
 
+Result: 
+{’abc’: 12, ’uv’: 2, ’sailing’: ’away’}
+}}}
 
 = 4. Class =
 
@@ -518,51 +531,66 @@ The constructor for a class is __init__().
 
 == 4-2. Sample Class ==
 
+{{{
+#!python
 class Complex:
     count = 0
     def __init__(self, realpart, imagpart):
         Complex.count += 1
         self.r = realpart
         self.i = imagpart
+}}}
 
 == 4-3. Derived Classes (superclass.__init__(self)) ==
 
 If a class b is the subclass of a class a, we need write it like,
 
+{{{
+#!python
 class b(a):
     def __init__(self,xinit): # constructor for class b
     self.x = xinit # define and initialize an instance variable x
     a.__init__(self) # call base class constructor
-
+}}}
 
 
 = 5. Exception Handling =
 Python’s built-in and library functions have no C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism, e.g.
 
+{{{
+#!python
 try:
     f = open(callargs[0])
 except:
     print ’open failed:’, callargs[0]
-
+}}}
 
 Here’s another example:
 
+{{{
+#!python
 try:
     i = 5
     y = x[i]
 except:
     print ’no such index:’, i
+}}}
 
 But the Python idiom also uses this for code which is not acting in an exception context. Say for example we want to find the index of the number 8 in the list z and if there is no such number, to first add it to the list. We could do it this way:
 
+{{{
+#!python
 try:
     place = x.index(8)
 except:
     x.append(8)
     place = len(x)
+}}}
 
 The try statement has another optional clause which is intended to define clean-up actions that must be executed under all circumstances. A finally clause is always executed before leaving the try statement, whether an exception has occurred or not. For example:
 
+{{{
+#!python
 def divide(x, y):
     try:
         result = x / y
@@ -572,9 +600,12 @@ def divide(x, y):
         print "result is", result
     finally:
         print "executing finally clause"
+}}}
 
 Results are following
 
+{{{
+#!python
 divide(2, 1)
 result is 2
 executing finally clause
@@ -589,6 +620,7 @@ Traceback (most recent call last):
 File "<stdin>", line 1, in ?
 File "<stdin>", line 3, in divide
 TypeError: unsupported operand type(s) for /: ’str’ and ’str’
+}}}
 
 As you can see, the finally clause is executed in any event.
 
