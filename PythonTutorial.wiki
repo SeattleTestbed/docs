@@ -541,7 +541,9 @@ class Complex:
         self.i = imagpart
 }}}
 
-== 4-3. Derived Classes (superclass.__init__(self)) ==
+== 4-3. Derived Classes ==
+
+'''superclass.__init__(self)''' 
 
 If a class b is the subclass of a class a, we need write it like,
 
@@ -549,8 +551,8 @@ If a class b is the subclass of a class a, we need write it like,
 #!python
 class b(a):
     def __init__(self,xinit): # constructor for class b
-    self.x = xinit # define and initialize an instance variable x
-    a.__init__(self) # call base class constructor
+        self.x = xinit # define and initialize an instance variable x
+        a.__init__(self) # call base class constructor
 }}}
 
 
