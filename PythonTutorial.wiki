@@ -10,58 +10,80 @@
 == 1-1. Interpreted rather than being compiled == 
 {{{
 #!comment
-I'm not sure we need this.   If we do need this, we need to explain why (i.e. the user doesn't need to compile their code before distributing it) -Justincappos 10/21/08 4:24 PM 
+I'm not sure we need this.
+If we do need this, we need to explain why (i.e. the user doesn't need to compile their code before distributing it) 
+Justincappos 10/21/08 4:24 PM 
 }}}
 
-1-1.1. Executing programs in local computer
+=== 1-1.1. Executing programs in local computer ===
 
 Here is a very simple code to print ‘Hello World’.
 
+{{{
+#!python
 print “Hello, World”
+}}}
 
 You can make a file ‘test.py’ that contains one sentence above and then run the program by typing
 
 python test.pyI'm not sure we want to have this step.   Does this help us? -Justincappos 10/21/08 4:25 PM 
 
-1-1.2. Executing programs locally in REPY
+=== 1-1.2. Executing programs locally in REPY ===
 
 You can run the program above in your computer, but you need different way to execute the program in repy.Maybe this should say "There are two ways to execute a program, locally (useful for debugging) or on remote computers (how you'll actually deploy your programs).   We first explain how to run a program locally" -Justincappos 10/21/08 4:25 PM 
 
+{{{
+#!python
 python repy.py restrictions.test test.py
+}}}
 
 We need to make sure that you have the files named repy.py and restrictions.test in your current directory before executing the program like above.
 
 Output is following
+
+{{{
+#!python
 Hello World
 Hello World
 Terminated
+}}}
+
 "Hello World" was printed twice, and then the last sentence means that the program was terminated successfully Not all users will see "Terminated"   This only shows up on some operating systems.   Other operating systems have different messages -Justincappos 10/21/08 4:27 PM . test.py is called two times for different events (initialize and exit), because REPY is a event-driven programming language and has two events when it is executed. We can have more detail about it in REPY tutorial. Maybe this talk about events is confusing?  Perhaps we can skip this and instead start with the below example?  -Justincappos 10/21/08 4:28 PM 
 
 If you want to print "Hello World" only one time, you can change the code like below:
 
+{{{
+#!python
 if callfunc == 'initialize':
     print "Hello World"
+}}}
 
-1-1.3. Executing programs in Vessels.
+=== 1-1.3. Executing programs in Vessels. ===
 You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
 
-Step 1. Run programs in the Seattle 
+'''Step 1. Run programs in the Seattle 
 
 To run a program, you should use the experiment manager seash.   Seash allows you to control the files running in sandboxes you control.
 python seash.py 
 
-Step 2. Log in with my ID
+'''Step 2. Log in with my ID
 
 Before logging in, you have to load your public and private keys. You need to make sure that you have two files containing your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be john.publickey and john.privatekey.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
 
+{{{
+#!python
 !> loadkeys john
 !> as john
 john@ !>
+}}}
 
-Step 3. Locate the resources(computers) you can use
+'''Step 3. Locate the resources(computers) you can use
+
+{{{
+#!python
 john@ !> browse
 
 Added targets: %1(10.0.1.1:1224:v9), %2(10.0.1.2:2888:v9)
@@ -69,21 +91,30 @@ Added targets: %1(10.0.1.1:1224:v9), %2(10.0.1.2:2888:v9)
 Added group 'browsegood' with 2 targets
 
 The command browse produced the output that shows resources(targets) you can control. 
+}}}
 
 In the first target %1(10.0.1.1:1224:v9), %1 is the alias of the target, 10.0.1.1 is IP address, 1224 is port number, and v9 is vessel name. The vessel is the partial portion of whole donated resources. It means that the donated resources could be one vessel or divided and assigned to more than one person. 
 
-Step 4. Access the resources(vessels)
+'''Step 4. Access the resources(vessels)
 
+{{{
+#!python
 john@ !> on browsegood
+}}}
 
-Step 5. Run a program
+'''Step 5. Run a program
 
 We assume the program named test.py is stored in the current directory, which prints "Hello, World".
 
+{{{
+#!python
 john@browsegood !> run test.py
+}}}
 
-Step 6. Look up the result of the program executed
+'''Step 6. Look up the result of the program executed
 
+{{{
+#!python
 john@browsegood !> show log
 
 Log from '10.0.1.1:1224:v9':
@@ -91,28 +122,29 @@ Hello World
 
 Log from '10.0.1.2:2888:v9':
 Hello World
+}}}
 
-Step 7. Look up the information about the vessel you control
+'''Step 7. Look up the information about the vessel you control
 
+{{{
+#!python
 john@browsegood !> list
 
-ID Own                      Name     Status              Owner Information
+ID Own       Name          Status          Owner Information
+%1  *   10.0.1.1:1224:v9 Terminated                               
+%2  *   10.0.1.2:2888:v9 Terminated        
+}}}
 
-%1  *       10.0.1.1:1224:v9 Terminated                               
+'''Step 8. Exit from REPY
 
-%2  *      10.0.1.2:2888:v9 Terminated        
-
-Step 8. Exit from REPY
-
+{{{
+#!python
 john@browsegood !> exit
+}}}
 
-Help command helps you look up the commands you can use in repy.
+Help command helps you look up the commands you can use in repy.                  
 
-                    
-
-
-1-1.4. Testing programs in the interactive mode. I'm not sure this will help the reader.   It might just be confusing.   Perhaps we shouldn't talk about interactive mode? -Justincappos 10/21/08 4:29 PM 
-After reading the document, I can see the potential value.   It helps the programmer quickly test things in the language and makes the tutorial easier to walk through.   If you think this is better from a pedagogical standpoint, I'll have to think how we should introduce it. -Justincappos 10/21/08 4:49 PM 
+=== 1-1.4. Testing programs in the interactive mode. ===
 
 Instead of executing this program from the command line in batch mode, you could enter and run the code in interactive mode.
 
@@ -129,19 +161,25 @@ While in interactive mode, you can test your simple code before executing and lo
 To exit interactive mode, hit ctrl-d. Different on different OSes... -Justincappos 10/21/08 4:30 PM 
 
 
-1-2. Non-restricted type
+== 1-2. Non-restricted type ==
 Type is not declared in Python. However, the Python interpreter keeps track of the type of all objects. Thus Python variables don’t have types, but their values do.
 
-x = 10*10Should this program be indented and have "if callfunc == 'initialize':" ? -Justincappos 10/21/08 4:31 PM 
+{{{
+#!python
+x = 10*10 
 print x
-Result: 100
-
 x = “Hello”
 print x
-Result: Hello
+}}}
 
+Result
+{{{
+#!python
+100
+Hello
+}}}
 
-1-3. High-level operations
+== 1-3. High-level operations ==
 
 Python contains many high level operations.
 
@@ -153,26 +191,32 @@ Result: 2
 The method split() is a member of the string class. It splits a string into a list of words and len() returns the number of elements in a list.
 
 
+= 2. Basic Grammar =
 
-2. Basic Grammar
+== 2-1. Block Definition ('''colon and indenting''') ==
 
-2-1. Block Definition (colon and indenting) I like this section, but we might like to be more verbose. -Justincappos 10/21/08 4:47 PM 
-
+{{{
+#!python
 for i in range(10):
      print i
+}}}
+
+In C++ and Java, we use curly braces({}) as a block definition, but in Python, it has different syntax.
 
 The first line should ends with colon(:) and from next line, lines should be indented until at the end of the block.
 
-range() function returns a list of consecutive integers. This will result in 10 iterations of the loop, 0 through 9.
+In the example code, range() function returns a list of consecutive integers. This will result in 10 iterations of the loop, 0 through 9.
 
 
 
-2-2. Flow Control
+== 2-2. Flow Control ==
 
-2-2.1 if Statements
+=== 2-2.1 if Statements ===
 
 Perhaps the most well-known statement type is the if statement. For example:
 
+{{{
+#!python
 x = 42
 if x < 0:
     x = 0
@@ -183,31 +227,45 @@ elif x == 1:
     print ’Single’
 else:
     print ’More’
+}}}
 
-Result: More
+Result
+{{{
+#!python
+More
+}}}
 
 There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
 
-2-2.2 for Statements
+=== 2-2.2 for Statements ===
 
 The for statement in Python differs a bit from what you may be used to in C or Pascal. Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example (no pun intended):
 
+{{{
+#!python
 a = [’cat’, ’window’, ’defenestrate’]
 for x in a:
     print x, len(x)
+}}}
 
-Result:
+Result
+{{{
+#!python
 cat 3
 window 6
 defenestrate 12
+}}}
 
-2-2.3 break and continue Statements, and else Clauses on Loops
+=== 2-2.3 break and continue Statements, and else Clauses on Loops ===
 
 The break statement, like in C, breaks out of the smallest enclosing for or while loop.
 The continue statement, also borrowed from C, continues with the next iteration of the loop.
 Loop statements may have an else clause; it is executed when the loop terminates through exhaustion of the list (with for) or when the condition becomes false (with while), but not when the loop is terminated by a break statement.
 
 This is exemplified by the following loop, which searches for prime numbers:
+
+{{{
+#!python
 for n in range(2, 10):
     for x in range(2, n):
         if n % x == 0:
@@ -216,8 +274,11 @@ for n in range(2, 10):
     else:
         # loop fell through without finding a factor
         print n, ’is a prime number’
+}}}
 
-Result:
+Result
+{{{
+#!python
 2 is a prime number
 3 is a prime number
 4 equals 2 * 2
@@ -226,67 +287,158 @@ Result:
 7 is a prime number
 8 equals 2 * 4
 9 equals 3 * 3
+}}}
 
-2-3. Function Definition (def)
+=== 2-3. Function Definition (def) ===
+{{{
+#!python
 def square(x):
     return x*x
+}}}
 
 The keyword def is used to define a function. Note once again that the colon and indenting are used to define a block which serves as the function body. A function can return a value, using the return statement. However, the function does not have a type even if it does return something, and the object returned could be anything—an integer, a list, or whatever.
 
 
-
-2-4. Reading and Writing Files
+=== 2-4. Reading and Writing Files ===
 
 open() returns a file object, and is most commonly used with two arguments: open(filename, mode).
 
+{{{
+#!python
 f = open(’/tmp/workfile’, ’w’)
+}}}
 
 The first argument is a string containing the filename. The second argument is another string containing a few characters describing the way in which the file will be used. mode can be ’r’ when the file will only be read, ’w’ for only writing (an existing file with the same name will be erased), and ’a’ opens the file for appending; any data written to the file is automatically added to the end. ’r+’ opens the file for both reading and writing. The mode argument is optional; ’r’ will be assumed if it’s omitted.
 
 When you’re done with a file, call f.close() to close it and free up any system resources taken up by the open file. After calling f.close(), attempts to use the file object will automatically fail.
 
 
-3. Sequences
+= 3. Sequences =
 
 Sequences are array-like but with some differences.
 
-3-1. Lists
+== 3-1. Lists ==
 
 Lists are denoted by brackets and commas.
 
 There are some useful list operations.
-
+{{{
+#!python
 x = [1, 2]
-
+}}}
+{{{
+#!python
 x.append(3)
-Result: [1, 2, 3]
+}}}
 
+Result: 
+{{{
+#!python
+[1, 2, 3]
+}}}
+
+{{{
+#!python
 x.extend([-4, 5])
-Result: [1, 2, 3, -4, 5]
+}}}
 
+Result: 
+{{{
+#!python
+[1, 2, 3, -4, 5]
+}}}
+
+{{{
+#!python
 del x[2]
-Result: [1, 2, -4, 5]
+}}}
+
+Result: 
+{{{
+#!python
+[1, 2, -4, 5]
+}}}
+
+{{{
+#!python
 x.remove(5)
-Result: [1, 2, -4]
+}}}
+
+Result: 
+{{{
+#!python
+[1, 2, -4]
+}}}
+
+{{{
+#!python
 z = x[1:3] # array "slicing": elements 1 through 3-1 = 2
-Result: [2, -4]
+}}}
 
+Result: 
+{{{
+#!python
+[2, -4]
+}}}
+
+{{{
+#!python
 x[1:] # all elements starting with index 3
-Result: [2, -4]
+}}}
 
+Result: 
+{{{
+#!python
+[2, -4]
+}}}
+
+{{{
+#!python
 x[:2] # all elements up to but excluding index 2
-Result: [1, 2]
+}}}
 
+Result: 
+{{{
+#!python
+[1, 2]
+}}}
+
+{{{
+#!python
 x.index(-4)
-Result: 2
+}}}
 
+Result: 
+{{{
+#!python
+2
+}}}
+
+{{{
+#!python
 2 in x
-Result: True
+}}}
 
+Result: 
+{{{
+#!python
+True
+}}}
+
+{{{
+#!python
 x = 10
 y = 20
 [x, y] = [x, y]
-Result: x = 20, y =10 Somewhere in here, we should have negative indices (i.e. x[-1] is the last element) -Justincappos 10/21/08 4:53 PM 
+}}}
+
+Result: 
+{{{
+#!python
+x = 20, y =10
+}}} 
+
+Somewhere in here, we should have negative indices (i.e. x[-1] is the last element) -Justincappos 10/21/08 4:53 PM 
 
 3-2. Tuples
 
