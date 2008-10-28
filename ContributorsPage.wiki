@@ -6,3 +6,4 @@ This page contains information useful to developers working on Seattle
  * DeveloperSetup -- Running the code from SVN and generating a public / private key pair
  * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
  * DocFormatToDo -- ToDos for formatting documentation on Trac
+ * PythonTutorial -- Basic instruction of Python for writing codes in Repy
