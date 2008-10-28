@@ -20,7 +20,10 @@ print “Hello, World”
 
 You can make a file ‘test.py’ that contains one sentence above, and then run the program by typing
 
+{{{
+#!python
 python test.py
+}}}
 
 It is the normal way to execute the python codes. But this tutorial is written for those who use REPY.
 So, we need to explain how to run the codes in REPY.
