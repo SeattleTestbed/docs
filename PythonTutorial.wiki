@@ -8,14 +8,8 @@
 = 1. Overview =
 
 == 1-1. Interpreted rather than being compiled == 
-{{{
-#!comment
-I'm not sure we need this.
-If we do need this, we need to explain why (i.e. the user doesn't need to compile their code before distributing it) 
-Justincappos 10/21/08 4:24 PM 
-}}}
 
-=== 1-1.1. Executing programs in local computer ===
+You don't have to compile your python code to execute. 
 
 Here is a very simple code to print ‘Hello World’.
 
@@ -24,11 +18,14 @@ Here is a very simple code to print ‘Hello World’.
 print “Hello, World”
 }}}
 
-You can make a file ‘test.py’ that contains one sentence above and then run the program by typing
+You can make a file ‘test.py’ that contains one sentence above, and then run the program by typing
 
-python test.pyI'm not sure we want to have this step.   Does this help us? -Justincappos 10/21/08 4:25 PM 
+python test.py
 
-=== 1-1.2. Executing programs locally in REPY ===
+It is the normal way to execute the python codes. But this tutorial is written for those who use REPY.
+So, we need to explain how to run the codes in REPY.
+
+=== 1-1.1. Executing programs locally in REPY ===
 
 You can run the program above in your computer, but you need different way to execute the program in repy.Maybe this should say "There are two ways to execute a program, locally (useful for debugging) or on remote computers (how you'll actually deploy your programs).   We first explain how to run a program locally" -Justincappos 10/21/08 4:25 PM 
 
@@ -58,7 +55,7 @@ if callfunc == 'initialize':
     print "Hello World"
 }}}
 
-=== 1-1.3. Executing programs in Vessels. ===
+=== 1-1.2. Executing programs remotely in vessels. ===
 You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
 
 '''Step 1. Run programs in the Seattle 
@@ -144,7 +141,7 @@ john@browsegood !> exit
 
 Help command helps you look up the commands you can use in repy.                  
 
-=== 1-1.4. Testing programs in the interactive mode. ===
+=== 1-1.3. Testing programs in the interactive mode. ===
 
 Instead of executing this program from the command line in batch mode, you could enter and run the code in interactive mode.
 
