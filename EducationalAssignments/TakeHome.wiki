@@ -7,17 +7,18 @@ The purpose of this assignment is to illustrate several important networking con
 
 == Step 1 : Adding resources ==----
 
-
 You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website] at 
 Once you've logged in, you'll see resources contributed by your instructor. In the middle area, you'll see that you currently aren't using any resources. Click on the add resources button, under the Quick Start tab. Then click on LAN, and choose 10 computers, and click "Go!".  You should now see that ten computers have been added for you to use.
 
 [[BR]]
-== Step 2 : Running Seattle shell ==----
+== Step 2 : Running Seattle shell ==
+----
 
 Now click in the bottom pane click to download your Private Key and Public Key (need to save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py".   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
-== Step 3 : Browsing available resources ==----
+== Step 3 : Browsing available resources ==
+----
 
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt,
 
@@ -51,8 +52,10 @@ Added group 'browsegood' with X targets
 }}}
 
 This tells you that the seash has discovered the computers you selected and verified that they are ready to run your code.
+
 [[BR]]
-== Step 4 : Hello World! on a single computer ==----
+== Step 4 : Hello World! on a single computer ==
+----
 
 In the above print-out response to the browse command, the %1, %2, %3, etc are an easy way to refer to a computer.  For example, we can run a "hello world" program on computer %1 by typing:
 
@@ -98,6 +101,7 @@ username @%1 !> show log
 
 You'll see two "Hello World" lines now because you've run the program twice.  
 
+[[BR]]
 == Step 5 : Hello World! on many computers ==
 ----
 
@@ -139,6 +143,7 @@ username@browsegood !> on LAN
 
 to use the LAN group.
 
+[[BR]]
 == Step 6 : Stopping programs ==
 ----
 
@@ -208,7 +213,7 @@ to see that %2 received the ping packets. Okay, now stop the pingserver on compu
 username@LAN !> on %2 stop
 }}}
 
-
+[[BR]]
 == Step 8 : Sending pings between a group of computers ==
 ----
 
@@ -249,7 +254,7 @@ username@LAN !> show log
 
 Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).
 
-
+[[BR]]
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
@@ -307,6 +312,7 @@ username@WAN !> show log
 
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  (if the connectivity graph is complete, try to remove your nodes on the Seattle GENI website and choose different ones, repeating the commands in this step).
 
+[[BR]]
 == Step 10 : Packet forwarding ==
 ----
 
@@ -326,7 +332,7 @@ username@WAN !> on %node2 ping.py intermediateIP
 
 You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.
 
-
+[[BR]]
 == Step 11 : Observed behavior from your home computer ==
 ----
 
