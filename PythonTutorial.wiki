@@ -337,6 +337,28 @@ Result:
 
 {{{
 #!python
+x[0]
+
+Result:
+1
+
+x[-1]
+
+Result:
+3
+}}}
+Python array has not only the same indexing structure as other languages but also backward indexing(negative indexing).
+
+In the example above,
+
+||       Value      ||  1  ||  2  ||  3  ||
+||   Normal Index   ||  0  ||  1  ||  2  ||
+|| Additional Index || -3  || -2  ||  -1 ||
+
+
+[[BR]]
+{{{
+#!python
 x.extend([-4, 5])
 }}}
 Result: 
@@ -344,12 +366,10 @@ Result:
 #!python
 [1, 2, 3, -4, 5]
 }}}
-[[BR]]
 
 {{{
 #!python
 del x[2]
-}}}
 
 Result: 
 {{{
@@ -438,7 +458,7 @@ x = 20, y =10
 
 Somewhere in here, we should have negative indices (i.e. x[-1] is the last element) -Justincappos 10/21/08 4:53 PM 
 
-3-2. Tuples
+== 3-2. Tuples ==
 
 Tuples are like lists, but are immutable, i.e. unchangeable. They are enclosed by parentheses or nothing at all, rather than brackets. The parentheses are mandatory if there is an ambiguity without them, e.g. in function arguments. A comma must be used in the case of empty or single tuple, e.g. (,) and (5,).
 
@@ -450,7 +470,7 @@ print len(x) # prints 3
 x.pop() # illegal, due to immutability
 
 
-3-3. Strings
+== 3-3. Strings ==
 
 Strings are essentially tuples of character elements. But they are quoted instead of surrounded by parentheses, and have more ﬂexibility than tuples of character elements would have.
 
@@ -462,7 +482,7 @@ x = x[0:3] + ‘z’ + x[3:5]
 Result: ‘abczde’
 
 
-3-4. Dictionaries (Hashes)
+== 3-4. Dictionaries (Hashes) ==
 
 Dictionaries are associative arrays. The statement
 
@@ -489,14 +509,14 @@ x[’uv’] = 2
 Result: {’abc’: 12, ’uv’: 2, ’sailing’: ’away’}
 
 
-4. Class
+= 4. Class =
 
-4-1. Structure
+== 4-1. Structure ==
 The keyword ‘self’ is analogous to this in C++ and Java.
 Static variables in Python is ‘class name.variable name’.
 The constructor for a class is __init__().
 
-4-2. Sample Class
+== 4-2. Sample Class ==
 
 class Complex:
     count = 0
@@ -505,7 +525,7 @@ class Complex:
         self.r = realpart
         self.i = imagpart
 
-4-3. Derived Classes (superclass.__init__(self))
+== 4-3. Derived Classes (superclass.__init__(self)) ==
 
 If a class b is the subclass of a class a, we need write it like,
 
@@ -516,7 +536,7 @@ class b(a):
 
 
 
-5. Exception Handling
+= 5. Exception Handling =
 Python’s built-in and library functions have no C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism, e.g.
 
 try:
