@@ -1,5 +1,5 @@
 = All of the Python you need to understand Repy (and none you don't) =
-
+[[TOC]]
 
 = Introduction =
 
@@ -326,14 +326,12 @@ There are some useful list operations.
 #!python
 x = [1, 2]
 }}}
+
 {{{
 #!python
 x.append(3)
-}}}
 
 Result: 
-{{{
-#!python
 [1, 2, 3]
 }}}
 
@@ -341,12 +339,12 @@ Result:
 #!python
 x.extend([-4, 5])
 }}}
-
 Result: 
 {{{
 #!python
 [1, 2, 3, -4, 5]
 }}}
+[[BR]]
 
 {{{
 #!python
