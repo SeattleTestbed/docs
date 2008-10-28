@@ -4,8 +4,9 @@
 The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet. For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle toolkit. Altogether there are 11 steps to this assignment. Let's begin!
 
 == Using the GENI website and the Seattle shell ==
-
-== Step 1 : Adding resources ==----
+[[BR]]
+== Step 1 : Adding resources ==
+----
 
 You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website] at 
 Once you've logged in, you'll see resources contributed by your instructor. In the middle area, you'll see that you currently aren't using any resources. Click on the add resources button, under the Quick Start tab. Then click on LAN, and choose 10 computers, and click "Go!".  You should now see that ten computers have been added for you to use.
