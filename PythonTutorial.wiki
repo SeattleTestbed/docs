@@ -1,13 +1,17 @@
-All of the Python you need to understand Repy (and none you don't)
+= All of the Python you need to understand Repy (and none you don't) =
 
 
-Introduction
+= Introduction =
 
     This tutorial is written for those who have background knowledge of object oriented programming languages such as C++ and Java. This tutorial focuses on introducing the subset of Python used in the REPY (Restricted Python) language supported by the Seattle testbed.   After reading this tutorial, you should walk through the repy tutorial (link).
 
-1. Overview
+= 1. Overview =
 
-1-1. Interpreted rather than being compiled I'm not sure we need this.   If we do need this, we need to explain why (i.e. the user doesn't need to compile their code before distributing it) -Justincappos 10/21/08 4:24 PM 
+== 1-1. Interpreted rather than being compiled == 
+{{{
+#!comment
+I'm not sure we need this.   If we do need this, we need to explain why (i.e. the user doesn't need to compile their code before distributing it) -Justincappos 10/21/08 4:24 PM 
+}}}
 
 1-1.1. Executing programs in local computer
 
