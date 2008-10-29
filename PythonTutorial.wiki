@@ -1,5 +1,5 @@
 = All of the Python you need to understand Repy (and none you don't) =
-[[TOC]]
+[[TOC(inline)]]
 
 [[BR]]
 [[BR]]
