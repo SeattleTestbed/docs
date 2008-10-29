@@ -189,8 +189,18 @@ Python contains many high level operations.
 
 Here is a simple example that print the number of words in ‘Hello Word”
 
+
+{{{
+#!python
 print len(“Hello World”.split())
-Result: 2
+}}}
+
+Result:
+
+{{{
+#!python
+2
+}}}
 
 The method split() is a member of the string class. It splits a string into a list of words and len() returns the number of elements in a list.
 
