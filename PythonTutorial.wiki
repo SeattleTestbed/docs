@@ -48,7 +48,11 @@ Hello World
 Terminated
 }}}
 
-"Hello World" was printed twice, and then the last sentence means that the program was terminated successfully Not all users will see "Terminated"   This only shows up on some operating systems.   Other operating systems have different messages -Justincappos 10/21/08 4:27 PM . test.py is called two times for different events (initialize and exit), because REPY is a event-driven programming language and has two events when it is executed. We can have more detail about it in REPY tutorial. Maybe this talk about events is confusing?  Perhaps we can skip this and instead start with the below example?  -Justincappos 10/21/08 4:28 PM 
+"Hello World" was printed twice, and then the last sentence means that the program was terminated successfully. 
+
+Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems have different messages.
+
+The test.py is called two times.
 
 If you want to print "Hello World" only one time, you can change the code like below:
 
@@ -57,6 +61,8 @@ If you want to print "Hello World" only one time, you can change the code like b
 if callfunc == 'initialize':
     print "Hello World"
 }}}
+
+REPY is a event-driven programming language and has two events when it is executed, initialize and exit. We can have more detail about it in REPY tutorial. 
 
 === 1-1.2. Executing programs remotely in vessels. ===
 You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
