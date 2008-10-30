@@ -1,3 +1,5 @@
+= For Educators =
+
 This page will contain information for educators wishing to use Seattle in the classroom. Check back later for more info, but for now you can contact justinc -AT- cs -DOT- washington -DOT- edu 
 
  * TakeHomeAssignment
