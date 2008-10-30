@@ -1,4 +1,4 @@
-= For Developers =
+= Developer Portal =
 
 This page contains information useful to developers working on Seattle
 
