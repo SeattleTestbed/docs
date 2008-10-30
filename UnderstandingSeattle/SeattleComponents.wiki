@@ -1,12 +1,10 @@
-Seattle's Components
+= Seattle Components =
 
-Installation of Seattle
-
-The way that new resources are able to be used by researchers is a three step process.   First a person called a planner [CustomizedInstaller creates a customized installer] that defines how the planner would like to allocate resources when Seattle is installed on a computer.   A donor runs the customized installer on their local system and a small percentage of the resources on their computer are added to the testbed according to the allocations set out by the planner.   Researchers who have resources on the computer can run experiments or give those resource to other researchers.
+New resources are added to the Seattle testbed in a three step process. First a person we call a '''planner''' [CustomizedInstaller creates a customized installer] which defines how the planner would like to allocate their resources when Seattle is installed on a computer. Then, someone we call a '''donor''' runs the customized installer on their local system and a small percentage of the resources on their computer are added to the testbed according to the allocations set out by the planner. '''Researchers''' who are granted resources on the newly added computer will then be able to run experiments or share those resource with other researchers.
 
 [[Image(SeattlePicture1.jpg)]]
 
-It's important to understand three main components to understand how Seattle works.
+Seattle is composed of three components.
 
 
  * Vessel ---   A vessel is a programming language virtual machine that runs a user's code (currently the only language supported is RestrictedPython).   Vessels prevent the program running in them from performing unsafe actions (like opening the user's credit card information).   Vessels also have a specified number of resources they are allowed to consume.   The vessel restricts the program from consuming more than the allowed number of resources.   
