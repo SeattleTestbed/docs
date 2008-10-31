@@ -8,9 +8,12 @@ This tutorial is written for those who have background knowledge of object orien
 [[BR]]
 
 = 1. Overview =
+----
+
+[[BR]]
 
 == 1-1. Interpreted rather than being compiled == 
-
+----
 You don't have to compile your python code to execute. 
 
 Here is a very simple code to print ‘Hello World’.
@@ -30,7 +33,10 @@ python test.py
 It is the normal way to execute the python codes. But this tutorial is written for those who use REPY.
 So, we need to explain two different ways to run the codes in REPY.
 
+[[BR]]
+
 === 1-1.1. Executing programs locally in REPY ===
+----
 
 You can run the program above in your computer, but you need different way to execute the program in repy.
 
