@@ -12,7 +12,7 @@ This tutorial is written for those who have background knowledge of object orien
 
 [[BR]]
 
-== 1-1. Interpreted rather than being compiled == 
+== 1-1. The way to execute programs == 
 ----
 You don't have to compile your python code to execute. 
 
