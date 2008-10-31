@@ -74,7 +74,10 @@ You need to insert if block to execute your code one time in initialize status.
 
 REPY is a event-driven programming language and has two events when it is executed, initialize and exit. We can have more detail about it in [RepyTutorial REPY tutorial]. 
 
+[[BR]]
 === 1-1.2. Executing programs remotely in vessels. ===
+----
+
 You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
 
 '''Step 1. Run programs in the Seattle 
