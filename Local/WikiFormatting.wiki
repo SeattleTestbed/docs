@@ -6,4 +6,10 @@
  * Immediately following the purpose summary, is a horizontal line: {{{----}}}, followed by {{{[[TOC(inline)]]}}}, followed by another horizontal line: {{{----}}}
  * All section titles in the rest of the document must use nested heading tags: {{{== ==}}}, {{{=== ===}}}, and so on. 
  * Each section title must be '''preceded''' by a line break {{{[[BR]]}}} and immediately followed by a horizontal line {{{----}}}
- * Python/Seash code snippets must be enclosed with: {{{{{{#!python }}}}}}
+ * Python/Seash code snippets must be enclosed with: {{{{{{#!python }}}}}}. Here's an example:
+{{{
+{{{
+#!python
+print "hello world"
+}}}
+}}}
