@@ -2,4 +2,4 @@
 
 This page will contain information for educators wishing to use Seattle in the classroom. Check back later for more info, but for now you can contact justinc -AT- cs -DOT- washington -DOT- edu 
 
- * TakeHomeAssignment
+ * [TakeHomeAssignment Take-Home Assignment] that introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the internet
