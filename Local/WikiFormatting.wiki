@@ -17,7 +17,7 @@
 ----
 }}}
 
- * Python/Seash code snippets must be enclosed with: {{{{{{#!python }}}}}}. Here's an example:
+ * Python/Repy code and Seash terminal interaction examples must be enclosed with: {{{{{{#!python }}}}}}. Here's an example:
 {{{
 {{{
 #!python
