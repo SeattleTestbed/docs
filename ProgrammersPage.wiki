@@ -2,5 +2,4 @@
 
 This page will feature information and references regarding how to use Seattle, check back soon!
 
- * TakeHomeAssignment
- * PythonTutorial
+ * [PythonTutorial Python Tutorial]
