@@ -222,7 +222,7 @@ Comments
 
   Inline Comments
 
-    Use inline comments sparingly.
+    Use inline comments very sparingly.
 
     An inline comment is a comment on the same line as a statement.  Inline
     comments should be separated by at least two spaces from the statement.
@@ -237,12 +237,80 @@ Comments
 
         x = x + 1                 # Compensate for border
 
-    Comments should give the reader the context for why you are performing a specific action, not what action you are performing.   An exception is if you need to do some "magic operation" in the code.
 
-        # reuse the socket if it's "pseudo-availible"  
+  Purpose of Comments
+
+    Comments should give the reader the context for why you are performing a specific action and indicate authorship and mindset.
+
+It is very important that when you change code you didn't write you
+comment the change.   I've spent days looking for bugs that people
+introduced because they changed code they thought they understood.
+'''Any changes you make to a module or function you didn't write, use
+your initials in a comment describing the scope and purpose of the change.'''
+
+Use the comment to explain what you are thinking when you make the
+change.   For example:
+
+old code:
+  for line in file("foo"):
+     print line.split()[1]
+
+new code:
+  for line in file("foo"):
+     # JAC: Need to check if there is a second word, if not then we
+can skip the line because
+     # it isn't relevant to the output.   Prior code threw an
+IndexError in this case.
+     if len(line.split()) > 2:
+        print line.split()[1]
+
+Now when someone reads the new code they can understand why you
+changed what you did.   If the original author reads your updated code, they can tell if you misunderstood their code and easily fix it (but if you misunderstood the code, this is a hint it needs better comments).
+
+If you spend time struggling to understand something in code, it is useful to put a comment indicating you find it unclear but you *think* this is what is intended.   This helps us to locate portions of the code that need to be cleaned up and also indicates "how" to clean the code.
+    
+  Comments should describe why you are performing an action, not what action you are performing.   
+
+    No:
+      i = i + 2     # add 2 to i
+    Yes: 
+      i = i + 2     # skipping even numbers since even numbers > 2 are not prime
+
+    An exception is if you need to do some "magic operation" in the code.
+
+        # reuse the socket if it's recently been closed but is availible 
         socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    
+
+
+
+  Hints for writing good comments
+
+    It is helpful many times to write comments as questions
+
+      # Is the file correctly signed?
+      if (foo.bar(fn)):
+
+
+    The "right time" to write comments is as you write the code (sometimes I even write them before the code).   You will never have a better understanding of the code than when you write it.
+
+
+    If you are making assumptions then you should check that your assumptions are valid.   If you can't test your assumptions then at least comment your code
+
+total = 0
+for item in list:
+  # The list should contain only integers
+  total = total + item
+
+
+
+  Comment quantity
+
+    There is no hard and fast rule for the number of comments a file should have.   However, one way to check it is to read only the comments (not the code).   If you could re-construct the code using only the comments, you are likely at the right level of comments.   
+
+    Note that "well commented" modules may have more lines of comments than lines of code!  
+
+
 
 
 Documentation Strings
@@ -255,7 +323,6 @@ Documentation Strings
       should have a comment that describes what the method does.  This comment
       should appear after the "def" line.
 
-#### ADD STORK DOC TYPE HERE
 
     - Note that most
       importantly, the """ that ends a multiline docstring should be on a line
@@ -271,17 +338,127 @@ Documentation Strings
       line.
 
 
+   Example documentation strings for files, modules, and classes.
+
+      Each file should have a header block that explains the purpose of the
+module, when it was started, who wrote it (or made very substantial
+revisions), and a list of any caveats or issues with the module.
+
+"""
+<Program Name>
+  storkreport.py
+
+<Started>
+  February 4, 2005
+
+<Author>
+  sethh@cs.arizona.edu
+  Justin Cappos
+  Jeffry Johnston
+
+<Purpose>
+  Provides Error Reporting/Logging Utility Functions.
+
+  The functions are named loosely based on the syslog levels.  However,
+  because syslog has 7 priority levels, and stork only has 4, the
+  send_error and send_out_* series only contain debug, info, warning, and
+  err (notice, alert, and emergency were omitted).  send_syslog supports
+  all seven levels, however.
+
+  Current syslog implementation assumes local syslog (no remote servers),
+  and a facility of LOG_USER (defaults from the syslog module).
+
+  On July 10th, 2007, Justin is doing a pretty substantial rewrite.   Blame
+  him for any resulting cruft.
+"""
+
+
+Documentation strings are needed for every function in a module that will be called from other modules.   It is recommended to create comment blocks for long functions even if they are private to a module.   There are 5 main
+parts of a function comment block: purpose, arguments, exceptions,
+side effects, and return value.   The purpose is to specify everything someone
+who calls your function needs to know (so they don't need to look at the code).
+An example follows.
+
+def redirect_stdout(stream):
+  """
+  <Purpose>
+     Redirects the standard output stream (stdout) to a new file stream.
+     If this is the first time that output has been redirected, the
+     original stdout stream will be saved for use with the restore_stdout
+     function.
+
+  <Arguments>
+     stream:
+             The new file stream for stdout.
+
+  <Exceptions>
+     TypeError on bad parameters.
+
+  <Side Effects>
+     Changes sys.stdout.
+
+  <Returns>
+     None.
+  """
+
+In general the use of classes is discouraged (link to below), but in the cases it is clear classes should be used, use the following format:
+
+class single_conn(Thread):
+   """
+   <Purpose>
+      Wraps up the client side of arizonacomm into a single class.
+   <Side Effects>
+      Defaults to running itself in a thread.
+   <Example Use>
+      # open a connection
+      connection = single_conn()
+      # write information to the connected party
+      connection.send("hello")
+      # and disconnect without checking if they have said anything
+      connection.disconnect()
+   """   
+
+Classes that are used for exceptions can be written more succinctly (since the purpose, side effects, example use are obvious).
+
+class UserError(Exception):
+  """This exception indicates the user provided us with bad input"""
+
+
 
 Naming Conventions
 
-    The naming conventions of Python's library are a bit of a mess, so we'll
-    never get this completely consistent -- nevertheless, here are the
-    currently recommended naming standards.  New modules and packages
-    (including third party frameworks) should be written to these standards,
-    but where an existing library has a different style, internal consistency
-    is preferred.
 
   Descriptive: Naming Styles
+
+
+    Use descriptive variable and function names.
+
+Put at least one adjective in each variable name like 'slicename' or 'inputfileobj' or 'deststring'.   Also make sure that the type of the variable is
+readable by looking at the name.   Don't call a string containing a filename 'inputfile', call it 'input_fn'.   This is especially important for function arguments or variables that have long lifespans.
+
+    Yes:
+       inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
+       deststring = "abc" + currentstring
+       slicename = "uw_seattle"
+     
+    No:
+       inobj = file(filename)
+       dest = "abc" + current
+       name = "uw_seattle"
+ 
+    Definitely not:
+       i = i + 1
+
+    The only case where it is okay to use single letter variable names is for arguments passed into a constructor.   For example:
+   
+       class foo:
+         ... # doc string omitted
+         startingitemcount = None
+         maxitemcount = None
+         def __init__(self, s, m):
+           self.startingitemcount = s
+           self.maxitemcount = m
+
 
     Exception Names
 
@@ -294,10 +471,7 @@ Naming Conventions
       (Let's hope that these variables are meant for use inside one module
       only.)  The conventions are about the same as those for functions.
 
-      Modules that are designed for use via "from M import *" should use the
-      __all__ mechanism to prevent exporting globals, or use the older
-      convention of prefixing such globals with an underscore (which you might
-      want to do to indicate these globals are "module non-public").
+      If you can do it without globals in an intelligent way, then don't use globals.   When you must use globals then explain why you need to use globals.   An example that uses globals in a good way is a program that keeps a cache.
 
     Function Names
 
@@ -315,6 +489,7 @@ Naming Conventions
       generally better to append a single trailing underscore rather than use
       an abbreviation or spelling corruption.  Thus "print_" is better than
       "prnt".  (Perhaps better is to avoid such clashes by using a synonym.)
+
 
 
 
@@ -470,280 +645,43 @@ Programming Recommendations
 
 
 
+  Pet Peeves
 
+    Unix not Windows style text files.
 
+      If you develop on Windows make sure you use dos2unix before checking in.
 
 
-The rules are:
 
-Per module and per function comment blocks
-Indentation (3 spaces)
-No generic try: except: blocks
-Unix not Windows style text files.
-Put whitespace between functions
-Avoid globals and objects
-No lambda functions or lisp-esque code
-Use comments to describe what is happening in your program.
-Use descriptive variable and function names.
-Write test cases
-Indicate authorship and mindset
-Never use short circuit evaluation to produce output
 
 
-I list examples and descriptions for each of these below...
 
 
+    Avoid objects
 
 
+      Objects are a terrific programming tool when used correctly, but make code nearly unreadable when used poorly.   Unfortunately, even experienced developers have a hard time knowing how to correctly use objects.   About 80% of the code one could write is equally good with and without objects.   10% is easier with objects and 10% is easier without them.   Seattle code should use objects only in very rare cases.   The 90% of the code where objects can be avoided without significant impact, should be written without objects.
 
-### Per module and per function comment blocks
 
-Each file should have a header block that explains the purpose of the
-module, when it was started, who wrote it (or made very substantial
-revisions), and a list of any caveats or issues with the module.
 
-"""
-<Program Name>
-  storkreport.py
+    No lambda functions or lisp-esque code
 
-<Started>
-  February 4, 2005
+      Don't use lambda functions.   Don't use map, flatten, etc.   It's best not to use these functions and to write longer code that produces the same result instead because using these functions makes your code very dense and difficult to read.
 
-<Author>
-  sethh@cs.arizona.edu
-  Justin Cappos
-  Jeffry Johnston
 
-<Purpose>
-  Provides Error Reporting/Logging Utility Functions.
+    Write test cases
 
-  The functions are named loosely based on the syslog levels.  However,
-  because syslog has 7 priority levels, and stork only has 4, the
-  send_error and send_out_* series only contain debug, info, warning, and
-  err (notice, alert, and emergency were omitted).  send_syslog supports
-  all seven levels, however.
+      Since you're going to want to test your module anyways before integrating it into the rest of Seattle (right?), it makes sense to do it in a reusable way.   This way when you make changes later, you can immediately test to see if anything is broken.
 
-  Current syslog implementation assumes local syslog (no remote servers),
-  and a facility of LOG_USER (defaults from the syslog module).
+      Write 90% tests.   The test should make sure that it will catch 90% of the potential problems with the function.   Avoid writing 50% tests (that only check a common case or two) and avoid writing 99.9% tests because it will consume too much of your time.
 
-  On July 10th, 2007, Justin is doing a pretty substantial rewrite.   Blame
-  him for any resulting cruft.
-"""
+All "external" functions _must_ be tested.   Internal functions (starting with __) are up to your discretion.
 
-Each function should also have a comment block.   There are 5 main
-parts of a function comment block: purpose, arguments, exceptions,
-side effects, and return value.   An example follows.
 
-def redirect_stdout(stream):
-  """
-  <Purpose>
-     Redirects the standard output stream (stdout) to a new file stream.
-     If this is the first time that output has been redirected, the
-     original stdout stream will be saved for use with the restore_stdout
-     function.
 
-  <Arguments>
-     stream:
-             The new file stream for stdout.
+    Never use short circuit evaluation to produce output
 
-  <Exceptions>
-     TypeError on bad parameters.
-
-  <Side Effects>
-     Changes sys.stdout.
-
-  <Returns>
-     None.
-  """
-
-
-
-
-### Indentation
-
-No tabs, 3 space indentation.   The only time there should ever be any
-different indentation is if you need to break up a long line.   Then
-indent at least 6 spaces.   You can align elsewhere if it makes sense.
-
-For example:
-
-  usagecount = compute_count(slice1) + compute_count(slice2) +
-compute_count(slice3) +
-                      compute_count(slice4)
-
-
-
-
-
-### No try: except: blocks
-
-Instead of generic try: except: blocks, specify the exceptions you are
-trying to catch.
-
-For example:
-
-try:
- parsefile("foo")
-except:
- # There may be problems reading the file, ignore them
- pass
-
-should be:
-
-try:
- parsefile("foo")
-except IOError:
- # There may be problems reading the file, ignore them
- pass
-
-This way unintentional exceptions will not be caught by the try: except: block.
-
-
-
-
-### Unix not Windows style text files.
-
-If you develop on Windows make sure you use dos2unix before checking in.
-
-
-
-
-
-### Put whitespace between functions
-
-Add at least 5 or 6 <CR>s between functions.   You can add more if
-you're moving to a new "section" of the code.
-
-
-
-
-### Avoid globals and objects
-If you can do it without globals in an intelligent way, then don't use
-globals.   When you must use globals then explain why you need to use
-globals.
-
-Objects are similar.   About 80% of the code one could write is
-equally good with and without objects.   10% is easier with objects
-and 10% is easier without them.   We chose to only use objects when
-required for Stork (like interfacing with a module that requires
-objects).
-
-
-
-### No lambda functions or lisp-esque code
-
-Don't use lambda functions.   Don't use map, flatten, etc. without
-commenting what you are trying to do.   It's best not to use these
-functions at all.
-
-
-
-
-###   Use comments to describe what is happening in your program.
-Here are some tips:
-
-1) Describe "why" you are doing something, not what you are doing.
-
-BAD COMMENT:   i = i + 2   # Add 2 to i
-
-GOOD COMMENT:   i = i + 2    # Skip the even integers > 2 because they
-are not prime
-
-
-2) It is helpful many times to write comments as questions
-
-# Is the file correctly signed?
-if (foo.bar(fn)):
-
-
-3) The "right time" to write comments is as you write the code
-(sometimes I even write them before the code).   You will never have a
-better understanding of the code than when you write it.
-
-
-4) If you are making assumptions then you should check that your
-assumptions are valid.   If you can't test your assumptions then at
-least comment your code
-
-total = 0
-for item in list:
-  # The list should contain only integers
-  total = total + item
-
-
-
-
-###   Use descriptive variable and function names.
-
-Don't call variables 'name' or 'file' or 'string'.   Put at least one
-adjective in each variable name like 'slicename' or 'inputfile' or
-'deststring'.   Also make sure that the type of the variable is
-readable by looking at the name.   Don't call a string containing a
-filename 'inputfile', call it 'input_fn'.   This is especially
-important for function arguments or variables that have long
-lifespans.
-
-
-
-
-###   Write test cases
-
-Since you're going to want to test your function anyways before
-integrating it into the rest of stork (right?), it makes sense to do
-this in a reusable way.   This way when you make changes later, you
-can immediately test to see if anything is broken.
-
-Write 90% tests.   The test should make sure that it will catch 90% of
-the potential problems with the function.   Avoid writing 50% tests
-(that only check a common case or two) and avoid writing 99.9% tests
-because it will consume too much of your time.
-
-All "external" functions _must_ be tested.   Internal functions
-(starting with __) are up to your discretion.
-
-
-
-
-###    Indicate authorship and mindset
-
-It is very important that when you change code you didn't write you
-comment the change.   I've spent days looking for bugs that people
-introduced because they changed code they thought they understood.
-Any changes you make to a module or function you didn't write, use
-your initials in the comment.
-
-Use the comment to explain what you are thinking when you make the
-change.   For example:
-
-old code:
-  for line in file("foo"):
-     print line.split()[1]
-
-new code:
-  for line in file("foo"):
-     # JAC: Need to check if there is a second word, if not then we
-can skip the line because
-     # it isn't relevant to the output.   Prior code threw an
-IndexError in this case.
-     if len(line.split()) > 2:
-        print line.split()[1]
-
-Now when someone reads the new code they can understand why you
-changed what you did.   If you misunderstood the intent they know how
-to comment the code to make it more understandable.
-
-If you spend time struggling to understand something in code, it is
-useful to put a comment indicating you find it unclear but you *think*
-this is what is intended.   This helps us to locate portions of the
-code that need to be cleaned up and also indicates "how" to clean the
-code.
-
-
-
-
-###   Never use short circuit evaluation to produce output
-
-Do not write:
+      No:
 
   if synched or askokcancel("Change slice without synching?", "You
 have changes that are not synched with the repository. These changes
@@ -753,7 +691,7 @@ slice without synching.", default=CANCEL):
   else:
      # else clause
 
-Instead write:
+      Yes:
 
   if not synched:
      if askokcancel("Change slice without synching?", "You have
@@ -767,7 +705,7 @@ slice without synching.", default=CANCEL):
      #then clause
 
 
-or if the then and else clauses are large write:
+      or if the then and else clauses are large write:
 
   if not synched:
      isok = askokcancel("Change slice without synching?", "You have
