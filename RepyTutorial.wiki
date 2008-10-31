@@ -44,7 +44,7 @@ A simple "helloworld.py" repy program looks like this:
 #!python
 if callfunc == "initialize":
   print "hello world"
-}}}}
+}}}
 
 This program states that if I'm being called during initialization, I should print "hello world" to my log.   By default the log is the shell you are using when you run repy from the command line.   On some architectures you will also see a line like "Terminated".
 
