@@ -2,10 +2,10 @@
 
 This page contains information useful to developers working on Seattle
 
- * SeattleTalks -- Upcoming talks about Seattle 
- * RepoAccess -- SVN access instructions
- * DeveloperSetup -- Running the code from SVN and generating a public / private key pair
- * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
- * DocFormatToDo -- ToDos for formatting documentation on Trac
- * PythonTutorial -- Basic instruction of Python for writing codes in Repy
- * SeattleDownload -- Download instructions for seattle
+ * [SeattleTalks Upcoming talks] about Seattle
+ * [RepoAccess SVN access] instructions
+ * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
+ * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
+ * [DocFormatToDo Documentation format guidelines]
+ * [PythonTutorial Python Tutorial] with basic instruction of Python for writing codes in Repy
+ * [SeattleDownload Download and installation instructions] for Seattle
