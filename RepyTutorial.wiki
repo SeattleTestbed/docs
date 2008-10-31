@@ -1,34 +1,50 @@
 = Repy Tutorial =
 
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
 = Introduction =
+----
 
 This guide provides an introduction to using the repy sandbox environment.  It describes who would want to use repy, how to perform actions in the sandboxed environment, and what restrictions are placed upon the sandboxed code.   At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
 
 It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
 
+[[BR]]
 == What is repy and who should use it? ==
+----
 
 Repy is a sandboxed environment that is intended for educational and research use.   The idea is that a user can install repy on their system and researchers and students can run code on their system without significantly impacting the security or performance of the host system.   To provide security and performance isolation, the programs that run on repy are restricted in what they can do and when they can do it.  
 
+[[BR]]
 == When should I use repy? ==
+----
 
 Repy is ideal for students, researchers, and companies that want to prototype code and have it run on as many computers as possible.   <completely unsubstantiated claims> Repy has performance comparable to native Python and is safe for untrusted code to run on.</completely unsubstantiated claims>   The focus on repy is on safety.   If you need access to more complex mechanisms than what the sandbox provides (direct access to hardware, running C code, etc.), repy is not for you.  
 
+[[BR]]
 == How is this different than BOINC (SETI@Home, etc.)? ==
+----
 
 In BOINC the focus is on using spare CPU cycles from home machines.   To BOINC, getting 1% of the time on 1000 computers is similar to getting 100% on 10 computers (for similar computers).   With repy it is much more useful to get 1% on 1000 computers because the research and educational programs are trying to understand how to write scalable programs that run on many computers at the same time.   The problems and programs become interesting when there are thousands of computers.  
 
 Also BOINC uses only CPU cycles when the system would be idle so as to avoid interfering with the user.   BOINC typically uses almost all of the CPU when it's idle.   With repy, it is more desirable to constantly have a small percentage of the resources (this allows a smaller percentage of resources to be used over a longer time period).
 
-
+[[BR]]
 = A simple example (example 1.1) =
+----
 
 The way to execute the codes in Repy is in the [PythonTutorial Python tutorial] page.
 
 A simple "helloworld.py" repy program looks like this:
 
+{{{
+#!python
 if callfunc == "initialize":
   print "hello world"
+}}}}
 
 This program states that if I'm being called during initialization, I should print "hello world" to my log.   By default the log is the shell you are using when you run repy from the command line.   On some architectures you will also see a line like "Terminated".
 
