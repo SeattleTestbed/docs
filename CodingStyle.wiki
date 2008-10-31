@@ -1,0 +1,469 @@
+ = Style Guidelines for the Python project =
+
+These guidelines provide examples about what to do (or not to do) when writing code for the Seattle project.   These are based upon Justin's experiences working with Stork, [http://www.python.org/dev/peps/pep-0008/ Guido van Rossom's ] Python style guidelines, and the experiences and suggestions of team members.   Please give Justin feedback if there is anything you'd like to change.
+
+
+
+One of Guido's key insights is building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have is security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
+
+
+A style guide is about consistency.  Consistency within a project is very important and since we're writing basically all of the code ourselves, there should be little reason for inconsistency.  
+
+
+There is only one good reason to break a rule in the style guideline and that's when applying the rule would make the code less readable, even for someone who is used to reading code that follows the rules.
+
+
+
+Code lay-out
+
+  Indentation
+
+    Use 2 spaces per indentation level.
+
+  Tabs?
+
+    Never use tabs to indent project code.   There should be no tabs in Seattle code.
+
+  Maximum Line Length
+
+    Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments and use common sense when applying this rule to code.   I've seen developers who have a highly indented loop wrap a relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
+
+    The preferred way of wrapping long lines is by using Python's implied line
+    continuation inside parentheses, brackets and braces.  If necessary, you
+    can add an extra pair of parentheses around an expression, but sometimes
+    using a backslash looks better.  Make sure to indent the continued line
+    appropriately.  The preferred place to break around a binary operator is
+    *after* the operator, not before it.  Some examples:
+
+    class Rectangle(Blob):
+
+        def __init__(self, width, height,
+                     color='black', emphasis=None, highlight=0):
+            if width == 0 and height == 0 and \
+               color == 'red' and emphasis == 'strong' or \
+               highlight > 100:
+                raise ValueError("sorry, you lose")
+            if width == 0 and height == 0 and (color == 'red' or
+                                               emphasis is None):
+                raise ValueError("I don't think so -- values are %s, %s" %
+                                 (width, height))
+            Blob.__init__(self, width, height,
+                          color, emphasis, highlight)
+
+  Blank Lines
+
+    Separate top-level function and class definitions with at least 5 blank lines.
+
+    Method definitions inside a class are separated by at least 2 blank lines.
+
+    Use blank lines in functions to indicate logical sections and help to offset comments.
+
+
+
+Imports
+
+    - Imports should usually be on separate lines, e.g.:
+
+        Yes: import os
+             import sys
+
+        No:  import sys, os
+
+    - It is preferable to import an entire module than items from the module
+
+        Yes: import subprocess
+
+        Maybe: from subprocess import Popen, PIPE
+
+        No: from subprocess import *
+       * An exception to this is when you must import items in this way for repy portability.
+
+    - Imports are always put at the top of the file, just after any module
+      comments and docstrings, and before module globals and constants.
+
+      Imports should be grouped in the following order:
+
+      1. standard library imports
+      2. related third party imports
+      3. local application/library specific imports
+
+      You should put a blank line between each group of imports.
+
+    - Always use the absolute package path for all imports.
+
+
+Whitespace in Expressions and Statements
+
+  Pet Peeves
+
+    Avoid extraneous whitespace in the following situations:
+
+    - Immediately inside parentheses, brackets or braces.
+
+      Yes: spam(ham[1], {eggs: 2})
+      No:  spam( ham[ 1 ], { eggs: 2 } )
+
+    - Immediately before a comma, semicolon, or colon:
+
+      Yes: if x == 4: print x, y; x, y = y, x
+      No:  if x == 4 : print x , y ; x , y = y , x
+
+    - Immediately before the open parenthesis that starts the argument
+      list of a function call:
+
+      Yes: spam(1)
+      No:  spam (1)
+
+    - Immediately before the open parenthesis that starts an indexing or
+      slicing:
+
+      Yes: dict['key'] = list[index]
+      No:  dict ['key'] = list [index]
+
+    - More than one space around an assignment (or other) operator to
+      align it with another.
+
+      Yes:
+
+          x = 1
+          y = 2
+          long_variable = 3
+
+      No:
+
+          x             = 1
+          y             = 2
+          long_variable = 3
+
+
+  Other Recommendations
+
+    - Always surround these binary operators with a single space on
+      either side: assignment (=), augmented assignment (+=, -= etc.),
+      comparisons (==, <, >, !=, <>, <=, >=, in, not in, is, is not),
+      Booleans (and, or, not).
+
+    - Use spaces around arithmetic operators:
+
+      Yes:
+
+          i = i + 1
+          submitted += 1
+          x = x * 2 - 1
+          hypot2 = x * x + y * y
+          c = (a + b) * (a - b)
+
+      Maybe not:
+
+          i=i+1
+          submitted +=1
+          x = x*2 - 1
+          hypot2 = x*x + y*y
+          c = (a+b) * (a-b)
+
+    - Compound statements (multiple statements on the same line) are
+      not allowed.
+
+      Yes:
+
+          if foo == 'blah':
+              do_blah_thing()
+          do_one()
+          do_two()
+          do_three()
+
+      No:
+
+          if foo == 'blah': do_blah_thing()
+          do_one(); do_two(); do_three()
+
+      Definitely not:
+
+          if foo == 'blah': do_blah_thing()
+          else: do_non_blah_thing()
+
+          try: something()
+          finally: cleanup()
+
+          do_one(); do_two(); do_three(long, argument,
+                                       list, like, this)
+
+          if foo == 'blah': one(); two(); three()
+
+
+Comments
+
+    Comments that contradict the code are worse than no comments.  Always make
+    a priority of keeping the comments up-to-date when the code changes!
+
+    Comments should be complete sentences.  If a comment is a phrase or
+    sentence, its first word should be capitalized, unless it is an identifier
+    that begins with a lower case letter (never alter the case of
+    identifiers!).
+
+    If a comment is short, the period at the end can be omitted.  Block
+    comments generally consist of one or more paragraphs built out of complete
+    sentences, and each sentence should end in a period.
+
+    You should use two spaces after a sentence-ending period.
+
+    When writing English, Strunk and White apply.
+
+
+  Block Comments
+
+    Block comments generally apply to some (or all) code that follows them,
+    and are indented to the same level as that code.  Each line of a block
+    comment starts with a # and a single space (unless it is indented text
+    inside the comment).
+
+    Paragraphs inside a block comment are separated by a line containing a
+    single #.
+
+  Inline Comments
+
+    Use inline comments sparingly.
+
+    An inline comment is a comment on the same line as a statement.  Inline
+    comments should be separated by at least two spaces from the statement.
+    They should start with a # and a single space.
+
+    Inline comments are unnecessary and in fact distracting if they state
+    the obvious.  Don't do this:
+
+        x = x + 1                 # Increment x
+
+    But sometimes, this is useful:
+
+        x = x + 1                 # Compensate for border
+
+    Comments should give the reader the context for why you are performing a specific action, not what action you are performing.   An exception is if you need to do some "magic operation" in the code.
+
+        # reuse the socket if it's "pseudo-availible"  
+        socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    
+
+
+Documentation Strings
+
+    Conventions for writing good documentation strings (a.k.a. "docstrings")
+    are immortalized in PEP 257 [3].
+
+    - Write docstrings for all public modules, functions, classes, and
+      methods.  Docstrings are not necessary for non-public methods, but you
+      should have a comment that describes what the method does.  This comment
+      should appear after the "def" line.
+
+#### ADD STORK DOC TYPE HERE
+
+    - Note that most
+      importantly, the """ that ends a multiline docstring should be on a line
+      by itself, and preferably preceded by a blank line, e.g.:
+
+      """Return a foobang
+
+      Optional plotz says to frobnicate the bizbaz first.
+
+      """
+
+    - For one liner docstrings, it's okay to keep the closing """ on the same
+      line.
+
+
+
+Naming Conventions
+
+    The naming conventions of Python's library are a bit of a mess, so we'll
+    never get this completely consistent -- nevertheless, here are the
+    currently recommended naming standards.  New modules and packages
+    (including third party frameworks) should be written to these standards,
+    but where an existing library has a different style, internal consistency
+    is preferred.
+
+  Descriptive: Naming Styles
+
+    Exception Names
+
+      Because exceptions should be classes, the class naming convention
+      applies here.  However, you should use the suffix "Error" on your
+      exception names (if the exception actually is an error).
+
+    Global Variable Names
+
+      (Let's hope that these variables are meant for use inside one module
+      only.)  The conventions are about the same as those for functions.
+
+      Modules that are designed for use via "from M import *" should use the
+      __all__ mechanism to prevent exporting globals, or use the older
+      convention of prefixing such globals with an underscore (which you might
+      want to do to indicate these globals are "module non-public").
+
+    Function Names
+
+      Function names should be lowercase, with words separated by underscores
+      as necessary to improve readability.
+
+      mixedCase is allowed only in contexts where that's already the
+      prevailing style (e.g. threading.py), to retain backwards compatibility.
+
+    Function and method arguments
+
+      Always use 'self' for the first argument to instance methods.
+
+      If a function argument's name clashes with a reserved keyword, it is
+      generally better to append a single trailing underscore rather than use
+      an abbreviation or spelling corruption.  Thus "print_" is better than
+      "prnt".  (Perhaps better is to avoid such clashes by using a synonym.)
+
+
+
+
+Programming Recommendations
+
+
+    - Comparisons to singletons like None should always be done with
+      'is' or 'is not', never the equality operators.
+
+      Also, beware of writing "if x" when you really mean "if x is not None"
+      -- e.g. when testing whether a variable or argument that defaults to
+      None was set to some other value.  The other value might have a type
+      (such as a container) that could be false in a boolean context!
+
+    - Use class-based exceptions.
+
+      String exceptions in new code are forbidden, because this language
+      feature is being removed in Python 2.6.
+
+      Modules or packages should define their own domain-specific base
+      exception class, which should be subclassed from the built-in Exception
+      class.  Always include a class docstring.  E.g.:
+
+        class MessageError(Exception):
+            """Base class for errors in the email package."""
+
+      Class naming conventions apply here, although you should add the suffix
+      "Error" to your exception classes, if the exception is an error.
+      Non-error exceptions need no special suffix.
+
+    - When raising an exception, use "raise ValueError('message')" instead of
+      the older form "raise ValueError, 'message'".
+
+      The paren-using form is preferred because when the exception arguments
+      are long or include string formatting, you don't need to use line
+      continuation characters thanks to the containing parentheses.
+
+    - When catching exceptions, mention specific exceptions
+      whenever possible instead of using a bare 'except:' clause.
+
+      For example, use:
+
+          try:
+              import platform_specific_module
+          except ImportError:
+              platform_specific_module = None 
+
+      A bare 'except:' clause will catch SystemExit and KeyboardInterrupt
+      exceptions, making it harder to interrupt a program with Control-C,
+      and can disguise other problems.  If you want to catch all
+      exceptions that signal program errors, use 'except Exception:'.
+
+      A good rule of thumb is to limit use of bare 'except' clauses to two 
+      cases:
+
+         1) If the exception handler will be printing out or logging
+            the traceback; at least the user will be aware that an
+            error has occurred.  
+
+         2) If the code needs to do some cleanup work, but then lets
+            the exception propagate upwards with 'raise'.
+            'try...finally' is a better way to handle this case.
+
+    - Additionally, for all try/except clauses, limit the 'try' clause
+      to the absolute minimum amount of code necessary.  Again, this
+      avoids masking bugs.
+
+      Yes:
+
+          try:
+              value = collection[key]
+          except KeyError:
+              return key_not_found(key)
+          else:
+              return handle_value(value)
+
+      No:
+
+          try:
+              # Too broad!
+              return handle_value(collection[key])
+          except KeyError:
+              # Will also catch KeyError raised by handle_value()
+              return key_not_found(key)
+
+    - Use string methods instead of the string module.
+
+      String methods are always much faster and share the same API with
+      unicode strings.  Override this rule if backward compatibility with
+      Pythons older than 2.0 is required.
+
+    - Use ''.startswith() and ''.endswith() instead of string slicing to check
+      for prefixes or suffixes.
+
+      startswith() and endswith() are cleaner and less error prone.  For
+      example:
+
+        Yes: if foo.startswith('bar'):
+
+        No:  if foo[:3] == 'bar':
+
+      The exception is if your code must work with Python 1.5.2 (but let's
+      hope not!).
+
+    - Object type comparisons should always use isinstance() instead
+      of comparing types directly.
+
+        Yes: if isinstance(obj, int):
+
+        No:  if type(obj) is type(1):
+
+      When checking if an object is a string, keep in mind that it might be a
+      unicode string too!  In Python 2.3, str and unicode have a common base
+      class, basestring, so you can do:
+
+        if isinstance(obj, basestring):
+
+      In Python 2.2, the types module has the StringTypes type defined for
+      that purpose, e.g.:
+
+        from types import StringTypes
+        if isinstance(obj, StringTypes):
+
+      In Python 2.0 and 2.1, you should do:
+
+        from types import StringType, UnicodeType
+        if isinstance(obj, StringType) or \
+           isinstance(obj, UnicodeType) :
+
+    - For sequences, (strings, lists, tuples), use the fact that empty
+      sequences are false.
+
+      Yes: if not seq:
+           if seq:
+
+      No: if len(seq)
+          if not len(seq)
+
+    - Don't write string literals that rely on significant trailing
+      whitespace.  Such trailing whitespace is visually indistinguishable and
+      some editors (or more recently, reindent.py) will trim them.
+
+    - Don't compare boolean values to True or False using ==
+
+        Yes:   if greeting:
+
+        No:    if greeting == True:
+
+        Worse: if greeting is True:
+
+      However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is true, is allowed.
