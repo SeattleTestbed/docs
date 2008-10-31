@@ -8,3 +8,4 @@ This page contains information useful to developers working on Seattle
  * WikiSvnAccounts -- How to gain commit access to Seattle SVN and Wiki
  * DocFormatToDo -- ToDos for formatting documentation on Trac
  * PythonTutorial -- Basic instruction of Python for writing codes in Repy
+ * SeattleDownload -- Download instructions for seattle
