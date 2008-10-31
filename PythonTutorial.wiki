@@ -160,7 +160,10 @@ john@browsegood !> exit
 
 Help command helps you look up the commands you can use in repy.                  
 
+[[BR]]
+
 === 1-1.3. Testing programs in the interactive mode. ===
+----
 
 Instead of executing this program from the command line in batch mode, you could enter and run the code in interactive mode.
 
@@ -180,8 +183,10 @@ Hello, World
 While in interactive mode, you can test your simple code before executing and look up the command history by using the arrow keys.
 To exit interactive mode, hit ctrl-d. Different on different OSes... -Justincappos 10/21/08 4:30 PM 
 
-
+[[BR]]
 == 1-2. Non-restricted type ==
+----
+
 Type is not declared in Python. However, the Python interpreter keeps track of the type of all objects. Thus Python variables don’t have types, but their values do.
 
 {{{
@@ -199,7 +204,9 @@ Result
 Hello
 }}}
 
+[[BR]]
 == 1-3. High-level operations ==
+----
 
 Python contains many high level operations.
 
@@ -220,10 +227,13 @@ Result:
 
 The method split() is a member of the string class. It splits a string into a list of words and len() returns the number of elements in a list.
 
-
+[[BR]]
 = 2. Basic Grammar =
+----
 
+[[BR]]
 == 2-1. Block Definition ==
+----
 
 {{{
 #!python
@@ -238,10 +248,13 @@ The first line should ends with '''colon(:)''' and from next line, lines should 
 In the example code, range() function returns a list of consecutive integers. This will result in 10 iterations of the loop, 0 through 9.
 
 
-
+[[BR]]
 == 2-2. Flow Control ==
+----
 
+[[BR]]
 === 2-2.1 if Statements ===
+----
 
 Perhaps the most well-known statement type is the if statement. For example:
 
@@ -267,7 +280,9 @@ More
 
 There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
 
+[[BR]]
 === 2-2.2 for Statements ===
+----
 
 The for statement in Python differs a bit from what you may be used to in C or Pascal. Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example (no pun intended):
 
@@ -286,7 +301,9 @@ window 6
 defenestrate 12
 }}}
 
+[[BR]]
 === 2-2.3 break and continue Statements, and else Clauses on Loops ===
+----
 
 The break statement, like in C, breaks out of the smallest enclosing for or while loop.
 The continue statement, also borrowed from C, continues with the next iteration of the loop.
@@ -319,7 +336,10 @@ Result
 9 equals 3 * 3
 }}}
 
+[[BR]]
 === 2-3. Function Definition (def) ===
+----
+
 {{{
 #!python
 def square(x):
@@ -328,8 +348,9 @@ def square(x):
 
 The keyword def is used to define a function. Note once again that the colon and indenting are used to define a block which serves as the function body. A function can return a value, using the return statement. However, the function does not have a type even if it does return something, and the object returned could be anything—an integer, a list, or whatever.
 
-
+[[BR]]
 === 2-4. Reading and Writing Files ===
+----
 
 open() returns a file object, and is most commonly used with two arguments: open(filename, mode).
 
@@ -342,12 +363,15 @@ The first argument is a string containing the filename. The second argument is a
 
 When you’re done with a file, call f.close() to close it and free up any system resources taken up by the open file. After calling f.close(), attempts to use the file object will automatically fail.
 
-
+[[BR]]
 = 3. Sequences =
+----
 
 Sequences are array-like but with some differences.
 
+[[BR]]
 == 3-1. Lists ==
+----
 
 Lists are denoted by brackets and commas.
 
@@ -464,7 +488,9 @@ x = 20, y =10
 
 Somewhere in here, we should have negative indices (i.e. x[-1] is the last element) -Justincappos 10/21/08 4:53 PM 
 
+[[BR]]
 == 3-2. Tuples ==
+----
 
 Tuples are like lists, but are immutable, i.e. unchangeable. They are enclosed by parentheses or nothing at all, rather than brackets. The parentheses are mandatory if there is an ambiguity without them, e.g. in function arguments. A comma must be used in the case of empty or single tuple, e.g. (,) and (5,).
 
@@ -478,7 +504,9 @@ print len(x) # prints 3
 x.pop() # illegal, due to immutability
 }}}
 
+[[BR]]
 == 3-3. Strings ==
+----
 
 Strings are essentially tuples of character elements. But they are quoted instead of surrounded by parentheses, and have more ﬂexibility than tuples of character elements would have.
 
@@ -499,8 +527,9 @@ Result:
 ‘abczde’
 }}}
 
-
+[[BR]]
 == 3-4. Dictionaries (Hashes) ==
+----
 
 Dictionaries are associative arrays. The statement
 
@@ -552,14 +581,21 @@ Result:
 {’abc’: 12, ’uv’: 2, ’sailing’: ’away’}
 }}}
 
+[[BR]]
 = 4. Class =
+----
 
+[[BR]]
 == 4-1. Structure ==
+----
+
 The keyword ‘self’ is analogous to this in C++ and Java.
 Static variables in Python is ‘class name.variable name’.
 The constructor for a class is __init__().
 
+[[BR]]
 == 4-2. Sample Class ==
+----
 
 {{{
 #!python
@@ -571,7 +607,9 @@ class Complex:
         self.i = imagpart
 }}}
 
+[[BR]]
 == 4-3. Derived Classes ==
+----
 
 '''superclass.__init__(self)''' 
 
@@ -585,8 +623,9 @@ class b(a):
         a.__init__(self) # call base class constructor
 }}}
 
-
+[[BR]]
 = 5. Exception Handling =
+----
 
 Python’s built-in and library functions have no C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism, e.g.
 
