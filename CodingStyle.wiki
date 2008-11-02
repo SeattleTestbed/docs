@@ -41,20 +41,19 @@ There is only one good reason to break a rule in the style guideline and that's 
 
 {{{
 #!python
-    class Rectangle(Blob):
-
-        def __init__(self, width, height,
-                     color='black', emphasis=None, highlight=0):
-            if width == 0 and height == 0 and \
-               color == 'red' and emphasis == 'strong' or \
-               highlight > 100:
-                raise ValueError("sorry, you lose")
-            if width == 0 and height == 0 and (color == 'red' or
-                                               emphasis is None):
-                raise ValueError("I don't think so -- values are %s, %s" %
-                                 (width, height))
-            Blob.__init__(self, width, height,
-                          color, emphasis, highlight)
+class Rectangle(Blob):
+  def __init__(self, width, height,
+    color='black', emphasis=None, highlight=0):
+    if width == 0 and height == 0 and \
+        color == 'red' and emphasis == 'strong' or \
+        highlight > 100:
+      raise ValueError("sorry, you lose")
+    if width == 0 and height == 0 and (color == 'red' or
+        emphasis is None):
+      raise ValueError("I don't think so -- values are %s, %s" %
+          (width, height))
+    Blob.__init__(self, width, height,
+        color, emphasis, highlight)
 }}}
 
   Blank Lines
@@ -75,14 +74,14 @@ There is only one good reason to break a rule in the style guideline and that's 
         Yes: 
 {{{
 #!python
-             import os
-             import sys
+import os
+import sys
 }}}
 
         No:  
 {{{
 #!python
-             import sys, os
+import sys, os
 }}}
 
     - It is preferable to import an entire module than items from the module
@@ -90,19 +89,19 @@ There is only one good reason to break a rule in the style guideline and that's 
         Yes:
 {{{
 #!python
-             import subprocess
+import subprocess
 }}}
 
         No: 
 {{{
 #!python
-             from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE
 }}}
 
         Definitely Not: 
 {{{
 #!python
-             from subprocess import *
+from subprocess import *
 }}}
         An exception to the last rule is when you must import items in a specific way for repy portability.
 
@@ -124,12 +123,12 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes: 
 {{{
 #!python
-           spam(ham[1], {eggs: 2})
+spam(ham[1], {eggs: 2})
 }}}
       No:  
 {{{
 #!python
-           spam( ham[ 1 ], { eggs: 2 } )
+spam( ham[ 1 ], { eggs: 2 } )
 }}}
 
     - Immediately before a comma, semicolon, or colon:
@@ -137,12 +136,12 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes: 
 {{{
 #!python
-           if x == 4: print x, y; x, y = y, x
+if x == 4: print x, y; x, y = y, x
 }}}
       No:  
 {{{
 #!python
-           if x == 4 : print x , y ; x , y = y , x
+if x == 4 : print x , y ; x , y = y , x
 }}}
 
     - Immediately before the open parenthesis that starts the argument
@@ -151,12 +150,12 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes: 
 {{{
 #!python
-           spam(1)
+spam(1)
 }}}
       No:  
 {{{
 #!python
-           spam (1)
+spam (1)
 }}}
 
     - Immediately before the open parenthesis that starts an indexing or
@@ -165,12 +164,12 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes: 
 {{{
 #!python
-           dict['key'] = list[index]
+dict['key'] = list[index]
 }}}
       No:  
 {{{
 #!python
-           dict ['key'] = list [index]
+dict ['key'] = list [index]
 }}}
 
     - More than one space around an assignment (or other) operator to
@@ -179,17 +178,17 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes:
 {{{
 #!python
-          x = 1
-          y = 2
-          long_variable = 3
+x = 1
+y = 2
+long_variable = 3
 }}}
 
       No:
 {{{
 #!python
-          x             = 1
-          y             = 2
-          long_variable = 3
+x             = 1
+y             = 2
+long_variable = 3
 }}}
 
 
@@ -205,21 +204,21 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes:
 {{{
 #!python
-          i = i + 1
-          submitted += 1
-          x = x * 2 - 1
-          hypot2 = x * x + y * y
-          c = (a + b) * (a - b)
+i = i + 1
+submitted += 1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
 }}}
 
       Maybe not:
 {{{
 #!python
-          i=i+1
-          submitted +=1
-          x = x*2 - 1
-          hypot2 = x*x + y*y
-          c = (a+b) * (a-b)
+i=i+1
+submitted +=1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
 }}}
 
     - Compound statements (multiple statements on the same line) are
@@ -228,33 +227,33 @@ There is only one good reason to break a rule in the style guideline and that's 
       Yes:
 {{{
 #!python
-          if foo == 'blah':
-              do_blah_thing()
-          do_one()
-          do_two()
-          do_three()
+if foo == 'blah':
+  do_blah_thing()
+do_one()
+do_two()
+do_three()
 }}}
 
       No:
 {{{
 #!python
-          if foo == 'blah': do_blah_thing()
-          do_one(); do_two(); do_three()
+if foo == 'blah': do_blah_thing()
+do_one(); do_two(); do_three()
 }}}
 
       Definitely not:
 {{{
 #!python
-          if foo == 'blah': do_blah_thing()
-          else: do_non_blah_thing()
+if foo == 'blah': do_blah_thing()
+else: do_non_blah_thing()
 
-          try: something()
-          finally: cleanup()
+try: something()
+finally: cleanup()
 
-          do_one(); do_two(); do_three(long, argument,
-                                       list, like, this)
+do_one(); do_two(); do_three(long, argument,
+    list, like, this)
 
-          if foo == 'blah': one(); two(); three()
+if foo == 'blah': one(); two(); three()
 }}}
 
 [[BR]]
@@ -296,14 +295,19 @@ There is only one good reason to break a rule in the style guideline and that's 
     comments should be separated by at least two spaces from the statement.
     They should start with a # and a single space.
 
+
     Inline comments are unnecessary and in fact distracting if they state
     the obvious.  Don't do this:
-
-        x = x + 1                 # Increment x
+{{{
+#!python
+x = x + 1                 # Increment x
+}}}
 
     But sometimes, this is useful:
-
-        x = x + 1                 # Compensate for border
+{{{
+#!python
+x = x + 1                 # Compensate for border
+}}}
 
 
 
@@ -312,73 +316,101 @@ There is only one good reason to break a rule in the style guideline and that's 
 
     Comments should give the reader the context for why you are performing a specific action and indicate authorship and mindset.
 
-It is very important that when you change code you didn't write you
-comment the change.   I've spent days looking for bugs that people
-introduced because they changed code they thought they understood.
-'''Any changes you make to a module or function you didn't write, use
-your initials in a comment describing the scope and purpose of the change.'''
+    It is very important that when you change code you didn't write you
+    comment the change.   I've spent days looking for bugs that people
+    introduced because they changed code they thought they understood.
+    '''Any time you make changes to a module or function you didn't write, use
+    your initials in a comment describing the scope and purpose of the change.'''
 
-Use the comment to explain what you are thinking when you make the
-change.   For example:
+    Use the comment to explain what you are thinking when you make the
+    change.  
 
-old code:
-  for line in file("foo"):
-     print line.split()[1]
+    old code:
+{{{
+#!python
+for line in file("foo"):
+  print line.split()[1]
+}}}
 
-new code:
-  for line in file("foo"):
-     # JAC: Need to check if there is a second word, if not then we
-can skip the line because
-     # it isn't relevant to the output.   Prior code threw an
-IndexError in this case.
-     if len(line.split()) > 2:
-        print line.split()[1]
+    new code:
+{{{
+#!python
+for line in file("foo"):
+  # JAC: Need to check if there is a second word, if not then we
+  # can skip the line because it isn't relevant to the output.   
+  # Prior code threw an IndexError in this case.
+  if len(line.split()) > 2:
+    print line.split()[1]
+}}}
 
-Now when someone reads the new code they can understand why you
-changed what you did.   If the original author reads your updated code, they can tell if you misunderstood their code and easily fix it (but if you misunderstood the code, this is a hint it needs better comments).
+    Now when someone reads the new code they can understand why you
+    changed what you did.   If the original author reads your updated 
+    code, they can tell if you misunderstood their code and easily fix 
+    it (but if you misunderstood the code, this is a hint it needs better comments).
 
-If you spend time struggling to understand something in code, it is useful to put a comment indicating you find it unclear but you *think* this is what is intended.   This helps us to locate portions of the code that need to be cleaned up and also indicates "how" to clean the code.
+    If you spend time struggling to understand something in code, it is 
+    useful to put a comment indicating you find it unclear but you *think* 
+    this is what is intended.   This helps us to locate portions of the code 
+    that need to be cleaned up and also indicates "how" to clean the code.
     
   Comments should describe why you are performing an action, not what action you are performing.   
 
     No:
-      i = i + 2     # add 2 to i
+{{{
+#!python
+i = i + 2     # add 2 to i
+}}}
     Yes: 
-      i = i + 2     # skipping even numbers since even numbers > 2 are not prime
+{{{
+#!python
+i = i + 2     # skipping even numbers since even numbers > 2 are not prime
+}}}
 
-    An exception is if you need to do some "magic operation" in the code.
-
-        # reuse the socket if it's recently been closed but is availible 
-        socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
+    An exception to this rule is if you need to do some "magic operation" in the code.
+{{{
+#!python
+# reuse the socket if it's recently been closed but is available 
+socketobj.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+}}}
 
 
 
   Hints for writing good comments
 
     It is helpful many times to write comments as questions
+{{{
+#!python
+# Is the file correctly signed?
+if (foo.bar(fn)):
+}}}
 
-      # Is the file correctly signed?
-      if (foo.bar(fn)):
+
+    The "right time" to write comments is as you write the code 
+    (sometimes I even write them before the code).   You will never 
+    have a better understanding of the code than when you write it.
 
 
-    The "right time" to write comments is as you write the code (sometimes I even write them before the code).   You will never have a better understanding of the code than when you write it.
-
-
-    If you are making assumptions then you should check that your assumptions are valid.   If you can't test your assumptions then at least comment your code
-
+    If you are making assumptions then you should check that your 
+    assumptions are valid.   If you can't test your assumptions then 
+    at least comment your code
+{{{
+#!python
 total = 0
 for item in list:
   # The list should contain only integers
   total = total + item
-
+}}}
 
 
   Comment quantity
 
-    There is no hard and fast rule for the number of comments a file should have.   However, one way to check it is to read only the comments (not the code).   If you could re-construct the code using only the comments, you are likely at the right level of comments.   
+    There is no hard and fast rule for the number of comments a file 
+    should have.   However, one way to check it is to read only the 
+    comments (not the code).   If you could re-construct the code using 
+    only the comments, you are likely at the right level of comments.   
 
-    Note that "well commented" modules may have more lines of comments than lines of code!  
+    Note that "well commented" modules may have more lines of comments 
+    than lines of code!  
 
 
 
@@ -398,12 +430,14 @@ for item in list:
     - Note that most
       importantly, the """ that ends a multiline docstring should be on a line
       by itself, and preferably preceded by a blank line, e.g.:
-
+{{{
+#!python
       """Return a foobang
 
       Optional plotz says to frobnicate the bizbaz first.
 
       """
+}}}
 
     - For one liner docstrings, it's okay to keep the closing """ on the same
       line.
@@ -412,9 +446,10 @@ for item in list:
    Example documentation strings for files, modules, and classes.
 
       Each file should have a header block that explains the purpose of the
-module, when it was started, who wrote it (or made very substantial
-revisions), and a list of any caveats or issues with the module.
-
+      module, when it was started, who wrote it (or made very substantial
+      revisions), and a list of any caveats or issues with the module.
+{{{
+#!python
 """
 <Program Name>
   storkreport.py
@@ -442,14 +477,17 @@ revisions), and a list of any caveats or issues with the module.
   On July 10th, 2007, Justin is doing a pretty substantial rewrite.   Blame
   him for any resulting cruft.
 """
+}}}
 
-
-Documentation strings are needed for every function in a module that will be called from other modules.   It is recommended to create comment blocks for long functions even if they are private to a module.   There are 5 main
-parts of a function comment block: purpose, arguments, exceptions,
-side effects, and return value.   The purpose is to specify everything someone
-who calls your function needs to know (so they don't need to look at the code).
-An example follows.
-
+      Documentation strings are needed for every function in a module that 
+      will be called from other modules.   It is recommended to create comment 
+      blocks for long functions even if they are private to a module.   There are 5 main
+      parts of a function comment block: purpose, arguments, exceptions,
+      side effects, and return value.   The purpose is to specify everything someone
+      who calls your function needs to know (so they don't need to look at the code).
+      For example:
+{{{
+#!python
 def redirect_stdout(stream):
   """
   <Purpose>
@@ -471,9 +509,12 @@ def redirect_stdout(stream):
   <Returns>
      None.
   """
+}}}
 
-In general the use of classes is discouraged (link to below), but in the cases it is clear classes should be used, use the following format:
-
+      In general the use of classes is discouraged (link to below), but in the 
+      cases it is clear classes should be used, use the following format:
+{{{
+#!python
 class single_conn(Thread):
    """
    <Purpose>
@@ -488,12 +529,14 @@ class single_conn(Thread):
       # and disconnect without checking if they have said anything
       connection.disconnect()
    """   
+}}}
 
 Classes that are used for exceptions can be written more succinctly (since the purpose, side effects, example use are obvious).
-
+{{{
+#!python
 class UserError(Exception):
   """This exception indicates the user provided us with bad input"""
-
+}}}
 
 [[BR]]
 == Naming Conventions ==
