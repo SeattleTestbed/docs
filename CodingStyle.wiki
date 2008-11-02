@@ -121,40 +121,76 @@ There is only one good reason to break a rule in the style guideline and that's 
 
     - Immediately inside parentheses, brackets or braces.
 
-      Yes: spam(ham[1], {eggs: 2})
-      No:  spam( ham[ 1 ], { eggs: 2 } )
+      Yes: 
+{{{
+#!python
+           spam(ham[1], {eggs: 2})
+}}}
+      No:  
+{{{
+#!python
+           spam( ham[ 1 ], { eggs: 2 } )
+}}}
 
     - Immediately before a comma, semicolon, or colon:
 
-      Yes: if x == 4: print x, y; x, y = y, x
-      No:  if x == 4 : print x , y ; x , y = y , x
+      Yes: 
+{{{
+#!python
+           if x == 4: print x, y; x, y = y, x
+}}}
+      No:  
+{{{
+#!python
+           if x == 4 : print x , y ; x , y = y , x
+}}}
 
     - Immediately before the open parenthesis that starts the argument
       list of a function call:
 
-      Yes: spam(1)
-      No:  spam (1)
+      Yes: 
+{{{
+#!python
+           spam(1)
+}}}
+      No:  
+{{{
+#!python
+           spam (1)
+}}}
 
     - Immediately before the open parenthesis that starts an indexing or
       slicing:
 
-      Yes: dict['key'] = list[index]
-      No:  dict ['key'] = list [index]
+      Yes: 
+{{{
+#!python
+           dict['key'] = list[index]
+}}}
+      No:  
+{{{
+#!python
+           dict ['key'] = list [index]
+}}}
 
     - More than one space around an assignment (or other) operator to
       align it with another.
 
       Yes:
-
+{{{
+#!python
           x = 1
           y = 2
           long_variable = 3
+}}}
 
       No:
-
+{{{
+#!python
           x             = 1
           y             = 2
           long_variable = 3
+}}}
 
 
   Other Recommendations
@@ -167,39 +203,48 @@ There is only one good reason to break a rule in the style guideline and that's 
     - Use spaces around arithmetic operators:
 
       Yes:
-
+{{{
+#!python
           i = i + 1
           submitted += 1
           x = x * 2 - 1
           hypot2 = x * x + y * y
           c = (a + b) * (a - b)
+}}}
 
       Maybe not:
-
+{{{
+#!python
           i=i+1
           submitted +=1
           x = x*2 - 1
           hypot2 = x*x + y*y
           c = (a+b) * (a-b)
+}}}
 
     - Compound statements (multiple statements on the same line) are
       not allowed.
 
       Yes:
-
+{{{
+#!python
           if foo == 'blah':
               do_blah_thing()
           do_one()
           do_two()
           do_three()
+}}}
 
       No:
-
+{{{
+#!python
           if foo == 'blah': do_blah_thing()
           do_one(); do_two(); do_three()
+}}}
 
       Definitely not:
-
+{{{
+#!python
           if foo == 'blah': do_blah_thing()
           else: do_non_blah_thing()
 
@@ -210,6 +255,7 @@ There is only one good reason to break a rule in the style guideline and that's 
                                        list, like, this)
 
           if foo == 'blah': one(); two(); three()
+}}}
 
 [[BR]]
 == Comments ==
@@ -723,6 +769,7 @@ slice without synching.", default=CANCEL):
 
   if not synched:
      if askokcancel("Change slice without synching?", "You have
+
 
 changes that are not synched with the repository. These changes will
 be lost if you change the slice right now. \n\nClick OK to change
