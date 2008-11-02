@@ -24,13 +24,13 @@ There is only one good reason to break a rule in the style guideline and that's 
 
     Use 2 spaces per indentation level.
 
-  Tabs?
+  Tabs
 
     Never use tabs to indent project code.   There should be no tabs in Seattle code.
 
   Maximum Line Length
 
-    Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments and use common sense when applying this rule to code.   I've seen developers who have a highly indented loop wrap a relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
+    Try to limit most lines to a maximum of 79 characters.   This certainly should be done for comments, but use common sense when applying this rule to code!   I've seen developers who have a highly indented loop wrap a relatively short line across three separate lines to try to avoid going over 80 characters (don't do it!).
 
     The preferred way of wrapping long lines is by using Python's implied line
     continuation inside parentheses, brackets and braces.  If necessary, you
@@ -39,6 +39,8 @@ There is only one good reason to break a rule in the style guideline and that's 
     appropriately.  The preferred place to break around a binary operator is
     *after* the operator, not before it.  Some examples:
 
+{{{
+#!python
     class Rectangle(Blob):
 
         def __init__(self, width, height,
@@ -53,6 +55,7 @@ There is only one good reason to break a rule in the style guideline and that's 
                                  (width, height))
             Blob.__init__(self, width, height,
                           color, emphasis, highlight)
+}}}
 
   Blank Lines
 
@@ -69,30 +72,42 @@ There is only one good reason to break a rule in the style guideline and that's 
 
     - Imports should usually be on separate lines, e.g.:
 
-        Yes: import os
+        Yes: 
+{{{
+#!python
+             import os
              import sys
+}}}
 
-        No:  import sys, os
+        No:  
+{{{
+#!python
+             import sys, os
+}}}
 
     - It is preferable to import an entire module than items from the module
 
-        Yes: import subprocess
+        Yes:
+{{{
+#!python
+             import subprocess
+}}}
 
-        Maybe: from subprocess import Popen, PIPE
+        No: 
+{{{
+#!python
+             from subprocess import Popen, PIPE
+}}}
 
-        No: from subprocess import *
-       * An exception to this is when you must import items in this way for repy portability.
+        Definitely Not: 
+{{{
+#!python
+             from subprocess import *
+}}}
+        An exception to the last rule is when you must import items in a specific way for repy portability.
 
     - Imports are always put at the top of the file, just after any module
       comments and docstrings, and before module globals and constants.
-
-      Imports should be grouped in the following order:
-
-      1. standard library imports
-      2. related third party imports
-      3. local application/library specific imports
-
-      You should put a blank line between each group of imports.
 
     - Always use the absolute package path for all imports.
 
@@ -243,6 +258,7 @@ There is only one good reason to break a rule in the style guideline and that's 
     But sometimes, this is useful:
 
         x = x + 1                 # Compensate for border
+
 
 
 
@@ -707,6 +723,7 @@ slice without synching.", default=CANCEL):
 
   if not synched:
      if askokcancel("Change slice without synching?", "You have
+
 changes that are not synched with the repository. These changes will
 be lost if you change the slice right now. \n\nClick OK to change
 slice without synching.", default=CANCEL):
