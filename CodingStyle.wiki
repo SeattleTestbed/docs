@@ -3,8 +3,11 @@
 These guidelines provide examples about what to do (or not to do) when writing code for the Seattle project.   These are based upon Justin's experiences working with Stork, [http://www.python.org/dev/peps/pep-0008/ Guido van Rossom's ] Python style guidelines, and the experiences and suggestions of team members.   Please give Justin feedback if there is anything you'd like to change.
 
 
+----
+[[TOC(inline)]]
+----
 
-One of Guido's key insights is building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have is security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
+One of Guido's key insights in building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have is security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
 
 
 A style guide is about consistency.  Consistency within a project is very important and since we're writing basically all of the code ourselves, there should be little reason for inconsistency.  
@@ -13,8 +16,9 @@ A style guide is about consistency.  Consistency within a project is very import
 There is only one good reason to break a rule in the style guideline and that's when applying the rule would make the code less readable, even for someone who is used to reading code that follows the rules.
 
 
-
-Code lay-out
+[[BR]]
+== Code lay-out ==
+----
 
   Indentation
 
@@ -59,8 +63,9 @@ Code lay-out
     Use blank lines in functions to indicate logical sections and help to offset comments.
 
 
-
-Imports
+[[BR]]
+== Imports ==
+----
 
     - Imports should usually be on separate lines, e.g.:
 
@@ -91,8 +96,9 @@ Imports
 
     - Always use the absolute package path for all imports.
 
-
-Whitespace in Expressions and Statements
+[[BR]]
+== Whitespace in Expressions and Statements ==
+----
 
   Pet Peeves
 
@@ -190,8 +196,9 @@ Whitespace in Expressions and Statements
 
           if foo == 'blah': one(); two(); three()
 
-
-Comments
+[[BR]]
+== Comments ==
+----
 
     Comments that contradict the code are worse than no comments.  Always make
     a priority of keeping the comments up-to-date when the code changes!
@@ -236,6 +243,7 @@ Comments
     But sometimes, this is useful:
 
         x = x + 1                 # Compensate for border
+
 
 
   Purpose of Comments
@@ -312,8 +320,9 @@ for item in list:
 
 
 
-
-Documentation Strings
+[[BR]]
+== Documentation Strings ==
+----
 
     Conventions for writing good documentation strings (a.k.a. "docstrings")
     are immortalized in PEP 257 [3].
@@ -424,17 +433,19 @@ class UserError(Exception):
   """This exception indicates the user provided us with bad input"""
 
 
+[[BR]]
+== Naming Conventions ==
+----
 
-Naming Conventions
 
-
-  Descriptive: Naming Styles
+  Descriptive Naming Styles
 
 
     Use descriptive variable and function names.
 
-Put at least one adjective in each variable name like 'slicename' or 'inputfileobj' or 'deststring'.   Also make sure that the type of the variable is
-readable by looking at the name.   Don't call a string containing a filename 'inputfile', call it 'input_fn'.   This is especially important for function arguments or variables that have long lifespans.
+Put at least one adjective in each variable name like 'slicename' or 'inputfileobj' or 'deststring'.   Also make sure that the type of the variable is readable by looking at the name.   Also, the word "file" is ambiguous, use fileobj or filename (fn is an acceptable abbreviation for filename).   
+
+These rules are especially important for function arguments or variables that have long lifespans.
 
     Yes:
        inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
@@ -493,8 +504,9 @@ readable by looking at the name.   Don't call a string containing a filename 'in
 
 
 
-
-Programming Recommendations
+[[BR]]
+== Programming Recommendations ==
+----
 
 
     - Comparisons to singletons like None should always be done with
