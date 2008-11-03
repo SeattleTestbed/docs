@@ -18,13 +18,19 @@ Once you've logged in, you'll see resources contributed by your instructor. Clic
 == Step 2 : Running Seattle shell ==
 ----
 
-Now click on the User Info tab.    Click to download the demo kit.   This includes all of the files you need to do the take home assignment.   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by changing to the directory with seash and your public and private key and then type "python seash.py" (if this fails, you may need to [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+Now click on the User Info tab.    Click to download the demo kit.   This includes all of the files you need to do the take home assignment.   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
+
+ * On Windows do start, run, cmd and then cd to the folder where you downloaded the toolkit.   
+
+ * On Mac / Linux, open a terminal window and change to the directory where you downloaded the toolkit.   
+
+Then type "python seash.py" (if this fails, you may need to [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
-== Step 3 : Browsing available resources ==
+== Step 3 : Browsing your resources ==
 ----
 
-Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, (replacing username with the user name you used to log into the Seattle GENI website)
+Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing username with the user name you used to log into the Seattle GENI website)'''
 
 {{{
 #!python
@@ -38,7 +44,7 @@ Then, type
 !> as username
 }}}
 
-This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, at the " username@ !> " prompt type
+This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell the shell to search for vessels you control by typing browse:
 
 {{{
 #!python
@@ -51,14 +57,14 @@ time for the vessel information to propagate).  The output from browse command w
 {{{
 #!python
 username@ !> browse            
-Added targets: %1(IP address:port:vesselname), %2(IP address:port:vesselname), %3(IP address:port:vesselname), ...
+Added targets: %1(IP:port:vesselname), %2(IP:port:vesselname), %3(IP:port:vesselname), ...
 Added group 'browsegood' with X targets      
 }}}
 
 This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.
 
 [[BR]]
-== Step 4 : Hello World! on a single computer ==
+== Step 4 : Hello World on a single computer ==
 ----
 
 In the above print-out response to the browse command, the %1, %2, %3, etc are an easy way to refer to a computer.  For example, we can run a "hello world" program on computer %1 by typing:
@@ -68,14 +74,14 @@ In the above print-out response to the browse command, the %1, %2, %3, etc are a
 username@ !> on %1 run helloworld.py
 }}}
 
-To see the results of this command on computer %1 we would type
+To see the results of this command on computer %1 we would type:
 
 {{{
 #!python
 username@ !> on %1 show log
 }}}
 
-would show you the output from that (%1) computer, which hopefully looks something like "Hello World". If you're going to deal with a specific computer over and over, then constantly typing "on %1" before every command can be very annoying.   You can instead set the default target by simply typing
+This shows you the output from the %1 computer, which should say "Hello World". If you're going to deal with a specific computer over and over, then constantly typing "on computername" before every command can be very annoying.   You can instead set the default target by simply typing
 
 {{{
 #!python
@@ -89,7 +95,7 @@ and hitting enter.  This will change your prompt to be:
 username@%1 !>
 }}}
 
-to indicate that you're acting as your username and you're acting on %1 (unless otherwise specified).  Try typing
+This indicates that you're acting as your username and you're acting on %1 (unless otherwise specified).  Try typing
 
 {{{
 #!python
@@ -106,7 +112,7 @@ username@%1 !> show log
 You'll see two "Hello World" lines now because you've run the program twice.  
 
 [[BR]]
-== Step 5 : Hello World! on many computers ==
+== Step 5 : Hello World on many computers ==
 ----
 
 Now we'd like to run commands on more than one computer at a time.  To do this, we'll use the result of our previous browse command as a group.  If you recall the output from the command said "Added group 'browsegood' with X targets".  This means that the nodes it found the last time you browsed are now in a group called browsegood.   Type
