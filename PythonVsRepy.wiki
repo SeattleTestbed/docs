@@ -56,7 +56,6 @@ Python modules aren't directly allowed in Repy. This is to ensure safety for Sea
     Similar to the Python native {{{open}}}. 
     
     The file to be opened may only contain the charcters 'a-zA-Z0-9.-_'. It cannot be . or ..
-	'file':emulfile.emulated_file,	# emulated file object
 
 ==== listdir ====
     Returns a list of strings representing the files in a vessel's workspace
