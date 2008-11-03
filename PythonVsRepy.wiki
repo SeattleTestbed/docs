@@ -141,7 +141,7 @@ def foo():
 And a file ''b.repy'':
 {{{
 #!python
-include 
+include a.repy
 def bar():
     print "bar"
 }}}
@@ -151,7 +151,7 @@ The resuling file will look like:
 def foo():
     print "foo"
 
-def b():
+def bar():
     print "bar"
 }}}
 
