@@ -6,9 +6,9 @@
 
 || Oct 23rd, 1:30-4 || Networks Lab (390) || Affiliates || Justin || Poster
 
-|| Oct 27th ||  UW  ||   Used in Graduate Networking class || || Classroom use
-
 || Oct 29th, 2:00-2:30 || San Fransisco || GENI Engineering Conference 3 || Tom || Talk
+
+|| Nov 3rd ||  UW  ||   Used in Graduate Networking class || || Classroom use
 
 || Nov 5th, 1:30-2:30 || EE 025 || Systems Seminar 590S || Justin || Talk / Live Demo
 
