@@ -161,10 +161,10 @@ We'll cover one last function of the shell before we start measuring network con
 
 {{{
 #!python
-username@LAN !> run pingserver.py
+username@LAN !> run infloop.py
 }}}
 
-This deploys a program that waits for UDP ping packets and sends a response if a packet arrives.   If you now try to do "run helloworld.py" you'll see that the shell doesn't run the program since the pingserver is already running.  To stop the ping server type
+This deploys a program that waits in an infinite loop.   If you now try to do "run helloworld.py" you'll see that the shell doesn't run the program since the infinite loop program is already running.  To stop the program type
 
 {{{
 #!python
@@ -178,26 +178,28 @@ You'll see a message noting that the program has stopped on your nodes.   To che
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   We'll measure connectivity by sending UDP pings from a target computer to a destination. At the " username@LAN !> " prompt type
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels.   To figure out which port you should use, log into the Seattle GENI website and on the User Info page, look to see what port number it indicates.   You should write this down as you'll need this value repeatedly.
+
+We'll measure connectivity by sending UDP pings from a target computer to a destination.  At the " username@LAN !> " prompt type
 
 {{{
 #!python
 username@LAN !> list
 }}}
 
-This will allow you to see the IP of %2.  Now type
+This will allow you to see the IP of %2.  Now type (replacing GENIport with your port number)
 
 {{{
 #!python
-username@LAN !> on %2 run pingserver.py
+username@LAN !> on %2 run udppingserver.py GENIport
 }}}
 
 
-You can ping from %1 to %2 by typing
+You can ping from %1 to %2 by typing the line listed below.   Replace IP_of_%2 with the IP address of computer %2 as shown by your previous list command.   It will be something like 1.2.3.4.   Also replace GENIport with your port number.
 
 {{{
 #!python
-username@LAN !> on %1 run ping.py IP address of %2
+username@LAN !> on %1 run udpping.py IP_of_%2 GENIport
 }}}
 
 
@@ -216,7 +218,7 @@ username@LAN !> on %2 show log
 }}}
 
 
-to see that %2 received the ping packets. Okay, now stop the pingserver on computer two by typing
+to see that %2 received the ping packets. Okay, now stop the udppingserver on computer %2 by typing
 
 {{{
 #!python
@@ -248,27 +250,24 @@ Save the file to the directory where seash.py is running.   Now type
 username@LAN !> upload neighboriplist.txt
 }}}
 
-This adds the file with nodes to ping to the all the computers in the LAN group. Now type
+This adds the file with nodes to ping to the all the computers in the LAN group. Now type (substituting your port for GENIport)
 
 {{{
 #!python
-username@LAN !> run allpairsping.py
+username@LAN !> run allpairsping.py GENIport
 }}}
 
-You can see the result of all of the nodes pinging each other by typing
+You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
 
-{{{
-#!python
-username@LAN !> show log
-}}}
+Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).   If a row is completely missing, you'll notice the corresponding column is likely empty as well.   This indicates that the node you are looking at is mostly likely down.   
 
-Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).
+If you refresh the page occasionally, you'll see that the latencies change as the nodes periodically update.
 
 [[BR]]
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the same experiment as Step 6, but on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed. Click on "remove all nodes".  Now that you've given back some of your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
+Now we'll run the same experiment as Step 6, but on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the Used Resources tab. Click on "remove all nodes".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
 
 Back in the shell, type
 
@@ -278,7 +277,7 @@ username@LAN !> browse
 }}}
 
 
-You will see that the WAN nodes are now detected and given names.  For convenience, let's add the nodes to a group called WAN by typing
+You will see that the WAN nodes are now detected.  For convenience, let's add the nodes to a group called WAN by typing
 
 {{{
 #!python
@@ -320,27 +319,50 @@ Finally, run
 username@WAN !> show log
 }}}
 
-What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  (if the connectivity graph is complete, try to remove your nodes on the Seattle GENI website and choose different ones, repeating the commands in this step).
+What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column wich is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   (If you don't see this effect, try to remove your nodes on the Seattle GENI website and choose different WAN nodes, repeating the commands in this step).
 
 [[BR]]
 == Step 10 : Packet forwarding ==
 ----
 
-Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity"... '''(explanation follows)'''   Write down the IP addresses of the intermediate node (as intermediateIP) To get packets from one to another, we can have a node in the middle forward packets.   Find the %number of a node who can talk to both nodes.   Then type
+Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity".   Non-transitive connectivity usually happens because of configuration errors or convergence failures in the BGP protocol.   
+
+Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of an intermediate node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the intermediate node who can talk to both nodes.   Then type (replacing node1IP, node2IP, and GENIport)
 
 {{{
 #!python
-username@WAN !> on %number run forward.py node1IP node2IP
+username@WAN !> on %number run udpforward.py node1IP node2IP GENIport
 }}}
 
-Now start the pingserver on node1 and run
+Now start the udppingserver on node1 by doing (replacing node1 with the node number for node1 and GENIport)
 
 {{{
 #!python
-username@WAN !> on %node2 ping.py intermediateIP
+username@WAN !> on %node1 run udppingserver.py GENIport
 }}}
 
-You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.
+
+To send a ping packet, run: (replacing node2 with the node number for node2, intermediateIP with the IP address of the computer that can talk to both nodes, and GENIport)
+
+{{{
+#!python
+username@WAN !> on %node2 run ping.py intermediateIP GENIport
+}}}
+
+You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). 
+
+{{{
+#!python
+username@WAN !> on %node2 show log
+}}}
+
+However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.   You'll also see that node1 got the response from the intermediate node (instead of directly from node2).
+
+{{{
+#!python
+username@WAN !> on %node1 show log
+}}}
+
 
 [[BR]]
 == Step 11 : Observed behavior from your home computer ==
