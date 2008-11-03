@@ -111,7 +111,7 @@ stoptimer(t)
  
 
 ==== time.time ====
-    In repy you make make use of the '''getruntime()''' function. This returns a float representing the runtime of the current program. This is the same as the following in Python:
+    In repy you make make use of the '''getruntime()''' function. This returns a float representing the runtime of the current program, which is equivalent to the Python:
     {{{
 #!python
 time.time() - starttime #starttime is when the program started execution
@@ -123,7 +123,12 @@ time.time() - starttime #starttime is when the program started execution
 
 ==== getmyip ====
 
-==== gethostbyname_ex ====
+==== socket.gethostbyname_ex(name)  ====
+    In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behavior is the same, so you can write Repy which looks like
+        {{{
+#!python
+        gethostbyname_ex("www.google.com")
+        }}}
 
 ==== recvmess ====
 
