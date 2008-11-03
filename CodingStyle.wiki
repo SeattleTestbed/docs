@@ -38,7 +38,6 @@ There is only one good reason to break a rule in the style guideline and that's 
     using a backslash looks better.  Make sure to indent the continued line
     appropriately.  The preferred place to break around a binary operator is
     *after* the operator, not before it.  Some examples:
-
 {{{
 #!python
 class Rectangle(Blob):
@@ -432,11 +431,11 @@ for item in list:
       by itself, and preferably preceded by a blank line, e.g.:
 {{{
 #!python
-      """Return a foobang
+"""Return a foobang
 
-      Optional plotz says to frobnicate the bizbaz first.
+Optional plotz says to frobnicate the bizbaz first.
 
-      """
+"""
 }}}
 
     - For one liner docstrings, it's okay to keep the closing """ on the same
@@ -491,23 +490,23 @@ for item in list:
 def redirect_stdout(stream):
   """
   <Purpose>
-     Redirects the standard output stream (stdout) to a new file stream.
-     If this is the first time that output has been redirected, the
-     original stdout stream will be saved for use with the restore_stdout
-     function.
+    Redirects the standard output stream (stdout) to a new file stream.
+    If this is the first time that output has been redirected, the
+    original stdout stream will be saved for use with the restore_stdout
+    function.
 
   <Arguments>
-     stream:
-             The new file stream for stdout.
+    stream:
+           The new file stream for stdout.
 
   <Exceptions>
-     TypeError on bad parameters.
+    TypeError on bad parameters.
 
   <Side Effects>
-     Changes sys.stdout.
+    Changes sys.stdout.
 
   <Returns>
-     None.
+    None.
   """
 }}}
 
@@ -516,19 +515,19 @@ def redirect_stdout(stream):
 {{{
 #!python
 class single_conn(Thread):
-   """
-   <Purpose>
-      Wraps up the client side of arizonacomm into a single class.
-   <Side Effects>
-      Defaults to running itself in a thread.
-   <Example Use>
-      # open a connection
-      connection = single_conn()
-      # write information to the connected party
-      connection.send("hello")
-      # and disconnect without checking if they have said anything
-      connection.disconnect()
-   """   
+  """
+  <Purpose>
+    Wraps up the client side of arizonacomm into a single class.
+  <Side Effects>
+    Defaults to running itself in a thread.
+  <Example Use>
+    # open a connection
+    connection = single_conn()
+    # write information to the connected party
+    connection.send("hello")
+    # and disconnect without checking if they have said anything
+    connection.disconnect()
+  """   
 }}}
 
 Classes that are used for exceptions can be written more succinctly (since the purpose, side effects, example use are obvious).
@@ -548,32 +547,57 @@ class UserError(Exception):
 
     Use descriptive variable and function names.
 
-Put at least one adjective in each variable name like 'slicename' or 'inputfileobj' or 'deststring'.   Also make sure that the type of the variable is readable by looking at the name.   Also, the word "file" is ambiguous, use fileobj or filename (fn is an acceptable abbreviation for filename).   
+      Put at least one adjective in each variable name like 'slicename' or 
+      'inputfileobj' or 'deststring'.   Also make sure that the type of the 
+      variable is readable by looking at the name.   Also, the word "file" is 
+      ambiguous, use fileobj or filename (fn is an acceptable abbreviation for 
+      filename).   
 
-These rules are especially important for function arguments or variables that have long lifespans.
+      These rules are especially important for function arguments or variables that have long lifespans.
 
     Yes:
-       inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
-       deststring = "abc" + currentstring
-       slicename = "uw_seattle"
+{{{
+#!python
+inputfileobj = file(inputfn)   # fn is an acceptable abbreviation for file name
+deststring = "abc" + currentstring
+slicename = "uw_seattle"
+}}}
      
     No:
-       inobj = file(filename)
-       dest = "abc" + current
-       name = "uw_seattle"
+{{{
+#!python
+inobj = file(filename)
+dest = "abc" + current
+name = "uw_seattle"
+}}}
  
     Definitely not:
-       i = i + 1
+{{{
+#!python
+i = i + 1
+}}}
 
-    The only case where it is okay to use single letter variable names is for arguments passed into a constructor.   For example:
-   
-       class foo:
-         ... # doc string omitted
-         startingitemcount = None
-         maxitemcount = None
-         def __init__(self, s, m):
-           self.startingitemcount = s
-           self.maxitemcount = m
+      The only case where it is okay to use single letter variable names is for arguments 
+      passed into a constructor or using e for an exception.   For example:
+{{{
+#!python
+class foo:
+  ... # doc string omitted
+  itemcount = None
+  maxitemcount = None
+  itemlist = None
+  def __init__(self, i, m):
+    self.itemcount = i
+    self.maxitemcount = m
+    self.itemlist = []
+
+  def popanitem(self):
+    try:
+      return self.itemlist.pop()
+    except KeyError, e:
+      # Raise an error, the list is empty...
+      raise KeyError, "Can't pop an empty foo"
+}}}
 
 
     Exception Names
@@ -587,7 +611,9 @@ These rules are especially important for function arguments or variables that ha
       (Let's hope that these variables are meant for use inside one module
       only.)  The conventions are about the same as those for functions.
 
-      If you can do it without globals in an intelligent way, then don't use globals.   When you must use globals then explain why you need to use globals.   An example that uses globals in a good way is a program that keeps a cache.
+      If you can do it without globals in an intelligent way, then don't use globals.   
+      When you must use globals then explain why you need to use globals.   An example 
+      that uses globals in a good way is a program that keeps a cache.
 
     Function Names
 
@@ -630,9 +656,11 @@ These rules are especially important for function arguments or variables that ha
       Modules or packages should define their own domain-specific base
       exception class, which should be subclassed from the built-in Exception
       class.  Always include a class docstring.  E.g.:
-
-        class MessageError(Exception):
-            """Base class for errors in the email package."""
+{{{
+#!python
+class MessageError(Exception):
+  """Base class for errors in the email package."""
+}}}
 
       Class naming conventions apply here, although you should add the suffix
       "Error" to your exception classes, if the exception is an error.
@@ -649,11 +677,13 @@ These rules are especially important for function arguments or variables that ha
       whenever possible instead of using a bare 'except:' clause.
 
       For example, use:
-
-          try:
-              import platform_specific_module
-          except ImportError:
-              platform_specific_module = None 
+{{{
+#!python
+try:
+  import platform_specific_module
+except ImportError:
+  platform_specific_module = None 
+}}}
 
       A bare 'except:' clause will catch SystemExit and KeyboardInterrupt
       exceptions, making it harder to interrupt a program with Control-C,
@@ -676,22 +706,26 @@ These rules are especially important for function arguments or variables that ha
       avoids masking bugs.
 
       Yes:
-
-          try:
-              value = collection[key]
-          except KeyError:
-              return key_not_found(key)
-          else:
-              return handle_value(value)
+{{{
+#!python
+try:
+  value = collection[key]
+except KeyError:
+  return key_not_found(key)
+else:
+  return handle_value(value)
+}}}
 
       No:
-
-          try:
-              # Too broad!
-              return handle_value(collection[key])
-          except KeyError:
-              # Will also catch KeyError raised by handle_value()
-              return key_not_found(key)
+{{{
+#!python
+try:
+  # Too broad!
+  return handle_value(collection[key])
+except KeyError:
+  # Will also catch KeyError raised by handle_value()
+  return key_not_found(key)
+}}}
 
     - Use string methods instead of the string module.
 
@@ -705,46 +739,62 @@ These rules are especially important for function arguments or variables that ha
       startswith() and endswith() are cleaner and less error prone.  For
       example:
 
-        Yes: if foo.startswith('bar'):
+        Yes: 
+{{{
+#!python
+if foo.startswith('bar'):
+}}}
 
-        No:  if foo[:3] == 'bar':
-
-      The exception is if your code must work with Python 1.5.2 (but let's
-      hope not!).
+        No:  
+{{{
+#!python
+if foo[:3] == 'bar':
+}}}
 
     - Object type comparisons should always use isinstance() instead
       of comparing types directly.
 
-        Yes: if isinstance(obj, int):
-
-        No:  if type(obj) is type(1):
+        Yes: 
+{{{
+#!python
+if isinstance(obj, int):
+}}}
+        No:  
+{{{
+#!python
+if type(obj) is type(1):
+}}}
 
       When checking if an object is a string, keep in mind that it might be a
       unicode string too!  In Python 2.3, str and unicode have a common base
       class, basestring, so you can do:
+{{{
+#!python
+if isinstance(obj, basestring):
+}}}
 
-        if isinstance(obj, basestring):
-
-      In Python 2.2, the types module has the StringTypes type defined for
-      that purpose, e.g.:
-
-        from types import StringTypes
-        if isinstance(obj, StringTypes):
-
-      In Python 2.0 and 2.1, you should do:
-
-        from types import StringType, UnicodeType
-        if isinstance(obj, StringType) or \
-           isinstance(obj, UnicodeType) :
+      The types module has the StringTypes type defined for that purpose, e.g.:
+{{{
+#!python
+import types
+if isinstance(obj, types.StringTypes):
+}}}
 
     - For sequences, (strings, lists, tuples), use the fact that empty
       sequences are false.
 
-      Yes: if not seq:
-           if seq:
-
-      No: if len(seq)
-          if not len(seq)
+      Yes: 
+{{{
+#!python
+if not seq:
+if seq:
+}}}
+      No: 
+{{{
+#!python
+if len(seq)
+if not len(seq)
+}}}
 
     - Don't write string literals that rely on significant trailing
       whitespace.  Such trailing whitespace is visually indistinguishable and
@@ -752,97 +802,118 @@ These rules are especially important for function arguments or variables that ha
 
     - Don't compare boolean values to True or False using ==
 
-        Yes:   if greeting:
+        Yes:   
+{{{
+#!python
+if greeting:
+}}}
 
-        No:    if greeting == True:
+        No:    
+{{{
+#!python
+if greeting == True:
+}}}
 
-        Worse: if greeting is True:
+        Worse: 
+{{{
+#!python
+if greeting is True:
+}}}
 
-      However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is true, is allowed.
+      However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is True or False, is allowed.
 
 
 
-  Pet Peeves
+ == Potpourri ==
 
     Unix not Windows style text files.
 
       If you develop on Windows make sure you use dos2unix before checking in.
 
 
-
-
-
-
-
     Avoid objects
 
 
-      Objects are a terrific programming tool when used correctly, but make code nearly unreadable when used poorly.   Unfortunately, even experienced developers have a hard time knowing how to correctly use objects.   About 80% of the code one could write is equally good with and without objects.   10% is easier with objects and 10% is easier without them.   Seattle code should use objects only in very rare cases.   The 90% of the code where objects can be avoided without significant impact, should be written without objects.
+      Objects are a terrific programming tool when used correctly, but make code 
+      nearly unreadable when used poorly.   Unfortunately, even experienced developers 
+      have a hard time knowing how to correctly use objects.   About 80% of the code one 
+      could write is equally good with and without objects.   10% is easier with objects 
+      and 10% is easier without them.   Seattle code should use objects only in very 
+      rare cases.   The 90% of the code where objects can be avoided without significant 
+      impact, should be written without objects.
 
 
 
     No lambda functions or lisp-esque code
 
-      Don't use lambda functions.   Don't use map, flatten, etc.   It's best not to use these functions and to write longer code that produces the same result instead because using these functions makes your code very dense and difficult to read.
+      Don't use lambda functions.   Don't use map, flatten, etc.   It's best not to use 
+      these functions and to write longer code that produces the same result instead 
+      because using these functions makes your code very dense and difficult to read.
 
 
     Write test cases
 
-      Since you're going to want to test your module anyways before integrating it into the rest of Seattle (right?), it makes sense to do it in a reusable way.   This way when you make changes later, you can immediately test to see if anything is broken.
+      Since you're going to want to test your module anyways before integrating it 
+      into the rest of Seattle (right?), it makes sense to do it in a reusable way.   
+      This way when you make changes later, you can immediately test to see if anything 
+      is broken.
 
-      Write 90% tests.   The test should make sure that it will catch 90% of the potential problems with the function.   Avoid writing 50% tests (that only check a common case or two) and avoid writing 99.9% tests because it will consume too much of your time.
+      Write 90% tests.   The test should make sure that it will catch 90% of the 
+      potential problems with the function.   Avoid writing 50% tests (that only 
+      check a common case or two) and avoid writing 99.9% tests because it will 
+      consume too much of your time.
 
-All "external" functions _must_ be tested.   Internal functions (starting with __) are up to your discretion.
-
-
+      All "external" functions '''must''' be tested.   Internal functions (starting with __) are up to your discretion.
 
     Never use short circuit evaluation to produce output
 
       No:
-
-  if synched or askokcancel("Change slice without synching?", "You
+{{{
+#!python
+if synched or askokcancel("Change slice without synching?", "You
 have changes that are not synched with the repository. These changes
 will be lost if you change the slice right now. \n\nClick OK to change
 slice without synching.", default=CANCEL):
-     # then clause
-  else:
-     # else clause
+  # then clause
+else:
+  # else clause
+}}}
 
       Yes:
-
-  if not synched:
-     if askokcancel("Change slice without synching?", "You have
-
-
-changes that are not synched with the repository. These changes will
-be lost if you change the slice right now. \n\nClick OK to change
-slice without synching.", default=CANCEL):
-        #then clause
-     else:
-        #else clause
-   else:
-     #then clause
-
-
-      or if the then and else clauses are large write:
-
-  if not synched:
-     isok = askokcancel("Change slice without synching?", "You have
-changes that are not synched with the repository. These changes will
-be lost if you change the slice right now. \n\nClick OK to change
-slice without synching.", default=CANCEL):
+{{{
+#!python
+if not synched:
+  if askokcancel("Change slice without synching?", "You have
+      changes that are not synched with the repository. These changes will
+      be lost if you change the slice right now. \n\nClick OK to change
+      slice without synching.", default=CANCEL):
+    #then clause
   else:
-      isok = True
+    #else clause
+else:
+  #then clause
 
-  if isok:
-     #then clause
+
+     or if the then and else clauses are large write:
+{{{
+#!python
+if not synched:
+  isok = askokcancel("Change slice without synching?", "You have
+      changes that are not synched with the repository. These changes will
+      be lost if you change the slice right now. \n\nClick OK to change
+      slice without synching.", default=CANCEL):
   else:
-     #else clause
+    isok = True
+
+if isok:
+  #then clause
+else:
+  #else clause
 
 
-Writing the code the first way is hard for someone to read.   The
-second two ways make it more clear that you are relying on the short
-circuit evaluation to perform or avoid the evaluation of the
-askokcancel function.
+     Writing the code the first way is hard for someone to read.   The
+     second two ways make it more clear that you are relying on the short
+     circuit evaluation to perform or avoid the evaluation of the
+     askokcancel function.
 
 
