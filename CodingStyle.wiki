@@ -863,7 +863,7 @@ if greeting is True:
       check a common case or two) and avoid writing 99.9% tests because it will 
       consume too much of your time.
 
-      All "external" functions '''must''' be tested.   Internal functions (starting with __) are up to your discretion.
+      All "external" functions '''must''' be tested.   Internal functions (starting with {{{__}}}) are up to your discretion.
 
     Never use short circuit evaluation to produce output
 
