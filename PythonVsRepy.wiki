@@ -67,8 +67,16 @@ Returns a list of strings representing the files in a vessel's workspace
 
 ==== removefile ====
     Remove a file from the user program area. Has the same filename character restrictions as {{{open}}} 
-
-	
+    The following Repy code
+        {{{
+#!python
+removefile(tmpfile)
+        }}}
+    Is equivalent to the following Python
+        {{{
+#!python
+os.remove(tmpfile)
+        }}}
 [[BR]]
 === Time ===
 ----
@@ -144,7 +152,6 @@ def foo():
 }}}
 And a file ''b.repy'':
 {{{
-
 #!python
 include a.repy
 def bar():
