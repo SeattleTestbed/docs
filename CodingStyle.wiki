@@ -620,7 +620,7 @@ class foo:
       Function names should be lowercase, with words separated by underscores
       as necessary to improve readability.
 
-      mixedCase is allowed only in contexts where that's already the
+      !mixedCase is allowed only in contexts where that's already the
       prevailing style (e.g. threading.py), to retain backwards compatibility.
 
     Function and method arguments
@@ -666,8 +666,8 @@ class MessageError(Exception):
       "Error" to your exception classes, if the exception is an error.
       Non-error exceptions need no special suffix.
 
-    - When raising an exception, use "raise ValueError('message')" instead of
-      the older form "raise ValueError, 'message'".
+    - When raising an exception, use "raise !ValueError('message')" instead of
+      the older form "raise !ValueError, 'message'".
 
       The paren-using form is preferred because when the exception arguments
       are long or include string formatting, you don't need to use line
@@ -685,7 +685,7 @@ except ImportError:
   platform_specific_module = None 
 }}}
 
-      A bare 'except:' clause will catch SystemExit and KeyboardInterrupt
+      A bare 'except:' clause will catch !SystemExit and !KeyboardInterrupt
       exceptions, making it harder to interrupt a program with Control-C,
       and can disguise other problems.  If you want to catch all
       exceptions that signal program errors, use 'except Exception:'.
@@ -773,7 +773,7 @@ if type(obj) is type(1):
 if isinstance(obj, basestring):
 }}}
 
-      The types module has the StringTypes type defined for that purpose, e.g.:
+      The types module has the !StringTypes type defined for that purpose, e.g.:
 {{{
 #!python
 import types
