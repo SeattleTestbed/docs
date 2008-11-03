@@ -2,7 +2,7 @@
 
 This page will feature information and references regarding how to use Seattle, check back soon!
 
- * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]   '''Start here if you're new to Python and Repy!'''
+ * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]   '''Start here if you're new to Python and Repy! '''
 
  * (Andreas add here) '''Start here if you already know Python and want to see what is different in Repy'''
 
