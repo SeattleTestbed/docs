@@ -7,7 +7,7 @@ These guidelines provide examples about what to do (or not to do) when writing c
 [[TOC(inline)]]
 ----
 
-One of Guido's key insights in building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have is security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
+One of Guido's key insights in building Python is that code is read much more often than it is written.  The guidelines provided here are intended to improve the readability of code and make it consistent across the wide spectrum of Python code.  The primary goal of the code we write for Seattle is '''readability'''.   The other features that your code must have are security, correctness, and robustness (notice that performance is not listed).   The purpose of this document is to help to improve the readability of Seattle code (which I believe strongly impacts the security, correctness, and robustness).   
 
 
 A style guide is about consistency.  Consistency within a project is very important and since we're writing basically all of the code ourselves, there should be little reason for inconsistency.  
