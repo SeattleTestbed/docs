@@ -24,4 +24,4 @@ Note: You must have Python 2.5 installed
  1. Extract the tarball to the directory in which you would like to install Seattle.
  1. Navigate to that directory and run ''./install.sh'' (or ''python install.py'').[[BR]]
 
-To check that Seattle is running, try running: ''ps aww | grep nmmain.py | grep -v grep''
+To check that Seattle is running, try running: ''ps Aww | grep nmmain.py | grep -v grep''
