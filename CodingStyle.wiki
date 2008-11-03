@@ -892,7 +892,7 @@ if not synched:
     #else clause
 else:
   #then clause
-
+}}}
 
      or if the then and else clauses are large write:
 {{{
