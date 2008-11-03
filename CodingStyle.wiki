@@ -909,7 +909,7 @@ if isok:
   #then clause
 else:
   #else clause
-
+}}}
 
      Writing the code the first way is hard for someone to read.   The
      second two ways make it more clear that you are relying on the short
