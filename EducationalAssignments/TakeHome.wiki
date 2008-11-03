@@ -370,24 +370,24 @@ username@WAN !> on %node1 show log
 
 The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.   
 
-Install Seattle on your home computer by logging into your Seattle GENI account.   Click on the Donations tab.   On the right hand side, you'll see installers available for Windows / Mac / Linux.   Click on the appropriate type for your home computer.   After downloading the installer, uncompress it.
+Install Seattle on your home computer by logging into your Seattle GENI account.   Click on the Donations tab.   On the right hand side, you'll see installers available for Windows / Mac / Linux.   Click on the appropriate type for your home computer.   After downloading the installer, uncompress / unzip it.
 
  * On Windows do start, run, cmd and then cd to the folder where you uncompressed the installer.   Run install.bat
 
  * On Mac / Linux, open a terminal window and change to the directory where you uncompressed the installer. Run ./install.sh
 
-You also will need to download the toolkit and keys like you previously did in Step 2.   As before, run the seash shell from a terminal by typing "python seash.py".  Load your keys for your identity by typing
+You also will need to download the toolkit and keys like you previously did in Step 2.   As before, run the seash shell from a terminal by typing "python seash.py".  Load your keys by typing (replacing username with your GENI user name)
 
 {{{
 #!python
-!> loadkeys identity
+!> loadkeys username
 }}}
 
 Then type
 
 {{{
 #!python
-!> as identity
+!> as username
 }}}
 
 and you'll see the prompt changes to "username@ !>". 
@@ -401,7 +401,7 @@ Now under your shell at the " username@ !>" prompt, type
 username@ !> browse
 }}}
 
-You should see the IP of at least one WAN node. Write down the IP address of your computer and the IP address of the WAN node.   Start the pingserver on the WAN node (by running "on %WANnode run pingserver.py").   Ping the WAN node from your local computer (by running "on %localcomputer ping WANIP").   Now look at the logs, in particular the log of the WAN computer.   Does it have your computer's IP address listed as the source address?  
+You should see the IP of at least one WAN node. Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing "host `hostname` on Mac) and the IP address of the WAN node.   Start the pingserver on the WAN node (by running "on %WANnode run pingserver.py").   Ping the WAN node from your local computer (by running "on %localcomputer ping WANIP").   Now look at the logs, in particular the log of the WAN computer.   Does it have your computer's IP address listed as the source address?  
 
 Now try to ping in the opposite direction.  First, stop the pingserver on the WAN node (by running "on %WANnode stop").   Then start the ping server on the local computer (by running "on %localnode run pingserver.py").   Next ping the local node from the WAN node (by running "on %WANnode ping localIP").   Then check the logs (by running "on %WANnode show log", and "on %localnode show log").   Did it work?
 
