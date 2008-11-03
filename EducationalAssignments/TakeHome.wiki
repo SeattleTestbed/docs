@@ -11,31 +11,31 @@ The purpose of this assignment is to illustrate several important networking con
 == Step 1 : Adding resources ==
 ----
 
-You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website] at 
-Once you've logged in, you'll see resources contributed by your instructor. In the middle area, you'll see that you currently aren't using any resources. Click on the add resources button, under the Quick Start tab. Then click on LAN, and choose 10 computers, and click "Go!".  You should now see that ten computers have been added for you to use.
+You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website]. 
+Once you've logged in, you'll see resources contributed by your instructor. Click on the Used Resources tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  You should see that ten computers have been added for you to use.
 
 [[BR]]
 == Step 2 : Running Seattle shell ==
 ----
 
-Now click in the bottom pane click to download your Private Key and Public Key (need to save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py".   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+Now click on the User Info tab.    Click to download 'seash'.   This is the Seattle shell that allows you to run programs using Seattle.   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now under your disposal.  Open up a terminal window and run the seash shell by typing "python seash.py" (if this fails, please [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
 == Step 3 : Browsing available resources ==
 ----
 
-Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt,
+Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, (replacing ''username'' with the username you used to log into the Seattle GENI website.
 
 {{{
 #!python
-!> loadkeys username
+!> loadkeys ''username''
 }}}
 
 Then, type
 
 {{{
 #!python
-!> as username
+!> as ''username''
 }}}
 
 This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, at the " username@ !> " prompt type
@@ -45,7 +45,7 @@ This will change the prompt to " username@ !> " to indicate that by default, you
 username @ !> browse
 }}}
 
-This will search for vessels that you control (so that the shell can locate them).  You should see several vessels added (if not, you should wait a minute and try again, as sometimes it takes ll
+This will search for vessels that you control (so that the shell can locate them).  You should see several vessels added (if not, you should wait a minute and try again, as sometimes it takes
 time for the vessel information to propagate).  The output from browse command will look something like the following:
 
 {{{
