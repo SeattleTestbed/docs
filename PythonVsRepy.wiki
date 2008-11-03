@@ -127,7 +127,7 @@ time.time() - starttime #starttime is when the program started execution
     In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behavior is the same, so you can write Repy which looks like
         {{{
 #!python
-        gethostbyname_ex("www.google.com")
+gethostbyname_ex("www.google.com")
         }}}
 
 ==== recvmess ====
