@@ -489,9 +489,7 @@ y = 20
 
 Result: 
 x = 20, y =10
-}}} 
-
-Somewhere in here, we should have negative indices (i.e. x[-1] is the last element) -Justincappos 10/21/08 4:53 PM 
+}}}  
 
 [[BR]]
 == 3-2. Tuples ==
