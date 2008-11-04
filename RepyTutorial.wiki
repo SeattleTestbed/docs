@@ -566,6 +566,8 @@ In the previous section, we looked at restrictions; a mechanism for allowing or 
 
 If you look at a restrictions / resources file, you'll see a bunch of lines like this:
 
+{{{
+#!python
 resource cpu .10
 resource memory 10000000   # 10 Million bytes
 resource diskused 10000000 # 10 MB
@@ -584,7 +586,7 @@ resource random 100
 resource messport 12345
 resource messport 12346
 resource connport 12345
-
+}}}
 
 These lines specify the type and quantity of resources the program can consume.   Some resources like CPU, the netsend / recv rate, random number generation rate, etc. are for renewable resources.   Renewable resources are resources that replenish themselves over time.   For example, if your program is using too much CPU, it will be paused temporarily to allow other programs to run.    Trying to use too much of a renewable resource will cause a call to run slowly.
 
