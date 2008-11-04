@@ -33,7 +33,11 @@ In BOINC the focus is on using spare CPU cycles from home machines.   To BOINC, 
 Also BOINC uses only CPU cycles when the system would be idle so as to avoid interfering with the user.   BOINC typically uses almost all of the CPU when it's idle.   With repy, it is more desirable to constantly have a small percentage of the resources (this allows a smaller percentage of resources to be used over a longer time period).
 
 [[BR]]
-= A simple example (example 1.1) =
+= General Operations =
+----
+
+[[BR]]
+== A simple example (example 1.1) ==
 ----
 
 The way to execute the codes in Repy is in the [PythonTutorial Python tutorial] page.
@@ -63,75 +67,7 @@ To run a program, you should use the experiment manager seash.   Seash allows yo
 
 Before using the experiment manager seash, you need to create a ID and generate public and private keys. The instruction is on https://seattle.cs.washington.edu/wiki/DeveloperSetup.
 
-You need to follow the steps below in the shell in order to  run the program in sandboxes you control.
-
-Step 1. Run programs in the Seattle 
-
-To run a program, you should use the experiment manager seash.   Seash allows you to control the files running in sandboxes you control.
-
-python seash.py 
-
-Step 2. Log in with my ID
-
-Before logging in, you have to load your public and private keys. You need to make sure that you have two files containing your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
-
-For example, if your ID were john, the two files would be john.publickey and john.privatekey.
-
-If you successfully logged in, you could notice that the prompt starts with you ID.
-
-!> loadkeys john
-
-!> as john
-
-john@ !>
-
-Step 3. Locate the resources(computers) you can use
-
-john@ !> browse
-
-Added targets: %1(10.0.1.1:1224:v9), %2(10.0.1.2:2888:v9)
-
-Added group 'browsegood' with 2 targets
-
-The command browse produced the output that shows resources(targets) you can control. 
-
-In the first target %1(10.0.1.1:1224:v9), %1 is the alias of the target, 10.0.1.1 is IP address, 1224 is port number, and v9 is vessel name. The vessel is the partial portion of whole donated resources. It means that the donated resources could be one vessel or divided and assigned to more than one person.
-
-Step 4. Access the resources(vessels)
-
-john@ !> on browsegood
-
-Step 5. Run a program
-
-We assume the program named test.py is stored in the current directory, which prints "Hello, World".
-
-john@browsegood !> run test.py
-
-Step 6. Look up the result of the program executed
-
-john@browsegood !> show log
-
-Log from '10.0.1.1:1224:v9':
-Hello World
-
-Log from '10.0.1.2:2888:v9':
-Hello World
-
-Step 7. Look up the information about the vessel you control
-
-john@browsegood !> list
-
-ID Own                      Name     Status              Owner Information
-
-%1  *       10.0.1.1:1224:v9 Terminated                               
-
-%2  *      10.0.1.2:2888:v9 Terminated        
-
-Step 8. Exit from REPY
-
-john@browsegood !> exit
-
-Help command helps you look up the commands you can use in repy.
+The instruction to run a program with seash is in the [PythonTutorial Python tutorial].
 
 Note that if you instead write the program:
 
