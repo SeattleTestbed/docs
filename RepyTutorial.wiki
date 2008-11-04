@@ -5,7 +5,7 @@
 ----
 
 [[BR]]
-= Introduction =
+== Introduction ==
 ----
 
 This guide provides an introduction to using the repy sandbox environment.  It describes who would want to use repy, how to perform actions in the sandboxed environment, and what restrictions are placed upon the sandboxed code.   At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
@@ -13,19 +13,19 @@ This guide provides an introduction to using the repy sandbox environment.  It d
 It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
-== What is repy and who should use it? ==
+=== What is repy and who should use it? ===
 ----
 
 Repy is a sandboxed environment that is intended for educational and research use.   The idea is that a user can install repy on their system and researchers and students can run code on their system '''without significantly impacting the security or performance of the host system'''.   To provide security and performance isolation, the programs that run on repy are restricted in what they can do and when they can do it.  
 
 [[BR]]
-== When should I use repy? ==
+=== When should I use repy? ===
 ----
 
 Repy is ideal for students, researchers, and companies that want to prototype code and have it run on as many computers as possible.   <completely unsubstantiated claims> Repy has performance comparable to native Python and is safe for untrusted code to run on.</completely unsubstantiated claims>   The focus on repy is on safety.   If you need access to more complex mechanisms than what the sandbox provides (direct access to hardware, running C code, etc.), repy is not for you.  
 
 [[BR]]
-== How is this different than BOINC (SETI@Home, etc.)? ==
+=== How is this different than BOINC (SETI@Home, etc.)? ===
 ----
 
 In BOINC the focus is on using spare CPU cycles from home machines.   To BOINC, getting 1% of the time on 1000 computers is similar to getting 100% on 10 computers (for similar computers).   With repy it is much more useful to get 1% on 1000 computers because the research and educational programs are trying to understand how to write scalable programs that run on many computers at the same time.   The problems and programs become interesting when there are thousands of computers.  
@@ -33,11 +33,11 @@ In BOINC the focus is on using spare CPU cycles from home machines.   To BOINC, 
 Also BOINC uses only CPU cycles when the system would be idle so as to avoid interfering with the user.   BOINC typically uses almost all of the CPU when it's idle.   With repy, it is more desirable to constantly have a small percentage of the resources (this allows a smaller percentage of resources to be used over a longer time period).
 
 [[BR]]
-= General Operations =
+== General Operations ==
 ----
 
 [[BR]]
-== A simple example (example 1.1) ==
+=== A simple example (example 1.1) ===
 ----
 
 The way to execute the codes in Repy is in the [PythonTutorial Python tutorial] page.
@@ -102,7 +102,7 @@ elif callfunc == "exit":
 Repy is the event-driven programming language. It initially has two events. The initialize event initializes all functions in the program and exit event checks whether the events generated in the program are terminated. Programmers don't have to insert any code at the end of the code to check whether all events are terminated before exit.
 
 [[BR]]
-== A more realistic Hello World example (example 1.2) ==
+=== A more realistic Hello World example (example 1.2) ===
 ----
 
 In this example, we'll wait for the user to browse a port we listen on.   When the user browses our page, we'll display a hello world webpage and then exit.   Create a file "helloworldwebpage.py" with the following text:
@@ -138,7 +138,7 @@ default@browsegood !> list
   %1  *   IP address:port:vesselname Stopped   Notice that the program is now "Stopped".   It's not running
 
 [[BR]]
-== Counting the number of calls (example 1.3) ==
+=== Counting the number of calls (example 1.3) ===
 ----
 
 In this example, we'll add a counter to our helloworld pprogram.   First we'll try some perfectly valid python code that will not work in repy.
@@ -168,7 +168,7 @@ if callfunc == 'initialize':
 Start the program using the shell, then open a web browser and in the address bar type: 127.0.0.1:12345  (this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage and a count of 1.   You can refresh the page and the count should increment.   Once again,use the shell to stop the program
 
 [[BR]]
-== Adding a Timer and listing the elapsed time (example 1.4) ==
+=== Adding a Timer and listing the elapsed time (example 1.4) ===
 ----
 
 The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program timeout after 1 minute?   To do this, we'll register a timer that will close the connection.
@@ -191,7 +191,7 @@ The timer (when called) will stop the communication.  settimer returns an eventh
 Start the program and then open a web browser and in the address bar type: 127.0.0.1:12345.   You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
 
 [[BR]]
-== Interacting with Timers (example 1.5) ==
+=== Interacting with Timers (example 1.5) ===
 ----
 
 The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program stop if it doesn't display a web page for 10 seconds?   Well, we know how to set a timer to close the connection in 10 seconds, but that doesn't help us to keep the connection open.   To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection.  
@@ -222,7 +222,7 @@ The timer (when called) will stop the communication.  canceltimer stops a timer 
 Try running the program and then try browsing the webpage a few times and then wait.   You'll notice the connection closes 10 seconds after you stop browsing. 
 
 [[BR]]
-== Races, Sleep, and Locks (example 1.6) ==
+=== Races, Sleep, and Locks (example 1.6) ===
 ----
 
 The wily reader may have noticed that the previous program has a race condition.   (explain what a race is here).   It is possible to have multiple browser windows browse 127.0.0.1 at the same time.   It is possible for browser window A to cancel the timer, but before it adds the new eventhandle to mycontext['stopevent'], window B could also try to cancel the timer and set up its own event.   Now there are two events that will stop communications and only one of these will be listed in mycontext['stopevent'].   This means that regardless of how often a user views the webpages, the other event will fire because there is no reference to the eventhandle.   The connection will be closed (not what we want!).   It would be difficult to trigger this condition manually, but we'll use a command "sleep" to pause the current function for some amount of time to allow us to trigger the bug so that we can see it in practice.
@@ -280,11 +280,11 @@ if callfunc == 'initialize':
 Now if you run the program repeatedly, it shouldn't be possible to trigger a race condition.   Note that since only one event can be in the section of the code protected with locks, if you put a sleep in there and rapidly browse, you may have your program slow down because there are not enough free events.  
 
 [[BR]]
-= File Operations =
+== File Operations ==
 ----
 
 [[BR]]
-== Introduction to Files (example 2.1) ==
+=== Introduction to Files (example 2.1) ===
 ----
 
 We'll now switch gears from our hello world web server and focus instead on writing data to files.   The first program we'll write will write the string "hello world" to a file and then read it back out and print it.
@@ -305,7 +305,7 @@ for line in file("hello.file","r"):
   ...
 
 [[BR]]
-== Listing and Removing Files (example 2.2) ==
+=== Listing and Removing Files (example 2.2) ===
 ----
 
 In this example, we'll change our program to write information to a few different files and after we're finished, we'll remove the files.   Instead of coding in the program which files to write information to, we'll let our command line arguments specify which files to write.
@@ -327,8 +327,12 @@ if callfunc == 'initialize':
 
 You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you may get an error because repy programs are not allowed to use certain characters in file names.
 
+[[BR]]
+== Network Operations 1 ==
+----
+
  [[BR]]
-== Interacting with other computers (example 3.1) ==
+=== Interacting with other computers (example 3.1) ===
 ----
 
 In this example, we'll retrieve a webpage and print it on the screen.   We're not going to translate all of the HTML or remove the HTTP headers, so it will be a bit messy.  
@@ -345,7 +349,7 @@ if callfunc == 'initialize':
 You should see google's webpage along with some numbers and other information (this is the HTTP protocol).   However, the program does not stop (at least until you press CTRL-C)!   This is because HTTP 1.1 allows us to issue multiple page requests on a single connection.  
 
 [[BR]]
-== Causing a program to exit (example 3.2) ==
+=== Causing a program to exit (example 3.2) ===
 ----
 
 In this example, we'll change the previous program to exit after we receive the data from google.   To do this we'll use a function called exitall().   This function causes the program to abort and all threads to exit immediately.   We can add this to a timer to the previous example as follows:
@@ -378,11 +382,11 @@ if callfunc == 'initialize':
        break
 
 [[BR]]
-= Network Operations =
+== Network Operations 2 ==
 ----
 
 [[BR]]
-== Looking up IP addresses (example 4.1) ==
+=== Looking up IP addresses (example 4.1) ===
 ----
 
 In this example, we'll look up some IP addresses using gethostname_ex:
@@ -396,7 +400,7 @@ if callfunc == 'initialize':
 This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname_ex see socket.gethostbyname_ex.
 
 [[BR]]
-== Sending and receiving messages (example 4.2) ==
+=== Sending and receiving messages (example 4.2) ===
 ----
 
 In this example, we'll manually send a NTP (time) lookup message and print the raw data that is returned.   Rather than hard code a server into our program, we'll randomly choose a server from a list of publicly available time servers.   A lot of the complexity in this program comes with encoding and decoding NTP data.  
@@ -435,7 +439,7 @@ One thing to note, connection functions like opencomm and waitforcomm use differ
 Getting the time from a synchronized time source is a handy thing to do (so this isn't bad code to repurpose for your code).   You shouldn't ask for the time repeatedly from the time servers though (they consider requests more frequent than 4 seconds apart to be a DoS attack).   You can ask once for a global reference time and then use getruntime to measure the elapsed time.
 
 [[BR]]
-= Restrictions =
+== Restrictions ==
 ----
 
 In the previous examples, we've been running code on our local system which we have control over.   When deploying repy programs, you may instead end up running your code on systems that don't belong to you.   Since you don't control these systems, the users are likely to have a set of restrictions on what you can do on their computer.   You may be unable to write files to disk, not be able to send packets to certain IP addresses, or prevented from performing operations.  
@@ -484,7 +488,7 @@ call getlock allow                      # can get a lock
 These lines specify which functions the program is allowed to call.   They may also list the arguments that can be passed.   When you create a program, you should decide which actions it needs to perform.   It is easier for you to locate computers you can run on if your program has fewer requirements.   You can specify that a function can only be called with a certain number of arguments or certain arguments.   This can be helpful to restrict your program to use certain filenames or functions.  
 
 [[BR]]
-= Resources =
+== Resources ==
 ----
 
 In the previous section, we looked at restrictions; a mechanism for allowing or denying an action.   These aren't adequate for many cases.   For example, you can say a program can or cannot write files, but you cannot say that a program can only write 1MB worth of files.   This is where resources come in.   They put limits on the number of resources a program can consume.
@@ -518,7 +522,7 @@ Alternatively, other resources like memory, disk used, sockets, etc. are not ren
 For more information about resources and restrictions see the resources and restrictions guide.
 
 [[BR]]
-= Conclusion =
+== Conclusion ==
 ----
 
 This concludes a brief tour of the repy functionality.   This guide has covered all of the API calls for repy.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own repy applications that can run on hundreds of computers.   Good luck!
