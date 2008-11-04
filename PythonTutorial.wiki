@@ -627,7 +627,7 @@ class b(a):
 }}}
 
 [[BR]]
-= 5. Exception Handling =
+== 5. Exception Handling ==
 ----
 
 Python’s built-in and library functions have no C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism, e.g.
