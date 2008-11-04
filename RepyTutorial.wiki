@@ -135,11 +135,14 @@ In this example, we'll wait for the user to browse a port we listen on.   When t
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
  
-  sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World! </h1></body></html>")
-  stopcomm(thiscommhandle)   # close my connection with this user (we could also do sockobj.close())
+  sockobj.send("<html><head><title>Hello World</title></head>
+                <body><h1> Hello World! </h1></body></html>")
+  stopcomm(thiscommhandle)   
+  # close my connection with this user (we could also do sockobj.close())
 
 if callfunc == 'initialize':
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
 }}}
 
 The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345 and when you get it call the function hello().  
