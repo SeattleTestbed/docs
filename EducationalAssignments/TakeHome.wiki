@@ -11,8 +11,7 @@ The purpose of this assignment is to illustrate several important networking con
 == Step 1 : Adding resources ==
 ----
 
-You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website]. 
-Once you've logged in, you'll see resources contributed by your instructor. Click on the Used Resources tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  You should see that ten computers have been added for you to use.
+You should have been given a user name and password from the instructor or the class TA. Use these to login to the Seattle [https://seattle.cs.washington.edu/geni GENI website]. Click on the Used Resources tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  You should see that ten computers have been added for you to use.
 
 [[BR]]
 == Step 2 : Running Seattle shell ==
