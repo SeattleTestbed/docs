@@ -7,12 +7,12 @@ This tutorial is written for those who have background knowledge of object orien
 
 [[BR]]
 
-= 1. Overview =
+== 1. Overview ==
 ----
 
 [[BR]]
 
-== 1-1. The way to execute programs == 
+=== 1-1. The way to execute programs === 
 ----
 You don't have to compile your python code to execute. 
 
@@ -35,7 +35,7 @@ So, we need to explain two different ways to run the codes in REPY.
 
 [[BR]]
 
-=== 1-1.1. Executing programs locally in REPY ===
+==== 1-1.1. Executing programs locally in REPY ====
 ----
 
 You can run the program above in your computer, but you need different way to execute the program in repy.
@@ -77,7 +77,7 @@ REPY is a event-driven programming language and has two events when it is execut
 From now on, we suppose all codes below are in the '''if callfunc == 'initialize'''' block.
 
 [[BR]]
-=== 1-1.2. Executing programs remotely in vessels. ===
+==== 1-1.2. Executing programs remotely in vessels. ====
 ----
 
 You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
@@ -166,8 +166,7 @@ john@browsegood !> exit
 Help command helps you look up the commands you can use in repy.                  
 
 [[BR]]
-
-=== 1-1.3. Testing programs in the interactive mode. ===
+==== 1-1.3. Testing programs in the interactive mode. ====
 ----
 
 Instead of executing this program from the command line in batch mode, you could enter and run the code in interactive mode.
@@ -189,7 +188,7 @@ While in interactive mode, you can test your simple code before executing and lo
 To exit interactive mode, hit ctrl-d on Unix or ctrl-z on Windows. 
 
 [[BR]]
-== 1-2. Non-restricted type ==
+=== 1-2. Non-restricted type ===
 ----
 
 Type is not declared in Python. However, the Python interpreter keeps track of the type of all objects. Thus Python variables don’t have types, but their values do.
@@ -210,7 +209,7 @@ Hello
 }}}
 
 [[BR]]
-== 1-3. High-level operations ==
+=== 1-3. High-level operations ===
 ----
 
 Python contains many high level operations.
@@ -233,11 +232,11 @@ Result:
 The method split() is a member of the string class. It splits a string into a list of words and len() returns the number of elements in a list.
 
 [[BR]]
-= 2. Basic Grammar =
+== 2. Basic Grammar ==
 ----
 
 [[BR]]
-== 2-1. Block Definition ==
+=== 2-1. Block Definition ===
 ----
 
 {{{
@@ -254,11 +253,11 @@ In the example code, range() function returns a list of consecutive integers. Th
 
 
 [[BR]]
-== 2-2. Flow Control ==
+=== 2-2. Flow Control ===
 ----
 
 [[BR]]
-=== 2-2.1 if Statements ===
+==== 2-2.1 if Statements ====
 ----
 
 Perhaps the most well-known statement type is the if statement. For example:
@@ -286,7 +285,7 @@ More
 There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
 
 [[BR]]
-=== 2-2.2 for Statements ===
+==== 2-2.2 for Statements ====
 ----
 
 The for statement in Python differs a bit from what you may be used to in C or Pascal. Rather than always iterating over an arithmetic progression of numbers (like in Pascal), or giving the user the ability to define both the iteration step and halting condition (as C), Python’s for statement iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence. For example (no pun intended):
@@ -307,7 +306,7 @@ defenestrate 12
 }}}
 
 [[BR]]
-=== 2-2.3 break and continue Statements, and else Clauses on Loops ===
+==== 2-2.3 break and continue Statements, and else Clauses on Loops ====
 ----
 
 The break statement, like in C, breaks out of the smallest enclosing for or while loop.
@@ -369,13 +368,13 @@ The first argument is a string containing the filename. The second argument is a
 When you’re done with a file, call f.close() to close it and free up any system resources taken up by the open file. After calling f.close(), attempts to use the file object will automatically fail.
 
 [[BR]]
-= 3. Sequences =
+== 3. Sequences ==
 ----
 
 Sequences are array-like but with some differences.
 
 [[BR]]
-== 3-1. Lists ==
+=== 3-1. Lists ===
 ----
 
 Lists are denoted by brackets and commas.
@@ -492,7 +491,7 @@ x = 20, y =10
 }}}  
 
 [[BR]]
-== 3-2. Tuples ==
+=== 3-2. Tuples ===
 ----
 
 Tuples are like lists, but are immutable, i.e. unchangeable. They are enclosed by parentheses or nothing at all, rather than brackets. The parentheses are mandatory if there is an ambiguity without them, e.g. in function arguments. A comma must be used in the case of empty or single tuple, e.g. (,) and (5,).
@@ -508,7 +507,7 @@ x.pop() # illegal, due to immutability
 }}}
 
 [[BR]]
-== 3-3. Strings ==
+=== 3-3. Strings ===
 ----
 
 Strings are essentially tuples of character elements. But they are quoted instead of surrounded by parentheses, and have more ﬂexibility than tuples of character elements would have.
@@ -531,7 +530,7 @@ Result:
 }}}
 
 [[BR]]
-== 3-4. Dictionaries (Hashes) ==
+=== 3-4. Dictionaries (Hashes) ===
 ----
 
 Dictionaries are associative arrays. The statement
@@ -585,11 +584,11 @@ Result:
 }}}
 
 [[BR]]
-= 4. Class =
+== 4. Class ==
 ----
 
 [[BR]]
-== 4-1. Structure ==
+=== 4-1. Structure ===
 ----
 
 The keyword ‘self’ is analogous to this in C++ and Java.
@@ -597,7 +596,7 @@ Static variables in Python is ‘class name.variable name’.
 The constructor for a class is __init__().
 
 [[BR]]
-== 4-2. Sample Class ==
+=== 4-2. Sample Class ===
 ----
 
 {{{
@@ -611,7 +610,7 @@ class Complex:
 }}}
 
 [[BR]]
-== 4-3. Derived Classes ==
+=== 4-3. Derived Classes ===
 ----
 
 '''superclass.__init__(self)''' 
