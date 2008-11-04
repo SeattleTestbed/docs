@@ -1,6 +1,6 @@
 = All of the Python You Need to Forget to Use Repy =
 
-This tutorial is written for those who are familiar with the Python programming language, and want to start using Repy. The syntax and and many of the properties of Repy should be very familiar for Python users, but there are some noticable differences. 
+This tutorial is written for those who are familiar with the Python programming language, and want to start using Repy. The syntax and and many of the properties of Repy should be very familiar for Python users, but there are some noticeable differences. 
 
 
 ----
@@ -10,7 +10,7 @@ This tutorial is written for those who are familiar with the Python programming 
 
 == Global Variables ==
 ----
-In Repy global variables are not allowed. In place of this there is an implicit dictionary called {{{mycontext}}} which can be used to create globally visiable variables. 
+In Repy global variables are not allowed. In place of this there is an implicit dictionary called {{{mycontext}}} which can be used to create globally visible variables. 
 {{{
 #!python
 mycontext['pagecount'] = mycontext['pagecount'] + 1
@@ -55,7 +55,7 @@ Python modules aren't directly allowed in Repy. This is to ensure safety for Sea
 ==== open() ====
     Repy has a builtin '''open()''' that behaves similarly to the Python native {{{open}}}. 
     
-    The file to be opened may only contain the charcters 'a-zA-Z0-9.-_', and cannot be . or ..
+    The file to be opened may only contain the characters 'a-zA-Z0-9.-_', and cannot be . or ..
 
 ==== os.listdir() ====
     Repy provides the function '''listdir''' which is equivalent to a call to Python
@@ -124,7 +124,7 @@ time.time() - starttime #starttime is when the program started execution
 ==== getmyip ====
 
 ==== socket.gethostbyname_ex(name)  ====
-    In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behavior is the same, so you can write Repy which looks like
+    In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behaviour is the same, so you can write Repy which looks like
         {{{
 #!python
 gethostbyname_ex("www.google.com")
@@ -142,12 +142,12 @@ gethostbyname_ex("www.google.com")
 === Threading ===
 ----
 ==== threading.Lock() ====
-    In Repy use '''getlock()''' to create new instances Mutex objects. The object's behavior is the same in Repy as it is in Python: it supports the '''aquire''' and '''release''' operations. 
+    In Repy use '''getlock()''' to create new instances Mutex objects. The object's behaviour is the same in Repy as it is in Python: it supports the '''acquire''' and '''release''' operations. 
 
 [[BR]]
 == Import statements ==
 ----
-In Repy there are no {{{import}}} statements. In its place make use of the {{{include}}} statement. {{{include}}} takes the specified file and inline's it's content to that place in the Repy program. 
+In Repy there are no {{{import}}} statements. In its place make use of the {{{include}}} statement. {{{include}}} takes the specified file and inlines its content to that place in the Repy program. 
 
 For example if you have the file ''a.repy'':
 {{{
