@@ -54,16 +54,22 @@ This program states that if I'm being called during initialization, I should pri
 
 To run this using repy, execute the following from the command line:
 
+{{{
+#!python
 python repy.py restrictions.test test.py
+}}}
 
-(You need to make sure that you have repy.py, restrictions.test, and helloworld.py in the same directory where your comaand line is pointing)
+You need to make sure that you have repy.py, restrictions.test, and helloworld.py in the same directory where your command line is pointing.
 
 Output is below.
 
+{{{
+#!python
 Hello World
 Terminated
+}}}
 
-To run a program, you should use the experiment manager seash.   Seash allows you to control the files running in sandboxes you control.
+To run a program in the vessel, you should use the experiment manager seash. Seash allows you to control the files running in sandboxes you control.
 
 Before using the experiment manager seash, you need to create a ID and generate public and private keys. The instruction is on https://seattle.cs.washington.edu/wiki/DeveloperSetup.
 
@@ -71,33 +77,51 @@ The instruction to run a program with seash is in the [PythonTutorial Python tut
 
 Note that if you instead write the program:
 
+{{{
+#!python
 print "hello world"
+}}}
 
 you will see output like:
 
+{{{
+#!python
 hello world
 hello world
+}}}
 
 The reason why is that your code is called different times for different events (initialize and exit).   If you change the program to read:
 
+{{{
+#!python
 print "hello world",callfunc
+}}}
 
 You'll see:
 
+{{{
+#!python
 hello world initialize
 hello world exit
+}}}
 
 In python it is considered good practice to have a python module with a check to see whether it was imported or the main module and only call main when appropriate:
 
+{{{
+#!python
 if __name__ == "__main__":    # This is not valid repy code!!!  
   main()
+}}}
 
 The equivalent code for repy is:
 
+{{{
+#!python
 if callfunc == "initialize":
   my_initialize()
 elif callfunc == "exit":
   my_exit()
+}}}
 
 Repy is the event-driven programming language. It initially has two events. The initialize event initializes all functions in the program and exit event checks whether the events generated in the program are terminated. Programmers don't have to insert any code at the end of the code to check whether all events are terminated before exit.
 
@@ -107,6 +131,8 @@ Repy is the event-driven programming language. It initially has two events. The 
 
 In this example, we'll wait for the user to browse a port we listen on.   When the user browses our page, we'll display a hello world webpage and then exit.   Create a file "helloworldwebpage.py" with the following text:
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
  
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World! </h1></body></html>")
@@ -114,6 +140,7 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
 if callfunc == 'initialize':
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+}}}
 
 The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345 and when you get it call the function hello().  
 The waitforconn() function returns a commhandle.   A commhandle is a way for your program to refer to a connection.   You can pass a commhandle to other functions to do operations.   For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
@@ -122,20 +149,29 @@ The hello() function is called with 5 arguments: the ip address and port of the 
 
 Run this program the same as in the previous example, substituting "run helloworldwebpage.py" for "run helloworld.py"
 
-...
+{{{
+#!python
 default@browsegood !> run helloworldwebpage.py  
-default@browsegood !> list                            This displays information about the vessels you control
-  ID Own                      Name     Status              Owner Information
-  %1  *   IP address:port:vesselname Started     Notice that the program is "Started" instead of "Terminated". It's still running! 
+default@browsegood !> list                            
+  ID   Own                      Name                             Status              Owner Information
+  %1     *       IP address:port:vesselname        Started     
+}}}
+
+Notice that the program is "Started" instead of "Terminated". It's still running! 
 
 Then open a web browser and in the address bar type: 127.0.0.1:12345  (this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage.  
 
 To stop the program, in the shell type:
 
+{{{
+#!python
 default@browsegood !> stop                      This will stop any programs that are still running...  
 default@browsegood !> list                          
-  ID Own                      Name     Status              Owner Information
-  %1  *   IP address:port:vesselname Stopped   Notice that the program is now "Stopped".   It's not running
+  ID    Own                      Name                              Status              Owner Information
+  %1      *          IP address:port:vesselname    Stopped   
+}}}
+
+Notice that the program is now "Stopped".   It's not running
 
 [[BR]]
 === Counting the number of calls (example 1.3) ===
