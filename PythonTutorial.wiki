@@ -186,7 +186,7 @@ Hello, World
 }}}
 
 While in interactive mode, you can test your simple code before executing and look up the command history by using the arrow keys.
-To exit interactive mode, hit ctrl-d. Different on different OSes... -Justincappos 10/21/08 4:30 PM 
+To exit interactive mode, hit ctrl-d on Unix or ctrl-z on Windows. 
 
 [[BR]]
 == 1-2. Non-restricted type ==
