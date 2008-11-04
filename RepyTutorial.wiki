@@ -156,8 +156,8 @@ Run this program the same as in the previous example, substituting "run hellowor
 #!python
 default@browsegood !> run helloworldwebpage.py  
 default@browsegood !> list                            
-  ID   Own                  Name                     Status              Owner Information
-  %1     *       IP address:port:vesselname        Started     
+  ID   Own                  Name                Status      Owner Information
+  %1     *       IP address:port:vesselname     Started     
 }}}
 
 Notice that the program is "Started" instead of "Terminated". It's still running! 
@@ -168,10 +168,10 @@ To stop the program, in the shell type:
 
 {{{
 #!python
-default@browsegood !> stop                     # This will stop any programs that are still running...  
+default@browsegood !> stop  # This will stop any programs that are still running...  
 default@browsegood !> list                          
-  ID    Own                    Name                 Status              Owner Information
-  %1      *          IP address:port:vesselname    Stopped   
+  ID    Own                Name                Status          Owner Information
+  %1      *      IP address:port:vesselname    Stopped   
 }}}
 
 Notice that the program is now "Stopped".   It's not running
