@@ -515,6 +515,8 @@ In the previous examples, we've been running code on our local system which we h
 
 To get a restrictions / restrictions file, in the shell type: show resources.   If you look at a restrictions file, you'll see a bunch of lines like this (ignore the resource lines for now):
 
+{{{
+#!python
 call sendmess allow
 call stopcomm allow                     # it doesn't make sense to restrict
 call recvmess allow
@@ -552,7 +554,7 @@ call removefile allow                   # They can remove the files they create
 call randomfloat allow                  # can get random numbers
 call getruntime allow                   # can get the elapsed time
 call getlock allow                      # can get a lock
-
+}}}
 
 These lines specify which functions the program is allowed to call.   They may also list the arguments that can be passed.   When you create a program, you should decide which actions it needs to perform.   It is easier for you to locate computers you can run on if your program has fewer requirements.   You can specify that a function can only be called with a certain number of arguments or certain arguments.   This can be helpful to restrict your program to use certain filenames or functions.  
 
