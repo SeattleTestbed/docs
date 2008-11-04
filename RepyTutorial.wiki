@@ -179,6 +179,8 @@ Notice that the program is now "Stopped".   It's not running
 
 In this example, we'll add a counter to our helloworld pprogram.   First we'll try some perfectly valid python code that will not work in repy.
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   global pagecount   # GLOBALS ARE NOT ALLOWED IN REPY
   pagecount = pagecount + 1
@@ -189,9 +191,12 @@ if callfunc == 'initialize':
   global pagecount   # GLOBALS ARE NOT ALLOWED IN REPY
   pagecount = 0
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+}}}
 
 This code will not work because globals do not exist in repy.   However, there is a mycontext dictionary provided for this purpose.   The code can be written as follows:
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World!</h1><p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
@@ -200,6 +205,7 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+}}}
 
 Start the program using the shell, then open a web browser and in the address bar type: 127.0.0.1:12345  (this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage and a count of 1.   You can refresh the page and the count should increment.   Once again,use the shell to stop the program
 
@@ -209,6 +215,8 @@ Start the program using the shell, then open a web browser and in the address ba
 
 The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program timeout after 1 minute?   To do this, we'll register a timer that will close the connection.
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World!</h1><p>You are visitor "+str(mycontext['pagecount'])+"<p>I've been running "+str(getruntime())+" seconds</body></html>")
@@ -221,6 +229,7 @@ if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   eventhandle = settimer(60, stop_listening, (listencommhandle,)) # wait 60 seconds, then call stop_listening with listencommhandle
+}}}
  
 The timer (when called) will stop the communication.  settimer returns an eventhandle.   An eventhandle is similar to a commhandle in that it can be used to interact with an event.   getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
 
@@ -232,6 +241,8 @@ Start the program and then open a web browser and in the address bar type: 127.0
 
 The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program stop if it doesn't display a web page for 10 seconds?   Well, we know how to set a timer to close the connection in 10 seconds, but that doesn't help us to keep the connection open.   To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection.  
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World!</h1><p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
@@ -251,7 +262,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn("127.0.0.1",12345,hello)  
   eventhandle = settimer(10, stop_listening, (listencommhandle,))
   mycontext['stopevent'] = eventhandle
-
+}}}
  
 The timer (when called) will stop the communication.  canceltimer stops a timer (if it hasn't already started).  
 
@@ -263,6 +274,8 @@ Try running the program and then try browsing the webpage a few times and then w
 
 The wily reader may have noticed that the previous program has a race condition.   (explain what a race is here).   It is possible to have multiple browser windows browse 127.0.0.1 at the same time.   It is possible for browser window A to cancel the timer, but before it adds the new eventhandle to mycontext['stopevent'], window B could also try to cancel the timer and set up its own event.   Now there are two events that will stop communications and only one of these will be listed in mycontext['stopevent'].   This means that regardless of how often a user views the webpages, the other event will fire because there is no reference to the eventhandle.   The connection will be closed (not what we want!).   It would be difficult to trigger this condition manually, but we'll use a command "sleep" to pause the current function for some amount of time to allow us to trigger the bug so that we can see it in practice.
 
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World!</h1><p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
@@ -280,7 +293,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) # wait 60 seconds, then call stop_listening with listencommhandle
   mycontext['stopevent'] = eventhandle
-
+}}}
  
 Try browsing the webpage a few times rapidly and then browse every 3-5 seconds.   You'll notice the program closes automatically even though it shouldn't (because you kept browsing).  
 
@@ -288,7 +301,8 @@ One way to fix a race condition is using a lock.   You can get a lock by calling
 
 We can avoid race conditions by the following changes:
 
-
+{{{
+#!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head><body><h1> Hello World!</h1><p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
@@ -311,7 +325,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) # wait 60 seconds, then call stop_listening with listencommhandle
   mycontext['stopevent'] = eventhandle
-
+}}}
 
 Now if you run the program repeatedly, it shouldn't be possible to trigger a race condition.   Note that since only one event can be in the section of the code protected with locks, if you put a sleep in there and rapidly browse, you may have your program slow down because there are not enough free events.  
 
@@ -325,6 +339,8 @@ Now if you run the program repeatedly, it shouldn't be possible to trigger a rac
 
 We'll now switch gears from our hello world web server and focus instead on writing data to files.   The first program we'll write will write the string "hello world" to a file and then read it back out and print it.
 
+{{{
+#!python
 if callfunc == 'initialize':
   myfileobject = open("hello.file","w")   # just like python's open() function
   print >> myfileobject, "hello world"     # we also could have used myfileobject.write("hello world\n")
@@ -333,12 +349,16 @@ if callfunc == 'initialize':
   newfileobject = file("hello.file","r")   # we can use file instead of open.   They work the same...
   print newfileobject.read()
   newfileobject.close()
+}}}
 
 This program should print hello world (and an extra newline from print).   The repy file object is similar to python's file object so you can do things like:
 
+{{{
+#!python
 for line in file("hello.file","r"):
   # code here
   ...
+}}}
 
 [[BR]]
 === Listing and Removing Files (example 2.2) ===
@@ -346,6 +366,8 @@ for line in file("hello.file","r"):
 
 In this example, we'll change our program to write information to a few different files and after we're finished, we'll remove the files.   Instead of coding in the program which files to write information to, we'll let our command line arguments specify which files to write.
 
+{{{
+#!python
 if callfunc == 'initialize':
   for filename in callargs:   # callargs has all of the command line arguments in it.
     myfileobject = open(filename,"w")   # just like python's open() function
@@ -359,7 +381,7 @@ if callfunc == 'initialize':
     removefile(filename)  
 
   print "The files:",callargs," should now be missing from ",listdir()  
- 
+}}}
 
 You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you may get an error because repy programs are not allowed to use certain characters in file names.
 
@@ -372,6 +394,9 @@ You should see output that first lists the file names in the current directory (
 ----
 
 In this example, we'll retrieve a webpage and print it on the screen.   We're not going to translate all of the HTML or remove the HTTP headers, so it will be a bit messy.  
+
+{{{
+#!python
 if callfunc == 'initialize':
  
   socketobject = openconn("www.google.com",80)   # open a connection to the google web server
@@ -379,9 +404,8 @@ if callfunc == 'initialize':
 
   while True:
      print socketobject.recv(4096)
- 
+}}}
    
-
 You should see google's webpage along with some numbers and other information (this is the HTTP protocol).   However, the program does not stop (at least until you press CTRL-C)!   This is because HTTP 1.1 allows us to issue multiple page requests on a single connection.  
 
 [[BR]]
@@ -390,6 +414,8 @@ You should see google's webpage along with some numbers and other information (t
 
 In this example, we'll change the previous program to exit after we receive the data from google.   To do this we'll use a function called exitall().   This function causes the program to abort and all threads to exit immediately.   We can add this to a timer to the previous example as follows:
 
+{{{
+#!python
 if callfunc == 'initialize':
 
   socketobject = openconn("www.google.com",80)   # open a connection to the google web server
@@ -399,9 +425,12 @@ if callfunc == 'initialize':
   settimer(3, exitall, ())
   while True:
      print socketobject.recv(4096)
+}}}
  
-    Alternatively, we could instead close the socket and check this condition.   Example code that shows this is below
+Alternatively, we could instead close the socket and check this condition.   Example code that shows this is below
 
+{{{
+#!python
 if callfunc == 'initialize':
 
   socketobject = openconn("www.google.com",80)   # open a connection to the google web server
@@ -416,6 +445,7 @@ if callfunc == 'initialize':
        if str(e) != "Socket closed":
          raise
        break
+}}}
 
 [[BR]]
 == Network Operations 2 ==
@@ -427,11 +457,13 @@ if callfunc == 'initialize':
 
 In this example, we'll look up some IP addresses using gethostname_ex:
 
+{{{
+#!python
 if callfunc == 'initialize':
   print gethostbyname_ex("www.google.com")
   print gethostbyname_ex("www.wikipedia.com")
   print getmyip()
- 
+}}}
 
 This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname_ex see socket.gethostbyname_ex.
 
@@ -441,6 +473,8 @@ This will print IP address, hostname and other information for google and wikipe
 
 In this example, we'll manually send a NTP (time) lookup message and print the raw data that is returned.   Rather than hard code a server into our program, we'll randomly choose a server from a list of publicly available time servers.   A lot of the complexity in this program comes with encoding and decoding NTP data.  
 
+{{{
+#!python
 # See RFC 2030 (http://www.ietf.org/rfc/rfc2030.txt) for details about NTP
 def convert_timestamp_to_float(timestamp):   # this unpacks the data from the packet and changes it to a float
   integerpart = (ord(timestamp[0])<<24) + (ord(timestamp[1])<<16) + (ord(timestamp[2])<<8) + (ord(timestamp[3]))
@@ -465,8 +499,7 @@ if callfunc == 'initialize':
   ntp_request_string = chr(27)+chr(0)*47
   recvmess(ip,12345, decode_NTP_packet)
   sendmess(servername,123, ntp_request_string, ip, 12345) # port 123 is used for NTP
-
-
+}}}
 
 This will print the number of seconds since Jan 1st, 1900 from a time server.   If you run the program multiple times, you'll see it chooses servers randomly from the timeservers list.  
 
