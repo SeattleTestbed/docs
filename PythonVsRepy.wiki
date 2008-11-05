@@ -22,26 +22,26 @@ mycontext['pagecount'] = mycontext['pagecount'] + 1
 ----
 
 ==== sys.argv ====
-    Programs written in Python use {{{sys.argv}}} to access arguments to the file. In Repy variable {{{callargs}}} behaves the same as {{{sys.argv[1:]}}}
+  Programs written in Python use {{{sys.argv}}} to access arguments to the file. In Repy variable {{{callargs}}} behaves the same as {{{sys.argv[1:]}}}
 
 ==== {{{__name__}}} ====
-    There is no {{{__name__}}} variable. In python it's common to use the following code to see if a file invoked directly:
-    {{{
+  There is no {{{__name__}}} variable. In python it's common to use the following code to see if a file invoked directly:
+  {{{
 #!python
 if __name__ == "__main__":
-	main()
-}}}
+   main()
+  }}}
 
-    In Repy the corresponding implicit variable is '''callafunc'''. A similar Repy program would include:
+  In Repy the corresponding implicit variable is '''callafunc'''. A similar Repy program would include:
     {{{
 #!python
 if callfunc == "initialize":
-	main()
+  main()
     }}}
 
-    This ensures that the following code is only executed once. Note that if you use the Repy {{{include}}} statement and both include the above if statement, both file's initialize blocks will be executed. 
+  This ensures that the following code is only executed once. Note that if you use the Repy {{{include}}} statement and both include the above if statement, both file's initialize blocks will be executed. 
 
-    Repy scripts are called twice: on entry {{{callfunc}}} is set to "intialize". At exit {{{callfunc}}} is surprisingly enough called "exit".
+  Repy scripts are called twice: on entry {{{callfunc}}} is set to "intialize". At exit {{{callfunc}}} is surprisingly enough called "exit".
 
 [[BR]]
 
@@ -53,48 +53,48 @@ Python modules aren't directly allowed in Repy. This is to ensure safety for Sea
 === Files ===
 ----
 ==== open() ====
-    Repy has a builtin '''open()''' that behaves similarly to the Python native {{{open}}}. 
+  Repy has a builtin '''open()''' that behaves similarly to the Python native {{{open}}}. 
     
-    The file to be opened may only contain the characters 'a-zA-Z0-9.-_', and cannot be . or ..
+  The file to be opened may only contain the characters 'a-zA-Z0-9.-_', and cannot be . or ..
 
 ==== os.listdir() ====
-    Repy provides the function '''listdir''' which is equivalent to a call to Python
+  Repy provides the function '''listdir()''' which is equivalent to a call to Python
     {{{
 #!python
 os.listdir('.')
     }}}
-Returns a list of strings representing the files in a vessel's workspace
+  Returns a list of strings representing the files in a vessel's workspace
 
 ==== removefile ====
-    Remove a file from the user program area. Has the same filename character restrictions as {{{open}}} 
-    The following Repy code
-        {{{
+  Remove a file from the user program area. Has the same filename character restrictions as {{{open}}} 
+  The following Repy code
+    {{{
 #!python
 removefile(tmpfile)
-        }}}
-    Is equivalent to the following Python
-        {{{
+    }}}
+  Is equivalent to the following Python
+    {{{
 #!python
 os.remove(tmpfile)
-        }}}
+    }}}
 [[BR]]
 === Time ===
 ----
 ==== sleep ====
-    Repy's sleep behaves similarly to time.sleep(), causing execution of the current program to halt for the specified number of seconds. 
+  Repy's sleep behaves similarly to time.sleep(), causing execution of the current program to halt for the specified number of seconds. 
 
 ==== Timer ====
-    In python, to start a timer you typically have code such as:
+  In python, to start a timer you typically have code such as:
     {{{
 #!python
 def hello(str):
-    print "hello,", str
+  print "hello,", str
 
 t = Timer(30.0, hello, ["world"])
 t.start() # after 30 seconds, "hello, world" will be printed
     }}}
 
-    In repy use the '''settimer''' function. A repy equivalent would be 
+  In repy use the '''settimer''' function. A repy equivalent would be 
     {{{
 #!python
 def hello(str):
@@ -103,15 +103,14 @@ def hello(str):
 t = settimer(30.0, hello, ["world"])
     }}}
 
-    In order to cancel the timer, use 
+  In order to cancel the timer, use 
     {{{
 #!python
 stoptimer(t)
     }}}
- 
 
 ==== time.time ====
-    In repy you make make use of the '''getruntime()''' function. This returns a float representing the runtime of the current program, which is equivalent to the Python:
+  In repy you make make use of the '''getruntime()''' function. This returns a float representing the runtime of the current program, which is equivalent to the Python:
     {{{
 #!python
 time.time() - starttime #starttime is when the program started execution
@@ -124,11 +123,11 @@ time.time() - starttime #starttime is when the program started execution
 ==== getmyip ====
 
 ==== socket.gethostbyname_ex(name)  ====
-    In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behaviour is the same, so you can write Repy which looks like
-        {{{
+  In Repy, rather than use {{{socket.gethostbyname_ex(name)}}}, use '''gethostbyname_ex(name)'''. The behaviour is the same, so you can write Repy which looks like
+    {{{
 #!python
 gethostbyname_ex("www.google.com")
-        }}}
+    }}}
 
 ==== recvmess ====
 
@@ -142,7 +141,7 @@ gethostbyname_ex("www.google.com")
 === Threading ===
 ----
 ==== threading.Lock() ====
-    In Repy use '''getlock()''' to create new instances Mutex objects. The object's behaviour is the same in Repy as it is in Python: it supports the '''acquire''' and '''release''' operations. 
+  In Repy use '''getlock()''' to create new instances Mutex objects. The object's behaviour is the same in Repy as it is in Python: it supports the '''acquire''' and '''release''' operations. 
 
 [[BR]]
 == Import statements ==
@@ -150,25 +149,24 @@ gethostbyname_ex("www.google.com")
 In Repy there are no {{{import}}} statements. In its place make use of the {{{include}}} statement. {{{include}}} takes the specified file and inlines its content to that place in the Repy program. 
 
 For example if you have the file ''a.repy'':
-{{{
+  {{{
 #!python
 def foo():
     print "foo"
-}}}
+  }}}
 And a file ''b.repy'':
-{{{
+  {{{
 #!python
 include a.repy
 def bar():
     print "bar"
-}}}
+  }}}
 The resuling file will look like:
-{{{
+  {{{
 #!python
 def foo():
     print "foo"
 
 def bar():
     print "bar"
-}}}
-
+  }}}
