@@ -32,7 +32,7 @@ Then type "python seash.py" (if this fails, you may need to [http://www.python.o
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing username with the user name you used to log into the Seattle GENI website)'''
 
 {{{
-#!seash
+#!python
 !> loadkeys username
 }}}
 
