@@ -410,7 +410,13 @@ Now under your shell at the " username@ !>" prompt, type
 username@ !> browse
 }}}
 
-You should see the IP of at least one WAN node. Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing {{{"host `hostname`"}}} on Mac) and the IP address of the WAN node.   Start the pingserver on the WAN node (by running "on %WANnode run pingserver.py").   Ping the WAN node from your local computer by typing the following at a terminal window (not in seash!).   Remember to replace WANIP with the WAN node's IP address and GENIport with your port.
+You should see the IP of at least one WAN node. Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing {{{"host `hostname`"}}} on Mac) and the IP address of the WAN node.   Start the pingserver on the WAN node with the following command in seash (replacing GENIport with your port number):
+{{{
+#!python
+username@ !> on %WANnode run udppingserver.py GENIport
+}}}
+
+Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace WANIP with the WAN node's IP address and GENIport with your port.
 
 {{{
 python localudpping.py WANIP GENIport
