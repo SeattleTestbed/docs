@@ -613,7 +613,7 @@ class Complex:
 === 4-3. Derived Classes ===
 ----
 
-'''superclass.__init__(self)''' 
+'''superclass.!__init!__(self)''' 
 
 If a class b is the subclass of a class a, we need write it like,
 
