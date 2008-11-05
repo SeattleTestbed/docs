@@ -449,7 +449,7 @@ Next ping the local node from the WAN node
 
 {{{
 #!python
-username@ !> on %WANnode run udpping.py localIP   
+username@ !> on %WANnode run udpping.py localIP GENIport
 }}}
 
 
