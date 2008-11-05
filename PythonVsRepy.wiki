@@ -109,7 +109,7 @@ t = settimer(30.0, hello, ["world"])
 stoptimer(t)
     }}}
 
-==== time.time ====
+==== time.time() ====
   In repy you make make use of the '''getruntime()''' function. This returns a float representing the runtime of the current program, which is equivalent to the Python:
     {{{
 #!python
@@ -120,9 +120,8 @@ time.time() - starttime #starttime is when the program started execution
 === Networking ===
 ----
 
-There are several native Repy functions provided to make common networking operations easier. 
+There are several native Repy functions provided to make common networking operations easier. Many don't have direct Python equivalents, but are convenience functions.
 
-==== getmyip ====
 
 ==== socket.gethostbyname_ex(name)  ====
   In Repy, rather than use [[http://docs.python.org/library/socket.html#socket.gethostbyname_ex socket.gethostbyname_ex(name)]], use '''gethostbyname_ex(name)'''. The behaviour is the same, so you can write Repy which looks like
@@ -130,6 +129,12 @@ There are several native Repy functions provided to make common networking opera
 #!python
 gethostbyname_ex("www.google.com")
     }}}
+
+==== getmyip ====
+Provides the external IP address of this computer. A [[http://docs.python.org/library/socket.html#socket.error socket.error]] can occur if an external address does not exist.
+
+==== sendmess ====
+
 
 ==== recvmess ====
 
