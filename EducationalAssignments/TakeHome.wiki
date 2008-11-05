@@ -354,7 +354,7 @@ To send a ping packet, run: (replacing node2 with the node number for node2, int
 
 {{{
 #!python
-username@WAN !> on %node2 run ping.py intermediateIP GENIport
+username@WAN !> on %node2 run udpping.py intermediateIP GENIport
 }}}
 
 You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). 
