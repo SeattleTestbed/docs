@@ -443,8 +443,9 @@ Next ping the local node from the WAN node
 
 {{{
 #!python
-username@ !> on %WANnode run ping.py localIP   
+username@ !> on %WANnode run udpping.py localIP   
 }}}
+
 
 
 Then check the log by running 
