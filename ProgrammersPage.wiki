@@ -7,4 +7,6 @@ This page will feature information and references regarding how to use Seattle, 
  * Or if you already know Python, get started with the [PythonVsRepy All of the Python You Need to Forget to Use Repy] guide.
 
 
- * [RepyTutorial The Repy Tutorial].  Read this after doing one of the above tutorials to learn more about the features and API for Repy.
+After doing one of the above tutorials to learn more about the features and API for Repy, try [RepyTutorial the Repy Tutorial].  
+
+For Repy experts, refer to the [RepyLibrary the Repy Library Reference].
