@@ -317,7 +317,9 @@ Finally, check the result of all of the nodes pinging each other by opening your
 username@WAN !> show log
 }}}
 
-What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like 
+What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like the image below
+
+[[Image(nontransitiveconnectivity.jpg)]]
 
 [[BR]]
 == Step 10 : Packet forwarding ==
