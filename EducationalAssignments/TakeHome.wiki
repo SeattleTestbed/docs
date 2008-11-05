@@ -283,7 +283,7 @@ You will see that the WAN nodes are now detected.  For convenience, let's add th
 username@LAN !> add browsegood to WAN
 }}}
 
-Now type
+If you have only a few nodes, wait a few minutes, then do {{{browse}}} and {{{add browsegood to WAN}}} again.  Now type
 
 {{{
 #!python
