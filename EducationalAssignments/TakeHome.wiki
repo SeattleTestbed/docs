@@ -357,14 +357,13 @@ To send a ping packet, run: (replacing node2 with the node number for node2, int
 username@WAN !> on %node2 run udpping.py intermediateIP GENIport
 }}}
 
-You can look at the log on node1 and node2 to see that the packets were delivered (using the "show log" command). 
+You can look at the log on node1 or node2 to see that the packets were delivered (using the "show log" command).   However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.   You'll also see that node1 got the response from the intermediate node (instead of directly from node2).
 
 {{{
 #!python
 username@WAN !> on %node2 show log
 }}}
 
-However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.   You'll also see that node1 got the response from the intermediate node (instead of directly from node2).
 
 {{{
 #!python
@@ -446,6 +445,7 @@ Next ping the local node from the WAN node
 #!python
 username@ !> on %WANnode run ping.py localIP   
 }}}
+
 
 Then check the log by running 
 
