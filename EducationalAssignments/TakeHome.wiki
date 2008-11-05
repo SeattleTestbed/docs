@@ -323,6 +323,12 @@ What do you observe? Is the connectivity graph complete and do all of the nodes 
 
 Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.
 
+Stop the allpairsping on the WAN nodes so we can focus on the nodes with non-transitive connectivity.
+{{{
+#!python
+username@WAN !> stop
+}}}
+
 [[BR]]
 == Step 10 : Packet forwarding ==
 ----
