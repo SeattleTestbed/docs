@@ -57,31 +57,33 @@ Python modules aren't directly allowed in Repy. This is to ensure safety for Sea
     
   The file to be opened may only contain the characters 'a-zA-Z0-9.-_', and cannot be . or ..
 
+  The object returned by {{{open()}}} is similar to the Python [[http://docs.python.org/library/stdtypes.html#file-objects file]] object, and provides most of the same functionality.
+
+
 ==== os.listdir() ====
   Repy provides the function '''listdir()''' which is equivalent to a call to Python
     {{{
 #!python
 os.listdir('.')
     }}}
-  Returns a list of strings representing the files in a vessel's workspace
-
-==== removefile ====
+  Since file access is only allowed within a Vessel, there is no need to provide {{{listdir()}}} with any arguments. The list will contain all the files in the current working directory. 
+==== os.removefile() ====
   Remove a file from the user program area. Has the same filename character restrictions as {{{open}}} 
   The following Repy code
     {{{
 #!python
-removefile(tmpfile)
+removefile(f)
     }}}
   Is equivalent to the following Python
     {{{
 #!python
-os.remove(tmpfile)
+os.remove(f)
     }}}
 [[BR]]
 === Time ===
 ----
 ==== time.sleep() ====
-  Repy's '''sleep()''' behaves similarly to time.sleep(), causing execution of the current program to halt for the specified number of seconds. 
+  Repy's '''sleep()''' function behaves similarly to [[http://docs.python.org/library/time.html#time.time time.sleep()]], causing execution of the current program to halt for the specified number of seconds. 
 
 ==== Timer ====
   In python, to start a timer you typically have code such as:
@@ -94,7 +96,7 @@ t = Timer(30.0, hello, ["world"])
 t.start() # after 30 seconds, "hello, world" will be printed
     }}}
 
-  In repy use the '''settimer''' function. A repy equivalent would be 
+  In repy use the '''settimer()''' function. A repy equivalent would be 
     {{{
 #!python
 def hello(str):
@@ -120,7 +122,7 @@ time.time() - starttime #starttime is when the program started execution
 === Networking ===
 ----
 
-There are several native Repy functions provided to make common networking operations easier. Many don't have direct Python equivalents, but are convenience functions.
+There are several native Repy functions provided to make common networking operations easier. Many don't have direct Python equivalents, but are convenience functions. See the RepyTutorial for examples of these functions.
 
 
 ==== socket.gethostbyname_ex(name)  ====
@@ -129,20 +131,6 @@ There are several native Repy functions provided to make common networking opera
 #!python
 gethostbyname_ex("www.google.com")
     }}}
-
-==== getmyip ====
-Provides the external IP address of this computer. A [[http://docs.python.org/library/socket.html#socket.error socket.error]] can occur if an external address does not exist.
-
-==== sendmess ====
-
-
-==== recvmess ====
-
-==== openconn ====
-
-==== waitforconn ====
-
-==== stopcomm ====
 
 [[BR]]
 === Threading ===
