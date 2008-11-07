@@ -822,6 +822,24 @@ if greeting is True:
 
       However, there are a few cases where a function may return True, False, or other values.   In these cases, checking if a value with an unknown type is True or False, is allowed.
 
+    - Use the % string formatting operator only when necessary
+
+      The string formatting operator '%' provides a convenient way to do printf like substitution of variables in strings.  It's better in many cases to put variables in line when you don't need the more advanced options (like fixed length fields).  The issue is that the string formatting operator makes understanding the output difficult in many cases.   For example in the following example, it's difficult to read the code and determine what the resulting output will look like:
+{{{
+#!python
+print "python %s %s %s/vesselinfodir/ %s/ > /tmp/carter.out 2> /tmp/carter.err"%(carter_script, dist_char, prefix,prefix)
+}}}
+
+      A better way to write this:
+{{{
+#!python
+print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix+"/ > /tmp/carter.out 2> /tmp/carter.err"
+}}}
+
+
+
+
+
 
 
  == Potpourri ==
@@ -881,6 +899,7 @@ else:
 
       Yes:
 {{{
+
 #!python
 if not synched:
   if askokcancel("Change slice without synching?", "You have
