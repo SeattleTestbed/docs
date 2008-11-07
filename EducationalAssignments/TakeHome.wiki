@@ -309,7 +309,7 @@ Then type
 
 {{{
 #!python
-username@WAN !> run allpairsping.py
+username@WAN !> run allpairsping.py GENIport
 }}}
 
 Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage from a different computer if the problem persists. 
