@@ -418,7 +418,7 @@ for item in list:
 ----
 
     Conventions for writing good documentation strings (a.k.a. "docstrings")
-    are immortalized in PEP 257 [http://www.python.org/dev/peps/pep-0257/ 3].
+    are immortalized in [http://www.python.org/dev/peps/pep-0257/ PEP 257]
 
     - Write docstrings for all public modules, functions, classes, and
       methods.  Docstrings are not necessary for non-public methods, but you
@@ -726,6 +726,7 @@ except KeyError:
   # Will also catch KeyError raised by handle_value()
   return key_not_found(key)
 }}}
+
 
 
 
