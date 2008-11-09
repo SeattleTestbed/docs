@@ -12,26 +12,23 @@ This tutorial is written for those who have background knowledge of object orien
 
 [[BR]]
 
-=== 1-1. The way to execute programs === 
+=== 1-1. How python programs are executed === 
 ----
-You don't have to compile your python code to execute. 
-
-Here is a very simple code to print ‘Hello World’.
+Python is an interpreted language, which in a nutshell means that you do not need to compile python code in order to execute it. Here's an example program that prints ‘Hello World’.
 
 {{{
 #!python
 print “Hello, World”
 }}}
 
-You can make a file ‘test.py’ that contains one sentence above, and then run the program by typing
+To execute this program, you can place the above source code into file, say ‘test.py’, and then run the program by executing the following statement on the command line:
 
 {{{
 #!python
-python test.py
+$ python test.py
 }}}
 
-It is the normal way to execute the python codes. But this tutorial is written for those who use REPY.
-So, we need to explain two different ways to run the codes in REPY.
+This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain two different ways to run the codes in REPY.
 
 [[BR]]
 
