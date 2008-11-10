@@ -229,11 +229,11 @@ username@LAN !> on %2 stop
 == Step 8 : Sending pings between a group of computers ==
 ----
 
-Instead of manually pinging between each of the computers in the LAN group (if your prompt isn't " username@LAN !> " type: "on LAN" to reset it), you can run a program that does an UDP ping between all of the computers in a group.  First we need to generate a list of all nodes. Type
+Instead of manually pinging between each of the computers in the LAN group (if your prompt isn't " username@LAN !> " type: "on LAN" to reset it), you can run a program that does an UDP ping between all of the computers in a group.  First we need to generate a list of the IP addresses of the nodes. Type
 
 {{{
 #!python
-username@LAN !> list
+username@LAN !> show ip
 }}}
 
 and then write the IP addresses into a file called "neighboriplist.txt" on your computer.   The IP addresses should be written one line at a time like this:
@@ -295,7 +295,7 @@ and the prompt should now say "username@WAN !>".  Now let's examine the all pair
 
 {{{
 #!python
-username@WAN !> list
+username@WAN !> show ip
 }}}
 
 and as before write the IP addresses you see to a local file called 'neighboriplist.txt'. Then type
