@@ -158,7 +158,7 @@ Start the program and then open a web browser and in the address bar type: 127.0
 === Interacting with Timers (example 1.5) ===
 ----
 
-The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program stop if it doesn't display a web page for 10 seconds?   Well, we know how to set a timer to close the connection in 10 seconds, but that doesn't help us to keep the connection open.   To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection.  
+We know how to set a timer to close the connection in 60 seconds, but that doesn't help us to keep the connection open.   To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection.  
 
 {{{
 #!python
