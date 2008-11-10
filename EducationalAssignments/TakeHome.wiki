@@ -1,6 +1,8 @@
 = Seattle Take Home Assignment =
 
-The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet. For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle toolkit. Altogether there are 11 steps to this assignment. Let's begin!
+The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet.  For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle toolkit.  Following familiarization, we will run an all-pairs-ping on computers distributed around the world.   The goal of this part is to observe non-transitive connectivity (when two computers cannot communicate, but they can both communicate with a third computer).   Following this, we will set up one-hop detour routing to allow the computers to communicate through the intermediate node.   The final part of the assignment investigates whether or not a computer is behind a NAT (network address translator) and illustrates the practical issues with communicating with a NATed node.   
+
+Altogether there are 11 steps to this assignment. This assignment should take about 60 minutes to complete.   Let's begin!
 
 ----
 [[TOC(inline)]]
