@@ -69,7 +69,7 @@ if callfunc == 'initialize':
 
 You need to insert if block to execute your code one time in initialize status.  
 
-REPY is a event-driven programming language and has two events when it is executed, initialize and exit. We can have more detail about it in [RepyTutorial REPY tutorial]. 
+REPY is a event-driven programming language and has two events when it is executed, initialize and exit. We can have more detail about it in [PythonVsRepy All of the Python You Need to Forget to Use Repy]. 
 
 From now on, we suppose all codes below are in the '''if callfunc == 'initialize'''' block.
 
