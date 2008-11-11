@@ -25,7 +25,7 @@ Now click on the User Info tab.    Click to download the demo kit.   This includ
 
  * On Mac / Linux, open a terminal window and change to the directory where you downloaded the toolkit.   
 
-Then type "python seash.py" (if this fails, you may need to [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+Then type "python seash.py" or "seash.py" (if these fail, you may need to [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
 == Step 3 : Browsing your resources ==
