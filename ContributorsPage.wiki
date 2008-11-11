@@ -10,3 +10,4 @@ This page contains information useful to developers working on Seattle
  * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
  * [SeattleDownload Download and installation instructions] for Seattle
  * [CodingStyle Style guidelines] for writing code for Seattle
+ * [ProjectMembers Project Members] contact information
