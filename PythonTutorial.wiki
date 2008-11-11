@@ -246,9 +246,9 @@ for i in range(10):
      print i
 }}}
 
-In C++ and Java, we use curly braces({}) as a block definition, but in Python, it has different syntax.
+In C++ and Java, we use curly braces({}) as a block definition, but in Python, it has a different syntax.
 
-The first line should ends with '''colon(:)''' and from next line, lines should be '''indented''' until at the end of the block.
+The first line should end with a '''colon(:)''' and from next line on, lines should be '''indented''' until at the end of the block.
 
 In the example code, range() function returns a list of consecutive integers. This will result in 10 iterations of the loop, 0 through 9.
 
