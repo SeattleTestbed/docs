@@ -541,7 +541,7 @@ Dictionaries are associative arrays. The statement
 x = {’abc’:12,’sailing’:’away’}
 }}}
 
-sets x to what amounts to a 2-element array with x[’abc’] being 12 and x[’sailing’] equal to ’away’. We say that ’abc’ and ’sailing’ are keys, and 12 and ’away’ are values. Keys can be any immmutable object, i.e. numbers, tuples or strings.16 Use of tuples as keys is quite common in Python applications, and you should keep in mind that this valuable tool is available.
+sets x to what amounts to a 2-element array with x[’abc’] being 12 and x[’sailing’] equal to ’away’. We say that ’abc’ and ’sailing’ are keys, and 12 and ’away’ are values. Keys can be any immutable object, i.e. numbers, tuples or strings. Use of tuples as keys is quite common in Python applications, and you should keep in mind that this valuable tool is available.
 
 Internal storage is organized as a hash table. This is why Perl’s analog of Python’s dictionary concept is actually called a hash.
 
