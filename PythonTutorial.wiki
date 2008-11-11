@@ -594,7 +594,7 @@ Result:
 
 The keyword ‘self’ is analogous to this in C++ and Java.
 Static variables in Python is ‘class name.variable name’.
-The constructor for a class is !__init__.
+The constructor for a class is !__init!__.
 
 [[BR]]
 === 4-2. Sample Class ===
