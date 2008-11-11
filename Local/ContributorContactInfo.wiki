@@ -8,4 +8,5 @@ Please keep the list ordered alphabetically by SVN username.
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' ||
 || Armon Dadgar || armond@cs.washington.edu || 206-914-6233 || armon ||
 || Carter Butaud || butaud@cs.washington.edu || 206-459-3483 || butaud ||
+|| Brent Couvrette || couvb@cs.washington.edu ||    || couvb ||
 || Justin Cappos || justinc@cs.washington.edu ||    || justinc ||
