@@ -82,7 +82,11 @@ You can also access the resources donated to you and run the program test.py in 
 '''Step 1. Run programs in the Seattle 
 
 To run a program, you should use the experiment manager seash.   Seash allows you to control the files running in sandboxes you control.
-python seash.py 
+
+{{{
+#!python
+python seash.py
+}}}
 
 '''Step 2. Log in with my ID
 
