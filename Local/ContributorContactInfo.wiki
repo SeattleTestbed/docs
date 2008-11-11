@@ -10,3 +10,4 @@ Please keep the list ordered alphabetically by SVN username.
 || Carter Butaud || butaud@cs.washington.edu || 206-459-3483 || butaud ||
 || Brent Couvrette || couvb@cs.washington.edu ||    || couvb ||
 || Justin Cappos || justinc@cs.washington.edu ||    || justinc ||
+|| Michael Moshofsky || mikemosh@cs.washington.edu || 503-910-7091 || mikemosh||
