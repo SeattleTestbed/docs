@@ -388,7 +388,7 @@ Install Seattle on your home computer by logging into your Seattle GENI account.
 
 You also will need to download the toolkit and keys like you previously did in Step 2.   Copy all of the files from the toolkit into the directory where you uncompressed the installer.   Change so that your terminal window is in the directory where you unpacked the installer.   
 
-As before, run the seash shell from a terminal by typing "python seash.py".  Load your keys by typing (replacing username with your GENI user name)
+As before, run the seash shell from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing username with your GENI user name)
 
 {{{
 #!python
