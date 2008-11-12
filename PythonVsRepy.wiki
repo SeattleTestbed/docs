@@ -1,6 +1,6 @@
 = All of the Python You Need to Forget to Use Repy =
 
-This tutorial is written for those who are familiar with the Python programming language, and want to start using Repy. The syntax and and many of the properties of Repy should be very familiar for Python users, but there are some noticeable differences. 
+This tutorial is written for those who are familiar with the Python programming language, and want to start using Repy. The syntax and many of the properties of Repy should be very familiar for Python users, but there are some noticeable differences. 
 
 
 ----
@@ -22,7 +22,7 @@ mycontext['pagecount'] = mycontext['pagecount'] + 1
 ----
 
 ==== sys.argv ====
-  Programs written in Python use {{{sys.argv}}} to access arguments to the file. In Repy variable {{{callargs}}} behaves the same as {{{sys.argv[1:]}}}
+  Programs written in Python use {{{sys.argv}}} to access arguments to the file. In Repy the variable {{{callargs}}} behaves the same as {{{sys.argv[1:]}}}
 
 ==== {{{__name__}}} ====
   There is no {{{__name__}}} variable. In python it's common to use the following code to see if a file invoked directly:
