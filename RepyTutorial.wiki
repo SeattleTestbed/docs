@@ -207,7 +207,7 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sleep(5)   # give me 5 seconds to trigger the race
   
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
-  # wait 60 seconds, then call stop_listening with listencommhandle
+  # wait 10 seconds, then call stop_listening with listencommhandle
   
   mycontext['stopevent'] = eventhandle
  
@@ -221,7 +221,7 @@ if callfunc == 'initialize':
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
-  # wait 60 seconds, then call stop_listening with listencommhandle
+  # wait 10 seconds, then call stop_listening with listencommhandle
   
   mycontext['stopevent'] = eventhandle
 }}}
