@@ -451,7 +451,7 @@ Result:
 
 {{{
 #!python
-x[1:] # all elements starting with index 3
+x[1:] # all elements starting with index 1
 
 Result: 
 [2, -4]
