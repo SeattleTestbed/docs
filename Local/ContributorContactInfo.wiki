@@ -9,5 +9,6 @@ Please keep the list ordered alphabetically by SVN username.
 || Armon Dadgar || armond@cs.washington.edu || 206-914-6233 || armon ||
 || Carter Butaud || butaud@cs.washington.edu || 206-459-3483 || butaud ||
 || Brent Couvrette || couvb@cs.washington.edu ||    || couvb ||
+|| Ivan Beschastnikh || ivan@cs.washington.edu || || ivan ||
 || Justin Cappos || justinc@cs.washington.edu ||    || justinc ||
-|| Michael Moshofsky || mikemosh@cs.washington.edu || 503-910-7091 || mikemosh||
+|| Michael Moshofsky || mikemosh@cs.washington.edu || 503-910-7091 || mikemosh||
