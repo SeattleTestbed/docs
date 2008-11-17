@@ -1,0 +1,24 @@
+3 Fishster
+The third part of the assignment is to design and implement Fishster, a way of sharing files with
+your classmates. As file sharing was the original motivation behind the Web, we build Fishster
+using web protocols as a key building block. You will need to build:
+•   Simple Web server. Your server should accept connections on the Transport port reserved
+    for Fishster: port 80. For each arriving connection, it decodes the request using HTTP (see
+    Peterson, Chapter 9.2.2). You should only support the very simplest form of “GET” re-
+    quests, as in “GET index http/1.0<crlf> Host: ipaq-tom<crlf>”. The server then establishes
+    another connection in the opposite direction, and if the file exists in the IPAQ’s “/www” di-
+    rectory, sends the file to the other side, again using HTTP. Use only the simplest reply for-
+    mat, e.g., “HTTP/1.0 202 Accepted<crlf><crlf><file contents>", or “HTTP/1.0 404 Not
+    Found<crlf>” if the file doesn’t exist.
+•   Fishster client. On the client side, the application should be able to connect to a remote web
+    server running on an IPAQ at port 80. Instead of displaying the contents of the file (as in a
+    normal web browser), your fishster client downloads all content that it doesn’t already have.
+    The protocol to follow is that the file “index”, if it exists, contains a list of file names that the
+    server is willing to share. Note that we are using HTTP/1.0, so that connections are terminated 
+as soon as the file has been downloaded; another connection must be established to
+download additional files. To avoid having every file downloaded over every hop multiple
+times, the fishster client should only connect to web servers that are within one hop of the
+client; provided the network stays up, all unique files will eventually end up on all nodes.
+(This means that as you find and download files, you need to add them to your “index” file.)
+As a test case, set up the file “index” to point to a file named your CSE login, and create a
+file of that name with contents of your choice (e.g., a random #).
