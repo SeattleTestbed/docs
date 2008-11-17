@@ -17,11 +17,12 @@ It is assumed that you have a basic understanding of ports and IP addresses.  Al
 ----
 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
-Here is [attachment:sourceFiles.zip link] to the zip file containing all files used in this tutorial.
+Here is [attachment:examples.zip link] to the zip file containing all files used in this tutorial.
 
 [[BR]]
-=== File execution (example 1.1) - [attachment:restrictions.test restrictions.test], [attachment: example.1.1.repy] ===
+=== File execution (example 1.1) ===
 ----
+[attachment:restrictions.test restrictions.test], [attachment: example.1.1.repy]
 
 Let's start with the file named test.py, which prints the string "Hello World" below.
 
