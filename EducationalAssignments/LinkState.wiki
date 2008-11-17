@@ -16,7 +16,9 @@ First, acquire some number of hosts for your experiment via the geni website. On
 == Step 2 : Connect hosts using the connectivity map ==
 ----
 
-On startup, each of Seattle host will read the connectivity map file you've uploaded in Step 1. The host will then attempt to connect to the hosts with which it is paired with in the file. The connection should be done over TCP, and use the port that was assigned to you (see the User Info page on the geni website to find out your port). In this step you should verify that all the hosts are able to connect to the hosts they are paired with.
+On startup, each of Seattle host will read the connectivity map file you've uploaded in Step 1. The host will then attempt to connect to the hosts with which it is paired with in the file. The connection should be done over TCP, and use the port that was assigned to you (see the User Info page on the geni website to find out your port). 
+
+In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.
 
 [[BR]]
 == Step 3 : Flood connectivity information ==
