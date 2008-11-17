@@ -1,6 +1,6 @@
 = Educator Portal =
 
-This page contains information for educators wishing to use Seattle in the classroom. If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
+This page contains information for educators wishing to use Seattle in the classroom.   The below assignments are geared toward an undergraduate class (so graduate classes will likely want to have longer / more complex assignments). If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
@@ -9,5 +9,5 @@ This page contains information for educators wishing to use Seattle in the class
  * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   ...
 
 
- * The [ChatServerAssignment Chat Server Assignment] and 
+ * The [ChatServerAssignment Chat Server Assignment] and [WebServerAssignment Web Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle (including using the abstractions built in previous assignments!).
 
