@@ -476,3 +476,8 @@ username@ !> on %WANnode show log
 Did it work?
 
 If you have a NAT device on your home network your computer can initiate connections out, but the packets will be translated so they have a different IP address than the local IP.   This also typically means that nodes on the outside of the NAT cannot initiate connections to inside nodes (which is why the WAN node could not ping your computer).
+
+
+== Conclusion ==
+
+That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you have any comments or questions about the assignment please contact justinc _AT_ cs DOT washington DOT edu.
