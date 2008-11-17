@@ -1,8 +1,8 @@
 = Link State Routing Assignment =
 
-This assignment will illustrate an important network routing strategy called Link State routing. In this assignment, Seattle nodes will take an initial connectivity map of nodes. They will then implement and run the Link State routing algorithm to build their routing tables.
+This assignment will illustrate an important network routing strategy called Link State routing. In this assignment, Seattle nodes will take an initial connectivity map of nodes. They will then implement and run Dijkstra's shortest path algorithm to build their routing tables. Finally, nodes will forward packets using their routing table.
 
-This assignment consists of X steps and should take around Y minutes to complete. Let's begin!
+This assignment consists of 5 steps and should take about 2 hours to complete. Let's begin!
 
 ----
 [[TOC(inline)]]
@@ -10,6 +10,7 @@ This assignment consists of X steps and should take around Y minutes to complete
 [[BR]]
 = Link State Routing Primer =
 ----
+
 
 
 
@@ -35,7 +36,10 @@ From now on, we will refer to the hosts in your experiment as routers. In this s
 == Step 4 : Computing the routing path ==
 ----
 
+In addition to building the global map of the network, each router will also need to perform shortest-path calculation using Dijkstra's algorithm. Maintaining an up-to-date routing table computed in this way enables the router to perform next-hop routing to forward a packet towards its destination.
 
+[[BR]]
+== Step 5 : Forwarding packets ==
+----
 
-
-
+Finally, each router needs to be able to route packets by using its routing table. To forward a packet, the router looks into its routing table for the destination address on the packet. From the routing table it retrieves the address of the router where it should forward the packet. It then forwards the packet to that router.
