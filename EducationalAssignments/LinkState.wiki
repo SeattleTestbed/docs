@@ -2,8 +2,6 @@
 
 This assignment will illustrate an important network routing strategy called Link State routing. In this assignment, Seattle nodes will take an initial connectivity map of nodes. They will then implement and run Dijkstra's shortest path algorithm to build their routing tables. Finally, nodes will forward packets using their routing table.
 
-This assignment consists of 5 steps and should take about 2 hours to complete. Let's begin!
-
 ----
 [[TOC(inline)]]
 ----
