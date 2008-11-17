@@ -20,7 +20,7 @@ It is assumed that you have a basic understanding of ports and IP addresses.  Al
 === File execution (example 1.1) ===
 ----
 
-Let's start with the file named 'test.py', which prints the string "Hello World" below.
+Let's start with the file named test.py, which prints the string "Hello World" below.
 
 {{{
 #!python
