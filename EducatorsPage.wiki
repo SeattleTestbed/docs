@@ -9,5 +9,5 @@ This page contains information for educators wishing to use Seattle in the class
  * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   ...
 
 
- * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment] and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle (including using the abstractions built in previous assignments!).
+ * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle (including using the abstractions built in previous assignments!).
 
