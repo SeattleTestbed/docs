@@ -238,7 +238,7 @@ username@LAN !> on %2 stop
 == Step 8 : Sending pings between a group of computers ==
 ----
 
-Instead of manually pinging between each of the computers in the LAN group (if your prompt isn't " username@LAN !> " type: "on LAN" to reset it), you can run a program that does an UDP ping between all of the computers in a group.  First we need to generate a list of the IP addresses of the nodes. Type
+Instead of manually pinging between each of the computers in the LAN group, you can run a program that does an UDP ping between all of the computers in a group.  If your prompt isn't " username@LAN !> " type: "on LAN" to reset it.   First we need to generate a list of the IP addresses of the nodes. Type
 
 {{{
 #!python
