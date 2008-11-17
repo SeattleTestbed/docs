@@ -1,0 +1,8 @@
+= Seattlechat =
+
+This assignment focuses on designing and implementing a Seattle chat service with the 
+following features:
+
+•  Seattlechat server. Your Seattlechat server should accept connections on your GENI port using waitforconn.   Seattlechat is a multiway text conferencing system, and so the server must be able to accept and manage multiple connections simultaneously. Once two or more sources are connected, all bytes sent to the server are “relayed” to all other computers listening to the service. The server should separate text by source by sending it line by line (lines end with '\n'), labeling each line with the name of the client who sourced that particular message.
+
+•  Seattlechat client. On the client side, the application should be able to connect to a remote server at the Fishcat port, and then display all text relayed back from the server. Since you’ll want to be able to use your own IPAQ as both a client and a server, you should design some way for your IPAQ to connect to itself (of course, the bytes in this case are not sent over the network, but relayed internally).
