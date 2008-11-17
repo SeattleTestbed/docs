@@ -21,8 +21,8 @@ Here is [attachment:examples.zip link] to the zip file containing all files used
 
 [[BR]]
 === File execution (example 1.1) ===
-----
 [attachment:restrictions.test restrictions.test], [attachment: example.1.1.repy]
+----
 
 Let's start with the file named test.py, which prints the string "Hello World" below.
 
