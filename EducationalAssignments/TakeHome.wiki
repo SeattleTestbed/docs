@@ -166,7 +166,14 @@ We'll cover one last function of the shell before we start measuring network con
 username@LAN !> run infloop.py
 }}}
 
-This deploys a program that waits in an infinite loop.   If you now try to do "run helloworld.py" you'll see that the shell doesn't run the program since the infinite loop program is already running.  To stop the program type
+This deploys a program that waits in an infinite loop.   Now let's try to run helloworld.py while the previous program is running.
+
+{{{
+#!python
+username@LAN !> run helloworld.py
+}}}
+
+The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has already been started'' on  ... }}} for each of the nodes.   The reason is that the shell doesn't run the program since the infinite loop program is already running.  To stop the infloop program type
 
 {{{
 #!python
@@ -325,6 +332,7 @@ What do you observe? Is the connectivity graph complete and do all of the nodes 
 [[Image(nontransitiveconnectivity.jpeg)]]
 
 Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.
+
 
 
 Stop the allpairsping on the WAN nodes so we can focus on the nodes with non-transitive connectivity.
