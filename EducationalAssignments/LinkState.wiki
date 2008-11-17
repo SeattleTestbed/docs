@@ -5,12 +5,6 @@ This assignment will illustrate an important network routing strategy called Lin
 ----
 [[TOC(inline)]]
 ----
-[[BR]]
-= Link State Routing Primer =
-----
-
-
-
 
 [[BR]]
 == Step 1 : Building an initial connectivity map ==
