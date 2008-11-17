@@ -2,9 +2,12 @@
 
 This page contains information for educators wishing to use Seattle in the classroom. If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
 
- * [TakeHomeAssignment Take-Home Assignment] that introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
+ * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
  * The [StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it's trivial to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.   For comparison, [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html Part 1] is a C version of the assignment.
 
+ * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   ...
 
+
+ * The [ChatServerAssignment Chat Server Assignment] and 
 
