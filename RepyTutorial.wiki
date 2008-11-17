@@ -16,6 +16,8 @@ It is assumed that you have a basic understanding of ports and IP addresses.  Al
 == General Operations with examples ==
 ----
 
+The link to all the files used in this tutorial is at the bottom of this tutorial.
+
 [[BR]]
 === File execution (example 1.1) ===
 ----
@@ -27,7 +29,7 @@ Let's start with the file named test.py, which prints the string "Hello World" b
 print “Hello, World”
 }}}
 
-As you might know, we can run the program 'test'py' by executing the following statement on the command line:
+As you might know, we can run the program test.py by executing the following statement on the command line:
 
 {{{
 #!python
@@ -35,6 +37,8 @@ $ python test.py
 }}}
 
 This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain two different ways to run the codes in REPY.
+
+And we use repy instead of py as the file extension for files run in repy. 
 
 [[BR]]
 ==== Executing programs locally in REPY ====
@@ -44,7 +48,7 @@ You can run the program above in your computer, but you need different way to ex
 
 {{{
 #!python
-python repy.py restrictions.test test.py
+python repy.py restrictions.test test.repy
 }}}
 
 We need to make sure that you have the files named repy.py and restrictions.test in your current directory before executing the program like above.
