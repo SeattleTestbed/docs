@@ -19,11 +19,12 @@ Implement the stop-and-wait protocol using the recvmess and sendmess Seattle cal
 
 {{{
 #!python     
-     reliable_recvmess(srcip, srcport, function) 
+reliable_recvmess(srcip, srcport, function) 
 
-     reliable_sendmess(destip, destport, message, srcip=None, srcport=None)   # Notice that just like in sendmess, the srcip and srcport arguments are optional
+# Notice that just like in sendmess, the srcip and srcport arguments are optional
+reliable_sendmess(destip, destport, message, srcip=None, srcport=None)
 
-     reliable_config(retries, timeoutinms)
+reliable_config(retries, timeoutinms)
 }}}
 
 These first two routines are modeled on the existing sendmess and recvmess functions. See the RepyTutorial or Repy library API for more information.
