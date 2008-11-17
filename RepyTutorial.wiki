@@ -13,18 +13,6 @@ This guide provides an introduction to using the repy sandbox environment.  It d
 It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
-=== What is repy and who should use it? ===
-----
-
-Repy is a sandboxed environment that is intended for educational and research use.   The idea is that a user can install repy on their system and researchers and students can run code on their system '''without significantly impacting the security or performance of the host system'''.   To provide security and performance isolation, the programs that run on repy are restricted in what they can do and when they can do it.  
-
-[[BR]]
-=== When should I use repy? ===
-----
-
-Repy is ideal for students, researchers, and companies that want to prototype code and have it run on as many computers as possible.   <completely unsubstantiated claims> Repy has performance comparable to native Python and is safe for untrusted code to run on.</completely unsubstantiated claims>   The focus on repy is on safety.   If you need access to more complex mechanisms than what the sandbox provides (direct access to hardware, running C code, etc.), repy is not for you.  
-
-[[BR]]
 == General Operations ==
 ----
 
