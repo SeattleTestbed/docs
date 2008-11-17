@@ -18,7 +18,8 @@ It is assumed that you have a basic understanding of ports and IP addresses.  Al
 
 [[BR]]
 === File execution (example 1.1) ===
----
+----
+
 Let's start with the file named 'test.py', which prints the string "Hello World" below.
 
 {{{
@@ -502,6 +503,7 @@ if callfunc == 'initialize':
 
   while True:
      print socketobject.recv(4096)
+
 }}}
    
 You should see google's webpage along with some numbers and other information (this is the HTTP protocol).   However, the program does not stop (at least until you press CTRL-C)!   This is because HTTP 1.1 allows us to issue multiple page requests on a single connection.  
