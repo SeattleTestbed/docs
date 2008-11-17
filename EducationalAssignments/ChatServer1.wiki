@@ -1,0 +1,16 @@
+2 Fishchat
+The second part of this assignment is to design and implement a Fishchat service with the fol-
+lowing features:
+•  Fishchat server. Your fishchat server should accept connections on the Transport port re-
+   served for Fishchat: port 40. For each arriving connection, it establishes another connection
+   in the opposite direction. Fishchat is a multiway text conferencing system, and so the server
+   must be able to accept and manage multiple connections simultaneously. Once two or more
+   sources are connected (e.g., including the IPAQ hosting the service), all bytes sent to the
+   server are “relayed” to all other IPAQ’s listening to the service. The server should separate
+   text by source by sending it line by line, labeled each line with the name of the client who
+   sourced that particular message.
+•  Fishchat client. On the client side, the application should be able to connect to a remote
+   server (e.g., using the name of the IPAQ) at the Fishcat port, and then display all text relayed
+   back from the server. Since you’ll want to be able to use your own IPAQ as both a client and
+   a server, you should design some way for your IPAQ to connect to itself (of course, the bytes
+   in this case are not sent over the network, but relayed internally).
