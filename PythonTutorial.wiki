@@ -48,6 +48,7 @@ python repy.py restrictions.test test.py
 }}}
 
 We need to make sure that you have the files named repy.py and restrictions.test in your current directory before executing the program like above.
+If you don't have the restrictions.test, you can find the link to the file at the bottom of this tutorial. 
 
 Output is following
 
