@@ -34,9 +34,10 @@ reliable_sendmess should return the number of characters sent and raise an Excep
 The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_send to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
 
 You should put your protocol implementation in a file called reliable.repy and include it in a client and server program. Your main client program should be called "reliable_client.repy" and your server program should be called "reliable_server.repy." Each is to be executed from different computers using seash:
-
+{{{
 on client run swclient.repy inputfile host portnum maxdgramsize nretries timeoutms
 on server run swserver.repy outfile portnum  
+}}}
 
 You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
 
