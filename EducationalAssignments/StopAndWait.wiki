@@ -1,18 +1,13 @@
 = Stop-and-Wait Protocol =
+
+In this assignment you will implement a reliable datagram protocol using the stop-and-wait (also known as alternating bit) protocol. A message is considered sent once it has been delivered and acknowledged. An unacknowledged message is resent after a timeout. After a finite number of resends, an error is reported.
+
 ----
 [[TOC(inline)]]
 ----
 
 [[BR]]
-== Defined ==
-----
-
-You will implement a reliable datagram protocol using the stop-and-wait (also known as alternating bit) protocol.
-
-A message is considered sent once it has been delivered and acknowledged. An unacknowledged message is resent after a timeout. After a finite number of resends, an error is reported.
-
-[[BR]]
-== Implement ==
+== Step 1 : Implementation ==
 ----
 
 Implement the stop-and-wait protocol using the recvmess and sendmess Seattle calls. Your protocol should run as a library that is included into a client program and a server program. It should extend recvmess and sendmess with three new routines:
@@ -46,7 +41,7 @@ The client reads data from inputfile and sends it to the server. The client's no
 The server logs the data it receives to outfile. The server's portnum indicates on which port the server should receive messages. 
 
 [[BR]]
-== Evaluate ==
+== Step 2 : Evaluation ==
 ----
 
 First, measure the underlying reliability of the network by disabling retransmissions and measuring loss (the difference between the number of packets sent on the client and the number received on the server) as a function of the timeout. Use timeouts ranging from 0ms to 2000ms, and datagram sizes of 512 bytes and 8k. Show your measurements on a LOSS graph of packet loss as a function of timeout with one line for each datagram size.   Try this both for LAN and WAN nodes and plot them as different lines on the same graph.
