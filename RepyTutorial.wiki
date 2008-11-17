@@ -430,10 +430,10 @@ Now if you run the program repeatedly, it shouldn't be possible to trigger a rac
 
 [[BR]]
 === Introduction to Files (example 2.1) ===
-[attachment:example.2.1.repy example.2.1.repy]
+[attachment:example.2.1.repy example.2.1.repy], [attachment:hello.file hello.file]
 ----
 
-We'll now switch gears from our hello world web server and focus instead on writing data to files.   The first program we'll write will write the string "hello world" to a file and then read it back out and print it.
+We'll now switch gears from our hello world web server and focus instead on writing data to files.   The first program we'll write the string "hello world" to a file and then read it back out and print it.
 
 {{{
 #!python
