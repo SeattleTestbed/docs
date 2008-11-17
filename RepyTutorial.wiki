@@ -624,9 +624,7 @@ if callfunc == 'initialize':
                  "time-b.timefreq.bldrdoc.gov", "time-c.timefreq.bldrdoc.gov", 
                  "utcnist.colorado.edu", "time.nist.gov", "time-nw.nist.gov", 
                  "nist1.symmetricom.com", "nist1-dc.WiTime.net", "nist1-ny.WiTime.net", 
-                 "nist1-sj.WiTime.net", "nist1.aol-ca.symmetricom.com", 
-                 "nist1.aol-va.symmetricom.com", "nist1.columbiacountyga.gov", 
-                 "nist.expertsmi.com", "nist.netservicesgroup.com"]
+                 "nist1-sj.WiTime.net", "nist.expertsmi.com", "nist.netservicesgroup.com"]
 
   # choose a random time server from the list
   servername = timeservers[int(randomfloat()*len(timeservers))]
