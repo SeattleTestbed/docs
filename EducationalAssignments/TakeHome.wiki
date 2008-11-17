@@ -480,4 +480,4 @@ If you have a NAT device on your home network your computer can initiate connect
 
 == Conclusion ==
 
-That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you have any comments or questions about the assignment please contact justinc _AT_ cs DOT washington DOT edu.
+That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
