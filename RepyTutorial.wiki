@@ -16,10 +16,10 @@ It is assumed that you have a basic understanding of ports and IP addresses.  Al
 == General Operations with examples ==
 ----
 
-The link to all the files used in this tutorial is at the bottom of this tutorial.
+There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 
 [[BR]]
-=== File execution (example 1.1) ===
+=== File execution (example 1.1) - [attachment:restrictions.test restrictions.test] ===
 ----
 
 Let's start with the file named test.py, which prints the string "Hello World" below.
