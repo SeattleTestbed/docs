@@ -10,7 +10,7 @@
 
 This guide provides an introduction to using the repy sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
 
-It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
+It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
 == General Operations with examples ==
@@ -24,18 +24,18 @@ Here is [attachment:examples.zip link] to the zip file containing all files used
 [attachment:restrictions.test restrictions.test], [attachment:example.1.1.repy example.1.1.repy]
 ----
 
-Let's start with the file named test.py, which prints the string "Hello World" below.
+Let's start with the file named "example.1.1.py", which prints the string "Hello World" below.
 
 {{{
 #!python
-print “Hello, World”
+print "Hello World"
 }}}
 
-As you might know, we can run the program test.py by executing the following statement on the command line:
+As you might know, we can run the program example.1.1.py by executing the following statement on the command line:
 
 {{{
 #!python
-$ python test.py
+$ python example.1.1.py
 }}}
 
 This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain two different ways to run the codes in REPY.
@@ -50,7 +50,7 @@ You can run the program above in your computer, but you need different way to ex
 
 {{{
 #!python
-python repy.py restrictions.test test.repy
+python repy.py restrictions.test example.1.1.repy
 }}}
 
 We need to make sure that you have the files named repy.py and restrictions.test in your current directory before executing the program like above.
@@ -86,7 +86,7 @@ REPY is a event-driven programming language and has two events when it is execut
 ==== Executing programs remotely in vessels ====
 ----
 
-You can also access the resources donated to you and run the program test.py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
+You can also access the resources donated to you and run the program example.1.1.repy in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
 
 '''Step 1. Run programs in the Seattle 
 
@@ -139,7 +139,7 @@ We assume the program named test.py is stored in the current directory, which pr
 
 {{{
 #!python
-john@browsegood !> run test.repy
+john@browsegood !> run example.1.1.repy
 }}}
 
 '''Step 6. Look up the result of the program executed
@@ -181,7 +181,7 @@ And also you can fine more practical example in the [TakeHomeAssignment Take hom
 [attachment:example.1.2.repy example.1.2.repy]
 ----
 
-In this example, we'll wait for the user to browse a port we listen on.   When the user browses our page, we'll display a hello world webpage and then exit.   Create a file "helloworldwebpage.py" with the following text:
+In this example, we'll wait for the user to browse a port we listen on.   When the user browses our page, we'll display a hello world webpage and then exit. 
 
 {{{
 #!python
@@ -206,7 +206,7 @@ Run this program the same as in the previous example, substituting "run hellowor
 
 {{{
 #!python
-default@browsegood !> run helloworldwebpage.py  
+default@browsegood !> run example.1.2.py  
 default@browsegood !> list                            
   ID   Own                  Name                Status      Owner Information
   %1     *       IP address:port:vesselname     Started     
@@ -233,7 +233,7 @@ Notice that the program is now "Stopped".   It's not running
 [attachment:example.1.3.repy example.1.3.repy]
 ----
 
-In this example, we'll add a counter to our helloworld pprogram.   First we'll try some perfectly valid python code that will not work in repy.
+In this example, we'll add a counter to our helloworld program.   First we'll try some perfectly valid python code that will not work in repy.
 
 {{{
 #!python
