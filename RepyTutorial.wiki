@@ -8,9 +8,9 @@
 == Introduction ==
 ----
 
-This guide provides an introduction to using the repy sandbox environment.  It describes who would want to use repy, how to perform actions in the sandboxed environment, and what restrictions are placed upon the sandboxed code.   At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
+This guide provides an introduction to using the repy sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
 
-It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
+It is assumed that you have a basic understanding of ports and IP addresses.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
 == General Operations with examples ==
