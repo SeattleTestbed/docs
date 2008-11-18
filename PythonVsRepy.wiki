@@ -2,7 +2,8 @@
 
 This tutorial is written for those who are familiar with the Python programming language, and want to start using Repy. The syntax and many of the properties of Repy should be very familiar for Python users, but there are some noticeable differences. 
 
-
+Many Python built-ins are not allowed in Repy. This is to ensure maximum cross platform compatibility and security for end users. Python modules aren't allowed to be imported (see below), however porting python code to Repy takes minimal effort. 
+ 
 ----
 [[TOC(inline)]]
 ----
@@ -17,7 +18,37 @@ mycontext['pagecount'] = mycontext['pagecount'] + 1
 }}}
 
 [[BR]]
+== Import statements ==
+----
+In Repy there are no {{{import}}} statements. In its place make use of the '''include''' statement. {{{include}}} takes the specified file and inlines its content to that place in the Repy program. 
 
+If you have the file ''a.repy'':
+  {{{
+#!python
+def foo():
+    print "foo"
+  }}}
+And a file ''b.repy'':
+  {{{
+#!python
+include a.repy
+def bar():
+    print "bar"
+  }}}
+The resuling file will look like:
+  {{{
+#!python
+def foo():
+    print "foo"
+
+def bar():
+    print "bar"
+  }}}
+== Python Built-Ins Not in Repy ==
+Below is a partial list of the Python built-ins worth noting are left out. 
+
+
+[[BR]]
 ==  Common Python Constructs and Their Repy Counterparts ==
 ----
 
@@ -138,30 +169,4 @@ gethostbyname_ex("www.google.com")
 ==== threading.Lock() ====
   In Repy use '''getlock()''' to create new instances Mutex objects. The object's behaviour is the same in Repy as it is in Python: it supports the '''acquire''' and '''release''' operations. 
 
-[[BR]]
-== Import statements ==
-----
-In Repy there are no {{{import}}} statements. In its place make use of the '''include''' statement. {{{include}}} takes the specified file and inlines its content to that place in the Repy program. 
 
-If you have the file ''a.repy'':
-  {{{
-#!python
-def foo():
-    print "foo"
-  }}}
-And a file ''b.repy'':
-  {{{
-#!python
-include a.repy
-def bar():
-    print "bar"
-  }}}
-The resuling file will look like:
-  {{{
-#!python
-def foo():
-    print "foo"
-
-def bar():
-    print "bar"
-  }}}
