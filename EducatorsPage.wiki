@@ -6,7 +6,7 @@ This page contains information for educators wishing to use Seattle in the class
 
  * The [StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it's trivial to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.   For comparison, [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html Part 1] is a C version of the assignment.
 
- * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   ...
+ * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   Students implement Dijkstra's shortest path routing and then apply this to route packets in an attempt to minimize latency.
 
 
  * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
