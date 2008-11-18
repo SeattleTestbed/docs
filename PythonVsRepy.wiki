@@ -63,7 +63,7 @@ if __name__ == "__main__":
    main()
   }}}
 
-  In Repy the corresponding implicit variable is '''callafunc'''. A similar Repy program would include:
+  In Repy the corresponding implicit variable is '''callfunc'''. A similar Repy program would include:
     {{{
 #!python
 if callfunc == "initialize":
