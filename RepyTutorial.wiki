@@ -40,7 +40,7 @@ $ python example.1.1.py
 
 This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain two different ways to run the codes in REPY.
 
-And we use repy instead of py as the file extension for files run in repy. 
+And we use repy instead of py as the file extension for files in repy. 
 
 [[BR]]
 ==== Executing programs locally in REPY ====
@@ -68,7 +68,7 @@ Terminated
 
 Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems have different messages.
 
-The test.py is called two times.
+The example.1.1.repy is called two times.
 
 If you want to print "Hello World" only one time, you can change the code like below:
 
@@ -90,7 +90,7 @@ You can also access the resources donated to you and run the program example.1.1
 
 '''Step 1. Run programs in the Seattle 
 
-To run a program, you should use the experiment manager seash.   Seash allows you to control the files running in sandboxes you control.
+To run a program, you should use the experiment manager seash. Seash allows you to control the files running in sandboxes you control.
 
 {{{
 #!python
@@ -99,7 +99,7 @@ python seash.py
 
 '''Step 2. Log in with my ID
 
-Before logging in, you have to load your public and private keys. You need to make sure that you have two files containing your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
+Before logging in, you have to load your public and private keys. You can get keys in the Seattle [https://seattle.cs.washington.edu/geni/accounts/login GENI] website. You need to make sure that you have two files, your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be john.publickey and john.privatekey.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
