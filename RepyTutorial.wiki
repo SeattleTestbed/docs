@@ -332,7 +332,8 @@ if callfunc == 'initialize':
   # wait 60 seconds, then call stop_listening with listencommhandle
 }}}
  
-The timer (when called) will stop the communication.  settimer returns an eventhandle.   An eventhandle is similar to a commhandle in that it can be used to interact with an event.   getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
+The timer (when called) will stop the communication. settimer returns an eventhandle. An eventhandle is similar to a commhandle in that it can be used to interact with an event. listencommhandle is not the arguments of settimer but that of stop_listening. The comma next to stop_listening indicates that.
+getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
 
 Start the program and then open a web browser and in the address bar type: 127.0.0.1:12345.   You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
 
@@ -354,6 +355,7 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
   # stop the previous timer...
   canceltimer(mycontext['stopevent'])
+
   # start a new one for 10 seconds from now...
   eventhandle = settimer(10, stop_listening, (listencommhandle,))
   mycontext['stopevent'] = eventhandle
