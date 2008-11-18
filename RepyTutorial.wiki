@@ -135,7 +135,7 @@ john@ !> on browsegood
 
 '''Step 5. Run a program
 
-We assume the program named test.py is stored in the current directory, which prints "Hello, World".
+We assume the program named example.1.1.repy is stored in the current directory, which prints "Hello, World".
 
 {{{
 #!python
