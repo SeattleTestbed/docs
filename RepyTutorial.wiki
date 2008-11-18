@@ -208,7 +208,9 @@ Callback function : Callback function is executed when users connect to
 
 Return : event handler, commhandle
 
-Repy is event-driven programming language. waiforconn is the one of the examples. waitforconn calls callback function given as argument only when connection is created.
+Repy is event-driven programming language. 
+waiforconn is the one of the examples. 
+waitforconn calls callback function given as argument only when connection is created.
 
 }}}
 
@@ -217,17 +219,17 @@ Repy is event-driven programming language. waiforconn is the one of the examples
 It is localhost and means this computer. It is used to access the computer currently I use.
 }}}
 
-The hello() function is called with 5 arguments: the ip address and port of the person who is connecting, a sockobj that can be used to communicate with the other end of the connection, and two commhandles.
-First commhandle is for the connection, and the commhandle that hello is registered on. 
 The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
 {{{ 
 hello(IP address, Port number, Socket Object, commhandle1, commhandle2)
 The ip address and port : the users are connecting to.
 Socket Object : End-point of a bidirectional communication flow across the Internet.
 Commhandle1 : Handle created by connection
-Commhandle2 : Handle created for establishing connection
+Commhandle2 : Handle created for establishing connection, which hello is registered on
 
-In the Berkeley sockets API in the C language, Commhandle1 is the new socket created by accept function and commhadle2 is initial socket created by socket function.
+In the Berkeley sockets API in the C language, 
+Commhandle1 is the new socket created by accept function,
+and commhadle2 is initial socket created by socket function.
 }}}
 
 Run this program the same as in the previous example, substituting "run example.1.1.repy" for "run example.1.2.repy"
