@@ -221,6 +221,7 @@ It is localhost and means this computer. It is used to access the computer curre
 The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
 {{{ 
 hello(IP address, Port number, Socket Object, commhandle1, commhandle2)
+
 The ip address and port : the users are connecting to.
 Socket Object : End-point of a bidirectional communication flow across the Internet.
 Commhandle1 : Handle created by connection
@@ -325,6 +326,7 @@ if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+
 
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   
