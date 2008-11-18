@@ -210,7 +210,7 @@ Return : event handler, commhandle
 
 Repy is event-driven programming language. 
 waiforconn is the one of the examples. 
-waitforconn calls callback function given as argument only when connection is created.
+waitforconn calls callback function given as argument only whenever connection is created.
 }}}
 
 {{{
@@ -326,6 +326,7 @@ if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+
 
 
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
