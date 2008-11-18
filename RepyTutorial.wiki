@@ -181,11 +181,11 @@ And also you can fine more practical example in the [TakeHomeAssignment Take hom
 [attachment:example.1.2.repy example.1.2.repy]
 ----
 
-In this example, we'll wait for the user to browse a port we listen on.   When the user browses our page, we'll display a hello world webpage and then exit. 
+In this example, we'll wait for the user to browse a port we listen on. When the user browses our page, we'll display a hello world webpage and then exit. 
 
 {{{
 #!python
-def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+def hello(ip, port, sockobj, thiscommhandle, listencommhandle):
  
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World! </h1></body></html>")
@@ -197,12 +197,40 @@ if callfunc == 'initialize':
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
 }}}
 
-The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345 and when you get it call the function hello().  
-The waitforconn() function returns a commhandle.   A commhandle is a way for your program to refer to a connection.   You can pass a commhandle to other functions to do operations.   For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
+The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345, and when you get, it calls the function hello().
+The waitforconn() function returns a commhandle. A commhandle is a way for your program to refer to a connection. You can pass a commhandle to other functions to do operations. For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
+{{{
+waitforconn(IP address, Port number, Callback function)
 
-The hello() function is called with 5 arguments: the ip address and port of the person who is connecting, a sockobj that can be used to communicate with the other end of the connection, a commhandle for the connection, and the commhandle that hello is registered on.   The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
+IP address : The server address users want to connect to
+Port number : Port number users connect to with IP address
+Callback function : Callback function is executed when users connect to
 
-Run this program the same as in the previous example, substituting "run helloworldwebpage.py" for "run helloworld.py"
+Return : event handler, commhandle
+
+Repy is event-driven programming language. waiforconn is the one of the examples. waitforconn calls callback function given as argument only when connection is created.
+
+}}}
+
+{{{
+127.0.0.1 is a special IP address. 
+It is localhost and means this computer. It is used to access the computer currently I use.
+}}}
+
+The hello() function is called with 5 arguments: the ip address and port of the person who is connecting, a sockobj that can be used to communicate with the other end of the connection, and two commhandles.
+First commhandle is for the connection, and the commhandle that hello is registered on. 
+The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
+{{{ 
+hello(IP address, Port number, Socket Object, commhandle1, commhandle2)
+The ip address and port : the users are connecting to.
+Socket Object : End-point of a bidirectional communication flow across the Internet.
+Commhandle1 : Handle created by connection
+Commhandle2 : Handle created for establishing connection
+
+In the Berkeley sockets API in the C language, Commhandle1 is the new socket created by accept function and commhadle2 is initial socket created by socket function.
+}}}
+
+Run this program the same as in the previous example, substituting "run example.1.1.repy" for "run example.1.2.repy"
 
 {{{
 #!python
@@ -599,6 +627,7 @@ This will print IP address, hostname and other information for google and wikipe
 ----
 
 In this example, we'll manually send a NTP (time) lookup message and print the raw data that is returned.   Rather than hard code a server into our program, we'll randomly choose a server from a list of publicly available time servers.   A lot of the complexity in this program comes with encoding and decoding NTP data.  
+
 
 {{{
 #!python
