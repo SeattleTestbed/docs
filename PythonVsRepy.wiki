@@ -44,8 +44,12 @@ def foo():
 def bar():
     print "bar"
   }}}
-== Python Built-Ins ==
-Below is a partial list of the Python built-ins worth noting are left out. 
+
+== Input ==
+There are no Repy mechanisms to read user input. Providing the python {{{input}}} and {{{raw_input}}} methods is impractical, since the intent of Repy is to run as a background process on user machines. There is no terminal to accept input from. 
+
+== Python Built-Ins Not in Repy ==
+Below is a list of the Python built-ins that are '''not''' allowed in Repy 
 
  * all
  * any
@@ -55,6 +59,18 @@ Below is a partial list of the Python built-ins worth noting are left out.
  * complex
  * delattr
  * dir
+ * enumerate
+ * eval
+ * execfile
+ * globals
+ * hash
+ * help
+ * id
+ * input
+ * 
+ * 
+ * 
+ * 
 
 
 
