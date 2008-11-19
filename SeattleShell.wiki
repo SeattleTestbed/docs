@@ -42,4 +42,4 @@ exit                             -- exits the shell
 
 == Further Information ==
 
-For more information on how to use Seash in practice, refer to the steps that begin with the [TakeHomeAssignment#Step2:RunningSeattleshell RunningSeattleShell] page. This describes Seash usage in the context of the TakeHomeAssignment.
+For more information on how to use Seash in practice, refer to the steps that begin with [TakeHomeAssignment#Step2:RunningSeattleshell RunningSeattleShell]. These steps describe Seash usage in the context of the TakeHomeAssignment, and are easily adapted to other use cases.
