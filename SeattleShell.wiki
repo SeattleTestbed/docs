@@ -7,7 +7,7 @@ Seash is a terminal interface for managing Seattle resources. This page is inten
 ----
 [[BR]]
 
-= Starting Seash =
+== Starting Seash ==
 
 Seash can be started from the terminal by running the command {{{python seash.py}}}. Once seash starts, it will print a line that starts with {{{!>}}}, and will wait for you to issue a command.
 
