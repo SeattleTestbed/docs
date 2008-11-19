@@ -39,3 +39,7 @@ join                             -- Join vessels on the same node
 help [help | set | show ]        -- help information 
 exit                             -- exits the shell
 }}}
+
+== Further Information ==
+
+For more information on how to use Seash in practice, refer to the [TakeHomeAssignment#Step2:RunningSeattleshell RunningSeattleShell] page, which describes Seash usage in the context of the TakeHomeAssignment.
