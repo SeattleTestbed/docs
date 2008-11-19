@@ -44,8 +44,18 @@ def foo():
 def bar():
     print "bar"
   }}}
-== Python Built-Ins Not in Repy ==
+== Python Built-Ins ==
 Below is a partial list of the Python built-ins worth noting are left out. 
+
+ * all
+ * any
+ * bin
+ * callable
+ * compile
+ * complex
+ * delattr
+ * dir
+
 
 
 [[BR]]
