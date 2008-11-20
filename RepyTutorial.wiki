@@ -343,8 +343,10 @@ Start the program and then open a web browser and in the address bar type: 127.0
 [raw-attachment:example.1.5.repy example.1.5.repy]
 ----
 
-We know how to set a timer to close the connection in 60 seconds, but that doesn't help us to keep the connection open. To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection. The timer (when called) will stop the communication.  canceltimer stops a timer (if it hasn't already started). 
+We know how to set a timer to close the connection in 60 seconds, but that doesn't help us to keep the connection open. To have the connection kept open while requests continue to happen, every time we get a request we'll cancel the existing timer and set a new timer for 10 seconds in the future that will close the connection. The timer(when called) will stop the communication. canceltimer stops a timer (if it hasn't already started).
+
 [[Image(SetTimer.jpg)]]
+
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
