@@ -204,7 +204,7 @@ waitforconn(IP address, Port number, Callback function)
 
 IP address : The server address users want to connect to
 Port number : Port number users connect to with IP address
-Callback function : Callback function is executed when users connect to
+Callback function : Callback function is executed when users connect 
 
 Return : event handler, commhandle
 
@@ -215,7 +215,7 @@ waitforconn calls callback function given as argument only whenever connection i
 
 {{{
 127.0.0.1 is a special IP address. 
-It is localhost and means this computer. It is used to access the computer currently I use.
+It is localhost and means this computer. It is used to access the computer currently used.
 }}}
 
 The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
