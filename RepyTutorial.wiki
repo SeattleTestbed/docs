@@ -373,7 +373,7 @@ if callfunc == 'initialize':
   mycontext['stopevent'] = eventhandle
 }}}
 
-Try running the program and then try browsing the webpage a few times and then wait.   You'll notice the connection closes 10 seconds after you stop browsing. 
+Try running the program and then try browsing the webpage a few times and then wait. You'll notice the connection closes 10 seconds after you stop browsing. 
 
 [[BR]]
 === Races, Sleep, and Locks (example 1.6) ===
@@ -415,7 +415,7 @@ if callfunc == 'initialize':
  
 Try browsing the webpage a few times rapidly and then browse every 3-5 seconds.   You'll notice the program closes automatically even though it shouldn't (because you kept browsing).  
 
-One way to fix a race condition is using a lock.   You can get a lock by calling getlock().   A lock supports two operations: acquire and release and is similar to the Python threading.Lock class.
+One way to fix a race condition is using a lock. You can get a lock by calling getlock(). A lock supports two operations: acquire and release and is similar to the Python threading Lock class.
 
 We can avoid race conditions by the following changes:
 
