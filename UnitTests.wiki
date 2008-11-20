@@ -35,3 +35,20 @@ python start_tests.py [-v] keyname nodeip
 where keyname is the file name of your key (minus the publickey/privatekey part), and nodeip is the IP address of the node you want to run the tests on.  The optional -v option will have failed tests immediately print out their detailed failure information, as well as printing it out at the end, as opposed to just printing all of the error details at the end.
 
 Note that this only runs the repy unit tests that do not have a custom restrictions file.  While if you run start_tests.py with the -o option, it will attempt to run these tests remotely, this is currently undefined.  The reasons for this are because this requires that you actually have owner privileges on the node we are accessing (which at this time is not very convenient to make happen), and it would require a significant amount of customization of the test runner for many of these tests just to make it not crash.  Then there would be a good chance that many of these tests would not be able to run anyway if the chosen node did not have enough resources.  As these tests can be still be run locally, it was determine that it would not be worth the time to find solutions to these issues.
+
+[[BR]]
+== Running Nodemanager Tests Locally ==
+----
+To run the repy unit tests locally, first navigate to the trunk directory of your svn working directory in a terminal. Create a test directory <test_directory_name> if one is not already there. Run:
+{{{
+python preparetest.py <test_directory_name>
+cd <test_directory_name>
+python nminit.py
+python nmmain.py
+}}}
+
+Open a new terminal and navigate to the test directory in the trunk that was used previously. The following command can be used to run a test:
+{{{
+python repy.py restrictions.test <test_name>.py
+}}}
+<test_name> refers to the name of the test file that is to be run (do not include the .mix extension). To see which tests are available to run navigate to nodemanager\tests in the trunk folder.
