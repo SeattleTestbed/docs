@@ -370,8 +370,6 @@ if callfunc == 'initialize':
   eventhandle = settimer(10, stop_listening, (listencommhandle,))
   mycontext['stopevent'] = eventhandle
 }}}
- 
-The timer (when called) will stop the communication.  canceltimer stops a timer (if it hasn't already started).  
 
 Try running the program and then try browsing the webpage a few times and then wait.   You'll notice the connection closes 10 seconds after you stop browsing. 
 
