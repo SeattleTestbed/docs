@@ -1,0 +1,39 @@
+= Web Code Style Guidelines for the Seattle project =
+
+This guide explains how to format code for the Seattle project that implements functionality exposed to the web. This guide should be seen as '''complementary''' to the general [CodingStyle code style guidelines], so please read that document thoroughly before you continue with the content below. Please let Ivan know if you have suggestions or feedback.
+
+----
+[[TOC(inline)]]
+----
+
+This guide contains general rules of thumbs, as well as instructions on how to format specific types of web files used by Seattle. This guide is expected to evolve, and should not be considered complete.
+
+[[BR]]
+== Code lay-out ==
+----
+
+
+[[BR]]
+== Django applications ==
+----
+
+
+[[BR]]
+== Django models ==
+----
+
+
+[[BR]]
+== Django templates ==
+----
+
+
+[[BR]]
+== CSS ==
+----
+
+[[BR]]
+== HTML ==
+----
+
+
