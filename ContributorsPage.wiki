@@ -3,7 +3,7 @@
 This page contains information useful to developers working on Seattle
 
  * [SeattleTalks Upcoming talks] about Seattle
- * [MailingList access] instructions
+ * [MailingList seattle-devel mailing list access] instructions
  * [RepoAccess SVN access] instructions
  * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
  * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
