@@ -13,4 +13,4 @@ After doing one of the above tutorials to learn more about the features and API 
 
 For Repy experts, refer to the [RepyAPI the Repy API Reference].
 
-There is a growing list of library code you can download and use with Repy.   Much of this uses a Repy PreProcessor (repypp) that we built.   To "include" a repy file in your source file source.repy, do {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The file out.repy will contain the code for filename.repy included inside the code for source.repy at the appropriate place.
+There is a growing list of library code you can download and use with Repy.   Much of this uses a Repy Pre-Processor (repypp) that we built.   To "include" a repy file in your source file source.repy, do {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The file out.repy will contain the code for filename.repy included inside the code for source.repy at the appropriate place.
