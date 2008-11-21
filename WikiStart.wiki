@@ -1,6 +1,3 @@
-[[TOC(StudentsPage, EducatorsPage, DevelopersPage, heading=Quick Links)]]
-
-
 == What is Seattle? ==
 Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world. Seattle works by operating on resources donated by users and institutions. It's currently targeted for use by educators teaching networking and distributed systems classes. The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, and distributed systems.
 
