@@ -1,15 +1,23 @@
 = Developer Portal =
 
 This page contains information useful to developers working on Seattle
+ 
+ * Accessing SVN, subscribing to the mailing list, running code from SVN
+   * [RepoAccess SVN access] instructions
+   * [MailingList seattle-devel mailing list access] instructions
+   * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
+   * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
+   * [SeattleDownload Download and installation instructions] for Seattle
 
- * [SeattleTalks Upcoming talks] about Seattle
- * [MailingList seattle-devel mailing list access] instructions
- * [RepoAccess SVN access] instructions
- * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
- * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
- * [DocsFormatting Documentation format guidelines]
- * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
- * [SeattleDownload Download and installation instructions] for Seattle
- * [CodingStyle Style guidelines] for writing code for Seattle
- * [ProjectMembers Project Members] contact information
- * [UnitTests Running unit tests] for repy
+ * Getting started with programming in Repy
+   * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
+   * [UnitTests Running unit tests] for repy
+
+ * Style guidelines for documentation, python code, web code
+   * [DocsFormatting Documentation format guidelines]
+   * [CodingStyle Style guidelines] for writing code for Seattle
+   * [WebCodingStyle Web style guidelines] for writing web code for Seattle
+
+ * Events relevant to Seattle and Seattle team information
+   * [SeattleTalks Upcoming talks] about Seattle
+   * [ProjectMembers Project Members] contact information
