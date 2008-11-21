@@ -1,6 +1,6 @@
 = Stop-and-Wait Protocol =
 
-In this assignment you will implement a reliable datagram protocol using the stop-and-wait (also known as alternating bit) protocol. A message is considered sent once it has been delivered and acknowledged. An unacknowledged message is resent after a timeout. After a finite number of resends, an error is reported.
+In this assignment you will implement a reliable datagram protocol using the stop-and-wait (also known as alternating bit) protocol. A message is considered sent once it has been delivered and acknowledged. An unacknowledged message is resent after a timeout. After a finite number of resent messages, an error is reported.
 
 ----
 [[TOC(inline)]]
@@ -10,7 +10,9 @@ In this assignment you will implement a reliable datagram protocol using the sto
 == Step 1 : Implementation ==
 ----
 
-Implement the stop-and-wait protocol using the recvmess and sendmess Seattle calls. Your protocol should run as a library that is included into a client program and a server program. It should extend recvmess and sendmess with three new routines:
+Implement the stop-and-wait protocol using the recvmess and sendmess Seattle calls. The client will read a data file and send the data to the computer running the server program. The packet size of the data is defined by the user. When the server receives a packet of data, it sends an acknowledgment message to the client. If the acknowledgment message is not received in a user defined amount of miliseconds, the message is resent a user defined number of times until the program moves on to the next packet of data. The server program outputs the data received to a file.
+
+Your protocol should run as a library that is included into a client program and a server program. It should extend recvmess and sendmess with three new routines:
 
 {{{
 #!python     
@@ -26,9 +28,9 @@ These first two routines are modeled on the existing sendmess and recvmess funct
 
 reliable_sendmess should return the number of characters sent and raise an Exception if an error occurred.   
 
-The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_send to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
+The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
 
-You should put your protocol implementation in a file called reliable.repy and include it in a client and server program. Your main client program should be called "reliable_client.repy" and your server program should be called "reliable_server.repy." Each is to be executed from different computers using seash:
+You should put your protocol implementation in a file called reliable.repy and include it in a client and server program. This can be done with "include reliable.repy". Your main client program should be called "reliable_client.repy" and your server program should be called "reliable_server.repy." Each is to be executed from different computers using seash:
 {{{
 on client run swclient.repy inputfile host portnum maxdgramsize nretries timeoutms
 on server run swserver.repy outfile portnum  
