@@ -28,7 +28,7 @@ Please use the firefox to test our examples.
 [raw-attachment:restrictions.test restrictions.test], [raw-attachment:example.1.1.repy example.1.1.repy]
 ----
 
-Let's start with the file named "example.1.1.repy", which prints the string "Hello World" below.
+Let's start with the file named "example.1.1.repy", which prints the string "Hello World".
 We use repy instead of py as the file extension for files in repy.
 
 {{{
@@ -38,13 +38,13 @@ if callfunc == 'initialize':
 }}}
 
 There are two different ways to run the codes in REPY.
-You can run the codes in your local machine and in the vessels you control.
+You can run the code in your local machine and in the vessels you control.
 
 [[BR]]
 ==== Executing programs locally in REPY ====
 ----
 
-You can run the program above in your computer, but you need different way to execute the program in repy.
+You need to type like below to run the code above.
 
 {{{
 #!python
