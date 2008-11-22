@@ -19,28 +19,26 @@ It is assumed that you have a basic understanding of network programming such as
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
 
+All examples was tested with the web browser Firefox.
+The internet explorer generated error with our codes.
+Please use the firefox to test our examples.
+
 [[BR]]
 === File execution (example 1.1) ===
 [raw-attachment:restrictions.test restrictions.test], [raw-attachment:example.1.1.repy example.1.1.repy]
 ----
 
-Let's start with the file named "example.1.1.py", which prints the string "Hello World" below.
+Let's start with the file named "example.1.1.repy", which prints the string "Hello World" below.
+We use repy instead of py as the file extension for files in repy.
 
 {{{
 #!python
-print "Hello World"
+if callfunc == 'initialize':
+    print "Hello World"
 }}}
 
-As you might know, we can run the program example.1.1.py by executing the following statement on the command line:
-
-{{{
-#!python
-$ python example.1.1.py
-}}}
-
-This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain two different ways to run the codes in REPY.
-
-And we use repy instead of py as the file extension for files in repy. 
+There are two different ways to run the codes in REPY.
+You can run the codes in your local machine and in the vessels you control.
 
 [[BR]]
 ==== Executing programs locally in REPY ====
@@ -60,27 +58,12 @@ Output is following
 {{{
 #!python
 Hello World
-Hello World
 Terminated
 }}}
 
-"Hello World" was printed twice, and then the last sentence means that the program was terminated successfully. 
+"Hello World" was printed, and then the last sentence means that the program was terminated successfully. 
 
 Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems have different messages.
-
-The example.1.1.repy is called two times.
-
-If you want to print "Hello World" only one time, you can change the code like below:
-
-{{{
-#!python
-if callfunc == 'initialize':
-    print "Hello World"
-}}}
-
-You need to insert if block to execute your code one time in initialize status.  
-
-REPY is a event-driven programming language and has two events when it is executed, initialize and exit. We can have more detail about it in [PythonVsRepy All of the Python You Need to Forget to Use Repy]. 
 
 [[BR]]
 ==== Executing programs remotely in vessels ====
