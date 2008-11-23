@@ -1,1 +1,473 @@
-= Repy Library Reference =
+= Repy Library Reference = 
+
+[[BR]]
+
+== Cheat Sheet ==
+
+||Variable Name||Short description||Tutorial Section||
+||callargs||callargs are the command line arguments for your program (similar to Python's sys.argv[1:])||example 2.2||
+||callfunc||callfunc is a string that indicates if the program was called for initialization or exit.||example 1.1||
+||mycontext||mycontext is a shared dictionary that is used in place of global variables.||example 1.3||
+
+[[BR]]
+
+||Object Name||Short description||Tutorial Section||
+
+||file||similar to Python's file object||example 2.1||
+
+||socket||similar to Python's socket object||example 1.2||
+
+||lock||similar to Python's threading.Lock object||example 1.6||
+
+
+[[BR]]
+
+||Function Name||Short description||Tutorial Section||
+
+||open||similar to Python's open function||example 2.1||
+
+||listdir||similar to Python's os.listdir() function||example 2.2||
+
+||removefile||similar to Python's os.remove() function||example 2.2||
+
+||sleep||similar to Python's time.sleep() function||example 1.6||
+
+||randomfloat||similar to Python's random.random() function||example 4.2||
+
+||getlock||similar to Python's threading.Lock() constructor||example 1.6||
+
+||exitall||similar to Python's sys.exit() or os._exit()||example 3.2||
+
+||getruntime||gets the time since the program was started||example 1.4||
+
+||gethostbyname_ex||similar to Python's socket.gethostbyname_ex() function||example 4.1||
+
+||getmyip||gets an external IP address of the computer||example 4.1||
+
+||recvmess||registers a function to be called on message receipt||example 4.2||
+
+||sendmess||sends a message to another computer||example 4.2||
+
+||openconn||opens a connection to another computer||example 3.1||
+
+||waitforconn||registers a function to be called when a connection is opened||example 1.2||
+
+||stopcomm||stops communication on a commhandle (either connection or message based)||example 1.2||
+
+||settimer||ets an event to execute at a time in the future||example 1.4||
+
+||canceltimer||cancels an event which has not yet started||example 1.5||
+
+
+[[BR]]
+
+
+||Built-in name||Notes||Tutorial Section||
+||print ...||Used only for logging on "production" systems. Used mostly when debugging.||example 1.1||
+
+||print >> fileobject, ...||Used to write data to a file (similar to native Python)||example 2.1||
+
+||chr||Changes an integer to that ASCII character (i.e. chr(97) == 'a'). Used for marshalling||example 4.2||
+
+||ord||The inverse of chr, changes an ASCII character to a number (ord('a') == 97)||example 4.2||
+
+
+[[BR]]
+
+== Detailed description ==
+
+[[BR]]
+
+
+=== Shared variables ===
+
+[[BR]]
+
+==== mycontext ====
+
+
+    Mycontext is a dictionary that is shared between all of the events in your
+
+    program. The intent is that mycontext will be used in the place
+
+    of global variables. See the tutorial for examples using
+
+    mycontext.
+
+==== callfunc ====
+
+        Callfunc is a string that indicates if the program was called for
+
+        initialization or exit. This allows the program to determine
+
+        whether to initialize or clean up.
+
+==== callargs ====
+
+        Callargs is a list of strings that contain the arguments your program
+
+        was called with (typically by invoking the program with the
+
+        shell. Use this in place of sys.argv[1:]
+
+[[BR]]
+
+=== API functions ===
+
+      
+[[BR]]
+     
+==== gethostbyname_ex(name) ====
+   <Purpose>
+      Provides information about a hostname.   Calls socket.gethostbyname_ex()
+
+   <Arguments>
+      name:
+         The host name to get information about
+
+   <Exceptions>
+      As from socket.gethostbyname_ex()
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      A tuple containing (hostname, aliaslist, ipaddrlist).   See the 
+      python docs for socket.gethostbyname_ex()
+
+==== getmyip() ====
+   <Purpose>
+      Provides the external IP of this computer.   Does some clever trickery.
+
+   <Arguments>
+      None
+
+   <Exceptions>
+      As from socket.gethostbyname_ex()
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      The localhost's IP address
+      python docs for socket.gethostbyname_ex()
+
+==== recvmess(localip, localport, function) ====
+   <Purpose>
+      Registers a function as an event handler for incoming messages
+
+   <Arguments>
+      localip:
+         The local IP or hostname to register the handler on
+      localport:
+         The port to listen on
+      function:
+         The function that messages should be delivered to.   It should expect
+         the following arguments: (remoteIP, remoteport, message, commhandle)
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Registers an event handler.
+
+   <Returns>
+      The commhandle for this event handler.
+
+==== sendmess(desthost, destport, message, localip=None, localport=None) ====
+
+   <Purpose>
+      Send a message to a host / port
+
+   <Arguments>
+      desthost:
+         The host to send a message to
+      destport:
+         The port to send the message to
+      message:
+         The message to send
+      localhost (optional):
+         The local IP to send the message from 
+      localport (optional):
+         The local port to send the message from 
+
+      * if you specify localhost, you must specify localport
+
+   <Exceptions>
+      socket.error when communication errors happen
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      The number of bytes sent on success
+
+==== stopcomm(commhandle) ====
+
+   <Purpose>
+      Stop handling events for a commhandle.   This works for both message and
+      connection based event handlers.
+
+   <Arguments>
+      commhandle:
+         A commhandle as returned by recvmess or waitforconn.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      This has an undefined effect on a socket-like object if it is currently
+      in use.
+
+   <Returns>
+      None.
+
+==== openconn(desthost, destport, localip=None, localport=None, timeout = 5) ====
+   <Purpose>
+      Opens a connection, returning a socket-like object
+
+   <Arguments>
+      desthost:
+         The host to open communcations with
+      destport:
+         The port to use for communication
+      localip (optional):
+         The local ip to use for the communication
+      localport (optional):
+         The local port to use for communication
+      timeout (optional):
+         The maximum amount of time to wait to connect
+
+      * if you specify localip, you must specify localport
+
+   <Exceptions>
+      As from socket.connect, etc.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      A socket-like object that can be used for communication.   Use send, 
+      recv, and close just like you would an actual socket object in python.
+
+
+==== waitforconn(localip, localport, function) ====
+   <Purpose>
+      Waits for a connection to a port.   Calls function with a socket-like 
+      object if it succeeds.
+
+   <Arguments>
+      localip:
+         The local IP to listen on
+      localport:
+         The local port to bind to
+      function:
+         The function to call.   It should take five arguments:
+         (remoteip, remoteport, socketlikeobj, thiscommhandle, maincommhandle)
+         If your function has an uncaught exception, the socket-like object it
+         is using will be closed.
+         
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Starts an event handler that listens for connections.
+
+   <Returns>
+      A handle to the comm object.   This can be used to stop listening
+
+==== open(filename, mode='r') ====
+
+   <Purpose>
+      Allows the user program to open a file safely.   This function is meant
+      to resemble the builtin "open"
+
+   <Arguments>
+      filename:
+         The file that should be operated on
+      mode:
+         The mode (see open)
+
+   <Exceptions>
+      As with open, this may raise a number of errors
+
+   <Side Effects>
+      Opens a file on disk, using a file descriptor.   When opened with "w"
+      it will truncate the existing file.
+
+   <Returns>
+      A file-like object 
+
+==== listdir() ====
+   <Purpose>
+      Allows the user program to get a list of files in their area.
+
+   <Arguments>
+      None
+
+   <Exceptions>
+      This probably shouldn't raise any errors / exceptions so long as the
+      node manager isn't buggy.
+
+   <Side Effects>
+      None
+
+   <Returns>
+      A list of strings (file names)
+
+        strings (file names)
+
+==== removefile(filename) ====
+   <Purpose>
+      Allows the user program to remove a file in their area.
+
+   <Arguments>
+      filename: the name of the file to remove.   It must not contain 
+      characters other than 'a-zA-Z0-9.-_' and cannot be '.' or '..'
+
+   <Exceptions>
+      This probably shouldn't raise any errors / exceptions so long as the
+      node manager isn't buggy.
+
+   <Side Effects>
+      None
+
+   <Returns>
+      A list of strings (file names)
+
+==== exitall() ====
+   <Purpose>
+      Allows the user program to stop execution of the program without
+      passing an exit event to the main program. 
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Interactions with timers and connection / message receiving functions 
+      are undefined.   These functions may be called after exit and may 
+      have undefined state.
+
+   <Returns>
+      None.   The current thread does not resume after exit
+
+==== getlock() ====
+
+   <Purpose>
+      Returns a lock object to the user program.    A lock object supports
+      two functions: acquire and release.   See threading.Lock() for details
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      The lock object.
+
+==== getruntime() ====
+
+   <Purpose>
+      Return the amount of time the program has been running.   This is in
+      wall clock time.   This function is not guaranteed to always return
+      increasing values due to NTP, etc.
+
+   <Arguments>
+      None
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None
+
+   <Returns>
+      The elapsed time as float
+
+==== randomfloat() ====
+
+   <Purpose>
+      Return a random number in the range [0.0, 1.0)
+
+   <Arguments>
+      None
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      This function is metered because it may involve using a hardware
+      source of randomness.
+
+   <Returns>
+      The number (a float)
+==== canceltimer(timerhandle) ====
+
+   <Purpose>
+      Cancels a timer.
+
+   <Arguments>
+      timerhandle:
+         The handle of the timer that should be stopped.   Handles are 
+         returned by settimer
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      If False is returned, the timer already fired or was cancelled 
+      previously.   If True is returned, the timer was cancelled
+
+==== settimer(waittime, function, args) ====
+
+   <Purpose>
+      Allow the current event to set an event to be performed in the future.
+      This does not guarantee the event will be triggered at that time, only
+      that it will be triggered after that time.
+
+   <Arguments>
+      waittime:
+         The minimum amount of time to wait before delivering the event
+      function:
+         The function to call
+      args:
+         The arguments to pass to the function.   This should be a tuple or 
+         list
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      A timer handle, for use with canceltimer
+
+==== sleep(seconds) ====
+
+   <Purpose>
+      Allow the current event to pause execution (similar to time.sleep()).
+      This function will not return early for any reason
+
+   <Arguments>
+      seconds:
+         The number of seconds to sleep.   This can be a floating point value
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      None.
