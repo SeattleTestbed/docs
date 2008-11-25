@@ -4,7 +4,7 @@ This page contains information for educators wishing to use Seattle in the class
 
 
 
-== Assignments ==
+== Complete Assignments ==
 
 The below assignments are geared toward an undergraduate class (so graduate classes will likely want to have longer / more complex assignments). If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
 
