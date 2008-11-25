@@ -54,7 +54,7 @@
 
 ||stopcomm||stops communication on a commhandle (either connection or message based)||example 1.2||
 
-||settimer||ets an event to execute at a time in the future||example 1.4||
+||settimer||sets an event to execute at a time in the future||example 1.4||
 
 ||canceltimer||cancels an event which has not yet started||example 1.5||
 
