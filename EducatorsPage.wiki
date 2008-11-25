@@ -1,6 +1,12 @@
 = Educator Portal =
 
-This page contains information for educators wishing to use Seattle in the classroom.   The below assignments are geared toward an undergraduate class (so graduate classes will likely want to have longer / more complex assignments). If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
+This page contains information for educators wishing to use Seattle in the classroom.   
+
+
+
+== Assignments ==
+
+The below assignments are geared toward an undergraduate class (so graduate classes will likely want to have longer / more complex assignments). If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
@@ -10,4 +16,25 @@ This page contains information for educators wishing to use Seattle in the class
 
 
  * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
+
+== Assignment ideas ==
+
+
+ * Examining Non-Transitive Connectivity
+
+    For this assignment the students first implement a DHT-like message routing system (such as Chord~\cite{Stoica_SIGCOMM_2001}) and test their implementations on local Seattle resources. The students then run their code on globally distributed Seattle resources. Chord works well over LAN, but has performance and correctness problems in a global scale deployment with non-transitive connectivity. After explaining the reasons behind Chord's poor performance, the instructor can have the class discuss solutions to these problems. Students can then implement these solutions to achieve better performance and reliability. Our Seattle Chord implementation is approximately 300 lines of code (existing Chord implementations in C++ and Java are many thousands of lines of code).
+
+    This assignment reinforces several important ideas. First, the students will reuse their implementation, which emphasizes good software engineering practices. Second, the assignment demonstrates that test and deployment environments may differ significantly. Third, students will hone their debugging skills as they attempt to understand why their ``correct code'' does not work in a global deployment. Fourth, by creating their implementation from scratch, and motivated by a real problem, students can arrive at unique solutions. Lastly, the instructor can easily evaluate student implementations using a small set of metrics.
+
+ * Dynamic Resource Acquisition
+
+    This assignment focuses on acquiring and migrating computation. Students are given a simple program that serves a webpage. The students' task is to find the most efficient way to serve the webpage to an initially unknown set of clients. The students begin by implementing a program to load, start and stop programs (similar to the experiment manager) on their nodes. However, a student's program can only acquire a fixed amount of resources across all nodes. The students' goal is to have the webpage served quickly to a set of clients that periodically request the page. The students use DynDNS to register the IP addresses for their nodes with a single hostname. The clients (run by the instructor) look up this hostname and request the page from one of the nodes returned by DynDNS.
+
+    This assignment demonstrates that locality is important in distributed data references, and that resources present in the cloud have a cost and must be evaluated. This assignment also builds students' experience with acquiring and migrating resources to handle an unknown client workload.
+
+
+ * Global Data Store
+
+    Some cloud computing models provide an interface to a global, persistent store (like Amazon's S3 or Google's !AppEngine). While Seattle provides local persistent storage, there is no preexisting global store. Such a system can be constructed from a set of nodes that cooperatively replicate and manage data. This project requires that student implementations operate correctly over LAN with multiple readers / writers and gracefully recovers from node failures. For a more difficult project, the global store can be required to run on globally distributed nodes. This extension teaches students to deal with high failure likelihood and to overcome non-transitive connectivity, both of which are typical problems for distributed systems deployed at global scale.
+
 
