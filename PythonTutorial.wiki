@@ -264,7 +264,22 @@ def square(x):
     return x*x
 }}}
 
+
 The keyword def is used to define a function. Note once again that the colon and indenting are used to define a block which serves as the function body. A function can return a value, using the return statement. However, the function does not have a type even if it does return something, and the object returned could be anything—an integer, a list, or whatever.
+
+{{{
+#!python
+def convert_string_to_number(stringvalue, base=10):
+    return int(stringvalue,base)
+}}}
+
+Functions can also have optional arguments.   Optional arguments do not need to be specified by the caller.   The following function call {{{convert_string_to_number('1234')}}} is the same as {{{convert_string_to_number('1234',10)}}}.
+
+
+Kyung: need example with key word arguments
+
+Kyung: need example with *args. 
+
 
 [[BR]]
 === Reading and Writing Files ===
