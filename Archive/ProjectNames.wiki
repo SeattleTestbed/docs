@@ -6,3 +6,6 @@ pebbles - Conveys a large collection of autonomous objects. Also conveys sturdin
 
 hitchhiker
 
+interloper
+
+global mesh
