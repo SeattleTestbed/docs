@@ -1,8 +1,8 @@
-add suggestions for project names here:
+Add suggestions for project names here:
 
 midichlorian
 
-pebbels
+pebbles - Conveys a large collection of autonomous objects. Also conveys sturdiness/hardiness. Cute.
 
 hitchhiker
 
