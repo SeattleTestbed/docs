@@ -286,7 +286,7 @@ There are two advantages - one, using the function is easier since we do not nee
 {{{
 #!python
 def func(a, b=5, c=10):
-	print 'a is', a, 'and b is', b, 'and c is', c
+    print 'a is', a, 'and b is', b, 'and c is', c
 
 func(3, 7)
 func(25, c=24)
