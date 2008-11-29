@@ -15,6 +15,8 @@ It is assumed that you have a basic understanding of network programming such as
 [[BR]]
 == General Operations with examples ==
 ----
+You have to install repy before starting tutorials.
+You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
