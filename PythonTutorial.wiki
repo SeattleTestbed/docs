@@ -279,8 +279,28 @@ def convert_string_to_number(stringvalue, base=10):
 
 Functions can also have optional arguments.   Optional arguments do not need to be specified by the caller.   The following function call {{{convert_string_to_number('1234')}}} is the same as {{{convert_string_to_number('1234',10)}}}.
 
+If you have some functions with many parameters and you want to specify only some of them, then you can give values for such parameters by naming them - this is called keyword arguments - we use the name (keyword) instead of the position (which we have been using all along) to specify the arguments to the function.
 
-Kyung: need example with key word arguments
+There are two advantages - one, using the function is easier since we do not need to worry about the order of the arguments. Two, we can give values to only those parameters which we want, provided that the other parameters have default argument values.
+
+{{{
+#!python
+def func(a, b=5, c=10):
+	print 'a is', a, 'and b is', b, 'and c is', c
+
+func(3, 7)
+func(25, c=24)
+func(c=50, a=100)
+}}}
+
+Output
+
+{{{
+#!python
+a is 3 and b is 7 and c is 10
+a is 25 and b is 5 and c is 24
+a is 100 and b is 5 and c is 50
+}}}
 
 Kyung: need example with *args. 
 
