@@ -1,6 +1,10 @@
 = All of the Python You Need to Understand Repy (and None You Don't) =
 
 This tutorial is written for those who have background knowledge of object oriented programming languages such as C++ and Java. This tutorial focuses on introducing the subset of Python used in the REPY (Restricted Python) language supported by the Seattle testbed.   After reading this tutorial, you should walk through the [RepyTutorial repy tutorial].
+
+You have to install repy before starting the tutorial.
+You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
+
 ----
 [[TOC(inline)]]
 ----
