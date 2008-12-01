@@ -280,7 +280,7 @@ def convert_string_to_number(stringvalue, base=10):
     return int(stringvalue,base)
 }}}
 
-Functions can also have optional arguments.   Optional arguments do not need to be specified by the caller.   The following function call {{{convert_string_to_number('1234')}}} is the same as {{{convert_string_to_number('1234',10)}}}.
+Functions can also have arguments that have default values. The argument vales do not need to be specified by the caller. The following function call {{{convert_string_to_number('1234')}}} is the same as {{{convert_string_to_number('1234',10)}}}.
 
 [[BR]]
 ==== Keyword Arguments ====
