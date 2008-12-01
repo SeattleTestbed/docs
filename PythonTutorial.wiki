@@ -311,7 +311,7 @@ a is 100 and b is 5 and c is 50
 [[BR]]
 ==== Arbitrary Argument Lists ====
 ----
-Finally, the least frequently used option is to specify that a function can be called with an arbitrary number of arguments. These arguments will be wrapped up in a tuple. Before the variable number of arguments, zero or more normal arguments may occur.
+Finally, the least frequently used option is to specify that a function can be called with an arbitrary number of arguments. These arguments will be wrapped up in a tuple (see Tuples in Sequences). Before the variable number of arguments, zero or more normal arguments may occur.
 
 {{{
 #!python
