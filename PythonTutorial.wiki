@@ -271,6 +271,9 @@ def square(x):
 
 The keyword def is used to define a function. Note once again that the colon and indenting are used to define a block which serves as the function body. A function can return a value, using the return statement. However, the function does not have a type even if it does return something, and the object returned could be anything—an integer, a list, or whatever.
 
+[[BR]]
+==== Default Argument Values ====
+----
 {{{
 #!python
 def convert_string_to_number(stringvalue, base=10):
@@ -279,6 +282,9 @@ def convert_string_to_number(stringvalue, base=10):
 
 Functions can also have optional arguments.   Optional arguments do not need to be specified by the caller.   The following function call {{{convert_string_to_number('1234')}}} is the same as {{{convert_string_to_number('1234',10)}}}.
 
+[[BR]]
+==== Keyword Arguments ====
+----
 If you have some functions with many parameters and you want to specify only some of them, then you can give values for such parameters by naming them - this is called keyword arguments - we use the name (keyword) instead of the position (which we have been using all along) to specify the arguments to the function.
 
 There are two advantages - one, using the function is easier since we do not need to worry about the order of the arguments. Two, we can give values to only those parameters which we want, provided that the other parameters have default argument values.
@@ -302,8 +308,16 @@ a is 25 and b is 5 and c is 24
 a is 100 and b is 5 and c is 50
 }}}
 
-Kyung: need example with *args. 
+[[BR]]
+==== Arbitrary Argument Lists ====
+----
+Finally, the least frequently used option is to specify that a function can be called with an arbitrary number of arguments. These arguments will be wrapped up in a tuple. Before the variable number of arguments, zero or more normal arguments may occur.
 
+{{{
+#!python
+def write_multiple_items(file, separator, *args):
+    file.write(separator.join(args))
+}}}
 
 [[BR]]
 === Reading and Writing Files ===
