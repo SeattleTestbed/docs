@@ -9,3 +9,5 @@ hitchhiker
 interloper
 
 global mesh
+
+NetHive - hive reminds me of autonomous ants, and Net conveys the scale of the project
