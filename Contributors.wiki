@@ -36,13 +36,13 @@ Seattle Geni Website
 
  * Backend -- Ivan Beschastnikh, Justin Cappos
 
- * Front end / GUI -- Peter Lipay, Sean Ren
+ * Front end / GUI -- Peter Lipay, Sean Ren, Ivan Beschastnikh
 
 Installers -- Carter Butaud
 
 Custom Installer Creator
 
- * Backend -- Carter Butaud
+ * Backend -- Carter Butaud, Ivan Beschastnikh
 
  * Front end / GUI -- Sean Ren, Peter Lipay
 
