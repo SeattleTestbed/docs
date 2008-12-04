@@ -22,8 +22,6 @@ Node Manager -- Justin Cappos
 
 Seash -- Justin Cappos
 
-Test framework -- Brent Couvrette
-
 Software Updater -- Justin Cappos, Brent Couvrette
 
 
@@ -56,3 +54,12 @@ Custom Installer Creator
 Repy Tutorials -- Kyungil Kim, Andreas Sekine, Justin Cappos
 
 Repy API -- Justin Cappos, Jeff Flatten
+
+
+
+[[BR]]
+== Useful add-ons ==
+----
+
+Test framework -- Brent Couvrette
+
