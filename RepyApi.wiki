@@ -1,8 +1,21 @@
 = Repy Library Reference = 
 
-[[BR]]
+----
+[[TOC(inline)]]
+----
 
+[[BR]]
+== Introduction and Purpose ==
+----
+
+This document describes the API available to repy programs.   This document includes all of the calls that are available to a repy program and the use and meaning of these calls.   For items built into the python programming language (like list operations, etc.) see the appropriate Python documentation.   
+
+
+
+
+[[BR]]
 == Cheat Sheet ==
+----
 
 ||Variable Name||Short description||Tutorial Section||
 ||callargs||callargs are the command line arguments for your program (similar to Python's sys.argv[1:])||example 2.2||
@@ -72,19 +85,19 @@
 ||ord||The inverse of chr, changes an ASCII character to a number (ord('a') == 97)||example 4.2||
 
 
-[[BR]]
 
+[[BR]]
 == Detailed description ==
+----
+
 
 [[BR]]
-
-
 === Shared variables ===
+----
 
 [[BR]]
-
 ==== mycontext ====
-
+----
 
     Mycontext is a dictionary that is shared between all of the events in your
 
@@ -94,15 +107,18 @@
 
     mycontext.
 
+[[BR]]
 ==== callfunc ====
-
+----
         Callfunc is a string that indicates if the program was called for
 
         initialization or exit. This allows the program to determine
 
         whether to initialize or clean up.
 
+[[BR]]
 ==== callargs ====
+----
 
         Callargs is a list of strings that contain the arguments your program
 
@@ -110,14 +126,15 @@
 
         shell. Use this in place of sys.argv[1:]
 
-[[BR]]
 
+[[BR]]
 === API functions ===
+----
 
       
-[[BR]]
-     
+[[BR]] 
 ==== gethostbyname_ex(name) ====
+----
    <Purpose>
       Provides information about a hostname.   Calls socket.gethostbyname_ex()
 
@@ -135,7 +152,9 @@
       A tuple containing (hostname, aliaslist, ipaddrlist).   See the 
       python docs for socket.gethostbyname_ex()
 
+[[BR]]
 ==== getmyip() ====
+----
    <Purpose>
       Provides the external IP of this computer.   Does some clever trickery.
 
@@ -152,7 +171,9 @@
       The localhost's IP address
       python docs for socket.gethostbyname_ex()
 
+[[BR]]
 ==== recvmess(localip, localport, function) ====
+----
    <Purpose>
       Registers a function as an event handler for incoming messages
 
@@ -174,7 +195,9 @@
    <Returns>
       The commhandle for this event handler.
 
+[[BR]]
 ==== sendmess(desthost, destport, message, localip=None, localport=None) ====
+----
 
    <Purpose>
       Send a message to a host / port
@@ -202,7 +225,9 @@
    <Returns>
       The number of bytes sent on success
 
+[[BR]]
 ==== stopcomm(commhandle) ====
+----
 
    <Purpose>
       Stop handling events for a commhandle.   This works for both message and
@@ -222,7 +247,9 @@
    <Returns>
       None.
 
+[[BR]]
 ==== openconn(desthost, destport, localip=None, localport=None, timeout = 5) ====
+----
    <Purpose>
       Opens a connection, returning a socket-like object
 
@@ -251,7 +278,9 @@
       recv, and close just like you would an actual socket object in python.
 
 
+[[BR]]
 ==== waitforconn(localip, localport, function) ====
+----
    <Purpose>
       Waits for a connection to a port.   Calls function with a socket-like 
       object if it succeeds.
@@ -276,7 +305,9 @@
    <Returns>
       A handle to the comm object.   This can be used to stop listening
 
+[[BR]]
 ==== open(filename, mode='r') ====
+----
 
    <Purpose>
       Allows the user program to open a file safely.   This function is meant
@@ -298,7 +329,9 @@
    <Returns>
       A file-like object 
 
+[[BR]]
 ==== listdir() ====
+----
    <Purpose>
       Allows the user program to get a list of files in their area.
 
@@ -317,7 +350,9 @@
 
         strings (file names)
 
+[[BR]]
 ==== removefile(filename) ====
+----
    <Purpose>
       Allows the user program to remove a file in their area.
 
@@ -335,7 +370,9 @@
    <Returns>
       A list of strings (file names)
 
+[[BR]]
 ==== exitall() ====
+----
    <Purpose>
       Allows the user program to stop execution of the program without
       passing an exit event to the main program. 
@@ -354,7 +391,9 @@
    <Returns>
       None.   The current thread does not resume after exit
 
+[[BR]]
 ==== getlock() ====
+----
 
    <Purpose>
       Returns a lock object to the user program.    A lock object supports
@@ -372,7 +411,9 @@
    <Returns>
       The lock object.
 
+[[BR]]
 ==== getruntime() ====
+----
 
    <Purpose>
       Return the amount of time the program has been running.   This is in
@@ -391,7 +432,9 @@
    <Returns>
       The elapsed time as float
 
+[[BR]]
 ==== randomfloat() ====
+----
 
    <Purpose>
       Return a random number in the range [0.0, 1.0)
@@ -408,7 +451,10 @@
 
    <Returns>
       The number (a float)
+
+[[BR]]
 ==== canceltimer(timerhandle) ====
+----
 
    <Purpose>
       Cancels a timer.
@@ -428,7 +474,9 @@
       If False is returned, the timer already fired or was cancelled 
       previously.   If True is returned, the timer was cancelled
 
+[[BR]]
 ==== settimer(waittime, function, args) ====
+----
 
    <Purpose>
       Allow the current event to set an event to be performed in the future.
@@ -453,7 +501,9 @@
    <Returns>
       A timer handle, for use with canceltimer
 
+[[BR]]
 ==== sleep(seconds) ====
+----
 
    <Purpose>
       Allow the current event to pause execution (similar to time.sleep()).
