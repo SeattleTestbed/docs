@@ -1,6 +1,14 @@
 = Contributors =
 
-== Core software ==
+----
+[[TOC(inline)]]
+----
+
+
+[[BR]]
+== Core Software ==
+----
+
 
 Repy Sandbox -- Justin Cappos
 
@@ -19,7 +27,10 @@ Test framework -- Brent Couvrette
 Software Updater -- Justin Cappos, Brent Couvrette
 
 
+[[BR]]
 == Web interfaces ==
+----
+
 
 Seattle website / wiki -- Ivan Beschastnikh
 
@@ -37,7 +48,8 @@ Custom Installer Creator
 
  * Front end / GUI -- Sean Ren, Peter Lipay
 
-
-== Docs ==
+[[BR]]
+== Documentation ==
+----
 
 Repy Tutorials -- Justin Cappos, Kyungil Kim, Andreas Sekine
