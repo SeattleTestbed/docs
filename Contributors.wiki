@@ -1,0 +1,43 @@
+= Contributors =
+
+== Core software ==
+
+Repy Sandbox -- Justin Cappos
+
+ * Improved Windows API, CPU Throttling fix -- Armon Dadger
+
+ * Improved testing -- Brent Couvrette
+
+Node Manager -- Justin Cappos
+ 
+ * Improved testing -- Cosmin Barsan
+
+Seash -- Justin Cappos
+
+Test framework -- Brent Couvrette
+
+Software Updater -- Justin Cappos, Brent Couvrette
+
+
+== Web interfaces ==
+
+Seattle website / wiki -- Ivan Beschastnikh
+
+Seattle Geni Website
+
+ * Backend -- Ivan Beschastnikh, Justin Cappos
+
+ * Front end / GUI -- Peter Lipay, Sean Ren
+
+Installers -- Carter Butaud
+
+Custom Installer Creator
+
+ * Backend -- Carter Butaud
+
+ * Front end / GUI -- Sean Ren, Peter Lipay
+
+
+== Docs ==
+
+Repy Tutorials -- Justin Cappos, Kyungil Kim, Andreas Sekine
