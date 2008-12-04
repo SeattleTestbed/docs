@@ -48,8 +48,11 @@ Custom Installer Creator
 
  * Front end / GUI -- Sean Ren, Peter Lipay
 
+
 [[BR]]
 == Documentation ==
 ----
 
-Repy Tutorials -- Justin Cappos, Kyungil Kim, Andreas Sekine
+Repy Tutorials -- Kyungil Kim, Andreas Sekine, Justin Cappos
+
+Repy API -- Justin Cappos, Jeff Flatten
