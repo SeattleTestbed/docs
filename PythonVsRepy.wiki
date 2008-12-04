@@ -168,7 +168,7 @@ t = settimer(30.0, hello, ["world"])
   In order to cancel the timer, use 
     {{{
 #!python
-stoptimer(t)
+canceltimer(t)
     }}}
 
 ==== time.time() ====
@@ -177,6 +177,8 @@ stoptimer(t)
 #!python
 time.time() - starttime #starttime is when the program started execution
     }}} 
+
+  For programs that actually want the "time" (rather than using it to measure elapsed time as most programmers seem to use it), there is a library that does a NTP lookup and provides the correct global time.
 
 [[BR]]	
 === Networking ===
