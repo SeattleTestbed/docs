@@ -4,4 +4,6 @@ pebbles - Conveys a large collection of autonomous objects. Also conveys sturdin
 
 global mesh
 
-NetHive - hive reminds me of autonomous ants, and Net conveys the scale of the project
+NetHive - hive reminds me of autonomous ants, and Net conveys the scale of the project
+
+Metropolis - the urban agglomeration nature of this type of "city" stands for the cooperation of many smaller entities/peers.  a metropolis is also "an important hub for regional or international connections and communications" (Yih Sun)
