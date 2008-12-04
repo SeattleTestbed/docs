@@ -184,6 +184,7 @@ You'll see a message noting that the program has stopped on your nodes.   To che
 
 
 = Measuring Connectivity =
+[[BR]]
 == Step 7 : Sending UDP pings manually ==
 ----
 
