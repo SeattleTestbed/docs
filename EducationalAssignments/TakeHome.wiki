@@ -182,7 +182,7 @@ username@LAN !> stop
 
 You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).  
 
-
+[[BR]]
 = Measuring Connectivity =
 [[BR]]
 == Step 7 : Sending UDP pings manually ==
