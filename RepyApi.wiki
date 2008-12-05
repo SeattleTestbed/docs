@@ -8,7 +8,7 @@
 == Introduction and Purpose ==
 ----
 
-This document describes the API available to repy programs.   This document includes all of the calls that are available to a repy program and the use and meaning of these calls.   For items built into the python programming language (like list operations, etc.) see the appropriate Python documentation.   
+This document describes the narrow API available to repy programs.   This document includes all of the calls that are available to a repy program and the use and meaning of these calls.   For items built into the python programming language (like list operations, etc.) see the appropriate Python documentation.   
 
 
 
@@ -99,32 +99,18 @@ This document describes the API available to repy programs.   This document incl
 ==== mycontext ====
 ----
 
-    Mycontext is a dictionary that is shared between all of the events in your
-
-    program. The intent is that mycontext will be used in the place
-
-    of global variables. See the tutorial for examples using
-
-    mycontext.
+    Mycontext is a dictionary that is shared between all of the events in your program. The intent is that mycontext will be used in the place of global variables. See the tutorial for examples using mycontext.
 
 [[BR]]
 ==== callfunc ====
 ----
-        Callfunc is a string that indicates if the program was called for
-
-        initialization or exit. This allows the program to determine
-
-        whether to initialize or clean up.
+    Your program may register different events that will trigger parts of your code.   The system events "initialize" and "exit" are not triggered by your code, and as such have no predefined entry point.   They are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" event is the first event that your program executes.   If the initialize event finishes and there are no pending events, the "exit" event is triggered to allow your program a chance to clean up.
 
 [[BR]]
 ==== callargs ====
 ----
 
-        Callargs is a list of strings that contain the arguments your program
-
-        was called with (typically by invoking the program with the
-
-        shell. Use this in place of sys.argv[1:]
+    Callargs is a list of strings that contain the arguments your program was called with.   If there are no arguments, callargs contains an empty list.
 
 
 [[BR]]
