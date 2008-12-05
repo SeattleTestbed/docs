@@ -157,7 +157,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       None
 
    <Exceptions>
-      As from socket.gethostbyname_ex()
+      Exception if the host is not connected to the Internet or has name resolution problems
 
    <Side Effects>
       None.
@@ -359,6 +359,7 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 ==== listdir() ====
 ----
 
+
 Returns a list of file names for the files in the vessel.   
 
  * Doc string:
@@ -378,8 +379,6 @@ Returns a list of file names for the files in the vessel.
 
    <Returns>
       A list of strings (file names)
-
-        strings (file names)
 
 [[BR]]
 ==== removefile(filename) ====
