@@ -121,6 +121,10 @@ This document describes the narrow API available to repy programs.   This docume
 [[BR]] 
 ==== gethostbyname_ex(name) ====
 ----
+(from the Python documentation)   Translate a host name to IPv4 address format, extended interface. Return a triple (hostname, aliaslist, ipaddrlist) where hostname is the primary host name responding to the given ip_address, aliaslist is a (possibly empty) list of alternative host names for the same address, and ipaddrlist is a list of IPv4 addresses for the same interface on the same host (often but not always a single address). gethostbyname_ex() does not support IPv6 name resolution, and getaddrinfo() should be used instead for IPv4/v6 dual stack support. 
+
+ * Doc string:
+
    <Purpose>
       Provides information about a hostname.   Calls socket.gethostbyname_ex()
 
@@ -141,6 +145,11 @@ This document describes the narrow API available to repy programs.   This docume
 [[BR]]
 ==== getmyip() ====
 ----
+Returns the localhost's "Internet facing" IP address.   It may raise an exception on hosts that are not connected to the Internet.
+
+
+ * Doc string:
+
    <Purpose>
       Provides the external IP of this computer.   Does some clever trickery.
 
@@ -155,11 +164,15 @@ This document describes the narrow API available to repy programs.   This docume
 
    <Returns>
       The localhost's IP address
-      python docs for socket.gethostbyname_ex()
 
 [[BR]]
 ==== recvmess(localip, localport, function) ====
 ----
+
+Registers a function as an event handler for incoming UDP messages.  If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free event, the function is not called until an event is available.   Also, if there is no current function registered by recvmess or waitforconn, an event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.
+
+ * Doc string:
+
    <Purpose>
       Registers a function as an event handler for incoming messages
 
@@ -184,6 +197,9 @@ This document describes the narrow API available to repy programs.   This docume
 [[BR]]
 ==== sendmess(desthost, destport, message, localip=None, localport=None) ====
 ----
+Sends a UDP message to a destination host / port.   By default the system selects a localip and port for the outgoing message, but this can be overridden by passing in arguments that specify which port and IP to use.   If either the localip or localport are used, both must be.   Returns the number of bytes sent.
+
+ * Doc string:
 
    <Purpose>
       Send a message to a host / port
@@ -200,7 +216,7 @@ This document describes the narrow API available to repy programs.   This docume
       localport (optional):
          The local port to send the message from 
 
-      * if you specify localhost, you must specify localport
+      Note: if you specify localhost, you must specify localport
 
    <Exceptions>
       socket.error when communication errors happen
@@ -212,8 +228,80 @@ This document describes the narrow API available to repy programs.   This docume
       The number of bytes sent on success
 
 [[BR]]
+==== openconn(desthost, destport, localip=None, localport=None, timeout = 5) ====
+----
+Open a TCP connection to a remote computer, returning a socket object.   Optionally a localip and localport to connect from can be specified and if one is specified both must be.   There is a timeout value that can be set to limit the amount of time the system will wait for a response before abandoning the attempt to connect.
+
+ * Doc string:
+
+   <Purpose>
+      Opens a connection, returning a socket-like object
+
+   <Arguments>
+      desthost:
+         The host to open communications with
+      destport:
+         The port to use for communication
+      localip (optional):
+         The local ip to use for the communication
+      localport (optional):
+         The local port to use for communication
+      timeout (optional):
+         The maximum amount of time to wait to connect
+
+      Note: if you specify localip, you must specify localport
+
+   <Exceptions>
+      As from socket.connect, etc.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      A socket-like object that can be used for communication.   Use send, 
+      recv, and close just like you would an actual socket object in python.
+
+
+[[BR]]
+==== waitforconn(localip, localport, function) ====
+----
+Register a function to be called whenever a TCP connection is made to a localip and localport.   As with recvmess, an event is consumed to start a network listener if no previous function was registered for either recvmess or waitforconn.   If a connection is established but no free events remain, the function is not called until an event is available.   Returns a handle that can be used by stopcomm to deregister the function.
+
+ * Doc string:
+
+   <Purpose>
+      Waits for a connection to a port.   Calls function with a socket-like 
+      object if it succeeds.
+
+   <Arguments>
+      localip:
+         The local IP to listen on
+      localport:
+         The local port to bind to
+      function:
+         The function to call.   It should take five arguments:
+         (remoteip, remoteport, socketlikeobj, thiscommhandle, listencommhandle)
+         If your function has an uncaught exception, the socket-like object it
+         is using will be closed.
+         
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Starts an event handler that listens for connections.
+
+   <Returns>
+      A handle to the listener.   This can be used to stop listening
+
+
+
+[[BR]]
 ==== stopcomm(commhandle) ====
 ----
+
+Stops communication on a commhandle.   In the case of a UDP message based commhandle or a TCP communication listener commhandle, this deregisters the function and if there are no remaining functions registers, stops the event that checks for network traffic.   This can also be called on the commhandle that corresponds to an open TCP connection and in that case it behaves identically to calling close for the connection.
+
+ * Doc string:
 
    <Purpose>
       Stop handling events for a commhandle.   This works for both message and
@@ -233,67 +321,19 @@ This document describes the narrow API available to repy programs.   This docume
    <Returns>
       None.
 
-[[BR]]
-==== openconn(desthost, destport, localip=None, localport=None, timeout = 5) ====
-----
-   <Purpose>
-      Opens a connection, returning a socket-like object
-
-   <Arguments>
-      desthost:
-         The host to open communcations with
-      destport:
-         The port to use for communication
-      localip (optional):
-         The local ip to use for the communication
-      localport (optional):
-         The local port to use for communication
-      timeout (optional):
-         The maximum amount of time to wait to connect
-
-      * if you specify localip, you must specify localport
-
-   <Exceptions>
-      As from socket.connect, etc.
-
-   <Side Effects>
-      None.
-
-   <Returns>
-      A socket-like object that can be used for communication.   Use send, 
-      recv, and close just like you would an actual socket object in python.
-
-
-[[BR]]
-==== waitforconn(localip, localport, function) ====
-----
-   <Purpose>
-      Waits for a connection to a port.   Calls function with a socket-like 
-      object if it succeeds.
-
-   <Arguments>
-      localip:
-         The local IP to listen on
-      localport:
-         The local port to bind to
-      function:
-         The function to call.   It should take five arguments:
-         (remoteip, remoteport, socketlikeobj, thiscommhandle, maincommhandle)
-         If your function has an uncaught exception, the socket-like object it
-         is using will be closed.
-         
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      Starts an event handler that listens for connections.
-
-   <Returns>
-      A handle to the comm object.   This can be used to stop listening
 
 [[BR]]
 ==== open(filename, mode='r') ====
 ----
+
+(some of this came from the Python docs)
+Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
+
+Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
+
+The most commonly-used values of mode are 'r' for reading, 'w' for writing (truncating the file if it already exists), and 'a' for appending. If mode is omitted, it defaults to 'r'.  Modes 'r+', 'w+' and 'a+' open the file for updating (note that 'w+' truncates the file).   The mode must begin with 'r', 'w' or 'a'.
+
+ * Doc string:
 
    <Purpose>
       Allows the user program to open a file safely.   This function is meant
