@@ -358,6 +358,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 [[BR]]
 ==== listdir() ====
 ----
+
+Returns a list of file names for the files in the vessel.   
+
+ * Doc string:
+
    <Purpose>
       Allows the user program to get a list of files in their area.
 
@@ -379,6 +384,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 [[BR]]
 ==== removefile(filename) ====
 ----
+
+Deletes a file in the vessel.   If the file does not exist, an exception is raised.
+
+ * Doc string:
+
    <Purpose>
       Allows the user program to remove a file in their area.
 
@@ -399,6 +409,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 [[BR]]
 ==== exitall() ====
 ----
+
+Terminates the program immediately.   The program will not execute the "exit" event.
+
+ * Doc string:
+
    <Purpose>
       Allows the user program to stop execution of the program without
       passing an exit event to the main program. 
@@ -421,6 +436,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 ==== getlock() ====
 ----
 
+Returns a lock object that can be used for mutual exclusion and critical section protection.
+
+ * Doc string:
+
+
    <Purpose>
       Returns a lock object to the user program.    A lock object supports
       two functions: acquire and release.   See threading.Lock() for details
@@ -440,6 +460,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 [[BR]]
 ==== getruntime() ====
 ----
+
+Returns a float containing the number of seconds the program has been running.   Note that in very rare circumstances (like the user resetting their clock), this will not produce increasing values.   For the actual time, use NTP.
+
+ * Doc string:
+
 
    <Purpose>
       Return the amount of time the program has been running.   This is in
@@ -462,6 +487,11 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
 ==== randomfloat() ====
 ----
 
+Returns a random floating point number between 0.0 (inclusive) and 1.0 (exclusive).   
+
+ * Doc string:
+
+
    <Purpose>
       Return a random number in the range [0.0, 1.0)
 
@@ -479,30 +509,13 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
       The number (a float)
 
 [[BR]]
-==== canceltimer(timerhandle) ====
-----
-
-   <Purpose>
-      Cancels a timer.
-
-   <Arguments>
-      timerhandle:
-         The handle of the timer that should be stopped.   Handles are 
-         returned by settimer
-
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      None.
-
-   <Returns>
-      If False is returned, the timer already fired or was cancelled 
-      previously.   If True is returned, the timer was cancelled
-
-[[BR]]
 ==== settimer(waittime, function, args) ====
 ----
+
+Sets a timer that when it expires will start a new event to call a function with a set of arguments.   The event is charged to your program when you set the timer (instead of when the timer fires).   This function returns a timer handle that may be used to cancel the timer before the event is started.   
+
+ * Doc string:
+
 
    <Purpose>
       Allow the current event to set an event to be performed in the future.
@@ -528,8 +541,44 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
       A timer handle, for use with canceltimer
 
 [[BR]]
+==== canceltimer(timerhandle) ====
+----
+
+Try to cancels a timer handle that has not started an event.   Returns False if the event has been started already (and so cannot be canceled).   Returns True if the timer was successfully canceled.
+
+
+ * Doc string:
+
+
+   <Purpose>
+      Cancels a timer.
+
+   <Arguments>
+      timerhandle:
+         The handle of the timer that should be stopped.   Handles are 
+         returned by settimer
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None.
+
+   <Returns>
+      If False is returned, the timer already fired or was cancelled 
+      previously.   If True is returned, the timer was cancelled
+
+
+
+
+[[BR]]
 ==== sleep(seconds) ====
 ----
+
+Sleeps the current event for some time (waits for a specific time before executing any further instructions).   This event will not consume CPU cycles during this time.    Timing issues that confuse getruntime() may also cause sleep to behave in undefined ways.
+
+ * Doc string:
+
 
    <Purpose>
       Allow the current event to pause execution (similar to time.sleep()).
