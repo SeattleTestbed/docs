@@ -459,6 +459,9 @@ x = 20, y =10
 
 {{{
 #!python
+# To loop over two or more sequences at the same time, 
+# the entries can be paired with the zip() function.
+
 names = ['John', 'Mary', 'Paul']
 answers = ['yellow', 'pink', 'blue']
 for name, color in zip(names, answers):
@@ -500,6 +503,7 @@ x[2]
 Result:
 ‘c’
 }}}
+
 
 {{{
 #!python
