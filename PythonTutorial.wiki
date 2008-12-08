@@ -455,6 +455,19 @@ y = 20
 
 Result: 
 x = 20, y =10
+}}}
+
+{{{
+#!python
+names = ['John', 'Mary', 'Paul']
+answers = ['yellow', 'pink', 'blue']
+for name, color in zip(names, answers):
+    print name + ' likes ' + color
+
+Result: 
+John likes yellow
+Mary likes pink
+Paul likes blue
 }}}  
 
 [[BR]]
