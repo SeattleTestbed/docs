@@ -8,14 +8,14 @@ Please keep the list ordered alphabetically by SVN username.
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
 || Alper || || || alpers || alpers ||
 || Andreas || || || asekine || asekine ||
-|| Armon Dadgar || armond@cs.washington.edu || 206-914-6233 || armon ||  armon ||
-|| Carter Butaud || butaud@cs.washington.edu || 206-459-3483 || butaud || butaud ||
-|| Brent Couvrette || couvb@cs.washington.edu ||    || couvb ||couvb ||
+|| Armon Dadgar || armond at cs d0t washington d0t edu || 206-914-6233 || armon ||  armon ||
+|| Carter Butaud || butaud at cs d0t washington d0t edu || 206-459-3483 || butaud || butaud ||
+|| Brent Couvrette || couvb at cs d0t washington d0t edu ||    || couvb ||couvb ||
 || Cosmin || || || || cosminb ||
-|| Ivan Beschastnikh || ivan@cs.washington.edu || || ivan || ivan ||
+|| Ivan Beschastnikh || ivan at cs d0t washington d0t edu || || ivan || ivan ||
 || Jeff || || || || jflat06 ||
-|| Justin Cappos || justinc@cs.washington.edu ||    || justinc || justinc ||
-|| Michael Moshofsky || mikemosh@cs.washington.edu || 503-910-7091 || mikemosh|| MikeMosh ||
+|| Justin Cappos || justinc at cs d0t washington d0t edu ||    || justinc || justinc ||
+|| Michael Moshofsky || mikemosh at cs d0t washington d0t edu || 503-910-7091 || mikemosh|| MikeMosh ||
 || Peter || || || || peter ||
 || Sean || || || || shawiz ||
 || Kyungil || || || || sojc701 ||
