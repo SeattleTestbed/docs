@@ -1,0 +1,66 @@
+= Strike Force =
+
+strike force (n.) -- an armed force, usually small in size, that is equipped to deliver a strong offensive.
+
+
+I'm considering using a slightly different philosophy this quarter.   Rather than dividing tasks by individual, we'll try to set a small team on each task and have them focus their efforts.   Project members will belong to one or more teams and will be responsible for helping those teams to meet their goals.   There will be weekly coding sprints (Saturdays) to try and push the teams to meet their deadlines.   Justin and Ivan would be available on Saturdays for sprints where we would work hard to push toward a common goal.   There would likely be 1-2 teams that would sprint toward different goals on the same day and we would work alternatively with them as needed.   I would also try to work out some reward system for those teams that meet their goals.
+
+Here is a list of potential teams:
+
+
+== Sleight of hand ==
+
+NAT traversal, IPv6, and DHCP support.
+
+
+
+== Micro-machines ==
+
+Portability to mobile devices, location services, and MobileASL project support.
+
+
+
+== Eye candy ==
+
+Seattle GENI website, GENI website, and web back end improvements.
+
+
+
+== Infection and Recurrence ==
+
+Deployment onto nodes, black box testing / repeated testing, and software updates.
+
+
+
+== Speciesism ==
+
+Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition.
+
+
+
+== Indoctrination ==
+
+Educational support, auto-grading, and student support.
+
+
+
+== Top Secret ==
+
+TCP over UDP flow control, anonymous donation, and other interactions with Tor project.
+
+
+== Square peg in round hole ==
+
+Xax or VX32 integration.
+
+
+== Measure twice, cut once == 
+
+Benchmarking service, actually getting 10%, and dynamic resource re-allocation.
+
+
+
+== Lipstick on a pig ==
+
+Output improvements, exception handling, and seattle lib clean-up.
+
