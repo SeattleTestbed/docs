@@ -20,6 +20,9 @@ You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ 
 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
+All attached files works on Windows systems.
+
+Here is another [raw-attachment:examples_linux.zip link] to the zip file containing all files working on Linux and Mac systems.
 
 [[BR]]
 === File execution (example 1.1) ===
@@ -167,15 +170,15 @@ In this example, we'll wait for the user to browse a port we listen on. When the
 {{{
 #!python
 def hello(ip, port, sockobj, thiscommhandle, listencommhandle):
- 
+  sockobj.recv(512) # Receive HTTP header
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World! </h1></body></html>")
   stopcomm(thiscommhandle)   
   # close my connection with this user (we could also do sockobj.close())
 
 if callfunc == 'initialize':
+   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
 }}}
 
 The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345, and when you get, it calls the function hello().
@@ -249,7 +252,7 @@ In this example, we'll add a counter to our helloworld program.   First we'll tr
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-
+  
   global pagecount   # GLOBALS ARE NOT ALLOWED IN REPY
   pagecount = pagecount + 1
   sockobj.send("<html><head><title>Hello World</title></head>
@@ -269,6 +272,7 @@ This code will not work because globals do not exist in repy. However, there is 
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World!</h1>
@@ -277,8 +281,8 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
 }}}
 
 Start the program using the shell, then open a web browser and in the address bar type: 127.0.0.1:12345(this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
@@ -293,6 +297,7 @@ The previous program would wait forever for a user to connect so it could displa
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World!</h1>
@@ -305,12 +310,12 @@ def stop_listening(commhandle):
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
-  
+
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello  
   listencommhandle = waitforconn("127.0.0.1",12345,hello)   
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
   
-  eventhandle = settimer(60, stop_listening, (listencommhandle,)) 
   # wait 60 seconds, then call stop_listening with listencommhandle
+  eventhandle = settimer(60, stop_listening, (listencommhandle,)) 
 }}}
  
 The timer (when called) will stop the communication. settimer returns an eventhandle. An eventhandle is similar to a commhandle in that it can be used to interact with an event. listencommhandle is not the arguments of settimer but that of stop_listening. The comma next to stop_listening and parentheses surrounding listencommhandle indicate that.
@@ -331,6 +336,7 @@ We know how to set a timer to close the connection in 60 seconds, but that doesn
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World!</h1>
@@ -366,6 +372,7 @@ The wily reader may have noticed that the previous program has a race condition.
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World!</h1>
@@ -374,8 +381,8 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   canceltimer(mycontext['stopevent'])
   sleep(5)   # give me 5 seconds to trigger the race
   
-  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   # wait 10 seconds, then call stop_listening with listencommhandle
+  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
  
@@ -384,12 +391,12 @@ def stop_listening(commhandle):
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
-  
+
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello  
   listencommhandle = waitforconn("127.0.0.1",12345,hello)  
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  
-  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
+
   # wait 10 seconds, then call stop_listening with listencommhandle
+  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
 }}}
@@ -403,6 +410,7 @@ We can avoid race conditions by the following changes:
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>
                 <body><h1> Hello World!</h1>
@@ -413,8 +421,8 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
   canceltimer(mycontext['stopevent'])
   
-  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   # wait 60 seconds, then call stop_listening with listencommhandle
+  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
 
@@ -427,11 +435,11 @@ if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   mycontext['stoplock'] = getlock()
   
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
   
-  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   # wait 60 seconds, then call stop_listening with listencommhandle
+  eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
 }}}
@@ -453,16 +461,16 @@ We'll now switch gears from our hello world web server and focus instead on writ
 #!python
 if callfunc == 'initialize':
   
-  myfileobject = open("hello.file","w")   
   # just like python's open() function
+  myfileobject = open("hello.file","w")   
   
-  print >> myfileobject, "hello world"     
   # we also could have used myfileobject.write("hello world\n")
+  print >> myfileobject, "hello world"     
   
   myfileobject.close()
 
-  newfileobject = file("hello.file","r")   
   # we can use file instead of open.   They work the same...
+  newfileobject = file("hello.file","r")   
   
   print newfileobject.read()
   newfileobject.close()
@@ -489,16 +497,17 @@ In this example, we'll change our program to write information to a few differen
 if callfunc == 'initialize':
   for filename in callargs:   # callargs has all of the command line arguments in it.
     
-    myfileobject = open(filename,"w")   
     # just like python's open() function
+    myfileobject = open(filename,"w")   
     
-    print >> myfileobject, "hello world"
     # we also could have used myfileobject.write("hello world\n")
+    print >> myfileobject, "hello world"
 
     myfileobject.close()
 
-  print listdir()
-  # now we'll go through and print the files in this directory (it may include things other than our files).
+    # now we'll go through and print the files in this directory
+    # it may include things other than our files.
+    print listdir()
 
   for filename in callargs:   # let's remove our files now...
     removefile(filename)  
@@ -523,11 +532,11 @@ In this example, we'll retrieve a webpage and print it on the screen.   We're no
 #!python
 if callfunc == 'initialize':
  
-  socketobject = openconn("www.google.com",80)   
   # open a connection to the google web server
+  socketobject = openconn("www.google.com",80)   
   
-  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n")
   # this is a HTTP request...
+  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n")
 
   while True:
      print socketobject.recv(4096)
@@ -547,11 +556,11 @@ In this example, we'll change the previous program to exit after we receive the 
 #!python
 if callfunc == 'initialize':
 
-  socketobject = openconn("www.google.com",80)   
   # open a connection to the google web server
+  socketobject = openconn("www.google.com",80)   
   
-  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n")
   # this is a HTTP request...
+  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n")
 
   # We'll loop and print information from google. 
   # We don't "speak" HTTP, so we'll set a timer to exit in 3 seconds
@@ -567,11 +576,11 @@ Alternatively, we could instead close the socket and check this condition.   Exa
 #!python
 if callfunc == 'initialize':
 
-  socketobject = openconn("www.google.com",80) 
   # open a connection to the google web server
+  socketobject = openconn("www.google.com",80) 
 
-  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n") 
   # this is a HTTP request...
+  socketobject.send("GET /index.html http/1.1\r\nHost: www.google.com\r\n\r\n") 
 
   # We'll loop and print information from google. 
   # We don't "speak" HTTP, so we'll set a timer to close the socket in 3 seconds
