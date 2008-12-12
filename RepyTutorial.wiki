@@ -21,10 +21,6 @@ You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
 
-All examples was tested with the web browser Firefox.
-The internet explorer generated error with our codes.
-Please use the firefox to test our examples.
-
 [[BR]]
 === File execution (example 1.1) ===
 [raw-attachment:restrictions.test restrictions.test], [raw-attachment:example.1.1.repy example.1.1.repy]
