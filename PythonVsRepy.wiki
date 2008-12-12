@@ -70,10 +70,21 @@ Below is a list of the Python built-ins that are '''not''' allowed in Repy
  * help
  * id
  * input
- * 
- * 
- * 
- * 
+ * iter
+ * locals
+ * next
+ * property
+ * raw_input
+ * reload
+ * reversed
+ * sorted
+ * staticmethod
+ * super
+ * unichr
+ * unicode
+ * vars
+ * !__import!__
+
 
 
 
