@@ -147,7 +147,18 @@ abbr,acronym { border:0;
    }  
 }}}
 
+  * Indent changes you are not sure about. CSS code can be tricky and bugs are difficult to find. Therefore, whenever you make a change to an existing file: (1) indent the change, (2) comment the change with your name, date, and explanation of what you were trying to solve. Here's an example:
 
+{{{
+#!C
+#sidebar ul li a {
+     display: block;
+     background-color: #ccc;
+          border-bottom: 1px solid #999; /* ADDED Apr. 9, 2008 */
+     margin: 3px 0 3px 0;
+          padding: 3px;  /* CHANGED Feb. 14, 2008 (Prev. 1px) */
+}
+}}}
 
 [[BR]]
 == HTML specifics ==
