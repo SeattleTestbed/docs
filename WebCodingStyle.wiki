@@ -9,26 +9,20 @@ This guide explains how to format code for the Seattle project that implements f
 This guide contains general rules of thumbs, as well as instructions on how to format specific types of web files used by Seattle. This guide is expected to evolve, and should not be considered complete.
 
 [[BR]]
-== Code lay-out ==
-----
-
-
-[[BR]]
 == Django applications ==
 ----
 
 Django code is written in python, and falls under the purview of Seattle CodingStyle guidelines. However, Django is complex enough to warrant a few special cases.
 
-
 [[BR]]
 == Django models ==
 ----
 
-Django model classes define the interface to the database. Additionally, these models '''document''' the database schema because Django automatically generates the database schema based on these models. Therefore is it critical to thoroughly document each class member and function in these classes. Here is an example:
+  * Django model classes define the interface to the database. Additionally, these models '''document''' the database schema because Django automatically generates the database schema based on these models. Therefore is it critical to thoroughly document each class member and function in these classes. Here is an example:
 
-In general, each class member will need at least a single commented line of explanation.
+  * In general, each class member will need at least a single commented line of explanation.
 
-Each model class must define an __str__() method.  This method is used to generated a meaningful string representation of the model. This method is crucial for effective debugging of Django code.
+  * Each model class must define an __str__() method.  This method is used to generated a meaningful string representation of the model. This method is crucial for effective debugging of Django code.
 
 
 [[BR]]
@@ -215,3 +209,9 @@ There are numerous other resources for learning about effective style guidelines
     * http://www.louddog.com/bloggity/2008/03/css-best-practices.php
     * http://css-tricks.com/indent-css-changes-you-are-unsure-about/
     * http://developer.yahoo.com/yui/reset/
+    * http://www.sitepoint.com/dustmeselectors/
+
+  * HTML
+    * http://validator.w3.org/
+    * https://addons.mozilla.org/en-US/firefox/addon/249
+    * 
