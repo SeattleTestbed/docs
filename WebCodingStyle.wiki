@@ -174,11 +174,18 @@ abbr,acronym { border:0;
 }
 }}}
 
+
 [[BR]]
 == HTML specifics ==
 ----
 
-  * DOCTYPE must be properly declared
+  * Use comments around logical blocks of HTML so that anyone can navigate the page in a text editor.
+
+  * Keep all HTML lines less than 80 characters long. Reading long lines is hard.
+
+  * Always indent nested tags, and use 2 spaces for indentation.
+
+  * Always declare the DOCTYPE
 
   * Head section needs to be minimal and include the following:
     * Title is set
@@ -192,6 +199,8 @@ abbr,acronym { border:0;
 
   * Paragraphs must format text, use lists and labels if possible. Close all tags (e.g. <img .. />
 
+  * Test your pages with a markup validation service (e.g. [http://validator.w3.org/ at w3]) to make sure that your pages are using valid markup.
+
 [[BR]]
 == See Also ==
 ----
@@ -199,6 +208,8 @@ abbr,acronym { border:0;
 There are numerous other resources for learning about effective style guidelines for coding in CSS\HTML and for web-programming more generally. Here are a few links:
 
   * CSS
+    * http://www.smashingmagazine.com/2007/05/10/70-expert-ideas-for-better-css-coding/
+    * http://www.onyx-design.net/weblog2/css/12-articles-and-tools-for-css-structuring-and-optimising/
     * http://woork.blogspot.com/2008/03/write-well-structured-css-file-without.html
     * http://www.smashingmagazine.com/2008/05/02/improving-code-readability-with-css-styleguides/
     * http://www.louddog.com/bloggity/2008/03/css-best-practices.php
