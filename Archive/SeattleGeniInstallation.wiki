@@ -245,7 +245,7 @@ all connections to '''http'''://mysite/geni/* to use
 '''https'''://mysite/geni/*.
 
 {{{
-#!html
+#!sh
 NameVirtualHost *:80
 NameVirtualHost *:443
 
