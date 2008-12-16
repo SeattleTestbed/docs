@@ -7,7 +7,6 @@ This page contains information useful to developers working on Seattle
    * [MailingList seattle-devel mailing list access] instructions
    * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
-   * [SeattleDownload Download and installation instructions] for Seattle
 
  * Getting started with programming in Repy
    * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
@@ -17,6 +16,10 @@ This page contains information useful to developers working on Seattle
    * [DocsFormatting Documentation format guidelines]
    * [CodingStyle Style guidelines] for writing code for Seattle
    * [WebCodingStyle Web style guidelines] for writing web code for Seattle
+
+ * Installation instructions
+   * [SeattleDownload Download and installation instructions] for Seattle
+   * [GENIInstallation Installation instructions] for the GENI portal
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
