@@ -399,7 +399,7 @@ body {
  Minimize use of global variables
 
  Naming conventions::
- 
+
   - Use naming conventions from the [https://seattle.cs.washington.edu/wiki/CodingStyle Python guidelines]
 
   - Variable and function names are in all lower-case.
