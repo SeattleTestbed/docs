@@ -1,0 +1,317 @@
+= GENI portal Installation !HowTo =
+
+This document explains how to do a fresh install of the GENI portal on
+a new machine that is running a Debian-like Linux operating system,
+such as Ubuntu.
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== Install Apache and !MySql ==
+----
+
+Start off the installation by installing Apache, Apache's python module, mysql,
+and a python interface to mysql:
+
+{{{
+#!sh
+$ apt-get install apache2 libapache2-mod-python
+$ apt-get install mysql-server python-mysqldb
+}}}
+
+Later on, we will configure Apache to use a SSL certificate. To do this you will need to generate a private key/CSR (Certificate Signing Request) and possibly purchase a certificate for your site. To generate the necessary information you will need to have installed openssl:
+
+{{{
+#!sh
+$ apt-get install openssl
+}}}
+
+
+[[BR]]
+== Install Django ==
+----
+
+Install the latest official release of Django by following the
+instructions at the following page: http://www.djangoproject.com/download/
+
+[[BR]]
+== Create a geni user ==
+----
+
+The geni user will be in charge of running the GENI website, and have
+access to the GENI database. You can create a new user from the
+command line with the following:
+
+{{{
+#!sh
+$ adduser --home /home/geni --shell /bin/bash geni
+}}}
+
+[[BR]]
+== Setup the database for use by Django ==
+----
+
+At this point you will create the 'geni' database and add to mysql a
+'www' mysql user which will access the geni database. From the mysql
+shell, which you can get to via '''mysql -u root -p''', run the
+following commands: 
+
+{{{
+#!sh
+
+mysql> create database geni;
+
+mysql> GRANT ALL PRIVILEGES 
+ON geni.* 
+TO 'www'@'localhost'
+IDENTIFIED BY 'password';
+}}}
+
+[[BR]]
+== Get the GENI code ==
+----
+
+Check out the geni directory from Seattle SVN into geni's home
+directory (this checkout is anonymous and read-only):
+
+{{{
+#!sh
+$ svn co http://seattle.cs.washington.edu/svn/seattle/trunk/www/geni/
+}}}
+
+This checkout should create a directory /home/geni/geni/ which
+contains all the files you need to run the GENI website. This
+directory, however, is missing a crucial file called settings.py which
+is used by Django to specify django paths, database
+usernames/passwords, etc. This file is not included in the SVN, but
+here is a stripped down version of this file:
+
+{{{
+#!python
+# Django settings for geni project.
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASE_ENGINE = 'mysql'         # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_NAME = 'geni'            # Or path to database file if using sqlite3.
+DATABASE_USER = 'www'             # Not used with sqlite3.
+DATABASE_PASSWORD = '...'         # Not used with sqlite3.
+DATABASE_HOST = 'localhost'       # Set to empty string for localhost. Not used with sqlite3.
+DATABASE_PORT = ''                # Set to empty string for default. Not used with sqlite3.
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'America/Los_Angeles'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+# Absolute path to the directory that holds media.
+# Example: "/home/media/media.lawrence.com/"
+MEDIA_ROOT = '/home/geni/geni/media/'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_URL = '/geni/media/'
+
+# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
+# trailing slash.
+# Examples: "http://foo.com/media/", "/media/".
+ADMIN_MEDIA_PREFIX = '/geni/admin_media/'
+
+# Absolute path to the directory that holds admin media files.
+ADMIN_MEDIA_ROOT='/home/geni/geni/admin_media/'
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '...'
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+)
+
+ROOT_URLCONF = 'geni.urls'
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    '/home/geni/geni/templates/'
+)
+
+LOGIN_REDIRECT_URL='/geni/control/'
+LOGIN_URL = '/geni/accounts/login'
+
+AUTH_PROFILE_MODULE = 'control.user'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'geni.control',
+    'geni.accounts',
+)
+}}}
+
+Assuming that you will be serving the GENI website from
+/home/geni/geni/, you have to change only a few variables in
+settings.py. See the instructions below. '''After you make the
+necessary modifications, place settings.py into /home/geni/geni/.'''
+
+{{{
+#!python
+# If you've installed mysql then this is the correct setting,
+otherwise choose the appropriate setting for your database setup
+DATABASE_ENGINE='mysql'
+
+# Change to your preferred database user for the GENI website
+DATABASE_USER='www'
+
+# Change to the host that is serving your database
+DATABASE_HOST='localhost
+
+# List the password for the www database user
+DATABASE_PASSWORD='...'		
+
+# This needs to be a unique string generated by django: run
+# '$django-admin.py startproject tmp_project' and extract a new
+# SECRET_KEY from tmp_project/settings.py. Then delete
+# tmp_project/
+SECRET_KEY = '....'		
+
+# Paths: leave these default settings if you are going to serve the
+# website from /home/geni/geni/
+MEDIA_ROOT = '/home/geni/geni/media/'
+TEMPLATE_DIRS = '/home/geni/geni/templates'
+ADMIN_MEDIA_ROOT = '/home/geni/geni/media/'
+}}}
+
+You might also want to modify the TIME_ZONE variable and a few others
+where appropriate.
+
+[[BR]]
+== Set up the right PATH variables ==
+----
+
+The GENI codebase needs to know where to find the topmost 'geni'
+module. Additionally, you have to specify the name of the settings
+module. If you've named the settings file from the previous step
+'settings.py' and saved it in the /home/geni/geni/ directory then the
+these variables (typically set in the geni user's ~/.bashrc file for
+convenience) should look like this:
+
+{{{
+#!sh
+$ export PYTHONPATH=$PYTHONPATH:/home/geni/
+$ export DJANGO_SETTINGS_MODULE='geni.settings'
+}}}
+
+[[BR]]
+== Configure Apache sites ==
+----
+
+To provide encryption, GENI relies on SSL. Therefore you will need to
+setup two !VirtualHost entries at the minimum: one for connections to
+port 80 (HTTP), and one for connections to port 443 (SSL). Here is a
+minimal sites files to serve the geni website from:
+https://mysite/geni/. Note that in this snippet, the second
+!VirtualHost entry assumes that you have a server certificate and key
+files setup, and the Location directive assumes that your geni
+installation lives in /home/geni/ and that your django settings module
+is geni.settings. The first !VirtualHost is only provided to redirect
+all connections to '''http'''://mysite/geni/* to use
+'''https'''://mysite/geni/*.
+
+{{{
+#!sh
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+# HTTP
+<VirtualHost *:80>
+ <Location /geni/>
+        redirect permanent /geni/ https://mysite/geni/
+        Options FollowSymLinks
+    </Location>
+</VirtualHost>
+
+# SSL
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/server.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+    SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
+
+    <Location /geni/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE geni.settings
+        PythonOption django.root
+        PythonDebug On
+        PythonPath "['/home/geni/'] + sys.path"
+    </Location>
+</VirtualHost>
+}}}
+
+
+[[BR]]
+== Restart Apache ==
+----
+
+Finally, restart Apache after you are done making adjustmenets to the
+geni sites file.
+
+{{{
+#!sh
+$ /etc/init.d/apache2 restart
+}}}
+
+[[BR]]
+== Create the GENI database tables ==
+----
+
+Finally, you need to setup all the necessary mysql tables in the geni
+database. Run the following commands from within /home/geni/geni/:
+
+{{{
+#!sh
+$ python manage.py syncdb
+}}}
+
+
+[[BR]]
+== Conclusion ==
+----
+
+Congratulations! You should now have a fully operational GENI
+web-interface that you can access at https//mysite/geni/
