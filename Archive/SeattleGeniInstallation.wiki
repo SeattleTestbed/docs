@@ -53,7 +53,7 @@ $ adduser --home /home/geni --shell /bin/bash geni
 == Setup the database for use by Django ==
 ----
 
-At this point you will create the 'geni' database and add to MySql a
+At this point you will create the 'geni' database and add to mysql a
 'www' mysql user which will access the geni database. From the mysql
 shell, which you can get to via '''mysql -u root -p''', run the
 following commands: 
@@ -240,14 +240,14 @@ $ export DJANGO_SETTINGS_MODULE='geni.settings'
 ----
 
 To provide encryption, GENI relies on SSL. Therefore you will need to
-setup two VirtualHost entries at the minimum: one for connections to
+setup two !VirtualHost entries at the minimum: one for connections to
 port 80 (HTTP), and one for connections to port 443 (SSL). Here is a
 minimal sites files to serve the geni website from:
 https://mysite/geni/. Note that in this snippet, the second
-VirtualHost entry assumes that you have a server certificate and key
+!VirtualHost entry assumes that you have a server certificate and key
 files setup, and the Location directive assumes that your geni
-installation lives in /home/geni/ and that your django settinsg module
-is geni.settings. The first VirtualHost is only provided to redirect
+installation lives in /home/geni/ and that your django settings module
+is geni.settings. The first !VirtualHost is only provided to redirect
 all connections to '''http'''://mysite/geni/* to use
 '''https'''://mysite/geni/*.
 
