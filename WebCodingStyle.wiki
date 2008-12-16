@@ -380,14 +380,11 @@ body {
 function animate(delay) {
   <Purpose>
     Animates the drop-down menu by displaying each successive element with a small delay
-
   <Arguments>
     delay:
            The delay to use between elements
-
   <Side Effects>
     None.
-
   <Returns>
     None.
 *****************************************************************/
