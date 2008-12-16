@@ -21,13 +21,6 @@ $ apt-get install apache2 libapache2-mod-python
 $ apt-get install mysql-server python-mysqldb
 }}}
 
-Later on, we will configure Apache to use a SSL certificate. To do this you will need to generate a private key/CSR (Certificate Signing Request) and possibly purchase a certificate for your site. To generate the necessary information you will need to have installed openssl:
-
-{{{
-#!sh
-$ apt-get install openssl
-}}}
-
 
 [[BR]]
 == Install Django ==
@@ -282,6 +275,8 @@ NameVirtualHost *:443
     </Location>
 </VirtualHost>
 }}}
+
+To configure SSL you will probably need to install openssl to generate a private key/CSR (Certificate Signing Request), and then possibly purchase a certificate for your site. For more information see [http://slacksite.com/apache/certificate.php this page].
 
 
 [[BR]]
