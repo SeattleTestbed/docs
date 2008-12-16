@@ -194,6 +194,10 @@ body {
   * Test your pages with a markup validation service (e.g. [http://validator.w3.org/ at w3]) to make sure that your pages are using valid markup.
 
 [[BR]]
+== !JavaScript specifics ==
+----
+
+[[BR]]
 == See Also ==
 ----
 
