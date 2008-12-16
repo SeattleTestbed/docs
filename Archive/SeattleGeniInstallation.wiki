@@ -46,13 +46,11 @@ $ adduser --home /home/geni --shell /bin/bash geni
 == Setup the database for use by Django ==
 ----
 
-At this point you will create the 'geni' database and add to mysql a
-'www' mysql user which will access the geni database. From the mysql
-shell, which you can get to via '''mysql -u root -p''', run the
-following commands: 
+At this point you can create the 'geni' mysql database and add a 'www' mysql user who will access the geni database. Here are the commands to do this, the first of which starts the mysql shell: 
 
 {{{
 #!sh
+$ mysql -u root -p
 
 mysql> create database geni;
 
@@ -74,12 +72,11 @@ directory (this checkout is anonymous and read-only):
 $ svn co http://seattle.cs.washington.edu/svn/seattle/trunk/www/geni/
 }}}
 
-This checkout should create a directory /home/geni/geni/ which
-contains all the files you need to run the GENI website. This
+This checkout will create a directory /home/geni/geni/ containing all the files you need to run the GENI website. This
 directory, however, is missing a crucial file called settings.py which
 is used by Django to specify django paths, database
-usernames/passwords, etc. This file is not included in the SVN, but
-here is a stripped down version of this file:
+usernames/passwords, etc. This file is not included in the SVN (for security reasons), but
+here is a stripped down version of this file that you will modify to fit your installation:
 
 {{{
 #!python
