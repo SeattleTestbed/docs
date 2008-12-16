@@ -1,4 +1,4 @@
-= GENI portal Installation HowTo =
+= GENI portal Installation !HowTo =
 
 This document explains how to do a fresh install of the GENI portal on
 a new machine that is running a Debian-like Linux operating system,
