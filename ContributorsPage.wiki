@@ -19,7 +19,7 @@ This page contains information useful to developers working on Seattle
 
  * Installation instructions
    * [SeattleDownload Download and installation instructions] for Seattle
-   * [GENIInstallation Installation instructions] for the GENI portal
+   * [GeniInstallation Installation instructions] for the GENI portal
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
