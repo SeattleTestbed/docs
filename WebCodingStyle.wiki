@@ -427,6 +427,4 @@ There are numerous other resources for learning about effective style guidelines
     * http://www.sitepoint.com/dustmeselectors/
 
   * HTML
-    * 
     * https://addons.mozilla.org/en-US/firefox/addon/249
-    * 
