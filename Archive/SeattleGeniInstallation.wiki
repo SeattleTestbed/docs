@@ -16,7 +16,7 @@ Start off the installation by installing Apache, Apache's python module, mysql,
 and a python interface to mysql:
 
 {{{
-#!shell
+#!bash
 $ apt-get install apache2 libapache2-mod-python
 $ apt-get install mysql-server python-mysqldb
 }}}
@@ -38,7 +38,7 @@ access to the GENI database. You can create a new user from the
 command line with the following:
 
 {{{
-#!shell
+#!bash
 $ adduser --home /home/geni --shell /bin/bash geni
 }}}
 
@@ -51,7 +51,10 @@ At this point you will create the 'geni' database and add to MySql a
 shell, which you can get to via '''mysql -u root -p''', run the
 following commands: 
 
-{{{ #!shell mysql> create database geni;
+{{{
+#!bash
+
+mysql> create database geni;
 
 mysql> GRANT ALL PRIVILEGES 
 ON geni.* 
@@ -67,7 +70,7 @@ Check out the geni directory from Seattle SVN into geni's home
 directory (this checkout is anonymous and read-only):
 
 {{{
-#!shell
+#!bash
 $ svn co http://seattle.cs.washington.edu/svn/seattle/trunk/www/geni/
 }}}
 
@@ -220,7 +223,7 @@ these variables (typically set in the geni user's ~/.bashrc file for
 convenience) should look like this:
 
 {{{
-#!shell
+#!bash
 $ export PYTHONPATH=$PYTHONPATH:/home/geni/
 $ export DJANGO_SETTINGS_MODULE='geni.settings'
 }}}
@@ -282,7 +285,7 @@ Finally, restart Apache after you are done making adjustmenets to the
 geni sites file.
 
 {{{
-#!shell
+#!bash
 $ /etc/init.d/apache2 restart
 }}}
 
@@ -294,7 +297,7 @@ Finally, you need to setup all the necessary mysql tables in the geni
 database. Run the following commands from within /home/geni/geni/:
 
 {{{
-#!shell
+#!bash
 $ python manage.py syncdb
 }}}
 
