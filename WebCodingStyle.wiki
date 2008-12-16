@@ -181,7 +181,7 @@ abbr,acronym {
 }}}
 
  Browser-specific hacks must be well commented::
- 
+
   * Explain exactly the problem the code solves or provide a link to an article that documents the problem (e.g. [http://en.wikipedia.org/wiki/Internet_Explorer_box_model_bug IE box model bug])
 
   * Explain where you found your solution and how it works.
@@ -189,7 +189,7 @@ abbr,acronym {
   * Remember that a cryptic hack is the worst kind of hack.
 
  Group related CSS properties::
-  
+
   * Positioning properties go together font properties go together, etc
 
   * Separate groups of properties with blank lines
@@ -212,13 +212,11 @@ body {
 }  
 }}}
 
- Indent changes you are not sure about::
+ Whenever you make a change to an existing file::
 
-  * Whenever you make a change to an existing file:
-
-    * Indent the change
+  * Indent the change
      
-    * Comment the change with your name, date, and explanation of what you were trying to solve. Here's an example:
+  * Comment the change with your name, date, and explanation of what you were trying to solve. Here's an example:
 {{{
 #!C
 #sidebar ul li a {
