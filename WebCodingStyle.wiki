@@ -68,7 +68,7 @@ status = models.CharField("Node status", max_length=1024)
 #!python
 def __unicode__(self):
     return "%s:%s:%d"%(self.user.www_user.username, self.ip, self.port)
-}}}}
+}}}
 
 
 [[BR]]
