@@ -314,4 +314,4 @@ $ python manage.py syncdb
 ----
 
 Congratulations! You should now have a fully operational GENI
-web-interface that you can access at https//mysite/geni/
+web-interface that you can access at https://mysite/geni/
