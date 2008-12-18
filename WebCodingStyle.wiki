@@ -474,6 +474,7 @@ There are numerous other resources for learning about effective style guidelines
     * http://css-tricks.com/indent-css-changes-you-are-unsure-about/
     * http://developer.yahoo.com/yui/reset/
     * http://www.sitepoint.com/dustmeselectors/
+    * http://www.evolt.org/article/Ten_CSS_tricks_you_may_not_know/17/60369/
 
   * HTML
     * https://addons.mozilla.org/en-US/firefox/addon/249
