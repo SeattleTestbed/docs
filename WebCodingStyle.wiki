@@ -111,14 +111,14 @@ example goes here
 
   - Use the {{{!important}}} property for CSS hacks dealing with IE.
 
-    Normally in CSS whichever rule is specified last takes precedence. However if you use !important after a command then this CSS command will take precedence regardless of what appears after it. This is true for all browsers except IE. An example of this would be:
-
+    Normally in CSS whichever rule is specified last takes precedence. However if you use {{{!important}}} after a command then this CSS command will take precedence regardless of what appears after it. This is true for all browsers except IE. An example of this would be:
 {{{
 #!C
-margin-top: 3.5em !important; margin-top: 2em
+margin-top: 3.5em !important;
+margin-top: 2em;
 }}}
 
-    So, the top margin will be set to 3.5em for all browsers except IE, which will have a top margin of 2em. This can sometimes come in useful, especially when using relative margins (such as in this example) as these can display slightly differently between IE and other browsers. See also http://www.yellowjug.com/web-design/the-importance-of-important-in-css/
+    So, the top margin will be set to 3.5em for all browsers except in IE, which will have a top margin set to 2em. This can come in useful when using relative margins (such as in this example) as relative margins are displayed slightly differently between IE and other browsers. For more information see [http://www.yellowjug.com/web-design/the-importance-of-important-in-css/ this article].
 
 
  Define elements styles in CSS, not !JavaScript::
