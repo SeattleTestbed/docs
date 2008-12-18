@@ -58,9 +58,9 @@ Educational support, auto-grading, and student support.
 TCP over UDP flow control, anonymous donation, and other interactions with Tor project.
 
 
-== Square peg in round hole ==
+== Bot Master ==
 
-Xax or VX32 integration.
+Reading remote logs, "service interface" on nodes, backup software update mechanism.
 
 
 == Measure twice, cut once == 
