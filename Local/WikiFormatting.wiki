@@ -24,3 +24,7 @@
 print "hello world"
 }}}
 }}}
+
+ * For adding HTML code the {{{#!html}}} directive should be used
+ 
+ * For CSS code, use the {{{#!C}}} directive
