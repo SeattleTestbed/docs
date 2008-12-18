@@ -109,9 +109,7 @@ example goes here
 
  For IE hacks employ CSS solutions, not !JavaScript conditionals::
 
-  - Use the {{{!important}}} property for CSS hacks dealing with IE.
-
-    Normally in CSS whichever rule is specified last takes precedence. However if you use {{{!important}}} after a command then this CSS command will take precedence regardless of what appears after it. This is true for all browsers except IE. An example of this would be:
+  - Use the {{{!important}}} property for CSS hacks dealing with IE. Normally in CSS whichever rule is specified last takes precedence. However if you use {{{!important}}} after a command then this CSS command will take precedence regardless of what appears after it. This is true for all browsers except IE. An example of this would be:
 {{{
 #!C
 margin-top: 3.5em !important;
