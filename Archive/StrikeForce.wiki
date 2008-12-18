@@ -68,6 +68,13 @@ Benchmarking service, actually getting 10%, and dynamic resource re-allocation.
 Output improvements, exception handling, and seattle lib clean-up.
 
 
+== Lisping ==
+
+'''Not accepting new members'''
+
+Porting MapReduce, Hadoop integration, and possible integration with end applications
+
+
 == Speciesism ==
 
 '''Not accepting new members'''
