@@ -72,7 +72,7 @@ Output improvements, exception handling, and seattle lib clean-up.
 
 '''Not accepting new members'''
 
-Porting MapReduce, Hadoop integration, and possible integration with end applications
+Porting !MapReduce, Hadoop integration, and possible integration with end applications
 
 
 == Speciesism ==
