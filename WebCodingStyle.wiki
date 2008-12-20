@@ -124,13 +124,31 @@ margin-top: 2em;
   - Yes
 {{{
 #!C
-examples goes here
+/* in JavaScript */
+var staticvessel = document.createElement("span");
+staticvessel.id = "staticvessel";
+$("staticvessel").addClassName("staticvessel");
+
+/* in CSS */
+.staticvessel {
+   display: inline-block;
+   width: 192px;
+   height: 172px;
+   textAlign: center;
+}
+
 }}}
 
   - No
 {{{
 #!C
-example goes here
+/* in JavaScript */
+var staticvessel = document.createElement("span");
+staticvessel.id = "staticvessel";
+staticvessel.style.display = "inline-block";
+staticvessel.style.width = "192px";
+staticvessel.style.height = "172px";
+staticvessel.style.textAlign = "center";
 }}}
 
 [[BR]]
