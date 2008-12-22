@@ -54,7 +54,7 @@ GENI relies on having a database that supports [http://en.wikipedia.org/wiki/ACI
 default-storage_engine = innodb
 }}}
 
-After you make this change, restart mysql by issuing {{{/etc/init.d/mysql restart}} from the command line.
+After you make this change, restart mysql by issuing {{{/etc/init.d/mysql restart}}} from the command line.
 
 At this point you can create the 'geni' mysql database and add a 'www' mysql user who will access the geni database. Here are the commands to do this, the first of which starts the mysql shell: 
 
