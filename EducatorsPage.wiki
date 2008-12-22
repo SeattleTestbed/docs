@@ -41,38 +41,10 @@ The below assignments are geared toward an undergraduate class (so graduate clas
 
   * P2P Data Streaming
 
-    One of the uses for Seattle is as a measurement platform.
-Because Seattle nodes are spread throughout the Internet, each node
-offers a valuable vantage point from which to observe Internet
-activity such as congestion, routing instabilities, outages, and much
-more. One way to think about Seattle nodes then is as sensors. The
-nodes generate a constant stream of data about what they observe from
-their vantage point. It is then up to the researcher to collect this
-data and process it in a meaningful manner. The database project for
-this measurement use case of Seattle would involve designing and
-implementing an infrastructure capable of organizing potentially
-millions of data streams coming from Seattle nodes in a way that
-allows the researcher to query the node stream data without needing to
-aggregate all the data across all time in a centralized manner. This
-may be done by, for example, delegating stream aggregation to Seattle
-nodes that have more resources at their disposal, and by constructing
-a tree structure for Seattle nodes in which the sensing nodes are the
-leaves of the tree and the researcher is at the root of the tree.
+    One of the uses for Seattle is as a measurement platform. Because Seattle nodes are spread throughout the Internet, each node offers a valuable vantage point from which to observe Internet activity such as congestion, routing instabilities, outages, and much more. One way to think about Seattle nodes then is as sensors. The nodes generate a constant stream of data about what they observe from their vantage point. It is then up to the researcher to collect this data and process it in a meaningful manner. The database project for this measurement use case of Seattle would involve designing and implementing an infrastructure capable of organizing potentially millions of data streams coming from Seattle nodes in a way that allows the researcher to query the node stream data without needing to aggregate all the data across all time in a centralized manner. This may be done by, for example, delegating stream aggregation to Seattle nodes that have more resources at their disposal, and by constructing a tree structure for Seattle nodes in which the sensing nodes are the leaves of the tree and the researcher is at the root of the tree.
 
 
   * P2P ACID Databases
 
-    A Seattle service may use millions of nodes, but it may
-also use hundreds of just a dozen of nodes. Distributed Hash Table
-(DHTs) are typically used to provide data storage to systems with
-thousands to millions of nodes. However, for systems comprised of just
-a dozen nodes, it is simpler and much more efficient to use a
-database. Traditional databases, however, do not cope well with
-peer-to-peer environments (e.g. such as in the Seattle platform). In
-this project, your aim will be to explore, design, and implement a
-data store organization that combines the advantages of databases with
-the resilience of DHTs. You will design a database that supports ACID
-properties, but that can also thrive in a peer-to-peer settings in
-which nodes join and leave the network unpredictably and in which
-nodes have disparate resources at their disposal.
+   A Seattle service may use millions of nodes, but it may also use hundreds of just a dozen of nodes. Distributed Hash Table (DHTs) are typically used to provide data storage to systems with thousands to millions of nodes. However, for systems comprised of just a dozen nodes, it is simpler and much more efficient to use a database. Traditional databases, however, do not cope well with peer-to-peer environments (e.g. such as in the Seattle platform). In this project, your aim will be to explore, design, and implement a data store organization that combines the advantages of databases with the resilience of DHTs. You will design a database that supports ACID properties, but that can also thrive in a peer-to-peer settings in which nodes join and leave the network unpredictably and in which nodes have disparate resources at their disposal.
 
