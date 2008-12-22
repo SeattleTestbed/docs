@@ -43,8 +43,18 @@ $ adduser --home /home/geni --shell /bin/bash geni
 }}}
 
 [[BR]]
-== Setup the database for use by Django ==
+== Configure mysql for Django use ==
 ----
+
+GENI relies on having a database that supports [http://en.wikipedia.org/wiki/ACID ACID properties]. Thus your mysql database must use the InnoDB storage engine instead of the default MyISAM engine. You must change the default storage engine '''before''' you create any django tables as they'll be created with the MyISAM engine by default. To change this default, add the following line to your mysql's cnf file (typically located in /etc/mysql/my.cnf), under the [mysqld] section:
+
+{{{
+#!sh
+[mysqld]
+default-storage_engine = innodb
+}}}
+
+After you make this change, restart mysql by issuing {{{/etc/init.d/mysql restart}} from the command line.
 
 At this point you can create the 'geni' mysql database and add a 'www' mysql user who will access the geni database. Here are the commands to do this, the first of which starts the mysql shell: 
 
@@ -59,6 +69,7 @@ ON geni.*
 TO 'www'@'localhost'
 IDENTIFIED BY 'password';
 }}}
+
 
 [[BR]]
 == Get the GENI code ==
