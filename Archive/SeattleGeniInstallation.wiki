@@ -12,13 +12,13 @@ such as Ubuntu.
 == Install Apache and !MySql ==
 ----
 
-Start off the installation by installing Apache, Apache's python module, mysql,
-and a python interface to mysql:
+Start off the installation by installing Apache, Apache's python module, mysql, a python interface to mysql, and ntp (for time synchronization):
 
 {{{
 #!sh
 $ apt-get install apache2 libapache2-mod-python
 $ apt-get install mysql-server python-mysqldb
+$ apt-get install ntp
 }}}
 
 
