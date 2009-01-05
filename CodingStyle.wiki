@@ -730,6 +730,8 @@ except KeyError:
 
 
 
+
+
     - Use string methods instead of the string module.
 
       String methods are always much faster and share the same API with
@@ -871,10 +873,16 @@ print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix
       these functions and to write longer code that produces the same result instead 
       because using these functions makes your code very dense and difficult to read.
 
+      Do not use syntax like:
+{{{
+#!python
+must_testy = [must_test(line) for line in changed.split("\n")]
+}}}
+
 
     Write test cases
 
-      Since you're going to want to test your module anyways before integrating it 
+      Since you're going to test your module anyways before integrating it 
       into the rest of Seattle (right?), it makes sense to do it in a reusable way.   
       This way when you make changes later, you can immediately test to see if anything 
       is broken.
