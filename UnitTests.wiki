@@ -44,7 +44,7 @@ On the FIRST command prompt type the following command:
 {{{
 python preparetest.py -t <test_directory_name>
 }}}
-The -t flag is optional if you are only planning to run the node manager tests.
+The -t flag is required even if you are only planning to run the node manager tests.
 
 On the SECOND command prompt enter the following sequence of commands:
 {{{
