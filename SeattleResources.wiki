@@ -1,0 +1,24 @@
+= Web Server Layout for Seattle / Beraber / GENI services =
+
+== Production ==
+
+GENI (http)
+GENI (sql)
+GENI installer-maker client
+State transition daemons
+Hash Table
+
+== Stable == 
+
+Seattle Wiki
+Seattle SVN
+Seattle installer-maker server
+Seattle software updater
+Beraber (http)
+GENI test (http)
+
+== Unstable ==
+
+Autograder
+Black box testing
+Deployment scripts
