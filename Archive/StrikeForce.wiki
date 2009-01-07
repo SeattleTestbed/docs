@@ -19,14 +19,14 @@ Here is a list of the Winter 09 teams:
 ----
 
 == Sleight of hand ==
-''Armon''
+''Armon, Dennis''
 
 NAT traversal, IPv6, and DHCP support.
 
 ----
 
 == Micro-machines ==
-''Armon, Carter''
+''Armon, Carter, Mitchell''
 
 Portability to mobile devices, location services, and MobileASL project support.
 
@@ -78,7 +78,7 @@ Benchmarking service, actually getting 10%, and dynamic resource re-allocation.
 
 
 == Lipstick on a pig ==
-''Andreas, Sean''
+''Andreas, Sean, Mitchell''
 
 Output improvements, exception handling, and seattle lib clean-up.
 
