@@ -63,3 +63,9 @@ Repy API -- Justin Cappos, Jeff Flatten
 
 Test framework -- Brent Couvrette
 
+
+
+[[BR]]
+== External Contributors ==
+----
+Jake Appelbaum -- Patch to fix a race conditions in installer
