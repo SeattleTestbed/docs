@@ -20,4 +20,5 @@ Please keep the list ordered alphabetically by SVN username.
 || Peter || || || || peter ||
 || Sean || || || || shawiz ||
 || Kyungil || || || || sojc701 ||
-|| Yih || || || || yskhoo ||
+|| Yih || || || || yskhoo ||
+|| Mitchell Hashimoto || mitch at cs d0t washington d0t edu || 970-231-9011 || mitchellh || mitchellh ||
