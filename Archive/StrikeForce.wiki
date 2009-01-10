@@ -32,7 +32,7 @@ Portability to mobile devices, location services, and MobileASL project support.
 
 ----
 
-== [wiki:Eye candy] ==
+== [wiki:EyeCandy Eye candy] ==
 ''Sean, Alper''
 
 Seattle/GENI website, and web back end improvements.
