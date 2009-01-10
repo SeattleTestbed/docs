@@ -177,11 +177,37 @@ def hello(ip, port, sockobj, thiscommhandle, listencommhandle):
   # close my connection with this user (we could also do sockobj.close())
 
 if callfunc == 'initialize':
-   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
+
 }}}
 
-The initialize portion says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345, and when you get, it calls the function hello().
+The initialize portion has two options.  If you run it locally, it says, wait for a connection on 127.0.0.1 (the "local" IP of the computer), port 12345, and when you get, it calls the function hello().
+
+{{{
+127.0.0.1 is a special IP address. 
+It is localhost and means this computer. It is used to access the computer currently used.
+}}}
+
+Otherwise, you're running it remotely and need to pass it your GENIport.  For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the Seattle GENI website and on the User Info page, look to see what port number it indicates. You'll see a page like below.
+
+[[Image(geniport.jpg)]]
+
+You should write your GENIport down as you'll need this value repeatedly.
+
 The waitforconn() function returns a commhandle. A commhandle is a way for your program to refer to a connection. You can pass a commhandle to other functions to do operations. For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
 {{{
 waitforconn(IP address, Port number, Callback function)
@@ -195,11 +221,6 @@ Return : event handler, commhandle
 Repy is event-driven programming language. 
 waiforconn is the one of the examples. 
 waitforconn calls callback function given as argument only whenever connection is created.
-}}}
-
-{{{
-127.0.0.1 is a special IP address. 
-It is localhost and means this computer. It is used to access the computer currently used.
 }}}
 
 The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
@@ -216,28 +237,51 @@ Commhandle1 is the new socket created by accept function,
 and commhadle2 is initial socket created by socket function.
 }}}
 
-Run this program the same as in the previous example, substituting "run example.1.1.repy" for "run example.1.2.repy"
+'''Running locally
+
+To run this program locally, you can type like below.
 
 {{{
 #!python
-default@browsegood !> run example.1.2.repy  
-default@browsegood !> list                            
+python repy.py restrictions.test example.1.2.repy
+}}}
+
+Then open a web browser and in the address bar type: 127.0.0.1:12345  (this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage.
+
+To stop the program, press CTRL-C.
+
+'''Running remotely
+
+Open seash the same as in the previous example but choose a single vessel.
+
+{{{
+#!python
+default@ !> on %1  
+default@%1 !>
+}}}
+
+Then, run this program passing it your GENIport.
+
+{{{
+#!python
+default@%1 !> run example.1.2.repy GENIport
+default@%1 !> list                            
   ID   Own                  Name                Status      Owner Information
-  %1     *       IP address:port:vesselname     Started     
+  %1             IP address:port:vesselname     Started     
 }}}
 
 Notice that the program is "Started" instead of "Terminated". It's still running! 
 
-Then open a web browser and in the address bar type: 127.0.0.1:12345  (this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage.  
+Now open a web browser and in the address bar type: IP_of_%1:GENIport.  For example, if 1.2.3.4 is the IP address of %1, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321". If the node doesn't respond, try again.    You should see the hello world webpage.
 
 To stop the program, in the shell type:
 
 {{{
 #!python
-default@browsegood !> stop  # This will stop any programs that are still running...  
-default@browsegood !> list                          
+default@%1 !> stop  # This will stop any programs that are still running...  
+default@%1 !> list                          
   ID    Own                Name                Status          Owner Information
-  %1      *      IP address:port:vesselname    Stopped   
+  %1             IP address:port:vesselname    Stopped   
 }}}
 
 Notice that the program is now "Stopped".   It's not running
@@ -449,6 +493,7 @@ Now if you run the program repeatedly, it shouldn't be possible to trigger a rac
 [[BR]]
 == File Operations ==
 ----
+
 
 [[BR]]
 === Introduction to Files (example 2.1) ===
