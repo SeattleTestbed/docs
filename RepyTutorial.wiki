@@ -307,8 +307,22 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 if callfunc == 'initialize':
   global pagecount   # GLOBALS ARE NOT ALLOWED IN REPY
   pagecount = 0
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
 }}}
 
 This code will not work because globals do not exist in repy. However, there is a mycontext dictionary provided for this purpose.   The code can be written as follows:
@@ -325,11 +339,24 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello) 
 }}}
 
-Start the program using the shell, then open a web browser and in the address bar type: 127.0.0.1:12345(this says to navigate to the "local" IP of the computer at port 12345).   You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
+Start the program using the shell, then open a web browser and in the address bar type: IP_of_vessel:GENIport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
 
 [[BR]]
 === Adding a Timer and listing the elapsed time (example 1.4) ===
@@ -355,8 +382,21 @@ def stop_listening(commhandle):
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
 
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello  
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
   
   # wait 60 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(60, stop_listening, (listencommhandle,)) 
@@ -366,7 +406,7 @@ The timer (when called) will stop the communication. settimer returns an eventha
 
 getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
 
-Start the program and then open a web browser and in the address bar type: 127.0.0.1:12345.   You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
+Start the program and then open a web browser and in the address bar type: IPaddress_of_vessel:GENIport.  You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
 
 [[BR]]
 === Interacting with Timers (example 1.5) ===
@@ -399,7 +439,23 @@ def stop_listening(commhandle):
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)  
+
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
+
   eventhandle = settimer(10, stop_listening, (listencommhandle,))
   mycontext['stopevent'] = eventhandle
 }}}
@@ -436,8 +492,21 @@ def stop_listening(commhandle):
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
 
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello  
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)  
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
+  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
 
   # wait 10 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
@@ -479,8 +548,21 @@ if callfunc == 'initialize':
   mycontext['pagecount'] = 0
   mycontext['stoplock'] = getlock()
   
+  if len(callargs) > 1:
+    raise Exception("Too many call arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  elif len(callargs) == 1:
+    port = int(callargs[0])
+    ip = getmyip()
+
+  # Running locally:
   # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  listencommhandle = waitforconn("127.0.0.1",12345,hello)   
+  else:
+    port = 12345
+    ip = '127.0.0.1'
+  listencommhandle = waitforconn(ip,port,hello)
   
   # wait 60 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
