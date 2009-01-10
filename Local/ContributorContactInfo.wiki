@@ -7,7 +7,7 @@ Please keep the list ordered alphabetically by SVN username.
 
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
 || Alper || || || alpers || alpers ||
-|| Andreas || || || asekine || asekine ||
+|| Andreas || asekine at cs d0t washington d0t edu|| || asekine || asekine ||
 || Armon Dadgar || armond at cs d0t washington d0t edu || 206-914-6233 || armon ||  armon ||
 || Carter Butaud || butaud at cs d0t washington d0t edu || 206-459-3483 || butaud || butaud ||
 || Brent Couvrette || couvb at cs d0t washington d0t edu ||    || couvb ||couvb ||
