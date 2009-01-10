@@ -220,7 +220,7 @@ Run this program the same as in the previous example, substituting "run example.
 
 {{{
 #!python
-default@browsegood !> run example.1.2.py  
+default@browsegood !> run example.1.2.repy  
 default@browsegood !> list                            
   ID   Own                  Name                Status      Owner Information
   %1     *       IP address:port:vesselname     Started     
@@ -421,7 +421,7 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
 
   canceltimer(mycontext['stopevent'])
   
-  # wait 60 seconds, then call stop_listening with listencommhandle
+  # wait 10 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
