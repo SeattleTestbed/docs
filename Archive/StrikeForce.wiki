@@ -92,7 +92,7 @@ Better RSA implementation
 
 ----
 
-== Lisping ==
+== [wiki:Lisping] ==
 
 ''Alper'' '''Not accepting new members'''
 
