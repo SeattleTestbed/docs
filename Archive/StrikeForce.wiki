@@ -47,7 +47,7 @@ Deployment onto nodes, black box testing / repeated testing, and software update
 ----
 
 
-== Indoctrination ==
+== [wiki:Indoctrination] ==
 ''Alper, Michael, Sal, Eric''
 
 Educational support, auto-grading, and student support.
