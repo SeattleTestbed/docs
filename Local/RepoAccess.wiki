@@ -13,6 +13,10 @@ To commit changes to the repository, you must have an ssh account on the svn ser
 
   {{{svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/}}}
 
+If you want to perform the checkout as another user, say user BOB, then you can use the following line:
+
+  {{{svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/}}}
+
 = Quick Guide to SVN =
 
 To take a look inside the repository without checking anything out:
