@@ -1,5 +1,5 @@
 = Lisping =
 
- * Porting MapReduce
+ * Porting !MapReduce
  * Hadoop integration
  * integration with end applications 
