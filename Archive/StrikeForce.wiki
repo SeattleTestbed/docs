@@ -55,7 +55,7 @@ Educational support, auto-grading, and student support.
 ----
 
 
-== Top Secret ==
+== [wiki:TopSecret Top Secret] ==
 ''Michael, Andreas''
 
 TCP over UDP flow control, anonymous donation, and other interactions with Tor project.
