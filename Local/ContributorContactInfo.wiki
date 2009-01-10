@@ -15,6 +15,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Ivan Beschastnikh || ivan at cs d0t washington d0t edu || || ivan || ivan ||
 || Jeff || || || || jflat06 ||
 || Justin Cappos || justinc at cs d0t washington d0t edu ||    || justinc || justinc ||
+|| Eric Kimbrel || kimbrl at cs d0t washington d0t edu ||    || kimbrl || kimbrl ||
 || Michael Moshofsky || mikemosh at cs d0t washington d0t edu || 503-910-7091 || mikemosh|| !MikeMosh ||
 || Peter || || || || peter ||
 || Sean || || || || shawiz ||
