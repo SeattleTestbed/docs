@@ -68,4 +68,5 @@ Test framework -- Brent Couvrette
 [[BR]]
 == External Contributors ==
 ----
-Jake Appelbaum -- Patch to fix a race conditions in installer
+
+Patch to fix race conditions in installer -- Jake Appelbaum
