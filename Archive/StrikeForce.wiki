@@ -19,7 +19,7 @@ Here is a list of the Winter 09 teams:
 ----
 
 == Sleight of hand ==
-''Armon, Dennis''
+''Armon, Dennis, Eric''
 
 NAT traversal, IPv6, and DHCP support.
 
@@ -48,7 +48,7 @@ Deployment onto nodes, black box testing / repeated testing, and software update
 
 
 == Indoctrination ==
-''Alper, Michael, Sal''
+''Alper, Michael, Sal, Eric''
 
 Educational support, auto-grading, and student support.
 
