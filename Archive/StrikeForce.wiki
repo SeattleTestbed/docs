@@ -1,6 +1,6 @@
 = Strike Force =
 
-strike force (n.) -- an armed force, usually small in size, that is equipped to deliver a strong offensive.
+'''''strike force (n.) -- an armed force, usually small in size, that is equipped to deliver a strong offensive.'''''
 
 Rather than dividing tasks by individual, we will set a small team on each task and have them focus their efforts.   Project members will belong to one or more teams and will be responsible for helping those teams to meet their goals.   There will be weekly coding sprints (Saturdays) where Justin and Ivan will be available to try and push the teams to meet their deadlines.   There would likely be ~2 teams that would sprint toward different goals on the same day and Justin and Ivan will work alternatively with them as needed.
 
@@ -41,4 +41,4 @@ The requirements are:
 
 ||[wiki:Speciesism]||Cosmin '''*'''||Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition||
 
-'''*''' : Not accepting new members
+'''*''' Not accepting new members
