@@ -11,7 +11,7 @@ Coding Sprint: Jan 17th
 
 Jan 10th - Jan 15th
 
-Sal: Bring my Python "deployment" program up to the standards specified in the code style guidelines and add unit tests.   Ensure that information is being logged from the program running on remote systems.
+Sal: Bring Justin's Python "deployment" program up to the standards specified in the code style guidelines and add unit tests.   Ensure that information is being logged from the program running on remote systems.
 
 Brent: Check to see if the state of the files that are on the system is normal and if not log enough information that we can understand the issue.
 
