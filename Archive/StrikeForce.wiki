@@ -15,6 +15,9 @@ The requirements are:
 = Winter'09 teams =
 ----
 
+||Strike Force||Members||Purpose||
+----
+
 ||[wiki:SleightOfHand Sleight of hand]||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
 
 ||[wiki:MicroMachines Micro-machines]||Armon, Carter, Mitchell||Portability to mobile devices, location services, and MobileASL project support||
