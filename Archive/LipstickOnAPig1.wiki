@@ -1,0 +1,27 @@
+= Lipstick on a Pig =
+ * 
+= Overview =
+
+
+== Exception Handling ==
+
+
+Coding Sprint: Feb ?th
+
+Jan 10th - Jan 17th
+
+Mitchell: Examine exception hierarchy of Java or Python.   Make notes on one type of call (file I/O, nw, etc.).
+
+Andreas: Look at the sort of exceptions Repy might generate and what should be thrown.   Try to finish one type of call (file I/O, nw, etc.).
+
+Both: Synchronize so that you look at the same call type (file I/O)
+
+Jan 17th - Jan 24nd
+
+Mitchell: Examine exception hierarchies of other popular languages.   "Present" in meeting
+
+Andreas: Complete looking over all repy call types
+
+Jan 24th - Jan 31st
+
+TBD -- discussed in meeting.
