@@ -27,13 +27,13 @@ The requirements are:
 
 ||[wiki:Indoctrination]||Alper, Michael, Sal, Eric||Educational support, auto-grading, and student support||
 
-||[wiki:TopSecret Top Secret]||Michael, Andreas||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
+||[wiki:TopSecret Top Secret]||Michael, Andreas, Richard||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
 
 ||[wiki:BotMaster Bot Master]||Brent, Sean||Reading remote logs, "service interface" on nodes, backup software update mechanism||
 
 ||[wiki:MeasureTwiceCutOnce Measure twice, cut once]||Brent, Armon, Carter, Anthony||Benchmarking service, actually getting 10%, and dynamic resource re-allocation||
 
-||[wiki:Lipstickonapig Lipstick on a pig]||Andreas, Sean, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
+||[wiki:Lipstickonapig Lipstick on a pig]||Andreas, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
 
 ||[wiki:2+2= 2 + 2 = ?]||Anthony '''*'''||Better RSA implementation||
 
