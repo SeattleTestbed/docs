@@ -14,7 +14,7 @@ Mitchell: Examine exception hierarchy of Java or Python.   Make notes on one typ
 
 Andreas: Look at the sort of exceptions Repy might generate and what should be thrown.   Try to finish one type of call (file I/O, nw, etc.).
 
-Both: Synchronize so that you look at the same call type (file I/O)
+Both: Synchronize so that you look at the same call type (file I/O, nw, etc.)
 
 Jan 17th - Jan 24nd
 
