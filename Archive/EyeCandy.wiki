@@ -10,11 +10,11 @@ This force is concerned with the GENI web portal. This portal consists of html/c
 There is a production server that runs the GENI portal, and test server that is used for development work. We will periodically push updates to the production server once the new code has been extensively tested and has been verified to work.
 
 = Week 1 =
-
  * Add parallelism to resource acquisition and resource release
  * Work on new design\layout for the portal
 
 = Next Meeting =
+ * Set up a coding sprint date and deadlines
  * Current django back end overview and tutorial
  * Review of new portal design
 
