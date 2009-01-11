@@ -15,9 +15,9 @@ The requirements are:
 = Winter'09 teams =
 ----
 
-||Sleight of hand||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
+||[wiki:SleightOfHand Sleight of hand]||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
 
-||Micro-machines||Armon, Carter, Mitchell||Portability to mobile devices, location services, and MobileASL project support||
+||[wiki:MicroMachines Micro-machines]||Armon, Carter, Mitchell||Portability to mobile devices, location services, and MobileASL project support||
 
 ||[wiki:EyeCandy Eye candy]||Sean, Alper||Seattle/GENI website, and web back end improvements||
 
