@@ -16,7 +16,6 @@ The requirements are:
 ----
 
 ||Strike Force||Members||Purpose||
-----
 
 ||[wiki:SleightOfHand Sleight of hand]||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
 
