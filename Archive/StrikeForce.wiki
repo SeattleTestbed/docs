@@ -33,8 +33,10 @@ The requirements are:
 
 ||[wiki:Lipstickonapig Lipstick on a pig]||Andreas, Sean, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
 
-||[wiki:2+2= 2 + 2 = ?]||Anthony '''Not accepting new members'''||Better RSA implementation||
+||[wiki:2+2= 2 + 2 = ?]||Anthony '''*'''||Better RSA implementation||
 
-||[wiki:Lisping]||Alper '''Not accepting new members'''||Porting !MapReduce, Hadoop integration, and possible integration with end applications||
+||[wiki:Lisping]||Alper '''*'''||Porting !MapReduce, Hadoop integration, and possible integration with end applications||
 
-||[wiki:Speciesism]||Cosmin '''Not accepting new members'''||Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition||
+||[wiki:Speciesism]||Cosmin '''*'''||Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition||
+
+'''*''' : Not accepting new members
