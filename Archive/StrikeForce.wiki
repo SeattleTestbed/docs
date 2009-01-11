@@ -39,7 +39,7 @@ Seattle/GENI website, and web back end improvements.
 
 ----
 
-== Infection and Recurrence ==
+== [wiki:InfectionAndRecurrence Infection and Recurrence] ==
 ''Brent, Carter, Cosmin, Sal''
 
 Deployment onto nodes, black box testing / repeated testing, and software updates.
@@ -62,14 +62,14 @@ TCP over UDP flow control, anonymous donation, and other interactions with Tor p
 ----
 
 
-== Bot Master ==
+== [wiki:BotMaster Bot Master] ==
 ''Brent, Sean''
 
 Reading remote logs, "service interface" on nodes, backup software update mechanism.
 
 ----
 
-== Measure twice, cut once == 
+== [wiki:MeasureTwiceCutOnce Measure twice, cut once] == 
 ''Brent, Armon, Carter, Anthony''
 
 Benchmarking service, actually getting 10%, and dynamic resource re-allocation.
@@ -77,14 +77,14 @@ Benchmarking service, actually getting 10%, and dynamic resource re-allocation.
 ----
 
 
-== Lipstick on a pig ==
+== [wiki:Lipstickonapig Lipstick on a pig] ==
 ''Andreas, Sean, Mitchell''
 
 Output improvements, exception handling, and seattle lib clean-up.
 
 ----
 
-== 2 + 2 = ? ==
+== [wiki:2+2= 2 + 2 = ?] ==
 
 ''Anthony'' '''Not accepting new members'''
 
@@ -100,7 +100,7 @@ Porting !MapReduce, Hadoop integration, and possible integration with end applic
 
 ----
 
-== Speciesism ==
+== [wiki:Speciesism] ==
 
 ''Cosmin'' '''Not accepting new members'''
 
