@@ -20,13 +20,13 @@ If you want to perform the checkout as another user, say user BOB, then you can 
 = Quick Guide to SVN =
 
 To take a look inside the repository without checking anything out:
-  {{{svn list svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy}}}
+  {{{svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
 
 To check out the entire seattle repository:
-  {{{svn checkout svn+ssh://testbed-ubuntu.cs.washington.edu/seattle}}}
+  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle}}}
 
 To check out a portion of it, e.g. just the repy code sub-folder:
-  {{{svn checkout svn+ssh://testbed-ubuntu.cs.washington.edu/seattle/trunk/repy}}}
+  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
 
 To find out some basic information about a checked out copy, such as the repository root, last changed rev/author/date do:
   {{{svn info}}}
