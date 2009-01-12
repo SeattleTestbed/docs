@@ -1,0 +1,52 @@
+= Anonymous Access =
+
+To check out the repository anonymously (read-only):
+
+  {{{svn co http://seattle.cs.washington.edu/svn/seattle/trunk/}}}
+
+URL to Browse the repository through a web-browser:
+  {{{http://seattle.cs.washington.edu/svn/seattle/trunk/}}}
+
+= Developer Access =
+
+To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email ivan@cs. Once you can ssh into the machine, you can use the following line to co the trunk:
+
+  {{{svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/}}}
+
+If you want to perform the checkout as another user, say user BOB, then you can use the following line:
+
+  {{{svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/}}}
+
+= Quick Guide to SVN =
+
+To take a look inside the repository without checking anything out:
+  {{{svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
+
+To check out the entire seattle repository:
+  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle}}}
+
+To check out a portion of it, e.g. just the repy code sub-folder:
+  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
+
+To find out some basic information about a checked out copy, such as the repository root, last changed rev/author/date do:
+  {{{svn info}}}
+
+Once you make edits inside the repo, typical CVS usage applies. First do an update, then a commit:
+  {{{svn update}}}
+  {{{svn commit}}}
+
+To add new or remove existing files/directories use:
+  {{{svn add [filename]}}}
+  {{{svn remove [filename]}}}
+
+If you have conflicts, you must tell SVN explicitly that you have resolved them, otherwise SVN will fail to commit\update these files:
+  {{{svn resolve [filename]}}}
+
+If you do an "svn status" in a folder, it recursively lists all the Modified (M), Deleted (D) and Added (A) files. It will also show up files that are in conflict (C) and those about which svn does not know (?). To see what modifications were made to individual files marked with an M, you'd do an "svn diff": 
+  {{{svn status}}}
+
+  {{{svn diff [filename]}}}
+
+= Links =
+
+[http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]
