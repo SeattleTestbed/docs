@@ -2,7 +2,7 @@ This page lists potential conferences and workshops that might be relevant to th
 
 ||Genre||Venue||Full Name||Deadline||Location||Conference Dates||
 
-|| Python || [http://seapig.org/NorthwestPythonDay Northwest Python Day] || Northwest Python Day || N/A || UW || Jan 31st ||
+|| Python || [http://seapig.org/NorthwestPythonDay Northwest Python Day] || Northwest Python Day || Jan 15, 2009 || UW || Jan 31st ||
 || Linux / Open Source || [http://www.linuxfestnorthwest.org/ LinuxFest NW 2009] || !LinuxFest Northwest || N/A || Bellingham, WA || Apr 25, 26 ||
 || Systems || [http://www.sigops.org/sosp/sosp09/ SOSP] || Symposium on Operating Systems Principles || March 2, 2009 || Big Sky, MT || ||
 || Virtualization || [http://conferences.sigcomm.org/sigcomm/2009/workshops/visa/ SIGCOMM VISA Workshop] || Virtualized Infastructure Systems and Architectures || March 6, 2009 || Barcelona || ||
