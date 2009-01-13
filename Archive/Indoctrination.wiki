@@ -19,7 +19,7 @@ All members should register for an account on Emulab:
  2. On the left click the 'Request Account' button. 
  3. Select 'Join an Existing Project'
  4. Fill out the form and use 'seattle' as your 'Project Name'
- 5. Submit the form and let Justin know that you've requested an Emulab account, and what username you've decided to use
+ 5. Submit the form and let Justin/Ivan know that you've requested an Emulab account, and what username you've decided to use
 
 == Auto-grading support ==
 
