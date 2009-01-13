@@ -1,0 +1,22 @@
+= Sleight Of Hand =
+
+ * NAT traversal
+ * IPv6
+ * DHCP support 
+
+= Overview = 
+
+This team focuses on peer-to-peer communication with the server (data multiplexing/demultiplexing and nameserver). Its main goal is to implement the software on Windows Mobile for communicating the nameserver and the other phone as well as the software on the data server for NAT traversal (simply data forwarding in the server). There are two softwares (server and client) running on the virtual machine available in the handheld device. (Please look at the first attachment.)
+
+The most challenging part is to make the protocol between phones, data server and nameserver. Implementation will be divided to client on the phone, server on the phone and data server.
+
+= Week 1 =
+
+ * Understand the main goal of first milestone
+ * Allocate each work to the team members
+
+= Next Meeting =
+
+ * Explain and discuss weekly plan
+ * Set up a coding sprint date and deadlines
+
