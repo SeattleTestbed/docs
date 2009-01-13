@@ -12,6 +12,15 @@ This team focuses on Seattle's primary mission -- adoption of Seattle by the edu
 
 Tuesdays 10am-11am 4th floor breakout in CSE
 
+== Accounts on Emulab ==
+
+All members should register for an account on Emulab:
+ 1. Go to http://www.emulab.net
+ 2. On the left click the 'Request Account' button. 
+ 3. Select 'Join an Existing Project'
+ 4. Fill out the form and use 'seattle' as your 'Project Name'
+ 5. Submit the form and let Justin know that you've requested an Emulab account, and what username you've decided to use
+
 == Auto-grading support ==
 
 For auto-grading we will use a network testbed called [http://www.emulab.net/ Emulab]. Emulab provides a rich [https://www.emulab.net/xmlrpcapi.php3 XML-RPC API] for configuring nodes, loading software on the nodes, etc. We will use this API to build an auto-grader mash-up.
