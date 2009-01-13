@@ -28,7 +28,7 @@ to this line (if your svn revision is rev1):
   rev1 name1 task1
 }}}
 
-==Example==
+== Example ==
 
 Here is an example of a completed sprint snippet:
 {{{
