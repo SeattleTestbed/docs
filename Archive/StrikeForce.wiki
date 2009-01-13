@@ -11,6 +11,8 @@ The requirements are:
 
  3. The entire time in the meetings is spent on Seattle work 
 
+ 4. Teams must maintain the MilestonesFile in the svn repository up to date
+
 [[BR]]
 = Winter'09 teams =
 ----
