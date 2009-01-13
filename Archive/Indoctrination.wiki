@@ -1,7 +1,7 @@
 = Indoctrination =
 
  * Educational support
- * auto-grading
+ * [wiki:AutoGradingStrategy Auto-Grading]
  * student support
 
 = Overview =
