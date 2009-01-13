@@ -5,7 +5,7 @@ To check out the repository anonymously (read-only):
   {{{svn co http://seattle.cs.washington.edu/svn/seattle/trunk/}}}
 
 URL to Browse the repository through a web-browser:
-  {{{http://seattle.cs.washington.edu/svn/seattle/trunk/}}}
+  http://seattle.cs.washington.edu/svn/seattle/trunk/
 
 = Developer Access =
 
