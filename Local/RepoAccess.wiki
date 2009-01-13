@@ -47,6 +47,13 @@ If you do an "svn status" in a folder, it recursively lists all the Modified (M)
 
   {{{svn diff [filename]}}}
 
+If the seattle svn repo moves to a new machine, you can relocate your checked out existing version without performing a new checkout using the following command. Here {{{old_repo}}} and {{{new_repo}}} are paths to the old and new roots of the repository that you can find out with {{{svn info}}}:
+
+  {{{svn sw --relocate old_repo new_repo}}}
+
+thanks,
+ivan.
+
 = Links =
 
 [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]
