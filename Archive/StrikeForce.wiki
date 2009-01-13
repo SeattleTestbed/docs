@@ -25,7 +25,7 @@ The requirements are:
 
 ||[wiki:InfectionAndRecurrence Infection and Recurrence]||Brent, Carter, Cosmin, Sal||Deployment onto nodes, black box testing / repeated testing, and software updates||
 
-||[wiki:Indoctrination]||Alper, Michael, Sal, Eric||Educational support, auto-grading, and student support||
+||[wiki:Indoctrination]||Alper, Michael, Sal, Eric, Jenn||Educational support, auto-grading, and student support||
 
 ||[wiki:TopSecret Top Secret]||Michael, Andreas, Richard||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
 
