@@ -4,7 +4,7 @@ This page will hopefully get us more organized in our approach in adding automat
 
 == Completed work ==
 
-* None yet :(
+ * None yet :(
 
 == Plan of Attack ==
 
