@@ -12,7 +12,9 @@ The most challenging part is to make the protocol between phones, data server an
 
  * Making the protocol and then its implementation on the phone and the data server
  * Data multiplexing/demultiplexing (simply data forwarding) over a channel on the data server
- * Find the data server on the phone 
+ * Find the data server and update the location on the phone 
+
+[[Image(NAT_traversal.jpg)]]
 
 = Meetings =
 
