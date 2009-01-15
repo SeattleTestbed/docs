@@ -18,6 +18,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Michael Moshofsky || mikemosh at cs || 503-910-7091 || mikemosh|| !MikeMosh ||
 || Peter || || || || peter ||
+|| Salikh (Sal) Bagaveyev || sal at cs ||    || sal || sal ||
 || Sean || shawiz at cs || || sean || shawiz ||
 || Kyungil || || || || sojc701 ||
 || Yih || || || || yskhoo ||
