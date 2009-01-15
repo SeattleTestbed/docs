@@ -8,12 +8,19 @@
 
 The [http://code.google.com/p/octopy/ octopy project] aims to produce a very rudimentary implementation of !MapReduce in python. Here is a [http://ebiquity.umbc.edu/blogger/2009/01/02/octopy-quick-and-easy-mapreduce-for-python/ blog post] with some more details of the project. Lisping will concentrate on porting this code to Seattle as a user program. The port should be easy to do as octopy is written in python and is a single file of about 700 lines of code. The next steps for Lisping is to work on numerous improvements to this code to make it more fault tolerant and more useful. The ideal is to reproduce a minimal Hadoop-like service in Seattle.
 
+
 == Meetings ==
- * Thursdays 12:30 - 1:30 at CSE 314
+ * Wednesdays 11:30 - 12:30 in CSE 314
 
-= Next Meeting =
- * Set up a coding sprint date and deadlines
+== Week 1 ==
+ * Understand octo.py, use it, understand limitations in making the port (e.g. pickle, shelve).
 
-= Roadmap =
- * Week 1 : Understand octo.py, use it, understand limitations in making the port (e.g. pickle, shelve) and write some repy code to prepare for port.
- * Week 2 [1/22/08] : Port of octo.py to Seattle.
+== Week 2 ==
+ * !MapReduce in repy with a primary and a single map/reduce node
+
+== Week 2 ==
+ * !MapReduce in repy with a primary and arbitrary number of map/reduce nodes
+
+== Week 3 ==
+ * Coding sprint to complete a working version
+ * Fault tolerance and applications
