@@ -14,7 +14,7 @@ There is a production server that runs the GENI portal, and test server that is 
 Wednesdays 11:30-12:30pm in CSE 314 (pending Sean).
 
 = Coding Sprints =
- * 1/22 (Sprint) and 1/24 (Integration)
+ * 1/22 (Sprint) 7PM, and 1/24 (Integration) 2-5 PM
    * Parallelism addition to resource acquisition/release in django
    * New design of the GENI portal
 
