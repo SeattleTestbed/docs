@@ -15,7 +15,7 @@
  * Beraber (http)
  * GENI test (http)
 [[BR]]
-== Unstable : satya.cs.washington.edu ==
+== Unstable : blackbox.cs.washington.edu ==
  * Autograder
  * Black box testing
  * Deployment scripts
