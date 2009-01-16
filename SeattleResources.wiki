@@ -1,6 +1,6 @@
 = Web Server Layout for Seattle / Beraber / GENI services =
 [[BR]]
-== Production : geni.cs.washington.edu ==
+== Production : seattlegeni.cs.washington.edu ==
  * GENI (http)
  * GENI (sql)
  * GENI installer-maker client
