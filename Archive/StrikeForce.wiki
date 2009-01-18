@@ -11,7 +11,7 @@ The requirements are:
 
  3. The entire time in the meetings is spent on Seattle work 
 
- 4. Teams must maintain the MilestonesFile in the svn repository up to date
+ 4. Teams must keep the MilestonesFile in the svn repository up to date
 
 [[BR]]
 = Winter'09 teams =
@@ -31,11 +31,11 @@ The requirements are:
 
 ||[wiki:TopSecret Top Secret]||Michael, Andreas, Richard||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
 
-||[wiki:BotMaster Bot Master]||Brent, Sean||Reading remote logs, "service interface" on nodes, backup software update mechanism||
+||[wiki:Archive/BotMaster Bot Master]||Brent, Sean||Reading remote logs, "service interface" on nodes, backup software update mechanism||
 
 ||[wiki:MeasureTwiceCutOnce Measure twice, cut once]||Brent, Armon, Carter, Anthony||Benchmarking service, actually getting 10%, and dynamic resource re-allocation||
 
-||[wiki:Lipstickonapig Lipstick on a pig]||Andreas, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
+||[wiki:Archive/LipstickOnAPig Lipstick on a pig]||Andreas, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
 
 ||[wiki:2+2= 2 + 2 = ?]||Anthony '''*'''||Better RSA implementation||
 
