@@ -33,4 +33,6 @@ A "config file" to get rid of repyconstants, hardcoding the version in nmmain, e
 
 Black box testing of installers / uninstallers
 
-Do we need a tarball that allows people to run Repy code without being a Seattle node?
+Do we need a tarball that allows people to run Repy code without being a Seattle node?
+
+Clean up of installer
