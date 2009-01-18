@@ -24,3 +24,6 @@ This page contains information useful to developers working on Seattle
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
    * [ProjectMembers Project Members] contact information
+ 
+ * Other
+   * [StrikeForces Information] about strike forces
