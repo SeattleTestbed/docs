@@ -20,3 +20,6 @@
 == Interesting things to think about ==
 
 Many of the unit tests are timing based and so will fail on "slow" systems.   Can we address this somehow?
+
+There are no repyportability / seattlelib unit tests.   
+
