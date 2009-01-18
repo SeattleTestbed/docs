@@ -23,3 +23,4 @@ Many of the unit tests are timing based and so will fail on "slow" systems.   Ca
 
 There are no repyportability / seattlelib unit tests.   
 
+How do we prevent repy errors of the wrong type from having unit tests pass?
