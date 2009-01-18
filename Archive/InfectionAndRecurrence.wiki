@@ -30,3 +30,5 @@ Lots of extra files in the installer that don't need to be there.
 The installer builder / software updater builder has lots of unnecessary and distracting output
 
 A "config file" to get rid of repyconstants, hardcoding the version in nmmain, etc.
+
+Black box testing of installers / uninstallers
