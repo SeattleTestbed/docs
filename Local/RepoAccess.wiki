@@ -9,6 +9,8 @@ URL to Browse the repository through a web-browser:
 
 = Developer Access =
 
+'''Test all code before checking it into SVN'''
+
 To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email ivan@cs. Once you can ssh into the machine, you can use the following line to co the trunk:
 
   {{{svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/}}}
@@ -18,6 +20,8 @@ If you want to perform the checkout as another user, say user BOB, then you can 
   {{{svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/}}}
 
 = Quick Guide to SVN =
+
+'''Test all code before checking it into SVN'''
 
 To take a look inside the repository without checking anything out:
   {{{svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
@@ -50,9 +54,6 @@ If you do an "svn status" in a folder, it recursively lists all the Modified (M)
 If the seattle svn repo moves to a new machine, you can relocate your checked out existing version without performing a new checkout using the following command. Here {{{old_repo}}} and {{{new_repo}}} are paths to the old and new roots of the repository that you can find out with {{{svn info}}}:
 
   {{{svn sw --relocate old_repo new_repo}}}
-
-thanks,
-ivan.
 
 = Links =
 
