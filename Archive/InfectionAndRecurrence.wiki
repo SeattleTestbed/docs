@@ -31,4 +31,6 @@ The installer builder / software updater builder has lots of unnecessary and dis
 
 A "config file" to get rid of repyconstants, hardcoding the version in nmmain, etc.
 
-Black box testing of installers / uninstallers
+Black box testing of installers / uninstallers
+
+Do we need a tarball that allows people to run Repy code without being a Seattle node?
