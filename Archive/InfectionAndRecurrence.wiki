@@ -24,3 +24,7 @@ Many of the unit tests are timing based and so will fail on "slow" systems.   Ca
 There are no repyportability / seattlelib unit tests.   
 
 How do we prevent repy errors of the wrong type from having unit tests pass?
+
+Lots of extra files in the installer that don't need to be there.
+
+The installer builder / software updater builder has lots of unnecessary and distracting output
