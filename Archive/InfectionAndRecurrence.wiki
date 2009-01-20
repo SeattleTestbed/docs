@@ -16,6 +16,9 @@
 
  * Carter: Build scripts that completely uninstall a failed install or otherwise clean up as needed.
 
+== Jan 20th - Jan 27th ==
+
+ * Brent: Go through the softwareupdater and its tests, checking for correctness, and documenting both update procedures and testing procedures.
 
 == Interesting things to think about ==
 
