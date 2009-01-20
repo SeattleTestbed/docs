@@ -35,4 +35,6 @@ Black box testing of installers / uninstallers
 
 Do we need a tarball that allows people to run Repy code without being a Seattle node?
 
-Clean up of installer
+Clean up of installer
+
+Bug autopsies?
