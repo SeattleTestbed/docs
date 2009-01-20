@@ -18,7 +18,15 @@ This page will hopefully get us more organized in our approach in adding automat
      * How is the script placed on the nodes initially?  Is it run from client-side?
      * What specific steps are required to run Seattle on all emulab machines?  These steps should go in the *.sh file.
 
+
+=== Quick outline (1/20/09) ===
+
+ * Installer (seattle_linux.tgz) will be pre-loaded with assignment private/public keys specific to the nsfile and network group on emulab
+ * User will be able to interact with resources with given assignment credentials against the DHT server
+ * Web server will facilitate linking of multiple assignments to user
+
 = Current Codemonkeys =
 
  * Eric Kimbrel 
  * Alper Sarikaya
+ * Sal Bagaveyev
