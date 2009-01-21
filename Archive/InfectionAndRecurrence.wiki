@@ -20,6 +20,9 @@
 
  * Brent: Go through the softwareupdater and its tests, checking for correctness, and documenting both update procedures and testing procedures.
 
+ * Carter: Go through the process of creating the base installers and preparing the code for release to the software updaters. Document the procedure on the wiki.
+
+
 == Interesting things to think about ==
 
 Many of the unit tests are timing based and so will fail on "slow" systems.   Can we address this somehow?
