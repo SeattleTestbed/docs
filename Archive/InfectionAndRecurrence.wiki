@@ -2,6 +2,8 @@
 
 = Overview =
 
+Our mission is to make it as simple as possible for us and the users to install seattle on their system, and to make sure that we can keep our installations running and up to date for as long as possible.
+
 == Coding Sprint ==
 
  * January 17th
