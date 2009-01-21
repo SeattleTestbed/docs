@@ -1,4 +1,5 @@
 = Web Server Layout for Seattle / Beraber / GENI services =
+
 [[BR]]
 == Production : seattlegeni.cs.washington.edu ==
  * GENI (http)
@@ -6,6 +7,7 @@
  * GENI installer-maker client
  * State transition daemons
  * Hash Table
+
 [[BR]]
 == Stable : seattle.cs.washington.edu, beraber.cs.washington.edu == 
  * Seattle Wiki
@@ -14,8 +16,17 @@
  * Seattle software updater
  * Beraber (http)
  * GENI test (http)
+
 [[BR]]
 == Unstable : blackbox.cs.washington.edu ==
  * Autograder
  * Black box testing
  * Deployment scripts
+
+[[BR]]
+== User machines ==
+
+ Use these machines to work on Seattle projects, test compatibility of your code across operating systems, etc.
+
+ * testbed-opensuse.cs.washington.edu
+ * testbed-mac.cs.washington.edu
