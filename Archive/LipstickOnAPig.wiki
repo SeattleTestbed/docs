@@ -65,3 +65,7 @@ RepyException
 }}}
 
 The above is just a beginning of an attempt at brainstorming an exception hierarcy.
+
+== Improving Seash ==
+
+Consider using the [http://docs.python.org/library/cmd.html#module-cmd cmd module] for making seash more robust and improving the readability of its code.
