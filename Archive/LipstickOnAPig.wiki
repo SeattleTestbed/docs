@@ -68,4 +68,4 @@ The above is just a beginning of an attempt at brainstorming an exception hierar
 
 == Improving Seash ==
 
-Consider using the [http://docs.python.org/library/cmd.html#module-cmd cmd module] for making seash more robust and improving the readability of its code.
+Consider using the [http://docs.python.org/library/cmd.html#module-cmd cmd module] for making seash more robust and improving the readability of its code. A good tutorial for this module can be found [http://www.doughellmann.com/PyMOTW/cmd/index.html here].
