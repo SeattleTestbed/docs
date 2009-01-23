@@ -11,7 +11,7 @@ There is a production server that runs the GENI portal, and test server that is 
 
 == Meetings ==
 
-Fridays 11:00-12:00pm in CSE 314.
+Wednesday 10:30-11:30pm in CSE 314.
 
 = Coding Sprints =
  * 1/22 (Sprint) 7PM, and 1/24 (Integration) 2-5 PM
