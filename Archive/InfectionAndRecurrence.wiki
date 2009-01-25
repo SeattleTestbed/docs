@@ -24,6 +24,7 @@ Our mission is to make it as simple as possible for us and the users to install 
 
  * Carter: Go through the process of creating the base installers and preparing the code for release to the software updaters. Document the procedure on the wiki.
 
+ * Cosmin: Examine the current geni code and look for areas to improve. Determine which areas of the code need testing.
 
 == Interesting things to think about ==
 
