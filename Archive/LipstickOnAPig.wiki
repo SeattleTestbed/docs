@@ -67,6 +67,7 @@ RepyException
 The above is just a beginning of an attempt at brainstorming an exception hierarcy.
 
 
+== These are some observations we made after going through the Repy library. ==
 {{{
 All library calls could raise an error if a function is used that isn't allowed by the restrictions file. 
 
@@ -154,9 +155,6 @@ PythonException
  +-- ValueError
  +-- TypeError
  +-- etc. (PythonException "wraps" pure python exceptions?)
-
-
-
 }}}
 
 == Improving Seash ==
