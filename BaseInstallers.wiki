@@ -1,0 +1,20 @@
+= Building Base Installers =
+Explains how to go about building the base installers (everything you need to distribute the program except custom vessel information.
+----
+[[TOC(inline)]]
+----
+[[BR]]
+== Step by Step ==
+----
+ 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names inside of this folder, they will be overwritten without warning.
+ 1. Navigate to the trunk/dist directory.
+ 1. Run the program (make_base_installers.py) with the following arguments:
+   1. Various flags that will modify the behavior of the program. Include "m" to create a mac installer, "l" to create a linux installer, "w" to create a windows installer, and/or "t" to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
+   1. The path to trunk - so ".." if you are running from the dist directory.
+   1. The path to the public key that the installation will eventually use to communicate with the software updater.
+   1. The path to the private key that the installation will eventually use to communicate with the software updater.
+   1. The path to the output directory that you wanted any created installers to end up in.
+[[BR]]
+== Using the base installers to test your code ==
+----
+You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running "python make_base_installers.py mlwt .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir". Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample vessel information.
