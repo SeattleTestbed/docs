@@ -8,10 +8,12 @@ This page contains information useful to developers working on Seattle
    * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
 
- * Getting started with programming in Repy
+ * Programming in Repy
    * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
+   * [PythonVsRepy Python You Need to Forget to Use Repy]
    * [UnitTests Running unit tests] for repy
-
+   * [RepyLibrary Repy Library] reference
+   
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
    * [CodingStyle Style guidelines] for writing code for Seattle
