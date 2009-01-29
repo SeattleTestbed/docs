@@ -61,11 +61,22 @@ Include a thoughtful discussion and analysis of the results of no more than one 
 == Notes ==
 ----
 
+ * Your code should gracefully handle duplicate acks and data packets. That is, it should ignore duplicate packets, and possibly use them as an indicator of the other endpoint's state.
+
+ * Callbacks triggered by socket events run in the context of another thread. This means that the programmer (i.e. you!) are responsible for maintaining consistency and atomicity of access to your variables. The easiest way to accomplish this is to use locks, acquiring them before regions that require atomic access, and releasing them afterward. See the getlock() function described in the RepyLibrary for more information.
+
+ * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing.
+
+ * Note that the client and the server cannot run locally on the same port. If they are set to run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports for the server and the client.
+
  * Do this assignment in parts. First, get the protocol working. Then, worry about making the measurements. Go from local testing to LAN to WAN.
- * Your programs can use 'print' to create logging, debugging, or error messages.   Use this information to help you debug!
+
+ * Your programs can use 'print' to create logging, debugging, or error messages. Use this information to help you debug!
+
  * IMPORTANT: If you run the client and server on the same computer, you will see substantially different failure/lost packet behavior than if you run them on different computers. This is because the underlying OS may actually take care to slow down the sender if the receiver's buffer is full. On separate computers, there's no way for it to do this.
 
  * You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.
+
  * The maximum size of a UDP datagram is 64k. (What happens if you try to exceed it?)
 
 [[BR]]
