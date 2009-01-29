@@ -1,11 +1,11 @@
 = Stop-and-Wait Protocol =
 
-In this assignment you will implement a reliable datagram protocol using the stop-and-wait (also known as alternating bit) protocol. A message is considered sent once it has been delivered and acknowledged. An unacknowledged message is resent after a timeout. After a finite number of resent messages, an error is reported.
+In this assignment, you will implement a reliable datagram protocol using the [http://en.wikipedia.org/wiki/Stop-and-wait_ARQ stop-and-wait] (also known as [http://en.wikipedia.org/wiki/Alternating_bit_protocol alternating bit]) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgments.  The client will send messages and listen for acknowledgments.  The client will consider a message delivered once it receives an acknowledgment and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
 
 ----
 [[TOC(inline)]]
 ----
-
+.
 [[BR]]
 == Step 1 : Implementation ==
 ----
