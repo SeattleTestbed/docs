@@ -61,7 +61,7 @@ If after pre-processing reliable_client.repy and reliable_server.repy, your main
 Execute them locally using '''repy.py'''.  For example:
 {{{
  $ python repy.py restriction.file reliable_client in.file `hostname -i` 12345 `hostname -i` 12346
- $ python repy.py restriction.file reliable_client junk_test.out 12345
+ $ python repy.py restriction.file reliable_server junk_test.out 12345
 }}}
 Make sure your restriction.file allows the writing to junk_test.out and using these messports.  See [https://seattle.cs.washington.edu/wiki/RepyTutorial#Restrictions Repy Tutorial About Restrictions].
 
