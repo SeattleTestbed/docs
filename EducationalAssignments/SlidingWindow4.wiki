@@ -1,0 +1,54 @@
+= Sliding Window Protocol =
+
+'''This page is under construction.'''
+
+In this assignment, you will extend the [StopAndWaitAssignment Stop and Wait Assignment] with a sliding window algorithm. The purpose of this algorithm is to enable the sender to use the available network bandwidth more efficiently. This is done by sending more than one packet at a time before waiting to receive acknowledgements. This ''pipelining'' of packets makes for a much higher bandwidth communication protocol. 
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== Overview ==
+----
+The requirements for the assignment includes extensions to the [StopAndWaitAssignment Stop and Wait Assignment] library, along with a new set of client and server programs that stress-test your implementation by sending a lot of data.  Lastly, you will write up an evaluation of your implementation.
+[[BR]]
+== Extended Reliable API ==
+----
+Your protocol should run using your stop-and-wait, '''reliable.repy''' library.  To extend your library to implement the sliding window protocol, ''reliable_config'' has a new definition:
+{{{
+#!python     
+reliable_config(maxdgramsize, retries, timeoutinms, windowsize) # No return
+}}}
+Your function ''reliable_config'' should take an optional argument windowsize which restricts how many bytes the client can send at a time.  A window size less than ''maxdgramsize'' will cause the client to never send a packet.  The default window size should be 3 times the maxdgramsize.
+[[BR]]
+== Extended Reliable Client ==
+----
+Again, you will will use your stop-and-wait client, '''reliable_client.repy''', and the server, '''reliable_server.repy.''', programs.  The client has a new definition:
+{{{
+reliable_client inputfile serverhost serverportnum [srchost srcportnum] [maxdgramsize nretries timeoutms windowsize]
+}}}
+The ''windowsize'' is an optional argument indicating the value sent to the extended ''reliable_config'' function.  It indicates the number of bytes the client should "pipeline."
+
+[[BR]]
+== Step 0: Preparation ==
+----
+Read and implement the [StopAndWaitAssignment Stop and Wait Assignment].
+
+
+[[BR]]
+== Step 1: Extension ==
+----
+
+
+[[BR]]
+== What to turn in? ==
+----
+
+Turn in a tar file called "reliable.tar" that contains a directory called Reliable. This directory contains:
+ * reliable.repy
+ * reliable_server.repy
+ * reliable_client.repy
+ * results.pdf
+ * README
+The file results.pdf contains your evaluation. The file called README contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 
