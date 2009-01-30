@@ -4,7 +4,11 @@ In this assignment, you will implement a reliable datagram protocol using the [h
 [[TOC(inline)]]
 ----
 [[BR]]
-== Repy API ==
+== Overview ==
+----
+The requirements for the assignment includes a library, a client program, and a server program.  Last, you will write up an evaluation of your implementation.
+[[BR]]
+=== Repy API ===
 ----
 You will implement your stop-and-wait protocol over Repy's UDP functions.  Specifically, you must extend the recvmess and sendmess routines:
 {{{
@@ -15,60 +19,56 @@ sendmess(desthost, destport, message, localip=None, localport=None) # Returns th
 See the [https://seattle.cs.washington.edu/wiki/RepyLibrary Repy Library Reference] for more details.
 
 [[BR]]
-== The Reliable API ==
+=== Reliable API ===
 ----
-Your protocol should run as a library that is included into a client and a server program. It should extend recvmess and sendmess with three new routines:
+Your protocol should run as a library in a file called reliable.repy.  It should extend recvmess and sendmess with three new routines:
 {{{
 #!python     
 reliable_recvmess(srcip, srcport, function) # Returns an event handler
 reliable_sendmess(destip, destport, message, srcip=None, srcport=None) # Returns the bytes sent
 reliable_config(maxdgramsize, retries, timeoutinms) # No return
 }}}
-These first two routines are modeled on the existing sendmess and recvmess functions.  The function reliable_recvmess should return the handle to the Repy recvmess event.  The function reliable_sendmess should return the number of characters(bytes) sent and raise a TimeoutError Exception.
+These first two routines are modeled on the existing sendmess and recvmess functions.  The function reliable_recvmess should return the handle to the Repy recvmess event.  The function reliable_sendmess should return the number of characters (bytes) sent and raise a TimeoutError Exception.
 
-The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
+The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms or retries of 0 disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
+
+[[BR]]
+=== Reliable Client and Server ===
+----
+You must write two programs, a client and server, which include your reliable.repy library:
+{{{
+Usage: ./reliable_client inputfile host portnum [srchost srcportnum] [maxdgramsize nretries timeoutms]
+Usage: ./reliable_server repy outfile portnum [timeout]
+}}}
+You should put the client in a file called reliable_client.repy and the server in a file called reliable_server.repy.
+
+The client reads data from inputfile and sends it to the server. The client's non-optional arguments indicate the target address (host, portnum).  The other arguments should be optional.  The source address (srchost, srcportnum) indicates the return address for Repy's sendmess routine.  The final arguments are the maximum allowable size of a reliable datagram, the number of retries for each packet, and the timeout in milliseconds that should be used to clock a retransmission.
+
+The server logs the data it receives to outfile. The server's portnum indicates on which port the server should receive messages.  The timeout indicates how long the server should wait after receiving the last datagram to stop listening.  The default should be 10 seconds.  See example 1.5 in the [https://seattle.cs.washington.edu/wiki/RepyTutorial#InteractingwithTimersexample1.5 Repy Tutorial]
 
 [[BR]]
 == Step 1 : Implementation ==
 ----
 
-Implement the stop-and-wait protocol using the recvmess and sendmess Seattle calls. The client will read a data file and send the data to the computer running the server program. The packet size of the data is defined by the user. When the server receives a packet of data, it sends an acknowledgment message to the client. If the acknowledgment message is not received in a user defined amount of miliseconds, the message is resent a user defined number of times until the program moves on to the next packet of data. The server program outputs the data received to a file.
+Implement the stop-and-wait protocol using the recvmess and sendmess Seattle calls. The client will read a data file and send the data to the computer running the server program. The packet size of the data is defined by the user. When the server receives a packet of data, it sends an acknowledgment message to the client. If the acknowledgment message is not received in a user defined amount of milliseconds, the message is resent a user defined number of times until the program moves on to the next packet of data. The server program outputs the data received to a file.
 
-Your protocol should run as a library that is included into a client program and a server program. It should extend recvmess and sendmess with three new routines:
-
+Your protocol should run as a library that is included into a client program, reliable_client.repy and a server program, reliable_server.repy.  You should put your protocol implementation in a file called reliable.repy and include it in the client and server programs. This can be done by putting "include reliable.repy" at the top of your client and server programs. However, you will need to run your server and client code through the repy pre-processor (repypp.py) to set up your code. However, you do not need to run your reliable.repy file through the pre-processor.  For example, to pre-process reliable_client.repy to reliable_client:
 {{{
-#!python     
-reliable_recvmess(srcip, srcport, function) 
-
-# Notice that just like in sendmess, the srcip and srcport arguments are optional
-reliable_sendmess(destip, destport, message, srcip=None, srcport=None)
-
-reliable_config(retries, timeoutinms)
+python repypp.py reliable_client.repy reliable_client
 }}}
 
-These first two routines are modeled on the existing sendmess and recvmess functions. See the RepyTutorial or Repy library API for more information.
+If after pre-processing reliable_client.repy and reliable_server.repy, your main client program may be called "reliable_client" and your server program may be "reliable_server."  Execute each from different computers using seash:
 
-reliable_sendmess should return the number of characters sent and raise an Exception if an error occurred.   
-
-The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
-
-You should put your protocol implementation in a file called reliable.repy and include it in the client and server programs. This can be done by putting "include reliable.repy" at the top of your client and server programs. However, you will need to run your server and client code through the repy pre-processor (repypp.py) to set up your code. However, you do not need to run your reliable.repy file through the pre-processor.  For example, to pre-process foo.repy to foo2.repy:
 {{{
-python repypp.py foo.repy foo2.repy
-}}}
-
-Your main client program should be called "reliable_client.repy" and your server program should be called "reliable_server.repy." Each is to be executed from different computers using seash:
-{{{
-on client run reliable_client.repy inputfile host portnum maxdgramsize nretries timeoutms
-
-on server run reliable_server.repy outfile portnum  
+ john@ !> on client upload input.file
+ ...
+ john@ !> on client run reliable_client input.file <server_host> <server_portnum>
+ john@ !> on server run reliable_server out.file <my_portnum>
+ ...
+ john@ !> on server download out.file
 }}}
 
 You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
-
-The client reads data from inputfile and sends it to the server. The client's non-optional arguments indicate the target address (host, portnum), the maximum allowable size of reliable datagram, the number of retries for each packet, and the timeout in milliseconds that should be used to clock a retransmission.
-
-The server logs the data it receives to outfile. The server's portnum indicates on which port the server should receive messages. 
 
 [[BR]]
 == Step 2 : Evaluation ==
@@ -106,4 +106,10 @@ Include a thoughtful discussion and analysis of the results of no more than one 
 == What to turn in? ==
 ----
 
-Turn in a tar file called "reliable.tar" that contains a directory called Reliable. This directory contains your source code, a file called results.pdf that contains your evaluation, and a file called README that contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 
+Turn in a tar file called "reliable.tar" that contains a directory called Reliable. This directory contains:
+ * reliable.repy
+ * reliable_server.repy
+ * reliable_client.repy
+ * results.pdf
+ * README
+The file results.pdf that contains your evaluation. The file called README contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 
