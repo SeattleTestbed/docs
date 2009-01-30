@@ -1,11 +1,20 @@
 = Stop-and-Wait Protocol =
 
 In this assignment, you will implement a reliable datagram protocol using the [http://en.wikipedia.org/wiki/Stop-and-wait_ARQ stop-and-wait] (also known as [http://en.wikipedia.org/wiki/Alternating_bit_protocol alternating bit]) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgments.  The client will send messages and listen for acknowledgments.  The client will consider a message delivered once it receives an acknowledgment and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
-
 ----
 [[TOC(inline)]]
 ----
-.
+[[BR]]
+== Building Blocks ==
+----
+You will implement your stop-and-wait protocol over Repy's UDP functions.  Specifically, you must extend recvmess and sendmess.
+{{{
+#!python   
+recvmess(localip, localport, function) # Returns an event handler
+sendmess(desthost, destport, message, localip=None, localport=None) # Returns the bytes sent
+}}}
+See the [https://seattle.cs.washington.edu/wiki/RepyLibrary Repy Library Reference] for more details.
+
 [[BR]]
 == Step 1 : Implementation ==
 ----
