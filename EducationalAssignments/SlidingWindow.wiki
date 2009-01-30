@@ -48,6 +48,11 @@ The server program outputs the data received to a file.
 Like with stop-and-wait, your protocol should run as a library that is included into a client program, '''reliable_client.repy''' and a server program, '''reliable_server.repy'''.  You should put your protocol implementation in a file called '''reliable.repy''' and include it in the client and server programs.  Then, you'll need to pre-process your reliable_client.repy and reliable_server.repy programs.
 
 You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
+[[BR]]
+== Notes ==
+----
+ * You'll need to extend your stop-n-wait header from a single alternating bit.  It's okay if your header is variable sized.  '''IMPORTANT:''' You should number your packets by byte number not packet number.
+ * When the client receives an acknowlegement, you can assume that the server has received all earlier packets.
 
 [[BR]]
 == Extra Credit ==
