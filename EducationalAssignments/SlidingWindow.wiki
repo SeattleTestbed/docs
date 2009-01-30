@@ -1,7 +1,5 @@
 = Sliding Window Protocol =
 
-'''This page is under construction.'''
-
 In this assignment, you will extend the [StopAndWaitAssignment Stop and Wait Assignment] with a [http://en.wikipedia.org/wiki/Sliding_window sliding window algorithm]. The purpose of this algorithm is to enable the sender to use the available network bandwidth more efficiently. This is done by sending more than one packet at a time before waiting to receive acknowledgements. This ''pipelining'' of packets makes for a much higher bandwidth communication protocol. 
 
 ----
