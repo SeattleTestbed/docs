@@ -41,18 +41,19 @@ Read and implement the [StopAndWaitAssignment Stop and Wait Assignment].
 ----
 Change your protocol to implement the sliding window protocol.  The client will read a data file and send the data to the computer running the server program.  The packet size of the data is defined by the user.  The client will send multiple packets at time -- enough to fill the ''windowsize''.  When the server receives a packet of data, it sends an acknowledgment message to the client if the packet's byte number is the next in order.  Otherwise, the server ignores the packet.
 
-If the acknowledgement message is not received in a user defined amount of milliseconds, the client will resend all the packets inside its window.  The client will continue to resend all the packets a user defined number of times until it receives an acknowlegement.  Then, the client will "slide" its window over, filling it again completely with new packet(s) of data.  The client will again sending all the packets inside its incremented window.
+If the acknowledgement message is not received in a user defined amount of milliseconds, the client will resend all the packets inside its window.  The client will continue to resend all the packets a user defined number of times until it receives an acknowlegement.  Then, the client will "slide" its window over, filling it again completely with new packet(s) of data.  The client will again start sending all the packets inside its incremented window.
 
 The server program outputs the data received to a file.
 
-Like with stop-and-wait, your protocol should run as a library that is included into a client program, '''reliable_client.repy''' and a server program, '''reliable_server.repy'''.  You should put your protocol implementation in a file called '''reliable.repy''' and include it in the client and server programs.  Then, you'll need to pre-process your reliable_client.repy and reliable_server.repy programs.
-
-You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
 [[BR]]
 == Notes ==
 ----
+
+ * Like with stop-and-wait, your protocol should run as a library that is included into a client program, '''reliable_client.repy''' and a server program, '''reliable_server.repy'''.  You should put your protocol implementation in a file called '''reliable.repy''' and include it in the client and server programs.  Then, you'll need to pre-process your reliable_client.repy and reliable_server.repy programs.
+ * You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
  * You'll need to extend your stop-n-wait header from a single alternating bit.  It's okay if your header is variable sized.  '''IMPORTANT:''' You should number your packets by byte number not packet number.
  * When the client receives an acknowlegement, you can assume that the server has received all earlier packets.
+
 
 [[BR]]
 == Extra Credit ==
