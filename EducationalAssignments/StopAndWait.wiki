@@ -1,19 +1,32 @@
 = Stop-and-Wait Protocol =
-
 In this assignment, you will implement a reliable datagram protocol using the [http://en.wikipedia.org/wiki/Stop-and-wait_ARQ stop-and-wait] (also known as [http://en.wikipedia.org/wiki/Alternating_bit_protocol alternating bit]) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgments.  The client will send messages and listen for acknowledgments.  The client will consider a message delivered once it receives an acknowledgment and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
 ----
 [[TOC(inline)]]
 ----
 [[BR]]
-== Building Blocks ==
+== Repy API ==
 ----
-You will implement your stop-and-wait protocol over Repy's UDP functions.  Specifically, you must extend recvmess and sendmess.
+You will implement your stop-and-wait protocol over Repy's UDP functions.  Specifically, you must extend the recvmess and sendmess routines:
 {{{
 #!python   
 recvmess(localip, localport, function) # Returns an event handler
 sendmess(desthost, destport, message, localip=None, localport=None) # Returns the bytes sent
 }}}
 See the [https://seattle.cs.washington.edu/wiki/RepyLibrary Repy Library Reference] for more details.
+
+[[BR]]
+== The Reliable API ==
+----
+Your protocol should run as a library that is included into a client and a server program. It should extend recvmess and sendmess with three new routines:
+{{{
+#!python     
+reliable_recvmess(srcip, srcport, function) # Returns an event handler
+reliable_sendmess(destip, destport, message, srcip=None, srcport=None) # Returns the bytes sent
+reliable_config(maxdgramsize, retries, timeoutinms) # No return
+}}}
+These first two routines are modeled on the existing sendmess and recvmess functions.  The function reliable_recvmess should return the handle to the Repy recvmess event.  The function reliable_sendmess should return the number of characters(bytes) sent and raise a TimeoutError Exception.
+
+The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgments are not forthcoming in a window of timeoutms milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A retries of 0 also disables retransmissions, but delays at least timeoutms before returning. Datagrams are never reported as lost.
 
 [[BR]]
 == Step 1 : Implementation ==
@@ -47,6 +60,7 @@ python repypp.py foo.repy foo2.repy
 Your main client program should be called "reliable_client.repy" and your server program should be called "reliable_server.repy." Each is to be executed from different computers using seash:
 {{{
 on client run reliable_client.repy inputfile host portnum maxdgramsize nretries timeoutms
+
 on server run reliable_server.repy outfile portnum  
 }}}
 
