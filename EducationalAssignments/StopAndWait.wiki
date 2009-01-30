@@ -88,7 +88,7 @@ Include a thoughtful discussion and analysis of the results of no more than one 
 
  * Callbacks triggered by socket events run in the context of another thread. This means that the programmer (i.e. you!) are responsible for maintaining consistency and atomicity of access to your variables. The easiest way to accomplish this is to use locks, acquiring them before regions that require atomic access, and releasing them afterward. See the getlock() function described in the RepyLibrary for more information.
 
- * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing.
+ * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing.  WARNING: If your code crashes, you may need to kill processes.  You can use `ps` to see.  If you have thirty "python" lines running, use `killall -9 python` to stop them!
 
  * Note that the client and the server cannot run locally on the same port. If they are set to run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports for the server and the client.
 
@@ -112,4 +112,4 @@ Turn in a tar file called "reliable.tar" that contains a directory called Reliab
  * reliable_client.repy
  * results.pdf
  * README
-The file results.pdf that contains your evaluation. The file called README contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 
+The file results.pdf contains your evaluation. The file called README contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 
