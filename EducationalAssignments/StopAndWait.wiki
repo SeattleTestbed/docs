@@ -1,5 +1,5 @@
 = Stop-and-Wait Protocol =
-In this assignment, you will implement a reliable datagram protocol using the [http://en.wikipedia.org/wiki/Stop-and-wait_ARQ stop-and-wait] (also known as [http://en.wikipedia.org/wiki/Alternating_bit_protocol alternating bit]) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgements.  The client will send messages and listen for acknowledgements.  The client will consider a message delivered once it receives an acknowledgement and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
+In this assignment, you will implement a reliable datagram protocol using the [http://en.wikipedia.org/wiki/Stop-and-wait_ARQ stop-and-wait] (also known as [http://en.wikipedia.org/wiki/Alternating_bit_protocol alternating bit]) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgements.  The client will send messages and listen for acknowledgements.  The client will consider a message delivered once it receives an acknowledgment and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
 ----
 [[TOC(inline)]]
 ----
@@ -87,27 +87,35 @@ Second, measure throughput as a function of timeout for 5 different datagram siz
 
 Include a thoughtful discussion and analysis of the results of no more than one page. Don't forget to make clear the description of the experimental setup (eg, machine IP addresses, network speed, etc.).
 
+
 [[BR]]
-== Notes ==
+== Hints ==
 ----
-
- * Your code should gracefully handle duplicate acks and data packets. That is, it should ignore duplicate packets, and possibly use them as an indicator of the other endpoint's state.
-
- * Callbacks triggered by socket events run in the context of another thread. This means that the programmer (i.e. you!) are responsible for maintaining consistency and atomicity of access to your variables. The easiest way to accomplish this is to use locks, acquiring them before regions that require atomic access, and releasing them afterwards. See the getlock() function described in the RepyLibrary for more information.
-
- * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing.  '''WARNING:''' If your code crashes, you may need to kill processes.  You can use `ps` to see.  If you have thirty rogue "python" threads running, use `killall -9 python` to stop them!
-
- * Note that the client and the server cannot run locally on the same port. If they are set to run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports for the server and the client.
-
  * Do this assignment in parts. First, get the protocol working. Then, worry about making the measurements. Go from local testing to LAN to WAN.
 
  * Your programs can use 'print' to create logging, debugging, or error messages. Use this information to help you debug!
 
- * '''IMPORTANT:''' If you run the client and server on the same computer, you will see substantially different failure/lost packet behavior than if you run them on different computers. This is because the underlying OS may actually take care to slow down the sender if the receiver's buffer is full. On separate computers, there's no way for it to do this.
-
  * You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.
 
+ * If the client and server are run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports, one for the server and another for the client.
+
  * The maximum size of a UDP datagram is 64k. (What happens if you try to exceed it?)
+
+ * Callbacks triggered by socket events run in the context of another thread. This means that the programmer (i.e. you!) are responsible for maintaining consistency and atomicity of access to your variables. The easiest way to accomplish this is to use locks, acquiring them before regions that require atomic access, and releasing them afterwards. See the getlock() function described in the RepyLibrary for more information.
+
+
+[[BR]]
+== Notes ==
+----
+
+ * '''IMPORTANT:''' If you run the client and server on the same computer, you will see substantially different failure/lost packet behavior than if you run them on different computers. This is because the in the local case, the operating system may take care to slow down the sender if the receiver's buffer is full. On different computers, there's no way for the operating system to do this.
+
+ * Your code should gracefully handle duplicate acks and data packets. That is, it should ignore duplicate packets, and possibly use them as an indicator of the other endpoint's state.
+
+ * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing. 
+
+ * '''WARNING:''' If your code crashes, you may need to kill any remaining processes. In Linux, you can use `ps` to find these processes and if you find rogue "python" threads running, use `killall -9 python` to stop them!
+
 
 [[BR]]
 == What to turn in? ==
