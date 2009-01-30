@@ -10,7 +10,7 @@ The below assignments are geared toward an undergraduate class (so graduate clas
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
- * The [StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it's trivial to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.   For comparison, [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html Part 1] is a C version of the assignment.
+ * The [StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it's trivial to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.   For comparison, [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html Part 1] is a C version of the assignment.  Also, the new [SlidingWindowAssignment] is an advanced extension.
 
  * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   Students implement Dijkstra's shortest path routing and then apply this to route packets in an attempt to minimize latency.
 
