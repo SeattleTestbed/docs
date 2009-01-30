@@ -28,7 +28,7 @@ reliable_recvmess(srcip, srcport, function) # Returns an event handler
 reliable_sendmess(destip, destport, message, srcip=None, srcport=None) # Returns the bytes sent
 reliable_config(maxdgramsize, retries, timeoutinms) # No return
 }}}
-These first two routines are modelled on the existing ''sendmess'' and ''recvmess'' functions.  The function ''reliable_recvmess'' should return the handle to the Repy ''recvmess'' event.  The function ''reliable_sendmess'' should return the number of characters (bytes) sent and raise a TimeoutError Exception in case of a timeout.
+These first two routines are modelled on the existing ''sendmess'' and ''recvmess'' functions.  The function ''reliable_recvmess'' should return the handle to the Repy ''recvmess'' event.  The function ''reliable_sendmess'' should return the number of characters (bytes) sent and raise a !TimeoutError Exception in case of a timeout.
 
 The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgements are not forthcoming in a window of '''timeoutms''' milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms or retries of 0 disables retransmissions and causes ''reliable_sendmess'' to never report an unacknowledged datagram. A retries setting of 0 also disables retransmissions, but delays at least '''timeoutms''' before returning. Datagrams are never reported as lost.
 
