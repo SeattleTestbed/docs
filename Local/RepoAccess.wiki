@@ -11,7 +11,7 @@ URL to Browse the repository through a web-browser:
 
 '''Test all code before checking it into SVN'''
 
-To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email ivan@cs. Once you can ssh into the machine, you can use the following line to co the trunk:
+To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email ivan@cs. Once you have ssh access to the machine, you can use the following line to checkout (co) the trunk from anywhere:
 
   {{{svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/}}}
 
