@@ -1,17 +1,23 @@
 = Student Portal =
 
-This page feature information and references regarding how to use write programs on Seattle.   Seattle nodes run code written in a special language called Repy.   Repy is a subset of the Python language invented specifically for Seattle.   
+This page feature information and references regarding how to use write programs on Seattle. Seattle nodes run code written in a special language called Repy. Repy is a subset of the [http://www.python.org/ Python language] invented specifically for Seattle.  
 
-There are several different tutorials depending on your background. You have to install repy before starting tutorials.
-You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
+= Getting Repy =
 
- * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)].   Start here if you're new to Python and Repy!
+You will have to download and install repy before starting the tutorials below. [https://seattle.cs.washington.edu/geni/download/flibble/ '''Download repy!''']
 
- * Or if you already know Python, get started with the [PythonVsRepy All of the Python You Need to Forget to Use Repy] guide.
+= Tutorials =
 
+There are several different tutorials depending on your background. 
 
-After doing one of the above tutorials to learn more about the features and API for Repy, try [RepyTutorial the Repy Tutorial].  
+ * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
 
-For Repy experts, refer to the [RepyLibrary Repy Library Reference].
+ * [PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
 
-There is a growing list of library code you can download and use with Repy.   Much of this uses a Repy Pre-Processor (repypp) that we built.   To "include" a repy file in your source file source.repy, at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The filename.repy file does not need to be pre-processed also. The file out.repy will contain the code for filename.repy included inside the code for source.repy at the appropriate place.
+ * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
+
+ * [RepyLibrary Repy Library Reference]. Use this reference as a quick guide to Repy's API once you are comfortable with the language.
+
+= Other Resources =
+
+There is a growing list of library code you can download and use with Repy. Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
