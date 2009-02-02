@@ -2,11 +2,11 @@
 
 This page feature information and references regarding how to use write programs on Seattle. Seattle nodes run code written in a special language called Repy. Repy is a subset of the [http://www.python.org/ Python language] invented specifically for Seattle.  
 
-= Getting Repy =
+== Getting Repy ==
 
 You will have to download and install repy before starting the tutorials below. [https://seattle.cs.washington.edu/geni/download/flibble/ '''Download repy!''']
 
-= Tutorials =
+== Tutorials ==
 
 There are several different tutorials depending on your background. 
 
@@ -18,6 +18,6 @@ There are several different tutorials depending on your background.
 
  * [RepyLibrary Repy Library Reference]. Use this reference as a quick guide to Repy's API once you are comfortable with the language.
 
-= Other Resources =
+== Other Resources ==
 
 There is a growing list of library code you can download and use with Repy. Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
