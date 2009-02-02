@@ -19,6 +19,9 @@ If you want to perform the checkout as another user, say user BOB, then you can 
 
   {{{svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/}}}
 
+All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in this prior to making any commits. You can use the dos2unix tool on seattle.cs to convert DOS formatted files.
+
+
 = Quick Guide to SVN =
 
 '''Test all code before checking it into SVN'''
