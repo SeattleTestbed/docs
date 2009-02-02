@@ -4,7 +4,7 @@ This page feature information and references regarding how to use write programs
 
 == Getting Repy ==
 
-You will have to download and install repy before starting the tutorials below. [https://seattle.cs.washington.edu/geni/download/flibble/ '''Download repy!''']
+You will have to download and install repy before starting the tutorials below: '''[https://seattle.cs.washington.edu/geni/download/flibble/ Download repy!]'''
 
 == Tutorials ==
 
