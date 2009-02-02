@@ -6,6 +6,7 @@ Explains how to go about building the base installers (everything you need to di
 [[BR]]
 == Step by Step ==
 ----
+ 1. Make sure you are operating on a Linux system.
  1. Choose an output folder for the base installers. Note: If there are already base installers of the same names inside of this folder, they will be overwritten without warning.
  1. Navigate to the trunk/dist directory.
  1. Run the program (make_base_installers.py) with the following arguments:
