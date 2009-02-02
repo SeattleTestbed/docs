@@ -16,6 +16,6 @@
 
 || Dec 4th, 2008 ||  UW  ||   Used in Undergraduate Networking class || || Classroom use
 
-|| Jan 31st, 2009 || Gates Commons || NW Python Day || Justin / Ivan || Talk / Live Demo
+|| Jan 31st, 2009 || Gates Commons || NW Python Day || Justin || Talk / Live Demo
 
 || 2:30-3:00 Mar 6th, 2009 || Chattanooga, TN || SIGCSE 2009 || Justin || Talk / Live Demo
