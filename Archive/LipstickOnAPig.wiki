@@ -157,7 +157,7 @@ PythonException
  +-- etc. (PythonException "wraps" pure python exceptions?)
 }}}
 
-=== List of Library Calls And Their Problems===
+=== List of Library Calls And Their Problems ===
 This is an ongoing list of problems discovered in library calls found during repy testing about possible mistakes users could make
 
 ==== sendmess ====
