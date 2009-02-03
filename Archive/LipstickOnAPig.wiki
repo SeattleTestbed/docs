@@ -166,6 +166,10 @@ This is an ongoing list of problems discovered in library calls found during rep
  * Does no check on destport, allowed to be 800000!
  * When third argument (message) isn't a string throws a typeerror saying {{{sendto}}} needs 3 args, given 2...
  
+==== recvmess ====
+ * Checks on localip are loose: allows binding of local ip to string "1234", but does complain about unicode coercing if not string
+ * socket.error if cannot assign requested address
+ * no checks performed to see if the callback has proper arguments
 
 === Todo list for testing ===
 Uncertainty's faced while writing unit tests
