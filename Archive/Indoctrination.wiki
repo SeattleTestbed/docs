@@ -41,4 +41,8 @@ Another interface that might be useful to us in making this mashup is Emulab's [
 = Next Meeting =
  * Set up a coding sprint date and deadlines
  * Specify first assignment that will be used as our test case
- * Emulab accounts
+ * Emulab accounts
+
+=== Alper modifications to installer ===
+ * Added call in nmAPI.py to check whether 'donationIP' exists in the nodemanager configuration, pass to repy if it exists
+ * Fixed up install.py to store the donationIP into the nodemanager configuration, cleaned up argument parsing of the install script
