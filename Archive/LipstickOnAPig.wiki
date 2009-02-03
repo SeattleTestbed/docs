@@ -181,6 +181,8 @@ This is an ongoing list of problems discovered in library calls found during rep
  * The mode checks are pretty loose
  * Tried breaking resource checks using seek and then write, unsuccessful. 
  
+==== Python Builtins provided in Repy ==== 
+The python builtins provided in repy (defined in safe.repy and repy.py) overwhelmingly favor TypeError when passed an argument of incorrect type, and ValueError when passed bad values (negative, out of range, etc). We should probably do the same
 
 === Todo list for testing ===
 Uncertainty's faced while writing unit tests
