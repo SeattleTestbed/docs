@@ -200,14 +200,14 @@ RepyError
    +-- NetworkError
      |
      +--AddressError (wrapper for socket.gaierror and socket.herror)
-     +--NetworkDisconnectedError (for when not connected to network)
+     +--DisconnectedError (whether from the start, or suddenly)
      +--TimeoutError (when a host times out)
    +-- ResourceError
      |
      +-- ResourceExhaustedError
    +-- DiskIOError
      
-
+ +-- UnsafeCallError (python call not allowed in repy)
 PythonException
  |
  +-- ValueError (these two are particularly important for library call's performing argument checks)
