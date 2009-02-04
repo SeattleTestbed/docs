@@ -22,6 +22,7 @@ This page contains information useful to developers working on Seattle
  * Installation instructions
    * [SeattleDownload Download and installation instructions] for Seattle
    * [GeniInstallation Installation instructions] for the GENI portal
+   * [CustomizedInstaller Customized installer instructions]
 
  * Deployment
    * [BaseInstallers Building] the base installers
