@@ -6,7 +6,7 @@ The [http://seattle.cs.washington.edu/customized_installer/ customized installer
 [[TOC(inline)]]
 ----
 
-== Page layout ==
+== Web Page layout: ==
 
 [[Image(customized_installer_builder.jpg)]]
 
