@@ -1,0 +1,7 @@
+= Customized installer instructions =
+
+The [http://seattle.cs.washington.edu/customized_installer/ customized installer] creates custom Seattle installers. This means that you can create an installer that has 4% of the resources reserved for a user Michael, while the rest are reserved for a user John. Or any other assignment of resources. The customized installer lets you to specify the proportion of resources each vessel will be allocated. The public\private keys of the owner for each vessel, as well as the public and private keys of the users for each vessel.
+
+== Details ==
+
+Initially, the page loads with no vessels, and no users. You add new users (and optionally their public key) to the page by clicking 'Add'. You can then drag the user-names appearing in the top box to the lower box and associate user identities you create with vessels as owners or as users. You can also create new vessels or remove existing vessels in the bottom box on the page by clicking + (to add new vessels) or X (to remove an existing vessel).
