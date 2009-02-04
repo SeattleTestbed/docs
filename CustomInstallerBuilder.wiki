@@ -2,6 +2,26 @@
 
 The [http://seattle.cs.washington.edu/customized_installer/ customized installer] creates custom Seattle installers. This means that you can create an installer that has 4% of the resources reserved for a user Michael, while the rest are reserved for a user John. Or any other assignment of resources. The customized installer lets you to specify the proportion of resources each vessel will be allocated. The public\private keys of the owner for each vessel, as well as the public and private keys of the users for each vessel.
 
-== Details ==
+== Page layout ==
 
-Initially, the page loads with no vessels, and no users. You add new users (and optionally their public key) to the page by clicking 'Add'. You can then drag the user-names appearing in the top box to the lower box and associate user identities you create with vessels as owners or as users. You can also create new vessels or remove existing vessels in the bottom box on the page by clicking + (to add new vessels) or X (to remove an existing vessel).
+'''Insert screenshot with explanation of what the different areas of the page mean.'''
+
+== Step 1 : Create your users ==
+
+Initially, the page loads with no vessels, and no users. You add new users (and optionally their public key) to the page by filling in their username and clicking 'Add'. 
+
+== Step 2 : Create your vessels ==
+
+Next create the vessels that you would like your Seattle installer to be configured with. You can add new vessels at the bottom box on the page by clicking +  or remove existing vessels by clicking X right above the vessel partition bar.
+
+== Step 3 : Configure your vessels ==
+
+Now drag the usernames appearing in the top box into the vessel boxes to associate user identities you created in Step 1 with the vessels you created in Step 2. Note that you can assign an identity to be the owner and/or a user of any one vessel. Note that you can use an identity multiple times.
+
+== Step 4 : Build your customized installer ==
+
+Once you are done configuring your vessels, build your customized installer by clicking 'Create Installer'. Note that this button will be disabled until every vessel has an owner associated with it.
+
+== Step 5 : Download your customized installer ==
+
+At the end of Step 4 you will be directed to a downloads page where you can download an installer for the platform of your choice. For more information on how to install Seattle see [https://seattle.cs.washington.edu/wiki/SeattleDownload this page].
