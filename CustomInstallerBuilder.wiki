@@ -8,7 +8,7 @@ The [http://seattle.cs.washington.edu/customized_installer/ customized installer
 
 == Page layout ==
 
-'''Insert screenshot with explanation of what the different areas of the page mean.'''
+[[Image(customized_installer_builder.jpg)]]
 
 == Step 1 : Create your users ==
 
