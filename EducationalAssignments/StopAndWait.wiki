@@ -108,6 +108,8 @@ Include a thoughtful discussion and analysis of the results of no more than one 
 == Notes ==
 ----
 
+ * Your sending code should send the next packet immediately after receiving an ack from the receiver. Your sender should '''not''' do a sleep() after sending a packet. One possible solution is to use locks: have the sender acquire a lock L before sending the packet, and then have it block in attempting to acquire L again. The timeout timer or the receiver callback can then release L once a timeout occurs or when an ack is received.
+
  * '''IMPORTANT:''' If you run the client and server on the same computer, you will see substantially different failure/lost packet behavior than if you run them on different computers. This is because the in the local case, the operating system may take care to slow down the sender if the receiver's buffer is full. On different computers, there's no way for the operating system to do this.
 
  * Your code should gracefully handle duplicate acks and data packets. That is, it should ignore duplicate packets, and possibly use them as an indicator of the other endpoint's state.
