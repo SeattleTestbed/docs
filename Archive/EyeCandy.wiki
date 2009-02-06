@@ -34,7 +34,15 @@ Wednesday 10:30-11:30pm in CSE 314.
 
 
 = MyGENI Ajax calls =
- 
+
+ * ajax_getcredits : returns list of credits
+   * args {}
+   * return : [{'username' : 'sean', percent : 16} ...]
+
+ * ajax_getshares : returns list of shares
+   * args {}
+   * return : [{'username' : 'sean', percent : 16} ...]
+
  * ajax_editshare : modifies existing share
    * args : {username: "sean", percent : "17"}
    * return : {"success" : True/False, "error" : "" on success or string with explanation of error}
