@@ -25,4 +25,8 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
 [[BR]]
 == Using the base installers to test your code ==
 ----
-You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running "python make_base_installers.py at .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir". Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample vessel information.
+You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
+{{{
+python make_base_installers.py at .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir
+}}}
+Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample vessel information.
