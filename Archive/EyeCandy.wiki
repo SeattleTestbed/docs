@@ -27,3 +27,22 @@ Wednesday 10:30-11:30pm in CSE 314.
 
  * Testing django functionality using django's testing suite
  * Portal Ajaxification
+
+= Ajax API =
+
+ * All Ajax calls are POSTs
+
+
+= MyGENI Ajax calls =
+ 
+ * ajax_editshare : modifies existing share
+   * args : {username: "sean", percent : "17"}
+   * return : {"success" : True/False, "error" : "" on success or string with explanation of error}
+   * note: if percent is 0 then the action is to remove the share
+
+ * ajax_createshare : creates a new share with some user
+   * args : {username : "sean", percent : "17"}
+   * return : {"success", "error"} just like above
+   * note: percent must be > 0 (local js check as well as remote django check)
+
+ * 
