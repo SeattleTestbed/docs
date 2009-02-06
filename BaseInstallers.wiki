@@ -4,6 +4,13 @@ Explains how to go about building the base installers (everything you need to di
 [[TOC(inline)]]
 ----
 [[BR]]
+== Sample Usage ==
+Running from trunk/dist directory: [[BR]]
+{{{
+python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey tempdir
+}}}
+----
+[[BR]]
 == Step by Step ==
 ----
  1. Make sure you are operating on a Linux system.
@@ -11,7 +18,7 @@ Explains how to go about building the base installers (everything you need to di
  1. Navigate to the trunk/dist directory.
  1. Run the program (make_base_installers.py) with the following arguments:
    1. Various flags that will modify the behavior of the program. Include "m" to create a mac installer, "l" to create a linux installer, "w" to create a windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported OSs, and/or "t" to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
-   1. The path to trunk - so ".." if you are running from the dist directory.
+   1. The path to trunk; for example, ".." if you are running from the dist directory.
    1. The path to the public key that the installation will eventually use to communicate with the software updater.
    1. The path to the private key that the installation will eventually use to communicate with the software updater.
    1. The path to the output directory that you wanted any created installers to end up in.
