@@ -18,6 +18,8 @@ Where:
  * date is in mm/dd/yyyy format
  * names are person names of those involved in the sprint
  * tasks are short descriptions of the task corresponding to each person
+
+You can add comments to the file, and possibly comment out old sprints by using the '#' symbol. '''Note: right now the parser ignores all lines containing #, not just lines that start with #.'''
  
 At the end of your development cycle for the sprint, your should pre-append an svn revision number that contains all your committed files to the line with your name. For example, change this line:
 {{{
