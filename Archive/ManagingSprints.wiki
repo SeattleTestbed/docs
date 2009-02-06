@@ -41,3 +41,7 @@ eye candy
 807 alper
 810 sean
 }}}
+
+== Current Milestones File (directly from SVN) ==
+
+[[Include(source:trunk/milestones.txt)]]
