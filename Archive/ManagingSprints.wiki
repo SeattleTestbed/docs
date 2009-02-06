@@ -21,7 +21,6 @@ Where:
 
 You can add comments to the file, and possibly comment out old sprints by using the '#' symbol. '''Note: right now the parser ignores all lines containing #, not just lines that start with #.'''
 
-[[BR]]
 
 At the end of your development cycle for the sprint, your should pre-append an svn revision number that contains all your committed files to the line with your name. For example, change this line:
 {{{
