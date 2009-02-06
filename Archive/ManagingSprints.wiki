@@ -44,4 +44,4 @@ eye candy
 
 == Current Milestones File (directly from SVN) ==
 
-[[Include(source:trunk/milestones.txt)]]
+[[Include(source:seattle/trunk/milestones.txt)]]
