@@ -54,7 +54,9 @@ PythonException
  * Instead of cryptic Socket.* errors, Repy uses a clearer exception name. (Ex. Socket.gaierror vs AddressError)
 
 TODO: Example user code to catch a network/file error, compared to how it would look with only python code.
-=== Network Example ===
+=== Network Examples ===
+
+==== Host Name Example ====
 In native python, socket errors are defined in the socket module. Since repy has no concept of modules, and doesn't allow imports, it doesn't make sense to use the code snippet below.
 {{{
 #!python
@@ -64,6 +66,7 @@ try:
   socket.gethostbyname_ex("somerandomhostname")
 except socket.error:
   #recover from error
+  #note the use of socket.error rather than socket.gaierror or socket.herror. It's unclear which would be better in this context
 }}}
 
 Instead, the code would look like
@@ -71,5 +74,43 @@ Instead, the code would look like
 #!python
 try:
   gethostbyname_ex("somerandomhostname")
-except NetworkError:
-  #recover from error
+except AddressError:
+  #recover from error
+}}}
+
+
+==== Connection Example ====
+The way of interacting with sockets is also different from regular python:
+
+{{{
+#!python
+import socket
+
+try:
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.connect((some_user_input, 12347))
+  #use s to send/receive info
+except socket.gaierror, e:
+  #do something to account for invalid host
+except socket.timeout:
+  #handle the host timing out
+finally:
+  s.close()
+}}}
+
+Repy version:
+{{{
+#!python
+try:
+  s = openconn(some_user_input, 12347)
+  #use s to send/receive info
+except AddressError, e
+  #handle the invald host
+excpet TimeoutError, e:
+  #handle the host timing out
+finally:
+  stopcomm(s)
+}}}
+
+The exception handing for both cases are meant to be similar. We aimed to keep the programming model familiar enough to programmers with a python background, but also more user friendly to those just staring out with repy. Just as {{{openconn}}} and {{{sendmess}}} provide easy access for users to interact over networks, {{{NetworkError}}} and its subclasses are meant to facilitate convenient handling of common errors that can occur.
+
