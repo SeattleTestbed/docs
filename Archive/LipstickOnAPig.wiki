@@ -204,7 +204,8 @@ RepyError
      +--TimeoutError (when a host times out)
    +-- ResourceError
      |
-     +-- ResourceExhaustedError
+     +-- ResourceExhaustedError (too many files opened/used?)
+     +-- ResourceNotAllowedError (using a port that's not allowed)
    +-- DiskIOError
      
  +-- UnsafeCallError (python call not allowed in repy)
