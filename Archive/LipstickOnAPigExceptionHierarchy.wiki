@@ -1,5 +1,7 @@
 == Overview ==
 
+The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method for handling exceptions within repy programs.
+
 == Purpose ==
 
 == Proposed Repy Hierarchy ==
