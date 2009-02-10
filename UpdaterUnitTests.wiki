@@ -1,0 +1,30 @@
+= Running Software Updater Unit Tests =
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+=== Prepare Folders ===
+
+To start, you need to create a new directory that is empty save for another directory.  For example, you could create a directory /home/user/supertest, which only contains a directory named magictest (/home/user/supertest/magictest).  Then from the trunk of svn, run preparetest.py with the inner directory as the destination (magictest in the example).  Then the contents of trunk/softwareupdater/test should also be copied to this directory.  Once this is done, cd to this directory and run:
+
+{{{
+python test_updater.py <http://update.baseurl/location/>
+}}}
+
+The update base url location should be somewhere that is publicly accessible via http, and you should be able to copy files there as well.  Note that you are specifying a directory (which should be empty to start), and the trailing slash must be provided.  When this completes, there should be numerous folders in the outer directory you created (supertest in the example).
+
+=== Copy Folders ===
+
+Next, the folders that were created in the previous step must be copied over to the web location specified in the last step.
+
+=== Run Tests ===
+
+Finally, to run the tests, go back to the inner directory (magictest in the example), and run the command:
+
+{{{
+python test_runupdate.py <http://update.baseurl/location/>
+}}}
+
+The update base url location should be exactly the same as when you prepared the tests.  Note that on Windows, ps does not exist, so you will have to check manually that the softwareupdater is running in task manager.  Before updating, there should be a python process with the command line saying "python softwareupdater.py", and after each of the 2 updates there should be the same thing, but with random looking numbers at the end as well.  You can view the command line command that invoked the process by going to View->Select Columns...->Command Line.
