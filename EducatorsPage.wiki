@@ -31,7 +31,7 @@ The below assignments are geared toward an undergraduate class (so graduate clas
  * Dynamic Resource Acquisition
 
     This assignment focuses on acquiring and migrating computation. Students are given a simple program that serves a webpage. The students' task is to find the most efficient way to serve the webpage to an initially unknown set of clients. The students begin by implementing a program to load, start and stop programs (similar to the experiment manager) on their nodes. However, a student's program can only acquire a fixed amount of resources across all nodes. The students' goal is to have the webpage served quickly to a set of clients that periodically request the page. The students use DynDNS to register the IP addresses for their nodes with a single hostname. The clients (run by the instructor) look up this hostname and request the page from one of the nodes returned by DynDNS.
-
+    
     This assignment demonstrates that locality is important in distributed data references, and that resources present in the cloud have a cost and must be evaluated. This assignment also builds students' experience with acquiring and migrating resources to handle an unknown client workload.
 
 
