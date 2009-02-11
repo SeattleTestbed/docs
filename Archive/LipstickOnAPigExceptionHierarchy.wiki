@@ -118,7 +118,7 @@ try:
   #use s to send/receive info
 except AddressError, e
   #handle the invald host
-excpet TimeoutError, e:
+except TimeoutError, e:
   #handle the host timing out
 finally:
   stopcomm(s)
