@@ -38,7 +38,7 @@ Now we use the module name to access the desired functions.
 
 ==== Stage 2 ====
 
-To complete our transition, we will {{{include}}} the module instead of importing it. The [#https://seattle.cs.washington.edu/wiki/PythonVsRepy#Importstatements Importstatements guide] has more information on the functionality of the includes feature. To avoid collisions in the name space, an appropriate naming convention will be needed since the contents of the foo module will be inlined into the module using the {{{include}}} statement.
+To complete our transition, we will {{{include}}} the module instead of importing it. The [/wiki/PythonVsRepy#Importstatements Importstatements guide] has more information on the functionality of the includes feature. To avoid collisions in the name space, an appropriate naming convention will be needed since the contents of the foo module will be inlined into the module using the {{{include}}} statement.
 
 {{{
 include foo
