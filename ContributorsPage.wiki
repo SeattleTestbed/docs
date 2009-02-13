@@ -13,6 +13,7 @@ This page contains information useful to developers working on Seattle
    * [PythonVsRepy Python You Need to Forget to Use Repy]
    * [UnitTests Running unit tests] for repy
    * [RepyLibrary Repy Library] reference
+   * [PortingPythonToRepy Porting Python to Repy Guide]
    
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
