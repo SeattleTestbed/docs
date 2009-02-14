@@ -32,3 +32,10 @@ Eric: forwarder logic.
 
 
 
+== Milestone 1 cleanup ==
+
+Dennis:   Allow connections on different ports, intelligently choose from multiple forwarders.
+
+Armon:   Separate out the connection multiplexing code (ask Richard), openconn MAC address, MAC addresses should be very flexible, error messages should be the same as openconn / waitforconn. 
+
+Eric:    Working with forwarder, limits on the forwarder, sleeps -> locks.
