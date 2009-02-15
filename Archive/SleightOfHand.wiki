@@ -36,6 +36,6 @@ Eric: forwarder logic.
 
 Dennis:   Allow connections on different ports, intelligently choose from multiple forwarders, error conditions for current code, multiple mac addresses.   
 
-Armon:   Separate out the connection multiplexing code (ask Richard), openconn MAC address, MAC addresses should be very flexible, error messages should be the same as openconn / waitforconn. 
+Armon:   Separate out the connection multiplexing code (ask Richard), ??MAC addresses??, error messages should be the same as openconn / waitforconn. 
 
 Eric:    Forwarder with separate sockets, limits on the forwarder, sleeps go away.
