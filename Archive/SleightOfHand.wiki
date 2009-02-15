@@ -34,7 +34,7 @@ Eric: forwarder logic.
 
 == Milestone 1 cleanup ==
 
-Dennis:   Allow connections on different ports, intelligently choose from multiple forwarders, error conditions for current code, multiple mac addresses.   
+Dennis:   Allow connections on different ports, intelligently choose from multiple forwarders, error conditions for current code.   
 
 Armon:   Separate out the connection multiplexing code (ask Richard), ??MAC addresses??, error messages should be the same as openconn / waitforconn. 
 
