@@ -34,6 +34,7 @@ RepyException
      +--TimeoutError (when a host times out)
    +-- DiskError
      |
+     +--IllegalFileNameError
      +--FileNotFoundError
      +--InvalidFileModeError
  +-- ResourceError
