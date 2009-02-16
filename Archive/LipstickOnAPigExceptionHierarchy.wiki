@@ -29,9 +29,10 @@ RepyException
    |
    +-- NetworkError
      |
-     +--AddressError (wrapper for socket.gaierror and socket.herror)
+     +--AddressError (problem with address resolution/format)
+     +--ConnectionRefusedError
      +--DisconnectedError (whether from the start, or suddenly)
-     +--TimeoutError (when a host times out)
+     +--TimeoutError (connection/message with host times out)
    +-- DiskError
      |
      +--IllegalFileNameError
