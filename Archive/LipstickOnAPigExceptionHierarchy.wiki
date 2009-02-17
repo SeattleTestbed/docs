@@ -94,6 +94,38 @@ except AddressError:
   #recover from error
 }}}
 
+==== !AddressError ====
+  One class of errors that users may tend to see often due to the nature of resolution is address errors. In Python these are presented as {{{socket.gaierror}}}, and what the specific cause of the problem is presented in the text of the exception. 
+
+  Currently several repy network API calls still make use of {{{socket.*}}} errors. However the socket module is not in the scope of repy user programs, and modules aren't allowed to be imported. This means the current implementation of repy requires workarounds:
+{{{
+#!python
+try:
+  #stuff with a socket
+except Exception, e:
+  if "socket" not in str(e):
+    raise
+  #handle error condition
+}}}
+
+  In regular python, the user has the option of handling {{{socket.error}}}, or more specific exceptions such as {{{socket.herror}}} and {{{socket.gaierror}}}
+{{{
+#!python
+try:
+  #stuff with a socket
+except socket.error:
+  #handle error condition
+}}}
+
+  With our proposed hierarchy, it will be much simpler than it is currently. 
+
+{{{ 
+#!python
+try:
+  #stuff with a socket
+except NetworkError:
+  #handle error condition
+}}}
 
 ==== Connection Example ====
 The way of interacting with sockets is also different from regular python:
