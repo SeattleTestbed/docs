@@ -4,6 +4,8 @@
 
 The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
 
+[[TOC(inline)]]
+
 == Purpose ==
 
   Currently the Repy library has inconsistent treatment and use of exceptions, which can be confusing and off-putting for new users. Our goal is to come up with a clear, uniform and logical way to present exceptions. The repy library functions have specific needs and goals, and the reflection hierarchy we're proposing reflects this.
@@ -128,3 +130,8 @@ finally:
 
 The exception handing for both cases are meant to be similar. We aimed to keep the programming model familiar enough to programmers with a python background, but also more user friendly to those just staring out with repy. Just as {{{openconn}}} and {{{sendmess}}} provide easy access for users to interact over networks, {{{NetworkError}}} and its subclasses are meant to facilitate convenient handling of common errors that can occur.
 
+== Internal Errors ==
+
+The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, a separate, distinct {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
+
+If this occurs in a {{{try...finally}}} block, the finally block will not get executed, and no "exit" event will be made. This is the same behavior as {{{exitall()}}}.
