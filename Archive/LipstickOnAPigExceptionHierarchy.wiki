@@ -183,6 +183,77 @@ s = openconn('127.0.0.1', 12347, '127.0.0.1', 12345)
 #a socket.ConnectionRefusedError would be raised
 }}}
 
+=== File System Examples ===
+
+While the python standard library provides many functions to flexibly interface with the underlying file system, the nature of repy requires a much more restricted subset of allowed operations. Additionally, there are a number of areas (such as file system modes) where the python standard library functions fail "silently" by either not raising an exception or proceeding with unexpected behavior. 
+
+The goal of the repy file system exceptions are to make it very clear what error has occured and to not silently continue.
+
+==== File Open Examples ====
+
+In native python, most errors with the file system raise a general "IOError" with more specific details in the message. This makes it hard to realize what happened:
+
+{{{
+try:
+  open("i_dont_exist", 'r')
+except IOError:
+  # Did the file really not exist? Were the permissions incorrect?
+  # Not clear what went wrong.
+  pass
+}}}
+
+In repy:
+
+{{{
+try:
+  open("i_dont_exist", 'r')
+except FileNotFoundError:
+  # Very clear, the file was not found
+  pass
+}}}
+
+==== File Open Mode Example ====
+
+Python "silently" allows some obscure modes with the file system:
+
+{{{
+try:
+  open("exists", "r1234")
+except:
+  # No exception is actually raised.
+  pass
+}}}
+
+In Repy:
+
+{{{
+try:
+  open("exists", "r1234")
+except InvalidFileModeException:
+  pass
+}}}
+
+==== Illegal File Names ====
+
+Python allows many characters within the open method such as ".." to traverse directories. Because Repy has no concept of "directories" for programs running in the vessels, it must be more restrictive of allowed file names.
+
+Python:
+{{{
+try:
+  open("../parent.txt", 'r')
+except:
+  # No exception is raised
+  pass
+}}}
+
+Repy:
+{{{
+try:
+  open("../parent.txt", 'r')
+except IllegalFileNameException:
+  pass
+}}}
+
 === Re-used Python Exceptions ===
 ==== !TypeError ====
 The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
