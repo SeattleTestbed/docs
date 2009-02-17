@@ -185,6 +185,16 @@ Repy version:
 sleep(-1)
 }}}
 
+----
+
+There are some ambiguities about when {{{ValueError}}} is appropriate. For example, {{{gethostbyname_ex}}} can raise several exceptions. 
+In python, the following snippet will raise {{{socket.herror}}}, with the message "Unknown server error"
+{{{
+#!python
+import socket
+socket.gethostbyname_ex("")
+}}}
+While this could be considered a network error, it seems reasonable to assume that getting host information from the empty string is obviously a value error, no network checks have to be performed. The repy version of the above code should raise a {{{ValueError}}}
 
 == Internal Errors ==
 
