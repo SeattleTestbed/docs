@@ -81,7 +81,8 @@ try:
   socket.gethostbyname_ex("somerandomhostname")
 except socket.error:
   #recover from error
-  #note the use of socket.error rather than socket.gaierror or socket.herror. It's unclear which would be better in this context
+  #note the use of socket.error rather than socket.gaierror or socket.herror. 
+  #It's unclear which would be better in this context
 }}}
 
 Instead, the code would look like
