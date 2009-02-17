@@ -196,7 +196,7 @@ Similar behaviour is proposed for repy. For example, if a user tries specifying 
 ==== !ValueError ====
 We want to change the Repy Library to emulate python's builtin API's usage of [http://docs.python.org/library/exceptions.html#exceptions.ValueError ValueError]. Although exact Python behavior differs per implementation and per call (a bad thing, in our opinion) {{{ValueError}}} tends to be used to indicate that a value of the correct type was passed in, but an invalid value was used. 
 
-An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a ValueError should be raised
+An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a !ValueError should be raised
 Python Version:
 {{{
 #!python
