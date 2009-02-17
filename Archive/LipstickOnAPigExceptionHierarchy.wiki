@@ -69,6 +69,9 @@ PythonException
 }}}
 
 === Network Examples ===
+Network failures can be of particular importance given the nature of repy and the types of programs that tend to get written in it. There are a large number of reasons for why network operations can fail, and we feel python's socket module's interface could be improved upon. 
+
+Our goal is to make it easy for users to determine precisely what went wrong with a network call, and be able to recover gracefully from these error conditions. 
 
 ==== Host Name Example ====
 In native python, socket errors are defined in the socket module. Since repy has no concept of modules, and doesn't allow imports, it doesn't make sense to use the code snippet below.
@@ -160,6 +163,25 @@ finally:
 }}}
 
 The exception handing for both cases are meant to be similar. We aimed to keep the programming model familiar enough to programmers with a python background, but also more user friendly to those just staring out with repy. Just as {{{openconn}}} and {{{sendmess}}} provide easy access for users to interact over networks, {{{NetworkError}}} and its subclasses are meant to facilitate convenient handling of common errors that can occur.
+
+==== !ConnectionRefusedError ====
+In python, the following code snippet raises a {{{socket.error}}}:
+{{{
+#!python
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('127.0.0.1', 12345))
+#try to connect to a socket which we aren't waiting for a connection on
+s.connect(('127.0.0.1', 12347))
+}}}
+The message for the error is {{{socket.error: (111, 'Connection refused')}}}
+
+A general {{{socket.error}}} is raised, and it's up to the user to determine the cause from the string/error code. In repy we propose making detection of the nature of what went wrong, so in our proposed model, the following would occur
+{{{
+#!python
+s = openconn('127.0.0.1', 12347, '127.0.0.1', 12345)
+#a socket.ConnectionRefusedError would be raised
+}}}
 
 === Re-used Python Exceptions ===
 ==== !TypeError ====
