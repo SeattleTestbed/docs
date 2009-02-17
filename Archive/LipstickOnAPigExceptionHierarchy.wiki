@@ -196,6 +196,9 @@ socket.gethostbyname_ex("")
 }}}
 While this could be considered a network error, it seems reasonable to assume that getting host information from the empty string is obviously a value error, no network checks have to be performed. The repy version of the above code should raise a {{{ValueError}}}
 
+=== Resource Errors ===
+Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handers hat once, it will be possible to catch the exception raised during the attempt to create more
+
 == Internal Errors ==
 
 The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, a separate, distinct {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
