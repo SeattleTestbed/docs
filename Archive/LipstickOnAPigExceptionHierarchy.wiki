@@ -161,10 +161,11 @@ finally:
 
 The exception handing for both cases are meant to be similar. We aimed to keep the programming model familiar enough to programmers with a python background, but also more user friendly to those just staring out with repy. Just as {{{openconn}}} and {{{sendmess}}} provide easy access for users to interact over networks, {{{NetworkError}}} and its subclasses are meant to facilitate convenient handling of common errors that can occur.
 
-=== !TypeError ===
+=== Re-used Python Exceptions ===
+==== !TypeError ====
 The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
 
-=== !ValueError ===
+==== !ValueError ====
 We want to change the Repy Library to emulate python's builtin API's usage of [http://docs.python.org/library/exceptions.html#exceptions.ValueError ValueError]. Although exact Python behavior differs per implementation and per call (a bad thing, in our opinion) {{{ValueError}}} tends to be used to indicate that a value of the correct type was passed in, but an invalid value was used. 
 
 An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a ValueError should be raised
