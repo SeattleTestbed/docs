@@ -46,7 +46,7 @@ def bar():
     print "bar"
   }}}
 
-To do this run python repypp.py b.repy out.repy. The a.repy file does not need to be pre-processed also. The file out.repy will contain the code for a.repy included inside the code for b.repy at the appropriate place. 
+To do this run {{{python repypp.py b.repy out.repy}}}. The a.repy file does not need to be pre-processed also. The file out.repy will contain the code for a.repy included inside the code for b.repy at the appropriate place. 
 
 == Input ==
 There are no Repy mechanisms to read user input. Providing the python {{{input}}} and {{{raw_input}}} methods is impractical, since the intent of Repy is to run as a background process on user machines. There is no terminal to accept input from. 
