@@ -12,7 +12,8 @@ The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create
 
  Our design makes use of existing python exceptions when it makes sense. This includes making use of exceptions such as !TypeError and !ValueError for argument passing to functions, and user generated errors such as !KeyError, !AttributeError, etc. We're introducing a new hierarchy which we feel represents the most relevant exceptional events that can occur during repy execution. Common operations in repy, such as dealing with the network and files, are given specific exceptions to allow users to account for errors they are likely to come across. 
 
- The hierarchy we designed is meant to account for the specific types of errors which can arise in Repy. The heirarchy in Repy is meant to be used in conjunction with some native Python exceptions, where it makes the most sense. For example, having network exceptions for repy library calls made sense, while creating wrappers for python exceptions such as !TypeError and !ValueError did not.  
+ The hierarchy we designed is meant to account for the specific types of errors which can arise in Repy. The heirarchy in Repy is meant to be used in conjunction with some native Python exceptions, where it makes the most sense. For example, having network exceptions for repy library calls made sense, while creating wrappers for python exceptions such as !TypeError and !ValueError did not.
+  
 {{{
 #!comment
  * Repy has specific needs, so we're attempting to target the needs
@@ -33,7 +34,7 @@ RepyException
      |
      +--AddressError (problem with address resolution/format)
      +--ConnectionRefusedError
-     +--DisconnectedError (whether from the start, or suddenly)
+     +--DisconnectedError
      +--TimeoutError (connection/message with host times out)
    +-- DiskError
      |
@@ -70,6 +71,8 @@ PythonException
 
 === Network Examples ===
 Network failures can be of particular importance given the nature of repy and the types of programs that tend to get written in it. There are a large number of reasons for why network operations can fail, and we feel python's socket module's interface could be improved upon. 
+
+Native python's exception types for network related errors are pretty limited. They are subclasses of [http://docs.python.org/library/socket.html#socket.error socket.error], and most of the information regarding the type of error is contained in error codes and corresponding error messages. In the case of the linux CPython implementation, the error codes used are the same as those defined in '''errno.h'''. It is then up to the user to parse the error message to determine exactly what went wrong.
 
 Our goal is to make it easy for users to determine precisely what went wrong with a network call, and be able to recover gracefully from these error conditions. 
 
@@ -182,6 +185,11 @@ A general {{{socket.error}}} is raised, and it's up to the user to determine the
 s = openconn('127.0.0.1', 12347, '127.0.0.1', 12345)
 #a socket.ConnectionRefusedError would be raised
 }}}
+
+==== !DisconnectedError ====
+This error is meant to be raised by {{{getmyip()}}}, to indicate that a computer lost it's connection to the internet. The current behavior is ambiguous; {{{getmyip}}} raises a {{{socket.gairerror}}} with the message No address associated with hostname". 
+
+This error should also be raised if the socket layer raises {{{socket.error}}} 101: "Network is unreachable"
 
 === File System Examples ===
 
