@@ -1,0 +1,211 @@
+= Lipstick on a Pig Exception Hierarchy Proposal =
+
+== Overview ==
+
+The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
+
+[[TOC(inline)]]
+
+== Purpose ==
+
+  Currently the Repy library has inconsistent treatment and use of exceptions, which can be confusing and off-putting for new users. Our goal is to come up with a clear, uniform and logical way to present exceptions. The repy library functions have specific needs and goals, and the reflection hierarchy we're proposing reflects this.
+
+ Our design makes use of existing python exceptions when it makes sense. This includes making use of exceptions such as !TypeError and !ValueError for argument passing to functions, and user generated errors such as !KeyError, !AttributeError, etc. We're introducing a new hierarchy which we feel represents the most relevant exceptional events that can occur during repy execution. Common operations in repy, such as dealing with the network and files, are given specific exceptions to allow users to account for errors they are likely to come across. 
+
+ The hierarchy we designed is meant to account for the specific types of errors which can arise in Repy. The heirarchy in Repy is meant to be used in conjunction with some native Python exceptions, where it makes the most sense. For example, having network exceptions for repy library calls made sense, while creating wrappers for python exceptions such as !TypeError and !ValueError did not.  
+{{{
+#!comment
+ * Repy has specific needs, so we're attempting to target the needs
+ * Make use of existing python exceptions where it makes sense
+ * Hierarchy was designed to account for the specific types of errors which can happen, up to the general errors which some library calls all apply to
+ * PythonException tree is separate from RepyException and is used to show that the two exception hierarchies are distinct
+}}}
+
+== Proposed Repy Hierarchy ==
+
+Below is our proposed exception hierarchy. The !RepyException tree is separate from !RepyException to show how the two are meant to be distinct, although !RepyException is a subclass of Python's Exception. 
+{{{
+RepyException
+ |
+ +-- IOError
+   |
+   +-- NetworkError
+     |
+     +--AddressError (problem with address resolution/format)
+     +--ConnectionRefusedError
+     +--DisconnectedError (whether from the start, or suddenly)
+     +--TimeoutError (connection/message with host times out)
+   +-- DiskError
+     |
+     +--IllegalFileNameError
+     +--FileNotFoundError
+     +--InvalidFileModeError
+ +-- ResourceError
+   |
+   +-- ResourceExhaustedError (too many files opened/used?)
+   +-- ResourceNotAllowedError (using a port that's not allowed)
+     
+
+PythonException
+ |
+ +-- ValueError (these two are particularly important for library call's performing argument checks)
+ +-- TypeError 
+ +-- Any exceptions raised by python builtins (KeyError, etc
+ +-- Builtin exceptions raised due to programmer mistakes (AttributeError, IndexError, NameError, etc)
+}}}
+
+
+== Comparison to Python and Current Repy Implementation ==
+
+ The python builtins tend to throw the same types of errors, and repy is meant to mimic this behavior. For example, builtins overwhelmingly raise {{{TypeError}}} when passed an argument of the wrong type, and raise {{{ValueError}}} when passed an incorrect value (such as a positive number instead of a negative one). 
+
+ Repy exceptions are also meant to be less cryptic than some of the python exceptions. The socket.* errors for example were quite cryptic for new users, which resulted in the creation of {{{AddressError}}} rather than using python's {{{socket.gaierror}}}.
+
+{{{
+#!comment
+ * Python library calls tend to throw type errors when arguments of the wrong types are passed in, so Repy mimics that
+ * Value errors are when an invalid value, but correct type, such as a negative when expecting a positive are passed into a function.
+ * Instead of cryptic Socket.* errors, Repy uses a clearer exception name. (Ex. Socket.gaierror vs AddressError)
+}}}
+
+=== Network Examples ===
+
+==== Host Name Example ====
+In native python, socket errors are defined in the socket module. Since repy has no concept of modules, and doesn't allow imports, it doesn't make sense to use the code snippet below.
+{{{
+#!python
+import socket
+
+try:
+  socket.gethostbyname_ex("somerandomhostname")
+except socket.error:
+  #recover from error
+  #note the use of socket.error rather than socket.gaierror or socket.herror. 
+  #It's unclear which would be better in this context
+}}}
+
+Instead, the code would look like
+{{{
+#!python
+try:
+  gethostbyname_ex("somerandomhostname")
+except AddressError:
+  #recover from error
+}}}
+
+==== !AddressError ====
+  One class of errors that users may tend to see often due to the nature of resolution is address errors. In Python these are presented as {{{socket.gaierror}}}, and what the specific cause of the problem is presented in the text of the exception. 
+
+  Currently several repy network API calls still make use of {{{socket.*}}} errors. However the socket module is not in the scope of repy user programs, and modules aren't allowed to be imported. This means the current implementation of repy requires workarounds:
+{{{
+#!python
+try:
+  #stuff with a socket
+except Exception, e:
+  if "socket" not in str(e):
+    raise
+  #handle error condition
+}}}
+
+  In regular python, the user has the option of handling {{{socket.error}}}, or more specific exceptions such as {{{socket.herror}}} and {{{socket.gaierror}}}
+{{{
+#!python
+try:
+  #stuff with a socket
+except socket.error:
+  #handle error condition
+}}}
+
+  With our proposed hierarchy, it will be much simpler than it is currently. 
+
+{{{ 
+#!python
+try:
+  #stuff with a socket
+except NetworkError:
+  #handle error condition
+}}}
+
+==== Connection Example ====
+The way of interacting with sockets is also different from regular python:
+
+{{{
+#!python
+import socket
+
+try:
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.connect((some_user_input, 12347))
+  #use s to send/receive info
+except socket.gaierror, e:
+  #do something to account for invalid host
+except socket.timeout:
+  #handle the host timing out
+finally:
+  s.close()
+}}}
+
+Repy version:
+{{{
+#!python
+try:
+  s = openconn(some_user_input, 12347)
+  #use s to send/receive info
+except AddressError, e
+  #handle the invald host
+except TimeoutError, e:
+  #handle the host timing out
+finally:
+  stopcomm(s)
+}}}
+
+The exception handing for both cases are meant to be similar. We aimed to keep the programming model familiar enough to programmers with a python background, but also more user friendly to those just staring out with repy. Just as {{{openconn}}} and {{{sendmess}}} provide easy access for users to interact over networks, {{{NetworkError}}} and its subclasses are meant to facilitate convenient handling of common errors that can occur.
+
+=== Re-used Python Exceptions ===
+==== !TypeError ====
+The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
+
+For example, the python {{{abs}}} built-in expects a numeric type. If a string is passed in, it raises a {{{TypeError}}}. 
+
+Similar behaviour is proposed for repy. For example, if a user tries specifying a port number in {{{sendmess}}} which isn't a number, a {{{TypeError}}} should be raised. 
+
+
+
+==== !ValueError ====
+We want to change the Repy Library to emulate python's builtin API's usage of [http://docs.python.org/library/exceptions.html#exceptions.ValueError ValueError]. Although exact Python behavior differs per implementation and per call (a bad thing, in our opinion) {{{ValueError}}} tends to be used to indicate that a value of the correct type was passed in, but an invalid value was used. 
+
+An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a ValueError should be raised
+Python Version:
+{{{
+#!python
+import time
+#This raises "IOError: [Errno 22] Invalid argument"
+time.sleep(-1)
+}}}
+
+Repy version:
+{{{
+#!python
+#This raises "ValueError: Argument must be nonnegative"
+sleep(-1)
+}}}
+
+----
+
+There are some ambiguities about when {{{ValueError}}} is appropriate. For example, {{{gethostbyname_ex}}} can raise several exceptions. 
+In python, the following snippet will raise {{{socket.herror}}}, with the message "Unknown server error"
+{{{
+#!python
+import socket
+socket.gethostbyname_ex("")
+}}}
+While this could be considered a network error, it seems reasonable to assume that getting host information from the empty string is obviously a value error, no network checks have to be performed. The repy version of the above code should raise a {{{ValueError}}}
+
+=== Resource Errors ===
+Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handers hat once, it will be possible to catch the exception raised during the attempt to create more
+
+== Internal Errors ==
+
+The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, a separate, distinct {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
+
+If this occurs in a {{{try...finally}}} block, the finally block will not get executed, and no "exit" event will be made. This is the same behavior as {{{exitall()}}}.
