@@ -319,5 +319,7 @@ If this occurs in a {{{try...finally}}} block, the finally block will not get ex
 
 Information regarding the internal error will get logged, for debugging purposes. 
 
-== Unresolved Questions/Issued ==
+== Unresolved Questions/Issues ==
 There are a number of problems/questions we weren't sure the most appropriate way to handle. We'd appreciate any feedback regarding these issues
+ * What type of error should be raised if a user's IP address changes? If a program has event handlers associated with an IP address and that changes, how should the user be notified?
+   * If this were to raise an exception, would it even be possible for a user to handle this case? In this scenario, the only code still executing is most likely event handler code, so there's nowhere appropriate to handle an exception being thrown. 
