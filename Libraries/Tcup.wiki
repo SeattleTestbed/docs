@@ -4,8 +4,8 @@ This [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] is also ava
 
 == Getting the Code ==
 At the online [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] page, you can click and download:
- * [https://seattle.cs.washington.edu/attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
- * [https://seattle.cs.washington.edu/attachment/wiki/TopSecretReadme/tcp.tgz tcp.tgz] - our sub folder in the Seattle project svn
+ * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
+ * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tcp.tgz] - our sub folder in the Seattle project svn
 
 Also, you can checkout the code anonymously:
 {{{
@@ -29,11 +29,11 @@ The code has the following layout:
   * units/ - testing how each function of a class works in isolation
 
 == Using the Library ==
-If you want to use the [https://seattle.cs.washington.edu/attachment/wiki/TopSecretReadme/tcp.repy single file]:
+If you want to use the [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy single file]:
 {{{
 #!sh
 # 1. Get the single file version, '''tcp.repy'''
-wget https://seattle.cs.washington.edu/attachment/wiki/TopSecretReadme/tcp.repy
+wget https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy
 # 2. Add ''include tcp.repy'' to the top of your Repy file
 emacs file.repy
 # 3. Pre-process your Repy file:
@@ -42,7 +42,7 @@ python repypp.py file.repy file.out
 python repy.py restictions.file file.out
 }}}
 
-If you downloaded the [https://seattle.cs.washington.edu/attachment/wiki/TopSecretReadme/tcp.tgz tarball] or
+If you downloaded the [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tarball] or
 checked out the SVN, here's some basic steps to follow if your starting from a clean directory:
 {{{
 #!sh
