@@ -3,6 +3,8 @@ This code is an implementation of TCP over Repy's native UDP.  See the [https://
 This [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] is also available online (or maybe you are online).
 
 == Getting the Code ==
+The current release is '''0.0.1''' (February 19, 2009).
+
 At the online [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] page, you can click and download:
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tcp.tgz] - our sub folder in the Seattle project svn
