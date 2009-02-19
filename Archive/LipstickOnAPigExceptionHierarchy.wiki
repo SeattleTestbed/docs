@@ -70,7 +70,7 @@ PythonException
 }}}
 
 
-=== Re-used Python Exceptions ===
+=== Reused Python Exceptions ===
 
 ==== !TypeError ====
 The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
