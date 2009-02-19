@@ -69,6 +69,49 @@ PythonException
  * Instead of cryptic Socket.* errors, Repy uses a clearer exception name. (Ex. Socket.gaierror vs AddressError)
 }}}
 
+
+=== Re-used Python Exceptions ===
+
+==== !TypeError ====
+The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
+
+For example, the python {{{abs}}} built-in expects a numeric type. If a string is passed in, it raises a {{{TypeError}}}. 
+
+Similar behaviour is proposed for repy. For example, if a user tries specifying a port number in {{{sendmess}}} which isn't a number, a {{{TypeError}}} should be raised. 
+
+
+
+==== !ValueError ====
+We want to change the Repy Library to emulate python's builtin API's usage of [http://docs.python.org/library/exceptions.html#exceptions.ValueError ValueError]. Although exact Python behavior differs per implementation and per call (a bad thing, in our opinion) {{{ValueError}}} tends to be used to indicate that a value of the correct type was passed in, but an invalid value was used. 
+
+An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a !ValueError should be raised
+Python Version:
+{{{
+#!python
+import time
+#This raises "IOError: [Errno 22] Invalid argument"
+time.sleep(-1)
+}}}
+
+Repy version:
+{{{
+#!python
+#This raises "ValueError: Argument must be nonnegative"
+sleep(-1)
+}}}
+
+----
+
+There are some ambiguities about when {{{ValueError}}} is appropriate. For example, {{{gethostbyname_ex}}} can raise several exceptions. 
+In python, the following snippet will raise {{{socket.herror}}}, with the message "Unknown server error"
+{{{
+#!python
+import socket
+socket.gethostbyname_ex("")
+}}}
+While this could be considered a network error, it seems reasonable to assume that getting host information from the empty string is obviously a value error, no network checks have to be performed. The repy version of the above code should raise a {{{ValueError}}}
+
+
 === Network Examples ===
 Network failures can be of particular importance given the nature of repy and the types of programs that tend to get written in it. There are a large number of reasons for why network operations can fail, and we feel python's socket module's interface could be improved upon. 
 
@@ -262,51 +305,13 @@ except IllegalFileNameException:
   pass
 }}}
 
-=== Re-used Python Exceptions ===
-==== !TypeError ====
-The python library uses [http://docs.python.org/library/exceptions.html#exceptions.TypeError TypeError] to notify users that an argument of the wrong type was passed to a function. We want to emulate this behavior, as the current repy implementation primarily raises {{{Exception}}} and gives the description of what argument was incorrect.
-
-For example, the python {{{abs}}} built-in expects a numeric type. If a string is passed in, it raises a {{{TypeError}}}. 
-
-Similar behaviour is proposed for repy. For example, if a user tries specifying a port number in {{{sendmess}}} which isn't a number, a {{{TypeError}}} should be raised. 
-
-
-
-==== !ValueError ====
-We want to change the Repy Library to emulate python's builtin API's usage of [http://docs.python.org/library/exceptions.html#exceptions.ValueError ValueError]. Although exact Python behavior differs per implementation and per call (a bad thing, in our opinion) {{{ValueError}}} tends to be used to indicate that a value of the correct type was passed in, but an invalid value was used. 
-
-An example of this is the {{{sleep}}} API call, which expects a numeric value greater than 0. If a negative number is passed in, a !ValueError should be raised
-Python Version:
-{{{
-#!python
-import time
-#This raises "IOError: [Errno 22] Invalid argument"
-time.sleep(-1)
-}}}
-
-Repy version:
-{{{
-#!python
-#This raises "ValueError: Argument must be nonnegative"
-sleep(-1)
-}}}
-
-----
-
-There are some ambiguities about when {{{ValueError}}} is appropriate. For example, {{{gethostbyname_ex}}} can raise several exceptions. 
-In python, the following snippet will raise {{{socket.herror}}}, with the message "Unknown server error"
-{{{
-#!python
-import socket
-socket.gethostbyname_ex("")
-}}}
-While this could be considered a network error, it seems reasonable to assume that getting host information from the empty string is obviously a value error, no network checks have to be performed. The repy version of the above code should raise a {{{ValueError}}}
-
 === Resource Errors ===
-Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handers hat once, it will be possible to catch the exception raised during the attempt to create more
+Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handers at once, it will be possible to catch the exception raised during the attempt to create more, and allow the programmer to take appropriate action. 
 
 == Internal Errors ==
 
-The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, a separate, distinct {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
+The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, an {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
 
 If this occurs in a {{{try...finally}}} block, the finally block will not get executed, and no "exit" event will be made. This is the same behavior as {{{exitall()}}}.
+
+Information regarding the internal error will get logged, for debugging purposes. 
