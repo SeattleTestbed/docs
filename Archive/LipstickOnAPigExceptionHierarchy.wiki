@@ -99,7 +99,10 @@ Repy version:
 #This raises "ValueError: Argument must be nonnegative"
 sleep(-1)
 }}}
-
+{{{
+#!comment
+To figure out number of arguments for a function pointer, use fun_name.func_code.co_argcount
+}}}
 ----
 
 There are some ambiguities about when {{{ValueError}}} is appropriate. For example, {{{gethostbyname_ex}}} can raise several exceptions. 
@@ -315,3 +318,6 @@ The above errors are meant to be the exceptions exposed to users. If a corrupt i
 If this occurs in a {{{try...finally}}} block, the finally block will not get executed, and no "exit" event will be made. This is the same behavior as {{{exitall()}}}.
 
 Information regarding the internal error will get logged, for debugging purposes. 
+
+== Unresolved Questions/Issued ==
+There are a number of problems/questions we weren't sure the most appropriate way to handle. We'd appreciate any feedback regarding these issues
