@@ -19,7 +19,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
 || Michael Moshofsky || mikemosh at cs || 503-910-7091 || mikemosh|| !MikeMosh ||
 || Mitchell Hashimoto || mitch at cs || 970-231-9011 || mitchellh || mitchellh ||
-|| Peter || || || || peter ||
+|| Richard Jordan || richard at jordan.ham-radio-op.net || || || ||
 || Salikh (Sal) Bagaveyev || sal at cs ||    || sal || sal ||
 || Sean || shawiz at cs || || sean || shawiz ||
 
