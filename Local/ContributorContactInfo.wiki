@@ -24,3 +24,4 @@ Please keep the list ordered alphabetically by SVN username.
 || Kyungil || || || || sojc701 ||
 || Yih || || || || yskhoo ||
 || Mitchell Hashimoto || mitch at cs || 970-231-9011 || mitchellh || mitchellh ||
+|| Jenn|| hanson at cs || || jenn || jenn ||
