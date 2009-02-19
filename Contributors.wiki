@@ -70,3 +70,5 @@ Test framework -- Brent Couvrette
 ----
 
 Patch to fix race conditions in installer -- Jake Appelbaum
+
+VIM syntax coloring for repy -- João Moreno
