@@ -33,6 +33,7 @@ RepyException
    +-- NetworkError
      |
      +--AddressError (problem with address resolution/format)
+     +--AddressInUseError
      +--ConnectionRefusedError
      +--DisconnectedError
      +--TimeoutError (connection/message with host times out)
@@ -235,7 +236,7 @@ s = openconn('127.0.0.1', 12347, '127.0.0.1', 12345)
 ==== !DisconnectedError ====
 This error is meant to be raised by {{{getmyip()}}}, to indicate that a computer lost it's connection to the internet. The current behavior is ambiguous; {{{getmyip}}} raises a {{{socket.gairerror}}} with the message No address associated with hostname". 
 
-This error should also be raised if the socket layer raises {{{socket.error}}} 101: "Network is unreachable"
+This error should also be raised if the socket layer raises {{{socket.error}}} 101: "Network is unreachable". This is currently the exception that is thrown by various network api calls, such as when {{{sendmess}}} is given an external ip but the network is disconnected
 
 === File System Examples ===
 
