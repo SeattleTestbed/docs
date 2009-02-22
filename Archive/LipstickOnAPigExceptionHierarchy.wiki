@@ -238,6 +238,10 @@ This error is meant to be raised by {{{getmyip()}}}, to indicate that a computer
 
 This error should also be raised if the socket layer raises {{{socket.error}}} 101: "Network is unreachable". This is currently the exception that is thrown by various network api calls, such as when {{{sendmess}}} is given an external ip but the network is disconnected
 
+
+ 
+
+
 === File System Examples ===
 
 While the python standard library provides many functions to flexibly interface with the underlying file system, the nature of repy requires a much more restricted subset of allowed operations. Additionally, there are a number of areas (such as file system modes) where the python standard library functions fail "silently" by either not raising an exception or proceeding with unexpected behavior. 
@@ -324,3 +328,5 @@ Information regarding the internal error will get logged, for debugging purposes
 There are a number of problems/questions we weren't sure the most appropriate way to handle. We'd appreciate any feedback regarding these issues
  * What type of error should be raised if a user's IP address changes? If a program has event handlers associated with an IP address and that changes, how should the user be notified?
    * If this were to raise an exception, would it even be possible for a user to handle this case? In this scenario, the only code still executing is most likely event handler code, so there's nowhere appropriate to handle an exception being thrown. 
+
+ * Should an exception should be thrown if the interface and destination IP don't match?   I.e. {{{sendmess("google.com",80, "hi", "127.0.0.1", 12345)}}}
