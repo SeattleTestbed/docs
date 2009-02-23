@@ -2,6 +2,7 @@
  * 
 = Overview =
 
+Our Exception Hierarchy [LipstickExceptionProposal proposal]
 
 == Exception Handling ==
 
