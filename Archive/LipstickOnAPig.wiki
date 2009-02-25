@@ -1,11 +1,16 @@
 = Lipstick on a Pig =
- * 
+
 = Overview =
 
-Our Exception Hierarchy [LipstickExceptionProposal proposal]
+The purpose of this Strike Force is to improve the usability of the Repy language.   In particular, we focus on exception handling, seattle lib clean up, and Repy <-> Python portability.
+
+
 
 == Exception Handling ==
 
+Our Exception Hierarchy [LipstickExceptionProposal proposal]
+
+== Calendar ==
 
 Coding Sprint: Feb ?th
 
@@ -117,6 +122,7 @@ All library calls could raise an error if a function is used that isn't allowed 
 * removefile
   *expects string
   *filename not allowed exception
+
 
 * emulated_file
   * __init__
