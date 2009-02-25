@@ -11,13 +11,6 @@ Donating resources with Seattle is a safe and easy way to help students and rese
 == Introduction to Seattle Donation ==
 ----
 
-By running Seattle on your home computer, workstation, or computer, you
-are helping everyone using Seattle! By making your
-donation available to Seattle users, you are allowing users to try new   topologies of nodes. This enables both more accurate representations of
-Internet (increased and varied latency times) and allows more
-undergraduates, graduate students, and professors to test their
-hypotheses on a internetwork-like testbed without charge.
-
 On the download page, you may notice that it details that you are
 donating resources on behalf of a specific user. By downloading the
 installer from this page, you are donating resources to be owned by the
@@ -51,19 +44,34 @@ destination IP are not.   This means there is some small risk they could be used
 
 
 [[BR]]
+== Why You Should Donate ==
+----
+
+By running Seattle on your home computer, workstation, or computer, you
+are helping everyone using Seattle! By making your
+donation available to Seattle users, you are allowing users to try new   topologies of nodes. This enables both more accurate representations of
+Internet (increased and varied latency times) and allows more
+undergraduates, graduate students, and professors to test their
+hypotheses on a internetwork-like testbed without charge.
+
+
+
+[[BR]]
 == Installing Seattle ==
 ----
 
+Installing Seattle on your machine is easy. First you will need to download an installer.   If you were referred to Seattle by a Seattle user, they may give you a link to an installer that credits the donated resources to them.   If not, you can download [https://seattle.cs.washington.edu/geni/download/flibble/ download a general installer] that credits your donations to a general fund for students to use.   
 
-Running Seattle on your machine is easy. First you will need to [https://seattle.cs.washington.edu/geni/download/flibble/ Download download the installer].   Then uncompress the file and start the install script ({{{install.bat}}} on Windows or {{{install.sh}}} on other OSes) and the application will do three things. 
+
+Then uncompress the file and start the install script ({{{install.bat}}} on Windows or {{{install.sh}}} on other OSes).   The installer does three things: 
 
  1. start Seattle on your computer
 
- 2. start the software updater for Seattle
+ 2. start the software updater for Seattle.   The software updater will automatically keep Seattle updated to the latest version for you.
 
  3. insert Seattle and the software updater into your startup queue (crontab for linux/apple, startup items for windows) so that they run whenever you reboot or login.
 
-You're done!
+And that's it, you're done!
 
 
 [[BR]]
