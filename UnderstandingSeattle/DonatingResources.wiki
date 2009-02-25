@@ -1,0 +1,71 @@
+
+
+[[BR]]
+== Introduction to Seattle Donation ==
+----
+
+   By running Seattle on your home computer, workstation, or computer, you
+   are helping everyone using the Beraber framework! By making your
+   donation available to Seattle users, you are allowing users to try new   topologies of nodes. This enables both more accurate representations of
+   Internet (increased and varied latency times) and allows more
+   undergraduates, graduate students, and professors to test their
+   hypotheses on a internetwork-like testbed without charge.
+
+   On the download page, you may notice that it details that you are
+   donating resources on behalf of a specific user. By downloading the
+   installer from this page, you are donating resources to be owned by the
+   user detailed on this page. The owner of the donation then has the
+   flexibility to organize permissions and allocate vessels to specific
+   users and the general Seattle public.
+
+   The philosophy of the Seattle project is use donationed resources in a
+   way that is secure (including performance-isolation). Programs that run
+   donated resources are isolated so that a program can't write or read
+   files it isn't supposed to or do other bad things to your computer. The
+   Beraber framework also ensures fair play with each donation by
+   isolating the performance of your programs from the programs that run
+   on donated resources. Our promise to you is to use no more than 10% of
+   your computer's resources XXX: footnote{Computational resources are    things like RAM, CPU time, network bandwidth, and hard drive space.
+   We're working on allowing you to reset the percentages or absolute
+   value to allow you to change the amount. }.
+
+[[BR]]
+== Installing Seattle ==
+----
+
+   Running Seattle on your machine is easy. Simply start the install
+   script (install.bat or install.sh, depending on the type of your
+   system), and the application will do three things. (1) start the main
+   communication program, nmmain.py (standing for node manager main
+   thread), (2) start up the software updater, and (3) insert nmmain.py
+   into your startup queue (crontab for linux/apple, startup items for
+   windows).
+
+[[BR]]
+== Pausing Seattle ==
+----
+
+   To pause the execution of Seattle, run the python script
+   seattlestopper.py (or use the script stop_seattle.sh). To unpause, run
+   the python script seattlestarter.py (or use the script
+   start_seattle.sh). During the paused period, your computer's resources 
+
+   will not be consumed by student programs.
+
+[[BR]]
+== Uninstalling Seattle ==
+----
+
+   If you decide to end your donation, Seattle can be uninstalled simply
+   by running the python script uninstall.py (or the script uninstall.sh).
+   This process will remove Seattle from the startup queue, deactivate the
+   main thread, and remove the execution from the user's crontab (if
+   applicable).
+
+[[BR]]
+== Comments or Questions ==
+----
+
+   We would also like to know about your experiences with Seattle. If you
+   have any questions or comments please drop a message to our Seattle
+   user list! We're always striving to make a better experience for all.
