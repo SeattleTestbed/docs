@@ -2,6 +2,7 @@
 
 Donating resources with Seattle is a safe and easy way to help students and researchers all around the world.   
 
+
 ----
 [[TOC(inline)]]
 ----
@@ -11,23 +12,14 @@ Donating resources with Seattle is a safe and easy way to help students and rese
 == Introduction to Seattle Donation ==
 ----
 
-On the download page, you may notice that it details that you are
-donating resources on behalf of a specific user. By downloading the
-installer from this page, you are donating resources to be owned by the
-user detailed on this page. The owner of the donation then has the
-flexibility to organize permissions and allocate vessels to specific
-users and the general Seattle public.
 
-The philosophy of the Seattle project is use donationed resources in a
-way that is secure (including performance-isolation). Programs that run
+The overall philosophy of the Seattle project is use donated resources in a way that is safe and secure 
+(including performance-isolation). Programs that run
 donated resources are isolated so that a program can't write or read
 files it isn't supposed to or do other bad things to your computer. 
-Seattle also ensures fair play with each donation by
-isolating the performance of your programs from the programs that run
-on donated resources. Our promise to you is to use no more than 10% of
-your computer's resources (things like RAM, CPU time, network bandwidth, and hard drive space).
-One of the things we're working on is allowing you to reset the percentages or absolute
-value to allow you to change the amount.
+Seattle also ensures fair play by isolating the performance of Seattle programs from your other programs you use.
+Our promise to you is to use no more than 10% of your computer's resources (things like RAM, CPU time, network bandwidth, and hard drive space).
+
 
 [[BR]]
 == Risk ==
