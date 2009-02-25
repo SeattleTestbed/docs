@@ -34,12 +34,17 @@
 ----
 
    Running Seattle on your machine is easy. Simply start the install
-   script (install.bat or install.sh, depending on the type of your
-   system), and the application will do three things. (1) start the main
-   communication program, nmmain.py (standing for node manager main
-   thread), (2) start up the software updater, and (3) insert nmmain.py
-   into your startup queue (crontab for linux/apple, startup items for
-   windows).
+   script ({{{install.bat}}} on Windows or {{{install.sh}}} on other OSes)
+   and the application will do three things. 
+
+(1) start the main communication program, nmmain.py (standing for node manager main thread)
+
+(2) start up the software updater
+
+(3) insert Seattle into your startup queue (crontab for linux/apple, startup items for windows) so that it runs whenever you reboot or login.
+
+   
+
 
 [[BR]]
 == Pausing Seattle ==
@@ -49,7 +54,6 @@
    seattlestopper.py (or use the script stop_seattle.sh). To unpause, run
    the python script seattlestarter.py (or use the script
    start_seattle.sh). During the paused period, your computer's resources 
-
    will not be consumed by student programs.
 
 [[BR]]
