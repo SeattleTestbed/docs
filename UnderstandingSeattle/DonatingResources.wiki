@@ -50,11 +50,11 @@ destination IP are not.   This means there is some small risk they could be used
 Running Seattle on your machine is easy. Simply start the install script ({{{install.bat}}} on Windows or {{{install.sh}}} on other OSes)
 and the application will do three things. 
 
- 1. start the main communication program, nmmain.py (standing for node manager main thread)
+ 1. start Seattle on your computer
 
- 2. start up the software updater
+ 2. start the software updater for Seattle
 
- 3. insert Seattle into your startup queue (crontab for linux/apple, startup items for windows) so that it runs whenever you reboot or login.
+ 3. insert Seattle and the software updater into your startup queue (crontab for linux/apple, startup items for windows) so that they run whenever you reboot or login.
 
    
 
