@@ -8,17 +8,21 @@ You will have to download and install repy before starting the tutorials below: 
 
 == Tutorials ==
 
-There are several different tutorials depending on your background. 
+There are several starting tutorials depending on your background. 
 
  * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
 
  * [PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
 
- * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
- * [RepyLibrary Repy Library Reference]. Use this reference as a quick guide to Repy's API once you are comfortable with the language.
+After completing one of the above do the [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
+
+
+
 
 == Other Resources ==
+
+[RepyLibrary Repy Library Reference]. Use this reference as a quick guide to Repy's API once you are comfortable with the language.
 
 There is a growing list of library code you can download and use with Repy. Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
 
