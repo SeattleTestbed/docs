@@ -1,5 +1,5 @@
-= Creating trac Tickets =
-With so many options, fields, and dropdown boxes, trac tickets can be confusing. This is a description of how to get the most out of the powerful and convenient tools that trac gives you.
+= Managing Trac Tickets =
+With so many options, fields, and dropdown boxes, trac tickets can be confusing. This is a description of how to get the most out of the powerful and convenient tools that trac gives you. After the description, there are a few hints and recommended best practices.
 ----
 [[TOC(inline)]]
 ----
