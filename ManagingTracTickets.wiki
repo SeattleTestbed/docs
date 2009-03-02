@@ -10,7 +10,7 @@ One of the most important features of trac is its ticketing system. Developers c
 [[BR]]
 == The life of a ticket ==
 ----
-These are the various stages that every ticket can and should pass through.
+These are the various stages that every ticket should pass through.
  1. '''Creation:''' Whether you are creating a ticket for yourself or for someone else, it should contain certain information:
   1. Summary - a brief but descriptive summary of the ticket which will show up in searches.
   1. Description - a full description of the ticket, ideally including everything that anyone on the project would need to know about the assignment or bug. You can and should use wiki formatting here where it would be helpful.
@@ -28,3 +28,23 @@ These are the various stages that every ticket can and should pass through.
  1. '''Acceptance:''' When you are assigned a ticket, you should as soon as possible either accept it, close it if it is invalid, or reassign it to someone else if it doesn't belong to you. This way the reporter knows that you've at least looked at the ticket.
  1. '''Modification:''' Actually, the description of a ticket can't be modified, so if you need to make any significant modifications to the ticket, it's usually best to close the old one and open a new one with the modified description, since people are apt to overlook comments when looking at a ticket. Tickets closed for this reason should generally be resolved as invalid.
  1. '''Closing:''' Once you've fixed the problem or completed the task described in the ticket, you need to close the ticket, marking it as "fixed". If you fixed part of the problem and are not immediately planning to fix the whole thing, you might consider closing the ticket and reopening a new one with the part of the problem that you still have to fix. Anytime you close a ticket you should leave a comment. If you're reopening a new one that is closely related, go ahead and link to it (which you can do in wiki formatting by prefacing the ticket number with a pound sign; !#42 -> #42). If you've completed a task or fixed a bug that involved checking code into the repository, then you should provide a link to the changeset (which you can do in wiki formatting by prefacing the revision number with the letter r: !r1313 -> r1313). That's really handy for people browsing the wiki to quickly see exactly what changes you made.
+
+== A few hints ==
+
+The art of ticket management is not a strict art. But there are a few hints that you can use along the way. Here are some of these (feel free to add more!):
+
+ * Use the right task granularity. If the ticket is too specific and documents a spelling error then the granularity is too small -- the overhead of creating/closing the ticket is higher than that of the actual task -- avoid this case. On the other hand a ticket could specify a very large task that has multiple sub-tasks -- avoid these as well because its much better to have a ticket for each sub-task so that progress can be made and each task has its own space where relevant details could be assembled.
+
+ * Be verbose -- describe the problem in the ticket with as much detail as possible -- e.g. attach screenshots, or code that triggers the problem. A ticket should strive to convey everything one needs to start addressing the problem.
+
+ * Use a milestone to organize your work. If none exists -- create one in the roadmap (see left bar of the wiki). Milestones make it easy to find tickets later and to track your progress on a number of related  tickets
+
+ *  Use the correct component for the ticket. Remember that the component owner will be notified on ticket creation. You don't want to bother people unnecessarily.
+
+ * Use comments to reply to tickets / update tickets as you make progress. Reference other tickets related to the issue. Its important to specify how the ticket fits in with the rest of the project. For example, a ticket could be blocking a release, or it could be a minor issue that's orthogonal to the priority areas of the project.
+
+ * Use the CC field to reference other users who need to know about the ticket. Often a ticket will require team effort -- reference anyone who needs to know about the ticket.
+
+ * Use ticket numbers in SVN comments when committing code (e.g. Worked on Ticket #92) -- the #92 is the format that will cause trac to understand that this refers to a ticket.
+
+ * Use the Trac timeline [wiki:timeline] to track what has been happening recently -- to see new tickets, new commits, etc.
