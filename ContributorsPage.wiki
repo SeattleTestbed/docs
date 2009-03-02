@@ -7,7 +7,7 @@ This page contains information useful to developers working on Seattle
    * [MailingList seattle-devel mailing list access] instructions
    * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
-   * [CreatingTracTickets Using] the trac ticket system
+   * [ManagingTracTickets Managing Trac tickets] 
 
  * Programming in Repy
    * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
