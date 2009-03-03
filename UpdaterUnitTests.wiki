@@ -8,7 +8,7 @@ The softwareupdater tests can now be run to either update from a remote server o
 
 [[BR]]
 == Updating From Local Location ==
-Running the tests locally requires files from trunk/assignments/webserver/ and trunk/softwareupdater/test/ as well as a normal preparetest.  Also, there cannot be another instance of softwareupdater.py running, or the restart tests will fail.  Note that when running these tests on Windows, ps cannot be used to check process status.  You will have to do this yourself in the task manager.  Once everything is setup, run {{{python test_updater_local.py}}}.
+To run the tests locally, you need to first run preparetest.py to a folder of your choosing.  Then you also need to copy over the files from trunk/assignments/webserver/ and trunk/softwareupdater/test/ to that same folder.  Also, there cannot be another instance of softwareupdater.py running, or the restart tests will fail.  Note that when running these tests on Windows, ps cannot be used to check process status.  You will have to do this yourself in the task manager.  Once everything is setup, run {{{python test_updater_local.py}}} from the folder you just setup.
 
 Each rsync unit test has 3 lines of output.  The first is the webserver telling you the ip address it is listening on (this should be the address of the local machine).  The second line is the local folder that the webserver is serving.  The third line notes the type of test, the url being passed to rsync, and whether or not the test passed.  
 
