@@ -33,6 +33,9 @@ This page contains information useful to developers working on Seattle
    * [BaseInstallers Building] the base installers
    * [VersionDeployment Deploying] a new version
 
+ * Project Resources
+   * [WebServerLayout Seattle project machines]
+
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
    * [ProjectMembers Project Members] contact information
