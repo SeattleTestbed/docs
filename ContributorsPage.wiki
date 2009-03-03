@@ -12,9 +12,12 @@ This page contains information useful to developers working on Seattle
  * Programming in Repy
    * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
    * [PythonVsRepy Python You Need to Forget to Use Repy]
-   * [UnitTests Running unit tests] for repy
    * [RepyLibrary Repy Library] reference
    * [PortingPythonToRepy Porting Python to Repy Guide]
+
+ * Testing
+   * [UnitTests Running Repy unit tests]
+   * [UpdaterUnitTests Running Software Updater Unit Tests]
    
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
