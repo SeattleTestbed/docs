@@ -1,6 +1,6 @@
 = Educator Portal =
 
-This page contains information for educators wishing to use Seattle in the classroom.  We also have information about [SeattleClassroomExperiences the experiences of instructors using Seattle in their classroom].
+This page contains information for educators wishing to use Seattle in the classroom.  We are also gradually compiling [SeattleClassroomExperiences the experiences] of instructors using Seattle in their classroom. You might also want to watch our 5 minute [http://seattle.cs.washington.edu/demos/ demo] of Seattle in action!
 
 
 
