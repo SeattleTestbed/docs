@@ -1,6 +1,7 @@
 = Educator Portal =
+----
 
-This page contains information for educators wishing to use Seattle in the classroom.  We are also gradually compiling [SeattleClassroomExperiences the experiences] of instructors using Seattle in their classroom. For a quick intro you might also want to watch our 5 minute [http://seattle.cs.washington.edu/demos/ demo] of Seattle in action!
+This page contains information for educators wishing to use Seattle in the classroom.  We are also gradually compiling [SeattleClassroomExperiences the experiences] of instructors using Seattle in their classroom. For a quick intro you might also want to watch our 5 minute [http://seattle.cs.washington.edu/demos/ demo] of Seattle in action! If you have any questions about any of the materials on this page, please contact justinc -AT- cs -DOT- washington -DOT- edu
 
 ----
 [[TOC(inline)]]
@@ -9,7 +10,7 @@ This page contains information for educators wishing to use Seattle in the class
 [[BR]]
 == Complete Assignments ==
 ----
-The below assignments have complete descriptions, and have fully docemented instructor solutions. These assignments are geared toward an undergraduate class in networks. If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
+The below assignments have complete descriptions, and have fully docemented instructor solutions. These assignments are geared toward an undergraduate class in networks. 
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
