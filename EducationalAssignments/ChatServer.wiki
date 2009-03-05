@@ -1,11 +1,10 @@
 = Chat Server Assignment =
-
+----
 This assignment focuses on designing and implementing a chat service called Seattlechat. Seattlechat has three main components, a central Seattlechat server whose focus is to relay messages, a collection of Seattlechat translators that change messages into different formats for display, and a Seattlechat client which is will use a standard web browser for communicating with a user. Each Seattlechat client has its own translator, but many translators can connect to the same Seattlechat server.
 
 ----
 [[TOC(inline)]]
 ----
-[[BR]]
 
 [[BR]]
 == Step 1 : Seattlechat Server ==
