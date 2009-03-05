@@ -11,5 +11,5 @@ This page lists potential conferences and workshops that might be relevant to th
 || Python || [http://www.europython.eu/ EuroPython 2009] || !EuroPython || April 5th, 2009 || Birmingham, UK || June 28th - 3rd July, 2009 ||
 || Mobile Systems || [http://mobicase.org/ MobiCASE Conference] || Mobile Computing, Applications, and Services || May 1, 2009 || San Diego ||
 || CS Education || [http://www.cs.arizona.edu/groups/sigcse09/ SIGCSE Conference] || Technical Symposium on Computer Science Education || || Chattanooga, TN || ||
-|| CS Education || [http://www.cloudera.com/sigcse-2009-disc-workshop SIGCSE DISC Workshop] || Workshop on Data Intensive Scalable Computing || || Chattanooga, TN || Systems / Databases || [http://netdb09.cis.upenn.edu/ NetDB'09 Workshop] || Fifth International Workshop on Networking Meets Databases || June 1, 2009 || Big Sky, MT with SOSP'09 || October 14, 2009 || 
-|| ||
+|| CS Education || [http://www.cloudera.com/sigcse-2009-disc-workshop SIGCSE DISC Workshop] || Workshop on Data Intensive Scalable Computing || || Chattanooga, TN ||
+|| Systems / Databases || [http://netdb09.cis.upenn.edu/ NetDB'09 Workshop] || Fifth International Workshop on Networking Meets Databases || June 1, 2009 || Big Sky, MT with SOSP'09 || October 14, 2009 || 
