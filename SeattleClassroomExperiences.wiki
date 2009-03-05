@@ -4,4 +4,4 @@ We're currently preparing survey results from students in different classes that
 
 = Classes that have used Seattle = 
 
- * [http://www.systems.ethz.ch/education/courses/fs09/acn/ Advanced Computer Networks] at ETH Zurich, during Fall-Spring 2009
+Under construction
