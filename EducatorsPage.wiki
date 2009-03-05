@@ -8,7 +8,7 @@ This page contains information for educators wishing to use Seattle in the class
 == Complete Assignments ==
 ----
 
-The following set of assignments have complete descriptions, and have fully documented instructor solutions. These assignments are geared toward an undergraduate class in networks. 
+The following set of assignments have complete descriptions, and have fully documented instructor solutions. These assignments are geared toward an undergraduate class in networks or distributed systems.
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
