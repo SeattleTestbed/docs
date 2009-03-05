@@ -8,22 +8,16 @@ You will have to download and install repy before starting the tutorials below: 
 [[TOC(inline)]]
 ----
 
-[[BR]]
-== Getting Repy ==
-----
-
-
-[[BR]]
 == Tutorials ==
 ----
 
-There are several starting tutorials depending on your background. 
+You can start with several different tutorials depending on your background.
 
  * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
 
  * [PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
 
-After completing one of the above do the [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
+ * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
 [[BR]]
 == Other Resources ==
