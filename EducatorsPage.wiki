@@ -1,12 +1,15 @@
 = Educator Portal =
 
-This page contains information for educators wishing to use Seattle in the classroom.  We are also gradually compiling [SeattleClassroomExperiences the experiences] of instructors using Seattle in their classroom. You might also want to watch our 5 minute [http://seattle.cs.washington.edu/demos/ demo] of Seattle in action!
+This page contains information for educators wishing to use Seattle in the classroom.  We are also gradually compiling [SeattleClassroomExperiences the experiences] of instructors using Seattle in their classroom. For a quick intro you might also want to watch our 5 minute [http://seattle.cs.washington.edu/demos/ demo] of Seattle in action!
 
+----
+[[TOC(inline)]]
+----
 
-
+[[BR]]
 == Complete Assignments ==
-
-The below assignments are geared toward an undergraduate class (so graduate classes will likely want to have longer / more complex assignments). If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
+----
+The below assignments have complete descriptions, and have fully docemented instructor solutions. These assignments are geared toward an undergraduate class in networks. If you have any questions, please contact justinc -AT- cs -DOT- washington -DOT- edu 
 
  * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
@@ -19,8 +22,9 @@ The below assignments are geared toward an undergraduate class (so graduate clas
 
  * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
 
+[[BR]]
 == Assignment ideas ==
-
+----
 
  * Examining Non-Transitive Connectivity
 
@@ -39,8 +43,9 @@ The below assignments are geared toward an undergraduate class (so graduate clas
 
     Some cloud computing models provide an interface to a global, persistent store (like Amazon's S3 or Google's !AppEngine). While Seattle provides local persistent storage, there is no preexisting global store. Such a system can be constructed from a set of nodes that cooperatively replicate and manage data. This project requires that student implementations operate correctly over LAN with multiple readers / writers and gracefully recovers from node failures. For a more difficult project, the global store can be required to run on globally distributed nodes. This extension teaches students to deal with high failure likelihood and to overcome non-transitive connectivity, both of which are typical problems for distributed systems deployed at global scale.
 
+[[BR]]
 == Project ideas ==
-
+----
   * P2P Data Streaming
 
     One of the uses for Seattle is as a measurement platform. Because Seattle nodes are spread throughout the Internet, each node offers a valuable vantage point from which to observe Internet activity such as congestion, routing instabilities, outages, and much more. One way to think about Seattle nodes then is as sensors. The nodes generate a constant stream of data about what they observe from their vantage point. It is then up to the researcher to collect this data and process it in a meaningful manner. The database project for this measurement use case of Seattle would involve designing and implementing an infrastructure capable of organizing potentially millions of data streams coming from Seattle nodes in a way that allows the researcher to query the node stream data without needing to aggregate all the data across all time in a centralized manner. This may be done by, for example, delegating stream aggregation to Seattle nodes that have more resources at their disposal, and by constructing a tree structure for Seattle nodes in which the sensing nodes are the leaves of the tree and the researcher is at the root of the tree.
