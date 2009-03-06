@@ -1,11 +1,15 @@
-= Readme =
+= TCUP : TCP over UDP Repy Library =
+----
 This code is an implementation of TCP over Repy's UDP.  Hence, TC-p-U-d-P or TCUP (pronounced teacup).  See the [https://seattle.cs.washington.edu/wiki/TopSecret project wiki].  
 This [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] is also available online (or maybe you are online).
+----
+[[TOC]]
 
 [[Image(tcup.jpg)]]
+----
 
 == Getting the Code ==
-The current release is '''0.0.1''' (February 19, 2009).
+The current TCUP release is '''0.0.1''' (February 19, 2009).
 
 At the online [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] page, you can click and download:
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
