@@ -1,6 +1,6 @@
 = TCUP : TCP over UDP Repy Library =
 ----
-This Library implements the TCP protocol on top of UDP sockets exposed in [Repy Repy].  Hence, TC-p-U-d-P or TCUP (pronounced teacup). For where to get the code, and instructions on how to use TCUP see below. To see recent activity, see the [TopSecret project wiki]. 
+This Library implements the TCP protocol on top of UDP sockets exposed in [wiki:Repy].  Hence, TC-p-U-d-P or TCUP (pronounced teacup). For where to get the code, and instructions on how to use TCUP see below. To see recent activity, see the [TopSecret project wiki]. 
 ----
 [[TOC]]
 
