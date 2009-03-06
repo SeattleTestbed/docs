@@ -37,6 +37,20 @@ where keyname is the file name of your key (minus the publickey/privatekey part)
 Note that this only runs the repy unit tests that do not have a custom restrictions file.  While if you run start_tests.py with the -o option, it will attempt to run these tests remotely, this is currently undefined.  The reasons for this are because this requires that you actually have owner privileges on the node we are accessing (which at this time is not very convenient to make happen), and it would require a significant amount of customization of the test runner for many of these tests just to make it not crash.  Then there would be a good chance that many of these tests would not be able to run anyway if the chosen node did not have enough resources.  As these tests can be still be run locally, it was determine that it would not be worth the time to find solutions to these issues.
 
 [[BR]]
+== Running CPU Throttling Check Locally ==
+----
+To run the repy CPU throttling test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python run_tests.py -cpu
+}}}
+
+This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement.
+
+
+[[BR]]
 == Running Nodemanager Tests Automatically Using run_tests.py ==
 ----
 To run the node manager unit tests locally, open two shells (or command prompts). Navigate to trunk in each. Create a test directory <test_directory_name> if one is not already there.
