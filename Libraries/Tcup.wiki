@@ -1,6 +1,6 @@
 = TCUP : TCP over UDP Repy Library =
 ----
-This Library implements the TCP protocol on top of UDP sockets exposed in Repy.  Hence, TC-p-U-d-P or TCUP (pronounced teacup). For where to get the code, and instructions on how to use TCUP see below. To see recent activity, see the [TopSecret project wiki]. 
+This Library implements the TCP protocol on top of UDP sockets exposed in Repy.  Hence, TC-p-U-d-P or TCUP (pronounced teacup). For where to get the code, and instructions on how to use TCUP see below. For recent activity, see the [TopSecret project wiki]. 
 ----
 [[TOC]]
 
@@ -8,13 +8,13 @@ This Library implements the TCP protocol on top of UDP sockets exposed in Repy. 
 ----
 
 == Getting the Code ==
-The current TCUP release is '''0.0.1''' (February 19, 2009).
+The latest TCUP release is '''0.0.1'''  released on February 19, 2009.
 
 At the online [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] page, you can click and download:
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tcp.tgz] - our sub folder in the Seattle project svn
 
-Also, you can checkout the code anonymously:
+You can also checkout the latest code anonymously directly from SVN:
 {{{
 #!sh
 svn co http://seattle.cs.washington.edu/svn/seattle/trunk/ # get whole Seattle
@@ -64,8 +64,8 @@ python repypp.py file.repy file.out
 # 5. Excute your script locally with Repy:
 python repy.py restictions.file file.out
 }}}
-See the [https://seattle.cs.washington.edu/wiki/StudentsPage Students page] for more details on Repypp and links to help pages for Repy.
-See the [https://seattle.cs.washington.edu/wiki/RepyTutorial Repy Tutorial] for an introduction to Repy.
+See the [StudentsPage Students page] for more details on Repypp and links to help pages for Repy.
+See the [RepyTutorial Repy Tutorial] for an introduction to Repy.
 
 == Example ==
 {{{
