@@ -2,6 +2,8 @@
 This code is an implementation of TCP over Repy's native UDP.  See the [https://seattle.cs.washington.edu/wiki/TopSecret project wiki].  
 This [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] is also available online (or maybe you are online).
 
+[[Image(tcup.jpg)]]
+
 == Getting the Code ==
 The current release is '''0.0.1''' (February 19, 2009).
 
