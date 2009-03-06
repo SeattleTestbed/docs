@@ -116,15 +116,14 @@ test functions.  Each test function calls multiple related class functions and m
 sure they interact correctly.
 
 === Integration test files ===
-Integration files include all of the library.  Integrations should test interaction 
-between multiple classes.  Name them like '''z_test_<description>.repy'''.  Each
+Integration test files include all of the library. Integration tests test interaction 
+between multiple classes.  The have names like '''z_test_<description>.repy'''.  Each
 integration file uses only public interface methods.  The file is an example application
 using the library.
 
 == Distributing == 
-To pack up the current libray: 
+To pack up the current library from source into a tarball do: 
 {{{
 #!sh
 make dist
 }}}
-Afterwards, you'll see a generated tarball.
