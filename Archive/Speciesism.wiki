@@ -19,7 +19,7 @@ If a program attempts to send a packet to an address not in the node's cache, th
 To maintain the node's cache of addresses as current as possible, the Seattle Node Directory Service sends out update packets describing changes to the list of addresses registered for each user key. The update mechanism uses a gossip protocol, with each node forwarding the update packet to a random set of other nodes. For each user key the server will generate a separate update packet containing address changes relevant to just that user key.  Update packets may contain multiple changes, and are sent at short intervals (less than 1 minute apart) to ensure that changes are disseminated quickly.
 
 
-== Initial Design ==
-
+== Feedback ==
+[wiki: Integration with NAT Nodes]
 
 
