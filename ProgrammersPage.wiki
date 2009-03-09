@@ -40,6 +40,5 @@ João Moreno has also provided a [http://www.vim.org/scripts/script.php?script_i
 You can also choose to automatically color Repy code with python-mode in emacs.  In your .emacs file, add the following line:
 
 {{{
-#!emacs
 (add-to-list 'auto-mode-alist '("\\.repy$" . python-mode))
 }}}
