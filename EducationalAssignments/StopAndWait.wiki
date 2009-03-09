@@ -38,13 +38,13 @@ The third routine allows you to parametrize the number of retransmissions that s
 
 You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.  
 
-For automatic grading, your header structure must:
+For automatic grading, your message structure must:
  1. Be in the format <header><delimiter><payload> __in that order__.
- 2. Have a header of only 1 character in length.
+ 2. Have a 1 character long header.  The header character must either be a "0" or a "1".
  3. Use a constant called ''DELIM'' for any characters to ignore between the header and payload
  4. Store the delimiter in mycontext
 
-For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "X, <payload>" where X is the one character long header.  The code would be:
+For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "0, <payload>" and "1, <payload>.  The code would be:
 {{{
 #!python
 message_structure = header + mycontext["DELIM"] + payload
