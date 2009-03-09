@@ -36,3 +36,9 @@ Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file 
 == Editing repy files ==
 ----
 João Moreno has also provided a [http://www.vim.org/scripts/script.php?script_id=2546 VIM syntax file] for Repy that will syntax color Repy programs.
+
+You can also choose to automatically color Repy code with python-mode in emacs.  In your .emacs file, add the following line:
+
+{{{
+(add-to-list 'auto-mode-alist '("\\.repy$" . python-mode))
+}}}
