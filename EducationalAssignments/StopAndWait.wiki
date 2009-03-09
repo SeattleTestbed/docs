@@ -44,7 +44,7 @@ For automatic grading, your message structure must:
  3. Use a constant called ''DELIM'' for any characters to ignore between the header and payload
  4. Store the delimiter in mycontext
 
-For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "0, <payload>" and "1, <payload>.  The code would be:
+For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "0, <payload>" and "1, <payload>".  The code would be:
 {{{
 #!python
 message_structure = header + mycontext["DELIM"] + payload
