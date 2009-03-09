@@ -33,6 +33,26 @@ These first two routines are modelled on the existing sendmess and recvmess func
 The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgements are not forthcoming in a window of ''timeoutinms'' milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms or retries of 0 disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A ''retries'' setting of 0 also disables retransmissions, but delays at least timeoutinms before returning. Datagrams are never reported as lost.
 
 [[BR]]
+=== Message Structure ===
+----
+
+You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.  
+
+For automatic grading, your header structure must:
+ 1. Be in the format <header><delimiter><payload> __in that order__.
+ 2. Have a header of only 1 character in length.
+ 3. Use a constant called ''DELIM'' for any characters to ignore between the header and payload
+ 4. Store the delimiter in mycontext
+
+For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "X, <payload>" where X is the one character long header.  The code would be:
+{{{
+#!python
+message_structure = header + mycontext["DELIM"] + payload
+}}}
+
+If you do not follow this format, the auto-grader system will assume your solution is incorrect.
+
+[[BR]]
 === Reliable Client and Server ===
 ----
 You must write two programs, a client and server, which include your '''reliable.repy''' library:
@@ -94,8 +114,6 @@ Include a thoughtful discussion and analysis of the results of no more than one 
  * Do this assignment in parts. First, get the protocol working. Then, worry about making the measurements. Go from local testing to LAN to WAN.
 
  * Your programs can use 'print' to create logging, debugging, or error messages. Use this information to help you debug!
-
- * You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.
 
  * If the client and server are run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports, one for the server and another for the client.
 
