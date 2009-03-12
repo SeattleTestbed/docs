@@ -1,6 +1,6 @@
 {{{
 #!NewsFlash
-[[BlogList(recent=5, max_size=150, heading=Latest Project News, format=full)]]
+[[BlogList(recent=5, max_size=150, format=full)]]
 }}}
 
 == What is Seattle? ==
