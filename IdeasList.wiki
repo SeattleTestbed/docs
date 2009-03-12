@@ -1,6 +1,6 @@
 = Ideas List for Google Summer of Code =
 
-This lists a set of projects the Seattle project intends to work on over the summer which are appropriate for an outside developer to help with.  
+This lists a set of projects the Seattle project intends to work on over the summer which are appropriate for an outside developer to help with.  Most of the work that we do is with a [StrikeForces  Strike Force] so this work will be performed jointly with existing developers.
 
 ----
 [[TOC(inline)]]
@@ -76,7 +76,7 @@ C++ experience required, Perl, Python and XML experience preferred by not requir
 == "user level" GFS-like FS for better !MapReduce support ==
 ----
 
-Seattle has a MapReduce library to support parallel processing of data.   However, the data must be copied to the individual nodes.   We'd like to build a GFS-like distributed FS for better support of !MapReduce and explore its use in other applications.   The implementation must be in the restricted version of Python used by the Seattle project.   
+Seattle has a !MapReduce library to support parallel processing of data.   However, the data must be copied to the individual nodes.   We'd like to build a GFS-like distributed FS for better support of !MapReduce and explore its use in other applications.   The implementation must be in the restricted version of Python used by the Seattle project.   
 
 As with all work on the Seattle project, this work will be done in cooperation with other developers on a "Strike Force".   
 
