@@ -42,7 +42,7 @@ Previous IPv6 experience is recommended.   Networking experience or Python exper
 Seattle currently runs (to varying degrees) on many different mobile devices such as the Nokia N800, jail broken iPhone, and Windows Mobile.   We'd like to increase our support for these platforms by ensuring the portability and security on these platforms.   We would also like to port the Seattle VM to new mobile platforms, in particular Android.
 
 
-Previous mobile development experience is a big plus, but other experience with low level OS concepts (do you know what a system call is?) is an acceptable substitute.   Python experience is helpful but not required.
+Mobile development experience is a big plus, but other experience with low level OS concepts (do you know what a system call is?) is an acceptable substitute.   Python experience is helpful but not required.
 
 
 
@@ -97,3 +97,4 @@ The Seattle VM provides resource control over the program that execute on it.   
 In addition to control, it's also important for a user to have feedback on how resources are being used.   We'd like to provide a feedback mechanism to the user program, especially in the cases where a resource is constrained.   This would allow a user to understand how resources are utilized by their program.
 
 
+Python experience a plus, but not required.
