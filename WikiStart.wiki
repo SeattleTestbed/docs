@@ -5,6 +5,7 @@
 
 == What is Seattle? ==
 Seattle is a platform for networking and distributed systems research.
+
 It's free, community-driven,
 and offers a large deployment of computers spread across the world.
 Seattle works by operating on resources donated by users and institutions.
