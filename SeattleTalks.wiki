@@ -19,3 +19,5 @@
 || Jan 31st, 2009 || Gates Commons || NW Python Day || Justin || Talk / Live Demo
 
 || 2:30-3:00 Mar 6th, 2009 || Chattanooga, TN || SIGCSE 2009 || Justin || Talk / Live Demo
+
+|| sometime between 9-11 AM April 2nd, 2009 || Miami, FL || GEC-4 || Justin || Talk / Live Demo
