@@ -9,7 +9,7 @@ The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create
 
  Our design makes use of existing python exceptions when it makes sense. This includes making use of exceptions such as !TypeError and !ValueError for argument passing to functions, and user generated errors such as !KeyError, !AttributeError, etc. We're introducing a new hierarchy which we feel represents the most relevant exceptional events that can occur during repy execution. Common operations in repy, such as dealing with the network and files, are given specific exceptions to allow users to account for errors they are likely to come across. 
 
- The hierarchy we designed is meant to account for the specific types of errors which can arise in Repy. The heirarchy in Repy is meant to be used in conjunction with some native Python exceptions, where it makes the most sense. For example, having network exceptions for repy library calls made sense, while creating wrappers for python exceptions such as !TypeError and !ValueError did not.
+ The hierarchy we designed is meant to account for the specific types of errors which can arise in Repy. The hierarchy in Repy is meant to be used in conjunction with some native Python exceptions, where it makes the most sense. For example, having network exceptions for repy library calls made sense, while creating wrappers for python exceptions such as !TypeError and !ValueError did not.
   
 {{{
 #!comment
@@ -28,7 +28,7 @@ The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create
 == Proposed Repy Hierarchy ==
 ----
 
-Below is our proposed exception hierarchy. The !RepyException tree is separate from !RepyException to show how the two are meant to be distinct, although !RepyException is a subclass of Python's Exception. 
+Below is our proposed exception hierarchy. The !RepyException tree is separate from Exception to show how the two are meant to be distinct, although !RepyException is a subclass of Python's Exception. 
 {{{
 RepyException
  |
@@ -127,7 +127,7 @@ While this could be considered a network error, it seems reasonable to assume th
 
 Network failures can be of particular importance given the nature of repy and the types of programs that tend to get written in it. There are a large number of reasons for why network operations can fail, and we feel python's socket module's interface could be improved upon. 
 
-Native python's exception types for network related errors are pretty limited. They are subclasses of [http://docs.python.org/library/socket.html#socket.error socket.error], and most of the information regarding the type of error is contained in error codes and corresponding error messages. In the case of the linux CPython implementation, the error codes used are the same as those defined in '''errno.h'''. It is then up to the user to parse the error message to determine exactly what went wrong.
+Native python's exception types for network related errors are pretty limited. They are subclasses of [http://docs.python.org/library/socket.html#socket.error socket.error], and most of the information regarding the type of error is contained in error codes and corresponding error messages. In the case of the Linux CPython implementation, the error codes used are the same as those defined in '''errno.h'''. It is then up to the user to parse the error message to determine exactly what went wrong.
 
 Our goal is to make it easy for users to determine precisely what went wrong with a network call, and be able to recover gracefully from these error conditions. 
 
@@ -255,7 +255,7 @@ This error should also be raised if the socket layer raises {{{socket.error}}} 1
 
 While the python standard library provides many functions to flexibly interface with the underlying file system, the nature of repy requires a much more restricted subset of allowed operations. Additionally, there are a number of areas (such as file system modes) where the python standard library functions fail "silently" by either not raising an exception or proceeding with unexpected behavior. 
 
-The goal of the repy file system exceptions are to make it very clear what error has occured and to not silently continue.
+The goal of the repy file system exceptions are to make it very clear what error has occurred and to not silently continue.
 
 ==== File Open Examples ====
 
@@ -326,7 +326,7 @@ except IllegalFileNameException:
 === Resource Errors ===
 ----
 
-Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handers at once, it will be possible to catch the exception raised during the attempt to create more, and allow the programmer to take appropriate action. 
+Given the nature of repy, it is necessary to be able to signal users that they have exceeded their allowed resources. There are several types of resources, and some of these errors may be recoverable, some may not. For example, when a program is consuming too much memory, there is no way for a program to catch that exception. However, if a user tries to have too many files open or have too many event handlers at once, it will be possible to catch the exception raised during the attempt to create more, and allow the programmer to take appropriate action. 
 
 [[BR]]
 == Internal Errors ==
