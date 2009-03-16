@@ -238,7 +238,7 @@ A general {{{socket.error}}} is raised, and it's up to the user to determine the
 {{{
 #!python
 s = openconn('127.0.0.1', 12347, '127.0.0.1', 12345)
-#a socket.ConnectionRefusedError would be raised
+#a ConnectionRefusedError would be raised
 }}}
 
 ==== !DisconnectedError ====
