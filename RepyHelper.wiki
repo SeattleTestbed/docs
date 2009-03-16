@@ -1,0 +1,177 @@
+= Importing Repy Code to Python: The {{{repyhelper}}} module =
+
+[[BR]]
+== Introduction ==
+----
+
+As repy is currently implemented, the only way to make use of repy code from within the context of python is to use a combination of the repyportability module and .mix files. .mix files require preprocessing, which quickly becomes cumbersome during development. 
+
+In order to ease the pain of porting repy to python, the {{{repyportability}}} module was created. It's intended to do away with .mix files, and provide a simple interface for making use of repy code within python. 
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== API ==
+----
+
+The following are defined in the repyhelper module:
+
+[[BR]]
+=== translate ===
+----
+{{{
+  <Purpose>
+    Translate a Repy file into a valid python module that can be imported by
+    the standard "import" statement. 
+    
+      Creates a python file correspond to the repy file in the current directory, 
+    with all '.' in the name replaced with "_", and ".py" appended to it to make
+    it a valid python module name.
+    Performs several checks to only perform a translation when necessary, and to 
+    prevent accidentally clobbering other files.    
+      The repyhelper and repyportability modules must be in the module path for the
+    translated files
+      Note that the optional arguments used to set variables are only inserted if 
+    the file is retranslated--otherwise they are ignored.
+  
+  <Arguments>
+    repyfilename:
+      A valid repy file name that exists. 
+    shared_mycontext:
+      Optional parameter whether or not the mycontext of this translation should 
+      be shared, or the translation should have it's own. Default True
+    callfunc:
+      Optional parameter for what the callfunc of this translation should be.
+      Should be valid python string. Deafault "import"
+    callargs:
+      A list of strings to use as the repy's "callargs" variable. Default empty list.
+      
+  <Exceptions>
+    TranslationError if there was an error during file generation
+  
+  <Side Effects>
+    Creates a python file correspond to the repy file, overwriting previously 
+    generated files that exists with that name
+  
+  <Returns>
+    The name of the Python module that was created in the current directory. This
+    string can be used with __import__ to import the translated module.
+}}}
+
+  [[BR]]
+  ==== Example 1 ====
+  Import a python file using the "from X import *" syntax, which will result in scoping similar to repy includes. Say foo defined the function bar:
+  {{{
+#!python
+import repyhelper
+repyhelper.translate("foo.repy")
+from foo_repy import *
+bar()
+  }}}
+
+[[BR]]
+==== Example 2 ====
+  Import the file foo.repy to the local namespace as the module foo. Say foo defined the function bar:
+  {{{
+#!python
+import repyhelper
+module_name = repyhelper.translate("foo.repy")
+foo = __import__(module_name)
+foo.bar()
+  }}}
+
+
+[[BR]]
+=== translate_and_import ===
+----
+{{{translate_and_import}}} is to simplify the {{{translate}}} interface even more, by performing the actual import as well. {{{translate_and_import}}} results in the same behavior as a .mix file's include would; the file gets imported, and all of it's defined functions/variables are then visible in the current global scope.
+
+{{{
+  <Purpose>
+    Translate   a repy file to python (see repyhelper.translate), but also import
+    it to the current global namespace. This import is the same as 
+    "from <module> import *", to mimic repy's include semantics, in which
+    included files are in-lined. Globals starting with "_" aren't imported. 
+    
+  <Arguments>
+    filename:
+      The name of the repy filename to translate and import
+    shared_mycontext:
+      Whether or not the mycontext of this translation should be shared, or
+      the translation should have it's own. Default True
+    callfunc:
+      Optional parameter for what the callfunc of this translation should be.
+      Should be valid python string. Deafault "import"
+    callargs:
+      A list of strings to use as the repy's "callargs" variable. Default []
+    preserve_globals:
+      Whether or not to preserve globals in the current namespace.
+      False means globals in current context will get overwritten by globals
+      in filename if the names clash, True means to keep current globals in the
+      event of a collision. Default False
+  
+  <Exceptions>
+    TranslationError if there was an error during translation
+  
+  <Side Effects>
+    Creates/updates a python module corresponding to the repy file argument,
+    and places references to that module in the current global namespace 
+  
+  <Returns>
+    None
+}}}
+
+[[BR]]
+==== Example 1 ====
+Say foo.repy defined the function bar:
+  {{{
+#!python
+import repyhelper
+repyhelper.translate_and_import('foo.repy')
+bar()
+  }}}
+
+==== Example 2 ====
+Say foo.repy defined the function bar:
+  {{{
+#!python
+
+def bar():
+  pass
+
+import repyhelper
+repyhelper.translate_and_import('foo.repy', preserve_globals=True)
+bar() #calls the bar defined above, not foo.repy's bar
+  }}}
+
+[[BR]]
+=== set_shared_context(context) ===
+----
+By default, translated repy modules share the mycontext dictionary. It's initially empty, but can be assigned using {{{set_shared_context}}}. Note that this completely overwrites whatever the shared mycontext dictionary previously held. 
+
+{{{
+  <Purpose>
+    Set the shared mycontext dictionary
+  
+  <Arguments>
+    context:
+      A dict to use as the new mycontext
+  
+  <Exceptions>
+    TypeError if context is None
+  
+  <Side Effects>
+    Reassigns the shared_context dict to be context
+  
+  <Returns>
+    None
+ }}}
+
+
+[[BR]]
+=== !TranslationError ===
+----
+If an error occurs during translation, a {{{TranslationError}}} will be raised. The cause of the error will be included in the message string, but is usually caused by an error locating or reading from the file, or finding unexpected input.
+
