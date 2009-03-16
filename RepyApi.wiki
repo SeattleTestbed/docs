@@ -459,7 +459,7 @@ Returns a lock object that can be used for mutual exclusion and critical section
 ==== getruntime() ====
 ----
 
-Returns a float containing the number of seconds the program has been running.   Note that in very rare circumstances (like the user resetting their clock), this will not produce increasing values.   For the actual time, use NTP.
+Returns a float containing the number of seconds the program has been running.   Note that in very rare circumstances (like the user resetting their clock), this will not produce increasing values.   For the actual time, use NTP (e.g. look in /seattlelib/time.repy for more information in the Seattle SVN trunk).
 
  * Doc string:
 
