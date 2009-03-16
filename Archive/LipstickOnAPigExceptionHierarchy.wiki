@@ -332,11 +332,13 @@ Given the nature of repy, it is necessary to be able to signal users that they h
 == Internal Errors ==
 ----
 
-The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, an {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. 
+The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, an {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. The rationale behind this is that we want to hide potential repy weaknesses to typical users, and ensure that a corrupt vessel doesn't resume execution in a potentially harmful state. 
+
+!InternalError's aren't meant to be recoverable, and are meant to only occur in extraordinary cases. They're meant to provide a notification to the user that an error occurred that (hopefully) wasn't their fault, and execution had to terminate. Ideally these won't occur, and only errors that were actually caused by the user will get thrown to them. !InternalError is supposed to be a shadow/umbrella error that lets the user know something was FUBAR'ed, but a) doesn't fall into the category of one of the other exceptions, and b) was an error which they aren't expected to able to recover from. 
 
 If this occurs in a {{{try...finally}}} block, the finally block will not get executed, and no "exit" event will be made. This is the same behavior as {{{exitall()}}}.
 
-Information regarding the internal error will get logged, for debugging purposes. 
+Information regarding the internal error will get privately logged, to provide seattle developers some insight to what caused the problem, and do postmortem analysis  
 
 [[BR]]
 == Unresolved Questions/Issues ==
