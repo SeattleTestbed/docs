@@ -469,7 +469,6 @@ Try running the program and then try browsing the webpage a few times and then w
 
 The wily reader may have noticed that the previous program has a race condition. It is possible to have multiple browser windows browse 127.0.0.1 at the same time. It is possible for browser window A to cancel the timer, but before it adds the new eventhandle to mycontext!['stopevent'], window B could also try to cancel the timer and set up its own event. Now there are two events that will stop communications and only one of these will be listed in mycontext!['stopevent']. This means that regardless of how often a user views the webpages, the other event will fire because there is no reference to the eventhandle. The connection will be closed (not what we want!). It would be difficult to trigger this condition manually, but we'll use a command "sleep" to pause the current function for some amount of time to allow us to trigger the bug so that we can see it in practice.
 
-This problem can happen with different threads created by several different functions including waitforconn, recvmess, and settimer.   Remember that any callbacks or timers may be executing at the same time as your other code.   If you need to prevent multiple threads from executing a piece of code at the same time, use a lock!
 
 {{{
 #!python
@@ -572,7 +571,10 @@ if callfunc == 'initialize':
   mycontext['stopevent'] = eventhandle
 }}}
 
-Now if you run the program repeatedly, it shouldn't be possible to trigger a race condition.   Note that since only one event can be in the section of the code protected with locks, if you put a sleep in there and rapidly browse, you may have your program slow down because there are not enough free events.  
+Now if you run the program repeatedly, it shouldn't be possible to trigger a race condition.   Note that since only one event can be in the section of the code protected with locks, if you put a sleep in there and rapidly browse, you may have your program slow down because there are not enough free threads / events.  
+
+Race conditions can happen with threads created by several different functions including waitforconn, recvmess, and settimer.   Remember that any callbacks or timers may be executing at the same time as your other code.   If you need to prevent multiple threads from modifying a variable or executing a piece of code at the same time, use a lock!
+
 
 [[BR]]
 == File Operations ==
