@@ -67,9 +67,9 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||stopcomm||stops communication on a commhandle (either connection or message based)||example 1.2||
 
-||settimer||sets an event to execute at a time in the future||example 1.4||
+||settimer||sets a thread to execute at a time in the future||example 1.4||
 
-||canceltimer||cancels an event which has not yet started||example 1.5||
+||canceltimer||cancels an thread which has not yet started||example 1.5||
 
 
 [[BR]]
@@ -99,12 +99,12 @@ This document describes the narrow API available to repy programs.   This docume
 ==== mycontext ====
 ----
 
-    Mycontext is a dictionary that is shared between all of the events in your program. The intent is that mycontext will be used in the place of global variables. See the tutorial for examples using mycontext.
+    Mycontext is a dictionary that is shared between all of the threads in your program. The intent is that mycontext will be used in the place of global variables. See the tutorial for examples using mycontext.
 
 [[BR]]
 ==== callfunc ====
 ----
-    Your program may register different events that will trigger parts of your code.   The system events "initialize" and "exit" are not triggered by your code, and as such have no predefined entry point.   They are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" event is the first event that your program executes.   If the initialize event finishes and there are no pending events, the "exit" event is triggered to allow your program a chance to clean up.
+    Your program may choose to have different functionality that executes at different times.   The callfunc variable is set to values that indicate what the state of execution is.   Callfunc is set to either "initialize" and "exit".   These are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" event is the first event that your program executes.   If the initialize event finishes and there are no pending events, the "exit" event is triggered to allow your program a chance to clean up.
 
 [[BR]]
 ==== callargs ====
@@ -169,7 +169,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
 ==== recvmess(localip, localport, function) ====
 ----
 
-Registers a function as an event handler for incoming UDP messages.  If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free event, the function is not called until an event is available.   Also, if there is no current function registered by recvmess or waitforconn, an event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.
+Registers a function as a callback for incoming UDP messages.  If another message arrives before the first is processed, a second thread will be started. If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free event, the function is not called until an event is available.   Also, if there is no current function registered by recvmess or waitforconn, an event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.
 
  * Doc string:
 
