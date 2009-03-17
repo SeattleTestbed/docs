@@ -216,10 +216,10 @@ IP address : The server address users want to connect to
 Port number : Port number users connect to with IP address
 Callback function : Callback function is executed when users connect 
 
-Return : event handler, commhandle
+Return : commhandle
 
-Repy is event-driven programming language. 
-waiforconn is the one of the examples. 
+
+waitforconn is the one of the examples. 
 waitforconn calls callback function given as argument only whenever connection is created.
 }}}
 
