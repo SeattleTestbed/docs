@@ -57,17 +57,17 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||getmyip||gets an external IP address of the computer||example 4.1||
 
-||recvmess||registers a function to be called on message receipt||example 4.2||
+||recvmess||registers a function to be called on message receipt (callback)||example 4.2||
 
-||sendmess||sends a message to another computer||example 4.2||
+||sendmess||sends a message to another computer (blocking)||example 4.2||
 
-||openconn||opens a connection to another computer||example 3.1||
+||openconn||opens a connection to another computer (blocking)||example 3.1||
 
-||waitforconn||registers a function to be called when a connection is opened||example 1.2||
+||waitforconn||registers a function to be called when a connection is opened (callback)||example 1.2||
 
-||stopcomm||stops communication on a commhandle (either connection or message based)||example 1.2||
+||stopcomm||stops communication on a either connection or message based commhandle (blocking)||example 1.2||
 
-||settimer||sets a thread to execute at a time in the future||example 1.4||
+||settimer||sets a thread to execute at a time in the future (callback)||example 1.4||
 
 ||canceltimer||cancels an thread which has not yet started||example 1.5||
 
