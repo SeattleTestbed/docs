@@ -104,7 +104,7 @@ This document describes the narrow API available to repy programs.   This docume
 [[BR]]
 ==== callfunc ====
 ----
-    Your program may choose to have different functionality that executes at different times.   The callfunc variable is set to values that indicate what the state of execution is.   Callfunc is set to either "initialize" and "exit".   These are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" event is the first event that your program executes.   If the initialize event finishes and there are no pending events, the "exit" event is triggered to allow your program a chance to clean up.
+    Your program may choose to have different functionality that executes at different times.   The callfunc variable is set to values that indicate what the state of execution is.   Callfunc is set to either "initialize" and "exit".   These are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" is the first time that your program executes.   If initialize finishes and there are no pending threads or callbacks, the program is called with "exit" to allow it a chance to clean up.
 
 [[BR]]
 ==== callargs ====
@@ -169,12 +169,12 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
 ==== recvmess(localip, localport, function) ====
 ----
 
-Registers a function as a callback for incoming UDP messages.  If another message arrives before the first is processed, a second thread will be started. If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free event, the function is not called until an event is available.   Also, if there is no current function registered by recvmess or waitforconn, an event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.
+Registers a function as a callback for incoming UDP messages.  If another message arrives before the first is processed, a second thread will be started. If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free thread / event, the function is not called until a thread / event is available.   Also, if there is no current function registered by recvmess or waitforconn, an thread / event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.
 
  * Doc string:
 
    <Purpose>
-      Registers a function as an event handler for incoming messages
+      Registers a function as a callback for incoming messages
 
    <Arguments>
       localip:
@@ -189,10 +189,10 @@ Registers a function as a callback for incoming UDP messages.  If another messag
       None.
 
    <Side Effects>
-      Registers an event handler.
+      Registers a callback.
 
    <Returns>
-      The commhandle for this event handler.
+      The commhandle for this callback.
 
 [[BR]]
 ==== sendmess(desthost, destport, message, localip=None, localport=None) ====
@@ -265,7 +265,7 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
 [[BR]]
 ==== waitforconn(localip, localport, function) ====
 ----
-Register a function to be called whenever a TCP connection is made to a localip and localport.   As with recvmess, an event is consumed to start a network listener if no previous function was registered for either recvmess or waitforconn.   If a connection is established but no free events remain, the function is not called until an event is available.   Returns a handle that can be used by stopcomm to deregister the function.
+Register a function to be called whenever a TCP connection is made to a localip and localport.   Multiple instances of the callback may execute concurrently if there are multiple incoming connections.   As with recvmess, an event / thread is consumed to start a network listener if no previous function was registered for either recvmess or waitforconn.   If a connection is established but no free events / threads remain, the function is not called until one is available.   Returns a handle that can be used by stopcomm to deregister the function.
 
  * Doc string:
 
@@ -288,7 +288,7 @@ Register a function to be called whenever a TCP connection is made to a localip 
       None.
 
    <Side Effects>
-      Starts an event handler that listens for connections.
+      Starts a handler that listens for connections.
 
    <Returns>
       A handle to the listener.   This can be used to stop listening
@@ -299,13 +299,13 @@ Register a function to be called whenever a TCP connection is made to a localip 
 ==== stopcomm(commhandle) ====
 ----
 
-Stops communication on a commhandle.   In the case of a UDP message based commhandle or a TCP communication listener commhandle, this deregisters the function and if there are no remaining functions registers, stops the event that checks for network traffic.   This can also be called on the commhandle that corresponds to an open TCP connection and in that case it behaves identically to calling close for the connection.
+Stops communication on a commhandle.   In the case of a UDP message based commhandle or a TCP communication listener commhandle, this deregisters the function and if there are no remaining functions registers, stops the event / thread that checks for network traffic.   This can also be called on the commhandle that corresponds to an open TCP connection and in that case it behaves identically to calling close for the connection.
 
  * Doc string:
 
    <Purpose>
-      Stop handling events for a commhandle.   This works for both message and
-      connection based event handlers.
+      Deregister a callback for a commhandle.   This works for both message and
+      connection based callbacks.
 
    <Arguments>
       commhandle:
@@ -408,13 +408,13 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
 ==== exitall() ====
 ----
 
-Terminates the program immediately.   The program will not execute the "exit" event.
+Terminates the program immediately.   The program will not execute the "exit" callfunc or finally blocks.
 
  * Doc string:
 
    <Purpose>
       Allows the user program to stop execution of the program without
-      passing an exit event to the main program. 
+      passing an exit to the main program or calling finally blocks.
 
    <Arguments>
       None.
@@ -510,19 +510,19 @@ Returns a random floating point number between 0.0 (inclusive) and 1.0 (exclusiv
 ==== settimer(waittime, function, args) ====
 ----
 
-Sets a timer that when it expires will start a new event to call a function with a set of arguments.   The event is charged to your program when you set the timer (instead of when the timer fires).   This function returns a timer handle that may be used to cancel the timer before the event is started.   
+Sets a timer that when it expires will start a new thread to call a function with a set of arguments.   The thread is charged to your program when you set the timer (instead of when the timer fires).   This function returns a timer handle that may be used to cancel the timer before the thread is started.   
 
  * Doc string:
 
 
    <Purpose>
-      Allow the current event to set an event to be performed in the future.
-      This does not guarantee the event will be triggered at that time, only
+      Allow the current thread to set an thread to be performed in the future.
+      This does not guarantee the thread will be triggered at that time, only
       that it will be triggered after that time.
 
    <Arguments>
       waittime:
-         The minimum amount of time to wait before delivering the event
+         The minimum amount of time to wait before delivering the thread
       function:
          The function to call
       args:
@@ -542,7 +542,7 @@ Sets a timer that when it expires will start a new event to call a function with
 ==== canceltimer(timerhandle) ====
 ----
 
-Try to cancels a timer handle that has not started an event.   Returns False if the event has been started already (and so cannot be canceled).   Returns True if the timer was successfully canceled.
+Try to cancels a timer handle that has not started a thread.   Returns False if the thread has been started already (and so cannot be canceled).   Returns True if the timer was successfully canceled.
 
 
  * Doc string:
@@ -573,13 +573,13 @@ Try to cancels a timer handle that has not started an event.   Returns False if 
 ==== sleep(seconds) ====
 ----
 
-Sleeps the current event for some time (waits for a specific time before executing any further instructions).   This event will not consume CPU cycles during this time.    Timing issues that confuse getruntime() may also cause sleep to behave in undefined ways.
+Sleeps the current thread for some time (waits for a specific time before executing any further instructions).   This thread will not consume CPU cycles during this time.    Timing issues that confuse getruntime() may also cause sleep to behave in undefined ways.
 
  * Doc string:
 
 
    <Purpose>
-      Allow the current event to pause execution (similar to time.sleep()).
+      Allow the current thread to pause execution (similar to time.sleep()).
       This function will not return early for any reason
 
    <Arguments>
