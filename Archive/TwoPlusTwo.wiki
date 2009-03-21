@@ -28,3 +28,12 @@ Key generation working
 Feb 7th - Feb 12th
 
 Wrap up and programmer interface (key conversion)
+
+=== Mar 17th - Mar 24 ===
+
+Port of pycrypto RSA to repy is nearly complete. Appropriate interface and documentation is still needed.
+
+Implement RSA key representation and storage.
+Evaluate and begin port of OSRNG and Fortuna PRNG.
+Consider PKCS 1 RSAES-OAEP encryption scheme.
+
