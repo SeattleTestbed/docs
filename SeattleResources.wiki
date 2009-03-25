@@ -2,23 +2,32 @@
 
 [[BR]]
 == Production : seattlegeni.cs.washington.edu ==
+
+Runs production services that change infrequently. No dev access.
+ 
  * GENI (http)
  * GENI (sql)
  * GENI installer-maker client
  * State transition daemons
- * Hash Table
 
 [[BR]]
 == Stable : seattle.cs.washington.edu, beraber.cs.washington.edu == 
- * Seattle Wiki
+
+Hosts the basic dev services, and a few simple production services.
+
+ * Seattle Trac
  * Seattle SVN
  * Seattle installer-maker server
  * Seattle software updater
  * Beraber (http)
  * GENI test (http)
+ * Centralized advertise server
 
 [[BR]]
 == Unstable : blackbox.cs.washington.edu ==
+
+Runs no production services. Used for monitoring, node deployment, and other distributed tasks.
+
  * Autograder
  * Black box testing
  * Deployment scripts
@@ -26,7 +35,7 @@
 [[BR]]
 == User machines ==
 
- Use these machines to work on Seattle projects, test compatibility of your code across operating systems, etc.
+Use these machines to work on Seattle projects, test compatibility of your code across operating systems, etc.
 
  * testbed-opensuse.cs.washington.edu
  * testbed-mac.cs.washington.edu
