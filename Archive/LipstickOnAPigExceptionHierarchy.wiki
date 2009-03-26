@@ -3,7 +3,7 @@
 
 == Overview / Purpose ==
 
-The [wiki:Lipstickonapig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
+The [wiki:Archive/LipstickOnAPig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
 
 Currently the Repy library has inconsistent treatment and use of exceptions, which can be confusing and off-putting for new users. Our goal is to come up with a clear, uniform and logical way to present exceptions. The repy library functions have specific needs and goals, and the reflection hierarchy we're proposing reflects this. We are focusing on creating the core exception hierarchy which will be used by the repy library calls themselves; exceptions specific to any seattlelib code will need to augment the hierarchy with their own exceptions. 
 
@@ -336,5 +336,5 @@ Information regarding the internal error will get privately logged, to provide s
 
 There are a number of problems/questions we weren't sure the most appropriate way to handle. We'd appreciate any feedback regarding these issues
  * What type of error should be raised if a user's IP address changes? If a program has event handlers associated with an IP address and that changes, how should the user be notified?
-   * If this were to raise an exception, would it even be possible for a user to handle this case? In this scenario, the only code still executing is most likely event handler code, so there's nowhere appropriate to handle an exception being thrown.
+   * The biggest concern for changing IP's is how to notify the user. It's easy to imagine the scenario where the only thing keeping a program in execution (rather than terminating) is event handlers waiting to be triggered. So if a program has a recvmess handler waiting to receive UDP packets, but the machine's IP changes, how do we notify the user in a meaningful way? If there's no context to which allow them to catch an exception we raised, does it even make sense to? Plus, recvmess is provided a localip, which is no longer valid! It's conceivable that users would write their own logic to periodically check the IP, and if it changes, then to update the event handlers accordingly. As to how/if repy should detect these (and possibly unregister stale listeners) is still uncertain...
  * Should an exception should be thrown if the interface and destination IP don't match?   I.e. {{{sendmess("google.com",80, "hi", "127.0.0.1", 12345)}}}
