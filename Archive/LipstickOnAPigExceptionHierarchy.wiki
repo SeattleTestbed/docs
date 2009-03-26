@@ -27,12 +27,12 @@ RepyException
    |
    +-- NetworkError
      |
-     +--NetworkAddressError (problem with address resolution/format)
+     +--NetworkAddressError
        |
-       +--AddressInUseError
+       +--NetworkAddressInUseError
      +--ConnectionRefusedError
      +--NetworkDisconnectedError
-     +--NetworkTimeoutError (connection/message with host times out)
+     +--NetworkTimeoutError
    +-- DiskError
      |
      +--IllegalFileNameError
@@ -40,8 +40,8 @@ RepyException
      +--InvalidFileModeError
  +-- ResourceError
    |
-   +-- ResourceExhaustedError (too many files opened/used?)
-   +-- ResourceNotAllowedError (using a port that's not allowed)
+   +-- ResourceExhaustedError
+   +-- ResourceNotAllowedError
      
 
 PythonException
