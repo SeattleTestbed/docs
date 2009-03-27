@@ -14,4 +14,4 @@ Explains how to go about deploying a new version of the code, which consists of 
   1. Navigate to trunk/dist.
   1. Run "python update_and_build.py .. path/to/publickey path/to/privatekey version".
   1. Navigate to the base installer directory (/var/www/dist as of January 2009).
-  1. scp the new files here (these will be the versioned files, e.g. seatttle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /var/www/dist on the seattle geni server (seattlegeni.cs.washington.edu).
+  1. scp the new files here (these will be the versioned files, e.g. seattle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /var/www/dist on the seattle geni server (seattlegeni.cs.washington.edu).
