@@ -1,4 +1,4 @@
-[[Include(https://seattlegeni.cs.washington.edu/geni/accounts/simplelogin)]]
+
 
 {{{
 #!NewsFlash
