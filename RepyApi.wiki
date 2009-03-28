@@ -228,7 +228,7 @@ Sends a UDP message to a destination host / port.   By default the system select
       The number of bytes sent on success
 
 [[BR]]
-==== openconn(desthost, destport, localip=None, localport=None, timeout = 5) ====
+==== openconn(desthost, destport, localip=None, localport=0, timeout = 5) ====
 ----
 Open a TCP connection to a remote computer, returning a socket object.   Optionally a localip and localport to connect from can be specified and if one is specified both must be.   There is a timeout value that can be set to limit the amount of time the system will wait for a response before abandoning the attempt to connect.
 
