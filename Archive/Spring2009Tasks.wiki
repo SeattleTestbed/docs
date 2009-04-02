@@ -53,13 +53,17 @@ The GENI portal has numerous outstanding tickets having to do with everything fr
 
 == Custom installer creator port to Django --- Ivan --- 2 weeks ==
 ----
-Tickets #76, #78, #90, #91, #92, #93, #73 ..
+
+Tickets #312, #76, #78, #90, #91, #92, #93, #73 ..
+
 The current custom installer creator is written in PHP, and has numerous problems. It lacks documentation, it is not consistent in its use of installer scripts, and is in general in a messy state. This task involves porting the custom installer to Django, and integrating it with the look/style/feel of the GENI portal.
 
 
 == Remote installer builder service with XMLRPC interface --- Ivan ---  2 weeks ==
 ----
+
 No ticket
+
 Currently we create/customize installers in the custom installer creator, and in GENI. It is likely that we will have other services that need to create/customize installers in the future. We need a common service that provides this functionality so that the same functionality is not implemented multiple times and there is a common point where Seattle installers are distributed.
 
 This task will involve (1) reviewing the existing prototype for creating remote installers, and working on it until its ready for production use, (2) writing integration tests for the service, and (3) converting of existing services that create/customize installers to use the newly built service (e.g. GENI, and custom installer creator).
@@ -236,7 +240,10 @@ http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
 
 
 
-===   Lisping clean up   ---   Ivan   (Alper)   ---   1 week   ===
+==   Lisping clean up   ---   Ivan   (Alper)   ---   1 week   ==
+----
+
+Ticket #263
 
 Clean up the map-reduce code -- i.e. make sure that all files are well commented and ready to be used by an instructor as an example solution. Write up a 3-4 step assignment that outlines how to code map-reduce in repy. This is '''not''' intended to add any new features to the existing map-reduce implementation. We are trying to tie off loose ends.
 
@@ -254,9 +261,9 @@ Eric's thesis.   If you're not him, this isn't for you!
 
 == Sysadmin strike force: backups, accounts, pinging   ---   Ivan   ---   ??? weeks ==
 ----
-(Tickets #267, but this is the tip of the iceberg)
+(Tickets #267, #306, #307, #308, #309, #310 but this is the tip of the iceberg)
 
-Our project is growing and developing more and more complex code. As a result, we need relevant system and technical support to maintain our operations. This includes (1) making regular backups of essential data (2) maintaing accounts across our systems/wiki (3) documenting our setup so that its easy to reproduce/setup a version of seattle.cs.washington.edu from scratch (e.g. in case of crash) (4) adding robustness to our services by creating availability ping tests (5) running simple tests for essential services -- e.g. does the website work?, is mysql running?, etc (6) creating proper daemon scripts for daemons that we currently run as users by hand, etc.
+Our project is growing and developing more and more complex code. As a result, we need relevant system and technical support to maintain our operations. This includes (1) making regular backups of essential data (2) maintaining accounts across our systems/wiki (3) documenting our setup so that its easy to reproduce/setup a version of seattle.cs.washington.edu from scratch (e.g. in case of crash) (4) adding robustness to our services by creating availability ping tests (5) running simple tests for essential services -- e.g. does the website work?, is mysql running?, etc (6) creating proper daemon scripts for daemons that we currently run as users by hand, etc.
 
 
 = Possibly anactive tasks =
