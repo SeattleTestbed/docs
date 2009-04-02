@@ -1,7 +1,9 @@
 = Important tasks =
+----
 
 [[TOC(inline)]]
 
+----
 == NAT traversal in production   --- Justin      (Eric?)   ---   3 weeks ==
 ----
 (Tickets #227, #228, #274, #299, Ticket #228 related to "remote deployment repy")
@@ -282,7 +284,7 @@ We want a general autograder that allows instructors to upload NS files and / or
 
 ===   ?   Building a small number of services for service composition  ===
 
-
+[[BR]]
 
 = Startup Tasks for new students =
 ----
