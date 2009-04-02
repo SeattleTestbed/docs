@@ -13,7 +13,7 @@ This assignment consists of 11 steps and should take around 60 minutes to comple
 == Step 1 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the Used Resources tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  After a few seconds, you will see that ten computers have been added for you to use.
+Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  After a few seconds, you will see that ten computers have been added for you to use.
 
 [[BR]]
 == Step 2 : Running Seattle shell ==
@@ -277,7 +277,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the Used Resources tab. Click on "remove all nodes".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
+Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all nodes".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
 
 Back in the shell, type
 
