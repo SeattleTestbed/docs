@@ -239,6 +239,13 @@ Additional motivation for improvement can be found in
 http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
 
 
+== RSA integration with production code ---   Justin (Anthony) --- 2 weeks ==
+----
+
+No ticket
+
+Ensure we have a backwards-compatible way to use the new RSA routines with the old ones.   Update all of the production code to use this.
+
 
 ==   Lisping clean up   ---   Ivan   (Alper)   ---   1 week   ==
 ----
@@ -266,7 +273,7 @@ Eric's thesis.   If you're not him, this isn't for you!
 Our project is growing and developing more and more complex code. As a result, we need relevant system and technical support to maintain our operations. This includes (1) making regular backups of essential data (2) maintaining accounts across our systems/wiki (3) documenting our setup so that its easy to reproduce/setup a version of seattle.cs.washington.edu from scratch (e.g. in case of crash) (4) adding robustness to our services by creating availability ping tests (5) running simple tests for essential services -- e.g. does the website work?, is mysql running?, etc (6) creating proper daemon scripts for daemons that we currently run as users by hand, etc.
 
 
-= Possibly anactive tasks =
+= Possibly inactive tasks =
 ----
 
 ====   X    Working Windows Mobile port  ====
@@ -290,6 +297,9 @@ We want a general autograder that allows instructors to upload NS files and / or
 ===   ?   Documentation clean up  ===
 
 ===   ?   Building a small number of services for service composition  ===
+
+===   ?   Allow ssh keys to be imported to use our RSA routines  ===
+
 
 [[BR]]
 
@@ -316,4 +326,4 @@ Should we move from IM/email to IRC/tickets?
  
 
 Should we have bug days?
-   "Winner" of bug days gets a white elephant gift (likely from Justin's conference giveaway stash) 
+   "Winner" of bug days gets a [http://en.wikipedia.org/wiki/White_elephant_gift_exchange white elephant gift] (likely from Justin's conference giveaway stash) 
