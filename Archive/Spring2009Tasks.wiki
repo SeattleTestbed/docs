@@ -231,6 +231,9 @@ We need to communicate with Tor folks to understand their requirements more, and
 ----
 Determine if the currently proposed exception hierarchy can be made palatable to our developers.   Get some sort of yes / no resolution to decide if the current direction is a good one or if we need to move in an entirely different direction.   This requires talking a lot with the other developers.
 
+
+
+
 [[BR]]
 == Formal specification of call behavior   ---   Justin   ---   2 tokens ==
 ----
@@ -241,6 +244,11 @@ Specify the behavior of our API calls in a formal way.   I.e. lay out what shoul
 == Implement the new exception hierarchy   ---   Justin   ---   squishy ~6 tokens ==
 ----
 After we have decided as a group on what our hierarchy of exceptions should look like, we need to adapt repy to support it.   This should be done after the formal specification of call behavior for our system calls.   The call behavior specification should be a useful guide that helps us create test cases for this.  
+
+[[BR]]
+== Portability Team   ---   Justin (Armon?)  ---   squishy ~6 tokens ==
+----
+We need to ensure that the calls behave the same on every OS.   This currently isn't true for many calls.   This task is very detail oriented and will involve trying to find clever workarounds to mitigate the effect of OS weirdness.
 
 
 [[BR]]
