@@ -314,8 +314,10 @@ We need an experienced developer (with a good grasp of the English language) to 
 ----
 
 ==   X    Working Windows Mobile port  ==
+----
 
 ==   X    Working Nokia N800 ==
+----
 
 ==   X    Working Jailbroken iPhone ==
 [[BR]]
@@ -327,13 +329,16 @@ Mainly, we need to set up the server so that it will build the NSIS installer wh
 
 [[BR]]
 ==   X    Autograder (production)   ---   Ivan ---   squishy  ==
+----
 
 We want a general autograder that allows instructors to upload NS files and / or test cases.   There are a lot of security and usability questions to doing this which we have no answer for.
 
 [[BR]]
 ==   ?   Documentation clean up  ==
+----
 
 ==   ?   Building a small number of services for service composition  ==
+----
 
 ==   ?   Allow ssh keys to be imported to use our RSA routines  ==
 
@@ -345,14 +350,19 @@ We want a general autograder that allows instructors to upload NS files and / or
 The following are startup tasks that are to be assigned to new developers joining Seattle in the spring.
 
 ==     XMLRPC client library repy implementation   ---   Ivan ==
-   
+----
+
 ==    XMLRPC server library repy implementation   ---   Ivan ==
+----
 
 ==    Write a simple repy pickle implementation (with wiki page)   ---   Ivan   (Donnie) --- squishy 3 tokens  ==
+----
 
 ==    Write a key gen daemon   ---   Ivan   (Tania)   ---   squishy 2 tokens (including tutorials) ==
+----
 
 ==    Write NTP forwarder   ---   Justin ==
+----
 
 ==    Read the local vessel's resource file (given a user port)   ---   Justin ==
    
