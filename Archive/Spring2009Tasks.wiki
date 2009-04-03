@@ -30,6 +30,14 @@ The node manager should detect and log if its IP address changes.   Ideally it w
 
 
 
+== Build demokit from SVN   ---   Justin   ---   1 week ==
+----
+No ticket
+
+We should be able to build the demokit from SVN.   This should include only the files that are needed.
+
+
+
 == Find out where we are with Windows Mobile    ---   Justin   (Armon)   1 week ==
 ----
 Ticket #259
