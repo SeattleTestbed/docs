@@ -18,7 +18,7 @@ Seattle is composed of three components: vessels, the node manager, and the expe
 
 == Vessel ==
 ----
-A vessel is a programming language virtual machine that runs a user's code (currently the only language supported is RestrictedPython).   Vessels prevent the program running in them from performing unsafe actions (like opening the user's credit card information).   Vessels also have a specified number of resources they are allowed to consume.   The vessel restricts the program from consuming more than the allowed number of resources.   
+A vessel is a programming language virtual machine that runs a user's code (currently the only language supported is !RestrictedPython).   Vessels prevent the program running in them from performing unsafe actions (like opening the user's credit card information).   Vessels also have a specified number of resources they are allowed to consume.   The vessel restricts the program from consuming more than the allowed number of resources.   
 
 == Node Manager ==
 ----
