@@ -352,7 +352,7 @@ The following are startup tasks that are to be assigned to new developers joinin
 ==     XMLRPC client library repy implementation   ---   Ivan ==
 ----
 
-==    XMLRPC server library repy implementation   ---   Ivan ==
+==    XMLRPC server library repy implementation   ---   Ivan (Conrad) --- squishy 3 token ==
 ----
 
 ==    Write a simple repy pickle implementation (with wiki page)   ---   Ivan   (Donnie) --- squishy 3 tokens  ==
