@@ -56,7 +56,7 @@ Appropriate the AJAX functions that are used to access the GENI portal and add n
 This will involve understanding much of the functionality inside of the GENI portal. Cleaning up code so that the pieces that are independent of protocol can be execute by both the HTTP handlers, as well as the XMLRPC and AJAX handlers. Also, this will involve writing a test program for every XMLRPC call exposed in GENI. 
 
 [[BR]]
-== GENI bug squashers / testing   ---   Ivan ----  squishy ==
+== GENI bug squashers / testing   ---   Ivan ('''Alper''')   ----  squishy ==
 ---- 
 Tickets #254, #165, #189, etc
 The GENI portal has numerous outstanding tickets having to do with everything from user-interface bugs (#254) to complex resource and database management issues (#165, #278). Additionally, most of the GENI code is untested and requires thorough integration tests to be written to test that the database is always in a consistent state, and is modified accordingly. The testing part of this task will involve understanding the XMLRPC web backend (see above).
@@ -274,7 +274,7 @@ Ensure we have a backwards-compatible way to use the new RSA routines with the o
 
 
 [[BR]]
-==   Lisping clean up   ---   Ivan   (Alper)   ---   1 token   ==
+==   Lisping clean up   ---   Ivan   ('''Alper''')   ---   2 tokens   ==
 ----
 
 Ticket #263
