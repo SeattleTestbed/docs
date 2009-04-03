@@ -42,4 +42,4 @@ This page contains information useful to developers working on Seattle
  
  * Other
    * [StrikeForces Information] about strike forces
-   * [MobileCENotes Windows CE] implementation notes and problems
+   * [MobileCeNotes Windows CE] implementation notes and problems
