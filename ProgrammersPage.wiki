@@ -17,7 +17,7 @@ You can start with several different tutorials depending on your background.
 
  * [PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
 
-After doing one of the above tutorials:
+After doing one of the above tutorials, do the following tutorial to learn how to use Repy specific features and functionality:
 
  * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
