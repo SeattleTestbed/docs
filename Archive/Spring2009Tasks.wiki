@@ -353,6 +353,8 @@ The following are startup tasks that are to be assigned to new developers joinin
     Write a key gen daemon   ---   Ivan   (Tania)   ---   squishy 2 tokens (including tutorials)
 
     Write NTP forwarder   ---   Justin
+
+    Read the local vessel's resource file (given a user port)   ---   Justin
    
 [[BR]]
 = Collaboration =
