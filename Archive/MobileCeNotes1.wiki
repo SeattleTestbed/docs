@@ -1,0 +1,18 @@
+= Windows Mobile CE Notes =
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== Unit Test Status ==
+As of Marth 29th 2009, we are passing approximately 90 tests, and failing 50. (repy tests only).
+See attached test.output file for the log file of which tests passed and failed.
+
+== Unit Test Evaluation == 
+See status.txt file for more detail, but essentially the errors of the following type:
+ * We need to check errno 6 as well as errno 9 for a closed socket (Easy Fix)
+ * Some of the tests which explicitly need repy to fail will not work since our logging system requires repy to be working, since there is no stdout or stderr (Impossible to Fix)
+ * The phone disconnects from the internet in the middle of the tests, this messes up the net ones (Unknown, I talk about this in the file)
+ * Slow harshexit / os._exit causes some strange behavior and test failures. (We are at the mercy of the OS once that call is made)
+ * Tests that use timers and sleep to work generally fail because the phone is slow (Impossible to Fix)
