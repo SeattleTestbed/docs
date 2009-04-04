@@ -252,7 +252,7 @@ We need to ensure that the calls behave the same on every OS.   This currently i
 
 
 [[BR]]
-== RSA implementation finish up   ---   Justin  (Anthony)  ---   3 tokens ==
+== RSA implementation finish up   ---   Justin  ('''Anthony''')  ---   3 tokens ==
 ----
 Ticket #247
 
@@ -265,7 +265,7 @@ http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
 
 
 [[BR]]
-== RSA integration with production code ---   Justin (Anthony) --- 2 tokens ==
+== RSA integration with production code ---   Justin ('''Anthony''') --- 2 tokens ==
 ----
 
 No ticket
