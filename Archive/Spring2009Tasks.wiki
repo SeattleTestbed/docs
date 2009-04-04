@@ -370,9 +370,8 @@ The following are startup tasks that are to be assigned to new developers joinin
 = Collaboration =
 ----
 
-Should we move from IM/email to IRC/tickets?
+Move from IM/email to IRC/tickets?
    Let's have an IRC "group meeting" to decide how to assign tasks!  
  
-
-Should we have bug days?
-   Individual "Winner" of bug days gets conference swag.
+Bug weekends!
+   There will be some prize or prizes to be determined.   If you have an idea, let us know!
