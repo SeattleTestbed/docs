@@ -32,11 +32,12 @@ The node manager should detect and log if its IP address changes.   Ideally it w
 
 
 [[BR]]
-== Build demokit from SVN   ---   Justin   ---   1 token ==
+==Build demokit from SVN   ---   Richard   ---   1 token==
 ----
 No ticket
 
 We should be able to build the demokit from SVN.   This should include only the files that are needed.
+
 
 
 [[BR]]
