@@ -258,9 +258,9 @@ We need to ensure that the calls behave the same on every OS.   This currently i
 ----
 Ticket #247
 
-Improve the existing implementation with padding scheme as defined in PKCS#1 to prevent. It may be possible to use the existing repy SHA without porting SHA256. A masking function will also need to be implemented. This will be done to prevent the vulnerability of a chosen plaintext attacks. As noted in the wikipedia page (but not yet verified elsewhere), a Optimal Asymmetric Encryption Padding scheme is as vital to signing as it is to plaintext encryption.
+Improve the existing implementation with padding scheme as defined in PKCS!#1 to prevent. It may be possible to use the existing repy SHA without porting SHA256. A masking function will also need to be implemented. This will be done to prevent the vulnerability of a chosen plaintext attacks. As noted in the wikipedia page (but not yet verified elsewhere), a Optimal Asymmetric Encryption Padding scheme is as vital to signing as it is to plaintext encryption.
 
-A copy of PKCS#1 V2.1 can be found at
+A copy of PKCS!#1 V2.1 can be found at
 http://www.rsa.com/rsalabs/node.asp?id=2125
 Additional motivation for improvement can be found in
 http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
