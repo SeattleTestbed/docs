@@ -648,7 +648,7 @@ if callfunc == 'initialize':
   print "The files:",callargs," should now be missing from ",listdir()  
 }}}
 
-You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you may get an error because repy programs are not allowed to use certain characters in file names.
+You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you will get an error because repy programs are not allowed to use certain characters in file names.
 
 [[BR]]
 == Network Operations 1 ==
