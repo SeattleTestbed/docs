@@ -173,7 +173,7 @@ In this example, we'll wait for the user to browse a port we listen on. When the
 #!python
 def hello(ip, port, sockobj, thiscommhandle, listencommhandle):
   sockobj.recv(512) # Receive HTTP header
-  sockobj.send("<html><head><title>Hello World</title></head>
+  sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World! </h1></body></html>")
   stopcomm(thiscommhandle)   
   # close my connection with this user (we could also do sockobj.close())
