@@ -301,9 +301,9 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   
   global pagecount   # GLOBALS ARE NOT ALLOWED IN REPY
   pagecount = pagecount + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1><p>You are visitor "+str(pagecount)+"
-                </body></html>")
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1><p>You are visitor "+str(pagecount)+\
+                "</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
 
 if callfunc == 'initialize':
@@ -334,8 +334,8 @@ This code will not work because globals do not exist in repy. However, there is 
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1>
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1>\
                 <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
 
@@ -372,10 +372,10 @@ The previous program would wait forever for a user to connect so it could displa
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1>
-                <p>You are visitor "+str(mycontext['pagecount'])+"
-                <p>I've been running "+str(getruntime())+" seconds</body></html>")
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1>\
+                <p>You are visitor "+str(mycontext['pagecount'])+
+                "<p>I've been running "+str(getruntime())+" seconds</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
  
 def stop_listening(commhandle):
