@@ -375,4 +375,4 @@ Should we move from IM/email to IRC/tickets?
  
 
 Should we have bug days?
-   "Winner" of bug days gets a [http://en.wikipedia.org/wiki/White_elephant_gift_exchange white elephant gift] (likely from Justin's conference giveaway stash) 
+   Individual "Winner" of bug days gets conference swag.
