@@ -184,7 +184,7 @@ Build a test framework that allows us to easily run our code (including whitebox
 Fix bugs as they arise with Repy and the node manager.   Requires good overall understanding of the project, attention to detail, and on some occasions requires speed.
 
 [[BR]]
-== Autograder (usable but rigid)   ---   Ivan --- 2-3 tokens ==
+== Autograder (usable but rigid)   ---   Ivan ('''Jenn''') --- 3 tokens ==
 ----
 We want a version of the autograder that is usable by instructors.   It does not need to support instructors uploading NS files or test cases.   It is okay for it only to work with the NS files and test files we ourselves upload.
 
