@@ -106,7 +106,7 @@ Write a series of black box integration tests for the software updater.   This s
 Compare and contrast different Python testing frameworks.   Write a small amount of test code in each and put it up for a vote.
 
 [[BR]]
-== Remote deployment for repy   ---   Justin  (Richard?)  --- 1 token  ==
+== Remote deployment for repy   ---   Justin  ('''Richard''')  --- 1 token  ==
 ----
 Related to ticket #228
 
@@ -220,7 +220,7 @@ We need to make the installers and custom installer creator work together to dea
 
 
 [[BR]]
-== TCUP demo / see if there is Tor interest   ---   Ivan (Richard) ---   ~3 tokens  ==
+== TCUP demo / see if there is Tor interest   ---   Ivan ('''Richard''') ---   ~3 tokens  ==
 ----
 
 Tickets #205, #301
@@ -273,14 +273,14 @@ Clean up the map-reduce code -- i.e. make sure that all files are well commented
 
 
 [[BR]]
-== CNC   ---   Justin   (Cosmin)   ---   squishy  ==
+== CNC   ---   Justin   ('''Cosmin''')   ---   squishy 3 tokens  ==
 ----
 
 Cosmin's thesis.   If you're not him, this isn't for you!
 
 
 [[BR]]
-== Service composition scaffolding   ---   Justin   (Eric)   ---   squishy ==
+== Service composition scaffolding   ---   Justin   ('''Eric''')   ---   squishy 3 tokens ==
 ----
 Eric's thesis.   If you're not him, this isn't for you!
 
