@@ -32,7 +32,7 @@ The node manager should detect and log if its IP address changes.   Ideally it w
 
 
 [[BR]]
-== ~~Build demokit from SVN   ---   Richard   ---   1 token~~ ==
+== ~~Build demokit from SVN   ---   Ivan ('''Richard''')   ---   1 token~~ ==
 ----
 No ticket
 
@@ -42,7 +42,7 @@ See r1968.  I moved some of the old demokit to trunk/repy/apps/old_demokit.  The
 
 
 [[BR]]
-== Find out where we are with Windows Mobile    ---   Justin   ('''Armon''')   1 token ==
+== ~~Find out where we are with Windows Mobile    ---   Justin   ('''Armon''')   1 token~~ ==
 ----
 Ticket #259
 
