@@ -253,18 +253,6 @@ After we have decided as a group on what our hierarchy of exceptions should look
 We need to ensure that the calls behave the same on every OS.   This currently isn't true for many calls.   This task is very detail oriented and will involve trying to find clever workarounds to mitigate the effect of OS weirdness.
 
 
-[[BR]]
-== RSA implementation finish up   ---   Justin  ('''Anthony''')  ---   3 tokens ==
-----
-Ticket #247
-
-Improve the existing implementation with padding scheme as defined in PKCS!#1 to prevent. It may be possible to use the existing repy SHA without porting SHA256. A masking function will also need to be implemented. This will be done to prevent the vulnerability of a chosen plaintext attacks. As noted in the wikipedia page (but not yet verified elsewhere), a Optimal Asymmetric Encryption Padding scheme is as vital to signing as it is to plaintext encryption.
-
-A copy of PKCS!#1 V2.1 can be found at
-http://www.rsa.com/rsalabs/node.asp?id=2125
-Additional motivation for improvement can be found in
-http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
-
 
 [[BR]]
 == RSA integration with production code ---   Justin ('''Anthony''') --- 2 tokens ==
@@ -343,6 +331,18 @@ We want a general autograder that allows instructors to upload NS files and / or
 ----
 
 ==   ?   Allow ssh keys to be imported to use our RSA routines  ==
+
+==   ?   RSA implementation finish up   ---   Justin  ('''Anthony''') ==
+----
+Ticket #247
+
+Improve the existing implementation with padding scheme as defined in PKCS!#1 to prevent. It may be possible to use the existing repy SHA without porting SHA256. A masking function will also need to be implemented. This will be done to prevent the vulnerability of a chosen plaintext attacks. As noted in the wikipedia page (but not yet verified elsewhere), a Optimal Asymmetric Encryption Padding scheme is as vital to signing as it is to plaintext encryption.
+
+A copy of PKCS!#1 V2.1 can be found at
+http://www.rsa.com/rsalabs/node.asp?id=2125
+Additional motivation for improvement can be found in
+http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
+
 
 
 [[BR]]
