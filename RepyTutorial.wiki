@@ -424,8 +424,8 @@ We know how to set a timer to close the connection in 60 seconds, but that doesn
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1>
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1>\
                 <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
 
@@ -477,8 +477,8 @@ The wily reader may have noticed that the previous program has a race condition.
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1>
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1>\
                 <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
   canceltimer(mycontext['stopevent'])
@@ -528,8 +528,8 @@ We can avoid race conditions by the following changes:
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>
-                <body><h1> Hello World!</h1>
+  sockobj.send("<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World!</h1>\
                 <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
   stopcomm(thiscommhandle)   # close my connection with this user
 
