@@ -97,6 +97,8 @@ john@ !>
 
 '''Step 3. Locate the resources(computers) you can use
 
+This command will tell the shell to locate resources that have been assigned to your account through the SeattleGENI website.
+
 {{{
 #!python
 john@ !> browse
