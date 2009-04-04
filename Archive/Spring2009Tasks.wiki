@@ -178,7 +178,7 @@ Log information into a database with a very, very simple web front end.
 Build a test framework that allows us to easily run our code (including whitebox and blackbox tests) on different platforms.   Developers should be able to "queue" test runs by running a command from an instance of SVN that will then deploy and test their code on different architectures.
 
 [[BR]]
-== Repy / Node Manager rapid response team   ---   Justin      ---   squishy   1/2 token per bug? ==
+== Repy / Node Manager rapid response team   ---   Justin ('''Cosmin, Armon''')     ---   squishy   1/2 token per bug? ==
 ----
 
 Fix bugs as they arise with Repy and the node manager.   Requires good overall understanding of the project, attention to detail, and on some occasions requires speed.
