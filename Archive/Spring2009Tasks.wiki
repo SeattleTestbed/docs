@@ -113,7 +113,7 @@ Related to ticket #228
 Build a framework that deploys and monitors a simple repy service.   It should get vessels for the service, run the code, and when instances die, log information and restart them on new nodes.
 
 [[BR]]
-== Remote deployment Seattle   ---   Justin   ---   2 tokens (ongoing)  ==
+== Remote deployment Seattle   ---   Justin   ---   3 tokens (ongoing)  ==
 ----
 
 Build scripts to deploy Seattle and keep it deployed.   This interacts with monitoring
