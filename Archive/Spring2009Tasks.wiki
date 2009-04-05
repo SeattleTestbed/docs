@@ -116,7 +116,7 @@ Build a framework that deploys and monitors a simple repy service.   It should g
 == Remote deployment Seattle   ---   Justin   ---   3 tokens (ongoing)  ==
 ----
 
-Build scripts to deploy Seattle and keep it deployed.   This interacts with monitoring
+Build scripts to deploy Seattle and keep it deployed.   We should use XMLRPC to get node lists from PlanetLab APIs, ensure our slice is on all nodes, and then deploy on them.   For CS machines, we will need to be able to load on them.   This interacts with monitoring.  
 
 [[BR]]
 == Installer builder cleanup   ---   ???   ---   squishy ~5 tokens ==
