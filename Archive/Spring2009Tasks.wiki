@@ -209,7 +209,7 @@ The bandwidth code right now is specific to client or server, and only allows a 
 
 
 [[BR]]
-== Actually getting 10% (installer updates, determining offcut size)   ---   Justin   (Brent)     ---   4 tokens  ==
+== Actually getting 10% (installer updates, determining offcut size)   ---   Justin   (Brent)     ---   3 tokens  ==
 ----
 (Tickets #257, #258)
 
