@@ -1,0 +1,20 @@
+= Project Members and Affiliates =
+
+This page is to organize and collect contact information for all of the developers in one location.
+Please include as much information as you are willing to disclose. SVN user is so that the proper user can be contacted if a bug is identified with their code, and the SVN -> Name translation isn't immediately obvious.
+
+Please keep the list ordered alphabetically by SVN username.
+
+|| '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
+|| Alper Sarikaya || alpers at cs || || alpers || alpers ||
+|| Anthony Honstain || honsta at cs || || anthony || anthony ||
+|| Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
+|| Cosmin || || || || cosminb ||
+|| Brent Couvrette || couvb at cs ||    || couvb ||couvb ||
+|| Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
+|| Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
+|| Jenn|| hanson at cs || || jenn || jenn ||
+|| Justin Cappos || justinc at cs  || || justinc || justinc ||
+|| Richard Jordan || richard at jordanyachts.com || || || ||
+|| Sean || shawiz at cs || || sean || shawiz ||
+
