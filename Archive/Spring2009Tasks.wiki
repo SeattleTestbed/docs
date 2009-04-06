@@ -351,23 +351,23 @@ http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
 ----
 The following are startup tasks that are to be assigned to new developers joining Seattle in the spring.
 
-==     XMLRPC client library repy implementation   ---   Ivan (Michael) --- squishy 3 tokens ==
+==     XMLRPC client library repy implementation   ---   Ivan ('''Michael''') --- squishy 3 tokens ==
 ----
 
-==    XMLRPC server library repy implementation   ---   Ivan (Conrad) --- squishy 3 tokens ==
+==    XMLRPC server library repy implementation   ---   Ivan ('''Conrad''') --- squishy 3 tokens ==
 ----
 
-==    Write a simple repy pickle implementation (with wiki page)   ---   Ivan    --- squishy 3 tokens  ==
+==    Write a simple repy pickle implementation (with wiki page)   ---   Ivan ('''Donnie''')    --- squishy 3 tokens  ==
 ----
 
-==    Write a key gen daemon   ---   Ivan   (Tania)   ---   squishy 2 tokens (including tutorials) ==
+==    Write a key gen daemon   ---   Ivan   ('''Tania''')   ---   squishy 2 tokens (including tutorials) ==
 ----
 
 Ticket #7
 
 Maintain generated keys in a process (not database). Communicate with this process over a socket to request new keys.
 
-==    Write NTP forwarder   ---   Justin (Zachary) --- squishy 2 tokens (including tutorials) ==
+==    Write NTP forwarder   ---   Justin ('''Zachary''') --- squishy 2 tokens (including tutorials) ==
 ----
 
 ==    Read the local vessel's resource file (given a user port)   ---   Justin ==
