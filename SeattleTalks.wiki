@@ -23,3 +23,5 @@
 || 5:30-8:30 PM March 31th, 2009 || Miami, FL || GEC-4 || Justin || Poster / Demo
 
 || 10-11 AM April 2nd, 2009 || Miami, FL || GEC-4 Opt-In WG || Justin || Talk / Live Demo
+
+|| 4:30-5:30 AM April 2nd, 2009 || UW || CSE 551 Section || Ivan || Tutorial / Live Demo
