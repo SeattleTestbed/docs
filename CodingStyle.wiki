@@ -273,8 +273,8 @@ if foo == 'blah': one(); two(); three()
 
     You should use two spaces after a sentence-ending period.
 
-    When writing English, Strunk and White apply.
-
+    When writing English, Strunk and White apply.   This means you shouldn't have spelling or
+    grammar errors.   It also helps to make the project's code look more professional.
 
   Block Comments
 
@@ -732,6 +732,7 @@ except KeyError:
 
 
 
+
     - Use string methods instead of the string module.
 
       String methods are always much faster and share the same API with
@@ -852,6 +853,8 @@ print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix
     Unix not Windows style text files.
 
       If you develop on Windows make sure you use dos2unix before checking in.
+
+
 
 
     Avoid objects
