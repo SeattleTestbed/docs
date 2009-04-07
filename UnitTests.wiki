@@ -52,6 +52,10 @@ This will start the test running, and will output a status report with the resul
 [[BR]]
 == Running Threading Error Check Locally ==
 ----
+
+
+'''Be warned that this test is designed to push the system to its thread limit. This means you may experience system instability. Windows and OSX seem to remain stable, but near the end of the test Linux will exhaust its system wide thread availability.'''
+
 To run the repy threading error test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
 
 {{{
@@ -60,7 +64,8 @@ cd /path/to/test/directory
 python run_tests.py -threaderr
 }}}
 
-This will start the test running, and will output a status report with the results of the test. Be warned that this test is designed to push the system to its thread limit. This means you may experience system instability. Windows and OSX seem to remain stable, but near the end of the test Linux will exhaust its system wide thread availability.
+This will start the test running, and will output a status report with the results of the test. 
+
 
 
 [[BR]]
