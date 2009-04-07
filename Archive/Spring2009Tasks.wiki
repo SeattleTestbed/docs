@@ -192,7 +192,7 @@ We want a version of the autograder that is usable by instructors.   It does not
 
 
 [[BR]]
-== Reasonable number of events    ---     Justin    ('''Armon''')   ---   1 token  ==
+== ~~Reasonable number of events    ---     Justin    ('''Armon''')   ---   1 token~~ ==
 ----
 (Ticket #256)
 
