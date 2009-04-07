@@ -49,6 +49,19 @@ python run_tests.py -cpu
 
 This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement.
 
+[[BR]]
+== Running Threading Error Check Locally ==
+----
+To run the repy threading error test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python run_tests.py -threaderr
+}}}
+
+This will start the test running, and will output a status report with the results of the test. Be warned that this test is designed to push the system to its thread limit. This means you may experience system instability. Windows and OSX seem to remain stable, but near the end of the test Linux will exhaust its system wide thread availability.
+
 
 [[BR]]
 == Running Nodemanager Tests Automatically Using run_tests.py ==
@@ -94,3 +107,18 @@ Open a new terminal and navigate to the test directory in the trunk that was use
 python repy.py restrictions.test <test_name>.py
 }}}
 <test_name> refers to the name of the test file that is to be run (do not include the .mix extension). To see which tests are available to run navigate to nodemanager\tests in the trunk folder.
+
+[[BR]]
+== Running Nodemanager threading error / restrictions processor check Locally ==
+----
+To run the node manager threading test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python testnmthreadingerror.py
+}}}
+
+This will start the test running, and will output a status report with the results of the test. 
+[[BR]]
+[[BR]]
