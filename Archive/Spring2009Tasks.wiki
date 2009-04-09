@@ -64,7 +64,7 @@ Tickets #254, #165, #189, etc
 The GENI portal has numerous outstanding tickets having to do with everything from user-interface bugs (#254) to complex resource and database management issues (#165, #278). Additionally, most of the GENI code is untested and requires thorough integration tests to be written to test that the database is always in a consistent state, and is modified accordingly. The testing part of this task will involve understanding the XMLRPC web backend (see above).
 
 [[BR]]
-== Custom installer creator port to Django --- Ivan --- 2 tokens ==
+== Custom installer creator port to Django --- Ivan ('''Sean''') --- 1 tokens ==
 ----
 
 Tickets #312, #76, #78, #90, #91, #92, #93, #73 ..
