@@ -94,7 +94,7 @@ Right now, stop_seattle does the proper thing and calls seattlestopper.py, but s
 
 
 [[BR]]
-== Software updater integration test   ---    ?   ('''Brent''')   ---   1 token   ==
+== Software updater integration test   ---    ?    ---   1 token   ==
 ----
 (No ticket)
 
