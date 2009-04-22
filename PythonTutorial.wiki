@@ -640,7 +640,7 @@ But the Python idiom also uses this for code which is not acting in an exception
 #!python
 try:
     place = x.index(8)
-except:
+except IndexError:
     x.append(8)
     place = len(x)
 }}}
