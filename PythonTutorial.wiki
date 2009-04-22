@@ -630,11 +630,11 @@ Here’s another example:
 try:
     i = 5
     y = x[i]
-except:
+except IndexError:
     print ’no such index:’, i
 }}}
 
-But the Python idiom also uses this for code which is not acting in an exception context. Say for example we want to find the index of the number 8 in the list z.  If there is no such number in z, then we want to first add it to the list before getting the index of that number. We could do it this way:
+But the Python idiom also uses this for code which is not acting in an exception context. Say for example we want to find the index of the number 8 in the list x.  If there is no such number in x, then we will append x to the list and return its index. We could do it this way:
 
 {{{
 #!python
