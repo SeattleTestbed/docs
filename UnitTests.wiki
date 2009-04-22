@@ -50,6 +50,20 @@ python run_tests.py -cpu
 This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement.
 
 [[BR]]
+== Running Network Restriction Check Locally ==
+----
+To run the repy network restriction tests locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python run_tests.py -network
+}}}
+
+This will start the test running, and will output a status report with the results of the test.
+
+
+[[BR]]
 == Running Threading Error Check Locally ==
 ----
 
