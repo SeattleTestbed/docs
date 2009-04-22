@@ -409,7 +409,7 @@ Result:
 
 {{{
 #!python
-z = x[1:3] # array "slicing": give the first element specified through the last element specified minus one (in this example, elements 1 through 2)
+z = x[1:3] # array "slicing": give the first element specified through the last element specified minus one.   Since the elements in a Python list are numbered 0, 1, 2, etc., x[1:3] will return elements 1 and 2.
 
 Result: 
 [2, -4]
