@@ -132,7 +132,7 @@ Hello
 
 Python contains many high level operations.
 
-Here is a simple example that prints the number of words in ‘Hello Word”
+Here is a simple example that prints the number of words in ‘Hello World”
 
 
 {{{
