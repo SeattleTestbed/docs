@@ -613,7 +613,7 @@ class b(a):
 == Exception Handling ==
 ----
 
-Python’s built-in and library functions have no C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism:
+Python functions usually don't have C-style error return code to check to see whether they succeeded. Instead, you use Python’s try/except exception-handling mechanism:
 
 {{{
 #!python
