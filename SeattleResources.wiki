@@ -1,20 +1,25 @@
-= Web Server Layout for Seattle / Beraber / GENI services =
+= Seattle servers and services =
 
 [[BR]]
 == Production : seattlegeni.cs.washington.edu ==
 
 Runs production services that change infrequently. No dev access.
- 
+
+Services:
  * GENI (http)
  * GENI (sql)
  * GENI installer-maker client
  * State transition daemons
+
+Monitoring:
+ * http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.
 
 [[BR]]
 == Stable : seattle.cs.washington.edu, beraber.cs.washington.edu == 
 
 Hosts the basic dev services, and a few simple production services.
 
+Services:
  * Seattle Trac
  * Seattle SVN
  * Seattle installer-maker server
@@ -23,11 +28,15 @@ Hosts the basic dev services, and a few simple production services.
  * GENI test (http)
  * Centralized advertise server
 
+Monitoring:
+ * http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.
+
 [[BR]]
 == Unstable : blackbox.cs.washington.edu ==
 
 Runs no production services. Used for monitoring, node deployment, and other distributed tasks.
 
+Services:
  * Autograder
  * Black box testing
  * Deployment scripts
