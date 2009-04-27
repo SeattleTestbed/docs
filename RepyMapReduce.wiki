@@ -4,6 +4,9 @@ The second assignment would increase the number of peers past identity by implem
 
 The final assignment is to add fault-tolerance to the system by adding fail-safes to both the primary node and its peers.   The primary node will implement a scoreboard that will keep track of all state by issuing a regular heartbeat query to each peer and performing an action (i.e. allocate a new peer, restart a job, etc) if a job fails or connectivity is lost, as frequently happens while working over WAN.  The primary fulfills the meaning of its name and a control flow is established between the primary and all peers to inform them of any changes to the job details (e.g. new peer allocated).  The peers will communicate to each other directly and establish this connection early on to migitate concerns of semi-transitivity, communicating back to the primary if a node is unreachable.  In addition, the peers act as scouts, informing the primary if a node has been forcefully terminated using a timeout on the peer-to-peer socket.
 
-Please feel free to contact Alper or Ivan for more information on this potential project.
+[[Image(stage3.PNG)]]
+'''Figure 1:''' Example !MapReduce implementation on Repy, showing both control and data flow.
+
+Please feel free to [ProjectMembers contact] Alper or Ivan for more information on this potential project.
 
 [EducatorsPage Back to Assisnment/Project List]
