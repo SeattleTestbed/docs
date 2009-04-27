@@ -69,7 +69,7 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||settimer||sets a thread to execute at a time in the future (callback)||example 1.4||
 
-||canceltimer||cancels an thread which has not yet started||example 1.5||
+||canceltimer||cancels an thread that has not yet started||example 1.5||
 
 
 [[BR]]
