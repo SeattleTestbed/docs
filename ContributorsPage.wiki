@@ -43,3 +43,4 @@ This page contains information useful to developers working on Seattle
  * Other
    * [StrikeForces Information] about strike forces
    * [MobileCeNotes Windows CE] implementation notes and problems
+   * [RepyNetworkRestrictions Repy Network Restrictions] information and errata.
