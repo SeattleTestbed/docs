@@ -1,4 +1,4 @@
- = Code Style Guidelines for the Seattle project =
+ = Known Bugs for the Seattle project =
 
 This page is used to track and list known bugs from the various components of Seattle.
 
