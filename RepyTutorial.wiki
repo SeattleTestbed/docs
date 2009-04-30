@@ -805,7 +805,7 @@ Getting the time from a synchronized time source is a handy thing to do (so this
 
 In the previous examples, we've been running code on our local system which we have control over.   When deploying repy programs, you may instead end up running your code on systems that don't belong to you.   Since you don't control these systems, the users are likely to have a set of restrictions on what you can do on their computer.   You may be unable to write files to disk, not be able to send packets to certain IP addresses, or prevented from performing operations.  
 
-To get a restrictions / restrictions file, in the shell type: show resources.   If you look at a restrictions file, you'll see a bunch of lines like this (ignore the resource lines for now):
+To get a restriction / restrictions file, in the shell type: show resources.   If you look at a restrictions file, you'll see a bunch of lines like this (ignore the resource lines for now):
 
 {{{
 #!python
