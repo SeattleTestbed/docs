@@ -99,7 +99,7 @@ python nminit.py
 python nmmain.py
 }}}
 
-On the FIRST command prompt, enter the follwing sequence of commands:
+On the FIRST command prompt, enter the following sequence of commands:
 {{{
 cd <test_directory_name>
 python run_tests.py -n
@@ -107,8 +107,8 @@ python run_tests.py -n
 
 <test_name> refers to the name of the test file that is to be run (do not include the .mix extension). To see which tests are available to run navigate to nodemanager\tests in the trunk folder.
 
-Known Issue 1: the test nmtestchangeowner_validsequenceid.py fails since sequece id's are currently broken. 
-[[BR]]Known Issue 2: Ocassionally the testscript freezes as it is running (no change in status for 3 minutes or more). This is rare and the cause is not yet fully known (appears to be related to connection resets in the node manager). If this occurs, restart the node manager and rerun the run_tests.py script.
+Known Issue 1: the test nmtestchangeowner_validsequenceid.py fails since sequence id's are currently broken. 
+[[BR]]Known Issue 2: Occasionally the testscript freezes as it is running (no change in status for 3 minutes or more). This is rare and the cause is not yet fully known (appears to be related to connection resets in the node manager). If this occurs, restart the node manager and rerun the run_tests.py script.
 
 [[BR]]
 == Running Nodemanager Tests Individually ==
