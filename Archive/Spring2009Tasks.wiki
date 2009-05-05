@@ -351,7 +351,7 @@ http://www.cs.bgu.ac.il/~beimel/Courses/crypto/Boneh.pdf
 ----
 The following are startup tasks that are to be assigned to new developers joining Seattle in the spring.
 
-==     XMLRPC client library repy implementation   ---   Ivan ('''Michael''') --- squishy 3 tokens ==
+== ~~    XMLRPC client library repy implementation   ---   Ivan ('''Michael''') --- squishy 3 tokens ~~ ==
 ----
 
 ==    XMLRPC server library repy implementation   ---   Ivan ('''Conrad''') --- squishy 3 tokens ==
