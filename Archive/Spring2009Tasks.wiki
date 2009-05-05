@@ -370,7 +370,7 @@ Maintain generated keys in a process (not database). Communicate with this proce
 ==    Write NTP forwarder   ---   Justin ('''Zachary''') --- squishy 2 tokens (including tutorials) ==
 ----
 
-==    Read the local vessel's resource file (given a user port)   ---   Justin ('''Monzur''') --- squishy 2 tokens (including tutorials) ==
+==  ~~  Read the local vessel's resource file (given a user port)   ---   Justin ('''Monzur''') --- squishy 2 tokens (including tutorials) ~~ ==
    
 [[BR]]
 = Collaboration =
