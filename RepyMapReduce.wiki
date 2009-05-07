@@ -1,5 +1,5 @@
 = A !MapReduce service =
-
+[[BR]]
 == Introduction ==
 
 The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of !MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their !MapReduce service.  An example use of !MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one !MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple !MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
@@ -17,4 +17,5 @@ In the second stage of the project, students will work to increase the number of
 In large distributed systems failures are common and recovering from failures is a basic necessity. In the final stage of the project students will add fault-tolerance to their systems. The primary node will implement a scoreboard to track all system state by using a regular heartbeat mechanism to query each peer and will perform an action whenever it detects that a job is failing to complete or that connectivity between peers is lost. An action by the primary might be to allocate a new peer to an existing job, or to perform a restart of a job that failed beyond recovery. To accomplish this, students must implement a control protocol that the primary can use to communicate changes to the !MapReduce job to the peers whenever failures occur. Additionally, students will implement a distributed failure detector in which the peers will communicate with each other to detect node failures and report these failures to the primary.
 
 [[Image(stage3.PNG)]]
+[[BR]]
 '''Figure 1:''' Example !MapReduce implementation on Repy, showing both control and data flow.
