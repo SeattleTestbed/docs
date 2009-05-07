@@ -50,7 +50,7 @@ A more complex set of assignments can also be designed for use with Seattle. The
 
 Advanced undergraduate and graduate courses in networks and distributed systems can also use Seattle for a class project. Seattle project can involve everything from highly scalable, and complex distributed systems, to measurements of global Internet traffic patterns, to ubiquitous computing topics. The two project ideas below are examples of what such a graduate-level project would entail.
 
-  * [RepyMapReduce A !MapReduce service]
+  * [RepyMapReduce A MapReduce service]
 
     The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of !MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their !MapReduce service.  An example use of !MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one !MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple !MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
 
