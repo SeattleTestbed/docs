@@ -330,7 +330,9 @@ We want a general autograder that allows instructors to upload NS files and / or
 ==   ?   Building a small number of services for service composition  ==
 ----
 
-==   ?   Allow ssh keys to be imported to use our RSA routines  ==
+==   ?   Allow ssh keys to be imported to use our RSA routines  --- Justin ('''Anthony''') ==
+----
+Ticket #393
 
 ==   ?   RSA implementation finish up   ---   Justin  ('''Anthony''') ==
 ----
