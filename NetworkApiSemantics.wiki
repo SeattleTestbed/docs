@@ -1,0 +1,18 @@
+= Network API call semantics = 
+
+----
+[[TOC(inline)]]
+----
+
+
+[[BR]]
+== Introduction and Purpose ==
+----
+
+This page is designed to specify in detail the behavior of network API calls under various circumstances.  For each call a list of argument and behavioral semantics is provided, along with a snippet of test code that shows how each case is verified.
+
+
+[[BR]]
+==== under construction ====
+----
+
