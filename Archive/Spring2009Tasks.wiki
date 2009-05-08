@@ -362,6 +362,10 @@ The following are startup tasks that are to be assigned to new developers joinin
 ==    Write a simple repy pickle implementation (with wiki page)   ---   Ivan    --- squishy 3 tokens  ==
 ----
 
+==    Change run_tests.py so that the seattlelib tests can be run using it ---   Justin --- squishy 2 tokens  ==
+----
+
+
 == ~~   Write a key gen daemon   ---   Ivan ('''Kon''')   ---   squishy 2 tokens (including tutorials) ~~ ==
 ----
 
