@@ -4,6 +4,8 @@
 [[TOC(inline)]]
 ----
 
+For a detailed description of Network API call semantics see: [NetworkApiSemantics].  (Read the description of calls on this page first.)
+
 [[BR]]
 == Introduction and Purpose ==
 ----
