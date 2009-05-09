@@ -795,6 +795,326 @@ Result:  Behavior will be as if the calls were made in some serial order.
 
 
 
+[[BR]]
+== recvmess(localip,localport,function) ==
+----
+
+=== Interacts With: ===
+
+recvmess(..)[[BR]]
+stopcomm
+
+=== Argument Semantics: ===
+
+The locaip specified is a string or an exception occurs.
+
+The localport specified is an int between 1 and 65535 (inclusive), of an exception occurs.
+
+The function specified is a function with arguments (remoteip, remoteport,message,commhandle)or an exception occurs)
+
+
+=== Behavior Semantics: ===
+
+1
+
+Action:  A recvmess has been called and a UDP message arrives at the specified port.
+
+Result:  As soon as an event becomes free the call back function specified is executed and the message is processed.
+
+(test  - tested recvmess_basic.py)[[BR]]
+Test Snippet:
+ 
+
+{{{
+recvmess(ip,port,func)
+sendmess(ip,port,msg)
+test_msg_proccessed()
+}}}
+
+
+
+2
+
+Action:  A recvmess has been called on the same ip / port as a waitforconn, and A TCP message arrives.
+
+Result:  The recvmess callback function is not executed.
+
+(tested - recvmess_waitforconn1.py)[[BR]]
+Test Snippet:
+
+
+{{{
+recvmess(ip,port,func)
+sock.send(msg)
+test_msg_not_processed()
+}}}
+
+
+
+3
+
+Action:  A recvmess has been called on the same ip/port as a waitforconn, and a UDP message arrives.
+
+Result:  The recvmess callback function is executed and the message is processed.
+
+(tested - recvmess_waitforconn2.py)[[BR]]
+Test Snippet:
+
+
+{{{
+waitforconn(ip,port,foo)
+recvmess(ip,port,func)
+sendmess(ip,port,msg)
+test_msg_processed()
+}}}
+
+
+
+4
+
+Action: Recvmess is called on the same ip / port as a previous recvmess.
+
+Result: The call back function is replaced and a new commhandle is returned.
+
+(tested - recvmess_duplicate1.py, this tests that the callback function is replaced)[[BR]]
+(tested - recvmess_duplicate2.py, this tests that the commhandle returned is uniqe)[[BR]]
+Test Snippet:
+
+(test 1)
+
+{{{
+recvmess(ip,port,old)
+recmess(ip,port,new)
+sendmess(ip,port,msg)
+test_msg_processed()
+}}}
+
+
+(test 2)
+
+{{{
+old_handle = recvmess(ip,port,old)
+new_handle = recvmess(ip,port,new)
+stopcomm(old_handle)
+sendmess(ip,port,msg)
+test_msg_processed()
+}}}
+
+
+
+
+5
+
+Action:  Stopcomm has been called on the recvmess commhandle and a UDP message is recivied.
+
+Result:  The message is not processed.
+
+(tested recvmess_stopcomm.py)[[BR]]
+Test Snippet:
+
+
+{{{
+handle = recvmess(ip,port,fail_test)
+stopcomm(handle)
+sendmess(ip,port,msg)
+}}}
+
+
+
+[[BR]]
+== stopcomm(commhandle) ==
+----
+
+=== Interacts With: ===
+
+waitforconn(..)[[BR]]
+
+=== Argument Semantics: ===
+
+The commhandle specified is a commhandle or an exception occurs.
+
+=== Behavioral Semantics: ===
+
+1
+
+Action: Stopcomm is called on a valid commhandle.
+
+Result: The listener associated with the commhandle is stopped.  Stopcomm returns True.
+
+(tested - stopcomm_basic.py)[[BR]]
+(tested - stopcomm_basic2.py)[[[BR]]
+Test Snippet: 
+
+
+{{{
+handle = waitforconn(ip,port,func)
+stopped = stopcomm(handle)
+if stopped is not True:
+  test_fail()
+test_callback_is_stopped()
+}}}
+
+
+2
+
+Action: Stopcomm is called twice on the same commhandle.
+
+Result: No exception occurs, stopcomm returns False on the second attempt.
+
+(tested - stopcomm_duplicate.py)[[BR]]
+(tested - stopcomm_duplicate2.py)[[BR]]
+
+Test Snippet:
+
+
+{{{
+handle = waitforconn(ip,port,func)
+stopcomm(handle)
+stopped = stopcomm(handle)
+if stopped is not False:
+  test_fail()
+}}}
+
+
+
+3
+
+Action:  Stopcomm is called on  an invalid commhandle (a newer waitforconn has replaced it).
+
+Result:  No exception occurs, stopcomm returns False.
+
+(tested - stopcomm_invalid_handle.py)[[BR]]
+(tested - stopcomm_invalid_handle2.py)[[BR]]
+Test Snippet:
+
+
+{{{
+  handle = waitforconn(ip,waitport,echo)
+  new_handle = waitforconn(ip,waitport,do_nothing)
+  stopped = stopcomm(handle)
+  if (stopped is not False):
+    print 'Stopcomm did not return False'
+}}}
+  
+ 
+
+4
+
+Action:  Stopcomm is called simultaneously in multiple events.
+
+Result:  Behaves as if each call occured in some serial order.
+
+
+[[BR]]
+== gethostbyname_ex(name) ==
+----
+
+=== Interacts With: ===
+
+None[[BR]]
+
+=== Argument Semantics: ===
+
+The name specified is a string or an exception occurs.
+
+=== Behavioral Semantics: ===
+
+
+1
+
+Action:  A call is made to get hostbyname_ex(name)  with a valid host name.
+
+Result:  A tuple containing information about the host name is returned, or a netowork error occurs.
+
+(tested - gethost_basic.py) [[BR]]
+Test Snippet:
+
+{{{
+(one,two,three) = gethostbyname_ex(host)
+}}}
+
+
+
+2
+
+Action:  A call is made to get hostbyname with an invalid host name.
+
+Result:  An exception occurs.
+
+(tested - gethost_invalid.py)[[BR]]
+Test Snippet:
+
+
+{{{
+try:
+  gethosbyname_ex(invalid_host)
+except:
+  pass
+else:
+  fail()
+
+}}}
+
+
+
+[[BR]]
+== getmyip() ==
+----
+
+=== Interacts With: ===
+
+openconn[[BR]]
+sendmess[[BR]]
+
+=== Argument Semantics: ===
+
+None
+
+=== Behavioral Semantics: ===
+
+1
+
+Action:  A call to getmyip() is made while the perferred IP or interface is attached to a network.
+
+Result:  The IP (or the IP of the perferred interface) is returned and can be used to communicate over the network.
+
+(tested - getmyip_basic.py) [[BR]]
+Test Snippet:
+
+{{{
+#run the echo_serever on another node
+openconn(rip,geniport,getmyip(),geniport)
+#verify connection
+}}}
+
+
+
+2
+Action:  A call to getmyip() is made while not connected to a network.
+
+Result:  An exception occurs.
+
+(tested - getmyip_no_connection.py)[[BR]]
+Test Snippet:
+
+
+{{{
+#run while not connected to a network
+try:
+  getmyip()
+except:
+  pass
+else:
+  fail()
+}}}
+
+
+3
+
+Action:  getmyip() is called while the prefered interface/IP is not connected to the network, but other connections from the allowed list are connected to the network.
+
+Result:  getmyip() returns the first connected interface/IP in the list, and will continue to reutrn this IP for the duration of the program or until it becomes invalid.
+
 
 
 
