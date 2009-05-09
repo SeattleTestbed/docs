@@ -18,6 +18,7 @@ This page contains information useful to developers working on Seattle
  * Testing
    * [UnitTests Running Repy unit tests]
    * [UpdaterUnitTests Running Software Updater Unit Tests]
+   * [GENIPortalTesting Running a GENI test server]
    
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
