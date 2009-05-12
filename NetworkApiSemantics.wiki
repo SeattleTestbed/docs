@@ -39,7 +39,7 @@ Both localPort and localIP are specified, or both are none, or an exception is t
   
 If localIP and localPort are specified, the IP is checked against the allowed IP /interface list.  If the IP specified is in the list an attempt to bind to the port is made.  If the IP is not in the allowed list an exception is thrown.
 
-If localIP and localPort are not specified, the IP that would be returned from getmyip() is used.  The port is the lowest port without an open connection with this (remoteIP, remoteport, localIP, localport) tuple.
+If localIP and localPort are not specified, the IP that would be returned from getmyip() is used (This may not be the case if a loop back ip is being used).  The port is the lowest port without an open connection with this (remoteIP, remoteport, localIP, localport) tuple.
 
 
 === Behavioral Semantics: ===
