@@ -1,0 +1,7 @@
+= Seattle Installer Maker API =
+
+The installer maker creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
+
+[[BR]]
+=== make_installer(os_type, vesseldict) ===
+----
