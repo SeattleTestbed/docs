@@ -1,4 +1,4 @@
-= Seattle servers and services =
+= Seattle Resources =
 
 [[BR]]
 == Production : seattlegeni.cs.washington.edu ==
@@ -48,3 +48,37 @@ Use these machines to work on Seattle projects, test compatibility of your code 
 
  * testbed-opensuse.cs.washington.edu
  * testbed-mac.cs.washington.edu
+
+[[BR]]
+== Seattle Auto-notification Gmail Account ==
+
+We use a normal Gmail account seattle DOT devel -AT- gmail to send automatically generated emails regarding
+
+|| Service                                        || Subject Line Format                                            ||
+|| Unit test failures in the post-commit SVN hook || svn post-commit unit test hoook failed on rvn [RVN #]          ||
+|| Integration test failures from blackbox.cs     || seattle test failed @ blackbox.cs.washington.edu : [TEST_PATH] ||
+|| Trac ticket notifications                      || [Seattle] #[TICKET #]: [TICKET TITLE]                          ||
+
+[[BR]]
+== Mailing Lists ==
+
+We use the UW CSE mailing lists to coordinate developers, and to receive email from our users. These lists are configured to receive email from anyone, but require admin confirmation to subscribe, and only subscribers can view the list archives.
+
+ * [https://mailman.cs.washington.edu/mailman/listinfo/seattle-devel Developers] mailing list ([https://mailman.cs.washington.edu/mailman/admin/seattle-devel admin] interface)
+ * [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users Users] mailing list ([https://mailman.cs.washington.edu/mailman/admin/seattle-users admin] interface)
+
+[[BR]]
+== UW CSE Seattle account ==
+
+We run Seattle on some of the machines in UW CSE labs. Seattle runs under the '''justinc''' username.
+
+[[BR]]
+== Emulab Accounts ==
+
+We use [http://www.emulab.net Emulab] for our autograder infrastructure. Our Emulab GID (group ID) is '''Seattle'''.
+
+
+[[BR]]
+== PlanetLab Accounts ==
+
+We run Seattle on [http://planet-lab.org/ PlanetLab]. Our PlanetLab slice is '''uw_seattle'''.
