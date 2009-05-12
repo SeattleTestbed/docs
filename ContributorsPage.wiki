@@ -35,7 +35,7 @@ This page contains information useful to developers working on Seattle
    * [VersionDeployment Deploying] a new version
 
  * Project Resources
-   * [SeattleServers Seattle project machines and services]
+   * [SeattleResources A full listing of Seattle project services]
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
