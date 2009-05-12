@@ -1,0 +1,17 @@
+= XML-RPC API to Seattle GENI =
+
+== acquire_resources(num, type) ==
+
+Acquires num resources of type. Returns a list of nodeip:nmport:vesselid strings indicating which vessels were acquired.
+
+== release_resources(which) ==
+
+Release resources associated with an account. If which is an empty list then it release all resources associated with an account.
+
+== get_resource_info() ==
+
+Returns a list resources currently associated with this account.
+
+== get_account_info() ==
+
+Returns a list of account information for the account. This includes the user's keys, port number, name, and affiliation.
