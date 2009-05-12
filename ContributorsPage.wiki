@@ -16,7 +16,7 @@ This page contains information useful to developers working on Seattle
    * [PortingPythonToRepy Porting Python to Repy Guide]
 
  * Testing
-   * [UnitTests Running Repy unit tests]
+   * [UnitTests Running Repy and / or node manager unit tests]
    * [UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:GENIPortalTesting Running a GENI test server]
    * [RemoteTesting Running remote tests on seattle testbeds]
