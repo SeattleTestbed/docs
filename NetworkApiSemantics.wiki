@@ -648,7 +648,7 @@ Result:  Behavior in each event is as if each call to recv was performed in some
 
 ----
 [[BR]]
-==  socketlikeobj.close(length) ==
+==  socketlikeobj.close() ==
 ----
 
 
