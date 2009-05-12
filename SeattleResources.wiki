@@ -54,7 +54,7 @@ Use these machines to work on Seattle projects, test compatibility of your code 
 
 We use a normal Gmail account seattle DOT devel -AT- gmail to send automatically generated emails regarding
 
-|| Service                                        || Subject Line Format                                            ||
+|| '''Service'''                                  || '''Subject Line Format'''                                      ||
 || Unit test failures in the post-commit SVN hook || svn post-commit unit test hoook failed on rvn [RVN #]          ||
 || Integration test failures from blackbox.cs     || seattle test failed @ blackbox.cs.washington.edu : [TEST_PATH] ||
 || Trac ticket notifications                      || [Seattle] #[TICKET #]: [TICKET TITLE]                          ||
@@ -79,6 +79,6 @@ We use [http://www.emulab.net Emulab] for our autograder infrastructure. Our Emu
 
 
 [[BR]]
-== PlanetLab Accounts ==
+== !PlanetLab Accounts ==
 
-We run Seattle on [http://planet-lab.org/ PlanetLab]. Our PlanetLab slice is '''uw_seattle'''.
+We run Seattle on [http://planet-lab.org/ PlanetLab]. Our !PlanetLab slice is '''uw_seattle'''.
