@@ -214,8 +214,8 @@ Assuming you want to run the testing server on a remote machine, you could to th
  2. scp * user@machine:'~/server/'
  3. ssh user@machine
  4. machine$ cd server
- 5. python testingserver.py >output.txt &
- 6. exit
+ 5. machine$ python testingserver.py >output.txt &
+ 6. machine$ exit
 
 This will start the testing server with the default server.cfg. Of couse, you should probably edit this.
 
