@@ -269,14 +269,14 @@ So Windows doesn't really have much in the way of job control, so you cannot do 
  * Search for 2 files, instsrv.exe and srvany.exe, They are available from Microsoft (something about a Windows 2K service kit...)
  * Store a copy of the "minimal" directory somewhere, e.g. C:\minimal. Put srvany inside this folder.
  * Lock down the permissions of server.cfg. For users, disable all access.
- * Then go to where you have instsrv.exe. Do instsrv.exe TestService "C:\minimal\srvany.exe"
- * Then open regedit. Go to HKLM\SYSTEM\CurrentControlSet\Services\TestService
+ * Then go to where you have instsrv.exe. Do instsrv.exe !TestService "C:\minimal\srvany.exe"
+ * Then open regedit. Go to HKLM\SYSTEM\!CurrentControlSet\Services\!TestService
  * Make a sub-folder call Parameters
- * In side Parameters, make 3 entries,  Application, AppDirectory, and AppParameters
- * Set Application to "C:\Python26\pythonw.exe" or whereever python is.
- * Set AppDirectory to "C:\minimal\"
- * Set AppParameters to "C:\minimal\testingserver.py"
- * Open services.msc, then go to TestService. Open its properties.
+ * In side Parameters, make 3 entries,  Application, !AppDirectory, and !AppParameters
+ * Set Application to "C:\Python26\pythonw.exe" or wherever python is.
+ * Set !AppDirectory to "C:\minimal\"
+ * Set !AppParameters to "C:\minimal\testingserver.py"
+ * Open services.msc, then go to !TestService. Open its properties.
  * Set it to start automatically. On the credential tab, lower its permissions from SYSTEM, in case somebody is malicious. In the Error tab, set it to restart automatically on the first and second failures. Just in case.
  * You can reboot, or manually start the service now. Then check using remotetest.py --list if the computer is auto advertising.
  
