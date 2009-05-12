@@ -2,53 +2,20 @@
 
 [[BR]]
 == Hosts dedicated to the project and that we maintain ==
-=== '''Production''' : seattlegeni.cs.washington.edu ===
 
-Runs production services that change infrequently. No dev access.
+Accounts on these machines must be requested. These machines do not run NIS/NFS, so accounts/file-systems on these machines are independent.
 
-Services:
- * GENI (http)
- * GENI (sql)
- * GENI installer-maker client
- * State transition daemons
+|| Type || Location || Purpose || Hostname || OS || Services || Monitoring ||
 
-Monitoring:
- * http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.
+|| Production || ? || Runs production services that change infrequently. [[BR]] No dev access. || seattlegeni.cs.washington.edu || Ubuntu || GENI (http)[[BR]] GENI (sql)[[BR]] GENI installer-maker client[[BR]] State transition daemons[[BR]] || http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service.[[BR]] GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.||
 
-[[BR]]
-=== '''Stable''' : seattle.cs.washington.edu, beraber.cs.washington.edu ===
+|| Stable || Justin's Office CSE? || Hosts the basic dev services, and a few simple production services || seattle.cs.washington.edu, beraber.cs.washington.edu || Ubuntu || Seattle Trac [[BR]] Seattle SVN[[BR]] Seattle installer-maker server[[BR]] Seattle software updater[[BR]] Beraber (http)[[BR]] GENI test (http)[[BR]] Centralized advertise server|| http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. [[BR]]GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.||
 
-Hosts the basic dev services, and a few simple production services.
+|| Unstable || Justin's Office CSE? || Runs no production services. Used for monitoring, node deployment, and other distributed tasks. || blackbox.cs.washington.edu || Ubuntu || Autograder[[BR]]  Black box testing[[BR]] Deployment scripts[[BR]] ||
 
-Services:
- * Seattle Trac
- * Seattle SVN
- * Seattle installer-maker server
- * Seattle software updater
- * Beraber (http)
- * GENI test (http)
- * Centralized advertise server
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-opensuse.cs.washington.edu || !OpenSuse || SSH || None ||
 
-Monitoring:
- * http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. GET request is generated every 20 minutes. Justin and Ivan are emailed in case of downtime.
-
-[[BR]]
-=== '''Unstable''' : blackbox.cs.washington.edu ===
-
-Runs no production services. Used for monitoring, node deployment, and other distributed tasks.
-
-Services:
- * Autograder
- * Black box testing
- * Deployment scripts
-
-[[BR]]
-=== User machines ===
-
-Use these machines to work on Seattle projects, test compatibility of your code across operating systems, etc.
-
- * testbed-opensuse.cs.washington.edu
- * testbed-mac.cs.washington.edu
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-mac.cs.washington.edu || OSX || SSH || None ||
 
 [[BR]]
 == Seattle Auto-notification Gmail Account ==
