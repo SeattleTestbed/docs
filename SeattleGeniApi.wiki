@@ -1,5 +1,7 @@
 = XML-RPC API to Seattle GENI =
 
+[[BR]]
+
 == acquire_resources(num, type) ==
 
 Acquires num resources of type. Returns a list of nodeip:nmport:vesselid strings indicating which vessels were acquired.
