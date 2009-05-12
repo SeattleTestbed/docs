@@ -30,6 +30,10 @@ This page contains information useful to developers working on Seattle
    * [GeniInstallation Installation instructions] for the GENI portal
    * [CustomizedInstaller Customized installer instructions]
 
+ * API specifications for user-facing services
+   * [wiki:SeattleGeniAPI Seattle-GENI XML-RPC API]
+   * [SeattleInstallerMaker Seattle Installer Maker Service XML-RPC API]
+
  * Deployment
    * [BaseInstallers Building] the base installers
    * [VersionDeployment Deploying] a new version
