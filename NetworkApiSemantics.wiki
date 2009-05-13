@@ -726,6 +726,8 @@ The desthost/localip specified is a string, or an exception occurs.  (can be an 
 
 The destport/localport specified is an int between 1 and 65535 (inclusive), of an exception occurs.
 
+If localip or localport is specified both must be.
+
 The message sepcified is a string or an exception occurs.
 
 If localIP and localPort are not specified, the IP that would be returned from getmyip() is used.  The port is the lowest port avaiable.
