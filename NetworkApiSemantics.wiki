@@ -930,6 +930,7 @@ sendmess(ip,port,msg)
 === Interacts With: ===
 
 waitforconn(..)[[BR]]
+recvmess(...)[[BR]]
 
 === Argument Semantics: ===
 
