@@ -30,7 +30,7 @@ under its host name so that remotetest.py can lookup the host.
 == Server side: server.cfg ==
 ----
 
-This file stores the configuration for the testingserver. It takes the following directives:
+This file stores the configuration for the testingserver. This file should not contain blank lines, and does not support '#' for comments. It takes the following directives:
 
 || Directive || Argument 1 || Argument 2 || Notes ||
 || hostname || The hostname || N/A || Only 1 hostname directive may be specified. Spaces not allowed in the hostname. This can be '''omitted'''. This will disable advertisement, but you can still connect using the --ip flag of remotetest.py ||
