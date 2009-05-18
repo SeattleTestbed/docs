@@ -22,7 +22,7 @@ Returns a list resources currently associated with this account.
 === get_account_info() ===
 ----
 
-Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, used vessels, and the user's affiliation.
+Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, and the user's affiliation.
 
 
 [[BR]]
