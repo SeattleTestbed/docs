@@ -22,4 +22,9 @@ Returns a list resources currently associated with this account.
 === get_account_info() ===
 ----
 
-Returns a list of account information for the account. This includes the user's keys, port number, name, and affiliation.
+Returns a list of account information for the account. This includes the user's keys, port number, name, URL for installers, and affiliation.
+
+[[BR]]
+=== delete_private_key() ===
+----
+Removes the user's private key from the server.
