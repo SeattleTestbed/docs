@@ -22,7 +22,20 @@ Returns a list resources currently associated with this account.
 === get_account_info() ===
 ----
 
-Returns a list of account information for the account. This includes the user's keys, port number, name, URL for installers, and affiliation.
+Returns a list of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, and the user's affiliation.
+
+
+[[BR]]
+=== get_public_key() ===
+----
+
+Returns the user's public key.
+
+[[BR]]
+=== get_private_key() ===
+----
+
+Returns the user's private key.   Raises an exception if the key was removed.
 
 [[BR]]
 === delete_private_key() ===
