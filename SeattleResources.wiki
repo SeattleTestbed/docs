@@ -17,7 +17,7 @@ Accounts on these machines must be requested. These machines do not run NIS/NFS,
 
 || Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-mac.cs || OSX || [wiki:SSHService SSH] || None ||
 
-|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-xp2 || XP || [wiki:SSHService SSH]  || None ||
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-xp2 || XP || [wiki:SSHSetup SSH]  || None ||
 
 [[BR]]
 == Seattle Auto-notification Gmail Account ==
