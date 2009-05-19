@@ -15,26 +15,23 @@ Seattle runs Trac v11.1.
 = Plugins =
 
 Trac is highly extensible. Our installation includes the following Plugins:
-
-| Plugin              | Version        | Enabled? | Purpose |
-| NavAdd              | 0.1            | Y        | For adding navigation items into one of the navigation bars. |
-| TracAccountManager  | 0.2.1dev-r3857 | Y        | User account management from the browser. |
-| TracFullBlogPlugin  | 0.1            | Y        | Blog support. |
-| TracGoogleAnalytics | 0.2.2          | Y        | Support for Google Analytics tracking. |
-| TracMasterTickets   | 2.1.3          | Y        | Support for ticket dependencies and master tickets |
-| TracNavHider        | 1.0            | Y        | Remove items from the Trac navigation bars.|
-| TracNewsFlash       | 1.0.1          | Y        | A Trac macro to make a colored box. |
-| TracPyDotOrgTheme   | 2.0            | Y        | A theme for Trac based on python.org. |
-| TracTags            | 0.6            | Y        | Tags plugin for Trac. |
-| TracThemeEngine     | 2.0            | Y        | Provide a modular interface to styling Trac. |
-| TracTocMacro        | 11.0.0.3       | Y        | A macro to create tables of contents. |
-| TracWikiRename      | 2.1.1          | Y        | Add simple support for renaming/moving wiki pages. |
-| TracPermRedirect    | 2.0            | N*       | Redirect users to the login screen on PermissionError. |
-| TracConsultantTheme | 1.0            | N*       | A theme. |
-| TracGamedevTheme    | 1.0            | N*       | A theme. |
-| TracIncludeMacro    | 2.1            | Y*       | Include support for external html, etc|
-
-
+|| Plugin              || Version        || Enabled? || Purpose ||
+|| NavAdd              || 0.1            || Y        || For adding navigation items into one of the navigation bars. ||
+|| TracAccountManager  || 0.2.1dev-r3857 || Y        || User account management from the browser. ||
+|| TracFullBlogPlugin  || 0.1            || Y        || Blog support. ||
+|| TracGoogleAnalytics || 0.2.2          || Y        || Support for Google Analytics tracking. ||
+|| TracMasterTickets   || 2.1.3          || Y        || Support for ticket dependencies and master tickets ||
+|| TracNavHider        || 1.0            || Y        || Remove items from the Trac navigation bars.||
+|| TracNewsFlash       || 1.0.1          || Y        || A Trac macro to make a colored box. ||
+|| TracPyDotOrgTheme   || 2.0            || Y        || A theme for Trac based on python.org. ||
+|| TracTags            || 0.6            || Y        || Tags plugin for Trac. ||
+|| TracThemeEngine     || 2.0            || Y        || Provide a modular interface to styling Trac. ||
+|| TracTocMacro        || 11.0.0.3       || Y        || A macro to create tables of contents. ||
+|| TracWikiRename      || 2.1.1          || Y        || Add simple support for renaming/moving wiki pages. ||
+|| TracPermRedirect    || 2.0            || N*       || Redirect users to the login screen on PermissionError. ||
+|| TracConsultantTheme || 1.0            || N*       || A theme. ||
+|| TracGamedevTheme    || 1.0            || N*       || A theme. ||
+|| TracIncludeMacro    || 2.1            || Y*       || Include support for external html, etc||
 
 
 
