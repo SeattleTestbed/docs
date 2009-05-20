@@ -37,7 +37,8 @@ This file stores the configuration for the testingserver. This file should not c
 || ip || The IP address || N/A ||Multiple ip directives may be specified. The are only loaded initially ||
 || user || username || password || Multiple user directives may be specified. The are reloaded every 60 seconds. ||
 || disablestderr || N/A || N/A || Defers sending the stderr of the test to the client until the test terminates. This is '''NECESSARY''' on windows hosts if you would like any output.  ||
-
+|| path || Full path to python || N/A || The rest of the line is used as the path. This is optional, and the default is just "python" ||
+|| noshell || N/A || N/A || When launching subprocess.Popen, the shell parameter will be set to False. This is useful if you have provided the full path to python. ||
 
 [[BR]]
 == Client side: remotetest.py ==
