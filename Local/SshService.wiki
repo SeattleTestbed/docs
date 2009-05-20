@@ -4,19 +4,19 @@
 ----
 [[BR]]
 
-= SSH Configuration on *NIX =
+== SSH Configuration on *NIX ==
 ----
 
 We use the latest version of OpenSSH on our Linux/BSD/OpenSUSE/OSX machines.
 
 [[BR]]
-= SSH Configuration on Windows =
+== SSH Configuration on Windows ==
 ----
 
 We use a free program called [http://mobassh.mobatek.net/en/ Moba SSH] for SSH access on Windows.
 
 [[BR]]
-== Installation and Configuration ==
+=== Installation and Configuration ===
 ----
 
  1. '''Download:''' Grab the install file by visiting the Moba SSH website. Go to the [http://mobassh.mobatek.net/en/index.php?option=com_content&view=article&id=93&Itemid=55 download link] and get the latest version. Currently the machines in Sieg 319 are running MobaSSH Home v1.0.
