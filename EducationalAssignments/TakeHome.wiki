@@ -205,7 +205,7 @@ username@LAN !> on %2 run udppingserver.py GENIport
 }}}
 
 
-You can ping from %1 to %2 by typing the line listed below.   Replace IP_of_%2 with the IP address of computer %2 as shown by your previous list command.   It will be something like 1.2.3.4.   Also replace GENIport with your port number.
+You can ping from %1 to %2 by typing the line listed below.   Replace ''IP_of_%2'' with the IP address of computer %2 as shown by your previous list command.   It will be something like 1.2.3.4.   Also replace ''GENIport'' with your port number.
 
 {{{
 #!python
@@ -429,7 +429,7 @@ You should see the IP of at least one WAN node. Write down the IP address of the
 username@ !> on %WANnode run udppingserver.py GENIport
 }}}
 
-Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace WANIP with the WAN node's IP address and GENIport with your port.
+Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace ''WANIP'' with the WAN node's IP address and GENIport with your port.
 
 {{{
 python localudpping.py WANIP GENIport
