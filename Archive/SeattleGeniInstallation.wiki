@@ -72,6 +72,19 @@ TO 'www'@'localhost'
 IDENTIFIED BY 'password';
 }}}
 
+Django will take care of populating the geni database you created above with the necessary tables. However, you will need one other database for storing public\private key pairs. Here are the commands you should run to create the keygen database, the keys_512 table in that database, and to give the www user access to this database:
+
+{{{
+#!sh
+mysql> create database keygen;
+
+mysql> CREATE TABLE keygen.keys_512 (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, pub VARCHAR(512), priv VARCHAR(1024));
+
+mysql> GRANT ALL PRIVILEGES 
+ON keygen.keys_512 
+TO 'www'@'localhost'
+IDENTIFIED BY 'password';
+}}}
 
 [[BR]]
 == Get the GENI code ==
