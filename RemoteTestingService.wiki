@@ -271,7 +271,7 @@ So Windows doesn't really have much in the way of job control, so you cannot do 
  * Store a copy of the "minimal" directory somewhere, e.g. C:\minimal. Put srvany inside this folder.
  * Lock down the permissions of server.cfg. For users, disable all access.
  * Then go to where you have instsrv.exe. Do instsrv.exe !TestService "C:\minimal\srvany.exe"
- * Then open regedit. Go to HKLM\SYSTEM\!CurrentControlSet\Services\!TestService
+ * Then open regedit. Go to HKey_Local_Machine\SYSTEM\!CurrentControlSet\Services\!TestService
  * Make a sub-folder call Parameters
  * In side Parameters, make 3 entries,  Application, !AppDirectory, and !AppParameters
  * Set Application to "C:\Python26\pythonw.exe" or wherever python is.
