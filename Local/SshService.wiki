@@ -26,8 +26,8 @@ We use a free program called [http://mobassh.mobatek.net/en/ Moba SSH] for SSH a
 {{{
 #!/bin/bash
 exec /cygdrive/c/Python25/python ${1+"$@"}
-}}}
-This will tell the ssh program to look for python in C:\Python25. Note that /cygwin/c corresponds to C:\ so make sure that you put the appropriate address in the file 'python'.
+}}} 
+ This will tell the ssh program to look for python.exe in C:\Python25. Note that /cygwin/c corresponds to C:\ so make sure that you put the appropriate address in the file 'python'. Now you should be able to run python programs properly by SSHing into the windows machine. To run the interactive mode of python, type in python -i.
  
  1. '''Final Test:''' Go to a different machine and make sure you can use ssh to access the machine. The two windows machine name should be testbed-vista1.cs.washington.edu and testbed-xp2.cs.washington.edu
  1. '''Advanced Configuration:''' You can manually choose which users will have ssh access manually. To do this open up the exe file in C:\Program Files\MobaSSH. Hit the Users button on the right side of the panel and click on 'Selected users'. Once you have chosen all the users click on Restart button under the 'MobaSSH Service is running' on the left side of the panel. Any changes you made will not take place until you restart the MobaSSH service.
