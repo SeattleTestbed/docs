@@ -8,6 +8,8 @@ The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize 
 
 To start out, students will make the base framework of a !MapReduce application: a primary node that delegates a task to its workers (also called peers), and a single peer that takes the data given to it by the primary, performs a map pass and a reduce pass on the data, and eventually passes that data back to the primary for post-processing.  This assignment will require the need to implement a simple message-passing protocol, and abstract the functionality of the map() and reduce() methods.
 
+[wiki:SimpleMapReduceAssignment Simple MapReduce Assignment]
+
 == Stage 2: Implementation the partition method and using multiple nodes ==
 
 In the second stage of the project, students will work to increase the number of peers their system supports and will implement the partitioning algorithm to enable map data-passing between the !MapReduce peers during the shuffle phase. By implementing the partitioning method, the primary invariant of !MapReduce must be maintained at all times: all keys, no matter what their origin node, must be sent to the same reducer during the reducing stage. By adding the partition algorithm to the peers simple parallelism is achieved in this assignment.
