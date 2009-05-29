@@ -15,6 +15,7 @@ More detail on the use of !MapReduce is available from [http://labs.google.com/p
 [[BR]]
 [[BR]]
 -----
+'''These assignments are a work-in-progress, please e-mail our developer list for more information! '''
 [[TOC(inline)]]
 [[BR]]
 [[BR]]
@@ -22,7 +23,7 @@ More detail on the use of !MapReduce is available from [http://labs.google.com/p
 
 To start out, students will make the base framework of a !MapReduce application: a primary node that delegates a task to its workers (also called peers), and a single peer that takes the data given to it by the primary, performs a map pass and a reduce pass on the data, and eventually passes that data back to the primary for post-processing.  This assignment will require the need to implement a simple message-passing protocol, and abstract the functionality of the map() and reduce() methods.
 
-Sample Assignment: [wiki:SimpleMapReduceAssignment Simple MapReduce Assignment]
+Sample Assignment: [wiki:EducationalAssignments/SimpleMapReduce Simple MapReduce Assignment]
 
 == Stage 2: Adding partitioning and support for multiple worker nodes ==
 
