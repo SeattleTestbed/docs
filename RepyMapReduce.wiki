@@ -1,16 +1,30 @@
 = A !MapReduce service =
+The original !MapReduce framework was designed and developed by Google to support large-scale distributed computing on large amounts of closely-networked computers.  The main drive for the !MapReduce framework stem from the intrinsic benefits of functional programming, more specifically the map() and reduce() functions.
+
+There are 3 main steps in a !MapReduce run.
+
+ 1. Map step: data received by the worker is tossed into a map() function that will emit key-value pairs based on each aliquot of data.
+
+ 2. Partition (or shuffle) step: The generated key-value pairs from map() are hashed by its key to a particular worked and sent off.  If a key ends up on a particular work at the end of the partition phase, it is required that all other key-value pairs with the same key also be on the same host in order for the reduce step to work properly.
+
+ 3. Reduce step: The collected key-value pairs are collected into a key, value_1, value_2, ..., value_n list and can do computation to reduce the expanded data down to a useful conclusion.
+
+This computation can be performed on an arbitrary number of worker machines, making it scalable to nearly all sizes of computing clusters!  !MapReduce frameworks often have a primary node delegating tasks to workers, organizing and distributing the initial data, and acting as a mediator in fault situations.
+
+More detail on the use of !MapReduce is available from [http://labs.google.com/papers/!MapReduce.html the original Google paper] or an open-source implementation of !MapReduce in Java: [http://hadoop.apache.org/core/ Hadoop].
 [[BR]]
-== Introduction ==
-
-The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of !MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their !MapReduce service.  An example use of !MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one !MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple !MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
-
-== Stage 1: A simple message-passing protocol for data transfer ==
+[[BR]]
+-----
+[[TOC(inline)]]
+[[BR]]
+[[BR]]
+== Stage 1: A simple implementation of !MapReduce ==
 
 To start out, students will make the base framework of a !MapReduce application: a primary node that delegates a task to its workers (also called peers), and a single peer that takes the data given to it by the primary, performs a map pass and a reduce pass on the data, and eventually passes that data back to the primary for post-processing.  This assignment will require the need to implement a simple message-passing protocol, and abstract the functionality of the map() and reduce() methods.
 
-[wiki:SimpleMapReduceAssignment Simple MapReduce Assignment]
+Sample Assignment: [wiki:SimpleMapReduceAssignment Simple MapReduce Assignment]
 
-== Stage 2: Implementation the partition method and using multiple nodes ==
+== Stage 2: Adding partitioning and support for multiple worker nodes ==
 
 In the second stage of the project, students will work to increase the number of peers their system supports and will implement the partitioning algorithm to enable map data-passing between the !MapReduce peers during the shuffle phase. By implementing the partitioning method, the primary invariant of !MapReduce must be maintained at all times: all keys, no matter what their origin node, must be sent to the same reducer during the reducing stage. By adding the partition algorithm to the peers simple parallelism is achieved in this assignment.
 
