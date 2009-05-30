@@ -1,5 +1,5 @@
 = Building Base Installers =
-Explains how to go about building the base installers (everything you need to distribute the program except custom vessel information.
+Explains how to go about building the base installers (everything you need to distribute the program except custom vessel information).
 ----
 [[TOC(inline)]]
 ----
@@ -7,21 +7,22 @@ Explains how to go about building the base installers (everything you need to di
 == Sample Usage ==
 Running from trunk/dist directory: [[BR]]
 {{{
-python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey tempdir
+python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey outputdir [version]
 }}}
 ----
 [[BR]]
 == Step by Step ==
 ----
  1. Make sure you are operating on a Linux system.
- 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names inside of this folder, they will be overwritten without warning.
+ 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning.
  1. Navigate to the trunk/dist directory.
  1. Run the program (make_base_installers.py) with the following arguments:
-   1. Various flags that will modify the behavior of the program. Include "m" to create a mac installer, "l" to create a linux installer, "w" to create a windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported OSs, and/or "t" to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
+   1. Various flags that will modify the behavior of the program. Include "m" to create a Mac installer, "l" to create a Linux installer, "w" to create a Windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported Operating Systems, and "t" (optional) to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
    1. The path to trunk; for example, ".." if you are running from the dist directory.
    1. The path to the public key that the installation will eventually use to communicate with the software updater.
    1. The path to the private key that the installation will eventually use to communicate with the software updater.
    1. The path to the output directory that you wanted any created installers to end up in.
+   1. (Optional) The version of the installer which will be included in the installer name.
 [[BR]]
 == Using the base installers to test your code ==
 ----
