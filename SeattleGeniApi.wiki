@@ -2,42 +2,83 @@
 
 [[BR]]
 
-=== acquire_resources(num, type) ===
+=== acquire_resources(geni_user, num, type) ===
 ----
 
-Acquires num resources of type. Returns a list of nodeip:nmport:vesselid strings indicating which vessels were acquired.
+Given a geni_user, acquires num resources of type.
+
+Returns a dictionary of the form:
+      '''{success, acquired_list, explanation}'''
+      
+      '''success''' indicates whether resource removal was successful.
+
+      ''Not exactly sure where this info will come from yet.''[[BR]]
+      '''acquired_list''' is a list of strings, of the form ''node_ip:node_port:vesselid'' indicating which vessels were acquired.[[BR]]
+      '''explanation''' is an info string for the web view. XML-RPC clients can ignore this if desired.
+
 
 [[BR]]
-=== release_resources(which) ===
+=== release_resources(geni_user, which) ===
 ----
 
-Release resources associated with an account. If which is an empty list then it release all resources associated with an account.
+Release resources associated with an account. If which is an empty list then it release all resources associated with an account. Otherwise, it releases vessels within the list 'which'.
 
-=== get_resource_info() ===
+Returns a dictionary of the form:
+      '''{success, remove_explanation}'''
+      
+      '''success''' indicates whether resource removal was successful.[[BR]]
+      '''remove_explanation''' is an info string about the removal operation.
+[[BR]]
+=== get_resource_info(geni_user) ===
 ----
 
-Returns a list resources currently associated with this account.
+Returns a list of resources currently associated with this account.
+
+The return list is of the form:
+      '''[success, vessel1, vessel2, etc...]'''
+      
+      '''success''' indicates whether the operation was successful.[[BR]]
+      subsequent list elements are vessels associated with geni_user.
+
 
 [[BR]]
-=== get_account_info() ===
+=== get_account_info(geni_user) ===
 ----
 
 Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, and the user's affiliation.
 
+Returns a dictionary of the form:
+      '''{success, user_port, user_name, urlinstaller, privkey_exist, max_vessel, user_affiliation}'''
+
+      '''success''' indicates whether the operation was successful.
+
 
 [[BR]]
-=== get_public_key() ===
+=== get_public_key(geni_user) ===
 ----
 
 Returns the user's public key.
 
+Returns a dictionary of the form:
+      '''{success, pub_key}'''
+
+      '''success''' returns True if operation was successful. False otherwise.
+
 [[BR]]
-=== get_private_key() ===
+=== get_private_key(geni_user) ===
 ----
 
-Returns the user's private key.   Raises an exception if the key was removed.
+Returns the user's private key.
+
+Returns a dictionary of the form:
+      '''{success, priv_key}'''
+
+      '''success''' returns True if operation was successful. False if the key was already removed.
+
 
 [[BR]]
-=== delete_private_key() ===
+=== delete_private_key(geni_user) ===
 ----
 Removes the user's private key from the server.
+
+Returns True on successful deletion, False otherwise.
