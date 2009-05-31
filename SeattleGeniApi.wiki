@@ -6,16 +6,22 @@
 ----
 
 Given a geni_user, acquires num resources of type.
+Available types are 1: LAN, 2: WAN, 3: Random.
 
 Returns a list of the form:
       ''Not exactly sure where this info will come from yet.''[[BR]]
       ''node_ip:node_port:vesselid'' indicating which vessels were acquired.[[BR]]
+
+Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
+Raises a ''ValueError'' if '''num''' is negative, or if '''type''' is not between 1 and 3.
+
 [[BR]]
 === release_resources(geni_user, which) ===
 ----
 
-Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account. Otherwise, it releases vessels within the list '''which'''.
+Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account. Otherwise, it releases vessels based on the vessel_ids within the  '''which''' list.
 
+Raises a ''TypeError'' if the vessel_ids in the list aren't integer values.
 
 [[BR]]
 === get_resource_info(geni_user) ===
@@ -48,7 +54,9 @@ Returns the user's public key.
 === get_private_key(geni_user) ===
 ----
 
-Returns the user's private key. Raises an exception if the key was already removed.
+Returns the user's private key. 
+
+Raises an exception if the key was already removed.
 
 
 [[BR]]
