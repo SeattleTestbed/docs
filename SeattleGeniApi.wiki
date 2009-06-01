@@ -27,9 +27,9 @@ Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error
 === release_resources(geni_user, which) ===
 ----
 
-Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account. Otherwise, it releases vessels based on the vessel_ids within the  '''which''' list.
+Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account. Otherwise, it releases vessels based on the vmap_ids within the  '''which''' list.
 
-Raises a ''TypeError'' if the vessel_ids in the list aren't integer values.[[BR]]
+Raises a ''TypeError'' if the vmap_ids in the list aren't integer values.[[BR]]
 Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
