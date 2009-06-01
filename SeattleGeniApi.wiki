@@ -49,8 +49,13 @@ The return list is of the form:
 Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, and the user's affiliation.
 
 Returns a dictionary of the form:
-      '''{user_port, user_name, urlinstaller, privkey_exist, max_vessel, user_affiliation}'''
-
+      '''{'user_port':user_port, 'user_name':user_name, 'urlinstaller':urlinstaller, 'privkey_exist':privkey_exist, 'max_vessel':max_vessel, 'user_affiliation':user_affiliation}'''[[BR]]
+      ''user_port'' is an integer, indicating the user's port number.[[BR]]
+      ''user_name'' is a string.[[BR]]
+      ''urlinstaller'' is a string, the URL for installers.[[BR]]
+      ''privkey_exist'' is a boolean, determining whether the private key exists for this user. [[BR]]
+      ''max_vessel'' is an integer, indicating the total vessels allowed.[[BR]]
+      ''user_affiliation'' is a string.[[BR]]
 
 [[BR]]
 === get_public_key(geni_user) ===
