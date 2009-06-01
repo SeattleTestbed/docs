@@ -9,7 +9,7 @@ Given a geni_user, acquires num resources of type.
 Available types are 1: LAN, 2: WAN, 3: Random.
 
 Returns a list of strings, where the strings are of the form:
-      ''node_ip:node_port:vesselid'' [[BR]]
+      ''node_ip:node_port:vessel_id'' [[BR]]
       These strings indicate which vessels were acquired.[[BR]]
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
@@ -60,7 +60,7 @@ Returns the user's public key.
 
 Returns the user's private key. 
 
-Raises a ''GENI_KeyAlredyRemoved'' if the key was already removed.
+Raises a ''GENI_KeyAlreadyRemoved'' if the key was already removed.
 
 
 [[BR]]
