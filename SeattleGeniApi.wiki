@@ -9,7 +9,10 @@ Given a geni_user, acquires num resources of type.
 Available types are 1: LAN, 2: WAN, 3: Random.
 
 Returns a list of dictionaries, where the dicts are of the form:
-      '''{node_ip, node_port, vmap_id}'''[[BR]]
+      '''{'node_ip':ip, 'node_port':port, 'vmap_id':id}'''[[BR]]
+      ''ip'' is a string, containing the IP of the vessel.[[BR]]
+      ''port'' is an integer, representing the port on the vessel.[[BR]]
+      ''vmap_id'' is an integer, which uniquely identifies this vessel to its vessel mapping.[[BR]]
       Each dict contains info about each acquired vessel.[[BR]]
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
