@@ -8,12 +8,15 @@
 Given a geni_user, acquires num resources of type.
 Available types are 1: LAN, 2: WAN, 3: Random.
 
-Returns a list of the form:
-      ''Not exactly sure where this info will come from yet.''[[BR]]
-      ''node_ip:node_port:vesselid'' indicating which vessels were acquired.[[BR]]
+Returns a list of strings, where the strings are of the form:
+      ''node_ip:node_port:vesselid'' [[BR]]
+      These strings indicate which vessels were acquired.[[BR]]
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
-Raises a ''ValueError'' if '''num''' is negative, or if '''type''' is not between 1 and 3.
+Raises a ''ValueError'' if '''num''' is negative, or if '''type''' is not between 1 and 3.[[BR]]
+Raises a ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
+Raises a ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
+Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
 === release_resources(geni_user, which) ===
@@ -21,7 +24,8 @@ Raises a ''ValueError'' if '''num''' is negative, or if '''type''' is not betwee
 
 Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account. Otherwise, it releases vessels based on the vessel_ids within the  '''which''' list.
 
-Raises a ''TypeError'' if the vessel_ids in the list aren't integer values.
+Raises a ''TypeError'' if the vessel_ids in the list aren't integer values.[[BR]]
+Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
 === get_resource_info(geni_user) ===
@@ -56,7 +60,7 @@ Returns the user's public key.
 
 Returns the user's private key. 
 
-Raises an exception if the key was already removed.
+Raises a ''GENI_KeyAlredyRemoved'' if the key was already removed.
 
 
 [[BR]]
