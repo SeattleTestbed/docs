@@ -29,7 +29,7 @@ This page contains information useful to developers working on Seattle
  * Installation instructions
    * [SeattleDownload Download and installation instructions] for Seattle
    * [GeniInstallation Installation instructions] for the GENI portal
-   * [CustomizedInstaller Customized installer instructions]
+   * [CustomizedInstaller Using the Customized Installer]
 
  * API specifications for user-facing services
    * [wiki:SeattleGeniAPI Seattle-GENI XML-RPC API]
