@@ -5,12 +5,16 @@
 === acquire_resources(geni_user, rspec) ===
 ----
 
-Given a geni_user (a string that is the username used to log into SeattleGENI) and a resource specification (dict), this function acquires resources for the specified user.   There are currently three types of rspecs defined:
+Given a geni_user (a string that is the username used to log into SeattleGENI) and a resource specification as a dict (rspec), this function acquires resources for the specified user.   There are currently three types of rspecs defined:
 
+''{'rspec_type':'LAN', 'number_of_nodes':N}''[[BR]]  
+Returns N nodes all with the same starting three octects of the IP address.[[BR]]
 
-{'rspec_type':'LAN', 'number_of_nodes':N}   # returns N nodes all with the same starting three octects of the IP address
-{'rspec_type':'WAN', 'number_of_nodes':N}   # returns N nodes all with different starting three octects of the IP address
-{'rspec_type':'Random', 'number_of_nodes':N}   # returns N nodes
+''{'rspec_type':'WAN', 'number_of_nodes':N}''[[BR]] 
+Returns N nodes all with different starting three octects of the IP address.[[BR]]
+
+''{'rspec_type':'Random', 'number_of_nodes':N}''[[BR]]
+Returns N nodes.[[BR]]
 
 
 Returns a list of dictionaries, where the dicts are of the form:
@@ -19,7 +23,7 @@ Returns a list of dictionaries, where the dicts are of the form:
       ''port'' is an integer, representing the port used by the node manager.[[BR]]
       ''id'' is a string, which represents the vessel_id for the vessel (such as 'v21').[[BR]]
       ''node_id'' is the node id of the node (a public key string).[[BR]]
-      ''handle'' has an undefined type, but is used in future calls to release_resources.   ''Make no assumptions about the type of this item!''.[[BR]]
+      ''handle'' has an undefined type, but is used in future calls to release_resources. ''Make no assumptions about the type of this item.''[[BR]]
       Each dict contains info about each acquired vessel.[[BR]]
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
