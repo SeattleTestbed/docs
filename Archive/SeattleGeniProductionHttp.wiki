@@ -68,13 +68,6 @@ $ ps auwx | grep apache2 | grep -v grep
 
 
 [[BR]]
-== Apache Dependencies ==
-----
- * [mod_python http://www.modpython.org/] -- necessary for interfacing with Django code
- * [OpenSSL http://www.openssl.org/] -- necessary for https:// support
- * [Django http://www.djangoproject.com/] -- necessary to run Django code
-
-[[BR]]
 == Related ==
 -----
 
