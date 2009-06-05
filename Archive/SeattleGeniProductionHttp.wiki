@@ -58,4 +58,10 @@ You can check whether Apache is running by running the following command and mak
 
 {{{
 $ ps auwx | grep apache2 | grep -v grep
-}}}
+}}}
+
+[[BR]]
+== Related ==
+-----
+
+ * GeniInstallation -- Information about installing the GENI portal and dependencies from scratch.
