@@ -18,17 +18,17 @@ Returns N nodes.[[BR]]
 
 
 Returns a list of dictionaries, where the dicts are of the form:
-      '''{'node_ip':ip, 'node_port':port, 'vessel_id':vessel_id, 'node_id':node_id, 'handle':handle}'''[[BR]]
-      ''ip'' is a string, containing the IP or other identifying information of the node manager.[[BR]]
-      ''port'' is an integer, representing the port used by the node manager.[[BR]]
-      ''id'' is a string, which represents the vessel_id for the vessel (such as 'v21').[[BR]]
+      '''{'node_ip':node_ip, 'node_port':node_port, 'vessel_id':vessel_id, 'node_id':node_id, 'handle':handle}'''[[BR]]
+      ''node_ip'' is a string, containing the IP or other identifying information of the node manager.[[BR]]
+      ''node_port'' is an integer, representing the port used by the node manager.[[BR]]
+      ''vessel_id'' is a string, which represents the vessel_id for the vessel (such as 'v21').[[BR]]
       ''node_id'' is the node id of the node (a public key string).[[BR]]
       ''handle'' has an undefined type, but is used in future calls to release_resources. ''Make no assumptions about the type of this item.''[[BR]]
       Each dict contains info about each acquired vessel.[[BR]]
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
 Raises a ''ValueError'' if '''rspec''' is not of an understood type.[[BR]]
-Raises a ''GENI_NotEnoughCredits'' if the user doesn't have enough creditsto acquire '''num''' vessels.   '''JAC: I don't like the word Credits here and will likely want to change it'''[[BR]]
+Raises a ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
 Raises a ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
 Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
@@ -36,9 +36,9 @@ Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error
 === release_resources(geni_user, list_of_handles) ===
 ----
 
-Release resources associated with an account. If '''which''' is an empty list then it releases all resources associated with an account '''why?'''. Otherwise, it releases vessels based on the handles within the  '''which''' list.
+Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
 
-Raises a ''TypeError'' if the list_of_handles aren't integer values or valid.[[BR]]
+Raises a ''TypeError'' if the '''list_of_handles''' aren't integer values or valid.[[BR]]
 Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
@@ -47,7 +47,7 @@ Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error
 
 Returns a list of resources currently associated with geni_user.
 
-The return list is of the same form as returned by acquire_resources
+The return list is of the same form as returned by acquire_resources.
 
 
 
