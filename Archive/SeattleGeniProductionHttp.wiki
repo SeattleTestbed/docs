@@ -1,8 +1,14 @@
 = Geni HTTP =
 
-The GENI portal runs on Apache and uses mod_python to interface with django.
+The GENI portal runs on Apache and uses mod_python to interface with django. This page describes how to restart the service, make sure that its running, deploy it, etc.
 
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
 == Settings ==
+----
 
 The Apache settings can all be found in /etc/apache2/.
 
@@ -10,7 +16,9 @@ The primary configuration file (that specific the django path, and URL mappings,
 
 Note that the GENI site uses a SSL certificate and uses https:// (port 443) for all URLs that map into the GENI portal.
 
+[[BR]]
 == Django setup ==
+----
 
 The GENI django code is currently hard-coded in Apache config file 000-default to live in /home/geni/geni_production/. The Django settings module must have the path geni_private.settings. Typically the directory layout used by Django is the following:
 
@@ -24,12 +32,15 @@ The GENI django code is currently hard-coded in Apache config file 000-default t
  |-- __init__.py               <-- blank file enabling import of geni.*
 }}}
 
+[[BR]]
 == Dependencies ==
-
+----
  * mod_python -- necessary for interfacing with Django code
  * OpenSSL -- necessary for https:// support
 
+[[BR]]
 == Starting/Stopping/Restarting ==
+----
 
 Log into seattlegeni.cs as root or run the following commands as sudo to start/stop/restart apache:
 
@@ -38,4 +49,14 @@ To start apache
 $ /etc/init.d/apache2 start
 $ /etc/init.d/apache2 stop
 $ /etc/init.d/apache2 restart
+}}}
+
+[[BR]]
+== Making sure that its running ==
+----
+
+You can check whether Apache is running by running the following command and making sure that you see entries for '/usr/sbin/apache2 -k start'
+
+{{{
+$ ps auwx | grep apache2 | grep -v grep
 }}}
