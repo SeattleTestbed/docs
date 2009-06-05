@@ -2,6 +2,9 @@
 
 The GENI portal runs on Apache and uses mod_python to interface with django. This page describes how to restart the service, make sure that its running, deploy it, etc.
 
+ * For info on installing the necessary software to run GENI, see GeniInstallation.
+ * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
+
 ----
 [[TOC(inline)]]
 ----
@@ -65,10 +68,3 @@ You can check whether Apache is running by running the following command and mak
 {{{
 $ ps auwx | grep apache2 | grep -v grep
 }}}
-
-
-[[BR]]
-== Related ==
------
-
- * GeniInstallation -- Information about installing the GENI portal and dependencies from scratch.
