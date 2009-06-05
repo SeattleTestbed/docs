@@ -16,12 +16,12 @@ The GENI django code is currently hard-coded in Apache config file 000-default t
 
 {{{
 /home/geni/
-  |
-  |--- /home/geni/geni/          <--- contains the geni portal code deployed using /trunk/www/geni/deploy_geni.py
-  |
-  |--- /home/geni/geni_private/  <--- contains settings.py
-  |
-  |--- __init__.py               <--- blank file enabling import of geni.*
+ |
+ |-- /home/geni/geni/          <-- GENI portal code deployed with /trunk/www/geni/deploy_geni.py
+ |
+ |-- /home/geni/geni_private/  <-- contains settings.py
+ |
+ |-- __init__.py               <-- blank file enabling import of geni.*
 }}}
 
 == Dependencies ==
