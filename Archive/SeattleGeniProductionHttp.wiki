@@ -22,23 +22,29 @@ Note that the GENI site uses a SSL certificate and uses https:// (port 443) for 
 The GENI django code is currently hard-coded in Apache config file 000-default to live in /home/geni/geni_production/. The Django settings module must have the path geni_private.settings. Typically the directory layout used by Django is the following:
 
 {{{
-/home/geni/
+/home/geni_production/
  |
- |-- /home/geni/geni/          <-- GENI portal code deployed with /trunk/www/geni/deploy_geni.py
+ |-- /home/geni_production/geni/          <-- GENI code deployed with /trunk/www/geni/deploy_geni.py
  |
- |-- /home/geni/geni_private/  <-- contains settings.py
+ |-- /home/geni_production/geni_private/  <-- contains settings.py
  |
- |-- __init__.py               <-- blank file enabling import of geni.*
+ |-- __init__.py                          <-- blank file enabling import of geni.*
 }}}
 
 [[BR]]
-== Dependencies ==
+== Deploying Django code ==
 ----
- * mod_python -- necessary for interfacing with Django code
- * OpenSSL -- necessary for https:// support
+
+To deploy django code into production, first run the /trunk/www/geni/deploy_geni.py script from Seattle SVN. Assuming that the GENI trunk is checked out into ~/trunk/ then the following command will deploy the GENI portal from ~/trunk/ into /home/geni_production/geni/ -- where Apache will find the code.
+
+{{{
+$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && ~/trunk/www/geni/deploy_geni.py /home/geni/geni_production/geni ~/trunk/
+}}}
+
+Second, you '''must''' restart Apache in order for the deployment to take effect (see next section below).
 
 [[BR]]
-== Starting/Stopping/Restarting ==
+== Starting/Stopping/Restarting Apache ==
 ----
 
 Log into seattlegeni.cs as root or run the following commands as sudo to start/stop/restart apache:
@@ -59,6 +65,14 @@ You can check whether Apache is running by running the following command and mak
 {{{
 $ ps auwx | grep apache2 | grep -v grep
 }}}
+
+
+[[BR]]
+== Apache Dependencies ==
+----
+ * [mod_python http://www.modpython.org/] -- necessary for interfacing with Django code
+ * [OpenSSL http://www.openssl.org/] -- necessary for https:// support
+ * [Django http://www.djangoproject.com/] -- necessary to run Django code
 
 [[BR]]
 == Related ==
