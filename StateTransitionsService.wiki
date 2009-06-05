@@ -38,6 +38,7 @@ $ export PYTHONPATH=$PYTHONPATH:~/trunk/ && deploy_state_transitions.py /home/ge
 The daemons are run from the command line without any arguments. You must run them from within their directory (e.g. /home/geni/node_state_transitions/). Here is the command for running each of the different type of transition scripts:
 
  * donationtocanonical:
+
 {{{
 $ python donationtocanonical.py
 }}}
