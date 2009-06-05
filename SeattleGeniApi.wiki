@@ -38,7 +38,7 @@ Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error
 
 Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
 
-Raises a ''TypeError'' if the '''list_of_handles''' aren't integer values or valid.[[BR]]
+Raises a ''TypeError'' if the '''list_of_handles''' are of invalid form.[[BR]]
 Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
