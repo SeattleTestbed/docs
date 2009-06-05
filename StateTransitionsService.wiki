@@ -19,16 +19,47 @@ Each state transition daemon is a python script that runs '''all the time'''. Th
 == Configuration ==
 ----
 
+The state transition scripts on seattlegeni.cs are deployed in /home/geni/node_state_transitions/
+
 [[BR]]
 == Deploying the daemons ==
 ----
 
+To deploy the state transition scripts into /home/geni/node_state_transitions/ from the Seattle trunk that is assumed to have been checked out in ~/trunk/, do the following ('''warning''' : the destination directory will be overwritten) :
+
+{{{
+$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && deploy_state_transitions.py /home/geni/node_state_transitions/
+}}}
 
 [[BR]]
 == Starting/Stopping the daemons ==
 ----
 
+The daemons are run from the command line without any arguments. You must run them from within their directory (e.g. /home/geni/node_state_transitions/). Here is the command for running each of the different type of transition scripts:
+
+* donationtocanonical:
+{{{
+$ python donationtocanonical.py
+}}}
+
+* canonicaltoonepercent:
+
+{{{
+$ python canonicaltoonepercent_manyevents.py
+}}}
+
+* onepercenttoonepercent:
+
+{{{
+$ python onepercenttoonepercent_manyevents.py
+}}}
+
 [[BR]]
 == Making sure that the daemons are running ==
 ----
 
+To test if these scripts are running, you can run the following command and check that each of the transition scripts listed above appears in the output:
+
+{{{
+$ ps auwx | grep python | grep -v grep
+}}}
