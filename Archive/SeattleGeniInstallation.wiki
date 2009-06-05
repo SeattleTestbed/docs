@@ -4,14 +4,13 @@ This document explains how to do a fresh install of the GENI portal on
 a new machine that is running a Debian-like Linux operating system,
 such as Ubuntu.
 
-For information on how to deploy geni once you go through this tutorial, see [wiki:GENIPortalTesting].
+ * For info on deploying the production GENI code and for starting/restarting Apache, see ProductionGeniHTTPService
+ * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
 
 ----
 [[TOC(inline)]]
 ----
 
-
-[[BR]]
 == Dependencies ==
 ----
  * [http://www.apache.org/ Apache] -- the web server
