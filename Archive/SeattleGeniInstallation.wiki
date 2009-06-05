@@ -10,6 +10,17 @@ For information on how to deploy geni once you go through this tutorial, see [wi
 [[TOC(inline)]]
 ----
 
+
+[[BR]]
+== Dependencies ==
+----
+ * [http://www.apache.org/ Apache] -- the web server
+ * [http://www.mysql.com/ MySQL] -- the database
+ * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://www.openssl.org/ OpenSSL] -- necessary for https:// support
+ * [http://www.djangoproject.com/ Django] -- necessary to run Django code
+
+
 [[BR]]
 == Install Apache and !MySql ==
 ----
