@@ -6,7 +6,6 @@ The Centralized Advertise daemon implements a centralized DHT. This DHT is used 
 [[TOC(inline)]]
 ----
 
-[[BR]]
 == Configuration ==
 ----
 
