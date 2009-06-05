@@ -1,20 +1,50 @@
 = Trac Service =
 
-Seattle runs Trac v11.1.
+Seattle runs Trac v11.1. This page describes how to install Trac, how to configure it, what plugins our Trac installation includes, etc.
 
-= Dependencies =
+----
+[[TOC(inline)]]
+----
 
-= Installation =
+== Dependencies ==
+----
 
+ * [http://trac.edgewall.org/ Trac] -- the beast
+   * [http://trac.edgewall.org/wiki/TracInstall Trac Dependencies]
+
+
+[[BR]]
 == Trac installation ==
+----
 
-== Plugin Installation ==
+See [http://trac.edgewall.org/wiki/TracInstall Trac installation] instructions for how to install Trac.
 
-= Permissions =
+[[BR]]
+== Configuration ==
+----
 
-= Plugins =
+Our Seattle Trac is installed in /var/local/trac/seattle/
 
-Trac is highly extensible. Our installation includes the following Plugins:
+The /var/local/trac/seattle/conf/trac.ini file is the main configuration file for Trac. Modify this file if you want to enable/disable critical options in Trac, such as the title text, the svn repository path, tickets configuration, etc.
+
+
+[[BR]]
+== Administration ==
+----
+
+If you log into Trac with an account that has admin priveliges. You will see an ''Admin'' tab on the left hand side. From this Admin page you can add new users, modify components (for Tickets), and perform numerous other actions.
+
+
+[[BR]]
+== Plugins ==
+----
+
+Trac is highly extensible. Numerous plug-ins for Trac can be found on the [http://trac-hacks.org/ Trac Hacks] website. Most of these plug-ins require root permission to install on seattle.cs.
+
+Enabling/Disabling a plug-in requires making modifications to the /var/local/trac/seattle/conf/trac.ini file.
+
+Our installation includes the following Plugins:
+
 || Plugin              || Version        || Enabled? || Purpose ||
 || NavAdd              || 0.1            || Y        || For adding navigation items into one of the navigation bars. ||
 || TracAccountManager  || 0.2.1dev-r3857 || Y        || User account management from the browser. ||
