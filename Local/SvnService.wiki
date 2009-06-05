@@ -1,4 +1,4 @@
-= Seattle SVN Repository
+= Seattle SVN Repository =
 
 Our project uses SVN for our version control. This page describes our configuration.
 
