@@ -8,7 +8,6 @@ GENI uses the MySQL database, and InnoDB table types.
 [[TOC(inline)]]
 ----
 
-[[BR]]
 == Configuration ==
 ----
 
