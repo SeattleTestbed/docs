@@ -6,7 +6,6 @@ The GENI portal runs on Apache and uses mod_python to interface with django. Thi
 [[TOC(inline)]]
 ----
 
-[[BR]]
 == Settings ==
 ----
 
