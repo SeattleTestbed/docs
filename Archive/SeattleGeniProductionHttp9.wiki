@@ -1,0 +1,69 @@
+= Geni HTTP =
+
+The GENI portal runs on Apache and uses mod_python to interface with django. This page describes how to restart the service, make sure that its running, deploy it, etc.
+
+ * For info on installing the necessary software to run GENI, see GeniInstallation.
+ * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
+
+----
+[[TOC(inline)]]
+----
+
+== Settings ==
+----
+
+The Apache settings can all be found in /etc/apache2/.
+
+The primary configuration file (that specific the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
+
+Note that the GENI site uses a SSL certificate and uses https:// (port 443) for all URLs that map into the GENI portal.
+
+[[BR]]
+== Django setup ==
+----
+
+The GENI django code is currently hard-coded in Apache config file 000-default to live in /home/geni/geni_production/. The Django settings module must have the path geni_private.settings. Typically the directory layout used by Django is the following:
+
+{{{
+/home/geni_production/
+ |
+ |-- /home/geni_production/geni/          <-- GENI code deployed with /trunk/www/geni/deploy_geni.py
+ |
+ |-- /home/geni_production/geni_private/  <-- contains settings.py
+ |
+ |-- __init__.py                          <-- blank file enabling import of geni.*
+}}}
+
+[[BR]]
+== Deploying Django code ==
+----
+
+To deploy django code into production, first run the /trunk/www/geni/deploy_geni.py script from Seattle SVN. Assuming that the GENI trunk is checked out into ~/trunk/ then the following command will deploy the GENI portal from ~/trunk/ into /home/geni_production/geni/ -- where Apache will find the code.
+
+{{{
+$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && ~/trunk/www/geni/deploy_geni.py /home/geni/geni_production/geni ~/trunk/
+}}}
+
+Second, you '''must''' restart Apache in order for the deployment to take effect (see next section below).
+
+[[BR]]
+== Starting/Stopping/Restarting Apache ==
+----
+
+Log into seattlegeni.cs as root or run the following commands as sudo to start/stop/restart apache:
+
+{{{
+$ /etc/init.d/apache2 start
+$ /etc/init.d/apache2 stop
+$ /etc/init.d/apache2 restart
+}}}
+
+[[BR]]
+== Making sure that its running ==
+----
+
+You can check whether Apache is running by running the following command and making sure that you see entries for '/usr/sbin/apache2 -k start'
+
+{{{
+$ ps auwx | grep apache2 | grep -v grep
+}}}
