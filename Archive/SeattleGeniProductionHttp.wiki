@@ -52,7 +52,6 @@ Second, you '''must''' restart Apache in order for the deployment to take effect
 
 Log into seattlegeni.cs as root or run the following commands as sudo to start/stop/restart apache:
 
-To start apache
 {{{
 $ /etc/init.d/apache2 start
 $ /etc/init.d/apache2 stop
