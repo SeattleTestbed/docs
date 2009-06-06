@@ -451,7 +451,7 @@ True
 #!python
 x = 10
 y = 20
-[x, y] = [x, y]
+[x, y] = [y, x]
 
 Result: 
 x = 20, y =10
