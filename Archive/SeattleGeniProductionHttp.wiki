@@ -41,7 +41,7 @@ The GENI django code is currently hard-coded in Apache config file 000-default t
 To deploy django code into production, first run the /trunk/www/geni/deploy_geni.py script from Seattle SVN. Assuming that the GENI trunk is checked out into ~/trunk/ then the following command will deploy the GENI portal from ~/trunk/ into /home/geni_production/geni/ -- where Apache will find the code.
 
 {{{
-$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && ~/trunk/www/geni/deploy_geni.py /home/geni/geni_production/geni ~/trunk/
+$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && python ~/trunk/www/deploy_geni.py /home/geni/geni_production/geni ~/trunk/
 }}}
 
 Second, you '''must''' restart Apache in order for the deployment to take effect (see next section below).
