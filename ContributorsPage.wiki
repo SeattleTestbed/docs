@@ -39,6 +39,7 @@ This page contains information useful to developers working on Seattle
  * Deployment
    * [BaseInstallers Building] the base installers
    * [VersionDeployment Deploying] a new version
+   * [ProductionGeniHTTPService Updating] the production SeattleGENI code
 
  * Project Resources
    * [SeattleResources A full listing of Seattle project services]
