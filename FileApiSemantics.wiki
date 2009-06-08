@@ -9,3 +9,77 @@
 ----
 
 This page is designed to specify, in detail, the behavior of File API calls under various circumstances.  For each call a list of argument and behavioral semantics is provided, along with a snippet of test code that shows how each case is verified -- hopefully in much the same style as the NetworkApiSemantics page.
+
+
+----
+
+
+
+[[BR]]
+== fobj.close() ==
+----
+
+=== Interacts with: ===
+
+All fobj methods that require a file to be open.
+
+=== Argument Semantics: ===
+
+None.
+
+=== Behavioral Semantics: ===
+
+1
+
+Action: Close is called on an open file object.
+
+Result: The file obj is closed. Read and write operations can no longer be performed.
+
+(tested - fobj_close_basic.py)
+Test Snippet:
+
+{{{
+
+fobj = open(filename)
+fobj.close()
+try:
+  fobj.read(1)
+except:
+  pass
+else:
+  test_fail()
+
+}}}
+
+2
+
+Action: Close is called on an allready closed file object.
+
+Result: False is returned, no exception occurs.
+
+(tested - fobj_close_duplicate.py)
+
+Test Snippet:
+
+{{{
+
+fobj = open(filename)
+fobj.close()
+fobj.close()
+
+}}}
+
+3
+
+Action: Close is called and the attempts are made to read or write from the file.
+
+Result: An exception occurs.
+
+(tested under other file_object methods)
+
+----
+[[BR]]
+== fobj.flush() ==
+----
+
+TODO.
