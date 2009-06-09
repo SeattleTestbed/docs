@@ -39,7 +39,6 @@ Result: The file obj is closed. Read and write operations can no longer be perfo
 Test Snippet:
 
 {{{
-
 fobj = open(filename)
 fobj.close()
 try:
@@ -48,7 +47,6 @@ except:
   pass
 else:
   test_fail()
-
 }}}
 
 2
@@ -62,11 +60,9 @@ Result: False is returned, no exception occurs.
 Test Snippet:
 
 {{{
-
 fobj = open(filename)
 fobj.close()
 fobj.close()
-
 }}}
 
 3
@@ -81,5 +77,193 @@ Result: An exception occurs.
 [[BR]]
 == fobj.flush() ==
 ----
+
+=== Interacts with: ===
+
+All fobj methods that write data into a file.
+
+=== Argument Semantics: ===
+
+None.
+
+=== Behavioral Semantics: ===
+
+1
+
+Action: flush is called on a file object in read-only mode
+Result: noop
+(tested - file_obj_flush_read_only.py)
+
+Test Snippet:
+
+{{{
+fobj = open(filename,'r')
+fobj.flush()
+}}}
+
+2
+
+Action: flush is called on a file object that has write capability
+Result: Buffers are written to disk.
+(tested - file_obj_flush_write.py)
+
+Test Snippet:
+
+{{{
+fobj = open(filename,mode)
+fobj.write(num)
+fobj.flush()
+reader = open(filename,'r')
+if reader.read(1) != num:
+  print ' write did not flush to disk on mode: '+mode
+}}}
+
+----
+[[BR]]
+== fobj.next() ==
+----
+
+=== Interacts With: ===
+
+fobj.close()
+fobj.read()
+fobj.readline()
+fobj.readlines()
+
+NOTE: using next() in combination with other read methods such as read, readline, or readlines, is not recommended and results in undefined behavior (do we want this?).
+
+=== Argument Semantics: ===
+
+None.
+
+=== Behavioral Semantics: ===
+
+NOTE: behavior of fobj.next() is undefined when the fobj is open for writing. All cases here assume the file is open read-only unless otherwise stated.
+
+1
+
+Action: next is called on a file object to get each line of the file, then next is called one additional time.
+
+Result: Each line of the file is returned. When the additional call to next is made an exception is thrown.
+(tested - fobj_next_forloop.py)
+
+Test Snippet:
+
+{{{
+fobj = open(filename)
+for line in fobj:
+  #process each line
+  try:
+    fobj.next()
+  except:
+    pass
+  else:
+    fail('no exception')
+}}}
+
+2
+
+Action: A fileobj is used as its own iterator in a for loop.
+
+Result: Each line of the file is returned. An additional call to next outside of the for loop results in an exception.
+(tested - fobj_next_linebyline.py)
+
+Test Snippet:
+
+{{{
+fobj = open(filename)
+for i in range(FILE_LENGTH):
+  line = fobj.next()
+  #process each line
+  try:
+    fobj.next()
+  except:
+    pass
+  else:
+    fail('no exception')
+}}}
+
+----
+[[BR]]
+== fobj.read(*args) ==
+----
+
+=== Interacts With: ===
+
+TODO.
+
+=== Argument Semantics: ===
+
+TODO.
+
+=== Behavioral Semantics: ===
+
+TODO.
+
+----
+[[BR]]
+== fobj.readline(*args) ==
+----
+
+=== Interacts With: ===
+
+TODO.
+
+=== Argument Semantics: ===
+
+TODO.
+
+=== Behavioral Semantics: ===
+
+TODO.
+
+----
+[[BR]]
+== fobj.readlines(*args) ==
+----
+
+=== Interacts With: ===
+
+TODO.
+
+=== Argument Semantics: ===
+
+TODO.
+
+=== Behavioral Semantics: ===
+
+TODO.
+
+----
+[[BR]]
+== fobj.write(text) ==
+----
+
+=== Interacts With: ===
+
+TODO.
+
+=== Argument Semantics: ===
+
+TODO.
+
+=== Behavioral Semantics: ===
+
+TODO.
+
+----
+[[BR]]
+== fobj.writelines(lines) ==
+----
+
+=== Interacts With: ===
+
+TODO.
+
+=== Argument Semantics: ===
+
+TODO.
+
+=== Behavioral Semantics: ===
 
 TODO.
