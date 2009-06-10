@@ -1,5 +1,7 @@
 = File API call semantics = 
 
+Note: This is a working draft, and may be incomplete or incorrect in some places.
+
 ----
 [[TOC(inline)]]
 ----
