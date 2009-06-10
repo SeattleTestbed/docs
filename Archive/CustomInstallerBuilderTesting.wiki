@@ -2,9 +2,6 @@
 
 This page describes how you run a customized installer test server. It makes the assumption that you are attempting to do so on the seattle.cs machine.
 
-----
-[[TOC(inline)]]
-----
 
 [[BR]]
 == Running Customized Installer Test Server ==
@@ -56,3 +53,4 @@ Quit the server with CONTROL-C.
 }}}
 
  * '''Step 6:''' Note that the settings file remaps customized installer's URL_PREFIX. This means that you should use http://128.208.3.86:8090/web_installers_dev/customized_installer/ for accessing your test server.
+
