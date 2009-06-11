@@ -138,6 +138,8 @@ None.
 
 === Behavioral Semantics: ===
 
+StopIteration is raised when EOF is hit.
+
 1
 
 Action: next() is called on a file object that is opened for writing.
@@ -191,12 +193,12 @@ fobj = open(filename)
 for i in range(FILE_LENGTH):
   line = fobj.next()
   #process each line
-  try:
-    fobj.next()
-  except:
-    pass
-  else:
-    fail('no exception')
+try:
+  fobj.next()
+except:
+  pass
+else:
+  fail('no exception')
 }}}
 
 ----
