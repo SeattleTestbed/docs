@@ -220,8 +220,17 @@ put them into a list and print the list on the console
 (or write the list out to an output file). 
 Then, you can run some script to parse the output from
 {{{dump.repy}}} and verify the correctness of your 
-implementation. You can write the script in pure Python, 
-since one useful method {{{eval()}}} is not supported in Repy. 
+implementation. You may want to use the pickle module in the 
+standard library for repy so that you can easily write and read
+objects from disk.
+
+Once your code works in LAN environments, test it in WAN environments.   
+You may notice errors due to non-transitive connectivity.   In order to
+get around this problem, your Chord implementation should route messages
+through other nodes in your leafset when you have continued communications
+failures.   You should design and test a heuristic for determining when to
+route messages through an intermediary and describe this in your design
+document.
 
 [[BR]]
 = What to turn in? =
