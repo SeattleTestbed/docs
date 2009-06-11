@@ -1,0 +1,80 @@
+= Seattle Black Box Tests =
+
+----
+[[TOC(inline)]]
+----
+
+== Overview ==
+----
+
+Blackbox tests or integration tests are intended to test large portions of the Seattle system end-to-end.
+
+[[BR]]
+== Configuration ==
+----
+
+ * Seattle blackbox tests live on blackbox.cs in /home/integrationtester/cron_tests/
+ * The tests run as the integrationtester user on a cron schedule scheduled by the user cron of the integrationtester user
+ * The test logs are written to /home/integrationtester/cron_logs/
+
+[[BR]]
+== centralizedputget Test ==
+----
+
+=== Purpose ===
+Attempt to put a (k,v) into our centralized hash table and then get it back. On error send an email to some folks.
+
+=== Deployment ===
+To deploy centralizedputget, run the deploy_centralizedputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run centralizedputget once an hour. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the centralizedputget script. Run preparetest.py on this new folder. Then copy over the file deploy_centralizedputget.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_centralizedputget script using the following line:
+{{{
+python deploy_centralizedputget.py -c <target_folder> <target_log_folder>
+}}}
+<target_log_folder> is the folder where you want the logs from the centralizedputget script to be stored.
+
+=== Schedule ===
+This script runs once an hour. The current crontab line on blackbox looks like:
+{{{
+0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/centralizedputget.py > /home/integrationtester/deploy_test/cron_log.centralizedputget
+}}}
+
+[[BR]]
+== opendhtputget Test ==
+----
+
+=== Purpose ===
+Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
+
+=== Deployment ===
+To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on this new folder. Then copy over the file deploy_opendhtputget.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_opendhtputget script using the following line:
+{{{
+python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
+}}}
+<target_log_folder> is the folder where you want the logs from the opendhtputget script to be stored.
+
+=== Schedule ===
+This script runs once an hour. The current crontab line on blackbox looks like:
+{{{
+30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
+}}}
+
+[[BR]]
+== downloadandinstallseattle Test ==
+----
+
+=== Purpose ===
+Download, install and check the resulting Seattle installation for correct state (onepercent state).
+
+=== Deployment ===
+To deploy downloadandinstallseattle, run the deploy_downloadandinstallseattle.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run downloadandinstallseattle once a day. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the downloadandinstallseattle script. Run preparetest.py on this new folder. Then copy over the file deploy_downloadandinstallseattle.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_downloadandinstallseattle script using the following line:
+{{{
+python deploy_downloadandinstallseattle.py -c <target_folder> <target_log_folder>
+}}}
+<target_log_folder> is the folder where you want the logs from the downloadandinstallseattle script to be stored.
+
+=== Schedule ===
+This script runs once a day. The current crontab line on blackbox looks like:
+{{{
+15 16 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/downloadandinstallseattle.py > /home/integrationtester/deploy_test/cron_log.downloadandinstallseattle
+}}}
+
+
