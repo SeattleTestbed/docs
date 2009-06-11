@@ -21,17 +21,15 @@ The following set of assignments have complete descriptions, and have fully docu
 
  * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
 
+ * The [ChordAssignment Distributed Hash Table Assignment] has students build a peer-to-peer routing layer.   Students begin by building an implementation of the popular DHT Chord.   This will work well for routing messages over LAN topologies, but will fail in many WAN scenarios due to non-transitive connectivity.   Students then use one-hop detour routing to route around failures.
+
+
 [[BR]]
 == Other Assignment Ideas ==
 ----
 A more complex set of assignments can also be designed for use with Seattle. The following assignment ideas are intended to show the scope of assignments Seattle can support.
 
 
- * [ChordAssignment Chord-like DHT and Examining Non-Transitive Connectivity]
-
-    For this assignment the students first implement a DHT-like message routing system based on Chord, and test their implementations on local Seattle resources. The students then run their code on globally distributed Seattle resources. Chord works well over LAN, but has performance and correctness problems in a global scale deployment with non-transitive connectivity. After explaining the reasons behind Chord's poor performance, the instructor can have the class discuss solutions to these problems. Students can then implement these solutions to achieve better performance and reliability. Our Seattle Chord implementation is approximately 300 lines of code (existing Chord implementations in C++ and Java are many thousands of lines of code).
-
-    This assignment reinforces several important ideas. First, the students will reuse their implementation, which emphasizes good software engineering practices. Second, the assignment demonstrates that test and deployment environments may differ significantly. Third, students will hone their debugging skills as they attempt to understand why their "correct code" does not work in a global deployment. Fourth, by creating their implementation from scratch, and motivated by a real problem, students can arrive at unique solutions. Lastly, the instructor can easily evaluate student implementations using a small set of metrics.
 
  * Dynamic Resource Acquisition
 
