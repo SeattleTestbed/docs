@@ -162,7 +162,7 @@ else:
 
 Action: next is called on a file object to get each line of the file, then next is called one additional time.
 
-Result: Each line of the file is returned. When the additional call to next is made an exception is thrown.
+Result: Each line of the file is returned. When the additional call to next is made a StopIteration exception is thrown.
 (tested - fobj_next_forloop.py)
 
 Test Snippet:
@@ -173,7 +173,7 @@ for line in fobj:
   #process each line
   try:
     fobj.next()
-  except:
+  except StopIteration:
     pass
   else:
     fail('no exception')
@@ -183,7 +183,7 @@ for line in fobj:
 
 Action: A fileobj is used as its own iterator in a for loop.
 
-Result: Each line of the file is returned. An additional call to next outside of the for loop results in an exception.
+Result: Each line of the file is returned. An additional call to next outside of the for loop results in a StopIteration exception.
 (tested - fobj_next_linebyline.py)
 
 Test Snippet:
@@ -195,7 +195,7 @@ for i in range(FILE_LENGTH):
   #process each line
 try:
   fobj.next()
-except:
+except StopIteration:
   pass
 else:
   fail('no exception')
@@ -212,6 +212,8 @@ fobj.close()
 fobj.next()
 fobj.readline()
 fobj.readlines()
+fobj.write(text)
+fobj.writelines(lines)
 
 === Argument Semantics: ===
 
@@ -219,9 +221,24 @@ Takes one argument (length to read). If that argument is omitted or a negative i
 
 === Behavioral Semantics: ===
 
-Note: read() expects the file to be open; all test snippets after this assume the file has not had close() called on it yet.
-
 1
+
+Action: read() is called on a file object that is closed.
+
+Result: A ValueError exception is thrown.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.read()
+except ValueError:
+  pass
+}}}
+
+2
 
 Action: read() is called on a file object that is newly opened with no argument or a negative argument.
 
@@ -236,7 +253,7 @@ fobj.seek(0)
 fobj.read(-1)
 }}}
 
-2
+3
 
 Action: read() is called with a positive 'len' argument.
 
@@ -251,7 +268,7 @@ if len(str) > 5:
   fail("fobj.read() should read no more than len bytes!")
 }}}
 
-3
+4
 
 Action: read() is called with a len argument that is not an integer at all.
 
@@ -277,15 +294,65 @@ for arg in [3.0, "hi"]:
 
 === Interacts With: ===
 
-TODO.
+fobj.close()
+fobj.next()
+fobj.read(*args)
+fobj.readlines(*args)
+fobj.write(text)
+fobj.writelines(lines)
 
 === Argument Semantics: ===
 
-TODO.
+Optional non-negative integer argument 'size' limits the number of bytes to return.
 
 === Behavioral Semantics: ===
 
-TODO.
+1
+
+Action: User calls readline on a closed file.
+
+Result: ValueError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.read()
+except ValueError:
+  pass
+}}}
+
+2
+
+Action: User calls readline with no argument or a negative argument.
+
+Result: The next line is returned in its entirety. (Lines are LF-delimited.)
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+line = fobj.readline()
+if len(line) > 0 and not line.endswith("\n"):
+  fail("readline() with no arguments should return an entire line")
+}}}
+
+3
+
+Action: User calls readline with a positive integer argument.
+
+Result: The next line is returned in its entirety if its length (including trailing newline) is shorter than or equal to the integer passed.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+line = fobj.readline(5)
+if len(line) > 5:
+  fail("readline() with a positive size argument should return a truncated line")
+}}}
 
 ----
 [[BR]]
