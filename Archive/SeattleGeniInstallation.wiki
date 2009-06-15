@@ -193,6 +193,9 @@ TEMPLATE_DIRS = (
     '/home/geni/geni/templates/'
 )
 
+# The prefix in the path of all URLs (http://host/URL_PREFIX...)
+URL_PREFIX = 'geni/'
+
 LOGIN_REDIRECT_URL='/geni/control/'
 LOGIN_URL = '/geni/accounts/login'
 
