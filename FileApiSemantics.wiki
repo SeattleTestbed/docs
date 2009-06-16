@@ -506,7 +506,7 @@ fobj.write(data)
 
 === Argument Semantics: ===
 
-Takes any iterable object for the 'lines' argument, iterates over it, and calls write() on each individual string. Another words, it behaves exactly the same as:
+Takes any iterable object for the 'lines' argument, iterates over it, and calls write() on each individual string. In other words, it behaves exactly the same as:
 
 {{{
 for line in lines:
