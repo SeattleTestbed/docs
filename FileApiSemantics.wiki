@@ -203,7 +203,7 @@ else:
 
 ----
 [[BR]]
-== fobj.read(*args) ==
+== fobj.read(size) ==
 ----
 
 === Interacts With: ===
@@ -212,12 +212,12 @@ fobj.close()
 fobj.next()
 fobj.readline()
 fobj.readlines()
-fobj.write(text)
+fobj.write(data)
 fobj.writelines(lines)
 
 === Argument Semantics: ===
 
-Takes one argument (length to read). If that argument is omitted or a negative integer, read() returns the entire contents of the file from wherever the file handle is currently in the file. If that argument is a positive integer, read() returns at most that many bytes from the current position of the file handle. If the argument is not an integer, read() throws TypeError.
+Takes one optional argument -- the length to read, in bytes. If that argument is omitted or a negative integer, read() returns the entire contents of the file from wherever the file handle is currently in the file. If that argument is a positive integer, read() returns at most that many bytes from the current position of the file handle. If the argument is not an integer, read() throws TypeError.
 
 === Behavioral Semantics: ===
 
@@ -289,16 +289,16 @@ for arg in [3.0, "hi"]:
 
 ----
 [[BR]]
-== fobj.readline(*args) ==
+== fobj.readline(size) ==
 ----
 
 === Interacts With: ===
 
 fobj.close()
 fobj.next()
-fobj.read(*args)
-fobj.readlines(*args)
-fobj.write(text)
+fobj.read(size)
+fobj.readlines(size)
+fobj.write(data)
 fobj.writelines(lines)
 
 === Argument Semantics: ===
@@ -319,7 +319,7 @@ Test Snippet:
 fobj = open(filename, 'rb')
 fobj.close()
 try:
-  fobj.read()
+  fobj.readline()
 except ValueError:
   pass
 }}}
@@ -356,37 +356,138 @@ if len(line) > 5:
 
 ----
 [[BR]]
-== fobj.readlines(*args) ==
+== fobj.readlines(size) ==
 ----
 
 === Interacts With: ===
 
-TODO.
+fobj.close()
+fobj.next()
+fobj.read(size)
+fobj.readline(size)
+fobj.write(data)
+fobj.writelines(lines)
 
 === Argument Semantics: ===
 
-TODO.
+Optional argument size approximately limits the amount of data returned (in bytes). If the argument is omitted or negative, the result size is unbounded. Note: the size argument is not a strict bound, as readlines() only returns whole lines. Thus, it is possible for readlines() to go over the size specified as an argument.
 
 === Behavioral Semantics: ===
 
-TODO.
+readlines() calls readline() repeatedly and returns a list of the lines read.
+
+1
+
+Action: User calls readlines() on a closed file.
+
+Result: ValueError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.readlines()
+except ValueError:
+  pass
+}}}
+
+2
+
+Action: User calls readlines() with a negative or omitted size.
+
+Result: All lines in a file are returned.
+
+Test Snippet:
+
+{{{
+fobj = open("junk.out", "w+b")
+fobj.write("line1\nline2\r\n")
+fobj.flush()
+fobj.seek(0)
+expected = ["line1\n", "line2\r\n"]
+results = fobj.readlines()
+for i in xrange(0, len(expected)):
+  assert expected[i] == results[i]
+}}}
+
+3
+
+Action: User calls readlines() with a positive size argument.
+
+Result: At most one line more than that amount is read.
+
+Test Snippet:
+
+{{{
+fobj = open("junk.out", "w+b")
+fobj.write("line1\nline2\r\nline3\n")
+fobj.flush()
+fobj.seek(0)
+expected1 = ["line1\n", "line2\r\n", "line3\n"]
+results1 = fobj.readlines(14)
+fobj.seek(0)
+expected2 = ["line1\n", "line2\r\n"]
+results2 = fobj.readlines(7)
+assert len(expected1) == len(results1)
+assert len(expected2) == len(results2)
+for i in xrange(0, len(expected1)):
+  assert expected1[i] == results1[i]
+for i in xrange(0, len(expected2)):
+  assert expected2[i] == results2[i]
+}}}
 
 ----
 [[BR]]
-== fobj.write(text) ==
+== fobj.write(data) ==
 ----
 
 === Interacts With: ===
 
-TODO.
+fobj.close()
+fobj.flush()
+fobj.next()
+fobj.read(size)
+fobj.readline(size)
+fobj.readlines(size)
+fobj.writelines(lines)
 
 === Argument Semantics: ===
 
-TODO.
+Writes the (required) string argument to the (open) file handle. Due to buffering, it is necessary to call flush() on the object before the on-disk file contents are changed.
 
 === Behavioral Semantics: ===
 
-TODO.
+1
+
+Action: User calls write() on a closed file, or a file opened in read-only mode.
+
+Result: ValueError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.write("hi")
+except ValueError:
+  pass
+}}}
+
+2
+
+Action: User calls write() on a file opened in a write-enabled mode.
+
+Result: No-op.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'r+b')
+fobj.write("hi")
+}}}
 
 ----
 [[BR]]
@@ -395,12 +496,69 @@ TODO.
 
 === Interacts With: ===
 
-TODO.
+fobj.close()
+fobj.flush()
+fobj.next()
+fobj.read(size)
+fobj.readline(size)
+fobj.readlines(size)
+fobj.write(data)
 
 === Argument Semantics: ===
 
-TODO.
+Takes any iterable object for the 'lines' argument, iterates over it, and calls write() on each individual string. Another words, it behaves exactly the same as:
+
+{{{
+for line in lines:
+  fobj.write(line)
+}}}
+
+(Yes, this means no newlines are added.)
 
 === Behavioral Semantics: ===
 
-TODO.
+1
+
+Action: User calls writelines() on a closed file, or a file opened in read-only mode.
+
+Result: ValueError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.writelines(["hi"])
+except ValueError:
+  pass
+}}}
+
+2
+
+Action: User calls writelines() on a file opened in a write-enabled mode.
+
+Result: No-op.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'r+b')
+fobj.writelines(["hi"])
+}}}
+
+3
+
+Action: User calls writelines(), passing a non-iterable argument.
+
+Result: TypeError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'r+b')
+try:
+  fobj.writelines(5)
+except TypeError:
+  pass
+}}}
