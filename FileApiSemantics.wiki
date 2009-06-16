@@ -82,7 +82,8 @@ Result: An exception occurs.
 
 === Interacts with: ===
 
-All fobj methods that write data into a file.
+fobj.write(data)
+fobj.writelines(lines)
 
 === Argument Semantics: ===
 
