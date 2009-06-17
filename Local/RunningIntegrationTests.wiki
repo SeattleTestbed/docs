@@ -25,7 +25,9 @@ Blackbox tests or integration tests are intended to test large portions of the S
 Attempt to put a (k,v) into our centralized hash table and then get it back. On error send an email to some folks.
 
 === Deployment ===
-To deploy centralizedputget, run the deploy_centralizedputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run centralizedputget once an hour. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the centralizedputget script. Run preparetest.py on this new folder. Then copy over the file deploy_centralizedputget.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_centralizedputget script using the following line:
+To deploy centralizedputget, run the deploy_centralizedputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run centralizedputget once an hour.
+
+In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the centralizedputget script. Run preparetest.py on <folder_1>. Then copy over the file deploy_centralizedputget.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_centralizedputget script using the following line:
 {{{
 python deploy_centralizedputget.py -c <target_folder> <target_log_folder>
 }}}
@@ -45,7 +47,9 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
 
 === Deployment ===
-To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on this new folder. Then copy over the file deploy_opendhtputget.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_opendhtputget script using the following line:
+To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. 
+
+In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on <folder_1>. Then copy over the file deploy_opendhtputget.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_centralizedputget script using the following line:
 {{{
 python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
 }}}
@@ -65,7 +69,9 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 Download, install and check the resulting Seattle installation for correct state (onepercent state).
 
 === Deployment ===
-To deploy downloadandinstallseattle, run the deploy_downloadandinstallseattle.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run downloadandinstallseattle once a day. Create a folder in the same directory that the folder trunk/ is located. Create a second folder <target_folder> where you want to deploy the downloadandinstallseattle script. Run preparetest.py on this new folder. Then copy over the file deploy_downloadandinstallseattle.py from the deploy_scripts/ folder to the new folder that was just created. Then run the deploy_downloadandinstallseattle script using the following line:
+To deploy downloadandinstallseattle, run the deploy_downloadandinstallseattle.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run downloadandinstallseattle once a day. 
+
+In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the downloadandinstallseattle script. Run preparetest.py on <folder_1>. Then copy over the file deploy_downloadandinstallseattle.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_downloadandinstallseattle script using the following line:
 {{{
 python deploy_downloadandinstallseattle.py -c <target_folder> <target_log_folder>
 }}}
