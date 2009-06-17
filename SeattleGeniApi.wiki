@@ -7,13 +7,13 @@
 
 Given a geni_user (a string that is the username used to log into SeattleGENI) and a resource specification as a dict (rspec), this function acquires resources for the specified user.   There are currently three types of rspecs defined:
 
-''{'rspec_type':'LAN', 'number_of_nodes':N}''[[BR]]  
+''{'rspec_type':'lan', 'number_of_nodes':N}''[[BR]]  
 Returns N nodes all with the same starting three octects of the IP address.[[BR]]
 
-''{'rspec_type':'WAN', 'number_of_nodes':N}''[[BR]] 
+''{'rspec_type':'wan', 'number_of_nodes':N}''[[BR]] 
 Returns N nodes all with different starting three octects of the IP address.[[BR]]
 
-''{'rspec_type':'Random', 'number_of_nodes':N}''[[BR]]
+''{'rspec_type':'random', 'number_of_nodes':N}''[[BR]]
 Returns N nodes.[[BR]]
 
 
