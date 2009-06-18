@@ -12,6 +12,8 @@ Note: This is a working draft, and may be incomplete or incorrect in some places
 
 This page is designed to specify, in detail, the behavior of File API calls under various circumstances.  For each call a list of argument and behavioral semantics is provided, along with a snippet of test code that shows how each case is verified -- hopefully in much the same style as the NetworkApiSemantics page.
 
+Note: In order to make file operations more defined across threads, we have per-file locks that each file operation will block on.
+
 
 ----
 
