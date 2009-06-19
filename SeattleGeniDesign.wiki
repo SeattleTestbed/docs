@@ -161,7 +161,7 @@ As the website is not a sole single-threaded process, there can be conflict with
 
 With the dual goals of taking care to eliminate race conditions that result from multi-threaded database access as well as eliminating the need for a separate backend server, this version of the !GeniPortal will use database locking mechanisms to provide mutual exclusion as needed.
 
-This will take some good design and planning. Justin S. is by no means an expert here, but he feels that it is likely possible to do the required database locking and, as a result, end up with a more robust system as a result. The difficult parts will be:
+This will take some good design and planning. jsamuel is by no means an expert here, but he feels that it is likely possible to do the required database locking and, as a result, end up with a more robust system. The difficult parts will be:
   * Ensure that the exclusion/locking is done correctly to avoid race conditions as well as deadlock.
   * Avoid excessive performance penalties (e.g. avoid exclusive table locks except when absolutely necessary and then only very briefly, avoid excessive row locking and unlocking, etc.)
 
