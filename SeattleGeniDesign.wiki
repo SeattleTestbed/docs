@@ -78,7 +78,7 @@ The following models are based on the old/current models. Some fields have been 
 
   * Donation
     * thoughts:
-      * Should this be called a "Node" rather than a "Donation"?
+      * jsamuel: Should this be called a "Node" rather than a "Donation"?
     * fields:
       * user (foreign key to the users table)
       * pubkey
