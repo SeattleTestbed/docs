@@ -59,28 +59,68 @@ Ultimately, various logged information should be summarized and available throug
 = Models =
 
   * User
-    * djangouser
-      * links this record to the django user record
-    * port
-    * affiliation
-    * pubkey
-    * privkey
-    * donor_pubkey
-    * donor_privkey
-    * vessel_count_acquired
-      * this is the number of vessels this user owns
-      * this could be figured out through inspection of the vessels table but this scales better and may be used for atomicity of changes to the recorded number of vessels a user owns.
-    * vessel_credits_via_base
-    * vessel_credits_via_donations
-    * vessel_credits_via_shares
+    * fields:
+      * djangouser
+        * links this record to the django user record
+      * port
+      * affiliation
+      * pubkey
+      * privkey
+      * donor_pubkey
+      * donor_privkey
+      * vessel_count_acquired
+        * the is the number of vessels this user owns
+        * this could be figured out through inspection of the vessels table but this scales better and may be used for atomicity of changes to the recorded number of vessels a user owns (without having to lock the vessels table, at least).
+      * vessel_credits_via_base
+      * vessel_credits_via_donations
+      * vessel_credits_via_shares
 
   * Donation
+    * thoughts:
+      * Should this be called a "Node" rather than a "Donation"?
+    * fields:
+      * user
+      * pubkey
+      * ip
+      * port
+      * subnet
+      * date_added
+      * last_heard
+      * status
+        * the rewrite will ensure that the status field is changed through specific functions to do so, as right now it is done through scattered string arguments. (At the moment I can see 'Initializing' and 'Ready', not sure if there are others.)
+      * version
+      * epoch
+        * jsamuel: I'm not sure the epoch field is needed. it appears to only be used strangely in genidb.handle_inactive_donation().
+      * active
+      * owner_pubkey
+      * owner_privkey
 
   * Vessel
+    * fields:
+      * donation
+      * name
+      * status
+        * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible status]
+        * as with the donation status field, let's keep these updates to specific functions in one place so that we know which statuses are used and can prevent typos.
+      * extra_vessel
+      * acquired_by_user
+        * if this vessel has been acquired by a user, this is the user who acquired it
 
   * !VesselPort
+    * description:
+      * Represents a port that is available on a vessel. A single vessel can have multiple ports (multiple !VesselPort records).
+    * fields:
+      * vessel
+      * port
 
   * !VesselUserMap
+    * description:
+      * Represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through the !GeniPortal, the additional users would have records here.
+    * fields:
+      * vessel
+      * user
+      * creation_date
+      * expiration_date
 
 == Model Notes ==
 
