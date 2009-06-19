@@ -12,7 +12,7 @@
   * Eliminate the need for a separate backend xmlrpc server.
     * Current design makes use of a separate xmlrpc server to synchronize some database and nodemanager operations related to vessel assignment.
       * This is an additional potential point of failure.
-      * If there were a security argument for this, it could be worth it (e.g. certain keys are not accessible to the GeniPortal and the backend xmlrpc server that has access to them runs on a different server)
+      * If there were a security argument for this, it could be worth it (e.g. certain keys are not accessible to the !GeniPortal and the backend xmlrpc server that has access to them runs on a different server)
     * If the necessary synchronization can be done without this separate server, it should be.
 
 = New Design Plan =
@@ -55,3 +55,26 @@ Ultimately, various logged information should be summarized and available throug
     * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
   * Dependency injection to increase testability using mock objects:
     * at least in backend database and nodemanager so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
+
+= Models =
+
+  * User
+
+  * Donation
+
+  * Vessel
+
+  * !VesselPort
+
+  * !VesselUserMap
+
+== Model Notes ==
+
+  * '''Vessel ownership/acquisition''': If a user acquires a vessel, the user is considered the owner. The vessel counts towards that user's vessel limit.
+  * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always owned by a single user. The users with access to the vessel are not allowed to release the vessel, though they can remove themselves from it so that they no longer have access. This is mostly future-proofing, as this version of the !GeniPortal currently does not include mechanisms by which additional users can be given access to a vessel. The idea is to keep this part in mind for the design at this stage.
+  * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time. Note: jsamuel needs to discuss the sharing model more with justinc.
+
+= Synchronization =
+
+TODO: discuss database table and row locking.
+
