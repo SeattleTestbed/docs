@@ -2,6 +2,8 @@
 
 This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
+----
+
 == Design Goals ==
 
   * Greater understandability and maintainability.
@@ -18,6 +20,8 @@ This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. co
       * This is an additional potential point of failure.
       * If there were a security argument for this, it could be worth it (e.g. certain keys are not accessible to the !GeniPortal and the backend xmlrpc server that has access to them runs on a different server)
     * If the necessary synchronization can be done without this separate server, it should be.
+
+----
 
 == New Design Plan ==
 
@@ -53,6 +57,8 @@ Logging will be available in multiple ways:
 
 Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc. A summarization/visualization of this data helps to identify logic bugs. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
+----
+
 == Testing ==
 
   * Unit tests:
@@ -65,6 +71,8 @@ Ultimately, various logged information should be summarized and available throug
     * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
   * Dependency injection to increase testability using mock objects:
     * at least in backend database and nodemanager so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
+
+----
 
 == Models ==
 
@@ -140,6 +148,8 @@ The following models are based on the old/current models. Some fields have been 
   * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
   * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
   * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time.
+
+----
 
 == Synchronization ==
 
