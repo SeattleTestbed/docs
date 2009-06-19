@@ -47,6 +47,8 @@ which would be used by both requests through the HTML frontend as well as the XM
 
 Where most of the dirty work will be kept for database modification and node communication.
 
+----
+
 == Logging ==
 
 Logging will be available in multiple ways:
