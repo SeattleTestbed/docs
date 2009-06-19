@@ -19,6 +19,8 @@
 
 We'll split the system up into three main components: Frontends, Controller, and Backend.
 
+[[Image(seattlegeni-rewrite-structure.gif)]]
+
 == Frontends ==
 
 A way in which the !GeniPortal is interacted with. Two planned frontends will be HTML (the website) and XML-RPC.
