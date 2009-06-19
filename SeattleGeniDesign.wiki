@@ -1,0 +1,33 @@
+= Design Goals =
+
+  * Greater understandability and maintainability.
+    * Current design is more difficult than necessary for new people to understand.
+  * Easier testing.
+    * Current design's lack of modularity makes testing difficult.
+  * Better logging.
+    * Design not only needs to incorporate better logging, but needs to allow easy future addition of logging.
+  * Eliminate race condition.
+    * Current implementation has various race conditions related to database access (e.g. I believe the potential for the same key from keys_512 to be assigned to multiple users).
+    * It is likely that locking at the database level needs to be done in certain situations.
+  * Eliminate the need for a separate backend xmlrpc server.
+    * Current design makes use of a separate xmlrpc server to synchronize some database and nodemanager operations related to vessel assignment.
+      * This is an additional potential point of failure.
+      * If there were a security argument for this, it could be worth it (e.g. certain keys are not accessible to the GeniPortal and the backend xmlrpc server that has access to them runs on a different server)
+    * If the necessary synchronization can be done without this separate server, it should be.
+
+= New Design Plan =
+
+We'll split the system up into three main components: Frontends, Controller, and Backend.
+
+== Frontends ==
+
+A way in which the !GeniPortal is interacted with. Two planned frontends will be HTML (the website) and XML-RPC.
+
+== Controller ==
+
+The "middle" between the Frontend and Backend. The brunt of the logic goes here. The various frontends make calls to functions in a single interface module in the controller. These interface functions then directly or indirectly make calls to backend functions.
+
+== Backend ==
+
+Where most of the dirty work will be kept for database modification and node communication.
+
