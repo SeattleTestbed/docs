@@ -29,6 +29,12 @@ A way in which the !GeniPortal is interacted with. There are separate frontends 
 
 The "middle" between the Frontend and Backend. The brunt of the logic goes here. The various frontends make calls to functions in a single interface module in the controller. These interface functions then directly or indirectly make calls to backend functions.
 
+As an example of what would be in the controller interface, there may be a function
+
+{{{def acquire_vessels(user, count, type):}}}
+
+which would be used by both requests through the HTML frontend as well as the XML-RPC frontend.
+
 == Backend ==
 
 Where most of the dirty work will be kept for database modification and node communication.
