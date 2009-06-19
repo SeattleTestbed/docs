@@ -33,3 +33,25 @@ The "middle" between the Frontend and Backend. The brunt of the logic goes here.
 
 Where most of the dirty work will be kept for database modification and node communication.
 
+= Logging =
+
+Logging will be available in multiple ways:
+  * Request/Response available via [http://docs.djangoproject.com/en/dev/topics/http/middleware/ django middleware].
+  * Logging at the controller interface (allows logging requests/response, recording time, etc. independent of frontend).
+  * Use of the python logger module (no calls to "print", ever).
+  * Email critical errors to developers (include request/response information).
+
+Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc.
+ 
+= Testing =
+
+  * Unit tests:
+    * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
+    * controller interface
+    * controller additional logic
+    * backend db
+    * backend nodemanager api
+  * Test data:
+    * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
+  * Dependency injection to increase testability using mock objects:
+    * at least in backend database and nodemanager so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
