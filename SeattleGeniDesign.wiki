@@ -124,9 +124,10 @@ Ultimately, various logged information should be summarized and available throug
 
 == Model Notes ==
 
-  * '''Vessel ownership/acquisition''': If a user acquires a vessel, the user is considered the owner. The vessel counts towards that user's vessel limit.
-  * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always owned by a single user. The users with access to the vessel are not allowed to release the vessel, though they can remove themselves from it so that they no longer have access. This is mostly future-proofing, as this version of the !GeniPortal currently does not include mechanisms by which additional users can be given access to a vessel. The idea is to keep this part in mind for the design at this stage.
-  * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time. Note: jsamuel needs to discuss the sharing model more with justinc.
+  * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit.
+  * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
+  * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
+  * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time.
 
 = Synchronization =
 
