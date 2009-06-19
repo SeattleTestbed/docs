@@ -58,6 +58,8 @@ Ultimately, various logged information should be summarized and available throug
 
 = Models =
 
+The following models are based on the old/current models. Some fields have been changed. The major change is that there is a !VesselUserMap model (a junction/map table) to provide a many-to-many map of vessels to users who have access to those vessels. The old/current models have a !VesselMap which is a map of Users to !VesselPorts (that is, the old/current design has an unnecessary level of indirection between the user record and the vessel record).
+
   * User
     * fields:
       * djangouser
