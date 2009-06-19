@@ -8,7 +8,7 @@
     * Design not only needs to incorporate better logging, but needs to allow easy future addition of logging.
   * Eliminate race conditions.
     * Current implementation has various race conditions related to database access (e.g. I believe the potential for the same key from keys_512 to be assigned to multiple users).
-    * It is likely that locking at the database level needs to be done in certain situations.
+    * It appears to jsamuel that locking at the database level needs to be done in certain situations.
   * Eliminate the need for a separate backend xmlrpc server.
     * Current design makes use of a separate xmlrpc server to synchronize some database and nodemanager operations related to vessel assignment.
       * This is an additional potential point of failure.
@@ -17,13 +17,13 @@
 
 = New Design Plan =
 
-We'll split the system up into three main components: Frontends, Controller, and Backend.
+We'll split the system up into three main components: Frontend, Controller, and Backend.
 
 [[Image(seattlegeni-rewrite-structure.gif)]]
 
-== Frontends ==
+== Frontend ==
 
-A way in which the !GeniPortal is interacted with. Two planned frontends will be HTML (the website) and XML-RPC.
+A way in which the !GeniPortal is interacted with. There are separate frontends here (which do not communicate with each other, but rather only with the controller interface). Two planned frontends will be HTML (the website) and XML-RPC.
 
 == Controller ==
 
@@ -41,7 +41,7 @@ Logging will be available in multiple ways:
   * Use of the python logger module (no calls to "print", ever).
   * Email critical errors to developers (include request/response information).
 
-Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc.
+Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc. A summarization/visualization of this data helps to identify logic bugs. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
 = Testing =
 
@@ -71,17 +71,16 @@ The following models are based on the old/current models. Some fields have been 
       * donor_pubkey
       * donor_privkey
       * vessel_count_acquired
-        * the is the number of vessels this user owns
+        * the number of vessels this user owns
         * this could be figured out through inspection of the vessels table but this scales better and may be used for atomicity of changes to the recorded number of vessels a user owns (without having to lock the vessels table, at least).
       * vessel_credits_via_base
       * vessel_credits_via_donations
-      * vessel_credits_via_shares
 
   * Donation
     * thoughts:
       * Should this be called a "Node" rather than a "Donation"?
     * fields:
-      * user
+      * user (foreign key to the users table)
       * pubkey
       * ip
       * port
@@ -89,38 +88,39 @@ The following models are based on the old/current models. Some fields have been 
       * date_added
       * last_heard
       * status
-        * the rewrite will ensure that the status field is changed through specific functions to do so, as right now it is done through scattered string arguments. (At the moment I can see 'Initializing' and 'Ready', not sure if there are others.)
+        * the rewrite will ensure that the status field is changed through specific functions to do so, as right now it is done through scattered string arguments. (At the moment I can see 'Initializing', 'Ready', and 'Intermediate' and that is all that appears in the database at the moment, as well.)
       * version
       * epoch
-        * jsamuel: I'm not sure the epoch field is needed. it appears to only be used strangely in genidb.handle_inactive_donation().
+        * jsamuel: I'm not sure the epoch field is needed. it appears to only be used (strangely) in genidb.handle_inactive_donation().
       * active
       * owner_pubkey
       * owner_privkey
 
   * Vessel
     * fields:
-      * donation
+      * donation (foreign key to the donations table)
       * name
       * status
         * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible status]
-        * as with the donation status field, let's keep these updates to specific functions in one place so that we know which statuses are used and can prevent typos.
+        * as with the donation status field, let's keep these updates to specific functions in one place so that we know which statuses are used and can prevent typos. (I actually do see a typo -- 'Intialized' -- in the live database, but I think this much be an old bug as I can't see that string anywhere in the code.)
       * extra_vessel
-      * acquired_by_user
+      * acquired_by_user (foreign key to the users table)
         * if this vessel has been acquired by a user, this is the user who acquired it
 
   * !VesselPort
     * description:
       * Represents a port that is available on a vessel. A single vessel can have multiple ports (multiple !VesselPort records).
     * fields:
-      * vessel
+      * vessel (foreign key to vessels table)
       * port
+        * the actual port number, not a foreign key to a new "ports" table -- though that would seem technically correct and could be useful in a few rare cases, it feels like it would be over-complication
 
   * !VesselUserMap
     * description:
       * Represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through the !GeniPortal, the additional users would have records here.
     * fields:
-      * vessel
-      * user
+      * vessel (foreign key to vessels table)
+      * user (foreign key to users table)
       * creation_date
       * expiration_date
 
