@@ -1,4 +1,8 @@
-= Design Goals =
+= !GeniPortal Version 3 Design Document/Proposal =
+
+This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
+
+== Design Goals ==
 
   * Greater understandability and maintainability.
     * Current design is more difficult than necessary for new people to understand.
@@ -15,17 +19,17 @@
       * If there were a security argument for this, it could be worth it (e.g. certain keys are not accessible to the !GeniPortal and the backend xmlrpc server that has access to them runs on a different server)
     * If the necessary synchronization can be done without this separate server, it should be.
 
-= New Design Plan =
+== New Design Plan ==
 
 We'll split the system up into three main components: Frontend, Controller, and Backend.
 
 [[Image(seattlegeni-rewrite-structure.gif)]]
 
-== Frontend ==
+=== Frontend ===
 
 A way in which the !GeniPortal is interacted with. There are separate frontends here (which do not communicate with each other, but rather only with the controller interface). Two planned frontends will be HTML (the website) and XML-RPC.
 
-== Controller ==
+=== Controller ===
 
 The "middle" between the Frontend and Backend. The brunt of the logic goes here. The various frontends make calls to functions in a single interface module in the controller. These interface functions then directly or indirectly make calls to backend functions.
 
@@ -35,11 +39,11 @@ As an example of what would be in the controller interface, there may be a funct
 
 which would be used by both requests through the HTML frontend as well as the XML-RPC frontend.
 
-== Backend ==
+=== Backend ===
 
 Where most of the dirty work will be kept for database modification and node communication.
 
-= Logging =
+== Logging ==
 
 Logging will be available in multiple ways:
   * Request/Response available via [http://docs.djangoproject.com/en/dev/topics/http/middleware/ django middleware].
@@ -49,7 +53,7 @@ Logging will be available in multiple ways:
 
 Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc. A summarization/visualization of this data helps to identify logic bugs. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
-= Testing =
+== Testing ==
 
   * Unit tests:
     * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
@@ -62,7 +66,7 @@ Ultimately, various logged information should be summarized and available throug
   * Dependency injection to increase testability using mock objects:
     * at least in backend database and nodemanager so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
 
-= Models =
+== Models ==
 
 The following models are based on the old/current models. Some fields have been changed. The major change is that there is a !VesselUserMap model (a junction/map table) to provide a many-to-many map of vessels to users who have access to those vessels. The old/current models have a !VesselMap which is a map of Users to !VesselPorts (that is, the old/current design has an unnecessary level of indirection between the user record and the vessel record).
 
@@ -130,14 +134,14 @@ The following models are based on the old/current models. Some fields have been 
       * creation_date
       * expiration_date
 
-== Model Notes ==
+=== Model Notes ===
 
   * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit.
   * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
   * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
   * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time.
 
-= Synchronization =
+== Synchronization ==
 
 As the website is not a sole single-threaded process, there can be conflict with two different process trying to modify related data in the database. Database transactions don't address this issue (two transactions can happily update the same data not knowing the other was updating it -- transactions aren't a locking mechanism).
 
