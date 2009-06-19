@@ -59,6 +59,20 @@ Ultimately, various logged information should be summarized and available throug
 = Models =
 
   * User
+    * djangouser
+      * links this record to the django user record
+    * port
+    * affiliation
+    * pubkey
+    * privkey
+    * donor_pubkey
+    * donor_privkey
+    * vessel_count_acquired
+      * this is the number of vessels this user owns
+      * this could be figured out through inspection of the vessels table but this scales better and may be used for atomicity of changes to the recorded number of vessels a user owns.
+    * vessel_credits_via_base
+    * vessel_credits_via_donations
+    * vessel_credits_via_shares
 
   * Donation
 
