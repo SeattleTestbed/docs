@@ -6,7 +6,7 @@
     * Current design's lack of modularity makes testing difficult.
   * Better logging.
     * Design not only needs to incorporate better logging, but needs to allow easy future addition of logging.
-  * Eliminate race condition.
+  * Eliminate race conditions.
     * Current implementation has various race conditions related to database access (e.g. I believe the potential for the same key from keys_512 to be assigned to multiple users).
     * It is likely that locking at the database level needs to be done in certain situations.
   * Eliminate the need for a separate backend xmlrpc server.
@@ -131,5 +131,14 @@ Ultimately, various logged information should be summarized and available throug
 
 = Synchronization =
 
-TODO: discuss database table and row locking.
+As the website is not a sole single-threaded process, there can be conflict with two different process trying to modify related data in the database. Database transactions don't address this issue (two transactions can happily update the same data not knowing the other was updating it -- transactions aren't a locking mechanism).
 
+With the dual goals of taking care to eliminate race conditions that result from multi-threaded database access as well as eliminating the need for a separate backend server, this version of the !GeniPortal will use database locking mechanisms to provide mutual exclusion as needed.
+
+This will take some good design and planning. Justin S. is by no means an expert here, but he feels that it is likely possible to do the required database locking and, as a result, end up with a more robust system as a result. The difficult parts will be:
+  * Ensure that the exclusion/locking is done correctly to avoid race conditions as well as deadlock.
+  * Avoid excessive performance penalties (e.g. avoid exclusive table locks except when absolutely necessary and then only very briefly, avoid excessive row locking and unlocking, etc.)
+
+Correctness will be the major goal with performance focused more heavily on later. This is not only for the sake of getting something working sooner rather than later, but also to help identify earlier if this approach will not be work.
+
+'''Important note''': If in development there appear to be too many difficulties in implementing this correctly using database locking, the use of a separate single-process multi-threaded backend xmlrpc server (as is currently used) will be reconsidered. A working solution that more people understand is better than a non-working one (or even a working one) that is only maintainable by the person who wrote it. However, use of a separate backend server will be avoided, if possible, at it also has issues (such as a tendency for code not in the backed xmlrpc server to ignore race conditions with database access).
