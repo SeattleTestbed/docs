@@ -2,6 +2,8 @@
 
 This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
+[[TOC(inline)]]
+
 ----
 
 == Design Goals ==
