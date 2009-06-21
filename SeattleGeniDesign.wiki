@@ -16,7 +16,9 @@ This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. co
     * Design not only needs to incorporate better logging, but needs to allow easy future addition of logging.
   * Eliminate race conditions.
     * Current implementation has various race conditions related to database access (e.g. I believe the potential for the same key from keys_512 to be assigned to multiple users).
+       * JAC: we have a key server that we need to put into place.   It will prevent this from being a problem.
     * It appears to jsamuel that locking at the database level needs to be done in certain situations.
+    * JAC: can we create a locking service for the backend?   I.e. you pass it a string it uses a lock name.   This should be easy to implement and seems like a good locking primitive.   We would likely implement this with XMLRPC
   * Eliminate the need for a separate backend xmlrpc server.
     * Current design makes use of a separate xmlrpc server to synchronize some database and nodemanager operations related to vessel assignment.
       * This is an additional potential point of failure.
