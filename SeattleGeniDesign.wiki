@@ -51,6 +51,8 @@ which would be used by both requests through the HTML frontend as well as the XM
 
 Where most of the dirty work will be kept for database modification and node communication.
 
+JAC: It may make sense to do locking and key generation here too.
+
 ----
 
 == Logging ==
@@ -83,6 +85,8 @@ Ultimately, various logged information should be summarized and available throug
 == Models ==
 
 The following models are based on the old/current models. Some fields have been changed. The major change is that there is a !VesselUserMap model (a junction/map table) to provide a many-to-many map of vessels to users who have access to those vessels. The old/current models have a !VesselMap which is a map of Users to !VesselPorts (that is, the old/current design has an unnecessary level of indirection between the user record and the vessel record).
+
+JAC: Is the rest of this sensible?   I'd be happier redoing the rest of this as it makes sense.   We will likely end up rewriting much of the code, so the database can be completely changed.   
 
   * User
     * fields:
