@@ -6,7 +6,7 @@ seattlebot is an instance of the supybot running on seattle.cs which logs the fr
 
 Currently seattlebot is configured to log to /home/seattlebot/logs/ChannelLogger/freenode/#seattle/
 
-jsamuel intends to setup a cronjob to copy these somewhere web-accessible.
+The logs can be viewed through the website here: https://seattle.cs.washington.edu/irclogs/
 
 == Trac info in IRC ==
 
@@ -76,3 +76,17 @@ All plugins besides !ChannelLog and !SupyTrac were disabled in the /home/seattle
 The following was added to /etc/rc.local to start supybot on startup:
 
 sudo -u seattlebot supybot /home/seattlebot/seattlebot.conf >>/home/seattlebot/stdout-stderr.log 2>&1 &
+
+To make the logs available through the website, the following was added to /etc/apache2/sites-available/default's https vhost:
+
+{{{
+    Alias /irclogs /home/seattlebot/logs/ChannelLogger/freenode/#seattle
+    <Location /irclogs>
+      SetHandler None
+    </Location>
+    <Directory "/home/seattlebot/logs/ChannelLogger/freenode/#seattle">
+      Options +Indexes
+      Order allow,deny
+      Allow from all
+    </Directory>
+}}}
