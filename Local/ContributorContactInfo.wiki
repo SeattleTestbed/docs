@@ -18,3 +18,4 @@ Please keep the list ordered alphabetically by SVN username.
 || Richard Jordan || richard at jordanyachts.com || || || ||
 || Sean || shawiz at cs || || sean || shawiz ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
+|| Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
