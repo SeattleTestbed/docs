@@ -88,6 +88,22 @@ The following models are based on the old/current models. Some fields have been 
 
 JAC: Is the rest of this sensible?   I'd be happier redoing the rest of this as it makes sense.   We will likely end up rewriting much of the code, so the database can be completely changed.   
 
+jsamuel: As far as being sensible, I believe it generally is. There will very likely be yet more fields that are changed/removed/added when this is actually implemented (some of that probably due to my understanding of things growing and realizing there are bits I hadn't previously fully understood). In terms of general structure, though, I'll add here the argument for the basic structure. As long as this is sane, I'm not sure there's a lot of reason for drastically changing the basic db layout.
+
+Basic argument for the model:
+  * There are three major objects to be dealt with:
+    * users
+    * donations/nodes
+    * vessels
+  * It makes sense to have at least a table for each of these objects. The relationships between them are:
+    * each donation/node is donated by a single user
+    * each vessel is acquired by a single user
+    * each vessel will ultimately be accessible by multiple users
+    * each vessel has multiple ports associated with it
+  * If there was going to be a keyserver that tracked all keys, then any key references would probably be replaced by a key id.
+    * This indirection could be added now in the form of a keys table if needed, but that should be done in a way to ensure minimal code changes will be needed to change over to using a key server.
+
+The details of the models are as follow:
   * User
     * fields:
       * djangouser
@@ -108,7 +124,7 @@ JAC: Is the rest of this sensible?   I'd be happier redoing the rest of this as 
     * thoughts:
       * jsamuel: Should this be called a "Node" rather than a "Donation"?
     * fields:
-      * user (foreign key to the users table)
+      * donor (foreign key to the users table)
       * pubkey
       * ip
       * port
