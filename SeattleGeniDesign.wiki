@@ -168,6 +168,11 @@ The details of the models are as follow:
       * creation_date
       * expiration_date
 
+Indexing
+  * The current database schema does not appear to make use of additional indexes for performance.
+  * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten.
+    * Indexes will be added where logical and should be tested using a large database with performance profiling.
+
 === Model Notes ===
 
   * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit.
