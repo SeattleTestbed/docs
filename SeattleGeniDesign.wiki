@@ -174,3 +174,61 @@ This will take some good design and planning. jsamuel is by no means an expert h
 Correctness will be the major goal with performance focused more heavily on later. This is not only for the sake of getting something working sooner rather than later, but also to help identify earlier if this approach will not work.
 
 '''Important note''': If in development there appear to be too many difficulties in implementing this correctly using database locking, the use of a separate single-process multi-threaded backend xmlrpc server (as is currently used) will be reconsidered. A working solution that more people understand is better than a non-working one (or even a working one) that is only maintainable by the person who wrote it. However, use of a separate backend server will be avoided, if possible, at it also has issues (such as a tendency for code not in the backed xmlrpc server to ignore race conditions with database access).
+
+----
+
+== Fundamental change idea: Make vessel-modifying actions asynchronous ==
+
+This would be to:
+  * improve scalability
+  * have greater control over the complexity of synchronization/locking that needs to be implemented
+  * simplify the role of the website.
+
+Some actions that would be performed asynchronously would include:
+  * Request/release vessels
+  * Add user to vessels
+  * Change user key
+
+Actions that would not be performed asynchronously (they would be fulfilled in real-time) include:
+  * All queries for data that do not make changes.
+  * Data updates that do not involve remote communication and in no way impact the fulfilling of asynchronously fulfilled actions.
+    * Examples: create new user. delete user private key.
+
+=== How it could be done ===
+
+  * Keep a table of user actions 
+    * When a request is made, perform checks that don't require vessel communication.
+      * If the request is potentially fillable, return an action_id to the user (xmlrpc) or
+        notify them that their request is pending and have the interface 
+        check for updates (html).
+      * If the request could not possibly be filled (e.g. user does not have enough
+        vessel credits, there are not enough resources of the type requested), indicate that in the response.
+        * Denying a request due to lack of resources available does allow the possibility that a request for vessels
+          is denied when there are pending vessel release requests that have not been processed, but such a situation
+          seems acceptable.
+    * Could be multiple tables, not a single request table (a more complex db structure, but much cleaner data):
+      * simple request table that tracks only id, request_time, request_type
+      * separate table for each request_type that holds request/result data for that
+        request type.
+  * Have a daemon process to process the action queue
+    * Can run on a different server from the web server
+    * Could initially process a single action at a time for correctness/simplicity.
+      * If number of requests was ever great enough, could be changed to perform
+        some actions simultaneously, some with higher priority, etc.
+        * Examples:
+          * Process vessel releases before vessel requests.
+          * Process multiple vessel release actions simultaneously.
+          * Process multiple vessel request actions simultaneously.
+  * Clients would interact with the frontend as follows:
+    * xmlrpc asynchronous
+      * Request resources.
+      * Receive response of QUEUED with an action_id, or FAILED with a reason.
+      * If QUEUED, client can then make status requests using the action_id.
+    * xmlrpc synchronous requests
+      * This could be implemented, if needed, by just having the frontend wait until
+        the response has been fulfilled before responding.
+    * html
+      * Request resources.
+      * Show result of pending or failed.
+      * If pending, either manual refreshing or ajax-based to check status.
+
