@@ -187,7 +187,7 @@ The details of the models (database schemas) are below. Note that with the decis
       * status
         * This field will be used, if necessary, to indicate steps in the process of setting up a donation's resources for use (which, for now, would be creating vessels on the corresponding node using this donation's resources).
     * notes
-      * In the future, there may be more than one donor of a node. For now it will be used as just one donation record per node record.
+      * In the future, there may be more than one donor of a node and so multiple Donation records for a single node but each with different donors. For now it will be used as just one donation record per node record.
 
   * !DonationResource
     * purpose:
