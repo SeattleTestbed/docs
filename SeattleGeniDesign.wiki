@@ -284,9 +284,8 @@ Note that with the decision to move most work away from the website, there is a 
 
   * '''Indexing'''
     * The current database schema does not appear to make use of additional indexes for performance.
-    * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten.
-      * Indexes will be added where logical and should be tested using a large database with performance profiling.
-  * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit.
+    * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten. Indexes will be added where logical and should be tested using a large database with performance profiling.
+  * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit. In the future, limits may be by resources (e.g. diskspace) rather than number of vessels.
   * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
   * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
-  * '''Sharing''': allowing other users to create vessels against your vessel credits is not re-incorporated in the design at this time.
+  * '''Sharing''': allowing other users to create vessels against your available resources is not re-incorporated in the design at this time.
