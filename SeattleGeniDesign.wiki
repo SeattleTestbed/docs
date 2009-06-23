@@ -1,4 +1,4 @@
-= !GeniPortal Version 3 Design Document/Proposal =
+= !SeattleGeni Design Document/Proposal =
 
 This is a proposal for the rewrite SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
