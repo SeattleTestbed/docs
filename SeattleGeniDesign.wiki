@@ -240,6 +240,10 @@ The details of the models (database schemas) are below. Note that with the decis
       * id
       * pubkey
       * privkey
+      * unprivileged
+        * flag to indicate whether this key is accessible to unprivileged client applications (e.g. the website).
+        * if an unprivileged client requests this key (or, possibly just the private key/signing services), the request would be rejected if this flag is not set.
+        * this is "unprivileged" rather than "privileged" so that the default is clearly to make keys privileged.
 
 === Model Notes ===
 
