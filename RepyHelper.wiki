@@ -146,6 +146,43 @@ repyhelper.translate_and_import('foo.repy', preserve_globals=True)
 bar() #calls the bar defined above, not foo.repy's bar
   }}}
 
+==== Example 3 ====
+Each library must include any functions that it uses, even if they will be included elsewhere.   If you have the following three files, you will see a !NameError when calling {{{foo_foobar()}}} because {{{b.repy}}} does not include {{{a.repy}}} but uses it.
+
+{{{
+#!python
+justinc@nara:~/test> cat a.repy
+def a_foo():
+  print "hello"
+justinc@nara:~/test> cat b.repy
+def b_bar():
+  a_foo()   # OOPS, needed to include a.repy
+justinc@nara:~/test> cat foo.repy
+include a.repy
+include b.repy
+
+def foo_foobar():
+  a_foo()
+  b_bar()
+
+justinc@nara:~/test> python
+Python 2.5.2 (r252:60911, Dec  1 2008, 18:10:01)
+[GCC 4.3.1 20080507 (prerelease) [gcc-4_3-branch revision 135036]] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import repyhelper
+>>> repyhelper.translate_and_import('foo.repy')
+>>> foo_foobar()
+hello
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "foo_repy.py", line 21, in foo_foobar
+    b_bar()
+  File "b_repy.py", line 17, in b_bar
+    a_foo()
+NameError: global name 'a_foo' is not defined
+>>>
+}}}
+
 [[BR]]
 === set_shared_context(context) ===
 ----
