@@ -234,7 +234,7 @@ The details of the models (database schemas) are below. Note that with the decis
   * Queue
     * purpose:
       * Items in the queue represent tasks for the backend.
-      * Note: the table will be called "queue" --- that's not the name of each record. This model more of a table description than a data item description.
+      * Note: the table will be called "queue" --- that's not the name of each record. This model is more of a table description than a data item description.
     * fields:
       * id
       * source
@@ -246,14 +246,21 @@ The details of the models (database schemas) are below. Note that with the decis
       * date_added
       * date_started
       * date_ended
-      * type
-        * enum: '!AcquireVessels', '!ReleaseVessels', '!ChangeUserKey', '!AddUserToVessels', '!SetupDonatedResources', '!DisableNode', '!EnableNode', ...
-        * using the names '!AcquireVessels' and '!ReleaseVessels' as there may be a reason to have separate '!AcquireResources' and '!ReleaseResources' types later on that are more than just simple vessel acquisition.
+      * task_type (foreign key to !QueueTaskType table)
       * [a field for each piece of information that is needed by each task type]
       * [a field for each piece of information that is returned by each task type]
     * notes
       * another option besides including additional fields for each parameter and return value would be to create a separate table for each task type and have only the necessary fields in each table. That complicates the sql, though, when trying to aggregate data. This will be reconsidered when implementing if clarity is greatly enhanced by doing so. 
+      * depending on the exact types of tasks that get defined, it seems likely that this table could easily grow by 1000 records a day when seattle gains some momentum. 10k a day might not even be out of the question. So, we're looking at 400k+ records a year. I don't expect this to be a problem. Performance shouldn't suffer with less than a few million records (aside from any aggregation/statistics queries that may be being run administratively). When it becomes necessary, an archiver script can be run to move records from the live queue table to a separate archive queue table.
 
+  * !QueueTaskType
+    * purpose:
+      * A !QueueTaskType represents a type of task in the queue. The reason an enum field isn't used in Queue is because it is likely that new types of tasks will be added and it will be easier and faster to make these changes with this being a joined table rather than an enum. The performance loss shouldn't be a concern except in cases of aggregating queue data, which would be more of an administrative task than a normal operation within the system.
+    * fields:
+      * id
+      * type
+        * one record each for values such as '!AcquireVessels', '!ReleaseVessels', '!ChangeUserKey', '!AddUserToVessels', '!SetupDonatedResources', '!DisableNode', '!EnableNode', ...
+        * using the names '!AcquireVessels' and '!ReleaseVessels' as there may be a reason to have separate '!AcquireResources' and '!ReleaseResources' types later on that are more than just simple vessel acquisition.
 
 === Keyserver Database ===
 
