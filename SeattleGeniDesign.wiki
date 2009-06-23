@@ -231,6 +231,30 @@ The details of the models (database schemas) are below. Note that with the decis
       * creation_date
       * expiration_date
 
+  * Queue
+    * purpose:
+      * Items in the queue represent tasks for the backend.
+      * Note: the table will be called "queue" --- that's not the name of each record. This model more of a table description than a data item description.
+    * fields:
+      * id
+      * source
+        * the client application that added this item to the queue (e.g. website, node transition script, other)
+      * status
+        * enum: 'New', '!InProgress', 'Completed', 'Failed'
+      * error_code
+      * error_message
+      * date_added
+      * date_started
+      * date_ended
+      * type
+        * enum: '!AcquireVessels', '!ReleaseVessels', '!ChangeUserKey', '!AddUserToVessels', '!SetupDonatedResources', '!DisableNode', '!EnableNode', ...
+        * using the names '!AcquireVessels' and '!ReleaseVessels' as there may be a reason to have separate '!AcquireResources' and '!ReleaseResources' types later on that are more than just simple vessel acquisition.
+      * [a field for each piece of information that is needed by each task type]
+      * [a field for each piece of information that is returned by each task type]
+    * notes
+      * another option besides including additional fields for each parameter and return value would be to create a separate table for each task type and have only the necessary fields in each table. That complicates the sql, though, when trying to aggregate data. This will be reconsidered when implementing if clarity is greatly enhanced by doing so. 
+
+
 === Keyserver Database ===
 
   * Key
