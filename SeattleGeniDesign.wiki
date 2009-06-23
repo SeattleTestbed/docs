@@ -146,7 +146,9 @@ Ultimately, various logged information should be summarized and available throug
 
 == Models ==
 
-The details of the models (database schemas) are below. Note that with the decision to move most work away from the website, there is a very strong argument to using a different ORM besides django's. This is especially true with the intention to use multiple databases (at least a main database and a keyserver database -- though these probably won't/shouldn't be being used from within the same application, the general idea of going forward in a way that will easily allow using multiple, separate database within the same application might save problems later). One option for such an ORM to use instead of django's is SQLAlchemy.
+The details of the models (database schemas) are below.
+
+Note that with the decision to move most work away from the website, there is a very strong argument for using a different ORM besides django's. This is especially true with the intention to use multiple databases (at least a main database and a keyserver database -- though these probably won't/shouldn't be being used from within the same application, the general idea of going forward in a way that will easily allow using multiple, separate database within the same application might save problems later). One option for such an ORM to use instead of django's is SQLAlchemy. One side effect of a decision to use a non-django ORM would likely be the loss of use of the django admin data views. This would just mean a bit more work to write the parts of that which are needed.
 
 === Main Database ===
 
