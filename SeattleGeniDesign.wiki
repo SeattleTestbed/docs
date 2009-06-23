@@ -31,6 +31,8 @@ At a high level, the idea will be to:
 
 === Website ===
 
+[[Image(geniportal_v3_website.gif)]]
+
   * End clients communicate with the website through either XML-RPC or HTTP.
   * The request's authorization is checked (e.g. ensure valid sesssion for HTTP) and
     the request is then sent through the Controller Interface.
@@ -56,6 +58,8 @@ backend server, but this may be extra indirection for little benefit.
 
 === Backend ===
 
+[[Image(geniportal_v3_backend.gif)]]
+
 The Backend performs fundamentally the same purpose as the current backend implementation. It
 provides a means for other code to hand off non-trivial tasks to a process that can ensure the
 tasks are done correctly and efficiently (proper ordering, mutual exclusion for shared data
@@ -78,11 +82,15 @@ The method by which the Backend determines that a privileged request is authoriz
 
 === Polling Daemons ===
 
+[[Image(geniportal_v3_polling_daemons.gif)]]
+
 Polling Daemons are any processes or scripts that perform general monitoring of nodes
 as well as node state transition functionality. These processes communicate with nodes
 through the Node Manager API. 
 
 === Keyserver ===
+
+[[Image(geniportal_v3_keyserver.gif)]]
 
 The Keyserver exposes a private XML-RPC interface for use by other code within the system,
 including the website and the Node Manager API. 
