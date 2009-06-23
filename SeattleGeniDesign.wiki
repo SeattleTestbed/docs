@@ -214,6 +214,8 @@ The details of the models (database schemas) are below. Note that with the decis
       * extra_vessel (whether this is an 'extra vessel')
       * acquired_by_user (foreign key to the users table)
         * if this vessel has been acquired by a user, this is the user who acquired it
+      * date_acquired
+      * date_expires
     * notes:
       * when we want to begin tracking individual resources in each vessel, we can create a !VesselResource table like the !DonationResource table.
 
@@ -224,14 +226,13 @@ The details of the models (database schemas) are below. Note that with the decis
       * vessel (foreign key to vessels table)
       * port
 
-  * !VesselUserMap
+  * !VesselUserAccessMap
     * purpose:
-      * A !VesselUserMap record represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
+      * A !VesselUserAccessMap record represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
     * fields:
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
-      * creation_date
-      * expiration_date
+      * date_added
 
   * Queue
     * purpose:
