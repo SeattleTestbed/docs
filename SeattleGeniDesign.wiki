@@ -1,6 +1,6 @@
 = !GeniPortal Version 3 Design Document/Proposal =
 
-This is a proposal for the rewrite of the !GeniPortal. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
+This is a proposal for the rewrite SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
 [[TOC(inline)]]
 
@@ -34,7 +34,7 @@ At a high level, the idea will be to:
 [[Image(geniportal_v3_website.gif)]]
 
   * End clients communicate with the website through either XML-RPC or HTTP.
-  * The request's authorization is checked (e.g. ensure valid sesssion for HTTP) and
+  * The request's authorization is checked (e.g. ensure valid session for HTTP) and
     the request is then sent through the Controller Interface.
   * The Controller then processes the request based on the type of request.
     * A request for a user to acquire/release vessels will be sent to the backend through
@@ -44,7 +44,7 @@ At a high level, the idea will be to:
       the website has sufficient privileges to execute).
     * Certain safe and simple database needs may go directly to the database through a
       Main DB Website API. This prevents the need to send every potential query through the
-      backed server, which may add unecessary complication and performance impacts.
+      backed server, which may add unnecessary complication and performance impacts.
       At a minimum this would include reading and updating user account information that could
       not interfere with backend operations.
       * This is called the "Main DB Website API" mostly just to emphasize that only a few
@@ -146,99 +146,107 @@ Ultimately, various logged information should be summarized and available throug
 
 == Models ==
 
-'''Note: this section hasn't been updated yet since jsamuel's Monday morning discussion with JAC.'''
+The details of the models (database schemas) are below. Note that with the decision to move most work away from the website, there is a very strong argument to using a different ORM besides django's. This is especially true with the intention to use multiple databases (at least a main database and a keyserver database -- though these probably won't/shouldn't be being used from within the same application, the general idea of going forward in a way that will easily allow using multiple, separate database within the same application might save problems later). One option for such an ORM to use instead of django's is SQLAlchemy.
 
-The following models are based on the old/current models. Some fields have been changed. The major change is that there is a !VesselUserMap model (a junction/map table) to provide a many-to-many map of vessels to users who have access to those vessels. The old/current models have a !VesselMap which is a map of Users to !VesselPorts (that is, the old/current design has an unnecessary level of indirection between the user record and the vessel record).
+=== Main Database ===
 
-JAC: Is the rest of this sensible?   I'd be happier redoing the rest of this as it makes sense.   We will likely end up rewriting much of the code, so the database can be completely changed.   
-
-jsamuel: As far as being sensible, I believe it generally is. There will very likely be yet more fields that are changed/removed/added when this is actually implemented (some of that probably due to my understanding of things growing and realizing there are bits I hadn't previously fully understood). In terms of general structure, though, I'll add here the argument for the basic structure. As long as this is sane, I'm not sure there's a lot of reason for drastically changing the basic db layout.
-
-Basic argument for the model:
-  * There are three major objects to be dealt with:
-    * users
-    * donations/nodes
-    * vessels
-  * It makes sense to have at least a table for each of these objects. The relationships between them are:
-    * each donation/node is donated by a single user
-    * each vessel is acquired by a single user
-    * each vessel will ultimately be accessible by multiple users
-    * each vessel has multiple ports associated with it
-  * If there was going to be a keyserver that tracked all keys, then any key references would probably be replaced by a key id.
-    * This indirection could be added now in the form of a keys table if needed, but that should be done in a way to ensure minimal code changes will be needed to change over to using a key server.
-
-The details of the models are as follow:
   * User
+    * purpose:
+      * A User record represents a !SeattleGeni user.
     * fields:
       * djangouser
         * links this record to the django user record
       * port
       * affiliation
-      * pubkey
-      * privkey
-      * donor_pubkey
-      * donor_privkey
-      * vessel_count_acquired
-        * the number of vessels this user owns
-        * this could be figured out through inspection of the vessels table but this scales better and may be used for atomicity of changes to the recorded number of vessels a user owns (without having to lock the vessels table, at least).
-      * vessel_credits_via_base
-      * vessel_credits_via_donations
+      * key_id
+      * donor_key_id
+    * notes
+      * For efficiency reasons, additional fields may be added to keep cached values for the amount of resources the user has donated and has acquired, rather than requiring calculating this information on demand.
 
-  * Donation
-    * thoughts:
-      * jsamuel: Should this be called a "Node" rather than a "Donation"?
+  * Node
+    * purpose:
+      * A Node record represents an individual nodemanager.
     * fields:
-      * donor (foreign key to the users table)
-      * pubkey
+      * key_id (used only for the public key which is the node's identifier)
       * ip
       * port
-      * subnet
       * date_added
       * last_heard
-      * status
-        * the rewrite will ensure that the status field is changed through specific functions to do so, as right now it is done through scattered string arguments. (At the moment I can see 'Initializing', 'Ready', and 'Intermediate' and that is all that appears in the database at the moment, as well.)
       * version
-      * epoch
-        * jsamuel: I'm not sure the epoch field is needed. it appears to only be used (strangely) in genidb.handle_inactive_donation().
       * active
-      * owner_pubkey
-      * owner_privkey
+      * owner_key_id (this is !SeattleGeni's owner key for this node)
+    * notes
+      * The subnet will be calculated as needed rather than stored unless the database impact is too high. If it needs to be saved, it will be an indexed string field. (The current implementation as the concatenated first three octets without periods looks flawed unless I'm reading it wrong).
+
+  * Donation
+    * purpose:
+      * A Donation record represents the resources a user has donated from a single node.
+    * fields:
+      * node (foreign key to nodes table)
+      * donor (foreign key to the users table)
+      * status
+        * This field will be used, if necessary, to indicate steps in the process of setting up a donation's resources for use (which, for now, would be creating vessels on the corresponding node using this donation's resources).
+    * notes
+      * In the future, there may be more than one donor of a node. For now it will be used as just one donation record per node record.
+
+  * !DonationResource
+    * purpose:
+      * A !DonationResource record represents the type and amount of an individual resource that is part of a donation. 
+    * fields:
+      * donation (foreign key to donations table)
+      * type
+        * enum: "resource" or "call"
+        * if type is "resource", then either the int_val or float_val field will be filled in.
+        * if type is "call", it is assumed to be "allow" by the fact this it is in here.
+      * name
+        * these will generally correspond to names of resources/calls in resource files, such as "loopsend", "connport", or "log.writelines"
+      * int_val
+      * float_val
 
   * Vessel
+    * purpose:
+      * A vessel record represents a vessel that !SeattleGeni has setup on a node. note that this is not tied to an individual donation of resources from that node.
     * fields:
-      * donation (foreign key to the donations table)
+      * node (foreign key to the nodes table)
       * name
       * status
         * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible status]
-        * as with the donation status field, let's keep these updates to specific functions in one place so that we know which statuses are used and can prevent typos. (I actually do see a typo -- 'Intialized' -- in the live database, but I think this much be an old bug as I can't see that string anywhere in the code.)
-      * extra_vessel
+      * extra_vessel (whether this is an 'extra vessel')
       * acquired_by_user (foreign key to the users table)
         * if this vessel has been acquired by a user, this is the user who acquired it
 
   * !VesselPort
-    * description:
-      * Represents a port that is available on a vessel. A single vessel can have multiple ports (multiple !VesselPort records).
+    * purpose:
+      * A !VesselPort record represents a port that is available on a vessel. A single vessel can have multiple ports (multiple !VesselPort records).
     * fields:
       * vessel (foreign key to vessels table)
       * port
-        * the actual port number, not a foreign key to a new "ports" table -- though that would seem technically correct and could be useful in a few rare cases, it feels like it would be over-complication
 
   * !VesselUserMap
-    * description:
-      * Represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through the !GeniPortal, the additional users would have records here.
+    * purpose:
+      * A !VesselUserMap record represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
     * fields:
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
       * creation_date
       * expiration_date
 
-Indexing
-  * The current database schema does not appear to make use of additional indexes for performance.
-  * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten.
-    * Indexes will be added where logical and should be tested using a large database with performance profiling.
+=== Keyserver Database ===
+
+  * Key
+    * purpose:
+      * A Key record represents a public/private key pair. The private key is optional (whether it should be there depends on the purpose of this stored key).
+    * fields:
+      * id
+      * pubkey
+      * privkey
 
 === Model Notes ===
 
+  * '''Indexing'''
+    * The current database schema does not appear to make use of additional indexes for performance.
+    * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten.
+      * Indexes will be added where logical and should be tested using a large database with performance profiling.
   * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit.
   * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
   * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
