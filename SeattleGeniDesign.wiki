@@ -205,19 +205,21 @@ The details of the models (database schemas) are below. Note that with the decis
 
   * Vessel
     * purpose:
-      * A vessel record represents a vessel that !SeattleGeni has setup on a node. note that this is not tied to an individual donation of resources from that node.
+      * A vessel record represents a vessel that !SeattleGeni has setup on a node. Note that this is '''not''' tied to an individual donation of resources from that node.
     * fields:
       * node (foreign key to the nodes table)
       * name
       * status
-        * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible status]
+        * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible statuses]
       * extra_vessel (whether this is an 'extra vessel')
       * acquired_by_user (foreign key to the users table)
         * if this vessel has been acquired by a user, this is the user who acquired it
+    * notes:
+      * when we want to begin tracking individual resources in each vessel, we can create a !VesselResource table like the !DonationResource table.
 
   * !VesselPort
     * purpose:
-      * A !VesselPort record represents a port that is available on a vessel. A single vessel can have multiple ports (multiple !VesselPort records).
+      * A !VesselPort record represents a port that is assigned to a vessel. A single vessel can have multiple ports assigned to it (multiple !VesselPort records).
     * fields:
       * vessel (foreign key to vessels table)
       * port
