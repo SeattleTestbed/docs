@@ -14,6 +14,6 @@ Please keep the list ordered alphabetically by SVN username.
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
 || Jenn Hanson|| hanson at cs || || jenn || jenn ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
-|| Sean || shawiz at cs || || sean || shawiz ||
+|| Sean Ren || shawiz at cs || || sean || shawiz ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
