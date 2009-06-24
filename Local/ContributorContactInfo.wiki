@@ -15,6 +15,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Jenn Hanson|| hanson at cs || || jenn || jenn ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
+|| Monzur Muhammad || monzum at cs || || monzum || monzum ||
 || Sean Ren || shawiz at cs || || sean || shawiz ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
