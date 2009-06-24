@@ -88,6 +88,8 @@ Polling Daemons are any processes or scripts that perform general monitoring of 
 as well as node state transition functionality. These processes communicate with nodes
 through the Node Manager API. 
 
+JAC: If we don't have these go through the queue, how do we prevent these from interfering with other tasks?
+
 === Keyserver ===
 
 [[Image(geniportal_v3_keyserver.gif)]]
