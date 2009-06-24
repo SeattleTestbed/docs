@@ -9,13 +9,11 @@ Please keep the list ordered alphabetically by SVN username.
 || Alper Sarikaya || alpers at cs || || alpers || alpers ||
 || Anthony Honstain || honsta at cs || || anthony || anthony ||
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
-|| Cosmin || || || || cosminb ||
-|| Brent Couvrette || couvb at cs ||    || couvb ||couvb ||
+|| Cosmin Barsan || || || || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
 || Jenn|| hanson at cs || || jenn || jenn ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
-|| Richard Jordan || richard at jordanyachts.com || || || ||
 || Sean || shawiz at cs || || sean || shawiz ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
