@@ -109,10 +109,10 @@ The method by which the Keyserver determines that a privileged request is author
 specified here for the moment. It may be as simple as a passphrase included with the request. Other security
 measures to be taken include only accepting requests from known IPs.
 
-=== Node Manager API ===
+'''Misc. Design Notes'''
 
-The Node Manager API internally makes use of the Keyserver API in order to, for example, obtain
-signed data to be communicated to nodes.
+The Node Manager API internally will make use of the Keyserver API in order to, for example, obtain
+signed data to be communicated to nodes. This is one reason why the Keyserver API doesn't show up in, for example, the Polling Daemons and Backend.
 
 ----
 
