@@ -13,6 +13,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Cosmin Barsan || || || cosminb || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
+|| Jason Chen || jchen at cs || || jchen || jchen ||
 || Jenn Hanson|| hanson at cs || || jenn || jenn ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
