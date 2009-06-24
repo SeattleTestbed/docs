@@ -1,6 +1,6 @@
 = !SeattleGeni Design Document/Proposal =
 
-This is a proposal for the rewrite SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
+This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
 [[TOC(inline)]]
 
