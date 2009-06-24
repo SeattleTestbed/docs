@@ -160,25 +160,40 @@ Note that with the decision to move most work away from the website, there is a 
     * fields:
       * djangouser
         * links this record to the django user record
-      * port
+      * usable_vessel_port
+        * the port which must be assigned to a vessel for the user to be able to acquire that vessel.
+        * this field may go away later on if users are no longer always assigned to the same port on all vessels.
       * affiliation
-      * key_id
-      * donor_key_id
+        * the text the user supplied which identifies the organization they are affiliated with.
+      * user_pubkey
+        * the corresponding private key, if stored, is stored in the keyserver and is accessible using this public key.
+        * a possible efficiency improvement to be implemented if necessary would be to store a flag indicating whether the private key existed. This would prevent the website from having to ask the keyserver anytime we want to be able to prompt the user to download/delete the private key.
+      * donor_pubkey
+        * the corresponding private key is always stored in the keyserver and is accessible using this public key.
     * notes
       * For efficiency reasons, additional fields may be added to keep cached values for the amount of resources the user has donated and has acquired, rather than requiring calculating this information on demand.
 
   * Node
     * purpose:
-      * A Node record represents an individual nodemanager.
+      * A Node record represents an individual nodemanager. When a node goes offline, it is marked inactive. Node records are never deleted because if they were and a node with a delete node's node_identifier came back online, the owner private key would have been lost.
     * fields:
-      * key_id (used only for the public key which is the node's identifier)
-      * ip
-      * port
-      * date_added
-      * last_heard
-      * version
-      * active
-      * owner_key_id (this is !SeattleGeni's owner key for this node)
+      * node_identifier
+        * the node's identifier (which happens to be a public key with no corresponding private key)
+      * last_known_ip
+        * the ip address the nodemanager was last known to be accessible through.
+      * last_known_port
+        * the port the nodemanager was last known to be accessible through.
+      * last_known_version
+        * the version of seattle the node was last known to be running.
+      * date_last_contacted
+        * the last time the node could be contacted by a monitoring script.
+      * is_active
+        * the node gets marked as not active when it becomes inaccessible.
+      * owner_pubkey
+        * the !SeattleGeni's owner key for this node.
+         * the private key is always stored in the keyserver and is accessible using this public key.
+      * extra_vessel_name
+        * the extra vessel will (at least in the near future) have the node's free resources assigned to it, so the name needs to be known in order to do things with those resources.
     * notes
       * The subnet will be calculated as needed rather than stored unless the database impact is too high. If it needs to be saved, it will be an indexed string field. (The current implementation as the concatenated first three octets without periods looks flawed unless I'm reading it wrong).
 
@@ -190,22 +205,11 @@ Note that with the decision to move most work away from the website, there is a 
       * donor (foreign key to the users table)
       * status
         * This field will be used, if necessary, to indicate steps in the process of setting up a donation's resources for use (which, for now, would be creating vessels on the corresponding node using this donation's resources).
+      * resource_description_text
+        * Simple storage of the contents of a resource file describing the donated resources.
+        * This information is not currently used anywhere. How this data is stored may change in the future and this field just serves to start keeping track of the information for now.
     * notes
       * In the future, there may be more than one donor of a node and so multiple Donation records for a single node but each with different donors. For now it will be used as just one donation record per node record.
-
-  * !DonationResource
-    * purpose:
-      * A !DonationResource record represents the type and amount of an individual resource that is part of a donation. 
-    * fields:
-      * donation (foreign key to donations table)
-      * type
-        * enum: "resource" or "call"
-        * if type is "resource", then either the int_val or float_val field will be filled in.
-        * if type is "call", it is assumed to be "allow" by the fact this it is in here.
-      * name
-        * these will generally correspond to names of resources/calls in resource files, such as "loopsend", "connport", or "log.writelines"
-      * int_val
-      * float_val
 
   * Vessel
     * purpose:
@@ -213,15 +217,12 @@ Note that with the decision to move most work away from the website, there is a 
     * fields:
       * node (foreign key to the nodes table)
       * name
-      * status
-        * there is a documented [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface list of possible statuses]
-      * extra_vessel (whether this is an 'extra vessel')
+        * the name used to refer to the vessel when communicating with the nodemanager
       * acquired_by_user (foreign key to the users table)
         * if this vessel has been acquired by a user, this is the user who acquired it
       * date_acquired
       * date_expires
-    * notes:
-      * when we want to begin tracking individual resources in each vessel, we can create a !VesselResource table like the !DonationResource table.
+        * the date after which the vessel should be taken away from the user who has acquired it.
 
   * !VesselPort
     * purpose:
@@ -236,7 +237,6 @@ Note that with the decision to move most work away from the website, there is a 
     * fields:
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
-      * date_added
 
   * Queue
     * purpose:
@@ -273,11 +273,16 @@ Note that with the decision to move most work away from the website, there is a 
 
   * Key
     * purpose:
-      * A Key record represents a public/private key pair. The private key is optional (whether it should be there depends on the purpose of this stored key).
+      * A Key record represents a public/private key pair. Keys are referenced by the public keys themselves. A keypair only needs to be stored here if there is need to store a private key.
     * fields:
-      * id
       * pubkey
+        * the way the client code refers to this key.
       * privkey
+        * this will always be set for any record, as there is no reason to only store just a public key.
+      * usage_identifier
+        * a unique name in the !SeattleGeni system where this key is used. for example, this would identify a given key is a specific user record's donor key.
+        * possible example: "user:123:donor" to represent user 123's donor key.
+        * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and information purposes, not for authentication in any way. It may end up only being read by separate scripts and never read within the keyserver (only written by the keyserver).
       * allow_unprivileged
         * flag to indicate whether this key is accessible to unprivileged client applications (e.g. the website).
         * if an unprivileged client requests this key (or, possibly just the private key/signing services), the request would be rejected if this flag is not set.
