@@ -9,6 +9,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Alper Sarikaya || alpers at cs || || alpers || alpers ||
 || Anthony Honstain || honsta at cs || || anthony || anthony ||
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
+|| Conrad Meyer || cemeyer at cs || || cemeyer || cemeyer ||
 || Cosmin Barsan || || || cosminb || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
