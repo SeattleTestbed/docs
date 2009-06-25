@@ -458,6 +458,32 @@ Returns a lock object that can be used for mutual exclusion and critical section
       The lock object.
 
 [[BR]]
+==== lock.acquire(blocking=1) ====
+----
+
+Blocks until the lock is available, then takes it (lock is an object obtained by calling getlock()).
+
+If the optional "blocking" argument is False, the method returns False immediately instead of waiting to acquire the lock; if the lock is available it takes it and returns True, as if it were called with no argument.
+
+ * Doc string:
+
+
+   <Purpose>
+      Acquires a lock.
+
+   <Arguments>
+      blocking (optional) - if False, returns immediately instead of waiting to acquire the lock.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Locks the object.
+
+   <Returns>
+      True if the lock was acquired, False otherwise.
+
+[[BR]]
 ==== getruntime() ====
 ----
 
