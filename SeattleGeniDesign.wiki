@@ -245,7 +245,7 @@ Whether logged to a database or text files, a summarization/visualization of log
 
 == Database / Data Models ==
 
-It is likely we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The drawbacks of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL. The benefit of using django's ORM will likely be code that is easier to understand in the common case. The models defined below do not seem to be complex enough such that they will be limited by what django's ORM lacks.
+It is likely that we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The drawbacks of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL. The benefit of using django's ORM will likely be code that is easier to understand in the common case. The models defined below do not seem to be complex enough such that they will be limited by what django's ORM lacks. Using the django ORM has the benefit of allowing use of the django admin data views, as well.
 
 The details of the models (database schemas) are below.
 
@@ -269,7 +269,7 @@ The details of the models (database schemas) are below.
           * the user will be encouraged through the Website to download this private key and have us delete our copy of it.
       * api_key
         * this is not a cryptographic key
-        * this is a API key that we generate which can be used with the public !SeattleGeni XML-RPC interface.
+        * this is an API key that we generate which can be used with the public !SeattleGeni XML-RPC interface.
         * the purpose is to allow developers to use the XML-RPC interface without requiring them to embed their passphrase in their source code.
       * donor_pubkey
         * the corresponding private key is always stored in the keyserver and is accessible using this public key.
