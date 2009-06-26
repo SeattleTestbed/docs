@@ -235,9 +235,11 @@ Whether logged to a database or text files, a summarization/visualization of log
   * Test data:
     * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
   * Dependency injection to increase testability using mock objects:
-    * at least in databases and the Node Manager API so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
-    * will not be aiming for idealized testability in design where that conflicts with the coding style of the project (i.e. monkey patching ok if code changes for dependency injection don't fit well)
-      * that is, testability is more important than test style
+    * the various APIs used by the Website and Backend (as well as other components) should each be able to be mocked out in order to test a component independent of actions performed by the APIs used in the component.
+      * for example, the Controller should be able to be tested using a mock Privileged Operation API, mock Keygen API, mock Lockserver API, and mock DB API in order to allow testing of only the Controller.
+    * will not be aiming for idealized testability in design where that conflicts with the coding style of the project
+      * monkey patching is ok if code changes for dependency injection don't fit well
+      * testability is more important than test code style
 
 ----
 
