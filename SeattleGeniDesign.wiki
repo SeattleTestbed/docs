@@ -37,6 +37,7 @@ At a high level, the idea will be to:
 
 [[Image(seattlegeni_website.gif)]]
 
+Overview:
   * End clients communicate with the Website through either XML-RPC or HTTP.
   * The request's authorization is checked (e.g. ensure valid session for HTTP) and
     the request is then sent through the Controller Interface.
@@ -65,6 +66,7 @@ APIs used:
 
 [[Image(seattlegeni_backend.gif)]]
 
+Overview:
   * The Privileged Operation Backend (a.k.a. "the Backend") performs fundamentally the same purpose as the current backend implementation, which is the performing of nodemanager communication indirectly resulting from user requests.
     * The primary motivation for this is that Website will be an unprivileged component of the system without access to privileged keys, which are needed for nodemanager communication.
   * The Backend exposes a private XML-RPC interface for use by other code within the system,
