@@ -33,7 +33,7 @@ At a high level, the idea will be to:
 
 === Website ===
 
-[[Image(geniportal_v3_website.gif)]]
+[[Image(seattlegeni_website.gif)]]
 
   * End clients communicate with the Website through either XML-RPC or HTTP.
   * The request's authorization is checked (e.g. ensure valid session for HTTP) and
@@ -51,7 +51,7 @@ At a high level, the idea will be to:
 
 === Backend ===
 
-[[Image(geniportal_v3_backend.gif)]]
+[[Image(seattlegeni_backend.gif)]]
 
   * The Backend performs fundamentally the same purpose as the current backend implementation, which is
     the performing of nodemanager communication indirectly resulting from user requests.
@@ -105,8 +105,6 @@ non-blocking lock requests that will return a lock acquisition failure if the lo
 
 === Keyserver ===
 
-[[Image(geniportal_v3_keyserver.gif)]]
-
 The Keyserver exposes a private XML-RPC interface for use by other code within the system,
 including the website and the Node Manager API. 
 
@@ -123,8 +121,6 @@ The method by which the Keyserver determines that a privileged request is author
 specified here for the moment. It may be as simple as a passphrase included with the request.
 
 === Polling Daemons ===
-
-[[Image(geniportal_v3_polling_daemons.gif)]]
 
 Polling Daemons are any processes or scripts that perform general monitoring of nodes
 as well as node state transition functionality. These processes communicate with nodes
