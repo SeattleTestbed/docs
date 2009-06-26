@@ -24,71 +24,84 @@ This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comme
 == New Design Plan ==
 
 At a high level, the idea will be to:
-  * Take the existing concept of a separate backend server and extend it to handling most data-modifying and node-modifying actions.
-  * Implement an explicit queue of actions in the backend server.
-  * Move all keys to a separate keyserver.
-  * Limit the website's role to mostly very simple data access, minimally-privileged keyserver requests, and interacting with the backend server.
+  * Redesign the data model to more accurately represent the current (and likely future) data to be stored.
+  * Implement a Lockserver that will be used by all other components of the system to ensure mutual exclusion in modification of data and node communication.
+  * Rewrite/refactor code for readability, ease of testing, locking, logging, etc.
+  * Keep the existing separate Backend server and extend it to handle more data-modifying and node-modifying actions.
+  * Move all private keys to a separate Keyserver.
+  * Restrict the the Website from performing arbitrary Keyserver requests or signed nodemanager calls.
 
 === Website ===
 
 [[Image(geniportal_v3_website.gif)]]
 
-  * End clients communicate with the website through either XML-RPC or HTTP.
+  * End clients communicate with the Website through either XML-RPC or HTTP.
   * The request's authorization is checked (e.g. ensure valid session for HTTP) and
     the request is then sent through the Controller Interface.
   * The Controller then processes the request based on the type of request.
-    * A request for a user to acquire/release vessels will be sent to the backend through
-      the Backend API.
-    * A request to obtain the user's public or private key, or to delete the user's
-      private key, will go through the Keyserver Low-Auth API (the only keyserver API calls that
-      the website has sufficient privileges to execute).
-    * Certain safe and simple database needs may go directly to the database through a
-      Main DB Website API. This prevents the need to send every potential query through the
-      backed server, which may add unnecessary complication and performance impacts.
-      At a minimum this would include reading and updating user account information that could
-      not interfere with backend operations.
-      * This is called the "Main DB Website API" mostly just to emphasize that only a few
-        direct database actions will be performed by the Controller.
-
-Note that the Website could just do more/everything through the backend server, but that might result in
-excessive communication to fulfill simple website requests and clutter the backend interface.
-This is open for debate and change. For example, it
-might be worthwhile to require user private key reading (for download by the user) to go through the
-backend server, but this may be extra indirection for little benefit.
+    * The Controller will handle as much of the work as it can given the limitation that, as it
+      is part of the Website, it cannot perform nodemanager calls directly or access arbitrary keys.
+      * The Controller will leverage the Backend to perform actions that it cannot perform directly.
+        * For example, a request for a user to acquire/release vessels will ultimately require using
+          the Backend API in order to perform the required nodemanager calls.
+    * A request to download the user's private key, or to delete the user's private key, will go
+      through the Keyserver Low-Auth API (the only keyserver API calls that the Website has sufficient
+      privileges to execute).
+    * The Website will do locking through the Lockserver as needed.
 
 === Backend ===
 
 [[Image(geniportal_v3_backend.gif)]]
 
-The Backend performs fundamentally the same purpose as the current backend implementation. It
-provides a means for other code to hand off non-trivial tasks to a process that can ensure the
-tasks are done correctly and efficiently (proper ordering, mutual exclusion for shared data
-access, safely parallelized operations).
+  * The Backend performs fundamentally the same purpose as the current backend implementation, which is
+    the performing of nodemanager communication indirectly resulting from user requests.
+    * This will now have the extra motivation of the fact that the Website will not be able to directly perform nodemanager
+      communication.
+  * The Backend exposes a private XML-RPC interface for use by other code within the system,
+    including the Website and Polling Daemons.
+  * The Backend will do locking through the Lockserver as needed.
 
-The Backend maintains an explicit Queue of tasks which are stored in a database. The tasks
-in the Queue are processed by a thread called the Queue Runner.
+=== Lockserver ===
 
-The Backend exposes a private XML-RPC interface for use by other code within the system,
-including the Website and Polling Daemons.
-  * Requests that can be safely fulfilled without risk of data access conflicts can be fulfilled immediately without being entered in the Queue.
-    * Such requests are inherently synchronous requests.
-  * Requests that cannot be safely fulfilled without risk of data access conflicts are entered in the Queue.
-    * Such requests are inherently asynchronous requests, but the Backend XML-RPC Interface can also provide a synchronous interface to any such action.
-      * For these requests, a task_id is assigned (the id in the Queue).
-      * For XML-RPC requests that are intended to be asynchronous requests, the task_id is returned and can be used to query the status of the task later.
-      * For XML-RPC requests that are intended to be synchronous, the response can block until the queued task has been performed.
+The Lockserver exposes a private XML-RPC interface for use by other code within the system,
+including the Website, Backend, and Polling Daemons. The purpose is to allow client code
+to be guaranteed exclusive access to some parts of the system.
 
-The method by which the Backend determines that a privileged request is authorized is not specified here for the moment. It may be as simple as a passphrase included with the request. Other security measures to be taken include only accepting requests from known IPs. 
+The following lock types will exist:
+  * ''global''
+    * excludes the granting of any other lock
+    * there should be few or no cases where this is needed in client code, but could be useful for maintenance tasks, for example.
+  * ''user''
+    * used for most user-initiated actions to ensure sequential order per-user
+    * examples of cases where used:
+      * user key change
+      * user resource acquisition/release
+      * user deletion
+  * ''node''
+    * can only be obtained if no locks on individual vessels of the node
+    * examples of cases where used:
+      * node state transition scripts
+  * ''vessel''
+    * can only be obtained if no locks on the corresponding node
+    * examples of cases where used:
+      * vessel acquisition/release
+      * node state transition scripts
+      * user key change
+      * could be used in the future to lock the extra vessel if resource allocation to/from the extra vessel is implemented
 
-=== Polling Daemons ===
+Lock requests will include one or more identifiers for one or more types of locks. For example, a lock request
+may be made for 6 different vessels and one user.
 
-[[Image(geniportal_v3_polling_daemons.gif)]]
+Lock request will be granted sequentially. When some locks are held, subsequent requests for non-conflicting
+locking will be granted. When a request is made for a lock that is already held, all subsequent requests will be
+queued until the first waiting request can be granted. (Non-conflicting pending requests can't be safely granted
+out of order because it might cause starvation of some requests -- at least, it can't be done with simple logic
+and we won't attempt to do that.)
 
-Polling Daemons are any processes or scripts that perform general monitoring of nodes
-as well as node state transition functionality. These processes communicate with nodes
-through the Node Manager API. 
-
-JAC: If we don't have these go through the queue, how do we prevent these from interfering with other tasks?
+Initially the Lockserver will be implemented in the simplest manner possible and client code will only
+make use of blocking lock requests. When it is determined to be needed for efficiency or other
+reasons, the Lockserver can be extended to allow client code to perform more advanced requests, such as
+non-blocking lock requests that will return a lock acquisition failure if the lock can't be granted immediately.
 
 === Keyserver ===
 
@@ -97,24 +110,26 @@ JAC: If we don't have these go through the queue, how do we prevent these from i
 The Keyserver exposes a private XML-RPC interface for use by other code within the system,
 including the website and the Node Manager API. 
 
-The Keyserver maintains all keys. No keys are stored in any other part of the system. When
-a public and/or private key needs to be stored, it is stored in the keyserver and a unique
-id can then be communicated to the Keyserver XML-RPC Interface to perform actions with the key.
+The Keyserver maintains all private keys. No keys private are stored in any other part of the system. When
+a private key needs to be stored, it is stored in the Keyserver and the corresponding public key can be
+communicated to the Keyserver to perform actions involving the private key.
 
 Actions performed by the Keyserver include:
-  * Store/delete/retrieve public/private key.
+  * Store/delete/retrieve private key.
   * Sign data with a private key.
-  * Verify data signature with a public key.
 
 Only a few actions will be authorized to be performed when the request comes from the Website.
 The method by which the Keyserver determines that a privileged request is authorized is not
-specified here for the moment. It may be as simple as a passphrase included with the request. Other security
-measures to be taken include only accepting requests from known IPs.
+specified here for the moment. It may be as simple as a passphrase included with the request.
 
-'''Misc. Design Notes'''
+=== Polling Daemons ===
 
-The Node Manager API internally will make use of the Keyserver API in order to, for example, obtain
-signed data to be communicated to nodes. This is one reason why the Keyserver API doesn't show up in, for example, the Polling Daemons and Backend.
+[[Image(geniportal_v3_polling_daemons.gif)]]
+
+Polling Daemons are any processes or scripts that perform general monitoring of nodes
+as well as node state transition functionality. These processes communicate with nodes
+directly through the Node Manager API unless there is shared functionality that has
+reason to exist in the Backend.
 
 ----
 
@@ -125,9 +140,12 @@ Logging will be available in multiple ways:
   * Logging at the controller interface will be possible (allows logging requests/response, recording time, etc. independent of frontend -- though much of this may be taken care of by the backend when processing the queue).
   * Use of the python logger module (no calls to "print", ever).
   * Email critical errors to developers (include request/response information).
-  * As the queue maintained by the backend will not be deleting processed requests but rather only marking them as completed with their resulting information, this will provide a log in itself.
+  * Lockserver logging requests including how long released locks were held. Potentially notify developers if a lock has been held an unusual amount of time.
+  * Keyserver logging all requests.
 
-Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. This would include details of exceptions, number of types of requests, average request times for different requests, etc. A summarization/visualization of this data helps to identify logic bugs. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
+Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. Log files by themselves tend to not be looked at by humans except after something is known to be going wrong. Where possible and efficient, some data may be logged to a database in order to facilitate easy summarization of the data (this wouldn't replace file logging).
+
+Whether logged to a database or text files, a summarization/visualization of log data helps to identify logic bugs or other problems in the system. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
 ----
 
@@ -135,22 +153,25 @@ Ultimately, various logged information should be summarized and available throug
 
   * Unit tests at various locations:
     * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
-    * controller interface
-    * keyserver
-    * backend
-    * nodemanager api
+    * Controller
+    * Keyserver
+    * Lockserver
+    * Backend
   * Test data:
     * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
   * Dependency injection to increase testability using mock objects:
     * at least in databases and the Node Manager API so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
+    * will not be aiming for idealized testability in design where that conflicts with the coding style of the project (i.e. monkey patching ok if code changes for dependency injection don't fit well)
 
 ----
 
-== Models ==
+== Database / Data Models ==
+
+It is likely we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The result of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL but with the code being easier to understand in the common case.
+
+jsamuel: SQLAlchemy would be more fun to use but seems less maintainable by other people as it generally seems less distanced from the underlying data. I'm very open to arguments in favor of SQLAlchemy to justify its use initially. Regarding complex queries and raw SQL, I don't think using the ORM for complex queries actually helps when people aren't experts with the ORM, as it usually takes a long time to write it without SQL and the result can be not what one intended. The models defined below I don't think are complex enough such that they are limited by what django's ORM lacks.
 
 The details of the models (database schemas) are below.
-
-Note that with the decision to move most work away from the website, there is a very strong argument for using a different ORM besides django's. This is especially true with the intention to use multiple databases (at least a main database and a keyserver database -- though these probably won't/shouldn't be being used from within the same application, the general idea of going forward in a way that will easily allow using multiple, separate database within the same application might save problems later). One option for such an ORM to use instead of django's is SQLAlchemy. One side effect of a decision to use a non-django ORM would likely be the loss of use of the django admin data views. This would just mean a bit more work to write the parts of that which are needed.
 
 === Main Database ===
 
@@ -238,36 +259,7 @@ Note that with the decision to move most work away from the website, there is a 
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
 
-  * Queue
-    * purpose:
-      * Items in the queue represent tasks for the backend.
-      * Note: the table will be called "queue" --- that's not the name of each record. This model is more of a table description than a data item description.
-    * fields:
-      * id
-      * source
-        * the client application that added this item to the queue (e.g. website, node transition script, other)
-      * status
-        * enum: 'New', '!InProgress', 'Completed', 'Failed'
-      * error_code
-      * error_message
-      * date_added
-      * date_started
-      * date_ended
-      * task_type (foreign key to !QueueTaskType table)
-      * [a field for each piece of information that is needed by each task type]
-      * [a field for each piece of information that is returned by each task type]
-    * notes
-      * another option besides including additional fields for each parameter and return value would be to create a separate table for each task type and have only the necessary fields in each table. That complicates the sql, though, when trying to aggregate data. This will be reconsidered when implementing if clarity is greatly enhanced by doing so. In general, I think this would be referred to as "disjoint subtypes" or "polymorphism in databases" (as in, the queue table would be a base type and the other tables would be the subtypes). Depending on the ORM used, functionality to support this easily could already be supported (e.g. SQLAlchemy's "with_polymorphism").
-      * depending on the exact types of tasks that get defined, it seems likely that this table could easily grow by 1000 records a day when seattle gains some momentum. 10k a day might not even be out of the question. So, we're looking at 400k+ records a year. I don't expect this to be a problem. Performance shouldn't suffer with less than a few million records (aside from any aggregation/statistics queries that may be being run administratively). When it becomes necessary, an archiver script can be run to move records from the live queue table to a separate archive queue table.
-
-  * !QueueTaskType
-    * purpose:
-      * A !QueueTaskType represents a type of task in the queue. The reason an enum field isn't used in Queue is because it is likely that new types of tasks will be added and it will be easier and faster to make these changes with this being a joined table rather than an enum. The performance loss shouldn't be a concern except in cases of aggregating queue data, which would be more of an administrative task than a normal operation within the system.
-    * fields:
-      * id
-      * type
-        * one record each for values such as '!AcquireVessels', '!ReleaseVessels', '!ChangeUserKey', '!AddUserToVessels', '!SetupDonatedResources', '!DisableNode', '!EnableNode', ...
-        * using the names '!AcquireVessels' and '!ReleaseVessels' as there may be a reason to have separate '!AcquireResources' and '!ReleaseResources' types later on that are more than just simple vessel acquisition.
+There will likely be additional tables for logging.
 
 === Keyserver Database ===
 
