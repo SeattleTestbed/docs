@@ -4,14 +4,14 @@ The Geni XMLRPC service is available at https://seattlegeni.cs.washington.edu/xm
 
 == Setup Notes ==
 
-The plain-http server runs locally on port 8000. (TODO: firewall this off/listen only locally so people can't get to it insecurely.)
+The plain-http server runs locally on port 9001. (TODO: firewall this off/listen only locally so people can't get to it insecurely.)
 
 It is made available through the secure url with the addition of the following to SSL !VirtualHost in /etc/apache2/mods-enabled/000-default
 
 {{{
     <Location /xmlrpc>
       RewriteEngine on
-      RewriteRule .* http://localhost:8000/ [P,L]
+      RewriteRule .* http://localhost:9001/ [P,L]
     </Location>
 }}}
 
