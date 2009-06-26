@@ -26,9 +26,11 @@ This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comme
 At a high level, the idea will be to:
   * Redesign the data model to more accurately represent the current (and likely future) data to be stored.
   * Implement a Lockserver that will be used by all other components of the system to ensure mutual exclusion in modification of data and node communication.
+  * Move all private keys used by !SeattleGeni to a separate Keyserver.
   * Rewrite/refactor code for readability, ease of testing, locking, logging, etc.
-  * Keep the existing separate Backend server and extend it to handle more data-modifying and node-modifying actions.
-  * Move all private keys to a separate Keyserver.
+  * Keep the existing separate Backend server and give it the responsibility for privileged operations requiring the usage of private keys.
+    * The Backend will be formally called the Privileged Operation Backend.
+    * All nodemanager communication the Website needs done will go through the Backend as such communication requires signing by keys maintained by the Keyserver.
   * Restrict the Website from performing arbitrary Keyserver requests or signed nodemanager calls.
 
 === Website ===
@@ -41,26 +43,50 @@ At a high level, the idea will be to:
   * The Controller then processes the request based on the type of request.
     * The Controller will handle as much of the work as it can given the limitation that, as it
       is part of the Website, it cannot perform nodemanager calls directly or access arbitrary keys.
-      * The Controller will leverage the Backend to perform actions that it cannot perform directly.
+      * The Controller will leverage the Privileged Operation Backend (through the Privileged Operation API)
+        to perform actions that it cannot perform directly.
         * For example, a request for a user to acquire/release vessels will ultimately require using
-          the Backend API in order to perform the required nodemanager calls.
-    * A request to download the user's private key, or to delete the user's private key, will go
-      through the Keyserver Low-Auth API (the only keyserver API calls that the Website has sufficient
-      privileges to execute).
-    * The Website will do locking through the Lockserver as needed.
+          the Privileged Operation API in order to perform the required nodemanager calls.
+    * The Controller will do locking through the Lockserver as needed.
 
-=== Backend ===
+APIs used:
+  * Privileged Operation API
+    * This handles communication with the Privileged Operation Backend.
+  * Keygen API
+    * This handles communication with the Keygen Service.
+      * The Keygen Service is not the same thing as the Keyserver!
+      * The Keygen Service's main purpose is to provide unique keys when new keys are needed in order to prevent the keys needing to be generated in all client code in real time.
+  * Lockserver API
+    * This handles communication with the Lockserver.
+  * DB API
+    * This performs any required database operations.
+
+=== Privileged Operation Backend ===
 
 [[Image(seattlegeni_backend.gif)]]
 
-  * The Backend performs fundamentally the same purpose as the current backend implementation, which is
-    the performing of nodemanager communication indirectly resulting from user requests.
-    * This will now have the extra motivation of the fact that the Website will not be able to directly perform nodemanager
-      communication.
+  * The Privileged Operation Backend (a.k.a. "the Backend") performs fundamentally the same purpose as the current backend implementation, which is the performing of nodemanager communication indirectly resulting from user requests.
+    * The primary motivation for this is that Website will be an unprivileged component of the system without access to privileged keys, which are needed for nodemanager communication.
   * The Backend exposes a private XML-RPC interface for use by other code within the system,
     including the Website and Polling Daemons.
+    * The nodemanager communication the Polling Daemons need to perform may or may not be moved to the Backend.
+      * The possible reasons to do so include:
+        * Being able to have the Polling Daemons be untrusted components (e.g. run in less secure environments)
+        * Allow the Backend to more efficiently handle nodemanager communication.
+          * Example: background releasing of vessels while maintaining locks on those vessels. This may not be the greatest example, but ideas along these lines may be easier to implement if the nodemanager communication is kept in one place.
   * The Backend will do locking through the Lockserver as needed.
-  * The backend uses a Geni Nodemanager API to do actual node communication. This is just a simple wrapper around the nmclient.
+
+APIs used:
+  * Geni Nodemanager API
+    * This does the actual node communication.
+    * This is just a simple wrapper around the nmclient.
+  * Keyserver API
+    * This handles communication with the Keyserver.
+    * This is used in order to provide signed data and/or private keys to the Geni Nodemanager API in order to perform secure communication with nodes.
+  * Lockserver API
+    * This handles communication with the Lockserver.
+  * DB API
+    * This performs any required database operations.
 
 === Lockserver ===
 
@@ -68,58 +94,64 @@ The Lockserver exposes a private XML-RPC interface for use by other code within 
 including the Website, Backend, and Polling Daemons. The purpose is to allow client code
 to be guaranteed exclusive access to some parts of the system.
 
-The following lock types will exist:
-  * ''global''
-    * excludes the granting of any other lock
-    * there should be few or no cases where this is needed in client code, but could be useful for maintenance tasks, for example.
-  * ''user''
-    * used for most user-initiated actions to ensure sequential order per-user
-    * examples of cases where used:
-      * user key change
-      * user resource acquisition/release
-      * user deletion
-  * ''node''
-    * can only be obtained if no locks on individual vessels of the node
-    * examples of cases where used:
-      * node state transition scripts
-  * ''vessel''
-    * can only be obtained if no locks on the corresponding node
-    * examples of cases where used:
-      * vessel acquisition/release
-      * node state transition scripts
-      * user key change
-      * could be used in the future to lock the extra vessel if resource allocation to/from the extra vessel is implemented
-
-Lock requests will include one or more identifiers for one or more types of locks. For example, a lock request
-may be made for 6 different vessels and one user.
-
-Lock request will be granted sequentially. When some locks are held, subsequent requests for non-conflicting
-locking will be granted. When a request is made for a lock that is already held, all subsequent requests will be
-queued until the first waiting request can be granted. (Non-conflicting pending requests can't be safely granted
-out of order because it might cause starvation of some requests -- at least, it can't be done with simple logic
-and we won't attempt to do that.)
-
-Initially the Lockserver will be implemented in the simplest manner possible and client code will only
-make use of blocking lock requests. When it is determined to be needed for efficiency or other
-reasons, the Lockserver can be extended to allow client code to perform more advanced requests, such as
-non-blocking lock requests that will return a lock acquisition failure if the lock can't be granted immediately.
+  * The following lock types will exist:
+    * ''global''
+      * excludes the granting of any other lock
+      * there should be few or no cases where this is needed in client code, but could be useful for maintenance tasks, for example.
+    * ''user''
+      * used for most user-initiated actions to ensure sequential ordering of multiple requests by the same user.
+      * examples of cases where used:
+        * user key change
+        * user resource acquisition/release
+        * user deletion
+    * ''node''
+      * can only be obtained if no locks on individual vessels of the node
+      * examples of cases where used:
+        * node state transition scripts
+    * ''vessel''
+      * can only be obtained if no locks on the corresponding node
+      * examples of cases where used:
+        * vessel acquisition/release
+        * node state transition scripts
+        * user key change
+        * could be used in the future to lock the extra vessel if resource allocation to/from the extra vessel is implemented
+  * Initially lock requests will be for single identifiers of a single lock type.
+    * For example, a lock request for "vessel 7".
+    * The following can be added when they become needed:
+      * Lock requests for multiple identifiers of a single lock type (e.g. "vessels 1,3,4,7")
+        where the lock would be granted only when all of the requested locks can be obtained.
+      * Lock requests that can include one or more identifiers for one or more types of locks. For example, a lock request for
+        "vessels 1,3,4,7 and user 1234".
+  * Lock request will be granted sequentially.
+    * When some locks are held, subsequent requests for non-conflicting locking will be granted.
+    * When a request is made for a lock that is already held, all subsequent requests will be
+      queued until the first waiting request can be granted. 
+      * (Non-conflicting pending requests can't be safely granted
+        out of order because it might cause starvation of some requests -- at least, it can't be done with simple logic
+        and we won't attempt it.)
+  * Initially the Lockserver will be implemented in the simplest manner possible and client code will only
+    make use of blocking lock requests.
+    * When it is determined to be needed for efficiency or other
+      reasons, the Lockserver can be extended to allow client code to perform more advanced requests, such as
+      non-blocking lock requests that will return a lock acquisition failure if the lock can't be granted immediately.
 
 === Keyserver ===
 
-The Keyserver exposes a private XML-RPC interface for use by other code within the system,
-including the website and the Node Manager API. 
+The Keyserver exposes a private XML-RPC interface for use by privileged code within the system.
+  * The Website is not a privileged component, and so will not be allowed to make requests to the Keyserver.
+  * All private keys used by !SeattleGeni will be stored only in the Keyserver and nowhere else.
+    * This excludes private keys belonging to users, which will be stored in the Main Database.
+      * A user's private key should only exist temporarily in our possession when the user has us generate their keys.
+      * We do not use these private keys anywhere in our system.
+      * The Website must have access to these keys so that users can download them (before requesting us to delete them).
+  * Private keys are referenced by client code using the corresponding public key.
+  * Actions performed by the Keyserver are:
+    * Store/delete/retrieve private key.
+    * Sign data with a private key.
 
-The Keyserver maintains all private keys. No keys private are stored in any other part of the system. When
-a private key needs to be stored, it is stored in the Keyserver and the corresponding public key can be
-communicated to the Keyserver to perform actions involving the private key.
-
-Actions performed by the Keyserver include:
-  * Store/delete/retrieve private key.
-  * Sign data with a private key.
-
-Only a few actions will be authorized to be performed when the request comes from the Website.
-The method by which the Keyserver determines that a privileged request is authorized is not
+The method by which the Keyserver determines that a request is authorized is not
 specified here for the moment. It may be as simple as a passphrase included with the request.
+It may also include verifying the IP address that the request originates from.
 
 === Polling Daemons ===
 
@@ -128,15 +160,19 @@ as well as node state transition functionality. These processes communicate with
 directly through the Node Manager API unless there is shared functionality that has
 reason to exist in the Backend.
 
+APIs used:
+  * If Polling Daemons do not perform node communication through the Backend, they use the same APIs as the Backend.
+  * If Polling Daemons use the Backend for node communication and thus can be run as unprivileged (or less-privileged) code, then they would not use the Geni Nodemanager API or the Keyserver API but rather the Privileged Operation API.
+
 ----
 
 == An Example Request Being Handled ==
 
-A user requests new vessels through the website (either through HTTP or XMLRPC).
+A user requests new vessels through the website (either through HTTP or XML-RPC).
 
 ''In the Website''
 
-The details of the request are passed to the Controller Interface (which is part of the controller, but is the only part of the Controller directly communicated with by the HTTP or XMLRPC frontends).
+The details of the request are passed to the Controller Interface (which is part of the controller, but is the only part of the Controller directly communicated with by the HTTP or XML-RPC frontends).
 
 The Controller sees that the request needs to have a ''user'' lock and obtains one through the Lockserver API (blocking until the lock is obtained).
 
@@ -144,11 +180,11 @@ The Controller determines whether the user is allowed the requested resources (t
 
 The Controller determines whether there are sufficient resources available to fulfill the request and, if so, which resources (e.g. specific vessels) those are. This is done without locking and so there is no guarantee at this point that the resources will be able to be acquired for this user. If there are not sufficient resources, the user lock is released and the proper response is returned to the frontend.
 
-At this point the controller knows a set of vessels it wants to acquire for the user. The Controller repeatedly uses Backend API calls to acquire the needed individual vessels for the user.
+At this point the controller knows a set of vessels it wants to acquire for the user. The Controller repeatedly uses Privileged Operation API calls to acquire the needed individual vessels for the user.
 
 ''In the Backend''
 
-The Backend receives the request (through its XML-RPC interface) to assign a specific vessel to a specific user.
+The Privileged Operation Backend receives the request (through its XML-RPC interface) to assign a specific vessel to a specific user.
 
 The Backend obtains a lock for this vessel through the Lockserver API (blocking until the lock is obtained).
 
@@ -156,7 +192,7 @@ Now that the Backend has a lock for this vessel, it uses the Database API to det
 
 The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the vessel. If the call fails, the Backend releases the vessel lock and returns a proper response.
 
-(The Geni Nodemanager API is a simple library that in turn uses the Keyserver API to obtain signed data for the actual nodemanager communication.)
+(The Geni Nodemanager API is used in combination with the Keyserver API to perform signed nodemanager communication.)
 
 Once the !ChangeUser call to the node is complete, the Backend uses the Database API to update the database to indicate this vessel's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the vessel but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
 
@@ -188,7 +224,7 @@ Whether logged to a database or text files, a summarization/visualization of log
 
 == Testing ==
 
-  * Unit tests at various locations:
+  * Unit tests at various locations, for example:
     * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
     * Controller
     * Keyserver
@@ -199,14 +235,13 @@ Whether logged to a database or text files, a summarization/visualization of log
   * Dependency injection to increase testability using mock objects:
     * at least in databases and the Node Manager API so that, for example, other functions that ultimately result in node communication can be tested without actual node communication.
     * will not be aiming for idealized testability in design where that conflicts with the coding style of the project (i.e. monkey patching ok if code changes for dependency injection don't fit well)
+      * that is, testability is more important than test style
 
 ----
 
 == Database / Data Models ==
 
-It is likely we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The result of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL but with the code being easier to understand in the common case.
-
-jsamuel: SQLAlchemy would be more fun to use but seems less maintainable by other people as it generally seems less distanced from the underlying data. I'm very open to arguments in favor of SQLAlchemy to justify its use initially. Regarding complex queries and raw SQL, I don't think using the ORM for complex queries actually helps when people aren't experts with the ORM, as it usually takes a long time to write it without SQL and the result can be not what one intended. The models defined below I don't think are complex enough such that they are limited by what django's ORM lacks.
+It is likely we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The drawbacks of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL. The benefit of using django's ORM will likely be code that is easier to understand in the common case. The models defined below do not seem to be complex enough such that they will be limited by what django's ORM lacks.
 
 The details of the models (database schemas) are below.
 
@@ -224,12 +259,19 @@ The details of the models (database schemas) are below.
       * affiliation
         * the text the user supplied which identifies the organization they are affiliated with.
       * user_pubkey
-        * the corresponding private key, if stored, is stored in the keyserver and is accessible using this public key.
-        * a possible efficiency improvement to be implemented if necessary would be to store a flag indicating whether the private key existed. This would prevent the website from having to ask the keyserver anytime we want to be able to prompt the user to download/delete the private key.
+      * user_privkey
+        * this is not stored in the Keyserver because the Website needs access to it and it is not used by us.
+        * the private key will only be stored when the the user has had us generate their keys.
+          * the user will be encouraged through the Website to download this private key and have us delete our copy of it.
+      * api_key
+        * this is not a cryptographic key
+        * this is a API key that we generate which can be used with the public !SeattleGeni XML-RPC interface.
+        * the purpose is to allow developers to use the XML-RPC interface without requiring them to embed their passphrase in their source code.
       * donor_pubkey
         * the corresponding private key is always stored in the keyserver and is accessible using this public key.
     * notes
       * For efficiency reasons, additional fields may be added to keep cached values for the amount of resources the user has donated and has acquired, rather than requiring calculating this information on demand.
+        * This will be avoided until it becomes truly necessary.
 
   * Node
     * purpose:
@@ -309,12 +351,10 @@ There will likely be additional tables for logging.
       * privkey
         * this will always be set for any record, as there is no reason to only store just a public key.
       * usage_identifier
-        * a unique name in the !SeattleGeni system where this key is used. for example, this would identify a given key is a specific user record's donor key.
-        * possible example: "user:123:donor" to represent user 123's donor key.
-        * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and information purposes, not for authentication in any way. It may end up only being read by separate scripts and never read within the keyserver (only written by the keyserver).
-      * allow_unprivileged
-        * flag to indicate whether this key is accessible to unprivileged client applications (e.g. the website).
-        * if an unprivileged client requests this key (or, possibly just the private key/signing services), the request would be rejected if this flag is not set.
+        * a unique name in the !SeattleGeni system where this key is used.
+          * for example, this would identify a given key is a specific user record's donor key ("user:123:donor").
+        * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and information purposes, not for authentication in any way. 
+        * this may end up only being read by separate scripts and never read within the keyserver (only written by the keyserver).
 
 === Model Notes ===
 
