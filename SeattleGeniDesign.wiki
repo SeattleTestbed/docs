@@ -29,7 +29,7 @@ At a high level, the idea will be to:
   * Rewrite/refactor code for readability, ease of testing, locking, logging, etc.
   * Keep the existing separate Backend server and extend it to handle more data-modifying and node-modifying actions.
   * Move all private keys to a separate Keyserver.
-  * Restrict the the Website from performing arbitrary Keyserver requests or signed nodemanager calls.
+  * Restrict the Website from performing arbitrary Keyserver requests or signed nodemanager calls.
 
 === Website ===
 
@@ -140,7 +140,7 @@ The details of the request are passed to the Controller Interface (which is part
 
 The Controller sees that the request needs to have a ''user'' lock and obtains one through the Lockserver API (blocking until the lock is obtained).
 
-The Controller determines whether the user is allowed the requested resources (that is, where the user already has too many acquired vessels). If not, the user lock is released and a proper response is returned to the frontend.
+The Controller determines whether the user is allowed the requested resources (that is, whether or not the user already has too many acquired vessels). If not, the user lock is released and a proper response is returned to the frontend.
 
 The Controller determines whether there are sufficient resources available to fulfill the request and, if so, which resources (e.g. specific vessels) those are. This is done without locking and so there is no guarantee at this point that the resources will be able to be acquired for this user. If there are not sufficient resources, the user lock is released and the proper response is returned to the frontend.
 
@@ -152,7 +152,7 @@ The Backend receives the request (through its XML-RPC interface) to assign a spe
 
 The Backend obtains a lock for this vessel through the Lockserver API (blocking until the lock is obtained).
 
-Now that the Backend has a lock for this vessel, it uses the Database API to determine if the the vessel is available for assignment to a user (that is, ensure it is not assigned to another user, ensures the correct port for the user exists on the vessel, ensures that the node the vessel is on is considered active, etc.). If the vessel is not available for assignment, the vessel lock is released and a proper response is returned (which in this case is a respionse to the Controller).
+Now that the Backend has a lock for this vessel, it uses the Database API to determine if the vessel is available for assignment to a user (that is, ensure it is not assigned to another user, ensures the correct port for the user exists on the vessel, ensures that the node the vessel is on is considered active, etc.). If the vessel is not available for assignment, the vessel lock is released and a proper response is returned (which in this case is a response to the Controller).
 
 The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the vessel. If the call fails, the Backend releases the vessel lock and returns a proper response.
 
@@ -164,7 +164,7 @@ The Backend then releases the lock on the vessel and responds to the Website tha
 
 ''In the Website''
 
-The Controller repeats the process of using the Backend to acquire vessels for the user. When acquisitions fail, the Controller does its best to try to accommodate the request until it is no longer possible to fulfill the request. If it is no longer possible to fulfill the request, the Controller makes calls to the Backend to release each vessel that had been successfully acquired.
+The Controller repeats the process of using the Backend to acquire vessels for the user. When acquisitions fail, the Controller does its best to try to accommodate the request until it is no longer possible to fulfill the request. If it is no longer possible to fulfill the request, the Controller makes calls to the Backend to release each vessel that had been successfully acquired. If the system crashes during the individual vessel acquisition/release process, the result will be that the user account will be left in a valid state but with a partial set of the resources they had requested, which is an acceptable failure effect.
 
 When the Controller has finished (either by giving up and releasing any acquired vessels or by acquiring the desired vessels), the Controller releases the user lock and returns a proper response to the frontend so that the frontend can give the appropriate response to the request (either HTTP or XML-RPC, however the request came in).
 
