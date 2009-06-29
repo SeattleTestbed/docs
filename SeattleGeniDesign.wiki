@@ -25,13 +25,13 @@ This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comme
 
 At a high level, the idea will be to:
   * Redesign the data model to more accurately represent the current (and likely future) data to be stored.
-  * Implement a Lockserver that will be used by all other components of the system to ensure mutual exclusion in modification of data and node communication.
-  * Move all private keys used by !SeattleGeni to a separate Keyserver.
+  * Implement a Lockserver that will be used by all other components of the system to ensure mutual exclusion in modification of data as well as node communication.
+  * Move all private keys used by !SeattleGeni to a separate Key DB that the Website cannot access.
   * Rewrite/refactor code for readability, ease of testing, locking, logging, etc.
   * Keep the existing separate Backend server and give it the responsibility for privileged operations requiring the usage of private keys.
     * The Backend will be formally called the Privileged Operation Backend.
-    * All nodemanager communication the Website needs done will go through the Backend as such communication requires signing by keys maintained by the Keyserver.
-  * Restrict the Website from performing arbitrary Keyserver requests or signed nodemanager calls.
+  * All nodemanager communication the Website needs done will go through the Backend.
+    * Such communication requires signing by keys stored in the Key DB, to which the Website does not have access.
 
 === Website ===
 
@@ -55,12 +55,12 @@ APIs used:
     * This handles communication with the Privileged Operation Backend.
   * Keygen API
     * This handles communication with the Keygen Service.
-      * The Keygen Service is not the same thing as the Keyserver!
+      * The Keygen Service is not the same thing as the Key DB API!
       * The Keygen Service's main purpose is to provide unique keys when new keys are needed in order to prevent the keys needing to be generated in all client code in real time.
   * Lockserver API
     * This handles communication with the Lockserver.
-  * DB API
-    * This performs any required database operations.
+  * Main DB API
+    * This performs any required database operations involving the Main DB.
 
 === Privileged Operation Backend ===
 
@@ -82,13 +82,12 @@ APIs used:
   * Geni Nodemanager API
     * This does the actual node communication.
     * This is just a simple wrapper around the nmclient.
-  * Keyserver API
-    * This handles communication with the Keyserver.
-    * This is used in order to provide signed data and/or private keys to the Geni Nodemanager API in order to perform secure communication with nodes.
   * Lockserver API
     * This handles communication with the Lockserver.
-  * DB API
-    * This performs any required database operations.
+  * Key DB API
+    * This is used for accessing the Key DB that stores private keys (which are needed for signed nodemanager communication).
+  * Main DB API
+    * This performs any required database operations involving the Main DB.
 
 === Lockserver ===
 
@@ -137,24 +136,6 @@ to be guaranteed exclusive access to some parts of the system.
       reasons, the Lockserver can be extended to allow client code to perform more advanced requests, such as
       non-blocking lock requests that will return a lock acquisition failure if the lock can't be granted immediately.
 
-=== Keyserver ===
-
-The Keyserver exposes a private XML-RPC interface for use by privileged code within the system.
-  * The Website is not a privileged component, and so will not be allowed to make requests to the Keyserver.
-  * All private keys used by !SeattleGeni will be stored only in the Keyserver and nowhere else.
-    * This excludes private keys belonging to users, which will be stored in the Main Database.
-      * A user's private key should only exist temporarily in our possession when the user has us generate their keys.
-      * We do not use these private keys anywhere in our system.
-      * The Website must have access to these keys so that users can download them (before requesting us to delete them).
-  * Private keys are referenced by client code using the corresponding public key.
-  * Actions performed by the Keyserver are:
-    * Store/delete/retrieve private key.
-    * Sign data with a private key.
-
-The method by which the Keyserver determines that a request is authorized is not
-specified here for the moment. It may be as simple as a passphrase included with the request.
-It may also include verifying the IP address that the request originates from.
-
 === Polling Daemons ===
 
 Polling Daemons are any processes or scripts that perform general monitoring of nodes
@@ -164,7 +145,7 @@ reason to exist in the Backend.
 
 APIs used:
   * If Polling Daemons do not perform node communication through the Backend, they use the same APIs as the Backend.
-  * If Polling Daemons use the Backend for node communication and thus can be run as unprivileged (or less-privileged) code, then they would not use the Geni Nodemanager API or the Keyserver API but rather the Privileged Operation API.
+  * If Polling Daemons use the Backend for node communication and thus can be run as unprivileged (or less-privileged) code, then they would not use the Geni Nodemanager API or the Key DB API but rather the Privileged Operation API.
 
 ----
 
@@ -194,7 +175,7 @@ Now that the Backend has a lock for this vessel, it uses the Database API to det
 
 The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the vessel. If the call fails, the Backend releases the vessel lock and returns a proper response.
 
-(The Geni Nodemanager API is used in combination with the Keyserver API to perform signed nodemanager communication.)
+(The Geni Nodemanager API is used in combination with the Key DB API to perform signed nodemanager communication.)
 
 Once the !ChangeUser call to the node is complete, the Backend uses the Database API to update the database to indicate this vessel's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the vessel but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
 
@@ -216,7 +197,9 @@ Logging will be available in multiple ways:
   * Use of the python logger module (no calls to "print", ever).
   * Email critical errors to developers (include request/response information).
   * Lockserver logging requests including how long released locks were held. Potentially notify developers if a lock has been held an unusual amount of time.
-  * Keyserver logging all requests.
+  * API call logging that can be enabled as needed.
+    * For example, ability to enable logging of calls to the Privileged Operation API, Nodemanager API, Main DB API, Key DB API, etc.
+    * Possibly implemented using python function annotations.
 
 Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. Log files by themselves tend to not be looked at by humans except after something is known to be going wrong. Where possible and efficient, some data may be logged to a database in order to facilitate easy summarization of the data (this wouldn't replace file logging).
 
@@ -229,14 +212,13 @@ Whether logged to a database or text files, a summarization/visualization of log
   * Unit tests at various locations, for example:
     * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
     * Controller
-    * Keyserver
     * Lockserver
     * Backend
   * Test data:
     * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
   * Dependency injection to increase testability using mock objects:
     * the various APIs used by the Website and Backend (as well as other components) should each be able to be mocked out in order to test a component independent of actions performed by the APIs used in the component.
-      * for example, the Controller should be able to be tested using a mock Privileged Operation API, mock Keygen API, mock Lockserver API, and mock DB API in order to allow testing of only the Controller.
+      * for example, the Controller should be able to be tested using a mock Privileged Operation API, mock Keygen API, mock Lockserver API, and mock Main DB API in order to allow testing of only the Controller.
     * will not be aiming for idealized testability in design where that conflicts with the coding style of the project
       * monkey patching is ok if code changes for dependency injection don't fit well
       * testability is more important than test code style
@@ -264,7 +246,7 @@ The details of the models (database schemas) are below.
         * the text the user supplied which identifies the organization they are affiliated with.
       * user_pubkey
       * user_privkey
-        * this is not stored in the Keyserver because the Website needs access to it and it is not used by us.
+        * this is not stored in the Key DB because the Website needs access to it and it is not used by us.
         * the private key will only be stored when the the user has had us generate their keys.
           * the user will be encouraged through the Website to download this private key and have us delete our copy of it.
       * api_key
@@ -272,7 +254,7 @@ The details of the models (database schemas) are below.
         * this is an API key that we generate which can be used with the public !SeattleGeni XML-RPC interface.
         * the purpose is to allow developers to use the XML-RPC interface without requiring them to embed their passphrase in their source code.
       * donor_pubkey
-        * the corresponding private key is always stored in the keyserver and is accessible using this public key.
+        * the corresponding private key is always stored in the Key DB and is accessible using this public key.
     * notes
       * For efficiency reasons, additional fields may be added to keep cached values for the amount of resources the user has donated and has acquired, rather than requiring calculating this information on demand.
         * This will be avoided until it becomes truly necessary.
@@ -295,7 +277,7 @@ The details of the models (database schemas) are below.
         * the node gets marked as not active when it becomes inaccessible.
       * owner_pubkey
         * the !SeattleGeni's owner key for this node.
-         * the private key is always stored in the keyserver and is accessible using this public key.
+         * the private key is always stored in the Key DB and is accessible using this public key.
       * extra_vessel_name
         * the extra vessel will (at least in the near future) have the node's free resources assigned to it, so the name needs to be known in order to do things with those resources.
     * notes
@@ -344,21 +326,21 @@ The details of the models (database schemas) are below.
 
 There will likely be additional tables for logging.
 
-=== Keyserver Database ===
+=== Key Database ===
 
   * Key
     * purpose:
       * A Key record represents a public/private key pair. Keys are referenced by the public keys themselves. A keypair only needs to be stored here if there is need to store a private key.
     * fields:
       * pubkey
-        * the way the client code refers to this key.
+        * the way the client code using the Key DB API refers to this key.
       * privkey
         * this will always be set for any record, as there is no reason to only store just a public key.
       * usage_identifier
         * a unique name in the !SeattleGeni system where this key is used.
           * for example, this would identify a given key is a specific user record's donor key ("user:123:donor").
-        * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and information purposes, not for authentication in any way. 
-        * this may end up only being read by separate scripts and never read within the keyserver (only written by the keyserver).
+        * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and general informational purposes. 
+        * this may end up only being read by separate scripts, never in normal usage, but seems useful to track just in case it's needed.
 
 === Model Notes ===
 
