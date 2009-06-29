@@ -27,7 +27,7 @@ When translating requirements into objectives, we are faced with a non-trivial t
 === Use Cases ===
 ----
 
-The following examples are not meant to be complete test cases for a specific module, but instead, are there to demonstrate a specific feature.
+The following examples are not meant to be complete test cases (or to follow standard testing practices) for a specific module, but instead, are there to demonstrate a specific feature.
 
 === Simple Use-Case ===
 
@@ -42,6 +42,35 @@ def init_rng(seed):
 def generate_next(rng):
 
 }}}
+
+And you want to test that given two random number generators with different seeds, they produce different results. Here is how you do it.
+
+{{{
+#!python
+
+# Create a method that tests for a given objective.
+def test_seed():
+  seed1 = 32
+  seed2 = 13
+
+  rng1 = init(seed1)
+  rng2 = init(seed2)
+
+  next1 = generate_next(rng1)
+  next2 = generate_next(rng2)
+
+  # Make sure those two numbers are not the same.
+  assertNotEqual(next1, next2)
+
+# Register the test with our Unit Test Framework (UTF), by passing it
+# the functor.
+registerTest(test_seed)
+
+}}}
+
+[[BR]]
+== API ==
+----
 
 [[BR]]
 == Comments ==
