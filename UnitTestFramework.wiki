@@ -1,4 +1,4 @@
-= Seattle's Unit Test Framework =
+= Proposal -- Seattle's Unit Test Framework =
 
 ----
 [[TOC(inline)]]
@@ -7,13 +7,27 @@
 [[BR]]
 == Abstract ==
 ----
-
+The purpose of this proposal is to gather as much feedback as possible with respect to the new testing framework. Please feel free to add any comments or concerns at the bottom of the page.
 
 [[BR]]
 == Requirements ==
 ----
+Before diving into examples and use cases, I would like to specify requirements, so that users have a better understanding of what the goals are.
+
+ * Above everything, writing a unit test module should be simple and obvious for new users. 
+test suite, or a specific test case.
+ * Test module should be able to have many small test cases and developer should be able to group them into test suites.
+ * For a small test modules run-time should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution.
+ * The framework should allow advanced users to perform non-trivial tests.
+ * The framework should allow users to easily select what tests to run -- either a whole 
+ * The framework back-end needs to be simple and extendible.
+
 
 
 [[BR]]
-== Usage ==
+== Use Cases ==
+----
+
+[[BR]]
+== Comments ==
 ----
