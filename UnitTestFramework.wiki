@@ -12,21 +12,24 @@ The purpose of this proposal is to gather as much feedback as possible with resp
 [[BR]]
 == Requirements ==
 ----
-Before diving into examples and use cases, I would like to specify requirements, so that users have a better understanding of what the goals are.
+Before diving into examples and use cases, I would like to specify requirements, so that users have a better understanding of what the goals are. 
 
- * Above everything, writing a unit test module should be simple and obvious for new users. 
-test suite, or a specific test case.
+ * Above everything, writing a unit test module should be simple and obvious for new users.
+ * For a small test modules run-time should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution. 
  * Test module should be able to have many small test cases and developer should be able to group them into test suites.
- * For a small test modules run-time should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution.
  * The framework should allow advanced users to perform non-trivial tests.
  * The framework should allow users to easily select what tests to run -- either a whole 
  * The framework back-end needs to be simple and extendible.
 
-
+When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
 
 [[BR]]
-== Use Cases ==
+=== Use Cases ===
 ----
+
+=== Simple Use-Case ===
+
+Now, let us consider s simple use case.
 
 [[BR]]
 == Comments ==
