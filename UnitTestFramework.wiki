@@ -27,9 +27,21 @@ When translating requirements into objectives, we are faced with a non-trivial t
 === Use Cases ===
 ----
 
+The following examples are not meant to be complete test cases for a specific module, but instead, are there to demonstrate a specific feature.
+
 === Simple Use-Case ===
 
-Now, let us consider s simple use case.
+Now, let us consider s simple use case. We'll be designing a random number generator.
+
+There are two methods defined:
+
+{{{
+#!python
+
+def init_rng(seed):
+def generate_next(rng):
+
+}}}
 
 [[BR]]
 == Comments ==
