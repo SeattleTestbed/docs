@@ -484,6 +484,30 @@ If the optional "blocking" argument is False, the method returns False immediate
       True if the lock was acquired, False otherwise.
 
 [[BR]]
+==== lock.release() ====
+----
+
+Releases the lock. Do not call it if the lock is unlocked.
+
+ * Doc string:
+
+
+   <Purpose>
+      Release a lock.
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      thread.error if release() is called on an unlocked lock.
+
+   <Side Effects>
+      Unlocks the object.
+
+   <Returns>
+      None.
+
+[[BR]]
 ==== getruntime() ====
 ----
 
