@@ -12,6 +12,7 @@ Please keep the list ordered alphabetically by SVN username.
 || Conrad Meyer || cemeyer at cs || || cemeyer || cemeyer ||
 || Cosmin Barsan || || || cosminb || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
+|| Konstantin Pik || n2k8000 @ u || || konp || kon ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
 || Jason Chen || jchen at cs || || jchen || jchen ||
 || Jenn Hanson|| hanson at cs || || jenn || jenn ||
