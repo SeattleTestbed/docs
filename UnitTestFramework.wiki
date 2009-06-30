@@ -191,3 +191,5 @@ $ utf.py --module rng --case test_seed
 [[BR]]
 == Comments ==
 ----
+
+Looks good to me. Perhaps the --all option should be an implied default? -- cemeyer
