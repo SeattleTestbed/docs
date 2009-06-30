@@ -15,10 +15,10 @@ The purpose of this proposal is to gather as much feedback as possible with resp
 Before diving into examples and use cases, I would like to specify requirements, so that users have a better understanding of what the goals are. 
 
  * Above everything, writing a unit test module should be simple and obvious for new users.
- * For a small test modules run-time should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution. 
+ * For a small test modules simplicity should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution. 
  * Test module should be able to have many small test cases and developer should be able to group them into test suites.
  * The framework should allow advanced users to perform non-trivial tests.
- * The framework should allow users to easily select what tests to run -- either a whole 
+ * The framework should allow users to easily select what tests to run (whole module or specific test cases).
  * The framework back-end needs to be simple and extendible.
 
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
@@ -27,11 +27,11 @@ When translating requirements into objectives, we are faced with a non-trivial t
 === Use Cases ===
 ----
 
-The following examples are not meant to be complete test cases (or to follow standard testing practices) for a specific module, but instead, are there to demonstrate a specific feature.
+The following examples are not meant to be complete test cases (or to follow standard testing practices) for some module, but instead, are there to demonstrate a specific feature.
 
 === Trivial Use-Case ===
 
-Now, let us consider s simple use case. We'll be designing a random number generator.
+Now, let us consider a trivial use case. We'll be designing a random number generator.
 
 There are two methods defined:
 
@@ -43,7 +43,9 @@ def generate_next(rng):
 
 }}}
 
-And you want to test that given two random number generators with different seeds, they produce different results. Here is how you do it.
+We are testing for two conditions: 
+ * Given two random number generators with different seeds, they should produce different outputs.
+ * Sanity check -- input validation.
 
 {{{
 #!python
@@ -53,8 +55,8 @@ def test_seed():
   seed1 = 32
   seed2 = 13
 
-  rng1 = init(seed1)
-  rng2 = init(seed2)
+  rng1 = rng_init(seed1)
+  rng2 = rng_init(seed2)
 
   next1 = generate_next(rng1)
   next2 = generate_next(rng2)
@@ -63,7 +65,7 @@ def test_seed():
   assertNotEqual(next1, next2)
 
 def test_invalid_seed():
-  assertRaises(BadInputException, init("lol"))
+  assertRaises(BadInputException, rng_init("lol"))
 
 # Register tests with our Unit Test Framework (UTF), by passing it
 # a functor and a description.
@@ -72,57 +74,82 @@ registerTest(test_invalid_seed, "testing invalid seed parameter")
 
 }}}
 
+When runing the test you should an output that looks something like this:
+
+{{{
+#!python
+
+def init_rng(seed):
+def generate_next(rng):
+
+}}}
+
+We are testing for two conditions: 
+ * Given two random number generators with different seeds, they should produce different outputs.
+ * Sanity check -- input validation.
+
+{{{
+#!python
+
+$ testing random number generator module
+$   testing different seeds                        [ ok ]
+$   testing invalid seed parameter                 [ ok ]
+
+}}}
+
 This is a very simple scenario, and hopefully it illustrates some of the basics of our UTF.
 
 
 === Simple Use-Case ===
 
-Another, more complicated example, would be Roman Number <-> Arabic Number converter.
+Another, more complicated example, would be IP <-> DNS converter.
 
 There are two functions defined:
 
 {{{
 #!python
 
-def to_roman(number):
-def from_roman(number):
+def to_ip(address):
+def from_ip(ip):
 
 }}}
 
-Even though the logic behind this module is simple, testing is not. There are quite a few things we need to test for: valid input, invalid input, boundary cases, etc. Therefore, when dealing with more sophisticated unit tests, it might be useful to separate test cases in more test suites.
+Even though the logic behind this module is simple, testing is not. There are quite a few things we need to tested for: valid input, invalid input, boundary cases, etc. Therefore, when dealing with more sophisticated unit tests, it might be useful to separate test cases into test suites.
 
 {{{
 #!python
 
-from_roman_bad_input = TestSuite()
+from_ip_bad_input = TestSuite()
 
-def test_ra_toolarge():
+def test_id_out_of_range():
   ...
 
-def test_ra_negative():
+def test_id_non_routable():
   ...
 
-def test_ra_zero():
+def test_id_zero():
   ...
 
-roman_bad_input.addCases(test_ra_toolarge, test_ra_negative, test_ra_zero)
-roman_bad_input.description("testing from roman to arabic bad input")
+roman_bad_input.addCases(test_id_out_of_range, test_id_non_routable, test_id_zero())
+roman_bad_input.description("testing from ip to dns bad input")
 
-from_roman_good_input = TestSuite()
+from_ip_good_input = TestSuite()
 ...
 
-to_roman_bad_input = TestSuite()
+to_ip_bad_input = TestSuite()
 ...
 
-to_roman_good_input = TestSuite()
+to_ip_good_input = TestSuite()
 ...
 
 }}}
 
+Please note that Test Suite feature is clunky, so it might be excluded from the implementation. There are ways around this problem, but it requires OO approach (which is not in compliance with project's coding guidelines).
+
 
 === Execution Monitor ===
 
-All test files have to follow a strict naming convention: utf_test_<module name>_<optional>.py. Therefore, if you want to create a test file for a random number generator module, the test file should be called: utf_test_rng.py
+All test files have to follow a strict naming convention: utf_test_<module name>_<optional>.py/mix. Therefore, if you want to create a test file for a random number generator module, the test file should be called: utf_test_rng.py
 
 When running tests, a developer is presented with three different possibilities:
  * Run all tests for all modules:
