@@ -157,19 +157,19 @@ $ utf.py --module rng --case test_seed
 ----
 
 === Assert ===
-  * assertTrue(expr[, msg])
+  * assertTrue(expr[, msg])[[BR]]
     Signal a test failure if expr is true; the explanation for the error will be msg if given, otherwise it will be None.
 
-  * assertFalse
+  * assertFalse[[BR]]
     Signal a test failure if expr is false; the explanation for the error will be msg if given, otherwise it will be None.
 
-  * assertEqual(first, second[, msg])
+  * assertEqual(first, second[, msg])[[BR]]
     Test that first and second are equal. If the values do not compare equal, the test will fail with the explanation given by msg, or None.
 
-  * assertNotEqual
+  * assertNotEqual[[BR]]
     Test that first and second are not equal. If the values do compare equal, the test will fail with the explanation given by msg, or None.
 
-  * assertRaises
+  * assertRaises[[BR]]
     Test that an exception is raised when callable is called with any positional or keyword arguments that are also passed to assertRaises(). The test passes if exception is raised, is an error if another exception is raised, or fails if no exception is raised. To catch any of a group of exceptions, a tuple containing the exception classes may be passed as exception.
 
 
