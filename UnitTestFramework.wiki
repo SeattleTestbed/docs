@@ -74,19 +74,7 @@ registerTest(test_invalid_seed, "testing invalid seed parameter")
 
 }}}
 
-When runing the test you should an output that looks something like this:
-
-{{{
-#!python
-
-def init_rng(seed):
-def generate_next(rng):
-
-}}}
-
-We are testing for two conditions: 
- * Given two random number generators with different seeds, they should produce different outputs.
- * Sanity check -- input validation.
+When runing the tests you should an output that looks something like this:
 
 {{{
 #!python
