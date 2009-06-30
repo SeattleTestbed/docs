@@ -68,6 +68,38 @@ registerTest(test_seed)
 
 }}}
 
+==== Execution Monitor ====
+
+All test files have to follow a strict naming convention: utf_test_<module name>_<optional>.py. Therefore, if you want to create a test file for a random number generator module, the test file should be called: utf_test_rng.py
+
+When running tests, a developer is presented with three different possibilities:
+ * Run all tests for all modules:
+
+{{{
+#!python
+
+$ utf.py --all
+
+}}}
+
+ * Run all tests for a specific module
+
+{{{
+#!python
+
+$ utf.py --module rng
+
+}}}
+
+ * Run a specific test case or a test suite for a specific module
+
+{{{
+#!python
+
+$ utf.py --module rng --case test_seed
+
+}}}
+
 [[BR]]
 == API ==
 ----
