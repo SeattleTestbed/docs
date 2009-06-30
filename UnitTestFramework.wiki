@@ -62,11 +62,17 @@ def test_seed():
   # Make sure those two numbers are not the same.
   assertNotEqual(next1, next2)
 
-# Register the test with our Unit Test Framework (UTF), by passing it
-# the functor.
-registerTest(test_seed)
+def test_invalid_seed():
+  assertRaises(BadInputException, init("lol"))
+
+# Register tests with our Unit Test Framework (UTF), by passing it
+# a functor and a description.
+registerTest(test_seed, "testing different seeds")
+registerTest(test_invalid_seed, "testing invalid seed parameter")
 
 }}}
+
+Hopefully, you get the idea.
 
 ==== Execution Monitor ====
 
@@ -120,16 +126,45 @@ Even though the logic behind this module is simple, testing is not. There are qu
 #!python
 
 from_roman_bad_input = TestSuite()
+
+def test_ra_toolarge():
+  ...
+
+def test_ra_negative():
+  ...
+
+def test_ra_zero():
+  ...'
+
+roman_bad_input.addCases(test_ra_toolarge, test_ra_negative, test_ra_zero)
+roman_bad_input.description("testing from roman to arabic bad input")
+
 from_roman_good_input = TestSuite()
+...
 
 to_roman_bad_input = TestSuite()
+...
+
 to_roman_good_input = TestSuite()
+...
+
+
 
 }}}
 
 [[BR]]
 == API ==
 ----
+
+=== Assert ===
+  * assertTrue
+  * assertFalse
+
+  * assertEqual
+  * assertNotEqual
+  * assertRaises
+
+
 
 [[BR]]
 == Comments ==
