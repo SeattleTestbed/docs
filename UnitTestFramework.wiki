@@ -29,7 +29,7 @@ When translating requirements into objectives, we are faced with a non-trivial t
 
 The following examples are not meant to be complete test cases (or to follow standard testing practices) for a specific module, but instead, are there to demonstrate a specific feature.
 
-=== Simple Use-Case ===
+=== Trivial Use-Case ===
 
 Now, let us consider s simple use case. We'll be designing a random number generator.
 
@@ -97,6 +97,33 @@ $ utf.py --module rng
 #!python
 
 $ utf.py --module rng --case test_seed
+
+}}}
+
+=== Simple Use-Case ===
+
+Another, more complicated example, would be Roman Number <-> Arabic Number converter.
+
+There are two functions defined:
+
+{{{
+#!python
+
+def to_roman(number):
+def from_roman(number):
+
+}}}
+
+Even though the logic behind this module is simple, testing is not. There are quite a few things we need to test for: valid input, invalid input, boundary cases, etc. Therefore, when dealing with more sophisticated unit tests, it might be useful to separate test cases in more test suites.
+
+{{{
+#!python
+
+from_roman_bad_input = TestSuite()
+from_roman_good_input = TestSuite()
+
+to_roman_bad_input = TestSuite()
+to_roman_good_input = TestSuite()
 
 }}}
 
