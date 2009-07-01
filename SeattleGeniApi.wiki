@@ -1,11 +1,42 @@
-= XML-RPC API to Seattle GENI =
+= XML-RPC API to SeattleGENI =
+[[BR]]
+An XML-RPC interface to SeattleGENI is available, for clients wishing to access SeattleGENI functionality without going through the SeattleGENI website.[[BR]]
+The XML-RPC server is located at https://seattlegeni.cs.washington.edu/xmlrpc/. [[BR]]
+For examples on how to use XML-RPC with SeattleGENI, check out our [XML-RPC Client].
+
+[[BR]]
+=== Authentication ===
+In order to talk with SeattleGENI over XML-RPC, authentication is required in the form of an authentication structure.[[BR]]
+The authentication structure takes the form of the following dictionary:
+   ''{'username':'my_username', 'authstring':'my_password'}''
+
+Both ''my_username'' and ''my_password'' are the same login details used when logging into the SeattleGENI website.[[BR]]
+To check if your credentials are valid, use the ''authcheck'' API call.[[BR]]
+[[BR]]
+'''This structure is expected in every XML-RPC API call, as the ''auth'' parameter.[[BR]]'''
+All XML-RPC functions will throw an XMLRPC Fault Code 101, ''GENI_AuthError'' if authentication fails.
 
 [[BR]]
 
-=== acquire_resources(geni_user, rspec) ===
+=== XML-RPC Faults ===
+In the event of an exception/error, an XML-RPC Fault will be sent to the client.[[BR]]
+The fault object contains information about the error that occurred, and clients can catch these faults as they would exceptions in standard programs. The fault itself contains a faultCode, indicating the type of fault, and a faultString, containing more info about the error.[[BR]]
+More information about XML-RPC Faults is available at http://docs.python.org/library/xmlrpclib.html#fault-objects [[BR]]
+For examples on dealing with SeattleGENI XML-RPC Faults, please take a look at our [XML-RPC client.]
+
+[[BR]]
+
+=== authcheck(auth) ===
+----
+Checks if the credentials in the given authentication structure are valid.[[BR]]
+[[BR]]
+Returns '''0''' if the credentials are valid, '''-1''' otherwise.
+
+[[BR]]
+=== acquire_resources(auth, rspec) ===
 ----
 
-Given a geni_user (a string that is the username used to log into SeattleGENI) and a resource specification as a dict (rspec), this function acquires resources for the specified user.   There are currently three types of rspecs defined:
+Given a resource specification as a dict (rspec), this function acquires resources for the user. There are currently three types of rspecs defined:
 
 ''{'rspec_type':'lan', 'number_of_nodes':N}''[[BR]]  
 Returns N nodes all with the same starting three octects of the IP address.[[BR]]
@@ -28,31 +59,32 @@ Returns a list of dictionaries, where the dicts are of the form:
 
 Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
 Raises a ''ValueError'' if '''rspec''' is not of an understood type.[[BR]]
-Raises a ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
-Raises a ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
-Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 102, ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
+Raises an XMLRPC Fault Code 103, ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
+
 
 [[BR]]
-=== release_resources(geni_user, list_of_handles) ===
+=== release_resources(auth, list_of_handles) ===
 ----
 
 Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
 
 Raises a ''TypeError'' if the '''list_of_handles''' are of invalid form.[[BR]]
-Raises a ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
-=== get_resource_info(geni_user) ===
+=== get_resource_info(auth) ===
 ----
 
-Returns a list of resources currently associated with geni_user.
+Returns a list of resources currently associated with the user.
 
 The return list is of the same form as returned by acquire_resources.
 
 
 
 [[BR]]
-=== get_account_info(geni_user) ===
+=== get_account_info(auth) ===
 ----
 
 Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, and the user's affiliation.
@@ -60,32 +92,29 @@ Returns a dict of account information for the account. This includes the user's 
 Returns a dictionary of the form:
       '''{'user_port':user_port, 'user_name':user_name, 'urlinstaller':urlinstaller, 'private_key_exists':private_key_exists, 'max_vessel':max_vessel, 'user_affiliation':user_affiliation}'''[[BR]]
       ''user_port'' is an integer, indicating a port number that by default will be available for TCP / UDP on all of the user's vessels.[[BR]]
-      ''user_name'' is a string containing the name.   This will be the same as the geni_user.[[BR]]
+      ''user_name'' is a string containing the username.[[BR]]
       ''urlinstaller'' is a string, and points to the URL where the user's installers may be downloaded.[[BR]]
       ''private_key_exists'' is a boolean, determining whether the private key exists in the database for this user. [[BR]]
       ''max_vessel'' is an integer, indicating the total vessels allowed.   This may vary as donations are credited to the user or go offline.   [[BR]]
       ''user_affiliation'' is a string and represents the affiliation provided by the user when registering for an account.   This field is not validated so should not be trusted.[[BR]]
 
 [[BR]]
-=== get_public_key(geni_user) ===
+=== get_public_key(auth) ===
 ----
 
 Returns the user's public key as a string.
 
 
 [[BR]]
-=== get_private_key(geni_user) ===
+=== get_private_key(auth) ===
 ----
 
 Returns the user's private key as a string. 
 
-Raises a ''GENI_KeyAlreadyRemoved'' if the key was already removed.
-
 
 [[BR]]
-=== delete_private_key(geni_user) ===
+=== delete_private_key(auth) ===
 ----
 Removes the user's private key from the server.
 
-
-'''JAC: What if the geni_user isn't valid?   Also, what if the user tries to do this on behalf of a different user?   How does this react?'''
+Raises an XMLRPC Fault Code 104, ''GENI_KeyAlreadyRemoved'' if the key was already removed.
