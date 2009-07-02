@@ -57,8 +57,8 @@ Returns a list of dictionaries, where the dicts are of the form:
       ''handle'' has an undefined type, but is used in future calls to release_resources. ''Make no assumptions about the type of this item.''[[BR]]
       Each dict contains info about each acquired vessel.[[BR]]
 
-Raises a ''TypeError'' if the given values are of incorrect type.[[BR]]
-Raises a ''ValueError'' if '''rspec''' is not of an understood type.[[BR]]
+Raises an XMLRPC Fault Code 1, with the string ''TypeError'' present in the faultString, if the given values are of incorrect type.[[BR]]
+Raises an XMLRPC Fault Code 1, with the string ''ValueError'' present in the faultString, if '''rspec''' is not of an understood type.[[BR]]
 Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 Raises an XMLRPC Fault Code 102, ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
 Raises an XMLRPC Fault Code 103, ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
@@ -70,7 +70,7 @@ Raises an XMLRPC Fault Code 103, ''GENI_NoAvailNodes'' if there are no available
 
 Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
 
-Raises a ''TypeError'' if the '''list_of_handles''' are of invalid form.[[BR]]
+Raises an XMLRPC Fault Code 1, with the string ''TypeError'' present in the faultString, if the '''list_of_handles''' are of invalid form.[[BR]]
 Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
