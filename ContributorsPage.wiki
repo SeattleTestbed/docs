@@ -34,7 +34,8 @@ This page contains information useful to developers working on Seattle
    * [CustomizedInstaller Using the Customized Installer]
 
  * API specifications for user-facing services
-   * [wiki:SeattleGeniAPI Seattle-GENI XML-RPC API]
+   * [wiki:SeattleGeniAPI SeattleGENI XML-RPC API]
+   * [wiki:SeattleGeniClientLib SeattleGENI XML-RPC Client Library]
    * [SeattleInstallerMaker Seattle Installer Maker Service XML-RPC API]
 
  * Deployment
