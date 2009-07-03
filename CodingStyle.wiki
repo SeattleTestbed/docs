@@ -959,3 +959,6 @@ else:
      Call subprocess.Popen with a first argument that looks like ['command', 'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
 
 
+    Avoid changing directory (#487).
+     
+     Changing the current directory can cause multithreaded programs to break is scary ways and is usually an indication of bad programming style.   Don't do it!
