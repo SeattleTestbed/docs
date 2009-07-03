@@ -50,7 +50,7 @@ We need a precise reason (not an exception listing) why the tests fail on Window
 
 
 [[BR]]
-== XMLRPC web backend   --- Ivan ----  3 tokens  ==
+== ~~XMLRPC web backend   --- Ivan ('''Jason''') ----  3 tokens ~~ ==
 ----
 
 Ticket #255
@@ -58,7 +58,7 @@ Appropriate the AJAX functions that are used to access the GENI portal and add n
 This will involve understanding much of the functionality inside of the GENI portal. Cleaning up code so that the pieces that are independent of protocol can be execute by both the HTTP handlers, as well as the XMLRPC and AJAX handlers. Also, this will involve writing a test program for every XMLRPC call exposed in GENI. 
 
 [[BR]]
-== GENI bug squashers / testing   ---   Ivan ('''Alper''')   ----  squishy ==
+== ~~GENI bug squashers / testing   ---   Justin   ----  squishy ~~==
 ---- 
 Tickets #254, #165, #189, etc
 The GENI portal has numerous outstanding tickets having to do with everything from user-interface bugs (#254) to complex resource and database management issues (#165, #278). Additionally, most of the GENI code is untested and requires thorough integration tests to be written to test that the database is always in a consistent state, and is modified accordingly. The testing part of this task will involve understanding the XMLRPC web backend (see above).
@@ -84,7 +84,7 @@ This task will involve (1) reviewing the existing prototype for creating remote 
 
 
 [[BR]]
-== Installers    ---    Justin ('''Zachary''')   ---   3 tokens ==
+== ~~Installers    ---    Justin ('''Zachary''')   ---   3 tokens~~ ==
 ----
 (No direct ticket, related tickets #219)
 
@@ -106,20 +106,20 @@ Write a series of black box integration tests for the software updater.   This s
 Compare and contrast different Python testing frameworks.   Write a small amount of test code in each and put it up for a vote.
 
 [[BR]]
-== Remote deployment for repy   ---   Justin   --- 1 token  ==
+== ~~Remote deployment for repy   ---   Justin (Eric)   --- 1 token~~  ==
 ----
 Related to ticket #228
 
 Build a framework that deploys and monitors a simple repy service.   It should get vessels for the service, run the code, and when instances die, log information and restart them on new nodes.
 
 [[BR]]
-== Remote deployment Seattle   ---   Justin ('''Kon''')   ---   3 tokens (ongoing)  ==
+== ~~Remote deployment Seattle   ---   Justin ('''Kon''')   ---   3 tokens (ongoing)~~  ==
 ----
 
 Build scripts to deploy Seattle and keep it deployed.   We should use XMLRPC to get node lists from PlanetLab APIs, ensure our slice is on all nodes, and then deploy on them.   For CS machines, we will need to be able to load on them.   This interacts with monitoring.  
 
 [[BR]]
-== Installer builder cleanup   ---   Justin ('''Zachary''')   ---   squishy ~5 tokens ==
+== ~~Installer builder cleanup   ---   Justin ('''Zachary''')   ---   squishy ~5 tokens~~ ==
 ----
 
 Related tickets (#59, #57, #61, #302, #153, #155, #288, #72)
@@ -162,7 +162,7 @@ The name of the build_installers.py should be something like installer_utils. Iv
 
 
 [[BR]]
-== Monitor nodes we can log into, get vessel logs from nodes, work with database, state of node should be logged    ---   Ivan   ---   4 tokens  ==
+== ~~Monitor nodes we can log into, get vessel logs from nodes, work with database, state of node should be logged    ---   Justin (Kon)   ---   4 tokens~~  ==
 ----
 
 We want a monitoring program to go and check the status of nodes.   We have scripts that can be run on nodes that we can ssh to that provides detailed information.  
@@ -180,7 +180,7 @@ Log information into a database with a very, very simple web front end.
 Build a test framework that allows us to easily run our code (including whitebox and blackbox tests) on different platforms.   Developers should be able to "queue" test runs by running a command from an instance of SVN that will then deploy and test their code on different architectures.
 
 [[BR]]
-== Repy / Node Manager rapid response team   ---   Justin ('''Cosmin, Armon''')     ---   squishy   1/2 token per bug? ==
+== ~~Repy / Node Manager rapid response team   ---   Justin ('''Cosmin, Armon''')     ---   squishy   1/2 token per bug?~~ ==
 ----
 
 Fix bugs as they arise with Repy and the node manager.   Requires good overall understanding of the project, attention to detail, and on some occasions requires speed.
@@ -201,7 +201,7 @@ The plan is to try to determine if we're on a "thread limited" platform (like a 
 
 
 [[BR]]
-== Bi-directional Bandwidth measurement    ---    Justin    ('''Brent''')   ---   2 tokens  ==
+== Bi-directional Bandwidth measurement    ---    Justin    ('''Anthony''')   ---   2 tokens  ==
 ----
 (Ticket #161)
 
@@ -209,7 +209,7 @@ The bandwidth code right now is specific to client or server, and only allows a 
 
 
 [[BR]]
-== Actually getting 10% (installer updates, determining offcut size)   ---   Justin   ('''Brent''')     ---   3 tokens  ==
+== Actually getting 10% (installer updates, determining offcut size)   ---   Justin   ('''Anthony''')     ---   3 tokens  ==
 ----
 (Tickets #257, #258)
 
@@ -255,7 +255,7 @@ We need to ensure that the calls behave the same on every OS.   This currently i
 
 
 [[BR]]
-== RSA integration with production code ---   Justin ('''Anthony''') --- 2 tokens ==
+== ~~RSA integration with production code ---   Justin ('''Anthony''') --- 2 tokens ~~==
 ----
 
 No ticket
@@ -286,7 +286,7 @@ Eric's thesis.   If you're not him, this isn't for you!
 
 
 [[BR]]
-== Sysadmin strike force: backups, accounts, pinging   ---   Ivan (Monzur)  ---   ??? tokens ==
+== ~~Sysadmin strike force: backups, accounts, pinging   ---   Justin (Monzur)  ---   ??? tokens ~~==
 ----
 (Tickets #267, #306, #307, #308, #309, #310 but this is the tip of the iceberg)
 
