@@ -17,13 +17,14 @@ creating an instance of the client, clientlib WILL throw an exception.
    When instantiating a 'client' object, the following parameters are available:[[BR]]''username'': Your username. (Must specify)[[BR]]''authstring'': Your password. (Must specify)[[BR]]''xmlrpc_url'': The url where the SeattleGENI XMLRPC server is located. (Defaults to the correct location)[[BR]]''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do NOT use allow_ssl_insecure=True in production code.''' (Defaults to False)
 [[BR]]
 3) After the client instances have been created, simply call warmup() on each instance. [[BR]]
-4) Once the clients have been warmed up, simply invoke the client methods (listed further below).
+4) Once the clients have been warmed up, simply invoke the client methods.[[BR]]
+'''A usage example is provided further down the page.'''
 
 [[BR]]
 === SeattleGENI !ClientLib Methods ===
 Please note, these methods are '''not the same as the XML-RPC API calls'''.
 The clientlib methods are simply convenient wrappers for those calls. 
-Although, most methods here have '''identical returns as the actual XMLRPC calls'''.
+Although, most methods here have ''identical returns as the actual XMLRPC calls''.
 
 Available methods on the !ClientLib 'client' object:
   * ''warmup()'':  Initializes and starts up an XMLRPC client instance, used to communicate with the XMLRPC server. Doesn't return anything.
