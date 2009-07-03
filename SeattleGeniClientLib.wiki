@@ -1,0 +1,105 @@
+= SeattleGENI XML-RPC Client Library =
+[[BR]]
+The SeattleGENI XML-RPC Client Library is useful for anyone wishing to communicate with the SeattleGENI XML-RPC Interface; and also serves as an example for people wishing to design their own clients to interface with our XML-RPC server.
+
+You can download the library at the bottom of this page.
+
+{{{
+NOTICE (7/2/2009): geni_xmlrpc_clientlib does not yet support
+secure SSL communications. If you set allow_ssl_insecure=False when
+creating an instance of the client, clientlib WILL throw an exception.
+}}}
+
+[[BR]]
+=== Usage ===
+1) In python, simply import the geni_xmlrpc_clientlib.[[BR]]
+2) Create an instance (or multiple instances, if desired) of the client.[[BR]]
+   When instantiating a 'client' object, the following parameters are available:[[BR]]''username'': Your username. (Must specify)[[BR]]''authstring'': Your password. (Must specify)[[BR]]''xmlrpc_url'': The url where the SeattleGENI XMLRPC server is located. (Defaults to the correct location)[[BR]]''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do NOT use allow_ssl_insecure=True in production code.''' (Defaults to False)
+[[BR]]
+3) After the client instances have been created, simply call warmup() on each instance. [[BR]]
+4) Once the clients have been warmed up, simply invoke the client methods (listed further below).
+
+[[BR]]
+=== SeattleGENI !ClientLib Methods ===
+Please note, these methods are '''not the same as the XML-RPC API calls'''.
+The clientlib methods are simply convenient wrappers for those calls. 
+Although, most methods here have '''identical returns as the actual XMLRPC calls'''.
+
+Available methods on the !ClientLib 'client' object:
+  * ''warmup()'':  Initializes and starts up an XMLRPC client instance, used to communicate with the XMLRPC server. Doesn't return anything.
+
+  The acquire methods all return a list of acquired resources, following the SeattleGENI XMLRPC API spec.
+  * ''acquire_lan_resources(num)'':  Acquires ''num'' LAN resources.
+  * ''acquire_wan_resources(num)'':  Acquires ''num'' WAN resources.
+  * ''acquire_random_resources(num)'':  Acquires ''num'' random resources.
+
+  * ''release_resources(handlelist)'':  Release all resources referenced by handles given in ''handlelist''. Doesn't return anything.
+
+  * ''get_resource_info()'':  Gets all acquired resources.
+  * ''get_account_info()'':  Gets account information.
+  * ''get_public_key()'':  Gets user's public key.
+  * ''get_private_key()'':  Gets user's private key.
+  * ''delete_private_key()'':  Deletes user's private key.
+
+[[BR]]
+=== Example ===
+Here is an example of how to use the SeattleGENI XML-RPC Client Library, in python:[[BR]]
+{{{
+import geni_xmlrpc_clientlib
+
+def main():
+  c = geni_xmlrpc_clientlib.client(username="bob", authstring="123", allow_ssl_insecure=True)
+  c.warmup()
+  
+  # gets account info
+  print c.get_account_info()
+
+  # acquires 3 LAN resources
+  acquired_lan = c.acquire_lan_resources(3)
+
+  # acquires 3 WAN resources
+  acquired_wan = c.acquire_wan_resources(3)
+
+  # acquires 3 random resources
+  acquired_rand = c.acquire_random_resources(3)
+
+  # release all acquired LAN resources
+  lan_handles_to_release = []
+  for lan_resource in acquired_lan:
+    lan_handles_to_release.append(lan_resource['handle'])
+  c.release_resources(lan_handles_to_release)
+
+  # gets all acquired resources info
+  resource_info = c.get_resource_info()
+
+  # releases all acquired resources 
+  # (need to extract handles from info dictionary)
+  handles_to_release = []
+  for resource in resource_info:
+    handles_to_release.append(resource['handle'])
+  c.release_resources(handles_to_release)
+
+  # gets public key
+  print c.get_public_key()
+
+  # gets private key
+  print c.get_private_key()
+
+  # deletes private key
+  c.delete_private_key()
+
+  # you can catch exceptions by using try, except blocks.
+  try:
+    c.acquire_random_resources(100)
+  except GENI_NotEnoughCredits:
+    print("Not enough credits!")
+}}}
+
+[[BR]]
+=== Exceptions ===
+The following exceptions can be thrown by the SeattleGENI Clientlib:[[BR]]
+  * ''GENI_AuthError'': Your authentication details were invalid.[[BR]]
+  * ''GENI_NotEnoughCredits'': Your account does not have enough credits for the requested resources.[[BR]]
+  * ''GENI_NoAvailNodes'': There are no more available nodes to acquire.[[BR]]
+  * ''GENI_KeyAlreadyRemoved'': Your private key has already been removed.[[BR]]
+  * ''GENI_OpError'': An internal SeattleGENI error has occurred. Check the error message for more details.
