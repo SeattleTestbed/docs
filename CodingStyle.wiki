@@ -950,3 +950,12 @@ else:
      askokcancel function.
 
 
+    Don't use os.popen or os.system
+
+     These are deprecated and we've found bugs in them.   Don't use them!   Use subprocess instead.
+
+    Don't use subprocess.Popen with a string argument (#508).
+
+     Call subprocess.Popen with a first argument that looks like ['command', 'arg1', 'arg2', ...].   Do not use 'command arg1 arg2 ...'!
+
+
