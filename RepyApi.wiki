@@ -358,6 +358,54 @@ The most commonly-used values of mode are 'r' for reading, 'w' for writing (trun
       A file-like object 
 
 [[BR]]
+==== file.close() ====
+----
+
+Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ValueError after the file has been closed. Calling close() more than once is allowed.
+
+ * Doc string:
+
+   <Purpose>
+      Allows the user program to close a file.  This function is meant
+      to resemble the builtin "file.close".
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      Closes a file descriptor previously opened for writing.
+
+   <Returns>
+      Nothing.
+
+[[BR]]
+==== file.flush() ====
+----
+
+Flush the internal buffer, like C stdio's fflush().
+
+ * Doc string:
+
+   <Purpose>
+      Allows the user program to flush a file buffer.  This function is meant
+      to resemble the builtin "file.flush".
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      ValueError if the file is closed.
+
+   <Side Effects>
+      Flushes a file previously opened for writing.
+
+   <Returns>
+      Nothing.
+
+[[BR]]
 ==== listdir() ====
 ----
 
