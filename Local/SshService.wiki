@@ -31,19 +31,16 @@ exec /cygdrive/c/Python25/python ${1+"$@"}
 {{{
 python -i.
 }}}
-
-The same thing must be done for SSH. Before the next step, make sure you have the latest version of SVN installed. You can get the latest version from [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100&expandFolder=8100&folderID=91 subversion.tigris page]. Create a file called ssh without any extension, and add these two lines:
+ The same thing must be done for SSH. Before the next step, make sure you have the latest version of SVN installed. You can get the latest version from [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100&expandFolder=8100&folderID=91 subversion.tigris page]. Create a file called ssh without any extension, and add these two lines:
 {{{
 #!/bin/bash
 exec /cygdrive/c/Program\ Files/Subversion/bin ${1+"$@"}
 }}}
-
-Now we have to edit the environment variable PATH. Note that even though we added the python and ssh file in C:\WINDOWS\system32\bsh\bin, typing in 'python' or 'svn' will only work in cygwin. Suppose we want to use the 'cmd' command after we ssh into the windows machine and then want to run python program, then we need to edit the PATH variables. To do this we have to edit the file 'profile', which is located at C:\WINDOWS\system32\bsh\etc\profile, or if you are sshing into the machine its located at /etc/profile. Open up the file and the following should be the value of your PATH variable (or its equivalent, depending on where you installed Python and SVN):
+ Now we have to edit the environment variable PATH. Note that even though we added the python and ssh file in C:\WINDOWS\system32\bsh\bin, typing in 'python' or 'svn' will only work in cygwin. Suppose we want to use the 'cmd' command after we ssh into the windows machine and then want to run python program, then we need to edit the PATH variables. To do this we have to edit the file 'profile', which is located at C:\WINDOWS\system32\bsh\etc\profile, or if you are sshing into the machine its located at /etc/profile. Open up the file and the following should be the value of your PATH variable (or its equivalent, depending on where you installed Python and SVN):
 {{{
 PATH=.:/cygdrive/c/WINDOWS/system32:/usr/bin:/bin:/usr/sbin:/usr/local/bin:/cygdrive/c/Python25:/cygdrive/c/WINDOWS/system32:/cygdrive/c/Program\ Files/Subversion/bin:$PATH
 }}}
-
-Note that in the path directory '/' automatically refers to C:\WINDOWS\system32\bsh\, so /usr/bin is equivalent to C:\WINDOWS\system32\bsh\usr\bin. The path directory C:\ is equivalent as /cygdrive/c. So C:\Program Files would essentially be /cygdrive/c/Program\ Files. 
+ Note that in the path directory '/' automatically refers to C:\WINDOWS\system32\bsh\, so /usr/bin is equivalent to C:\WINDOWS\system32\bsh\usr\bin. The path directory C:\ is equivalent as /cygdrive/c. So C:\Program Files would essentially be /cygdrive/c/Program\ Files. 
  1. '''Final Test:''' Go to a different machine and make sure you can use ssh to access the machine. The two windows machine name should be testbed-vista1.cs.washington.edu and testbed-xp2.cs.washington.edu
  1. '''Advanced Configuration:''' You can manually choose which users will have ssh access manually. To do this open up the exe file in C:\Program Files\MobaSSH. Hit the Users button on the right side of the panel and click on 'Selected users'. Once you have chosen all the users click on Restart button under the 'MobaSSH Service is running' on the left side of the panel. Any changes you made will not take place until you restart the MobaSSH service.
 
