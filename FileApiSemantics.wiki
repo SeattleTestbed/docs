@@ -39,7 +39,7 @@ Action: Close is called on an open file object.
 
 Result: The file obj is closed. Read and write operations can no longer be performed.
 
-(tested - fobj_close_basic.py)
+(tested - z_testfileclosecloses.py)
 Test Snippet:
 
 {{{
@@ -55,23 +55,24 @@ else:
 
 2
 
-Action: Close is called on an allready closed file object.
+Action: Close is called on an already closed file object.
 
 Result: False is returned, no exception occurs.
 
-(tested - fobj_close_duplicate.py)
+(tested - z_testfilecloseduplicate.py)
 
 Test Snippet:
 
 {{{
-fobj = open(filename)
+fobj = open("junk_test.out")
 fobj.close()
-fobj.close()
+if fobj.close():
+  print "a duplicate fobj.close() should return false
 }}}
 
 3
 
-Action: Close is called and the attempts are made to read or write from the file.
+Action: Close is called and attempts are made to read or write from the file.
 
 Result: An exception occurs.
 
