@@ -98,7 +98,7 @@ None.
 
 Action: flush is called on a file object in read-only mode
 Result: noop
-(tested - file_obj_flush_read_only.py)
+(tested - z_testfileflushnooponreadonly.py)
 
 Test Snippet:
 
@@ -111,7 +111,7 @@ fobj.flush()
 
 Action: flush is called on a file object that has write capability
 Result: Buffers are written to disk.
-(tested - file_obj_flush_write.py)
+(tested - z_testfileflushwrite.py)
 
 Test Snippet:
 
