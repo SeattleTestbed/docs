@@ -150,10 +150,10 @@ Action: next() is called on a file object that is opened for writing.
 
 Result: IOError is raised.
 
-Test Snippet:
+Test Snippet (z_testfilenextwrite.py):
 
 {{{
-fobj = open(filename, 'r+')
+fobj = open("junk_test.out", 'r+')
 try:
   fobj.next()
 except IOError:
@@ -167,7 +167,7 @@ else:
 Action: next is called on a file object to get each line of the file, then next is called one additional time.
 
 Result: Each line of the file is returned. When the additional call to next is made a StopIteration exception is thrown.
-(tested - fobj_next_forloop.py)
+(tested - z_testfilenextloop.py)
 
 Test Snippet:
 
@@ -175,28 +175,8 @@ Test Snippet:
 fobj = open(filename)
 for line in fobj:
   #process each line
-  try:
-    fobj.next()
-  except StopIteration:
-    pass
-  else:
-    fail('no exception')
-}}}
+  pass
 
-3
-
-Action: A fileobj is used as its own iterator in a for loop.
-
-Result: Each line of the file is returned. An additional call to next outside of the for loop results in a StopIteration exception.
-(tested - fobj_next_linebyline.py)
-
-Test Snippet:
-
-{{{
-fobj = open(filename)
-for i in range(FILE_LENGTH):
-  line = fobj.next()
-  #process each line
 try:
   fobj.next()
 except StopIteration:
