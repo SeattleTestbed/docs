@@ -228,7 +228,7 @@ Action: read() is called on a file object that is newly opened with no argument 
 
 Result: The contents of the file are returned.
 
-Test Snippet:
+Test Snippet (z_testfilereadbasic.py):
 
 {{{
 fobj = open(filename, 'rb')
@@ -243,10 +243,10 @@ Action: read() is called with a positive 'len' argument.
 
 Result: At most that many bytes of the file's contents are returned.
 
-Test Snippet:
+Test Snippet (z_testfilereadlength.py):
 
 {{{
-fobj = open(filename, 'rb)
+fobj = open(filename, 'rb')
 str = fobj.read(5)
 if len(str) > 5:
   fail("fobj.read() should read no more than len bytes!")
@@ -258,7 +258,7 @@ Action: read() is called with a len argument that is not an integer at all.
 
 Result: TypeError is raised.
 
-Test Snippet:
+Test Snippet (z_testfilereadbadarg.py):
 
 {{{
 fobj = open(filename, 'rb')
