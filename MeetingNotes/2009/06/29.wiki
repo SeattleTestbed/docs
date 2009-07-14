@@ -51,7 +51,7 @@ Working on automated deployment / monitoring script, hopefully will have
 it running by this Friday. Later on will allow retrieving detailed
 information about failures on nodes, etc.
 
-'''Conrad (I think)'''
+'''Conrad'''
 
 Working on repy bugs and incomplete documentation. The repy bug he's
 working is a bug in the seattlelib xmlrpc client. Can't get the
