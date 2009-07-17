@@ -1,8 +1,8 @@
 = XML-RPC API to SeattleGENI =
 [[BR]]
 An XML-RPC interface to SeattleGENI is available, for clients wishing to access SeattleGENI functionality without going through the SeattleGENI website.[[BR]]
-The XML-RPC server is located at https://seattlegeni.cs.washington.edu/xmlrpc/. [[BR]]
-For examples on how to use XML-RPC with SeattleGENI, check out our [XML-RPC Client].
+The XML-RPC server is located at !https://seattlegeni.cs.washington.edu/xmlrpc/. [[BR]]
+For examples on how to use XML-RPC with SeattleGENI, check out the [https://seattle.cs.washington.edu/wiki/SeattleGeniClientLib SeattleGENI XMLRPC Client Library].
 
 [[BR]]
 === Authentication ===
@@ -14,7 +14,7 @@ Both ''my_username'' and ''my_password'' are the same login details used when lo
 To check if your credentials are valid, use the ''authcheck'' API call.[[BR]]
 [[BR]]
 '''This structure is expected in every XML-RPC API call, as the ''auth'' parameter.[[BR]]'''
-All XML-RPC functions will throw an XMLRPC Fault Code 101, ''GENI_AuthError'' if authentication fails.
+All XML-RPC functions will throw an XMLRPC Fault Code 101, ''GENIAuthError'' if authentication fails.
 
 [[BR]]
 
@@ -22,7 +22,7 @@ All XML-RPC functions will throw an XMLRPC Fault Code 101, ''GENI_AuthError'' if
 In the event of an exception/error, an XML-RPC Fault will be sent to the client.[[BR]]
 The fault object contains information about the error that occurred, and clients can catch these faults as they would exceptions in standard programs. The fault itself contains a faultCode, indicating the type of fault, and a faultString, containing more info about the error.[[BR]]
 More information about XML-RPC Faults is available at http://docs.python.org/library/xmlrpclib.html#fault-objects [[BR]]
-For examples on dealing with SeattleGENI XML-RPC Faults, please take a look at our [XML-RPC client.]
+For examples on handling SeattleGENI XML-RPC Faults, please take a look at our [https://seattle.cs.washington.edu/wiki/SeattleGeniClientLib XML-RPC client.]
 
 [[BR]]
 
@@ -59,9 +59,9 @@ Returns a list of dictionaries, where the dicts are of the form:
 
 Raises an XMLRPC Fault Code 1, with the string ''!TypeError'' present in the faultString, if the given values are of incorrect type.[[BR]]
 Raises an XMLRPC Fault Code 1, with the string ''!ValueError'' present in the faultString, if '''rspec''' is not of an understood type.[[BR]]
-Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
-Raises an XMLRPC Fault Code 102, ''GENI_NotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
-Raises an XMLRPC Fault Code 103, ''GENI_NoAvailNodes'' if there are no available nodes to acquire.[[BR]]
+Raises an XMLRPC Fault Code 100, ''GENIOpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 102, ''GENINotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
+Raises an XMLRPC Fault Code 103, ''GENINoAvailNodes'' if there are no available nodes to acquire.[[BR]]
 
 
 [[BR]]
@@ -71,7 +71,7 @@ Raises an XMLRPC Fault Code 103, ''GENI_NoAvailNodes'' if there are no available
 Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
 
 Raises an XMLRPC Fault Code 1, with the string ''!TypeError'' present in the faultString, if the '''list_of_handles''' are of invalid form.[[BR]]
-Raises an XMLRPC Fault Code 100, ''GENI_OpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 100, ''GENIOpError'' if the operation fails due to some GENI internal error.[[BR]]
 
 [[BR]]
 === get_resource_info(auth) ===
@@ -117,4 +117,4 @@ Returns the user's private key as a string.
 ----
 Removes the user's private key from the server.
 
-Raises an XMLRPC Fault Code 104, ''GENI_KeyAlreadyRemoved'' if the key was already removed.
+Raises an XMLRPC Fault Code 104, ''GENIKeyAlreadyRemoved'' if the key was already removed.
