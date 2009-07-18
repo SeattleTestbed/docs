@@ -25,6 +25,8 @@ The state transition scripts on seattlegeni.cs are deployed in /home/geni/node_s
 == Deploying the daemons ==
 ----
 
+''Note: This information is slightly out of date. See #564 for more info on deploying the node state transition scripts.''
+
 To deploy the state transition scripts into /home/geni/node_state_transitions/ from the Seattle trunk that is assumed to have been checked out in ~/trunk/, do the following ('''warning''' : the destination directory will be overwritten) :
 
 {{{
