@@ -406,6 +406,164 @@ Flush the internal buffer, like C stdio's fflush().
       Nothing.
 
 [[BR]]
+==== file.next() ====
+----
+
+If the file pointer is at the end of the file, throws StopIteration. Otherwise, reads the next line from the file and returns it. Equivalent to the following:
+
+{{{
+#!python
+  def next(self):
+    line = self.readline()
+    if line == "":
+      raise StopIteration()
+    return line
+}}}
+
+ * Doc string:
+
+   <Purpose>
+      Allows a user program to iterate over the lines of a file.
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      StopIteration if EOF is reached.
+      ValueError if the file is closed.
+
+   <Side Effects>
+      Advances the file pointer to the next line (unless it is already at
+      EOF).
+
+   <Returns>
+      The contents of the next line.
+
+[[BR]]
+==== file.read(size) ====
+----
+
+Reads up to size bytes of the rest of the (open) file, returning what is read. If size is ommitted, the file is read to EOF.
+
+ * Doc string:
+
+   <Purpose>
+      Reads from a file handle.
+
+   <Arguments>
+      size (optional) - Specify a maximum number of bytes to read from the
+                        file.
+
+   <Exceptions>
+      ValueError if the file is closed.
+
+   <Side Effects>
+      Advances the file pointer.
+
+   <Returns>
+      The data that was read.
+
+[[BR]]
+==== file.readline(size) ====
+----
+
+Reads a whole line from the file. If size is not ommitted, the number of bytes read is limited to size. Trailing newlines are included in the resulting line. The empty string is returned if EOF is hit immediately.
+
+ * Doc string:
+
+   <Purpose>
+      Reads a line from a file.
+
+   <Arguments>
+      size (optional) - Specifies a maximum bound to the number of bytes
+                        to read from the file.
+
+   <Exceptions>
+      ValueError if the file is closed.
+
+   <Side Effects>
+      Advances the file pointer.
+
+   <Returns>
+      The data read (a string).
+
+[[BR]]
+==== file.readlines(size) ====
+----
+
+Reads multiple lines from the file. If size is not ommitted and positive, stops reading when it has read at least size bytes.
+
+ * Doc string:
+
+   <Purpose>
+      Reads many lines from a file.
+
+   <Arguments>
+      size (optional) - Specifies an approximate bound to the number of bytes
+                        to read from the file.
+
+   <Exceptions>
+      ValueError if the file is closed.
+
+   <Side Effects>
+      Advances the file pointer.
+
+   <Returns>
+      A list of lines read from the file. Lines are seperated by newlines, but
+      these newlines are not stripped from the lines in the resulting list.
+
+[[BR]]
+==== file.write(data) ====
+----
+
+Write some data to a file.
+
+ * Doc string:
+
+   <Purpose>
+      Allows the user program to write data to a file.
+
+   <Arguments>
+      Data to write (a string).
+
+   <Exceptions>
+      ValueError if the file is closed.
+      IOError if the disk is out of space or some low level IO error occurs.
+
+   <Side Effects>
+      Writes some data after the current filepointer position, advancing it.
+
+   <Returns>
+      Nothing.
+
+[[BR]]
+==== file.writelines(lines) ====
+----
+
+Writes a sequence of strings to the file.
+
+ * Doc string:
+
+   <Purpose>
+      Writes a sequence of strings to a file. (Unlike the name might suggest,
+      does not do any mucking about with adding or mangling newlines.)
+      Equivalent to looping through the elements of the sequence and
+      {{{file.write()}}}ing them individually.
+
+   <Arguments>
+      lines - The sequence of strings to write to the file.
+
+   <Exceptions>
+      ValueError if the file is closed.
+      TypeError if the {{{lines}}} argument isn't iterable.
+
+   <Side Effects>
+      Writes some data to the file.
+
+   <Returns>
+      Nothing.
+
+[[BR]]
 ==== listdir() ====
 ----
 
