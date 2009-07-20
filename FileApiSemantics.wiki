@@ -464,7 +464,7 @@ except ValueError:
 
 Action: User calls write() on a file opened in a write-enabled mode.
 
-Result: No-op.
+Result: Data is written to file. If two threads try to write at the same time, the behavior is the same as if the writes were sequential, though the order is undefined.
 
 Test Snippet:
 
