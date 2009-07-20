@@ -66,8 +66,11 @@ def main():
   # you can catch exceptions by using try, except blocks.
   try:
     c.acquire_random_resources(100)
-  except GENINotEnoughCredits:
+  except geni_xmlrpc_client.GENINotEnoughCredits:
     print("Not enough credits!")
+
+if __init__=="__main__":
+  main()
 }}}
 
 [[BR]]
