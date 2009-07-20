@@ -2,7 +2,6 @@
 
 Information about !MapReduce is available on the [wiki:RepyMapReduce main MapReduce page].
 
-In this first assignment, a simple one worker node and one primary node !MapReduce framework will be built.  The primary node will acquire data, hand it off to the worker, and wait for the worker to finish.  The worker will perform a map() pass and a reduce() pass on the data and send the result back to the primary node.  Since only one worker is involved in the computation, the partition step is left for future assignments.  This code will serve as a base for the future assignments that will expand the scalability and robustness of the framework.
 [[BR]]
 [[BR]]
 
@@ -10,7 +9,7 @@ In this first assignment, a simple one worker node and one primary node !MapRedu
 ----
 == Overview ==
 
-
+In this first assignment, a simple one worker node and one primary node !MapReduce framework will be built.  The primary node will acquire data, hand it off to the worker, and wait for the worker to finish.  The worker will perform a map() pass and a reduce() pass on the data and send the result back to the primary node.  Since only one worker is involved in the computation, the partition step is left for future assignments.  This code will serve as a base for the future assignments that will expand the scalability and robustness of the framework.
 
 == The Assignment ==
 ----
@@ -23,17 +22,21 @@ In order to ensure that the implementation of the worker stays general, we're go
 With the results from the do_map() function, do_reduce can now be called after some simplification.  The do_map function will have returned a list of (key, value) tuples, but the reduce_func expects a key with a list of values!  This means the worker will have to combine (key, value) tuples into a dictionary where the dictionary keys are keys and the dictionary values will be a list of values.  After this conversion, do_reduce() can be called while passing in this {key1: [v1, v2,..., vn], ..} dictionary.
 
 Similar to do_map(), do_reduce() will call the reduce_func(key, value_list) for each key-values pair.  After collecting the results of reduce_func(), the key-value pairs can be expanded back out into the flat format as before ("'''key''' \t '''value''' \n").
+[[BR]]
+[[BR]]
 
-== Step 2: The primary code ==
+=== Step 2: The primary code ===
 
-Work on this..
+In this step, the mappri.repy program will embody the preliminary design of how the primary node communicates with the single !MapReduce peer.
 
-== Step 3: Primary and worker communication ==
+
+=== Step 3: Primary and worker communication ===
 
 Messages!!
 
 == Hints ==
- * Hints to go here...
+ * Work sequentially!  Start with step 1 and ensure that if you directly feed in data that it will be mapped and reduced correctly.  Move onto developing the skeleton for step 2, and think about how you can pass strings using TCP messages for step 3.
+ * 
 
 == Notes ==
 
