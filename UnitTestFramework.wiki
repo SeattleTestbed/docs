@@ -46,21 +46,23 @@ Here are the allowed pragma directives for UTF. We
 #!python
 """
 Instructs UTF that this test file is suppose to be run inside Repy execution environment. 
-Restriction file argument is optional -- if not specified _restriction.default_ is used.
+Restriction file argument is optional -- if not specified restrictions.default is used.
+If this directives is omitted, UTF assumes that your test file is a standard Python
+file.
 """
-#pragma repy [RESTRICTION FILE]
+#pragma repy [RESTRICTIONS FILE]
 
 """
 Instructs UTF that this test file is suppose to produce some output on standard out. 
 If the TEXT argument is specified, UTF will try to find TEXT substring. IF TEXT is not 
-specified, UTF makes sure that standard out data is not empty.
+specified, UTF makes sure that the standard out data is not empty.
 """
 #pragma out [TEXT]
 
 """
 Instructs UTF that this test file is suppose to produce some output on standard error. 
 If the TEXT argument is specified, UTF tries to find TEXT substring. IF TEXT is not 
-specified, UTF makes sure that standard error data is not empty.
+specified, UTF makes sure that the standard error data is not empty.
 """
 #pragma error [TEXT]
 }}}
