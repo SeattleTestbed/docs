@@ -1,4 +1,4 @@
-= Proposal -- Seattle's Unit Test Framework =
+= Seattle's Unit Test Framework Alpha Documentation =
 
 ----
 [[TOC(inline)]]
@@ -12,16 +12,58 @@ The purpose of this proposal is to gather as much feedback as possible with resp
 [[BR]]
 == Requirements ==
 ----
-Before diving into examples and use cases, I would like to specify requirements, so that users have a better understanding of what the goals are. 
+Before diving into design and examples, I would like to specify requirements, so that the users have a better understanding of what the goals are. 
 
  * Above everything, writing a unit test module should be simple and obvious for new users.
- * For a small test modules simplicity should prevail over everything else. Having to prepare tests (using preparetests.py) before the execution is not a time effective solution. 
  * Test module should be able to have many small test cases and developer should be able to group them into test suites.
  * The framework should allow advanced users to perform non-trivial tests.
  * The framework should allow users to easily select what tests to run (whole module or specific test cases).
  * The framework back-end needs to be simple and extendible.
 
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
+
+=== Design ===
+[[BR]]
+
+UTF behaves similar to python's standard unittest module, with addition of several other features suitable for Seattle project, such as:
+
+* Testing inside Repy execution environment.
+* Ability to specify different restrictions for different test files.
+* External process testing.
+
+The way you instruct UTF how it is suppose to behave, is via #pragma directives. In short #pragma directive is a single line inside of your source file, which has the following syntax:
+
+{{{
+#!python
+
+#DIRECTIVE TYPE [ARGS]
+}}}
+
+Here are the allowed pragma directives for UTF. We
+
+
+{{{
+#!python
+"""
+Instructs UTF that this test file is suppose to be run inside Repy execution environment. 
+Restriction file argument is optional -- if not specified _restriction.default_ is used.
+"""
+#pragma repy [RESTRICTION FILE]
+
+"""
+Instructs UTF that this test file is suppose to produce some output on standard out. 
+If the TEXT argument is specified, UTF will try to find TEXT substring. IF TEXT is not 
+specified, UTF makes sure that standard out data is not empty.
+"""
+#pragma out [TEXT]
+
+"""
+Instructs UTF that this test file is suppose to produce some output on standard error. 
+If the TEXT argument is specified, UTF tries to find TEXT substring. IF TEXT is not 
+specified, UTF makes sure that standard error data is not empty.
+"""
+#pragma error [TEXT]
+}}}
 
 [[BR]]
 === Use Cases ===
