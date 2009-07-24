@@ -24,7 +24,7 @@ Before diving into design and examples, I would like to specify requirements, so
 
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
 
-=== Design ===
+== Design ==
 [[BR]]
 
 UTF behaves similarly to python's standard unittest library, with addition of several other features suitable for Seattle. Those are:
@@ -85,7 +85,7 @@ specified, UTF makes sure that the standard error data is not empty.
 #pragma error [TEXT]
 }}}
 
----
+----
 
 Other features, such as:
  * Which module does the test file belong to.
