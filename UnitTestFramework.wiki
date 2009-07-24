@@ -26,8 +26,7 @@ When translating requirements into objectives, we are faced with a non-trivial t
 
 [[BR]]
 == Design ==
-[[BR]]
-
+----
 UTF behaves similarly to python's standard unittest library, with addition of several other features suitable for Seattle. Those are:
 
  * Testing within Repy execution environment.
@@ -86,9 +85,9 @@ specified, UTF makes sure that the standard error data is not empty.
 #pragma error [TEXT]
 }}}
 
-
+[[BR]]
 ----
-
+[[BR]]
 
 Other features are encoded inside of the ''' filename'''. Those are:
 
@@ -110,8 +109,9 @@ Furthermore, a module may contain two special descriptors: '''setup''' and '''sh
 
 Test files with the above mentioned syntax are executed '''by default'''. To exclude them from default execution, '''prepend the filename with _'''. This way, the test file has to be executed '''explicitly'''.
 
+[[BR]]
 ----
-
+[[BR]]
 
 When running tests, a developer is presented with three different possibilities:
  * Run all tests for all modules:
@@ -146,12 +146,11 @@ $ utf.py -f <file>
 [[BR]]
 == Examples ==
 ----
-
-
 The following examples are not meant to be complete test cases (or to follow standard testing practices) for some module, but instead, are there to demonstrate a specific feature.
 
+[[BR]]
 === Single Test File ===
-
+----
 Now, let us consider a trivial use case. We'll be designing a random number generator.
 
 There are two methods defined:
@@ -210,9 +209,9 @@ $   Running ut_rng_invalid_seed.py                 [ PASS ]
 
 This is a very simple scenario, and hopefully it illustrates some of the basics of UTF.
 
-
+[[BR]]
 === Module Testing ===
-
+----
 Another, more complicated example, would be a IP <-> DNS converter.
 
 There are two functions defined:
@@ -295,8 +294,9 @@ $   Running ut_converter_to_ip_invalid.py                 [ PASS ]
 $   Running ut_converter_to_ip_invalid.py                 [ PASS ]
 }}}
 
+[[BR]]
 === Standard Out Test ===
-
+----
 How do you test if an application produces the correct output? Well, define '''#pragma out''' directive with expected argument.
 
 {{{
@@ -309,8 +309,9 @@ import sys
 sys.stdout.write("Hello Out.")
 }}}
 
+[[BR]]
 === Restrictions File & Standard Error ===
-
+----
 How do you verify that the restrictions file is behaving the way it should? First of all, you need to define the restriction file you want to use as repy pragma argument. Also, we have to make sure that the file throws an exception containing ''not allowed'' string.
 
 {{{
