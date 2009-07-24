@@ -7,7 +7,9 @@
 [[BR]]
 == Abstract ==
 ----
-The purpose of this proposal is to gather as much feedback as possible with respect to the new testing framework. Please feel free to add any comments or concerns at the bottom of the page.
+The purpose of this document is to outline the most important features and to gather as much feedback as possible with respect to the new testing framework. We will be referring to Testing Unit Framework as UTF.
+
+Please feel free to add any comments or concerns at the bottom of the page.
 
 [[BR]]
 == Requirements ==
@@ -25,13 +27,22 @@ When translating requirements into objectives, we are faced with a non-trivial t
 === Design ===
 [[BR]]
 
-UTF behaves similar to python's standard unittest module, with addition of several other features suitable for Seattle project, such as:
+UTF behaves similarly to python's standard unittest library, with addition of several other features suitable for Seattle. Those are:
 
-* Testing inside Repy execution environment.
-* Ability to specify different restrictions for different test files.
-* External process testing.
+ * Testing within Repy execution environment.
+ * Ability to specify different restrictions for different Repy test files.
+ * Testing for standard out and standard error messages.
+ * Support for setup and shutdown scripts.
 
-The way you instruct UTF how it is suppose to behave, is via #pragma directives. In short #pragma directive is a single line inside of your source file, which has the following syntax:
+Having this in mind, you are probably asking yourself: 'Well, how do I achieve this?'. Obviously, we need to be able to hint or to instruct the framework about our needs. Those instructions are embedded either in the file itself or the filename. Below, we discuss each aspect.
+
+When hinting the UTF:
+
+ * that the test file is suppose to be run inside the Repy execution environment,
+ * or to use a non-default restrictions,
+ * or that the executed test has to produce a specific output on standard out or/and standard error
+
+we need to use the following syntax:
 
 {{{
 #!python
@@ -39,8 +50,15 @@ The way you instruct UTF how it is suppose to behave, is via #pragma directives.
 #DIRECTIVE TYPE [ARGS]
 }}}
 
-Here are the allowed pragma directives for UTF. We
+The directive name is always going to be '''pragma''' (a directive communicating additional "pragmatic" or implementation-specific information). Therefore, the more specific syntax is:
 
+{{{
+#!python
+
+#pragma TYPE [ARGS]
+}}}
+
+The following #pragma directives are allowed. When an unknown #pragma directive is encountered, UTF reports an error.
 
 {{{
 #!python
@@ -67,7 +85,48 @@ specified, UTF makes sure that the standard error data is not empty.
 #pragma error [TEXT]
 }}}
 
+---
+
+Other features, such as:
+ * Which module does the test file belong to.
+ * Does the module have setup and shutdown scripts?
+ * Whether or not the test file be executed by default
+
+All test files have to follow a strict naming convention: utf_test_<module name>_<optional>.py/mix. Therefore, if you want to create a test file for a random number generator module, the test file should be called: utf_test_rng.py
+
+When running tests, a developer is presented with three different possibilities:
+ * Run all tests for all modules:
+
+{{{
+#!python
+
+$ utf.py --all
+
+}}}
+
+ * Run all tests for a specific module
+
+{{{
+#!python
+
+$ utf.py --module rng
+
+}}}
+
+ * Run a specific test case or a test suite for a specific module
+
+{{{
+#!python
+
+$ utf.py --module rng --case test_seed
+
+}}}
+
 [[BR]]
+== API ==
+----
+
+
 === Use Cases ===
 ----
 
@@ -178,42 +237,6 @@ to_ip_good_input = TestSuite()
 
 Please note that Test Suite feature is clunky, so it might be excluded from the implementation. There are ways around this problem, but it requires OO approach (which is not in compliance with project's coding guidelines).
 
-
-=== Execution Monitor ===
-
-All test files have to follow a strict naming convention: utf_test_<module name>_<optional>.py/mix. Therefore, if you want to create a test file for a random number generator module, the test file should be called: utf_test_rng.py
-
-When running tests, a developer is presented with three different possibilities:
- * Run all tests for all modules:
-
-{{{
-#!python
-
-$ utf.py --all
-
-}}}
-
- * Run all tests for a specific module
-
-{{{
-#!python
-
-$ utf.py --module rng
-
-}}}
-
- * Run a specific test case or a test suite for a specific module
-
-{{{
-#!python
-
-$ utf.py --module rng --case test_seed
-
-}}}
-
-[[BR]]
-== API ==
-----
 
 === Assert ===
   * assertTrue(expr[, msg])[[BR]]
