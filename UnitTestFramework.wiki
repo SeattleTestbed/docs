@@ -36,7 +36,7 @@ UTF behaves similarly to python's standard unittest library, with addition of se
 
 Having this in mind, you are probably asking yourself: 'Well, how do I achieve this?'. Obviously, we need to be able to hint or to instruct the framework about our needs. Those instructions are embedded either in the file itself or the filename. Below, we discuss each aspect.
 
-When hinting the UTF:
+When providing a hint for the UTF:
 
  * that the test file is suppose to be run inside the Repy execution environment,
  * or to use a non-default restrictions,
