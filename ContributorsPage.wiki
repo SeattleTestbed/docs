@@ -22,6 +22,7 @@ This page contains information useful to developers working on Seattle
    * [wiki:CustomizedInstallerTesting Running the Customized Installer test server]
    * [RemoteTestingService Running remote tests on seattle testbeds]
    * [UnitTestFramework Unit Test Framework -- Alpha]
+   * [IntegrationTestFramework Writing Integration Tests]
 
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
