@@ -15,7 +15,7 @@ The purpose of this document is to guide any Seattle developers in how to create
 These are the files that need to be imported in order to setup and run the integration tests properly. All these files are located in trunk/integrationtests/common/
  1. send_gmail.py
  1. integrationtestlib.py
- 1. irc_seattlebot.py (Optional)
+ 1. irc_seattlebot.py (Optional - import this if you want to send messages on the irc)
 
 [[BR]]
 == Initializing the Integration Tests ==
@@ -42,7 +42,7 @@ This ensures that the gmail user name and password are set up.
 if test_fail:
   integrationtestlib.notify("Error: The test has failed!!")
 }}}
-  1.handle_exception(test) - This function is used with a try and except block. This function should be called if you expect there to be some kind of error that will be printed in StdErr. This function sends an email to the developer as well as send them a traceback of the failure. An example of usage would be:
+  1. handle_exception(text) - This function is used with a try and except block. This function should be called if you expect there to be some kind of error that will be printed in StdErr. This function sends an email to the developer as well as send them a traceback of the failure. An example of usage would be:
 {{{
 try:
   run_test()
