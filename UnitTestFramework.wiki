@@ -179,7 +179,7 @@ sleep(1)
 
 }}}
 
-[[BR}]
+[[BR]]
 === Nome Manager Example ===
 ----
 
