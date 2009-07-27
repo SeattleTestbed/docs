@@ -20,7 +20,7 @@ Before diving into design and examples, I would like to specify requirements, so
  * Test module should be able to have many small test cases and developer should be able to group them into test suites.
  * The framework should allow advanced users to perform non-trivial tests.
  * The framework should allow users to easily select what tests to run (whole module or specific test cases).
- * The framework back-end needs to be simple and extendible.
+ * The framework back-end needs to be simple and extensible.
 
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
 
@@ -29,20 +29,20 @@ When translating requirements into objectives, we are faced with a non-trivial t
 ----
 UTF behaves similarly to python's standard unittest library, with addition of several other features suitable for Seattle. Those are:
 
- * Testing within Repy execution environment.
- * Ability to specify different restrictions for different Repy test files.
- * Testing for standard out and standard error messages.
- * Support for setup and shutdown scripts.
+ * Testing within '''Repy execution environment'''.
+ * Ability to specify different '''restrictions''' for different Repy test files.
+ * Testing for '''standard out and standard error''' messages.
+ * Support for '''setup and shutdown scripts'''.
 
-Having this in mind, you are probably asking yourself: 'Well, how do I achieve this?'. Obviously, we need to be able to hint or to instruct the framework about our needs. Those instructions are embedded either in the file itself or the filename. Below, we discuss each aspect.
+Having this in mind, you are probably asking yourself: 'Well, how do I achieve this?'. Obviously, we need to be able to hint or to instruct the framework about our needs. Those instructions are embedded '''either in the file itself or the filename'''. Below, we discuss each aspect.
 
-When providing a hint for the UTF:
+When instructing the UTF:
 
  * that the test file is suppose to be run inside the Repy execution environment,
- * or to use a non-default restrictions,
+ * or to use a non-default restrictions file,
  * or that the executed test has to produce a specific output on standard out or/and standard error
 
-we need to use the following syntax:
+we need to use the following syntax withing the:
 
 {{{
 #!python
@@ -72,15 +72,15 @@ file.
 
 """
 Instructs UTF that this test file is suppose to produce some output on standard out. 
-If the TEXT argument is specified, UTF will try to find TEXT substring. IF TEXT is not 
-specified, UTF makes sure that the standard out data is not empty.
+If the TEXT argument is specified, UTF will try to find TEXT substring within standard out. 
+If TEXT is not specified, UTF makes sure that the standard out data is not empty.
 """
 #pragma out [TEXT]
 
 """
 Instructs UTF that this test file is suppose to produce some output on standard error. 
-If the TEXT argument is specified, UTF tries to find TEXT substring. IF TEXT is not 
-specified, UTF makes sure that the standard error data is not empty.
+If the TEXT argument is specified, UTF tries to find TEXT substring within standard error. 
+If TEXT is not specified, UTF makes sure that the standard error data is not empty.
 """
 #pragma error [TEXT]
 }}}
