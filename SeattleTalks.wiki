@@ -26,7 +26,7 @@
 
 || 4:30-5:30 AM April 2nd, 2009 || UW Seattle || CSE 551 Section || Ivan || Tutorial / Live Demo
 
-|| 1-1:30 PM July 8th, 2009 || Boston, MA || Cluster C GENI Meeting || Justin || Talk
+|| 1-1:30 PM July 8th, 2009 || Boston, MA || GENI Status Meeting || Justin || Talk
 
 || 8-9 PM July 9th, 2009 || Gates Commons, UW Seattle || Seattle Python Interest Group || Justin || Talk / Live Demo
 
