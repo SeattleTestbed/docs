@@ -184,9 +184,9 @@ sleep(1)
 ----
 Some software components require additional steps before and after the test execution. One such component is the node manager which is built around server-client architecture. As such, we need to initialize the state needed to run the node manager on the local node. 
 
-Basically, all of the initialization code will be located inside __ut_nm_setup.py__ (formally known as nminit.py) file. This file is also responsible for starting a local instance of node manager which is executed before any tests.
+Basically, all of the initialization code will be located inside __ut_nm_setup.py__ (formally known as nminit.py) file. This file is executed before any tests and it is also responsible for starting a local instance of node manager.
 
-After all tests are finished, UTF will try to find and execute the shutdown script (__ut_nm_shutdown__). This script is responsible for deleting the initialization files and stopping the node manager instance.
+After all tests have finished, UTF will try to find and execute the shutdown script (__ut_nm_shutdown__). This script is responsible for deleting the initialization files and stopping the node manager instance.
 
 
 [[BR]]
