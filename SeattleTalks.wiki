@@ -29,3 +29,12 @@
 || 1-1:30 PM July 8th, 2009 || Boston, MA || Cluster C GENI Meeting || Justin || Talk
 
 || 8-9 PM July 9th, 2009 || Gates Commons, UW Seattle || Seattle Python Interest Group || Justin || Talk / Live Demo
+
+|| 2-2:30 PM, July 20st, 2009 || Sheraton, Seattle || GENI Engineering Conference 5, Cluster C || Justin S., Eric, Jenn, Monzur || Talk / Live Demo
+
+
+|| 6-8:30PM July 20st, 2009 || Sheraton, Seattle || GENI Engineering Conference 5, Demo session || Justin, Justin S., Eric, Jenn, Monzur || Live Demo / Posters
+
+|| 2:30-3PM July 21st, 2009 || Sheraton, Seattle || GENI Engineering Conference 5, Cluster C || Justin || Live Demo / Talk (Control Framework)
+
+|| 4:30-5PM July 21st, 2009 || Sheraton, Seattle || GENI Engineering Conference 5, Opt-In WG || Justin || Live Demo / Talk (Opt-In)
