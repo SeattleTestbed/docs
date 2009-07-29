@@ -198,7 +198,7 @@ def initialize_state():
 
 
 
-
+# Start the local instance.
 def start_instance():
   identifier = 'nm_instance'
   args = ('python', 'nmmain.py')
@@ -224,7 +224,7 @@ import utfutil
 
 
 
-
+# Stop the local instance.
 def stop_instance():
   identifier = 'nm_instance'
   utfutil.kill(identifier)
