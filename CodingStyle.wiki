@@ -110,7 +110,7 @@ from subprocess import *
     - Always use the absolute package path for all imports.
 
 
-    - '''Avoid circular imports'''.   This is where {{{a.py}}} imports {{{b.py}}} and then either {{{b.py}}} (or a path of imports from {{{b.py}}}) imports {{{a.py}}}.   This does really odd things to Python, in particular if you perform any actions during import.
+    - '''Avoid circular imports'''.   This is where {{{a.py}}} imports {{{b.py}}} and then either {{{b.py}}} or a path of imports from {{{b.py}}} imports {{{a.py}}}.   This does really odd things to Python, in particular if you perform any actions during import.
 
     - Try to avoid performing actions on module import.   This doesn't play well with circular imports and is non-intuitive for most programmers.
 
