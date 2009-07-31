@@ -302,7 +302,7 @@ Remember, we need to use ''#pragma out'' directive. What this says is that the t
 # This is a repy file!
 #pragma repy
 
-# The output mush match this string.
+# The output must match this string.
 #pragma out Hello Out.
 
 print 'Hello Out.'
