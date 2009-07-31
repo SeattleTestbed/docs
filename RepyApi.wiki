@@ -1,4 +1,4 @@
-= Future Repy Library Reference = 
+= Repy Library Reference = 
 
 ----
 [[TOC(inline)]]
