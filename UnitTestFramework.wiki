@@ -333,28 +333,92 @@ if __name__ == '__initialize__':
 }}}
 
 [[BR]]
-=== Node Manager Example ===
+=== Setup Shutdown Scripts ===
 ----
-Some software components require additional steps before and after the test execution. One such component is the node manager which is built around server-client architecture. As such, we need to initialize the state needed to run the node manager on the local node. 
+Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts receptively.
 
-Basically, all of the initialization code will be located inside __ut_nm_setup.py__ (formally known as nminit.py) file. This file is executed before any tests and it is also responsible for starting a local instance of node manager. Basically, here is what the file looks like.
+
+==== Shutdown ====
+
+There is an IO module with two functions defined.
 
 {{{
 #!python
 
-#
+def open(file_path): ...
+def read(handle) ...
+def write(handle): ...
+def truncate(handle): ...
+def stat(handle): ...
+...
+}}}
+
+Instead of doing the cleanup after every test case, it is much easier to do this in bulk. So here is what the hierarchy might look like. 
+
+{{{
+#!python
+
+# All test cases for IO module.
+$ vim ut_io.py
+
+# Clean-up steps.
+$ vim ut_io_shutdown.py
+}}}
+
+The content of ''ut_io.py'' is irrelevant, but assume that all test cases are operating inside of some temporary directory. Therefore, our shutdown script might look something like this.
+
+{{{
+#!python
+
+import glob
+import os
+
+def purge_garbage():
+  temporary_dir = '/tmp/io'
+  os.remove(temporary_dir)
+
+
+
+if __name__ == '__main__':
+  purge_garbage()
+}}}
+
+
+==== Setup + Shutdown ====
+
+Whenever you are testing some type of server-client architecture, you will most likely find your self using both ''setup'' and ''shutdown'' scripts. For instance, we could have three files.
+
+{{{
+#!python
+
+$ vim ut_network_setup.py
+$ vim ut_network.py
+$ vim ut_network_shutdown.py
+}}}
+
+What the setup file would do is spawn a server component, which is required by any subsequent test cases. Shutdown script, on the other hand, would be in charge of killing that instance. Thus:
+
+
+{{{
+#!python
+"""
+ut_network_setup.py
+"""
+
+# A helper module, which allows us to easily spawn new processes.
 import utfutil
 
-# It initializes the state needed to run the node manager on the local node.
+# Initializes the state needed to run the server on the 
+# local node.
 def initialize_state():
   ...
 
 
 
-# Start the local instance.
+# Starts the local instance.
 def start_instance():
-  identifier = 'nm_instance'
-  args = ('python', 'nmmain.py')
+  identifier = 'server_instance'
+  args = ('python', 'server.py')
   utfutil.spawn(args, identifier)
 
 
@@ -366,26 +430,35 @@ if __name__ == '__main__':
 
 }}}
 
-After all tests have finished, UTF will try to find and execute the shutdown script (__ut_nm_shutdown__). This script is responsible for deleting the initialization files and stopping the node manager instance. Here is what the file looks like:
+After all tests have finished, UTF will try to find and execute the shutdown script (''ut_network_shutdown.py''). This script is responsible for deleting the initialization files and stopping the server instance. Here is what the file looks like:
 
 
 {{{
 #!python
+"""
+ut_network_shutdown.py
+"""
 
-#
+# A helper module, which allows us to easily kill new processes.
 import utfutil
 
 
 
-# Stop the local instance.
+# Clean the initialization files.
+def clean_state():
+  ...
+
+
+
+# Stops the local instance.
 def stop_instance():
   identifier = 'nm_instance'
   utfutil.kill(identifier)
 
 
 
-
 if __name__ == '__main__':
+  clean_state()
   stop_instance()
 
 }}}
