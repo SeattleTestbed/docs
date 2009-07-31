@@ -212,3 +212,77 @@ By default, translated repy modules share the mycontext dictionary. It's initial
 ----
 If an error occurs during translation, a {{{TranslationError}}} will be raised. The cause of the error will be included in the message string, but is usually caused by an error locating or reading from the file, or finding unexpected input.
 
+
+
+[[BR]]
+=== set_importcachedir ===
+----
+{{{
+  <Purpose>
+    Repyhelper creates Python versions of repy files.   This function sets
+    the location where those all files will be stored.   By default, files are 
+    stored wherever they are found in the python path.   If a relative path
+    name is specified, by default, files are instead stored in the first 
+    directory in the Python path sys.path[0] (usually the current directory)
+  
+  <Arguments>
+    newimportcachedir:
+       The location where all files should be stored.   Use None to restore 
+       the default behavior
+
+  <Exceptions>
+    TypeError if the path is invalid.
+    ValueError is thrown if the newimportcachedir isn't in the path
+  
+  <Side Effects>
+    None.
+  
+  <Returns>
+    None.                            
+}}}
+
+  [[BR]]
+
+For all examples, let's assume our {{{sys.path}}} for modules looks like {{{['.', '/usr/lib/repy', '/usr/lib/python2.5', '/tmp']}}}.
+  ==== Example 1 ====
+  By default, modules without path information are written into their directory.
+  {{{
+#!python
+import repyhelper
+module_name = repyhelper.translate_and_import("foo.repy")
+# A file foo_repy.py is written to /usr/lib/repy
+
+  }}}
+
+[[BR]]
+==== Example 2 ====
+  When given path information, the files are written into {{{sys.path[0]}}}
+  {{{
+#!python
+import repyhelper
+module_name = repyhelper.translate_and_import("/usr/lib/repy/foo.repy")
+# A file foo_repy.py is written to the current directory
+  }}}
+
+[[BR]]
+==== Example 3 ====
+  The location of these files can be controlled with {{{set_importcachedir}}}
+  {{{
+#!python
+import repyhelper
+repyhelper.set_importcachedir('/tmp')
+module_name = repyhelper.translate_and_import("foo.repy")
+# A file foo_repy.py is written to /tmp
+  }}}
+
+
+[[BR]]
+==== Example 4 ====
+  A call to {{{set_importcachedir}}} also changes the location of files with paths.
+  {{{
+#!python
+import repyhelper
+repyhelper.set_importcachedir('/tmp')
+module_name = repyhelper.translate_and_import("/usr/lib/repy/foo.repy")
+# A file foo_repy.py is written to /tmp
+  }}}
