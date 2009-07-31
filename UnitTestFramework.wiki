@@ -272,7 +272,7 @@ Accordingly, we need to create a test file for it.
 vim ut_repy.sempahore
 }}}
 
-The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy'' directive. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restirctions.default''.
+The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy'' directive. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restrictions.default''.
 
 Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
 
