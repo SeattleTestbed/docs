@@ -240,7 +240,6 @@ $ utf.py -m monitor
 Testing module: monitor
   Running ut_monitor_hosts.py               [ PASS }
   Running ut_monitor_disk.py                [ PASS }
-
 $
 }}}
 
@@ -273,7 +272,7 @@ Accordingly, we need to create a test file for it.
 vim ut_repy.sempahore
 }}}
 
-The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy''. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restirctions.default''.
+The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy'' directive. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restirctions.default''.
 
 Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
 
@@ -289,23 +288,31 @@ def test_up():
 def test_down():
 }}}
 
-----
 ==== Repy Execution Environment ====
 
-How do you test if an application produces the correct output? Well, define '''#pragma out''' directive with expected output.
+Testing whether or not Repy Execution Environment is behaving properly is a more daunting task to accomplish. So, let's say you want to test that print statement behaves the way it should.
+
+This type of testing should be seen as external process testing, or complete black-box testing.
+
+Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is support to produce output on standard out.
 
 {{{
 #!python
 
+# This is a repy file!
+#pragma repy
+
+# The output mush match this string.
 #pragma out Hello Out.
 
 print 'Hello Out.'
 }}}
 
-[[BR]]
-=== Restrictions File & Standard Error ===
-----
-How do you verify that the restrictions file is behaving the way it should? First of all, you need to define the restriction file you want to use as repy pragma argument. Also, we have to make sure that the file throws an exception containing ''not allowed'' string.
+==== Restrictions ====
+
+How do you verify that the restrictions file is behaving the way it should? 
+
+Basically, you need to define the restriction file you want to use as ''#pragma repy <file>'' directive. Also, we have to make sure that the file throws an exception containing ''not allowed'' string. Remember -- exceptions are always thrown on standard error.
 
 The restriction file we are using does not allow function calls. Consequently, upon a function call, an exception will be thrown stating that we are not allowed to perform that action.
 
@@ -316,7 +323,12 @@ The restriction file we are using does not allow function calls. Consequently, u
 
 #pragma err not allowed
 
-sleep(1)
+def callee()
+  print 'Specified restriction file should not allow this function call.'
+
+
+if __name__ == '__initialize__':
+  callee()
 
 }}}
 
