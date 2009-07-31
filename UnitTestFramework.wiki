@@ -165,7 +165,7 @@ def list_hosts(): ...
 First thing you need to do is create a test file. If you have read the previous section, you will remember that each test file has to follow a specific naming convention. Everything that you will be writing for Seattle is a smaller component (or a module) of the entire Seattle framework. Thus, we need to give it an appropriate name. Let's go ahead and create that file.
 
 {{{
-#!python
+#!pyhton
 
 vim ut_monitor.py
 }}}
@@ -245,10 +245,53 @@ $
 }}}
 
 
-
 [[BR]]
 === Repy Testing ===
 ----
+When doing Repy testing, there are two distinct aspects:
+ * Testing Repy Libraries.
+ * Testing Repy Execution Environment.
+
+==== Repy Libraries ====
+Testing a library ought to be simple. Image you are writing a synchronization primitive (semaphore) which has four methods defined.
+
+{{{
+#!python
+
+def create_semaphore(): ...
+def destroy_semaphore(handle): ...
+def up(handle): ...
+def down(handle): ...
+}}}
+
+Accordingly, we need to create a test file for it.
+
+{{{
+#!python
+
+# The module name is repy.semaphore.
+vim ut_repy.sempahore
+}}}
+
+The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy''. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restirctions.default''.
+
+Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
+
+{{{
+#!python
+
+#pragma repy
+
+
+def test_create():
+def test_destroy():
+def test_up():
+def test_down():
+}}}
+
+----
+==== Repy Execution Environment ====
+
 How do you test if an application produces the correct output? Well, define '''#pragma out''' directive with expected output.
 
 {{{
