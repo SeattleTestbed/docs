@@ -14,7 +14,7 @@ This page contains information useful to developers working on Seattle
    * [PythonVsRepy Python You Need to Forget to Use Repy]
    * [RepyLibrary Repy Library] reference
    * [PortingPythonToRepy Porting Python to Repy Guide]
-   * [repyhelper Importing Repy code into Python using repyhelper]
+   * [RepyHelper Importing Repy code into Python using repyhelper]
 
  * Testing
    * [UnitTests Running Repy and / or node manager unit tests]
