@@ -340,7 +340,7 @@ Some software modules require additional steps before and after the test executi
 
 ==== Shutdown ====
 
-There is an IO module with several functions defined.
+Suppose we are testing an IO module with several functions defined.
 
 {{{
 #!python
