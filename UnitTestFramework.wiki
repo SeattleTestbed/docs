@@ -146,10 +146,108 @@ $ utf.py -f <file>
 [[BR]]
 == Examples ==
 ----
-The following examples are not meant to be complete test cases (or to follow standard testing practices) for some module, but instead, are there to demonstrate a specific feature.
+Now, let us go over some simple and straightforward examples. Each of the examples is intended to provide a use case for a specific feature.
 
 [[BR]]
-=== Standard Out Test ===
+=== Python Testing ===
+----
+So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behaviour.
+
+The component you are testing is a resource monitor. For the sake of simplicity, there are only few methods implemented.
+
+{{{
+#!python
+
+def add_host(host_name): ...
+def list_hosts(): ...
+}}}
+
+First thing you need to do is create a test file. If you have read the previous section, you will remember that each test file has to follow a specific naming convention. Everything that you will be writing for Seattle is a smaller component (or a module) of the entire Seattle framework. Thus, we need to give it an appropriate name. Let's go ahead and create that file.
+
+{{{
+#!python
+
+vim ut_monitor.py
+}}}
+
+Now, we start writing test cases. You write them the same way you would any python executable. The only thing to remember is that by default your test file is not allowed to produce any output (stdout or stderr).
+
+{{{
+#!python
+
+# import you module.
+import monitor
+
+# Test valid host names.
+def test_valid_add():
+
+  valid_host_names = ('google.com', 
+                      '128.208.1.1', 
+                      '127.0.0.1')
+  
+  for host_name in valid_host_names:
+    add_host(host_name)
+
+  Available_hosts = list_hosts()
+  if len(available_hosts) != len(valid_host_names):
+    print 'Adding valid host names failed.'
+
+
+
+def test_invalid_add():
+
+  invalid_host_names = ('...', '0.0.0.0')
+  for host_name in invalid_host_names:
+    try: add_host(host_name)
+    except: InvalidHostName
+    else: print 'Adding invalid host did not raise an exception'
+
+}}}
+
+All you have to do now is run the UTF, specifying ''monitor'' as the module to test.
+
+{{{
+#!python
+
+$ utf.py -m monitor
+Testing module: monitor
+  Running ut_monitor.py                   [ PASS }
+
+$
+}}}
+
+----
+
+After some time, you decide that you need to add additional functionality to you resource monitor component (i. e. Disk Usage). As you would imagine, you test file could get bloated pretty quickly, so you decide to split module testing into multiple test files. Remember, all of the files have to be in the same module, but need to have a different descriptor. The purpose of the descriptor is to give a general description of what the file is testing.
+
+{{{
+#!python
+
+# Resource Monitor -- Host Availability.
+$ mv ut_monitor.py ut_monitor_hosts.py
+
+# Resource Monitor -- Disk Usage.
+$ vim ut_monitor_disk.py
+
+}}}
+
+After you're done writing test cases for the new functionality, simply run UTF once more.
+
+{{{
+#!python
+
+$ utf.py -m monitor
+Testing module: monitor
+  Running ut_monitor_hosts.py               [ PASS }
+  Running ut_monitor_disk.py                [ PASS }
+
+$
+}}}
+
+
+
+[[BR]]
+=== Repy Testing ===
 ----
 How do you test if an application produces the correct output? Well, define '''#pragma out''' directive with expected output.
 
@@ -236,4 +334,3 @@ if __name__ == '__main__':
   stop_instance()
 
 }}}
-
