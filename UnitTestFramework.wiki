@@ -27,7 +27,7 @@ When translating requirements into objectives, we are faced with a non-trivial t
 [[BR]]
 == Design ==
 ----
-UTF behaves similarly to python's standard unittest library, with addition of several other features suitable for Seattle. Those are:
+UTF behaves similarly to python's standard unittest library ([wiki:UnitTestFramework#unittestTesting]), with addition of several other features suitable for Seattle. Those are:
 
  * Testing within '''Repy execution environment'''.
  * Ability to specify different '''restrictions''' for different Repy test files.
@@ -42,7 +42,7 @@ When instructing the UTF:
  * or to use a non-default restrictions file,
  * or that the executed test has to produce a specific output on standard out or/and standard error
 
-we need to use the following syntax withing the:
+we need to use the following syntax withing the test file:
 
 {{{
 #!python
@@ -151,9 +151,9 @@ Now, let us go over some simple and straightforward examples. Each of the exampl
 [[BR]]
 === Python Testing ===
 ----
-So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behaviour.
+So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behavior.
 
-The component you are testing is a resource monitor. For the sake of simplicity, there are only few methods implemented.
+The component you are testing is a resource monitor. For the sake of simplicity, there are only two methods implemented.
 
 {{{
 #!python
@@ -340,7 +340,7 @@ Some software modules require additional steps before and after the test executi
 
 ==== Shutdown ====
 
-There is an IO module with two functions defined.
+There is an IO module with several functions defined.
 
 {{{
 #!python
@@ -370,7 +370,6 @@ The content of ''ut_io.py'' is irrelevant, but assume that all test cases are op
 {{{
 #!python
 
-import glob
 import os
 
 def purge_garbage():
@@ -396,7 +395,7 @@ $ vim ut_network.py
 $ vim ut_network_shutdown.py
 }}}
 
-What the setup file would do is spawn a server component, which is required by any subsequent test cases. Shutdown script, on the other hand, would be in charge of killing that instance. Thus:
+What the setup file would do is spawn a server component, which is required by any subsequent test case. Shutdown script, on the other hand, would be in charge of killing that instance. Thus:
 
 
 {{{
@@ -460,5 +459,44 @@ def stop_instance():
 if __name__ == '__main__':
   clean_state()
   stop_instance()
+
+}}}
+
+[[BR]]
+=== unittest Testing ===
+----
+
+You are also able to run regular unittest files, with a slight modification. Example.
+
+{{{
+#!python
+
+#pragma error OK
+
+import random
+import unittest
+
+class TestSequenceFunctions(unittest.TestCase):
+
+  def setUp(self):
+    self.seq = range(10)
+
+  def testshuffle(self):
+    # make sure the shuffled sequence does not lose any elements
+    random.shuffle(self.seq)
+    self.seq.sort()
+    self.assertEqual(self.seq, range(10))
+
+  def testchoice(self):
+    element = random.choice(self.seq)
+    self.assert_(element in self.seq)
+
+  def testsample(self):
+    self.assertRaises(ValueError, random.sample, self.seq, 20)
+    for element in random.sample(self.seq, 5):
+      self.assert_(element in self.seq)
+
+if __name__ == '__main__':
+  unittest.main()
 
 }}}
