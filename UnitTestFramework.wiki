@@ -1,4 +1,4 @@
-= Seattle's Unit Test Framework Alpha Documentation =
+= Seattle's Unit Test Framework Draft =
 
 ----
 [[TOC(inline)]]
