@@ -328,6 +328,8 @@ Stops communication on a commhandle.   In the case of a UDP message based commha
 ==== safe_open(filename, mode='r', create=False) ====
 ----
 
+(Replaces: ~~open~~, ~~file~~.)
+
 Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
 
 Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
