@@ -39,7 +39,7 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Function Name||Short description||Tutorial Section||
 
-||open||opens file objects. not similar to Python's open function||example 2.1||
+||safe_open||opens file objects. not similar to Python's open function||example 2.1||
 
 ||listdir||similar to Python's os.listdir() function||example 2.2||
 
@@ -325,7 +325,7 @@ Stops communication on a commhandle.   In the case of a UDP message based commha
 
 
 [[BR]]
-==== open(filename, mode='r', create=False) ====
+==== safe_open(filename, mode='r', create=False) ====
 ----
 
 Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
@@ -350,8 +350,8 @@ If create is True, the file is created if it does not exist.
               "r":  Open the file for reading.
               "rw": Open the file for reading and writing.
 
-              These are the only valid modes accepted by this version of
-              open(). Note: files are always opened in "binary" mode.
+              These are the only valid modes accepted by safe_open(). Note:
+              files are always opened in "binary" mode.
         create:
            If True, create the file if it doesn't exist already.
 
