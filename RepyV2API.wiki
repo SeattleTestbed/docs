@@ -39,7 +39,7 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Function Name||Short description||Tutorial Section||
 
-||open||similar to Python's open function||example 2.1||
+||open||opens file objects. not similar to Python's open function||example 2.1||
 
 ||listdir||similar to Python's os.listdir() function||example 2.2||
 
@@ -325,37 +325,47 @@ Stops communication on a commhandle.   In the case of a UDP message based commha
 
 
 [[BR]]
-==== open(filename, mode='r') ====
+==== open(filename, mode='r', create=False) ====
 ----
 
-(some of this came from the Python docs)
 Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
 
 Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
 
-The most commonly-used values of mode are 'r' for reading, 'w' for writing (truncating the file if it already exists), and 'a' for appending. If mode is omitted, it defaults to 'r'.  Modes 'r+', 'w+' and 'a+' open the file for updating (note that 'w+' truncates the file).   The mode must begin with 'r', 'w' or 'a'.
+The mode must be 'r' (read-only) or 'rw' (read/write). Neither truncates the file.
+
+If create is True, the file is created if it does not exist.
 
  * Doc string:
 
-   <Purpose>
-      Allows the user program to open a file safely.   This function is meant
-      to resemble the builtin "open"
+     <Purpose>
+        Allows the user program to open a file safely.   This function is not
+        meant to resemble the builtin "open".
 
-   <Arguments>
-      filename:
-         The file that should be operated on
-      mode:
-         The mode (see open)
+     <Arguments>
+        filename:
+           The file that should be operated on
+        mode:
+           The mode:
+              "r":  Open the file for reading.
+              "rw": Open the file for reading and writing.
 
-   <Exceptions>
-      As with open, this may raise a number of errors
+              These are the only valid modes accepted by this version of
+              open(). Note: files are always opened in "binary" mode.
+        create:
+           If True, create the file if it doesn't exist already.
 
-   <Side Effects>
-      Opens a file on disk, using a file descriptor.   When opened with "w"
-      it will truncate the existing file.
+     <Exceptions>
+        As with open, this may raise a number of errors. Additionally:
 
-   <Returns>
-      A file-like object 
+        ValueError is raised if this is passed an invalid mode.
+
+     <Side Effects>
+        Opens a file on disk, using a file descriptor.
+
+     <Returns>
+        A file-like object 
+
 
 [[BR]]
 ==== file.close() ====
@@ -382,68 +392,12 @@ Close the file. A closed file cannot be read or written any more. Any operation 
       Nothing.
 
 [[BR]]
-==== file.flush() ====
+==== file.read(size=None, offset=None) ====
 ----
 
-Flush the internal buffer, like C stdio's fflush().
+If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
 
- * Doc string:
-
-   <Purpose>
-      Allows the user program to flush a file buffer.  This function is meant
-      to resemble the builtin "file.flush".
-
-   <Arguments>
-      None.
-
-   <Exceptions>
-      ValueError if the file is closed.
-
-   <Side Effects>
-      Flushes a file previously opened for writing.
-
-   <Returns>
-      Nothing.
-
-[[BR]]
-==== file.next() ====
-----
-
-If the file pointer is at the end of the file, throws StopIteration. Otherwise, reads the next line from the file and returns it. Equivalent to the following:
-
-{{{
-#!python
-  def next(self):
-    line = self.readline()
-    if line == "":
-      raise StopIteration()
-    return line
-}}}
-
- * Doc string:
-
-   <Purpose>
-      Allows a user program to iterate over the lines of a file.
-
-   <Arguments>
-      None.
-
-   <Exceptions>
-      StopIteration if EOF is reached.
-      ValueError if the file is closed.
-
-   <Side Effects>
-      Advances the file pointer to the next line (unless it is already at
-      EOF).
-
-   <Returns>
-      The contents of the next line.
-
-[[BR]]
-==== file.read(size) ====
-----
-
-Reads up to size bytes of the rest of the (open) file, returning what is read. If size is ommitted, the file is read to EOF.
+Reads up to size bytes of the rest of the (open) file, returning what is read. If size is omitted or None, the file is read to EOF.
 
  * Doc string:
 
@@ -454,111 +408,49 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
       size (optional) - Specify a maximum number of bytes to read from the
                         file.
 
-   <Exceptions>
-      ValueError if the file is closed.
-
-   <Side Effects>
-      Advances the file pointer.
-
-   <Returns>
-      The data that was read.
-
-[[BR]]
-==== file.readline(size) ====
-----
-
-Reads a whole line from the file. If size is not ommitted, the number of bytes read is limited to size. Trailing newlines are included in the resulting line. The empty string is returned if EOF is hit immediately.
-
- * Doc string:
-
-   <Purpose>
-      Reads a line from a file.
-
-   <Arguments>
-      size (optional) - Specifies a maximum bound to the number of bytes
-                        to read from the file.
+      offset (optional) - Seek to a specific location in the file before
+                          reading.
 
    <Exceptions>
       ValueError if the file is closed.
+      TypeError if offset or size is not an integer.
 
    <Side Effects>
-      Advances the file pointer.
+      Seeks to offset (if specified) and advances the file pointer by the
+      number of bytes read.
 
    <Returns>
-      The data read (a string).
+      The data that was read; this may be the empty string only if we
+      have reached the end of the file or size was non-positive.
 
 [[BR]]
-==== file.readlines(size) ====
+==== file.write(data, offset=None) ====
 ----
 
-Reads multiple lines from the file. If size is not ommitted and positive, stops reading when it has read at least size bytes.
-
- * Doc string:
-
-   <Purpose>
-      Reads many lines from a file.
-
-   <Arguments>
-      size (optional) - Specifies an approximate bound to the number of bytes
-                        to read from the file.
-
-   <Exceptions>
-      ValueError if the file is closed.
-
-   <Side Effects>
-      Advances the file pointer.
-
-   <Returns>
-      A list of lines read from the file. Lines are seperated by newlines, but
-      these newlines are not stripped from the lines in the resulting list.
-
-[[BR]]
-==== file.write(data) ====
-----
+If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
 
 Write some data to a file.
 
  * Doc string:
 
    <Purpose>
-      Allows the user program to write data to a file.
+      Allows the user program to write data to a file (and optionally
+      seek somewhere first).
 
    <Arguments>
       Data to write (a string).
 
+      Offset (optional) - where to seek in the file first.
+
    <Exceptions>
       ValueError if the file is closed.
       IOError if the disk is out of space or some low level IO error occurs.
+      TypeError if offset isn't an integer or data isn't a string.
 
    <Side Effects>
+      If offset is included, seeks to offset.
+
       Writes some data after the current filepointer position, advancing it.
-
-   <Returns>
-      Nothing.
-
-[[BR]]
-==== file.writelines(lines) ====
-----
-
-Writes a sequence of strings to the file.
-
- * Doc string:
-
-   <Purpose>
-      Writes a sequence of strings to a file. (Unlike the name might suggest,
-      does not do any mucking about with adding or mangling newlines.)
-      Equivalent to looping through the elements of the sequence and
-      {{{file.write()}}}ing them individually.
-
-   <Arguments>
-      lines - The sequence of strings to write to the file.
-
-   <Exceptions>
-      ValueError if the file is closed.
-      TypeError if the {{{lines}}} argument isn't iterable.
-
-   <Side Effects>
-      Writes some data to the file.
 
    <Returns>
       Nothing.
