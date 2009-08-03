@@ -336,7 +336,7 @@ Deregisters a callback.   This deregisters the function and if there are no rema
 
 
 [[BR]]
-==== safe_open(filename, mode='r', create=False) ====
+==== safe_open(filename, writeable=False, create=False) ====
 ----
 
 (Replaces: ~~open~~, ~~file~~.)
@@ -345,7 +345,7 @@ Open a file, returning an object of the file type. If the file cannot be opened,
 
 Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
 
-The mode must be 'r' (read-only) or 'rw' (read/write). Neither truncates the file.
+The writeable parameter determines whether the file handle is read-only or capable of both reading and writing. Neither mode truncates the file on open.
 
 If create is True, the file is created if it does not exist.
 
@@ -358,26 +358,23 @@ If create is True, the file is created if it does not exist.
      <Arguments>
         filename:
            The file that should be operated on
-        mode:
+        writeable:
            The mode:
-              "r":  Open the file for reading.
-              "rw": Open the file for reading and writing.
+              False:  Open the file for reading.
+              True: Open the file for reading and writing.
 
-              These are the only valid modes accepted by safe_open(). Note:
-              files are always opened in "binary" mode.
+              Note: files are always opened in "binary" mode.
         create:
            If True, create the file if it doesn't exist already.
 
      <Exceptions>
-        As with open, this may raise a number of errors. Additionally:
-
-        ValueError is raised if this is passed an invalid mode.
+        As with open, this may raise a number of errors.
 
      <Side Effects>
         Opens a file on disk, using a file descriptor.
 
      <Returns>
-        A file-like object 
+        A file-like object.
 
 
 [[BR]]
