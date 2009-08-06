@@ -865,3 +865,27 @@ Sleeps the current thread for some time (waits for a specific time before execut
 
    <Returns>
       None.
+
+
+[[BR]] 
+==== socket.close() ====
+----
+Closes the socket.   Any further local calls to recv / send will result in an exception.
+
+ * Doc string:
+
+   <Purpose>
+     Closes a socket.   Pending remote recv() calls will return with the
+     remaining information.   Local recv / send calls will fail after this.
+
+   <Arguments>
+     None
+
+   <Exceptions>
+     None
+
+   <Side Effects>
+     Pending local recv calls will either return or have an exception.
+
+   <Returns>
+     True if this is the first close call to this socket, False otherwise.
