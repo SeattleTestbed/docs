@@ -889,3 +889,32 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
+
+
+
+
+[[BR]] 
+==== socket.recv(bytes) ====
+----
+Receives data that was sent by the connected party using send.   Note that this may return less than bytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   If recv returns '' then the other side has closed the connection.
+
+ * Doc string:
+
+   <Purpose>
+     Receives data from a socket.   It may receive fewer bytes than
+     requested.
+
+   <Arguments>
+     bytes:
+        The maximum number of bytes to read.   
+
+   <Exceptions>
+     Exception if the socket is closed either locally or remotely.
+
+   <Side Effects>
+     This call will block the thread until the other side calls send.
+
+   <Returns>
+     The data received from the socket (as a string).   If '' is returned,
+     the other side has closed the socket and no more data will arrive.
+
