@@ -35,6 +35,24 @@ This document describes the narrow API available to repy programs.   This docume
 ||lock||similar to Python's threading.Lock object||example 1.6||
 
 
+
+[[BR]]
+
+||Object / Function Name||Short description||Tutorial Section||
+
+||file.read||XXX||example ?||
+
+||socket.recv||Read data from a socket||example 1.2||
+
+||socket.send||Send data on a socket||example 1.2||
+
+||socket.close||Closes a socket||example 3.2||
+
+||socket.willblock||Returns an indicator of whether or not a socket will block|| N/A (new call)||
+
+||lock.acquire||XXX||example 1.6||
+
+
 [[BR]]
 
 ||Function Name||Short description||Tutorial Section||
