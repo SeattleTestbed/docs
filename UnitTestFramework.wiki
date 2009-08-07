@@ -76,9 +76,7 @@ import monitor
 # Test valid host names.
 def test_valid_add():
 
-  valid_host_names = ('google.com', 
-                      '128.208.1.1', 
-                      '127.0.0.1')
+  valid_host_names = ('google.com', '128.208.1.1', '127.0.0.1')
   
   for host_name in valid_host_names:
     monitor.add_host(host_name)
