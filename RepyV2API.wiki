@@ -832,3 +832,30 @@ Sends data to the connected party.   Note that this may send less than the entir
    <Returns>
      The number of bytes sent.   Be sure not to assume this is always the
      complete amount!
+
+
+[[BR]] 
+==== socket.willblock() ====
+----
+
+(added call)
+
+Returns a tuple of booleans {{{(recvwillblock,sendwillblock)}}} indicating if a socket may block if send or recv are called.   This allows the caller to determine if a deadlock may occur if the call is performed.   Note that returning True doesn't necessarily mean the call will block.   It could be that data was recently consumed / sent so the call will now proceed without blocking.
+
+ * Doc string:
+
+   <Purpose>
+     Determines if a socket may block if send or recv are called.
+
+   <Arguments>
+     None.
+
+   <Exceptions>
+     Exception if the socket is closed locally or if the socket was
+     closed remotely and there is no data pending for recv.
+
+   <Side Effects>
+     None.
+
+   <Returns>
+     A tuple (recvwillblock, sendwillblock) of booleans.   
