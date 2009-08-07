@@ -5,16 +5,320 @@
 ----
 
 [[BR]]
-== Abstract ==
+== Tutorials ==
 ----
-The purpose of this document is to outline the most important features and to gather as much feedback as possible with respect to the new testing framework. We will be referring to Testing Unit Framework as UTF.
 
-Please feel free to add any comments or concerns at the bottom of the page.
+You think writing tests is difficult, annoying and fruitless work? I beg to differ. Read through these tutorials and I am sure you will agree. They should help you get familiar with all the features in the Unit Testing Framework (UTF). We will go over some simple and straightforward examples. Each of the examples is intended to provide a use case for a specific feature.
 
 [[BR]]
-== Requirements ==
+=== Introduction ===
 ----
-Before diving into design and examples, I would like to specify requirements, so that the users have a better understanding of what the goals are. 
+
+So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behavior. The component you are testing is a resource monitor. For the sake of simplicity, there are only two methods implemented.
+
+{{{
+#!python
+
+"""
+File: monitor.py
+"""
+
+def add_host(host_name): ...
+def list_hosts(): ...
+}}}
+
+
+[[BR]]
+=== Naming Requirements ===
+----
+
+First thing you need to do is create a test file. Every test file has to follow a very specific naming convention -- otherwise, it will fail to be registered by UTF. There are two components to it:
+
+ * Module Name -- Everything that you will be writing for Seattle is a smaller component (or a module) of the entire Seattle framework. Thus, we need to give it an appropriate name.
+
+ * Descriptor -- Is an optional attribute. It is used to distinguish between different test files withing the same module.
+
+Putting this together, we get:
+
+{{{
+#!python
+
+ut_MODULE[_DESCRIPTOR].py
+
+}}}
+
+Since we are designing a resource monitor, let us call our module ''monitor''. Go ahead and create that file. 
+
+{{{
+#!python
+
+"""
+File: ut_monitor.py
+"""
+}}}
+
+[[BR]]
+=== Basics ===
+----
+
+Now, we start writing test cases. You write them the same way you would any python executable. The only thing to remember is that by default your test file is not allowed to produce any output on stdout or stderr. This is how UTF is able to tell if your test file has run successfully.
+
+{{{
+#!python
+
+"""
+File: ut_monitor.py
+"""
+
+# import you module.
+import monitor
+
+# Test valid host names.
+def test_valid_add():
+
+  valid_host_names = ('google.com', 
+                      '128.208.1.1', 
+                      '127.0.0.1')
+  
+  for host_name in valid_host_names:
+    monitor.add_host(host_name)
+
+  Available_hosts = monitor.list_hosts()
+  if len(available_hosts) != len(valid_host_names):
+    print 'Adding valid host names failed.'
+
+
+# Test invalid host names.
+def test_invalid_add():
+
+  invalid_host_names = ('...', '0.0.0.0')
+  for host_name in invalid_host_names:
+    try: monitor.add_host(host_name)
+    except: InvalidHostName
+    else: print 'Adding invalid host did not raise an exception'
+
+}}}
+
+[[BR]]
+=== Invocation ===
+----
+
+Logically, now you would like to run your tests. This is done by invoking '''utf.py'''. When running tests, you are presented with three different possibilities:
+
+ * Run all tests for all modules:
+
+{{{
+#!python
+
+$ utf.py
+
+}}}
+
+ * Run all tests for a specific module
+
+{{{
+#!python
+
+$ utf.py --module <module name>
+$ utf.py -m <module name>
+
+}}}
+
+ * Run a specific test file.
+
+{{{
+#!python
+
+$ utf.py --file <file>
+$ utf.py -f <file>
+
+}}}
+
+All you have to do now is run the UTF, specifying ''monitor'' as the module to test.
+
+{{{
+#!python
+
+$ utf.py -m monitor
+Testing module: monitor
+  Running ut_monitor.py                   [ PASS }
+
+$
+}}}
+
+Great! It works!
+
+[[BR]]
+=== Multiple Test Files ===
+----
+
+After some time, you decide that you need to add additional functionality to you resource monitor component (i. e. Disk Usage). As you would imagine, you test file could get bloated pretty quickly, so you decide to split module testing into multiple test files. Remember, all test files have to be in the same module, but need to have a different descriptor. The purpose of the descriptor is to give a general description of what the file is testing.
+
+{{{
+#!python
+
+# Resource Monitor -- Host Availability.
+$ mv ut_monitor.py ut_monitor_hosts.py
+
+# Resource Monitor -- Disk Usage.
+$ vim ut_monitor_disk.py
+
+}}}
+
+After you're done writing test cases for the new functionality, simply run UTF once more.
+
+{{{
+#!python
+
+$ utf.py -m monitor
+Testing module: monitor
+  Running ut_monitor_hosts.py               [ PASS }
+  Running ut_monitor_disk.py                [ PASS }
+$
+}}}
+
+
+[[BR]]
+=== Repy ===
+----
+
+Another feature of UTF is the ability to test Repy.  
+
+Testing Repy code is pretty simple. Image you are writing a synchronization primitive (semaphore) which has four methods defined.
+
+{{{
+#!python
+
+def create_semaphore(): ...
+def destroy_semaphore(handle): ...
+def up(handle): ...
+def down(handle): ...
+}}}
+
+
+And you decide to test it by creating an appropriate test file.
+
+{{{
+#!python
+"""
+File: ut_repy.sempahore.py
+"""
+}}}
+UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert, what is called, a '''pragma directive''' at the beginning of the test file. Each pragma directive hints the UTF about some specific behaviour.
+
+{{{
+#!python
+
+#pragma TYPE [ARGS]
+
+}}}
+
+
+
+For this specific purpose use ''#pragma repy'' directive. Whenever UTF encounters this directive, it knows it has to execute the test file inside of the Repy Execution Environment.
+
+Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
+
+{{{
+#!python
+
+#pragma repy
+
+
+def test_create():
+def test_destroy():
+def test_up():
+def test_down():
+}}}
+
+[[BR]]
+==== Repy Restrictions ====
+----
+
+Repy execution is always associated with a restrictions file. As with the previous example, if no argument was provided to #pragma repy directive, UTF assumes default restrictions are to be used. Therefore,
+
+
+{{{
+#!python
+
+#pragma repy
+}}}
+
+is equivalent to:
+
+{{{
+#!python
+
+#pragma repy restrictions.default
+}}}
+
+For instance, if your test file is suppose to be executed using non-default restrictions (i.e. restrictions.callomit) you would be using #pragma repy restrictions.omitcall (the restriction file we are using does not allow function calls).
+ 
+[[BR]]
+==== Standard Out ====
+----
+Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is support to produce output on standard out.
+
+{{{
+#!python
+
+# This is a repy file!
+#pragma repy
+
+# The output must match this string.
+#pragma out Hello Out.
+
+print 'Hello Out.'
+}}}
+
+[[BR]]
+=== Setup Shutdown Scripts ===
+----
+Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts receptively.
+
+Suppose we are testing an IO module with several functions defined.
+
+{{{
+#!python
+
+def open(file_path): ...
+def read(handle) ...
+def write(handle): ...
+def truncate(handle): ...
+def stat(handle): ...
+...
+}}}
+
+And you decide to start testing. You notice that every test requires some sort of file cleanup. Instead of doing the cleanup after every test case, it is much easier to do this in bulk. So we introduce what is called a '''shutdown script'''. It is guaranteed that this script will run last.
+
+{{{
+#!python
+
+import os
+
+# Remove the directory.
+def remove_tmp():
+  temporary_dir = '/tmp/io'
+  os.rmdir(temporary_dir)
+
+
+
+if __name__ == '__main__':
+  remove_tmp()
+}}}
+
+
+Basically, the same logic applies for setup scripts, however, opposite holds true -- it is first script to be executed.
+
+
+[[BR]]
+== User's guide ==
+----
+
+
+=== Requirements ===
+
+Here we specify requirements, so that the users have a better understanding of what the goals are. 
 
  * Above everything, writing a unit test module should be simple and obvious for new users.
  * Test module should be able to have many small test cases and developer should be able to group them into test suites.
@@ -24,10 +328,8 @@ Before diving into design and examples, I would like to specify requirements, so
 
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
 
-[[BR]]
-== Design ==
-----
-UTF behaves similarly to python's standard unittest library ([wiki:UnitTestFramework#unittestTesting]), with addition of several other features suitable for Seattle. Those are:
+
++== Design =+=
 
  * Testing within '''Repy execution environment'''.
  * Ability to specify different '''restrictions''' for different Repy test files.
@@ -140,363 +442,5 @@ $ utf.py -m <module name>
 
 $ utf.py --file <file>
 $ utf.py -f <file>
-
-}}}
-
-[[BR]]
-== Examples ==
-----
-Now, let us go over some simple and straightforward examples. Each of the examples is intended to provide a use case for a specific feature.
-
-[[BR]]
-=== Python Testing ===
-----
-So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behavior.
-
-The component you are testing is a resource monitor. For the sake of simplicity, there are only two methods implemented.
-
-{{{
-#!python
-
-def add_host(host_name): ...
-def list_hosts(): ...
-}}}
-
-First thing you need to do is create a test file. If you have read the previous section, you will remember that each test file has to follow a specific naming convention. Everything that you will be writing for Seattle is a smaller component (or a module) of the entire Seattle framework. Thus, we need to give it an appropriate name. Let's go ahead and create that file.
-
-{{{
-#!python
-
-vim ut_monitor.py
-}}}
-
-Now, we start writing test cases. You write them the same way you would any python executable. The only thing to remember is that by default your test file is not allowed to produce any output (stdout or stderr).
-
-{{{
-#!python
-
-# import you module.
-import monitor
-
-# Test valid host names.
-def test_valid_add():
-
-  valid_host_names = ('google.com', 
-                      '128.208.1.1', 
-                      '127.0.0.1')
-  
-  for host_name in valid_host_names:
-    add_host(host_name)
-
-  Available_hosts = list_hosts()
-  if len(available_hosts) != len(valid_host_names):
-    print 'Adding valid host names failed.'
-
-
-
-def test_invalid_add():
-
-  invalid_host_names = ('...', '0.0.0.0')
-  for host_name in invalid_host_names:
-    try: add_host(host_name)
-    except: InvalidHostName
-    else: print 'Adding invalid host did not raise an exception'
-
-}}}
-
-All you have to do now is run the UTF, specifying ''monitor'' as the module to test.
-
-{{{
-#!python
-
-$ utf.py -m monitor
-Testing module: monitor
-  Running ut_monitor.py                   [ PASS }
-
-$
-}}}
-
-----
-
-After some time, you decide that you need to add additional functionality to you resource monitor component (i. e. Disk Usage). As you would imagine, you test file could get bloated pretty quickly, so you decide to split module testing into multiple test files. Remember, all of the files have to be in the same module, but need to have a different descriptor. The purpose of the descriptor is to give a general description of what the file is testing.
-
-{{{
-#!python
-
-# Resource Monitor -- Host Availability.
-$ mv ut_monitor.py ut_monitor_hosts.py
-
-# Resource Monitor -- Disk Usage.
-$ vim ut_monitor_disk.py
-
-}}}
-
-After you're done writing test cases for the new functionality, simply run UTF once more.
-
-{{{
-#!python
-
-$ utf.py -m monitor
-Testing module: monitor
-  Running ut_monitor_hosts.py               [ PASS }
-  Running ut_monitor_disk.py                [ PASS }
-$
-}}}
-
-
-[[BR]]
-=== Repy Testing ===
-----
-When doing Repy testing, there are two distinct aspects:
- * Testing Repy Libraries.
- * Testing Repy Execution Environment.
-
-==== Repy Libraries ====
-Testing a library ought to be simple. Image you are writing a synchronization primitive (semaphore) which has four methods defined.
-
-{{{
-#!python
-
-def create_semaphore(): ...
-def destroy_semaphore(handle): ...
-def up(handle): ...
-def down(handle): ...
-}}}
-
-Accordingly, we need to create a test file for it.
-
-{{{
-#!python
-
-# The module name is repy.semaphore.
-vim ut_repy.sempahore
-}}}
-
-The first thing we must do is instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment (NOTE: This might change in the near future. Need further discussion.). This is achieved via ''#pragma repy'' directive. Additionally, we can also specify what restrictions file is to be associated with this test file. This is achieved by providing an argument to ''#pragma repy'', yielding: ''#pragma repy restrictions.file''. If no argument is specified, UTF will use ''restrictions.default''.
-
-Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
-
-{{{
-#!python
-
-#pragma repy
-
-
-def test_create():
-def test_destroy():
-def test_up():
-def test_down():
-}}}
-
-==== Repy Execution Environment ====
-
-Testing whether or not Repy Execution Environment is behaving properly is a more daunting task to accomplish. So, let's say you want to test that print statement behaves the way it should.
-
-This type of testing should be seen as external process testing, or complete black-box testing.
-
-Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is support to produce output on standard out.
-
-{{{
-#!python
-
-# This is a repy file!
-#pragma repy
-
-# The output must match this string.
-#pragma out Hello Out.
-
-print 'Hello Out.'
-}}}
-
-==== Restrictions ====
-
-How do you verify that the restrictions file is behaving the way it should? 
-
-Basically, you need to define the restriction file you want to use as ''#pragma repy <file>'' directive. Also, we have to make sure that the file throws an exception containing ''not allowed'' string. Remember -- exceptions are always thrown on standard error.
-
-The restriction file we are using does not allow function calls. Consequently, upon a function call, an exception will be thrown stating that we are not allowed to perform that action.
-
-{{{
-#!python
-
-#pragma repy restrictions.callomit
-
-#pragma err not allowed
-
-def callee()
-  print 'Specified restriction file should not allow this function call.'
-
-
-if __name__ == '__initialize__':
-  callee()
-
-}}}
-
-[[BR]]
-=== Setup Shutdown Scripts ===
-----
-Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts receptively.
-
-
-==== Shutdown ====
-
-Suppose we are testing an IO module with several functions defined.
-
-{{{
-#!python
-
-def open(file_path): ...
-def read(handle) ...
-def write(handle): ...
-def truncate(handle): ...
-def stat(handle): ...
-...
-}}}
-
-Instead of doing the cleanup after every test case, it is much easier to do this in bulk. So here is what the hierarchy might look like. 
-
-{{{
-#!python
-
-# All test cases for IO module.
-$ vim ut_io.py
-
-# Clean-up steps.
-$ vim ut_io_shutdown.py
-}}}
-
-The content of ''ut_io.py'' is irrelevant, but assume that all test cases are operating inside of some temporary directory. Therefore, our shutdown script might look something like this.
-
-{{{
-#!python
-
-import os
-
-def purge_garbage():
-  temporary_dir = '/tmp/io'
-  os.remove(temporary_dir)
-
-
-
-if __name__ == '__main__':
-  purge_garbage()
-}}}
-
-
-==== Setup + Shutdown ====
-
-Whenever you are testing some type of server-client architecture, you will most likely find your self using both ''setup'' and ''shutdown'' scripts. For instance, we could have three files.
-
-{{{
-#!python
-
-$ vim ut_network_setup.py
-$ vim ut_network.py
-$ vim ut_network_shutdown.py
-}}}
-
-What the setup file would do is spawn a server component, which is required by any subsequent test case. Shutdown script, on the other hand, would be in charge of killing that instance. Thus:
-
-
-{{{
-#!python
-"""
-ut_network_setup.py
-"""
-
-# A helper module, which allows us to easily spawn new processes.
-import utfutil
-
-# Initializes the state needed to run the server on the 
-# local node.
-def initialize_state():
-  ...
-
-
-
-# Starts the local instance.
-def start_instance():
-  identifier = 'server_instance'
-  args = ('python', 'server.py')
-  utfutil.spawn(args, identifier)
-
-
-
-
-if __name__ == '__main__':
-  initialize_state() 
-  start_instance()
-
-}}}
-
-After all tests have finished, UTF will try to find and execute the shutdown script (''ut_network_shutdown.py''). This script is responsible for deleting the initialization files and stopping the server instance. Here is what the file looks like:
-
-
-{{{
-#!python
-"""
-ut_network_shutdown.py
-"""
-
-# A helper module, which allows us to easily kill new processes.
-import utfutil
-
-
-
-# Clean the initialization files.
-def clean_state():
-  ...
-
-
-
-# Stops the local instance.
-def stop_instance():
-  identifier = 'nm_instance'
-  utfutil.kill(identifier)
-
-
-
-if __name__ == '__main__':
-  clean_state()
-  stop_instance()
-
-}}}
-
-[[BR]]
-=== unittest Testing ===
-----
-
-You are also able to run regular unittest files, with a slight modification. Example.
-
-{{{
-#!python
-
-#pragma error OK
-
-import random
-import unittest
-
-class TestSequenceFunctions(unittest.TestCase):
-
-  def setUp(self):
-    self.seq = range(10)
-
-  def testshuffle(self):
-    # make sure the shuffled sequence does not lose any elements
-    random.shuffle(self.seq)
-    self.seq.sort()
-    self.assertEqual(self.seq, range(10))
-
-  def testchoice(self):
-    element = random.choice(self.seq)
-    self.assert_(element in self.seq)
-
-  def testsample(self):
-    self.assertRaises(ValueError, random.sample, self.seq, 20)
-    for element in random.sample(self.seq, 5):
-      self.assert_(element in self.seq)
-
-if __name__ == '__main__':
-  unittest.main()
 
 }}}
