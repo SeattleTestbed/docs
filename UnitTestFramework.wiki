@@ -329,7 +329,7 @@ Here we specify requirements, so that the users have a better understanding of w
 When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
 
 
-+== Design =+=
+=== Design ===
 
  * Testing within '''Repy execution environment'''.
  * Ability to specify different '''restrictions''' for different Repy test files.
