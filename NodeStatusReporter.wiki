@@ -126,13 +126,15 @@ with a
 where [username] (without square brackets) is the username that will be used with the
 following list of nodes. Multiple user's can be specified. For example:
 
-'''!user:konp
+{{{
+!user:konp
 1.2.3.4
 3.5.7.8
 
 # begin a new user
 !user:justinc
 3.4.5.6
-1.8.2.1'''
+1.8.2.1
+}}}
 
-will connect to konp@1.2.3.4, konp@3.5.7.8, justinc@3.4.5.6, etc.
+will connect to konp@1.2.3.4, konp@3.5.7.8, justinc@3.4.5.6, etc
