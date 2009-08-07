@@ -93,9 +93,12 @@ def test_invalid_add():
 
   invalid_host_names = ('...', '0.0.0.0')
   for host_name in invalid_host_names:
-    try: monitor.add_host(host_name)
-    except: InvalidHostName
-    else: print 'Adding invalid host did not raise an exception'
+    try: 
+      monitor.add_host(host_name)
+    except InvalidHostName:
+      pass
+    else: 
+      print 'Adding invalid host did not raise an exception'
 
 }}}
 
