@@ -81,7 +81,7 @@ def test_valid_add():
   for host_name in valid_host_names:
     monitor.add_host(host_name)
 
-  Available_hosts = monitor.list_hosts()
+  available_hosts = monitor.list_hosts()
   if len(available_hosts) != len(valid_host_names):
     print 'Adding valid host names failed.'
 
