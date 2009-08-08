@@ -39,4 +39,6 @@
 
 || 4:30-5PM July 21st, 2009 || Sheraton, Seattle || GENI Engineering Conference 5, Opt-In WG || Justin || Live Demo / Talk (Opt-In)
 
-|| 10-10:20AM Aug 8th, 2009 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Justin || Live Demo / Talk (Educational)
+|| 10-10:20AM Aug 8th, 2009 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Justin || Talk (Educational)
+
+|| Aug 9th, 2009 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Justin || Live Demo / Extended Talk (Educational)
