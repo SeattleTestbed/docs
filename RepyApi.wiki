@@ -62,7 +62,9 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||socket.close||Closes a socket||example 3.2||
 
-||lock.acquire||XXX||example 1.6||
+||lock.acquire||Acquire a lock||example 1.6||
+
+||lock.release||Release a lock||example 1.6||
 
 [[BR]]
 
