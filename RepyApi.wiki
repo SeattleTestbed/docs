@@ -38,7 +38,23 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Object / Function Name||Short description||Tutorial Section||
 
-||file.read||XXX||example ?||
+||file.close||Close an open file handle||example 2.1||
+
+||file.flush||Flushes a file handle (write contents to disk)||example ?||
+
+||file.next||Same as file.readline, except throws StopIteration on EOF||example 2.1||
+
+||file.read||Read data from a file||example 2.1||
+
+||file.readline||Reads a single line from a file||example ?||
+
+||file.readlines||Reads all lines from a file||example ?||
+
+||file.seek||Seek in a file||example ?||
+
+||file.write||Write data to a file||example ?||
+
+||file.writelines||Write several strings to a file||example ?||
 
 ||socket.recv||Read data from a socket||example 1.2||
 
