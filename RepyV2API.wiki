@@ -40,11 +40,11 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Object / Function Name||Short description||Tutorial Section||
 
-||file.read||Read data from a file (maybe seek first).||example ?||
+||file.read||Read data from a file (maybe seek first).||N/A (new call)||
 
-||file.write||Write data to a file (maybe seek first).||example ?||
+||file.write||Write data to a file (maybe seek first).||N/A (new call)||
 
-||file.close||Close an open file.||example ?||
+||file.close||Close an open file.||example 2.1||
 
 ||socket.recv||Read data from a socket||example 1.2||
 
