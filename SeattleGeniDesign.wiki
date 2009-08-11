@@ -231,12 +231,10 @@ The details of the models (database schemas) are below.
 
 === Main Database ===
 
-  * User
+  * !GeniUser
     * purpose:
-      * A User record represents a !SeattleGeni user.
+      * A !GeniUser record represents a !SeattleGeni user. This class extends the django.contrib.auth.models.User class.
     * fields:
-      * djangouser
-        * links this record to the django user record
       * usable_vessel_port
         * the port which must be assigned to a vessel for the user to be able to acquire that vessel.
         * this field may go away later on if users are no longer always assigned to the same port on all vessels.
