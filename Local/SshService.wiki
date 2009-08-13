@@ -31,7 +31,7 @@ exec /cygdrive/c/Python25/python ${1+"$@"}
 {{{
 python -i.
 }}}
- The same thing must be done for SSH. Before the next step, make sure you have the latest version of SVN installed. You can get the latest version from [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100&expandFolder=8100&folderID=91 subversion.tigris page]. Create a file called ssh without any extension, and add these two lines:
+ The same thing must be done for SVN. Before the next step, make sure you have the latest version of SVN installed. You can get the latest version from [http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100&expandFolder=8100&folderID=91 subversion.tigris page]. Create a file called svn without any extension, and add these two lines:
 {{{
 #!/bin/bash
 exec /cygdrive/c/Program\ Files/Subversion/bin ${1+"$@"}
