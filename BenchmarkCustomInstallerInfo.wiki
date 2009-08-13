@@ -1,0 +1,35 @@
+= Benchmark and Custom Installer Info =
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== Overview of current scheme ==
+[[BR]]
+=== Necessary files ===
+Before the installer can run, several files need to be in place that are critical for constructing the vessels.
+
+Files that are universal to all installations:
+ * vessel.restrictions 
+ * resources.offcut
+ * seattle.publickey
+Files that are unique to a single distribution
+ * vesselinfo 
+   * This is a specially formated file that indicates the percentage of system resources, ownerkeys, and publickeys for the vessels that should be in the node. The seattle vessel that manages the node is not described in vesselinfo and is added automatically by writecustominstaller.py.
+   * '''IMPORTANT''': all files containing publickeys for vesselinfo must be included.The 'names' for owners and users in vessel info should be the names of the files that contain the publickeys (publickeys should be in the file format defined in the seattlelib rsa module).
+Python modules involved
+ * seattleinstaller.py
+ * benchmark_resources.py
+ * writecustominstaller.py
+ * Win_WinCE_resources.py
+ * Mac_BSD_resources.py
+ * Linux_resources.py
+ * measuredisk.py
+ * measure_random.py
+
+[[BR]]
+=== Build steps ===
+ 1. Server should collect necessary files and public keys as listed in Necessary files.
+ 1. User starts installation, default of 10% will be used but user can select a different value by passing corresponding argument to installer.
+ 1. '''NOT FINISHED WRITING WIKI'''
