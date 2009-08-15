@@ -32,17 +32,19 @@ Python modules involved
 === Build steps ===
  1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file.
     * if vesselinfo is not correctly formated, it will cause the installation to fail.
- 1. User starts installation, default of 10% will be used but user can select a different value by passing corresponding argument to installer.
+ 1. User starts installation, default of 10% will be used but user can select a different value by passing corresponding argument to 
+installer.
  1. Installation starts, several important checks are performed, benchmark_resources.main() is called
    a. Service logger is intialized
    a. The ''vesselinfo'' file is transformed into a list by read_vessel_info_from_file. Any errors in the ''vesselinfo'' file will result in the install stopping completely. This is not recoverable.
    a. run_benchmark is called to get a dictionary containing the maximum available resources.
      i. The scripts Linux_resources.py, Mac_BSD_resources.py, Win_WinCE_resources.py, measuredisk.py, and measure_random.py will be used to generate this dictionary, and resources that are not measured by the scripts will be set as None.
-     i. The result from the scripts will be checked, to ensure that values are valid, non-negative, and not None. Bad values are logged.
+     i. The result from the scripts will be checked, to ensure that values are valid, non-negative, and not None. Bad values are logged and default values will be used.
    a. get_donatedresources uses the maximum available resources and the percentage defined by the user to create a dictionary will the total donated resources.
    a. the number of vessels is determined and the required offcut resources are removed from the donatedresources.
      * This is done to here instead of during construction of individual vessel resources to simplify the process.
      * offcut resources are the cost of an individual vessel, even though we do not technically "split" vessels in this code, we must still account for the overhead of creating multiple vessels. 
-   a. the donated resources are now chopped down to get ten percent of the donated resources (this ten percent will be used to get
+   a. the donated resources are now chopped down to get ten percent of the donated resources (this is ten percent because the vessels are given resources from the donated resources in increments of 10%).
+   a. writecustominstaller.create_installer_state takes the vesselcreationlist, tenpercentdict, and the target directory and initializes the vessel states.
 
 '''NOT FINISHED WRITING WIKI'''
