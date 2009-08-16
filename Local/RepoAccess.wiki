@@ -40,10 +40,12 @@ To find out some basic information about a checked out copy, such as the reposit
 
 Once you make edits inside the repo, typical CVS usage applies. First do an update, then a commit:
   {{{svn update}}}
+
   {{{svn commit}}}
 
 To add new or remove existing files/directories use:
   {{{svn add [filename]}}}
+
   {{{svn remove [filename]}}}
 
 If you have conflicts, you must tell SVN explicitly that you have resolved them, otherwise SVN will fail to commit\update these files:
