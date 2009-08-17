@@ -32,8 +32,8 @@ We provide fair and repeatable grading of student submissions by installing Seat
 
 
 == How does it work? ==
-
-1) Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
+[[Image(pic1.png)]]
+[[BR]]1) Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
 [[BR]]2) Instructor clicks the grade button for the assignment.  The assignment is marked as 'grading in progress' and the autograder_runner is started.
 [[BR]]3) autograder_runner locates corresponding test and grade scripts for the assignment and calls a method in it named 'run_testing' from the test script
 [[BR]]4) autograder_runner takes results from 'run_testing' and passes it as a parameter to a method 'run_grading' 
