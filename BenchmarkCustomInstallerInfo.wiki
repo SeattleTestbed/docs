@@ -7,13 +7,39 @@
 [[BR]]
 == Overview of current scheme ==
 [[BR]]
+=== Required from the server side ===
+Before an install is ready for the user, the server will be required to construct a properly formated vesselinfo file. The vesselinfo file will need to be in the same directory as seattleinstaller.py (the working directory at install time). Every public key file that is referenced in the vesselinfo file will need to be placed in this same directory. 
+[[BR]]
+==== The format for vesselinfo ====
+    ===== Example =====
+    {{{
+Percent 40
+Owner mike.publickey
+User jen.publickey
+Percent 20
+Owner sam.publickey
+Percent 20
+Owner seattle.publickey
+}}}
+    In addition to this vesselinfo file, there would need to be the following files in the same directory: mike.publickey, jen.publickey, sam.publickey, and seattle.publickey. All the publickeys must be in a file format recognized by the seattlelib rsa module.
+
+    ===== Requirements =====
+    Restrictions on vesselinfo (failure in any of these results in a completely failed install):
+    * Percent must be an integer 10, 20, 30, ..., 80, 90
+    * The sum of all the Percent values must be 100
+    * Case matters for '''P'''ercent, '''O'''wner, '''U'''ser
+    * The values for Owner and User should be the names of files containing publickeys that were created by rsa_file_to_publickey (NOT the string that is returned by rsa_publickey_to_string). 
+    * vesselinfo and all the publickeys must be in the same directory as seattleinstaller.py when the user attempts to install.
+    ===== Difference from old scheme =====
+    Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
+[[BR]]
 === Necessary files ===
-Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and created the initial vessel state).
+Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and created the initial vessel state). 
 
 Files that are universal to all installations:
- * vessel.restrictions 
- * resources.offcut
- * seattle.publickey
+ * vessel.restrictions - This is a static file, these are universal to all installations.
+ * resources.offcut - This is a static fale, these are predetermined values and are universal to all installations.
+ * seattle.publickey - All installations will have a seattle vessel that receives 20% of the donated resources.
 Files that are unique to a single distribution
  * vesselinfo 
    * This is a specially formated file that indicates the percentage of system resources, ownerkeys, and publickeys for the vessels that should be in the node. The seattle vessel that manages the node is not described in vesselinfo and is added automatically by writecustominstaller.py.
@@ -30,10 +56,9 @@ Python modules involved
 
 [[BR]]
 === Build steps ===
- 1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file.
+ 1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file. This should be packaged appropriately and dispensed to the user wishing to install seattle.
     * if vesselinfo is not correctly formated, it will cause the installation to fail.
- 1. User starts installation, default of 10% will be used but user can select a different value by passing corresponding argument to 
-installer.
+ 1. User starts installation, default of 10% will be used but user can select a different value by passing a corresponding argument to the installer.
  1. Installation starts, several important checks are performed, benchmark_resources.main() is called
    a. Service logger is intialized
    a. The ''vesselinfo'' file is transformed into a list by read_vessel_info_from_file. Any errors in the ''vesselinfo'' file will result in the install stopping completely. This is not recoverable.
@@ -46,5 +71,3 @@ installer.
      * offcut resources are the cost of an individual vessel, even though we do not technically "split" vessels in this code, we must still account for the overhead of creating multiple vessels. 
    a. the donated resources are now chopped down to get ten percent of the donated resources (this is ten percent because the vessels are given resources from the donated resources in increments of 10%).
    a. writecustominstaller.create_installer_state takes the vesselcreationlist, tenpercentdict, and the target directory and initializes the vessel states.
-
-'''NOT FINISHED WRITING WIKI'''
