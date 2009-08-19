@@ -38,7 +38,7 @@ Before the installer can run, several files need to be in place for benchmark_re
 
 Files that are universal to all installations:
  * vessel.restrictions - This is a static file, these are universal to all installations.
- * resources.offcut - This is a static fale, these are predetermined values and are universal to all installations.
+ * resources.offcut - This is a static file, these are predetermined values and are universal to all installations.
  * seattle.publickey - All installations will have a seattle vessel that receives 20% of the donated resources.
 Files that are unique to a single distribution
  * vesselinfo 
@@ -57,10 +57,10 @@ Python modules involved
 [[BR]]
 === Build steps ===
  1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file. This should be packaged appropriately and dispensed to the user wishing to install seattle.
-    * if vesselinfo is not correctly formated, it will cause the installation to fail.
+    * if vesselinfo is not correctly formatted, it will cause the installation to fail.
  1. User starts installation, default of 10% will be used but user can select a different value by passing a corresponding argument to the installer.
  1. Installation starts, several important checks are performed, benchmark_resources.main() is called
-   a. Service logger is intialized
+   a. Service logger is initialized
    a. The ''vesselinfo'' file is transformed into a list by create_installer_state.read_vessel_info_from_file. Any errors in the ''vesselinfo'' file will result in the install stopping completely. This is not recoverable.
    a. run_benchmark is called to get a dictionary containing the maximum available resources.
      i. The scripts Linux_resources.py, Mac_BSD_resources.py, Win_WinCE_resources.py, measuredisk.py, and measure_random.py will be used to generate this dictionary, and resources that are not measured by the scripts will be set as None.
