@@ -11,25 +11,40 @@
 Before an install is ready for the user, the server will be required to construct a properly formated vesselinfo file. The vesselinfo file will need to be in the same directory as seattleinstaller.py (the working directory at install time). Every public key file that is referenced in the vesselinfo file will need to be placed in this same directory. 
 [[BR]]
 ==== The format for vesselinfo ====
-    ===== Example =====
+    ===== Example ===== Actual key's for owner and user will be much longer.
     {{{
 Percent 40
-Owner mike.publickey
-User jen.publickey
+Owner 123456789123 123456789123456789123456789
+User 23456789123 23456789123456789123456789
 Percent 20
-Owner sam.publickey
+Owner 3456789123 3456789123456789123456789
 Percent 20
-Owner seattle.publickey
+Owner 456789123 456789123456789123456789
 }}}
     In addition to this vesselinfo file, there would need to be the following files in the same directory: mike.publickey, jen.publickey, sam.publickey, and seattle.publickey. All the publickeys must be in a file format recognized by the seattlelib rsa module.
 
     ===== Requirements =====
     Restrictions on vesselinfo (failure in any of these results in a completely failed install):
     * Percent must be an integer 10, 20, 30, ..., 80, 90
+    * There can be NO empty lines.[[BR]]
+
+    '''BAD:'''
+{{{
+Percent 40
+Owner 123456789123 123456789123456789123456789
+User 23456789123 23456789123456789123456789
+
+Percent 20
+Owner 3456789123 3456789123456789123456789
+Percent 20
+Owner 456789123 456789123456789123456789
+}}}
+
+
     * The sum of all the Percent values must be 100
     * Case matters for '''P'''ercent, '''O'''wner, '''U'''ser
-    * The values for Owner and User should be the names of files containing publickeys that were created by rsa_file_to_publickey (NOT the string that is returned by rsa_publickey_to_string). 
-    * vesselinfo and all the publickeys must be in the same directory as seattleinstaller.py when the user attempts to install.
+    * The values for Owner and User should be the publickey strings that can be read by rsa_string_to_publickey (NOT the file name). 
+    * vesselinfo must be in the same directory as seattleinstaller.py when the user attempts to install.
     ===== Difference from old scheme =====
     Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
 [[BR]]
@@ -39,20 +54,27 @@ Before the installer can run, several files need to be in place for benchmark_re
 Files that are universal to all installations:
  * vessel.restrictions - This is a static file, these are universal to all installations.
  * resources.offcut - This is a static file, these are predetermined values and are universal to all installations.
- * seattle.publickey - All installations will have a seattle vessel that receives 20% of the donated resources.
+
 Files that are unique to a single distribution
  * vesselinfo 
-   * This is a specially formated file that indicates the percentage of system resources, ownerkeys, and publickeys for the vessels that should be in the node. The seattle vessel that manages the node is not described in vesselinfo and is added automatically by writecustominstaller.py.
-   * '''IMPORTANT''': all files containing publickeys for vesselinfo must be included.The 'names' for owners and users in vessel info should be the names of the files that contain the publickeys (publickeys should be in the file format defined in the seattlelib rsa module).
+   * This is a specially formatted file that indicates the percentage of system resources and publickeys for the owners and users of the vessels that should be in the node. 
+
 Python modules involved
  * seattleinstaller.py
- * benchmark_resources.py - manages and runs the benchmark scripts as well as operating the create_installer_state module.
- * create_installer_state.py - is responsible for reading the vesselinfo file and taking the resource information to initialize the vessels.
- * Win_WinCE_resources.py
- * Mac_BSD_resources.py
- * Linux_resources.py
- * measuredisk.py
- * measure_random.py
+ * benchmark_resources.py 
+   * manages and runs the benchmark scripts as well as operating the create_installer_state module.
+ * create_installer_state.py 
+   * is responsible for reading the vesselinfo file and taking the resource information to initialize the vessels.
+ * Win_WinCE_resources.py 
+   * OS specific resource benchmark
+ * Mac_BSD_resources.py 
+   * OS specific resource benchmark
+ * Linux_resources.py 
+   * OS specific resource benchmark
+ * measuredisk.py 
+   * used by each OS benchmark
+ * measure_random.py 
+   * used by each OS benchmark
 
 [[BR]]
 === Build steps ===
