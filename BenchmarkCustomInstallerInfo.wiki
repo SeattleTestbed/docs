@@ -34,7 +34,7 @@ Owner seattle.publickey
     Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
 [[BR]]
 === Necessary files ===
-Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and created the initial vessel state). 
+Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and creating the initial vessel state). 
 
 Files that are universal to all installations:
  * vessel.restrictions - This is a static file, these are universal to all installations.
