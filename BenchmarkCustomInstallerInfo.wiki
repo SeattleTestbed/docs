@@ -21,7 +21,7 @@ Owner 3456789123 3456789123456789123456789
 Percent 20
 Owner 456789123 456789123456789123456789
 }}}
-    In addition to this vesselinfo file, there would need to be the following files in the same directory: mike.publickey, jen.publickey, sam.publickey, and seattle.publickey. All the publickeys must be in a file format recognized by the seattlelib rsa module.
+    ~~In addition to this vesselinfo file, there would need to be the following files in the same directory: mike.publickey, jen.publickey, sam.publickey, and seattle.publickey. All the publickeys must be in a file format recognized by the seattlelib rsa module.~~
 
     ===== Requirements =====
     Restrictions on vesselinfo (failure in any of these results in a completely failed install):
