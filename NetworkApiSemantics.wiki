@@ -404,7 +404,7 @@ socketlikeobj.close()[[BR]]
 
 === Argument semantics: ===
  
-The message provided is a string, or a char, or an exception occurs.
+The message provided is a string or an exception occurs.
 
 
 === Behavioral Semantics: ===
