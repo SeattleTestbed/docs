@@ -187,8 +187,6 @@ The localIP specified is a string or an Exception occurs.
 
 The localPort specified is an int in the range between 1 and 65535 (inclusive) or an Exception occurs.
 
-The function specified is the name of the call back function and has arguments (remoteip,remoteport,socklikeobj,thiscommhandle,listencommhandle) or an Exception occurs.
-
 
 === Behavioral Semantics: ===
 
@@ -367,7 +365,7 @@ if an_event_was_not_freed:
 
 Action:  All free events are consumed and a call to waitforconn is made.
 
-Result: An exception occurs.
+Result: The call will block, and return when an event becomes available.
 
 (tested test_waitforconn_no_free_events.py) [[BR]]
 Test Snippet:
