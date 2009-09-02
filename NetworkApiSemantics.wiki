@@ -44,7 +44,8 @@ If localIP and localPort are not specified, the IP that would be returned from g
 
 === Behavioral Semantics: ===
 
-
+Action: A call to openconn successfully returns a socketlikeobj
+Result: The socketlikeobj may be connected to a waitforconn or is connected to nothing.  In rare cases the host OS may accept the TCP connection when the repy listener is not ready to accept a new connection, which can result in a socketlikeobj be returned that is not actually connected to the waitforconn.
 
 1
 
