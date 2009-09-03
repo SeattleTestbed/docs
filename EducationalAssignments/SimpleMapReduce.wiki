@@ -27,16 +27,29 @@ Similar to do_map(), do_reduce() will call the reduce_func(key, value_list) for 
 
 === Step 2: The primary code ===
 
-In this step, the mappri.repy program will embody the preliminary design of how the primary node communicates with the single !MapReduce peer.
+In this step, the mappri.repy program will embody the preliminary design of how the primary node communicates with the single !MapReduce peer.  In order to hand off the initial data to the !MapReduce peer, the primary needs to be able to read a data file, copy its contents, and send it to the peer.  To do this, mappri.repy must take some arguments on the command line:
+
+`mappri.repy <init data file> <peer ip>:<peer port>`
+
+Your !MapReduce primary will take these parameters on the command line, do some basic error checking, attempt to connect to the replica, and pass it a message with the initial data.  The primary node should then wait until the peer is completed with its computation and receive the output of the peer.  The primary can either write this to a file of your choosing or output this data to screen and exit.
 
 
 === Step 3: Primary and worker communication ===
 
-Messages!!
+In order to allow communication between the primary and peer, it is necessary to ''serialize'' all communication between the two.  A complicated data structure such as a dictionary cannot be represented as a string without some distinct structure and possibly some limitations.  Since repy does not have any built-in modules to support ''pickling'' (the python term for serializing objects), this responsibility must fall to you.
+
+It is important to note that sockets always receive a distinct number of bytes.  How does the program using the socket know if the message is been entirely received if the socket has no idea how long the message is?  There are many ways to solve this, but one of the easiest is to preface the message with the size of the message.  This way, the receiving side can look at the first couple of bytes (iterating if it doesn't find the * separator), find and parse how long the message should be, and then receive the entire message from the socket.  An example of what a message could look like is below:
+
+`<size>*<message message message>`
+
+For easier readability for yourself and your grader, encapsulate this sending and receiving functionality into methods, so only a recv_msg() needs to be called to receive a message or a send_msg() to compose the outgoing message and send it instead of repeating the functionality wherever communication is required.
+
+It may be needed now or in the next !MapReduce assignments to serialize more complicated python structure such as dictionaries.  The appeal of dictionaries in a !MapReduce setting makes sense; it's a structure that can hold a mapping of a key to a list of values, e.g. `{key1: [v1,v2,v3], key2: [v3,v5], ...}`.
 
 == Hints ==
  * Work sequentially!  Start with step 1 and ensure that if you directly feed in data that it will be mapped and reduced correctly.  Move onto developing the skeleton for step 2, and think about how you can pass strings using TCP messages for step 3.
- * 
+ * To save the trouble of destroying and recreating sockets, remember that keeping several sockets alive is very cheap.  It is comparatively more expensive to keep creating them however.  Take advantage of the global mycontext dictionary and utilize the same socket to respond to the primary or vice versa.
+ * Break your assignment into multiple methods.  Do most of your computation in methods, not in the script part of the repy file.  This allows for greater headway going forward, and is clearer to other people reading your program.
 
 == Notes ==
 
