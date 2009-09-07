@@ -544,6 +544,36 @@ Reads multiple lines from the file. If size is not ommitted and positive, stops 
       these newlines are not stripped from the lines in the resulting list.
 
 [[BR]]
+==== file.seek(offset, whence=0) ====
+----
+
+Set the file’s current position, like stdio‘s fseek().
+
+(From the Python documentation) Note that if the file is opened for appending (mode 'a' or 'a+'), any seek() operations will be undone at the next write. If the file is only opened for writing in append mode (mode 'a'), this method is essentially a no-op, but it remains useful for files opened in append mode with reading enabled (mode 'a+'). If the file is opened in text mode (without 'b'), only offsets returned by tell() are legal. Use of other offsets causes undefined behavior.
+
+ * Doc string:
+
+   <Purpose>
+      Set the file's current position.
+
+   <Arguments>
+      offset - Specifies the number of bytes to seek.
+
+      whence (optional) - Specifies how the seeking is to be done. Defaults to 0 (absolute
+      file positioning); other values are 1 (seek relative to the current position) and 2
+      (seek relative to the file's end). For example, f.seek(2, 1) advances the position by
+      two and f.seek(-3, 2) sets the position to the third to last.
+
+   <Exceptions>
+      ValueError if the file is closed.
+
+   <Side Effects>
+      The file's current position is set.
+
+   <Returns>
+      Nothing.
+
+[[BR]]
 ==== file.write(data) ====
 ----
 
