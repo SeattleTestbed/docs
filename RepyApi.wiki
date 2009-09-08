@@ -352,7 +352,8 @@ Stops communication on a commhandle.   In the case of a UDP message based commha
       in use.
 
    <Returns>
-      None.
+      Returns True if commhandle was successfully closed, False if the handle
+      cannot be closed (i.e. it was already closed).
 
 
 [[BR]]
