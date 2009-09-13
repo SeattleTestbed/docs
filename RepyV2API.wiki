@@ -259,7 +259,7 @@ Sends a UDP message to a destination host / port.   By default the system select
       The number of bytes sent on success
 
 [[BR]]
-==== openconnection(desthost, destport, localip=None, localport=0, timeout = 5) ====
+==== openconnection(desthost, destport, localip=None, localport=None, timeout = 5) ====
 ----
 
 (rename of ~~openconn~~)
