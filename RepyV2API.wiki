@@ -807,7 +807,7 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
 
 
 [[BR]] 
-==== socket.recv(bytes) ====
+==== socket.recv(numbytes) ====
 ----
 Receives data that was sent by the connected party using send.   Note that this may return less than bytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   If recv returns !'' then the other side has closed the connection.
 
@@ -818,7 +818,7 @@ Receives data that was sent by the connected party using send.   Note that this 
      requested.
 
    <Arguments>
-     bytes:
+     numbytes:
         The maximum number of bytes to read.   
 
    <Exceptions>
@@ -832,7 +832,7 @@ Receives data that was sent by the connected party using send.   Note that this 
      the other side has closed the socket and no more data will arrive.
 
 [[BR]] 
-==== socket.send(bytes) ====
+==== socket.send(message) ====
 ----
 
 Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may block indefinitely.   If the other party closes the connection, send will raise an exception.
