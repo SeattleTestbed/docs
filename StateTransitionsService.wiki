@@ -11,9 +11,9 @@ The state transition daemons track node configuration state. Primarily they are 
 
 Each state transition daemon is a python script that runs '''all the time'''. These scripts are essential because they configure newly installed Seattle nodes for use by the GENI. Each script ''transitions'' the node from some prior state to a new state. The transition might require sending commands to the node manager, creating new database records, etc. Here are the three state transition scripts that run on seattlegeni.cs:
 
- * '''donationtocanonical''' -- transition a node from a newly installed state (donation state) into the canonical state
- * '''canonicaltoonepercent''' -- transitions a node from the canonical state into the one percent state in which the node is ready to be used by GENI
- * '''onepercenttoonepercent''' -- transitions a node from the one percent state back into the one percent state, updating some time-dependent information about the node in the database
+ * '''donation_to_canonical''' -- transition a node from a newly installed state (donation state) into the canonical state
+ * '''canonical_to_onepercentmanyevents''' -- transitions a node from the canonical state into the one percent manyevents state in which the node is ready to be used by GENI. If a node fails to get split, it is joined back up so there is only one vessel remaining.
+ * '''onepercentmanyevents_to_onepercentmanyevents''' -- transitions a node from the one percent manyevents state back into the one percent manyevents state, updating some time-dependent information about the node in the database
 
 [[BR]]
 == Configuration ==
@@ -25,12 +25,11 @@ The state transition scripts on seattlegeni.cs are deployed in /home/geni/node_s
 == Deploying the daemons ==
 ----
 
-''Note: This information is slightly out of date. See #564 for more info on deploying the node state transition scripts.''
 
 To deploy the state transition scripts into /home/geni/node_state_transitions/ from the Seattle trunk that is assumed to have been checked out in ~/trunk/, do the following ('''warning''' : the destination directory will be overwritten) :
 
 {{{
-$ export PYTHONPATH=$PYTHONPATH:~/trunk/ && deploy_state_transitions.py /home/geni/node_state_transitions/
+python ./trunk/seattlegeni/deploymentscripts/deploy_seattlegeni.py ./trunk /home/geni/node_state_transitions
 }}}
 
 [[BR]]
@@ -39,22 +38,22 @@ $ export PYTHONPATH=$PYTHONPATH:~/trunk/ && deploy_state_transitions.py /home/ge
 
 The daemons are run from the command line without any arguments. You must run them from within their directory (e.g. /home/geni/node_state_transitions/). Here is the command for running each of the different type of transition scripts:
 
- * donationtocanonical:
+ * donation_to_canonical:
 
 {{{
-$ python donationtocanonical.py
+$ python transition_donation_to_canonical.py
 }}}
 
- * canonicaltoonepercent:
+ * canonical_to_onepercentmanyevents:
 
 {{{
-$ python canonicaltoonepercent_manyevents.py
+$ python transition_canonical_to_onepercentmanyevents.py
 }}}
 
- * onepercenttoonepercent:
+ * onepercentmanyevents_to_onepercentmanyevents:
 
 {{{
-$ python onepercenttoonepercent_manyevents.py
+$ python transition_onepercentmanyevents_to_onepercentmanyevents.py
 }}}
 
 [[BR]]
@@ -66,3 +65,5 @@ To test if these scripts are running, you can run the following command and chec
 {{{
 $ ps auwx | grep python | grep -v grep
 }}}
+
+Also there is a monitoring script that is set up on seattlegeni.cs.washington.edu and a monitoring script on blackbox.cs.washington.edu which monitors the scripts regularly.
