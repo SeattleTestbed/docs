@@ -1,6 +1,8 @@
-= Geni HTTP =
+= SeattleGENI in Production =
 
-The GENI portal runs on Apache and uses mod_python to interface with django. This page describes how to restart the service, make sure that its running, deploy it, etc.
+The SeattleGENI portal runs on Apache and uses mod_python to interface with django.
+This page describes how to redeploy SeattleGENI from the current svn trunk as well
+as some additional configuration information for using SeattleGENI in production.
 
  * For info on installing the necessary software to run GENI, see GeniInstallation.
  * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
@@ -9,20 +11,46 @@ The GENI portal runs on Apache and uses mod_python to interface with django. Thi
 [[TOC(inline)]]
 ----
 
-== Settings ==
+== Apache Settings ==
 ----
 
-The Apache settings can all be found in /etc/apache2/.
+The Apache settings on our server can all be found in /etc/apache2/. The general information is described in GeniInstallation.
 
 The primary configuration file (that specific the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
 
 Note that the GENI site uses a SSL certificate and uses https:// (port 443) for all URLs that map into the GENI portal.
 
 [[BR]]
-== Deploying Django code ==
+== Logrotate ==
 ----
 
-To deploy django code into production:
+The SeattleGENI website's log data goes to the apache error log. However, the log files of the
+individual scripts (polling daemons, transition scripts, lockserver, and backend) go to file
+in the /home/geni/logs directory. These need to be rotated by logrotate.
+
+We use the following logrotate configuration (found in `/etc/logrotate.d/seattlegeni`):
+
+{{{
+/home/geni/logs/*.log {
+  rotate 60
+  daily
+  compress
+  missingok
+  notifempty
+  # The seattlegeni scripts don't know how to start a new log file, so we have
+  # logrotate make a copy of the log files and truncate the original ones.
+  copytruncate
+}
+
+
+}}}
+
+
+[[BR]]
+== Redeploying SeattleGENI from SVN ==
+----
+
+To deploy SeattleGENI code from SVN trunk into production:
   1. Log in to either seattlegeni.cs or blackbox.cs (depending on which installation you are updating).
   1. Get a root shell: `sudo -i`
   1. Open the screen running as root: `screen -r`
@@ -72,4 +100,4 @@ Starting transition script transition_canonical_to_onepercentmanyevents
 Starting transition script transition_onepercentmanyevents_to_onepercentmanyevents
 All components started. Kill this process (CTRL-C or 'kill 20452') to stop all started components (except apache).
 }}}
-  1. Get out of screen (either CTRL+SHIFT+A then CTRL+SHIFT+D or just close your terminal if you don't trust your screen skills).
+  1. Get out of screen (either CTRL-SHIFT-A then CTRL-SHIFT-D or just close your terminal if you don't trust your screen skills).
