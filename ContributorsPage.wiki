@@ -24,6 +24,7 @@ This page contains information useful to developers working on Seattle
    * [RemoteTestingService Running remote tests on seattle testbeds]
    * [UnitTestFramework Unit Test Framework -- Alpha]
    * [IntegrationTestFramework Writing Integration Tests]
+   * [ContinuousBuild Continuous Build]
 
  * Style guidelines for documentation, python code, web code
    * [DocsFormatting Documentation format guidelines]
