@@ -42,3 +42,7 @@
 || 10-10:20AM Aug 8th, 2009 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Justin || Talk (Educational)
 
 || Aug 9th, 2009 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Justin || Live Demo / Extended Talk (Educational)
+
+
+|| Oct 10th, 2009 || Pacific Lutheran University, Morken 210  || Seattle Workshop, co-located with CCSC NW || Justin || Live Demo / Extended Talk (Educational)
+
