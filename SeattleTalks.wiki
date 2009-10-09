@@ -8,13 +8,9 @@
 
 || 2:00-2:30 Oct 29th, 2008 || San Fransisco || GENI Engineering Conference 3 || Tom || Talk
 
-|| Nov 3rd, 2008 ||  UW  ||   Used in Graduate Networking class || || Classroom use
-
 || 1:30-2:30 Nov 5th, 2008 || EE 025 || Systems Seminar 590S || Justin || Talk / Live Demo
 
 || 2:10-2:30 Nov 7th, 2008 || HUB 310 || (PN-ASEE/WCERTE) || Justin || Talk /  Live Demo
-
-|| Dec 4th, 2008 ||  UW  ||   Used in Undergraduate Networking class || || Classroom use
 
 || Jan 31st, 2009 || Gates Commons || NW Python Day || Justin || Talk / Live Demo
 
