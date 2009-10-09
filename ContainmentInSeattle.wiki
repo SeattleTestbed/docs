@@ -6,7 +6,9 @@ The Seattle project allows researchers to remotely run programs in parallel on d
 The primary goal of this work is to ensure that nodes can only send packets to opt-in machines. This is important because nodes could otherwise be used to generate SPAM, participate in BitTorrent swarms with illegal content, or participate in DDOS attacks. There are also several secondary goals:
 
 -It is important that there is no hidden delay in allowing or denying traffic as this may interfere with measurements or performance of applications on nodes. 
+
 -The implementation must be secure against most forms of attack. For example, it should not be possible for a machine to opt-in another machine.  
+
 -The system must scale to over one million nodes (the expected size of Seattle).
 
 Our solution is to use a set of trusted central servers to host a service to manage addresses of machines that have opted in to receiving Seattle traffic. We call this service the Seattle Node Directory Service.  The opt-in machines are responsible for registering (and periodically re-registering) to continue receiving Seattle traffic. In order to prevent spoofing, when a machine wishes to register with the Seattle Node Directory Service, it must first do so through TCP. In response to each registration the Seattle Node Directory Service generates a random renewal key and sends it to the registering machine. The machine can then use these keys to renew its registration via UDP. This is done to improve performance, as TCP is expensive and a TCP-only registration system will not scale adequately.
