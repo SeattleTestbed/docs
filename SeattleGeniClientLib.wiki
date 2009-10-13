@@ -87,6 +87,8 @@ Available methods on the !ClientLib 'client' object:
 
   * ''release_resources(handlelist)'':  Release all resources referenced by handles given in ''handlelist''.
 
+  * ''renew_resources(handlelist)'':  Renew all resources referenced by handles given in ''handlelist'' (that is, extend their expiration dates).
+
   * ''get_resource_info()'':  Gets all acquired resources.
   * ''get_account_info()'':  Gets account information.
   * ''get_public_key()'':  Gets user's public key.
