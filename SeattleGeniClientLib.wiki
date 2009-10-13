@@ -2,7 +2,7 @@
 [[BR]]
 The SeattleGENI XML-RPC Client Library is useful for anyone wishing to communicate with the SeattleGENI XML-RPC Interface; and also serves as an example for people wishing to design their own clients to interface with our XML-RPC server.
 
-You can download the library here: [raw-attachment:geni_xmlrpc_clientlib.py SeattleGENI XMLRPC ClientLib],
+You can download the library here: [source:seattle/trunk/seattlegeni/website/xmlrpc/geni_xmlrpc_clientlib.py SeattleGENI XMLRPC ClientLib],
 
 {{{
 NOTICE: geni_xmlrpc_clientlib does not yet support
