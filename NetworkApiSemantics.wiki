@@ -1,1122 +1,175 @@
-= Network API call semantics = 
-
-----
 [[TOC(inline)]]
+
 ----
-
-
-[[BR]]
 == Introduction and Purpose ==
+
+
+This page is designed to specify in detail the behaviour of network API calls under various circumstances.  Each call and it's possible interactions are explained.  
+
+For a basic description and understanding of the API calls first see [https://seattle.cs.washington.edu/wiki/RepyLibrary]
+
 ----
+== Abstractions == 
 
-This page is designed to specify in detail the behavior of network API calls under various circumstances.  For each call a list of argument and behavioral semantics is provided, along with a snippet of test code that shows how each case is verified.
+To aid in the description of call interactions I will define some useful abstractions.  The repy environment may or may not be implemented using these abstractions, but they are useful mental constructs for considering call behaviour.
+
+''tcp_conn_table'' - a table with columns localip,localport,remoteip,remoteport for all open tcp connections
+
+''tcp_listen_table'' - a table with columns localip,localport for all tcp listeners
+
+''udp_listen_talbe'' - a table with columns localip,localport
+
 
 ----
+== openconn ==
 
 
+A call to openconn will attempt to establish a TCP connection to a remote host.  The call will either return a socketlike object, or raise an exception (in the case of failure).  If the connection is successful an entry is placed into the ''tcp_conn_table''.
 
-[[BR]]
-== openconn(ip,port,localIP=None,localPort=None,timeout=5) ==
-----
-
+To know the result of a call to openconn we must consider:
 
 
-=== Interacts with: ===
+1. Is there a conflicting tuple in the ''tcp_conn_table''.  A conflicting entry is one where all columns match.[[BR]]
+2. Are sockets resources available[[BR]]
+3. Can network connectivity to the remote host be established[[BR]]
+4. will the host accept the connection[[BR]]
+5. Will the connection be established within the timeout value
 
-socketlikeobj.close()[[BR]]
-openconn()[[BR]]
-getmyip()[[BR]]
-[[BR]]
-=== Argument semantics: ===
- 
-IP / localIP is a string or an Exception is thrown.
+The result of a call to openconn is:
 
-Port / localPort is an int between 1 and 65535 (inclusive), or an Exception is thrown.
 
-Timeout is an int and is greater than zero or is none, or an Exception is thrown.
-
-Both localPort and localIP are specified, or both are none, or an exception is thrown.
+{{{
+if (not matching entry in tcp_conn_table) AND 
+      (sockets available) AND 
+      (network connectivity to host can be established) AND 
+      (the remote host accepts the connection) AND 
+      (the connection can be established before the timeout expires):
   
-If localIP and localPort are specified, the IP is checked against the allowed IP /interface list.  If the IP specified is in the list an attempt to bind to the port is made.  If the IP is not in the allowed list an exception is thrown.
-
-If localIP and localPort are not specified, the IP that would be returned from getmyip() is used (This may not be the case if a loop back ip is being used).  The port is the lowest port without an open connection with this (remoteIP, remoteport, localIP, localport) tuple.
-
-
-=== Behavioral Semantics: ===
-
-Action: A call to openconn successfully returns a socketlikeobj
-Result: The socketlikeobj may be connected to a waitforconn or is connected to nothing.  In rare cases the host OS may accept the TCP connection when the repy listener is not ready to accept a new connection, which can result in a socketlikeobj be returned that is not actually connected to the waitforconn.
-
-1
-
-Action: The timeout specified expires prior to a successful connection being made or some other exception occurring.
-
-Result:  An exception is thrown.
-
-(tested - openconn_timeout.py, run with echo_server.py deployed on 3 WAN nodes)[[BR]]
-Test Snippet:
-
-{{{
-
-try:
-  openconn(ip,port,timeout=1)
-except:
-  pass
+  place an entry into tcp_conn_table
+  return a socekt_like_obj
 else:
-  test_fail()
-
-
+  raise an exception
 }}}
 
-2
+----
+==  waitforconn ==
 
-Action:  An openconn is performed with a port and IP specified at which there is no listener to receive the connection.
 
-Result:  An exception is thrown.
+A call to watiforconn will attempt to register a callback function and begin listening for TCP connections at the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous waitforconn)  A successful call to watiforconn will return a commhandle, a failed call will result in an exception.
 
-(tested - openconn_no_listener1.py  AND openconn_no_listener2.py AND openconn_no_listnener3.py)[[BR]]
-Test Snippet:
+To know the result of a call to waitforconn we must consider:
+
+1. Is there a conflicting tuple in the ''tcp_listen_table'', a conflicting entry is one where all columns match.[[BR]]
+2. Is there a connection to the network[[BR]]
+3. Are there free events OR is the socket selector already running
+
+
+The result of a call to waitforconn is:
+
 
 {{{
 
-try:
-  openconn(ip,waitport)
-except Exception:
-  pass
+if (there are free events OR the socekt selector is running) AND (there is a network connection):
+  if no matching tuple in listen table:
+    make entry in listen table
+    start the listener and register the callback function
+  elif:
+    replace the callback function
+  return a commhandle
 else:
-  fail_test() 
-}}}
-  
-
-3
-
-Action:  openconn is called with localIP and localPort that is currently used by a waitforconn
-
-Result:  No exception should occur.
-
-(tested - openconn_same_port_as_waitforconn.py )[[BR]]
-Test Snippet:
-
-{{{
-
-handle_local = waitforconn(ip,waitport,do_nothing)
-sock = openconn(remoteip,remoteport,ip,waitport)  
-
-}}}
- 
-4
-
-Action:  openconn is called, then close() is called on the returned socket, then openconn is called with identical arguments.
-
-Result:  no exception occurs.
-
-replicated by close_blocks.py[[BR]]
-Test Snippet:
-
-
-{{{
-sock = openconn(ip,port)
-sock.close()
-sock2 =openconn(ip,port)
+  raise an exception
 }}}
 
 
-5
+After effects:
 
-Action: openconn is called, then another openconn is called with identical arguments (where localIP and localPort are specified).
+Once a callback function has been registered a thread runs to listen for connections, whenever a tcp connection is established the resulting socketlikeobj is processed by the user specified callback function.  If there are no free events available when a connection is established the callback function will not be called until an event is available.
 
-Result: an exception occurs.
 
-(tested by -  openconn_duplicate_4tuple.py)[[BR]]
-Test Snippet:
+----
+== stopcomm ==
+
+A call to stopcomm will stop the listener and remove the entry from the corresponding listen table.  True is returned for success and False for failure.
+
+----
+== sendmess ==
+
+
+A call to sendmess will attempt to send a message to a  remote host.  The call will either return the number of bytes sent, or raise an exception (in the case of failure).
+
+To know the result of a call to sendmess we must consider:
+
+1. Is there a connection to the network
+2. Can the host name specified be resolved
+
+The result of a call to sendmess is:
 
 
 {{{
-sock1 = openconn(ip,port,ipA,portA)
-try:
-  sock2 = openconn(ip,port,ipA,portA)
-except Exception:
-   pass
+if (there is a network connection) AND (the host name can be resolved):
+     send the packet
+     return bytes sent
 else:
-   test_fail()
+  raise an exception
 }}}
-
-
-
-6
-
-Action:  openconn is called any number of times with a unique 4 tuple each time.
-
-Result:  no exception occurs.
-
-(tested - .._diff_remote_ports.py)[[BR]]
-(tested - .._diff_local_ports.py)[[BR]]
-(tested - .._diff_local_ip.py)[[BR]]
-(tested - echo_server.py and ... openconn_diff_remote_ip_2SERVERS.py,  (tested across a network))[[BR]]
-Test Snippet:
-
-
-{{{
-sock1 = openconn(A,B,C,D)
-sock2 = openconn(E,B,C,D)
-etc....
-}}}
-
-
-
-
-7
-
-Action:  openconn is called simultaneously in two separate events.
-
-Result:  Events will behave as if the two calls had executed in some serial order.
 
 ----
-[[BR]]
-== waitforconn(localip, localport, function) ==
-----
+== recvmess ==
 
 
-=== Interacts with: ===
+A call to recvmess will attempt to register a callback function and begin listening for arriving messagesat the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous recvmess)  A successful call to recvmess will return a commhandle, a failed call will result in an exception.
 
-stopcomm()[[BR]]
-waitforconn()[[BR]]
+To know the result of a call to waitforconn we must consider:
 
-=== Argument semantics: ===  
+1. Is there a connection to the network[[BR]]
+2. Are there free events OR is the socket selector already running
 
-The localIP specified is a string or an Exception occurs.
-
-The localPort specified is an int in the range between 1 and 65535 (inclusive) or an Exception occurs.
-
-
-=== Behavioral Semantics: ===
-
-1
-
-Action:  waitforconn is called on an unused port with a valid function.
-
-Result:  A listener is registered.
-
-(tested- waitforconn_basic.py)[[BR]]
-Test Snippet:
+The result of a call to recvmess is:
 
 {{{
-handle = waitforconn(ip,port,callback)
-}}}
 
-
-2
-
-Action:  waitforconn is called on a port being used by another waitforconn
-
-Result:  No exception occurs, the callback function is replaced. 
-
-(tested - waitforconn_used_port1.py) [[BR]] 
-Test Snippet: 
-
-{{{
-waitforconn(ip,port,callback1)
-waitforconn(ip,port,callback2)
-performcallbacktest()
-}}}
-
-
-
-
-3
-
-Action:  A waitforconn is called, and the replaced by a newer waitforconn.  Stopcomm is called on the original commhandle.
-
-Result: Nothing.  The waitforconn remains active.
-
-(tested - waitforconn_unique_handle.py)[[BR]]
-Test Snippet:
-
-
-{{{
-old_handle = waitforconn(ip,port,old_func)
-new_handle= waitforconn(ip,port,new_func)
-stopcomm(old_handle)
-test_new_func()
-}}}
-
-
-
-
-4
-
-Action:  waitforconn is called on a port being used by a socket (openconn).
-
-Result:  no exception occurs
-
-(tested - waitforconn_used_port2.py)[[BR]]
-Test Snippet:
-
-
-{{{
-openconn(remote_ip,remote_port,ip,port)
-waitforconn(ip,port,callback) 
-}}}
- 
-
-
-5
-
-Action:  waitforconn is called successfully, then stopcomm is called on "thiscommhandle" from the call back arguments.
-
-Result:  The corresponding socketlikeobj is closed, the listener remains active
-
-(tested - waitforconn_stop_thiscommhandle.py)[[BR]]
-Test Snippet:
-
-
-{{{
-callback(remoteip,remoteport,sock,thiscommhandle,listencommhandle):
-stopcomm(thiscommhandle)
-}}}
-
-
-
-
-6
-
-Action:  waitforconn is called successfully, then a stopcomm is called on the returned comm handle or the listencommhandle from the callback arguments.
-
-Result:  The listener is stopped and further connections are not accepted.  Connections being processed continue unaffected.
-
-(tested - waitforconn_stopcomm1.py  AND   - waitforconn_stopcomm2.py ) [[BR]]    
-Test Snippet:
-
-{{{
-handle = waitforconn(ip,port,callback)  
-stopcomm(handle)
-try:
-  sock = openconn(ip,port)
-except Exception:
-  pass
+if (there are free events OR the socket selector is running) AND (there is a network connection):
+  if no matching tuple in listen table:
+    start the listener and register the callback 
+    return a commhandle
 else:
-  test_fail()
+  raise an exception
 }}}
 
 
+After effects:
 
-
-7
-
-Action:  waitforconn is called successfully, then a stopcomm is called on the returned comm handle. Then an identical waitforconn is called.
-
-Result:  No exception occurs. The listener functions.
-
-(tested - waitforconn_after_stopcomm.py)[[BR]]
-Test Snippet:
-
-
-{{{
-handle = waitforconn(ip,port,func)
-stopcomm(handle)
-handle = waitforconn(ip,port,func)
-}}}
-
-
-
-
-8
-
-Action:  A connection is made to the waitforconn, while the first connection is being processed another connection is made.
-
-Result:  No exception occurs, another event is used to call the callback function and process the new connection.
-
-(tested - waitforconn_multievents.py)[[BR]]
-Test Snippet:
-
-
-{{{
-handle = waitforconn(ip,port,func)   #func is a long running routine
-sock1 = openconn(ip,port)
-sock2 = openconn(ip,port)
-}}}
-
-
-
-
-9
-
-Action:  There are no free events available and a connection is made to a port with an active listener (waitforconn was called)
-
-Result:    The callback function is called when a event becomes available
-
-(tested - waitforconn_max_events_1SERVER.py ,  works in conjunction with echo_server.py)[[BR]]
-Test Snippet:
- 
-
-{{{
-#open connections to consume all available events on the echo server
-settimer(3,free_an_event,[])  #closes a socket to free an event
-settimer(10,fail_test,[]) #timeout if the event is never processed
-sock = openconn(ip,port)
-sock.send('ping')
-msg = sock.recv()
-if an_event_was_not_freed:
-  fail_test()
-}}}
-
-
-
-10
-
-Action:  All free events are consumed and a call to waitforconn is made.
-
-Result: The call will block, and return when an event becomes available.
-
-(tested test_waitforconn_no_free_events.py) [[BR]]
-Test Snippet:
-
-{{{
-#consume all free events
-handle = settimer(5,fail_test,[])
-try:
-  waitforconn(ip,port,func)
-except:
-  canceltimer(handle)
-else:
-  print 'no exception occurs'
-}}}
-
-        
-
-11
-
-Action:  waitforconn is called simultaneously in two separate events.
-
-Result:  Each event behaves as if the two calls were performed in a serial order.
-
+Once a callback function has been registered a thread runs to listen for connections, whenever a message is received it is processed by the user specified callback function.  If there are no free events available when a message is received the callback function will not be called until an event is available.
 
 ----
-[[BR]]
-==  socketlikeobj.send(message) ==
-----
+= Socket Objects =
 
-=== Interacts with: ===
-
-socketlikeobj.close()[[BR]]
-
-
-=== Argument semantics: ===
- 
-The message provided is a string or an exception occurs.
-
-
-=== Behavioral Semantics: ===
-
-1
-
-Action:  A call to sock.send(msg) is made, where msg is smaller than free space in internal buffers.
-
-Result:  The message is copied to internal buffers and send returns the number of characters sent.
-
-(tested - send_not_blocking.py)[[BR]]
-Test Snippet:
-
-{{{
-h = settimer(1,test_fail,[])
-length = sock.send(msg)
-canceltimer(h)
-if length != len(msg):
-  test_fail()
-}}}
-
-
-2
-
-Action:  A call to sock.send(msg) is made, where msg is larger than free space in internal buffers.
-
-Result:  The call to send blocks and does not return until there is enough free buffer space for the entire message.
-
-(tested - send_blocks.py) [[BR]]
-Test Snippet:
-
-
-{{{
-#send eventually blocks and the timer ends the test, otherwise the test fails
-timerhandle = settimer(12,stop_test,[handle,sock])
-for i in range(1024):   #send until eventually it blocks
-  sock.send(file_data)
-print 'exited for loop without send blocking'
-
-}}}
-
-
-3   
-
-Action:  A call to send is made after close() is called.
-
-Result:  An exception occurs.
-
-(tested - send_self_close.py )[[BR]]
-Test Snippet:
-
-
-{{{
-sock.close()
-try:
-  sock.send(msg)
-except Exception:
-  pass
-else:
-  test_fail()
-}}}
-
- 
-
-4
-
-Action:  A call to send is made after close() has been called on the peer socket.
-
-Result:  Behavior is timing dependent.  If sufficient time has elapsed an exception occurs indicating that the connection is closed.
-
-(tested - send_peer_close1.py)[[BR]]
-Test Snippet:
-
-
-{{{
-#remote connection is closed then..
-sleep(3) #ensure sufficient time elapsed
-try:
-  sock.send(msg)
-except Exception:
-  pass
-else:
-  test_fail()
-}}}
-
-
-
-5
-
-Action:  Internal buffers are full and a call to send is made, which results in a blocking operation.  While the call is blocking close is called on the peer socket.
-
-Result:  An exception occurs.
-
-(tested - send_peer_close2.py)[[BR]]
-Test Snippet:
-
-
-{{{
-try:
-  sock.send(hugemsg)   #close is called on peer socket while this call is blocking
-except Exception:
-  pass
- else:
-    test_fail()
-}}}
-
-
-6
-
-Action:  Two or more calls to send are made simultaneously in separate events.
-
-Result:  Behavior is as if all calls were performed in some serial order.  Strings sent from separate events are NOT interleaved.  Ordering of calls is no defined.
-
+see bottom of page for state diagram.
 
 ----
-[[BR]]
-==  socketlikeobj.recv(length) ==
-----
+== socket.send(bytes) ==
 
-=== Interacts with: ===
-
-socketlikeobj.close()[[BR]]
-
-=== Argument Semantics: ===
- 
-The length provided is an int and is greater than 0, or an Exception occurs.
-
-
-=== Behavioral Semantics: ===
-
-
-1
-
-Action:  The internal buffer is empty and recv is called.
-
-Result:  The call blocks until some characters arrive in the buffer.
-
-(tested - recv_blocks.py)[[BR]]
-Test Snippet:
-
-{{{
-settimer(5,pass_test,[])
-msg = sock.recv()
-fail_test()
-}}}
-
-
-
-2
-
-Action:  There are bytes ready to be read and recv(N) is called.
-
-Result:  Some number of bytes <= N will .
-
-(tested - recv_some.py)[[BR]]
-Test Snippet:
-
-
-{{{
-msg = sock.recv(n)
-if len(msg) > n:
-  test_fail()
-}}}
-
-
-
-
-
-3
-
-Action:  There are no characters in the internal buffer and a call to recv is performed.  Sometime later a string of length N is received by the buffer.
-
-Result:  Some number of characters that is less than or equal to N is returned.
-
-(tested - test_recv_while_blocking.py)[[BR]]
-Test Snippet:
-
-
-{{{
-msg = recv(5)   #buffer is empty, the call blocks, then "hello" is sent by the peer
-if len(msg) > 5:
-  test_fail()
-}}}
-
-
-
-
-4
-
-Action:  close() is called on the peer socketobj, and then recv is called on the local socketobj.
-
-Result: Characters remaining in the buffer are returned as if close() had not been called.  When there are no characters remaining the an exception is thrown.
-
-(tested recv_peer_close.py)[[BR]]
-(tested recv_peer_close2.py)[[BR]]
-Test Snippet:
-
-
-{{{
-# peer connection  calls close()
-msg ='a'
-h = settimer(2,test_fail,[])
-while True:
-  try:
-    msg = sock.recv(n)
-  except:
-    canceltimer(h)
-}}}
-
-
-
-5
-
-Action:  close is called on a socketobj, and then recv is called.
-
-Result:  an exception occurs
-
-(tested - recv_self_close.py  not blocking call)
-(tested - test_recv_after_self_close_2.py  blocking call to recv)[[BR]]  
-Test Snippet:
-
-
-{{{
-sock.close()
-try:
-  sock.recv(n)
-except Exception:
-  pass
-else:
-  test_fail()
-}}}
-
-
-
-6
-
-Action:  recv is called simultaneously in two more more events.
-
-Result:  Behavior in each event is as if each call to recv was performed in some serial order.  The exact ordering which will occur is not defined.
-
+A call to send will attempt to transmit bytes to the remote host connected via the stream abstraction.  A call to send will either block waiting for the underlying network stack to accept the bytes, or will return the number of bytes successfully delivered to the underlying network stack.  
 
 ----
-[[BR]]
-==  socketlikeobj.close() ==
-----
+== socket.recv(n) ==
 
-
-=== Interacts with: ===
-
-openconn()[[BR]]
-socket.send()[[BR]]
-socket.recv()[[BR]]
-
-=== Argument Semantics: ===
-None[[BR]]
-
-=== Behavioral Semantics: ===
-
-
-1
-
-Action:  close() is called on an unopen connection
-
-Result:  No exception occurs, False is returned.
-
-(tested - close_closed.py)[[BR]]
-Test Snippet:
-
-
-{{{
-sock = openconn(...) 
-sock.close()
-value = sock.close()
-if value is not False:
-  fail_test()
-}}}
-
-
-2
-
-Action:  A call to close is performed
-
-Result:  The call blocks until the connection is closed and the ip/port used can be successfully reused.  True is returned
-
-(tested close_blocks.py )[[BR]]
-Test Snippet: 
- 
-
-{{{
-sock=openconn(ip,port)
-value = sock.close()
-sock =openconn(ip,port)
-if value is not True:
-  fail_test()
-}}}
-
-
-
-3
-
-Action:  close() is called simultaneously in more than one thread.
-
-Result:  Each thread will behave is if it closed the connection
-
+A call to recv will attempt to return to the application n bytes delivered over the stream abstraction.  The call will either block waiting for bytes to be delivered from the underlying network stack, or will return <= n bytes from the stream.
 
 ----
-[[BR]]
-== sendmess(desthost,destport,message,localip=None,localport=None) ==
+== socket.willbock() ==
+
+A call to willblock determines if calls to send or recv will block or not.  A tuple of the form (Bool,Bool) is returned indicating if send and recv will or will not block. (True for blocking, False for non-blocking)
+
 ----
+== socket.close() ==
 
-=== Interacts With: === 
+A call to close completely closes the local end of the stream abstraction.  After calling close the local socket will raise an exception on any class to send or recv.  The remote end of the socket will still be able to call recv until all data previously delivered is read.  
 
-None[[BR]]
-
-=== Argument Semantics: ===
-
-
-The desthost/localip specified is a string, or an exception occurs.  (can be an ip address or valid host name)
-
-The destport/localport specified is an int between 1 and 65535 (inclusive), of an exception occurs.
-
-If localip or localport is specified both must be.
-
-The message sepcified is a string or an exception occurs.
-
-If localIP and localPort are not specified, the IP that would be returned from getmyip() is used.  The port is the lowest port avaiable.
-
-
-=== Behavioral Semantics: ===
-
-1
-
-Action:  The host name specified does not resolve into an address.
-Result:  An exception occurs.
-
-(tested - sendmess_bad_host.py)[[BR]]
-Test Snippet:
-
-
-{{{
-try:
-    sendmess('notactuallyahost',port,'ping')
-  except:
-    pass
-  else:
-    print "using 'notactuallyahost' did not cause exception"
-
-}}}
-
-
-2
-
-Action:  A call sendmess completes succsessfully.
-
-Result:  The number of bytes sent are returned. 
-
-(tested sendmess_returns.py)[[BR]]
-Test Snippet:
-
-
-{{{
- x = sendmess('127.0.0.1',12345,"ping")
- if x != 4:
-    print 'sendmess did not return correct value'
-}}}
-
-
-
-3
-
-Action:  Sendmess is called with a 4-tuple that is identical to an open socket connection.
-
-Result:  There is no conflict, no exception occurs.
-
-(tested - sendmess_socket.py)[[BR]]
-Test Snippet:
-
-{{{
-sock = openconn(ip,waitport,ip,port)
-sendmess(ip,waitport,'ping',localip=ip,localport=port)
-}}}
-
-
-4
-
-Action:  Duplicate sendmess calls are made in seperate threads of execution
-
-Result:  Behavior will be as if the calls were made in some serial order.
-
-
-
-
-[[BR]]
-== recvmess(localip,localport,function) ==
 ----
+== Socket State Diagram ==
 
-=== Interacts With: ===
-
-recvmess(..)[[BR]]
-stopcomm
-
-=== Argument Semantics: ===
-
-The locaip specified is a string or an exception occurs.
-
-The localport specified is an int between 1 and 65535 (inclusive), of an exception occurs.
-
-The function specified is a function with arguments (remoteip, remoteport,message,commhandle)or an exception occurs)
-
-
-=== Behavior Semantics: ===
-
-1
-
-Action:  A recvmess has been called and a UDP message arrives at the specified port.
-
-Result:  As soon as an event becomes free the call back function specified is executed and the message is processed.
-
-(test  - tested recvmess_basic.py)[[BR]]
-Test Snippet:
- 
-
-{{{
-recvmess(ip,port,func)
-sendmess(ip,port,msg)
-test_msg_proccessed()
-}}}
-
-
-
-2
-
-Action:  A recvmess has been called on the same ip / port as a waitforconn, and A TCP message arrives.
-
-Result:  The recvmess callback function is not executed.
-
-(tested - recvmess_waitforconn1.py)[[BR]]
-Test Snippet:
-
-
-{{{
-recvmess(ip,port,func)
-sock.send(msg)
-test_msg_not_processed()
-}}}
-
-
-
-3
-
-Action:  A recvmess has been called on the same ip/port as a waitforconn, and a UDP message arrives.
-
-Result:  The recvmess callback function is executed and the message is processed.
-
-(tested - recvmess_waitforconn2.py)[[BR]]
-Test Snippet:
-
-
-{{{
-waitforconn(ip,port,foo)
-recvmess(ip,port,func)
-sendmess(ip,port,msg)
-test_msg_processed()
-}}}
-
-
-
-4
-
-Action: Recvmess is called on the same ip / port as a previous recvmess.
-
-Result: The call back function is replaced and a new commhandle is returned.
-
-(tested - recvmess_duplicate1.py, this tests that the callback function is replaced)[[BR]]
-(tested - recvmess_duplicate2.py, this tests that the commhandle returned is uniqe)[[BR]]
-Test Snippet:
-
-(test 1)
-
-{{{
-recvmess(ip,port,old)
-recmess(ip,port,new)
-sendmess(ip,port,msg)
-test_msg_processed()
-}}}
-
-
-(test 2)
-
-{{{
-old_handle = recvmess(ip,port,old)
-new_handle = recvmess(ip,port,new)
-stopcomm(old_handle)
-sendmess(ip,port,msg)
-test_msg_processed()
-}}}
-
-
-
-
-5
-
-Action:  Stopcomm has been called on the recvmess commhandle and a UDP message is recivied.
-
-Result:  The message is not processed.
-
-(tested recvmess_stopcomm.py)[[BR]]
-Test Snippet:
-
-
-{{{
-handle = recvmess(ip,port,fail_test)
-stopcomm(handle)
-sendmess(ip,port,msg)
-}}}
-
-
-
-[[BR]]
-== stopcomm(commhandle) ==
-----
-
-=== Interacts With: ===
-
-waitforconn(..)[[BR]]
-recvmess(...)[[BR]]
-
-=== Argument Semantics: ===
-
-The commhandle specified is a commhandle or an exception occurs.
-
-=== Behavioral Semantics: ===
-
-1
-
-Action: Stopcomm is called on a valid commhandle.
-
-Result: The listener associated with the commhandle is stopped.  Stopcomm returns True.
-
-(tested - stopcomm_basic.py)[[BR]]
-(tested - stopcomm_basic2.py)[[[BR]]
-Test Snippet: 
-
-
-{{{
-handle = waitforconn(ip,port,func)
-stopped = stopcomm(handle)
-if stopped is not True:
-  test_fail()
-test_callback_is_stopped()
-}}}
-
-
-2
-
-Action: Stopcomm is called twice on the same commhandle.
-
-Result: No exception occurs, stopcomm returns False on the second attempt.
-
-(tested - stopcomm_duplicate.py)[[BR]]
-(tested - stopcomm_duplicate2.py)[[BR]]
-
-Test Snippet:
-
-
-{{{
-handle = waitforconn(ip,port,func)
-stopcomm(handle)
-stopped = stopcomm(handle)
-if stopped is not False:
-  test_fail()
-}}}
-
-
-
-3
-
-Action:  Stopcomm is called on  an invalid commhandle (a newer waitforconn has replaced it).
-
-Result:  No exception occurs, stopcomm returns False.
-
-(tested - stopcomm_invalid_handle.py)[[BR]]
-(tested - stopcomm_invalid_handle2.py)[[BR]]
-Test Snippet:
-
-
-{{{
-  handle = waitforconn(ip,waitport,echo)
-  new_handle = waitforconn(ip,waitport,do_nothing)
-  stopped = stopcomm(handle)
-  if (stopped is not False):
-    print 'Stopcomm did not return False'
-}}}
-  
- 
-
-4
-
-Action:  Stopcomm is called simultaneously in multiple events.
-
-Result:  Behaves as if each call occured in some serial order.
-
-
-[[BR]]
-== gethostbyname_ex(name) ==
-----
-
-=== Interacts With: ===
-
-None[[BR]]
-
-=== Argument Semantics: ===
-
-The name specified is a string or an exception occurs.
-
-=== Behavioral Semantics: ===
-
-
-1
-
-Action:  A call is made to get hostbyname_ex(name)  with a valid host name.
-
-Result:  A tuple containing information about the host name is returned, or a netowork error occurs.
-
-(tested - gethost_basic.py) [[BR]]
-Test Snippet:
-
-{{{
-(one,two,three) = gethostbyname_ex(host)
-}}}
-
-
-
-2
-
-Action:  A call is made to get hostbyname with an invalid host name.
-
-Result:  An exception occurs.
-
-(tested - gethost_invalid.py)[[BR]]
-Test Snippet:
-
-
-{{{
-try:
-  gethosbyname_ex(invalid_host)
-except:
-  pass
-else:
-  fail()
-
-}}}
-
-
-
-[[BR]]
-== getmyip() ==
-----
-
-=== Interacts With: ===
-
-openconn[[BR]]
-sendmess[[BR]]
-
-=== Argument Semantics: ===
-
-None
-
-=== Behavioral Semantics: ===
-
-1
-
-Action:  A call to getmyip() is made while the perferred IP or interface is attached to a network.
-
-Result:  The IP (or the IP of the perferred interface) is returned and can be used to communicate over the network.
-
-(tested - getmyip_basic.py) [[BR]]
-Test Snippet:
-
-{{{
-#run the echo_serever on another node
-openconn(rip,geniport,getmyip(),geniport)
-#verify connection
-}}}
-
-
-
-2
-Action:  A call to getmyip() is made while not connected to a network.
-
-Result:  An exception occurs.
-
-(tested - getmyip_no_connection.py)[[BR]]
-Test Snippet:
-
-
-{{{
-#run while not connected to a network
-try:
-  getmyip()
-except:
-  pass
-else:
-  fail()
-}}}
-
-
-3
-
-Action:  getmyip() is called while the prefered interface/IP is not connected to the network, but other connections from the allowed list are connected to the network.
-
-Result:  getmyip() returns the first connected interface/IP in the list, and will continue to reutrn this IP for the duration of the program or until it becomes invalid.
-
+[[Image(socketstate.jpg)]]
 
 
 
