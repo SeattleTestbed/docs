@@ -14,6 +14,10 @@ After you add new files, you should to go to wherever the tests are running (e.g
 
 = Setup on testbed-opensuse =
 
+The following is information specific to setting up the continuous build system on our testbed-opensuse box.
+
+== Python ==
+
 The continuous build on testbed-opensuse is running on Python 2.6.3 which was built by us. The 2.5.1 version of python available on the system by default has problems with sqlite, which are required to run the seattlegeni tests.
 
 Python was built by the `continuousbuild` user with:
@@ -30,3 +34,28 @@ Django 1.1 is also installed by the continuousbuild user with:
 {{{
 python setup.py install --prefix=/home/continuousbuild/opt
 }}}
+
+== Firewall ==
+
+At the time of writing, NAT forwarding is new and not 100% reliable. This was causing the nodemanager tests to occasionally fail when a forwarder couldn't be found. Opening up port 1224 on this opensuse box involved the following:
+
+Create a file `/etc/sysconfig/SuSEfirewall2.d/services/seattle-nodemanager` with the following:
+
+{{{
+# space separated list of allowed TCP ports
+TCP="1224"
+}}}
+
+Edit the file `/etc/sysconfig/SuSEfirewall2` to add the name of the file created above to the list of services here:
+
+{{{
+FW_CONFIGURATIONS_EXT="sshd apache2 apache2-ssl seattle-nodemanager"
+}}}
+
+Reload the firewall:
+
+{{{
+/etc/init.d/SuSEfirewall2_setup reload
+}}}
+
+Note: you should check `iptables --list` after you reload the firewall to make sure you did it correctly. I'm not a SuSE person and apparently SuSE people think it makes sense to have two different init.d scripts, `/etc/init.d/SuSEfirewall2_init` and `/etc/init.d/SuSEfirewall2_setup`, and running `/etc/init.d/SuSEfirewall2_init reload` instead of `/etc/init.d/SuSEfirewall2_setup reload` will leave you with something other than what you wanted, namely, what appears to be no new inbound connections to any ports.
