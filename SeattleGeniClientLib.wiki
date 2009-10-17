@@ -14,7 +14,7 @@ creating an instance of the client, clientlib WILL throw an exception.
 === Usage ===
 1) In python, simply import the geni_xmlrpc_clientlib.[[BR]]
 2) Create an instance (or multiple instances, if desired) of the client.[[BR]]
-   When instantiating a 'client' object, the following parameters are available:[[BR]]''username'': Your username. (Must specify)[[BR]]''authstring'': Your password. (Must specify)[[BR]]''xmlrpc_url'': The url where the SeattleGENI XMLRPC server is located. (Defaults to the correct location)[[BR]]''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do NOT use allow_ssl_insecure=True in production code.''' (Defaults to False)
+   When instantiating a 'client' object, the following parameters are available:[[BR]]''username'': Your username. (Must specify)[[BR]]''api_key'': Your api_key. (Must specify)[[BR]]''xmlrpc_url'': The url where the SeattleGENI XMLRPC server is located. (Defaults to the correct location)[[BR]]''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do NOT use allow_ssl_insecure=True in production code.''' (Defaults to False)
 3) Once the client has been created, simply invoke the client methods.
 
 [[BR]]
@@ -24,7 +24,7 @@ Here is an example of how to use the SeattleGENI XML-RPC Client Library, in pyth
 import geni_xmlrpc_clientlib
 
 def main():
-  c = geni_xmlrpc_clientlib.client(username="bob", authstring="123", allow_ssl_insecure=True)
+  c = geni_xmlrpc_clientlib.client(username="bob", api_key="SAMPLEAPIKEY1234", allow_ssl_insecure=True)
   
   # gets account info
   print c.get_account_info()
