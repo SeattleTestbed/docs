@@ -40,6 +40,9 @@ We use the following logrotate configuration (found in `/etc/logrotate.d/seattle
   # The seattlegeni scripts don't know how to start a new log file, so we have
   # logrotate make a copy of the log files and truncate the original ones.
   copytruncate
+  # move the compressed files into the 'archived' directory that's in the same
+  # directory as the log files themselves.
+  olddir archived
 }
 
 
