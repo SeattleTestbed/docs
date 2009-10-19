@@ -968,7 +968,7 @@ Receives data that was sent by the connected party using send.   Note that this 
      the other side has closed the socket and no more data will arrive.
 
 [[BR]] 
-==== socket.send(bytes) ====
+==== socket.send(message) ====
 ----
 
 Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may block indefinitely.   If the other party closes the connection, send will raise an exception.
