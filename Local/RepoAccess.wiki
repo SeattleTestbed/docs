@@ -21,6 +21,18 @@ If you want to perform the checkout as another user, say user BOB, then you can 
 
 All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in this prior to making any commits. You can use the dos2unix tool on seattle.cs to convert DOS formatted files.
 
+''Note to sysadmins:'' svn+ssh relies on /usr/bin/svnserve. However, to make it so that users don't need to specify the svn repository root on the server, we have to modify arguments to svnserve. The following wrapper script lives at /usr/local/bin/svnserve:
+
+{{{
+#!/bin/bash
+
+# This wrapper lives in /usr/local/bin so it will come before the actual binary at /usr/bin/svnserve
+# in people's paths. We don't replace the real binary with a wrapper (renaming the real binary)
+# because then it will get clobbered anytime svn is updated.
+
+umask 002
+/usr/bin/svnserve --root=/var/local/svn --tunnel
+}}}
 
 = Quick Guide to SVN =
 
