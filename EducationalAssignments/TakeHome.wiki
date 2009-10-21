@@ -188,7 +188,7 @@ You'll see a message noting that the program has stopped on your nodes.   To che
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels.   To figure out which port you should use, log into the Seattle GENI website and on the User Info page, look to see what port number it indicates.   You should write this down as you'll need this value repeatedly.
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels.   To figure out which port you should use, log into the Seattle GENI website and on the Profile page, look to see what port number it indicates.   You should write this down as you'll need this value repeatedly.
 
 We'll measure connectivity by sending UDP pings from a target computer to a destination.  At the " username@LAN !> " prompt type
 
@@ -277,7 +277,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all nodes".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Go!".   Now you'll see that ten computers around the world have been added for you to use.
+Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all nodes".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the Quick Start tab, click on WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
 
 Back in the shell, type
 
