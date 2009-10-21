@@ -1,0 +1,20 @@
+= Building the Demokit =
+
+There's currently no automated way to build the demokit. There's an open ticket for this (#119) and there is a broken and outdated script to do this at dist/executable_setup.py.
+
+For now, to add or replace files, just download the existing demokit from seattlegeni.cs, unzip it, add/replace files, zip it back up, and put it back in place on seattlegeni.cs at /var/www/dist/demokit.zip. It would probably be a good idea to backup the old one with an insightful filename, e.g. demokit.20091021.zip.
+
+That is:
+
+{{{
+unzip demokit.zip
+cd demokit
+[make changes]
+cd ..
+mv demokit.zip.bak
+zip -r demokit demokit
+}}}
+
+That last step will create the new demokit.zip.
+
+You can list files in the demokit with `unzip -l demokit.zip` to see if you added it correctly, but better would probably be to unzip both the old one and the new one side by side and do a `diff r demokit.old/ demokit.new/` to make sure you only changed what you intended to change. And, of course, download it from the seattlegeni site (http://seattlegeni.cs.washington.edu/dist/demokit.zip) and unzip it once you've put it in place just to be sure.
