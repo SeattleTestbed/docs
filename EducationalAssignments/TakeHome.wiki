@@ -431,12 +431,13 @@ You should see the IP of at least one WAN node. Write down the IP address of the
 username@ !> on %WANnode run udppingserver.py GENIport
 }}}
 
-Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace ''WANIP'' with the WAN node's IP address and GENIport with your port.   
-(If you are running this on a remote system, you should replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.)
+Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace ''WANIP'' with the WAN node's IP address and GENIport with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
+
 
 {{{
 python repy.py restrictions.allowallports udpping.py WANIP GENIport
 }}}
+
 
 
 Now look at the log of the WAN computer.   
@@ -455,7 +456,7 @@ Now try to ping in the opposite direction.  First, stop the pingserver on the WA
 username@ !> on %WANnode stop
 }}}
 
-Then start the ping server on the local computer by running the following command from the terminal window (not in seash!).   (Once again, if you are running this on a remote system, you should replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.)
+Then start the ping server on the local computer by running the following command from the terminal window (not in seash!).   Once again, if you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
 
 
 {{{
