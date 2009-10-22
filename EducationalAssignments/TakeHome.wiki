@@ -25,7 +25,9 @@ Now click on the Profile tab, and download the toolkit linked from this page.   
 
  * On Mac / Linux, open a terminal window and change to the directory where you downloaded the toolkit.   
 
-Then type "python seash.py" or "seash.py" (if these fail, you may need to [http://www.python.org download python]).   You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+Then type "python seash.py" or "seash.py".   If these fail, you may need to [http://www.python.org download python].   On Windows systems, you may also need to set your environment path to point to the copy of python you installed by clicking on Control Panel--> Systems--> Advanced Settings-->Environment Variables.   
+
+You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
 == Step 3 : Browsing your resources ==
