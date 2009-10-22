@@ -197,7 +197,7 @@ We'll measure connectivity by sending UDP pings from a target computer to a dest
 username@LAN !> list
 }}}
 
-This will allow you to see the IP of %2.  Now type (replacing GENIport with your port number)
+This will allow you to see the IP of %2.  Now type (replacing ''GENIport'' with your port number)
 
 {{{
 #!python
