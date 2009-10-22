@@ -188,7 +188,9 @@ You'll see a message noting that the program has stopped on your nodes.   To che
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels.   To figure out which port you should use, log into the Seattle GENI website and on the Profile page, look to see what port number it indicates.   You should write this down as you'll need this value repeatedly.
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels. 
+
+To figure out which port you should use, log into the Seattle GENI website and on the Profile page, look to see what port number it indicates.   '''You should write down your port number as you'll need this value repeatedly.'''
 
 We'll measure connectivity by sending UDP pings from a target computer to a destination.  At the " username@LAN !> " prompt type
 
