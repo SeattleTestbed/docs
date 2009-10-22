@@ -180,7 +180,9 @@ The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has alread
 username@LAN !> stop
 }}}
 
-You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).  
+You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).   You may also have some vessels that have not been used (Fresh) or are in an error state (Stale).  
+
+It is common when using lots of distributed computers to have a few of them not function correctly, so it is normal to have a few in the wrong state after a command.   You can usually continue the series of operations and ignore the failed vessels or else retry the operation on the failed vessels.
 
 [[BR]]
 = Measuring Connectivity =
