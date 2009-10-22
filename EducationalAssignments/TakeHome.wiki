@@ -31,7 +31,7 @@ Then type "python seash.py" or "seash.py" (if these fail, you may need to [http:
 == Step 3 : Browsing your resources ==
 ----
 
-Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing username with the user name you used to log into the Seattle GENI website)'''
+Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing ''username'' with the user name you used to log into the Seattle GENI website)'''
 
 {{{
 #!python
@@ -400,7 +400,7 @@ You also will need to download the toolkit and keys like you previously did in S
 
 Alternatively, if you can't run Seattle on your home computer, you can also obtain a computer using Seattle GENI.   If you use Seattle GENI, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
 
-Once you have Seattle installed locally or have obtained a NAT node using Seattle GENI, run the seash shell from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing username with your GENI user name)
+Once you have Seattle installed locally or have obtained a NAT node using Seattle GENI, run the seash shell from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
 
 {{{
 #!python
