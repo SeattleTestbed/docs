@@ -249,17 +249,12 @@ Instead of manually pinging between each of the computers in the LAN group, you 
 
 {{{
 #!python
-username@LAN !> show ip
+username@LAN !> show ip to neighboriplist.txt
 }}}
 
-and then write the IP addresses into a file called "neighboriplist.txt" on your computer.   The IP addresses should be written one line at a time like this:
-{{{
-1.2.3.4
-100.200.100.1
-123.45.67.89
-}}}
+This will write the IP addresses into a file called "neighboriplist.txt" on your computer.  
 
-Save the file to the directory where seash.py is running.   Now type
+Now type
 
 {{{
 #!python
@@ -311,10 +306,10 @@ and the prompt should now say "username@WAN !>".  Now let's examine the all pair
 
 {{{
 #!python
-username@WAN !> show ip
+username@WAN !> show ip to neighboriplist.txt
 }}}
 
-and as before write the IP addresses you see to a local file called 'neighboriplist.txt'. Then type
+and as before this will write the IP addresses to a local file called 'neighboriplist.txt'. Then type
 
 {{{
 #!python
