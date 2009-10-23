@@ -261,7 +261,7 @@ Now type
 username@LAN !> upload neighboriplist.txt
 }}}
 
-This adds the file with nodes to ping to the all the computers in the LAN group. Now type (substituting your port for ''GENIport'')
+This adds the file with nodes to ping to all of the computers in the LAN group. Now type (substituting your port for ''GENIport'')
 
 {{{
 #!python
