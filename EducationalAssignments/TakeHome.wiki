@@ -302,7 +302,15 @@ If you have only a few nodes, wait a few minutes, then do {{{browse}}} and {{{ad
 username@LAN !> on WAN
 }}}
 
-and the prompt should now say "username@WAN !>".  Now let's examine the all pairs connectivity again. First type
+and the prompt should now say "username@WAN !>".  If you are curious, you can find out where the computers are located by typing:
+
+{{{
+#!python
+username@WAN !> show locations
+}}}
+
+
+Now let's examine the all pairs connectivity again. First type
 
 {{{
 #!python
