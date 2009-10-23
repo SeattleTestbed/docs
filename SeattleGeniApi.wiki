@@ -6,46 +6,38 @@ For examples on how to use XML-RPC with SeattleGENI, check out the [https://seat
 
 [[BR]]
 === Authentication ===
-In order to talk with SeattleGENI over XML-RPC, authentication is required in the form of an authentication structure.[[BR]]
+In order to talk with SeattleGENI over XML-RPC, authentication is required.[[BR]]
 The authentication structure takes the form of the following dictionary:
-   ''{'username':'my_username', 'authstring':'my_password'}''
+   ''{'username':'YOUR_USERNAME', 'api_key':'YOUR_API_KEY'}''
 
-Both ''my_username'' and ''my_password'' are the same login details used when logging into the SeattleGENI website.[[BR]]
-To check if your credentials are valid, use the ''authcheck'' API call.[[BR]]
+The value of ''YOUR_USERNAME'' is the same username you use to login to the SeattleGENI website. The value of ''YOUR_API_KEY'' is the API key you can find on SeattleGENI when viewing the profile page for your account.[[BR]]
 [[BR]]
-'''This structure is expected in every XML-RPC API call, as the ''auth'' parameter.[[BR]]'''
-All XML-RPC functions will throw an XMLRPC Fault Code 101, ''GENIAuthError'' if authentication fails.
+'''This structure is expected as the first argument in every XML-RPC API call.[[BR]]'''
+All XML-RPC functions will return an XMLRPC Fault Code 101 if authentication fails.
 
 [[BR]]
 
 === XML-RPC Faults ===
 In the event of an exception/error, an XML-RPC Fault will be sent to the client.[[BR]]
-The fault object contains information about the error that occurred, and clients can catch these faults as they would exceptions in standard programs. The fault itself contains a faultCode, indicating the type of fault, and a faultString, containing more info about the error.[[BR]]
-More information about XML-RPC Faults is available at http://docs.python.org/library/xmlrpclib.html#fault-objects [[BR]]
-For examples on handling SeattleGENI XML-RPC Faults, please take a look at our [https://seattle.cs.washington.edu/wiki/SeattleGeniClientLib XML-RPC client.]
-
-[[BR]]
-
-=== authcheck(auth) ===
-----
-Checks if the credentials in the given authentication structure are valid.[[BR]]
-[[BR]]
-Returns '''0''' if the credentials are valid, '''-1''' otherwise.
+The fault code and message contains information about the error that occurred.[[BR]]
 
 [[BR]]
 === acquire_resources(auth, rspec) ===
 ----
 
-Given a resource specification as a dict (rspec), this function acquires resources for the user. There are currently three types of rspecs defined:
+Given a resource specification as a dict (rspec), this function acquires resources for the user. There are currently four types of rspecs defined:
 
 ''{'rspec_type':'lan', 'number_of_nodes':N}''[[BR]]  
-Returns N nodes all with the same starting three octects of the IP address.[[BR]]
+Acquire N vessels on nodes all with the same starting three octects of the IP address.[[BR]]
 
 ''{'rspec_type':'wan', 'number_of_nodes':N}''[[BR]] 
-Returns N nodes all with different starting three octects of the IP address.[[BR]]
+Acquire N vessels on nodes all with different starting three octects of the IP address.[[BR]]
+
+''{'rspec_type':'nat', 'number_of_nodes':N}''[[BR]] 
+Acquire N vessels on NAT nodes (nodes which are communicated with through a NAT forwarder).[[BR]]
 
 ''{'rspec_type':'random', 'number_of_nodes':N}''[[BR]]
-Returns N nodes.[[BR]]
+Returns N vessels on any types of nodes, including a combination of different types of nodes.[[BR]]
 
 
 Returns a list of dictionaries, where each dictionary contains information about an acquired vessel. The dictionaries are of the form:
@@ -57,46 +49,61 @@ Returns a list of dictionaries, where each dictionary contains information about
       ''handle'' has an undefined type but is used in future calls to release_resources. ''Make no assumptions about the type of this item.''[[BR]]
       ''expires_in_seconds'' is an integer representing the number of seconds until this vessel's acquisition will expire.[[BR]]
 
-Raises an XMLRPC Fault Code 1, with the string ''!TypeError'' present in the faultString, if the given values are of incorrect type.[[BR]]
-Raises an XMLRPC Fault Code 1, with the string ''!ValueError'' present in the faultString, if '''rspec''' is not of an understood type.[[BR]]
-Raises an XMLRPC Fault Code 100, ''GENIOpError'' if the operation fails due to some GENI internal error.[[BR]]
-Raises an XMLRPC Fault Code 102, ''GENINotEnoughCredits'' if the user doesn't have enough credits to acquire '''num''' vessels.[[BR]]
-Raises an XMLRPC Fault Code 103, ''GENINoAvailNodes'' if there are no available nodes to acquire.[[BR]]
-
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+Raises an XMLRPC Fault Code 103 if the account doesn't have enough credits available to acquire the requested vessels.[[BR]]
+Raises an XMLRPC Fault Code 105 if SeattleGENI could not fulfill the request (e.g. there are not enough vessels of the requested type available).[[BR]]
 
 [[BR]]
 === release_resources(auth, list_of_handles) ===
 ----
 
-Release resources associated with an account.  It releases vessels based on the handles within the  '''list_of_handles''' list.
+Release resources (vessels) previously acquired by the account.  The handles in '''list_of_handles''' indicate the vessels to be released.
 
-Raises an XMLRPC Fault Code 1, with the string ''!TypeError'' present in the faultString, if the '''list_of_handles''' are of invalid form.[[BR]]
-Raises an XMLRPC Fault Code 100, ''GENIOpError'' if the operation fails due to some GENI internal error.[[BR]]
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+
+[[BR]]
+=== renew_resources(auth, list_of_handles) ===
+----
+
+Renew resources (vessels) previously acquired by the account.  The handles in '''list_of_handles''' indicate the vessels to be renewed. Vessels are renewed for 7 days.
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+Raises an XMLRPC Fault Code 103 if the account doesn't have enough credits available to renew any of its acquired vessels. This can happen, for example, if the account acquired vessels based on donations that have since gone offline resulting in the account being over its vessel credit limit.[[BR]]
 
 [[BR]]
 === get_resource_info(auth) ===
 ----
 
-Returns a list of resources currently associated with the user.
+Returns a list of resources (vessels) currently acquired by the user.
 
 The return list is of the same form as returned by acquire_resources.
 
-
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 [[BR]]
 === get_account_info(auth) ===
 ----
 
-Returns a dict of account information for the account. This includes the user's port number, name, URL for installers, if the private key exists, total vessels allowed, and the user's affiliation.
+Returns a dictionary of account information for the account. This includes the user's port number, name, total number vessels that can be acquired, and the user's affiliation.
 
 Returns a dictionary of the form:
       '''{'user_port':user_port, 'user_name':user_name, 'urlinstaller':urlinstaller, 'private_key_exists':private_key_exists, 'max_vessel':max_vessel, 'user_affiliation':user_affiliation}'''[[BR]]
       ''user_port'' is an integer, indicating a port number that by default will be available for TCP / UDP on all of the user's vessels.[[BR]]
       ''user_name'' is a string containing the username.[[BR]]
-      ''urlinstaller'' is a string, and points to the URL where the user's installers may be downloaded.[[BR]]
-      ''private_key_exists'' is a boolean, determining whether the private key exists in the database for this user. [[BR]]
       ''max_vessel'' is an integer, indicating the total vessels allowed.   This may vary as donations are credited to the user or go offline.   [[BR]]
       ''user_affiliation'' is a string and represents the affiliation provided by the user when registering for an account.   This field is not validated so should not be trusted.[[BR]]
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 [[BR]]
 === get_public_key(auth) ===
@@ -104,17 +111,6 @@ Returns a dictionary of the form:
 
 Returns the user's public key as a string.
 
-
-[[BR]]
-=== get_private_key(auth) ===
-----
-
-Returns the user's private key as a string. 
-
-
-[[BR]]
-=== delete_private_key(auth) ===
-----
-Removes the user's private key from the server.
-
-Raises an XMLRPC Fault Code 104, ''GENIKeyAlreadyRemoved'' if the key was already removed.
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
