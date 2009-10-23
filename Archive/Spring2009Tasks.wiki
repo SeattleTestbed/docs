@@ -6,7 +6,7 @@
 ----
 
 [[BR]]
-== NAT traversal in production   --- Justin      ('''Eric''')   ---   3 tokens ==
+== ~~NAT traversal in production   --- Justin      ('''Eric''')   ---   3 tokens~~ == 
 ----
 (Tickets #227, #228, #274, #299, Ticket #228 related to "remote deployment repy")
 
@@ -64,7 +64,7 @@ Tickets #254, #165, #189, etc
 The GENI portal has numerous outstanding tickets having to do with everything from user-interface bugs (#254) to complex resource and database management issues (#165, #278). Additionally, most of the GENI code is untested and requires thorough integration tests to be written to test that the database is always in a consistent state, and is modified accordingly. The testing part of this task will involve understanding the XMLRPC web backend (see above).
 
 [[BR]]
-== Custom installer creator port to Django --- Ivan ('''Sean''') --- 1 tokens ==
+== ~~ Custom installer creator port to Django --- Ivan ('''Sean''') --- 1 tokens ~~ ==
 ----
 
 Tickets #312, #76, #78, #90, #91, #92, #93, #73 ..
@@ -73,7 +73,7 @@ The current custom installer creator is written in PHP, and has numerous problem
 
 
 [[BR]]
-== Remote installer builder service with XMLRPC interface --- Ivan ---  2 tokens ==
+== ~~ Remote installer builder service with XMLRPC interface --- Ivan ---  2 tokens  ~~ ==
 ----
 
 No ticket
@@ -94,7 +94,7 @@ Right now, stop_seattle does the proper thing and calls seattlestopper.py, but s
 
 
 [[BR]]
-== Software updater integration test   ---       ---   1 token   ==
+== ~~ Software updater integration test   ---       ---   1 token  ~~ ==
 ----
 (No ticket)
 
@@ -186,7 +186,7 @@ Build a test framework that allows us to easily run our code (including whitebox
 Fix bugs as they arise with Repy and the node manager.   Requires good overall understanding of the project, attention to detail, and on some occasions requires speed.
 
 [[BR]]
-== Autograder (usable but rigid)   ---   Ivan ('''Jenn''') --- 3 tokens ==
+== ~~ Autograder (usable but rigid)   ---   Ivan ('''Jenn''') --- 3 tokens ~~ ==
 ----
 We want a version of the autograder that is usable by instructors.   It does not need to support instructors uploading NS files or test cases.   It is okay for it only to work with the NS files and test files we ourselves upload.
 
@@ -209,7 +209,7 @@ The bandwidth code right now is specific to client or server, and only allows a 
 
 
 [[BR]]
-== Actually getting 10% (installer updates, determining offcut size)   ---   Justin   ('''Anthony''')     ---   3 tokens  ==
+== ~~ Actually getting 10% (installer updates, determining offcut size)   ---   Justin   ('''Anthony''')     ---   3 tokens  ~~ ==
 ----
 (Tickets #257, #258)
 
@@ -327,14 +327,14 @@ We want a general autograder that allows instructors to upload NS files and / or
 ==   ?   Documentation clean up  ==
 ----
 
-==   ?   Building a small number of services for service composition  ==
+== ~~  ?   Building a small number of services for service composition ~~ ==
 ----
 
-==   ?   Allow ssh keys to be imported to use our RSA routines  --- Justin ('''Anthony''') ==
+== ~~  ?   Allow ssh keys to be imported to use our RSA routines  --- Justin ('''Anthony''') ~~ ==
 ----
 Ticket #393
 
-==   ?   RSA implementation finish up   ---   Justin  ('''Anthony''') ==
+== ~~  ?   RSA implementation finish up   ---   Justin  ('''Anthony''') ~~ ==
 ----
 Ticket #247
 
@@ -359,7 +359,7 @@ The following are startup tasks that are to be assigned to new developers joinin
 ==  ~~  XMLRPC server library repy implementation   ---   Ivan ('''Conrad''') --- squishy 3 tokens ~~ ==
 ----
 
-==    Write a simple repy pickle implementation (with wiki page)   ---   Justin ('''Huy''')   --- squishy 3 tokens  ==
+== ~~   Write a simple repy pickle implementation (with wiki page)   ---   Justin   --- squishy 3 tokens ~~ ==
 ----
 
 ==    Change run_tests.py so that the seattlelib tests can be run using it ---   Justin --- squishy 2 tokens  ==
