@@ -1,0 +1,91 @@
+= Virtual Namespaces =
+
+== Description ==
+
+A virtual namespace is an abstraction around code and a context of execution. A virtual namespace allows for executing code in its own context / namespace.
+The code for each virtual namespace is vetted by a static code safety check, and then is an immutable part of the virtual namespace. The context of the virtual namespace can be freely modified by the namespace itself or by another namespace which has a reference to the namespace.
+
+== API ==
+
+A virtual namespace supports the following:
+
+1.  Constructor
+  * Two primary components, the code and the context.
+  * Code can be given either as a string, or a file name (which is read in as a string)
+  * A custom context can be provided, or the "default" context is provided.
+  * The default context is the stock Repy API.
+
+2. get_code()
+  * Provides a reference to an immutable string which contains the code for the context.
+
+3. get_context()
+  * Provides a reference to a dictionary object which is the context of execution for the namespace.
+
+4. evaluate()
+  * Changes the namespace of execution of the current thread to the target namespace, and evaluates the code in the namespace.
+
+
+== Thread Behavior ==
+
+Each thread of execution can only be in one namespace at a time, but each thread can be executing a different namespace.
+If a namespace creates a thread explicitly (settimer) then the new thread is executing in the same namespace. If a namespace
+uses waitforconn / recvmess and a thread is spawned when a new connection or message arrives, then the newly spawned thread
+will also be in the same namespace.
+
+
+== Examples ==
+
+How to implement "from X import foo":
+{{{
+   # "import" X.py as a module
+   virt = VirtualNamespace(file="X.py")
+   virt.evaluate()
+
+   # Get the applicable context's
+   virt_context = virt.get_context()
+   current_context = get_current_namespace.get_context()
+
+   # Update the current context
+   current_context["foo"] = virt_context["foo"]
+}}}
+
+
+How to modify the behavior of a function in a different namespace:
+{{{
+  # Always raise an exception
+  def error(*args, **kwargs):
+    raise Exception, "Error!"
+
+  # Get a new virtual namespace
+  virt = VirtualNamespace(codeStr)
+  virt_context = virt.get_context()
+  
+  # Change the behavior of settimer in the virtual namespace to raise an exception.
+  virt_context["settimer"] = error
+
+  # Let the virtual namespace run
+  virt.evaluate()
+
+}}}
+
+How to emulate python eval():
+{{{
+  # Code string to evaluate
+  strValue = "result = 123 * 2"
+
+  # Get a new virtual namespace
+  virt = VirtualNamespace(strValue)
+
+  # Evaluate the code
+  virt.evaluate()
+
+  # Extract the value of result
+  virt_context = virt.get_context()
+  result = virt_context["result"]
+
+}}}
+
+
+
+
+
