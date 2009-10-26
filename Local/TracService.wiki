@@ -27,6 +27,9 @@ Our Seattle Trac is installed in /var/local/trac/seattle/
 
 The /var/local/trac/seattle/conf/trac.ini file is the main configuration file for Trac. Modify this file if you want to enable/disable critical options in Trac, such as the title text, the svn repository path, tickets configuration, etc.
 
+2009-10-26: The following two configuration options were enabled to prevent people from accidentally not getting emails from Trac. The result will be a few emails that people don't want, but that's better than missing any.
+  * always_notify_reporter
+  * always_notify_updater
 
 [[BR]]
 == Administration ==
