@@ -111,7 +111,7 @@ if callfunc == "initialize":
   main()
     }}}
 
-  This ensures that the following code is only executed once. Note that if you use the Repy {{{include}}} statement and both include the above if statement, both file's initialize blocks will be executed. 
+  This ensures that the following code is only executed once. Note that if you use the Repy {{{include}}} statement and the above if statement, both files' initialize blocks will be executed. 
 
   Repy scripts are called twice: on entry {{{callfunc}}} is set to "intialize". At exit {{{callfunc}}} is surprisingly enough called "exit".
 
