@@ -86,6 +86,117 @@ How to emulate python eval():
 }}}
 
 
+== Overriding the default API to provide different behavior ==
+
+In this example, we will create 2 virtual namespaces, which call sleep() and then exitall().
+However, we have modified exitall() so that repy will not exit until there are 2 calls to it.
+
+{{{
+
+# How many calls to exitall()
+mycontext["exit_count"] = 0
+
+# Wait for 2 calls before calling exitall()
+def waitforboth():
+  # Increment
+  mycontext["exit_count"] += 1
+
+  # Exit if necessary
+  if mycontext["exit_count"] == 2:
+    print "Exiting!"
+    exitall()
+
+if callfunc == "initialize":
+  # Create two virtual namespaces to call exitall()
+  virt1 = VirtualNamespace("sleep(0.5)\nexitall()")
+  virt2 = VirtualNamespace("sleep(1.0)\nexitall()")
+
+  # Re-map exitall to call waitforboth, then evaluate
+  for virt in [virt1,virt2]:
+    print "Evaluating virtual namespace: " + str(virt)
+    virt.get_context()["exitall"] = waitforboth
+    virt.evaluate()  
+
+  # We should never get here
+  print "Not here!"
+
+}}}
+
+
+So although the new virtual namespaces (virt1, virt2) have a function which looks the same as exitall() provided by repy, its behavior has been changed by the main namespace. This allows for chaining of namespaces that alter and improve behavior, as well as providing functionality such as logging and performance monitoring.
+
+== Currently Executing namespace ==
+
+In the case above, the main namespace altered the behavior of exitall() for the new virtual namespaces it created. In these types of situations, it can be difficult to know which namespace is currently executing. The only function which alters the currently "executing" namespace is VirtualNamespace.evaluate(). Here is an example:
+
+{{{
+
+# Constant value
+VALUE = 3
+
+# Print the current namespace and a constant "VALUE"
+def foo():
+  print VALUE, get_current_namespace()
+
+if callfunc == "initialize":
+  # Call foo(), prints 3 and a memory address (0x500000 for example)
+  foo()
+
+  # Get a virtual namespace
+  virt1 = VirtualNamespace("foo()")
+  virt1.get_context()["foo"] = foo
+
+  # Evaluate virt1, this will call foo()
+  # foo() will print 3 and the memory address of virt1 instead of what was printed before!
+  virt1.evaluate()
+
+  # Call foo(), prints the same thing as the first call to foo()
+  foo()
+}}}
+
+Before evaluating virt1 the function foo() was mapped into the context of virt1. When virt1.evaluate() was called, the namespace of execution switch from the initial namespace to virt1, where foo() was called.
+Since foo() is defined and located in the initial namespace, foo() has access to any globals in that namespace, such as VALUE, which is not defined inside of virt1. After the call to virt1.evaluate() returns the namespace of execution is restored and the output of foo() is the same as it was on the first call. Here is an example output:
+
+{{{
+3 <virtual_namespace.VirtualNamespace object at 0x5d9790>
+3 <virtual_namespace.VirtualNamespace object at 0x5f4590>
+3 <virtual_namespace.VirtualNamespace object at 0x5d9790>
+}}}
+
+== Executing different code in the same context ==
+
+It is possible to execute different code strings while sharing the same context. This might be useful for evaluating dynamic code strings in the current namespace as is done in this example:
+
+{{{
+
+if callfunc == "initialize":
+  # Set RESULT = 1
+  RESULT = 1
+
+  # Get our current context
+  current_context = get_current_namespace().get_context()
+
+  # Create a new namespace in the same context
+  virt1 = VirtualNamespace("RESULT = 5",current_context)
+
+  # Print the result pre and post evaluation
+  print RESULT
+  virt1.evaluate()
+  print RESULT
+
+}}}
+
+The output here is:
+
+{{{
+1
+5
+}}}
+
+In this example, we create a new virtual namespace with a different code string from what is currently executing, but sharing our same context.
+This allows the new namespace to manipulate our globals as its own.
+
+
 
 
 
