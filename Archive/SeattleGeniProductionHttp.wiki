@@ -11,6 +11,11 @@ as some additional configuration information for using SeattleGENI in production
 [[TOC(inline)]]
 ----
 
+== File and Directory Permissions ==
+----
+
+The way we have things setup on seattlegeni and betabox, if you try to access the website before running the other service after you have just deployed then you are likely to get a permissions error of apache not being able to write files in /home/geni/live/seattle. However, this is not a problem if you use the start_seattlegeni_components.sh script because it will start the lockserver and backend before restarting apache, and the result will be that all of the '.repy' files that need to be turned into '_repy.py' will have already been processed, so the website (mod_python running under apache's user) won't try to do that.
+
 == Apache Settings ==
 ----
 
