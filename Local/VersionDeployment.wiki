@@ -8,26 +8,26 @@ Explains how to go about deploying a new version of the code, which consists of 
 [[BR]]
 == Step by Step ==
 ----
- 1. First, we push the release to the blackbox testbed and make sure all is well there before pushing it on the main (seattlegeni) testbed.
-  1. Log in to blackbox (blackbox.cs.washington.edu) as a user who has sudo privileges.
+ 1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattlegeni) testbed.
+  1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
   1. `cd /home/release`
   1. Update to the current svn trunk: `svn up trunk`
   1. Edit the file `trunk/nodemanager/nmmain.py` and change the version to whichever version you're releasing (e.g. `version = "0.1m"`)
   1. At this point, we need to make sure that the only differences between our copy of trunk and what's in svn are the
-     differences of the blackbox software updater key and update url embedded in `trunk/softwareupdater/softwareupdater.py` and the version string in `trunk/nodemanager/nmmain.py`.
+     differences of the betabox software updater key and update url embedded in `trunk/softwareupdater/softwareupdater.py` and the version string in `trunk/nodemanager/nmmain.py`.
     * Check what's different from svn: `svn status trunk`
     * You should see the following as 'M':
       * `trunk/softwareupdater/softwareupdater.py`
       * `trunk/nodemanager/nmmain.py`
     * If you `svn diff` these files, the output should look like [attachment:blackbox-version-push-svn-diff.txt these diffs].
   1. Now, we actually deploy the new version. Still from the `/home/release` directory, do the following (these are separate actions, their order does not matter):
-    * To update the base installers used by seattlegeni on blackbox, run the following:
+    * To update the base installers used by seattlegeni on betabox, run the following:
       * `./rebuild_base_installers_for_seattlegeni.sh VERSION_HERE`
       * [attachment:blackbox-rebuild-base-installers-output.txt example output]
     * To update existing clients (that is, to make the updated files available to clients that are checking the update site), run the following: 
       * `./push_update_to_all_clients.sh`
       * [attachment:blackbox-push-update-output.txt example output]
- 1. Once the launch appears to have gone well on blackbox (all nodes updated, we can acquire and use vessels from blackbox's updated nodes), log on to the main seattle server (seattle.cs.washington.edu).
+ 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use vessels from betabox's updated nodes), log on to the main seattle server (seattle.cs.washington.edu).
   1. Make sure you are logged in as someone who will have full access to the update and base installer directories.
   1. Figure out which public and private keys you will use.
   1. Open trunk/nodemanager/nmmain.py and find where the version constant is set.
