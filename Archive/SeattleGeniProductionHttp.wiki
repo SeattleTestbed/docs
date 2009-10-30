@@ -59,12 +59,12 @@ We use the following logrotate configuration (found in `/etc/logrotate.d/seattle
 ----
 
 To deploy SeattleGENI code from SVN trunk into production:
-  1. Log in to either seattlegeni.cs or blackbox.cs (depending on which installation you are updating).
+  1. Log in to either seattlegeni.cs or betabox.cs (depending on which installation you are updating).
   1. Get a root shell: `sudo -i`
   1. Open the screen running as root: `screen -r`
   1. There should be only one session in the screen and you will find yourself looking at a running instance of `start_seattlegeni_components.sh` with output that looks like this:
 {{{
-root@blackbox:~# /home/geni/start_seattlegeni_components.sh
+root@betabox:~# /home/geni/start_seattlegeni_components.sh
 Starting lockserver.
 Starting backend.
 Gracefully restarting apache.
@@ -77,7 +77,7 @@ All components started. Kill this process (CTRL-C or 'kill 24038') to stop all s
   1. Press CTRL-C and wait for `start_seattlegeni_components.sh` to exit (you will see "Shutting down seattlegeni components." a few times, that's OK).
   1. Run the command `/home/geni/update_seattlegeni_from_trunk.sh`. Answer "y" when it asks. It will look like this:
 {{{
-root@blackbox:~# /home/geni/update_seattlegeni_from_trunk.sh
+root@betabox:~# /home/geni/update_seattlegeni_from_trunk.sh
 A    trunk/dist/rebuild_base_installers_for_seattlegeni.sh
 U    trunk/dist/update_software.py
 A    trunk/dist/push_update_to_all_clients.sh
@@ -98,7 +98,7 @@ rest of the info you'll need to get things running.
 }}}
   1. Now run `/home/geni/start_seattlegeni_components.sh`. It will look like this (just like you saw when you connected to the screen session):
 {{{
-root@blackbox:~# /home/geni/start_seattlegeni_components.sh
+root@betabox:~# /home/geni/start_seattlegeni_components.sh
 Starting lockserver.
 Starting backend.
 Gracefully restarting apache.
