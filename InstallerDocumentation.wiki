@@ -45,3 +45,8 @@ Below is a step-by-step explanation of exactly what the installer does: [[BR]]
      * Move the '''start_seattle_shortcut.bat''' batch file to the Startup folder. This batch file was created to be specifically placed in the Startup folder in case adding to the Windows Registry failed
    * Generate the keys that will be used by the Node Manager
    * Start seattle
+[[BR]]
+[[BR]]
+
+== WindowsCE Installer ==
+The WindowsCE installer is currently not functional.  There is a basic framework currently in the seattle installer for WindowsCE which may or may not work if a WindowsCE install were attempted.  This framework would need to be thoroughly examined and tested before advertising a WindowsCE installer for seattle.
