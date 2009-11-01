@@ -550,8 +550,6 @@ Reads multiple lines from the file. If size is not ommitted and positive, stops 
 
 Set the file’s current position, like stdio‘s fseek().
 
-(From the Python documentation) Note that if the file is opened for appending (mode 'a' or 'a+'), any seek() operations will be undone at the next write. If the file is only opened for writing in append mode (mode 'a'), this method is essentially a no-op, but it remains useful for files opened in append mode with reading enabled (mode 'a+'). If the file is opened in text mode (without 'b'), only offsets returned by tell() are legal. Use of other offsets causes undefined behavior.
-
  * Doc string:
 
    <Purpose>
