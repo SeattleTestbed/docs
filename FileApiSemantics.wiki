@@ -424,6 +424,72 @@ for i in xrange(0, len(expected2)):
 
 ----
 [[BR]]
+== fobj.seek(offset, whence=0) ==
+----
+
+=== Interacts With: ===
+
+fobj.close()
+fobj.next()
+fobj.read(size)
+fobj.readline(size)
+fobj.write(data)
+fobj.writelines(lines)
+
+=== Argument Semantics: ===
+
+Offset specifies how far to seek into the file. The optional argument whence specifies where to seek from; 0 is absolute position in the file, 1 is seek relative to the current position, and 2 is seek relative to the end of the file.
+
+=== Behavioral Semantics: ===
+
+seek() adjusts the position in the file where the next read/write will occur.
+
+1
+
+Action: User calls seek() on a closed file.
+
+Result: ValueError is raised.
+
+Test Snippet:
+
+{{{
+fobj = open(filename, 'rb')
+fobj.close()
+try:
+  fobj.seek(0)
+except ValueError:
+  pass
+}}}
+
+2
+
+Action: User calls seek() with an offset outside the bounds of the file.
+
+Result: Undefined behavior! Fun! (On POSIX, I think the call probably just fails, but the man/info pages don't say.)
+
+Test Snippet:
+
+{{{
+???
+}}}
+
+3
+
+Action: User calls seek() with a positive size argument.
+
+Result: The next write()/read() call happens at this location. Note: there is currently no atomic "{read,write} at position X" method; you'll need to do your own locking if you're writing to specific locations in the file from multiple threads. This will be addressed in the future API changes.
+
+Test Snippet:
+
+{{{
+f = open("filename", "w+b")
+f.write("abcd")
+f.seek(1)
+assert f.read() == 'bcd'
+}}}
+
+----
+[[BR]]
 == fobj.write(data) ==
 ----
 
