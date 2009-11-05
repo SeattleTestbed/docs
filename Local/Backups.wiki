@@ -1,6 +1,6 @@
 = Backups of Server Data =
 
-This describes the current state of our backups. There's an open ticket for backups: #26
+This describes the current state of our backups. There's an open ticket for backups: #267
 
 If anything looks incomplete, missing, or wrong, then it probably is and assistance/reminders/criticism is welcome.
 
