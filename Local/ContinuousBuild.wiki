@@ -88,4 +88,4 @@ The most noteworthy issue for the setup on testbed-freebsd is that bsd systems d
 export PATH=/home/continuousbuild/bin:$PATH
 }}}
 
-We also don't bother running seattlegeni tests here, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh'` in trunk/continuousbuild/config.py.
+We also don't bother running seattlegeni tests here, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
