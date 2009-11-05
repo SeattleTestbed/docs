@@ -33,6 +33,16 @@ The svn_backup.sh script uses svn-hot-backup (from the Ubuntu package subversion
 
 The scp_backups_to_other_system.sh scp's to seattlegeni.cs the latest trac and svn backups. Currently, only a single copy of the backups are kept on seattlegeni.cs at a time.
 
+Current backup-related entries in root's crontab:
+{{{
+### svn_backup.sh: Friday night svn backup
+20      0       *       *       6       /backups/scripts/svn_backup.sh
+### trac_backup.sh: Friday night trac backup
+0       1       *       *       6       /backups/scripts/trac_backup.sh
+### scp_backups_to_other_system.sh: Saturday night scp'ing of backups to another system.
+0       2       *       *       0       /backups/scripts/scp_backups_to_other_system.sh
+}}}
+
 == seattlegeni.cs ==
 
 Contents of /backups:
@@ -50,6 +60,16 @@ The tar_geni_home_dir.sh script runs weekly.
 
 Backups are scp'd to seattle.cs. The scp'd files are the last 7 days of mysql database dumps and the latest tar of the geni home dir.
 
+Current backup-related entries in root's crontab:
+{{{
+### automysqlbackup.sh: nightly backup of all mysql databases
+0       0       *       *       *       /backups/scripts/automysqlbackup.sh
+### tar-geni-home-dir.sh: Sunday night tar'ing up of the /home/geni directory
+20       0       *       *       6       /backups/scripts/tar_geni_home_dir.sh
+### scp_backups_to_other_system.sh: Saturday night scp'ing of backups to another system.
+0       1       *       *       0       /backups/scripts/scp_backups_to_other_system.sh
+}}}
+
 == betabox.cs ==
 
 Contents of /backups:
@@ -66,3 +86,13 @@ MySQL backups on each system are done with [http://sourceforge.net/projects/auto
 The tar_geni_home_dir.sh script runs weekly.
 
 Backups are scp'd to seattlegeni.cs. The scp'd files are the last 7 days of mysql database dumps and the latest tar of the geni home dir.
+
+Current backup-related entries in root's crontab:
+{{{
+### automysqlbackup.sh: nightly backup of all mysql databases
+0       0       *       *       *       /backups/scripts/automysqlbackup.sh
+### tar-geni-home-dir.sh: Friday night tar'ing up of the /home/geni directory
+20       0       *       *       6       /backups/scripts/tar_geni_home_dir.sh
+### scp_backups_to_other_system.sh: Saturday night scp'ing of backups to another system.
+0       1       *       *       0       /backups/scripts/scp_backups_to_other_system.sh
+}}}
