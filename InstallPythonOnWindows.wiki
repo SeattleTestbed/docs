@@ -19,7 +19,8 @@ To tell your computer where to look to find the Python program you just installe
  * Step 1: Go to the Control Panel (usually located right in the Start menu, or in Start-->Settings), click on System, click on the tab "Advanced", click on the button "Environment Variables"  Control Panel--> System--> Advanced--> Environment Variables
  * Step 2: Under the section titled "System variables," find the line with PATH in the Variable column, then click "Edit"  '''Note:''' If you are not able to edit this line, then follow Step 2.a. Otherwise, proceed to Step 3.
    * Step 2.a: '''ONLY FOLLOW THIS STEP IF YOU WERE UNABLE TO EDIT THE LINE CONTAINING "PATH" IN THE SECTION TITLED "System variables":''' Under the section titled "User variables", click "New". In "Variable name," type PATH in all capital letters. Do not close that window yet, and proceed to Step 3.
- * Step 3: Under "Variable value," add a semicolon to the end of the entry there, then add the full path to the Python26 folder you installed. This will most likely look like this (make sure not to include a period between 2.6 unless it appears in the folder name): C:\Python26\   Click "OK"
+ * Step 3: Under "Variable value," add a semicolon to the end of the entry there, then add the full path to the Python26 folder you installed. This will most likely look like this (make sure not to include a period between 2.6 unless it appears in the folder name): C:\Python26\
+ * Step 4: Click "OK"
 [[BR]]
 
 '''YOU SHOULD NOW BE READY TO RUN PYTHON PROGRAMS ON YOUR COMPUTER'''
