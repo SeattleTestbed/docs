@@ -1,0 +1,24 @@
+= Set Up Python on Windows =
+[[BR]]
+
+== Check That Python Is Already Installed ==
+
+ To check if Python is already installed, go the the Start Menu, then Program Files.  If Python2.5 or Python2.6 exists there, then you must make sure your Environment Variable PATH is set for Python (skip to '''Set Environment Variable PATH''' below).  If you find a different version of Python there (for example, Python3.1), then you must download Python2.6 and work out of the folder in which you install Python2.6 (that means putting all files downloaded through this assignment into that folder -- make sure the files are not in a subfolder!) since this assignment cannot work with any other version of Python (go to '''Download and Install Python2.6''' below, but skip the '''Set Environment Variable PATH''' section).  Lastly, if you do not see Python in the Program Files menu at all, then perform the actions in both '''Download and Install Python2.6''' and '''Set Environment Variable PATH''' below.
+
+
+=== Download and Install Python2.6 ===
+''Downloading and installing Python2.6 is safe and will not harm your computer.''
+
+ * Step 1: Go to the official Python website [http://www.python.org/download/releases/2.6.4/ here] to download Python2.6.4.  On the Python webpage, download the appropriate Windows installer for your computer (usually "Windows x86 MSI Installer") under the web page heading '''Download'''.
+ * Step 2: Install Python2.6 by double clicking the installer you just downloaded.  Walk through the simple installation instructions in the window that pops up.
+
+
+=== Set Environment Variable PATH ===
+To tell your computer where to look to find the Python program you just installed, you must set what is called the Environment Variable PATH.  Following the steps below to do so:
+
+ * Step 1: Go to the Control Panel (usually located right in the Start menu), click on System, click on the tab "Advanced", click on the button "Environment Variables"  Control Panel--> System--> Advanced--> Environment Variables
+ * Step 2: Find the line with PATH in the Variable column, then click "Edit"
+ * Step 3: Under "Variable value," add a semicolon to the end of the entry there, then add the full path to the python.exe file in the Python2.6 folder you installed (this will most likely look like this: C:\Python2.6\python )
+[[BR]]
+
+'''YOU SHOULD NOW BE READY TO RUN PYTHON PROGRAMS ON YOUR COMPUTER'''
