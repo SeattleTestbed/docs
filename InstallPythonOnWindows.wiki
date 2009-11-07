@@ -1,7 +1,7 @@
 = Set Up Python on Windows =
 [[BR]]
 
-== Find out If Python Is Already Installed ==
+== Find Out If Python Is Already Installed ==
 
  To check if Python is already installed, go the the Start menu, then Programs.  If Python2.5 or Python2.6 exists there, then you must make sure your Environment Variable PATH is set for Python (skip to '''Set Environment Variable PATH''' below).  If you find a different version of Python there (for example, Python3.1), then you must download Python2.6 and work out of the folder in which you install Python2.6 (that means putting all files downloaded through this assignment into that folder -- make sure the files are not in a sub-folder!) since this assignment cannot work with any other version of Python (go to '''Download and Install Python2.6''' below, but skip the '''Set Environment Variable PATH''' section).  Lastly, if you do not see Python in the Program Files menu at all, then perform the actions in both '''Download and Install Python2.6''' and '''Set Environment Variable PATH''' below.
 
