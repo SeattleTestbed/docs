@@ -4,6 +4,15 @@ The purpose of this assignment is to illustrate several important networking con
 
 This assignment consists of 11 steps and should take between 30-120 minutes to complete.   Let's begin!
 
+'''NOTE WINDOWS USERS:'''
+You must have Python2.5 or Python2.6, the programming language, installed on your computer in order to complete this assignment.  To check if Python is already installed, go the the Start Menu, then Program Files.  If Python2.5 or Python2.6 exists there, then you must make sure your Environment Variable PATH is set for Python (skip to '''Set Environment Variable PATH''' below).  If you find a different version of Python there (for example, Python3.1), then you must download Python2.6 and work out of the folder in which you install Python2.6 (that means putting all files downloaded through this assignment into that folder -- make sure the files are not in a subfolder!) since this assignment cannot work with any other version of Python (go to '''Download and Install Python2.6''' below, but skip the '''Set Environment Variable PATH''' section).  Lastly, if you do not see Python in the Program Files menu at all, then perform the actions in both '''Download and Install Python2.6''' and '''Set Environment Variable PATH''' below.
+
+__'''WINDOWS USERS: Download and Install Python2.6'''__
+
+
+__'''WINDOWS USERS: Set Environment Variable PATH'''__
+
+
 ----
 [[TOC(inline)]]
 ----
