@@ -7,14 +7,19 @@
 [[BR]]
 == Running Locally ==
 ----
+Repy and the unit tests cannot be run straight out of svn.   Please create a new directory which will store the runnable copy of the files (if you use an existing directory, the contents will be erased).   
+
 To run the repy unit tests locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
 
 {{{
 python preparetest.py -t /path/to/test/directory
 cd /path/to/test/directory
-python run_tests.py
 }}}
 
+This will set up the directory with the appropriate files.   To run the tests, type:
+{{{
+python run_tests.py
+}}}
 This will start all of the repy unit tests running, and will output which tests pass and fail, and give failure details at the end for the ones that do fail.
 
 [[BR]]
