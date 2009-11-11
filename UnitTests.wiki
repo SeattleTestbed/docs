@@ -8,8 +8,9 @@
 [[BR]]
 == Overview ==
 ----
-Seattle consists of several different components, the Repy VM (which executes programs), the node manager (which accepts incoming connections), etc.   These can be tested separately using different commands.
+Seattle consists of several different components including, the Repy VM (which executes programs), the node manager (which accepts incoming connections), Seattle standard libraries, and software updater.   There is a separate wiki page that describes how to run the [wiki:UpdaterUnitTests software updater unit tests].  There currently isn't a script that runs all of the unit tests for the Seattle standard libraries (but this is under development).
 
+There are also integration tests, tests for SeattlGENI, and similar other tests which are not covered here.
 
 
 [[BR]]
