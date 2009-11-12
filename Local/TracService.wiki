@@ -1,6 +1,6 @@
 = Trac Service =
 
-Seattle runs Trac v11.1. This page describes how to install Trac, how to configure it, what plugins our Trac installation includes, etc.
+Seattle runs Trac v11.1. This page describes how to install Trac, how to configure it, what plugins our Trac installation includes, etc. Finally it shows how to upgrade the Trac service to the latest version.
 
 ----
 [[TOC(inline)]]
@@ -12,12 +12,28 @@ Seattle runs Trac v11.1. This page describes how to install Trac, how to configu
  * [http://trac.edgewall.org/ Trac] -- the beast
    * [http://trac.edgewall.org/wiki/TracInstall Trac Dependencies]
 
+[[BR]]
+== Prerequisites ==
+----
+ * There should be a working subversion on the machine. For Seattle, our svn is located in /var/local/svn.
+ * Apache should be installed on the machine.
+  
 
 [[BR]]
 == Trac installation ==
 ----
 
-See [http://trac.edgewall.org/wiki/TracInstall Trac installation] instructions for how to install Trac.
+There is two ways to install or get the latest version of Trac, you can either use easy_install to install Trac or you can download a version of Trac from [http://trac.edgewall.org/wiki/TracDownload TracDownload] using wget.
+{{{
+easy_install Trac
+}}}
+or if downloading a version of Trac, then untar the downloaded file and run:
+{{{
+python setup.py install
+}}}
+
+During installation process the installer will ask for various information such as the project name, path to svn, etc.
+For more details and advanced options about installations see [http://trac.edgewall.org/wiki/TracInstall Trac installation] instructions for how to install Trac.
 
 [[BR]]
 == Configuration ==
@@ -30,7 +46,150 @@ The /var/local/trac/seattle/conf/trac.ini file is the main configuration file fo
 2009-10-26: The following two configuration options were enabled to prevent people from accidentally not getting emails from Trac. The result will be a few emails that people don't want, but that's better than missing any.
   * always_notify_reporter
   * always_notify_updater
+[[BR]]
+=== Configuring Apache ===
+In order to ensure that Trac is hosted properly, we have to modify some apache configuration files. The two main files are: /etc/apache2/ports.conf and /etc/apache2/sites-available/default.
+'''Note:''' Every time some configuration is changed in the apache configuration file or in Trac configuration file then apache2 should be restarted to reflect the change. To restart apache2 run the command:
+{{{
+/etc/init.d/apache2 reload
+}}} 
 
+Here is what the apache configuration file on seattle.cs.washington.edu looks like:
+'''default'''
+{{{
+#NameVirtualHost *:80
+#NameVirtualHost *:443
+NameVirtualHost 128.208.3.86:80
+NameVirtualHost 128.208.3.86:443
+
+# HTTP
+<VirtualHost 128.208.3.86:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/
+    ErrorLog /var/log/apache2/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog /var/log/apache2/access.log combined
+    ServerSignature On
+
+    <Directory />
+        redirect permanent /index.html https://seattle.cs.washington.edu
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+
+    <Location /svn>
+        DAV svn
+        AuthzSVNAccessFile /var/local/svn/conf/authz
+        SVNPath /var/local/svn/
+    </Location>
+
+    <Location /geni/>
+        redirect permanent /geni/ https://seattlegeni.cs.washington.edu/geni/
+#       redirect permanent /geni/ http://seattle.cs.washington.edu/geniseattle_downtime.html
+        Options FollowSymLinks
+    </Location>
+
+</VirtualHost>
+
+# SSL
+<VirtualHost 128.208.3.86:443>
+    ServerAdmin webmaster@localhost
+
+    # Setting this seems to mess up the urls of the trac install. We should
+    # probably figure out what implicit setting is being relied on, fix it,
+    # and enable this so we don't have any surprises.
+    #DocumentRoot /var/www/
+
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/seattle.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/seattle.key
+    SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
+
+    ErrorLog /var/log/apache2/error.log
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+    LogLevel warn
+    CustomLog /var/log/apache2/access.log combined
+#    ServerSignature On
+
+ # this tests mod_python:
+ #   <Location /mpinfo>
+ #      SetHandler mod_python
+ #      PythonInterpreter main_interpreter
+ #      PythonHandler mod_python.testhandler
+ #   </Location>
+
+    Redirect permanent /customized_installer/ http://seattle.cs.washington.edu/customized_installer/
+
+    <Location /geni/>
+        redirect permanent /geni/ https://seattlegeni.cs.washington.edu/geni/
+    #   redirect permanent /geni/ http://seattle.cs.washington.edu/geniseattle_downtime.html
+        Options FollowSymLinks
+    </Location>
+
+    <Location /geni_dev_alpers/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE geni_dev_private.settings_alpers
+        PythonOption django.root
+        PythonDebug On
+        PythonPath "['/home/ivan/geni_dev_private/', '/home/alpers/geni_dev/'] + sys.path"
+    </Location>
+
+    <Location /geni_dev_sean/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE geni_dev_private.settings_sean
+        PythonOption django.root
+        PythonDebug On
+        PythonPath "['/home/ivan/geni_dev_private/', '/home/sean/geni_dev/'] + sys.path"
+    </Location>
+
+    <Location /autograder/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE autograder_private.settings
+        PythonOption django.root
+        PythonDebug On
+        PythonPath "['/home/ivan/autograder_dev/'] + sys.path"
+    </Location>
+
+    <Directory />
+        SetHandler mod_python
+        PythonInterpreter main_interpreter
+        PythonHandler trac.web.modpython_frontend
+        PythonOption TracEnv /var/local/trac/seattle
+    </Directory>
+
+    Alias /irclogs /home/seattlebot/logs/ChannelLogger/freenode/#seattle
+    <Location /irclogs>
+      SetHandler None
+    </Location>
+    <Directory "/home/seattlebot/logs/ChannelLogger/freenode/#seattle">
+      Options +Indexes
+      Order allow,deny
+      Allow from all
+    </Directory>
+
+    Alias /stats /var/www/stats
+    <Location /stats>
+      SetHandler None
+    </Location>
+</VirtualHost>
+}}}
+
+'''ports.conf'''
+{{{
+Listen 80
+
+<IfModule mod_ssl.c>
+    Listen 443
+</IfModule>
+}}}
 [[BR]]
 == Administration ==
 ----
@@ -67,5 +226,10 @@ Our installation includes the following Plugins:
 || TracIncludeMacro    || 2.1            || Y*       || Include support for external html, etc||
 
 
-
+== Important Links ==
+ * [http://trac.edgewall.org/ Trac]
+ * [http://trac.edgewall.org/wiki/TracInstall TracInstall]
+ * [http://trac.edgewall.org/wiki/TracDownload TracDownload]
+ * [http://trac.edgewall.org/wiki/0.11/TracOnUbuntu TracOnUbuntu]
+ * [http://trac.edgewall.org/wiki/TracUpgrade TracUpgrade]
 
