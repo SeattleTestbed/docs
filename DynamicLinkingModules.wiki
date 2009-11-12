@@ -1,0 +1,110 @@
+= Dynamic Linking of Modules =
+
+----
+[[TOC(inline)]]
+----
+
+== The dylink module ==
+
+The API call dylink() is provided by the dylink module, which is chainloadable. It relies on another module, impr_virt which must be loaded prior to the dylink module.
+As an example, the sequence of modules should be something like this:
+
+{{{
+python repy.py restrictions.default chainloader.py [impr_virt.py,dylink.py] prgrm args...
+}}}
+
+[[BR]]
+
+=== The dylink API call ===
+
+Documentation
+{{{
+#!python
+  """
+  <Purpose>
+    Dynamically link in new modules at runtime.
+
+  <Arguments>
+    module:
+            The name of a module to import. This should be excluding extensions,
+            but may be the full name. e.g. for module foo.py use "foo"
+
+    mode:
+            (Optional, values: [module, global]) If the mode is "module"
+            then dylink will return a module like object. If mode is "global",
+            then dylink behaves like 'from foo import *'
+
+    context: 
+            (Optional, dict) If the mode is "module" you can provide a
+            custom dictionary to use for initializing the new module.
+
+  <Exceptions>
+    Raises an exception if the module cannot be found, or if there is a problem
+    initializing a VirtualNamespace around the module. See VirtualNamespace.
+
+  <Returns>
+    If mode is "module", a module like object will be returned. Otherwise, nothing.
+  """
+}}}
+
+The API call itself can behave either as pythons "import X as Y" or as "from X import *".
+
+To use as a normal import, one would do:
+{{{
+#!python
+
+Y = dylink("X")
+}}}
+
+To use as a "from X import *", one would do:
+{{{
+#!python
+dylink("X","global")
+}}}
+
+
+[[BR]]
+== Example ==
+
+In this example, we will define a library, "foo" that provides a function "bar". Then we will import the module from a test program and invoke "bar".
+
+This will be our definition of foo.repy:
+
+{{{
+#!python
+
+def bar():
+  return "Blah!"
+
+def baz():
+  return "Buz!"
+
+}}}
+
+
+Now we can use dylink() in our test program:
+
+{{{
+#!python
+
+if callfunc == "initialize":
+  # Import foo, module style
+  foo = dylink("foo")
+
+  # Try calling bar and baz
+  print foo.bar()
+  print foo.baz()
+
+  # Import bar and baz, without a module, ala "from foo import *"
+  dylink("foo", "global")
+
+  # Again, call bar and baz, without foo
+  print bar()
+  print baz()
+
+}}}
+
+This demonstrates the essential use of dylink and how it can be used to substitute import in repy programs.
+
+
+
