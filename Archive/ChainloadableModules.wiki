@@ -1,5 +1,9 @@
 = Chainload-able Modules =
 
+The chainloader system was designed to conveniently provide behavior altering modules.
+The main problem is how to provide a generic method of loading various bits of code that
+want to alter the behavior of the repy program or to make new API functions available. Instead of having each module provide lots of boilerplate code that is potentially buggy and hard to debug, all the generic code to handle building up the context of the repy program is handled by the chainloader, allowing modules to focus on their little snippet of functionality.
+
 ----
 [[TOC(inline)]]
 ----
