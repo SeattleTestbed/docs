@@ -18,7 +18,6 @@ Seattle runs Trac v11.1. This page describes how to install Trac, how to configu
  * There should be a working subversion on the machine. For Seattle, our svn is located in /var/local/svn.
  * Apache should be installed on the machine.
   
-
 [[BR]]
 == Trac installation ==
 ----
@@ -193,8 +192,17 @@ Listen 80
 [[BR]]
 == Administration ==
 ----
-
 If you log into Trac with an account that has admin priveliges. You will see an ''Admin'' tab on the left hand side. From this Admin page you can add new users, modify components (for Tickets), and perform numerous other actions.
+
+If there are no admin to begin with and you want to add an admin for the first time, then on the machine that Trac is residing in type in the command:
+{{{
+$ trac-admin /path/to/my/project
+
+Then on the Trac shell type in:
+
+Trac [/var/local/trac/]> permission add username TRAC_ADMIN
+Trac [/var/local/trac/]> permission list username
+}}}
 
 [[BR]]
 == Backups and Restoration ==
