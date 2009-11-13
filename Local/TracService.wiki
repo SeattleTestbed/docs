@@ -196,7 +196,48 @@ Listen 80
 
 If you log into Trac with an account that has admin priveliges. You will see an ''Admin'' tab on the left hand side. From this Admin page you can add new users, modify components (for Tickets), and perform numerous other actions.
 
+[[BR]]
+== Backups and Restoration ==
+----
+=== Backup ===
+It is very important to backup the Trac system as well as the Svn before upgrading or changing any configuration with the Trac system in case of failures. The command for backing up the Trac system is:
+{{{
+$ trac-admin /path/to/projenv hotcopy /path/to/backupdir
+}}}
+The command for backing up the subversion is:
+{{{
+$  svnadmin hotcopy /path/to/projenv /path/to/backupdir
+}}}
+'''Note:''' For both the Trac and Svn, the /path/to/backupdir folder should NOT exist as the trac-admin and svnadmin creates these folders. If the folders exist then the hotcopy fails.
 
+'''Note''' that the command for svnadmin comes before the svn project path. There are other ways of creating backups for the svn, but for our purpose this should be sufficient. When both the Trac and Svn does a hotcopy, it locks the database so nothing changes. If it is unable to lock the database then it fails in doing the hotcopy.
+
+
+=== Restore ===
+Before we restore the Trac system we must ensure that the webserver is stopped so the database can be copied over safely. To do this type in the command:
+{{{
+/etc/init.d/apache2 stop
+}}}
+
+To restore the Trac system and Svn, just copy the backup folders to the right folder where the Trac and Svn projects should exist. Open up and edit /var/local/trac/conf/trac.ini to ensure that the svn path is set correctly in the configuration file. 
+
+Next we have to sync up the svn with the Trac project. To do this type in the commands:
+{{{
+trac-admin /path/to/trac_project
+
+This should give you a Trac shell. Once you enter the Trac shell type in the command resync to sync up the Svn with the Trac.
+
+Trac [/var/local/trac/]> resync
+}}}
+
+Once everything is synced up then restart the webserver and everything should be good to go. To restart apache type in:
+{{{
+/etc/init.d/apache2 start
+
+or if apache is already running
+
+/etc/init.d/apache2 reload
+}}}
 [[BR]]
 == Plugins ==
 ----
@@ -225,8 +266,9 @@ Our installation includes the following Plugins:
 || TracGamedevTheme    || 1.0            || N*       || A theme. ||
 || TracIncludeMacro    || 2.1            || Y*       || Include support for external html, etc||
 
-
+[[BR]]
 == Important Links ==
+----
  * [http://trac.edgewall.org/ Trac]
  * [http://trac.edgewall.org/wiki/TracInstall TracInstall]
  * [http://trac.edgewall.org/wiki/TracDownload TracDownload]
