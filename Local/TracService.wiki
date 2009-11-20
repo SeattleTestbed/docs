@@ -247,6 +247,12 @@ or if apache is already running
 /etc/init.d/apache2 reload
 }}}
 [[BR]]
+== Upgrading Trac ==
+----
+
+Make sure that before any upgrade to Trac is done, that both the old Trac and SVN are backed up (look in the backup and restore section). The upgrade is done in 5 easy steps, to find the steps go to the [http://trac.edgewall.org/wiki/TracUpgrade TracUpgrade] site.
+
+[[BR]]
 == Plugins ==
 ----
 
