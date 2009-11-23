@@ -9,6 +9,7 @@ Overall test results page: http://blackbox.cs.washington.edu/~continuousbuild/
 Test failures RSS feeds (there's a separate one for each slave):
   * http://blackbox.cs.washington.edu/~continuousbuild/linux/failures.rss
   * http://blackbox.cs.washington.edu/~continuousbuild/bsd/failures.rss
+  * http://blackbox.cs.washington.edu/~continuousbuild/mac/failures.rss
 
 The continuous build is currently running only some of our tests. Time just needs to be spent making other tests work with the system.
 
@@ -89,3 +90,15 @@ export PATH=/home/continuousbuild/bin:$PATH
 }}}
 
 We also don't bother running seattlegeni tests here, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
+
+= Slave Setup on testbed-mac =
+
+Like testbed-freebsd, we have to provide our own setsid and customize the cron_run_tests.sh script so that our setsid binary is in the PATH. Unlike testbed-freebsd, the PATH that is setup by default for scripts run through cron seems to be lacking something important. (More details: #763)
+
+So, we put the following in cron_run_tests.sh (that is, we keep the same PATH that one gets through an interactive shell as it seems to do the trick):
+
+{{{
+export PATH="/Users/continuousbuild/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
+}}}
+
+We also don't bother running seattlegeni tests on testbed-mac, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
