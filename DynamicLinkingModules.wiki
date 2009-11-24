@@ -109,6 +109,22 @@ dylink_eval( {} )
 [[BR]]
 [[BR]]
 
+== Changes to Repy ==
+
+Dylink overrides the default VirtualNamespace object to provide its behavior.
+This does not affect the usage of VirtualNamespace in any substantial way, but
+it does add an additional optional argument to VirtualNamespace.evaluate().
+
+The standard definition of VirtualNamespace.evaluate() takes only a 
+dictionary context. However, the dylink version also has a named parameter
+enable_dylink which defaults to True.
+
+If True, then dylink will automatically be setup for that namespace before the evaluation happens. 
+
+If False, then the dylink functions will be deleted from the context, and thus will be unavailable.
+
+[[BR]]
+
 == Examples ==
 
 [[BR]]
