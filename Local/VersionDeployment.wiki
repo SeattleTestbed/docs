@@ -8,6 +8,7 @@ Explains how to go about deploying a new version of the code, which consists of 
 [[BR]]
 == Step by Step ==
 ----
+ 1. Make sure the [wiki:ContinuousBuild continuous build] shows all tests passing (aside from any expected, non-critical failures such as new build machines not fully configured or flaky tests).
  1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattlegeni) testbed.
   1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
   1. `cd /home/release`
