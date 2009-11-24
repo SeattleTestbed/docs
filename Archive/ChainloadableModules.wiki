@@ -1,4 +1,4 @@
-= Chainload-able Modules =
+= Chainload-able Modules (Old, Obsolete) =
 
 The chainloader system was designed to conveniently provide behavior altering modules.
 The main problem is how to provide a generic method of loading various bits of code that
