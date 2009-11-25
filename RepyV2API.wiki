@@ -97,18 +97,8 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||canceltimer||cancels an thread that has not yet started||example 1.5||
 
+||circularlog||logs information to the circular logging buffer (replaces print)||example 1.1||
 
-[[BR]]
-
-
-||Built-in name||Notes||Tutorial Section||
-||print ...||Used only for logging on "production" systems. Used mostly when debugging.||example 1.1||
-
-||print >> fileobject, ...||Used to write data to a file (similar to native Python)||example 2.1||
-
-||chr||Changes an integer to that ASCII character (i.e. chr(97) == 'a'). Used for marshalling||example 4.2||
-
-||ord||The inverse of chr, changes an ASCII character to a number (ord('a') == 97)||example 4.2||
 
 
 
@@ -883,3 +873,28 @@ Returns a tuple of booleans {{{(recvwillblock,sendwillblock)}}} indicating if a 
 
    <Returns>
      A tuple (recvwillblock, sendwillblock) of booleans.   
+
+[[BR]] 
+==== circularlog(string) ====
+----
+
+(added call -- replaces ~~print~~)
+
+Writes a string to the circular logging buffer.   A library will be added that constructs a function that log(*args) on top of this.
+
+ * Doc string:
+
+   <Purpose>
+     Writes data to the circular logging buffer.
+
+   <Arguments>
+     The string to write out.
+
+   <Exceptions>
+     This should not result in an exception.
+
+   <Side Effects>
+     The data is written to the circular logging buffer.
+
+   <Returns>
+     None.   
