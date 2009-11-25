@@ -12,6 +12,7 @@ For a detailed description of Network API call semantics see: [NetworkApiSemanti
 
 This document describes the narrow API available to repy programs.   This document includes all of the calls that are available to a repy program and the use and meaning of these calls.   For items built into the python programming language (like list operations, etc.) see the appropriate Python documentation.   
 
+The intent is that we will build libraries that will provide 'rich' functionality on top of these abstractions.   For example, the file-like objects don't support next, but we can build this in a library.   Also, notice that the logging mechanism doesn't support multiple arguments / do type conversion.   We can do this in a user level library.   We will expect that all users will load this library (and may even do it for them).
 
 
 
@@ -63,7 +64,7 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Function Name||Short description||Tutorial Section||
 
-||safeopen||opens file objects. not similar to Python's open function||example 2.1||
+||safeopen||opens file objects. ||example 2.1||
 
 ||listdir||similar to Python's os.listdir() function||example 2.2||
 
