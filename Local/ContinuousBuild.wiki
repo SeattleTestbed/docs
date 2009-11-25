@@ -17,6 +17,10 @@ To add new tests to the system, add files to svn in trunk/continuousbuild/tests/
 
 Make sure to setprop svn:executable on any files added to trunk/continuousbuild/tests/. (This will change when we make the tests all python scripts so they can run on windows).
 
+= What if the continuous build doesn't seem to be running? =
+
+If the continuous build doesn't seem to be running even though the crontab is setup properly, check to see if a previous run got interrupted and left a "running" directory in the location that output is kept in on the particular slave system. For example, if a slave box was power cycled in the middle of a run, the "running" directory would be left behind. If that directory is there, future attempts to run the continuous build will quickly abort because they think another copy is already running.
+
 = General Slave Setup Information =
 
 Generally:
