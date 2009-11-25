@@ -71,7 +71,7 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||sleep||similar to Python's time.sleep() function||example 1.6||
 
-||randomfloat||similar to Python's random.random() function||example 4.2||
+||randombytes||similar to Python's os.urandom() function||(new call) example 4.2||
 
 ||getlock||similar to Python's threading.Lock() constructor||example 1.6||
 
@@ -656,29 +656,29 @@ Returns a float containing the number of seconds the program has been running.  
       The elapsed time as float
 
 [[BR]]
-==== randomfloat() ====
+==== randombytes(num) ====
 ----
 
-Returns a random floating point number between 0.0 (inclusive) and 1.0 (exclusive).   
+Returns a random string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to the parameter num.
 
  * Doc string:
 
 
    <Purpose>
-      Return a random number in the range [0.0, 1.0)
+      Return a random string of bytes of length num
 
    <Arguments>
-      None
+      num: a number of bytes to return
 
    <Exceptions>
-      None.
+      TypeError if num isn't a long or int
 
    <Side Effects>
       This function is metered because it may involve using a hardware
       source of randomness.
 
    <Returns>
-      The number (a float)
+      The string of bytes.
 
 [[BR]]
 ==== settimer(waittime, function, args) ====
@@ -891,7 +891,7 @@ Writes a string to the circular logging buffer.   A library will be added that c
      The string to write out.
 
    <Exceptions>
-     This should not result in an exception.
+     Type error if the string argument isn't a string.
 
    <Side Effects>
      The data is written to the circular logging buffer.
