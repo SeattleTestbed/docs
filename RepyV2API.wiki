@@ -100,6 +100,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||circularlog||logs information to the circular logging buffer (replaces print)||example 1.1||
 
+||getthreadname||provides a unique string that indicates the name of the current thread||New call||
+
 
 
 
@@ -899,3 +901,29 @@ Writes a string to the circular logging buffer.   A library will be added that c
 
    <Returns>
      None.   
+
+[[BR]] 
+==== getthreadname() ====
+----
+
+(added call)
+
+Returns a unique name that indicates the thread's name.   Don't use this to derive any meaning other than string uniqueness.
+ * Doc string:
+
+   <Purpose>
+     Returns a string identifier for the currently executing thread.
+     This identifier is unique to this thread.
+
+   <Arguments>
+     None.
+
+   <Exceptions>
+     None.
+
+   <Side Effects>
+     None.
+
+   <Returns>
+     A string identifier.
+
