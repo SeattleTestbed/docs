@@ -40,9 +40,9 @@ This document describes the narrow API available to repy programs.   This docume
 
 ||Object / Function Name||Short description||Tutorial Section||
 
-||file.read||Read data from a file (maybe seek first).||N/A (new call)||
+||file.readat||Read data from a file (maybe seek first).||N/A (new call)||
 
-||file.write||Write data to a file (maybe seek first).||N/A (new call)||
+||file.writeat||Write data to a file (maybe seek first).||N/A (new call)||
 
 ||file.close||Close an open file.||example 2.1||
 
@@ -416,7 +416,7 @@ Close the file. A closed file cannot be read or written any more. Any operation 
       Nothing.
 
 [[BR]]
-==== file.read(size=None, offset=None) ====
+==== file.readat(size=None, offset=None) ====
 ----
 
 If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
@@ -448,7 +448,7 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
       have reached the end of the file or size was non-positive.
 
 [[BR]]
-==== file.write(data, offset=None) ====
+==== file.writeat(data, offset=None) ====
 ----
 
 If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
