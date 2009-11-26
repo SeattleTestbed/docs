@@ -11,7 +11,8 @@ You can download the the client from here: [source:seattle/trunk/seattlegeni/xml
   1. Create an instance (or multiple instances, if desired) of the class seattlegeni_xmlrpc.SeattleGENIClient.[[BR]]
      The following parameters can be passed to the constructor:
      * ''username'': Your username. (Required)
-     * ''api_key'': Your api_key. (Required)
+     * ''private_key_string'': Your private key. (Either this or the api_key is required)
+     * ''api_key'': Your api_key.
      * ''xmlrpc_url'': The url where the SeattleGENI XMLRPC server is located. (Defaults is our main SeattleGENI testbed's xmlrpc url.)
      * ''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do not use allow_ssl_insecure=True in production code.''' (Default is False)
      * ''ca_certs_file'': The location of a file containing your trusted CA certificates. (Default is a file named `cacert.pem` in the same directory that you place `seattlegeni_xmlrpc.py` in.)
@@ -87,7 +88,12 @@ import seattlegeni_xmlrpc
 
 
 USERNAME = "your_username"
-API_KEY = "your_api_key"
+
+# Only one of either the API key or the private key is needed. If providing
+# your API key, be sure to pass the API key to the SeattleGENIClient
+# constructor below.
+#API_KEY = "your_api_key"
+PRIVATE_KEY_STRING = open("your_username.privatekey").read()
 
 # Allowing SSL to be insecure means it will be susceptible to MITM attacks.
 # See the instructions in seattlegeni_xmlrpc.py for using SSL securely.
@@ -95,8 +101,9 @@ ALLOW_SSL_INSECURE = False
 
 
 def do_example_acquire_renew_release():
-  client = seattlegeni_xmlrpc.SeattleGENIClient(username=USERNAME, api_key=API_KEY,
-                                                   allow_ssl_insecure=ALLOW_SSL_INSECURE)
+  client = seattlegeni_xmlrpc.SeattleGENIClient(username=USERNAME,
+                                                private_key_string=PRIVATE_KEY_STRING,
+                                                allow_ssl_insecure=ALLOW_SSL_INSECURE)
 
   # Obtain general information about the account corresponding to the username
   # and API key.
