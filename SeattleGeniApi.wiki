@@ -114,3 +114,12 @@ Returns the user's public key as a string.
 Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
 Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+
+[[BR]]
+=== get_encrypted_api_key(username) ===
+----
+
+Returns the user's api key encrypted with the user's public key.
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
