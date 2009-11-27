@@ -14,7 +14,7 @@ You think writing tests is difficult, annoying and fruitless work? I beg to diff
 === Introduction ===
 ----
 
-So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behavior. The component you are testing is a resource monitor. For the sake of simplicity, there are only two methods implemented.
+So, you are writing a piece of software whose API has been defined and maybe implemented, and now you would like to start testing its behavior. The component you are testing is a resource monitor. For the sake of simplicity, suppose there are only two methods implemented in this file.
 
 {{{
 #!python
@@ -205,7 +205,7 @@ And you decide to test it by creating an appropriate test file.
 File: ut_repy.sempahore.py
 """
 }}}
-UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert, what is called, a '''pragma directive''' at the beginning of the test file. Each pragma directive hints the UTF about some specific behaviour.
+UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert, what is called, a '''pragma directive''' at the beginning of the test file. Each pragma directive instructs UTF in how to behave.
 
 {{{
 #!python
@@ -218,7 +218,9 @@ UTF has to be able to differentiate between Python and Repy. Therefore, there mu
 
 For this specific purpose use ''#pragma repy'' directive. Whenever UTF encounters this directive, it knows it has to execute the test file inside of the Repy Execution Environment.
 
-Rest of the file is written as a regular Repy file. Same as with Python testing, your tests should not produce any output, except if some condition has not been met.
+The rest of the file is written as a regular Repy file. Just as with Python testing, your tests should not produce any output, except if some condition has not been met. 
+
+Also, make sure to end your file with a .mix extension if you are running preparetest.py so that when you run preparetest.py, it will run the repy preprocessor and rename your file to <original name>.py. If you are not running the preparetest.py use the .py extension. UTF will not work under the .repy extension even though your code is written in restricted python (this is what the repy pragma is for).
 
 {{{
 #!python
@@ -258,7 +260,7 @@ For instance, if your test file is suppose to be executed using non-default rest
 [[BR]]
 ==== Standard Out ====
 ----
-Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is support to produce output on standard out.
+Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out.
 
 {{{
 #!python
