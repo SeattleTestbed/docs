@@ -33,9 +33,9 @@ A  ticket contains the following information attributes:
 
 '''Note:''' Versions of Trac prior to 0.9 did not have the ''type'' field, but instead provided a ''severity'' field and different default values for the ''priority'' field. This change was done to simplify the ticket model by removing the somewhat blurry distinction between ''priority'' and ''severity''. However, the old model is still available if you prefer it: just add/modify the default values of the ''priority'' and ''severity'', and optionally hide the ''type'' field by removing all the possible values through [wiki:TracAdmin trac-admin].
 
-'''Note:''' the [wiki:TicketTypes type], [wiki:TicketComponent component], version, priority and severity fields can be managed with [wiki:TracAdmin trac-admin] or with the WebAdmin plugin.
+'''Note:''' the [trac:TicketTypes type], [trac:TicketComponent component], version, priority and severity fields can be managed with [wiki:TracAdmin trac-admin] or with the [trac:WebAdmin WebAdmin] plugin.
 
-'''Note:''' Description of the builtin ''priority'' values is available at [wiki:TicketTypes#Whyistheseverityfieldgone]
+'''Note:''' Description of the builtin ''priority'' values is available at [trac:TicketTypes#Whyistheseverityfieldgone TicketTypes]
 
 == Changing and Commenting Tickets ==
 
@@ -68,8 +68,9 @@ The option selected by default for the various drop-down fields can be set in [w
  * `default_severity`: Default severity value
  * `default_type`: Default ticket type
  * `default_version`: Name of the default version
+ * `default_owner`: Name of the default owner, ''if no owner for the component has been set''
 
-If any of these options are omitted, the default value will either be the first in the list, or an empty value, depending on whether the field in question is required to be set.
+If any of these options are omitted, the default value will either be the first in the list, or an empty value, depending on whether the field in question is required to be set.  Some of these can be chosen through the [trac:WebAdmin WebAdmin] plugin in the "Ticket System" section (others in the "trac.ini" section).  The default owner for a ticket will be the component owner, if that is set, or `default_owner`, if not.
 
 
 == Hiding Fields and Adding Custom Fields ==
@@ -84,6 +85,12 @@ Trac also lets you add your own custom ticket fields. See TracTicketsCustomField
 If the list of possible ticket owners is finite, you can change the ''assign-to'' ticket field from a text input to a drop-down list. This is done by setting the `restrict_owner` option of the `[ticket]` section in [wiki:TracIni trac.ini] to “true”. In that case, Trac will use the list of all users who have accessed the project to populate the drop-down field.
 
 To appear in the dropdown list, a user needs be registered with the project, ''i.e.'' a user session should exist in the database. Such an entry is automatically created in the database the first time the user submits a change in the project, for example when editing the user's details in the ''Settings'' page, or simply by authenticating if the user has a login. Also, the user must have `TICKET_MODIFY` [TracPermissions permissions].
+
+'''Note:''' See [http://pacopablo.com/wiki/pacopablo/blog/set-assign-to-drop-down Populating Assign To Drop Down] on how to add user entries at database level
+
+'''Note 2:''' If you need serious flexibility and aren't afraid of a little plugin coding of your own, see [http://trac-hacks.org/wiki/FlexibleAssignToPlugin FlexibleAssignTo] (disclosure: I'm the author)
+
+'''Note 3:''' Activating this option may cause some performance degradation, read more about this in the [trac:TracPerformance#Configuration Trac performance] page.
 
 == Preset Values for New Tickets ==
 
