@@ -7,6 +7,7 @@ Tracd is a lightweight standalone Trac web server. In most cases it's easier to 
  * Fewer dependencies: You don't need to install apache or any other web-server.
  * Fast: Should be almost as fast as the [wiki:TracModPython mod_python] version (and much faster than the [wiki:TracCgi CGI]).
  * Automatic reloading: For development, Tracd can be used in ''auto_reload'' mode, which will automatically restart the server whenever you make a change to the code (in Trac itself or in a plugin).
+  * Options for tracd: `-r, --auto-reload`
 
 == Cons ==
 
@@ -39,6 +40,23 @@ An alternative way to serve multiple projects is to specify a parent directory i
 
 To exit the server on Windows, be sure to use {{{CTRL-BREAK}}} -- using {{{CTRL-C}}} will leave a Python process running in the background.
 
+== Installing as a Windows Service ==
+
+To install as a Windows service, get the [http://www.google.com/search?q=srvany.exe SRVANY] utility and run:
+{{{
+ C:\path\to\instsrv.exe tracd C:\path\to\srvany.exe
+ reg add HKLM\SYSTEM\CurrentControlSet\Services\tracd\Parameters /v Application /d "\"C:\path\to\python.exe\" \"C:\path\to\python\scripts\tracd-script.py\" <your tracd parameters>"
+ net start tracd
+}}}
+
+'''DO NOT''' use {{{tracd.exe}}}.  Instead register {{{python.exe}}} directly with {{{tracd-script.py}}} as a parameter.  If you use {{{tracd.exe}}}, it will spawn the python process without SRVANY's knowledge.  This python process will survive a {{{net stop tracd}}}.
+
+If you want tracd to start automatically when you boot Windows, do:
+{{{
+ sc config tracd start= auto
+}}}
+
+The spacing here is important.
 
 == Using Authentication ==
 
@@ -47,23 +65,22 @@ Using tracd with Apache .htpasswd files:
 To create a .htpasswd file using htpasswd:
 
 {{{
-sudo htpasswd -c /path/to/env/.htpasswd username
+ $ sudo htpasswd -c /path/to/env/.htpasswd username
 }}}
 then for additional users:
 {{{
-sudo htpasswd /var/www/html/.htpasswd-users username2
+ $ sudo htpasswd /path/to/env/.htpasswd username2
 }}}
-then for starting the tracd:
+then for starting the tracd (on windows skip the "=" after --basic-auth):
 {{{
-tracd -p 8080 --basic-auth=environmentname,/fullpath/environmentname/.htpasswd,/fullpath/environmentname /fullpath/environmentname
+ $ tracd -p 8080 --basic-auth=environmentname,/fullpath/environmentname/.htpasswd,/fullpath/environmentname /fullpath/environmentname
 }}}
-
 
 Tracd provides support for both Basic and Digest authentication. The default is to use Digest; to use Basic authentication, replace `--auth` with `--basic-auth` in the examples below. (You must still specify a dialogic "realm", which can be an empty string by trailing the BASICAUTH with a comma.)
 
   ''Support for Basic authentication was added in version 0.9.''
 
-The general format for using authentication is:
+The general format for using authentication is (on windows skip the "=" after --auth):
 
 {{{
  $ tracd -p port --auth=base_project_dir,password_file_path,realm project_path
@@ -76,7 +93,7 @@ where:
  * '''realm''' realm
  * '''project_path''' path of the project
 
-Example:
+Example (on windows skip the "=" after --auth):
 
 {{{
  $ tracd -p 8080 \
@@ -94,9 +111,10 @@ Another way to share the digest file is to specify "*"
 for the project name:
 {{{
  $ tracd -p 8080 \
-   --auth=*,/path/to/users.htdigest,mycompany.com \
+   --auth="*",/path/to/users.htdigest,mycompany.com \
    /path/to/project1 /path/to/project2
 }}}
+If using the `-s` parameter for serving a Trac environment from the root of a domain, one must use `*` for the project name
 
 == How to set up an htdigest password file ==
 
@@ -111,7 +129,12 @@ If you don't have Apache available, you can use this simple Python script to gen
 {{{
 #!python
 from optparse import OptionParser
-import md5
+# The md5 module is deprecated in Python 2.5
+try:
+    from hashlib import md5
+except ImportError:
+    from md5 import md5
+realm = 'trac'
 
 # build the options
 usage = "usage: %prog [options]"
@@ -120,32 +143,35 @@ parser.add_option("-u", "--username",action="store", dest="username", type = "st
                   help="the username for whom to generate a password")
 parser.add_option("-p", "--password",action="store", dest="password", type = "string",
                   help="the password to use")
+parser.add_option("-r", "--realm",action="store", dest="realm", type = "string",
+                  help="the realm in which to create the digest")
 (options, args) = parser.parse_args()
 
 # check options
 if (options.username is None) or (options.password is None):
    parser.error("You must supply both the username and password")
+if (options.realm is not None):
+   realm = options.realm
    
 # Generate the string to enter into the htdigest file
-realm = 'trac'
-kd = lambda x: md5.md5(':'.join(x)).hexdigest()
+kd = lambda x: md5(':'.join(x)).hexdigest()
 print ':'.join((options.username, realm, kd([options.username, realm, options.password])))
 }}}
 
 Note: If you use the above script you must use the --auth option to tracd, not --basic-auth, and you must set the realm in the --auth value to 'trac' (without the quotes). Example usage (assuming you saved the script as trac-digest.py):
 
 {{{
-python trac-digest.py -u username -p password >> c:\digest.txt
-tracd --port 8000 --auth=proj_name,c:\digest.txt,trac c:\path\to\proj_name
+ $ python trac-digest.py -u username -p password >> c:\digest.txt
+ $ tracd --port 8000 --auth=proj_name,c:\digest.txt,trac c:\path\to\proj_name
 }}}
 
 Note: If you would like to use --basic-auth you need to use htpasswd tool from apache server to generate .htpasswd file. The remaining part is similar but make sure to use empty realm (i.e. coma after path). When using on Windows make sure to use -m option for it (did not tested it on *nix, so not sure if that is the case there).  If you do not have Apache, [trac:source:/tags/trac-0.11b2/contrib/htpasswd.py htpasswd.py] may help.  (Note that it requires a `crypt` or `fcrypt` module; see the source comments for details.)
 
 It is possible to use md5sum utility to generate digest-password file using such method:
 {{{
-echo -e "${user}:trac:${password}\c" | md5sum - >>to-file
+ $ printf "${user}:trac:${password}" | md5sum - >>user.htdigest
 }}}
-and manually delete " -" from the end and add "${user}:trac:" to the start of line from 'to-file'. You can see attachment:trac-digest-corrected.sh for detail.
+and manually delete " -" from the end and add "${user}:trac:" to the start of line from 'to-file'.
 
 == Tips ==
 
@@ -163,7 +189,7 @@ the corresponding relative URL would be `/<project_name>/chrome/site/software-0.
 which in turn can be written using the relative link syntax
 in the Wiki: `[/<project_name>/chrome/site/software-0.1.tar.gz]` 
 
-The development version of Trac supports a new `htdocs:` TracLinks 
+Since 0.10, Trac supports a new `htdocs:` TracLinks 
 syntax for the above. With this, the example link above can be written simply 
 `htdocs:software-0.1.tar.gz`. 
 
@@ -171,10 +197,10 @@ syntax for the above. With this, the example link above can be written simply
 In some situations when you choose to use tracd behind apache, you might experience issues with redirects, like being redirected to URLs with the wrong host or protocol. In this case (and only in this case), setting the `[trac] use_base_url_for_redirect` to `true` can help, as this will force Trac to use the value of `[trac] base_url` for doing the redirects.
 
 === Serving a different base path than / ===
-Tracd supports serving projects with different base urls then /<project>. The parameter name to change this is
+Tracd supports serving projects with different base urls than /<project>. The parameter name to change this is
 {{{
-tracd --base-path=/some/path
+ $ tracd --base-path=/some/path
 }}}
 
 ----
-See also: TracInstall, TracCgi, TracModPython, TracGuide
+See also: TracInstall, TracCgi, TracModPython, TracGuide, [trac:TracOnWindowsStandalone?version=13#RunningTracdasservice Running tracd.exe as a Windows service]
