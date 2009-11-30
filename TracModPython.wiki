@@ -3,7 +3,7 @@
 
 Trac supports [http://www.modpython.org/ mod_python], which speeds up Trac's response times considerably, especially compared to [TracCgi CGI], and permits use of many Apache features not possible with [wiki:TracStandalone tracd]/mod_proxy.
 
-These instructions are for Apache 2; if you are still using Apache 1.3, you may have some luck with [wiki:TracModPython2.7 TracModPython2.7].
+These instructions are for Apache 2; if you are still using Apache 1.3, you may have some luck with [trac:wiki:TracModPython2.7 TracModPython2.7].
 
 == Simple configuration ==
 
@@ -12,7 +12,8 @@ If you just installed mod_python, you may have to add a line to load the module 
 LoadModule python_module modules/mod_python.so
 }}}
 
- ''Note: The exact path to the module depends on how the HTTPD installation is laid out.''
+''Note: The exact path to the module depends on how the HTTPD installation is laid out.''
+
 On Debian using apt-get
 {{{
 apt-get install libapache2-mod-python libapache2-mod-python-doc
@@ -56,17 +57,23 @@ The options available are
     # For multiple projects
     PythonOption TracEnvParentDir /var/trac/myprojects
     # For the index of multiple projects
-    PythonOption TracEnvIndexTemplate /srv/www/htdocs/trac/project_list_tepmlate.html
+    PythonOption TracEnvIndexTemplate /srv/www/htdocs/trac/project_list_template.html
     # A space delimitted list, with a "," between key and value pairs.
     PythonOption TracTemplateVars key1,val1 key2,val2
     # Useful to get the date in the wanted order
     PythonOption TracLocale en_GB.UTF8
     # See description above        
     PythonOption TracUriRoot /projects/myproject
-    # Override default python egg cache location
-    PythonOption PYTHON_EGG_CACHE /var/trac/myprojects/egg-cache
 }}}
 
+=== Python Egg Cache ===
+
+Compressed python eggs like Genshi are normally extracted into a directory named `.python-eggs` in the users home directory. Since apache's home usually is not writable an alternate egg cache directory can be specified like this:
+{{{
+PythonOption PYTHON_EGG_CACHE /var/trac/myprojects/egg-cache
+}}}
+
+or you can uncompress the Genshi egg to resolve problems extracting from it.
 === Configuring Authentication ===
 
 Creating password files and configuring authentication works similar to the process for [wiki:TracCgi#AddingAuthentication CGI]:
@@ -141,6 +148,19 @@ Note 2: Active Directory requires an authenticating user/password to access reco
 
 Note 3: The directive "require ldap-group ..."  specifies an AD group whose members are allowed access.
 
+
+=== Setting the Python Egg Cache ===
+
+If the Egg Cache isn't writeable by your Web server, you'll either have to change the permissions, or point Python to a location where Apache can write. This can manifest itself as a ''500 internal server error'' and/or a complaint in the syslog. 
+
+{{{
+#!xml
+<Location /projects/myproject>
+  ...
+  PythonOption PYTHON_EGG_CACHE /tmp 
+  ...
+</Location>
+}}}
 
 
 === Setting the !PythonPath ===
@@ -218,11 +238,14 @@ Below is the sample configuration required to set up your trac as a virtual serv
 </VirtualHost>
 }}}
 
-if you have issues with login try using `<LocationMatch>` instead of `<Location>`
+This does not seem to work in all cases. What you can do if it does not:
+ * Try using `<LocationMatch>` instead of `<Location>`
+ * <Location /> may, in your server setup, refer to the complete host instead of simple the root of the server. This means that everything (including the login directory referenced below) will be sent to python and authentication does not work (i.e. you get the infamous Authentication information missing error). If this applies to you, try using a sub-directory for trac instead of the root (i.e. /web/ and /web/login instead of / and /login).
+ * Depending on apache's `NameVirtualHost` configuration, you may need to use `<VirtualHost *:80>` instead of `<VirtualHost *>`.
 
 For a virtual host that supports multiple projects replace "`TracEnv`" /var/trac/myproject with "`TracEnvParentDir`" /var/trac/
 
-Note: !DocumentRoot should not point to your Trac project env. As Asmodai wrote on #trac: "suppose there's a webserer bug that allows disclosure of !DocumentRoot they could then leech the entire Trac environment".
+Note: !DocumentRoot should not point to your Trac project env. As Asmodai wrote on #trac: "suppose there's a webserver bug that allows disclosure of !DocumentRoot they could then leech the entire Trac environment".
 
 == Troubleshooting ==
 
@@ -263,6 +286,33 @@ Although it may seem trivial to rewrite the above configuration as a directory i
 
 It may be possible to work around this with mod_rewrite, but I failed to get this working. In all, it is more hassle than it is worth. Stick to the provided instructions. :)
 
+A success story: For me it worked out-of-box, with following trivial config:
+{{{
+SetHandler mod_python
+PythonInterpreter main_interpreter
+PythonHandler trac.web.modpython_frontend 
+PythonOption TracEnv /system/path/to/this/directory
+PythonOption TracUriRoot /path/on/apache
+
+AuthType Basic
+AuthName "ProjectName"
+AuthUserFile /path/to/.htpasswd
+Require valid-user
+}}}
+
+The `TracUriRoot` is obviously the path you need to enter to the browser to get to the trac (e.g. domain.tld/projects/trac)
+
+=== Additional .htaccess help ===
+
+If you are using the .htaccess method you may have additional problems if your trac directory is inheriting .htaccess directives from another.  This may also help to add to your .htaccess file:
+
+{{{
+<IfModule mod_rewrite.c>
+  RewriteEngine Off
+</IfModule>
+}}}
+
+
 === Win32 Issues ===
 If you run trac with mod_python < 3.2 on Windows, uploading attachments will '''not''' work. This problem is resolved in mod_python 3.1.4 or later, so please upgrade mod_python to fix this.
 
@@ -280,13 +330,13 @@ The security context on the repository may need to be set:
 chcon -R -h -t httpd_sys_content_t PATH_TO_REPOSITORY
 }}}
 
-See also [[http://subversion.tigris.org/faq.html#reposperms]]
+See also [http://subversion.tigris.org/faq.html#reposperms]
 
 === FreeBSD issues ===
 Pay attention to the version of the installed mod_python and sqlite packages. Ports have both the new and old ones, but earlier versions of pysqlite and mod_python won't integrate as the former requires threaded support in python, and the latter requires a threadless install.
 
 If you compiled and installed apache2, apache wouldn´t support threads (cause it doesn´t work very well on FreeBSD). You could force thread support when running ./configure for apache, using --enable-threads, but this isn´t recommendable.
-The best option [[http://modpython.org/pipermail/mod_python/2006-September/021983.html seems to be]] adding to /usr/local/apache2/bin/ennvars the line 
+The best option [http://modpython.org/pipermail/mod_python/2006-September/021983.html seems to be] adding to /usr/local/apache2/bin/ennvars the line 
 
 {{{
 export LD_PRELOAD=/usr/lib/libc_r.so
@@ -298,11 +348,11 @@ If you get the following Trac Error `Unsupported version control system "svn"` o
 
 If this is not the case, it's possible that you're using Subversion libraries that are binary incompatible with the apache ones (an incompatibility of the `apr` libraries is usually the cause). In that case, you also won't be able to use the svn modules for Apache (`mod_dav_svn`).
 
-You also need a recent version of `mod_python` in order to avoid a runtime error ({{{argument number 2: a 'apr_pool_t *' is expected}}}) due to the default usage of multiple sub-interpreters. 3.2.8 ''should'' work, though it's probably better to use the workaround described in #3371, in order to force the use of the main interpreter:
+You also need a recent version of `mod_python` in order to avoid a runtime error ({{{argument number 2: a 'apr_pool_t *' is expected}}}) due to the default usage of multiple sub-interpreters. 3.2.8 ''should'' work, though it's probably better to use the workaround described in [trac:#3371 #3371], in order to force the use of the main interpreter:
 {{{
 PythonInterpreter main_interpreter
 }}}
-This is anyway the recommended workaround for other well-known issues seen when using the Python bindings for Subversion within mod_python (#2611, #3455). See in particular Graham Dumpleton's comment in [comment:ticket:3455:9 #3455] explaining the issue.
+This is anyway the recommended workaround for other well-known issues seen when using the Python bindings for Subversion within mod_python ([trac:#2611 #2611], [trac:#3455 #3455]). See in particular Graham Dumpleton's comment in [trac:comment:9:ticket:3455 #3455] explaining the issue.
 
 === Page layout issues ===
 
@@ -335,9 +385,9 @@ Make sure you install the 'python-sqlite2' package as it seems to be required fo
 
 
 === Segmentation fault with php5-mhash or other php5 modules ===
-You may encounter segfaults (reported on debian etch) if php5-mhash module is installed. Try to remove it to see if this solves the problem. See debian bug report [[http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=411487]]
+You may encounter segfaults (reported on debian etch) if php5-mhash module is installed. Try to remove it to see if this solves the problem. See debian bug report [http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=411487]
 
-Some people also have troubles when using php5 compiled with its own 3rd party libraries instead of system libraries. Check here [[http://www.djangoproject.com/documentation/modpython/#if-you-get-a-segmentation-fault]]
+Some people also have troubles when using php5 compiled with its own 3rd party libraries instead of system libraries. Check here [http://www.djangoproject.com/documentation/modpython/#if-you-get-a-segmentation-fault]
 
 ----
-See also TracGuide, TracInstall, TracCgi, TracFastCgi
+See also:  TracGuide, TracInstall, [wiki:TracModWSGI ModWSGI], [wiki:TracFastCgi FastCGI], [wiki:TracModPython ModPython], [trac:TracNginxRecipe TracNginxRecipe]
