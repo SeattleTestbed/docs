@@ -252,6 +252,8 @@ or if apache is already running
 
 Make sure that before any upgrade to Trac is done, that both the old Trac and SVN are backed up (look in the backup and restore section). The upgrade is done in 5 easy steps, to find the steps go to the [http://trac.edgewall.org/wiki/TracUpgrade TracUpgrade] site.
 
+'''Remember to use Screen in order to the upgrade, in case you get disconnected from seattle.cs.washington.edu before the upgrade is completely done'''
+
 [[BR]]
 == Plugins ==
 ----
