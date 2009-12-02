@@ -6,19 +6,14 @@ Please include as much information as you are willing to disclose. SVN user is s
 Please keep the list ordered alphabetically by SVN username.
 
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
-|| Alper Sarikaya || alpers at cs || || alpers || alpers ||
-|| Anthony Honstain || honsta at cs || || anthony || anthony ||
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
 || Conrad Meyer || cemeyer at cs || || cemeyer || cemeyer ||
 || Cosmin Barsan || || || cosminb || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
-|| Konstantin Pik || n2k8000 @ u || || konp || kon ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
-|| Jason Chen || jchen at cs || || jchen || jchen ||
 || Jenn Hanson|| hanson at cs || || jenn || jenn ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
 || Monzur Muhammad || monzum at cs || || monzum || monzum ||
-|| Sean Ren || shawiz at cs || || sean || shawiz ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
