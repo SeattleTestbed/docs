@@ -49,4 +49,6 @@
 || 1:30-1:45 Nov 15th, 2009 || University of Utah, Officer's Club  || GEC 6, Cluster C || Justin || Talk
 
 
-|| 1:30-2:00 Dec 7th, 2009 || University of Washington Physics / Astronomy 212 (closed to public)  || Natural Science Honors || Cosmin || Talk
+|| 2:00-3 Dec 1th, 2009 || University of Washington, Allen building room 674  || Thesis Defenses || Cosmin, Eric || Talk (Research)
+
+|| 1:30-2:00 Dec 7th, 2009 || University of Washington Physics / Astronomy 212 (closed to public)  || Natural Science Honors || Cosmin || Talk (Non-technical)
