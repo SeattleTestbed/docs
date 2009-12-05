@@ -231,6 +231,37 @@ Sends a UDP message to a destination host / port.   By default the system select
    <Returns>
       The number of bytes sent on success
 
+	 
+[[BR]] 
+==== listenformessage(localip, localport) ==== 
+---- 
+Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.
+
+* Doc string: 
+	 
+   <Purpose> 
+    Sets up a udpserversocket to receive incoming UDP messages 
+	 	 
+   <Arguments> 
+      localip: 
+        The local IP or hostname to register the handler on 
+      localport: 
+         The port to listen on 
+      
+   <Exceptions> 
+      XXXException if there is already a udpserversocket with the same IP and port. 
+      XXXException if the port number is invalid.
+      XXXException if the IP address isn't a valid, local IP.
+
+ 	 
+   <Side Effects> 
+      Consumes an insocket. 
+	 
+   <Returns> 
+      The udpserversocket. 
+
+
+
 [[BR]]
 ==== openconnection(desthost, destport, localip=None, localport=None, timeout = 5) ====
 ----
@@ -267,6 +298,38 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
    <Returns>
       A socket-like object that can be used for communication.   Use send, 
       recv, and close just like you would an actual socket object in python.
+
+
+	 
+[[BR]] 
+==== listenforconnection(localip, localport) ==== 
+---- 
+Binds to a IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.
+
+* Doc string: 
+	 
+   <Purpose> 
+    Sets up a tcpserversocket to receive incoming TCP connections  
+	 	 
+   <Arguments> 
+      localip: 
+        The local IP or hostname to register the handler on 
+      localport: 
+         The port to listen on 
+      
+   <Exceptions> 
+      XXXException if there is already a tcpserversocket with the same IP and port. 
+      XXXException if the port number is invalid.
+      XXXException if the IP address isn't a valid, local IP.
+
+ 	 
+   <Side Effects> 
+      Consumes an insocket. 
+	 
+   <Returns> 
+      The tcpserversocket. 
+
+
 
 
 
