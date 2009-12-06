@@ -640,22 +640,22 @@ Returns a float containing the number of seconds the program has been running.  
       The elapsed time as float
 
 [[BR]]
-==== randombytes(num) ====
+==== randombytes() ====
 ----
 
-Returns a random string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to the parameter num.
+Returns a string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to 1024.   It is assumed that client libraries will cache data received from this and return smaller values if less than 1024 is needed.
 
  * Doc string:
 
 
    <Purpose>
-      Return a random string of bytes of length num
+      Return a string of random bytes with length 1024
 
    <Arguments>
-      num: a number of bytes to return
+      None.
 
    <Exceptions>
-      TypeError if num isn't a long or int
+      None.
 
    <Side Effects>
       This function is metered because it may involve using a hardware
