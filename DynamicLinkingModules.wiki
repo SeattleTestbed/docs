@@ -1,9 +1,9 @@
 = Dynamic Linking of Modules =
 
 One glaring problem for developers new to the repy platform is the lack of any sort of import or dynamic linking functionality.
-The current alternative is to put code in separate modules and to use a pre-processor with special directives to statically link code into a final output file. This has a number of issues, such as difficulty of maintenance, security, code size, and redundancy of code. Many modules provide common functionality and are under active development, this means that package maintainers are required to update their code so that the static links are updated and many different programs end up with the same code just copied in.
+The current alternative is to put code in separate modules and to use a pre-processor with special directives to statically link code into a final output file. This has a number of problems, such as difficulty of maintenance, security, code size, and redundancy of code. Many modules provide common functionality and are under active development, this means that package maintainers are required to update their code so that the static links are updated and many different programs end up with the same code just copied in.
 
-A solution to this is to provide an import like mechanism that allows code to be dynamically linked at run time, much like python vanilla does.
+A solution to this is to provide an import like mechanism that allows code to be dynamically linked at run time, much like vanilla python does.
 Dylink is that solution for repy, and it is written as a library around the VirtualNamespace.
 
 ----
