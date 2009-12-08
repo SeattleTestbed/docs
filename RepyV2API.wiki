@@ -1062,12 +1062,15 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
      code in an arbitrary global context.
 
    <Arguments>
+
      code:  The string code to check for safety and store for future evaluation.
+
      name: (Optional, defaults to "<string>") The name for this module. Used during initialization only, and so
      a stack trace can show the name of the module instead of just <string>.
 
+
    <Exceptions>
-     Safety exceptions will be raised if the static code analysis fails. This can be due to unsafe constructs,
+     A XXXException ~~Safety exceptions~~ will be raised if the static code analysis fails. This can be due to unsafe constructs,
      invalid syntax, or an evaluation timeout.
 
    <Side Effects>
@@ -1095,7 +1098,7 @@ Evaluates the code wrapped by the VirtualNamespace in a given context.
      object before evaluating the code.
 
    <Exceptions>
-     If the context cannot be converted to a SafeDict due to safety issues, and exception
+     If the context cannot be converted to a SafeDict due to safety issues, an XXXException
      will be raised. Any exception that the code raises during evaluation will not be
      caught.
 
@@ -1137,5 +1140,3 @@ Determines the resource usage limits and current usage.
       The usage dictionary contains the current usage of all the resources. It has all the same entries as
       the limits dictionary, but has an additional "threadcpu" key, which is the amount of CPU time in seconds
       the current thread has executed for.
-
-
