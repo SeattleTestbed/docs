@@ -26,7 +26,7 @@ This allows dylink to initialize itself, and to provide the repy program with th
 
 == Dylink API ==
 
-The dylink module provides three main API calls: dyn_import_module, dyn_import_module_symbols, and dyn_dispatch_module.
+The dylink module provides three main API calls: dy_import_module, dy_import_module_symbols, and dy_dispatch_module.
 These are documented separately
 
 When modules are being imported, they have their callfunc set to "import" so that they can specifically
@@ -34,7 +34,7 @@ handle that case.
 
 [[BR]]
 
-=== dyn_import_module_symbols ===
+=== dy_import_module_symbols ===
 
 This API call allows a module to export its symbols directly into the current global context.
 This is the python equivalent to "from X import *"
@@ -49,21 +49,21 @@ foo, foo.repy, foo.pp or foo.py.repy.
 To use this API call, one would do:
 {{{
 #!python
-dyn_import_module_symbols("X") # Same as 'from X import *'
+dy_import_module_symbols("X") # Same as 'from X import *'
 }}}
 
 This API call takes an additional parameter, which can specify the callfunc to use while importing.
 By default, the import will set the callfunc to "import", but this can be specified as the second parameter
-to dyn_import_module_symbols.
+to dy_import_module_symbols.
 
 [[BR]]
 
-=== dyn_import_module ===
+=== dy_import_module ===
 
 This API call initializes a module into a self-contained object, without clutter the current global context.
 This is the python equivalent to "import X as Y".
 
-This API call takes the same arguments as dyn_import_module_symbols, but it will return a module object.
+This API call takes the same arguments as dy_import_module_symbols, but it will return a module object.
 This module object does not necessarily need to be named the same as the module.
 
 The same warnings apply when importing a module that may have conflicting files.
@@ -72,21 +72,21 @@ To use this API call, one would do:
 {{{
 #!python
 
-Y = dyn_import_module("X") # Same as 'import X as Y'
+Y = dy_import_module("X") # Same as 'import X as Y'
 }}}
 
-Like dyn_import_module_symbols, this API call also takes an optional callfunc parameter.
+Like dy_import_module_symbols, this API call also takes an optional callfunc parameter.
 
 [[BR]]
 
 
-=== dyn_dispatch_module ===
+=== dy_dispatch_module ===
 
 This API call is designed to help implementing repy modules. Each module loaded by
 dylink has a special global dictionary called CHILD_CONTEXT defined.
 
 If a repy program wants to behave as a module, it may modify this dictionary and then call
-dyn_dispatch_module.
+dy_dispatch_module.
 
 This has the effect of reading `callargs[0]`, and treating this as the next module in a chain to load.
 dylink will then load that program in, create a VirtualNamespace around it, and evaluate it with
@@ -96,7 +96,7 @@ Important notes of behavior are:
  * The callfunc of the caller will be automatically set in CHILD_CONTEXT
  * If `CHILD_CONTEXT["callargs"]` is unmodified, then it will be set to `callargs[1:]`, which has the effect of "popping" the first element.
 
-If you want to evaluate the next module with a completely customized context, the dyn_dispatch_module() call takes
+If you want to evaluate the next module with a completely customized context, the dy_dispatch_module() call takes
 an optional dictionary which can be used instead of CHILD_CONTEXT. 
 
 To use this API call, one would do:
@@ -104,10 +104,10 @@ To use this API call, one would do:
 #!python
 
 # Use the CHILD_CONTEXT
-dyn_dispatch_module() # Same as dyn_dispatch_module(CHILD_CONTEXT)
+dy_dispatch_module() # Same as dy_dispatch_module(CHILD_CONTEXT)
 
 # Use an empty context
-dyn_dispatch_module( {} )
+dy_dispatch_module( {} )
 
 }}}
 
@@ -155,13 +155,13 @@ Now we can use dylink in our test program, test.repy:
 
 if callfunc == "initialize":
   # Import foo, module style
-  foo = dyn_import_module("foo")
+  foo = dy_import_module("foo")
 
   # Try calling bar and baz
   print foo.bar()
 
   # Import bar, without a module, ala "from foo import *"
-  dyn_import_module_symbols("foo")
+  dy_import_module_symbols("foo")
 
   # Again, call bar, without foo
   print bar()
@@ -194,7 +194,7 @@ def half_sleep(time):
 CHILD_CONTEXT["sleep"] = half_sleep
 
 # Evaluate the next program
-dyn_dispatch_module()
+dy_dispatch_module()
 
 }}}
 
