@@ -234,7 +234,10 @@ Sends a UDP message to a destination host / port.   By default the system select
       Note: if you specify localhost, you must specify localport
 
    <Exceptions>
-      ~~socket.error~~ XXXException when communication errors happen
+      ~~socket.error when communication errors happen~~
+      XXXException when the local IP isn't a local IP
+      XXXException when the local port isn't allowed
+      XXXException when the local IP and port aren't valid types or values
 
    <Side Effects>
       None.
@@ -405,7 +408,7 @@ If create is True, the file is created if it does not exist.
 ==== file.close() ====
 ----
 
-Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ValueError after the file has been closed. Calling close() more than once is allowed.
+Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ~~!ValueError~~ XXXException after the file has been closed. Calling close() more than once is allowed.
 
  * Doc string:
 
@@ -429,7 +432,7 @@ Close the file. A closed file cannot be read or written any more. Any operation 
 ==== file.readat(size=None, offset=None) ====
 ----
 
-If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
+If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)  Each file object instance has its own offset even if they operate on the same file.      
 
 Reads up to size bytes of the rest of the (open) file, returning what is read. If size is omitted or None, the file is read to EOF.
 
@@ -440,14 +443,14 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
 
    <Arguments>
       size (optional) - Specify a maximum number of bytes to read from the
-                        file.
+                        file.   Hitting EOF will read less.
 
       offset (optional) - Seek to a specific location in the file before
                           reading.
 
    <Exceptions>
-      ValueError if the file is closed.
-      TypeError if offset or size is not an integer.
+      XXXException if the file is closed.
+      XXXException if offset or size is not an integer.
 
    <Side Effects>
       Seeks to offset (if specified) and advances the file pointer by the
@@ -461,7 +464,7 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
 ==== file.writeat(data, offset=None) ====
 ----
 
-If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)
+If offset is an integer, first seek to that location in the file. If it is omitted or None, no seek is performed.   Each file object instance has its own offset even if they operate on the same file.      
 
 Write some data to a file.
 
@@ -477,9 +480,9 @@ Write some data to a file.
       Offset (optional) - where to seek in the file first.
 
    <Exceptions>
-      ValueError if the file is closed.
-      IOError if the disk is out of space or some low level IO error occurs.
-      TypeError if offset isn't an integer or data isn't a string.
+      XXXException if the file is closed.
+      XXXException if the disk is out of space or some low level IO error occurs.
+      XXXException if offset isn't an integer or data isn't a string.
 
    <Side Effects>
       If offset is included, seeks to offset.
@@ -499,14 +502,13 @@ Returns a list of file names for the files in the vessel.
  * Doc string:
 
    <Purpose>
-      Allows the user program to get a list of files in their area.
+      Returns a list of files accessible to the program.
 
    <Arguments>
       None
 
    <Exceptions>
-      This probably shouldn't raise any errors / exceptions so long as the
-      node manager isn't buggy.
+      None
 
    <Side Effects>
       None
@@ -530,7 +532,7 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
       characters other than 'a-zA-Z0-9.-_' and cannot be '.' or '..'
 
    <Exceptions>
-      An exception is raised if the file does not exist
+      An XXXException is raised if the file does not exist
 
    <Side Effects>
       None
