@@ -82,7 +82,8 @@ Like dy_import_module_symbols, this API call also takes an optional callfunc par
 
 === dy_dispatch_module ===
 
-This API call is designed to help implementing repy modules. Each module loaded by
+This API call is designed to help implementing repy programs which alter the behavior of other
+repy programs. These are called 'repy modules'. Each module or program loaded by
 dylink has a special global dictionary called CHILD_CONTEXT defined.
 
 If a repy program wants to behave as a module, it may modify this dictionary and then call
