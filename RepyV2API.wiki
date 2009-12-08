@@ -910,6 +910,8 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
 
    <Exceptions>
      XXXException if the local IP address has changed and the tcpserversocket is invalid
+     XXXException if the port number is no longer allowed.
+     XXXException if tcpserversocket.close() was called.
 
    <Side Effects>
      None
@@ -935,7 +937,7 @@ Closes the socket.   Any further local calls to getconnection will result in an 
      None
 
    <Side Effects>
-     Pending local recv calls will either return or have an exception.
+     The IP and port can be reused after this.
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
@@ -956,6 +958,8 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
 
    <Exceptions>
      XXXException if the local IP address has changed and the udpserversocket is invalid
+     XXXException if the port number is no longer allowed.
+     XXXException if udpserversocket.close() was called.
 
    <Side Effects>
      None
@@ -984,7 +988,7 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
      None
 
    <Side Effects>
-     None
+     The IP address and port can be reused after this.
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
@@ -1024,6 +1028,7 @@ Writes a string to the circular logging buffer.   A library will be added that c
 (added call)
 
 Returns a unique name that indicates the thread's name.   Don't use this to derive any meaning other than string uniqueness.
+
  * Doc string:
 
    <Purpose>
