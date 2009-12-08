@@ -235,8 +235,11 @@ Sends a UDP message to a destination host / port.   By default the system select
 
    <Exceptions>
       ~~socket.error when communication errors happen~~
+
       XXXException when the local IP isn't a local IP
+
       XXXException when the local port isn't allowed
+
       XXXException when the local IP and port aren't valid types or values
 
    <Side Effects>
@@ -264,7 +267,9 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
       
    <Exceptions> 
       XXXException if there is already a udpserversocket with the same IP and port. 
+
       XXXException if the port number is invalid.
+
       XXXException if the IP address isn't a valid, local IP.
 
  	 
@@ -305,13 +310,21 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
 
    <Exceptions>
       ~~As from socket.connect, etc.~~
+
       XXXException if the localip isn't associated with the local system
+
       XXXException if the localport is already used
+
       XXXException if the localport isn't allowed
+
       XXXException if the connection cannot be established due to a bad destination IP address
+
       XXXException if the connection cannot be established because the destination port isn't being listened on
+
       XXXException if the connection times out
+
       XXXException if the arguments are invalid
+
 
    <Side Effects>
       None.
@@ -340,8 +353,11 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
       
    <Exceptions> 
       XXXException if there is already a tcpserversocket with the same IP and port. 
+
       XXXException if the IP or port number is invalid.
+
       XXXException if the port number isn't allowed
+
       XXXException if the IP address isn't a local IP.
 
  	 
@@ -394,7 +410,9 @@ If create is True, the file is created if it does not exist.
 
      <Exceptions>
         ~~As with open, this may raise a number of errors.~~
+
         XXXException if one of the arguments is invalid
+
         XXXException if the file does not exist and should not be created
 
      <Side Effects>
@@ -450,6 +468,7 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
 
    <Exceptions>
       XXXException if the file is closed.
+
       XXXException if offset or size is not an integer.
 
    <Side Effects>
@@ -481,7 +500,9 @@ Write some data to a file.
 
    <Exceptions>
       XXXException if the file is closed.
+
       XXXException if the disk is out of space or some low level IO error occurs.
+
       XXXException if offset isn't an integer or data isn't a string.
 
    <Side Effects>
@@ -827,8 +848,11 @@ Receives data that was sent by the connected party using send.   Note that this 
 
    <Exceptions>
      XXXException if the socket is closed locally.
+
      XXXException if the socket was closed remotely.
+
      XXXException if the connection is broken due to a network problem.
+
      XXXException if the local system connection is broken because the local system changes its IP address.
 
    <Side Effects>
@@ -855,8 +879,11 @@ Sends data to the connected party.   Note that this may send less than the entir
 
    <Exceptions>
      XXXException if the socket is closed locally.
+
      XXXException if the socket was closed remotely.
+
      XXXException if the connection is broken due to a network problem.
+
      XXXException if the local system connection is broken because the local system changes its IP address.
 
    <Side Effects>
@@ -885,6 +912,7 @@ Returns a tuple of booleans {{{(recvwillblock,sendwillblock)}}} indicating if a 
 
    <Exceptions>
      XXXException if the socket is closed locally.
+
      XXXException if the socket was closed remotely and there is no data pending for recv.
 
    <Side Effects>
@@ -910,7 +938,9 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
 
    <Exceptions>
      XXXException if the local IP address has changed and the tcpserversocket is invalid
+
      XXXException if the port number is no longer allowed.
+
      XXXException if tcpserversocket.close() was called.
 
    <Side Effects>
@@ -958,7 +988,9 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
 
    <Exceptions>
      XXXException if the local IP address has changed and the udpserversocket is invalid
+
      XXXException if the port number is no longer allowed.
+
      XXXException if udpserversocket.close() was called.
 
    <Side Effects>
