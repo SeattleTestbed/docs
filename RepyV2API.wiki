@@ -15,6 +15,7 @@ This document describes the narrow API available to repy programs.   This docume
 The intent is that we will build libraries that will provide 'rich' functionality on top of these abstractions.   For example, the file-like objects don't support next, but we can build this in a library.   Also, notice that the logging mechanism doesn't support multiple arguments / do type conversion.   We can do this in a user level library.   We will expect that all users will load this library (and may even do it for them).
 
 
+'''Justin: This document probably should include resource consumption information.'''
 
 [[BR]]
 == Cheat Sheet ==
@@ -185,6 +186,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ----
 Returns the localhost's "Internet facing" IP address.   It may raise an exception on hosts that are not connected to the Internet.
 
+'''Justin: What if there are multiple interfaces?   Should this return a list?'''
+
 
  * Doc string:
 
@@ -231,7 +234,7 @@ Sends a UDP message to a destination host / port.   By default the system select
       Note: if you specify localhost, you must specify localport
 
    <Exceptions>
-      socket.error when communication errors happen
+      ~~socket.error~~ XXXException when communication errors happen
 
    <Side Effects>
       None.
@@ -298,7 +301,14 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
       Note: if you specify localip, you must specify localport
 
    <Exceptions>
-      As from socket.connect, etc.
+      ~~As from socket.connect, etc.~~
+      XXXException if the localip isn't associated with the local system
+      XXXException if the localport is already used
+      XXXException if the localport isn't allowed
+      XXXException if the connection cannot be established due to a bad destination IP address
+      XXXException if the connection cannot be established because the destination port isn't being listened on
+      XXXException if the connection times out
+      XXXException if the arguments are invalid
 
    <Side Effects>
       None.
@@ -327,8 +337,9 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
       
    <Exceptions> 
       XXXException if there is already a tcpserversocket with the same IP and port. 
-      XXXException if the port number is invalid.
-      XXXException if the IP address isn't a valid, local IP.
+      XXXException if the IP or port number is invalid.
+      XXXException if the port number isn't allowed
+      XXXException if the IP address isn't a local IP.
 
  	 
    <Side Effects> 
@@ -347,11 +358,13 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 (Replaces: ~~open~~, ~~file~~.)
 
-Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
+Open a file, returning an object of the file type. 
 
 Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
 
 '''Justin C: File name conversion to upper / lower???'''
+
+'''Justin C: What is the allowed length of file names?'''
 
 The writeable parameter determines whether the file handle is read-only or capable of both reading and writing. Neither mode truncates the file on open.
 
@@ -372,11 +385,14 @@ If create is True, the file is created if it does not exist.
               True: Open the file for reading and writing.
 
               Note: files are always opened in "binary" mode.
+
         create:
            If True, create the file if it doesn't exist already.
 
      <Exceptions>
-        As with open, this may raise a number of errors.
+        ~~As with open, this may raise a number of errors.~~
+        XXXException if one of the arguments is invalid
+        XXXException if the file does not exist and should not be created
 
      <Side Effects>
         Opens a file on disk, using a file descriptor.
