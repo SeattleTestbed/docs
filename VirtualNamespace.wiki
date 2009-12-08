@@ -17,8 +17,8 @@ A virtual namespace supports the following:
     complicated interactions between namespaces.
 
 2. evaluate()
-  * Evaluates the code in the namespace with a provided global context. This context must be a SafeDict or dict object.
-    dict objects are automatically converted to SafeDict object's, which prevent unsafe global keys from being used.
+  * Evaluates the code in the namespace with a provided global context. This context must be a !SafeDict or dict object.
+    dict objects are automatically converted to !SafeDict object's, which prevent unsafe global keys from being used.
 
 
 == Examples ==
