@@ -621,7 +621,7 @@ If the optional "blocking" argument is False, the method returns False immediate
 ==== lock.release() ====
 ----
 
-Releases the lock. Do not call it if the lock is unlocked.
+Releases the lock. This call does nothing if the lock is already unlocked.
 
  * Doc string:
 
@@ -647,6 +647,8 @@ Releases the lock. Do not call it if the lock is unlocked.
 
 Returns a float containing the number of seconds the program has been running.   Note that in very rare circumstances (like the user resetting their clock), this will not produce increasing values.   For the actual time, use NTP (e.g. look in /seattlelib/time.repy for more information in the Seattle SVN trunk).
 
+'''Justin: Really?!?   This won't have increasing values sometimes?!?'''
+
  * Doc string:
 
 
@@ -671,7 +673,7 @@ Returns a float containing the number of seconds the program has been running.  
 ==== randombytes() ====
 ----
 
-Returns a string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to 1024.   It is assumed that client libraries will cache data received from this and return smaller values if less than 1024 is needed.
+Returns a string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to 1024.   It is assumed that a client library that regularly needs small amounts of random data will cache data received from this call and return smaller values.
 
  * Doc string:
 
