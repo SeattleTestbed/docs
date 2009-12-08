@@ -351,6 +351,8 @@ Open a file, returning an object of the file type. If the file cannot be opened,
 
 Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
 
+'''Justin C: File name conversion to upper / lower???'''
+
 The writeable parameter determines whether the file handle is read-only or capable of both reading and writing. Neither mode truncates the file on open.
 
 If create is True, the file is created if it does not exist.
