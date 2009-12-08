@@ -39,6 +39,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||udpserversocket||A way to obtain incoming packets||new||
 
+||VirtualNamespace||A way to evaluate statically analyzed code||new||
+
 
 
 [[BR]]
@@ -70,6 +72,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ||udpserversocket.getmessage||Returns a UDP packet|| N/A (new call)||
 
 ||udpserversocket.close||Stops listening for connections|| new call||
+
+||VirtualNamespace.evaluate||Evaluates the code in a given global context||new call||
 
 [[BR]]
 
@@ -112,6 +116,10 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ||circularlog||logs information to the circular logging buffer (replaces print)||example 1.1||
 
 ||getthreadname||provides a unique string that indicates the name of the current thread||New call||
+
+||VirtualNamespace||Provides a VirtualNamespace object that can be used to evaluate code||New call||
+
+||getresources||Provides two dictionaries which represent the resource limits and usage||New call||
 
 
 
@@ -1006,4 +1014,96 @@ Returns a unique name that indicates the thread's name.   Don't use this to deri
 
    <Returns>
      A string identifier.
+
+[[BR]] 
+==== VirtualNamespace(code, name="<string>") ====
+----
+
+(added call)
+
+Wraps any arbitrary code after performing a safety evaluation. Provides a method to evaluate the code.
+
+ * Doc string:
+
+   <Purpose>
+     Returns a VirtualNamespace object which supports evaluation of the
+     code in an arbitrary global context.
+
+   <Arguments>
+     code:  The string code to check for safety and store for future evaluation.
+     name: (Optional, defaults to "<string>") The name for this module. Used during initialization only, and so
+     a stack trace can show the name of the module instead of just <string>.
+
+   <Exceptions>
+     Safety exceptions will be raised if the static code analysis fails. This can be due to unsafe constructs,
+     invalid syntax, or an evaluation timeout.
+
+   <Side Effects>
+     Other calls to VirtualNamespace() will block since safety checks are performed serially.
+
+   <Returns>
+     A VirtualNamespace object
+
+[[BR]] 
+==== VirtualNamespace.evaluate(context) ====
+----
+
+(added call)
+
+Evaluates the code wrapped by the VirtualNamespace in a given context.
+
+ * Doc string:
+
+   <Purpose>
+     Evaluates the code in a given context.
+
+   <Arguments>
+     context: A dictionary or SafeDict dictionary to execute the code in.
+     If a dictionary object is provided, an attempt is made to convert it to a SafeDict
+     object before evaluating the code.
+
+   <Exceptions>
+     If the context cannot be converted to a SafeDict due to safety issues, and exception
+     will be raised. Any exception that the code raises during evaluation will not be
+     caught.
+
+   <Side Effects>
+     The provided context will likely be modified during execution.
+
+   <Returns>
+      The context that was used during evaluation. If the context was a SafeDict originally,
+      this is the same object. If the provided context was a dict, this is the converted SafeDict
+      version.
+
+[[BR]] 
+==== getresources() ====
+----
+
+(added call)
+
+Determines the resource usage limits and current usage.
+
+ * Doc string:
+
+   <Purpose>
+     Returns the resource usage limits and the current usage.
+
+   <Arguments>
+     None.
+
+   <Exceptions>
+     None.
+
+   <Side Effects>
+     Calls to this function will be serialized.
+
+   <Returns>
+      A tuple of dictionaries (limits, usage). Limits is a dictionary which contains the maximum utilization
+      of a resource. It contains all of the resources as defined in the restrictions file. The user can also
+      determine the allowed conn and mess ports by checking for their respective entries.
+
+      The usage dictionary contains the current usage of all the resources. It has all the same entries as
+      the limits dictionary, but has an additional "threadcpu" key, which is the amount of CPU time in seconds
+      the current thread has executed for.
+
 
