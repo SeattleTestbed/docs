@@ -454,6 +454,9 @@ If create is True, the file is created if it does not exist.
      <Side Effects>
         Opens a file on disk, using a file descriptor.
 
+     <Resource Consumption>
+        This consumes 4K of fileread.   If this is the first call on this file, this consumes a filesopened resource.   If the file is created, this consumes 4K of filewrite.
+	 
      <Returns>
         A file-like object.
 
@@ -478,6 +481,9 @@ Close the file. A closed file cannot be read or written any more. Any operation 
 
    <Side Effects>
       Closes a file descriptor previously opened for writing.
+
+   <Resource Consumption>
+      If this is the last opened file-like object on this file, this stops consuming a filesopened resource.  
 
    <Returns>
       Nothing.
@@ -510,6 +516,9 @@ Reads up to size bytes of the rest of the (open) file, returning what is read. I
    <Side Effects>
       Seeks to offset (if specified) and advances the file pointer by the
       number of bytes read.
+
+   <Resource Consumption>
+      Consumes 4K of fileread for each 4K aligned-block of the file read.   All reads will consume at least 4K.   
 
    <Returns>
       The data that was read; this may be the empty string only if we
@@ -546,6 +555,9 @@ Write some data to a file.
 
       Writes some data after the current filepointer position, advancing it.
 
+   <Resource Consumption>
+      Consumes 4K of filewrite for each 4K aligned-block of the file written.   All writes consume at least 4K.   
+
    <Returns>
       Nothing.
 
@@ -570,6 +582,9 @@ Returns a list of file names for the files in the vessel.
    <Side Effects>
       None
 
+   <Resource Consumption>
+      Consumes 4K of fileread.
+
    <Returns>
       A list of strings (file names)
 
@@ -593,6 +608,9 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
 
    <Side Effects>
       None
+
+   <Resource Consumption>
+      Consumes 4K of fileread.   If successful, consumes 4K of filewrite.
 
    <Returns>
       None
