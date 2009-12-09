@@ -6,6 +6,26 @@
 
 For a detailed description of Network API call semantics see: [NetworkApiSemantics].  (Read the description of calls on this page first.)
 
+I have made the following resource consumption simplifications to make the interface easier to understand:
+
+ * I assume that the minimum packet size is 64 bytes and all data consumes extra space.   This unfairly penalizes small packets.
+
+ * I assume there is no maximum packet size.   This slightly benefits large packets / messages / sends.
+
+ * I assume that every separate network API call will result in a separate packet.   This presumes no 'batching' occurs.
+
+ * I assume that every disk I/O operation touches a separate block.
+
+ * I assume that a disk block has size 4K.
+
+ * I assume that every chunk of file data is aligned on 4K intervals.   This means that small reads / writes may cross blocks if they are done at 4K boundaries.
+
+ * I assume that each file that is created results in 4K of space and disk I/O.
+
+
+
+
+
 [[BR]]
 == Introduction and Purpose ==
 ----
@@ -14,8 +34,6 @@ This document describes the narrow API available to repy programs.   This docume
 
 The intent is that we will build libraries that will provide 'rich' functionality on top of these abstractions.   For example, the file-like objects don't support next, but we can build this in a library.   Also, notice that the logging mechanism doesn't support multiple arguments / do type conversion.   We can do this in a user level library.   We will expect that all users will load this library (and may even do it for them).
 
-
-'''Justin: This document probably should include resource consumption information.'''
 
 [[BR]]
 == Cheat Sheet ==
@@ -174,6 +192,9 @@ The intent is that we will build libraries that will provide 'rich' functionalit
    <Exceptions>
       As from socket.gethostbyname_ex()
 
+   <Resource Consumption>
+      This operation consumes network bandwidth of 4K netrecv, 1K netsend.   (It's hard to tell how much was actually sent / received at this level)
+
    <Side Effects>
       None.
 
@@ -202,6 +223,9 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
 
    <Side Effects>
       None.
+
+   <Resource Consumption>
+      This operation consumes 64*4 bytes of netsend (SYN, ACK, FIN/ACK, Last-ACK) and 64*2 bytes of netrecv (SYN/ACK, FIN / ACK)
 
    <Returns>
       The localhost's IP address
@@ -245,6 +269,9 @@ Sends a UDP message to a destination host / port.   By default the system select
    <Side Effects>
       None.
 
+   <Resource Consumption>
+      This operation consumes 64 bytes + number of bytes of the message that were transmitted.   This requires that the localport (if specified) is allowed.
+
    <Returns>
       The number of bytes sent on success
 
@@ -274,8 +301,11 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
  	 
    <Side Effects> 
-      Consumes an insocket. 
+      Prevents other udpserversockets from using this port / IP
 	 
+   <Resource Consumption>
+      This operation consumes an insocket and requires that the provided messport is allowed.
+
    <Returns> 
       The udpserversocket. 
 
@@ -329,6 +359,9 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
    <Side Effects>
       None.
 
+   <Resource Consumption>
+      This operation consumes 64*2 bytes of netsend (SYN, ACK) and 64 bytes of netrecv (SYN/ACK).   This requires that the localport (if specified) is allowed.   Upon success, this call consumes an outsocket.
+
    <Returns>
       A socket-like object that can be used for communication.   Use send, 
       recv, and close just like you would an actual socket object in python.
@@ -362,7 +395,10 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
  	 
    <Side Effects> 
-      Consumes an insocket. 
+      The IP / port combination cannot be reused by a tcpserversocket until closed.
+
+   <Resource Consumption>
+      This call consumes an insocket and requires that the localport (if specified) is allowed.
 	 
    <Returns> 
       The tcpserversocket. 
@@ -584,6 +620,9 @@ Terminates the program immediately.   The program will not execute the "exit" ca
       are undefined.   These functions may be called after exit and may 
       have undefined state.
 
+   <Resource Consumption>
+      None.
+
    <Returns>
       None.   The current thread does not resume after exit
 
@@ -607,6 +646,9 @@ Returns a lock object that can be used for mutual exclusion and critical section
       None.
 
    <Side Effects>
+      None.
+
+   <Resource Consumption>
       None.
 
    <Returns>
@@ -635,6 +677,9 @@ If the optional "blocking" argument is False, the method returns False immediate
    <Side Effects>
       Locks the object.
 
+   <Resource Consumption>
+      None.
+
    <Returns>
       True if the lock was acquired, False otherwise.
 
@@ -658,6 +703,9 @@ Releases the lock. This call does nothing if the lock is already unlocked.
 
    <Side Effects>
       Unlocks the object.
+
+   <Resource Consumption>
+      None.
 
    <Returns>
       None.
@@ -687,6 +735,9 @@ Returns a float containing the number of seconds the program has been running.  
    <Side Effects>
       None
 
+   <Resource Consumption>
+      None.
+
    <Returns>
       The elapsed time as float
 
@@ -711,6 +762,9 @@ Returns a string of random bytes of data derived from a hardware source of rando
    <Side Effects>
       This function is metered because it may involve using a hardware
       source of randomness.
+
+   <Resource Consumption>
+      This operation consumes 1024 bytes of random data.
 
    <Returns>
       The string of bytes.
@@ -744,6 +798,9 @@ Sets a timer that when it expires will start a new thread to call a function wit
    <Side Effects>
       None.
 
+   <Resource Consumption>
+      This operation consumes a thread.
+
    <Returns>
       A timer handle, for use with canceltimer
 
@@ -770,6 +827,9 @@ Try to cancels a timer handle that has not started a thread.   Returns False if 
 
    <Side Effects>
       None.
+
+   <Resource Consumption>
+      If the timer was cancelled, this operation stops consuming a thread.
 
    <Returns>
       If False is returned, the timer already fired or was cancelled 
@@ -801,6 +861,9 @@ Sleeps the current thread for some time (waits for a specific time before execut
    <Side Effects>
       None.
 
+   <Resource Consumption>
+      None.
+
    <Returns>
       None.
 
@@ -823,7 +886,10 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
      None
 
    <Side Effects>
-     Pending local recv calls will either return or have an exception.
+     Pending local recv and send calls will have an exception.
+
+   <Resource Consumption>
+      If the connection is already closed, no resources are consumed.   This operation consumes 64*2 bytes of netsend (FIN/ACK, Last-ACK) and 64 bytes of netrecv (FIN/ACK).   If applicable, this call stops consuming the corresponding outsocket.
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
@@ -856,7 +922,10 @@ Receives data that was sent by the connected party using send.   Note that this 
      XXXException if the local system connection is broken because the local system changes its IP address.
 
    <Side Effects>
-     This call will block the thread until the other side calls send.
+     If there is no buffered data, this call will block the thread until the other side calls send.
+
+   <Resource Consumption>
+     This operation consumes 64 + size of returned data in bytes of netrecv and 64 bytes of netsend (ACK).
 
    <Returns>
      The data received from the socket (as a string).   
@@ -889,6 +958,9 @@ Sends data to the connected party.   Note that this may send less than the entir
    <Side Effects>
      This call may block the thread until the other side calls recv.
 
+   <Resource Consumption>
+     This operation consumes 64 + size of sent data in bytes of netsend and 64 bytes of netrecv (ACK).
+
    <Returns>
      The number of bytes sent.   Be sure not to assume this is always the
      complete amount!
@@ -916,6 +988,9 @@ Returns a tuple of booleans {{{(recvwillblock,sendwillblock)}}} indicating if a 
      XXXException if the socket was closed remotely and there is no data pending for recv.
 
    <Side Effects>
+     None.
+
+   <Resource Consumption>
      None.
 
    <Returns>
