@@ -192,11 +192,11 @@ The intent is that we will build libraries that will provide 'rich' functionalit
    <Exceptions>
       As from socket.gethostbyname_ex()
 
-   <Resource Consumption>
-      This operation consumes network bandwidth of 4K netrecv, 1K netsend.   (It's hard to tell how much was actually sent / received at this level)
-
    <Side Effects>
       None.
+
+   <Resource Consumption>
+      This operation consumes network bandwidth of 4K netrecv, 1K netsend.   (It's hard to tell how much was actually sent / received at this level)
 
    <Returns>
       A tuple containing (hostname, aliaslist, ipaddrlist).   See the 
@@ -829,11 +829,11 @@ Try to cancels a timer handle that has not started a thread.   Returns False if 
       None.
 
    <Resource Consumption>
-      If the timer was cancelled, this operation stops consuming a thread.
+      If the timer was canceled, this operation stops consuming a thread.
 
    <Returns>
-      If False is returned, the timer already fired or was cancelled 
-      previously.   If True is returned, the timer was cancelled
+      If False is returned, the timer already fired or was canceled 
+      previously.   If True is returned, the timer was canceled
 
 
 
@@ -1021,6 +1021,9 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
    <Side Effects>
      None
 
+   <Resource Consumption>
+     Upon success, this operation consumes 64*2 bytes of netrecv (SYN, ACK), 64 bytes of netsend (SYN/ACK) and an outsocket.
+
    <Returns>
      A tuple consisting of the remote IP, remote port, and a socket object.
 
@@ -1042,7 +1045,10 @@ Closes the socket.   Any further local calls to getconnection will result in an 
      None
 
    <Side Effects>
-     The IP and port can be reused after this.
+     The IP and port can be reused by other tcpserversockets after this.
+
+   <Resource Consumption>
+     If applicable, this operation stops consuming the corresponding insocket.
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
@@ -1071,6 +1077,9 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
    <Side Effects>
      None
 
+   <Resource Consumption>
+     This operation consumes 64 + size of message bytes of netrecv
+
    <Returns>
      A tuple consisting of the remote IP, remote port, and message.
 
@@ -1095,7 +1104,10 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
      None
 
    <Side Effects>
-     The IP address and port can be reused after this.
+     The IP address and port can be reused by other udpserversockets after this.
+
+   <Resource Consumption>
+     If applicable, this operation stops consuming the corresponding insocket.
 
    <Returns>
      True if this is the first close call to this socket, False otherwise.
@@ -1111,6 +1123,8 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
 
 Writes a string to the circular logging buffer.   A library will be added that constructs a function that log(*args) on top of this.
 
+'''There is a debate over whether or not we need this call'''
+
  * Doc string:
 
    <Purpose>
@@ -1124,6 +1138,9 @@ Writes a string to the circular logging buffer.   A library will be added that c
 
    <Side Effects>
      The data is written to the circular logging buffer.
+
+   <Resource Consumption>
+      This operation consumes lograte of the size of the string.   This assumes that the string is less than the log size.   If the string is larger, then it consumes at most the log size.
 
    <Returns>
      None.   
@@ -1149,6 +1166,9 @@ Returns a unique name that indicates the thread's name.   Don't use this to deri
      None.
 
    <Side Effects>
+     None.
+
+   <Resource Consumption>
      None.
 
    <Returns>
@@ -1183,6 +1203,9 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
    <Side Effects>
      Other calls to VirtualNamespace() will block since safety checks are performed serially.
 
+   <Resource Consumption>
+      None
+
    <Returns>
      A VirtualNamespace object
 
@@ -1212,6 +1235,9 @@ Evaluates the code wrapped by the VirtualNamespace in a given context.
    <Side Effects>
      The provided context will likely be modified during execution.
 
+   <Resource Consumption>
+      Whatever is consumed by the executed code
+
    <Returns>
       The context that was used during evaluation. If the context was a !SafeDict originally,
       this is the same object. If the provided context was a dict, this is the converted !SafeDict
@@ -1238,6 +1264,9 @@ Determines the resource usage limits and current usage.
 
    <Side Effects>
      Calls to this function will be serialized.
+
+   <Resource Consumption>
+      None (???)
 
    <Returns>
       A tuple of dictionaries (limits, usage). Limits is a dictionary which contains the maximum utilization
