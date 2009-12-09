@@ -100,7 +100,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||Function Name||Short description||Tutorial Section||
 
-||safeopen||opens file objects. ||example 2.1||
+||openfile||opens file objects. ||example 2.1||
 
 ||listdir||similar to Python's os.listdir() function||example 2.2||
 
@@ -408,7 +408,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 
 [[BR]]
-==== safeopen(filename, writeable=False, create=False) ====
+==== openfile(filename, writeable=False, create=False) ====
 ----
 
 (Replaces: ~~open~~, ~~file~~.)
