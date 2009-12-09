@@ -32,8 +32,8 @@ This page contains information useful to developers working on Seattle
    * [WebCodingStyle Web style guidelines] for writing web code for Seattle
 
  * Installation instructions and documentation
-   * [SeattleDownload Download and installation instructions] for Seattle
    * [InstallerDocumentation Formal Installer Documentation]
+   * [SeattleDownload Download and installation instructions] for Seattle
    * [GeniInstallation Installation instructions] for the GENI portal
    * [CustomizedInstaller Using the Customized Installer]
 
