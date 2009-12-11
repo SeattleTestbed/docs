@@ -17,6 +17,8 @@ mv experimentmanager/* seattlelib/* ./
 rmdir experimentmanager seattlelib
 }}}
 
+Running the above commands will give you a directory named `experimentlibrary/` that contains the file `experimentlib.py` as well as all necessary supporting files. The file `experimentlib.py` is the Experiment Library that you will use.
+
 = Usage =
 
 At the top of your own Python script add:
