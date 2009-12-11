@@ -700,7 +700,7 @@ If the optional "blocking" argument is False, the method returns False immediate
 ==== lock.release() ====
 ----
 
-Releases the lock. This call does nothing if the lock is already unlocked.
+Releases the lock. This call raises an exception (?) if the lock is already unlocked.
 
  * Doc string:
 
@@ -712,7 +712,7 @@ Releases the lock. This call does nothing if the lock is already unlocked.
       None.
 
    <Exceptions>
-      thread.error if release() is called on an unlocked lock.
+      XXXException if release() is called on an unlocked lock.
 
    <Side Effects>
       Unlocks the object.
