@@ -55,7 +55,7 @@ else:
 ==  waitforconn ==
 
 
-A call to watiforconn will attempt to register a callback function and begin listening for TCP connections at the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous waitforconn)  A successful call to watiforconn will return a commhandle, a failed call will result in an exception.
+A call to waitforconn will attempt to register a callback function and begin listening for TCP connections at the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous waitforconn)  A successful call to waitforconn will return a commhandle, a failed call will result in an exception.
 
 To know the result of a call to waitforconn we must consider:
 
@@ -69,7 +69,7 @@ The result of a call to waitforconn is:
 
 {{{
 
-if (there are free events OR the socekt selector is running) AND (there is a network connection):
+if (there are free events OR the socket selector is running) AND (there is a network connection):
   if no matching tuple in listen table:
     make entry in listen table
     start the listener and register the callback function
