@@ -157,7 +157,7 @@ A call to send will attempt to transmit bytes to the remote host connected via t
 A call to recv will attempt to return to the application n bytes delivered over the stream abstraction.  The call will either block waiting for bytes to be delivered from the underlying network stack, or will return <= n bytes from the stream.
 
 ----
-== socket.willbock() ==
+== socket.willblock() ==
 
 A call to willblock determines if calls to send or recv will block or not.  A tuple of the form (Bool,Bool) is returned indicating if send and recv will or will not block. (True for blocking, False for non-blocking)
 
