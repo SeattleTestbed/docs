@@ -161,6 +161,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ----
     Your program may choose to have different functionality that executes at different times.   The callfunc variable is set to values that indicate what the state of execution is.   Callfunc is set to either "initialize" and "exit".   These are executed by running the program as a script and setting the variable callfunc to either the string "initialize" or the string "exit".   The "initialize" is the first time that your program executes.   If initialize finishes and there are no pending threads or callbacks, the program is called with "exit" to allow it a chance to clean up.
 
+'''Justin C.: Should we remove this?   We could register a function to be called at exit only using a library above.'''
+
 [[BR]]
 ==== callargs ====
 ----
