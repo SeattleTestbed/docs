@@ -188,7 +188,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
          The host name to get information about
 
    <Exceptions>
-      As from socket.gethostbyname_ex()
+      NetworkAddressError (descends from NetworkError) if the address cannot be resolved
 
    <Side Effects>
       None.
@@ -217,7 +217,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       None
 
    <Exceptions>
-      Exception if the host is not connected to the Internet or has name resolution problems
+      InternetConnectivityError (descends NetworkError) if the host is not connected to the Internet or has name resolution problems
 
    <Side Effects>
       None.
@@ -256,13 +256,11 @@ Sends a UDP message to a destination host / port.   By default the system select
       Note: if you specify localhost, you must specify localport
 
    <Exceptions>
-      ~~socket.error when communication errors happen~~
+      AddressBindingError (descends NetworkError) when the local IP isn't a local IP
 
-      XXXException when the local IP isn't a local IP
+      PortRestrictedException (descends ResourceException) when the local port isn't allowed
 
-      XXXException when the local port isn't allowed
-
-      XXXException when the local IP and port aren't valid types or values
+      TypeError/ValueError when the local IP and port aren't valid types or values
 
    <Side Effects>
       None.
@@ -291,11 +289,15 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
          The port to listen on 
       
    <Exceptions> 
-      XXXException if there is already a udpserversocket with the same IP and port. 
+      PortInUseException (descends NetworkError) if the port cannot be listened on because some other process on the system is listening on it
 
-      XXXException if the port number is invalid.
+      XXXException if there is already a udpserversocket with the same IP and port. (Conrad: I don't think we care (what type of exception this is). This is a coding error, not something you write code to catch / deal with.)
 
-      XXXException if the IP address isn't a valid, local IP.
+      TypeError/ValueError if the port number or ip is wrong type or obviously invalid.
+
+      AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
+
+      PortRestrictedException (descends ResourceException) if the port is restricted
 
  	 
    <Side Effects> 
@@ -337,21 +339,19 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
       Note: if you specify localip, you must specify localport
 
    <Exceptions>
-      ~~As from socket.connect, etc.~~
+      AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
 
-      XXXException if the localip isn't associated with the local system
+      PortInUseException (descends NetworkError) if the localport is already used
 
-      XXXException if the localport is already used
+      PortRestrictedException (descends ResourceException) if the localport isn't allowed
 
-      XXXException if the localport isn't allowed
+      ValueError if the connection cannot be established due to a bad destination IP address
 
-      XXXException if the connection cannot be established due to a bad destination IP address
+      ConnectionRefusedException (descends NetworkError) if the connection cannot be established because the destination port isn't being listened on
 
-      XXXException if the connection cannot be established because the destination port isn't being listened on
+      TimeoutException (common to all API functions that timeout) if the connection times out
 
-      XXXException if the connection times out
-
-      XXXException if the arguments are invalid
+      ValueError/TypeError if the arguments are invalid
 
 
    <Side Effects>
@@ -383,13 +383,15 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
          The port to listen on 
       
    <Exceptions> 
-      XXXException if there is already a tcpserversocket with the same IP and port. 
+      PortInUseException (descends NetworkError) if another process has already bound the ip/port 
 
-      XXXException if the IP or port number is invalid.
+      XXXException if there is already a tcpserversocket with the same IP and port. (Conrad: I don't think we care (what type of exception this is). This is a coding error, not something you write code to catch / deal with.)
 
-      XXXException if the port number isn't allowed
+      TypeError/ValueError if the IP or port number is invalid.
 
-      XXXException if the IP address isn't a local IP.
+      PortRestrictedException (descends ResourceException) if the port number isn't allowed
+
+      AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
 
  	 
    <Side Effects> 
