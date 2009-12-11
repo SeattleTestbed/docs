@@ -117,7 +117,7 @@ else:
 == recvmess ==
 
 
-A call to recvmess will attempt to register a callback function and begin listening for arriving messagesat the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous recvmess)  A successful call to recvmess will return a commhandle, a failed call will result in an exception.
+A call to recvmess will attempt to register a callback function and begin listening for arriving messages at the specified local ip and port.  A free event will be used for a socket selector thread (no free event is consumed if the socket selector thread is already running from a previous recvmess)  A successful call to recvmess will return a commhandle, a failed call will result in an exception.
 
 To know the result of a call to waitforconn we must consider:
 
