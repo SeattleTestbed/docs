@@ -36,4 +36,10 @@ All of the public constants, variables, and functions in `experimentlib.py` are 
 
 The comments at the top of `experimentlib.py` contain useful information about the data types and exceptions used by the Experiment Library. All of the public functions have comments to explain their usage. The examples/ directory that is in your experimentlibrary directory (if you performed the steps above) contains a handful of scripts that show different ways to use the Experiment Library.
 
-If you run into problems, find bugs, or feel that some useful functionality is missing, send an email to `seattle-devel -at- cs -dot- washington -dot- edu.`
+If you run into problems, find bugs, or feel that some useful functionality is missing, send an email to `seattle-devel -at- cs -dot- washington -dot- edu.`
+
+= Documentation =
+
+The best documentation is just to look at [browser:seattle/trunk/experimentmanager/experimentlib.py the comments in experimentlib.py].
+
+Second to that is to look at [browser:seattle/trunk/experimentmanager/examples/ the examples].
