@@ -128,9 +128,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||listenformessage||return a udpserversocket that can be used to accept incoming messages||new||
 
-||settimer||sets a thread to execute at a time in the future (callback)||example 1.4||
-
-||canceltimer||cancels an thread that has not yet started||example 1.5||
+||createthread||creates a new thread to execute a function with a set of arguments||new (example 1.4)||
 
 ||circularlog||logs information to the circular logging buffer (replaces print)||example 1.1||
 
@@ -634,15 +632,14 @@ Terminates the program immediately.   The program will not execute the "exit" ca
       None.
 
    <Side Effects>
-      Interactions with timers and connection / message receiving functions 
-      are undefined.   These functions may be called after exit and may 
-      have undefined state.
+      There isn't a guaranteed time which this function is realized.   This means that
+      other threads may execute while this call is being processed.
 
    <Resource Consumption>
       None.
 
    <Returns>
-      None.   The current thread does not resume after exit
+      The current thread does not resume after exit
 
 [[BR]]
 ==== getlock() ====
@@ -785,27 +782,23 @@ Returns a string of random bytes of data derived from a hardware source of rando
       The string of bytes.
 
 [[BR]]
-==== settimer(waittime, function, args) ====
+==== createthread(function, args) ====
 ----
 
-Sets a timer that when it expires will start a new thread to call a function with a set of arguments.   The thread is charged to your program when you set the timer (instead of when the timer fires).   This function returns a timer handle that may be used to cancel the timer before the thread is started.   
+Start a new thread to call a function with a set of arguments.   The thread is charged to your program.
 
  * Doc string:
 
 
    <Purpose>
-      Allow the current thread to set an thread to be performed in the future.
-      This does not guarantee the thread will be triggered at that time, only
-      that it will be triggered after that time.
+      Cause the execution of a function in another thread.   The current thread 
+      of execution will also proceed.
 
    <Arguments>
-      waittime:
-         The minimum amount of time to wait before delivering the thread
       function:
          The function to call
       args:
-         The arguments to pass to the function.   This should be a tuple or 
-         list
+         The arguments to pass to the function.   This can be a tuple or a list
 
    <Exceptions>
       None.
@@ -817,39 +810,7 @@ Sets a timer that when it expires will start a new thread to call a function wit
       This operation consumes a thread.
 
    <Returns>
-      A timer handle, for use with canceltimer
-
-[[BR]]
-==== canceltimer(timerhandle) ====
-----
-
-Try to cancels a timer handle that has not started a thread.   Returns False if the thread has been started already (and so cannot be canceled).   Returns True if the timer was successfully canceled.
-
-
- * Doc string:
-
-
-   <Purpose>
-      Cancels a timer.
-
-   <Arguments>
-      timerhandle:
-         The handle of the timer that should be stopped.   Handles are 
-         returned by settimer
-
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      None.
-
-   <Resource Consumption>
-      If the timer was canceled, this operation stops consuming a thread.
-
-   <Returns>
-      If False is returned, the timer already fired or was canceled 
-      previously.   If True is returned, the timer was canceled
-
+      None
 
 
 
