@@ -423,6 +423,8 @@ Filenames may only be in the current directory and contain lowercase letters, nu
 
 '''Conrad: FAT is limited to [http://en.wikipedia.org/wiki/FAT32 255 UTF-16 characters] (as is NTFS), ext2 to [http://en.wikipedia.org/wiki/Ext2 255 characters] (as are XFS and btrfs). Are there other filesystems we expect people to use (I don't think limiting to 8.3 is reasonable anymore)?'''
 
+'''Justin C: Wikipedia has a list and the modern FSes seem to allow a minimum of 30 characters for a file name.   30 characters seems reasonable and gives more than 10^47 possible file names.'''
+
 The writeable parameter determines whether the file handle is read-only or capable of both reading and writing. Neither mode truncates the file on open.
 
 If create is True, the file is created if it does not exist.
