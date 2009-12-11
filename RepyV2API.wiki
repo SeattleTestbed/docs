@@ -447,11 +447,11 @@ If create is True, the file is created if it does not exist.
            If True, create the file if it doesn't exist already.
 
      <Exceptions>
-        ~~As with open, this may raise a number of errors.~~
+        TypeError/ValueError if one of the arguments is invalid (this includes e.g. the length being longer than 255 characters)
 
-        XXXException if one of the arguments is invalid
+        FileNotFoundError if the file does not exist.
 
-        XXXException if the file does not exist and should not be created
+        XXXException if the file has incorrect permissions (I don't think it's reasonable to expect repy programs to catch this and choose a different filename, but I recognize it may have merit -- what do others think?)
 
      <Side Effects>
         Opens a file on disk, using a file descriptor.
@@ -467,7 +467,9 @@ If create is True, the file is created if it does not exist.
 ==== file.close() ====
 ----
 
-Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ~~!ValueError~~ XXXException after the file has been closed. Calling close() more than once is allowed.
+Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ~~!ValueError~~ XXXException after the file has been closed. ~~Calling close() more than once is allowed.~~
+
+'''Conrad: Python raises !ValueError in such situations. Any reason we think this should change? Also: I think (for consistency) we should raise !ValueError if they try to call ''any'' method on a closed file -- close() included.'''
 
  * Doc string:
 
