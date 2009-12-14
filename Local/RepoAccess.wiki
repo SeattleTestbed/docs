@@ -2,10 +2,48 @@
 
 To check out the repository anonymously (read-only):
 
-  {{{svn co https://seattle.cs.washington.edu/svn/seattle/trunk/}}}
+{{{
+svn co https://seattle.cs.washington.edu/svn/seattle/trunk/
+}}}
 
-URL to Browse the repository through a web-browser:
+If you have previously checked out from our repository using an http:// url rather than https://, you can change using the following command (issued from the root of your local svn folder):
+
+{{{
+svn switch --relocate http://seattle.cs.washington.edu/svn https://seattle.cs.washington.edu/svn
+}}}
+
+This command will work regardless of the actual directory you have checked out (that is, whether you've checked out /seattle/trunk or anything else).
+
+Depending on your system, you may be asked to accept the SSL certificate. Here is an example, showing our certificate's correct SHA1 fingerprint:
+
+{{{
+~/trunk$ svn switch --relocate http://seattle.cs.washington.edu/svn https://seattle.cs.washington.edu/svn
+Error validating server certificate for 'https://seattle.cs.washington.edu:443':
+ - The certificate is not issued by a trusted authority. Use the
+   fingerprint to validate the certificate manually!
+Certificate information:
+ - Hostname: seattle.cs.washington.edu
+ - Valid: from Tue, 20 Oct 2009 20:13:04 GMT until Thu, 21 Oct 2010 19:06:54 GMT
+ - Issuer: 07969287, http://certificates.godaddy.com/repository, GoDaddy.com, Inc., Scottsdale, Arizona, US
+ - Fingerprint: c3:b7:3e:d9:2c:f7:3d:45:7b:68:40:81:27:9a:51:45:a1:97:a6:6f
+(R)eject, accept (t)emporarily or accept (p)ermanently?
+}}}
+
+After running the command, you can verify your new settings with `svn info`:
+{{{
+~/trunk$ svn info
+...
+URL: https://seattle.cs.washington.edu/svn/seattle/trunk
+Repository Root: https://seattle.cs.washington.edu/svn
+...
+}}}
+
+= Browsing SVN through Trac =
+
+URL to Browse the repository through a web browser:
   https://seattle.cs.washington.edu/browser/seattle/trunk
+
+This is available to anonymous users.
 
 = Developer Access =
 
