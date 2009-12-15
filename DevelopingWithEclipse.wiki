@@ -74,6 +74,10 @@ but some of the instructions or names of menu items may change slightly.
 {{{
 svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk
 }}} 
+    If you don't have ssh access and want to use read-only svn access, you can use:
+{{{
+svn co https://seattle.cs.washington.edu/svn/seattle/trunk
+}}} 
     * That will actually get you a trunk/ directory inside of the seattle
       directory. That's fine for our purposes. If you want things setup
       differently, you can fiddle around with it as needed. For example, if you
