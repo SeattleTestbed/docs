@@ -48,6 +48,10 @@ This page contains information useful to developers working on Seattle
    * [wiki:ProductionGeniHTTPService Updating] the production SeattleGENI code
    * [wiki:BuildDemokit Building the Demokit]
 
+ * Developer Resources
+   * [ExperimentLibrary Experiment Library] for use in scripting communication with nodes, etc.
+   * [DevelopingWithEclipse Developing with Eclipse]
+
  * Project Resources
    * [SeattleResources A full listing of Seattle project services]
 
