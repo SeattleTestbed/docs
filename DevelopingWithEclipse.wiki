@@ -5,7 +5,7 @@ officially recommended (there is no official recommendation), but rather is bein
 by jsamuel for those who'd like to use Eclipse with python syntax highlighting (including
 of .repy files) as well as for the static analysis error detection that !PyDev provides, which
 is better than that provided by pylint and is more useful because you see the errors and
-warnings marked directly in your code. With PyDev setup properly, you can also not worry
+warnings marked directly in your code. With !PyDev setup properly, you can also not worry
 about accidentally using tabs and will be told if you haven't used the 2-space intent
 style used by our project.
 
