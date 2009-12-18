@@ -110,7 +110,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||randombytes||similar to Python's os.urandom() function||(new call) example 4.2||
 
-||getlock||similar to Python's threading.Lock() constructor||example 1.6||
+||createlock||similar to Python's threading.Lock() constructor||example 1.6||
 
 ||exitall||similar to Python's sys.exit() or os._exit()||example 3.2||
 
@@ -652,7 +652,7 @@ Terminates the program immediately.   The program will not execute the "exit" ca
       The current thread does not resume after exit
 
 [[BR]]
-==== getlock() ====
+==== createlock() ====
 ----
 
 Returns a lock object that can be used for mutual exclusion and critical section protection.
@@ -683,7 +683,7 @@ Returns a lock object that can be used for mutual exclusion and critical section
 ==== lock.acquire(blocking=1) ====
 ----
 
-Blocks until the lock is available, then takes it (lock is an object obtained by calling getlock()).
+Blocks until the lock is available, then takes it (lock is an object obtained by calling createlock()).
 
 If the optional "blocking" argument is False, the method returns False immediately instead of waiting to acquire the lock; if the lock is available it takes it and returns True, as if it were called with no argument.
 
