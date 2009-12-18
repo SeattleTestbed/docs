@@ -231,12 +231,12 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       The localhost's IP address
 
 [[BR]]
-==== sendmessage(desthost, destport, message, localip=None, localport=None) ====
+==== sendmessage(desthost, destport, message, localip, localport) ====
 ----
 
 (rename of ~~sendmess~~)
 
-Sends a UDP message to a destination host / port.   By default the system selects a localip and port for the outgoing message, but this can be overridden by passing in arguments that specify which port and IP to use.   If either the localip or localport are used, both must be.   Returns the number of bytes sent.
+Sends a UDP message to a destination host / port using a specified localip and localport.   Returns the number of bytes sent.
 
  * Doc string:
 
@@ -250,12 +250,11 @@ Sends a UDP message to a destination host / port.   By default the system select
          The port to send the message to
       message:
          The message to send
-      localhost (optional):
+      localhost:
          The local IP to send the message from 
-      localport (optional):
+      localport:
          The local port to send the message from 
 
-      Note: if you specify localhost, you must specify localport
 
    <Exceptions>
       AddressBindingError (descends NetworkError) when the local IP isn't a local IP
@@ -268,7 +267,7 @@ Sends a UDP message to a destination host / port.   By default the system select
       None.
 
    <Resource Consumption>
-      This operation consumes 64 bytes + number of bytes of the message that were transmitted.   This requires that the localport (if specified) is allowed.
+      This operation consumes 64 bytes + number of bytes of the message that were transmitted.   This requires that the localport is allowed.
 
    <Returns>
       The number of bytes sent on success
@@ -293,7 +292,7 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
    <Exceptions> 
       PortInUseException (descends NetworkError) if the port cannot be listened on because some other process on the system is listening on it
 
-      XXXException if there is already a udpserversocket with the same IP and port. (Conrad: I don't think we care (what type of exception this is). This is a coding error, not something you write code to catch / deal with.)
+      PortInUseException if there is already a udpserversocket with the same IP and port.
 
       TypeError/ValueError if the port number or ip is wrong type or obviously invalid.
 
@@ -314,12 +313,12 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
 
 [[BR]]
-==== openconnection(desthost, destport, localip=None, localport=None, timeout = 5) ====
+==== openconnection(desthost, destport, localip, localport, timeout = 5) ====
 ----
 
 (rename of ~~openconn~~)
 
-Open a TCP connection to a remote computer, returning a socket object.   Optionally a localip and localport to connect from can be specified and if one is specified both must be.   There is a timeout value that can be set to limit the amount of time the system will wait for a response before abandoning the attempt to connect.
+Open a TCP connection to a remote computer, returning a socket object.   There is a timeout value that can be set to limit the amount of time the system will wait for a response before abandoning the attempt to connect.
 
  * Doc string:
 
@@ -331,14 +330,13 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
          The host to open communications with
       destport:
          The port to use for communication
-      localip (optional):
+      localip:
          The local ip to use for the communication
-      localport (optional):
+      localport:
          The local port to use for communication
       timeout (optional):
          The maximum amount of time to wait to connect
 
-      Note: if you specify localip, you must specify localport
 
    <Exceptions>
       AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
@@ -360,7 +358,7 @@ Open a TCP connection to a remote computer, returning a socket object.   Optiona
       None.
 
    <Resource Consumption>
-      This operation consumes 64*2 bytes of netsend (SYN, ACK) and 64 bytes of netrecv (SYN/ACK).   This requires that the localport (if specified) is allowed.   Upon success, this call consumes an outsocket.
+      This operation consumes 64*2 bytes of netsend (SYN, ACK) and 64 bytes of netrecv (SYN/ACK).   This requires that the localport is allowed.   Upon success, this call consumes an outsocket.
 
    <Returns>
       A socket-like object that can be used for communication.   Use send, 
@@ -387,7 +385,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
    <Exceptions> 
       PortInUseException (descends NetworkError) if another process has already bound the ip/port 
 
-      XXXException if there is already a tcpserversocket with the same IP and port. (Conrad: I don't think we care (what type of exception this is). This is a coding error, not something you write code to catch / deal with.)
+      PortInUseException if there is already a tcpserversocket with the same IP and port. 
 
       TypeError/ValueError if the IP or port number is invalid.
 
@@ -400,7 +398,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
       The IP / port combination cannot be reused by a tcpserversocket until closed.
 
    <Resource Consumption>
-      This call consumes an insocket and requires that the localport (if specified) is allowed.
+      This call consumes an insocket and requires that the localport is allowed.
 	 
    <Returns> 
       The tcpserversocket. 
@@ -417,13 +415,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 Open a file, returning an object of the file type. 
 
-Filenames may only be in the current directory and contain lowercase letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
-
-'''Justin C: What is the allowed length of file names?'''
-
-'''Conrad: FAT is limited to [http://en.wikipedia.org/wiki/FAT32 255 UTF-16 characters] (as is NTFS), ext2 to [http://en.wikipedia.org/wiki/Ext2 255 characters] (as are XFS and btrfs). Are there other filesystems we expect people to use (I don't think limiting to 8.3 is reasonable anymore)?'''
-
-'''Justin C: Wikipedia has a list and the modern FSes seem to allow a minimum of 30 characters for a file name.   30 characters seems reasonable and gives more than 10^47^ possible file names.'''
+Filenames may only be in the current directory and contain lowercase letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  Filenames must be no more than 30 characters long.
 
 The writeable parameter determines whether the file handle is read-only or capable of both reading and writing. Neither mode truncates the file on open.
 
@@ -453,7 +445,7 @@ If create is True, the file is created if it does not exist.
 
         FileNotFoundError if the file does not exist.
 
-        XXXException if the file has incorrect permissions (I don't think it's reasonable to expect repy programs to catch this and choose a different filename, but I recognize it may have merit -- what do others think?)
+        An internal error will cause the program to terminate if the file has incorrect permissions or similar errors occur.
 
      <Side Effects>
         Opens a file on disk, using a file descriptor.
