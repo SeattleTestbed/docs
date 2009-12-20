@@ -3,3 +3,22 @@ Please see attached paper for information about Containment in the Seattle Testb
 
 Module descriptions and server startup details coming soon...
 
+
+== CNC Core Modules ==
+The following modues are used in the Seattle Node Containment system. Please note that unless specified otherwise, when we refer to the term userkey, we mean cncuserkey, not the userkeys Seattle uses to assign vessels. Cncuserkeys are essentially hashes of Seattle userkeys.
+
+keyrangelib.repy - Library that provides utility and helper functions for key range related tasks. These include tasks such as converting from Seattle userkeys to cncuserkeys, or looking up the address of the supporting server for a particular userkey.
+
+cncSignData.repy - Handles tasks related to packet signing. This is essentially a wrapper around signeddata.repy that makes it easier to use with the containment system.
+
+cncperformance.repy - Includes funtions whose purpose is to improve the performance of the cnc system. Currently it only provides functionality for compressing and restoring ip,port information, but more may be added to this modeule later as optimizations are made.
+
+cncmultifilelog.repy - provides simple interface to the cnc system for logging. It allows for two types of logging, single and multi-file. Multifile logging splits logs accross many files which is helpful for downloading experiment data from vessels as it avoids timeouts associated with retriveving what would otherwise be massive log files.
+
+cncFileParser.repy - used to read configuration files for both client and server.
+
+cncperfutils.repy - This module handles tracking of the order packets arrive in for diagnostic/debugging purposes. All calls to this method should be removed from production code (debug and experiments only).
+
+cncclient.repy - provides client interface to the containment system. It handles registration, update processing and otehr cnc related tasks transparently. To use this library, the caller (which will be the dedicated vessel on each node hosting the client service) must first call cncclient_initialize, specifying a free port that can be used by the system. cnc_sendmess and cnc_openconn are written to handle the restricting of sending traffic and opening connections. Similar methods need to be written for receiving traffic and waiting for connections.
+
+cncStandaloneServer.repy - Server module for the containment system. Handles registration, update dissemination, and query requests for a specified keyrange.
