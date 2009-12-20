@@ -1,7 +1,7 @@
 = Containing Node Communication In Seattle =
 Please see attached paper for information about Containment in the Seattle Testbed.
 
-Module descriptions and server startup details coming soon...
+server startup details coming soon...
 
 
 == CNC Core Modules ==
