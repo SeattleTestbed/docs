@@ -12,11 +12,15 @@ Start by creating a directory using preparetest.py. We'll call this directory te
 4) Copy 'restrictions.cnc' into the test directory if you are planning to run the Seattle Node Directory Service (cncStandaloneServer.repy is used to run this service).
 
 5) If you are planning to run the Seattle Node Directory Service, run:
+{{{
 python repypp.py cncStandaloneServer.repy cncStandaloneServer.py
+}}}
 
 If you are planning to run experiments from the directory, run:
+{{{
 python repypp.py cncallpairsping.repy cncallpairsping.py
 python repypp.py deploycncexperiment.mix deploycncexperiment.py
+}}}
 
 6) If you are planning to run the Seattle Node Directory Service, copy testdir to every machine in your farm.
 
@@ -24,7 +28,9 @@ python repypp.py deploycncexperiment.mix deploycncexperiment.py
 == Running the Seattle Node Directory Service ==
 Prior to this section, please complete the steps in the 'Building and Configuring' Section
 On every machine on your farm run:
+{{{
 python repy.py restrictions.cnc cncStandaloneServer.py <local available port to use> <user key range lower> <user key range upper> <server public key> <server private key>
+}}}
 Please see the paper attached for more information on keyranges. Basically, the combined keyranges of all servers on your farm should cover the entire keyspace from 0 to 999, endpoints inclusive. When specifying the keyrange parameters to the server, the endpoints are includes. For example, if I specify lower 0 and upper 333 for a server, that server will cover the keyrange from 0 to 333 with endpoints 0 and 333 included. Keyranges of different servers should not overlap. For example, it would not be correct to have one server with keyrange 0-333 and another server with keyrange 333-666, since these ranges overlap for the value 333.
 
 == Running an Experiment ==
