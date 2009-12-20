@@ -1,4 +1,4 @@
-== Containing Node Communication In Seattle ==
+= Containing Node Communication In Seattle =
 Please see attached paper for information about Containment in the Seattle Testbed.
 
 Module descriptions and server startup details coming soon...
@@ -19,6 +19,19 @@ cncFileParser.repy - used to read configuration files for both client and server
 
 cncperfutils.repy - This module handles tracking of the order packets arrive in for diagnostic/debugging purposes. All calls to this method should be removed from production code (debug and experiments only).
 
-cncclient.repy - provides client interface to the containment system. It handles registration, update processing and otehr cnc related tasks transparently. To use this library, the caller (which will be the dedicated vessel on each node hosting the client service) must first call cncclient_initialize, specifying a free port that can be used by the system. cnc_sendmess and cnc_openconn are written to handle the restricting of sending traffic and opening connections. Similar methods need to be written for receiving traffic and waiting for connections.
+cncclient.repy - provides client interface to the containment system. It handles registration, update processing and other cnc related tasks transparently. To use this library, the caller (which will be the dedicated vessel on each node hosting the client service) must first call cncclient_initialize, specifying a free port that can be used by the system. cnc_sendmess and cnc_openconn are written to handle the restricting of sending traffic and opening connections. Similar methods need to be written for receiving traffic and waiting for connections.
 
 cncStandaloneServer.repy - Server module for the containment system. Handles registration, update dissemination, and query requests for a specified keyrange.
+
+== Experiment Modules ==
+These modules are used only for running experiments, collecting data, and analyzing data.
+
+cncallpairsping.repy - all-pairs-ping program that has containment restrictions on sending traffic. It detects which addresses to ping using the seattle contralized advertize server (looking up the specific experiment name, each client only pings other client with which it shares at least one key). For debugging and test purposes, it provides callers the option of specifying a set of userkeys to use (in place of Seattle userkeys). 
+
+cncdeploylib.mix - provides numerous low level utilities for management of vessels. These include uploading of files, collecting log information (which is split accross multiple files as it has been collected with multifilelog), and ressetting/stopping of vessels.
+
+deployallpairspingtest.mix - provides methods used to automatically deploy the all pairs ping program on vessels. Not standalone, used to provide helper methods to deploycncexperiment.mix
+
+deploycncservers.mix - provides methods used to automatically deploy the cnc servers on vessels. Note, this method of testing the cnc system is not reccomended. Not standalone, used to provide helper methods to 
+
+deploycncexperiment.mix - support for automatically aquiring arbitrary numbers of vessels and running containment experiments. The recommeded way to use this script is to first manually configure and start the server, then use this script to aquire and start clients.
