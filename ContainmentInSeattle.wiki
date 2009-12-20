@@ -1,8 +1,25 @@
 = Containing Node Communication In Seattle =
 Please see attached paper for information about Containment in the Seattle Testbed.
 
-server startup details coming soon...
+server and experiment start details coming soon...
 
+== Building and Configuring ==
+Start by creating a directory using preparetest.py. We'll call this directory testdir.
+1) In testdir, copy all CNC Core Modules, as listed below. If you are planning to run experiments, also copy the CNC experiment modules (listed below) to testdir.
+
+2) A config file must be created that will describe the topology of the containment server farm (Seattle Node Directory Service). It must be named 'cnc_server_list.txt', and must list the information of every server in the farm. Each line describes a different server, and each line must follow this exact format: <server_ip>:<server_port> <server public key>
+
+3) A config file must be created that will describe the backup configuration of the containment server farm (Seattle Node Directory Service). The file must be named 'cnc_backup_config.txt.' If it is left empty, it indicates the server farm should use no backup configuration. This is fine for most experiments. See comments on cncFileParser_read_backup_config in cncFileParser.repy for information on how to specify a backup configuration.
+
+4) Copy 'restrictions.cnc' into the test directory if you are planning to run the Seattle Node Directory Service (cncStandaloneServer.repy is used to run this service).
+
+5) If you are planning to run the Seattle Node Directory Service, copy testdir to every machine in your farm.
+
+
+== Running the Server ==
+Prior to this section, please complete the steps in the 'Building and Configuring' Section
+
+<remainder of section coming soon>
 
 == CNC Core Modules ==
 The following modues are used in the Seattle Node Containment system. Please note that unless specified otherwise, when we refer to the term userkey, we mean cncuserkey, not the userkeys Seattle uses to assign vessels. Cncuserkeys are essentially hashes of Seattle userkeys.
