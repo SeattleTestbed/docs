@@ -5,6 +5,8 @@ Please see attached paper for overview and detailed explanation about Containmen
 Start by creating a directory using preparetest.py. We'll call this directory testdir.
 
 1) In testdir, copy all CNC Core Modules, as listed below. If you are planning to run experiments, also copy the CNC experiment modules (listed below) to testdir.
+Also, copy the 'seattlegeni_xmlrpc.py' file from trunk\seattlegeni\xmlrpc_clients to the testdir directory.
+Finally, copy the 'send_gmail.py' file from trunk\integrationtests\common to the testdir directory.
 
 2) A config file must be created that will describe the topology of the containment server farm (Seattle Node Directory Service). It must be named 'cnc_server_list.txt', and must list the information of every server in the farm. Each line describes a different server, and each line must follow this exact format: <server_ip>:<server_port> <server public key>
 
