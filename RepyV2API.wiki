@@ -24,6 +24,8 @@ I have made the following resource consumption simplifications to make the inter
 
 
 
+For more information on the Exception hierarchy for Repy 2.0, see FutureRepyExceptionHierarchy.
+
 
 
 [[BR]]
