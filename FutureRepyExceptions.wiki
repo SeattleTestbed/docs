@@ -5,7 +5,7 @@
    * InternetConnectivityError
    * AddressBindingError
    * ConnectionRefusedException
-   * LocalIPChanged
+   * [wiki:LocalIPChanged]
    * SocketClosedLocal
    * SocketClosedRemote
 
