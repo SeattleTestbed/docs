@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, SocketWouldBlockException is raised when a socket operation -- namely, `recv()`, `acceptconnection()`, or the UDP equivalent of `recv()` -- would block. This signals to the repy program that no data is available for reading at this time; instead the program should continue to poll until data is available, or do something else in the meantime.
