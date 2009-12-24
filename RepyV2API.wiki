@@ -488,48 +488,47 @@ Close the file. A closed file cannot be read or written any more. Any operation 
       Nothing.
 
 [[BR]]
-==== file.readat(size=None, offset=None) ====
+==== file.readat(sizelimit, offset) ====
 ----
 
-If offset is an integer, first seek to that location in the file. (If it is omitted or None, no seek is performed.)  Each file object instance has its own offset even if they operate on the same file.      
-
-Reads up to size bytes of the rest of the (open) file, returning what is read. If size is omitted or None, the file is read to EOF.
+Seek to a location in a file and reads up to sizelimit bytes from the file, returning what is read. If sizelimit is None, the file is read to EOF.
 
  * Doc string:
 
    <Purpose>
-      Reads from a file handle.
+      Reads from a file handle.   Reading 0 bytes informs you if you have read past the end-of-file, but returns no data.
 
    <Arguments>
-      size (optional) - Specify a maximum number of bytes to read from the
+      sizelimit - Specify a maximum number of bytes to read from the
                         file.   Hitting EOF will read less.
 
-      offset (optional) - Seek to a specific location in the file before
+      offset - Seek to a specific location in the file before
                           reading.
 
    <Exceptions>
       ValueError if the file is closed.
 
-      TypeError if offset or size is not an integer.
+      TypeError if offset or sizelimit is not a non-zero integer.
+
+      XXXException if trying to read past the end of the file
 
    <Side Effects>
-      Seeks to offset (if specified) and advances the file pointer by the
-      number of bytes read.
+      Reads data from persistent storage.   All write calls that occurred before this operation will be reflected in the data that is read.
 
    <Resource Consumption>
       Consumes 4K of fileread for each 4K aligned-block of the file read.   All reads will consume at least 4K.   
 
    <Returns>
-      The data that was read; this may be the empty string only if we
-      have reached the end of the file or size was non-positive.
+      The data that was read; this may be the empty string if we
+      have reached the end of the file.    The only other case where
+      the returned data is empty is when the sizelimit was zero and 
+      the offset was within the file.
 
 [[BR]]
-==== file.writeat(data, offset=None) ====
+==== file.writeat(data, offset) ====
 ----
 
-If offset is an integer, first seek to that location in the file. If it is omitted or None, no seek is performed.   Each file object instance has its own offset even if they operate on the same file.      
-
-Write some data to a file.
+Seek to the offset in the file and then write some data to a file.
 
  * Doc string:
 
@@ -545,15 +544,15 @@ Write some data to a file.
    <Exceptions>
       ValueError if the file is closed.
 
-      XXXException if the disk is out of space or some low level IO error occurs. (I don't think we care about this either -- do we expect authors of Repy programs to catch and handle such problems?)
+      An interal error terminates the program if the disk is out of space or some low level IO error occurs. 
 
-      TypeError if offset isn't an integer or data isn't a string.
+      TypeError if offset isn't an non-negative integer or data isn't a string.
+
+      XXXException if the offset is past the end of the file.
 
    <Side Effects>
-      If offset is included, seeks to offset.
-
-      Writes some data after the current filepointer position, advancing it.
-
+      Writes data to persistent storage.
+ 
    <Resource Consumption>
       Consumes 4K of filewrite for each 4K aligned-block of the file written.   All writes consume at least 4K.   
 
@@ -606,6 +605,8 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
       FileNotFoundError is raised if the file does not exist
 
       TypeError/ValueError if the filename param isn't the right type or is an invalid filename
+
+      '''Justin: ??? What if the file is open???'''
 
    <Side Effects>
       None
