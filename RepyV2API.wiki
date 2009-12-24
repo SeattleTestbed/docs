@@ -443,7 +443,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 
         FileNotFoundError if the file does not exist and create is false.
 
-        FileAlreadyOpenError if the file is already opened.   (This is handled at the system library level)
+        FileInUseError if the file is already opened.   (This is handled at the system library level)
 
         An internal error will cause the program to terminate if the file has incorrect permissions or similar errors occur.
 
