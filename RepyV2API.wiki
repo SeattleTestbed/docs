@@ -317,7 +317,7 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
 
 [[BR]]
-==== openconnection(desthost, destport, localip, localport, timeout = 5) ====
+==== openconnection(desthost, destport, localip, localport, timeout) ====
 ----
 
 (rename of ~~openconn~~)
@@ -338,7 +338,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
          The local ip to use for the communication
       localport:
          The local port to use for communication
-      timeout (optional):
+      timeout:
          The maximum amount of time to wait to connect
 
 
@@ -357,6 +357,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
 
       ValueError/TypeError if the arguments are invalid
 
+      '''Justin: What happens if the timeout is huge? Does this have any implications for the tcpserversocket?'''
 
    <Side Effects>
       None.
