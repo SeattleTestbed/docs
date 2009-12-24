@@ -46,6 +46,8 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ||callfunc||callfunc is a string that indicates if the program was called for initialization or exit.||example 1.1||
 ||mycontext||mycontext is a shared dictionary that is used in place of global variables.||example 1.3||
 
+'''Justin: Do callfunc and mycontext go away?   Are they implemented in a system library?'''
+
 [[BR]]
 
 ||Object Name||Short description||Tutorial Section||
