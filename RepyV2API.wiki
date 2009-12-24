@@ -443,7 +443,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 
         FileNotFoundError if the file does not exist and create is false.
 
-        XXXException if the file is already opened.   (This is handled at the system library level)
+        FileAlreadyOpenError if the file is already opened.   (This is handled at the system library level)
 
         An internal error will cause the program to terminate if the file has incorrect permissions or similar errors occur.
 
@@ -461,9 +461,11 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 ==== file.close() ====
 ----
 
-Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ~~!ValueError~~ XXXException after the file has been closed. ~~Calling close() more than once is allowed.~~
+Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ValueError after the file has been closed. ~~Calling close() more than once is allowed.~~
 
 '''Conrad: Python raises !ValueError in such situations. Any reason we think this should change? Also: I think (for consistency) we should raise !ValueError if they try to call ''any'' method on a closed file -- close() included.'''
+
+'''Conrad (2009-12-24): un-struck ValueError above until/unless we decide it's not appropriate.'''
 
  * Doc string:
 
@@ -509,7 +511,7 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
 
       TypeError if offset or sizelimit is not a non-zero integer.
 
-      XXXException if trying to read past the end of the file
+      SeekPastEndOfFileError if trying to read past the end of the file
 
    <Side Effects>
       Reads data from persistent storage.   All write calls that occurred before this operation will be reflected in the data that is read.
@@ -547,7 +549,7 @@ Seek to the offset in the file and then write some data to a file.
 
       TypeError if offset isn't an non-negative integer or data isn't a string.
 
-      XXXException if the offset is past the end of the file.
+      SeekPastEndOfFileError if the offset is past the end of the file.
 
    <Side Effects>
       Writes data to persistent storage.
@@ -605,7 +607,7 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
 
       TypeError/ValueError if the filename param isn't the right type or is an invalid filename
 
-      '''Justin: ??? What if the file is open???'''
+      FileInUseError if the file is already open.
 
    <Side Effects>
       None
@@ -717,7 +719,7 @@ Releases the lock. This call raises an exception (?) if the lock is already unlo
       None.
 
    <Exceptions>
-      XXXException if release() is called on an unlocked lock. '''Conrad: Do we want to raise an exception in this case?'''
+      LockDoubleReleaseError if release() is called on an unlocked lock.
 
    <Side Effects>
       Unlocks the object.
@@ -900,7 +902,7 @@ Receives data that was sent by the connected party using send.   Note that this 
 
      LocalIPChanged (descends NetworkError) if the local system connection is broken because the local system changes its IP address.
    
-     XXXException if the call would block.
+     SocketWouldBlockException if the call would block.
 
    <Side Effects>
      None
@@ -936,7 +938,7 @@ Sends data to the connected party.   Note that this may send less than the entir
 
      LocalIPChanged if the local system connection is broken because the local system changes its IP address.
 
-     XXXException if the call would block.   
+     SocketWouldBlockException if the call would block.   
 
    <Side Effects>
      None
@@ -1186,9 +1188,9 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
      object before evaluating the code.
 
    <Exceptions>
-     If the context cannot be converted to a !SafeDict due to safety issues, an XXXException
-     will be raised. Any exception that the code raises during evaluation will not be
-     caught. '''Conrad: do we care what exception this is? Should user code expect to catch/handle this?'''
+     If the context cannot be converted to a !SafeDict due to safety issues, an
+     internal error will be raised and the program will end. Any exception that
+     the code raises during evaluation will not be caught.
 
    <Side Effects>
      The provided context will likely be modified during execution.
