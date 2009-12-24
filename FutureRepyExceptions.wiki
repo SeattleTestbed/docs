@@ -8,6 +8,7 @@
    * [wiki:LocalIPChanged]
    * SocketClosedLocal
    * SocketClosedRemote
+   * SocketWouldBlockException
 
  * RestrictionError
    * PortRestrictedException
@@ -16,7 +17,12 @@
  
  * TimeoutException
 
- * FileNotFoundError
+ * FileError
+   * FileNotFoundError
+   * SeekPastEndOfFileError
+   * FileInUseError
+
+ * LockDoubleReleaseError
 
  * Python built-in exceptions:
    * TypeError
