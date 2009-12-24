@@ -76,13 +76,11 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||file.close||Close an open file.||example 2.1||
 
-||socket.recv||Read data from a socket||example 1.2||
+||socket.recv||Read data from a socket in a non-blocking manner||example 1.2||
 
-||socket.send||Send data on a socket||example 1.2||
+||socket.send||Send data on a socket in a non-blocking manner||example 1.2||
 
 ||socket.close||Closes a socket||example 3.2||
-
-||socket.willblock||Returns an indicator of whether or not a socket will block|| N/A (new call)||
 
 ||lock.acquire||Acquire the lock||example 1.6||
 
@@ -901,9 +899,11 @@ Receives data that was sent by the connected party using send.   Note that this 
      XXXException if the connection is broken due to a network problem. '''Conrad: is this substantially different from the socket being closed remotely?'''
 
      LocalIPChanged (descends NetworkError) if the local system connection is broken because the local system changes its IP address.
+   
+     XXXException if the call would block.
 
    <Side Effects>
-     If there is no buffered data, this call will block the thread until the other side calls send.
+     None
 
    <Resource Consumption>
      This operation consumes 64 + size of returned data in bytes of netrecv and 64 bytes of netsend (ACK).
@@ -936,8 +936,10 @@ Sends data to the connected party.   Note that this may send less than the entir
 
      LocalIPChanged if the local system connection is broken because the local system changes its IP address.
 
+     XXXException if the call would block.   
+
    <Side Effects>
-     This call may block the thread until the other side calls recv.
+     None
 
    <Resource Consumption>
      This operation consumes 64 + size of sent data in bytes of netsend and 64 bytes of netrecv (ACK).
@@ -945,37 +947,6 @@ Sends data to the connected party.   Note that this may send less than the entir
    <Returns>
      The number of bytes sent. '''Be sure not to assume this is always the
      complete amount!'''
-
-
-[[BR]] 
-==== socket.willblock() ====
-----
-
-(added call)
-
-Returns a tuple of booleans {{{(recvwillblock,sendwillblock)}}} indicating if a socket may block if send or recv are called.   This allows the caller to determine if a deadlock may occur if the call is performed.   Note that returning True doesn't necessarily mean the call will block.   It could be that data was recently consumed / sent so the call will now proceed without blocking.
-
- * Doc string:
-
-   <Purpose>
-     Determines if a socket may block if send or recv are called.
-
-   <Arguments>
-     None.
-
-   <Exceptions>
-     SocketClosedLocal if the socket is closed locally.
-
-     SocketClosedRemote if the socket was closed remotely '''and''' there is no data pending for recv.
-
-   <Side Effects>
-     None.
-
-   <Resource Consumption>
-     None.
-
-   <Returns>
-     A tuple (recvwillblock, sendwillblock) of booleans.   
 
 
 
