@@ -1253,7 +1253,7 @@ Determines the resource usage limits and current usage.
      Calls to this function will be serialized.
 
    <Resource Consumption>
-      None (???)
+      None
 
    <Returns>
       A tuple of dictionaries (limits, usage). Limits is a dictionary which contains the maximum utilization
