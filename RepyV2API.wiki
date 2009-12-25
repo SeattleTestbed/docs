@@ -507,9 +507,9 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
                           reading.
 
    <Exceptions>
-      ValueError if the file is closed.
+      ValueError if the file is closed or if the offset or sizelimit are negative.
 
-      TypeError if offset or sizelimit is not a non-zero integer.
+      TypeError if offset or sizelimit is not an integer.
 
       SeekPastEndOfFileError if trying to read past the end of the file
 
