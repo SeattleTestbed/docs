@@ -233,7 +233,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       The localhost's IP address
 
 [[BR]]
-==== sendmessage(desthost, destport, message, localip, localport) ====
+==== sendmessage(destip, destport, message, localip, localport) ====
 ----
 
 (rename of ~~sendmess~~)
@@ -249,13 +249,13 @@ Sends a UDP message to a destination host / port using a specified localip and l
       Send a message to a host / port
 
    <Arguments>
-      desthost:
-         The host to send a message to
+      destip:
+         The IP to send a message to
       destport:
          The port to send the message to
       message:
          The message to send
-      localhost:
+      localip:
          The local IP to send the message from 
       localport:
          The local port to send the message from 
@@ -281,7 +281,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
 [[BR]] 
 ==== listenformessage(localip, localport) ==== 
 ---- 
-Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.
+Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.   This call will raise an exception if it would block.
 
 
 '''Justin: Right now, I think we limit this to 4K.   Is that reasonable?   Should there be a message limit?'''
@@ -296,7 +296,7 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 	 	 
    <Arguments> 
       localip: 
-        The local IP or hostname to register the handler on 
+        The local IP to register the handler on 
       localport: 
          The port to listen on 
       
@@ -311,6 +311,7 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
       PortRestrictedException (descends ResourceException) if the port is restricted
 
+      XXXException if the call would block
  	 
    <Side Effects> 
       Prevents other udpserversockets from using this port / IP
@@ -324,7 +325,7 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
 
 [[BR]]
-==== openconnection(desthost, destport, localip, localport, timeout) ====
+==== openconnection(destip, destport, localip, localport, timeout) ====
 ----
 
 (rename of ~~openconn~~)
@@ -337,10 +338,10 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
       Opens a connection, returning a socket-like object
 
    <Arguments>
-      desthost:
-         The host to open communications with
+      destip:
+         The destination ip to open communications with
       destport:
-         The port to use for communication
+         The destination port to use for communication
       localip:
          The local ip to use for the communication
       localport:
@@ -352,7 +353,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
    <Exceptions>
       AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
 
-      PortInUseException (descends NetworkError) if the localport is already used
+      PortInUseException (descends NetworkError) if the localport is already used.   '''This doesn't make sense.   The ports can overlap so long as the tuple (localip, localport, destip, destport) is unique.'''
 
       PortRestrictedException (descends ResourceException) if the localport isn't allowed
 
@@ -381,7 +382,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
 [[BR]] 
 ==== listenforconnection(localip, localport) ==== 
 ---- 
-Binds to a IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.
+Binds to a IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.   This call raises an exception instead of blocking.
 
 * Doc string: 
 	 
@@ -390,7 +391,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 	 	 
    <Arguments> 
       localip: 
-        The local IP or hostname to register the handler on 
+        The local IP to listen on 
       localport: 
          The port to listen on 
       
@@ -405,6 +406,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
       AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
 
+      XXXException if the call would block
  	 
    <Side Effects> 
       The IP / port combination cannot be reused by a tcpserversocket until closed.
