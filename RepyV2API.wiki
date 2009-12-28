@@ -242,6 +242,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
 
 '''Justin: It seems odd that this call allows less than the full message to be sent'''
 
+
  * Doc string:
 
    <Purpose>
@@ -284,6 +285,9 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
 
 '''Justin: Right now, I think we limit this to 4K.   Is that reasonable?   Should there be a message limit?'''
+
+
+'''Justin: I believe the current implementation of UDP callbacks does not use non-blocking sockets'''
 
 * Doc string: 
 	 
