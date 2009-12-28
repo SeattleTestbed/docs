@@ -240,6 +240,8 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
 
 Sends a UDP message to a destination host / port using a specified localip and localport.   Returns the number of bytes sent.
 
+'''Justin: It seems odd that this call allows less than the full message to be sent'''
+
  * Doc string:
 
    <Purpose>
@@ -279,6 +281,9 @@ Sends a UDP message to a destination host / port using a specified localip and l
 ==== listenformessage(localip, localport) ==== 
 ---- 
 Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.
+
+
+'''Justin: Right now, I think we limit this to 4K.   Is that reasonable?   Should there be a message limit?'''
 
 * Doc string: 
 	 
