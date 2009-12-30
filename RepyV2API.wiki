@@ -353,7 +353,9 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
    <Exceptions>
       AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
 
-      PortInUseException (descends NetworkError) if the localport is already used.   '''This doesn't make sense.   The ports can overlap so long as the tuple (localip, localport, destip, destport) is unique.'''
+      PortInUseException (descends NetworkError) if the (localip, localport, destip, destport) tuple is already used.
+
+'''Conrad: Fixed to only raise if uniqueness property is not met. I think the exception name makes enough sense in this circumstance, but I could see virtue in adding a new one. Thoughts?'''
 
       PortRestrictedException (descends ResourceException) if the localport isn't allowed
 
