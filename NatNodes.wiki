@@ -1,0 +1,53 @@
+= UNDER CONSTRUCTION  THIS PAGE IS NOT COMPLETE=
+
+
+= Bringing NAT NODES into the Testbed = 
+
+
+
+----
+
+== What are NAT NODES ==
+
+Our testbed is made up of donated resources from around the world, giving us a testbed that models the behavior of the real Internet.  As such some of the nodes of our testbed are behind middle boxes such as Network Address Translators and Fire walls.  
+
+For testbed users to be able to acquire and use vessels we need to open connections to the controlling node manager.  If the node manager is behind a middle box this can be a problem.  To ensure such connectivity is possible we use a NAT Forwarding technique.
+----
+== NAT Forwarding in the Seattle Testbed ==
+
+NAT Forwarding is a method used to gain bi-directional connectivity in the presence of a middle box.  NAT nodes can open outgoing connections, but may experience troubles when listening for incoming connections. THe process takes place in BLANK steps.
+
+1. Using the NAT forwarding library a node that would normally listen for an incoming TCP connection (a server) will instead actively open a connection to an intermediate node (a forwarder).  This TCP connection persists for as long as the server needs to listen for connections.
+
+2.  The NAT forwarding library on the server application advertises a key (unique identifier for the node) and the connection information (an IP and port) for the forwarder.
+
+3.  A testbed user who wants to access a vessel will use a client application to do so.
+
+4. The NAT forwarding library on the client application will look up the key corresponding to the server (node manager) it wants to connect to and obtain connection information for the forwarder. The client then establishes a TCP connection to the forwarder.
+
+5. The forwarder receives a connection request from the client, and passes the request to the NAT forwarding library on the server.  The server establishes a new connection to the forwarder.  The forwarder then begins transparently passing traffic between the client and server.
+
+6. The NAT forwarding library on both the client and server applications passes a TCP-socket object up the application, the socket provides a "virtual" TCP connection, with the forwarder invisible to the application itself.  
+
+----
+INSERT DIAGRAM HERE
+----
+
+== Intermittent connectivity / IP address changes ==
+
+----
+
+== Forwarders ==
+
+discuss that forwarders are a deployed service
+discuss reconnection
+----
+
+
+== Performance ==
+explain why forwarding is good enough 
+----
+
+== Using the Vessels on NAT Nodes ==
+explain that communications between vessels are not automatically forwarded
+----
