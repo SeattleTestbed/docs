@@ -30,7 +30,7 @@ NAT Forwarding is a method used to gain bi-directional connectivity in the prese
 6. The NAT forwarding library on both the client and server applications passes a TCP-socket object up the application, the socket provides a "virtual" TCP connection, with the forwarder invisible to the application itself.  
 
 ----
-INSERT DIAGRAM HERE
+[[Image(NatNodes.jpg)]]
 ----
 
 == Intermittent connectivity / IP address changes ==
