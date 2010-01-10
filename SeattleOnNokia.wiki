@@ -1,0 +1,33 @@
+= Using Seattle on the Nokia N800 =
+Explains how to install Seattle as well as running the unit tests on the Nokia N800 Internet Tablet.
+----
+[[TOC(inline)]]
+----
+[[BR]]
+== Sample Usage ==
+Running from trunk/dist directory: [[BR]]
+{{{
+python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey outputdir [version]
+}}}
+----
+[[BR]]
+== Step by Step ==
+----
+ 1. Make sure you are operating on a Linux system.
+ 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning.
+ 1. Navigate to the trunk/dist directory.
+ 1. Run the program (make_base_installers.py) with the following arguments:
+   1. Various flags that will modify the behavior of the program. Include "m" to create a Mac installer, "l" to create a Linux installer, "w" to create a Windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported Operating Systems, and "t" (optional) to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
+   1. The path to trunk; for example, ".." if you are running from the dist directory.
+   1. The path to the public key that the installation will eventually use to communicate with the software updater.
+   1. The path to the private key that the installation will eventually use to communicate with the software updater.
+   1. The path to the output directory that you wanted any created installers to end up in.
+   1. (Optional) The version of the installer which will be included in the installer name.
+[[BR]]
+== Using the base installers to test your code ==
+----
+You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
+{{{
+python make_base_installers.py at .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir
+}}}
+Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample vessel information.
