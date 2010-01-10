@@ -3,16 +3,34 @@ Explains how to install Seattle as well as running the unit tests on the Nokia N
 ----
 [[TOC(inline)]]
 ----
+
+== Tools Required ==
+In order to run Seattle and its unit tests, you will need two things: Python and root access to the system in the tablet. Python or utilities that will allow you root access can be obtained from the Application Manager. Go to ??? -> ???, select "maemo extras," and uncheck the "disable" box. Refresh the installable package list, and packages that we require should now show up.
+
 [[BR]]
-== Sample Usage ==
+
+=== Python ===
+For Python, you will need to install both ??? and ???.
 Running from trunk/dist directory: [[BR]]
 {{{
 python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey outputdir [version]
 }}}
-----
+
 [[BR]]
-== Step by Step ==
+
+=== Root access ===
+This is only required for the installation of Seattle. In particular, root access is required to configure Seattle to run on startup. There are several ways to obtain the root shell access. This article will describe two easy ways by which root shell access can be obtained.
+
+==== rootsh ====
+Find and install the "rootsh" package. The root shell package allows the user to gain root access through a simple command: "sudo gainroot" or simply "root".
+
+==== openssh ====
+Find and install the ??? package. During installation, you will be prompted for a new password. Enter your password of choice and remember it for later. Root shell access can be obtained using "ssh root@localhost". You will be prompted for the password you entered during installation.
+
 ----
+
+== Setting up Seattle ==
+[[BR]]
  1. Make sure you are operating on a Linux system.
  1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning.
  1. Navigate to the trunk/dist directory.
@@ -23,9 +41,10 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
    1. The path to the private key that the installation will eventually use to communicate with the software updater.
    1. The path to the output directory that you wanted any created installers to end up in.
    1. (Optional) The version of the installer which will be included in the installer name.
-[[BR]]
-== Using the base installers to test your code ==
 ----
+
+== Running Seattle Unit Tests ==
+[[BR]]
 You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
 {{{
 python make_base_installers.py at .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir
