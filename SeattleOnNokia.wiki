@@ -33,7 +33,7 @@ Find and install "openssh" package. During installation the first time, you will
 [[BR]]
 
 === Installation ===
- 1. Download the Seattle tarball (the Linux one) [https://betabox.cs.washington.edu/geni/download/tukwila/ here]. 
+ 1. Download the Seattle tarball (Installer for Linux) [https://betabox.cs.washington.edu/geni/download/tukwila/ here]. 
  1. Next, extract the tarball, and navigate to the Seattle directory. 
  1. Install Seattle.
   1. You will need root access to configure Seattle to run on startup properly during installation. See above on how to gain root access. 
