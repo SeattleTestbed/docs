@@ -38,7 +38,7 @@ You will need the "subversion" package in order to check out the repository to r
 
 == Setting up Seattle ==
 [[BR]]
-Download Seattle tarball here. Next, extract the tarball, and navigate to the Seattle directory. You will need root access to configure Seattle to run on startup properly. See above on how to gain root access. 
+Download the Seattle tarball here. Next, extract the tarball, and navigate to the Seattle directory. Note that you will need root access to configure Seattle to run on startup properly during installation. See above on how to gain root access. 
 [[BR]]
 To install, run '''./install.sh'''. Seattle will be automatically started. To check that it is running, run the command
 
