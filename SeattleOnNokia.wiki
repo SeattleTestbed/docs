@@ -5,7 +5,7 @@ Explains how to install Seattle as well as running the unit tests on the Nokia N
 ----
 
 == Tools Required ==
-In order to run Seattle and its unit tests, you will need two things: Python and root access to the system in the tablet. Python or utilities that will allow you root access can be obtained from the Application Manager. 
+In order to run Seattle and its unit tests, you will need: Python, Subversion, and root access to the system in the tablet. These can be obtained through the Application Manager. 
 [[BR]]
  1. In the top menu, go to Tools -> Application Catalog. 
  1. Select the "maemo extras" entry and Edit. 
@@ -15,7 +15,7 @@ In order to run Seattle and its unit tests, you will need two things: Python and
 [[BR]]
 
 === Python ===
-For Python, you will need to install the "maemo-python-env" package.
+For Python, you will need to install the "maemo-python-env" package. This will install Python 2.5 onto the tablet.
 
 [[BR]]
 
