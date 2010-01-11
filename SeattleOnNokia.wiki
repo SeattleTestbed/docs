@@ -1,5 +1,5 @@
 = Using Seattle on the Nokia N800 =
-Explains how to install Seattle as well as running the unit tests (optionally) on the Nokia N800 Internet Tablet.
+This article is comprised of two sections: The first section explains how to install Seattle on the Nokia N800 Internet Tablet. The second section (optional) explains how to run the Seattle unit tests on the Nokia N800 Internet Tablet.
 ----
 [[TOC(inline)]]
 ----
@@ -51,10 +51,8 @@ ps -f | grep nmmain.py | grep -v grep
 
 ----
 == Running Seattle Unit Tests (Optional) ==
+Note: This part is '''optional.'''
 
-[[BR]]
-
-'''This part is optional.'''
 [[BR]]
 
 === Tools required ===
