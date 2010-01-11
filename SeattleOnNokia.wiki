@@ -48,4 +48,7 @@ Download Seattle tarball here.
 
 == Running Seattle Unit Tests ==
 [[BR]]
-To run unit tests for Repy, please follow the instructions on "Running the Repy VM tests" [https://seattle.cs.washington.edu/wiki/UnitTests#RunningtheRepyVMtests here].
+To run unit tests, you will need to install the "subversion" package and [https://seattle.cs.washington.edu/wiki/RepoAccess check out the repository anonymously]. 
+[[BR]]
+Next, follow the instructions on "Running the Repy VM tests" [https://seattle.cs.washington.edu/wiki/UnitTests#RunningtheRepyVMtests here].
+You may also try the Node Manager tests and Software Updater tests. Follow the instructions [https://seattle.cs.washington.edu/wiki/UnitTests#RunningNodemanagerTests here] and [https://seattle.cs.washington.edu/wiki/UpdaterUnitTests here] for the Node Manager tests and Software Updater tests, respectively.
