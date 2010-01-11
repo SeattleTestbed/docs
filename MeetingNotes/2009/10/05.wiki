@@ -1,0 +1,34 @@
+'''Justin'''
+
+  * Paper submitted.
+  * Will be giving multiple talks starting this weekend. We need to be sure
+    to keep things very stable.
+  * Various things are broken that should have been caught before by people
+    running the tests.
+
+'''Cosmin'''
+
+  * Working on making containment system scale.
+
+'''jsamuel'''
+
+  * Ticket questions for the people at the meeting:
+    * #300: do we want to indicate on the myvessels page when the node an
+      acquired vessel is on has become inactive/unreachable by us?
+    * #450: keygen daemon, do we need it or can the ticket be closed
+      until it's clear that it's needed?
+
+'''Jason'''
+
+  * Working on installer creator. Mostly testing on different browsers.
+    Works with E6+, Firefox 1.5+, almost working on Chrome.
+  * Implemented caching of created installers.
+
+'''Monzur'''
+
+  * Working on NAT forwarder advertising stuff.
+    * On a lot of nodes it wasn't running ("safe exception problems").
+
+'''Jenn'''
+
+  * Not very available this week.
