@@ -4,8 +4,10 @@ Explains how to install Seattle as well as running the unit tests (optionally) o
 [[TOC(inline)]]
 ----
 
-== Tools Required ==
-In order to run Seattle and its unit tests, you will need: Python, Subversion, and root access to the system in the tablet. These can be obtained through the Application Manager. 
+== Setting up Seattle ==
+[[BR]]
+=== Tools Required ===
+In order to run Seattle, you will need: Python, and root access to the system in the tablet. These can be obtained through the Application Manager. 
 [[BR]]
  1. In the top menu, go to Tools -> Application Catalog. 
  1. Select the "maemo extras" entry and Edit. 
@@ -14,30 +16,23 @@ In order to run Seattle and its unit tests, you will need: Python, Subversion, a
 
 [[BR]]
 
-=== Python ===
+==== Python ====
 For Python, you will need to install the "maemo-python-env" package. This will install Python 2.5 onto the tablet.
 
 [[BR]]
 
-=== Root access ===
+==== Root access ====
 This is only required for the installation of Seattle. In particular, root access is required to configure Seattle to run on startup. There are several ways to obtain the root shell access. This article will describe two easy ways by which root shell access can be obtained.
 
-==== rootsh ====
+===== rootsh =====
 Find and install the "rootsh" package. The root shell package allows the user to gain root access through a simple command: "sudo gainroot" or simply "root".
 
-==== openssh ====
+===== openssh =====
 Find and install "openssh" package. During installation the first time, you will be prompted for a new password. Enter your password of choice and remember it for later. Root shell access can be obtained using "ssh root@localhost". You will be prompted for the password you entered during installation.
 
 [[BR]]
 
-=== Subversion ===
-You will need the "subversion" package in order to check out the repository to run unit tests (optional).
-
-[[BR]]
-----
-
-== Setting up Seattle ==
-[[BR]]
+=== Installation ===
  1. Download the Seattle tarball (the Linux one) [https://betabox.cs.washington.edu/geni/download/tukwila/ here]. 
  1. Next, extract the tarball, and navigate to the Seattle directory. 
  1. Installation:
@@ -59,9 +54,14 @@ ps -f | grep nmmain.py | grep -v grep
 [[BR]]
 '''This part is optional.'''
 [[BR]]
+=== Tools required ===
+In addition to the packages required for installing Seattle, you will also need Subversion to check out the Seattle repository to run unit tests in.
+[[BR]]
+==== Subversion ====
+You will need the "subversion" package in order to check out the repository to run unit tests (optional).
 To run unit tests, you will need to install the "subversion" package and [https://seattle.cs.washington.edu/wiki/RepoAccess check out the repository]. 
 [[BR]]
-Next, follow the instructions on "Running the Repy VM tests" [https://seattle.cs.washington.edu/wiki/UnitTests#RunningtheRepyVMtests here].
-[[BR]]
+=== Running the tests ===
+Follow the instructions on "Running the Repy VM tests" [https://seattle.cs.washington.edu/wiki/UnitTests#RunningtheRepyVMtests here].
 [[BR]]
 You may also try the [https://seattle.cs.washington.edu/wiki/UnitTests#RunningNodemanagerTests Node Manager tests] and [https://seattle.cs.washington.edu/wiki/UpdaterUnitTests Software Updater tests]. However, these tests will take an extremely long time to run (up to a day) and it is likely that the tablet will need to be connected to the power supply during the tests. (To run these tests you will need developer access to the repository to have the assignments/webserver directory and files.)
