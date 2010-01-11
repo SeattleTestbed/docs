@@ -56,6 +56,22 @@ Raises an XMLRPC Fault Code 103 if the account doesn't have enough credits avail
 Raises an XMLRPC Fault Code 105 if SeattleGENI could not fulfill the request (e.g. there are not enough vessels of the requested type available).[[BR]]
 
 [[BR]]
+=== acquire_specific_vessels(auth, vesselhandle_list) ===
+----
+
+Acquires specific vessels (vessels of specific names on specific nodes). This will be best effort. Zero or more of the vessels may be acquired.
+Requesting vessels that exist but are not available will not result in an exception.
+
+The '''vesselhandle_list''' is a list of vessel handles.
+
+Returns a list of dictionaries like that returned by '''acquire_resources'''.
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+Raises an XMLRPC Fault Code 103 if the account doesn't have enough credits available to acquire the requested vessels.[[BR]]
+
+[[BR]]
 === release_resources(auth, list_of_handles) ===
 ----
 
