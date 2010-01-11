@@ -1,5 +1,5 @@
 = Using Seattle on the Nokia N800 =
-Explains how to install Seattle as well as running the unit tests on the Nokia N800 Internet Tablet.
+Explains how to install Seattle as well as running the unit tests (optionally) on the Nokia N800 Internet Tablet.
 ----
 [[TOC(inline)]]
 ----
@@ -31,29 +31,33 @@ Find and install "openssh" package. During installation the first time, you will
 [[BR]]
 
 === Subversion ===
-You will need the "subversion" package in order to check out the repository to run unit tests.
+You will need the "subversion" package in order to check out the repository to run unit tests (optional).
 
 [[BR]]
 ----
 
 == Setting up Seattle ==
 [[BR]]
-Download the Seattle tarball (the Linux one) [https://betabox.cs.washington.edu/geni/download/tukwila/ here]. Next, extract the tarball, and navigate to the Seattle directory. Note that you will need root access to configure Seattle to run on startup properly during installation. See above on how to gain root access. 
-[[BR]]
-To install, run '''./install.sh'''. Seattle will be automatically started. To check that it is running, run the command
-
+ 1. Download the Seattle tarball (the Linux one) [https://betabox.cs.washington.edu/geni/download/tukwila/ here]. 
+ 1. Next, extract the tarball, and navigate to the Seattle directory. 
+ 1. Installation:
+  1.You will need root access to configure Seattle to run on startup properly during installation. See above on how to gain root access. 
+  1. To install, run '''./install.sh'''. Seattle will be automatically started. 
+  1. To check that it is running, run the command
 {{{
 ps -f | grep nmmain.py | grep -v grep
 }}}
-
-To stop Seattle, run '''./stop_seattle.sh'''. Run '''./start_seattle.sh''' to restart it. 
-[[BR]]
-To uninstall Seattle. Run '''./uninstall.sh'''. You will again need root access.
+ 1. To stop Seattle, run '''./stop_seattle.sh'''. Run '''./start_seattle.sh''' to restart it. You will not need root access for either of these.
+ 1. Uninstallation:
+  1. You will again need root access to uninstall properly. This stops Seattle from running on startup.
+  1. Run '''./uninstall.sh'''.
 
 [[BR]]
 
 ----
-== Running Seattle Unit Tests ==
+== Running Seattle Unit Tests (Optional) ==
+[[BR]]
+'''This part is optional.'''
 [[BR]]
 To run unit tests, you will need to install the "subversion" package and [https://seattle.cs.washington.edu/wiki/RepoAccess check out the repository]. 
 [[BR]]
