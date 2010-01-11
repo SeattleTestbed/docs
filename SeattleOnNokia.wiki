@@ -50,6 +50,8 @@ To stop Seattle, run '''./stop_seattle.sh'''. Run '''./start_seattle.sh''' to re
 [[BR]]
 To uninstall Seattle. Run '''./uninstall.sh'''. You will again need root access.
 
+[[BR]]
+
 ----
 == Running Seattle Unit Tests ==
 [[BR]]
