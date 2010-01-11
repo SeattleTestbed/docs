@@ -5,16 +5,17 @@ Explains how to install Seattle as well as running the unit tests on the Nokia N
 ----
 
 == Tools Required ==
-In order to run Seattle and its unit tests, you will need two things: Python and root access to the system in the tablet. Python or utilities that will allow you root access can be obtained from the Application Manager. Go to ??? -> ???, select "maemo extras," and uncheck the "disable" box. Refresh the installable package list, and packages that we require should now show up.
+In order to run Seattle and its unit tests, you will need two things: Python and root access to the system in the tablet. Python or utilities that will allow you root access can be obtained from the Application Manager. 
+[[BR]]
+ 1. In the top menu, go to Tools -> Application Catalog. 
+ 1. Select the "maemo extras" entry and Edit. 
+ 1. Uncheck the "disabled" box. 
+ 1. Refresh the installable package list, and packages that we require should now show up.
 
 [[BR]]
 
 === Python ===
-For Python, you will need to install both ??? and ???.
-Running from trunk/dist directory: [[BR]]
-{{{
-python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey outputdir [version]
-}}}
+For Python, you will need to install the "maemo-python-env" package.
 
 [[BR]]
 
@@ -25,12 +26,14 @@ This is only required for the installation of Seattle. In particular, root acces
 Find and install the "rootsh" package. The root shell package allows the user to gain root access through a simple command: "sudo gainroot" or simply "root".
 
 ==== openssh ====
-Find and install the ??? package. During installation, you will be prompted for a new password. Enter your password of choice and remember it for later. Root shell access can be obtained using "ssh root@localhost". You will be prompted for the password you entered during installation.
+Find and install "openssh" package. During installation the first time, you will be prompted for a new password. Enter your password of choice and remember it for later. Root shell access can be obtained using "ssh root@localhost". You will be prompted for the password you entered during installation.
 
 ----
 
 == Setting up Seattle ==
 [[BR]]
+Download Seattle tarball here.
+
  1. Make sure you are operating on a Linux system.
  1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning.
  1. Navigate to the trunk/dist directory.
