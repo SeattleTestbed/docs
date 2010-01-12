@@ -688,12 +688,12 @@ Returns a lock object that can be used for mutual exclusion and critical section
       The lock object.
 
 [[BR]]
-==== lock.acquire(blocking=1) ====
+==== lock.acquire(blocking) ====
 ----
 
 Blocks until the lock is available, then takes it (lock is an object obtained by calling createlock()).
 
-If the optional "blocking" argument is False, the method returns False immediately instead of waiting to acquire the lock; if the lock is available it takes it and returns True, as if it were called with no argument.
+If the "blocking" argument is False, the method returns False immediately instead of waiting to acquire the lock; if the lock is available it takes it and returns True, as if it were called with no argument.
 
  * Doc string:
 
