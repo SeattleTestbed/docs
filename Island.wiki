@@ -1,0 +1,116 @@
+ = Island / CADET Profiling =
+
+An Island is a construct which is based on a VirtualNamespace. It has the additional property that it profiles all of the standard API calls, and provides additional statistical routines to determine various things like time consumed doing certain activities, or the number of files opened, bytes read from a socket, etc.
+
+This is a central component of CADET, since it is utilized to determine the performance characteristics of a program to optimize the host machine selection.
+
+----
+[[TOC(inline)]]
+----
+
+== Components ==
+
+The functionality of the Island is provided across several components.
+The components and their function are listed below:
+ * virt_island.repy : Provides the implementation of the Island class. Evaluating an Island stores its profile information with in the object.
+ * island_stats.repy : Provides routines to generate info from an Island. Includes general usage statistics, Island timeline, and time consumption information.
+ * stoptime_logger.repy : Logs the time's repy was stopped, and makes the information available. Used by island_stats for time consumption.
+ * prgm_stat.repy : Forces a normal repy program to run within an Island, and prints statistics upon termination.
+
+
+== Island Class Implementation Details ==
+
+
+The Island class is designed to have a minimal overhead, while still collecting all potentially valuable information for later analysis.
+Specifically, the Island class tracks all calls to resource consuming API's. The Island maintains usage information about all resources,
+and for files and sockets it also tracks usage on an individual basis. E.g. One could request the total bytes written to disk, or the bytes
+written to a specific file.
+
+
+The Island operates by providing an API which mimics that of the VirtualNamespace. However, when evaluate() is called on a context,
+all the underlying API calls are wrapped by Island specific implementations which track the resource utilization of the API call.
+Additionally, the wrapper functions maintain a "timeline" for each thread in the Island. The timeline is a chronologically ordered array of all the "events"
+in the thread. This includes thread creation, thread destruction, and API calls. When an API which can block or may use variable amounts
+of resources is called, the Island first registers a "Start API X" call followed by a "API X call" so that it is possible to know the initial TOC,
+and the "Time of Return". Each event has an associated API, and a resource utilization amount. So, a typical event will be something like
+: ("file.write", 1.24, 8) which indicates that at 1.24 seconds into the execution a call to file.write returned having wrote 8 bytes. Since the
+timelines are maintained on a per-thread basis, the Island can avoid locking every call to an API which reduces the overhead.
+
+
+Sockets and files have some additional handling which allows them to track usage on the individual level and in the broader global 
+resource usage scope. This is done by wrapping the file and socket objects returned to the program, and including some additional
+logic on the various function calls.
+
+
+== Island Statistics Implementation Details ==
+
+The functions in island_stats are directly related to the implementation of the Island class. They are able to parse the internal
+structures of the Island to provide meaningful data. The basic usage is to simply print information about the island, such
+as the amount of various resources used, either globally, at a thread level, or at a file and socket level.
+
+There are also functions which will compile the timelines of the individual threads into a single "Island" timeline, which
+allows for external processing of the activity to extend functionality.
+
+One use of this information is provided by island_stats in the form of time consumption determination. By using the "Island" timeline,
+it is possible to closely determine how time was utilized in the Island. This is done determining which resources are used by each
+API, and then using the "Start call X" and "Call X" entries to determine the time spent within each API call. If an API is not being evaluation,
+then it is assumed that the Island is performing general computation so "cpu" is being consumed. What complicates matters is determining
+how to compensate for Repy being stopped. When the Island timeline is generated, an entry is inserted for each time that repy is "stopped"
+by requesting that information from the stoptime_logger module. When we are processing the timeline, if a "Repy Stopped" event is encountered,
+then we decide how to account for the stoptime. If a thread is sleeping during the stoptime, then the stopping had no effect. As an extension,
+if the thread is not in an API call, then the stop had the effect of stopping "cpu" consumption for the stoptime and increasing the amount of time
+a thread was in the "stopped" state. The complicated situation is when a thread is stopped within an API call. To handle this, we determine the
+"expected time" of the API, which is based on the current resource utilization and the amount of resources used by the API. E.g. if we are allowed
+to write 10 bytes per second to disk, and we are stopped on a call which writes 20 bytes, we expect that call to take 2 seconds.  If we compare the
+actual time of the call ("Time of Return" - "Time of Call") to the expected time, and determine that the actual time >= expected time + stoptime, then
+we assume that the stopping had an effect of the time spent, so we discount that time from the resource utilization and count it again time which is
+stopped.
+
+
+One critical flaw with this approach is that there are valid reasons for the actual time to be much greater that the expected time without being due
+to the stoptime. As an example, take socket.recv(). Since this call blocks a call to receive a single byte may block for hours, even though it is expected
+to return immediately. If repy is stopped during that API call, it is impossible to determine why the call took longer than expected, so we must "assume"
+that it is due to being stopped. This problem should go away with the transition to Repy V2 since all blocking operations are replaced by non-blocking
+equivalents.
+
+
+== Stoptime Logger Module Implementation Details ==
+
+The stoptime logger module is used by island_stats when determining the time spent doing various activities. The reason it is needed is that
+getresources() will only return the last 100 stoptimes, which may not be enough to span the entire life of an Island. The stoptime logger
+implements a simple interface which launches a separate polling thread.
+
+
+This thread will periodically sample for the repy stoptimes, and store any new stoptimes. The module stores some number of the entries
+in memory, but after a arbitrary threshold, the module will log the stoptimes to disk. This way, the module maintains a constant memory
+footprint while still providing access to as many stoptimes as needed.
+
+
+All the data written to the file is "aligned" on a per-entry basis. This causes additional bytes to be read, written, and stored, but it allows
+the module to perform binary searches on the data, enabling much faster retrieval of stoptimes on an interval once there is a substantial
+number of entries logged.
+
+
+== Program Stats Implementation Details ==
+
+The prgm_stat.repy file is a very simple Dylink module which dispatch's the next module inside of an Island. Once the island terminates,
+or calls exitall() the global resource usage, Island timeline, and time consumption information are calculated and printed.
+
+This provides  a simple way to use the functionality of the Island, while bootstrapping existing code which is not designed to directly
+use the Island module, or any of its parsing routines.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
