@@ -118,7 +118,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||getruntime||gets the time since the program was started||example 1.4||
 
-||gethostbyname_ex||similar to Python's socket.gethostbyname_ex() function||example 4.1||
+||gethostbyname||similar to Python's socket.gethostbyname() function||example 4.1||
 
 ||getmyip||gets an external IP address of the computer||example 4.1||
 
@@ -178,21 +178,21 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
       
 [[BR]] 
-==== gethostbyname_ex(name) ====
+==== gethostbyname(name) ====
 ----
-(from the Python documentation)   Translate a host name to IPv4 address format, extended interface. Return a triple (hostname, aliaslist, ipaddrlist) where hostname is the primary host name responding to the given ip_address, aliaslist is a (possibly empty) list of alternative host names for the same address, and ipaddrlist is a list of IPv4 addresses for the same interface on the same host (often but not always a single address). gethostbyname_ex() does not support IPv6 name resolution, and getaddrinfo() should be used instead for IPv4/v6 dual stack support. 
+(from the Python documentation)   Translate a host name to IPv4 address format. The IPv4 address is returned as a string, such as '100.50.200.5'. If the host name is an IPv4 address itself it is returned unchanged.
 
  * Doc string:
 
    <Purpose>
-      Provides information about a hostname.   Calls socket.gethostbyname_ex()
+      Provides information about a hostname.
 
    <Arguments>
       name:
-         The host name to get information about
+         The host name to translate.
 
    <Exceptions>
-      NetworkAddressError (descends from NetworkError) if the address cannot be resolved
+      NetworkAddressError (descends from NetworkError) if the address cannot be resolved.
 
    <Side Effects>
       None.
@@ -201,8 +201,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
       This operation consumes network bandwidth of 4K netrecv, 1K netsend.   (It's hard to tell how much was actually sent / received at this level)
 
    <Returns>
-      A tuple containing (hostname, aliaslist, ipaddrlist).   See the 
-      python docs for socket.gethostbyname_ex()
+      The IPv4 address as a string.
 
 [[BR]]
 ==== getmyip() ====
