@@ -138,6 +138,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||getresources||Provides two dictionaries which represent the resource limits and usage||New call||
 
+||getlasterror||Obtain information about the last error (exception) that occurred in the current thread.||New call||
 
 
 
@@ -1215,3 +1216,31 @@ Determines the resource usage limits and current usage.
       The usage dictionary contains the current usage of all the resources. It has all the same entries as
       the limits dictionary, but has an additional "threadcpu" key, which is the amount of CPU time in seconds
       the current thread has executed for.
+
+
+[[BR]] 
+==== getlasterror() ====
+----
+
+TODO: others should review this, change its name as needed, etc.
+
+ * Doc string:
+
+   <Purpose>
+     Obtain information about the last error (exception) that occurred in the current thread.
+
+   <Arguments>
+     None.
+
+   <Exceptions>
+     TODO: Good question. Does it raise an error if there wasn't a last exception or does it return an empty string?
+
+   <Side Effects>
+     None.
+
+   <Resource Consumption>
+      None.
+
+   <Returns>
+      A string with details of the last exception that occurred in the current thread.
+
