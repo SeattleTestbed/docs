@@ -132,8 +132,6 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||createthread||creates a new thread to execute a function with a set of arguments||new (example 1.4)||
 
-||circularlog||logs information to the circular logging buffer (replaces print)||example 1.1||
-
 ||getthreadname||provides a unique string that indicates the name of the current thread||New call||
 
 ||createvirtualnamespace||Provides a virtualnamespace object that can be used to evaluate code||New call||
@@ -1079,37 +1077,6 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
      True if this is the first close call to this socket, False otherwise.
 
 
-
-
-[[BR]] 
-==== circularlog(string) ====
-----
-
-(added call -- replaces ~~print~~)
-
-Writes a string to the circular logging buffer.   A library will be added that constructs a function that log(*args) on top of this.
-
-'''There is a debate over whether or not we need this call'''
-
- * Doc string:
-
-   <Purpose>
-     Writes data to the circular logging buffer.
-
-   <Arguments>
-     The string to write out.
-
-   <Exceptions>
-     TypeError if the string argument isn't a string.
-
-   <Side Effects>
-     The data is written to the circular logging buffer.
-
-   <Resource Consumption>
-      This operation consumes lograte of the size of the string.   This assumes that the string is less than the log size.   If the string is larger, then it consumes at most the log size.
-
-   <Returns>
-     None.   
 
 [[BR]] 
 ==== getthreadname() ====
