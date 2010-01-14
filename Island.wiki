@@ -63,8 +63,8 @@ if the thread is not in an API call, then the stop had the effect of stopping "c
 a thread was in the "stopped" state. The complicated situation is when a thread is stopped within an API call. To handle this, we determine the
 "expected time" of the API, which is based on the current resource utilization and the amount of resources used by the API. E.g. if we are allowed
 to write 10 bytes per second to disk, and we are stopped on a call which writes 20 bytes, we expect that call to take 2 seconds.  If we compare the
-actual time of the call ("Time of Return" - "Time of Call") to the expected time, and determine that the actual time >= expected time + stoptime, then
-we assume that the stopping had an effect of the time spent, so we discount that time from the resource utilization and count it again time which is
+amount of time we are stopped to the expected time, and determine that the expected time < total stoptime, then
+we assume that the stopping had an effect of the time spent, so we discount that time from the resource utilization and count it against time which is
 stopped.
 
 
