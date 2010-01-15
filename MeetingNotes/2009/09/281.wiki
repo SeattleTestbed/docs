@@ -1,0 +1,41 @@
+'''Justin'''
+
+  * Working on both papers this last week.
+  * No ticket count, but Jenn closed many this week.
+
+'''Cosmin'''
+
+  * Working on collecting data for containment section of paper.
+    We have accuracy data, just working on graphs of scalability data.
+
+'''Eric'''
+
+  * Working on paper. Mostly working on running more experiments at the moment.
+    The current experiment involves interposing forwarding layer to show that
+    having it in a lossy environment is better. (Same with something else that
+    the meeting note-taker missed.)
+
+'''Jenn'''
+
+  * Reading papers, looking for thesis topic.
+
+'''Conrad'''
+
+  * Working on getting the gcov data for java. Decided to stop trying to
+    preprocess it.
+  * Java unit tests are running right now. When those are done will run
+    under securitymanager with applet settings.
+
+'''Jason'''
+
+  * Working on installer creator.
+    * It is now compatible with IE.
+    * Working on testing.
+
+'''Anthony'''
+
+  * Working on getting paper numbers: coverage data for python.
+
+'''jsamuel'''
+
+  * Worked and tables and graphs for the paper.

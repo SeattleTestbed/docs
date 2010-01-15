@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, FileInUseError is raised when a repy program attempts to call `removefile()` or `openfile()` on a file that is already open.

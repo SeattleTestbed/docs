@@ -1,0 +1,52 @@
+'''Justin'''
+
+  * Tickets:
+    * 8 opened (one opened twice)
+    * 3 closed (one closed twice)
+  * Worked on two different papers this week.
+  * Beginning of the quarter coming up. People should keep an eye out for
+    students who might be interested in joining our project, especially for
+    developing using our platform.
+
+'''Anthon'''
+
+  * Working on gathering numbers for the paper (code coverage for python
+    and repy with unit tests).
+
+'''Conrad'''
+ 
+  * Also working on gathering numbers for the paper.
+
+'''Jason'''
+
+  * Working on installer creator. The html side is done (will give demo at end of meeting).
+  * Justin asks: please look through existing seattlegeni, especially display-related
+    ones, and see which ones apply to the new seattlegeni and fix them.
+
+'''Monzur'''
+
+  * Working on the outstanding socket problem. Send hangs if socket is closed
+    from another thread.
+  * Working on a solution based on using select but may have bugs.
+  * Reset 6 of the nodes that have nmmain running but not advertising, result
+    is that 3 nodes are now advertising and 3 are still not.
+  * Justin asks: please look through existing seattlegeni tickets and close ones that don't
+    exist in the current seattlegeni or comment if they are still issues.
+
+
+'''jsamuel'''
+
+  * Made a light pass through the paper, mostly getting it to the point where
+    it seems like it intends to be a paper, even if how I left it isn't very
+    different in text content.
+  * Namespace layer is closer. Just working through a last few repy tests that
+    are failing (some are bugs in the tests, others are assuming functionality
+    that we never explicitly support and which is now unsupported).
+  * Narrowed down memory leak issues in seattlegeni node state transition
+    scripts. It appears to be ultimately caused by the known socket issues
+    which result in sockets and threads staying open and adding up.
+
+'''Jenn'''
+
+  * Finished testing autograder.
+  * Haven't yet written tests for a p2p type application/assignment yet.
