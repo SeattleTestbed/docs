@@ -1,0 +1,23 @@
+!FutureRepyExceptionHierarchy:
+
+ * NetworkError
+   * PortInUseException
+   * InternetConnectivityError
+   * AddressBindingError
+   * ConnectionRefusedException
+   * [wiki:LocalIPChanged]
+   * SocketClosedLocal
+   * SocketClosedRemote
+
+ * RestrictionError
+   * PortRestrictedException
+
+ * CodeUnsafeError
+ 
+ * TimeoutException
+
+ * FileNotFoundError
+
+ * Python built-in exceptions:
+   * TypeError
+   * ValueError

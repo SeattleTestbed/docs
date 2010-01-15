@@ -1,0 +1,26 @@
+!FutureRepyExceptionHierarchy:
+
+ * InternalRepyException
+ * RepyException
+   * NetworkError
+     * PortInUseException
+     * InternetConnectivityError
+     * AddressBindingError
+     * ConnectionRefusedException
+     * [wiki:LocalIPChanged]
+     * SocketClosedLocal
+     * SocketClosedRemote
+     * SocketWouldBlockException
+   * RestrictionError
+     * PortRestrictedException
+   * CodeUnsafeError
+   * TimeoutException
+   * FileError
+     * FileNotFoundError
+     * SeekPastEndOfFileError
+     * FileInUseError
+   * LockDoubleReleaseError
+   * Repy Argument exception
+     * RepyArgumentError (replaces ValueError ,TypeError)
+   * ResourceUsageError
+     * ResourceExhaustedError
