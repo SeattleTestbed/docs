@@ -1,0 +1,90 @@
+'''Justin'''
+
+  * Priority is for us to get the future API sorted out.
+
+'''jsamuel'''
+
+  * (Didn't take notes on what I said I did this week.)
+
+'''Ivan'''
+
+  * Coming back up to speed on the change from the past few months.
+  * Will be picking up some of the ongoing research and publication
+    work.
+
+'''Evan'''
+
+  * Working on geolocation service.
+  * A server for the geolocation inforamation is now on blackbox, we're getting
+    a separate hostname for this.
+  * The client of it is still being tested.
+
+'''Yafete'''
+
+  * Working on fixing bugs in viewpoints.
+  * Getting a better idea of what viewpoints needs to do in terms of
+    getting vessels, restricting access for usage (to seattlegeni users).
+
+'''Eric'''
+
+  * Working on rewriting some of the service management scripts.
+  * (??? something else note-taker missed).
+
+'''Monzur'''
+
+  * Working on the issues with the advertiseserver (#805).
+
+'''Jeff'''
+
+  * Working on the homepage changes for seattle.cs's website.
+
+'''Derek'''
+
+  * Working on seattle installers on nokia n800.
+  * The installer itself is ready, but there are issues about
+    how it gets started and making sure Python is installed.
+  * There were some problems with the previous approach where
+    it ran as root. Working on getting it to run as a user.
+
+'''Steve'''
+
+  * Working on testing framework.
+  * This week, got all of the repy unit tests running in the framework.
+  * Working on getting the new registerhttpcallback based webserver used
+    in the softwareupdater tests. Found a bug in registerhttpcallback.
+  * Goal is to have the softwareupdater tests done by friday.
+  * Repy tests should be done in a week after that.
+  * Seattlelib tests are done.
+
+'''Conrad'''
+
+  * Working on repy 2.0 api and a few tickets over break.
+  * Working on getting a nokia n800 to a development-usable state.
+  * Trying to fix httpretrieve.
+
+'''Yoon'''
+  * Working on picking up Cosmin's work.
+  * Working on proxy server. Fixed the problem with CSS files.
+
+'''Jenn'''
+
+  * Didn't get too much work on resource management done over
+    the break.
+
+'''Armon'''
+
+  * Added some IPC between repy processes to make various resource
+    usage information available. This is needed for the new repy
+    api as well as island work.
+  * The resource accounting information will make it possible for us
+    to make available to programs information about which resource
+    is constraining the application.
+
+'''Zack'''
+
+  * Working more on Windows installers. Always more roadblocks.
+    * The only problem at the moment is the difficulty of stopping
+      seattle when it is running as a different user.
+    * It oddly works using a DOS command by the admin but not by
+      a process running as admin using our existing process kill
+      functions.
