@@ -787,7 +787,10 @@ Returns a string of random bytes of data derived from a hardware source of rando
 ==== createthread(function, args) ====
 ----
 
-Start a new thread to call a function with a set of arguments.   The thread is charged to your program.
+Armon: Removed the "args" argument. We only accept a function. If they want to call a function with arguments,
+they can define a closure around that. This simplifies the API, without sacrificing functionality.
+
+Start a new thread to call a function.   The thread is charged to your program.
 
  * Doc string:
 
@@ -799,17 +802,16 @@ Start a new thread to call a function with a set of arguments.   The thread is c
    <Arguments>
       function:
          The function to call
-      args:
-         The arguments to pass to the function.   This can be a tuple or a list
 
    <Exceptions>
-      !TypeError if the function parameter isn't callable.
+      RepyArgumentError if the function is not callable.
+      ResourceExhaustedError if there are no events available.
 
    <Side Effects>
-      None.
+      Starts a new thread
 
    <Resource Consumption>
-      This operation consumes a thread.
+      This operation consumes an event.
 
    <Returns>
       None
