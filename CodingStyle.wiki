@@ -969,3 +969,9 @@ else:
     Avoid changing directory (#487).
      
      Changing the current directory can cause multithreaded programs to break is scary ways and is usually an indication of bad programming style.   Don't do it!
+
+    Don't use mutable objects as argument defaults (#828).
+
+     If they are modified in the function (or returned and modified outside of the function), the changes persist to future function calls.
+     If you want the default of an empty list or dict, for example, use a default of None and then check for this value in the function and
+     assign an empty list/dict inside the function.
