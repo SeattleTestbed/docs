@@ -14,6 +14,7 @@
    * RestrictionError
      * PortRestrictedException
    * CodeUnsafeError
+   * ContextUnsafeError
    * TimeoutException
    * FileError
      * FileNotFoundError
