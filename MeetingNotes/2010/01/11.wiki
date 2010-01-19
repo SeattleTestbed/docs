@@ -1,0 +1,97 @@
+'''Justin'''
+
+  * We need to make a documentation push.
+    * Some progress on wiki, need to keep making progress.
+  * Ticket overview:
+    * Closed 13 tickets (some were old tickets to be cleaned up).
+    * Emphasis: people should be sure to be creating tickets for things
+      their working on, changes their making, problems their solving, etc.
+  * We're hosting the SeaPIG meeting this week.
+  * We're going to have the final Repy 2.0 API meeting.
+    * Scheduled for Tuesday (tomorrow) at 1pm.
+    * After the meeting, people should be able to start implementing.
+    * Work will be done in an svn branch.
+
+'''Monzur'''
+
+  * Will unplug testbed-freebsd because it's running hot and we can't really
+    use it at this point anyways.
+  * Looking into the issues that may or may not exist with the central advertise server.
+
+'''Ivan'''
+
+  * Working on presentation/website. Justin will give feedback.
+  * Would like to schedule a meeting for shims.
+    * Tentatively planning the meeting for Mondays 5-6.
+
+'''jsamuel'''
+
+  * Closed a few old tickets.
+  * Worked with/met with Steve related to his work on the tests.
+
+'''Armon'''
+
+  * Code cleanup.
+    * New verson of nonportable contains ipc and stop time info.
+  * Worked on time module (determine when program started and stopped).
+  * Worked on thesis related to this, will put up wiki page soon.
+
+'''Zack'''
+
+  * Working on gui installer for windows (will demo after the meeting).
+
+'''Yoon'''
+
+  * Working on the proxy. Need to make changes to reflect the changes to
+    httpretrieve and the webserver.
+  * Need to work with Conrad to decide which httpretrieve (?) functions that
+    are currently private should become public.
+
+'''Evan'''
+
+  * Added geolocation to seash.
+    * Includes a separate command to provide lat/long.
+  * Justin requested making sure something is demo-able for him to use
+    during presentations. For now, just at least an idea of what it would
+    look like, even if it's not done.
+
+'''Derek'''
+
+  * Wrote a wiki page on installing seattle from scratch on an n800.
+  * Changed the installer to run a shell script that works to install
+    on the n800.
+  * It will still be the linux installer. We'll probably want to add
+    instructions to the download page (how to install python, etc).
+
+'''Eric'''
+
+  * Working on rebuilding the nat traversal service based on shims.
+  * High level status:
+    * Would like to be ready to deploy on beta testbed in about a week.
+    * While it runs on the beta testbed, will work on writing service manager.
+
+'''Steve'''
+
+  * Softwareupdater tests are working on the new unit testing framework now.
+    * There's the issue of the softwareupdater test process that gets left behind.
+  * The repy tests and the repy-same-as-python tests are working.
+  * Currently working on the -network (ip restrictions tests).
+  * There are a few seattlelib tests failing.
+    * Will identify if they are broken regardless of the new framework and send
+      any info about that to Justin.
+  * Have not implemented the pre-test and post-test functionality yet.
+
+'''Conrad'''
+
+  * Made changes to httpretrieve this week.
+    * Interface is pretty much in the shape it should be in.
+    * There are a few lingering bugs.
+  * Should have the remaining bugs done and be able to call it done
+    in a few days.
+
+'''Jeff'''
+
+  * Finished working on layout for main website.
+    * We're working on content now. Google doc email will go
+      out to everyone soon.
+  * Started working on monitoring scripts, using experimentlib.
