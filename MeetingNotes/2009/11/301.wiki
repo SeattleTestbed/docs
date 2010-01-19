@@ -1,0 +1,73 @@
+'''Justin'''
+
+  * We have new developers this week, we'll introduce them and they'll
+    talk about what they've been working on.
+
+'''Evan'''
+
+  * New developer.
+  * First project: geolocation + googlemaps to map locations of vessels (gave demo)
+
+'''Steve'''
+
+  * New developer.
+  * Learning python and repy.
+  * Working on getting our existing tests to run through the unit test framework
+    that Vjeko was developing.
+  * Currently working on splitting up the softwareupdater tests.
+
+'''Derek'''
+
+  * New developer.
+  * Adding support for the Nokia N800.
+    * Most of the test failures were timing related (due to slowness of the N800).
+    * Disk checking were main slowdown, so decreasing disk accesses sped things up.
+  * Will be working on giving Google NativeClient file system access through repy
+    (as well as rest of repy api).
+
+'''Yoonsung'''
+
+  * New developer.
+  * Developing an http proxy in repy.
+    * gave demo of using it as the proxy when running Firefox.
+
+'''Monzur'''
+
+  * Described admin duties to the new developers, including writing monitoring scripts.
+
+'''Armon'''
+
+  * (Note-take once again missed what Armon was saying, probably because of discussing
+    things with him.)
+
+'''Yafete'''
+
+  * Described ViewPoints project. Demo not currently working.
+
+'''Cosmin'''
+
+  * Project: Containment in Seattle.
+  * Addresses concerns regarding traffic entering/leaving the testbed. 
+
+'''Eric''
+
+  * Networking abstractions / Shims
+  * NAT traversal
+
+'''Jenn'''
+
+  * Beginning work on resource allocation, to enable users to request specific
+    resources they need and allow them to divide up and temporarily share their
+    resources.
+
+'''jsamuel'''
+
+  * Changes to seattlegeni xmlrpc api to allow authenticating indirectly using user's
+    private key. Request signing isn't implemented at this point and will likely need
+    to be revisited in the future when time allows.
+  * Found and fixed some bugs in the software updater that could cause an updater to
+    not restart itself or the nodemanager after an update.
+  * Things for new team members to possibly help with:
+    * seattlegeni usability (help information, etc.)
+    * tests and continuous build
+    * seattlegeni utilities and reporting 
