@@ -480,24 +480,21 @@ Close the file. A closed file cannot be read or written any more. Any operation 
 
  * Doc string:
 
-   <Purpose>
-      Allows the user program to close a file.  This function is meant
-      to resemble the builtin "file.close".
+    <Purpose>
+      Allows the user program to close the handle to the file.
 
-   <Arguments>
+    <Arguments>
       None.
 
-   <Exceptions>
+    <Exceptions>
+      FileClosedError is raised if the file is already closed.
+
+    <Resource Consumption>
+      Releases a file handle.
+
+    <Returns>
       None.
 
-   <Side Effects>
-      Closes a file descriptor previously opened for writing.
-
-   <Resource Consumption>
-      If this is the last opened file-like object on this file, this stops consuming a filesopened resource.  
-
-   <Returns>
-      Nothing.
 
 [[BR]]
 ==== file.readat(sizelimit, offset) ====
@@ -507,34 +504,28 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
 
  * Doc string:
 
-   <Purpose>
-      Reads from a file handle.   Reading 0 bytes informs you if you have read past the end-of-file, but returns no data.
+    <Purpose>
+      Reads from a file handle. Reading 0 bytes informs you if you have read
+      pas the end-of-file, but returns no data.
 
-   <Arguments>
-      sizelimit - Specify a maximum number of bytes to read from the
-                        file.   Hitting EOF will read less.
+    <Arguments>
+      sizelimit: 
+        The maximum number of bytes to read from the file. Reading EOF will read less.
+      offset:
+        Seek to a specific absolute offset before reading.
 
-      offset - Seek to a specific location in the file before
-                          reading.
+    <Exceptions>
+      RepyArgumentError is raised if the offset or size is negative.
+      FileClosedError is raised if the file is already closed.
+      SeekPastEndOfFileError is raised if trying to read past the end of the file.
 
-   <Exceptions>
-      ValueError if the file is closed or if the offset or sizelimit are negative.
+    <Resource Consumption>
+      Consumes 4K of fileread for each 4K aligned-block of the file read.
+      All reads will consume at least 4K.
 
-      TypeError if offset or sizelimit is not an integer.
-
-      SeekPastEndOfFileError if trying to read past the end of the file
-
-   <Side Effects>
-      Reads data from persistent storage.   All write calls that occurred before this operation will be reflected in the data that is read.
-
-   <Resource Consumption>
-      Consumes 4K of fileread for each 4K aligned-block of the file read.   All reads will consume at least 4K.   
-
-   <Returns>
-      The data that was read; this may be the empty string if we
-      have reached the end of the file.    The only other case where
-      the returned data is empty is when the sizelimit was zero and 
-      the offset was within the file.
+    <Returns>
+      The data that was read. This may be the empty string if we have reached the
+      end of the file, or if the sizelimit was 0.
 
 [[BR]]
 ==== file.writeat(data, offset) ====
@@ -544,32 +535,28 @@ Seek to the offset in the file and then write some data to a file.
 
  * Doc string:
 
-   <Purpose>
-      Allows the user program to write data to a file (and optionally
-      seek somewhere first).
+    <Purpose>
+      Allows the user program to write data to a file.
 
-   <Arguments>
-      Data to write (a string).
+    <Arguments>
+      data: The data to write
+      offset: An absolute offset into the file to write
 
-      Offset (optional) - where to seek in the file first.
+    <Exceptions>
+      FileClosedError is raised if the file is already closed.
+      SeekPastEndOfFileError is raised if trying to write past the EOF.
+      RepyArgumentError is raised if the offset is negative.
 
-   <Exceptions>
-      ValueError if the file is closed.
+    <Side Effects>
+      Writes to persistent storage.
 
-      An interal error terminates the program if the disk is out of space or some low level IO error occurs. 
+    <Resource Consumption>
+      Consumes 4K of filewrite for each 4K aligned-block of the file written.
+      All writes consume at least 4K.
 
-      TypeError if offset isn't an non-negative integer or data isn't a string.
+    <Returns>
+      Nothing
 
-      SeekPastEndOfFileError if the offset is past the end of the file.
-
-   <Side Effects>
-      Writes data to persistent storage.
- 
-   <Resource Consumption>
-      Consumes 4K of filewrite for each 4K aligned-block of the file written.   All writes consume at least 4K.   
-
-   <Returns>
-      Nothing.
 
 [[BR]]
 ==== listfiles() ====
@@ -606,25 +593,24 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
 
  * Doc string:
 
-   <Purpose>
+    <Purpose>
       Allows the user program to remove a file in their area.
 
    <Arguments>
-      filename: the name of the file to remove.   It must not contain
-      characters other than 'a-zA-Z0-9.-_' and cannot be '.' or '..'
+      filename: the name of the file to remove.   It must not contain 
+      characters other than 'a-zA-Z0-9.-_' and cannot be '.', '..' or
+      the empty string.
 
    <Exceptions>
       FileNotFoundError is raised if the file does not exist
-
-      TypeError/ValueError if the filename param isn't the right type or is an invalid filename
-
-      FileInUseError if the file is already open.
+      RepyArgumentError is raised if the filename is invalid.
+      FileInUseError is raised if the file is already open.
 
    <Side Effects>
       None
 
-   <Resource Consumption>
-      Consumes 4K of fileread.   If successful, consumes 4K of filewrite.
+  <Resource Consumption>
+      Consumes 4K of fileread, and 4K of filewrite if successful.
 
    <Returns>
       None
