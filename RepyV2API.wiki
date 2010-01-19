@@ -130,7 +130,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||listenformessage||return a udpserversocket that can be used to accept incoming messages||new||
 
-||createthread||creates a new thread to execute a function with a set of arguments||new (example 1.4)||
+||createthread||creates a new thread to execute a function||new (example 1.4)||
 
 ||getthreadname||provides a unique string that indicates the name of the current thread||New call||
 
@@ -784,7 +784,7 @@ Returns a string of random bytes of data derived from a hardware source of rando
       The string of bytes.
 
 [[BR]]
-==== createthread(function, args) ====
+==== createthread(function) ====
 ----
 
 Armon: Removed the "args" argument. We only accept a function. If they want to call a function with arguments,
