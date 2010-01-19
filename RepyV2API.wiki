@@ -1224,7 +1224,7 @@ TODO: others should review this, change its name as needed, etc.
      None.
 
    <Exceptions>
-     TODO: Good question. Does it raise an error if there wasn't a last exception or does it return an empty string?
+     None.
 
    <Side Effects>
      None.
@@ -1233,5 +1233,5 @@ TODO: others should review this, change its name as needed, etc.
       None.
 
    <Returns>
-      A string with details of the last exception that occurred in the current thread.
+      A string with details of the last exception that occurred in the current thread, or None if there is no such exception.
 
