@@ -1,6 +1,6 @@
 !FutureRepyExceptionHierarchy:
 
- * InternalRepyException
+ * InternalRepyError
  * RepyException
    * NetworkError
      * PortInUseException
@@ -24,3 +24,4 @@
      * RepyArgumentError (replaces ValueError ,TypeError)
    * ResourceUsageError
      * ResourceExhaustedError
+     * ResourceForbiddenError
