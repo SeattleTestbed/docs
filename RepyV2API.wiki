@@ -654,7 +654,7 @@ Returns a lock object that can be used for mutual exclusion and critical section
 
    <Purpose>
       Returns a lock object to the user program.    A lock object supports
-      two functions: acquire and release.   See threading.Lock() for details
+      two functions: acquire and release.
 
    <Arguments>
       None.
@@ -686,7 +686,7 @@ If the "blocking" argument is False, the method returns False immediately instea
       Acquires a lock.
 
    <Arguments>
-      blocking (optional) - if False, returns immediately instead of waiting to acquire the lock.
+      blocking - if False, returns immediately instead of waiting to acquire the lock.
 
    <Exceptions>
       None.
@@ -738,7 +738,7 @@ Returns a float containing the number of seconds the program has been running.  
 
    <Purpose>
       Return the amount of time the program has been running.   This is in
-      wall clock time.
+      wall clock time. This is guaranteed to be monotonic.
 
    <Arguments>
       None
