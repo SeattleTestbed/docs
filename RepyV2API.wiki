@@ -429,7 +429,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 Open a file, returning an object of the file type. 
 
-Filenames may only be in the current directory and contain lowercase letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  Filenames must be no more than 30 characters long.
+Filenames may only be in the current directory and contain lowercase letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  Filenames must be no more than 120 characters long.
 
 Every file object is capable of both reading and writing. 
 
@@ -437,35 +437,35 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 
 
  * Doc string:
+   <Purpose>
+      Allows the user program to open a file safely. This function is meant
+      to resemble the builtin "open".
 
-     <Purpose>
-        Allows the user program to open a file safely.   This function is not
-        meant to resemble the builtin "open".
+   <Arguments>
+      filename:
+        The file that should be operated on. It must not contain 
+        characters other than 'a-zA-Z0-9.-_' and cannot be '.', '..' or
+        the empty string.
 
-     <Arguments>
-        filename:
-           The file that should be operated on
+      create:
+         A Boolean flag which specifies if the file should be created
+         if it does not exist.
 
-        create:
-           If True, create the file if it doesn't exist already.
+   <Exceptions>
+      RepyArgumentError is raised if the filename is invalid.
+      FileNotFoundError is raised if the filename is not found, and create is False.
+      FileInUseError is raised if a handle to the file is already open.
+      ResourceExhaustedError is raised if there are no available file handles.
 
-     <Exceptions>
-        TypeError/ValueError if one of the arguments is invalid (this includes e.g. the length being longer than 255 characters)
+   <Side Effects>
+      Opens a file on disk, uses a file descriptor.
 
-        FileNotFoundError if the file does not exist and create is false.
+   <Resource Consumption>
+      Consumes 4K of fileread. If the file is created, then 4K of filewrite is used.
+      If a handle to the object is created, then a file descriptor is used.
 
-        FileInUseError if the file is already opened.   (This is handled at the system library level)
-
-        An internal error will cause the program to terminate if the file has incorrect permissions or similar errors occur.
-
-     <Side Effects>
-        Opens a file on disk, using a file descriptor.
-
-     <Resource Consumption>
-        This consumes 4K of fileread.   If this is the first call on this file, this consumes a filesopened resource.   If the file is created, this consumes 4K of filewrite.
-	 
-     <Returns>
-        A file-like object.
+   <Returns>
+      A file-like object.
 
 
 [[BR]]
