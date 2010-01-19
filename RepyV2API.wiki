@@ -1156,9 +1156,10 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
      object before evaluating the code.
 
    <Exceptions>
-     If the context cannot be converted to a !SafeDict due to safety issues, an
-     internal error will be raised and the program will end. Any exception that
-     the code raises during evaluation will not be caught.
+     If the context cannot be converted to a SafeDict due to safety issues,
+     a ContextUnsafeError will be raised.
+
+     Any exception that the code raises during evaluation will not be caught.
 
    <Side Effects>
      The provided context will likely be modified during execution.
