@@ -110,12 +110,13 @@ Here is a simple program, which only uses a single thread of execution:
 {{{
 
 def write_data():
-    lim, usage, stoptimes = getresources()
-    file_write_lim = lim["filewrite"]
-    file_write_lim *= 2
+    limit, usage, stoptimes = getresources()
+    # find out what twice my write limit is...
+    file_write_amount = limit["filewrite"] * 2
 
     file_handle = open("test.out","w")
-    data = "*" * int(file_write_lim)
+    # write out twice my per second write limit...
+    data = "X" * int(file_write_amount)
     file_handle.write(data)
     file_handle.close()
 
@@ -346,14 +347,6 @@ use is that of our CPU restriction (1%). The remaining time, it was stopped to c
 The last entry is the Global sum, and it just sum's up the information to provide a higher level overview.
 What is clear, is that at 93% of the time being "stopped", this program would greatly benefit from having more 
 CPU allocated to it.
-
-
-
-
-
-
-
-
 
 
 
