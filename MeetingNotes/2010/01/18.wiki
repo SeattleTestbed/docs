@@ -49,6 +49,7 @@
 '''Conrad'''
 
   * The http client and server libraries are done and working on testing now.
+    * However, message body data should be provided to callback as a stream to lower memory overhead (#827)
   * Renamed registerhttpcallback.repy to httpserver.repy.
 
 '''Monzur'''
