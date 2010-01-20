@@ -203,7 +203,7 @@ Island has only a single thread over its life, and that the only resources it us
 of filewrite and about ~0.18 seconds of actual CPU time. Since we wrote 2x our filewrite limit (100K) to a single file,
 this all seems consistent.
 
-Next, we see a timeline of activity in the Island. The MainThread has a "island_create_thread" event which indicates that
+Next, we see a timeline of activity in the Island. The !MainThread has a "island_create_thread" event which indicates that
 it has "joined" the Island at a certain time. Then a file is opened, we start the call to file.write() and eventually return from it.
 Notice the difference between the T.O.C and the T.O.R from the file.write of 1 second. This reflects what we expected, since
 we wrote twice our limit. After that, it shows that "ALL" the threads were stopped at 2.87 and 3.67 seconds for 0.70 and 0.91 seconds
@@ -211,7 +211,7 @@ respectively. This corresponds to the call to use_cpu() which is presumably usin
 "island_destroy_thread" which indicates that the thread has left the Island or terminated.
  
 Lastly, we have our thread time consumption. Since we only have a single thread, the Global usage, and the usage of the
-"MainThread" are the same, so we an just focus on one. The first key entry is the 'live' entry. This indicates the total amount
+"!MainThread" are the same, so we an just focus on one. The first key entry is the 'live' entry. This indicates the total amount
 of wall time that this thread was part of the Island. We are reporting about 2.8 seconds, which can be checked by looking at
 the island_create_thread and island_destroy_thread times above. Next, we have the "filewrite" entry. It indicates that 1 second
 was spent writing to a file, which is correct and accounts for about 35% of the life of the program. One might expect the remaining
@@ -235,7 +235,7 @@ sleep(0.2)
 
 }}}
 
-This has the affect of running each method in a separate thread, and to make the MainThread spend most of it's short life sleeping.
+This has the affect of running each method in a separate thread, and to make the !MainThread spend most of it's short life sleeping.
 I've also reduced the CPU allocation to 1%. Now, lets look at the output this produces:
 
 {{{
@@ -323,15 +323,15 @@ Now the information at the top has changed slightly. We now report that the Isla
 of 3 threads, and that 2 events were used, which is correct.
 
 The timeline is slightly more complicated now, since we see that several threads are inter-mingled.
-However, we see that the MainThread first calls settimer twice, and then goes to sleep.
+However, we see that the !MainThread first calls settimer twice, and then goes to sleep.
 
 At that point, repy is stopped for 0.29 seconds. Following that, the two other threads are created,
-and the MainThread wakes up from its sleep and exits. Thread "_EVENT:Thread:2" opens a file and beings
+and the !MainThread wakes up from its sleep and exits. Thread "_EVENT:Thread:2" opens a file and beings
 to write, when repy is stopped suddenly for 10 seconds, due to thread "_EVENT:Thread" which is just wasting CPU.
 Afterward, the two threads finish up and exit.
 
 Now we can look at the thread time usage information, which is broken down for each thread,
-and then given globally. The MainThread is very simple to analyze. All that thread did was
+and then given globally. The !MainThread is very simple to analyze. All that thread did was
 call settimer twice, sleep and then exit. So as expected, we see that 0.2 seconds were spent sleeping,
 and essentially the remaining portion of the thread's life was stopped. This seems accurate since the thread
 was stopped during the sleep, which extended the amount of time in the API call.
