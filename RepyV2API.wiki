@@ -207,9 +207,6 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 ----
 Returns the localhost's "Internet facing" IP address.   It may raise an exception on hosts that are not connected to the Internet.
 
-'''Justin: What if there are multiple interfaces?   Should this return a list?'''
-
-
  * Doc string:
 
    <Purpose>
