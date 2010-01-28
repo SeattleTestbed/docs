@@ -1,4 +1,4 @@
-= Developer Portal =
+= Contributor Portal =
 
 This page contains information useful to developers working on Seattle
  
