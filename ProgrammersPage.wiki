@@ -1,4 +1,4 @@
-= Student Portal =
+= Programmer Portal =
 
 This page features information and references regarding how to use write programs on Seattle. Seattle nodes run code written in a special language called Repy. Repy is a subset of the [http://www.python.org/ Python language] (version 2.5 / version 2.6) invented specifically for Seattle.  
 
