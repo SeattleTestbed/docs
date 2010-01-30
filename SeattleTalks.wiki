@@ -52,3 +52,6 @@
 || 2:00-3 Dec 1th, 2009 || University of Washington, Allen building room 674  || Thesis Defenses || Cosmin, Eric || Talk (Research)
 
 || 1:30-2:00 Dec 7th, 2009 || University of Washington Physics / Astronomy 212 (closed to public)  || Natural Science Honors || Cosmin || Talk (Non-technical)
+
+|| 3:00-3:30 Jan 30th, 2009 || Seattle Central Community College  || Northwest Python Day 2010 || Justin || Talk / Live Demo (Developer)
+
