@@ -10,9 +10,9 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
    * '''version''': version of the node
    * '''nodeid''': unique node id of the node
    * '''vessels''': a list of vessel dictionaries (output of browse_node on the node) corresponding to the specific node
-     * vesselhandle: 
+     * vesselhandle: 'nodeid:vesselname'
      * vesselname: name of the vessel, ie. "v1"
-     * ownerkey: 
+     * ownerkey: a dictionary with the the vessel's owner key, keys: 'e' and 'n'
      * nodelocation: 'ip:port'
      * userkeys: 0, 1 or >1 keys in a list where each key is a dictionary with keywords 'e' and 'n'
      * nodeid: unique node id of the node
