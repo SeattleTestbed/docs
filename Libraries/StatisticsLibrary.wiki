@@ -3,17 +3,30 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
 
 ----
 == Structure of a 'node_list' ==
- * 
-
+ * Dictionary of Nodes, with keyword of its corresponding unique node id.  Contents of node id keyword is another dictionary with the following keywords:
+   * '''timestamp''': a datetime object in the form of "datetime(2010, 2, 1, 22, 38, 21, 965646)", when the data was polled.
+   * '''nodelocation''': 'ip:port'
+   * '''responsetime''': a number in seconds corresponding to the time it took to run 'browse_node' (from the experiment library) on this specific node
+   * '''version''': version of the node
+   * '''nodeid''': unique node id of the node
+   * '''vessels''': a list of vessel dictionaries (output of browse_node on the node) corresponding to the specific node
+     * vesselhandle: 
+     * vesselname: name of the vessel, ie. "v1"
+     * ownerkey: 
+     * nodelocation: 'ip:port'
+     * userkeys: 
+     * nodeid: unique node id of the node
+     * version: version of the corresponding node
+     * status: the status of the vessel at the time of polling
 ----
 == Methods ==
- * poll_data()
+ * '''poll_data'''()
    * Returns a collection of data relating to nodes/vessels and stores them into an external pickle (unparallelized completes in roughly 20min)
- * import_data(file_name)
+ * '''import_data'''(file_name)
    * Takes a file name (in pickle form) and returns a node_list
- * versions(node_list)
+ * '''versions'''(node_list)
    * Returns a list of versions (strings) that exist in the current data
- * prod_beta_split(node_list)
+ * '''prod_beta_split'''(node_list)
    * Returns a list of 3 items: (1) list of production nodes, (2) list of beta nodes, (3) nodes with neither affiliation.
- * prod_beta_keys()
+ * '''prod_beta_keys'''()
    * Returns a list of 2 items: (1) list of production keys and (2) list of beta keys
