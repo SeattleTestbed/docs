@@ -29,4 +29,6 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
  * '''prod_beta_split'''(node_list)
    * Returns a list of 3 items: (1) list of production nodes, (2) list of beta nodes, (3) nodes with neither affiliation.
  * '''prod_beta_keys'''()
-   * Returns a list of 2 items: (1) list of production keys and (2) list of beta keys
+   * Returns a list of 2 maps with keywords corresponding to their public key names (ie. canonical.publickey is canonical):
+     * map of production keys  from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys statekeys]
+     * map of beta keys with keywords from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys_beta statekeys_beta]
