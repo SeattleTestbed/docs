@@ -2,18 +2,15 @@
 This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data.
 
 ----
- * versions() - Returns a list of versions (strings) that exist in the current data
- * verCounts() - Returns counts of node with specific version information
- * userkey() = Returns lists of vessels with 0,1,1+ user keys.  In the form [[ 0 ], [ 1 ], [ 1+ ]]
- * 
+
 == Methods ==
  * poll_data()
    * Returns a collection of data relating to nodes/vessels and stores them into an external pickle (unparallelized completes in roughly 20min)
  * import_data(file_name)
-   * 
+   * Takes a file name (in pickle form) and returns a node_list
  * versions(node_list)
    * Returns a list of versions (strings) that exist in the current data
  * prod_beta_split(node_list)
-   * 
+   * Returns a list of 3 items: (1) list of production nodes, (2) list of beta nodes, (3) nodes with neither affiliation.
  * prod_beta_keys()
-   * 
+   * Returns a list of 2 items: (1) list of production keys and (2) list of beta keys
