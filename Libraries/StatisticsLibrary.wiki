@@ -14,7 +14,7 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
      * vesselname: name of the vessel, ie. "v1"
      * ownerkey: 
      * nodelocation: 'ip:port'
-     * userkeys: 
+     * userkeys: 0, 1 or >1 keys in a list where each key is a dictionary with keywords 'e' and 'n'
      * nodeid: unique node id of the node
      * version: version of the corresponding node
      * status: the status of the vessel at the time of polling
