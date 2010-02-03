@@ -33,3 +33,58 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
    * Returns a list of 2 maps with keywords corresponding to their public key names (ie. canonical.publickey is canonical):
      * map of production keys  from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys statekeys]
      * map of beta keys with keywords from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys_beta statekeys_beta]
+
+----
+== Example Uses == 
+Script Contents:
+{{{
+import stat_lib
+
+def main():
+  nodes = stat_lib.import_data("nodedata_2_3_115/nodes_list.dat")
+  split(nodes)
+  print "------------------"
+  versions(nodes)
+
+def versions(nodes):
+  vers = stat_lib.versions(nodes)
+  node_count = 0
+  for key,nodes in vers.items():
+    print str(key) + ": " + str(len(nodes))
+    node_count = node_count + len(nodes)
+  print "total nodes: " + str(node_count)
+
+def split(nodes):
+  pb_split = stat_lib.prod_beta_split(nodes)
+  prod_nodes = pb_split[0]
+  beta_nodes = pb_split[1]
+  other_notes = pb_split[2]
+  
+  print "prod: " + str(len(prod_nodes))
+  print "beta: " + str(len(beta_nodes))
+  print "other: " + str(len(other_notes))
+  print "total: " + str(len(prod_nodes) + len(beta_nodes) + len(other_notes))
+  print "total nodes:" + str(len(nodes))
+
+if __name__ == '__main__':
+  main()
+}}}
+Console Output:
+{{{
+prod: 387
+beta: 30
+other: 2
+total: 419
+total nodes:419
+------------------
+0.1e: 1
+0.1p-beta-r3467: 28
+0.1c: 2
+0.1b: 1
+0.1m: 1
+0.1l: 1
+0.1o: 382
+0.1n: 2
+0.1p-beta-r3373: 1
+total nodes: 419
+}}}
