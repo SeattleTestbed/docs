@@ -36,12 +36,14 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
 
 ----
 == Example Uses == 
-Script Contents:
+Script Contents:[[BR]]
+(assumes 'poll_data()' was executed prior)
 {{{
 import stat_lib
 
 def main():
-  nodes = stat_lib.import_data("nodedata_2_3_115/nodes_list.dat")
+  #location of poll data pickle
+  nodes = stat_lib.import_data("nodedata_2_3_115/nodes_list.dat") 
   split(nodes)
   print "------------------"
   versions(nodes)
