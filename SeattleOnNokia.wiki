@@ -51,25 +51,20 @@ ps -f | grep nmmain.py | grep -v grep
 
 ----
 == Running Seattle Unit Tests (Optional) ==
-Note: This part is '''optional.'''
+Note: This part is '''optional''' and not required for the installation of Seattle.
 
 [[BR]]
 
-=== Tools required ===
-In addition to the packages required for installing Seattle, you will also need Subversion to check out the Seattle repository to run unit tests in.
-
+=== Directions ===
+ 1. The tarball for the unit tests can be obtained [https://seattle.cs.washington.edu/static/nokiadev/seattle-tests.tar here]. The tarball contains all of the repy files necessary to run the unit tests as a standalone.
+ 2. Untar the file by doing the following:
+{{{
+tar xf seattle-tests.tar
+}}}
+ 3. Change into the unit test directory, and run the unit tests by doing:
+{{{
+python run_tests.py
+}}}
+ 4. The unit tests should take about an hour. In the end it will report the number of passes/failures.
 [[BR]]
 
-==== Subversion ====
-You will need to install the "subversion" package in the same manner as above (through Application Manager).
-To run unit tests, you will need to install the "subversion" package and [https://seattle.cs.washington.edu/wiki/RepoAccess check out the repository]. 
-
-[[BR]]
-
-=== Running the tests ===
-Follow the instructions on "Running the Repy VM tests" [https://seattle.cs.washington.edu/wiki/UnitTests#RunningtheRepyVMtests here].
-
-[[BR]]
-[[BR]]
-
-You may also try the [https://seattle.cs.washington.edu/wiki/UnitTests#RunningNodemanagerTests Node Manager tests] and [https://seattle.cs.washington.edu/wiki/UpdaterUnitTests Software Updater tests]. However, these tests will take an extremely long time to run (up to a day) and it is likely that the tablet will need to be connected to the power supply during the tests. To run these tests you will need developer access to the repository to have the assignments/webserver directory and files.
