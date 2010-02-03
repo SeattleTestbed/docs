@@ -61,7 +61,7 @@ Note: This part is '''optional''' and not required for the installation of Seatt
 {{{
 tar xf seattle-tests.tar
 }}}
- 3. Change into the unit test directory, and run the unit tests by doing:
+ 3. Change into the tests directory, and run the unit tests by doing:
 {{{
 python run_tests.py
 }}}
