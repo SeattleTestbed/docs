@@ -290,6 +290,8 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
       PortRestrictedException (descends ResourceException) if the port is restricted
 
+      XXXException (descends ResourceException) if there are no available insockets
+
       XXXException if the call would block
  	 
    <Side Effects> 
