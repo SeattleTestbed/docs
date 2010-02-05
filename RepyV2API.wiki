@@ -1010,6 +1010,8 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
 
      SocketClosedLocal if udpserversocket.close() was called.
 
+     XXXException if the call would block
+
    <Side Effects>
      None
 
