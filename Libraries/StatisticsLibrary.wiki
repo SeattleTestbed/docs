@@ -39,6 +39,7 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
 Script Contents:[[BR]]
 (assumes 'poll_data()' was executed prior)
 {{{
+#!python
 import stat_lib
 
 def main():
@@ -89,4 +90,35 @@ total nodes:419
 0.1n: 2
 0.1p-beta-r3373: 1
 total nodes: 419
+}}}
+
+=== Tracking down a node with a certain property ===
+
+The context of this example is that there is a node with a certain version we know exists (e.g. from the output above) but we want to know its ip address and nodeid. 
+
+The following example demonstrates:
+  * Using a script in one's own directory with the data and stats lib stored in jeffra45's home dir on blackbox.
+  * Iterating over the node data returned by import_data('node_list.dat').
+
+{{{
+#!python
+import os
+import sys
+sys.path.append("/home/jeffra45/stat_lib")
+
+import stat_lib
+
+STATS_DATA_DIR = "/home/jeffra45"
+
+def main():
+  nodes_dat = os.path.join(STATS_DATA_DIR, "nodedata_2_5_610/node_list.dat")
+  nodes = stat_lib.import_data(nodes_dat)
+  for nodeid, nodeinfo in nodes.items():
+    for vesseldict in nodeinfo['vessels']:
+      if vesseldict['version'] == '0.1m':
+        print vesseldict
+        sys.exit(0)
+
+if __name__ == '__main__':
+  main()
 }}}
