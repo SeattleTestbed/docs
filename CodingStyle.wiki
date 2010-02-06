@@ -603,7 +603,7 @@ class foo:
       return self.itemlist.pop()
     except KeyError, e:
       # Raise an error, the list is empty...
-      raise KeyError, "Can't pop an empty foo"
+      raise KeyError("Can't pop an empty foo")
 }}}
 
 
