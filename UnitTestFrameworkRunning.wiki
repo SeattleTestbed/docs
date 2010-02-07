@@ -1,0 +1,53 @@
+= Running Tests for UTF =
+
+You've written your unit tests so that they work under the unit testing framework, but how do you run them?
+
+== Running ==
+
+
+[[BR]]
+=== Invocation ===
+----
+
+Logically, now you would like to run your tests. This is done by invoking '''utf.py'''. When running tests, you are presented with three different possibilities:
+
+ * Run all tests for all modules in the current directory:
+
+{{{
+#!python
+
+$ utf.py
+
+}}}
+
+ * Run all tests for a specific module
+
+{{{
+#!python
+
+$ utf.py --module <module name>
+$ utf.py -m <module name>
+
+}}}
+
+ * Run a specific test file.
+
+{{{
+#!python
+
+$ utf.py --file <file>
+$ utf.py -f <file>
+
+}}}
+
+All you have to do now is run the UTF, specifying ''monitor'' as the module to test.
+
+{{{
+#!python
+
+$ utf.py -m monitor
+Testing module: monitor
+  Running ut_monitor.py                   [ PASS }
+
+$
+}}}
