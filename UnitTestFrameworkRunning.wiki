@@ -8,58 +8,62 @@ You've written your unit tests so that they work under the unit testing framewor
 
 Before you can actually begin running your tests, you need to set them up correctly. There are a few requirements that need to be fulfilled:
 
-1) All of your unit tests must have a '.py' extension.
+'''All of your unit tests must have a '.py' extension.'''
 
 All of your python unit tests should already have this extension, but your repy files should not. A good extension to use for your repy unit testing files is '.mix'. This indicates that they haven't yet been preprocessed and can't run. To preprocess your files, use the command:
 
 {{{
+#!python
 
-python repypp.py ut_tests_filetobeprocessed.mix ut_tests_filetobeprocessed.py
+$ python repypp.py ut_tests_filetobeprocessed.mix ut_tests_filetobeprocessed.py
 
 }}}
 
-The first argument to python, repypp.py, is the preprocessor for repy files. It must be used before running repy files. The second argument is your repy unit test (note that it should follow the UTF naming convention, but with a .mix extension instead). The third argument is the filename that the preprocessor will process the file into.
-  
+The first argument, repypp.py, is the preprocessor for repy files. It must be used before you can run repy files. The second argument is your repy unit test (note that it should follow the UTF naming convention, but with a .mix extension instead). The third argument is the filename that the preprocessor will process the file into. This new filename will be the useable version of your repy unit test.
+
+'''All of your preprocessed unit tests must be in the same directory as utf.py and utfutil.py (located in the utf folder of your trunk).'''
+
+If you've got a lot of tests to run, it's usually best to write a script to do this work for you to avoid doing it every time you need to run your tests.
+
+'''All tests which test the same module should use the same module name for batch testing.'''
+
+That's all you really need to do to set up your tests.
+
+
+
 
 == Running Unit Tests ==
 
 There are three different ways you can run tests.
 
-{{{
-#!python
-
-$ utf.py
-
-}}}
-
- * Run all tests for a specific module
+ * You can choose to run all UTF tests in the current directory:
 
 {{{
 #!python
 
-$ utf.py --module <module name>
-$ utf.py -m <module name>
+$ python utf.py
 
 }}}
 
- * Run a specific test file.
+ * You can choose to run all tests belonging to one module:
 
 {{{
 #!python
 
-$ utf.py --file <file>
-$ utf.py -f <file>
+$ python utf.py --module <module name>
+$ python utf.py -m <module name>
 
 }}}
 
-All you have to do now is run the UTF, specifying ''monitor'' as the module to test.
+ * And you can run one specific test file:
 
 {{{
 #!python
 
-$ utf.py -m monitor
-Testing module: monitor
-  Running ut_monitor.py                   [ PASS }
+$ python utf.py --file <file>
+$ python utf.py -f <file>
 
-$
 }}}
+
+
+That's all you really need to know!
