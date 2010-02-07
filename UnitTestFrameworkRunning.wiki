@@ -2,6 +2,8 @@
 
 You've written your unit tests so that they work under the unit testing framework, but how do you run them?
 
+----
+
 [[BR]]
 
 == Setup ==
@@ -28,6 +30,8 @@ If you've got a lot of tests to run, it's usually best to write a script to move
 '''All tests which test the same module should use the same module name for batch testing.'''
 
 That's all you really need to do to set up your tests.
+
+----
 
 [[BR]]
 
