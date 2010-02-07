@@ -279,7 +279,7 @@ UTF will check to see that the entire string of words following the directive is
 If no output is specified as an argument to the directive, UTF will ignore all output to standard out or standard error, depending on which pragma directive you used.
 
 [[BR]]
-=== Setup Shutdown Scripts ===
+=== Setup/Shutdown Scripts ===
 ----
 Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts receptively.
 
@@ -296,7 +296,11 @@ def stat(handle): ...
 ...
 }}}
 
-And you decide to start testing. You notice that every test requires some sort of file cleanup. Instead of doing the cleanup after every test case, it is much easier to do this in bulk. So we introduce what is called a '''shutdown script'''. It is guaranteed that this script will run last.
+And you decide to start testing. You notice that every test requires some sort of file setup and cleanup. Instead of doing the setup and cleanup before and after every test case, it is much easier to do this all at the beginning or all at the end of running the tests. So we introduce '''setup and shutdown scripts'''. 
+
+Setup scripts will always run before any unit test, and shutdown scripts will always run after any unit test. To make a shutdown script, all you need to do is use the following naming convention '''ut_<module name>_shutdown.py'''. However, there are two types of setup scripts. One is for if all you need to do is change configurations (create a temporary directory, for example). In this case, name your setup file '''ut_<module name>_setup.py'''. If you need your setup program to run while simultaneously running your unit tests, name your setupd file '''ut_<module name>_subprocess.py'''.
+
+The following is an example of a shutdown script:
 
 {{{
 #!python
@@ -314,140 +318,3 @@ if __name__ == '__main__':
   remove_tmp()
 }}}
 
-
-Basically, the same logic applies for setup scripts, however, opposite holds true -- it is first script to be executed.
-
-
-[[BR]]
-== User's guide ==
-----
-
-
-=== Requirements ===
-
-Here we specify requirements, so that the users have a better understanding of what the goals are. 
-
- * Above everything, writing a unit test module should be simple and obvious for new users.
- * Test module should be able to have many small test cases and developer should be able to group them into test suites.
- * The framework should allow advanced users to perform non-trivial tests.
- * The framework should allow users to easily select what tests to run (whole module or specific test cases).
- * The framework back-end needs to be simple and extensible.
-
-When translating requirements into objectives, we are faced with a non-trivial task, since some requirements are more important than others. As a result, advanced features are somewhat limited (for instance there is not support for test trees).
-
-
-=== Design ===
-
- * Testing within '''Repy execution environment'''.
- * Ability to specify different '''restrictions''' for different Repy test files.
- * Testing for '''standard out and standard error''' messages.
- * Support for '''setup and shutdown scripts'''.
-
-Having this in mind, you are probably asking yourself: 'Well, how do I achieve this?'. Obviously, we need to be able to hint or to instruct the framework about our needs. Those instructions are embedded '''either in the file itself or the filename'''. Below, we discuss each aspect.
-
-When instructing the UTF:
-
- * that the test file is suppose to be run inside the Repy execution environment,
- * or to use a non-default restrictions file,
- * or that the executed test has to produce a specific output on standard out or/and standard error
-
-we need to use the following syntax withing the test file:
-
-{{{
-#!python
-
-#DIRECTIVE TYPE [ARGS]
-}}}
-
-The directive name is always going to be '''pragma''' (a directive communicating additional "pragmatic" or implementation-specific information). Therefore, the more specific syntax is:
-
-{{{
-#!python
-
-#pragma TYPE [ARGS]
-}}}
-
-The following #pragma directives are allowed. When an unknown #pragma directive is encountered, UTF reports an error.
-
-{{{
-#!python
-"""
-Instructs UTF that this test file is suppose to be run inside Repy execution environment. 
-Restriction file argument is optional -- if not specified restrictions.default is used.
-If this directives is omitted, UTF assumes that your test file is a standard Python
-file.
-"""
-#pragma repy [RESTRICTIONS FILE]
-
-"""
-Instructs UTF that this test file is suppose to produce some output on standard out. 
-If the TEXT argument is specified, UTF will try to find TEXT substring within standard out. 
-If TEXT is not specified, UTF makes sure that the standard out data is not empty.
-"""
-#pragma out [TEXT]
-
-"""
-Instructs UTF that this test file is suppose to produce some output on standard error. 
-If the TEXT argument is specified, UTF tries to find TEXT substring within standard error. 
-If TEXT is not specified, UTF makes sure that the standard error data is not empty.
-"""
-#pragma error [TEXT]
-}}}
-
-[[BR]]
-----
-[[BR]]
-
-Other features are encoded inside of the ''' filename'''. Those are:
-
- * Which module does the test file belong to.
- * Does the module have setup and shutdown scripts?
- * Whether or not the test file will be executed by default.
-
-All test files have to follow a strict naming convention: 
-
-{{{
-#!python
-
-ut_<module name>_<descriptor>.py.
-}}}
-
-A module can have multiple test files associated with it.
-
-Furthermore, a module may contain two special descriptors: '''setup''' and '''shutdown'''. When running full module testing, ut_<module>_setup.py is executed at the '''beginning''' and ut_<module>_shutdown.py at the '''end''' of the execution. This is primarily used by more complicated modules, which require initialization and clean-up steps.
-
-Test files with the above mentioned syntax are executed '''by default'''. To exclude them from default execution, '''prepend the filename with _'''. This way, the test file has to be executed '''explicitly'''.
-
-[[BR]]
-----
-[[BR]]
-
-When running tests, a developer is presented with three different possibilities:
- * Run all tests for all modules:
-
-{{{
-#!python
-
-$ utf.py
-
-}}}
-
- * Run all tests for a specific module
-
-{{{
-#!python
-
-$ utf.py --module <module name>
-$ utf.py -m <module name>
-
-}}}
-
- * Run a specific test file.
-
-{{{
-#!python
-
-$ utf.py --file <file>
-$ utf.py -f <file>
-
-}}}
