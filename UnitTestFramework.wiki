@@ -1,4 +1,4 @@
-= Seattle's Unit Test Framework Draft =
+= Seattle's Unit Test Framework--Writing Tests =
 
 ----
 [[TOC(inline)]]
