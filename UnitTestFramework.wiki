@@ -67,10 +67,10 @@ Now, we start writing test cases. You write them the same way you would any pyth
 #!python
 
 """
-File: ut_monitor.py
+File: ut_monitor_testhostnames.py
 """
 
-# import you module.
+# import your module.
 import monitor
 
 # Test valid host names.
@@ -106,7 +106,7 @@ def test_invalid_add():
 
 Logically, now you would like to run your tests. This is done by invoking '''utf.py'''. When running tests, you are presented with three different possibilities:
 
- * Run all tests for all modules:
+ * Run all tests for all modules in the current directory:
 
 {{{
 #!python
@@ -153,7 +153,7 @@ Great! It works!
 === Multiple Test Files ===
 ----
 
-After some time, you decide that you need to add additional functionality to you resource monitor component (i. e. Disk Usage). As you would imagine, you test file could get bloated pretty quickly, so you decide to split module testing into multiple test files. Remember, all test files have to be in the same module, but need to have a different descriptor. The purpose of the descriptor is to give a general description of what the file is testing.
+You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_firsttest.py'. All we need to do is use the same module descriptor. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
 
 {{{
 #!python
@@ -183,9 +183,9 @@ $
 === Repy ===
 ----
 
-Another feature of UTF is the ability to test Repy.  
+Another feature of UTF is the support for testing repy files.  
 
-Testing Repy code is pretty simple. Image you are writing a synchronization primitive (semaphore) which has four methods defined.
+Writing repy test cases is pretty simple. Imagine you are writing a synchronization primitive (semaphore) which has four methods defined.
 
 {{{
 #!python
@@ -202,25 +202,25 @@ And you decide to test it by creating an appropriate test file.
 {{{
 #!python
 """
-File: ut_repy.sempahore.py
+File: ut_semaphore_testrepy.py
 """
 }}}
 UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert, what is called, a '''pragma directive''' at the beginning of the test file. Each pragma directive instructs UTF in how to behave.
 
+Here is the general form of a pragma:
 {{{
-#!python
+...
 
 #pragma TYPE [ARGS]
 
+...
 }}}
 
 
 
-For this specific purpose use ''#pragma repy'' directive. Whenever UTF encounters this directive, it knows it has to execute the test file inside of the Repy Execution Environment.
+For this specific purpose use ''#pragma repy'' directive. Whenever UTF encounters this directive, it knows it has to execute the test file inside of the Repy Execution Environment. This directive must be inserted on its own line, somewhere in the file (a good convention is to put it near the top).
 
-The rest of the file is written as a regular Repy file. Just as with Python testing, your tests should not produce any output, except if some condition has not been met. 
-
-Also, make sure to end your file with a .mix extension if you are running preparetest.py so that when you run preparetest.py, it will run the repy preprocessor and rename your file to <original name>.py. If you are not running the preparetest.py use the .py extension. UTF will not work under the .repy extension even though your code is written in restricted python (this is what the repy pragma is for).
+The rest of the file is written as a regular Repy file. Just as with Python testing, by default your unit test will fail if there is anything written on standard out or standard error. 
 
 {{{
 #!python
@@ -238,7 +238,7 @@ def test_down():
 ==== Repy Restrictions ====
 ----
 
-Repy execution is always associated with a restrictions file. As with the previous example, if no argument was provided to #pragma repy directive, UTF assumes default restrictions are to be used. Therefore,
+Repy execution is always associated with a restrictions file. To use a specific restrictions file, append it to the pragma directive as an argument. As with the previous example, if no argument was provided to #pragma repy directive, UTF assumes default restrictions are to be used. Therefore,
 
 
 {{{
@@ -258,9 +258,9 @@ is equivalent to:
 For instance, if your test file is suppose to be executed using non-default restrictions (i.e. restrictions.callomit) you would be using #pragma repy restrictions.omitcall (the restriction file we are using does not allow function calls).
  
 [[BR]]
-==== Standard Out ====
+==== Standard Out/Error ====
 ----
-Remember, we need to use ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out.
+Remember, by default UTF will cause a test to fail if there is anything written to standard out or standard error. However, if you do need to have a specific output on standard out, there is a way for UTF distinguish between bad output and good output. We need to use ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out. Likewise, there is also a way for UTF to ignore certain error messages (for example if you're testing whether an error happens when it's supposed to). In this case, use the ''#pragma error'' directive.
 
 {{{
 #!python
@@ -268,11 +268,15 @@ Remember, we need to use ''#pragma out'' directive. What this says is that the t
 # This is a repy file!
 #pragma repy
 
-# The output must match this string.
+# This must be a substring of standard out for the test to pass.
 #pragma out Hello Out.
 
 print 'Hello Out.'
 }}}
+
+UTF will check to see that the entire string of words following the directive is written to standard out or standard error. If the string was not there, the test will fail.
+
+If no output is specified as an argument to the directive, UTF will ignore all output to standard out or standard error, depending on which pragma directive you used.
 
 [[BR]]
 === Setup Shutdown Scripts ===
