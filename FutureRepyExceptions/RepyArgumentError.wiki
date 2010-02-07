@@ -1,0 +1,1 @@
+RepyArgumentError is an exception meaning to convey similar meaning to Python's TypeError / ValueError. That is, there is something wrong with how the calling code is using this function or method, and it is not a fault in the function or method itself.
