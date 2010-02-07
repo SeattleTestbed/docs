@@ -1,17 +1,25 @@
-= Running Tests for UTF =
+= Running Tests Under the Unit Testing Framework =
 
 You've written your unit tests so that they work under the unit testing framework, but how do you run them?
 
-== Running ==
-
-
 [[BR]]
-=== Invocation ===
-----
 
-Logically, now you would like to run your tests. This is done by invoking '''utf.py'''. When running tests, you are presented with three different possibilities:
+== Setup ==
 
- * Run all tests for all modules in the current directory:
+Before you can actually begin running your tests, you need to set them up correctly. There are a few requirements that need to be fulfilled:
+
+* All of your unit tests must have a '.py' extension.
+
+All of your python unit tests should already have this extension, but your repy files will not. A good extension to use for your repy files is '.mix'. This indicates that they haven't yet been preprocessed and can't run. To preprocess your files, use the command:
+{{{
+python repypp.py ut_tests_filetobeprocessed.mix file_tobeprocessed.py
+}}}
+The first argument to python, repypp.py, is the preprocessor for repy files. It must be used before running repy files. The second argument is your repy unit test (note that it should follow the UTF naming convention)
+  
+
+== Running Unit Tests ==
+
+There are three different ways you can run tests.
 
 {{{
 #!python
