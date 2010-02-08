@@ -1,14 +1,10 @@
 = Seattle's Unit Test Framework--Writing Tests =
 
 ----
+
 [[TOC(inline)]]
-----
 
-[[BR]]
-== Tutorials ==
 ----
-
-You think writing tests is difficult, annoying and fruitless work? I beg to differ. Read through these tutorials and I am sure you will agree. They should help you get familiar with all the features in the Unit Testing Framework (UTF). We will go over some simple and straightforward examples. Each of the examples is intended to provide a use case for a specific feature.
 
 [[BR]]
 === Introduction ===
@@ -32,7 +28,7 @@ def list_hosts(): ...
 === Naming Requirements ===
 ----
 
-First thing you need to do is create a test file. Every test file has to follow a very specific naming convention -- otherwise, it will fail to be registered by UTF. There are two components to it:
+The first thing you need to do is create a test file. Every test file has to follow a very specific naming convention -- otherwise, it will fail to be registered by UTF. There are two components to it:
 
  * Module Name -- Everything that you will be writing for Seattle is a smaller component (or a module) of the entire Seattle framework. Thus, we need to give it an appropriate name.
 
@@ -47,21 +43,15 @@ ut_MODULE[_DESCRIPTOR].py
 
 }}}
 
-Since we are designing a resource monitor, let us call our module ''monitor''. Go ahead and create that file. 
-
-{{{
-#!python
-
-"""
-File: ut_monitor.py
-"""
-}}}
-
 [[BR]]
 === Basics ===
 ----
 
-Now, we start writing test cases. You write them the same way you would any python executable. The only thing to remember is that by default your test file is not allowed to produce any output on stdout or stderr. This is how UTF is able to tell if your test file has run successfully.
+Let's suppose that we've written a module called 'monitor.py'. We've written all of the code, and all we need are unit tests. 
+
+Let's begin writing unit tests. You write them the same way you would any python executable. The only thing to remember is that by default your test file is not allowed to produce any output on stdout or stderr. This is how UTF is able to tell if your test file has run successfully.
+
+The following test for the monitor module tests the adding of host names. We follow the utf naming conventions by using a module name of "monitor" and a descriptor of "testhostnames".
 
 {{{
 #!python
@@ -100,38 +90,11 @@ def test_invalid_add():
 
 }}}
 
-
-
-Great! It works!
-
 [[BR]]
 === Multiple Test Files ===
 ----
 
-You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_firsttest.py'. All we need to do is use the same module descriptor. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
-
-{{{
-#!python
-
-# Resource Monitor -- Host Availability.
-$ mv ut_monitor.py ut_monitor_hosts.py
-
-# Resource Monitor -- Disk Usage.
-$ vim ut_monitor_disk.py
-
-}}}
-
-After you're done writing test cases for the new functionality, simply run UTF once more.
-
-{{{
-#!python
-
-$ utf.py -m monitor
-Testing module: monitor
-  Running ut_monitor_hosts.py               [ PASS }
-  Running ut_monitor_disk.py                [ PASS }
-$
-}}}
+You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_testhostnames.py'. All we need to do is use the same module descriptor. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
 
 
 [[BR]]
@@ -175,7 +138,7 @@ Here is the general form of a pragma:
 
 For this specific purpose use ''#pragma repy'' directive. Whenever UTF encounters this directive, it knows it has to execute the test file inside of the Repy Execution Environment. This directive must be inserted on its own line, somewhere in the file (a good convention is to put it near the top).
 
-The rest of the file is written as a regular Repy file. Just as with Python testing, by default your unit test will fail if there is anything written on standard out or standard error. 
+The rest of the file is written as a regular Repy file. Just as with Python testing, by default your unit test will fail if there is anything written on standard out or standard error, so keep that in mind when writing your tests. 
 
 {{{
 #!python
@@ -210,12 +173,12 @@ is equivalent to:
 #pragma repy restrictions.default
 }}}
 
-For instance, if your test file is suppose to be executed using non-default restrictions (i.e. restrictions.callomit) you would be using #pragma repy restrictions.omitcall (the restriction file we are using does not allow function calls).
+For instance, if your test file is suppose to be executed using non-default restrictions (i.e. restrictions.callomit) you would be using #pragma repy restrictions.callomit (the restriction file we are using does not allow function calls).
  
 [[BR]]
 ==== Standard Out/Error ====
 ----
-Remember, by default UTF will cause a test to fail if there is anything written to standard out or standard error. However, if you do need to have a specific output on standard out, there is a way for UTF distinguish between bad output and good output. We need to use ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out. Likewise, there is also a way for UTF to ignore certain error messages (for example if you're testing whether an error happens when it's supposed to). In this case, use the ''#pragma error'' directive.
+Remember, by default UTF will cause a test to fail if there is anything written to standard out or standard error. However, if you do need to have a specific output on standard out, there is a way for UTF distinguish between bad output and good output. We need to use the ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out. Likewise, there is also a way for UTF to ignore certain error messages (for example if you're testing whether an error happens when it's supposed to). In this case, use the ''#pragma error'' directive.
 
 {{{
 #!python
@@ -229,7 +192,7 @@ Remember, by default UTF will cause a test to fail if there is anything written 
 print 'Hello Out.'
 }}}
 
-UTF will check to see that the entire string of words following the directive is written to standard out or standard error. If the string was not there, the test will fail.
+UTF will check to see that the entire string of words following the directive is written to standard out. If the string was not there, the test will fail.
 
 If no output is specified as an argument to the directive, UTF will ignore all output to standard out or standard error, depending on which pragma directive you used.
 
