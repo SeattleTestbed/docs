@@ -1,5 +1,11 @@
 = Running Tests Under the Unit Testing Framework =
 
+----
+
+[[TOC(inline)]]
+
+----
+
 You've written your unit tests so that they work under the unit testing framework, but how do you run them?
 
 ----
