@@ -12,6 +12,8 @@ You've written your unit tests so that they work under the unit testing framewor
 
 == Setup ==
 
+----
+
 Before you can actually begin running your tests, you need to set them up correctly. There are a few requirements that need to be fulfilled:
 
 '''All of your unit tests must have a '.py' extension.'''
@@ -38,6 +40,8 @@ That's all you really need to do to set up your tests.
 ----
 
 == Running Unit Tests ==
+
+----
 
 There are three different ways you can run tests.
 
