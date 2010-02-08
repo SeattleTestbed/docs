@@ -31,7 +31,7 @@ The first argument, repypp.py, is the preprocessor for repy files. It must be us
 
 '''All of your preprocessed unit tests must be in the same directory as utf.py and utfutil.py.'''
 
-If you've got a lot of tests to run, it's usually best to write a script to move all the tests and preprocess them for you to avoid doing it every time you need to run your tests. utf.py and utfutil.py are located in the 'utf' folder in the your trunk directory.
+If you've got a lot of tests to run, it's usually best to write a script to move all the tests and preprocess them for you to avoid doing it every time you need to run your tests. utf.py and utfutil.py are located in the 'utf' folder in your trunk directory.
 
 '''All tests which test the same module should use the same module name for batch testing.'''
 
