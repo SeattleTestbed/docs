@@ -55,6 +55,7 @@ This page contains information useful to developers working on Seattle
 
  * Project Resources
    * [SeattleResources A full listing of Seattle project services]
+   * [SeattleAccountManagement Creating and deleting accounts for developers]
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
