@@ -1,5 +1,7 @@
 = Seattle's Unit Test Framework--Writing Tests =
 
+(For information about running tests, visit [UnitTestFrameworkRunning Running Unit Tests with Seattle's Unit Test Framework].)
+
 ----
 
 [[TOC(inline)]]
