@@ -3,15 +3,12 @@
 This page is to organize and collect contact information for all of the developers in one location.
 Please include as much information as you are willing to disclose. SVN user is so that the proper user can be contacted if a bug is identified with their code, and the SVN -> Name translation isn't immediately obvious.
 
-Please keep the list ordered alphabetically by SVN username.
+'''If you are working on Seattle, please add your information to this table.'''   Please keep the list ordered alphabetically by SVN username.
 
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
-|| Conrad Meyer || cemeyer at cs || || cemeyer || cemeyer ||
-|| Cosmin Barsan || || || cosminb || cosminb ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
-|| Jenn Hanson|| hanson at cs || || jenn || jenn ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
 || Monzur Muhammad || monzum at cs || || monzum || monzum ||
