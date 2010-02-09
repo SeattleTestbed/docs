@@ -114,11 +114,11 @@ def write_data():
     # find out what twice my write limit is...
     file_write_amount = limit["filewrite"] * 2
 
-    file_handle = open("test.out","w")
+    testfileobj = open("test.out","w")
     # write out twice my per second write limit...
     data = "X" * int(file_write_amount)
-    file_handle.write(data)
-    file_handle.close()
+    testfileobj.write(data)
+    testfileobj.close()
 
 def use_cpu():
     start = getruntime()
