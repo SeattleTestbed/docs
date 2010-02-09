@@ -1,4 +1,15 @@
-= Anonymous Access =
+= Using SVN =
+
+Understanding how to access our SVN is important for contributors regardless of whether or not they have commit access. 
+
+----
+[[TOC(inline)]]
+----
+
+
+[[BR]]
+== Anonymous Access ==
+----
 
 To check out the repository anonymously (read-only):
 
@@ -38,6 +49,10 @@ Repository Root: https://seattle.cs.washington.edu/svn
 ...
 }}}
 
+[[BR]]
+== Anonymous Access ==
+----
+
 = Browsing SVN through Trac =
 
 URL to Browse the repository through a web browser:
@@ -45,7 +60,10 @@ URL to Browse the repository through a web browser:
 
 This is available to anonymous users.
 
-= Developer Access =
+
+[[BR]]
+== Contributor / Developer Access ==
+----
 
 '''Test all code before checking it into SVN'''
 
@@ -72,7 +90,10 @@ umask 002
 /usr/bin/svnserve --root=/var/local/svn --tunnel
 }}}
 
-= Quick Guide to SVN =
+
+[[BR]]
+== Quick Guide to SVN ==
+----
 
 '''Test all code before checking it into SVN'''
 
@@ -110,6 +131,10 @@ If the seattle svn repo moves to a new machine, you can relocate your checked ou
 
   {{{svn sw --relocate old_repo new_repo}}}
 
-= Links =
+
+
+[[BR]]
+== Links ==
+----
 
 [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]
