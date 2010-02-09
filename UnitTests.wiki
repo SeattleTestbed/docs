@@ -27,9 +27,9 @@ cd /path/to/test/directory
 
 This will set up the directory with the appropriate files.   To run the tests, type:
 {{{
-python run_tests.py
+python utf.py -m repytests
 }}}
-This will start all of the repy unit tests running, and will output which tests pass and fail, and give failure details at the end for the ones that do fail.
+This will start all of the repy unit tests running, and will output which tests pass and fail, and give failure details intermittently for the ones that do fail.
 
 [[BR]]
 == Running CPU Throttling Check Locally (advanced) ==
@@ -39,10 +39,10 @@ To run the repy CPU throttling test locally, first navigate to the trunk directo
 {{{
 python preparetest.py -t /path/to/test/directory
 cd /path/to/test/directory
-python run_tests.py -cpu
+python run_tests.py --obsolete -cpu
 }}}
 
-This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement.
+This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement. The --obsolete flag is necessary because we are in the middle of transitioning our tests to our new unit testing framework. However, the cpu tests are not yet converted.
 
 [[BR]]
 == Running Network Restriction Check Locally (advanced) ==
@@ -52,7 +52,7 @@ To run the repy network restriction tests locally, first navigate to the trunk d
 {{{
 python preparetest.py -t /path/to/test/directory
 cd /path/to/test/directory
-python run_tests.py -network
+python utf.py -m repynetworktests
 }}}
 
 This will start the test running, and will output a status report with the results of the test.
@@ -70,39 +70,27 @@ To run the repy threading error test locally, first navigate to the trunk direct
 {{{
 python preparetest.py -t /path/to/test/directory
 cd /path/to/test/directory
-python run_tests.py -threaderr
+python run_tests.py --obsolete -threaderr
 }}}
 
-This will start the test running, and will output a status report with the results of the test. 
+This will start the test running, and will output a status report with the results of the test. The --obsolete flag is necessary because the run_tests script is being phased out, and we are encouraging the use of our new unit testing framework.
 
 
 
 [[BR]]
 == Running Nodemanager Tests ==
 ----
-To run the node manager unit tests locally, open two shells (or command prompts). Navigate to trunk in each. Create a test directory <test_directory_name> if one is not already there.
-On the FIRST command prompt type the following command:
+To run the node manager unit tests locally, in a shell, navigate to the trunk directory. Create a test directory /path/to/test/directory if one is not already there.
+Next, type the following command:
 {{{
-python preparetest.py -t <test_directory_name>
-}}}
-The -t flag is required even if you are only planning to run the node manager tests.
-
-On the SECOND command prompt enter the following sequence of commands:
-{{{
-cd <test_directory_name>
-python nminit.py
-python nmmain.py
-}}}
-
-On the FIRST command prompt, enter the following sequence of commands:
-{{{
-cd <test_directory_name>
-python run_tests.py -n
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python utf.py -m nm
 }}}
 
 <test_name> refers to the name of the test file that is to be run (do not include the .mix extension). To see which tests are available to run navigate to nodemanager\tests in the trunk folder.
 
-Known Issue 1: the test nmtestchangeowner_validsequenceid.py fails since sequence id's are currently broken. 
+Known Issue 1: the test ut_nm_changeowner_validsequenceid.py fails since sequence id's are currently broken. 
 [[BR]]Known Issue 2: Occasionally the testscript freezes as it is running (no change in status for 3 minutes or more). This is rare and the cause is not yet fully known (appears to be related to connection resets in the node manager). If this occurs, restart the node manager and rerun the run_tests.py script.
 
 [[BR]]
