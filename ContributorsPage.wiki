@@ -60,7 +60,7 @@ This page contains information useful to developers working on Seattle.   Anythi
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
-   * [ProjectMembers Project Members] contact information
+   * '''[ProjectMembers Project Members] contact information'''
  
  * Other
    * [ContainmentInSeattle] about controlling node outgoing traffic
