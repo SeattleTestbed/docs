@@ -6,7 +6,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * '''[RepoAccess SVN access] instructions'''
    * '''[WikiSvnAccounts Getting accounts] for Seattle SVN, Wiki, testbed machines, and seattle-devel'''
    * '''[ManagingTracTickets Managing Trac tickets]'''
-   * (obsolete unless you are doing node manager testing) [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
+   * (obsolete unless you are doing node manager testing) --- [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
 
  * Programming in Repy
    * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
@@ -18,14 +18,14 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [RepyHelper Importing Repy code into Python using repyhelper]
 
  * Testing
-   * [UnitTests Running Repy and / or node manager unit tests]
+   * '''[UnitTestFramework Writing Tests for Seattle's Unit Test Framework]'''
+   * '''[UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]'''
+   * '''[UnitTests Running Repy and / or node manager unit tests]'''
    * [UpdaterUnitTests Running Software Updater Unit Tests]
+   * [IntegrationTestFramework Writing Integration Tests] 
    * [wiki:GENIPortalTesting Running a GENI test server]
    * [wiki:CustomizedInstallerTesting Running the Customized Installer test server]
    * [RemoteTestingService Running remote tests on seattle testbeds]
-   * [UnitTestFramework Writing Tests for Seattle's Unit Test Framework]
-   * [UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]
-   * [IntegrationTestFramework Writing Integration Tests]
    * [ContinuousBuild Continuous Build]
 
  * Style guidelines for documentation, python code, web code
