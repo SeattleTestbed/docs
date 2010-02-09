@@ -243,7 +243,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
    <Exceptions>
       AddressBindingError (descends NetworkError) when the local IP isn't a local IP
 
-      PortRestrictedException (descends ResourceException) when the local port isn't allowed
+      PortRestrictedError (descends ResourceError) when the local port isn't allowed
 
       TypeError/ValueError when the local IP and port aren't valid types or values
 
@@ -280,19 +280,19 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
          The port to listen on 
       
    <Exceptions> 
-      PortInUseException (descends NetworkError) if the port cannot be listened on because some other process on the system is listening on it
+      PortInUseError (descends NetworkError) if the port cannot be listened on because some other process on the system is listening on it
 
-      PortInUseException if there is already a udpserversocket with the same IP and port.
+      PortInUseError if there is already a udpserversocket with the same IP and port.
 
       TypeError/ValueError if the port number or ip is wrong type or obviously invalid.
 
       AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
 
-      PortRestrictedException (descends ResourceException) if the port is restricted
+      PortRestrictedError (descends ResourceError) if the port is restricted
 
       ResourceExhaustedError (descends ResourceUsageError) if there are no available insockets
 
-      XXXException if the call would block
+      XXXError if the call would block
  	 
    <Side Effects> 
       Prevents other udpserversockets from using this port / IP
@@ -334,17 +334,17 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
    <Exceptions>
       AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
 
-      PortInUseException (descends NetworkError) if the (localip, localport, destip, destport) tuple is already used.
+      PortInUseError (descends NetworkError) if the (localip, localport, destip, destport) tuple is already used.
 
 '''Conrad: Fixed to only raise if uniqueness property is not met. I think the exception name makes enough sense in this circumstance, but I could see virtue in adding a new one. Thoughts?'''
 
-      PortRestrictedException (descends ResourceException) if the localport isn't allowed
+      PortRestrictedError (descends ResourceError) if the localport isn't allowed
 
       ValueError if the connection cannot be established due to a bad destination IP address
 
-      ConnectionRefusedException (descends NetworkError) if the connection cannot be established because the destination port isn't being listened on
+      ConnectionRefusedError (descends NetworkError) if the connection cannot be established because the destination port isn't being listened on
 
-      TimeoutException (common to all API functions that timeout) if the connection times out
+      TimeoutError (common to all API functions that timeout) if the connection times out
 
       ValueError/TypeError if the arguments are invalid
 
@@ -379,17 +379,17 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
          The port to listen on 
       
    <Exceptions> 
-      PortInUseException (descends NetworkError) if another process has already bound the ip/port 
+      PortInUseError (descends NetworkError) if another process has already bound the ip/port 
 
-      PortInUseException if there is already a tcpserversocket with the same IP and port. 
+      PortInUseError if there is already a tcpserversocket with the same IP and port. 
 
       TypeError/ValueError if the IP or port number is invalid.
 
-      PortRestrictedException (descends ResourceException) if the port number isn't allowed
+      PortRestrictedError (descends ResourceError) if the port number isn't allowed
 
       AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
 
-      XXXException if the call would block
+      XXXError if the call would block
  	 
    <Side Effects> 
       The IP / port combination cannot be reused by a tcpserversocket until closed.
@@ -880,11 +880,11 @@ Receives data that was sent by the connected party using send.   Note that this 
 
      SocketClosedRemote (descends NetworkError) if the socket was closed remotely '''and''' there is no more data to be read.
 
-     XXXException if the connection is broken due to a network problem. '''Conrad: is this substantially different from the socket being closed remotely?'''
+     XXXError if the connection is broken due to a network problem. '''Conrad: is this substantially different from the socket being closed remotely?'''
 
      LocalIPChanged (descends NetworkError) if the local system connection is broken because the local system changes its IP address.
    
-     SocketWouldBlockException if the call would block.
+     SocketWouldBlockError if the call would block.
 
    <Side Effects>
      None
@@ -916,11 +916,11 @@ Sends data to the connected party.   Note that this may send less than the entir
 
      SocketClosedRemote (descends NetworkError) if the socket was closed remotely.
 
-     XXXException if the connection is broken due to a network problem. '''Conrad: see my comment above'''
+     XXXError if the connection is broken due to a network problem. '''Conrad: see my comment above'''
 
      LocalIPChanged if the local system connection is broken because the local system changes its IP address.
 
-     SocketWouldBlockException if the call would block.   
+     SocketWouldBlockError if the call would block.   
 
    <Side Effects>
      None
@@ -950,7 +950,7 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
    <Exceptions>
      LocalIPChanged if the local IP address has changed and the tcpserversocket is invalid
 
-     PortRestrictedException (descends ResourceException) if the port number is no longer allowed.
+     PortRestrictedError (descends ResourceError) if the port number is no longer allowed.
 
      SocketClosedLocal if tcpserversocket.close() was called.
 
@@ -1006,11 +1006,11 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
    <Exceptions>
      LocalIPChanged if the local IP address has changed and the udpserversocket is invalid
 
-     PortRestrictedException if the port number is no longer allowed.
+     PortRestrictedError if the port number is no longer allowed.
 
      SocketClosedLocal if udpserversocket.close() was called.
 
-     XXXException if the call would block
+     XXXError if the call would block
 
    <Side Effects>
      None
