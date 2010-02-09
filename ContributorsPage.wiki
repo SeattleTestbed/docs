@@ -9,8 +9,10 @@ This page contains information useful to developers working on Seattle.   Anythi
    * (obsolete unless you are doing node manager testing) [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
 
  * Programming in Repy
-   * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
+   * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
+   * [PythonTutorial Subset of Python Tutorial] with basic information about the subset of Python needed to write code in Repy
    * [PythonVsRepy Python You Need to Forget to Use Repy]
+   * [RepyTutorial Repy Tutorial]
    * [RepyLibrary Repy Library] reference
    * [PortingPythonToRepy Porting Python to Repy Guide]
    * [RepyHelper Importing Repy code into Python using repyhelper]
