@@ -62,7 +62,6 @@ This page contains information useful to developers working on Seattle
    * [ProjectMembers Project Members] contact information
  
  * Other
-   * [StrikeForces Information] about strike forces
    * [ContainmentInSeattle] about controlling node outgoing traffic
    * [MobileCeNotes Windows CE] implementation notes and problems
    * [BenchmarkCustomInstallerInfo Benchmark and Custom Installer Info] implementation notes and problems.
