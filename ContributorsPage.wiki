@@ -1,13 +1,12 @@
 = Contributor Portal =
 
-This page contains information useful to developers working on Seattle
+This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
  
  * Accessing SVN, subscribing to the mailing list, running code from SVN, using the wiki
-   * [RepoAccess SVN access] instructions
-   * [MailingList seattle-devel mailing list access] instructions
-   * [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
-   * [WikiSvnAccounts How to gain commit access] to Seattle SVN and Wiki
-   * [ManagingTracTickets Managing Trac tickets] 
+   * '''[RepoAccess SVN access] instructions'''
+   * '''[WikiSvnAccounts Getting accounts] for Seattle SVN, Wiki, testbed machines, and seattle-devel'''
+   * '''[ManagingTracTickets Managing Trac tickets]'''
+   * (obsolete unless you are doing node manager testing) [DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
 
  * Programming in Repy
    * [PythonTutorial Python Tutorial] with basic instruction of Python for writing code in Repy
