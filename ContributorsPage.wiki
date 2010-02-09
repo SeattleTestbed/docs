@@ -29,8 +29,8 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [ContinuousBuild Continuous Build]
 
  * Style guidelines for documentation, python code, web code
-   * [DocsFormatting Documentation format guidelines]
-   * [CodingStyle Style guidelines] for writing code for Seattle
+   * '''[CodingStyle Style guidelines] for writing code for Seattle'''
+   * '''[DocsFormatting Documentation format guidelines] for creating wiki pages'''
    * [WebCodingStyle Web style guidelines] for writing web code for Seattle
 
  * Installation instructions and documentation
