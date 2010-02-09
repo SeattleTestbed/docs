@@ -1,5 +1,7 @@
 = Running Tests Under the Unit Testing Framework =
 
+(For information about writing tests, visit [UnitTestFramework Writing Unit Tests for Seattle's Unit Test Framework].)
+
 ----
 
 [[TOC(inline)]]
@@ -18,7 +20,7 @@ Before you can actually begin running your tests, you need to set them up correc
 
 '''All of your unit tests must have a '.py' extension.'''
 
-All of your python unit tests should already have this extension, but your repy files should not. A good extension to use for your repy unit testing files is '.mix'. This indicates that they haven't yet been preprocessed and can't run. To preprocess your files, use the command:
+All of your python unit tests should already have this extension, but your repy test files may not if they have not been preprocessed. To learn about preprocessing, visit [PythonVsRepy Python Versus Repy].
 
 {{{
 #!python
