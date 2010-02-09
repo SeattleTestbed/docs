@@ -1,6 +1,7 @@
 == Overview ==
 
-To gain SVN and Wiki commit access, contact Ivan (ivan@cs) and send him your desired username.
+There are three types of accounts that all developers need.   In addition, all developers should be on the seattle-devel mailing list.
+
 
 == SVN ==
 
@@ -9,3 +10,13 @@ For SVN access you will be granted a Unix account on seattle.cs.washington.edu. 
 == Wiki ==
 
 Once you are granted Wiki access, you can use the Trac software to change your password. Simply Login, then go to the Preferences tab, and select the Account tab.
+
+== Testbed machines ==
+
+An account will also be created on all of the testbed machines for you.   You can look at [https://seattle.cs.washington.edu/wiki/SeattleResources the list of Seattle development machines] for the list of testbed systems you should use to validate your code.
+
+= Subscribe to the Mailing List =
+
+To subscribe to the seattle-devel mailing list, please see [https://mailman.cs.washington.edu/mailman/listinfo/seattle-devel this page]. For this list, send email to '''seattle-devel at cs.washington.edu'''.
+
+Additionally you'll want to subscribe to the seattle-users mailing list. Please see [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users this page] for instructions. For this list, send email to '''seattle-users at cs.washington.edu'''.
