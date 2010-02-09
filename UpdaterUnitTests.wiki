@@ -14,17 +14,18 @@ The softwareupdater tests start a local webserver and serve update files from th
       * For example, create a temp directory and pass that as the only argument to the script.
   * Windows:
     * Run preparetest.py to a folder of your choosing.
-    * Copy over the files from trunk/assignments/webserver/ and trunk/softwareupdater/test/ to that same folder.
-    * Go to that directory and run `python test_updater_local.py`
+    * Copy over the files from trunk/softwareupdater/test/ to that same folder.
+    * Go to that directory and run `python utf.py -m softwareupdaters`
     * When running these tests on Windows, ps cannot be used to check process status.  You will have to do this yourself in the task manager.
 
 == Notes ==
   * There cannot be another instance of softwareupdater.py running, or the restart tests will fail.  
 
 == Output ==
-Each rsync unit test has 3 lines of output.  The first is the webserver telling you the ip address it is listening on (this should be the address of the local machine).  The second line is the local folder that the webserver is serving.  The third line notes the type of test, the url being passed to rsync, and whether or not the test passed.  
 
-For the restart test, initially there should be only one softwareupdater running.  The return code that is printed next should be 10, and there should still be only one softwareupdater running after this.  The finally, there should be output saying "Second update a success!".
+Output if the test passed is one line indicating whether the test passed or failed (this test will take a while).
+
+If the test fails, output will be produced, telling you what went wrong in which part of the test.
 
 If everything is successful, there will be an instance of softwareupdater.py and nmmain.py running when the script completes.  It is non-trivial to clean these up automatically, because we do not directly start these processes.
 
