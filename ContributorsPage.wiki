@@ -22,8 +22,8 @@ This page contains information useful to developers working on Seattle
    * [wiki:GENIPortalTesting Running a GENI test server]
    * [wiki:CustomizedInstallerTesting Running the Customized Installer test server]
    * [RemoteTestingService Running remote tests on seattle testbeds]
-   * [UnitTestFramework Unit Test Framework -- Writing Tests (DRAFT)]
-   * [UnitTestFrameworkRunning Unit Test Framework -- Running Tests (DRAFT)]
+   * [UnitTestFramework Writing Tests for Seattle's Unit Test Framework]
+   * [UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]
    * [IntegrationTestFramework Writing Integration Tests]
    * [ContinuousBuild Continuous Build]
 
