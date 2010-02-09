@@ -91,7 +91,7 @@ python utf.py -m nm
 <test_name> refers to the name of the test file that is to be run (do not include the .mix extension). To see which tests are available to run navigate to nodemanager\tests in the trunk folder.
 
 Known Issue 1: the test ut_nm_changeowner_validsequenceid.py fails since sequence id's are currently broken. 
-[[BR]]Known Issue 2: Occasionally the testscript freezes as it is running (no change in status for 3 minutes or more). This is rare and the cause is not yet fully known (appears to be related to connection resets in the node manager). If this occurs, restart the node manager and rerun the run_tests.py script.
+[[BR]]Known Issue 2: Occasionally the testscript freezes as it is running (no change in status for 3 minutes or more). This is rare and the cause is not yet fully known (appears to be related to connection resets in the node manager). If this occurs, restart the tests by calling the python utf.py command again.
 
 [[BR]]
 == Running Individual Nodemanager Tests  ==
