@@ -1,4 +1,4 @@
-= Running Tests Under the Unit Testing Framework =
+= Running Tests for Seattle's Unit Testing Framework =
 
 (For information about writing tests, visit [UnitTestFramework Writing Unit Tests for Seattle's Unit Test Framework].)
 
