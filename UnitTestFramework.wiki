@@ -94,7 +94,7 @@ def test_invalid_add():
 == Multiple Test Files ==
 ----
 
-You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_testhostnames.py'. All we need to do is use the same module descriptor. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
+You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_testhostnames.py'. All we need to do is use the same module name. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
 
 
 [[BR]]
