@@ -49,11 +49,11 @@ Repository Root: https://seattle.cs.washington.edu/svn
 ...
 }}}
 
-[[BR]]
-== Anonymous Access ==
-----
 
-= Browsing SVN through Trac =
+
+[[BR]]
+== Browsing SVN through Trac ==
+----
 
 URL to Browse the repository through a web browser:
   https://seattle.cs.washington.edu/browser/seattle/trunk
