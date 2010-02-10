@@ -1,8 +1,8 @@
 == Statistics Library ==
-This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data. The library primarily deals with a custom data structure called a 'node_list' which is actually a dictionary of every node (unique key being the 'nodeid')
+This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data. The library primarily deals with a custom data structure called a 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid')
 
 ----
-== Structure of a 'node_list' ==
+== Structure of 'node_dicts' ==
  * Dictionary of Nodes, with keyword of its corresponding unique node id.  Contents of node id keyword is another dictionary with the following keywords:
    * '''timestamp''': a datetime object in the form of "datetime(2010, 2, 1, 22, 38, 21, 965646)", when the data was polled.
    * '''nodelocation''': 'ip:port'
@@ -21,7 +21,7 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
 ----
 == Methods ==
  * '''poll_data'''()
-   * Stores a collection of data (a 'node_list') relating to nodes/vessels and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
+   * Stores a collection of data ('node_dicts') relating to nodes/vessels and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
  * '''import_data'''(file_name)
    * Takes a file name (in pickle form) and returns a node_list
  * '''versions'''(node_list)
