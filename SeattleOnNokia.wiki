@@ -56,14 +56,14 @@ Note: This part is '''optional''' and not required for the installation of Seatt
 [[BR]]
 
 === Directions ===
- 1. The tarball for the unit tests can be obtained [https://seattle.cs.washington.edu/static/nokiadev/seattle-tests.tar here]. The tarball contains all of the repy files necessary to run the unit tests as a standalone.
+ 1. The tarball for the unit tests can be obtained [https://seattle.cs.washington.edu/static/nokiadev/tests.tar here]. The tarball contains all of the repy files necessary to run the unit tests as a standalone.
  2. Untar the file by doing the following:
 {{{
-tar xf seattle-tests.tar
+tar xf tests.tar
 }}}
  3. Change into the tests directory, and run the unit tests by doing:
 {{{
-python run_tests.py
+python utf.py -m repytests
 }}}
  4. The unit tests should take about an hour. In the end it will report the number of passes/failures.
 [[BR]]
