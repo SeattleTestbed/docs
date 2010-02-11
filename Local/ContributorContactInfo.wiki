@@ -11,7 +11,7 @@ Please include as much information as you are willing to disclose. SVN user is s
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
-|| Stephen Sievers || kori at cs || 425-343-2381 || sjs25 || sjs25 ||
+|| Stephen Sievers || sjs25 at u || 425-343-2381 || sjs25 || sjs25 ||
 || Monzur Muhammad || monzum at cs || || monzum || monzum ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
