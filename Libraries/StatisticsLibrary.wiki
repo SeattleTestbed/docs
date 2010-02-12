@@ -22,18 +22,18 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
 == Methods ==
  * '''poll_data'''()
    * Stores a collection of data ('node_dicts') relating to nodes/vessels and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
- * '''import_data'''(file_name)
-   * Takes a file name (in pickle form) and returns a node_list
- * '''versions'''(node_list)
-   * Returns a list of versions (strings) that exist in the current data
- * '''prod_beta_split'''(node_list)
-   * Returns a list of 3 items: (0) list of production nodes, (1) list of beta nodes, (2) nodes with neither affiliation.
-     * The actual items in each list are tuples (node_item, key name) where node_item is a node from the node_list and the key name corresponds to the production or beta key name it was matched with.
- * '''prod_beta_keys'''()
-   * Returns a list of 2 maps with keywords corresponding to their public key names (ie. canonical.publickey is canonical):
-     * map of production keys  from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys statekeys]
-     * map of beta keys with keywords from: [https://seattle.cs.washington.edu/browser/seattle/trunk/seattlegeni/node_state_transitions/statekeys_beta statekeys_beta]
 
+ * '''import_data'''(absolute_path_to_file)
+   * Takes a file name (in pickle form) and returns a node_list
+
+ * '''versions'''(node_dicts)
+   * Returns a dictionary with its keys as versions and its contents as a list of nodes with that specific version 
+
+  * '''vessels'''(node_dicts)
+   * Returns a list of all the vessel dictionaries associated to the dictionary of nodes passed in.
+ * '''production_beta_key_split'''(node_dicts)
+   * Returns a dictionary with 3 keys: production, beta and other nodes; in the form of {'production':node_dicts}. Where each node_dict now has a new key of production, beta or other and its contents being the name of the key.
+     * The actual items in each node_dict are the same as before but they have an added key of 'production, beta or other' and the contents being the name of the key found for that node.
 ----
 == Example Uses == 
 Script Contents:[[BR]]
