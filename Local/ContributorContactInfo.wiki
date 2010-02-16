@@ -9,6 +9,7 @@ Please include as much information as you are willing to disclose. SVN user is s
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
+|| Jeff Rasley || jeffra45 at cs || || jeffra45 || jeffra45 ||
 || Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
 || Stephen Sievers || sjs25 at u || 425-343-2381 || sjs25 || sjs25 ||
