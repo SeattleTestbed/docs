@@ -53,5 +53,6 @@
 
 || 1:30-2:00 Dec 7th, 2009 || University of Washington Physics / Astronomy 212 (closed to public)  || Natural Science Honors || Cosmin || Talk (Non-technical)
 
-|| 3:00-3:30 Jan 30th, 2009 || Seattle Central Community College  || Northwest Python Day 2010 || Justin || Talk / Live Demo (Developer)
+|| 3:00-3:30 Jan 30th, 2010 || Seattle Central Community College  || Northwest Python Day 2010 || Justin || Talk / Live Demo (Developer)
 
+|| 4:55-5:30 Feb 20th, 2010 || Hyatt Regency Atlanta Centennial room III  || PyCon 2010 || Justin || Talk / Live Demo (Python Developer)
