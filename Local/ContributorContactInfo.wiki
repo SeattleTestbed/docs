@@ -3,7 +3,7 @@
 This page is to organize and collect contact information for all of the developers in one location.
 Please include as much information as you are willing to disclose. SVN user is so that the proper user can be contacted if a bug is identified with their code, and the SVN -> Name translation isn't immediately obvious.
 
-Of course, you can often find other developers on IRC in room #seattle on freenode.net.
+You can often find other Seattle contributors on IRC in room #seattle on freenode.net.
 
 
 '''If you are working on Seattle, please add your information to this table.'''   Please keep the list ordered alphabetically by SVN username.
