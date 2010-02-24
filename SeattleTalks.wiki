@@ -55,4 +55,4 @@
 
 || 3:00-3:30 Jan 30th, 2010 || Seattle Central Community College  || Northwest Python Day 2010 || Justin || Talk / Live Demo (Developer)
 
-|| 4:55-5:30 Feb 20th, 2010 || Hyatt Regency Atlanta Centennial room III  || !PyCon 2010 || Justin || Talk / Live Demo (Python Developer)
+|| 4:55-5:30 Feb 20th, 2010 || Hyatt Regency Atlanta Centennial room III  || !PyCon 2010 || Justin || [http://blip.tv/file/3257337 Talk / Live Demo] (Python Developer)
