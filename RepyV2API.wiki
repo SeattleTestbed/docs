@@ -27,6 +27,8 @@ I have made the following resource consumption simplifications to make the inter
 For more information on the Exception hierarchy for Repy 2.0, see FutureRepyExceptionHierarchy.
 
 
+If multiple exceptions should occur for a given operation, the exception listed first in the doc string will happen.   For example, if openfile is called on an invalid filename when there are no available file handle resources, RepyArgumentError will occur instead of ResourceExhaustedError.
+
 
 [[BR]]
 == Introduction and Purpose ==
