@@ -436,11 +436,11 @@ If create is True, the file is created if it does not exist.   Neither mode trun
    <Exceptions>
       RepyArgumentError is raised if the filename is invalid.
 
-      FileNotFoundError is raised if the filename is not found, and create is False.
+      FileInUseError is raised if a handle to the file is already open.
 
       ResourceExhaustedError is raised if there are no available file handles.
 
-      FileInUseError is raised if a handle to the file is already open.
+      FileNotFoundError is raised if the filename is not found, and create is False.
 
 
    <Side Effects>
