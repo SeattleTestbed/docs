@@ -455,11 +455,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 ==== file.close() ====
 ----
 
-Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a ValueError after the file has been closed. ~~Calling close() more than once is allowed.~~
-
-'''Conrad: Python raises !ValueError in such situations. Any reason we think this should change? Also: I think (for consistency) we should raise !ValueError if they try to call ''any'' method on a closed file -- close() included.'''
-
-'''Conrad (2009-12-24): un-struck ValueError above until/unless we decide it's not appropriate.'''
+Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a FileClosedError after the file has been closed. 
 
  * Doc string:
 
@@ -526,9 +522,11 @@ Seek to the offset in the file and then write some data to a file.
       offset: An absolute offset into the file to write
 
     <Exceptions>
+      RepyArgumentError is raised if the offset is negative or the data is not
+      a string.
       FileClosedError is raised if the file is already closed.
       SeekPastEndOfFileError is raised if trying to write past the EOF.
-      RepyArgumentError is raised if the offset is negative.
+
 
     <Side Effects>
       Writes to persistent storage.
