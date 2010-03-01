@@ -15,6 +15,7 @@ The purpose of this document is to guide any Seattle developers in how to create
 These are the files that need to be imported in order to setup and run the integration tests properly. All these files are located in trunk/integrationtests/common/
  1. send_gmail.py
  1. integrationtestlib.py
+ 1. seattle_gmail_info
  1. irc_seattlebot.py (Optional - import this if you want to send messages on the irc)
 
 [[BR]]
