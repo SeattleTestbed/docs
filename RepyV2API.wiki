@@ -177,7 +177,10 @@ The intent is that we will build libraries that will provide 'rich' functionalit
          The host name to translate.
 
    <Exceptions>
-      NetworkAddressError (descends from NetworkError) if the address cannot be resolved.
+
+     RepyArgumentError (descends from NetworkError) if the name is not a string
+
+     NetworkAddressError (descends from NetworkError) if the address cannot be resolved.
 
    <Side Effects>
       None.
@@ -500,7 +503,9 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
 
     <Exceptions>
       RepyArgumentError is raised if the offset or size is negative.
+
       FileClosedError is raised if the file is already closed.
+
       SeekPastEndOfFileError is raised if trying to read past the end of the file.
 
     <Resource Consumption>
@@ -529,7 +534,9 @@ Seek to the offset in the file and then write some data to a file.
     <Exceptions>
       RepyArgumentError is raised if the offset is negative or the data is not
       a string.
+
       FileClosedError is raised if the file is already closed.
+
       SeekPastEndOfFileError is raised if trying to write past the EOF.
 
 
@@ -588,8 +595,10 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
       the empty string.
 
    <Exceptions>
-      FileNotFoundError is raised if the file does not exist
       RepyArgumentError is raised if the filename is invalid.
+
+      FileNotFoundError is raised if the file does not exist
+
       FileInUseError is raised if the file is already open.
 
    <Side Effects>
@@ -791,6 +800,7 @@ Start a new thread to call a function.   The thread is charged to your program.
 
    <Exceptions>
       RepyArgumentError if the function is not callable.
+
       ResourceExhaustedError if there are no events available.
 
    <Side Effects>
@@ -882,10 +892,6 @@ Receives data that was sent by the connected party using send.   Note that this 
      SocketClosedLocal (descends NetworkError) if the socket is closed locally.
 
      SocketClosedRemote (descends NetworkError) if the socket was closed remotely '''and''' there is no more data to be read.
-
-     XXXError if the connection is broken due to a network problem. '''Conrad: is this substantially different from the socket being closed remotely?'''
-
-     LocalIPChanged (descends NetworkError) if the local system connection is broken because the local system changes its IP address.
    
      SocketWouldBlockError if the call would block.
 
@@ -919,10 +925,6 @@ Sends data to the connected party.   Note that this may send less than the entir
 
      SocketClosedRemote (descends NetworkError) if the socket was closed remotely.
 
-     XXXError if the connection is broken due to a network problem. '''Conrad: see my comment above'''
-
-     LocalIPChanged if the local system connection is broken because the local system changes its IP address.
-
      SocketWouldBlockError if the call would block.   
 
    <Side Effects>
@@ -951,12 +953,12 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
      None
 
    <Exceptions>
-     LocalIPChanged if the local IP address has changed and the tcpserversocket is invalid
+     Raises SocketClosedLocal if close() has been called.
+ 
+     Raises SocketWouldBlockError if the operation would block.
 
-     PortRestrictedError (descends ResourceError) if the port number is no longer allowed.
-
-     SocketClosedLocal if tcpserversocket.close() was called.
-
+     Raises ResourcesExhaustedError if there are no free outsockets.
+ 
    <Side Effects>
      None
 
