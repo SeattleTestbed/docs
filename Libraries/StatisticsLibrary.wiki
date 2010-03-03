@@ -36,6 +36,10 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
      * The actual items in each node_dict are the same as before but they have an added key of 'production, beta or other' and the contents being the name of the key found for that node.
      * NOTE: Temporarily this method returns a dictionary with 2 keys: 'production_beta_key_dicts' and 'nodes_with_multi_keys' which corresponds to special nodes that have duplicate keys in the nodes vessels userkeys list.
 
+ * '''split_lan_nodes'''(node_dicts)
+   *     Takes a dictionary of node_dicts and splits them based on their ip addresses.  If 'node a' and 'node b' are both part of the '10.8.10.X' network they will be grouped together so you can tell how many nodes are part of the same local network.  It returns a dictionary of the form {'10.8.10.X':[node_dicts]}, where '[node_dicts]' is a list of node_dicts that are in the 10.8.10.X network.
+ 
+
 ----
 == Example Uses == 
 Script Contents:[[BR]]
