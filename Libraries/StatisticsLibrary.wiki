@@ -26,10 +26,10 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
  * '''import_data'''(absolute_path_to_file)
    * Takes a file name (in pickle form) and returns a node_list
 
- * '''versions'''(node_dicts)
+ * '''get_versions'''(node_dicts)
    * Returns a dictionary with its keys as versions and its contents as a list of nodes with that specific version 
 
-  * '''vessels'''(node_dicts)
+  * '''get_all_vessels'''(node_dicts)
    * Returns a list of all the vessel dictionaries associated to the dictionary of nodes passed in.
  * '''production_beta_key_split'''(node_dicts)
    * Returns a dictionary with 3 keys: production, beta and other nodes; in the form of {'production':node_dicts}. Where each node_dict now has a new key of production, beta or other and its contents being the name of the key.
