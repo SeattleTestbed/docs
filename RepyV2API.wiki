@@ -205,7 +205,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       None
 
    <Exceptions>
-      InternetConnectivityError (descends NetworkError) if the host is not connected to the Internet or has name resolution problems
+      InternetConnectivityError (descends NetworkError) if the host is not connected to the Internet.
 
    <Side Effects>
       None.
