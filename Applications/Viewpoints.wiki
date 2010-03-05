@@ -54,11 +54,11 @@ IN THE WORK.
 
 
 
-== Known Issues & Limitation ==
+== Known Issues & Limitations ==
 
 (Note: The program is not yet at its best. So keep posted for updates. This is just a demo version of viewpoints. We are currently working on a lot of refinements to minimize the failure rate.)
 
-== Improvement & Schedule ==
+== Improvement Schedule ==
 
 1. UI
    The user interface will be updated soon.
