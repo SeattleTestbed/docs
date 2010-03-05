@@ -30,21 +30,21 @@ IN THE WORK.
 
 == Install/Setup of Viewpoints ==
 
-1.      If you do not have a SeattleGENI account, go to https://seattlegeni.cs.washington.edu and register.
+1.      If you do not have a !SeattleGENI account, go to https://seattlegeni.cs.washington.edu and register.
 
-2.      Log on to seattleGeni and acquire 10 WAN vessels.  
+2.      Log on to !SeattleGeni and acquire 10 WAN vessels.  
 
-3.      Download the demokit form SeattleGeni
+3.      Download the demokit form !SeattleGeni
 
-4.      Download your private and public keys from SeattleGeni and save them into the demokit folder.
+4.      Download your private and public keys from !SeattleGeni and save them into the demokit folder.
 
 5.      Unzip {{{viewpoints.zip}}} and copy all the files and documents from the viewpoints folder to the demokit. There will be files that overlap; these are the files that need to be updated. Thus, copy and replace them with the files from the viewpoints folder.
 
-6.      Run {{{python viewpoints.py 'username' 'geniport'}}} with arguments of your seattleGeni username followed by you port.  Make sure it says waiting. This indicates that the server is ready for requests.
+6.      Run {{{python viewpoints.py 'username' 'geniport'}}} with arguments of your !SeattleGeni username followed by you port.  Make sure it says waiting. This indicates that the server is ready for requests.
 
 7.      Now go over to your browser and type in http://127.0.0.1:12345/. You should retrieve the display of the viewpoints webpage.
 
-8.      Click on the acquire vessels show button. This will generate the possible viewpoint locations using your available seattleGeni nodes.(Note: this will take a few seconds, please wait)
+8.      Click on the acquire vessels show button. This will generate the possible viewpoint locations using your available !SeattleGeni nodes.(Note: this will take a few seconds, please wait)
 
 9.      When you have the available locations. Copy over one location to the Viewpoints Location field.
 
