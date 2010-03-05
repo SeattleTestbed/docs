@@ -40,7 +40,7 @@ IN THE WORK.
 
 5.      Unzip {{{viewpoints.zip}}} and copy all the files and documents from the viewpoints folder to the demokit. There will be files that overlap; these are the files that need to be updated. Thus, copy and replace them with the files from the viewpoints folder.
 
-6.      Run {{{python viewpoints.py 'username' 'geniport'}}} with arguments of your !SeattleGeni username followed by you port.  Make sure it says waiting. This indicates that the server is ready for requests.
+6.      Run {{{python viewpoints.py 'username' 'geniport'}}} with arguments of your !SeattleGeni username followed by your port from SeattleGENI.  Make sure it says waiting. This indicates that the server is ready for requests.
 
 7.      Now go over to your browser and type in http://127.0.0.1:12345/. You should retrieve the display of the viewpoints webpage.
 
