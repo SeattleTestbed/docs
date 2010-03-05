@@ -29,17 +29,21 @@ IN THE WORK.
 
 
 == Running Seobinggo ==
-
 1.Install/Setup
 
-        a. Untar the package
-                {{{tar -xvf Seobinggo.tar}}}
 
-        b. Following file will be created.
-                {{{Seobinggo.repy}}}
+        a. Download and install Seattle.
+           {{{https://seattlegeni.cs.washington.edu/geni/download/flibble/}}}
+
+        b. Untar the package
+                {{{tar -zxvf Seobinggo.tar.gz}}}
+
+        c. Copy the files in Seobinggo to the {{{seattle/seattle_repy}}} directory
+
+        d. Enter the {{{seattle/seattle_repy}}} directory
 
 2. Run Seobinggo
-        {{{python repy.py <restriction file> Seobinggo.repy}}}
+        {{{python repy.py restrictions.default Seobinggo.repy}}}
 
 3. Using Sebinggo
 
@@ -71,16 +75,17 @@ IN THE WORK.
            public key. Although the file data is encrypted with public key, this is
            not ideal security policy.
 
-==Improvement & Schedule==
+== Improvement & Schedule ==
+
 1. Security
    SHA1 will be adopted to improve the security of the system. As before, file data
    will be encrypted with user's public key(RSA). Then, a hash value will be 
    calculated by SHA1(the file data).  Instead of storing only encrypted file data in 
    peers, the encrypted hash value(with user's private key) will be stored in peer 
-   nodes.  This way, hash value can be compared when retrieval request received in peernodes
-   to check the user has the correct private key. This is possible because Seobinggo
-   stores encrypted hash values(with private key) in peer node and this can be 
-   decrypted to compare with SHA1(file data) which returns hash value.
+   nodes.  This way, hash value can be compared when retrieval request received in peer
+   nodes to check the user has the correct private key. This is possible because 
+   Seobinggo stores encrypted hash values(with private key) in peer node and this can 
+   be decrypted to compare with SHA1(file data) which returns hash value.
 
 2. UI
    User interface is very important. It will be updated soon.
