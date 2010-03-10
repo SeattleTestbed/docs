@@ -1,20 +1,32 @@
 = Building the Demokit =
 
-There's currently no automated way to build the demokit. There's an open ticket for this (#119) and there is a broken and outdated script to do this at dist/executable_setup.py.
+The script `build_demokit.py` provides a quick and easy way to prepare a demokit. It bundles a set of demo programs along with the most recent versions of necessary Seattle core files into a downloadable tarball.
 
-For now, to add or replace files, just download the existing demokit from seattlegeni.cs, unzip it, add/replace files, zip it back up, and put it back in place on seattlegeni.cs at /var/www/dist/demokit.zip. It would probably be a good idea to backup the old one with an insightful filename, e.g. demokit.20091021.zip.
 
-That is:
+== Usage ==
+`build_demokit.py` can be run from anywhere, assuming you have access to a working copy of the trunk of the Seattle Subversion repository.
 
+Kits currently include the following demo programs:
+ * A simple all-pairs-ping program run via [SeattleShell Seash]
+ * An all-pairs-ping Google Maps mashup
+ * UDP ping connectivity-measuring programs
+
+`build_demokit.py` can be run thusly:
 {{{
-unzip demokit.zip
-cd demokit
-[make changes]
-cd ..
-mv demokit.zip.bak
-zip -r demokit demokit
+$ python build_demokit.py path/to/trunk output/directory
 }}}
 
-That last step will create the new demokit.zip.
+Please refer to the following example usage:
 
-You can list files in the demokit with `unzip -l demokit.zip` to see if you added it correctly, but better would probably be to unzip both the old one and the new one side by side and do a `diff r demokit.old/ demokit.new/` to make sure you only changed what you intended to change. And, of course, download it from the seattlegeni site (http://seattlegeni.cs.washington.edu/dist/demokit.zip) and unzip it once you've put it in place just to be sure.
+{{{
+Seattle/trunk$ mkdir ../demokit_test
+Seattle/trunk$ python dist/build_demokit.py . ../demokit_test
+Creating a demokit. This may take a moment or two.
+Demokit created: Seattle/demokit_test/seattle_demokit.tgz
+Seattle/trunk$ cd ../demokit_test && ls
+seattle_demokit.tgz
+}}}
+
+
+== Documentation ==
+Please refer to [browser:seattle/trunk/dist/build_demokit.py the comments in `build_demokit.py`] for further documentation.
