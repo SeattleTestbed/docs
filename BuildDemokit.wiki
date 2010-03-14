@@ -1,6 +1,6 @@
 = Building the Demokit =
 
-The script `build_demokit.py` provides a quick and easy way to prepare a demokit. It bundles a set of demo programs along with the most recent versions of necessary Seattle core files into a downloadable tarball.
+The script `dist/build_demokit.py` provides a quick and easy way to prepare a demokit. It bundles a set of demo programs along with the most recent versions of necessary Seattle core files into a downloadable tarball.
 
 
 == Usage ==
