@@ -1,6 +1,6 @@
 = Using the Customized Installer Builder =
 
-The [http://seattle.cs.washington.edu/customized_installer/ customized installer builder] creates custom Seattle installers. This means that you can create an installer that has 4% of the resources reserved for a user Michael, while the rest are reserved for a user John. Or an installer with some other assignment of resources. The customized installer builder lets you to specify the proportion of resources each vessel will be allocated, the public\private keys of the owner for each vessel, as well as the public and private keys of the users for each vessel. Finally, you will be able to download your custom made installer for a platform of your choice.
+The [http://seattle.cs.washington.edu/customized_installer/ customized installer builder] creates custom Seattle installers. This means that you can create an installer that has 4% of the resources reserved for a user Michael, while the rest are reserved for a user John. Or an installer with some other assignment of resources. The customized installer builder allows you to specify the proportion of resources each vessel will be allocated, the public\private keys of the owner for each vessel, as well as the public and private keys of the users for each vessel. Finally, you will be able to download your custom made installer for a platform of your choice.
 
 ----
 [[TOC(inline)]]
