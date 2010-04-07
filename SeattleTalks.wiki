@@ -62,3 +62,5 @@
 || 5:30-8:30 Mar 16th, 2010 || Fitzpatrick Center, Duke || GEC 7 Demo session || Justin || Live Demo
 
 || 10:15-10:30 Mar 18th, 2010 || Washington Duke Inn, President's room 3 || GEC 7 Services and Tools working group || Justin || Talk, Live Demo
+
+|| 2:30-3:30 Apr 7th, 2010 || University of Victoria || CSC 485 C || Justin || Talk, Live Demo
