@@ -268,7 +268,7 @@ This adds the file with nodes to ping to all of the computers in the LAN group. 
 
 {{{
 #!python
-username@LAN !> run allpairsping.py GENIport
+username@LAN !> run allpairsping.repy GENIport
 }}}
 
 You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
@@ -331,7 +331,7 @@ Then type
 
 {{{
 #!python
-username@WAN !> run allpairsping.py GENIport
+username@WAN !> run allpairsping.repy GENIport
 }}}
 
 Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage from a different computer if the problem persists. 
