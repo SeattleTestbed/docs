@@ -64,3 +64,5 @@
 || 10:15-10:30 Mar 18th, 2010 || Washington Duke Inn, President's room 3 || GEC 7 Services and Tools working group || Justin || Talk, Live Demo
 
 || 2:30-3:30 Apr 7th, 2010 || University of Victoria || CSC 485 C || Justin || Talk, Live Demo
+
+|| 10AM-11AM CDT Apr 10th, 2010 || Park University, Woodard room  || Seattle Workshop, co-located with CCSC CP || Justin || Live Demo / Extended Talk (Educational)
