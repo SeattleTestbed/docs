@@ -22,7 +22,7 @@ Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   I
 == Step 2 : Running Seattle shell ==
 ----
 
-Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.repy).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
+Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.py).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
 
  * On Windows do start, run, cmd and then cd to the folder where you downloaded the toolkit.   
 
@@ -268,7 +268,7 @@ This adds the file with nodes to ping to all of the computers in the LAN group. 
 
 {{{
 #!python
-username@LAN !> run allpairsping.repy GENIport
+username@LAN !> run allpairsping.py GENIport
 }}}
 
 You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
@@ -331,7 +331,7 @@ Then type
 
 {{{
 #!python
-username@WAN !> run allpairsping.repy GENIport
+username@WAN !> run allpairsping.py GENIport
 }}}
 
 Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage from a different computer if the problem persists. 
