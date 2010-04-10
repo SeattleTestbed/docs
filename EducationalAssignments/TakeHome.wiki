@@ -360,7 +360,7 @@ username@WAN !> stop
 
 Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity".   Non-transitive connectivity usually happens because of configuration errors or convergence failures in the BGP protocol.   
 
-Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of an node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the node who can talk to both nodes.   Then type (replacing ''node1IP'', ''node2IP'', and ''GENIport'')
+Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of a node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the node who can talk to both nodes.   Then type (replacing ''node1IP'', ''node2IP'', and ''GENIport'')
 
 {{{
 #!python
