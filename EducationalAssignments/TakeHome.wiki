@@ -22,7 +22,7 @@ Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   I
 == Step 2 : Running Seattle shell ==
 ----
 
-Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.py).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
+Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.repy).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
 
  * On Windows do start, run, cmd and then cd to the folder where you downloaded the toolkit.   
 
@@ -77,7 +77,7 @@ In the above print-out response to the browse command, the %1, %2, %3, etc are a
 
 {{{
 #!python
-username@ !> on %1 run helloworld.py
+username@ !> on %1 run helloworld.repy
 }}}
 
 To see the results of this command on computer %1 we would type:
@@ -105,7 +105,7 @@ This indicates that you're acting as your username and you're acting on %1 (unle
 
 {{{
 #!python
-username@%1 !> run helloworld.py
+username@%1 !> run helloworld.repy
 }}}
 
 and then type
@@ -140,7 +140,7 @@ Now type two commands:
 
 {{{
 #!python
-username@browsegood !> run helloworld.py
+username@browsegood !> run helloworld.repy
 username@browsegood !> show log
 }}}
 
@@ -168,14 +168,14 @@ We'll cover one last function of the shell before we start measuring network con
 
 {{{
 #!python
-username@LAN !> run infloop.py
+username@LAN !> run infloop.repy
 }}}
 
-This deploys a program that waits in an infinite loop.   Now let's try to run helloworld.py while the previous program is running.
+This deploys a program that waits in an infinite loop.   Now let's try to run helloworld.repy while the previous program is running.
 
 {{{
 #!python
-username@LAN !> run helloworld.py
+username@LAN !> run helloworld.repy
 }}}
 
 The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has already been started'' on  ... }}} for each of the nodes.   The reason is that the shell doesn't run the program since the infinite loop program is already running.  To stop the infloop program type
@@ -210,7 +210,7 @@ This will allow you to see the IP of %2.  Now type (replacing ''GENIport'' with 
 
 {{{
 #!python
-username@LAN !> on %2 run udppingserver.py GENIport
+username@LAN !> on %2 run udppingserver.repy GENIport
 }}}
 
 
@@ -218,7 +218,7 @@ You can ping from %1 to %2 by typing the line listed below.   Replace ''IP_of_%2
 
 {{{
 #!python
-username@LAN !> on %1 run udpping.py IP_of_%2 GENIport
+username@LAN !> on %1 run udpping.repy IP_of_%2 GENIport
 }}}
 
 
@@ -268,7 +268,7 @@ This adds the file with nodes to ping to all of the computers in the LAN group. 
 
 {{{
 #!python
-username@LAN !> run allpairsping.py GENIport
+username@LAN !> run allpairsping.repy GENIport
 }}}
 
 You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
@@ -331,7 +331,7 @@ Then type
 
 {{{
 #!python
-username@WAN !> run allpairsping.py GENIport
+username@WAN !> run allpairsping.repy GENIport
 }}}
 
 Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage from a different computer if the problem persists. 
@@ -364,14 +364,14 @@ Write down the IP addresses of the two computers that cannot directly communicat
 
 {{{
 #!python
-username@WAN !> on %number run udpforward.py node1IP node2IP GENIport
+username@WAN !> on %number run udpforward.repy node1IP node2IP GENIport
 }}}
 
 Now start the udppingserver on node1 by doing (replacing ''%node1'' with the node number for node1 and ''GENIport'')
 
 {{{
 #!python
-username@WAN !> on %node1 run udppingserver.py GENIport
+username@WAN !> on %node1 run udppingserver.repy GENIport
 }}}
 
 
@@ -379,7 +379,7 @@ To send a ping packet, run: (replacing ''%node2'' with the node number for node2
 
 {{{
 #!python
-username@WAN !> on %node2 run udpping.py intermediateIP GENIport
+username@WAN !> on %node2 run udpping.repy intermediateIP GENIport
 }}}
 
 You can look at the log on node1 or node2 to see that the packets were delivered (using the "show log" command).   However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.   You'll also see that node1 got the response from the intermediate node (instead of directly from node2).
@@ -440,14 +440,14 @@ username@ !> browse
 You should see the IP of at least one WAN node. Write down the IP address of the WAN node.   Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing either {{{"host `hostname`"}}} or {{{ifconfig}}} on a Mac).   Start the pingserver on the WAN node with the following command in seash (replacing ''GENIport'' with your port number):
 {{{
 #!python
-username@ !> on %WANnode run udppingserver.py GENIport
+username@ !> on %WANnode run udppingserver.repy GENIport
 }}}
 
 Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace ''WANIP'' with the WAN node's IP address and ''GENIport'' with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
 
 
 {{{
-python repy.py restrictions.allowallports udpping.py WANIP GENIport
+python repy.py restrictions.allowallports udpping.repy WANIP GENIport
 }}}
 
 
@@ -472,14 +472,14 @@ Then start the ping server on the local computer by running the following comman
 
 
 {{{
-python repy.py restrictions.allowallports udppingserver.py GENIport
+python repy.py restrictions.allowallports udppingserver.repy GENIport
 }}}
 
 Next ping the local node from the WAN node
 
 {{{
 #!python
-username@ !> on %WANnode run udpping.py localIP GENIport
+username@ !> on %WANnode run udpping.repy localIP GENIport
 }}}
 
 
