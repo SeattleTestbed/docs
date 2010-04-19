@@ -202,7 +202,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
 ==== recvmess(localip, localport, function) ====
 ----
 
-Registers a function as a callback for incoming UDP messages.  If another message arrives before the first is processed, a second thread will be started. If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free thread / event, the function is not called until a thread / event is available.   Also, if there is no current function registered by recvmess or waitforconn, an thread / event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.   The maximum datagram size is 4096 bytes.
+Registers a function as a callback for incoming UDP messages.  If another message arrives before the first is processed, a second thread will be started. If this function is called multiple times on the same ip and port, the previous function is replaced.   When an incoming UDP message is delivered on this IP and port, the function is called.   If there is no free thread / event, the function is not called until a thread / event is available.   Also, if there is no current function registered by recvmess or waitforconn, an thread / event is consumed to check for incoming network traffic.   This function returns a commhandle that can be used by stopcomm to deregister the handler.   The maximum datagram size is 4096 bytes in Repy 0.1r, but later revisions will remove this restriction.
 
  * Doc string:
 
