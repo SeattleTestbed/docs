@@ -59,7 +59,7 @@
 
 || 1:30-1:45 Mar 16th, 2010 || Washington Duke Inn, President's room 3  || GEC 7, Cluster C update || Justin || Talk
 
-|| 5:30-8:30 Mar 16th, 2010 || Fitzpatrick Center, Duke || GEC 7 Demo session || Justin || Live Demo
+|| 5:30-8:30 Mar 16th, 2010 || Fitzpatrick Center, Duke || GEC 7 Demo session || Justin || [http://vimeo.com/10721832 Live Demo]
 
 || 10:15-10:30 Mar 18th, 2010 || Washington Duke Inn, President's room 3 || GEC 7 Services and Tools working group || Justin || Talk, Live Demo
 
