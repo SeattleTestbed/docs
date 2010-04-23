@@ -169,27 +169,30 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
  * Doc string:
 
-   <Purpose>
-      Provides information about a hostname.
+    <Purpose>
+      Provides information about a hostname. Calls socket.gethostbyname().
+      Translate a host name to IPv4 address format. The IPv4 address is
+      returned as a string, such as '100.50.200.5'. If the host name is an
+      IPv4 address itself it is returned unchanged.
 
    <Arguments>
-      name:
+     name:
          The host name to translate.
 
    <Exceptions>
-
      RepyArgumentError (descends from NetworkError) if the name is not a string
-
-     NetworkAddressError (descends from NetworkError) if the address cannot be resolved.
+     NetworkAddressError (descends from NetworkError) if the address cannot
+     be resolved.
 
    <Side Effects>
-      None.
+     None.
 
    <Resource Consumption>
-      This operation consumes network bandwidth of 4K netrecv, 1K netsend.   (It's hard to tell how much was actually sent / received at this level)
+     This operation consumes network bandwidth of 4K netrecv, 1K netsend.
+     (It's hard to tell how much was actually sent / received at this level.)
 
    <Returns>
-      The IPv4 address as a string.
+     The IPv4 address as a string.
 
 [[BR]]
 ==== getmyip() ====
@@ -205,13 +208,13 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       None
 
    <Exceptions>
-      InternetConnectivityError (descends NetworkError) if the host is not connected to the Internet.
+      InternetConnectivityError is the host is not connected to the internet.
 
    <Side Effects>
       None.
 
    <Resource Consumption>
-      This operation consumes 64*4 bytes of netsend (SYN, ACK, FIN/ACK, Last-ACK) and 64*2 bytes of netrecv (SYN/ACK, FIN / ACK)
+      This operations consumes 256 netsend and 128 netrecv.
 
    <Returns>
       The localhost's IP address
@@ -234,29 +237,38 @@ Sends a UDP message to a destination host / port using a specified localip and l
 
    <Arguments>
       destip:
-         The IP to send a message to
+         The host to send a message to
       destport:
          The port to send the message to
       message:
          The message to send
-      localip:
+      localhost:
          The local IP to send the message from 
       localport:
-         The local port to send the message from 
-
+         The local port to send the message from
 
    <Exceptions>
-      AddressBindingError (descends NetworkError) when the local IP isn't a local IP
+      AddressBindingError (descends NetworkError) when the local IP isn't
+        a local IP.
 
-      PortRestrictedError (descends ResourceError) when the local port isn't allowed
+      ResourceForbiddenError (descends ResourceException?) when the local
+        port isn't allowed
 
-      TypeError/ValueError when the local IP and port aren't valid types or values
+      RepyArgumentError when the local IP and port aren't valid types
+        or values
+
+      AlreadyListeningError if there is an existing listening UDP socket
+      on the same local IP and port.
+
+      DuplicateTupleError if there is another sendmessage on the same
+      local IP and port to the same remote host.
 
    <Side Effects>
       None.
 
    <Resource Consumption>
-      This operation consumes 64 bytes + number of bytes of the message that were transmitted.   This requires that the localport is allowed.
+      This operation consumes 64 bytes + number of bytes of the message that
+      were transmitted. This requires that the localport is allowed.
 
    <Returns>
       The number of bytes sent on success
@@ -275,38 +287,39 @@ Binds to a IP and port and waits for incoming UDP messages.  If this function is
 
 * Doc string: 
 	 
-   <Purpose> 
-    Sets up a udpserversocket to receive incoming UDP messages 
-	 	 
-   <Arguments> 
-      localip: 
-        The local IP to register the handler on 
-      localport: 
-         The port to listen on 
-      
-   <Exceptions> 
-      PortInUseError (descends NetworkError) if the port cannot be listened on because some other process on the system is listening on it
+    <Purpose>
+        Sets up a UDPServerSocket to receive incoming UDP messages.
 
-      PortInUseError if there is already a udpserversocket with the same IP and port.
+    <Arguments>
+        localip:
+            The local IP to register the handler on.
+        localport:
+            The port to listen on.
 
-      TypeError/ValueError if the port number or ip is wrong type or obviously invalid.
+    <Exceptions>
+        DuplicateTupleError (descends NetworkError) if the port cannot be
+        listened on because some other process on the system is listening on
+        it.
 
-      AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
+        AlreadyListeningError if there is already a UDPServerSocket with the same
+        IP and port.
 
-      PortRestrictedError (descends ResourceError) if the port is restricted
+        RepyArgumentError if the port number or ip is wrong type or obviously
+        invalid.
 
-      ResourceExhaustedError (descends ResourceUsageError) if there are no available insockets
+        AddressBindingError (descends NetworkError) if the IP address isn't a
+        local IP.
 
-      XXXError if the call would block
- 	 
-   <Side Effects> 
-      Prevents other udpserversockets from using this port / IP
-	 
-   <Resource Consumption>
-      This operation consumes an insocket and requires that the provided messport is allowed.
+        ResourceForbiddenError if the port is not allowed.
 
-   <Returns> 
-      The udpserversocket. 
+    <Side Effects>
+        Prevents other UDPServerSockets from using this port / IP
+
+    <Resource Consumption>
+        This operation consumes an insocket and requires that the provided messport is allowed.
+
+    <Returns>
+        The UDPServerSocket.
 
 
 
@@ -320,50 +333,63 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
 
  * Doc string:
 
-   <Purpose>
+      <Purpose>
       Opens a connection, returning a socket-like object
 
-   <Arguments>
-      destip:
-         The destination ip to open communications with
-      destport:
-         The destination port to use for communication
-      localip:
-         The local ip to use for the communication
-      localport:
-         The local port to use for communication
-      timeout:
-         The maximum amount of time to wait to connect
+
+    <Arguments>
+      destip: The destination ip to open communications with
+
+      destport: The destination port to use for communication
+
+      localip: The local ip to use for the communication
+
+      localport: The local port to use for communication
+
+      timeout: The maximum amount of time to wait to connect.   This may
+               be a floating point number or an integer
 
 
-   <Exceptions>
-      AddressBindingError (descends NetworkError) if the localip isn't associated with the local system
+    <Exceptions>
 
-      PortInUseError (descends NetworkError) if the (localip, localport, destip, destport) tuple is already used.
+      RepyArgumentError if the arguments are invalid.   This includes both
+      the types and values of arguments. If the localip matches the destip,
+      and the localport matches the destport this will also be raised.
 
-'''Conrad: Fixed to only raise if uniqueness property is not met. I think the exception name makes enough sense in this circumstance, but I could see virtue in adding a new one. Thoughts?'''
+      AddressBindingError (descends NetworkError) if the localip isn't 
+      associated with the local system or is not allowed.
 
-      PortRestrictedError (descends ResourceError) if the localport isn't allowed
+      ResourceForbiddenError (descends ResourceError) if the localport isn't 
+      allowed.
 
-      ValueError if the connection cannot be established due to a bad destination IP address
+      DuplicateTupleError (descends NetworkError) if the (localip, localport, 
+      destip, destport) tuple is already used.   This will also occur if the 
+      operating system prevents the local IP / port from being used.
 
-      ConnectionRefusedError (descends NetworkError) if the connection cannot be established because the destination port isn't being listened on
+      AlreadyListeningError if the (localip, localport) tuple is already used
+      for a listening TCP socket.
 
-      TimeoutError (common to all API functions that timeout) if the connection times out
+      CleanupInProgress if the (localip, localport, destip, destport) tuple is
+      still being cleaned up by the OS.
 
-      ValueError/TypeError if the arguments are invalid
+      ConnectionRefusedError (descends NetworkError) if the connection cannot 
+      be established because the destination port isn't being listened on.
 
-      '''Justin: What happens if the timeout is huge? Does this have any implications for the tcpserversocket?'''
+      TimeoutError (common to all API functions that timeout) if the 
+      connection times out
 
-   <Side Effects>
-      None.
+      InternetConnectivityError if the network is down, or if the host
+      cannot be reached from the local IP that has been bound to.
 
-   <Resource Consumption>
-      This operation consumes 64*2 bytes of netsend (SYN, ACK) and 64 bytes of netrecv (SYN/ACK).   This requires that the localport is allowed.   Upon success, this call consumes an outsocket.
+    <Resource Consumption>
+      This operation consumes 64*2 bytes of netsend (SYN, ACK) and 64 bytes 
+      of netrecv (SYN/ACK). This requires that the localport is allowed. Upon 
+      success, this call consumes an outsocket.
 
-   <Returns>
-      A socket-like object that can be used for communication.   Use send, 
+    <Returns>
+      A socket-like object that can be used for communication. Use send, 
       recv, and close just like you would an actual socket object in python.
+
 
 
 	 
@@ -374,37 +400,35 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 * Doc string: 
 	 
-   <Purpose> 
-    Sets up a tcpserversocket to receive incoming TCP connections  
-	 	 
-   <Arguments> 
-      localip: 
-        The local IP to listen on 
-      localport: 
-         The port to listen on 
-      
-   <Exceptions> 
-      PortInUseError (descends NetworkError) if another process has already bound the ip/port 
+  <Purpose>
+    Sets up a TCPServerSocket to recieve incoming TCP connections. 
 
-      PortInUseError if there is already a tcpserversocket with the same IP and port. 
+  <Arguments>
+    localip:
+        The local IP to listen on
+    localport:
+        The local port to listen on
 
-      TypeError/ValueError if the IP or port number is invalid.
+  <Exceptions>
+    Raises AlreadyListeningError if another TCPServerSocket or process has bound
+    to the provided localip and localport.
 
-      PortRestrictedError (descends ResourceError) if the port number isn't allowed
+    Raises DuplicateTupleError if another process has bound to the
+    provided localip and localport.
 
-      AddressBindingError (descends NetworkError) if the IP address isn't a local IP.
+    Raises RepyArgumentError if the localip or localport are invalid
+    Raises ResourceForbiddenError if the ip or port is not allowed.
+    Raises AddressBindingError if the IP address isn't a local ip.
 
-      XXXError if the call would block
- 	 
-   <Side Effects> 
-      The IP / port combination cannot be reused by a tcpserversocket until closed.
+  <Side Effects>
+    The IP / Port combination cannot be used until the TCPServerSocket
+    is closed.
 
-   <Resource Consumption>
-      This call consumes an insocket and requires that the localport is allowed.
-	 
-   <Returns> 
-      The tcpserversocket. 
+  <Resource Consumption>
+    Uses an insocket for the TCPServerSocket.
 
+  <Returns>
+    A TCPServerSocket object.
 
 
 
@@ -851,24 +875,26 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
 
  * Doc string:
 
-   <Purpose>
-     Closes a socket.   Pending remote recv() calls will return with the
-     remaining information.   Local recv / send calls will fail after this.
+       <Purpose>
+        Closes a socket.   Pending remote recv() calls will return with the 
+        remaining information.   Local recv / send calls will fail after this.
 
-   <Arguments>
-     None
+      <Arguments>
+        None
 
-   <Exceptions>
-     None
+      <Exceptions>
+        None
 
-   <Side Effects>
-     Pending local recv and send calls will have an exception.
+      <Side Effects>
+        Pending local recv calls will either return or have an exception.
 
-   <Resource Consumption>
-      If the connection is already closed, no resources are consumed.   This operation consumes 64*2 bytes of netsend (FIN/ACK, Last-ACK) and 64 bytes of netrecv (FIN/ACK).   If applicable, this call stops consuming the corresponding outsocket.
+      <Resource Consumption>
+        If the connection is closed, no resources are consumed. This operation
+        uses 64 bytes of netrecv, and 128 bytes of netsend.
+        This call also stops consuming an outsocket.
 
-   <Returns>
-     True if this is the first close call to this socket, False otherwise.
+      <Returns>
+        True if this is the first close call to this socket, False otherwise.
 
 
 
@@ -880,29 +906,29 @@ Receives data that was sent by the connected party using send.   Note that this 
 
  * Doc string:
 
-   <Purpose>
-     Receives data from a socket.   It may receive fewer bytes than
-     requested.
+      <Purpose>
+        Receives data from a socket.   It may receive fewer bytes than 
+        requested.   
 
-   <Arguments>
-     numbytes:
-        The maximum number of bytes to read.   
+      <Arguments>
+        bytes: 
+           The maximum number of bytes to read.   
 
-   <Exceptions>
-     SocketClosedLocal (descends NetworkError) if the socket is closed locally.
+      <Exceptions>
+        SocketClosedLocal is raised if the socket was closed locally.
+        SocketClosedRemote is raised if the socket was closed remotely.
+        SocketWouldBlockError is raised if the socket operation would block.
 
-     SocketClosedRemote (descends NetworkError) if the socket was closed remotely '''and''' there is no more data to be read.
-   
-     SocketWouldBlockError if the call would block.
+      <Side Effects>
+        None.
 
-   <Side Effects>
-     None
-
-   <Resource Consumption>
-     This operation consumes 64 + size of returned data in bytes of netrecv and 64 bytes of netsend (ACK).
-
-   <Returns>
-     The data received from the socket (as a string).   
+      <Resource Consumptions>
+        This operations consumes 64 + amount of data  in bytes
+        worth of netrecv, and 64 bytes of netsend.
+  
+      <Returns>
+        The data received from the socket (as a string).   If '' is returned,
+        the other side has closed the socket and no more data will arrive.
 
 [[BR]] 
 ==== socket.send(message) ====
@@ -913,29 +939,28 @@ Sends data to the connected party.   Note that this may send less than the entir
  * Doc string:
 
 
-   <Purpose>
-     Sends data on a socket.   It may send fewer bytes than requested.
+      <Purpose>
+        Sends data on a socket.   It may send fewer bytes than requested.   
 
-   <Arguments>
-     message:
-       The string to send.
+      <Arguments>
+        message:
+          The string to send.
 
-   <Exceptions>
-     SocketClosedLocal (descends NetworkError) if the socket is closed locally.
+      <Exceptions>
+        SocketClosedLocal is raised if the socket is closed locally.
+        SocketClosedRemote is raised if the socket is closed remotely.
+        SocketWouldBlockError is raised if the operation would block.
 
-     SocketClosedRemote (descends NetworkError) if the socket was closed remotely.
+      <Side Effects>
+        None.
 
-     SocketWouldBlockError if the call would block.   
+      <Resource Consumption>
+        This operations consumes 64 + size of sent data of netsend and
+        64 bytes of netrecv.
 
-   <Side Effects>
-     None
-
-   <Resource Consumption>
-     This operation consumes 64 + size of sent data in bytes of netsend and 64 bytes of netrecv (ACK).
-
-   <Returns>
-     The number of bytes sent. '''Be sure not to assume this is always the
-     complete amount!'''
+      <Returns>
+        The number of bytes sent.   Be sure not to assume this is always the 
+        complete amount!
 
 
 
@@ -946,27 +971,24 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
 
  * Doc string:
 
-   <Purpose>
-     Obtains an incoming connection to an IP and port.
+    <Purpose>
+      Accepts an incoming connection to a listening TCP socket.
 
-   <Arguments>
-     None
+    <Arguments>
+      None
 
-   <Exceptions>
-     Raises SocketClosedLocal if close() has been called.
- 
-     Raises SocketWouldBlockError if the operation would block.
+    <Exceptions>
+      Raises SocketClosedLocal if close() has been called.
+      Raises SocketWouldBlockError if the operation would block.
+      Raises ResourcesExhaustedError if there are no free outsockets.
 
-     Raises ResourcesExhaustedError if there are no free outsockets.
- 
-   <Side Effects>
-     None
+    <Resource Consumption>
+      If successful, consumes 128 bytes of netrecv (64 bytes for
+      a SYN and ACK packet) and 64 bytes of netsend (1 ACK packet).
+      Uses an outsocket.
 
-   <Resource Consumption>
-     Upon success, this operation consumes 64*2 bytes of netrecv (SYN, ACK), 64 bytes of netsend (SYN/ACK) and an outsocket.
-
-   <Returns>
-     A tuple consisting of the remote IP, remote port, and a socket object.
+    <Returns>
+      A tuple containing: (remote ip, remote port, socket object)
 
 
 [[BR]] 
@@ -976,23 +998,24 @@ Closes the socket.   Any further local calls to getconnection will result in an 
 
  * Doc string:
 
-   <Purpose>
-     Closes a socket that is listening for connections.   Pending connections will be closed / refused.
+    <Purpose>
+      Closes the listening TCP socket.
 
-   <Arguments>
-     None
+    <Arguments>
+      None
 
-   <Exceptions>
-     None
+    <Exceptions>
+      None
 
-   <Side Effects>
-     The IP and port can be reused by other tcpserversockets after this.
+    <Side Effects>
+      The IP and port can be re-used after closing.
 
-   <Resource Consumption>
-     If applicable, this operation stops consuming the corresponding insocket.
+    <Resource Consumption>
+      Releases the insocket used.
 
-   <Returns>
-     True if this is the first close call to this socket, False otherwise.
+    <Returns>
+      True, if this is the first call to close.
+      False otherwise.
 
 
 [[BR]] 
@@ -1002,30 +1025,24 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
 
  * Doc string:
 
-   <Purpose>
-     Obtains an incoming message that was sent to an IP and port.
+      <Purpose>
+        Obtains an incoming message that was sent to an IP and port.
 
-   <Arguments>
-     None
+    <Arguments>
+        None.
 
-   <Exceptions>
-     LocalIPChanged if the local IP address has changed and the udpserversocket is invalid
+    <Exceptions>
+        SocketClosedLocal if UDPServerSocket.close() was called.
+        Raises SocketWouldBlockError if the operation would block.
 
-     PortRestrictedError if the port number is no longer allowed.
+    <Side Effects>
+        None
 
-     SocketClosedLocal if udpserversocket.close() was called.
+    <Resource Consumption>
+        This operation consumes 64 + size of message bytes of netrecv
 
-     XXXError if the call would block
-
-   <Side Effects>
-     None
-
-   <Resource Consumption>
-     This operation consumes 64 + size of message bytes of netrecv
-
-   <Returns>
-     A tuple consisting of the remote IP, remote port, and message.
-
+    <Returns>
+        A tuple consisting of the remote IP, remote port, and message.
 
 
 
@@ -1037,23 +1054,25 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
 
  * Doc string:
 
-   <Purpose>
-     Closes a socket that is listening for messages.
+     <Purpose>
+        Closes a socket that is listening for messages.
 
-   <Arguments>
-     None
+    <Arguments>
+        None.
 
-   <Exceptions>
-     None
+    <Exceptions>
+        None.
 
-   <Side Effects>
-     The IP address and port can be reused by other udpserversockets after this.
+    <Side Effects>
+        The IP address and port can be reused by other UDPServerSockets after
+        this.
 
-   <Resource Consumption>
-     If applicable, this operation stops consuming the corresponding insocket.
+    <Resource Consumption>
+        If applicable, this operation stops consuming the corresponding
+        insocket.
 
-   <Returns>
-     True if this is the first close call to this socket, False otherwise.
+    <Returns>
+        True if this is the first close call to this socket, False otherwise.
 
 
 
