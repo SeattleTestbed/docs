@@ -181,6 +181,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
    <Exceptions>
      RepyArgumentError (descends from NetworkError) if the name is not a string
+
      NetworkAddressError (descends from NetworkError) if the address cannot
      be resolved.
 
@@ -417,7 +418,9 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
     provided localip and localport.
 
     Raises RepyArgumentError if the localip or localport are invalid
+
     Raises ResourceForbiddenError if the ip or port is not allowed.
+
     Raises AddressBindingError if the IP address isn't a local ip.
 
   <Side Effects>
@@ -916,7 +919,9 @@ Receives data that was sent by the connected party using send.   Note that this 
 
       <Exceptions>
         SocketClosedLocal is raised if the socket was closed locally.
+
         SocketClosedRemote is raised if the socket was closed remotely.
+
         SocketWouldBlockError is raised if the socket operation would block.
 
       <Side Effects>
@@ -948,7 +953,9 @@ Sends data to the connected party.   Note that this may send less than the entir
 
       <Exceptions>
         SocketClosedLocal is raised if the socket is closed locally.
+
         SocketClosedRemote is raised if the socket is closed remotely.
+
         SocketWouldBlockError is raised if the operation would block.
 
       <Side Effects>
@@ -979,7 +986,9 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
 
     <Exceptions>
       Raises SocketClosedLocal if close() has been called.
+
       Raises SocketWouldBlockError if the operation would block.
+
       Raises ResourcesExhaustedError if there are no free outsockets.
 
     <Resource Consumption>
@@ -1033,6 +1042,7 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
 
     <Exceptions>
         SocketClosedLocal if UDPServerSocket.close() was called.
+
         Raises SocketWouldBlockError if the operation would block.
 
     <Side Effects>
@@ -1165,10 +1175,12 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
       it will automatically be converted to a SafeDict object.
 
     <Exceptions>
-      Any that may be raised by the code that is being evaluated.
       A RepyArgumentError exception will be raised if the provided context is not
       a safe dictionary object or a ContextUnsafeError if the
       context is a dict but cannot be converted into a SafeDict.
+
+      Any that may be raised by the code that is being evaluated.
+
 
     <Returns>
       The context dictionary that was used during evaluation.
