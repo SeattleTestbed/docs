@@ -1176,8 +1176,9 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
 
     <Exceptions>
       A RepyArgumentError exception will be raised if the provided context is not
-      a safe dictionary object or a ContextUnsafeError if the
-      context is a dict but cannot be converted into a SafeDict.
+      a dictionary or safe dictionary object 
+
+      ContextUnsafeError is raised if the context is a dict but cannot be converted into a SafeDict.
 
       Any that may be raised by the code that is being evaluated.
 
