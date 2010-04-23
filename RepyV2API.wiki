@@ -1156,30 +1156,26 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
 
  * Doc string:
 
-   <Purpose>
-     Evaluates the code in a given context.
+    <Purpose>
+      Evaluates the wrapped code within a context.
 
-   <Arguments>
-     context: A dictionary or !SafeDict dictionary to execute the code in.
-     If a dictionary object is provided, an attempt is made to convert it to a !SafeDict
-     object before evaluating the code.
+    <Arguments>
+      context: A global context to use when executing the code.
+      This should be a SafeDict object, but if a dict object is provided
+      it will automatically be converted to a SafeDict object.
 
-   <Exceptions>
-     If the context cannot be converted to a SafeDict due to safety issues,
-     a ContextUnsafeError will be raised.
+    <Exceptions>
+      Any that may be raised by the code that is being evaluated.
+      A RepyArgumentError exception will be raised if the provided context is not
+      a safe dictionary object or a ContextUnsafeError if the
+      context is a dict but cannot be converted into a SafeDict.
 
-     Any exception that the code raises during evaluation will not be caught.
+    <Returns>
+      The context dictionary that was used during evaluation.
+      If the context was a dict object, this will be a new
+      SafeDict object. If the context was a SafeDict object,
+      then this will return the same context object.
 
-   <Side Effects>
-     The provided context will likely be modified during execution.
-
-   <Resource Consumption>
-      Whatever is consumed by the executed code
-
-   <Returns>
-      The context that was used during evaluation. If the context was a !SafeDict originally,
-      this is the same object. If the provided context was a dict, this is the converted !SafeDict
-      version.
 
 [[BR]] 
 ==== getresources() ====
