@@ -1,5 +1,7 @@
 = Building Base Installers =
 Explains how to go about building the base installers (everything you need to distribute the program except custom vessel information).
+
+'''NOTE:''' In order to build the Windows GUI installer, NSIS must be properly installed and configured on the system building the base installers. [wiki:NSISSystemSetup Click here] for quick detailed instructions on how to do this.
 ----
 [[TOC(inline)]]
 ----
