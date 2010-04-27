@@ -12,7 +12,7 @@ The authentication structure takes the form of the following dictionary:
 
 The value of ''YOUR_USERNAME'' is the same username you use to login to the SeattleGENI website. The value of ''YOUR_API_KEY'' is the API key you can find on SeattleGENI when viewing the profile page for your account.[[BR]]
 [[BR]]
-'''This structure is expected as the first argument in every XML-RPC API call.[[BR]]'''
+'''This structure is expected as the first argument in every XML-RPC API call (except where otherwise noted).[[BR]]'''
 All XML-RPC functions will return an XMLRPC Fault Code 101 if authentication fails.
 
 [[BR]]
@@ -131,11 +131,41 @@ Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGEN
 Raises an XMLRPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
 
+----
+= Calls that do not require authentication =
+
 [[BR]]
 === get_encrypted_api_key(username) ===
 ----
 
 Returns the user's api key encrypted with the user's public key.
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+
+----
+= Calls requiring the account password =
+
+The calls below take a pwauth structure
+instead of the auth structure used in the rest of the api. The difference is that the pwauth
+structure contains a password instead of an api key. Thus, the structure is:
+   '''{'username':'YOUR_USERNAME', 'password':'YOUR_PASSWORD'}'''
+
+
+[[BR]]
+=== regenerate_api_key(pwauth) ===
+----
+
+Generates a new api key for the user and returns the new api key.
+
+Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
+
+[[BR]]
+=== set_public_key(pwauth, pubkeystring) ===
+----
+
+Sets the user's public key.
 
 Raises an XMLRPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
 Raises an XMLRPC Fault Code 102 if any arguments were invalid.[[BR]]
