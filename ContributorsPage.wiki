@@ -70,3 +70,4 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [RepyNetworkRestrictions Repy Network Restrictions] information and errata.
    * [KnownBugs Known Bugs] from the various components of the Seattle project.
    * [StatsLibrary Statistics Library] for analyzing date regarding nodes & vessels on Seattle.
+   * [GeoIPServer Running a GeoIP Server ]
