@@ -171,7 +171,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
     <Purpose>
       Provides information about a hostname. Calls socket.gethostbyname().
-      Translate a host name to IPv4 address format. The IPv4 address is
+      Translates a hostname to IPv4 address format. The IPv4 address is
       returned as a string, such as '100.50.200.5'. If the host name is an
       IPv4 address itself it is returned unchanged.
 
@@ -209,7 +209,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       None
 
    <Exceptions>
-      InternetConnectivityError is the host is not connected to the internet.
+      InternetConnectivityError if the host is not connected to the internet.
 
    <Side Effects>
       None.
