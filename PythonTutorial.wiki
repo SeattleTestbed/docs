@@ -32,7 +32,7 @@ To execute this program, you can place the above source code into file, say ‘t
 
 {{{
 #!python
-$ python test.py
+python test.py
 }}}
 
 This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain the different way to run the codes in REPY.
