@@ -29,4 +29,4 @@ seattle_demokit.tgz
 
 
 == Documentation ==
-Please refer to [browser:seattle/trunk/dist/build_demokit.py the comments in `build_demokit.py`] for further documentation.
+Please refer to [browser:seattle/trunk/dist/build_demokit.py the comments in build_demokit.py] for further documentation.
