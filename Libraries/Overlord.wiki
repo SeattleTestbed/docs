@@ -1,6 +1,6 @@
 = Overlord Deployment and Monitoring Library =
 
-Overlord is a library for deploying an arbitrary Repy program on a number of vessels. Built on top of the Experiment Library, it persistently manages a user-defined number of vessels, ensuring that the specified service is up and running.
+Overlord is a library for deploying an arbitrary Repy program on a number of vessels. Built on top of the [ExperimentLibrary Experiment Library], it persistently manages a user-defined number of vessels, ensuring that the specified service is up and running.
 
 [[BR]]
 == Setup ==
