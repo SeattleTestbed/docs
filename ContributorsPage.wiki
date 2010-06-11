@@ -50,6 +50,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [VersionDeployment Deploying] a new version
    * [wiki:ProductionGeniHTTPService Updating] the production SeattleGENI code
    * [wiki:BuildDemokit Building the Demokit]
+   * [wiki:Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
 
  * Developer Resources
    * [ExperimentLibrary Experiment Library] for use in scripting communication with nodes, etc.
