@@ -10,7 +10,7 @@ To begin setup, create a new directory of Overlord:
 mkdir overlord
 }}}
 
-Overlord requires the Seattle Experiment Library, which can be obtained by following the steps on [ExperimentLibrary the associated wiki page]. Note that the {{{experimentlibrary}}} directory must be a direct subdirectory the {{{overlord}}} directory created above.
+Overlord requires the Seattle Experiment Library, which can be obtained by following the steps on [ExperimentLibrary the associated wiki page]. Note that the {{{experimentlibrary}}} directory must be a direct subdirectory of the {{{overlord}}} directory created above.
 
 Also note that Overlord depends on Experiment Library functions that make secure connections to SeattleGENI. To perform secure SSL communication with SeattleGENI, you must:
   * Have a GENI user's public and private key files in the {{{overlord}}} directory
@@ -27,7 +27,7 @@ svn export https://seattle.cs.washington.edu/svn/seattle/trunk/overlord/overlord
 [[BR]]
 == Usage ==
 
-Using the API provided by Overlord, you can create simple scripts to deploy services on vessels.
+Using the API provided by Overlord, you can create simple Python scripts to deploy services on vessels.
 
 To create an Overlord client, simply import it:                               
 {{{
@@ -48,7 +48,7 @@ Once `run()` is called, Overlord will deploy the Repy program on the specified n
 
 [[BR]]
 == Example ==
-The following script will deploy time servers on 10 WAN vessels:
+The following script will deploy NTP time servers on 10 WAN vessels:
 {{{
 import overlord
 init_dict = overlord.init(GENI_USERNAME, 10, 'wan', 'time_server.py')
@@ -60,4 +60,4 @@ Note that `time_server.py` requires a local port number as an argument, so the u
 [[BR]]
 == Documentation ==
 
-Please refer to [browser:seattle/trunk/overlord/overlord.py the docstrings and comments in `overlord.py`] for further documentation.
+Please refer to [browser:seattle/trunk/overlord/overlord.py the docstrings and comments in overlord.py] for further documentation.
