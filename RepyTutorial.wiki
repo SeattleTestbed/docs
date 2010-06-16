@@ -332,7 +332,7 @@ This code will not work because globals do not exist in repy. However, there is 
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  sockobj.recv(512) # Receive HTTP header
+  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
@@ -370,7 +370,7 @@ The previous program would wait forever for a user to connect so it could displa
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  sockobj.recv(512) # Receive HTTP header
+  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
@@ -422,7 +422,7 @@ We know how to set a timer to close the connection in 60 seconds, but that doesn
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  sockobj.recv(512) # Receive HTTP header
+  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
@@ -475,7 +475,7 @@ The wily reader may have noticed that the previous program has a race condition.
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  sockobj.recv(512) # Receive HTTP header
+  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
@@ -526,7 +526,7 @@ We can avoid race conditions by the following changes:
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  sockobj.recv(512) # Receive HTTP header
+  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
