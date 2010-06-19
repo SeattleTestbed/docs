@@ -123,7 +123,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||sendmessage||sends a message to another computer||example 4.2||
 
-||openconnection||opens a connection to another computer (blocking)||example 3.1||
+||openconnection||opens a connection to another computer||example 3.1||
 
 ||listenforconnection||return a tcpserversocket that can be used to accept incoming connections||new||
 
@@ -933,7 +933,7 @@ Receives data that was sent by the connected party using send.   Note that this 
 ==== socket.send(message) ====
 ----
 
-Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may block indefinitely.   If the other party closes the connection, send will raise an exception.
+Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may raise an exception if the sender and receiver buffers fill (the buffer size is undefined).   If the other party closes the connection, send will raise an exception.
 
  * Doc string:
 
@@ -1136,7 +1136,7 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
      invalid syntax, or an evaluation timeout.
 
    <Side Effects>
-     Other calls to createvirtualnamespace() will block since safety checks are performed serially.
+     Other calls to createvirtualnamespace() will happen wait until the first completes since safety checks are performed serially.
   
      Another process will be launched to check the code for safety. This has memory and CPU ramifications,
      since we will not account for it's resource consumption. The memory use will likely exceed what is allowed
