@@ -72,3 +72,4 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [KnownBugs Known Bugs] from the various components of the Seattle project.
    * [StatsLibrary Statistics Library] for analyzing date regarding nodes & vessels on Seattle.
    * [wiki:GeoIPServer Running a GeoIP Server]
+   * How to run the [RunningSecLayerBenchmarks security layer benchmarks]
