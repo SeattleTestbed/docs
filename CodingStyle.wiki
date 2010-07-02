@@ -607,6 +607,17 @@ class foo:
 }}}
 
 
+    General Variable Names
+
+      Should be the same as function names, always use lower case, using 
+      an underscore if a separation is needed, such as: popanitem or pop_an_item
+
+    Constants
+        
+      Variables which are set once and never change value should be all
+      upper case, if a seperator is needed use an underscore.
+      
+
     Exception Names
 
       Because exceptions should be classes, the class naming convention
