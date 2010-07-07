@@ -1,5 +1,26 @@
-Under Construction:
+= Using Shims =
 
-This page will give a brief tutorial of how to code and use shims with repy programs.  We also give several examples of shims that we have used in the project.
+This tutorial shows you how to use the shims library, as well as how to create a shim correctly.
 
-Our examples will be added first, and then the tutorial content will be filled in.
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== What are shims ==
+----
+
+Blah blah blah
+
+
+[[BR]]
+== Using shims in your application ==
+----
+
+Blah blah blah
+
+
+[[BR]]
+== Creating your own shims ==
+----
+Blah blah blah
