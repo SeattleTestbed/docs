@@ -1,6 +1,6 @@
 = Using Shims =
 
-This tutorial shows you how to use the shims library, as well as how to create a shim correctly.
+This tutorial illustrates how to use the shims library in your application, as well as how to create your own shims correctly.
 
 ----
 [[TOC(inline)]]
@@ -17,7 +17,19 @@ Blah blah blah
 == Using shims in your application ==
 ----
 
-Blah blah blah
+Suppose you're writing an echo server. This server encrypts all traffic on a per-connection basis, and it may be behind a Network Address Translator (NAT). As the application creator, you only need to focus on what is relevant to the core functionalities of the echo server. Your job is to implement it, such that it echoes back messages sent from its clients. Encryptions and NAT rerouting are handled by the underlying shim library.
+
+Here is a sample echo server.
+
+{{{
+#!python
+
+include ShimStackInterface.repy
+include session.repy
+
+server = ShimStackInterface('(RSAShim)')
+}}}
+
 
 
 [[BR]]
