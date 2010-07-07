@@ -17,31 +17,42 @@ Blah blah blah
 == Using shims in your application ==
 ----
 
-Suppose you're writing an echo server. This server encrypts all traffic on a per-connection basis, and it may be behind a Network Address Translator (NAT). As the application creator, you only need to focus on what is relevant to the core functionalities of the echo server. Your job is to implement it, such that it echoes back messages sent from its clients. Encryptions and NAT rerouting are handled by the underlying shim library.
+Suppose you're writing an echo server. This server encrypts all traffic on a per-connection basis, and it may be behind a Network Address Translator (NAT). As the application creator, you only need to focus on what is relevant to the core functionalities of the echo server. Encryptions and NAT rerouting are handled by the underlying shim library.
 
-Here is a sample echo server. You need to tell the shim library what shims you would like to use. In this case, you want to encrypt the traffic. In this example, we're not sure if our echo server will run behind a NAT. Thus, we insert a NatDeciderShim.
+Here is a sample echo server. You need to tell the shim library what shims you would like to use. In this case, you want to encrypt the traffic. Since we're not sure if the network configuration changes, we insert a NatDeciderShim. It automatically connects to a forwarder if the presence of a NAT is detected.
 
 {{{
 #!python
 include ShimStackInterface.repy
 
-server = ShimStackInterface('(RSAShim)(NatDeciderShim)')
+server_shim = ShimStackInterface('(RSAShim)(NatDeciderShim)')
 
-def server_func(rip, rport, sock, th, lh):
-  msg = ''
+def server_callback(rip, rport, sock, th, lh):
   while True:
     msg = sock.recv(1024)
-    if msg == 'end':
-      break
     sock.send(msg)
-    print msg
 
 if callfunc == 'initialize':
-  ip = getmyip()
-  port = 12345
-  server.waitforconn(ip, port, server_func)
+  serverip = getmyip()
+  server_shim.waitforconn(serverip, 12345, server_callback)
 }}}
 
+In writing the client, you don't need to specify what shims to use. The shim library automatically detects the shim stack on the server, and it subsequently inserts the correct shims into the client's stack to communicate with the server. This is known as the balancing of shim stacks.
+
+Here is a simple echo client:
+
+{{{
+#!python
+include ShimStackInterface.repy
+
+client_shim = ShimStackInterface()
+
+if callfunc == 'initialize':
+  serverip = callargs[0]
+  serverport = callargs[1]
+  sock = client_shim.openconn(serverip, serverport)
+  sock.send('Hello World')
+}}}
 
 
 [[BR]]
