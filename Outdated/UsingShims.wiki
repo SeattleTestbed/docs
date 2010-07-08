@@ -61,18 +61,18 @@ In case you're wondering about the implementation details, the !ShimStackInterfa
 
 The public interface of the !ShimStackInterface is identical to the network system calls. The following public methods are defined. Their usage can be found in RepyLibrary.
 
- * !ShimStackInterface(shim_stack_string=""): Constructor.
- * waitforconn
- * openconn
- * stopcomm
- * recvmess
- * sendmess
+ * `ShimStackInterface(shim_stack_string="")`: Constructor.
+ * `waitforconn`
+ * `openconn`
+ * `stopcomm`
+ * `recvmess`
+ * `sendmess`
 
 When you obtain a reference to a handle or socket, you can manipulate it as if it is a normal system object. In specific, the following operations are defined on the socket-like object. Again, their usage can be found in RepyLibrary.
 
- * socket.send
- * socket.recv
- * socket.close
+ * `socket.send`
+ * `socket.recv`
+ * `socket.close`
 
 [[BR]]
 == Creating your own shims ==
@@ -111,7 +111,7 @@ The `get_advertisement_string()` method defines how your shim is advertised (i.e
 {{{
 #!python
   def get_advertisement_string(self):
-    return '(MyShim,' + self._some_args_str + ')' + \
+    return '(MyShim,' + self._shim_args_str + ')' + \
             self.shim_stack.get_advertisement_string()
 }}}
 
