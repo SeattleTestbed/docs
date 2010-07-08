@@ -101,6 +101,17 @@ Always override the copy() and get_advertisement_string() method. The first defi
 #!python
   def copy(self):
     mycopy = MyShim()
+    # If there are no internal states to copy, skip the next line
     mycopy._internalstate = self._internalstate
     return mycopy
 }}}
+
+The get_advertisement_string() method defines how your shim is advertised (i.e. published). The shim stack library publishes the contents of a server shim stack. The client subscribes to the contents, so it knows what shims to have in order to communicate with the server. When you publish your shim, always enclose the name of the shim within a pair of parentheses. If you have any additional arguments to publish, append them to the shim name, separated by commas. These arguments, when subscribed by the client, will become the optional_args in the constructor of the client shim. In the following example, we are publishing the shim along with some shared state.
+
+{{{
+#!python
+  def get_advertisement_string(self):
+    return '(MyShim,' + self._some_args_str + ')' + self.shim_stack.get_advertisement_string()
+}}}
+
+This call is recursive. Remember to append `self.shim_stack.get_advertisement_string()` at the end.
