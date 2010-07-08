@@ -154,7 +154,41 @@ You may choose to override any of the following methods, if you decide to redefi
     return self.shim_stack.socket_recv(socket, bytes)
 }}}
 
-Lastly, you need to register the shim with the shim library. Open `shimstackInterface.repy`. Include your shim at the top, and make sure you register it.
+Let us put everything together so far, and write a simple encryption shim. It encrypts all TCP traffic.
+
+{{{
+#!python
+class SimpleEncryptionShim(BaseShim):
+
+  def __init__(self, next_shim=None, optional_args=None):
+    BaseShim.__init__(self, next_shim, optional_args)
+    self._encryption_key = int(optional_args[0])
+
+  def copy(self):
+    newshim = SimpleEncryptionShim(optional_args=[self._encryption_key])
+    return newshim
+
+  def get_advertisement_string(self):
+    return '(SimpleEncryptionShim,' + str(self._encryption_key) + ')' + \
+        self.shim_stack.get_advertisement_string()
+
+  def _encrypt(self, clear_text):
+    # do some magic
+    return cypher
+
+  def _decrypt(self, cypher):
+    # do more magic
+    return clear_text
+
+  def _shim_socket_send(self, socket, msg):
+    return self.shim_stack.socket_send(socket, self._encrypt(msg))
+
+  def _shim_socket_recv(self, socket, bytes): 
+    cypher = self.shim_stack.socket_recv(socket, bytes)
+    return self._decrypt(cypher)
+}}}
+
+Finally, you need to register the shim with the shim library. Open `shimstackInterface.repy`. Include your shim at the top, and make sure you register it.
 
 {{{
 #!python
