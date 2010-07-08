@@ -10,7 +10,18 @@ This tutorial illustrates how to use the shims library in your application, as w
 == What are shims ==
 ----
 
-Blah blah blah
+A shim is a way for a programmer to add or modify network functionality in a way that is completely transparent to the application programmer.   The key word is ''transparent'', since the application (intentionally) cannot tell if a shim is in use or not.   This allows application programmers to focus on their application's logic, while utilizing rich network functionality that may have been added by many different parties.   
+
+Shims are combined together to form a ''shim stack'' which is an ordered set of shims that will act on a specific network communication (a listening socket, message, or connected socket).   Any number of shims can be used together in a shim stack.
+
+
+The key features a shim must have:
+
+1) it must provide the semantics of the repy network interface
+
+2) it must be constructed to use the semantics of the repy network interface
+
+3) it must have a small number of required methods necessary for the construction and management of shim stacks
 
 
 [[BR]]
@@ -95,14 +106,19 @@ In your constructor, you should call the super class's constructor before the co
     # I'm doing something else here
 }}}
 
-Always override the `copy()` and `get_advertisement_string()` method. The first defines how your shim can be duplicated. You need to specify how internal states, if any, are copied to the new instance of your shim. Here is an example.
+Always override the `copy()` and `get_advertisement_string()` method. The first defines how your shim can be duplicated. You need to specify how important internal states, if any, are copied to the new instance of your shim. Here is an example.
 
 {{{
 #!python
   def copy(self):
     mycopy = MyShim()
-    # If there are no internal states to copy, skip the next line
+    # Copy important internal state
     mycopy._internalstate = self._internalstate
+ 
+    # If I don't copy a variable, then if this is a listen socket, all 
+    # shimstacks created for connections that will share the same variable   
+#   mycopy._shared = self._shared
+ 
     return mycopy
 }}}
 
