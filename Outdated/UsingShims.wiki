@@ -81,14 +81,14 @@ When you obtain a reference to a handle or socket, you can manipulate it as if i
 Your own shim must be a subclass of !BaseShim, the super class of all shims. You don't need to include any special files.
 
 {{{
-!#python
+#!python
 class MyShim(BaseShim):
 }}}
 
 In your constructor, you should call the super class's constructor before the constructor returns. 
 
 {{{
-!#python
+#!python
   def __init__(self, next_shim=None, optional_args=None):
     # I'm doing something here
     BaseShim.__init__(self, next_shim, optional_args)
@@ -98,7 +98,7 @@ In your constructor, you should call the super class's constructor before the co
 Always override the copy() and get_advertisement_string() method. The first defines how your shim can be duplicated. You need to specify how internal states, if any, are copied to the new instance of your shim. Here is an example.
 
 {{{
-!#python
+#!python
   def copy(self):
     mycopy = MyShim()
     mycopy._internalstate = self._internalstate
