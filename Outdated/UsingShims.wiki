@@ -172,20 +172,13 @@ class SimpleEncryptionShim(BaseShim):
     return '(SimpleEncryptionShim,' + str(self._encryption_key) + ')' + \
         self.shim_stack.get_advertisement_string()
 
-  def _encrypt(self, clear_text):
-    # do some magic
-    return cypher
-
-  def _decrypt(self, cypher):
-    # do more magic
-    return clear_text
-
   def _shim_socket_send(self, socket, msg):
-    return self.shim_stack.socket_send(socket, self._encrypt(msg))
+    cypher = encrypt(msg, self._encryption_key)
+    return self.shim_stack.socket_send(socket, cypher)
 
   def _shim_socket_recv(self, socket, bytes): 
     cypher = self.shim_stack.socket_recv(socket, bytes)
-    return self._decrypt(cypher)
+    return decrypt(cypher, self._encryption_key)
 }}}
 
 Finally, you need to register the shim with the shim library. Open `shimstackInterface.repy`. Include your shim at the top, and make sure you register it.
