@@ -154,3 +154,12 @@ You may choose to override any of the following methods, if you decide to redefi
     return self.shim_stack.socket_recv(socket, bytes)
 }}}
 
+Lastly, you need to register the shim with the shim library. Open `shimstackInterface.repy`. Include your shim at the top, and make sure you register it.
+
+{{{
+#!python
+include MyShim.repy
+register_shim('MyShim', MyShim)
+}}}
+
+And now, the application can use your shim!
