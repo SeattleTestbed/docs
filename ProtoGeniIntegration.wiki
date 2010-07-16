@@ -34,7 +34,7 @@ This allows users from different project to acquire resources from the SeattleGE
   1. credentials - credentials is a list of credential that the user can provide. The list for this call should only contain one credential. If more then one credential is provided, then an unsuccessful result is returned. To see what a credential should look like, check below.
 
 [[BR]]
-== Emulab Credential ==
+== Credential example for XML-RPC Server ==
 ----
 In order to access the XML-RPC server for the Protogeni integration. The user needs to have the right credentials and must use it in order to acquire and release resources. Without the correct credentials, an user will receive an error code when they call the two calls !CreateSliver() and !DeleteSlice(). An example of what the credential will look like is shown below.
 {{{
