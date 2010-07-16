@@ -5,7 +5,7 @@ This page describes the XML-RPC server for the Protogeni Integration.
 ----
 [[BR]]
 == Introduction ==
-This is an XML-RPC interface that integrates the SeattleGENI project with the ProtoGENI project. You do not need to run your own instance of this code to access SeattleGENI resources through !ProtoGENI.   You can leverage an instance of the software which we run to provide resources to !ProtoGENI users.
+This is an XML-RPC interface that integrates the SeattleGENI project with the ProtoGENI project. You do not need to run your own instance of this code to access SeattleGENI resources through ProtoGENI.   You can leverage an instance of the software which we run to provide resources to ProtoGENI users.
 
 This allows users from different project to acquire resources from the SeattleGENI project as long as they have the proper credentials. SeattleGENI has implemented the two api calls: !CreateSliver() and !DeleteSlice(). These two calls allow users to acquire resources and release resources from the SeattleGENI project. The XML-RPC server is located at !https://blackbox.cs.washington.edu/xmlrpc/ A tarball of the XML-RPC server as well as the components required to set it up is attached at the bottom of this page.
 
