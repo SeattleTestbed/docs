@@ -66,3 +66,21 @@
 || 2:30-3:30 Apr 7th, 2010 || University of Victoria || CSC 485 C || Justin || Talk, Live Demo
 
 || 10AM-11AM CDT Apr 10th, 2010 || Park University, Woodard room  || Seattle Workshop, co-located with CCSC CP || Justin || Live Demo / Extended Talk (Educational)
+
+
+
+|| 10:15-10:30 Mar 18th, 2010 || Washington Duke Inn, President's room 3 || GEC 7 Services and Tools working group || Justin || Talk, Live Demo
+
+
+|| 10-11:30 May 3rd, 2010 || HP Labs (closed) || Seattle: A Peer-to-Peer Platform for Safe Code Execution || Justin || Talk, Live Demo
+
+
+|| May 20th, 2010 || University of Victoria || Seminar / invited talk || Justin || Talk, Live Demo
+
+
+|| July 9-14th, 2010 || University of Vienna || Ph.D. class  http://fc.cs.univie.ac.at/phd_2010 || Justin and Kurt Tutschku || Talk, Live Demo, Classroom experimentation
+
+|| 9-12 July 20th || Hilton La Jolla Torrey Pines, Salon B || Seattle workshop co-located with GEC 8 || Justin, Monzur || Talk, Live Demo
+
+|| 1-1:15 July 20th || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
+
