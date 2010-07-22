@@ -47,7 +47,7 @@ You can run the code in your local machine and in the vessels you control.
 ==== Executing programs locally in REPY ====
 ----
 
-You need to type like below to run the code above.
+You need to open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Then you can execute the following command to run the code above.
 
 {{{
 #!python
