@@ -105,7 +105,7 @@ In this section, we will explain the programming framework of the shim library. 
 
 
 
-=== Initialization of shim ===
+=== Initialization of a shim ===
 
 Your own shim must be a subclass of !BaseShim, the super class of all shims. You don't need to include any special files.
 
@@ -127,7 +127,8 @@ In your constructor, you should call the super class's constructor anywhere befo
 
 
 
-=== Advertisement of shim ===
+=== Advertisement of shims ===
+
 
 The construction of shims adheres to the publish/subscribe model. In the shim lingo, a shim on the server is ''advertised'' (published), and to build the same shim on the client, the shim library does a ''lookup'' (subscribes) on the global advertisement service. For example, a server decides to encrypt the traffic between all clients and itself. It pushes the RSAShim onto its shim stack. This shim is published on the advertisement service such as the DHT. When a client intends to connect to the server, it first learns, by doing a lookup, the shims required on the client side for the communication to proceed. As a result, the RSAShim is pushed onto the client's shim stack. The shim stacks of the server and the client are now ''balanced''. Messages from the server application is first encrypted when they pass through the RSAShim. The subsequent network calls by the system transmit these encoded data. At the client side, the system network calls pass this information through the RSAShim, where the messages are decrypted before they are returned to the client application. The publish/subscribe, or advertise/lookup, model of the shim framework ensures the balance of shim stacks in the end-to-end communications.
 
@@ -285,11 +286,11 @@ This approach to shim instantiation facilities the separation of internal states
 The `_shim_socket_*` calls are also unique to each individual connection. They exist in the same slave instance as the listener callback, so the listener callback can share states with the three socket calls. States in the same instance can be easily shared. Sharing of states between instances is discouraged, though it is possible to be achieved by using global variables (i.e. the `mycontext` dictionary).
 
 
-=== Replication of states ===
+=== Replication of state ===
 
-We encourage the replication of states from the master to the slave instances. Upon a new incoming client, the master instance creates a slave instance. During this process, the master's states can be selectively copied to the slave through the `copy()` method, so that the slave instance can "inherit" (in the biological sense) some of the properties of the master. The `copy()` operation is a means by which the shim library knows which of the master states are to be copied to the slaves.
+We encourage the replication of state from the master to the slave instances. Upon a new incoming client, the master instance creates a slave instance. During this process, the master's state can be selectively copied to the slave through the `copy()` method, so that the slave instance can "inherit" (in the biological sense) some of the properties of the master. The `copy()` operation is a means by which the shim library knows what master state should be copied to the slaves.
 
-Always override the `copy()` method, or else the shim library will thrown an exception. Within this method, specify what internal variables of the master instance should be passed on to the slave. In the following example, the shim generates a public key in the constructor, which is invoked in the same instance as `waitforconn`. For each new connection, the listener callback and the `_shim_socket_*` operations need to use the public key. Here is how you can pass the public key from the master instance to each of the slave instances.
+Always override the `copy()` method, or else the shim library will throw an exception. Within this method, specify what internal variables of the master instance should be passed on to the slave. In the following example, the shim generates a public key in the constructor, which is invoked in the same instance as `waitforconn`. For each new connection, the listener callback and the `_shim_socket_*` operations need to use the public key. Here is how you can pass the public key from the master instance to each of the slave instances.
 
 {{{
 #!python
@@ -316,10 +317,11 @@ class SimpleEncryptionShim(BaseShim):
     BaseShim.__init__(self, next_shim, optional_args)
     self._encryption_key = GetTheKeyFromSomewhere()
 
-  # Called in master instance
+  # Called in master instance, returns slave instance
   def copy(self):
     newshim = SimpleEncryptionShim()
-    newshim = self._encryption_key
+    # Copy the encryption key over to the new instance
+    newshim._encryption_key = self._encryption_key
     return newshim
 
   # Called in master instance
