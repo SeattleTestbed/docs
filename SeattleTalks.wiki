@@ -84,4 +84,4 @@
 
 || 1-1:15 July 20th || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
 
-|| 1-1:15 July 22th || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle End user use discussion || Justin || Talk
+|| 9:30-9:45 July 22th || Hilton La Jolla Torrey Pines, Salon D || Seattle End user use discussion || Justin || Talk
