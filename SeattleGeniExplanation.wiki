@@ -1,4 +1,4 @@
-= How !SeattleGENI Works =
+= How SeattleGENI Works =
 
 This page describes how the clearinghouse (!SeattleGENI) is constructed using the node manager API.   It heavily utilizes the [https://seattle.cs.washington.edu/wiki/NodeManagerDesign#NodeManagerInterface Node Manager API], so it is important to understand this document before reading further.
 
