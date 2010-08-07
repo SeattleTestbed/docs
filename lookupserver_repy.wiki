@@ -1,0 +1,46 @@
+
+== Summary ==
+
+lookupserver_repy is an application which allows the local system to function as a DNS name server, with a few key differences. Whereas normal DNS name servers serve many different sorts of request, lookupserver_repy only supports simple queries of class A (IP lookups). Also unlike typical name servers, this one doesn't draw its data from actual DNS-approved hosts. Rather, it performs its lookups recursively by requesting the information from the central advertise server.
+
+It should be noted that the program doesn't return values from advertise if they do not look like IP addresses of some flavor.
+
+
+== Limitations ==
+
+Since lookupserver_repy operates on UDP only, it is restricted to 512 bytes per packet sent. As a result, sometimes we aren't always able to return every advertise result available. This is further compounded by the IPv6 consuming so much of the packet that, in reality, we are only guaranteed 384 bytes of transmission space. In spite of the DNS compression scheme for messages being implemented in the lookupserver, there will be cases where we won't be able to return all of the IP addresses associated with a particular value.
+
+
+== Use ==
+
+Setting this up is fairly straightforward: Simply load the preprocessed REPY file on to a node, and execute it, passing the program your GENIPORT as its only argument. It will immediately begin listening for DNS connections on your GENIPORT.
+
+
+== Debugging ==
+
+You can check whether or not the lookupserver will respond properly to various types of correctly formatted packets as follows:
+
+1. Run NSLookup in the console
+
+2. Enter the following data:
+  set port=[geniport]
+  set domain=.
+  server [IP of machine running lookupserver_repy]
+
+3. Once done, you can simply type in a string literal, and NSLookup will send a query with default settings to the host machine. You are free to try different settings, but the current version of this program doesn't support anything but IN A queries. (Internet-based hostname translations)
+
+
+If you are interested in testing the lookupsever's reaction to malformed packets, do the following:
+
+1. Go in to the source code for lookupserver, and locate this line of code:
+
+
+{{{
+_DEBUG_MODE = 0
+}}}
+
+ Set it to 1.
+
+2. Obtain a copy of ut_lookupserver_repy_logic_tests.mix, and preprocess it as a .py file.
+
+3. Run the preprocessed python file in the UTF framework.
