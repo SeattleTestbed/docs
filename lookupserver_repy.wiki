@@ -10,6 +10,8 @@ It should be noted that the program doesn't return values from advertise if they
 
 Since lookupserver operates on UDP only, the DNS limits transmission rate to 512 bytes per packet sent. As a result, sometimes we aren't always able to return every advertise result available. This is further compounded by IPv6 consuming so much of the packet that, in reality, we are only guaranteed 384 bytes of transmission space. In spite of the DNS compression scheme for messages being implemented in the lookupserver, there will be cases where we won't be able to return all of the IP addresses associated with a particular value.
 
+Additionally, lookupserver identifies all responses as authoritative, since the data it returns can only come from the advertise service. Since there aren't any situations where our information wouldn't be authoritative, we adopt the convention that all responses are authoritative.
+
 
 == Use ==
 
