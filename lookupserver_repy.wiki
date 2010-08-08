@@ -41,7 +41,7 @@ If you are interested in testing the lookupsever's reaction to malformed packets
 _DEBUG_MODE = 0
 }}}
 
- Set it to 1. After you've done that, replace lookupserver_advertise.repy with a module of your choice which also contains the do_advertise_lookup method, and have it return whatever values you wish.
+ Set it to 1. After you've done that, replace lookupserver_advertise.repy with a module of your choice which also contains the do_advertise_lookup method, and have it return whatever values you wish to have sent to the server code while debugging.
 
 
 2. Obtain a copy of ut_lookupserver_repy_logic_tests.mix, and preprocess it as a .py file. 
