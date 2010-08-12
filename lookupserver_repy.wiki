@@ -3,15 +3,19 @@
 
 lookupserver is an application which allows the local system to function as a DNS name server, with a few key differences. Whereas normal DNS name servers serve many different sorts of request, lookupserver only supports simple queries of class A (IP lookups). Also unlike typical name servers, this one doesn't draw its data from actual DNS-approved hosts. Rather, it performs its lookups recursively by requesting the information from the central advertise server.
 
-It should be noted that the program doesn't return values from advertise if they do not look like IP addresses of some flavor.
+It should be noted that the program doesn't return values from advertise if they do not follow the format of a legitimate IP address. That is to say, period-separated eight-bit integer values.
 
 
 == Limitations ==
 
-Since lookupserver operates on UDP only, the DNS limits transmission rate to 512 bytes per packet sent. As a result, sometimes we aren't always able to return every advertise result available. This is further compounded by IPv6 consuming so much of the packet that, in reality, we are only guaranteed 384 bytes of transmission space. In spite of the DNS compression scheme for messages being implemented in the lookupserver, there will be cases where we won't be able to return all of the IP addresses associated with a particular value.
+The DNS restricts UDP traffic to 512 octets per packet by convention, meaning we might not always be able to return all available results from advertise. This is further compounded by IPv6 consuming so much of the packet that, in reality, we are only guaranteed 384 bytes of transmission space. In spite of the DNS compression scheme for messages being implemented in the lookupserver, there will be cases where we won't be able to return all of the IP addresses associated with a particular value.
 
-Additionally, lookupserver identifies all responses as authoritative, since the data it returns can only come from the advertise service. Since there aren't any situations where our information wouldn't be authoritative, we adopt the convention that all responses are authoritative.
 
+== Other Notes ==
+
+It is worth mentioning that lookupserver identifies all responses as authoritative, since the data it returns can only come from the advertise service. Since there aren't any situations where our information wouldn't be authoritative, we adopt the convention that all responses are authoritative.
+
+Currently there is no caching system for advertise data, since this information is extremely dynamic and caching results could lead to false or incorrect data being returned to users who request data that changes quickly.
 
 == Use ==
 
@@ -38,10 +42,10 @@ If you are interested in testing the lookupsever's reaction to malformed packets
 
 
 {{{
-_DEBUG_MODE = 0
+_DEBUG_MODE = False
 }}}
 
- Set it to 1. After you've done that, replace lookupserver_advertise.repy with a module of your choice which also contains the do_advertise_lookup method, and have it return whatever values you wish to have sent to the server code while debugging. Alternatively, you can rewrite the include for lookupserver_advertise.repy, and put in your own.
+ Set it to True. After you've done that, replace lookupserver_advertise.repy with a module of your choice which also contains the do_advertise_lookup method, and have it return whatever values you wish to have sent to the server code while debugging. Alternatively, you can rewrite the include for lookupserver_advertise.repy, and put in your own.
 
 
 2. Obtain a copy of ut_lookupserver_repy_logic_tests.mix, and preprocess it as a .py file. 
