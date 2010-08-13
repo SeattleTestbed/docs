@@ -3,7 +3,7 @@
 
 lookupserver is an application which allows the local system to function as a DNS name server, with a few key differences. Whereas normal DNS name servers serve many different sorts of request, lookupserver only supports simple queries of class A (IP lookups). Also unlike typical name servers, this one doesn't draw its data from actual DNS-approved hosts. Rather, it performs its lookups recursively by requesting the information from the central advertise server.
 
-It should be noted that the program doesn't return values from advertise if they do not follow the format of a legitimate IP address. That is to say, period-separated eight-bit integer values.
+It should be noted that the program doesn't return values from advertise if they do not follow the format of a legitimate IPv4 address. That is to say, period-separated eight-bit integer values.
 
 
 == Limitations ==
