@@ -85,3 +85,5 @@
 || 1-1:15 July 20th || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
 
 || 9:30-9:45 July 22th || Hilton La Jolla Torrey Pines, Salon D || Seattle End user use discussion || Justin || Talk
+|| August 13th || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk
+|| August 14th || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk, Live Demo
