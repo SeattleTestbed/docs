@@ -1,0 +1,46 @@
+== Overview ==
+
+dnsserver is a three file REPY application which hosts a DNS Name server on the Seattle network. Unlike a typical name server, dnsserver does not provide web address lookups, but rather services advertise lookup requests. For example, converting users' public keys in to IP addresses.
+
+This application is still under construction, so revisions to this page will be in order as it is completed.
+
+
+
+== How does it work? ==
+
+There are three files in the dnsserver suite: dnsserver.repy, dnsserver_advertise.repy, and dnsserver_manager.repy. Of these, dnsserver and dnsserver_advertise are modules used by manager. dnsserver.repy has the job of abstracting DNS protocol details, and dnsserver_advertise.repy has the job of performing lookups on whatever service is specified. The general application flow is as follows:
+
+1. Launch dnsserver_manager.repy
+
+2. dnsserver_manager.repy registers a callback function with dnsserver.repy, which will be run whenever a DNS-compliant query is received.
+
+3. Whenever a query is received, dnsserver.repy will parse it in to a dictionary, which will be then sent to the callback in dnsserver_manager.repy for processing. A dictionary of similar format will be returned, from which dnsserver.repy will construct a response packet for the client and send it off. Most likely, this packet will include information furnished by dnsserver_advertise.repy.
+
+
+== How do I use it? ==
+
+The service itself is pretty easy to use, just follow these steps:
+
+1. Preprocess dnsserver_manager.repy
+
+2. Run the resulting file in a node or other machine, passing in one obligatory argument: A UDP host port. If you're running this in a REPY vessel, the port will be your GENIport.
+
+3. You're done! The dnsserver will process requests per the server policy entailed by dnsserver_manager.repy's code. There are some additional customization features which you can use detailed below.
+
+
+
+== Customization, you say? ==
+
+The following arguments can be added to the execution statement for dnsserver_manager.repy at runtime, in any order.
+
+'''-aa on/off''' -- Determines whether responses are authoritative by default, with "on" indicating that they should be, and "off" indicating that they should not. This may affect client behavior, particularly in DNS-compliant clients, who will seek authoritative data if any can be found. If you indicate that data is not authoritative, they may attempt to inquire elsewhere to get authoritative data.
+
+'''-ra on/off''' -- Determines whether responses will be listed as recursive or not. Currently there are no plans to make this affect actual server behavior, since we cannot refer the client to an advertise server directly, and to refer it to another dnsserver would be pointless. However depending on how the client will choose to react, we may wish to indicate that our responses are recursive or not. (Recursive behavior simply means that the name server attempts to get the data for the client, even if this means contacting other name servers it knows of. Nonrecursive name servers simply check their local information and respond with either the desired information or a redirect.)
+
+'''-s on/off''' -- Determines whether the dnsserver should be "smart" in its parsing of queries or not. For example, if a client were to mark the authoritative bit as true, which is invalid in queries, it is possible that their query might still be answerable, even though it fails to be DNS compliant in that minor way. If that's the case, there's no reason why the dnsserver can't respond as if it were an acceptable query. This is on by default, though regardless of whether it's on or off, strange packets like this will be recorded to the standard output in case they are of interest.
+
+
+
+== Debugging ==
+
+There are unit tests included as well; any file enclosed with a ut_ prefix contains unit tests for various aspects of server behavior. To run these, simply preprocess them and use them as arguments for utf.py.
