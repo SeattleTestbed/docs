@@ -10,7 +10,7 @@ This application is still under construction, so revisions to this page will be 
 
 There are three files in the dnsserver suite: dnsserver.repy, dnsserver_advertise.repy, and dnsserver_manager.repy. Of these, dnsserver and dnsserver_advertise are modules used by manager. dnsserver.repy has the job of abstracting DNS protocol details, and dnsserver_advertise.repy has the job of performing lookups on whatever service is specified. The general application flow is as follows:
 
-1. Launch dnsserver_manager.repy
+1. Preprocess and Launch dnsserver_manager.repy
 
 2. dnsserver_manager.repy registers a callback function with dnsserver.repy, which will be run whenever a DNS-compliant query is received.
 
