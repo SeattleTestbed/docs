@@ -28,5 +28,7 @@ seattle_demokit.tgz
 }}}
 
 
+The script as of August 2010 seems to make a tarball of the demokit, while the demokit on the website is in zip format. Therefore after you have made the demokit using the script above, untar it using 'tar -zxvf' command. At this point we want to make sure that there aren't any extra files in the demokit or none of the files have been deleted. You can do this by comparing to the last version of the demokit. The current demokit should reside in /var/www/dist/ on seattlegeni.cs.washington.edu. After everything checks out use the command 'zip -r' to zip up the latest demokit and move it to the folder /var/www/dist/ in seattlegeni.cs.washington.edu replacing the old demokit.
+
 == Documentation ==
 Please refer to [browser:seattle/trunk/dist/build_demokit.py the comments in build_demokit.py] for further documentation.
