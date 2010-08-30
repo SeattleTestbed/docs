@@ -16,7 +16,25 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
 == Step by Step ==
 ----
  1. Make sure you are operating on a Linux system.
- 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning.
+ 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning. A common directory would be /var/www/dist/ (The dist folder doesn't exist and must be created.)
+ 1. If a pair of public key and private key doesn't exist for the updater then the following steps must be followed.
+   1. Create a temporary folder.
+   1. Navigate to the trunk/ folder.
+   1. Run the command:
+{{{
+python preparetest.py TEMP_FOLDER
+}}}
+      where the temp folder is the folder created in step 1.
+   1. Navigate to the TEMP_FOLDER.
+   1. Run the command:
+{{{
+python generatekey.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
+}}}
+      An example would be:
+{{{
+python generatekey.py softwareupdater_key
+}}}
+   1. You can copy these two files over to where you want to store the keys. You can delete the TEMP_FOLDER and all its contents at this point if you want.
  1. Navigate to the trunk/dist directory.
  1. Run the program (make_base_installers.py) with the following arguments:
    1. Various flags that will modify the behavior of the program. Include "m" to create a Mac installer, "l" to create a Linux installer, "w" to create a Windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported Operating Systems, and "t" (optional) to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
