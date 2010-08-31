@@ -4,7 +4,7 @@ This document explains how to do a fresh install of the SeattleGENI portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
  * For info on deploying the production SeattleGENI code and for starting/restarting Apache, see [wiki:ProductionGeniHTTPService]
- * For info on running a test/development version of the SeattleGENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
+ * For info on running a test/development version of the SeattleGENI portal using the Django built-in HTTP test server, see [wiki:SeattleGeniTesting]
 
 ----
 [[TOC(inline)]]
@@ -61,6 +61,7 @@ ON seattlegeni.*
 TO 'seattlegeni'@'localhost'
 IDENTIFIED BY 'password';
 }}}
+where you would replace the 'password with the password you want to use for the user 'seattlegeni'
 
 Be sure to repeat the process for a separate database called `keydb`.
 
@@ -98,6 +99,38 @@ cd /tmp/deploy/seattlegeni
       to start them in the order shown. Most importantly, first the lockserver,
       then the backend, then everything else. However, we're not going to describe
       the initial setup in this order.
+  * '''Generating state keys'''
+    Four different state keys need to be created in order for all the backend scripts
+    to work. The name of the four key files should be:
+    * acceptdonation.publickey
+    * canonical.publickey
+    * movingtoonepercent_manyevents.publickey
+    * onepercentmanyevents.publickey
+    Note that the privatekey of the key pairs is not necessary. To generate the keys 
+    follow these instructions: 
+    1. Create a temporary folder.
+    1. Navigate to the trunk/ folder.
+    1. Run the command:
+{{{
+python preparetest.py TEMP_FOLDER
+}}}
+       where the temp folder is the folder created in step 1.
+    1. Navigate to the TEMP_FOLDER.
+    1. Run the command:
+{{{
+python generatekey.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
+}}}
+       An example would be:
+{{{
+python generatekey.py acceptdonation
+}}}
+    1. Generate a key pair for all four state keys.
+    1. Create a folder in your /tmp/deploy/seattlegeni/node_state_transitions/
+       folder and copy the four publickeys over to that folder.
+    1. Remember the name of this folder as you will need it when you configure
+       the website/settings.py file in the next phase.
+    1. You can delete the privatekeys if you want to as we won't need them.
+    1. Delete the TEMP_FOLDER and all its content at this point if you want to.
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a mysql database for seattlegeni (e.g.
       called `seattlegeni`).
@@ -119,7 +152,7 @@ STATE_KEYS_DIR = "path/to/statekeys"
 
 # The directory where the base installers named seattle_linux.tgz, seattle_mac.tgz,
 # and seattle_win.zip are located.
-BASE_INSTALLERS_DIR = ""
+BASE_INSTALLERS_DIR = "" # usually you would use something like /var/www/dist/ for this.
 
 # The directory in which customized installers created by seattlegeni will be
 # stored. A directory within this directory will be created for each user.
@@ -160,6 +193,13 @@ export DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
       /tmp/deploy directory. The /tmp/deploy/seattle path item is to ensure
       that repyhelper can find repy files in the python path, as the repy files
       were placed in this directory by the deployment script.
+      You will have to do this in each of the shell terminals you work in for 
+      the steps below. Alternatively you can edit the .bashrc file in your home
+      directory and add the two lines in:
+{{{
+PYTHONPATH=$PYTHONPATH:/tmp/deploy:/tmp/deploy/seattle
+DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
+}}}
     * Create the database structure:
 {{{
 #!sh
@@ -206,19 +246,46 @@ cd backend
 python backend_daemon.py
 }}}      
   * '''Start the polling daemons'''
-    * Set your environment variables the same way as shown above.
+    * Set your environment variables the same way as shown above. (Not necessary 
+      if you have added it to the .bashrc file)
     * There's only one polling daemon at the moment. To start it:
 {{{
 #!sh   
 python polling/check_active_db_nodes.py
 }}}
   * '''Start the node state transition scripts'''
-    * Set your environment variables the same way as shown above.
+    * Set your environment variables the same way as shown above. (Not necessary 
+      if you have added it to the .bashrc file)
     * Start each transition script you intend to run:
 {{{
 #!sh   
 python node_state_transitions/TRANSITION_SCRIPT_NAME.py
 }}}
+
+
+[[BR]]
+== Generating and Deploying Seattle Installers ==
+----
+
+Now that we have set up the GENI website, we want to be able to distribute the Seattle 
+installers and the demokit through the website. We need to follow couple of steps to 
+do this. 
+
+ 1. We will need a distribution folder to store the installer files. Usually you would want
+ to create the folder dist/ in the directory /var/www/.
+ 1. We also need a folder to hold all the users custom installers. So we will create the 
+ folder geni/ in the /var/www/dist/ directory. We are not going to store anything in 
+ this folder, the custom installers for the users will be automatically generated and 
+ stored here.
+ 1. Now we need to create the base installers. In order to do this, follow the instruction
+ on the [wiki:BaseInstallers] page.
+ 1. After you have created all the installers, copy over all the tarballs and the zip files
+ in the /var/www/dist/ directory.
+ 1. We will also need to create the demokit at this point, if you want to distribute the demokit.
+ 1. Follow the instructions on the [wiki:BuildDemokit] to build the demokit.
+ 1. Once the demokit has been built, copy over the file demokit.zip in the directory /var/www/dist/.
+ 1. You should now be able to successfully distribute Seattle installation files and the demokit!
+
 
 
 [[BR]]
