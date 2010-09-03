@@ -1,7 +1,7 @@
 
 
 == What is Seattle? ==
-Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world.   You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions. It's currently targeted for use by educators teaching networking and distributed systems classes. The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
+Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world.   You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions.  The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
 
 Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
@@ -20,8 +20,6 @@ Seattle runs on end user systems on diverse platforms in a safe and contained ma
    * Windows (XP/Vista)
    * Mac OS-X
    * Linux
-   * FreeBSD
-   * OLPC (One Laptop Per Child) XO
    * Portable devices (Nokia N800s, jailbroken iPhones)
 
 
