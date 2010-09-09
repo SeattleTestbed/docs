@@ -13,9 +13,12 @@ Explains how to go about deploying a new version of the code, which consists of 
   1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
   1. `cd /home/release`
   1. Update to the current svn trunk: `svn up trunk`
+  1. If new library files has been added since the last deployment then couple of extra steps need to be taken. 
+    * trunk/preparetest.py needs to be edited to copy over the new library files that are new in this version.
+    * trunk/dist/initial_files.fi and trunk/dist/final_files.fi needs to be modified and the name of the new library files need to be added in. It will be in the form 'req NEW_LIB_FILE_NAME'.
   1. Edit the file `trunk/nodemanager/nmmain.py` and change the version to whichever version you're releasing (e.g. `version = "0.1m"`)
   1. At this point, we need to make sure that the only differences between our copy of trunk and what's in svn are the
-     differences of the betabox software updater key and update url embedded in `trunk/softwareupdater/softwareupdater.py` and the version string in `trunk/nodemanager/nmmain.py`.
+     differences of the betabox software updater key and update url embedded in `trunk/softwareupdater/softwareupdater.py` and the version string in `trunk/nodemanager/nmmain.py`. The files trunk/preparetest.py, trunk/dist/initial_files.fi and trunk/dist/final_files.fi may also be different if you had to edit them in step 4.
     * Check what's different from svn: `svn status trunk`
     * You should see the following as 'M':
       * `trunk/softwareupdater/softwareupdater.py`
