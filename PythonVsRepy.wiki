@@ -71,6 +71,7 @@ Below is a list of the Python built-ins that are '''not''' allowed in Repy
  * id
  * input
  * iter
+ * lambda
  * locals
  * next
  * property
