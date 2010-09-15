@@ -438,7 +438,7 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
 
 Open a file, returning an object of the file type. 
 
-Filenames may only be in the current directory and contain lowercase letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  Filenames must be no more than 120 characters long.
+Filenames may only be in the current directory and may only contain lowercase letters, numbers, the hyphen, underscore, and period characters.  Also, filenames cannot be '.', '..', the blank string or start with a period.   There is no concept of a directory or a folder in repy.  Filenames must be no more than 120 characters long.
 
 Every file object is capable of both reading and writing. 
 
