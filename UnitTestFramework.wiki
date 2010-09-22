@@ -96,7 +96,7 @@ def test_invalid_add():
 == Multiple Test Files ==
 ----
 
-You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_testhostnames.py'. All we need to do is use the same module name. For example, you might use 'ut_monitor_secondtest.py' as your second unit tests' name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
+You might require more than one test for a module. To create multiple unit tests for one module, all you need to do is use the same naming convention we described earlier. In our case where we were testing the 'monitor' module, we used the name 'ut_monitor_testhostnames.py'. All we need to do is use the same module name. For example, you might use 'ut_monitor_secondtest.py' as your second unit test's name. Keep in mind that when choosing a descriptor for your filename, you should be as descriptive as possible (if you were testing disk usage, a good name for your test would be 'ut_monitor_diskusage.py'). 
 
 
 [[BR]]
@@ -125,7 +125,7 @@ And you decide to test it by creating an appropriate test file.
 File: ut_semaphore_testrepy.py
 """
 }}}
-UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert, what is called, a '''pragma directive''' at the beginning of the test file. Each pragma directive instructs UTF in how to behave.
+UTF has to be able to differentiate between Python and Repy. Therefore, there must be a way to instruct the testing framework that this file is suppose to be executed inside of the Repy Execution Environment. To achieve this you need to insert what is called a '''pragma directive''' at the beginning of the test file. Each pragma directive instructs UTF in how to behave.
 
 Here is the general form of a pragma:
 {{{
