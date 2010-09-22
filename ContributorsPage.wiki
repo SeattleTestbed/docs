@@ -18,8 +18,8 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [RepyHelper Importing Repy code into Python using repyhelper]
 
  * Testing
-   * '''[UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]'''
    * '''[UnitTestFramework Writing Tests for Seattle's Unit Test Framework]'''
+   * '''[UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]'''
    * '''[UnitTests Running Repy and / or node manager unit tests]'''
    * [UpdaterUnitTests Running Software Updater Unit Tests]
    * [IntegrationTestFramework Writing Integration Tests] 
