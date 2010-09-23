@@ -14,7 +14,7 @@ There are three files in the dnsserver suite: dnsserver.repy, dnsserver_advertis
 
 2. dnsserver_manager.repy registers a callback function with dnsserver.repy, which will be run whenever a DNS-compliant query is received.
 
-3. Whenever a query is received, dnsserver.repy will parse it in to a dictionary, which will be then sent to the callback in dnsserver_manager.repy for processing. A dictionary of similar format will be returned, from which dnsserver.repy will construct a response packet for the client and send it off. Most likely, this packet will include information furnished by dnsserver_advertise.repy.
+3. Whenever a query is received, dnsserver.repy will parse it in to a dictionary, which will be then sent to the callback in dnsserver_manager.repy for processing. A dictionary of similar format will be returned, from which dnsserver.repy will construct a response packet for the client and send it off. Most likely, this packet will include information furnished by dnsserver_advertise.repy. (Currently, the advertise service is being delegated to dnsserver_advertise.repy for portability.)
 
 
 == How do I use it? ==
