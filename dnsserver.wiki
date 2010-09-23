@@ -31,7 +31,7 @@ The service itself is pretty easy to use, just follow these steps:
 
 == Customization, you say? ==
 
-The following arguments can be added to the execution statement for dnsserver_manager.repy at runtime, in any order. (This functionality has been removed for the time being, as it requires some sorting out. It will be restored soon.)
+The following arguments can be added to the execution statement for dnsserver_manager.repy at runtime, in any order. '''(This functionality has been removed for the time being, as it requires some sorting out. It will be restored soon.)'''
 
 '''-aa on/off''' -- Determines whether responses are authoritative by default, with "on" indicating that they should be, and "off" indicating that they should not. This may affect client behavior, particularly in DNS-compliant clients, who will seek authoritative data if any can be found. If you indicate that data is not authoritative, they may attempt to inquire elsewhere to get authoritative data.
 
