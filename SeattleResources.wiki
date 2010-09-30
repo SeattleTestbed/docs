@@ -13,7 +13,7 @@ Accounts on these machines must be requested. These machines do not run NIS/NFS,
 
 || Stable || Justin's Office CSE? || Hosts basic dev services, and simple production services || seattle.cs [[BR]] beraber.cs [[BR]] satya.cs || Ubuntu || [SeattleTracService Seattle Trac] [[BR]] [wiki:SeattleSVNService Seattle SVN] [[BR]] [InstallerMakerService Seattle installer-maker server] [[BR]] [SeattleSoftwareUpdaterService Seattle software updater] [[BR]] Beraber (http)[[BR]] GENI test (http)[[BR]] [CentralizedAdvertiseService Centralized advertise server] [[BR]] [wiki:SSHService SSH] [wiki:MonitorProcessService] [wiki:SeattleIRCBot] || http is monitored via the CSE [http://weblogin.cs.washington.edu/www_is_up www_is_up] service. [[BR]]GET request is generated every 20 minutes. Justin/Ivan/Monzur are emailed in case of downtime.||
 
-|| Unstable || Justin's Office CSE? || Runs no production services. Used for monitoring, node deployment, and other distributed tasks. || blackbox.cs || Ubuntu || Autograder[[BR]]  [wiki:BlackBoxTests Black box testing] [[BR]] Deployment scripts[[BR]] [wiki:SSHService SSH] || None ||
+|| Unstable || Justin's Office CSE? || Runs no production services. Used for monitoring, node deployment, and other distributed tasks.   Contains the [wiki:GeoIPServer geoip server].   Currently is running [wiki:dnsserver zenodotus] using screen under an account with the same name.       || blackbox.cs || Ubuntu || Autograder[[BR]]  [wiki:BlackBoxTests Black box testing] [[BR]] Deployment scripts[[BR]] [wiki:SSHService SSH] || None ||
 
 || Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-opensuse.cs || !OpenSuse || [wiki:SSHService SSH] || None ||
 
