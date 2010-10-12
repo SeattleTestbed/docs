@@ -1,46 +1,120 @@
-== Overview ==
+== What is it? ==
 
-dnsserver is a three file REPY application which hosts a DNS Name server on the Seattle network. Unlike a typical name server, dnsserver does not provide web address lookups, but rather services advertise lookup requests. For example, converting users' public keys in to IP addresses.
-
-This application is still under construction, so revisions to this page will be in order as it is completed.
+dnsserver is a repy application which provides a toolset for crafting and interpreting DNS communications. Whether you're looking to write a script to query for DNS information, or if you're interested in interpreting DNS queries sent to your server, dnsserver can save you some trouble by abstracting the messy details of the DNS protocol away.
 
 
 
-== How does it work? ==
+== Dependencies ==
 
-There are three files in the dnsserver suite: dnsserver.repy, dnsserver_advertise.repy, and dnsserver_manager.repy. Of these, dnsserver and dnsserver_advertise are modules used by manager. dnsserver.repy has the job of abstracting DNS protocol details, and dnsserver_advertise.repy has the job of performing lookups on whatever service is specified. The general application flow is as follows:
+Conveniently, dnsserver has no dependencies at all; it is standalone.
 
-1. Preprocess and Launch dnsserver_manager.repy
 
-2. dnsserver_manager.repy registers a callback function with dnsserver.repy, which will be run whenever a DNS-compliant query is received.
 
-3. Whenever a query is received, dnsserver.repy will parse it in to a dictionary, which will be then sent to the callback in dnsserver_manager.repy for processing. A dictionary of similar format will be returned, from which dnsserver.repy will construct a response packet for the client and send it off. Most likely, this packet will include information furnished by dnsserver_advertise.repy. (Currently, the advertise service is being delegated to dnsserver_advertise.repy for portability.)
+== Public Methods ==
+
+dnsserver currently has only one public method: dnsserver_registercallback. While you are free to use the private methods included as well, do so at your own discretion. They may behave in unexpected, possibly non-DNS-compliant ways if not treated properly.
+
+{{{
+def dnsserver_registercallback(listen_port, listen_ip, callback_function):
+  """
+  <Purpose>
+    This method registers a callback to be run whenever a DNS-formatted message 
+    arrives at the listen_port. Mechanically speaking, this means that it adds 
+    a key : value pair to _callback_registry with the form 
+    'connection_handle' : 'callback_function', and begins listening for 
+    messages on listen_port.
+
+  <Arguments>
+    listen_port
+      The UDP port on which we listen for DNS messages. If this is being used 
+      in a vessel, it must be a GENIPORT.
+
+    listen_ip
+      The IP address on which we listen for DNS messages. This will generally 
+      be that returned by getmyip(), but we leave it up to the client to set 
+      this, since there may be multiple network interfaces to choose from.
+
+    callback_function
+      The function which will be called whenever we receive a DNS message on 
+      its associated port. This function should take exactly one argument: A 
+      dictionary with the following form:
+
+      {
+        'raw_data': <long string>
+        'communication_id': 'a7'
+        'query_response': False
+        'operation_code': 0
+        'authority_advisory': False
+        'truncation': False
+        'recursion_desired': True
+        'recursion_accepted': False
+        'z': False
+        'authentic_data': False
+        'checking_disabled': False
+        'error_code': 0
+        'question_count': 1
+        'answer_count': 0
+        'nscount': 0
+        'arcount': 0
+        'question_name': "asdf" <--- This is the query, such as a hostname.
+        'question_type': 0
+        'question_class': 0
+        'answers': []
+      } (Numbers are integers)
+
+      The callback should return a dictionary with the same keys, 
+      though the values assigned to them will vary. Additionally, if 
+      one or more answers were found to the client's query, they should be 
+      assigned to the 'answers' key as an array of strings. (The strings should 
+      be direct results from advertise lookup.)
+
+  <Exceptions>
+    Exception
+      This is a global exception, but the only time it has been known to occur 
+      is when recvmess is given a port which we aren't allowed to access.
+
+  <Side Effects>
+    When the callback function is registered, a listener will be opened on 
+    listen_port, which could possibly interfere with other applications 
+    running on the local machine. It's unlikely, but worth mentioning.
+
+  <Returns>
+    A connection handle, which can be used by stopcomm() to end the connection.
+  """
+
+  # Start listening on the given listen_port. _connection_received_callback will
+  # run whenever we receive a UDP packet on listen_port.
+  connhandle = recvmess(listen_ip, listen_port, _connection_received_callback)
+
+  # Associate the connection handle with the callback function, so that we can 
+  # retrieve it later.
+  _dnsserver_callback_registry[connhandle] = {
+      'callback_function' : callback_function,
+      'local_port' : listen_port,
+      'local_ip' : listen_ip }
+
+  # For now, we return the 
+  # commhandle given by recvmess, so that the client can halt the connection 
+  # as necessary. I'd like to abstract this, but it's not urgent, and I'm 
+  # not sure of a good way to do it. There *is* the possibility of an error, if 
+  # a connection is terminated, and then a new callback is registered on the 
+  # same port, since we currently make no attempt to remove old callbacks from 
+  # the dictionary.
+  return connhandle
+}}}
+
+As the above code block suggests, this method will conveniently send your registered callback function a dictionary whenever a DNS query is received, with the listed arguments inside it.
+
 
 
 == How do I use it? ==
 
-The service itself is pretty easy to use, just follow these steps:
+Just include dnsserver.repy in your code as a dependency! This code is intended as a module; it has no main code body inside. All you have to do is pass a method name, IP, and hostport to dnsserver_registercallback, and it will begin listening for DNS connections as instructed.
 
-1. Preprocess dnsserver_manager.repy
-
-2. Run the resulting file in a node or other machine, passing in one obligatory argument: A UDP host port. If you're running this in a REPY vessel, the port will be your GENIport.
-
-3. You're done! The dnsserver will process requests per the server policy entailed by dnsserver_manager.repy's code. There are some additional customization features which you can use detailed below.
-
-
-
-== Customization, you say? ==
-
-The following arguments can be added to the execution statement for dnsserver_manager.repy at runtime, in any order. '''(This functionality has been removed for the time being, as it requires some sorting out. It will be restored soon.)'''
-
-'''-aa on/off''' -- Determines whether responses are authoritative by default, with "on" indicating that they should be, and "off" indicating that they should not. This may affect client behavior, particularly in DNS-compliant clients, who will seek authoritative data if any can be found. If you indicate that data is not authoritative, they may attempt to inquire elsewhere to get authoritative data.
-
-'''-ra on/off''' -- Determines whether responses will be listed as recursive or not. Currently there are no plans to make this affect actual server behavior, since we cannot refer the client to an advertise server directly, and to refer it to another dnsserver would be pointless. However depending on how the client will choose to react, we may wish to indicate that our responses are recursive or not. (Recursive behavior simply means that the name server attempts to get the data for the client, even if this means contacting other name servers it knows of. Nonrecursive name servers simply check their local information and respond with either the desired information or a redirect.)
-
-'''-s on/off''' -- Determines whether the dnsserver should be "smart" in its parsing of queries or not. For example, if a client were to mark the authoritative bit as true, which is invalid in queries, it is possible that their query might still be answerable, even though it fails to be DNS compliant in that minor way. If that's the case, there's no reason why the dnsserver can't respond as if it were an acceptable query. This is on by default, though regardless of whether it's on or off, strange packets like this will be recorded to the standard output in case they are of interest.
+There is currently no way to instruct dnsserver to stop processing requests; this will be implemented soon.
 
 
 
 == Debugging ==
 
-There are unit tests included as well; any file enclosed with a ut_ prefix contains unit tests for various aspects of server behavior. To run these, simply preprocess them and use them as arguments for utf.py.
+There are unit tests included as well; any file enclosed with a ut_ prefix contains unit tests for various aspects of server behavior. To run these, simply preprocess them and use them as arguments for utf.py. You'll need to include dnsserver.repy in the same directory when you preprocess them, of course.
