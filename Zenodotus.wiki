@@ -52,8 +52,23 @@ NOTE: zenodotus supports the following argument flags at runtime:
 
 It is worth noting that the hostport is obligatory; zenodotus has no way of guessing which port it should be listening on, since it is not a traditional DNS Name server and does not automatically assume that it should use port 53. The -ip flag is purely optional; use it if you'd like zenodotus to operate on a specific network interface.
 
-
-
 == Debugging ==
 
 There are no unit tests for zenodotus, due to the presence of main code which will crash when imported by a typical test file. This is being worked on, but in the meantime, NSLookup, Host, and DiG are all excellent testing utilities.
+
+
+== Production Deployment ==
+ 
+Zenodotus is deployed on blackbox under the zenodotus account.   To start / stop / modify it, log in under zenodotus.   Try to run {{{screen -r}}} to reattach to the previously run instance of zenodotus.   (If this fails, use {{{screen}}} to start a new instance).   To stop the running instance, use CTRL-C to interrupt it.
+
+When running the service, it needs to be run using {{{authbind}}} to allow it to bind to port 53.   Try running it under {{{screen}}} using a command like:    
+
+{{{
+  zenodotus@ubuntu:~/Zenodotus$ authbind python repy.py restrictions.test zenodotus_built.repy -p 53
+  Success.
+  zenodotus now running on the local machine:
+    Host port = 53
+    Local IP  = 192.168.1.7
+}}}
+
+To exit screen without terminating the process, use CTRL-A, CTRL-D.  It should now be running and have its output and errput listed under screen.   If this becomes too chatty, we will redirect these to log files.
