@@ -1,12 +1,7 @@
 == What is it? ==
 
-dnsserver is a repy application which provides a toolset for crafting and interpreting DNS communications. Whether you're looking to write a script to query for DNS information, or if you're interested in interpreting DNS queries sent to your server, dnsserver can save you some trouble by abstracting the messy details of the DNS protocol away.
+dnsserver is a repy library which allows your program to respond to or issue DNS queries. Whether you're looking to write a script to query for DNS information, or if you're interested in interpreting DNS queries sent to your server, dnsserver can save you some trouble by abstracting the messy details of the DNS protocol away.
 
-
-
-== Dependencies ==
-
-Conveniently, dnsserver has no dependencies at all; it is standalone.
 
 
 
