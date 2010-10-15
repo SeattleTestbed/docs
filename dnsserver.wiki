@@ -10,6 +10,7 @@ dnsserver is a repy library which allows your program to interpret and respond t
 dnsserver currently has only one public method: dnsserver_registercallback. While you are free to use the private methods included as well, do so at your own discretion. They may behave in unexpected, possibly non-DNS-compliant ways if not treated properly.
 
 {{{
+#!python
 def dnsserver_registercallback(listen_port, listen_ip, callback_function):
   """
   <Purpose>
