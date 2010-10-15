@@ -460,7 +460,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
          if it does not exist.   If the file exists, this flag has no effect.
 
    <Exceptions>
-      RepyArgumentError is raised if the filename is invalid.
+      RepyArgumentError is raised if the filename is invalid or create is not a boolean type.
 
       FileInUseError is raised if a handle to the file is already open.
 
