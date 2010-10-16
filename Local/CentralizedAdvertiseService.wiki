@@ -42,3 +42,5 @@ $ ps auwx | grep advertise | grep -v grep
 }}}
 
 An alternative way to kill the central advertise server would be to reopen the SCREEN mode under the geni account and send a kill signal (ctrl-c), to the terminal that is running the central advertise server.
+
+wiki:SeattleLibWiki
