@@ -1,0 +1,72 @@
+= Seattle Standard Library =
+This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. 
+
+ * Advertising
+  * Advertise.repy
+  * Advertiseobject.repy
+  * centralizedadvertise.repy
+  * DORadvertise.repy
+  * NAT_advertisement.repy (link also in networks section?)
+  * openDHTadvertise.repy
+
+ * Cryptography
+  * md5py.repy
+  * pycryptorsa.repy
+  * pydes.repy
+  * rsa.repy
+  * sha.repy
+  * sshkey.repy
+  * sshkey_paramiko.repy
+  * signeddata.repy
+
+ * Time Module
+  * ntptime.repy
+  * time.repy
+  * time_interface.repy
+  * tcp_time.repy
+
+ * Data Encoding
+  * binaryascii.repy
+  * base64.repy
+  * serialize.repy
+
+ * XML / URL parsing
+  * xmlparse.repy
+  * xmlrpc_client.repy
+  * xmlrpc_common.repy
+  * xmlrpc_server.repy
+  * urllib.repy
+  * httpretrieve.repy
+
+ * Concurrency / Parallelism
+  * parallelize.repy
+  * uniqueid.repy
+  * semaphore.repy
+  * cv.repy
+
+ * Domain info / Data retrieval
+  * domainname.repy
+  * geoip_client.repy
+  * httpserver.repy
+  * servicelookup.repy
+
+ * Network + Client Communication
+  * getvesselsresources.repy
+  * nmclient.repy
+  * NATLayer_rpc.repy
+  * sockettimeout.repy
+  * session.repy
+
+ * Programmer Resources / Data Structures
+  * argparse.repy
+  * listops.repy
+  * priority_queue.repy
+  * repyunit.repy
+  * safe_eval.repy
+  * random.repy
+  * repypp.py
+  * strace.py
+  * math.repy
+  * textops.py
+  * dylink.repy
+  * urlparse.repy
