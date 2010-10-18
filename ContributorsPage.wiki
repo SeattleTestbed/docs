@@ -59,6 +59,7 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Project Resources
    * [SeattleResources A full listing of Seattle project services]
    * [SeattleAccountManagement Creating and deleting accounts for developers]
+   * [SeattleAdminResources Resources needed by Seattle sysadmin]
 
  * Events relevant to Seattle and Seattle team information
    * [SeattleTalks Upcoming talks] about Seattle
