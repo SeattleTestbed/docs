@@ -37,5 +37,7 @@ nat_toggle_advertisement(enabled, threadRun=True)
    * threadRun controls the advertisement thread.
 === Usage ===
 
+???
+
 === Includes ===
 [wiki:Advertise.repy]
