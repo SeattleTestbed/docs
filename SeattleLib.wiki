@@ -2,12 +2,13 @@
 This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. 
 
  * Advertising
-  * Advertise.repy
-  * Advertiseobject.repy
-  * centralizedadvertise.repy
-  * DORadvertise.repy
-  * NAT_advertisement.repy (link also in networks section?)
-  * openDHTadvertise.repy
+  * [wiki:centralizedadvertise.repy]
+  * [wiki:openDHTadvertise.repy]
+  * [wiki:Advertise.repy]
+  * [wiki:NAT_advertisement.repy] (link also in networks section?)
+  * [wiki:DORadvertise.repy]
+  * [wiki:Advertiseobject.repy]
+ 
 
  * Cryptography
   * md5py.repy
