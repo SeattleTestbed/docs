@@ -1,6 +1,6 @@
 = centralizedadvertise.repy =
 
-This module provides a hash table service for nodes. Adds and removes entries to a centralized hash table much like openDHT.
+This module provides a hash table service for nodes. Adds and removes entries to a centralized hash table.
 
 === Functions ===
 
