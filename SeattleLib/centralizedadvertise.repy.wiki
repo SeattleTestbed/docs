@@ -10,6 +10,7 @@ This module provides a hash table service for nodes. Adds and removes entries to
 centralizedadvertise_announce(key, value, ttlval)
 }}}
    Announce a key / value pair into the CHT.
+
    Notes:
    * ttlval must be a positive integer that describes the amount of time until the value expires.
    * Network / Timeout exception are raised if there are connection errors.
@@ -18,6 +19,7 @@ centralizedadvertise_announce(key, value, ttlval)
 centralizedadvertise_lookup(key, maxvals=100)
 }}}
    Returns the valid values stored by the key in a list.
+
    Notes:
    * maxvals must be a positive integer that describes how many values to return.
    * Network / Timeout exception are raised if there are connection errors.
