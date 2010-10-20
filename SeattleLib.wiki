@@ -27,7 +27,7 @@ This pages contains documentation about the standard library. The libraries are 
   * [wiki:tcp_time.repy]
 
  * Data Encoding
-  * [wiki:binaryascii.repy]
+  * [wiki:binascii.repy]
   * [wiki:base64.repy]
   * [wiki:serialize.repy]
 
