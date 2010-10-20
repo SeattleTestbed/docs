@@ -1,13 +1,13 @@
 = Seattle Standard Library =
 This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. 
 
- * Advertising
+ * Node Advertising
   * [wiki:centralizedadvertise.repy]
   * [wiki:openDHTadvertise.repy]
-  * [wiki:Advertise.repy]
-  * [wiki:NAT_advertisement.repy] (link also in networks section?)
   * [wiki:DORadvertise.repy]
+  * [wiki:Advertise.repy]
   * [wiki:Advertiseobject.repy]
+  * [wiki:NAT_advertisement.repy]
  
 
  * Cryptography
