@@ -11,7 +11,7 @@ LookupCache
 {{{
 lookup(self, key, maxvals=100, lookuptype=['central','opendht','DOR'], concurrentevents=2, graceperiod=10, timeout=60)
 }}}
-   Exactly the same as [wiki:advertise.repy].
+   Exactly the same as [wiki:Advertise.repy].
    Note:[[BR]]
    * self refers to its own cache.
 
