@@ -2,7 +2,7 @@
 
 Provides two objects which makes advertising more efficient. Can be used as an alternative to [wiki:Advertise.repy].
 
-LookupCache caches lookup results to increase performance in programs which calls lookup services frequently.
+LookupCache caches lookup results to increase performance in programs which calls lookup services frequently.[[BR]]
 AdvertisePipe stores a list of (key, value) tuples and advertises them concurrently in a single thread. 
 
 = Functions =
