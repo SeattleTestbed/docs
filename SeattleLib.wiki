@@ -11,63 +11,63 @@ This pages contains documentation about the standard library. The libraries are 
  
 
  * Cryptography
-  * md5py.repy
-  * pycryptorsa.repy
-  * pydes.repy
-  * rsa.repy
-  * sha.repy
-  * sshkey.repy
-  * sshkey_paramiko.repy
-  * signeddata.repy
+  * [wiki:md5py.repy]
+  * [wiki:pycryptorsa.repy]
+  * [wiki:pydes.repy]
+  * [wiki:rsa.repy]
+  * [wiki:sha.repy]
+  * [wiki:sshkey.repy]
+  * [wiki:sshkey_paramiko.repy]
+  * [wiki:signeddata.repy]
 
  * Time Module
-  * ntptime.repy
-  * time.repy
-  * time_interface.repy
-  * tcp_time.repy
+  * [wiki:ntptime.repy]
+  * [wiki:time.repy]
+  * [wiki:time_interface.repy]
+  * [wiki:tcp_time.repy]
 
  * Data Encoding
-  * binaryascii.repy
-  * base64.repy
-  * serialize.repy
+  * [wiki:binaryascii.repy]
+  * [wiki:base64.repy]
+  * [wiki:serialize.repy]
 
  * XML / URL parsing
-  * xmlparse.repy
-  * xmlrpc_client.repy
-  * xmlrpc_common.repy
-  * xmlrpc_server.repy
-  * urllib.repy
-  * httpretrieve.repy
+  * [wiki:xmlparse.repy]
+  * [wiki:xmlrpc_client.repy]
+  * [wiki:xmlrpc_common.repy]
+  * [wiki:xmlrpc_server.repy]
+  * [wiki:urllib.repy]
+  * [wiki:httpretrieve.repy]
 
  * Concurrency / Parallelism
-  * parallelize.repy
-  * uniqueid.repy
-  * semaphore.repy
-  * cv.repy
+  * [wiki:parallelize.repy]
+  * [wiki:uniqueid.repy]
+  * [wiki:semaphore.repy]
+  * [wiki:cv.repy]
 
  * Domain info / Data retrieval
-  * domainname.repy
-  * geoip_client.repy
-  * httpserver.repy
-  * servicelookup.repy
+  * [wiki:domainname.repy]
+  * [wiki:geoip_client.repy]
+  * [wiki:httpserver.repy]
+  * [wiki:servicelookup.repy]
 
  * Network + Client Communication
-  * getvesselsresources.repy
-  * nmclient.repy
-  * NATLayer_rpc.repy
-  * sockettimeout.repy
-  * session.repy
+  * [wiki:getvesselsresources.repy]
+  * [wiki:nmclient.repy]
+  * [wiki:NATLayer_rpc.repy]
+  * [wiki:sockettimeout.repy]
+  * [wiki:session.repy]
 
  * Programmer Resources / Data Structures
-  * argparse.repy
-  * listops.repy
-  * priority_queue.repy
-  * repyunit.repy
-  * safe_eval.repy
-  * random.repy
-  * repypp.py
-  * strace.py
-  * math.repy
-  * textops.py
-  * dylink.repy
-  * urlparse.repy
+  * [wiki:argparse.repy]
+  * [wiki:listops.repy]
+  * [wiki:priority_queue.repy]
+  * [wiki:repyunit.repy]
+  * [wiki:safe_eval.repy]
+  * [wiki:random.repy]
+  * [wiki:repypp.py]
+  * [wiki:strace.py]
+  * [wiki:math.repy]
+  * [wiki:textops.py]
+  * [wiki:dylink.repy]
+  * [wiki:urlparse.repy]
