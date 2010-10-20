@@ -1,6 +1,6 @@
 = centralizedadvertise.repy =
 
-This module provides a hash table service for nodes. Adds and removes entries to a centralized hash table.
+This module provides a hash table service for nodes. Adds and removes entries to a centralized hash table. See CentralizedAdvertiseService for more details.
 
 === Functions ===
 
