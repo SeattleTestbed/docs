@@ -514,7 +514,7 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
 
     <Purpose>
       Reads from a file handle. Reading 0 bytes informs you if you have read
-      pas the end-of-file, but returns no data.
+      past the end-of-file, but returns no data.
 
     <Arguments>
       sizelimit: 
