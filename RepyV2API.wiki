@@ -518,7 +518,7 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
 
     <Arguments>
       sizelimit: 
-        The maximum number of bytes to read from the file. Reading EOF will read less.
+        The maximum number of bytes to read from the file. Reading EOF will read less. By setting this value to None, the entire file is read.
       offset:
         Seek to a specific absolute offset before reading.
 
