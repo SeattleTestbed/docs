@@ -38,4 +38,10 @@ md5py_md5(arg=None)
 
 === Usage ===
 
-?
+{{{
+testdigest = binascii_b2a_hex(md5py_new("").digest())
+assert(testdigest == 'd41d8cd98f00b204e9800998ecf8427e') 
+ 
+testdigest = binascii_b2a_hex(md5py_new("a").digest())
+assert(testdigest == '0cc175b9c0f1b6a831c399e269772661')
+}}}
