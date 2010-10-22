@@ -4,5 +4,5 @@ A include file to tie the time interface together. Contains no functions.
 
 === Includes ===
 
-[wiki:ntp_time.repy]
-[wiki:tcp_time.repy]
+[wiki:SeattleLib/ntp_time.repy][[BR]]
+[wiki:SeattleLib/tcp_time.repy]
