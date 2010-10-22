@@ -1,0 +1,8 @@
+= time.repy =
+
+A include file to tie the time interface together. Contains no functions.
+
+=== Includes ===
+
+[wiki:ntp_time.repy]
+[wiki:tcp_time.repy]
