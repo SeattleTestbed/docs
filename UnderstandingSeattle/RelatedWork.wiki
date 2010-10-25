@@ -21,3 +21,5 @@ There are a wide variety of other platforms and testbeds readily available from 
  * [http://www.opennebula.org/ OpenNebula] project.
 
  * [http://open.eucalyptus.com/ Eucalyptus] project.
+
+* [http://www.cs.cornell.edu/projects/fabric/index.html Fabric] project.
