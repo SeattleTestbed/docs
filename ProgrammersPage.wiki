@@ -2,16 +2,16 @@
 
 This page features information and references regarding how to use write programs on Seattle. Seattle nodes run code written in a special language called Repy. Repy is a subset of the [http://www.python.org/ Python language] (version 2.5 / version 2.6) invented specifically for Seattle.  
 
+----
+[[TOC(inline)]]
+----
+
 == Before You Begin ==
 Make sure you have all the necessary tools installed:
 
  * '''Step 1''': Python2.5 or Python2.6 must be installed in order to use Repy.  [http://www.python.org/download/releases/2.6.4/ Download Python2.6] '''WINDOWS USERS:''' For instructions on how to check if you already have the correct version of Python installed, and for directions on how to install Python2.6, [InstallPythonOnWindows click here]
 
  * '''Step 2''': You will have to download and install repy before starting the tutorials below: '''[https://seattle.cs.washington.edu/geni/download/flibble/ Download repy!]'''
-
-----
-[[TOC(inline)]]
-----
 
 == Tutorials ==
 ----
