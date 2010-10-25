@@ -2,9 +2,7 @@
 
 This page features information and references regarding how to use write programs on Seattle. Seattle nodes run code written in a special language called Repy. Repy is a subset of the [http://www.python.org/ Python language] (version 2.5 / version 2.6) invented specifically for Seattle.  
 
-----
 [[TOC(inline)]]
-----
 
 == Before You Begin ==
 Make sure you have all the necessary tools installed:
@@ -14,8 +12,6 @@ Make sure you have all the necessary tools installed:
  * '''Step 2''': You will have to download and install repy before starting the tutorials below: '''[https://seattle.cs.washington.edu/geni/download/flibble/ Download repy!]'''
 
 == Tutorials ==
-----
-
 You can start with several different tutorials depending on your background.
 
  * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
@@ -26,9 +22,7 @@ After doing one of the above tutorials, do the following tutorial to learn how t
 
  * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
-[[BR]]
 == Other Resources ==
-----
  * An easy way to start learning Seattle is to watch our quick 5 minute [http://seattle.cs.washington.edu/demos/ demo].
 
  * Use the [RepyLibrary Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
@@ -39,9 +33,7 @@ After doing one of the above tutorials, do the following tutorial to learn how t
 Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
 }}}
 
-[[BR]]
-== Editing repy files ==
-----
+== Editing Repy files ==
 João Moreno has also provided a [http://www.vim.org/scripts/script.php?script_id=2546 VIM syntax file] for Repy that will syntax color Repy programs.
 
 You can also choose to automatically color Repy code with python-mode in emacs.  In your .emacs file, add the following line:
