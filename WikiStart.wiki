@@ -1,22 +1,20 @@
-
-
 == What is Seattle? ==
 Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world.   You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions.  The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
 
 Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
 == Features ==
- * It's Free!
- * Community Driven
+ * It's free!
+ * Community-driven
  * Scalable
  * Non-intrusive and safe for end users
  * Already installed on about 1000 machines across hundreds of universities worldwide
  * Easy to learn (based on a subset of [http://www.python.org/ Python])
- * Simple and Clean programs
+ * Simple and clean programs
    * A UDP ping client is just 6 lines of code. A UDP ping server is just 4 lines
    * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation is about 300 lines of code
  * Provides access to systems behind a wide array of network technologies
- * Cross platform
+ * Cross-platform support
    * Windows (XP/Vista)
    * Mac OS-X
    * Linux
