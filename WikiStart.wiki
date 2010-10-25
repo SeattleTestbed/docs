@@ -1,5 +1,5 @@
 == What is Seattle? ==
-Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world.   You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions.  The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
+Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world. You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions. The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
 
 Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
@@ -15,11 +15,10 @@ Seattle runs on end user systems on diverse platforms in a safe and contained ma
    * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation is about 300 lines of code
  * Provides access to systems behind a wide array of network technologies
  * Cross-platform support
-   * Windows (XP/Vista)
-   * Mac OS-X
+   * Windows (XP or newer)
+   * Mac OS X
    * Linux
    * Portable devices (Nokia N800s, jailbroken iPhones)
-
 
 == Is Seattle For Me? ==
 Seattle is ideal for students, researchers, and companies that want to prototype and test code on testbeds that have varying scale, diversity, and topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
@@ -34,13 +33,13 @@ There are a wide variety of other platforms and testbeds readily available from 
  * [http://boinc.berkeley.edu/ BOINC] and [http://www.cs.wisc.edu/condor/ Condor] also allow users to donate resources. However, the emphasis is on computational power; getting resources from 1000 cheap computers is less preferable than getting resources from a supercomputer.   Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
  * [http://aws.amazon.com/ec2/ Amazon's EC2] provides a paid service that provides operating system virtual machines.   Seattle instead relies on donated resources and provides programming language virtual machines. 
  * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high level abstractions (such as global non-relational storage). It is useful for building locality-oblivious web applications that fit the HTTP request\response protocol model, however, it's transparent handling of scalability and locality make it unsuitable for those wishing to teach or address these fundamental distributed system topics. !AppEngine is run on Google controlled resources instead of on donated resources.
- * [RelatedWork More related work..]
+ * [RelatedWork More related work...]
 
 == How do I Learn More? ==
  * '''[http://seattle.cs.washington.edu/demos/ Watch]''' our 5 minute demo!
- * Learn more about [SeattleComponents how Seattle works]
- * Learn more about [DonatingResources donating resources]
- * Try out the TakeHomeAssignment to get hands-on experience with Seattle.
+ * Learn more about [SeattleComponents how Seattle works].
+ * Learn more about [DonatingResources donating resources].
+ * Try out the [TakeHomeAssignment take-home assignment] to get hands-on experience with Seattle.
  * [ProgrammersPage Programmers Portal]: resources for any programmer who wants to learn the platform.
  * [EducatorsPage Educator Portal]: example assignments for Seattle.
  * [ContributorsPage Contributors Portal]: detailed information about how to contribute to the project
