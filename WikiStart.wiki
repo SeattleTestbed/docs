@@ -8,11 +8,11 @@ Seattle runs on end user systems on diverse platforms in a safe and contained ma
  * Scalable architecture.
  * Non-intrusive and safe for end users.
  * Already installed on about 1,000 machines across hundreds of universities worldwide.
+ * Provides access to systems behind a wide array of network technologies.
  * Easy to learn, based on a subset of [http://www.python.org/ Python].
  * Simple and clean programs:
    * A TCP ping client is just six lines of code. A UDP ping server is just four lines.
    * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation requires about 300 lines of code.
- * Provides access to systems behind a wide array of network technologies.
  * Cross-platform support:
    * Windows (XP or newer)
    * Mac OS X
