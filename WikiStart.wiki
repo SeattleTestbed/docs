@@ -4,17 +4,16 @@ Seattle is a platform for networking and distributed systems research. It's free
 Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
 == Features ==
- * It's free!
- * Community-driven
- * Scalable
- * Non-intrusive and safe for end users
- * Already installed on about 1000 machines across hundreds of universities worldwide
- * Easy to learn (based on a subset of [http://www.python.org/ Python])
- * Simple and clean programs
-   * A UDP ping client is just 6 lines of code. A UDP ping server is just 4 lines
-   * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation is about 300 lines of code
- * Provides access to systems behind a wide array of network technologies
- * Cross-platform support
+ * Community-driven and free.
+ * Scalable architecture.
+ * Non-intrusive and safe for end users.
+ * Already installed on about 1,000 machines across hundreds of universities worldwide.
+ * Easy to learn, based on a subset of [http://www.python.org/ Python].
+ * Simple and clean programs:
+   * A TCP ping client is just six lines of code. A UDP ping server is just four lines.
+   * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation requires about 300 lines of code.
+ * Provides access to systems behind a wide array of network technologies.
+ * Cross-platform support:
    * Windows (XP or newer)
    * Mac OS X
    * Linux
@@ -36,11 +35,18 @@ There are a wide variety of other platforms and testbeds readily available from 
  * [RelatedWork More related work...]
 
 == How do I Learn More? ==
+
+Learn the basics:
+
  * Watch our [http://seattle.cs.washington.edu/demos/ five-minute demo]!
  * Learn more about [SeattleComponents how Seattle works].
  * Try [DonatingResources donating resources] to other users.
  * Complete the [TakeHomeAssignment take-home assignment] to get hands-on experience with Seattle.
- * [ProgrammersPage Programmers Portal]: resources for any programmer who wants to learn the platform.
- * [EducatorsPage Educator Portal]: example assignments for Seattle.
- * [ContributorsPage Contributors Portal]: detailed information about how to contribute to the project
- * If you are using Seattle and need support, send email to our mailing list: [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users seattle-users at cs.washington.edu].
+
+Check out the portal pages for in-depth information:
+
+ * [ProgrammersPage Programmers Portal]: Resources for programmers wanting to learn the platform.
+ * [EducatorsPage Educator Portal]: Example assignments for students using Seattle.
+ * [ContributorsPage Contributors Portal]: Detailed information about how to contribute to the project.
+
+If you are using Seattle and need support, send an email to our [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users mailing list].
