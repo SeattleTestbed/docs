@@ -1,7 +1,7 @@
 == What is Seattle? ==
 Seattle is a platform for networking and distributed systems research. It's free, community-driven, and offers a large deployment of computers spread across the world. You can access our [http://seattlegeni.cs.washington.edu/ SeattleGENI] website to share resources with other uses.  Seattle works by operating on resources donated by users and institutions. The global distribution of the Seattle network provides the ability to use it in application contexts that include cloud computing, peer-to-peer networking, ubiquitous/mobile computing, distributed systems.
 
-Seattle runs on end user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with little to no impact on system security and performance. Sandboxes are established on user's computer to limit the consumption of resources such as cpu, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
+Seattle runs on end-user systems on diverse platforms in a safe and contained manner. Users install and run Seattle with minimal impact on system security and performance. Sandboxes are established on the user's computer to limit the consumption of resources such as CPU, memory/disk usage, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
 == Features ==
  * Community-driven and free.
@@ -19,12 +19,12 @@ Seattle runs on end user systems on diverse platforms in a safe and contained ma
    * Linux
    * Portable devices (Nokia N800s, jailbroken iPhones)
 
-== Is Seattle For Me? ==
+== Is Seattle for me? ==
 Seattle is ideal for students, researchers, and companies that want to prototype and test code on testbeds that have varying scale, diversity, and topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
 
-Users needing direct access to hardware, running code in C, etc. should look elsewhere. Offering these capabilities would make it difficult to ensure safety and performance isolation for end users.
+Users needing direct access to hardware or support for lower-level languages should look elsewhere. Seattle forgoes these capabilities to ensure safety and performance isolation for end users.
 
-== What Makes Seattle Different? ==
+== What makes Seattle different? ==
 There are a wide variety of other platforms and testbeds readily available from a wide range of sources, with an equally expansive set of project goals. Some related projects and their differences include: 
  * [http://www.planet-lab.org/ PlanetLab] is similar in that it offers a platform composed of donated resources from around the world. However, !PlanetLab nodes are dedicated to !PlanetLab, while Seattle computers are not dedicated to the platform. In addition, !PlanetLab's computers and network connectivity are very homogeneous. Seattle aims to be more widely distributed and to support broader resource diversity.
  * [http://satellitelab.mpi-sws.mpg.de/ SatelliteLab] is useful for studying network characteristics and aims to bring heterogeneity to !PlanetLab.   However, due to the reliance on !PlanetLab nodes to forward traffic, !SatelliteLab has fidelity limitations and is not intended or able to scale to the sorts of diversity and size of Seattle.
@@ -34,7 +34,7 @@ There are a wide variety of other platforms and testbeds readily available from 
  * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high level abstractions (such as global non-relational storage). It is useful for building locality-oblivious web applications that fit the HTTP request\response protocol model, however, it's transparent handling of scalability and locality make it unsuitable for those wishing to teach or address these fundamental distributed system topics. !AppEngine is run on Google controlled resources instead of on donated resources.
  * [RelatedWork More related work...]
 
-== How do I Learn More? ==
+== How do I learn more? ==
 
 Learn the basics:
 
