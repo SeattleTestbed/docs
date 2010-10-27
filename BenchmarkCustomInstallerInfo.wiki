@@ -4,15 +4,34 @@
 [[TOC(inline)]]
 ----
 
-[[BR]]
 == Overview of current scheme ==
-[[BR]]
-=== Required from the server side ===
-Before an install is ready for the user, the server will be required to construct a properly formated vesselinfo file. The vesselinfo file will need to be in the same directory as seattleinstaller.py (the working directory at install time). Every public key file that is referenced in the vesselinfo file will need to be placed in this same directory. 
-[[BR]]
-==== The format for vesselinfo ====
-    ===== Example ===== Actual key's for owner and user will be much longer.
-    {{{
+
+=== Necessary files ===
+Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and creating the initial vessel state). 
+
+Files common to all distributions (without modification):
+ * vessel.restrictions
+ * resources.offcut
+
+Files customized for each distribution:
+ * vesselinfo — Partitions system resources into vessels, each with an owner and several users. Owners and users are identified by a public key.
+
+Python modules:
+ * seattleinstaller.py
+ * benchmark_resources.py — Manages and runs the benchmark scripts as well as operating the create_installer_state module.
+ * create_installer_state.py — Responsible for reading the vesselinfo file and taking the resource information to initialize the vessels.
+ * Win_WinCE_resources.py — Performs resource benchmarking for Windows and Windows CE platforms.
+ * Mac_BSD_resources.py — Performs resource benchmarking for Mac OS X and BSD platforms.
+ * Linux_resources.py — Performs resource benchmarking for Linux.
+ * measuredisk.py — A tool used by the above benchmarking scripts.
+ * measure_random.py — A tool used by the above benchmarking scripts.
+
+=== The format of vesselinfo ===
+Before an install is ready for the user, the server will be required to construct a properly formated vesselinfo file. The vesselinfo file will need to be in the same directory as seattleinstaller.py (the working directory at install time). Every public key file that is referenced in the vesselinfo file will need to be placed in this same directory.
+
+===== Example =====
+The following is a sample vesselinfo file. Actual owner/user public keys will be much longer.
+{{{
 Percent 40
 Owner 123456789123 123456789123456789123456789
 User 23456789123 23456789123456789123456789
@@ -21,14 +40,14 @@ Owner 3456789123 3456789123456789123456789
 Percent 20
 Owner 456789123 456789123456789123456789
 }}}
-    ~~In addition to this vesselinfo file, there would need to be the following files in the same directory: mike.publickey, jen.publickey, sam.publickey, and seattle.publickey. All the publickeys must be in a file format recognized by the seattlelib rsa module.~~
+All public keys must be in a format recognized by the seattlelib RSA module.
 
-    ===== Requirements =====
-    Restrictions on vesselinfo (failure in any of these results in a completely failed install):
-    * Percent must be an integer 10, 20, 30, ..., 80, 90
-    * There can be NO empty lines.[[BR]]
+===== Requirements =====
+Restrictions on vesselinfo (failure in any of these results in a completely failed install):
+ * Percentages must have integer values.
+ * There can be no empty lines.
 
-    '''BAD:'''
+  Example of wrong behavior:
 {{{
 Percent 40
 Owner 123456789123 123456789123456789123456789
@@ -40,43 +59,14 @@ Percent 20
 Owner 456789123 456789123456789123456789
 }}}
 
+ * The sum of all percentages must be 100.
+ * The labels "Percent", "Owner", and "User" are case sensitive.
+ * The values for Owner and User should be public key strings that can be read by rsa_string_to_publickey(). Do not provide file names.
+ * vesselinfo must be in the same directory as seattleinstaller.py when the user attempts to install.
 
-    * The sum of all the Percent values must be 100
-    * Case matters for '''P'''ercent, '''O'''wner, '''U'''ser
-    * The values for Owner and User should be the publickey strings that can be read by rsa_string_to_publickey (NOT the file name). 
-    * vesselinfo must be in the same directory as seattleinstaller.py when the user attempts to install.
-    ===== Difference from old scheme =====
-    Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
-[[BR]]
-=== Necessary files ===
-Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and creating the initial vessel state). 
+===== Difference from old scheme =====
+Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
 
-Files that are universal to all installations:
- * vessel.restrictions - This is a static file, these are universal to all installations.
- * resources.offcut - This is a static file, these are predetermined values and are universal to all installations.
-
-Files that are unique to a single distribution
- * vesselinfo 
-   * This is a specially formatted file that indicates the percentage of system resources and publickeys for the owners and users of the vessels that should be in the node. 
-
-Python modules involved
- * seattleinstaller.py
- * benchmark_resources.py 
-   * manages and runs the benchmark scripts as well as operating the create_installer_state module.
- * create_installer_state.py 
-   * is responsible for reading the vesselinfo file and taking the resource information to initialize the vessels.
- * Win_WinCE_resources.py 
-   * OS specific resource benchmark
- * Mac_BSD_resources.py 
-   * OS specific resource benchmark
- * Linux_resources.py 
-   * OS specific resource benchmark
- * measuredisk.py 
-   * used by each OS benchmark
- * measure_random.py 
-   * used by each OS benchmark
-
-[[BR]]
 === Build steps ===
  1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file. This should be packaged appropriately and dispensed to the user wishing to install seattle.
     * if vesselinfo is not correctly formatted, it will cause the installation to fail.
