@@ -1,6 +1,10 @@
 = Using the Customized Installer Builder =
 
-The [http://seattle.cs.washington.edu/customized_installer/ customized installer builder] creates custom Seattle installers. This means that you can create an installer that has 4% of the resources reserved for a user Michael, while the rest are reserved for a user John. Or an installer with some other assignment of resources. The customized installer builder allows you to specify the proportion of resources each vessel will be allocated, the public\private keys of the owner for each vessel, as well as the public and private keys of the users for each vessel. Finally, you will be able to download your custom made installer for a platform of your choice.
+Normally, installers created through SeattleGENI subdivide a donor's resources into two vessels. As always, there is a small vessel (20%) reserved for Seattle itself. The main vessel (80%) is owned by the experiment planner, and a special key is entered for the vessel user. This special key allows anybody to download a customized installer (provided through SeattleGENI) and donate their computing resources to the planner's experiment.
+
+If the experiment planner wants to further subdivide the vessels, he can use the [http://seattle.cs.washington.edu/customized_installer/ customized installer builder]. This tool allows the planner to create several smaller vessels in place of the larger main vessel. Each vessel can be assigned a particular owner and a number of users. Because working with cryptographic keys is awkward, the customized installer builder can accept public keys from files, or generate new key pairs entirely.
+
+On the backend, there will soon be an XML-RPC interface to create customized installers. Future versions of SeattleGENI will use this interface to build all installers.
 
 ----
 [[TOC(inline)]]
@@ -29,5 +33,3 @@ Once you are done configuring your vessels, build your customized installer by c
 == Step 5 : Download your customized installer ==
 
 At the end of Step 4 you will be directed to a downloads page where you can download an installer for the platform of your choice. For more information on how to install Seattle see [https://seattle.cs.washington.edu/wiki/SeattleDownload this page].
-
-'''Describe what the public\private keys are, and how to download them from the page'''
