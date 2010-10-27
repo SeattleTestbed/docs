@@ -1,4 +1,4 @@
-= Running the Security Layer Benchmakrs =
+= Running the Security Layer Benchmarks =
 
 ----
 
