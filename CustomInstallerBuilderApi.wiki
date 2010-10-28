@@ -1,5 +1,11 @@
-= Seattle Installer Maker API =
+= Seattle Installer Maker Future API =
+
+'''Note:''' The current installer maker does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
 
 The installer maker creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
 
-API to be documented.
+The following procedure calls will be supported:
+
+ * api_version()
+ * build_installers(vessels, platforms, user_data=None)
+ * build_installers_geni(owner_public_key, user_public_key, platform):
