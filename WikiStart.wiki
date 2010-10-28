@@ -20,9 +20,9 @@ Seattle runs on end-user systems in a safe and contained manner, with support fo
    * Portable devices (Nokia N800s, jailbroken iPhones)
 
 == Is Seattle for me? ==
-Seattle is ideal for students, researchers, and companies that want to prototype and test code on testbeds that have varying scale, diversity, and topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments to understand the performance as well as the dynamics of a distributed system. Seattle is also ideal for studying wide-area effects and characteristics that exist in the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
+Seattle is ideal for students, researchers, and companies that want to prototype and test code on testbeds that have varying scale, diversity, and topologies. The same code may easily be run on a variety of operating systems, architectures, and network environments in order to understand the performance and dynamics of a distributed system. Seattle is also ideal for studying the wide-area characteristics of the Internet. For example, path transitivity, latency and bandwidth variations, as well as availability can all be characterized with Seattle.
 
-Users needing direct access to hardware or support for lower-level languages should look elsewhere. Seattle forgoes these capabilities to ensure safety and performance isolation for end users.
+Users needing direct access to hardware or support for low-level languages should look elsewhere. Seattle forgoes these capabilities to ensure safety and performance isolation for end users.
 
 == What makes Seattle different? ==
 There is a wide variety of other platforms and testbeds readily available, each with an equally expansive set of project goals. Related projects include the following:
