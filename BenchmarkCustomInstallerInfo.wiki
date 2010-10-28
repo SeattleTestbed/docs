@@ -1,15 +1,10 @@
 = Benchmark and Custom Installer Info =
 
-----
 [[TOC(inline)]]
-----
-
-== Overview of current scheme ==
 
 [[BR]]
-
-=== Necessary files ===
-Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and creating the initial vessel state). 
+== Necessary files ==
+Before the installer can run, the client must performing benchmarking and set the initial vessel state. The following files are critical to this process, which is conducted by benchmark_resources.py.
 
 Files common to all distributions (without modification):
  * vessel.restrictions
@@ -28,11 +23,12 @@ Python modules:
  * measuredisk.py — A tool used by the above benchmarking scripts.
  * measure_random.py — A tool used by the above benchmarking scripts.
 
-=== The format of vesselinfo ===
-Before an install is ready for the user, the server will be required to construct a properly formated vesselinfo file. The vesselinfo file will need to be in the same directory as seattleinstaller.py (the working directory at install time). Every public key file that is referenced in the vesselinfo file will need to be placed in this same directory.
 
-===== Example =====
-The following is a sample vesselinfo file. Actual owner/user public keys will be much longer.
+[[BR]]
+== ''vesselinfo'' formatting ==
+
+=== Example ===
+The following is a sample ''vesselinfo'' file. Actual owner/user public keys will be much longer.
 
 {{{
 Percent 40
@@ -44,7 +40,7 @@ Percent 20
 Owner 456789123 456789123456789123456789
 }}}
 
-===== Requirements =====
+=== Format requirements ===
 Restrictions on vesselinfo (failure in any of these results in a completely failed install):
 
  * Percentages must have integer values.
@@ -52,12 +48,11 @@ Restrictions on vesselinfo (failure in any of these results in a completely fail
  * The sum of all percentages must be 100.
  * The labels "Percent", "Owner", and "User" are case sensitive.
  * The values for Owner and User should be public key strings that can be read by rsa_string_to_publickey. Do not provide file names.
- * vesselinfo must be in the same directory as seattleinstaller.py when the user attempts to install.
+ * The ''vesselinfo'' file must be in the same directory as seattleinstaller.py.
 
-===== Difference from old scheme =====
-Compared to the previous system to created custom installer, now the server only needs create the ''vesselinfo'' file and get the keys, they not longer need to run any script to generate the vessels.
 
-=== Build steps ===
+[[BR]]
+== Build steps ==
  1. The server collects the necessary information to create a ''vesselinfo'' file and places it into the base installers. Donors download these customized installers.
  1. The donor starts installation. By default, 10% of his computing resources are made available for vessels, but a custom value can be passed as an argument to the installer.
  1. The installer conducts several important checks and performs benchmarking by calling ''benchmark_resources.main''
@@ -73,3 +68,6 @@ Compared to the previous system to created custom installer, now the server only
    a. the donated resources are now chopped down by ''get_tenpercent_of_donated'' to get ten percent of the donated resources (this is ten percent because the vessels are given resources from the donated resources in increments of 10%).
    a. ''create_installer_state.main'' takes the vesselcreationlist, tenpercentdict, and the target directory and initializes the vessel states.
  1. If the installation worked correctly the service logger is initialized and the log file used during the benchmark and creation of vessels is transfered and the file is removed. The installation continues as normal in seattleinstaller.py
+
+=== Difference from old scheme ===
+With the current system, only a ''vesselinfo'' file is needed to customize the base installers. The actual vessels will be created automatically by the client. In the old scheme, vessels had to be generated ahead of time.
