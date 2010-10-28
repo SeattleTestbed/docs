@@ -8,4 +8,4 @@ The following procedure calls will be supported:
 
  * api_version()
  * build_installers(vessels, platforms, user_data=None)
- * build_installers_geni(owner_public_key, user_public_key, platform):
+ * build_installers_geni(owner_public_key, user_public_key, platform)
