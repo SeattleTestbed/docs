@@ -6,6 +6,8 @@
 
 == Overview of current scheme ==
 
+[[BR]]
+
 === Necessary files ===
 Before the installer can run, several files need to be in place for benchmark_resources.py that are critical for constructing the vessels (other files may be needed for install, these are just the critical ones for benchmarking and creating the initial vessel state). 
 
@@ -31,6 +33,7 @@ Before an install is ready for the user, the server will be required to construc
 
 ===== Example =====
 The following is a sample vesselinfo file. Actual owner/user public keys will be much longer.
+
 {{{
 Percent 40
 Owner 123456789123 123456789123456789123456789
@@ -40,40 +43,26 @@ Owner 3456789123 3456789123456789123456789
 Percent 20
 Owner 456789123 456789123456789123456789
 }}}
-All public keys must be in a format recognized by the seattlelib RSA module.
 
 ===== Requirements =====
 Restrictions on vesselinfo (failure in any of these results in a completely failed install):
+
  * Percentages must have integer values.
  * There can be no empty lines.
-
-  Example of wrong behavior:
-{{{
-Percent 40
-Owner 123456789123 123456789123456789123456789
-User 23456789123 23456789123456789123456789
-
-Percent 20
-Owner 3456789123 3456789123456789123456789
-Percent 20
-Owner 456789123 456789123456789123456789
-}}}
-
  * The sum of all percentages must be 100.
  * The labels "Percent", "Owner", and "User" are case sensitive.
- * The values for Owner and User should be public key strings that can be read by rsa_string_to_publickey(). Do not provide file names.
+ * The values for Owner and User should be public key strings that can be read by rsa_string_to_publickey. Do not provide file names.
  * vesselinfo must be in the same directory as seattleinstaller.py when the user attempts to install.
 
 ===== Difference from old scheme =====
-Compared to the previous system to created custom installer, now the server only needs create the vesselinfo file and get the keys, they not longer need to run any script to generate the vessels.
+Compared to the previous system to created custom installer, now the server only needs create the ''vesselinfo'' file and get the keys, they not longer need to run any script to generate the vessels.
 
 === Build steps ===
- 1. Server should collect necessary files and public keys as listed in Necessary files and construct custom vesselinfo file. This should be packaged appropriately and dispensed to the user wishing to install seattle.
-    * if vesselinfo is not correctly formatted, it will cause the installation to fail.
- 1. User starts installation, default of 10% will be used but user can select a different value by passing a corresponding argument to the installer.
- 1. Installation starts, several important checks are performed, benchmark_resources.main() is called
-   a. ~~Service logger is initialized~~ A temporary file is open/appended for logging, because service logger cannot be used until the vessels have been created (specifically vessel directory v2). Information about the benchmark and any exceptions will be logged here.
-   a. The ''vesselinfo'' file is transformed into a list by ''create_installer_state.read_vessel_info_from_file''. Any errors in the ''vesselinfo'' file will result in the install stopping completely. This is not recoverable and the will be logged.
+ 1. The server collects the necessary information to create a ''vesselinfo'' file and places it into the base installers. Donors download these customized installers.
+ 1. The donor starts installation. By default, 10% of his computing resources are made available for vessels, but a custom value can be passed as an argument to the installer.
+ 1. The installer conducts several important checks and performs benchmarking by calling ''benchmark_resources.main''
+   a. A temporary file is open/appended for logging, because service logger cannot be used until the vessels have been created (specifically vessel directory v2). Information about the benchmark and any exceptions will be logged here.
+   a. The ''vesselinfo'' file is transformed into a list by ''create_installer_state.read_vessel_info_from_file''. Any errors in the ''vesselinfo'' file will result in the install stopping completely. This is not recoverable and the errors will be logged.
    a. ''run_benchmark'' is called to get a dictionary containing the maximum available resources.
      i. The scripts Linux_resources.py, Mac_BSD_resources.py, Win_WinCE_resources.py, measuredisk.py, and measure_random.py will be used to generate this dictionary, and resources that are not measured by the scripts will be set as None.
      i. The result from the scripts will be checked, to ensure that values are valid, non-negative, and not None. Bad values are logged and default values will be used.
