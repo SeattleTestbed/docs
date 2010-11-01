@@ -1,4 +1,3 @@
-
 == What is it? ==
 
 zenodotus.repy is a DNS Name server application built in repy which services DNS queries as you might expect, but rather than returning data from the domain name service, it returns information on seattle nodes which it gets from the central advertise server.
@@ -8,6 +7,8 @@ zenodotus.repy is a DNS Name server application built in repy which services DNS
 == Dependencies ==
 
 At the moment, zenodotus requires a file named zenodotus_advertise.repy for preprocessing. This is our way of encapsulating the way zenodotus gets its data, so that in the future if zenodotus needs to change its data source, we can make this change in a sensible way without major code surgery.
+
+As of 10/25/2010, zenodotus also requires a REPY library dependency called ntp_time.repy. This is used to timestamp debug reports.
 
 
 
@@ -50,7 +51,15 @@ NOTE: zenodotus supports the following argument flags at runtime:
     '-ip' : Specifies an IP address to listen for queries on.
       USAGE: zenodotus.repy -ip <IP Address>
 
+    '-tsp': Specifies a "TimeStamp Port" on which zenodotus can connect to a NTP server.
+      USAGE: zenodotus.repy -p <hostport> -tsp <NTP Port>
+
+    '-ntp': Same functionality as -tsp, but possibly a less confusing acronym.
+      USAGE: zenodotus.repy -p <hostport> -ntp <NTP Port>
+
 It is worth noting that the hostport is obligatory; zenodotus has no way of guessing which port it should be listening on, since it is not a traditional DNS Name server and does not automatically assume that it should use port 53. The -ip flag is purely optional; use it if you'd like zenodotus to operate on a specific network interface.
+
+If no NTP port is specified, zenodotus will attempt to use one port from a built-in range to connect to a NTP server. (Default range is 49000 - 49005)
 
 == Debugging ==
 
