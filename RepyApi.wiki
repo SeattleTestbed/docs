@@ -943,7 +943,7 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
 [[BR]] 
 ==== socket.recv(bytes) ====
 ----
-Receives data that was sent by the connected party using send.   Note that this may return less than bytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   If recv returns !'' then the other side has closed the connection.
+Receives data that was sent by the connected party using send.   Note that this may return less than bytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   recv raises an exception when the other side has closed the connection.
 
  * Doc string:
 
@@ -962,8 +962,8 @@ Receives data that was sent by the connected party using send.   Note that this 
      This call will block the thread until the other side calls send.
 
    <Returns>
-     The data received from the socket (as a string).   If !'' is returned,
-     the other side has closed the socket and no more data will arrive.
+     The data received from the socket (as a string).   An exception is raised
+     when the other side has closed the socket and no more data will arrive.
 
 [[BR]] 
 ==== socket.send(message) ====
