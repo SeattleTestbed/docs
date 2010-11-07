@@ -26,7 +26,7 @@ Our promise to you is to use no more than 10% of your computer's resources (thin
 ----
 Running any software on your system involves a small amount of risk.  A bug in any of the software you run can allow an attacker to do bad things with your computer.   Seattle is designed to make running Seattle code on your system risk free.   Seattle prevents programs from using too many resources, reading your files on the system, or doing other bad things to your computer.   
 
- * '''Risk to your system''':   If we have a bug in the Seattle software that allows a malicious party to escape the protections of Seattle, they could have access with the privilege of the user account that runs Seattle.   We have developed a [http://portal.acm.org/citation.cfm?id=1866307.1866332 novel security design] to minimize the chance of this from happening.   To further minimize risk Seattle can be run in a restricted / non-privileged account, so if you're concerned about this, run Seattle as a restricted user.
+ * '''Risk to your system''':   If we have a bug in the Seattle software that allows a malicious party to escape the protections of Seattle, they could have access with the privilege of the user account that runs Seattle.   We use a [http://portal.acm.org/citation.cfm?id=1866307.1866332 novel security design] to minimize the chance of this from happening.   To further minimize risk Seattle can be run in a restricted / non-privileged account, so if you're concerned about this, run Seattle as a restricted user.
 
  If Seattle works correctly, the programs that run on our platform cannot harm your computer.   The program is limited to consume only a small percent of the resources on the computer and cannot interfere with security or performance.
 
