@@ -37,14 +37,14 @@ You should write a program that will read the connectivity map file you've uploa
 
 Note that you may want to have your program sleep for 10 seconds or so after calling waitforconn but before opening connections to make sure that all of the nodes have had a chance to start.
 
-In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.
+In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.   You can have your program print the nodes it is connected to and check that you are getting the same connections are are seen in the input file.   Once again, it might be a good idea to sleep after connecting and before printing to allow all nodes to finish initiating connections.
 
 [[BR]]
 == Step 3 : Flood connectivity information ==
 ----
 
 
-At this point, your nodes should be connecting to each other, but will not be forwarding traffic or routing information.    
+At this point, your nodes are connecting to each other, but will not be forwarding traffic or routing information.    
 
 From now on, we will refer to the hosts in your experiment as routers. In this step, these routers will re-construct the connectivity map of the entire network. To do this, you will need to create a simple protocol, using which a router can flood its connectivity information to its neighbors. A simple protocol for doing this would be to exchange strings such as "(router1 router2)" between two routers. Upon receiving such a string, each router forwards this string to its neighboring routers. One obvious problem with this protocol is that once generated, a message will be sent around forever. To stop messages from propagating, each message can include a time to live (TTL) value, so a message can look like "(router1 router2 TTL)". The TTL value will be decremented by each router before the router re-sends the message. Routers that generate initial messages can set the TTL value to be the number of routers in the system. A complementary way to deal with the problem of endless flooding is to prohibit routers from sending messages with information which they have already sent. In this way, only the newly updated routers will resend a message to its neighboring routers.
 
