@@ -42,7 +42,7 @@ are helping everyone using Seattle! By making your
 donation available to Seattle users, you are allowing users to try new   topologies of nodes. This enables both more accurate representations of
 Internet (increased and varied latency times) and allows more
 undergraduates, graduate students, and professors to test their
-hypotheses on a internetwork-like testbed without charge.
+hypotheses on a Internet-like testbed without charge.   You are helping these people to build the cool advances (like cloud computing) that everyone will benefit from in the future.
 
 
 
