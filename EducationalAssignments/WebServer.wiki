@@ -67,7 +67,7 @@ A minimal web-server will (1) read the request line: request method, request URI
 == Serving Files ==
 ----
 
-Your web-server should serve files from its current directory. That is, when you run the web-server program, the program's current directory will be some directory (e.g., a subdirectory of your home directory). HTTP GET requests for files in only that directory should be satisified. In other words, if you get a request like "GET /hello.html HTTP/1.0", you should return the file "hello.html" that is located in the current working directory of the web server. For this project it is assumed that the web-served serves HTML and plain text files only.
+Your web-server should serve files from its current directory. That is, when you run the web-server program, the program's current directory will be some directory (e.g., a subdirectory of your home directory). HTTP GET requests for files in only that directory should be satisified. In other words, if you get a request like "GET /hello.html HTTP/1.0", you should return the file "hello.html" that is located in the current working directory of the web server. For this project it is assumed that the web-server serves HTML and plain text files only.
 
 [[BR]]
 == Listing Files ==
