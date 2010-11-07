@@ -44,9 +44,15 @@ In this step you can check to see that each of the hosts is able to connect to t
 ----
 
 
-At this point, your nodes are connecting to each other, but will not be forwarding traffic or routing information.    
+At this point, your nodes are connecting to each other, but will not be forwarding traffic or routing information.  You will want to indicate both where a packet stops and starts within the data stream and also will need to indicate the type of packet.
 
-From now on, we will refer to the hosts in your experiment as routers. In this step, these routers will re-construct the connectivity map of the entire network. To do this, you will need to create a simple protocol, using which a router can flood its connectivity information to its neighbors. A simple protocol for doing this would be to exchange strings such as "(router1 router2)" between two routers. Upon receiving such a string, each router forwards this string to its neighboring routers. One obvious problem with this protocol is that once generated, a message will be sent around forever. To stop messages from propagating, each message can include a time to live (TTL) value, so a message can look like "(router1 router2 TTL)". The TTL value will be decremented by each router before the router re-sends the message. Routers that generate initial messages can set the TTL value to be the number of routers in the system. A complementary way to deal with the problem of endless flooding is to prohibit routers from sending messages with information which they have already sent. In this way, only the newly updated routers will resend a message to its neighboring routers.
+Routing packets that are sent over a link will need to be flooded to all other routers.  Upon receiving a routing packet, each router forwards this string to its neighboring routers. One obvious problem with this protocol is that if there is a loop in the graph (which there will be), messages will be sent around forever. To stop messages from propagating, each message can include a time to live (TTL) value. The TTL value must be decremented by each router before the router re-sends the message. Routers that generate initial messages can set the TTL value to be the number of routers in the system. 
+
+A complementary way to deal with the problem of endless flooding is to prohibit routers from sending messages with information which they have already sent. In this way, only the newly updated routers will resend a message to its neighboring routers.
+
+You may choose whichever technique you prefer.   Either way, it is a good idea to keep a count of the number of messages your router receives and forwards.   Assuming you are using a network of size 10, then if you see thousands of messages, then you have a routing loop.
+
+Once you have built this, have each router send a packet for each of its links to its neighbors.   After you have waited for the routers to receive these messages, print the result.   Each router should print a list of links that is the full connectivity map.   If the nodes seem to take a long time to run and don't have complete information then you should check that your flooding algorithm is correctly implemented.
 
 
 
@@ -54,6 +60,9 @@ From now on, we will refer to the hosts in your experiment as routers. In this s
 == Step 4 : Computing the routing path ==
 ----
 
+
+At this point, each node has the complete topology.   Now we need the nodes to calculate how to send data 
+packets.
 In addition to building the global map of the network, each router will also need to perform shortest-path calculation using Dijkstra's algorithm. Maintaining an up-to-date routing table computed in this way enables the router to perform next-hop routing to forward a packet towards its destination.
 
 [[BR]]
