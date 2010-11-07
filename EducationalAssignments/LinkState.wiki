@@ -14,11 +14,28 @@ This assignment will illustrate an important network routing strategy called Lin
 First, acquire some number of hosts for your experiment via the geni website. Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You can then save this list to a file, and upload this file to all of your geni nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
 
 
+
 [[BR]]
 == Step 2 : Connect hosts using the connectivity map ==
 ----
 
-On startup, each of Seattle host will read the connectivity map file you've uploaded in Step 1. The host will then attempt to connect to the hosts with which it is paired with in the file. The connection should be done over TCP, and use the port that was assigned to you (see the User Info page on the geni website to find out your port). 
+
+
+The output you see from the previous step will look like this:
+
+{{{
+srcip1 destip1
+srcip2 destip2
+...
+}}}
+
+Each of the links represents that those two routers should be considered to be connected.   All connections in the system are symmetric (that is, if A is connected to B then B is connected to A).   However, you will only see either A B or B A in the output list.   This was done to make it easier for you to decide whether A or B should open the TCP connection to the other.   If you see A B, you should have A open the connection to B.  
+
+Note that once A and B have an open connection, they can each use both send and recv on the connection.
+
+You should write a program that will read the connectivity map file you've uploaded in Step 1.   Your program should then attempt to connect to the hosts with which it is paired with in the file. The connection should be done over TCP, and use the port that was assigned to you (see the User Info page on the geni website to find out your port).   
+
+Note that you may want to have your program sleep for 10 seconds or so after calling waitforconn but before opening connections to make sure that all of the nodes have had a chance to start.
 
 In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.
 
@@ -26,7 +43,12 @@ In this step you can check to see that each of the hosts is able to connect to t
 == Step 3 : Flood connectivity information ==
 ----
 
+
+At this point, your nodes should be connecting to each other, but will not be forwarding traffic or routing information.    
+
 From now on, we will refer to the hosts in your experiment as routers. In this step, these routers will re-construct the connectivity map of the entire network. To do this, you will need to create a simple protocol, using which a router can flood its connectivity information to its neighbors. A simple protocol for doing this would be to exchange strings such as "(router1 router2)" between two routers. Upon receiving such a string, each router forwards this string to its neighboring routers. One obvious problem with this protocol is that once generated, a message will be sent around forever. To stop messages from propagating, each message can include a time to live (TTL) value, so a message can look like "(router1 router2 TTL)". The TTL value will be decremented by each router before the router re-sends the message. Routers that generate initial messages can set the TTL value to be the number of routers in the system. A complementary way to deal with the problem of endless flooding is to prohibit routers from sending messages with information which they have already sent. In this way, only the newly updated routers will resend a message to its neighboring routers.
+
+
 
 [[BR]]
 == Step 4 : Computing the routing path ==
