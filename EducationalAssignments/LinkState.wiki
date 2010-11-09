@@ -81,4 +81,4 @@ Now, you can subtract the send times from the receive times to see the delay.   
 
 If you measure the latency that packets take when forwarded over your network, you will observe that some links take a much longer time for packets to traverse than others.   For example, you might have a path of two hops that goes from Washington to Korea to San Diego.   This might be slower than a three hop path that goes Washington to Oregon to Berkeley to San Diego.   
 
-For this step, measure the latency information.   Base the "cost" of routing on the latency instead of TTL / hop count to decide how to forward packets.
+For this step, measure the latency information using allpairsping.repy (included in the demokit).   Base the "cost" of routing on the latency instead of TTL / hop count to decide how to forward packets.   A convenient way to do this is to first do the measurement with allpairsping.repy and then copy them into a file which your program reads.   A better way is to have the nodes compute the latency to their neighbors and send this information out with the flooding messages.
