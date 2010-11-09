@@ -71,6 +71,10 @@ In addition to building the global map of the network, each router will also nee
 
 Finally, each router needs to be able to route packets by using its routing table. To forward a packet, the router looks into its routing table for the destination address on the packet. From the routing table it retrieves the address of the router where it should forward the packet. It then forwards the packet to that router.
 
+For testing purposes, have each router send a packet to every other router.   Using getruntime() record the start time of the packets that are sent.   Also record the time that packets are received on the destination.   You should check that every packet was successfully received at its destination.
+
+Now, you can subtract the send times from the receive times to see the delay.   Since the clocks on the nodes aren't synchronized, you may see large values or negative values.   However, the total sum of these is the overall delay.
+
 [[BR]]
 == Step 6 : Using latency information when forwarding ==
 ----
