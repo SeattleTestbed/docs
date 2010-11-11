@@ -85,7 +85,7 @@ python seash.py
 
 '''Step 2. Log in with my ID
 
-Before logging in, you have to load your public and private keys. You can get keys in the Seattle [https://seattlegeni.cs.washington.edu/geni/accounts/login GENI] website. You need to make sure that you have two files, your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
+Before logging in, you have to load your public and private keys. You can get keys in the Seattle [https://seattlegeni.cs.washington.edu/ GENI] website. You need to make sure that you have two files, your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be {{{john.publickey}}} and {{{john.privatekey}}}.   These files must be placed in the directory where you run {{{seash}}}.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
