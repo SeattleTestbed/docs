@@ -8,15 +8,15 @@
 == Introduction ==
 ----
 
-This guide provides an introduction to using the repy sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write repy programs, manage the restrictions on programs, and understand whether repy is appropriate for a specific task or program.
+This guide provides an introduction to using the Repy sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write Repy programs, manage the restrictions on programs, and understand whether Repy is appropriate for a specific task or program.
 
-It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use repy, but as repy is a subset of Python, being able to write a simple Python program is essential.
+It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use Repy, but as Repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
 == General Operations with examples ==
 ----
-You have to install repy before starting the tutorial.
-You can download repy [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here].   
+You have to install Repy before starting the tutorial.
+You can download Repy [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here].   
 
 If you want you can look at the installer options using the {{{--usage}}} option.   You can also simply install the software using the defaults.
 
@@ -32,7 +32,7 @@ Here is another [raw-attachment:examples_linux.zip link] to the zip file contain
 ----
 
 Let's start with the file named "example.1.1.repy", which prints the string "Hello World".
-We use repy instead of py as the file extension for files in repy.
+We use repy instead of py as the file extension for files in Repy.
 
 {{{
 #!python
@@ -40,11 +40,11 @@ if callfunc == 'initialize':
     print "Hello World"
 }}}
 
-There are two different ways to run the codes in REPY.
+There are two different ways to run Repy programs.
 You can run the code in your local machine and in the vessels you control.
 
 [[BR]]
-==== Executing programs locally in REPY ====
+==== Executing programs locally in Repy ====
 ----
 
 You need to open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Then you can execute the following command to run the code above.
@@ -154,7 +154,7 @@ ID Own       Name          Status          Owner Information
 %2  *   10.0.1.2:2888:v9 Terminated        
 }}}
 
-'''Step 8. Exit from REPY
+'''Step 8. Exit from Seash
 
 {{{
 #!python
@@ -295,7 +295,7 @@ Notice that the program is now "Stopped".   It's not running
 [raw-attachment:example.1.3.repy example.1.3.repy]
 ----
 
-In this example, we'll add a counter to our helloworld program.   First we'll try some perfectly valid python code that will not work in repy.
+In this example, we'll add a counter to our helloworld program.   First we'll try some perfectly valid python code that will not work in Repy.
 
 {{{
 #!python
@@ -329,7 +329,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn(ip,port,hello)
 }}}
 
-This code will not work because globals do not exist in repy. However, there is a mycontext dictionary provided for this purpose.   The code can be written as follows:
+This code will not work because globals do not exist in Repy. However, there is a mycontext dictionary provided for this purpose.   The code can be written as follows:
 
 {{{
 #!python
@@ -611,7 +611,7 @@ if callfunc == 'initialize':
   newfileobject.close()
 }}}
 
-This program should print hello world (and an extra newline from print). The repy file object is similar to python's file object so you can do things like:
+This program should print hello world (and an extra newline from print). The Repy file object is similar to python's file object so you can do things like:
 
 {{{
 #!python
@@ -650,7 +650,7 @@ if callfunc == 'initialize':
   print "The files:",callargs," should now be missing from ",listdir()  
 }}}
 
-You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you will get an error because repy programs are not allowed to use certain characters in file names.
+You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you will get an error because Repy programs are not allowed to use certain characters in file names.
 
 [[BR]]
 == Network Operations 1 ==
@@ -805,7 +805,7 @@ Getting the time from a synchronized time source is a handy thing to do (so this
 == Restrictions ==
 ----
 
-In the previous examples, we've been running code on our local system which we have control over.   When deploying repy programs, you may instead end up running your code on systems that don't belong to you.   Since you don't control these systems, the users are likely to have a set of restrictions on what you can do on their computer.   You may be unable to write files to disk, not be able to send packets to certain IP addresses, or prevented from performing operations.  
+In the previous examples, we've been running code on our local system which we have control over.   When deploying Repy programs, you may instead end up running your code on systems that don't belong to you.   Since you don't control these systems, the users are likely to have a set of restrictions on what you can do on their computer.   You may be unable to write files to disk, not be able to send packets to certain IP addresses, or prevented from performing operations.  
 
 To get a restriction / restrictions file, in the shell type: show resources.   If you look at a restrictions file, you'll see a bunch of lines like this (ignore the resource lines for now):
 
@@ -892,4 +892,4 @@ For more information about resources and restrictions see the resources and rest
 == Conclusion ==
 ----
 
-This concludes a brief tour of the repy functionality.   This guide has covered all of the API calls for repy.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own repy applications that can run on hundreds of computers.   Good luck!
+This concludes a brief tour of the Repy functionality.   This guide has covered all of the API calls for Repy.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
