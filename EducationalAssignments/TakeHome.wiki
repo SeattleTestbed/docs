@@ -11,7 +11,7 @@ You must have Python2.5 or Python2.6, the programming language, installed on you
 [[TOC(inline)]]
 ----
 [[BR]]
-= Using the GENI website and the Seattle shell =
+= Using the GENI website and the Seash =
 [[BR]]
 == Step 1 : Adding resources ==
 ----
@@ -19,7 +19,7 @@ You must have Python2.5 or Python2.6, the programming language, installed on you
 Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. In the right pane, select LAN and choose 10 computers, and click "Get".  After a few seconds, you will see that ten computers have been added for you to use.   If you can't obtain 10 LAN nodes, it is fine to use fewer.
 
 [[BR]]
-== Step 2 : Running Seattle shell ==
+== Step 2 : Running Seash ==
 ----
 
 Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.repy).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the ten computers now at your disposal.     
@@ -30,7 +30,7 @@ Now click on the Profile tab, and download the toolkit linked from this page.   
 
 Then type "python seash.py" or "seash.py".   If these fail, you may need to [http://www.python.org download python].   On Windows systems, you may also need to set your environment path to point to the copy of python you installed by clicking on Control Panel--> Systems--> Advanced Settings-->Environment Variables.   
 
-You will see a prompt like " !> " once the seash shell starts.  The seash shell will allow you to easily run programs across multiple computers at the same time.
+You will see a prompt like " !> " once seash starts.  Seash will allow you to easily run programs across multiple computers at the same time.
 
 [[BR]]
 == Step 3 : Browsing your resources ==
@@ -50,14 +50,14 @@ Then, type
 !> as username
 }}}
 
-This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell the shell to search for vessels you control by typing browse:
+This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for vessels you control by typing browse:
 
 {{{
 #!python
 username@ !> browse
 }}}
 
-This will search for vessels that you control (so that the shell can locate them).  You should see several vessels added (if not, you should wait a few minutes and then try again, as sometimes it takes
+This will search for vessels that you control (so that seash can locate them).  You should see several vessels added (if not, you should wait a few minutes and then try again, as sometimes it takes
 time for the vessel information to propagate).  The output from browse command will look something like the following:
 
 {{{
@@ -164,7 +164,7 @@ to use the LAN group.
 == Step 6 : Stopping programs ==
 ----
 
-We'll cover one last function of the shell before we start measuring network connectivity: stopping a running program. Some programs don't exit immediately like the hello world program.   At your " username@LAN !> " prompt type
+We'll cover one last function of seash before we start measuring network connectivity: stopping a running program. Some programs don't exit immediately like the hello world program.   At your " username@LAN !> " prompt type
 
 {{{
 #!python
@@ -178,7 +178,7 @@ This deploys a program that waits in an infinite loop.   Now let's try to run he
 username@LAN !> run helloworld.repy
 }}}
 
-The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has already been started'' on  ... }}} for each of the nodes.   The reason is that the shell doesn't run the program since the infinite loop program is already running.  To stop the infloop program type
+The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has already been started'' on  ... }}} for each of the nodes.   The reason is that seash doesn't run the program since the infinite loop program is already running.  To stop the infloop program type
 
 {{{
 #!python
@@ -283,7 +283,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 
 Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the My Vessels tab, click on WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
 
-Back in the shell, type
+Back in seash, type
 
 {{{
 #!python
@@ -344,7 +344,7 @@ What do you observe? Is the connectivity graph complete and do all of the nodes 
 
 [[Image(nontransitiveconnectivity.jpeg)]]
 
-Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that the shell doesn't try to contact the nodes you aren't using any more.
+Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that seash doesn't try to contact the nodes you aren't using any more.
 
 
 
@@ -412,7 +412,7 @@ You also will need to download the toolkit and keys like you previously did in S
 
 Alternatively, if you can't run Seattle on your home computer, you can also obtain a computer using Seattle GENI.   If you use Seattle GENI, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
 
-Once you have Seattle installed locally or have obtained a NAT node using Seattle GENI, run the seash shell from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
+Once you have Seattle installed locally or have obtained a NAT node using Seattle GENI, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
 
 {{{
 #!python
@@ -430,7 +430,7 @@ and you'll see the prompt changes to "username@ !>".
 
 Check on the Seattle GENI website to see if you still have nodes to use.   If not, click on the add resources button, under the Quick Start tab, click on WAN, choose 1 computers, and click "Go!".  
 
-Now under your shell at the " username@ !>" prompt, type
+Now under seash at the " username@ !>" prompt, type
 
 {{{
 #!python
