@@ -205,6 +205,30 @@ More
 
 There can be zero or more elif parts, and the else part is optional. The keyword ‘elif‘ is short for ‘else if’, and is useful to avoid excessive indentation. An if ... elif ... elif ... sequence is a substitute for the switch or case statements found in other languages.
 
+
+[[BR]]
+==== while Statements ====
+----
+
+Just like in most languages, there is a while statement that loops until the condition is false.
+
+{{{
+#!python
+x = 1
+while x < 10:
+  x = x + x  
+  print x   # this will print 2, 4, 8, 16
+
+
+while False:
+  print "boo" # this will never print
+
+while True:
+  print "hi" # this will print "hi" forever...
+
+}}}
+
+
 [[BR]]
 ==== for Statements ====
 ----
