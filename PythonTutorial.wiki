@@ -1,12 +1,12 @@
 = All of the Python You Need to Understand Repy (and None You Don't) =
 
-This tutorial is written for those who have background knowledge of object oriented programming languages such as C++ and Java. This tutorial focuses on introducing the subset of Python used in the REPY (Restricted Python) language supported by the Seattle testbed.   After reading this tutorial, you should walk through the [RepyTutorial repy tutorial].
+This tutorial is written for those who have background knowledge of object oriented programming languages such as C++ and Java. This tutorial focuses on introducing the subset of Python used in the Repy (Restricted Python) language supported by the Seattle testbed.   After reading this tutorial, you should walk through the [RepyTutorial Repy tutorial].
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6 installed on your computer. Follow the instructions [InstallPythonOnWindows here] to check if Python2.5 or Python2.6 is currently installed on your system and to get directions on how to install Python2.6 if it is not installed.
 
 '''ALL USERS:'''
-You have to install repy before starting the tutorial.
-You can download repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
+You have to install Repy before starting the tutorial.
+You can download Repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
 
 ----
 [[TOC(inline)]]
@@ -35,16 +35,16 @@ To execute this program, you can place the above source code into file, say ‘t
 python test.py
 }}}
 
-This is the normal way to execute python code. However, since this tutorial is written for those who use REPY, we need to explain the different way to run the codes in REPY.
+This is the normal way to execute python code. However, since this tutorial is written for those who use Repy, we need to explain the different way to run Repy programs.
 
 There are two ways to execute programs.
-You can run your programs in your local computer and in the vessel you control.
+You can run your programs in your local computer or in a remote vessel that you control.
 Although our final goal is to run programs in the vessels, we explain the way to run programs on a local computer here because it's simple.
 
-You can learn how to execute in the vessels in the [RepyTutorial REPY Tutorial].
+You can learn how to execute in the vessels in the [RepyTutorial Repy Tutorial].
 
 [[BR]]
-==== Executing programs locally in REPY ====
+==== Executing programs locally in Repy ====
 ----
 
 You need to add more files as arguments to run the program above in your computer.
