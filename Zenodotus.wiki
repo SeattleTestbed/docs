@@ -15,6 +15,8 @@ Supposing that you wish to host a web page titled "helloworld" on multiple nodes
 advertise_announce('helloworld.zenodotus.cs.washington.edu', getmyip(), 600)
 }}}
 
+(Note that for this to work, you must be including the advertise.repy module.)
+
 When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. Six hundred seconds is just an example, since it is best to refresh the entry rather than leaving it there for a long time. If you are running this program on multiple nodes simultaneously, this will result in helloworld.zenodotus.cs.washington.edu being associated with all of their IP Addresses, and a random one will be used when a user tries to connect to your site via browser.
 
 If you're running in a node, your users will need to append your GENIPORT to the end of the IP Address in their browsers. For example, a user could access your page with this URL: 'helloworld.zenodotus.cs.washington.edu:631XX', but they would not connect properly if the port were not specified.
