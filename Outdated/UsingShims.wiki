@@ -36,6 +36,7 @@ Here is a sample echo server. You need to tell the shim library what shims you w
 #!python
 include ShimStackInterface.repy
 
+mycontext['UsingShims'] = True
 server_shim = ShimStackInterface('(RSAShim)(NatDeciderShim)')
 
 def server_callback(rip, rport, sock, th, lh):
@@ -56,6 +57,7 @@ Here is a simple echo client:
 #!python
 include ShimStackInterface.repy
 
+mycontext['UsingShims'] = True
 client_shim = ShimStackInterface()
 
 if callfunc == 'initialize':
@@ -67,6 +69,8 @@ if callfunc == 'initialize':
 
 
 In both cases involving the server and the client, you only need to initialize the !ShimStackInterface once for every type of shim stack you use. For instance, you decide to do a waitforconn on multiple ports and IPs. All these listeners use the same shim stack structure. You only need to initialize the shim stack once, say, at the top of the module or in the constructor. All subsequent operations can act on this shim stack instance.
+
+Note that you need to explicitly define `mycontext['UsingShims'] = True` to turn on the shim.
 
 In case you're wondering about the implementation details, the !ShimStackInterface actually creates a new shim stack for each operation. This, of course, has been abstracted away from you. It is one of our objectives to incur minimal changes if we decide to introduce shims to an existing application.
 
