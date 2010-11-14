@@ -1,7 +1,7 @@
 = Seattle Standard Library =
 This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. 
 
- * [wiki:NodeAdvertising Node Advertising]
+ * [wiki:NodeAdvertising Node Advertising] (click for a description)
   * [wiki:centralizedadvertise.repy]
   * [wiki:openDHTadvertise.repy]
   * [wiki:DORadvertise.repy]
