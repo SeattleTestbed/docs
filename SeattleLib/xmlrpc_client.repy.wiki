@@ -1,6 +1,6 @@
 = xmlrpc_client.repy =
 
-This module implements the client-side XML-RPC protocol. See http://en.wikipedia.org/wiki/XML-RPC for more details. A programmer may use this module to initiate a communication between the client (via a XML-RPC HTTP request). If the protocol is properly initiated, then the client will then return one or more values through XML, which can then by parsed by the [wiki:xmlparse.repy] or manipulated at will.
+This module implements the client-side XML-RPC protocol. See http://en.wikipedia.org/wiki/XML-RPC for more details. A programmer may use this module to initiate a communication between the client (via a XML-RPC HTTP request). If the protocol is properly initiated, then the client will then return one or more values through XML, which can then by parsed by the [wiki:SeattleLib/xmlparse.repy] or manipulated at will.
 
 Note that this module includes several other XML modules in the library.
 
@@ -14,11 +14,11 @@ def send_request(self, method_name, params, timeout=None):
    * method_name is the method name which of the caller chooses.
    * params are the parameters that are passed on.
    * Throws socket.error on socket errors, including server timeouts.
-            xmlrpc_common_Fault on a XML-RPC response fault.
-            xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
-            xmlparse_XMLParseError on a general XML parse error.
-            xmlrpc_common_ConnectionError on unexpected disconnects.
-            xmlrpc_common_Timeout if the time limit is exceeded.
+   * Throws xmlrpc_common_Fault on a XML-RPC response fault.
+   * Throws xmlrpc_common_XMLParseError on a XML-RPC structural parse error
+   * Throws xmlparse_XMLParseError on a general XML parse error.
+   * Throws xmlrpc_common_ConnectionError on unexpected disconnects.
+   * Throws xmlrpc_common_Timeout if the time limit is exceeded.
    * Will return "values" sent by the specified client.
 
 === Example Usage ===
@@ -29,7 +29,7 @@ print client.send_request("examples.getStateName", (1,))
 }}}
 
 === Includes ===
-[wiki:urlparse.repy][[BR]]
-[wiki:httpretrieve.repy][[BR]]
+[wiki:SeattleLib/urlparse.repy][[BR]]
+[wiki:SeattleLib/httpretrieve.repy][[BR]]
 [wiki:xmlrpc_common.repy][[BR]]
 
