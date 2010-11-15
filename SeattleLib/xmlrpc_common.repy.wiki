@@ -34,7 +34,6 @@ def xmlrpc_common_fault2xml(message, code):
     * message is the string describing the fault.
     * code is the integer code associated with the fault.
     * Returns the XML-RPC fault response string.
-}}}
 
 {{{
 def xmlrpc_common_call2python(xml):
@@ -67,4 +66,4 @@ print client.send_request("examples.getStateName", (1,))
 
 === Includes ===
 [wiki:base64.repy][[BR]]
-[wiki:xmlparse.repy][[BR]]]
+[wiki:xmlparse.repy][[BR]]
