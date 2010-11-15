@@ -1,6 +1,6 @@
 = xmlparse.repy =
 
-Provide a relatively basic but usable xml parsing library for repy.
+Provide a relatively basic but usable XML parsing functionality for repy.
 
 = Functions =
 
