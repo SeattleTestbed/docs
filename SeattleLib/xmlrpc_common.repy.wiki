@@ -2,9 +2,9 @@
 
 This module helps to implement the client-side XML-RPC protocol. See http://en.wikipedia.org/wiki/XML-RPC for more details. 
 
-A programmer may use this module to initiate a communication between the client (via a XML-RPC HTTP request). If the protocol is properly initiated, then the client will then return one or more values through XML, which can then by parsed by the [wiki:xmlparse.repy] or manipulated at will.
+A programmer may use this module to initiate a communication between the client (via a XML-RPC HTTP request). If the protocol is properly initiated, then the client will then return one or more values through XML, which can then by parsed by the [wiki:SeattleLib/xmlparse.repy] or manipulated at will.
 
-Note that this module is primarily used by [wiki:xmlrpc_client.repy], which programmer should include instead of this file. This file contains many functions which allow the XML-RPC protocol to be used in Python and is primary used to build the strings necessary to implement XML-RPC.
+Note that this module is primarily used by [wiki:SeattleLib/xmlrpc_client.repy], which programmers should include instead of this file. This file contains many functions which allow the XML-RPC protocol to be used in Python and is primary used to build the strings necessary to implement XML-RPC.
 
 === Functions ===
 {{{
@@ -65,5 +65,5 @@ print client.send_request("examples.getStateName", (1,))
 }}}
 
 === Includes ===
-[wiki:base64.repy][[BR]]
-[wiki:xmlparse.repy][[BR]]
+[wiki:SeattleLibbase64.repy][[BR]]
+[wiki:SeattleLib/xmlparse.repy][[BR]]
