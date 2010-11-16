@@ -38,6 +38,9 @@ def _rehost_callback():
     # Refresh the association.
     advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
 
+    # Remember to update the last refresh time.
+    _most_recent_refresh = getruntime()
+
 
 
 
