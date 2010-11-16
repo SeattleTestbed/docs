@@ -78,3 +78,17 @@ $ python utf.py -f <file>
 
 
 That's all you really need to know!
+
+You can also choose to use the verbose option -v or --verbose if you want the report to show you how long it took to run each individual tests or the how long it took for the entire module.
+
+{{{
+#!python
+
+$ python utf.py --verbose --module <module name>
+$ python utf.py -v -m <module name>
+
+or
+
+$ python utf.py --verbose --file <file>
+$ python utf.py -v -f <file>
+}}}
