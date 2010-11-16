@@ -1,3 +1,3 @@
 This class of modules supported by the Seattle Standard Library deal with URLs and XML. In most cases, Seattle utilizes the XML-RPC protocol to communicate between computers. In that case, [wiki:xmlrpc_server.repy] should be used. There are several modules described here which are simply helper modules.
 
-Note also there are many parallels between these modules and equivalent Python modules. Please email shurui@cs.washington.edu if I have failed to link any.
+Note also there are many parallels between these modules and equivalent Python modules. Please email [shurui@cs.washington.edu] if I have failed to link any.
