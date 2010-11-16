@@ -82,8 +82,3 @@ server.register_function(pow)
 # wait for clients to connect and call the function
 server.serve_forever()
 }}}
-
-=== Includes ===
-[wiki:xmlparse.repy][[BR]]
-[wiki:xmlrpc_common.repy][[BR]]
-[wiki:urllib.repy][[BR]]
