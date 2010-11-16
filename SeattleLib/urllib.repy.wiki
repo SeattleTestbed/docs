@@ -44,33 +44,33 @@ def urllib_unquote_plus(inputstring):
 }}}
     Unquote the urlencoded query fragment of a URL. See above for non-fragment version.
 
-    Notes: [[BR]]
-    * inputstring is the string to unquote.
-    * Raises TypeError if the inputstring isn't a string.
-    * Raises ValueError thrown if the last wrapped octet isn't a valid wrapped octet (i.e. if the string ends in "%" or "%x" rather than "%xx".
-    * Raises ValueError if the nibbles aren't valid hex digits.
-    * Returns the decoded string.
+   Notes: [[BR]]
+   * inputstring is the string to unquote.
+   * Raises TypeError if the inputstring isn't a string.
+   * Raises ValueError thrown if the last wrapped octet isn't a valid wrapped octet (i.e. if the string ends in "%" or "%x" rather than "%xx".
+   * Raises ValueError if the nibbles aren't valid hex digits.
+   * Returns the decoded string.
 
 {{{
 def urllib_quote_parameters(inputdictionary):
 }}}
     Encodes a dictionary of (key, value) pairs into an HTTP query string or POST body (same form).
 
-    Notes: [[BR]]
-    * dictionary is the dictionary to quote, i.e. encode.
-    * Raises TypeError if the inputdictionary isn't a dictionary.
-    * Returns the quoted dictionary.
+   Notes: [[BR]]
+   * dictionary is the dictionary to quote, i.e. encode.
+   * Raises TypeError if the inputdictionary isn't a dictionary.
+   * Returns the quoted dictionary.
 
 {{{
 def urllib_unquote_parameters(inputstring):
 }}}
     Decode a urlencoded query string or POST body.
 
-    Notes: [[BR]]
-    * inputstring is the string to decode.
-    * Raises TypeError if the inputstring isn't a string.
-    * Raises ValueError if the inputstring is poorly formed.
-    * Returns a dictionary mapping keys to values.
+   Notes: [[BR]]
+   * inputstring is the string to decode.
+   * Raises TypeError if the inputstring isn't a string.
+   * Raises ValueError if the inputstring is poorly formed.
+   * Returns a dictionary mapping keys to values.
 	
 === Example Usage ===
 
