@@ -46,7 +46,7 @@ This pages contains documentation about the standard library. The libraries are 
   * [wiki:cv.repy]
 
  * [wiki:DomainInfo+DataRetrieval Domain info / Data retrieval] (click for a description)
-  * [wiki:domainname.repy]
+  * [wiki:domainnameinfo.repy]
   * [wiki:geoip_client.repy]
   * [wiki:httpserver.repy]
   * [wiki:servicelookup.repy]
