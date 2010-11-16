@@ -75,10 +75,22 @@ def urllib_unquote_parameters(inputstring):
 === Example Usage ===
 
 {{{
-# create a server object
-server = xmlrpc_server_SimpleXMLRPCServer(("localhost", 12345))
-# register a function
-server.register_function(pow)
-# wait for clients to connect and call the function
-server.serve_forever()
+# We need to make sure the webserver starts up before returning.  Waiting
+# an arbitrary amount of time is just asking for strange and inconsistent
+# errors, so I will actually query the web server until it works.  However,
+# to prevent an infinite loop, I will limit the waiting to 1 minute.  If
+# the webserver has not started by this time, it is probably safe to say
+# it won't start.  In this case we will raise an exception indicating this.
+	 
+# Initialize the update url to just be the ip address of this machine.
+ip = getmyip()
+updateurl = 'http://' + ip + ':12345/'
+	 
+for junk in xrange(60):
+   try:
+      # If we can successfully retrieve the url, we are ready.
+      urllib.urlretrieve(updateurl)
+      break
+   except Exception:
+      time.sleep(1)
 }}}
