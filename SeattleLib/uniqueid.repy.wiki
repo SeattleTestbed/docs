@@ -13,6 +13,12 @@ def uniqueid_getid():
 }}}
     Return a unique ID in a threadsafe way
 
+=== Usage ===
+
+{{{
+request_id = uniqueid_getid();
+}}}
+
 === Includes ===
 
 [wiki:uniqueid.repy]
