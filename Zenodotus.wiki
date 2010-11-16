@@ -29,6 +29,9 @@ _REFRESH_FREQUENCY = 600
 # Put the address here,	since it's a constant.
 _ADDRESS_NAME = "hello.zenodotus.cs.washington.edu"
 
+# How frequently should we check for rehost? How about 5 seconds?
+_checking_frequency = 5
+
 
 
 
@@ -59,9 +62,9 @@ if callfunc == 'initialize':
   _most_recent_refresh = getruntime()
 
   # Set a timer	for a callback function to refresh the DHT association.
-  # We should check this every 5 seconds, to save system processing
-  # resources without sacrificing potential uptime. No args are	needed.
-  settimer(5, _rehost_callback,	[])
+  # We should check this every _checking_frequency seconds, to save system 
+  # processing resources without sacrificing potential uptime. No args are needed.
+  settimer(_checking_frequency, _rehost_callback,	[])
 
   # You need to	have your service code in here as well.	This code 
   # alone will terminate before it refreshes even once.
