@@ -1,3 +1,3 @@
 === Description ===
 
-The parallelism services offered by Seattle are purely for the client's needs. Running parallel processes are more efficient and may be of interest to some users, but adds a certain amount of overhead since locking must be implemented to prevent crashes and errors in critical sections of code. Thus there are also libraries like [wiki:semaphores.repy] and [wiki:cv.repy] to help the client implement locks.
+The parallelism services offered by Seattle are purely for the client's needs. Running parallel processes are more efficient and may be of interest to some users, but adds a certain amount of overhead since locking must be implemented to prevent crashes and errors in critical sections of code. Thus there are also libraries like [wiki:semaphore.repy] and [wiki:cv.repy] to help the client implement locks.
