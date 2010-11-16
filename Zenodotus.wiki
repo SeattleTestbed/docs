@@ -1,6 +1,8 @@
 == What is it? ==
 
-zenodotus.repy is a DNS Name server application built in repy which services DNS queries as you might expect, but rather than returning data from the domain name service, it returns information on seattle nodes which it gets from the central advertise server.
+If you've ever wanted to host a network service on a Seattle node, such as a diagnostic web page or similar, you'll no doubt be familiar with their potential instability. If you didn't watch your nodes like a hawk, You might lose one and not know about it for hours, perhaps even a day or more. And even if you can deal with that, your users still have to punch in an IP Address and port combination to navigate to your service! This is a very clumsy way to do things, so zenodotus was built to make the process cleaner.
+
+By adding a few lines of code to the REPY application running in your node, you can register your service to a domain name through Seattle's open DHT server, allowing for users to navigate to your service with a domain name and a port, rather than having to remember a specific node's IP address. What's more, you can register multiple nodes to a single hostname, meaning that even if one node fails, your service will still be available, allowing you to have uninterrupted uptime without constant vigilance.
 
 
 
@@ -8,18 +10,65 @@ zenodotus.repy is a DNS Name server application built in repy which services DNS
 
 General instructions for use are as follows:
 
-Supposing that you wish to host a web page titled "helloworld" on multiple nodes, add the following line of code to your program:
+The following code snippet is an example of how to implement zenodotus hosting in a REPY node. This code runs in each node hosting the service, so each one autonomously advertises its own existence, meaning that nodes which fail for whatever reason will simply be omitted from the DHT after their advertise expires.
 
 
 {{{
-advertise_announce('helloworld.zenodotus.cs.washington.edu', getmyip(), 600)
+include	advertise.repy
+
+
+
+
+# Store	the time of the	previous hostname refresh.
+_most_recent_refresh = 0
+
+# Refresh every	600 seconds (10	minutes)
+_REFRESH_FREQUENCY = 600
+
+# Put the address here,	since it's a constant.
+_ADDRESS_NAME = "hello.zenodotus.cs.washington.edu"
+
+
+
+
+def _rehost_callback():
+  # Check to see whether or not we need to rehost yet.
+  if getruntime() - _most_recent_refresh > _REFRESH_FREQUENCY:
+    # Refresh the association.
+    advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
+
+
+
+
+if callfunc == 'initialize':
+  # For	example	purposes, let's suppose	you're running a service called
+  # helloworld that displays "Hello, World!" In	a web page when	the user
+  # connects to	a REPY node you control	via web	browser. It makes sense
+  # to use the hostname	"hello.zenodotus.cs.washington.edu", so	that's
+  # what we'll advertise.
+
+  # Associates "hello.zenodotus.cs.washington.edu" : <Node's IP> for
+  # _REFRESH_FREQUENCY seconds.
+  advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
+
+  # Make a note of the current runtime.
+  _most_recent_refresh = getruntime()
+
+  # Set a timer	for a callback function to refresh the DHT association.
+  # We should check this every 5 seconds, to save system processing
+  # resources without sacrificing potential uptime. No args are	needed.
+  settimer(5, _rehost_callback,	[])
+
+  # You need to	have your service code in here as well.	This code 
+  # alone will terminate before it refreshes even once.
+
 }}}
 
-(Note that for this to work, you must be including the advertise.repy module.)
+When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
 
-When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. Six hundred seconds is just an example, since it is best to refresh the entry rather than leaving it there for a long time. If you are running this program on multiple nodes simultaneously, this will result in helloworld.zenodotus.cs.washington.edu being associated with all of their IP Addresses, and a random one will be used when a user tries to connect to your site via browser.
+Note that there is a bug in the above code. If the node this is running in has its computer clock reset during the runtime, getruntime() will fail to provide increasing values, and the node will fail to update for a time, which will give the illusion that it has been terminated. There doesn't seem to be a good way to solve this.
 
-If you're running in a node, your users will need to append your GENIPORT to the end of the IP Address in their browsers. For example, a user could access your page with this URL: 'helloworld.zenodotus.cs.washington.edu:631XX', but they would not connect properly if the port were not specified.
+While this is running in at least one node, your users will no longer have to type a URL of the form <IP Address>:<Port> in to their browser to access your service. Instead, they can type in something more friendly, as in the example above: 'hello.zenodotus.cs.washington.edu:631XX'. It is important to remember that this hosting service can't solve the port issue, since REPY vessels can only use GENIports for networking operations. As such, your users will still have to append the GENIport to their URLs.
 
 
 
