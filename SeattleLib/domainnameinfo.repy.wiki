@@ -16,3 +16,11 @@ def domainnameinfo_gethostlocation(hostname):
    * Raises TypeError if hostname isn't a string.
    * Returns a string which has the country.
 
+
+=== Usage ===
+
+{{{
+assert(domainnameinfo_gethostlocation('amazon.uk') == 'United Kingdom')
+assert(domainnameinfo_gethostlocation('microsoft.us') == 'United States')
+}}}
+
