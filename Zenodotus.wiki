@@ -14,6 +14,7 @@ The following code snippet is an example of how to implement zenodotus hosting i
 
 
 {{{
+#!python
 include	advertise.repy
 
 
