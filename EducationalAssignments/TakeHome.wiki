@@ -29,7 +29,7 @@ At this point, you should have vessels (VMs) that you can use to run your code!
 == Step 2 : Running Seash ==
 ----
 
-Now click on the Profile tab, and download the toolkit linked from this page.   The zip file includes all of the files you need to do the take home assignment (files like allpairsping.repy).   Click to download your Private Key and Public Key (save the files to the directory with seash).  This will give you the credentials necessary to run your programs on the computers now at your disposal.     
+Now click on the Profile tab, and download the toolkit linked from this page.   Unpacking the zip file will create a directory that contains a shell called seash.py and a bunch of other files you need to do the take home assignment.   Click to download your Private Key and Public Key (save the files to the directory with seash.py).  This will give you the credentials necessary to run your programs on the computers now at your disposal.     
 
  * On Windows do start, run, cmd and then cd to the folder where you downloaded the toolkit.   
 
