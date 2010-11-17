@@ -18,7 +18,7 @@ You must have Python2.5 or Python2.6, the programming language, installed on you
 
 Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
 
-In the right pane, select LAN and choose 5 computers, and click "Get".  After a few seconds, you will see that ten computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
+In the right pane, select LAN and choose 5 computers, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
 At this point, you should have vessels (VMs) that you can use to run your code!
 
