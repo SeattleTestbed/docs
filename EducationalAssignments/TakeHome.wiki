@@ -2,6 +2,9 @@
 
 The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet.  For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle toolkit.  Once you are comfortable with the toolkit, we will run an all-pairs-ping on computers distributed around the world.   The goal of running the all-pairs-ping is to observe non-transitive connectivity (when two computers cannot communicate, but they can both communicate with a third computer).   Following this, we will set up one-hop detour routing to circumvent non-transitive connectivity to allow the computers to communicate through the intermediate node.   The final part of the assignment investigates whether or not a computer is behind a NAT (network address translator) and illustrates the practical issues with communicating with a NATed node.   
 
+
+When performing these steps, you are running software on end user machines around the world.   As such it is possible (but unlikely) that you may have a node fail as a user turns off their laptop, loses network connectivity, etc.   If so, you should be able to redo the previous step to continue with the assignment.
+
 This assignment consists of 11 steps and should take between 30-120 minutes to complete.   Let's begin!
 
 '''NOTE WINDOWS USERS:'''
@@ -71,7 +74,7 @@ Added targets: %1(IP:port:vesselname), %2(IP:port:vesselname), %3(IP:port:vessel
 Added group 'browsegood' with X targets      
 }}}
 
-This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.
+This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.   
 
 [[BR]]
 == Step 4 : Hello World on a single computer ==
