@@ -1136,7 +1136,7 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
      invalid syntax, or an evaluation timeout.
 
    <Side Effects>
-     Other calls to createvirtualnamespace() will happen wait until the first completes since safety checks are performed serially.
+     Other calls to createvirtualnamespace() will wait until the first completes since safety checks are performed serially.
   
      Another process will be launched to check the code for safety. This has memory and CPU ramifications,
      since we will not account for it's resource consumption. The memory use will likely exceed what is allowed
