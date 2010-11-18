@@ -55,8 +55,8 @@ def httpserver_stopcallback(callbackid):
 
 === Includes ===
 
-[wiki:urllib.repy]
-[wiki:urlparse.repy]
-[wiki:uniqueid.repy]
-[wiki:sockettimeout.repy]
-[wiki:httpretrieve.repy]
+[wiki:urllib.repy][[BR]]
+[wiki:urlparse.repy][[BR]]
+[wiki:uniqueid.repy][[BR]]
+[wiki:sockettimeout.repy][[BR]]
+[wiki:SeattleLib/httpretrieve.repy][[BR]]
