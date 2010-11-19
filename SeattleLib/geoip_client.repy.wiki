@@ -41,12 +41,11 @@ def geoip_record_by_name(name):
 def geoip_location_str(location_dict):
 }}}
    Pretty-prints a location specified by location_dict as a comma-separated list. Prints location info as specifically as it can, according to the
-    format 'CITY, STATE/PROVINCE, COUNTRY'.
 
-    location_dict['city'], location_dict['region_name'], and
-    location_dict['country_name'] are added if defined, and
-    location_dict['region_name'] is added if the location is in the US or
-    Canada.
+   format 'CITY, STATE/PROVINCE, COUNTRY'.
+   location_dict['city'], location_dict['region_name'], and
+   location_dict['country_name'] are added if defined, and
+   location_dict['region_name'] is added if the location is in the US or Canada.
       
    Notes:[[BR]]
    * location_dict is the dictionary of location information, as returned by a call to geoip_record_by_addr or geoip_record_by_name.
