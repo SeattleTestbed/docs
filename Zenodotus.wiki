@@ -71,6 +71,10 @@ if callfunc == 'initialize':
 
 }}}
 
+
+'''To run this code on a Seattle node, you will need to pre-process the code using repypp.py'''
+
+
 When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
 
 Note that there is a bug in the above code. If the node this is running in has its computer clock reset during the runtime, getruntime() will fail to provide increasing values, and the node will fail to update for a time, which will give the illusion that it has been terminated. There doesn't seem to be a good way to solve this.
