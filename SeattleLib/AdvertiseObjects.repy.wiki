@@ -2,12 +2,12 @@
 
 Provides two objects which makes advertising more efficient. Can be used as an alternative to [wiki:Advertise.repy].
 
-LookupCache caches lookup results to increase performance in programs which calls lookup services frequently.[[BR]]
-AdvertisePipe stores a list of (key, value) tuples and advertises them concurrently in a single thread. 
+!LookupCache caches lookup results to increase performance in programs which calls lookup services frequently.[[BR]]
+!AdvertisePipe stores a list of (key, value) tuples and advertises them concurrently in a single thread. 
 
 = Functions =
 
-LookupCache
+!LookupCache
 {{{
 lookup(self, key, maxvals=100, lookuptype=['central','opendht','DOR'], concurrentevents=2, graceperiod=10, timeout=60)
 }}}
@@ -15,7 +15,7 @@ lookup(self, key, maxvals=100, lookuptype=['central','opendht','DOR'], concurren
    Note:[[BR]]
    * self refers to its own cache.
 
-AdvertisePipe
+!AdvertisePipe
 {{{
 add(self, key, value)
 }}}
@@ -35,7 +35,6 @@ remove(self, handle)
 = Usage =
 
 no examples?
-need to fix camelcase issue
 
 = Includes =
 [wiki:Advertise.repy][[BR]]
