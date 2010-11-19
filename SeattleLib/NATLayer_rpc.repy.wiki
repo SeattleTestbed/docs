@@ -50,8 +50,7 @@ def nat_waitforconn(localmac, localport, function, forwarderIP=None, forwarderPo
    Allows a server to accept connections from behind a NAT.
 
    Notes: [[BR]]
-   * If forwarderIP/forwarderPort are not specified, a forwarder will be automatically selected. They can also be explicitly specified.      
-forwarderPort must be a client port.
+   * If forwarderIP/forwarderPort are not specified, a forwarder will be automatically selected. They can also be explicitly specified. forwarderPort must be a client port.
    * forwarderCltPort is the port for clients to connect to on the explicitly specified forwarder. All forwarder information must be specified if this is set.
    * errdel is used to set the Error Delegate for the underlying multiplexer. See Multiplexer.setErrorDelegate. Argument should be a function pointer, the function should take 3 parameters, (mux, location, exception)
    * persist will be set to true the natlayer will reconnect to another forwarder in the case of failure, this is the recommeneded default 
