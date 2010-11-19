@@ -1,6 +1,6 @@
 = priority_queue.repy =
 
-This module implements a Piority Queue class using a heap. Expected runtime: getMinimum: O(1), deleteMinimum: O(log n), and insert: O(log n).
+This module implements a Priority Queue class using a heap. Expected runtime: getMinimum: O(1), deleteMinimum: O(log n), and insert: O(log n).
 
 
 === Functions ===
