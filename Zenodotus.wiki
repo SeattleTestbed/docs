@@ -72,7 +72,7 @@ if callfunc == 'initialize':
 }}}
 
 
-'''To run this code on a Seattle node, you will need to pre-process the code using [repypp.py repypp.py]'''
+'''To run this code on a Seattle node, you will need to pre-process the code using [wiki:repypp.py repypp.py]'''
 
 
 When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
