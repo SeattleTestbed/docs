@@ -1,0 +1,32 @@
+= urlparse.repy =
+
+Provides utilities for parsing URLs, based on the Python 2.6.1 module urlparse. See http://docs.python.org/library/urlparse.html for more details. This modules is used extensively in the networking section.
+
+=== Functions ===
+
+
+{{{
+def urlparse_urlsplit(urlstring, default_scheme="", allow_fragments=True):
+}}}
+   Parse a URL into five components, returning a dictionary. This corresponds to the general structure of a URL: scheme://netloc/path;parameters?query#fragment. The parameters are not split from the URL and individual componenets are not separated. Only absolute server-based URIs are currently supported (all URLs will be parsed into the components listed, regardless of the scheme).
+
+   Notes:[[BR]]
+   * default_scheme. Optional: defaults to the empty string.  If specified, gives the default addressing scheme, to be used only if the URL does not specify one.
+   * allow_fragments. Optional: defaults to True.  If False, fragment identifiers are not
+      allowed, even if the URL's addressing scheme normally does support them.
+   * Raises ValueError on parsing a non-numeric port value.
+   * Returns
+
+    A dictionary containing:
+
+    Key         Value                               Value if not present
+    ============================================================================
+    scheme      URL scheme specifier                empty string
+    netloc      Network location part               empty string
+    path        Hierarchical path                   empty string
+    query       Query component                     empty string
+    fragment    Fragment identifier                 empty string
+    username    User name                           None
+    password    Password                            None
+    hostname    Host name (lower case)              None
+    port        Port number as integer, if present  None
