@@ -93,16 +93,7 @@ The above code snippet will ensure that none of the nmhandles perform the action
 
 === Includes ===
 
-
-# for signing the data we send to the node manager
-[wiki:signeddata.repy]
-
-# session wrapper (breaks the stream into messages)
-# an abstracted "itemized data communication" in a separate API
-[wiki:session.repy]
-
-#allow nat layer
-[wiki:NATLayer_rpc.repy]
-
-# makes connections time out
-[wiki:sockettimeout.repy]
+[wiki:signeddata.repy][[BR]]
+[wiki:session.repy][[BR]]
+[wiki:SeattleLib/NATLayer_rpc.repy][[BR]]
+[wiki:sockettimeout.repy][[BR]]
