@@ -17,6 +17,7 @@ def urlparse_urlsplit(urlstring, default_scheme="", allow_fragments=True):
    * Raises ValueError on parsing a non-numeric port value.
    * Returns
 
+{{{
     A dictionary containing:
 
     Key         Value                               Value if not present
@@ -30,3 +31,5 @@ def urlparse_urlsplit(urlstring, default_scheme="", allow_fragments=True):
     password    Password                            None
     hostname    Host name (lower case)              None
     port        Port number as integer, if present  None
+
+}}}
