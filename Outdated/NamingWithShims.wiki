@@ -1,1 +1,4 @@
-Naming with Shims
+= Naming with Shims =
+
+Networked applications are usually identified by their IP addresses in the traditional model. With shims, this approach becomes ineffective. Essentially, shims create a virtual overlay network for the application. This overlay network exists in the application layer and is able to abstract away network heterogeneity. Conventional identifications like IP are closely associated with the particular OSI network layer. When the network environment changes, these identifications can potentially be affected. For instance, an IP address can change in a mobile network. Furthermore, IP addresses are not unique. For a service behind a NAT, its IP is effective only within a limited domain. Therefore, we need a new identification system that, like shims, virtualizes the underlying network heterogeneity.
+
