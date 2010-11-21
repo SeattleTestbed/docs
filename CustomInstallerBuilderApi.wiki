@@ -1,8 +1,8 @@
-= Seattle Installer Maker Future API =
+= Seattle Custom Installer Builder Future API =
 
-'''Note:''' The current installer maker does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
+'''Note:''' The current customized installer builder does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
 
-The installer maker creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
+The [https://seattle.cs.washington.edu/wiki/CustomizedInstaller customized installer builder] creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
 
 The following procedure calls will be supported:
 
