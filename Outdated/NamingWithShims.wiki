@@ -2,3 +2,8 @@
 
 Networked applications are usually identified by their IP addresses in the traditional model. With shims, this approach becomes ineffective. Essentially, shims create a virtual overlay network for the application. This overlay network exists in the application layer and is able to abstract away network heterogeneity. Conventional identifications like IP are closely associated with the particular OSI network layer. When the network environment changes, these identifications can potentially be affected. For instance, an IP address can change in a mobile network. Furthermore, IP addresses are not unique. For a service behind a NAT, its IP is effective only within a limited domain. Therefore, we need a new identification system that, like shims, virtualizes the underlying network heterogeneity.
 
+This new identification system is no longer host-specific. Rather, it distinguishes one service from another. The same node can host a number of services, each with their unique IDs (UID). The node may change a physical location. The UIDs of these services remain the same.
+
+A UID includes several pieces of information used to identify a service. In the case of a Seattle Node Manager (NM), the first part of the UID is the SHA of the the NM's public key, which guarantees uniqueness. The port number of the NM is appended to the UID.
+
+The string representation of the shims that a service is using can form a part of the UID.
