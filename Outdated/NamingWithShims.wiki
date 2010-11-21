@@ -4,6 +4,10 @@ Networked applications are usually identified by their IP addresses in the tradi
 
 This new identification system is no longer host-specific. Rather, it distinguishes one service from another. The same node can host a number of services, each with their unique IDs (UID). The node may change a physical location. The UIDs of these services remain the same.
 
-A UID includes several pieces of information used to identify a service. In the case of a Seattle Node Manager (NM), the first part of the UID is the SHA of the the NM's public key, which guarantees uniqueness. The port number of the NM is appended to the UID.
+A UID includes several pieces of information used to identify a service. In the case of a Seattle Node Manager (NM), the first part of the UID is the SHA of the the NM's public key, which guarantees uniqueness. The port number of the NM is appended to the UID. An example of an NM's UID would be `abc123.zenodotus.cs.washington.edu:1224`.
+
+When a client decides to connect to a NM, it first looks up the NM's UID on the advertisement service. Before the client connects to this UID, it also looks up the shims associated with the UID, so that the client can use the same shims as the NM. Finally, the client initiates an `openconn` on this UID.
+
+The `openconn` operation is handled by the client's shims. If the NM is not behind a NAT, the UID will be resolved into an IP address by the operating system. The underlying connection will be based on this IP. If, on the other hand, the NM is behind a NAT, the UID will not and cannot be resolved. Instead, the client shims connect to the same NAT forwarder (proxy) to which the NM is connected. The forwarder returns the NM's socket based on the UID. In this way, the client can communicate with the NM even though the latter is behind a NAT.
 
 The string representation of the shims that a service is using can form a part of the UID.
