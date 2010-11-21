@@ -12,8 +12,7 @@ def urlparse_urlsplit(urlstring, default_scheme="", allow_fragments=True):
 
    Notes:[[BR]]
    * default_scheme. Optional: defaults to the empty string.  If specified, gives the default addressing scheme, to be used only if the URL does not specify one.
-   * allow_fragments. Optional: defaults to True.  If False, fragment identifiers are not
-      allowed, even if the URL's addressing scheme normally does support them.
+   * allow_fragments. Optional: defaults to True.  If False, fragment identifiers are not allowed, even if the URL's addressing scheme normally does support them.
    * Raises ValueError on parsing a non-numeric port value.
    * Returns
 
