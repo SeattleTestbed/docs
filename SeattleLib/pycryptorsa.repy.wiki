@@ -91,7 +91,7 @@ def number_isPrime(N, randfunc=None):
 def number_long_to_bytes(n, blocksize=0):
 AND
 def number_bytes_to_long(s):
-
+}}}
 
 
 
