@@ -1,3 +1,13 @@
+= rsa.repy =
+
+
+This is the main interface for using the ported RSA implementation. See http://en.wikipedia.org/wiki/RSA for more details. This port to repy is primarily taken from Dwayne C. Litzenberger's (www.dlitz.net) python code.
+
+
+
+=== Functions ===
+
+
 {{{
 def rsa_gen_pubpriv_keys(bitsize):
 }}}
@@ -162,6 +172,8 @@ def rsa_file_to_publickey(filename):
 def rsa_matching_keys(privatekey, publickey):
 
 
-{{{
+=== Includes ===
 
-
+[wiki:random.repy]
+[wiki:pycryptorsa.repy]
+    
