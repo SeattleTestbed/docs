@@ -19,6 +19,8 @@ def rsa_gen_pubpriv_keys(bitsize):
    * Will return a key object that rsa_encrypt, rsa_decrypt, rsa_sign, and rsa_validate can use to preform their tasts.\
 
 
+
+
 {{{
 def rsa_encrypt(message, publickey):
 }}}
@@ -31,6 +33,9 @@ def rsa_encrypt(message, publickey):
    * Raises ValueError if public key is invalid.
    * Raises _slowmath_error if the key object lacks a public key, (elements 'e' and 'n')
    * Will return a string with the cypher text broken up and stored in the seperate integer representation. For example it might be similar to the string " 1422470 3031373 65044827" but with much larger integers.
+
+
+
 
 
 {{{
@@ -49,6 +54,9 @@ def rsa_decrypt(cypher, privatekey):
    * This will return the plaintext string that was encrypted with rsa_encrypt.
 
 
+
+
+
 {{{
 def rsa_sign(message, privatekey):
 }}}
@@ -61,6 +69,9 @@ def rsa_sign(message, privatekey):
    * Raises ValueError if public key is invalid.
    * Raises _slowmath_error if the key object lacks a public key, (elements 'e' and 'n')
    * Will return a string with the cypher text broken up and stored in the seperate integer representation. For example it might be similar to the string " 1422470 3031373 65044827" but with much larger integers.
+
+
+
 
 
 {{{
@@ -78,6 +89,8 @@ def rsa_verify(cypher, publickey):
    * This will return the plaintext string that was encrypted with rsa_encrypt.
 
 
+
+
 {{{
 def rsa_is_valid_privatekey(key):
 }}}
@@ -89,11 +102,15 @@ def rsa_is_valid_privatekey(key):
    * If the key is valid, True will be returned. Otherwise False will be returned.
 
 
+
+
 {{{
 def rsa_is_valid_publickey(key):
 }}}
 
    Exactly as the rsa_is_valid_privatekey method, but for public keys.
+
+
 
 
 {{{
@@ -107,6 +124,8 @@ def rsa_publickey_to_string(publickey):
    * Returns a string containing the publickey. Example: if the publickey was {'n':21, 'e':3} then returned string would be "3 21"
   
 
+
+
 {{{
 def rsa_string_to_publickey(mystr):
 }}}
@@ -119,17 +138,24 @@ def rsa_string_to_publickey(mystr):
    * Returns a publickey dictionary of the form {'n': 1.., 'e': 6..} with the keys 'n' and 'e'.
   
 
+
+
 {{{
 def rsa_privatekey_to_string(privatekey):
 }}}
    
    Same as above, but with private keys.
 
+
+
+
 {{{
 def rsa_string_to_privatekey(mystr):
 }}}
   
    Same as above, but with private keys.
+
+
 
 
 {{{
@@ -145,6 +171,8 @@ def rsa_privatekey_to_file(key,filename):
    * Raises IOError if the file cannot be opened.
 
 
+
+
 {{{
 def rsa_file_to_privatekey(filename):
 }}}
@@ -158,22 +186,28 @@ def rsa_file_to_privatekey(filename):
    * Returns a privatekey dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys 'd', 'p', and 'q'.
 
 
+
 {{{
 def rsa_publickey_to_file(publickey, filename):
 }}}
    Same as above but with public keys.
+
+
 
 {{{
 def rsa_file_to_publickey(filename):
 }}}
    Same as above but with public keys.
 
+
+
 {{{
 def rsa_matching_keys(privatekey, publickey):
+}}}
 
 
 === Includes ===
 
-[wiki:random.repy]
-[wiki:pycryptorsa.repy]
+[wiki:SeattleLib/random.repy]
+[wiki:SeattleLib/pycryptorsa.repy]
     
