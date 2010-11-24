@@ -1,0 +1,167 @@
+{{{
+def rsa_gen_pubpriv_keys(bitsize):
+}}}
+
+   Will generate a new key object with a key size of the argument bitsize and return it. A recommended value would be 1024.
+   
+   Notes:[[BR]]
+   * bitsize is the number of bits that the key should have. This means the modulus (publickey - n) will be in the range [2**(bitsize - 1), 2**(bitsize) - 1]           
+   * Will return a key object that rsa_encrypt, rsa_decrypt, rsa_sign, and rsa_validate can use to preform their tasts.\
+
+
+{{{
+def rsa_encrypt(message, publickey):
+}}}
+
+   Will use the key to encrypt the message string. If the string is to large to be encrypted it will be broken into chunks that are suitable for the keys modulus by the _rsa_chopstring function.
+  
+   Notes: [[BR]]
+   * message is the string to be encrypted, there is no restriction on size.
+   * publickey must be a valid publickey dictionary of the form {'n': 1.., 'e': 6..} with the keys being 'n' and 'e'.
+   * Raises ValueError if public key is invalid.
+   * Raises _slowmath_error if the key object lacks a public key, (elements 'e' and 'n')
+   * Will return a string with the cypher text broken up and stored in the seperate integer representation. For example it might be similar to the string " 1422470 3031373 65044827" but with much larger integers.
+
+
+{{{
+def rsa_decrypt(cypher, privatekey):
+}}}
+   
+   Will use the private key to decrypt the cypher string.
+    
+   If the plaintext string was to large to be encrypted it will use _rsa_gluechops and _rsa_unpicklechops to reassemble the origional plaintext after the individual peices are decrypted.
+  
+   Notes: [[BR]]
+   * cypher is the encrypted string that was returned by rsa_encrypt. Example: " 142247030 31373650 44827705"
+   * privatekey must be a valid privatekey dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys being 'd', 'p', and 'q'.
+   * Raises ValueError if private key is invalid.
+   * Raises _slowmath_error if the key object lacks a private key with (elements 'd' and 'n').
+   * This will return the plaintext string that was encrypted with rsa_encrypt.
+
+
+{{{
+def rsa_sign(message, privatekey):
+}}}
+
+   Will use the key to sign the plaintext string.
+        
+   Notes:[[BR]]
+   * message is the string to be encrypted, there is no restriction on size.
+   * publickey must be a valid publickey dictionary of the form {'n': 1.., 'e': 6..} with the keys being 'n' and 'e'.
+   * Raises ValueError if public key is invalid.
+   * Raises _slowmath_error if the key object lacks a public key, (elements 'e' and 'n')
+   * Will return a string with the cypher text broken up and stored in the seperate integer representation. For example it might be similar to the string " 1422470 3031373 65044827" but with much larger integers.
+
+
+{{{
+def rsa_verify(cypher, publickey):
+}}}
+   
+   Will use the private key to decrypt the cypher string.
+    
+   Notes: [[BR]]
+   * If the plaintext string was to large to be encrypted it will use _rsa_gluechops and _rsa_unpicklechops to reassemble the origional plaintext after the individual peices are decrypted. 
+   * cypher is the encrypted string that was returned by rsa_encrypt. Example: " 142247030 31373650 44827705"
+   * privatekey must be a valid privatekey dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys being 'd', 'p', and 'q'.
+   * Raises ValueError if private key is invalid.
+   * Raises _slowmath_error if the key object lacks a private key with (elements 'd' and 'n').
+   * This will return the plaintext string that was encrypted with rsa_encrypt.
+
+
+{{{
+def rsa_is_valid_privatekey(key):
+}}}
+   
+   This tries to determine if a key is valid. If it returns False, the key is definitely invalid. If True, the key is almost certainly valid.
+  
+   Notes:[[BR]]
+   * key is a dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys 'd', 'p', and 'q'    
+   * If the key is valid, True will be returned. Otherwise False will be returned.
+
+
+{{{
+def rsa_is_valid_publickey(key):
+}}}
+
+   Exactly as the rsa_is_valid_privatekey method, but for public keys.
+
+
+{{{
+def rsa_publickey_to_string(publickey):
+}}}
+   To convert a publickey to a string. It will read the publickey which should a dictionary, and return it in the appropriate string format.
+  
+   Notes: [[BR]]
+   * Must be a valid publickey dictionary of the form {'n': 1.., 'e': 6..} with the keys 'n' and 'e'.
+   * Raises ValueError if the publickey is invalid.
+   * Returns a string containing the publickey. Example: if the publickey was {'n':21, 'e':3} then returned string would be "3 21"
+  
+
+{{{
+def rsa_string_to_publickey(mystr):
+}}}
+   
+   To read a private key string and return a dictionary in the appropriate format: {'n': 1.., 'e': 6..} with the keys 'n' and 'e'.
+  
+   Notes:[[BR]]
+   * mystr is a string containing the publickey, should be in the format created by the function rsa_publickey_to_string. Example if e=3 and n=21, mystr = "3 21"
+   * Raises ValueError if the string containing the privateky is in a invalid format.
+   * Returns a publickey dictionary of the form {'n': 1.., 'e': 6..} with the keys 'n' and 'e'.
+  
+
+{{{
+def rsa_privatekey_to_string(privatekey):
+}}}
+   
+   Same as above, but with private keys.
+
+{{{
+def rsa_string_to_privatekey(mystr):
+}}}
+  
+   Same as above, but with private keys.
+
+
+{{{
+def rsa_privatekey_to_file(key,filename):
+}}}
+   
+   To write a privatekey to a file. It will convert the privatekey which should a dictionary, to the appropriate format and write it to a file, so that it can be read by rsa_file_to_privatekey.
+  
+   Notes: [[BR]]
+   * privatekey must be a valid privatekey dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys 'd', 'p', and 'q'
+   * filename is the string containing the name for the desired publickey file.
+   * Raises ValueError if the privatekey is invalid.
+   * Raises IOError if the file cannot be opened.
+
+
+{{{
+def rsa_file_to_privatekey(filename):
+}}}
+   
+   To read a file containing a key that was created with rsa_privatekey_to_file and return it in the appropriate format: {'d':1.., 'p':1.. 'q': 1..} with the keys 'd', 'p', and 'q'.
+   
+   Notes: [[BR]]
+   * filename is the name of the file containing the privatekey. 
+   * Raises ValueError if the file contains an invalid private key string.
+   * Raises IOError if the file cannot be opened.
+   * Returns a privatekey dictionary of the form {'d':1.., 'p':1.. 'q': 1..} with the keys 'd', 'p', and 'q'.
+
+
+{{{
+def rsa_publickey_to_file(publickey, filename):
+}}}
+   Same as above but with public keys.
+
+{{{
+def rsa_file_to_publickey(filename):
+}}}
+   Same as above but with public keys.
+
+{{{
+def rsa_matching_keys(privatekey, publickey):
+
+
+{{{
+
+
