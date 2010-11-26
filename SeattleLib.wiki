@@ -14,7 +14,7 @@ This pages contains documentation about the standard library. The libraries are 
  * [wiki:Cryptography] (click for a description)
   * [wiki:md5py.repy]
   * [wiki:pycryptorsa.repy]
-  * [wiki:pydes.repy]
+  * [wiki:pyDes.repy]
   * [wiki:rsa.repy]
   * [wiki:sha.repy]
   * [wiki:sshkey.repy]
