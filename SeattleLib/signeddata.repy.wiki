@@ -106,6 +106,6 @@ def signeddata_shouldtrust(oldsigneddata, newsigneddata, publickey=None, oldsign
 
 === Includes ===
 
-[wiki:sha.repy]
-[wiki:rsa.repy]
-[wiki:time.repy]
+[wiki:SeattleLib/sha.repy][[BR]]
+[wiki:SeattleLib/rsa.repy][[BR]]
+[wiki:time.repy][[BR]]
