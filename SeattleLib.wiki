@@ -6,7 +6,7 @@ This pages contains documentation about the standard library. The libraries are 
   * [wiki:centralizedadvertise.repy]
   * [wiki:openDHTadvertise.repy]
   * [wiki:DORadvertise.repy]
-  * [wiki:Advertise.repy]
+  * [wiki:advertise.repy]
   * [wiki:Advertiseobject.repy]
   * [wiki:NAT_advertisement.repy]
  
