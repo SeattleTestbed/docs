@@ -1,4 +1,4 @@
-= pydes.repy =
+= pyDes.repy =
 
 This module is a direct port of Todd Whitman's Python DES encryption algorithm. See http://en.wikipedia.org/wiki/Data_Encryption_Standard for more details on the algorithm. This particular page will basically use Todd's documentation. See http://twhiteman.netfirms.com/des.html for his documentation.
 
