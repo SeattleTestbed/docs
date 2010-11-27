@@ -1,8 +1,33 @@
 = repypp.py =
 
-A preprocessor for repy.  It includes dependent files as needed.
-This is used to help the programmer avoid the need to use import.   They
-can instead use "include X" which works somewhat like "from X import *".
-However, include must be the first character on the line (no indentation!)
+A preprocessor for repy.  It includes dependent files as needed. This is used to help the programmer avoid the need to use import. They
+can instead use "include X" which works somewhat like "from X import *". 
 
-...to be continued...?
+Note "include" must be the first character on the line. (no indentation allowed!).
+
+=== Functions ===
+
+{{{
+def processfiledata(stringlist):
+}}}
+   Scans lines with "include" and retrieves the correct module to be included.
+ 
+ 
+{{{
+def processfile(filename):
+}}}
+   Builds the correct file into a dictionary and returns the file's data.
+ 
+ 
+{{{
+def recursive_build_outdata(filename, includedfiles,filedict):
+}}}
+   Like above, but recursively builds and returns the data from file to be imported.
+
+ 
+ 
+
+=== Usage ===
+
+
+Note since this module essentially running in the background, an user can just use the keyword "include" and then any module in the Seattle Standard Library.
