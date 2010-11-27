@@ -1,0 +1,60 @@
+= dylink.repy =
+
+This module is designed to help dynamically link against other modules, and to provide a import like functionality in repy. This module will soon phase out [wiki:repypp.repy].
+
+dylink.repy's main mechanisms are dy_import_module, dy_import_module_symbols and dy_dispatch_module. dy_import_module_symbols allows importing directly into the current context (ala from X import *) and dy_import_module allows importing as an encapsulated module (ala import X as Y).
+
+dy_dispatch_module is a convenience for programs that want to behavior as "modules". These are behavior altering programs, that don't execute any code, but provide new code or alter behavior of builtin calls. These types of modules expect to be chained and to recursively call into the next module in the chain. 
+
+dy_dispatch_module will take the globally defined CHILD_CONTEXT and evaluate the next module in that context. Modules are free to alter CHILD_CONTEXT prior to calling dy_dispatch_module.
+
+Modules being imported are called with callfunc set to "import" to allow modules to have special behavior. If the module performs some action on import, it is possible that dy_* never returns, as with import in Python.
+
+=== Functions ===
+ 
+
+{{{
+def dylink_import_global(module, module_context,new_callfunc="import"):
+}}}
+   Dynamically link in new modules at runtime.
+
+   Notes: [[BR]]
+   * module is the name of a module to import. This should be excluding extensions, but may be the full name. e.g. for module foo.py use "foo"
+   * module_context is the context to evaluate the module in. If you want to do a global import, you can evaluate in the current global context. For a bundled module, see dylink_import_module.
+   * new_callfunc is the value to use for callfunc during the import. Defaults to "import".
+   * Raises an exception if the module cannot be found, or if there is a problem initializing a VirtualNamespace around the module. See VirtualNamespace.
+   
+
+ 
+{{{
+def dylink_import_module(module,import_context, new_callfunc="import", additional_globals=None):
+}}}
+   Imports modules dynamically into a bundles module like object.
+
+   Notes:[[BR]]
+   * module is the module to import.
+   * import_context is the context of the caller, e.g. the context of who is importing.
+   * new_callfunc is the value to use for callfunc during the import. Defaults to "import".
+   * additional_globals is an array of string globals which will be provided to the imported module. E.g. if the current context defines "foo" and this should be made available in addition to the Stock repy API, this can be provided as ["foo"]
+   * Raises an exception if the module cannot be found, or if there is a problem initializing a VirtualNamespace around the module. See VirtualNamespace. See dylink_import_global.
+   * Returns a module like object.
+
+ 
+
+{{{
+def dylink_dispatch(eval_context, caller_context):
+}}}
+   Allows a module to recursively evaluate another context. When the user specifies a chain of modules and programs to evaluate, this call steps to the next module.
+
+   Notes:[[BR]]
+   * eval_context is the context to pass to the next module that is being evaluated.
+   * caller_context is the context of the caller.
+   * As with the module being evaluated. An exception will be raised if the module to be evaluated cannot be initialized in a VirtualNamespace    due to safety or syntax problems, or if the module does not exist.
+   * Note that at the end of a call of dylink_dispatch, execution will switch to the next module.
+   * Returns True if a recursive evaluation was performed, False otherwise.
+
+
+ 
+= Usage =
+
+Note since this is essentially running in the background, an user can just use the keyword "include" and then any module in the SeattleLib. The difference between this module and the [wiki:repypp.repy] is that instead of including all the necessary files at the beginning of the code, dylink.repy will '''dynamically''' include them as necessary.
