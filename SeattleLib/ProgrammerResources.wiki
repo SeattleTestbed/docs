@@ -1,3 +1,5 @@
+=== Description ===
+
 This section contains all the extraneous data structures that Seattle supports, in addition to all the various backend modules that makes seash work. There are several utilities which can help with basic programming tasks such as [wiki:math.repy], [wiki:random.repy], and etc. Notably modules include:
 
 [wiki:safe_eval.repy] allows one to safely evaluate strings.
