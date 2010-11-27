@@ -3,12 +3,12 @@
 This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information
 
  * [wiki:NodeAdvertising Node Advertising] (click for a description)
-  * [wiki:centralizedadvertise.repy]
-  * [wiki:openDHTadvertise.repy]
-  * [wiki:DORadvertise.repy]
-  * [wiki:advertise.repy]
+  * '''[wiki:advertise.repy]'''
   * [wiki:Advertiseobject.repy]
+  * [wiki:centralizedadvertise.repy]
+  * [wiki:DORadvertise.repy]
   * [wiki:NAT_advertisement.repy]
+  * [wiki:openDHTadvertise.repy]
  
 
  * [wiki:Cryptography] (click for a description)
@@ -17,34 +17,34 @@ This pages contains documentation about the standard library. The libraries are 
   * [wiki:pyDes.repy]
   * [wiki:rsa.repy]
   * [wiki:sha.repy]
-  * [wiki:sshkey.repy]
-  * [wiki:sshkey_paramiko.repy]
+  * '''[wiki:sshkey.repy]'''
+  * '''[wiki:sshkey_paramiko.repy]'''
   * [wiki:signeddata.repy]
 
  * [wiki:TimeModule Time Module] (click for a description)
   * [wiki:ntp_time.repy]
-  * [wiki:time.repy]
-  * [wiki:time_interface.repy]
   * [wiki:tcp_time.repy]
+  * '''[wiki:time.repy]'''
+  * [wiki:time_interface.repy]
 
  * [wiki:DataEncoding Data Encoding] (click for a description)
-  * [wiki:binascii.repy]
   * [wiki:base64.repy]
-  * [wiki:serialize.repy]
+  * [wiki:binascii.repy]
+  * '''[wiki:serialize.repy]'''
 
  * [wiki:XML+URLparsing XML / URL parsing] (click for a description)
+  * [wiki:httpretrieve.repy]
   * [wiki:xmlparse.repy]
   * [wiki:xmlrpc_client.repy]
   * [wiki:xmlrpc_common.repy]
-  * [wiki:xmlrpc_server.repy]
+  * '''[wiki:xmlrpc_server.repy]'''
   * [wiki:urllib.repy]
-  * [wiki:httpretrieve.repy]
 
  * [wiki:Concurrency+Parallelism Concurrency / Parallelism] (click for a description)
-  * [wiki:parallelize.repy]
-  * [wiki:uniqueid.repy]
-  * [wiki:semaphore.repy]
   * [wiki:cv.repy]
+  * [wiki:parallelize.repy]
+  * [wiki:semaphore.repy]
+  * '''[wiki:uniqueid.repy]'''
 
  * [wiki:DomainInfo+DataRetrieval Domain info / Data retrieval] (click for a description)
   * [wiki:domainnameinfo.repy]
@@ -55,20 +55,20 @@ This pages contains documentation about the standard library. The libraries are 
  * [wiki:Network+ClientCommunication Network + Client Communication] (click for a description)
   * [wiki:getvesselsresources.repy]
   * [wiki:nmclient.repy]
-  * [wiki:NATLayer_rpc.repy]
-  * [wiki:sockettimeout.repy]
-  * [wiki:session.repy]
+  * '''[wiki:NATLayer_rpc.repy]'''
+  * '''[wiki:sockettimeout.repy]'''
+  * '''[wiki:session.repy]'''
 
  * [wiki:ProgrammerResources+DataStructures Programmer Resources / Data Structures] (click for a description)
   * [wiki:argparse.repy]
+  * [wiki:dylink.repy]
   * [wiki:listops.repy]
+  * [wiki:math.repy]
   * [wiki:priority_queue.repy]
-  * [wiki:repyunit.repy]
-  * [wiki:safe_eval.repy]
+  * '''[wiki:repyunit.repy]'''
   * [wiki:random.repy]
   * [wiki:repypp.py]
+  * [wiki:safe_eval.repy]
   * [wiki:strace.py]
-  * [wiki:math.repy]
   * [wiki:textops.py]
-  * [wiki:dylink.repy]
   * [wiki:urlparse.repy]
