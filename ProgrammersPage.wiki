@@ -28,6 +28,8 @@ After doing one of the above tutorials, do the following tutorial to learn how t
  * Use the [RepyLibrary Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
 
  * There is a growing list of library code you can download and use with Repy (see [http://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib/ seattlelib] in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
+
+ * Documentation about the Seattle Standard Library can be seen at [wiki:SeattleLibWiki]
 {{{
 #!comment
 Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
