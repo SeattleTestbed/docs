@@ -1,0 +1,9 @@
+This section contains all the extraneous data structures that Seattle supports, in addition to all the various backend modules that makes seash work. There are several utilities which can help with basic programming tasks such as [wiki:math.repy], [wiki:random.repy], and etc. Notably modules include:
+
+[wiki:safe_eval.repy] allows one to safely evaluate strings.
+
+[wiki:argparse.repy] checks command line arguments and separates in a way that is usable.
+
+[wiki:urlparse.repy] parses urls for network communication purposes.
+
+Please note that the The backend modules that are located here are mostly ones that the average user would not have to consider.
