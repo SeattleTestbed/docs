@@ -1,6 +1,6 @@
 = NATLayer_rpc.repy =
 
-This module provides a method of transferring data to machines behind firewalls or Network Address Translation (NAT). NatLayer_rpc.repy is appropriate for a lot of clients, since we can assume that many users are sitting behind firewalls and routers.
+This module provides a method of transferring data to machines behind firewalls or Network Address Translation (NAT). !NatLayer_rpc.repy is appropriate for a lot of clients, since we can assume that many users are sitting behind firewalls and routers.
 
 === Functions ===
 
@@ -67,5 +67,5 @@ def nat_waitforconn_alive():
 
 === Includes ===
 
-[wiki:NAT_advertisement.repy]
+[wiki:SeattleLib/NAT_advertisement.repy][[BR]]
 [wiki:Multiplexer.repy]
