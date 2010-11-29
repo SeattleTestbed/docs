@@ -1,9 +1,12 @@
-= Testing the Customized Installer =
-
-This page describes how you run a customized installer test server. It makes the assumption that you are attempting to do so on the seattle.cs machine.
+= Testing the Custom Installer Builder =
+This page outlines how to deploy the Custom Installer Builder using Django's built-in test server.
 
 
 [[BR]]
+= Current procedure =
+
+Assuming you are deploying on the seattle.cs test server, this is the procedure to follow for the current version of the Customized Installer Builder.
+
 == Running Customized Installer Test Server ==
 ----
 
@@ -54,3 +57,9 @@ Quit the server with CONTROL-C.
 
  * '''Step 6:''' Note that the settings file remaps customized installer's URL_PREFIX. This means that you should use http://128.208.3.86:8090/web_installers_dev/customized_installer/ for accessing your test server.
 
+
+[[BR]]
+= Future procedure =
+For the future version of Custom Installer Builder, follow this procedure.
+
+[Procedure to be added.]
