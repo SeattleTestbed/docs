@@ -11,7 +11,7 @@ You can often find other Seattle contributors on IRC in room #seattle on freenod
 
 
 || '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
-|| Alex Hanson || alexjh at cs || || alexjh [requested] || alexjh
+|| Alex Hanson || alexjh at cs || || alexjh || alexjh
 || Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
 || Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
 || Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
