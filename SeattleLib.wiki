@@ -1,13 +1,13 @@
 = Seattle Standard Library =
 
-This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
+This pages contains documentation about the Seattle standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
 
-The bolded links are modules are meant for direct usage by the client. They often aggregates multiple services.
+The bolded links are modules are meant for direct usage by the client. They often aggregate multiple services.
 
  * [wiki:NodeAdvertising Node Advertising] (click for a description)
-  * '''[wiki:advertise.repy]'''
-  * [wiki:Advertiseobject.repy]
-  * [wiki:centralizedadvertise.repy]
+  * '''[wiki:SeattleLib/advertise.repy]'''
+  * [wiki:SeattleLib/AdvertiseObjects.repy]
+  * [wiki:SeattleLib/centralizedadvertise.repy]
   * [wiki:DORadvertise.repy]
   * [wiki:NAT_advertisement.repy]
   * [wiki:openDHTadvertise.repy]
@@ -30,8 +30,8 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:time_interface.repy]
 
  * [wiki:DataEncoding Data Encoding] (click for a description)
-  * [wiki:base64.repy]
-  * [wiki:binascii.repy]
+  * [wiki:SeattleLib/base64.repy]
+  * [wiki:SeattleLib/binascii.repy]
   * '''[wiki:serialize.repy]'''
 
  * [wiki:XML+URLparsing XML / URL parsing] (click for a description)
@@ -62,7 +62,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:session.repy]'''
 
  * [wiki:ProgrammerResources+DataStructures Programmer Resources / Data Structures] (click for a description)
-  * [wiki:argparse.repy]
+  * [wiki:SeattleLib/argparse.repy]
   * [wiki:dylink.repy]
   * [wiki:listops.repy]
   * [wiki:math.repy]
