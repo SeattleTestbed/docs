@@ -40,5 +40,5 @@ def getvesselresources_vesselname(vesselname, ipaddr=getmyip(), portval=1224):
 === Includes ===
 
 
-[wiki:mclient.repy]
+[wiki:nmclient.repy],
 [wiki:rsa.repy]
