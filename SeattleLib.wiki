@@ -1,6 +1,8 @@
 = Seattle Standard Library =
 
-This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information
+This pages contains documentation about the standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
+
+The bolded links are modules are meant for direct usage by the client. They often aggregates multiple services.
 
  * [wiki:NodeAdvertising Node Advertising] (click for a description)
   * '''[wiki:advertise.repy]'''
