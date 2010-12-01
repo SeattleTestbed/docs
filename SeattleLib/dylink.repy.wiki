@@ -1,6 +1,6 @@
 = dylink.repy =
 
-This module is designed to help dynamically link against other modules, and to provide a import like functionality in repy. This module will soon phase out [wiki:repypp.repy].
+This module is designed to help dynamically link against other modules, and to provide a import like functionality in repy. This module will soon phase out [wiki:repypp.py].
 
 dylink.repy's main mechanisms are dy_import_module, dy_import_module_symbols and dy_dispatch_module. dy_import_module_symbols allows importing directly into the current context (ala from X import *) and dy_import_module allows importing as an encapsulated module (ala import X as Y).
 
@@ -27,7 +27,7 @@ def dylink_import_global(module, module_context,new_callfunc="import"):
 
  
 {{{
-def dylink_import_module(module,import_context, new_callfunc="import", additional_globals=None):
+def dylink_import_module(module, import_context, new_callfunc="import", additional_globals=None):
 }}}
    Imports modules dynamically into a bundles module like object.
 
@@ -57,4 +57,4 @@ def dylink_dispatch(eval_context, caller_context):
  
 = Usage =
 
-Note since this is essentially running in the background, an user can just use the keyword "include" and then any module in the SeattleLib. The difference between this module and the [wiki:repypp.repy] is that instead of including all the necessary files at the beginning of the code, dylink.repy will '''dynamically''' include them as necessary.
+Note since this is essentially running in the background, an user can just use the keyword "include" and then any module in the [wiki:SeattleLib SeattleLib]. The difference between this module and the [wiki:repypp.py] is that instead of including all the necessary files at the beginning of the code, dylink.repy will '''dynamically''' include them as necessary.
