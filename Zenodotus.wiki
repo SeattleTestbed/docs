@@ -56,6 +56,15 @@ if callfunc == 'initialize':
 
   # Associates "hello.zenodotus.cs.washington.edu" : <Node's IP> for
   # _REFRESH_FREQUENCY seconds.
+  #
+  # ########
+  # Note that this line is deprecated. To register a 'A' query in 
+  # zenodotus, the _ADDRESS_NAME should be preceded with the 
+  # character 'A' and a delimiting space. The format used here 
+  # will still work, since it makes sense conventionally to 
+  # maintain it, but it is not preferred.
+  # ########
+  #
   advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
 
   # Make a note of the current runtime.
