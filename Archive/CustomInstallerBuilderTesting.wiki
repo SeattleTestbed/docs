@@ -62,4 +62,37 @@ Quit the server with CONTROL-C.
 = Future procedure =
 For the future version of Custom Installer Builder, follow this procedure.
 
-[Procedure to be added.]
+ * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
+
+{{{
+$ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/customizedinstallerbuilder/
+}}}
+
+ * '''Step 2:''' From within the "customizedinstallerbuilder" directory, copy the "local_template" folder to "local".
+
+{{{
+$ cd customizedinstallerbuilder
+$ cp -R local_template local
+}}}
+
+ * '''Step 3:''' From within the "local" directory, edit "settings.py" to match your local configuration. On blackbox, it is sufficient to change the following line:
+
+{{{
+PROJECT_URL = 'http://domain.com/custominstallerbuilder/'
+}}}
+
+to the following:
+
+{{{
+PROJECT_URL = 'http://blackbox.cs.washington.edu:$PORT/'
+}}}
+
+where $PORT is some port above 1024.
+
+ * '''Step 4:''' From within the "local" directory, run the django test server:
+
+{{{
+$ ./manage.py runserver 0.0.0.0:$PORT
+}}}
+
+You should now be able to access your Custom Installer Builder test server at the address specified for the PROJECT_URL.
