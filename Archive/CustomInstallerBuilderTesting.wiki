@@ -60,6 +60,9 @@ Quit the server with CONTROL-C.
 
 [[BR]]
 = Future procedure =
+
+'''Note:''' This version of the Custom Installer Builder is not yet available in the SVN tree. This documentation exists for future reference.
+
 For the future version of Custom Installer Builder, follow this procedure.
 
  * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
@@ -84,15 +87,15 @@ PROJECT_URL = 'http://domain.com/custominstallerbuilder/'
 to the following:
 
 {{{
-PROJECT_URL = 'http://blackbox.cs.washington.edu:$PORT/'
+PROJECT_URL = 'http://blackbox.cs.washington.edu:PORT/'
 }}}
 
-where $PORT is some port above 1024.
+PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
  * '''Step 4:''' From within the "local" directory, run the django test server:
 
 {{{
-$ ./manage.py runserver 0.0.0.0:$PORT
+$ ./manage.py runserver 0.0.0.0:PORT
 }}}
 
 You should now be able to access your Custom Installer Builder test server at the address specified for the PROJECT_URL.
