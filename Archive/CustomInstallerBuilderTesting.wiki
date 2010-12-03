@@ -76,6 +76,7 @@ $ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/customizedinstaller
 {{{
 $ cd customizedinstallerbuilder
 $ cp -R local_template local
+$ cd local
 }}}
 
  * '''Step 3:''' From within the "local" directory, edit "settings.py" to match your local configuration. On blackbox, it is sufficient to change the following line:
