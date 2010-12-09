@@ -36,7 +36,7 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Installation instructions and documentation
    * [InstallerDocumentation Formal Installer Documentation]
    * [SeattleDownload Download and installation instructions] for Seattle
-   * [GeniInstallation Installation instructions] for the GENI portal
+   * [GeniInstallation Installing SeattleGENI] for the GENI portal
    * [CustomizedInstaller Using the Customized Installer]
 
  * API specifications for user-facing services
