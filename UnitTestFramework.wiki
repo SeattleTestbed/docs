@@ -218,7 +218,9 @@ def stat(handle): ...
 
 And you decide to start testing. You notice that every test requires some sort of file setup and cleanup. Instead of doing the setup and cleanup before and after every test case, it is much easier to do this all at the beginning or all at the end of running the tests. So we introduce '''setup and shutdown scripts'''. 
 
-Setup scripts will always run before any unit test, and shutdown scripts will always run after any unit test. To make a shutdown script, all you need to do is use the following naming convention '''ut_<module name>_shutdown.py'''. However, there are two types of setup scripts. One is for if all you need to do is change configurations (create a temporary directory, for example). In this case, name your setup file '''ut_<module name>_setup.py'''. If you need your setup program to run while simultaneously running your unit tests, name your setup file '''ut_<module name>_subprocess.py'''.
+Setup scripts will always run before any unit test, and shutdown scripts will always run after any unit test. To make a shutdown script, all you need to do is use the following naming convention '''ut_<module name>_shutdown.py'''. However, there are two types of setup scripts. One is for if all you need to do is change configurations (create a temporary directory, for example). In this case, name your setup file '''ut_<module name>_setup.py'''. If you need your setup program to run while simultaneously running your unit tests, name your setup file '''ut_<module name>_subprocess.py'''.   
+
+A subprocess script will be signaled to exit by the caller closing its stdin.   You can do sys.stdin.read() to block until it is time to clean up.
 
 The following is an example of a shutdown script:
 
