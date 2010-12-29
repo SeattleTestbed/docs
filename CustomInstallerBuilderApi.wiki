@@ -16,6 +16,7 @@ The following procedure calls are supported:
 
     A sample return string:
 {{{
+#!python
 '2.0'
 }}}
 
@@ -25,6 +26,7 @@ The following procedure calls are supported:
 
     A sample call:
 {{{
+#!python
 vessels = [
     {'percentage': 60, 'owner': 'alex', 'users': ['bob']},
     {'percentage': 20, 'owner': 'carl', 'users': ['darren']},
@@ -42,6 +44,7 @@ results = proxy.build_installers(vessels, platforms, user_data)
 
     A sample return dictionary (assuming the user requested all three platforms):
 {{{
+#!python
 {
     'keys': {
         'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
@@ -68,12 +71,14 @@ results = proxy.build_installers(vessels, platforms, user_data)
 
     A sample call:
 {{{
+#!python
 proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
 results = proxy.build_simple_installers('123 321', '456 654', 'linux')
 }}}
 
     A sample return dictionary (assuming the user requested a Linux build):
 {{{
+#!python
 {
     'keys': {},
 
@@ -95,12 +100,14 @@ results = proxy.build_simple_installers('123 321', '456 654', 'linux')
 
     A sample call:
 {{{
+#!python
 proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
 results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 }}}
 
     A sample return dictionary:
 {{{
+#!python
 {
     'keys': {
         'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
@@ -127,6 +134,7 @@ results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 
     A sample call:
 {{{
+#!python
 proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
 results = proxy.delete_private_keys('87198c4618a893c47b3d48643b7d97454417c8d5')
 }}}
