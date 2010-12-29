@@ -2,12 +2,133 @@
 
 '''Note:''' The current customized installer builder does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
 
-The [https://seattle.cs.washington.edu/wiki/CustomizedInstaller customized installer builder] creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
+The XML-RPC interface to the [https://seattle.cs.washington.edu/wiki/CustomizedInstaller Custom Installer Builder] can be used to create installers which can then be fetched over HTTP. 
 
 The following procedure calls are supported:
 
+
+
+
+
  * api_version()
+
+    Returns the current API version as a string. If you are designing clients that leverage this API, it may be helpful to check against this string to prevent unanticipated behavior.
+
+    A sample return string:
+{{{
+'2.0'
+}}}
+
  * build_installers(vessels, platforms, user_data=None)
+
+    Builds an installer for each of the specified platforms using the given vessel and user information. In the absence of provided user data, cryptographic keys will automatically be generated.
+
+    A sample call:
+{{{
+vessels = [
+    {'percentage': 60, 'owner': 'alex', 'users': ['bob']},
+    {'percentage': 20, 'owner': 'carl', 'users': ['darren']},
+]
+
+platforms = ['linux', 'mac', 'windows']
+
+user_data = {
+    'alex': {'public_key': '123 321'},
+}
+
+proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+results = proxy.build_installers(vessels, platforms, user_data)
+}}}
+
+    A sample return dictionary (assuming the user requested all three platforms):
+{{{
+{
+    'keys': {
+        'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
+        'private': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/private'
+    },
+
+    'installers': {
+        'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
+        'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
+        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+    },
+
+    'build_id': BUILD_ID
+}
+}}}
+
+
+
+
+
  * build_simple_installer(owner_public_key, user_public_key, platform)
+
+    Builds a single "simple" installer for the given platform. A simple installer has one full vessel with the given owner and user. The public/private keys are not stored.
+
+    A sample call:
+{{{
+proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+results = proxy.build_simple_installers('123 321', '456 654', 'linux')
+}}}
+
+    A sample return dictionary (assuming the user requested a Linux build):
+{{{
+{
+    'keys': {},
+
+    'installers': {
+        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+    },
+
+    'build_id': BUILD_ID
+}
+}}}
+
+
+
+
+
  * get_all_urls(build_id)
+
+    Returns a dictionary containing the URLs at which the installers and public/private key archives may be found for the given build ID.
+
+    A sample call:
+{{{
+proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
+}}}
+
+    A sample return dictionary:
+{{{
+{
+    'keys': {
+        'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
+        'private': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/private'
+    },
+
+    'installers': {
+        'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
+        'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
+        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+    }
+}
+}}}
+
+
+
+
+
  * delete_private_keys(build_id)
+
+    Deletes the private key archive for the given build ID from the server. Returns true upon success.
+
+    Note that anybody can perform this function without authentication, so it is recommended that you download the private key archives for your own installers and then run this function yourself. Otherwise, your private keys are available for others to download or remove freely.
+
+    A sample call:
+{{{
+proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+results = proxy.delete_private_keys('87198c4618a893c47b3d48643b7d97454417c8d5')
+}}}
+
+    
