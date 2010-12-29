@@ -106,4 +106,6 @@ PORT must be an open port number greater than 1024. For smaller port numbers, ad
 $ ./manage.py runserver 0.0.0.0:PORT
 }}}
 
+This command assumes that the Seattle standard library (located in 'trunk/seattlelib') is in your Python path.
+
 You should now be able to access your Custom Installer Builder test server at the address specified for BASE_URL above.
