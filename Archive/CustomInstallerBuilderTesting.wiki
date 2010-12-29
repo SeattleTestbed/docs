@@ -68,35 +68,42 @@ For the future version of Custom Installer Builder, follow this procedure.
  * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
 
 {{{
-$ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/customizedinstallerbuilder/
+$ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/custominstallerbuilder/
 }}}
 
- * '''Step 2:''' From within the "customizedinstallerbuilder" directory, copy the "local_template" folder to "local".
+ * '''Step 2:''' From within the "custominstallerbuilder" directory, copy the "local_template" folder to "local".
 
 {{{
-$ cd customizedinstallerbuilder
+$ cd custominstallerbuilder
 $ cp -R local_template local
-$ cd local
 }}}
 
- * '''Step 3:''' From within the "local" directory, edit "settings.py" to match your local configuration. On blackbox, it is sufficient to change the following line:
+ * '''Step 3:''' Edit "local/settings.py" to match your local configuration. On blackbox, it is sufficient to change the following lines:
 
 {{{
-PROJECT_URL = 'http://domain.com/custominstallerbuilder/'
+SERVE_STATIC = False
+...
+BASE_URL = 'http://domain.com/'
+...
+PROJECT_URL = BASE_URL + 'custominstallerbuilder/'
 }}}
 
 to the following:
 
 {{{
-PROJECT_URL = 'http://blackbox.cs.washington.edu:PORT/'
+SERVE_STATIC = True
+...
+BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
+...
+PROJECT_URL = BASE_URL
 }}}
 
 PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
- * '''Step 4:''' From within the "local" directory, run the django test server:
+ * '''Step 4:''' Still within the "custominstallerbuilder" directory, run the django test server:
 
 {{{
 $ ./manage.py runserver 0.0.0.0:PORT
 }}}
 
-You should now be able to access your Custom Installer Builder test server at the address specified for the PROJECT_URL.
+You should now be able to access your Custom Installer Builder test server at the address specified for BASE_URL above.
