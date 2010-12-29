@@ -4,8 +4,10 @@
 
 The [https://seattle.cs.washington.edu/wiki/CustomizedInstaller customized installer builder] creates an installer according to user specifications, and returns a URL at which the user can pick up the installer.
 
-The following procedure calls will be supported:
+The following procedure calls are supported:
 
  * api_version()
  * build_installers(vessels, platforms, user_data=None)
  * build_simple_installer(owner_public_key, user_public_key, platform)
+ * get_all_urls(build_id)
+ * delete_private_keys(build_id)
