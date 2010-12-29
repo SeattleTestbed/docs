@@ -6,12 +6,9 @@ If the experiment planner wants to further subdivide the vessels, he can use the
 
 On the backend, there will soon be an XML-RPC interface to create customized installers. Future versions of SeattleGENI will use this interface to build all installers.
 
-----
-[[TOC(inline)]]
-----
 
-== Web Page layout: ==
 
+= A Tour of the Web Interface =
 [[Image(customized_installer_builder.jpg)]]
 
 == Step 1 : Create your users ==
