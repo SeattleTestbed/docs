@@ -38,7 +38,7 @@ user_data = {
     'alex': {'public_key': '123 321'},
 }
 
-proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
 results = proxy.build_installers(vessels, platforms, user_data)
 }}}
 
@@ -72,7 +72,7 @@ results = proxy.build_installers(vessels, platforms, user_data)
     A sample call:
 {{{
 #!python
-proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
 results = proxy.build_simple_installers('123 321', '456 654', 'linux')
 }}}
 
@@ -101,7 +101,7 @@ results = proxy.build_simple_installers('123 321', '456 654', 'linux')
     A sample call:
 {{{
 #!python
-proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
+proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
 results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 }}}
 
