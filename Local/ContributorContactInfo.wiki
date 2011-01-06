@@ -21,6 +21,7 @@ You can often find other Seattle contributors on IRC in room #seattle on freenod
 || Justin Cappos || justinc at cs  || || justinc || justinc ||
 || Rishi Goutam || rishi at cs  || || rishi [requested] || rishi ||
 || Stephen Sievers || sjs25 at u || 425-343-2381 || sjs25 || sjs25 ||
+|| Steven Portzer || sportzer at cs || || || sportzer ||
 || Monzur Muhammad || monzum at cs || || monzum || monzum ||
 || Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
 || Zack Boka || zackrb at cs || || zackrb || zackrb ||
