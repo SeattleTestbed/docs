@@ -121,22 +121,3 @@ results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
     }
 }
 }}}
-
-
-
-
-
- * delete_private_keys(build_id)
-
-    Deletes the private key archive for the given build ID from the server. Returns true upon success.
-
-    Note that anybody can perform this function without authentication, so it is recommended that you download the private key archives for your own installers and then run this function yourself. Otherwise, your private keys are available for others to download or remove freely.
-
-    A sample call:
-{{{
-#!python
-proxy = xmlrpclib.ServerProxy(http://example.com/custominstallerbuilder/xmlrpc/)  
-results = proxy.delete_private_keys('87198c4618a893c47b3d48643b7d97454417c8d5')
-}}}
-
-    
