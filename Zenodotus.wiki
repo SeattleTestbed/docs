@@ -20,29 +20,18 @@ include	advertise.repy
 
 
 
-# Store	the time of the	previous hostname refresh.
-_most_recent_refresh = 0
-
 # Refresh every	600 seconds (10	minutes)
 _REFRESH_FREQUENCY = 600
 
 # Put the address here,	since it's a constant.
 _ADDRESS_NAME = "hello.zenodotus.cs.washington.edu"
 
-# How frequently should we check for rehost? How about 5 seconds?
-_checking_frequency = 5
-
 
 
 
 def _rehost_callback():
-  # Check to see whether or not we need to rehost yet.
-  if getruntime() - _most_recent_refresh > _REFRESH_FREQUENCY:
-    # Refresh the association.
-    advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
-
-    # Remember to update the last refresh time.
-    _most_recent_refresh = getruntime()
+  # Refresh the association.
+  advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
 
 
 
@@ -66,9 +55,6 @@ if callfunc == 'initialize':
   # ########
   #
   advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
-
-  # Make a note of the current runtime.
-  _most_recent_refresh = getruntime()
 
   # Set a timer	for a callback function to refresh the DHT association.
   # We should check this every _checking_frequency seconds, to save system 
