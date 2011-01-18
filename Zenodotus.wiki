@@ -59,7 +59,7 @@ if callfunc == 'initialize':
   # Set a timer	for a callback function to refresh the DHT association.
   # We should check this every _checking_frequency seconds, to save system 
   # processing resources without sacrificing potential uptime. No args are needed.
-  settimer(_checking_frequency, _rehost_callback, [])
+  settimer(_REFRESH_FREQUENCY - 5, _rehost_callback, [])
 
   # You need to	have your service code in here as well.	This code 
   # alone will terminate before it refreshes even once.
