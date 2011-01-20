@@ -6,7 +6,7 @@ Porting existing code into REPY.
 === Removing imports === 
 ----
 
-Since importing is not permitted in REPY it will be necessary to eventually remove this any {{{import}}} statements and use an '''include''' statement instead. Since for large files this may be difficult to attempt all at once, it can be approached in several stages.
+Since importing is not permitted in REPY it will be necessary to eventually remove any {{{import}}} statements and use an '''include''' statement instead. Since for large files this may be difficult to attempt all at once, it can be approached in several stages.
 
 ==== Stage 1 ====
 Given a simple example:
