@@ -65,35 +65,6 @@ results = proxy.build_installers(vessels, platforms, user_data)
 
 
 
- * build_simple_installer(owner_public_key, user_public_key, platform)
-
-    Builds a single "simple" installer for the given platform. A simple installer has one full vessel with the given owner and user. The public/private keys are not stored.
-
-    A sample call:
-{{{
-#!python
-proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
-results = proxy.build_simple_installers('123 321', '456 654', 'linux')
-}}}
-
-    A sample return dictionary (assuming the user requested a Linux build):
-{{{
-#!python
-{
-    'keys': {},
-
-    'installers': {
-        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
-    },
-
-    'build_id': BUILD_ID
-}
-}}}
-
-
-
-
-
  * get_all_urls(build_id)
 
     Returns a dictionary containing the URLs at which the installers and public/private key archives may be found for the given build ID.
