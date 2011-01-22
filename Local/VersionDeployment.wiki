@@ -1,7 +1,7 @@
 = Deploying a New Version =
 Explains how to go about deploying a new version of the code, which consists of two main steps: updating the files that the software updaters on each node check for updates, and replacing the base installers that are incorporated in new installations.
 
-'''If you only want to make a release candidate build (or one that includes tests) available to the CustomizedInstaller, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattlegeni.cs).'''
+'''If you only want to make a release candidate build (or one that includes tests) available to the Custom Installer Builder, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattlegeni.cs).'''
 ----
 [[TOC(inline)]]
 ----
