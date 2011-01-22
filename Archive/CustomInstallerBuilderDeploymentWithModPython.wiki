@@ -1,0 +1,32 @@
+= Deploying the Custom Installer Builder =
+'''Note:''' This information applies to the future version of the Custom Installer Builder, not yet released.
+
+This page outlines how to deploy the Custom Installer Builder using common Apache configurations.
+
+== Using Apache + mod_python ==
+Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the httpd.conf file, but the configuration will also work within a VirtualHost directive, for example.
+
+The directories within PythonPath should be modified to match your system configuration. In the following line, django.root should match the URL segment given in the Location directive. As always, disable debugging once you have successfully deployed the Custom Installer Builder.
+
+For more information on deploying Django projects with mod_python, reference the [http://docs.djangoproject.com/en/dev/howto/deployment/modpython/ Django website].
+{{{
+#!sh
+<Location "/custominstallerbuilder/">
+  SetHandler python-program
+  PythonHandler django.core.handlers.modpython
+  
+  SetEnv DJANGO_SETTINGS_MODULE custominstallerbuilder.local.settings 
+  PythonPath "['/parent/of/custominstallerbuilder', '/path/to/seattlelib'] + sys.path"
+  PythonOption django.root /custominstallerbuilder
+  
+  PythonDebug On
+</Location>
+
+Alias "/custominstallerbuilder/static/" "/path/to/custominstallerbuilder/html/static/"
+<Location "/custominstallerbuilder/static/">
+  SetHandler None
+</Location>
+}}}
+
+== Other configurations ==
+The Custom Installer Builder is a normal Django project. General instructions for [http://docs.djangoproject.com/en/dev/howto/deployment/ Deploying Django] can be found on the Django project website. Make sure that the /path/to/seattlelib is within your Python path, regardless of your deployment method.
