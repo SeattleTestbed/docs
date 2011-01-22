@@ -2,7 +2,7 @@
 
 '''Note:''' The current customized installer builder does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
 
-The XML-RPC interface to the [https://seattle.cs.washington.edu/wiki/CustomizedInstaller Custom Installer Builder] can be used to create installers which can then be fetched over HTTP. 
+The XML-RPC interface to the [wiki:CustomInstallerBuilder Custom Installer Builder] can be used to create installers which can then be fetched over HTTP. 
 
 The following procedure calls are supported:
 
