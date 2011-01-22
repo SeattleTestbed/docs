@@ -61,9 +61,7 @@ Quit the server with CONTROL-C.
 [[BR]]
 = Future procedure =
 
-'''Note:''' This version of the Custom Installer Builder is not yet available in the SVN tree. This documentation exists for future reference.
-
-For the future version of Custom Installer Builder, follow this procedure.
+'''Note:''' This information applies to the future version of the Custom Installer Builder, not yet released.
 
  * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
 
