@@ -1,4 +1,4 @@
-= Seattle Custom Installer Builder Future API =
+= Custom Installer Builder API =
 
 '''Note:''' The current customized installer builder does not have a functioning XML-RPC interface. A new version will be released soon. This page documents the future behavior of the XML-RPC interace.
 
