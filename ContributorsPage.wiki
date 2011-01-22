@@ -23,7 +23,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * '''[UnitTests Running Repy and / or node manager unit tests]'''
    * [UpdaterUnitTests Running Software Updater Unit Tests]
    * [IntegrationTestFramework Writing Integration Tests] 
-   * [wiki:GENIPortalTesting Running a GENI test server]
+   * [wiki:SeattleGeniTesting Running a GENI test server]
    * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [RemoteTestingService Running remote tests on seattle testbeds]
    * [ContinuousBuild Continuous Build]
@@ -37,12 +37,12 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [InstallerDocumentation Formal Installer Documentation]
    * [SeattleDownload Download and installation instructions] for Seattle
    * [GeniInstallation Installing SeattleGENI] for the GENI portal
-   * [CustomizedInstaller Using the Customized Installer]
+   * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
    * [wiki:SeattleGeniAPI SeattleGENI XML-RPC API]
    * [wiki:SeattleGeniClientLib SeattleGENI XML-RPC Client Library]
-   * [wiki:CustomInstallerBuilderAPI Custom Installer Builder XML-RPC API]
+   * [wiki:CustomInstallerBuilderApi Custom Installer Builder XML-RPC API]
 
  * Deployment
    * [BaseInstallers Building] the base installers
