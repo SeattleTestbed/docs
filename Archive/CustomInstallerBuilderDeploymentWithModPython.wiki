@@ -18,6 +18,7 @@ For more information on deploying Django projects with mod_python, reference the
   SetEnv DJANGO_SETTINGS_MODULE custominstallerbuilder.local.settings 
   PythonPath "['/parent/of/custominstallerbuilder', '/path/to/seattlelib'] + sys.path"
   PythonOption django.root /custominstallerbuilder
+  PythonInterpreter custominstallerbuilder
   
   PythonDebug On
 </Location>
