@@ -14,9 +14,9 @@
 
 || Jan 31st, 2009 || Gates Commons || NW Python Day || Justin || Talk / Live Demo
 
-|| 2:30-3:00 March 6th, 2009 || Chattanooga, TN || SIGCSE 2009 || Justin || Talk / Live Demo
+|| 2:30-3:00 Mar 6th, 2009 || Chattanooga, TN || SIGCSE 2009 || Justin || Talk / Live Demo
 
-|| 5:30-8:30 PM March 31th, 2009 || Miami, FL || GEC-4 || Justin || Poster / Demo
+|| 5:30-8:30 PM Mar 31th, 2009 || Miami, FL || GEC-4 || Justin || Poster / Demo
 
 || 10-11 AM April 2nd, 2009 || Miami, FL || GEC-4 Opt-In WG || Justin || Talk / Live Demo
 
@@ -85,10 +85,13 @@
 || 1-1:15 July 20th, 2010 || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
 
 || 9:30-9:45 July 22th, 2010 || Hilton La Jolla Torrey Pines, Salon D || Seattle End user use discussion || Justin || Talk
-|| August 13th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk
-|| August 14th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk, Live Demo
-|| 6-7:30PM October 4th, 2010 || Pacific Ballroom & Vancouver Island Room, Vancouver BC  || OSDI Poster Session || Danny || ~~ Poster + Demo! ~~ Canceled due to visa issues
-|| 6-8PM October 13th, 2010 || Gates Commons, Paul Allen Center, University of Washington  || Hot Seattle Topics Meeting || Various || Talks, Demos
-|| October 10th, 2010 || Closed to public || Microsoft Research Asia || Justin || Talk, Live Demo
-|| 4:30-7PM November 10th, 2010 || Paul Allen Center Atrium, University of Washington  || ACM Research Night || Justin, Jeff || Poster Presentation
+|| Aug 13th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk
+|| Aug 14th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk, Live Demo
+|| 6-7:30PM Oct 4th, 2010 || Pacific Ballroom & Vancouver Island Room, Vancouver BC  || OSDI Poster Session || Danny || ~~ Poster + Demo! ~~ Canceled due to visa issues
+
+|| Oct 10th, 2010 || Closed to public || Microsoft Research Asia || Justin || Talk, Live Demo
+
+|| 6-8PM Oct 13th, 2010 || Gates Commons, Paul Allen Center, University of Washington  || Hot Seattle Topics Meeting || Various || Talks, Demos
+
+|| 4:30-7PM Nov 10th, 2010 || Paul Allen Center Atrium, University of Washington  || ACM Research Night || Justin, Jeff || Poster Presentation
 
