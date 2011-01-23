@@ -1,5 +1,6 @@
 {{{
 #!NewsFlash
+= Version 2.0 =
 [[BlogList(recent=3, heading=Latest News, format=float, max_size=150)]] 
 }}} 
 
