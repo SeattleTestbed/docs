@@ -80,10 +80,12 @@
 
 || July 9-14th, 2010 || University of Vienna || Ph.D. class  http://fc.cs.univie.ac.at/phd_2010 || Justin and Kurt Tutschku || Talk, Live Demo, Classroom experimentation
 
-|| 9-12 July 20th || Hilton La Jolla Torrey Pines, Salon B || Seattle workshop co-located with GEC 8 || Justin, Monzur || Talk, Live Demo
+|| 9-12 July 20th, 2010 || Hilton La Jolla Torrey Pines, Salon B || Seattle workshop co-located with GEC 8 || Justin, Monzur || Talk, Live Demo
 
-|| 1-1:15 July 20th || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
+|| 1-1:15 July 20th, 2010 || Hilton La Jolla Torrey Pines, Scripps Ballroom II || Seattle / ProtoGENI integration demo || Monzur || Talk, Live Demo
 
-|| 9:30-9:45 July 22th || Hilton La Jolla Torrey Pines, Salon D || Seattle End user use discussion || Justin || Talk
-|| August 13th || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk
-|| August 14th || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk, Live Demo
+|| 9:30-9:45 July 22th, 2010 || Hilton La Jolla Torrey Pines, Salon D || Seattle End user use discussion || Justin || Talk
+|| August 13th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk
+|| August 14th, 2010 || VLIB 260 Vancouver Campus of Washington State University  || NW-DCSD Summer Workshop || Monzur || Talk, Live Demo
+|| 4:30-7PM November 10th, 2010 || Paul Allen Center Atrium, University of Washington  || ACM Research Night || Justin, Jeff || Talk, Live Demo
+
