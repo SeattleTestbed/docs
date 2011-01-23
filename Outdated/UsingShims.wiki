@@ -37,7 +37,7 @@ Here is a sample echo server. You need to tell the shim library what shims you w
 include ShimStackInterface.repy
 
 mycontext['UsingShims'] = True
-server_shim = ShimStackInterface('(RSAShim)(NatDeciderShim)')
+server_shim = ShimStackInterface('(RSAShim)(NatDeciderShim)', 'mylocalname')
 
 def server_callback(rip, rport, sock, th, lh):
   while True:
@@ -49,7 +49,7 @@ if callfunc == 'initialize':
   server_shim.waitforconn(serverip, 12345, server_callback)
 }}}
 
-In writing the client, you don't need to specify what shims to use. The shim library automatically detects the shim stack on the server, and it subsequently inserts the correct shims into the client's stack to communicate with the server. This is known shim stack ''balancing'', which will be explained later.
+In writing the client, you only need to use the CoordinationShim. The CoordinationShim shim library automatically detects the shim stack on the server, and it subsequently inserts the correct shims into the client's stack to communicate with the server. This is known shim stack ''balancing'', which will be explained later.
 
 Here is a simple echo client:
 
@@ -58,7 +58,7 @@ Here is a simple echo client:
 include ShimStackInterface.repy
 
 mycontext['UsingShims'] = True
-client_shim = ShimStackInterface()
+client_shim = ShimStackInterface('CoordinationShim')
 
 if callfunc == 'initialize':
   serverip = callargs[0]
@@ -76,7 +76,7 @@ In case you're wondering about the implementation details, the !ShimStackInterfa
 
 The public interface of the !ShimStackInterface is identical to the network system calls. The following public methods are defined. Their usage can be found in RepyLibrary.
 
- * `ShimStackInterface(shim_stack_string="")`: Constructor.
+ * `ShimStackInterface(shim_stack_string, local_host_name)`: Constructor.
  * `waitforconn`
  * `openconn`
  * `stopcomm`
