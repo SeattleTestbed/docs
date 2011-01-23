@@ -95,4 +95,4 @@
 
 || 4:30-7PM Nov 10th, 2010 || Paul Allen Center Atrium, University of Washington  || ACM Research Night || Justin, Jeff || Poster Presentation
 
-|| Jan 25th, 2011 || University of North Carolina, Charlotte (?)  || Seattle: A Peer-to-Peer Platform for Safe Code Execution || Justin || Talk, Demo
+|| Jan 25th, 2011 || (?)  || University of North Carolina, Charlotte  || Justin || Talk, Demo
