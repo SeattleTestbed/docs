@@ -926,7 +926,7 @@ Receives data that was sent by the connected party using send.   Note that this 
         worth of netrecv, and 64 bytes of netsend.
   
       <Returns>
-        The data received from the socket (as a string).   If '' is returned,
+        The data received from the socket (as a string).   If an empty string is returned,
         the other side has closed the socket and no more data will arrive.
 
 [[BR]] 
