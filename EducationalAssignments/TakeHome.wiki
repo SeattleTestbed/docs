@@ -21,7 +21,7 @@ You must have Python2.5 or Python2.6, the programming language, installed on you
 
 Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
 
-In the right pane, select LAN and choose 5 computers, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
+In the top pane, select LAN and choose 5 vessels, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
 At this point, you should have vessels (VMs) that you can use to run your code!
 
@@ -288,7 +288,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Click on the "add resources" button, under the My Vessels tab, click on WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
+Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Under the My Vessels tab, in the "Get more resources" pane, select WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
 
 Back in seash, type
 
@@ -341,11 +341,7 @@ Then type
 username@WAN !> run allpairsping.repy GENIport
 }}}
 
-Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage from a different computer if the problem persists. 
-{{{
-#!python
-username@WAN !> show log
-}}}
+Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage of a different computer if the problem persists.
 
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like the image below.
 
@@ -435,7 +431,7 @@ Then type
 
 and you'll see the prompt changes to "username@ !>". 
 
-Check on the Seattle GENI website to see if you still have nodes to use.   If not, click on the add resources button, under the Quick Start tab, click on WAN, choose 1 computers, and click "Go!".  
+Check on the Seattle GENI website to see if you still have nodes to use.   If not, under My Vessels, select WAN, choose 1 computer, and click "Get".  
 
 Now under seash at the " username@ !>" prompt, type
 
