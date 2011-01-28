@@ -403,19 +403,11 @@ username@WAN !> on %node1 show log
 == Step 11 : Observed behavior from your home computer ==
 ----
 
-The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.   
+The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.  You will need to download the toolkit and keys like you previously did in Step 2.
 
-Install Seattle on your home computer by logging into your Seattle GENI account.   Click on the Donations tab.   On the right hand side, you'll see installers available for Windows / Mac / Linux.   Click on the appropriate type for your home computer.   After downloading the installer, uncompress / unzip it.
+If you can't run Repy on your home computer, you can also obtain a computer using Seattle GENI.   If you use Seattle GENI, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
 
- * On Windows do start, run, cmd and then cd to the folder where you uncompressed the installer.   Run install.bat
-
- * On Mac / Linux, open a terminal window and change to the directory where you uncompressed the installer. Run ./install.sh
-
-You also will need to download the toolkit and keys like you previously did in Step 2.   Copy all of the files from the toolkit into the directory where you uncompressed the installer.   Change so that your terminal window is in the directory where you unpacked the installer.   
-
-Alternatively, if you can't run Seattle on your home computer, you can also obtain a computer using Seattle GENI.   If you use Seattle GENI, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
-
-Once you have Seattle installed locally or have obtained a NAT node using Seattle GENI, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
+Either way, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
 
 {{{
 #!python
@@ -446,7 +438,7 @@ You should see the IP of at least one WAN node. Write down the IP address of the
 username@ !> on %WANnode run udppingserver.repy GENIport
 }}}
 
-Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!).   Remember to replace ''WANIP'' with the WAN node's IP address and ''GENIport'' with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
+Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!) after you cd to the directory the toolkit is in.   Remember to replace ''WANIP'' with the WAN node's IP address and ''GENIport'' with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
 
 
 {{{
@@ -503,4 +495,4 @@ If you have a firewall, your home computer may not be able to receive incoming c
 
 == Conclusion ==
 
-That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
+That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you would like to [DonatingResources donate resources] to the Seattle project, you call install Seattle on your home computer.   Clicking on the Get Donations tab from your Seattle GENI account and picking the appropriate installer to download will credit the donation to your account.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
