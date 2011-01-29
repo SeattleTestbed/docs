@@ -1,6 +1,6 @@
 == What is it? ==
 
-Taking advantage of the ability to register a domain name for a node's IP address through [wiki:zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
+Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
 
 
 
@@ -8,9 +8,9 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
 General instructions for use are as follows:
 
-First, upload all the required files for the website on to the node. This includes html files, css, and images that may be used. Also, note that since nodes do not support the use of folders, any file referencing within your html files do not contain a folder name of any sort. Then, in the code below, set the _ADDRESS_NAME to be whatever domain name you desire as long as it ends in ".zenodotus.cs.washing.edu", and modify the mycontext['site_map'] dictionary of dictionaries depending on how you want the URL pathing for your site to work.
+First, upload all the required files for the website on to the node. This includes html files, css, and images that may be used. Also, note that since nodes do not support the use of folders, any file referencing within your html files do not contain a folder name of any sort. Then, in the code below, set the _ADDRESS_NAME to be whatever domain name you desire as long as it ends in ".zenodotus.cs.washing.edu", and modify the mycontext:site_map dictionary of dictionaries depending on how you want the URL pathing for your site to work.
 
-A couple things to note about mycontext['site_map']:
+A couple things to note about mycontext:site_map:
  - Image file names need to be placed in the same level of dictionaries as the page they appear in to load correctly
  - A key with no characters also needs to be included. It will mark the home page of your website.
  - For simplicity sake, a valid URL path should always end in a html file name of some sort. Anything else should either redirect the   user or throw up a Page not found
@@ -198,10 +198,10 @@ if callfunc == 'initialize':
 }}}
 
 
-'''To run this code on a Seattle node, you will need to pre-process the code using [wiki:repypp.py repypp.py]'''
+'''To run this code on a Seattle node, you will need to pre-process the code using [wiki:SeattleLib/repypp.py repypp.py]'''
 
 
-Further information about advertise_announce, settimer, and _rehost_callback can be found at the [wiki:zenodotus zenodotus] page.
+Further information about advertise_announce, settimer, and _rehost_callback can be found at the [wiki:Zenodotus zenodotus] page.
 
 Basically, when running in a node, this will associate seattle.zenodotus.cs.washington.edu with the node's IP Address. When a user types in the address along with your respective port number into the browser, they will automatically be directed to the home page of the site, which, in this case, would be "seattle.zenodotus.cs.washington.edu:(port number)/html/index.html". Any further URL requests will result in the server doing a check to see that the pathing matches the site map's configuration, and either send back the web file associated with page requested or be redirected to whatever path was set in the 'redirect' key field.
 
