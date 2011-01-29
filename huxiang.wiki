@@ -1,0 +1,212 @@
+== What is it? ==
+
+Taking advantage of the ability to register a domain name for a node's IP address through [wiki:zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
+
+
+
+== How do I use it? ==
+
+General instructions for use are as follows:
+
+First, upload all the required files for the website on to the node. This includes html files, css, and images that may be used. Also, note that since nodes do not support the use of folders, any file referencing within your html files do not contain a folder name of any sort. Then, in the code below, set the _ADDRESS_NAME to be whatever domain name you desire as long as it ends in ".zenodotus.cs.washing.edu", and modify the mycontext['site_map'] dictionary of dictionaries depending on how you want the URL pathing for your site to work.
+
+A couple things to note about mycontext['site_map']:
+ - Image file names need to be placed in the same level of dictionaries as the page they appear in to load correctly
+ - A key with no characters also needs to be included. It will mark the home page of your website.
+ - For simplicity sake, a valid URL path should always end in a html file name of some sort. Anything else should either redirect the   user or throw up a Page not found
+
+
+Below is an example of the program hosting a few example pages from Seattle's home page:
+
+{{{
+#!python
+include advertise.repy
+include httpserver.repy
+include geoip_client.repy
+
+
+# Refresh every 600 seconds (10 minutes)
+
+_REFRESH_FREQUENCY = 600
+
+# Put the address here, since it's a constant.
+_ADDRESS_NAME = "seattle.zenodotus.cs.washington.edu"
+
+
+def _shallow_copy(site_map):
+  site_map_copy = site_map.copy()
+  site_map_copy['needed_files'] = {}
+  return site_map_copy
+
+def _rehost_callback():
+  # Refresh the association.
+  advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
+
+  # Set our timer again.
+  settimer(_REFRESH_FREQUENCY - 5, _rehost_callback, [])
+
+
+# Returns a string holding the html code to automatically redirect the user
+# to the site with the path passed in the argument
+def _redirect_call(path):
+  redirect_link = "http://" + mycontext['site_url'] + "/" + path
+  html = "<html><head><meta http-equiv=\"Refresh\" content=\"0; url=" + redirect_link + "\" /></head><body><p>Please follow <a href=\"" + redirect_link + "\">link</a>!</p></body></html>"
+
+  return html
+
+
+# Writes the node_location.html file that will display a simple page show the
+# vessel's location and coordinates
+def _write_location_page():
+  geoip_init_client()
+
+  thisnodeIP = getmyip()
+
+  location_dict = geoip_record_by_addr(thisnodeIP)
+
+  if location_dict:
+    coordinates = '<p>Coordinates: ' + str(location_dict['latitude']) + ", " + str(location_dict['longitude']) + '</p>'
+    location = '<p>Location: ' + geoip_location_str(location_dict) + '</p>'
+  else:
+    coordinates = '<p>Coordinates: Unknown</p>'
+    location = '<p>Location: Unknown</p>'
+
+  html = '<html><body>' + coordinates + location + '</body></html>'
+
+  locationpage = open('node_location.html', 'w')
+  locationpage.write(html)
+  locationpage.close()
+    
+
+
+def server_callback(request_dict):
+  statuscode = 500
+  statusmsg = 'Server Error'
+  filecontent = ''
+  filename = ''
+
+  if request_dict['verb'] == 'GET':
+
+    # Temp dictionary to hold a copy of the site_map
+    temp_map = mycontext['site_map'].copy()
+
+    # Remove leading and trailing '/', and
+    # split the requested path by '/'
+    requested_path = request_dict['path'].strip('/')
+    requested_path_list = requested_path.split('/')
+    
+
+    # User is asking for location of the vessel
+    if request_dict['querystr']:
+      if 'location' in request_dict['querystr']:
+        filename = 'node_location.html'
+
+    # If an empty path is passed, user is requesting home page
+    # Redirect to /html/index.html
+    elif not requested_path:
+      statuscode = 301
+      statusmsg = 'Redirected'
+      filecontent = _redirect_call('html/index.html')
+
+    else:
+      # Since all files are stored in a single location,
+      # iterate through site_map to determine if the given path is valid
+      for word in requested_path_list:
+        for path_name in temp_map.iterkeys():
+          if word == path_name:
+            if temp_map[word]['redirect']:
+              statuscode = 301
+              statusmsg = 'Redirected'
+              filecontent = _redirect_call(temp_map[word]['redirect'])
+              temp_map = temp_map[word]['needed_files']
+              break
+            else:
+              filename = temp_map[word]['site_file']
+              temp_map = temp_map[word]['needed_files']
+              break
+
+        else:
+          # Invalid URL
+          statuscode = 404
+          statusmsg = 'Page not found'
+          break
+
+
+
+    if filename:
+      try:
+        myfileobject = open(filename, 'r')
+        filecontent = myfileobject.read()
+        myfileobject.close()
+        statuscode = 200
+        statusmsg = 'OK'
+        
+      except:
+        # File not found on server despite valid path
+        statuscode = 500
+        statusmsg = 'Server Error'
+        filecontent = ''
+
+
+  return {'version':'0.9', 'statuscode':statuscode, 'statusmsg': statusmsg, 'headers': {'header':'a header'}, 'message': filecontent}
+
+
+
+
+if callfunc == 'initialize':
+
+  # Dictionary that will determine what kind of paths are considered valid when making
+  # HTTP requests
+  mycontext['site_map'] = {
+    'html':{'site_file':'', 'redirect':'html/index.html', 'needed_files':{
+        'index.html':{'site_file':'Seattle.html', 'redirect':'', 'needed_files':{}},
+        'education.html':{'site_file':'education.html', 'redirect':'', 'needed_files':{}},
+        'research.html':{'site_files':'research.html', 'redirect':'', 'needed_files':{}},
+        'development.html':{'site_files':'development.html', 'redirect':'', 'needed_files':{}},
+        'altruism.html':{'site_files':'altruism.html', 'redirect':'', 'needed_files':{}},
+        'netadmins.html':{'site_files':'netadmins.html', 'redirect':'', 'needed_files':{}},
+
+        # Image files for Seattle.html
+        'download.png':{'site_file':'download.png', 'redirect':'', 'needed_files':{}},
+        'header.png':{'site_file':'header.png', 'redirect':'', 'needed_files':{}},
+        'key.png':{'site_file':'key.png', 'redirect':'', 'needed_files':{}},
+        'style.css':{'site_file':'style.css', 'redirect':'', 'needed_files':{}},
+        }},
+      
+}
+
+  mycontext['site_url'] = _ADDRESS_NAME + ":" + callargs[0]
+
+
+  advertise_announce(_ADDRESS_NAME, getmyip(), _REFRESH_FREQUENCY)
+
+  settimer(_REFRESH_FREQUENCY - 5, _rehost_callback, [])
+
+  if len(callargs) != 1:
+    raise Exception("Incorrect number of arguments")
+
+  # Running remotely:
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  port = int(callargs[0])
+  ip = getmyip()
+
+  # Creates a file on the vessel that will display its location
+  _write_location_page()
+  
+  listencommhttpid = httpserver_registercallback((ip, port), server_callback)
+  
+}}}
+
+
+'''To run this code on a Seattle node, you will need to pre-process the code using [wiki:repypp.py repypp.py]'''
+
+
+Further information about advertise_announce, settimer, and _rehost_callback can be found at the [wiki:zenodotus zenodotus] page.
+
+Basically, when running in a node, this will associate seattle.zenodotus.cs.washington.edu with the node's IP Address. When a user types in the address along with your respective port number into the browser, they will automatically be directed to the home page of the site, which, in this case, would be "seattle.zenodotus.cs.washington.edu:(port number)/html/index.html". Any further URL requests will result in the server doing a check to see that the pathing matches the site map's configuration, and either send back the web file associated with page requested or be redirected to whatever path was set in the 'redirect' key field.
+
+Also, when a user requests a query for the location of the node by adding "?location" into anywhere in the path, the server will automatically bring up a page showing the coordinates of the node and its location, if available.
+
+Note that the code is still in the middle of development, and it should become much more user friendly in the future.
+
+
