@@ -41,6 +41,5 @@ def listops_uniq(list_a):
    Return a list that has no duplicate items
 
    Notes:[[BR]]
-   Notes: [[BR]]
-   * Raises TypeError if list_a or list_b is not a list.
+   * Raises TypeError if list_a is not a list.
    * Returns a list containing list_a which contains only unique values.
