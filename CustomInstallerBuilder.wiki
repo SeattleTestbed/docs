@@ -29,4 +29,4 @@ Once you are done configuring your vessels, build your customized installer by c
 
 == Step 5 : Download your customized installer ==
 
-At the end of Step 4 you will be directed to a downloads page where you can download an installer for the platform of your choice. For more information on how to install Seattle see [https://seattle.cs.washington.edu/wiki/SeattleDownload this page].
+At the end of Step 4, you will be directed to a downloads page where you can download an installer for the platform of your choice. To use these installers, see the [https://seattle.cs.washington.edu/wiki/SeattleDownload installation instructions].
