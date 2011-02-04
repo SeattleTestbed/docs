@@ -76,9 +76,11 @@ $ cd custominstallerbuilder
 $ cp -R local_template local
 }}}
 
- * '''Step 3:''' Edit "local/settings.py" to match your local configuration. On blackbox, it is sufficient to change the following lines:
+ * '''Step 3:''' Edit "local/settings.py" to match your local configuration. On blackbox.cs, it is sufficient to change the following lines:
 
 {{{
+SECRET_KEY = '***** This should be changed to a random string *****'
+...
 SERVE_STATIC = False
 ...
 BASE_URL = 'http://domain.com/'
@@ -89,6 +91,8 @@ PROJECT_URL = BASE_URL + 'custominstallerbuilder/'
 to the following:
 
 {{{
+SECRET_KEY = 'RANDOM_STRING'
+...
 SERVE_STATIC = True
 ...
 BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
@@ -96,7 +100,7 @@ BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
 PROJECT_URL = BASE_URL
 }}}
 
-PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
+RANDOM_STRING should be a random string of your own choosing — do not share it with others. PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
  * '''Step 4:''' Still within the "custominstallerbuilder" directory, run the django test server:
 
