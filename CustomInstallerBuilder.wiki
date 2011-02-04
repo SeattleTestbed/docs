@@ -2,7 +2,7 @@
 
 Normally, installers created through SeattleGENI subdivide a donor's resources into two vessels. As always, there is a small vessel (20%) reserved for Seattle itself. The main vessel (80%) is owned by the experiment planner, and a special key is entered for the vessel user. This special key allows anybody to download a customized installer (provided through SeattleGENI) and donate their computing resources to the planner's experiment.
 
-If the experiment planner wants to further subdivide the vessels, he can use the [http://seattle.cs.washington.edu/customized_installer/ customized installer builder]. This tool allows the planner to create several smaller vessels in place of the larger main vessel. Each vessel can be assigned a particular owner and a number of users. Because working with cryptographic keys is awkward, the Custom Installer Builder can accept public keys from files, or generate new key pairs entirely.
+If the experiment planner wants to further subdivide the vessels, he can use the [http://seattle.cs.washington.edu/customized_installer/ Custom Installer Builder]. This tool allows the planner to create several smaller vessels in place of the larger main vessel. Each vessel can be assigned a particular owner and a number of users. Because working with cryptographic keys is awkward, the Custom Installer Builder can accept public keys from files, or generate new key pairs entirely.
 
 On the backend, there will soon be an XML-RPC interface to create customized installers. Future versions of SeattleGENI will use this interface to build all installers.
 
