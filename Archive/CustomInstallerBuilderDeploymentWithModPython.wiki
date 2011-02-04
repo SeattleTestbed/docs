@@ -31,3 +31,11 @@ Alias "/custominstallerbuilder/static/" "/path/to/custominstallerbuilder/html/st
 
 == Other configurations ==
 The Custom Installer Builder is a normal Django project. General instructions for [http://docs.djangoproject.com/en/dev/howto/deployment/ Deploying Django] can be found on the Django project website. Make sure that the /path/to/seattlelib is within your Python path, regardless of your deployment method.
+
+
+= Updating the base installers =
+New base installers should be placed in the /path/to/custominstallerbuilder/html/static/installers/base directory. To force pre-built installers to be rebuilt upon next request, execute this command:
+{{{
+#!sh
+python /path/to/custominstallerbuilder/manage.py cleaninstallers
+}}}
