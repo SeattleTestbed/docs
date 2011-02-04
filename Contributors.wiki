@@ -1,8 +1,5 @@
 = Contributors =
-
-----
 [[TOC(inline)]]
-----
 
 == Core Software ==
 Repy sandbox – Justin Cappos
