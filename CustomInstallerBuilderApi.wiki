@@ -14,13 +14,20 @@ The following procedure calls are supported:
 
     Returns the current API version as a string. If you are designing clients that leverage this API, it may be helpful to check against this string to prevent unanticipated behavior.
 
+    A sample call:
+{{{
+#!python
+proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
+results = proxy.api_version()
+}}}
+
     A sample return string:
 {{{
 #!python
 '2.0'
 }}}
 
- * build_installers(vessels, platforms, user_data=None)
+ * build_installers(vessels, user_data=None)
 
     Builds an installer for each of the specified platforms using the given vessel and user information. In the absence of provided user data, cryptographic keys will automatically be generated.
 
@@ -32,29 +39,29 @@ vessels = [
     {'percentage': 20, 'owner': 'carl', 'users': ['darren']},
 ]
 
-platforms = ['linux', 'mac', 'windows']
-
 user_data = {
     'alex': {'public_key': '123 321'},
 }
 
 proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
-results = proxy.build_installers(vessels, platforms, user_data)
+results = proxy.build_installers(vessels, user_data)
 }}}
 
     A sample return dictionary (assuming the user requested all three platforms):
 {{{
 #!python
 {
-    'keys': {
-        'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
-        'private': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/private'
-    },
-
     'installers': {
         'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
         'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
         'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+    },
+
+    'users': {
+        'alex': {'public_key': '123 321'},
+        'bob': {'public_key': '123 321', 'private_key': '123 321'},
+        'carl': {'public_key': '123 321', 'private_key': '123 321'},
+        'darren': {'public_key': '123 321', 'private_key': '123 321'},
     },
 
     'build_id': BUILD_ID
@@ -65,30 +72,23 @@ results = proxy.build_installers(vessels, platforms, user_data)
 
 
 
- * get_all_urls(build_id)
+ * get_urls(build_id)
 
-    Returns a dictionary containing the URLs at which the installers and public/private key archives may be found for the given build ID.
+    Returns a dictionary containing the URLs from which installers for the given build ID may be downloaded.
 
     A sample call:
 {{{
 #!python
 proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
-results = proxy.get_all_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
+results = proxy.get_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 }}}
 
     A sample return dictionary:
 {{{
 #!python
 {
-    'keys': {
-        'public': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/public',
-        'private': 'http://example.com/custominstallerbuilder/BUILD_ID/keys/private'
-    },
-
-    'installers': {
-        'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
-        'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
-        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
-    }
+    'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
+    'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
+    'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
 }
 }}}
