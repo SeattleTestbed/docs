@@ -34,8 +34,7 @@ The Custom Installer Builder is a normal Django project. General instructions fo
 
 
 = Updating the base installers =
-New base installers should be placed in the /path/to/custominstallerbuilder/html/static/installers/base directory. To force pre-built installers to be rebuilt upon next request, execute this command:
+New base installers should be placed into the /path/to/custominstallerbuilder/html/static/installers/base directory. To force pre-built installers to be rebuilt upon next request, execute this command:
 {{{
-#!sh
-python /path/to/custominstallerbuilder/manage.py cleaninstallers
+$ python /path/to/custominstallerbuilder/manage.py cleaninstallers
 }}}
