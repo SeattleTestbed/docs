@@ -38,3 +38,7 @@ New base installers should be placed into the /path/to/custominstallerbuilder/ht
 {{{
 $ python /path/to/custominstallerbuilder/manage.py cleaninstallers
 }}}
+
+
+= Using integration tests =
+There are two integration tests available in the /path/to/custominstallerbuilder/tests directory. They expect the "integrationtestlib" and "send_gmail" modules to be in the Python path. Each file must be edited to point to a running instance of the Custom Installer Builder XML-RPC interface.
