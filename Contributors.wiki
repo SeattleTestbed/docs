@@ -4,71 +4,44 @@
 [[TOC(inline)]]
 ----
 
-
-[[BR]]
 == Core Software ==
-----
+Repy sandbox – Justin Cappos
+ * Improved Windows API, CPU Throttling fix – Armon Dadger
+ * Improved testing – Brent Couvrette
+
+Node Manager – Justin Cappos
+ * Improved testing – Cosmin Barsan
+
+Seash – Justin Cappos
+
+Software updater – Justin Cappos, Brent Couvrette
 
 
-Repy Sandbox -- Justin Cappos
-
- * Improved Windows API, CPU Throttling fix -- Armon Dadger
-
- * Improved testing -- Brent Couvrette
-
-Node Manager -- Justin Cappos
- 
- * Improved testing -- Cosmin Barsan
-
-Seash -- Justin Cappos
-
-Software Updater -- Justin Cappos, Brent Couvrette
-
-
-[[BR]]
 == Web interfaces ==
-----
+Seattle website and wiki – Ivan Beschastnikh
+
+SeattleGENI website
+ * Backend – Ivan Beschastnikh, Justin Cappos
+ * Frontend – Peter Lipay, Sean Ren, Ivan Beschastnikh
+
+Installers – Carter Butaud
+
+Custom Installer Builder
+ * Version 1
+   * Backend – Carter Butaud, Ivan Beschastnikh
+   * Frontend – Sean Ren, Peter Lipay
+  * Version 2 – Alex Hanson
 
 
-Seattle website / wiki -- Ivan Beschastnikh
-
-Seattle Geni Website
-
- * Backend -- Ivan Beschastnikh, Justin Cappos
-
- * Front end / GUI -- Peter Lipay, Sean Ren, Ivan Beschastnikh
-
-Installers -- Carter Butaud
-
-Custom Installer Creator
-
- * Backend -- Carter Butaud, Ivan Beschastnikh
-
- * Front end / GUI -- Sean Ren, Peter Lipay
-
-
-[[BR]]
 == Documentation ==
-----
-
-Repy Tutorials -- Kyungil Kim, Andreas Sekine, Justin Cappos
-
-Repy API -- Justin Cappos, Jeff Flatten
+Repy tutorials – Kyungil Kim, Andreas Sekine, Justin Cappos
+Repy API – Justin Cappos, Jeff Flatten
 
 
-
-[[BR]]
 == Useful add-ons ==
-----
-
-Test framework -- Brent Couvrette
+Testing framework – Brent Couvrette
 
 
-
-[[BR]]
 == External Contributors ==
-----
-
-Patch to fix race conditions in installer -- Jake Appelbaum
-
-VIM syntax coloring for repy -- João Moreno
+Patch to fix race conditions in installer – Jake Appelbaum
+VIM syntax coloring for Repy – João Moreno
