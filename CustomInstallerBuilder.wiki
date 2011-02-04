@@ -19,7 +19,7 @@ Initially, the page loads with no vessels, and no users. You add new users (and 
 
 Next create the vessels that you would like your Seattle installer to be configured with. You can add new vessels at the bottom box on the page by clicking +  or remove existing vessels by clicking X right above the vessel partition bar.
 
-== Step 3 : Configure your vessels ==
+== Step 3 : Add users to vessels ==
 
 Now drag the usernames appearing in the top box into the vessel boxes to associate user identities you created in Step 1 with the vessels you created in Step 2. Note that you can assign an identity to be the owner and/or a user of any one vessel. Note that you can use an identity multiple times.
 
