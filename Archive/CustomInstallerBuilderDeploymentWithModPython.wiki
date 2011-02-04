@@ -34,11 +34,11 @@ The Custom Installer Builder is a normal Django project. General instructions fo
 
 
 = Updating the base installers =
-New base installers should be placed into the /path/to/custominstallerbuilder/html/static/installers/base directory. To force pre-built installers to be rebuilt upon next request, execute this command:
+New base installers should be placed into the "/path/to/custominstallerbuilder/html/static/installers/base" directory. To force pre-built installers to be rebuilt upon next request, execute this command:
 {{{
 $ python /path/to/custominstallerbuilder/manage.py cleaninstallers
 }}}
 
 
 = Using integration tests =
-There are two integration tests available in the /path/to/custominstallerbuilder/tests directory. They expect the "integrationtestlib" and "send_gmail" modules to be in the Python path. Each file must be edited to point to a running instance of the Custom Installer Builder XML-RPC interface.
+There are two integration tests available in the "/path/to/custominstallerbuilder/tests" directory. They expect the "integrationtestlib" and "send_gmail" modules to be in the Python path. Each file must be edited to point to a running instance of the Custom Installer Builder XML-RPC interface.
