@@ -1,6 +1,5 @@
 = Testing the Custom Installer Builder =
-This page outlines how to deploy the Custom Installer Builder using Django's built-in test server.
-
+This page outlines how to deploy the Custom Installer Builder using Django's built-in test server on one of the Seattle project servers. It should be easy to apply a similar procedure to run the Custom Installer Builder on your own server.
 
 [[BR]]
 = Current procedure =
