@@ -11,22 +11,15 @@ On the backend, there will soon be an XML-RPC interface to create customized ins
 = A Tour of the Web Interface =
 [[Image(cib.png)]]
 
-== Step 1 : Create your users ==
+== Step 1 : Build Installers ==
+Start by '''creating users''' in the top half of the page. You can upload a public key for existing users, or allow the Custom Installer Builder to generate cryptographic keys for you.
 
-Initially, the page loads with no vessels, and no users. You add new users (and optionally their public key) to the page by filling in their username and clicking 'Add'. 
+Next, '''create your vessels''' by splitting the main vessel as you see fit. Vessels can be split by clicking one of the "+" icons along the top edge. You can delete a created vessel by clicking the "×" icon in its upper-right corner.
 
-== Step 2 : Create your vessels ==
+Finally, '''configure your vessels''' by dragging users from the top half of the page into the vessels created in the previous step. Each vessel must have a single owner, but may have any number of users.
 
-Next create the vessels that you would like your Seattle installer to be configured with. You can add new vessels at the bottom box on the page by clicking +  or remove existing vessels by clicking X right above the vessel partition bar.
+== Step 2 : Download keys ==
+Before you can download your installers, you must download the cryptographic keys for the users created in the previous step. These keys are not stored on our server after your browsing session expires.
 
-== Step 3 : Add users to vessels ==
-
-Now drag the usernames appearing in the top box into the vessel boxes to associate user identities you created in Step 1 with the vessels you created in Step 2. Note that you can assign an identity to be the owner and/or a user of any one vessel. Note that you can use an identity multiple times.
-
-== Step 4 : Build your customized installer ==
-
-Once you are done configuring your vessels, build your customized installer by clicking 'Create Installer'. Note that this button will be disabled until every vessel has an owner associated with it.
-
-== Step 5 : Download your customized installer ==
-
-At the end of Step 4, you will be directed to a downloads page where you can download an installer for the platform of your choice. To use these installers, see the [https://seattle.cs.washington.edu/wiki/SeattleDownload installation instructions].
+== Step 3: Download installers ==
+After you have downloaded the cryptographic keys, you are ready to download your installers! A link is provided to share these installers with others.
