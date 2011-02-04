@@ -9,7 +9,7 @@ On the backend, there will soon be an XML-RPC interface to create customized ins
 
 
 = A Tour of the Web Interface =
-[[Image(customized_installer_builder.jpg)]]
+[[Image(cib.png)]]
 
 == Step 1 : Create your users ==
 
