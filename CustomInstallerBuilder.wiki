@@ -16,7 +16,7 @@ Start by '''creating users''' in the top half of the page. You can upload a publ
 
 Next, '''create your vessels''' by splitting the main vessel as you see fit. Vessels can be split by clicking one of the "+" icons along the top edge. You can delete a created vessel by clicking the "×" icon in its upper-right corner.
 
-Finally, '''configure your vessels''' by dragging users from the top half of the page into the vessels created in the previous step. Each vessel must have a single owner, but may have any number of users.
+Finally, '''configure your vessels''' by dragging users from the top half of the page into the vessels created in the previous step. Each vessel must have a single owner, but may have any number of users. When you are ready, '''press the "Build" button''' to move to the next step.
 
 == Step 2 : Download keys ==
 Before you can download your installers, you must download the cryptographic keys for the users created in the previous step. These keys are not stored on our server after your browsing session expires.
