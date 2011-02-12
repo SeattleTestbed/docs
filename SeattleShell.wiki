@@ -2,19 +2,17 @@
 
 Seash is a terminal interface for managing Seattle resources. This page is intended as a short overview of commands that one can run in Seash.
 
-----
 [[TOC(inline)]]
-----
-[[BR]]
 
 == Starting Seash ==
 
 Seash can be started from the terminal by running the command {{{python seash.py}}}. Once Seash starts, it will print a line that starts with {{{!>}}}, and will wait for you to issue a command.
 
-[[BR]]
+
 == Seash Commands ==
 
 If you issue the {{{help}}} command in Seash, you will receive an output that describes all the commands Seash supports. Here's a listing of this output:
+
 {{{
 A target can be either a host:port:vesselname, %ID, or a group name.
 
@@ -39,6 +37,7 @@ join                             -- Join vessels on the same node
 help [help | set | show ]        -- help information 
 exit                             -- exits the shell
 }}}
+
 
 == Further Information ==
 
