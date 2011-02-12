@@ -17,7 +17,7 @@ The following procedure calls are supported:
     A sample call:
 {{{
 #!python
-proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
+proxy = xmlrpclib.ServerProxy('https://seattlegeni.cs.washington.edu/custom_install/xmlrpc/')
 results = proxy.api_version()
 }}}
 
@@ -43,7 +43,7 @@ user_data = {
     'alex': {'public_key': '123 321'},
 }
 
-proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
+proxy = xmlrpclib.ServerProxy('https://seattlegeni.cs.washington.edu/custom_install/xmlrpc/')
 results = proxy.build_installers(vessels, user_data)
 }}}
 
@@ -52,9 +52,9 @@ results = proxy.build_installers(vessels, user_data)
 #!python
 {
     'installers': {
-        'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
-        'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
-        'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+        'windows': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/windows',
+        'mac': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/mac',
+        'linux': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/linux'
     },
 
     'users': {
@@ -79,7 +79,7 @@ results = proxy.build_installers(vessels, user_data)
     A sample call:
 {{{
 #!python
-proxy = xmlrpclib.ServerProxy('http://example.com/custominstallerbuilder/xmlrpc/')
+proxy = xmlrpclib.ServerProxy('https://seattlegeni.cs.washington.edu/custom_install/xmlrpc/')
 results = proxy.get_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 }}}
 
@@ -87,8 +87,8 @@ results = proxy.get_urls('87198c4618a893c47b3d48643b7d97454417c8d5')
 {{{
 #!python
 {
-    'windows': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/windows',
-    'mac': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/mac',
-    'linux': 'http://example.com/custominstallerbuilder/BUILD_ID/installers/linux'
+    'windows': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/windows',
+    'mac': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/mac',
+    'linux': 'https://seattlegeni.cs.washington.edu/custom_install/BUILD_ID/installers/linux'
 }
 }}}
