@@ -1,7 +1,5 @@
 = Custom Installer Builder API =
 
-'''Note:''' This information applies to the future version of the Custom Installer Builder, not yet released.
-
 The XML-RPC interface to the [wiki:CustomInstallerBuilder Custom Installer Builder] can be used to create installers which can then be fetched over HTTP. 
 
 The following procedure calls are supported:
