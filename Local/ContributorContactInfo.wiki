@@ -1,27 +1,21 @@
 = Project Members and Affiliates =
+'''If you are working on Seattle, please add your information to this table.''' Please include as much information as you are willing to disclose, and keep the list sorted alphabetically by SVN username.
 
-This page is to organize and collect contact information for all of the developers in one location.
-Please include as much information as you are willing to disclose. SVN user is so that the proper user can be contacted if a bug is identified with their code, and the SVN -> Name translation isn't immediately obvious.
-
-You can often find other Seattle contributors on IRC in room #seattle on freenode.net.
+You can often find other Seattle contributors on IRC in room {{{#seattle}}} on {{{freenode.net}}}.
 
 
-'''If you are working on Seattle, please add your information to this table.'''   Please keep the list ordered alphabetically by SVN username.
-
-
-
-|| '''Name''' || '''E-mail''' || '''Phone''' || '''SVN Username''' || '''Trac Username''' ||
-|| Alan Loh || yaluen at uw || 425-273-5651 || alanloh || alanloh ||
-|| Alex Hanson || alexjh at cs || || alexjh || alexjh
-|| Armon Dadgar || armond at cs || 206-914-6233 || armon ||  armon ||
-|| Eric Kimbrel || kimbrl at cs ||    || kimbrl || kimbrl ||
-|| Ivan Beschastnikh || ivan at cs || || ivan || ivan ||
-|| Jeff Rasley || jeffra45 at cs || || jeffra45 || jeffra45 ||
-|| Justin Samuel || jsamuel at cs || || jsamuel || jsamuel ||
-|| Justin Cappos || justinc at cs  || || justinc || justinc ||
-|| Stephen Sievers || sjs25 at u || 425-343-2381 || sjs25 || sjs25 ||
-|| Steven Portzer || sportzer at cs || || sportzer || sportzer ||
-|| Monzur Muhammad || monzum at cs || || monzum || monzum ||
-|| Yafete Yemuru || yemuru at gmail || || yemuru || yemuru ||
-|| Zack Boka || zackrb at cs || || zackrb || zackrb ||
-|| Sebastian Morgan || sebass63 at gmail || 206-498-5597 || sebass63 || sebass63
+|| '''Name''' || '''Email''' || '''SVN Username''' || '''Trac Username''' || '''Phone''' ||
+|| Alan Loh || yaluen at uw || alanloh || alanloh || 425-273-5651 ||
+|| Alex Hanson || alexjh at cs || alexjh || alexjh || ||
+|| Armon Dadgar || armond at cs || armon ||  armon || 206-914-6233 ||
+|| Eric Kimbrel || kimbrl at cs || kimbrl || kimbrl || ||
+|| Ivan Beschastnikh || ivan at cs || ivan || ivan || ||
+|| Jeff Rasley || jeffra45 at cs || jeffra45 || jeffra45 || ||
+|| Justin Samuel || jsamuel at cs || jsamuel || jsamuel || ||
+|| Justin Cappos || justinc at cs  || justinc || justinc || ||
+|| Stephen Sievers || sjs25 at uw || sjs25 || sjs25 || 425-343-2381 ||
+|| Steven Portzer || sportzer at cs || sportzer || sportzer || ||
+|| Monzur Muhammad || monzum at cs || monzum || monzum || ||
+|| Yafete Yemuru || yemuru at gmail || yemuru || yemuru || ||
+|| Zack Boka || zackrb at cs || zackrb || zackrb || ||
+|| Sebastian Morgan || sebass63 at gmail || sebass63 || sebass63 || 206-498-5597 ||
