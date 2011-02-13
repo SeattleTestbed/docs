@@ -4,7 +4,6 @@ Explains how to go about deploying a new version of the code, which consists of 
 '''If you only want to make a release candidate build (or one that includes tests) available to the Custom Installer Builder, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattlegeni.cs).'''
 
 == Step by Step ==
-----
  1. Make sure the [wiki:ContinuousBuild continuous build] shows all tests passing (aside from any expected, non-critical failures such as new build machines not fully configured or flaky tests).
  1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattlegeni) testbed.
   1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
