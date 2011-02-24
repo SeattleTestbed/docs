@@ -23,7 +23,7 @@ In order to start using the scripts, you must first run a preparetest.py on a
 directory (or untar the files from a seattle install) as the scripts use some
 of seattlelib and other files.  
 
-The second step is to copy over all *.pubkey from trunk/www/node_state_transitions/.
+The second step is to copy over all *.pubkey from trunk/seattlegeni/node_state_transitions/.
 These files will be used to determine the states of the nodes.
 
 We also need to setup ssh-agent so that it will be able to set up our RSA key
