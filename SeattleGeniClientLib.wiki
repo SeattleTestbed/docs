@@ -36,7 +36,7 @@ when creating a SeattleGENIClient instance.
 === SeattleGENIClient Methods ===
 Please note, these methods are not the same as the XML-RPC API calls.
 The clientlib methods are simply convenient wrappers for those calls. 
-As such, most methods here have identical return values as the actual XMLRPC calls. Refer to the [https://seattle.cs.washington.edu/wiki/SeattleGeniAPI SeattleGENI XMLRPC API spec] for more info about what these functions return.
+As such, most methods here have identical return values as the actual XMLRPC calls. Refer to the [wiki:SeattleGeniApi SeattleGENI XMLRPC API spec] for more info about what these functions return.
 
 Available methods on SeattleGENIClient objects:
   The acquire methods all return a list of acquired resources, following the SeattleGENI XMLRPC API spec.
