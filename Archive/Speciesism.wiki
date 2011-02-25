@@ -20,6 +20,6 @@ To maintain the node's cache of addresses as current as possible, the Seattle No
 
 
 == Feedback ==
-[wiki:NATIntegration Integration with NAT Nodes]
+[wiki:NatIntegration Integration with NAT Nodes]
 
 
