@@ -5,7 +5,7 @@ This page describes how to redeploy SeattleGENI from the current svn trunk as we
 as some additional configuration information for using SeattleGENI in production.
 
  * For info on installing the necessary software to run GENI, see GeniInstallation.
- * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:GENIPortalTesting]
+ * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:SeattleGeniTesting]
 
 ----
 [[TOC(inline)]]
@@ -23,7 +23,7 @@ The Apache settings on our server can all be found in /etc/apache2/. The general
 
 The primary configuration file (that specific the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
 
-Note that the GENI site uses a SSL certificate and uses https:// (port 443) for all URLs that map into the GENI portal.
+Note that the GENI site uses a SSL certificate and uses HTTPS (port 443) for all URLs that map into the GENI portal.
 
 [[BR]]
 == Logrotate ==
