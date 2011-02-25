@@ -15,7 +15,7 @@ Once you are granted Wiki access, you can use the Trac software to change your p
 
 == Testbed machines ==
 
-An account will also be created on all of the testbed machines for you.   You can look at [https://seattle.cs.washington.edu/wiki/SeattleResources the list of Seattle development machines] for the list of testbed systems you should use to validate your code.
+An account will also be created on all of the testbed machines for you.   You can look at [wiki:SeattleResources the list of Seattle development machines] for the list of testbed systems you should use to validate your code.
 
 = Subscribe to the Mailing List =
 
