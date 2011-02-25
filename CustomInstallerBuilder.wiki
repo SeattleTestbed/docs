@@ -4,12 +4,14 @@ Normally, installers created through SeattleGENI subdivide a donor's resources i
 
 If the experiment planner wants to further subdivide the vessels, he can use the [https://seattlegeni.cs.washington.edu/custom_install/ Custom Installer Builder]. This tool allows the planner to create several smaller vessels in place of the larger main vessel. Each vessel can be assigned a particular owner and a number of users. Because working with cryptographic keys is awkward, the Custom Installer Builder can accept public keys from files, or generate new key pairs entirely.
 
-On the backend, there is also an [wiki:CustomInstallerBuilderAPI XML-RPC interface] to create customized installers.
+On the backend, there is also an [wiki:CustomInstallerBuilderAPI XML-RPC interface] to create customized installers. (In fact, this is how SeattleGENI generates the default installers it provides.)
 
 
 
 = A Tour of the Web Interface =
 [[Image(cib.png)]]
+
+Start by opening the [https://seattlegeni.cs.washington.edu/custom_install/ Custom Installer Builder] in your web browser.
 
 == Step 1 : Build Installers ==
 Start by '''creating users''' in the top half of the page. You can upload a public key for existing users, or allow the Custom Installer Builder to generate cryptographic keys for you.
