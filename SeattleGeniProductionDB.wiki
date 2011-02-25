@@ -2,7 +2,7 @@
 
 GENI uses the MySQL database, and InnoDB table types.
 
- * For info on installing/configuring the database, creating the necessary tables, etc, see GeniInstallation.
+ * For info on installing/configuring the database, creating the necessary tables, etc, see [wiki:SeattleGeniInstallation].
 
 ----
 [[TOC(inline)]]
