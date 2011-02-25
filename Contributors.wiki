@@ -32,6 +32,7 @@ Custom Installer Builder
 
 == Documentation ==
 Repy tutorials – Kyungil Kim, Andreas Sekine, Justin Cappos
+
 Repy API – Justin Cappos, Jeff Flatten
 
 
@@ -41,4 +42,5 @@ Testing framework – Brent Couvrette
 
 == External Contributors ==
 Patch to fix race conditions in installer – Jake Appelbaum
+
 VIM syntax coloring for Repy – João Moreno
