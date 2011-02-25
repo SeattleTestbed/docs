@@ -36,19 +36,19 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Installation instructions and documentation
    * [InstallerDocumentation Formal Installer Documentation]
    * [SeattleDownload Download and installation instructions] for Seattle
-   * [GeniInstallation Installing SeattleGENI] for the GENI portal
+   * [SeattleGeniInstallation Installing SeattleGENI] for the GENI portal
    * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
-   * [wiki:SeattleGeniAPI SeattleGENI XML-RPC API]
+   * [wiki:SeattleGeniApi SeattleGENI XML-RPC API]
    * [wiki:SeattleGeniClientLib SeattleGENI XML-RPC Client Library]
    * [wiki:CustomInstallerBuilderApi Custom Installer Builder XML-RPC API]
 
  * Deployment
    * [BaseInstallers Building] the base installers
-     * [wiki:NSISSystemSetup System setup instructions] to be able to build the Windows GUI installer
+     * [wiki:NsisSystemSetup System setup instructions] to be able to build the Windows GUI installer
    * [VersionDeployment Deploying] a new version
-   * [wiki:ProductionGeniHTTPService Updating] the production SeattleGENI code
+   * [wiki:SeattleGeniProductionHttp Updating] the production SeattleGENI code
    * [wiki:BuildDemokit Building the Demokit]
    * [wiki:Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
 
