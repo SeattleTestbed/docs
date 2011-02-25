@@ -18,7 +18,7 @@ You will implement your stop-and-wait protocol over Repy's UDP functions.  Speci
 recvmess(localip, localport, function) # Returns an event handler
 sendmess(desthost, destport, message, localip=None, localport=None) # Returns the bytes sent
 }}}
-See the [https://seattle.cs.washington.edu/wiki/RepyLibrary Repy Library Reference] for more details.
+See the [wiki:RepyApi Repy Library Reference] for more details.
 
 [[BR]]
 === Reliable API ===
@@ -66,7 +66,7 @@ You should put the client in a file called '''reliable_client.repy''' and the se
 
 The client reads data from ''inputfile'' and sends it to the server. The client's non-optional arguments indicate the target address (''serverhost'', ''serverportnum'').  The other arguments should be optional.  The source address (''srchost'', ''srcportnum'') indicates the return address for Repy's ''sendmess'' routine.  The final arguments are the maximum allowable size of a reliable datagram, ''maxdgramsize''; the number of retries for each packet, ''nretries''; and the timeout in milliseconds that should be used to clock a retransmission, ''timeoutinms''.
 
-The server logs the data it receives to ''outfile''. The server's ''portnum'' indicates on which port the server should receive messages.  The ''timeout'' indicates how long the server should wait after receiving the last datagram to stop listening.  The default should be 10 seconds.  See example 1.5 in the [https://seattle.cs.washington.edu/wiki/RepyTutorial#InteractingwithTimersexample1.5 Repy Tutorial]
+The server logs the data it receives to ''outfile''. The server's ''portnum'' indicates on which port the server should receive messages.  The ''timeout'' indicates how long the server should wait after receiving the last datagram to stop listening.  The default should be 10 seconds.  See example 1.5 in the [wiki:RepyTutorial#InteractingwithTimersexample1.5 Repy Tutorial]
 
 [[BR]]
 == Step 1 : Implementation ==
@@ -85,7 +85,7 @@ Execute them locally using '''repy.py'''.  For example:
  $ python repy.py restriction.file reliable_client in.file `hostname -i` 12345 `hostname -i` 12346
  $ python repy.py restriction.file reliable_server junk_test.out 12345
 }}}
-Make sure your restriction.file allows the writing to junk_test.out and using these messports.  See [https://seattle.cs.washington.edu/wiki/RepyTutorial#Restrictions Repy Tutorial About Restrictions].
+Make sure your restriction.file allows the writing to junk_test.out and using these messports.  See [wiki:RepyTutorial#Restrictions Repy Tutorial About Restrictions].
 
 Execute each from different computers using seash:
 {{{
