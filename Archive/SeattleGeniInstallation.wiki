@@ -3,7 +3,7 @@
 This document explains how to do a fresh install of the SeattleGENI portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
- * For info on deploying the production SeattleGENI code and for starting/restarting Apache, see [wiki:ProductionGeniHTTPService]
+ * For info on deploying the production SeattleGENI code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
  * For info on running a test/development version of the SeattleGENI portal using the Django built-in HTTP test server, see [wiki:SeattleGeniTesting]
 
 ----
