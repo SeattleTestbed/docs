@@ -6,7 +6,7 @@
 
 This page is designed to specify in detail the behaviour of network API calls under various circumstances.  Each call and it's possible interactions are explained.  
 
-For a basic description and understanding of the API calls first see [https://seattle.cs.washington.edu/wiki/RepyLibrary]
+For a basic description and understanding of the API calls first see [wiki:RepyApi]
 
 ----
 == Abstractions == 
