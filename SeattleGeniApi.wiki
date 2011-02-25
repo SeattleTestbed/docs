@@ -2,7 +2,7 @@
 [[BR]]
 An XML-RPC interface to SeattleGENI is available, for clients wishing to access SeattleGENI functionality without going through the SeattleGENI website.[[BR]]
 The XML-RPC server is located at !https://seattlegeni.cs.washington.edu/xmlrpc/. [[BR]]
-For examples on how to use XML-RPC with SeattleGENI, check out the [https://seattle.cs.washington.edu/wiki/SeattleGeniClientLib SeattleGENI XMLRPC Client Library].
+For examples on how to use XML-RPC with SeattleGENI, check out the [wiki:SeattleGeniClientLib SeattleGENI XMLRPC Client Library].
 
 [[BR]]
 === Authentication ===
