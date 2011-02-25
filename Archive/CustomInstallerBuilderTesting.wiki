@@ -38,7 +38,7 @@ BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
 PROJECT_URL = BASE_URL
 }}}
 
-RANDOM_STRING should be a random string of your own choosing — do not share it with others. PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
+{{{RANDOM_STRING}}} should be a random string of your own choosing — do not share it with others. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
  * '''Step 4:''' Still within the "custominstallerbuilder" directory, run the django test server:
 
