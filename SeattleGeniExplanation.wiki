@@ -1,6 +1,6 @@
 = How SeattleGENI Works =
 
-This page describes how the clearinghouse (SeattleGENI) is constructed using the node manager API.   It heavily utilizes the [wiki:NodeManagerDesign#NodeManagerInterface Node Manager API], so it is important to understand this document before reading further.
+This page describes how the clearinghouse (SeattleGENI) is constructed using the node manager API.   It heavily utilizes the [wiki:UnderstandingSeattle/NodeManagerDesign#NodeManagerInterface Node Manager API], so it is important to understand this document before reading further.
 
 We first describe how the specific tasks are performed by SeattleGENI and then describe the key use overall.
 
