@@ -1,8 +1,8 @@
 = Indoctrination =
 
  * Educational support
- * [wiki:AutoGradingStrategy Auto-Grading]
- * [wiki:AutoGradingDatabase Autograding Database design]
+ * [wiki:Archive/AutograderCodeSprint Auto-Grading]
+ * [wiki:Applications/Autograder/Database Autograding Database design]
  * Student Support 
 
 
