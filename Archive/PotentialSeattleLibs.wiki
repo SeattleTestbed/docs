@@ -1,7 +1,7 @@
-= Beraber Services =
+= Potential Seattle Services =
 ----
 
-What follows is a variety of cooperative P2P libraries and services that may be implemented on top of beraber. These are lightweight enough to be supported by nodes running beraber nodes, and which can provide non-trivial and useful functionality to developers of distributed systems. As long as the node runs beraber, these services are available locally to the developer
+What follows is a variety of cooperative P2P libraries and services that may be implemented on top of Seattle. These are lightweight enough to be supported by nodes running Seattle nodes, and which can provide non-trivial and useful functionality to developers of distributed systems. As long as the node runs Seattle, these services are available locally to the developer
 
 == WAN P2P environment ==
 ----
