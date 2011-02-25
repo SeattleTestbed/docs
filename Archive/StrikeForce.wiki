@@ -19,28 +19,28 @@ The requirements are:
 
 ||'''Strike Force'''||'''Members'''||'''Purpose'''||
 
-||[wiki:SleightOfHand Sleight of hand]||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
+||[wiki:Archive/SleightOfHand Sleight of hand]||Armon, Dennis, Eric||NAT traversal, IPv6, and DHCP support||
 
-||[wiki:MicroMachines Micro-machines]||Armon, Carter, Mitchell||Portability to mobile devices, location services, and MobileASL project support||
+||[wiki:Archive/MicroMachines Micro-machines]||Armon, Carter, Mitchell||Portability to mobile devices, location services, and MobileASL project support||
 
-||[wiki:EyeCandy Eye candy]||Sean, Alper||Seattle/GENI website, and web back end improvements||
+||[wiki:Archive/EyeCandy Eye candy]||Sean, Alper||Seattle/GENI website, and web back end improvements||
 
-||[wiki:InfectionAndRecurrence Infection and Recurrence]||Brent, Carter, Cosmin, Sal||Deployment onto nodes, black box testing / repeated testing, and software updates||
+||[wiki:Archive/InfectionAndRecurrence Infection and Recurrence]||Brent, Carter, Cosmin, Sal||Deployment onto nodes, black box testing / repeated testing, and software updates||
 
-||[wiki:Indoctrination]||Alper, Sal, Eric, Jenn||Educational support, auto-grading, and student support||
+||[wiki:Archive/Indoctrination]||Alper, Sal, Eric, Jenn||Educational support, auto-grading, and student support||
 
-||[wiki:TopSecret Top Secret]||Michael, Andreas, Richard||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
+||[wiki:Archive/TopSecret Top Secret]||Michael, Andreas, Richard||TCP over UDP flow control, anonymous donation, and other interactions with Tor project||
 
 ||[wiki:Archive/BotMaster Bot Master]||Brent, Sean||Reading remote logs, "service interface" on nodes, backup software update mechanism||
 
-||[wiki:MeasureTwiceCutOnce Measure twice, cut once]||Brent, Armon, Carter, Anthony||Benchmarking service, actually getting 10%, and dynamic resource re-allocation||
+||[wiki:Archive/MeasureTwiceCutOnce Measure twice, cut once]||Brent, Armon, Carter, Anthony||Benchmarking service, actually getting 10%, and dynamic resource re-allocation||
 
 ||[wiki:Archive/LipstickOnAPig Lipstick on a pig]||Andreas, Mitchell||Output improvements, exception handling, and seattle lib clean-up||
 
 ||[wiki:2+2= 2 + 2 = ?]||Anthony '''*'''||Better RSA implementation||
 
-||[wiki:Lisping]||Alper '''*'''||Porting !MapReduce, Hadoop integration, and possible integration with end applications||
+||[wiki:Archive/Lisping]||Alper '''*'''||Porting !MapReduce, Hadoop integration, and possible integration with end applications||
 
-||[wiki:Speciesism]||Cosmin '''*'''||Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition||
+||[wiki:Archive/Speciesism]||Cosmin '''*'''||Optional isolation of traffic to within Seattle nodes, possible replacement for OpenDHT, and simple service composition||
 
 '''*''' Not accepting new members
