@@ -10,7 +10,7 @@ This Library implements the TCP protocol on top of UDP sockets exposed in Repy. 
 == Getting the Code ==
 The latest TCUP release is '''0.0.2'''  released on March 29, 2009.
 
-At the online [https://seattle.cs.washington.edu/wiki/TopSecretReadme Readme] page, you can click and download:
+At the online [wiki:TopSecretReadme Readme] page, you can click and download:
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy tcp.repy] - single file version
  * [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tcp.tgz] - our sub folder in the Seattle project svn
 
