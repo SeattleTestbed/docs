@@ -1,6 +1,6 @@
 = Ideas List for Google Summer of Code =
 
-This lists a set of projects the Seattle project intends to work on over the summer which are appropriate for an outside developer to help with.  Most of the work that we do is with a [StrikeForces  Strike Force] so this work will be performed jointly with existing developers.
+This lists a set of projects the Seattle project intends to work on over the summer which are appropriate for an outside developer to help with.  Most of the work that we do is with a [wiki:Archive/StrikeForce  Strike Force] so this work will be performed jointly with existing developers.
 
 ----
 [[TOC(inline)]]
