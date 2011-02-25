@@ -422,7 +422,7 @@ body {
 
  Naming conventions::
 
-  - Use naming conventions from the [https://seattle.cs.washington.edu/wiki/CodingStyle Python guidelines]
+  - Use naming conventions from the [wiki:CodingStyle Python guidelines]
 
   - Variable and function names are in all lower-case.
 
@@ -434,7 +434,7 @@ body {
 
   - Global variables should start with {{{g_}}}
 
- Use comment blocks similar to !DocStrings illustrated in the [https://seattle.cs.washington.edu/wiki/CodingStyle#DocumentationStrings coding style guide]::
+ Use comment blocks similar to !DocStrings illustrated in the [wiki:CodingStyle#DocumentationStrings coding style guide]::
 
   - At the top of the .js file include the same style header as used for CSS files (see above)
 
