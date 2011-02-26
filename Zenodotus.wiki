@@ -1,3 +1,5 @@
+= Zenodotus =
+
 == What is it? ==
 
 If you've ever wanted to host a network service on a Seattle node, such as a diagnostic web page or similar, you'll no doubt be familiar with their potential instability. If you didn't watch your nodes like a hawk, You might lose one and not know about it for hours, perhaps even a day or more. And even if you can deal with that, your users still have to punch in an IP Address and port combination to navigate to your service! This is a very clumsy way to do things, so zenodotus was built to make the process cleaner.
