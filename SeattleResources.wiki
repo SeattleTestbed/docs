@@ -1,33 +1,31 @@
 = Seattle Resources =
 
-[[BR]]
 == Hosts dedicated to the project and that we maintain ==
 
 Accounts on these machines must be requested. These machines do not run NIS/NFS, so accounts/file-systems on these machines are independent.
 
 || Type || Location || Purpose || Hostname || OS || Services || Monitoring ||
 
-|| Production || ? || Runs production services that change infrequently. [[BR]] No dev access. || seattlegeni.cs|| Ubuntu || [wiki:CustomInstallerBuilder Custom Installer Builder HTTP] [[BR]] [wiki:CustomInstallerBuilderApi Custom Installer Builder XML-RPC] [[BR]] [wiki:MonitorProcess Monitoring service] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:SSHService SSH] [[BR]] [wiki:StateTransitionsService State transition daemons] || HTTP is monitored by a [http://weblogin.cs.washington.edu/www_is_up UW CSE service].[[BR]]GET request is generated every 20 minutes. Justin/Ivan/Monzur are emailed in case of downtime.||
+|| Production || ? || Runs production services that change infrequently. [[BR]] No dev access. || seattlegeni.cs|| Ubuntu || [wiki:CustomInstallerBuilder Custom Installer Builder HTTP] [[BR]] [wiki:CustomInstallerBuilderApi Custom Installer Builder XML-RPC] [[BR]] [wiki:MonitorProcess Monitoring service] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:Local/SshService SSH] [[BR]] [wiki:StateTransitionsService State transition daemons] || HTTP is monitored by a UW CSE [http://weblogin.cs.washington.edu/www_is_up uptime service].[[BR]][[BR]]A GET request is generated every 20 minutes. Justin, Ivan, and Monzur are emailed in case of downtime.||
 
-|| Beta || Justin's Office CSE? || Runs beta services that change frequently. [[BR]] No dev access. This is the SeattleGENI home of our beta testbed and we want to keep it as stable as possible. || betabox.cs|| Ubuntu || [wiki:MonitorProcessService Monitoring service] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:SSHService SSH] [[BR]] [StateTransitionsService State transition daemons] || Needs monitoring ||
+|| Beta || Justin's Office CSE? || Runs beta services that change frequently. [[BR]] No dev access. This is the SeattleGENI home of our beta testbed and we want to keep it as stable as possible. || betabox.cs|| Ubuntu || [wiki:Local/MonitorProcessService Monitoring service] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:Local/SshService SSH] [[BR]] [StateTransitionsService State transition daemons] || Needs monitoring ||
 
-|| Stable || Justin's Office CSE? || Hosts basic dev services, and simple production services || seattle.cs [[BR]] beraber.cs [[BR]] satya.cs || Ubuntu || Beraber (HTTP) [[BR]] [CentralizedAdvertiseService Centralized advertise server] [[BR]] [wiki:SeattleIRCBot IRC bot] [[BR]] [wiki:MonitorProcessService Monitoring service] [[BR]] SeattleGENI test (HTTP) [[BR]] [SeattleSoftwareUpdaterService Software updater] [[BR]] [wiki:SSHService SSH] [[BR]] [wiki:SeattleSVNService SVN] [[BR]] [SeattleTracService Trac] || HTTP is monitored by a [http://weblogin.cs.washington.edu/www_is_up UW CSE service].[[BR]]GET request is generated every 20 minutes. Justin/Ivan/Monzur are emailed in case of downtime.||
+|| Stable || Justin's Office CSE? || Hosts basic dev services, and simple production services || seattle.cs [[BR]] beraber.cs [[BR]] satya.cs || Ubuntu || Beraber (HTTP) [[BR]] [CentralizedAdvertiseService Centralized advertise server] [[BR]] [wiki:SeattleIrcBot IRC bot] [[BR]] [wiki:Local/MonitorProcessService Monitoring service] [[BR]] SeattleGENI test (HTTP) [[BR]] [SeattleSoftwareUpdaterService Software updater] [[BR]] [wiki:Local/SshService SSH] [[BR]] [wiki:Local/SvnService SVN] [[BR]] [SeattleTracService Trac] || HTTP is monitored by a UW CSE [http://weblogin.cs.washington.edu/www_is_up uptime service].[[BR]][[BR]]A GET request is generated every 20 minutes. Justin, Ivan, and Monzur are emailed in case of downtime.||
 
 
-|| Unstable || Justin's Office CSE? || Runs no production services. Used for monitoring, node deployment, and other distributed tasks. || blackbox.cs || Ubuntu || Autograder [[BR]]  [wiki:BlackboxTests Blackbox testing] [[BR]] Deployment scripts [[BR]] [wiki:GeoIPServer GeoIP server] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:SSHService SSH] [[BR]] [wiki:Zenodotus server] [[BR]] || None ||
+|| Unstable || Justin's Office CSE? || Runs no production services. Used for monitoring, node deployment, and other distributed tasks. || blackbox.cs || Ubuntu || Autograder [[BR]]  [wiki:Local/RunningIntegrationTests Blackbox testing] [[BR]] Deployment scripts [[BR]] [wiki:Applications/GeoIpServer GeoIP server] [[BR]] [wiki:SeattleGeniProductionHttp SeattleGENI HTTP] [[BR]] [wiki:SeattleGeniProductionDB SeattleGENI SQL] [[BR]] [wiki:SeattleGeniApi SeattleGENI XML-RPC] [[BR]] [wiki:Local/SshService SSH] [[BR]] [wiki:Zenodotus Zenodotus server] [[BR]] || None ||
 
-|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-opensuse.cs || !OpenSuse || [wiki:SSHService SSH] || None ||
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-opensuse.cs || !OpenSuse || [wiki:Local/SshService SSH] || None ||
 
-|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-mac.cs || OS X || [wiki:SSHService SSH] || None ||
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-mac.cs || OS X || [wiki:Local/SshService SSH] || None ||
 
-|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-vista1.cs || Vista || [wiki:RemoteTestingService Remote testing service] [[BR]] [wiki:SSHService SSH] || None ||
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-vista1.cs || Vista || [wiki:RemoteTestingService Remote testing service] [[BR]] [wiki:Local/SshService SSH] || None ||
 
-|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-xp2.cs || XP || [wiki:RemoteTestingService Remote testing service] [[BR]] [wiki:SSHService SSH] || None ||
+|| Developer Machine || Sieg Hall !#319 || Testing/Development || testbed-xp2.cs || XP || [wiki:RemoteTestingService Remote testing service] [[BR]] [wiki:Local/SshService SSH] || None ||
 
-[[BR]]
-== Seattle Auto-notification Gmail Account ==
 
-We use a normal Gmail account seattle DOT devel -AT- gmail to send automatically generated emails regarding
+== Seattle notification Gmail Account ==
+We use a normal Gmail account seattle DOT devel -AT- gmail to send automatically generated emails regarding...
 
 || '''Service'''                                  || '''Subject Line Format'''                                      ||
 || Unit test failures in the post-commit SVN hook || svn post-commit unit test hoook failed on rvn [RVN #]          ||
@@ -35,26 +33,21 @@ We use a normal Gmail account seattle DOT devel -AT- gmail to send automatically
 || Trac ticket notifications                      || [Seattle] #[TICKET #]: [TICKET TITLE]                          ||
 || Django/SeattleGENI error                       || starts with "[seattlegeni]" or "[betabox]"                     ||
 
-[[BR]]
-== Mailing Lists ==
 
+== Mailing lists ==
 We use the UW CSE mailing lists to coordinate developers, and to receive email from our users. These lists are configured to receive email from anyone, but require admin confirmation to subscribe, and only subscribers can view the list archives.
 
  * [https://mailman.cs.washington.edu/mailman/listinfo/seattle-devel Developers] mailing list ([https://mailman.cs.washington.edu/mailman/admin/seattle-devel admin] interface)
  * [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users Users] mailing list ([https://mailman.cs.washington.edu/mailman/admin/seattle-users admin] interface)
 
-[[BR]]
-== UW CSE Seattle account ==
 
+== UW CSE Seattle account ==
 We run Seattle on some of the machines in UW CSE labs. Seattle runs under the '''justinc''' username.
 
-[[BR]]
-== Emulab Accounts ==
 
+== Emulab accounts ==
 We use [http://www.emulab.net Emulab] for our autograder infrastructure. Our Emulab GID (group ID) is '''Seattle'''.
 
 
-[[BR]]
-== !PlanetLab Accounts ==
-
+== !PlanetLab accounts ==
 We run Seattle on [http://planet-lab.org/ PlanetLab]. Our !PlanetLab slice is '''uw_seattle'''.
