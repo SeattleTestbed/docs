@@ -1,6 +1,6 @@
 = math.repy =
 
-A incomplete math library. Provides a few functions.
+An incomplete math library. Provides a few functions.
 
 
 === Functions ===
