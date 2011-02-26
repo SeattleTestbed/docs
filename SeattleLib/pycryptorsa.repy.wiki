@@ -98,4 +98,4 @@ def number_bytes_to_long(s):
 
 === Includes ===
 
-[wiki:random.repy]
+[wiki:SeattleLib/random.repy]
