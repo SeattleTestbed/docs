@@ -33,7 +33,7 @@ openDHTadvertise_get_proxy_list(maxnumberofattempts=5, concurrentevents=5)
 ...? only located in .svn directories?
 
 === Includes ===
-[wiki:random.repy][[BR]]
+[wiki:SeattleLib/random.repy][[BR]]
 [wiki:include sha.repy][[BR]]
 [wiki:include xmlrpc_client.repy][[BR]]
 [wiki:include parallelize.repy][[BR]]
