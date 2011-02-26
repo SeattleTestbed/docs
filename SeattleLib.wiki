@@ -8,13 +8,13 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:SeattleLibadvertise.repy]'''
   * [wiki:SeattleLibAdvertiseObjects.repy]
   * [wiki:SeattleLibcentralizedadvertise.repy]
-  * [wiki:DORadvertise.repy]
+  * [wiki:SeattleLib/DORadvertise.repy]
   * [wiki:NAT_advertisement.repy]
   * [wiki:openDHTadvertise.repy]
  
 
  * [wiki:Cryptography] (click for a description)
-  * [wiki:md5py.repy]
+  * [wiki:SeattleLib/md5py.repy]
   * [wiki:pycryptorsa.repy]
   * [wiki:pyDes.repy]
   * [wiki:rsa.repy]
@@ -32,10 +32,11 @@ The bolded links are modules are meant for direct usage by the client. They ofte
  * [wiki:DataEncoding Data Encoding] (click for a description)
   * [wiki:SeattleLibbase64.repy]
   * [wiki:SeattleLibbinascii.repy]
+  * '''[wiki:SeattleLib/deserialize.repy]'''
   * '''[wiki:serialize.repy]'''
 
  * [wiki:XML+URLparsing XML / URL parsing] (click for a description)
-  * [wiki:httpretrieve.repy]
+  * [wiki:SeattleLib/httpretrieve.repy]
   * [wiki:xmlparse.repy]
   * [wiki:xmlrpc_client.repy]
   * [wiki:xmlrpc_common.repy]
@@ -49,13 +50,13 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:uniqueid.repy]'''
 
  * [wiki:DomainInfo+DataRetrieval Domain info / Data retrieval] (click for a description)
-  * [wiki:domainnameinfo.repy]
-  * [wiki:geoip_client.repy]
-  * [wiki:httpserver.repy]
+  * [wiki:SeattleLib/domainnameinfo.repy]
+  * [wiki:SeattleLib/geoip_client.repy]
+  * [wiki:SeattleLib/httpserver.repy]
   * [wiki:servicelookup.repy]
 
  * [wiki:Network+ClientCommunication Network + Client Communication] (click for a description)
-  * [wiki:getvesselsresources.repy]
+  * [wiki:SeattleLib/getvesselsresources.repy]
   * [wiki:nmclient.repy]
   * '''[wiki:NATLayer_rpc.repy]'''
   * '''[wiki:sockettimeout.repy]'''
@@ -63,9 +64,9 @@ The bolded links are modules are meant for direct usage by the client. They ofte
 
  * [wiki:ProgrammerResources+DataStructures Programmer Resources / Data Structures] (click for a description)
   * [wiki:SeattleLibargparse.repy]
-  * [wiki:dylink.repy]
-  * [wiki:listops.repy]
-  * [wiki:math.repy]
+  * [wiki:SeattleLib/dylink.repy]
+  * [wiki:SeattleLib/listops.repy]
+  * [wiki:SeattleLib/math.repy]
   * [wiki:priority_queue.repy]
   * '''[wiki:repyunit.repy]'''
   * [wiki:random.repy]
