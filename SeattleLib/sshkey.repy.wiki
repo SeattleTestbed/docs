@@ -97,4 +97,4 @@ def sshkey_file_to_publickey(filename):
 
 === Includes ===
 
-[wiki:sshkey_paramiko.repy]
+[wiki:SeattleLib/sshkey_paramiko.repy]
