@@ -38,21 +38,21 @@ There is a wide variety of other platforms and testbeds readily available, each 
  * [http://boinc.berkeley.edu/ BOINC] and [http://www.cs.wisc.edu/condor/ Condor] also allow users to donate resources. However, the emphasis is on computational power, with a preference toward using a few supercomputers rather than a large group of cheaper PCs. Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
  * [http://aws.amazon.com/ec2/ Amazon's EC2] is a paid service that provides operating-system virtual machines. Seattle instead relies on donated resources and provides programming-language virtual machines. 
  * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high-level abstractions (such as global non-relational storage). It is useful for building locality-oblivious web applications that fit the HTTP request/response protocol model. However, its transparent handling of scalability and locality make it unsuitable for those wishing to teach or otherwise address these fundamental topics of distributed systems. !AppEngine is run on Google-controlled resources instead of donated resources.
- * [RelatedWork More related work...]
+ * [wiki:UnderstandingSeattle/RelatedWork More related work...]
 
 == How do I learn more? ==
 
 Learn the basics:
 
- * Watch our [http://seattle.cs.washington.edu/demos/ five-minute demo]!
- * Learn more about [SeattleComponents how Seattle works].
- * Try [DonatingResources donating resources] to other users.
- * Complete the [TakeHomeAssignment take-home assignment] to get hands-on experience with Seattle.
+ * Watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo]!
+ * Learn more about [wiki:UnderstandingSeattle/SeattleComponents how Seattle works].
+ * Try [wiki:UnderstandingSeattle/DonatingResources donating resources] to other users.
+ * Complete the [wiki:EducationalAssignments/TakeHome take-home assignment] to get hands-on experience with Seattle.
 
 Check out the portal pages for in-depth information:
 
- * [ProgrammersPage Programmers Portal]: Resources for programmers wanting to learn the platform.
- * [EducatorsPage Educator Portal]: Example assignments for students using Seattle.
- * [ContributorsPage Contributors Portal]: Detailed information about how to contribute to the project.
+ * [wiki:ProgrammersPage Programmers Portal]: Resources for programmers wanting to learn the platform.
+ * [wiki:EducatorsPage Educator Portal]: Example assignments for students using Seattle.
+ * [wiki:ContributorsPage Contributors Portal]: Detailed information about how to contribute to the project.
 
 If you are using Seattle and need support, send an email to our [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users mailing list].
