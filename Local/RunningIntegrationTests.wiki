@@ -1,4 +1,4 @@
-= Seattle Black Box Tests =
+= Seattle Blackbox Tests =
 
 ----
 [[TOC(inline)]]
