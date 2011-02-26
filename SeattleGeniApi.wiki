@@ -1,4 +1,4 @@
-= XML-RPC API to SeattleGENI =
+= SeattleGENI API =
 [[BR]]
 An XML-RPC interface to SeattleGENI is available, for clients wishing to access SeattleGENI functionality without going through the SeattleGENI website. The XML-RPC server is located at the following address: {{{https://seattlegeni.cs.washington.edu/xmlrpc/}}}
 
