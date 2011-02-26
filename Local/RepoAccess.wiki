@@ -1,29 +1,29 @@
 = Using SVN =
+Accessing SVN is important for all contributors, regardless of whether they are able to commit code themselves.
 
-Understanding how to access our SVN is important for contributors regardless of whether or not they have commit access. 
-
-----
 [[TOC(inline)]]
-----
 
 
-[[BR]]
-== Anonymous Access ==
-----
 
+== Browsing SVN through Trac ==
+Anybody can [https://seattle.cs.washington.edu/browser/seattle/trunk browse the SVN] tree using their web browser. This is available to anonymous users.
+
+
+
+== Anonymous access ==
 To check out the repository anonymously (read-only):
 
 {{{
 svn co https://seattle.cs.washington.edu/svn/seattle/trunk/
 }}}
 
-If you have previously checked out from our repository using an http:// url rather than https://, you can change using the following command (issued from the root of your local svn folder):
+
+If you have previously checked out from our repository using an {{{http://}}} url rather than {{{https://}}}, you can update the source with the following command (issued from the root of your local SVN folder):
 
 {{{
 svn switch --relocate http://seattle.cs.washington.edu/svn https://seattle.cs.washington.edu/svn
 }}}
 
-This command will work regardless of the actual directory you have checked out (that is, whether you've checked out /seattle/trunk or anything else).
 
 Depending on your system, you may be asked to accept the SSL certificate. Here is an example, showing our certificate's correct SHA1 fingerprint:
 
@@ -51,33 +51,22 @@ Repository Root: https://seattle.cs.washington.edu/svn
 
 
 
-[[BR]]
-== Browsing SVN through Trac ==
-----
+== Contributor / Developer access ==
+'''Test all code before checking it into SVN.'''
 
-URL to Browse the repository through a web browser:
-  https://seattle.cs.washington.edu/browser/seattle/trunk
+To commit changes to the repository, you must have an ssh account on {{{seattle.cs}}}, which hosts the Seattle SVN server. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following command to checkout (co) the trunk from anywhere:
+{{{
+svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/
+}}}
 
-This is available to anonymous users.
+If you want to perform the checkout as another user (e.g., "USER"), then use the following command:
+{{{
+svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/
+}}}
 
+All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in the proper format prior to making any commits. You can use the dos2unix tool on {{{seattle.cs}}} to convert DOS-formatted files to Unix format.
 
-[[BR]]
-== Contributor / Developer Access ==
-----
-
-'''Test all code before checking it into SVN'''
-
-To commit changes to the repository, you must have an ssh account on the svn server -- seattle.cs machine. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following line to checkout (co) the trunk from anywhere:
-
-  {{{svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/}}}
-
-If you want to perform the checkout as another user, say user BOB, then you can use the following line:
-
-  {{{svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/}}}
-
-All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in this prior to making any commits. You can use the dos2unix tool on seattle.cs to convert DOS formatted files.
-
-''Note to sysadmins:'' svn+ssh relies on /usr/bin/svnserve. However, to make it so that users don't need to specify the svn repository root on the server, we have to modify arguments to svnserve. The following wrapper script lives at /usr/local/bin/svnserve:
+'''Note to sysadmins:''' {{{svn+ssh}}} relies on {{{/usr/bin/svnserve}}}. However, to make it so that users don't need to specify the SVN repository root on the server, we have to modify arguments to {{{svnserve}}}. The following wrapper script lives at {{{/usr/local/bin/svnserve}}}:
 
 {{{
 #!/bin/bash
@@ -91,50 +80,60 @@ umask 002
 }}}
 
 
-[[BR]]
-== Quick Guide to SVN ==
-----
 
-'''Test all code before checking it into SVN'''
+== Example SVN commands ==
+'''Test all code before checking it into SVN.'''
 
-To take a look inside the repository without checking anything out:
-  {{{svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
+To look inside a directory without checking anything out:
+{{{
+svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy
+}}}
 
-To check out the entire seattle repository:
-  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle}}}
+To check out the entire Seattle repository:
+{{{
+svn checkout svn+ssh://seattle.cs.washington.edu/seattle
+}}}
 
-To check out a portion of it, e.g. just the repy code sub-folder:
-  {{{svn checkout svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy}}}
+To check out a subdirectory of the repository:
+{{{
+svn checkout svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy
+}}}
 
-To find out some basic information about a checked out copy, such as the repository root, last changed rev/author/date do:
-  {{{svn info}}}
+To find out some basic information about a checked-out copy, such as the repository root, last changed rev/author/date do:
+{{{
+svn info
+}}}
 
-Once you make edits inside the repo, typical CVS usage applies. First do an update, then a commit:
-  {{{svn update}}}
+To contribute code back to the SVN server, first perform an update, then a commit:
+{{{
+svn update
+svn commit
+}}}
 
-  {{{svn commit}}}
+To track new files/directories, or remove those which are already tracked:
+{{{
+svn add [filename]
+}}}
+{{{
+svn remove [filename]
+}}}
 
-To add new or remove existing files/directories use:
-  {{{svn add [filename]}}}
+If you have conflicts, you must tell SVN explicitly that you have resolved them, otherwise SVN will fail to commit/update these files:
+{{{
+svn resolve [filename]
+}}}
 
-  {{{svn remove [filename]}}}
+If you perform an {{{svn status}}} in a folder, it recursively lists all the Modified (M), Deleted (D) and Added (A) files. It will also list files that are in conflict (C) and those about which SVN does not know (?). To see what modifications were made to individual files marked with an M, you can perform a {{{diff}}}:
+{{{
+svn status
+}}}
+{{{
+svn diff [filename]
+}}}
 
-If you have conflicts, you must tell SVN explicitly that you have resolved them, otherwise SVN will fail to commit\update these files:
-  {{{svn resolve [filename]}}}
+If the Seattle SVN repository moves to a new machine, you can relocate your existing checked-out version using the following command. Here {{{old_repo}}} and {{{new_repo}}} are paths to the old and new roots of the repository that you can find out with {{{svn info}}}:
+{{{
+svn sw --relocate old_repo new_repo
+}}}
 
-If you do an "svn status" in a folder, it recursively lists all the Modified (M), Deleted (D) and Added (A) files. It will also show up files that are in conflict (C) and those about which svn does not know (?). To see what modifications were made to individual files marked with an M, you'd do an "svn diff": 
-  {{{svn status}}}
-
-  {{{svn diff [filename]}}}
-
-If the seattle svn repo moves to a new machine, you can relocate your checked out existing version without performing a new checkout using the following command. Here {{{old_repo}}} and {{{new_repo}}} are paths to the old and new roots of the repository that you can find out with {{{svn info}}}:
-
-  {{{svn sw --relocate old_repo new_repo}}}
-
-
-
-[[BR]]
-== Links ==
-----
-
-[http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]
+For more information about using SVN, reference this list of [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands useful SVN commands].
