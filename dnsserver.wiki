@@ -1,3 +1,5 @@
+= DNS Server libraries (dnsserver.repy) =
+
 == What is it? ==
 
 dnsserver is a repy library which allows your program to interpret and respond to DNS queries. It is intended for use as a tool for servers, though query formatting may be implemented in the future.
