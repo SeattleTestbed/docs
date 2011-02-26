@@ -1,5 +1,5 @@
 = Demo Video =
-This five-minute demo video should help get you acquainted with the [wiki:WikiStart Seattle project].
+This five-minute demo video should help get you acquainted with the [wiki:WikiStart Seattle project]. If you are unable to watch the video below, you may [https://seattle.cs.washington.edu/static/demo.mov download the video] to your computer.
 {{{
 #!html
 <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="660" height="500">
@@ -7,17 +7,11 @@ This five-minute demo video should help get you acquainted with the [wiki:WikiSt
   <param name="controller" value="true">
   <param name="autoplay" value="false">
 
-  <!--[if gte IE 7]> <!-->
   <object type="video/quicktime" data="https://seattle.cs.washington.edu/static/demo.mov" width="660" height="500">
     <param name="controller" value="true">
     <param name="autoplay" value="false">
     alt : <a href="https://seattle.cs.washington.edu/static/demo.mov">Seattle Demo Video</a>
   </object>
-  <!--<![endif]-->
-
-  <!--[if lt IE 7]>
-   alt : <a href="demo.mov">demo.mov</a>
-  <![endif]-->
 
 </object>
 
