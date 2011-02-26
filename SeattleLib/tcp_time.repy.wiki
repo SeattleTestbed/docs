@@ -21,7 +21,7 @@ tcp_time_updatetime(localport)
 
 === Includes ===
 
-[wiki:time_interface.repy]
+[wiki:SeattleLib/time_interface.repy]
 [wiki:include advertise.repy]
 [wiki:include random.repy]
 [wiki:include sockettimeout.repy]
