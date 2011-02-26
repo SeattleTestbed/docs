@@ -5,9 +5,9 @@ This pages contains documentation about the Seattle standard library. The librar
 The bolded links are modules are meant for direct usage by the client. They often aggregate multiple services.
 
  * [wiki:NodeAdvertising Node Advertising] (click for a description)
-  * '''[wiki:SeattleLib/advertise.repy]'''
-  * [wiki:SeattleLib/AdvertiseObjects.repy]
-  * [wiki:SeattleLib/centralizedadvertise.repy]
+  * '''[wiki:SeattleLibadvertise.repy]'''
+  * [wiki:SeattleLibAdvertiseObjects.repy]
+  * [wiki:SeattleLibcentralizedadvertise.repy]
   * [wiki:DORadvertise.repy]
   * [wiki:NAT_advertisement.repy]
   * [wiki:openDHTadvertise.repy]
@@ -30,8 +30,8 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:time_interface.repy]
 
  * [wiki:DataEncoding Data Encoding] (click for a description)
-  * [wiki:SeattleLib/base64.repy]
-  * [wiki:SeattleLib/binascii.repy]
+  * [wiki:SeattleLibbase64.repy]
+  * [wiki:SeattleLibbinascii.repy]
   * '''[wiki:serialize.repy]'''
 
  * [wiki:XML+URLparsing XML / URL parsing] (click for a description)
@@ -43,7 +43,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:urllib.repy]
 
  * [wiki:Concurrency+Parallelism Concurrency / Parallelism] (click for a description)
-  * [wiki:cv.repy]
+  * [wiki:SeattleLib/cv.repy]
   * [wiki:parallelize.repy]
   * [wiki:semaphore.repy]
   * '''[wiki:uniqueid.repy]'''
@@ -62,7 +62,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:session.repy]'''
 
  * [wiki:ProgrammerResources+DataStructures Programmer Resources / Data Structures] (click for a description)
-  * [wiki:SeattleLib/argparse.repy]
+  * [wiki:SeattleLibargparse.repy]
   * [wiki:dylink.repy]
   * [wiki:listops.repy]
   * [wiki:math.repy]
