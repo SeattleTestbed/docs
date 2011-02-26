@@ -37,9 +37,9 @@ advertise_announce(advertisekey, str(my_name), adTTL)
 }}}
 
 === Includes ===
-[wiki:listops.repy][[BR]]
-[wiki:openDHTadvertise.repy][[BR]]
-[wiki:centralizedadvertise.repy][[BR]]
-[wiki:DORadvertise.repy][[BR]]
-[wiki:parallelize.repy][[BR]]
+[wiki:SeattleLib/listops.repy][[BR]]
+[wiki:SeattleLib/openDHTadvertise.repy][[BR]]
+[wiki:SeattleLibcentralizedadvertise.repy][[BR]]
+[wiki:SeattleLib/DORadvertise.repy][[BR]]
+[wiki:SeattleLib/parallelize.repy][[BR]]
 
