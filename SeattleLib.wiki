@@ -1,10 +1,10 @@
-= Seattle Standard Library =
+= Seattle Standard Library (!SeattleLib) =
 
-This pages contains documentation about the Seattle standard library. The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
+This pages contains documentation about the Seattle standard library (called "!SeattleLib"). The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
 
 The bolded links are modules are meant for direct usage by the client. They often aggregate multiple services.
 
- * [wiki:NodeAdvertising Node Advertising] (click for a description)
+ * [wiki:SeattleLib/NodeAdvertising Node Advertising] (click for a description)
   * '''[wiki:SeattleLib/advertise.repy advertise.repy]'''
   * [wiki:SeattleLib/AdvertiseObjects.repy AdvertiseObjects.repy]
   * [wiki:SeattleLib/centralizedadvertise.repy centralizedadvertise.repy]
@@ -13,7 +13,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:SeattleLib/openDHTadvertise.repy openDHTadvertise.repy]
  
 
- * [wiki:Cryptography] (click for a description)
+ * [wiki:SeattleLib/Cryptography] (click for a description)
   * [wiki:SeattleLib/md5py.repy md5py.repy]
   * [wiki:SeattleLib/pycryptorsa.repy pycryptorsa.repy]
   * [wiki:SeattleLib/pyDes.repy pyDes.repy]
@@ -23,13 +23,13 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:SeattleLib/sshkey_paramiko.repy sshkey_paramiko.repy]'''
   * [wiki:SeattleLib/signeddata.repy signeddata.repy]
 
- * [wiki:TimeModule Time Module] (click for a description)
+ * [wiki:SeattleLib/Time Time Module] (click for a description)
   * [wiki:SeattleLib/ntp_time.repy ntp_time.repy]
   * [wiki:SeattleLib/tcp_time.repy tcp_time.repy]
   * '''[wiki:SeattleLib/time.repy time.repy]'''
   * [wiki:SeattleLib/time_interface.repy time_interface.repy]
 
- * [wiki:DataEncoding Data Encoding] (click for a description)
+ * [wiki:SeattleLib/DataEncoding Data Encoding] (click for a description)
   * [wiki:SeattleLib/base64.repy base64.repy]
   * [wiki:SeattleLib/binascii.repy binascii.repy]
   * '''[wiki:SeattleLib/deserialize.repy deserialize.repy]'''
