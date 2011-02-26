@@ -108,4 +108,4 @@ def signeddata_shouldtrust(oldsigneddata, newsigneddata, publickey=None, oldsign
 
 [wiki:SeattleLib/sha.repy][[BR]]
 [wiki:SeattleLib/rsa.repy][[BR]]
-[wiki:time.repy][[BR]]
+[wiki:SeattleLib/time.repy][[BR]]
