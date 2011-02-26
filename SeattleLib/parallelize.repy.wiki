@@ -71,4 +71,4 @@ def parallelize_initfunction(targetlist, callerfunc,concurrentevents=5, *extrafu
 
 === Includes ===
 
-[wiki:uniqueid.repy]
+[wiki:SeattleLib/uniqueid.repy]
