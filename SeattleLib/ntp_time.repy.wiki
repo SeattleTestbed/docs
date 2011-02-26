@@ -27,4 +27,4 @@ ntp_time_updatetime(localport)
 
 === Includes ===
 
-[wiki:random.repy]
+[wiki:SeattleLib/random.repy]
