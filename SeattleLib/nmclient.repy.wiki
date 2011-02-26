@@ -93,7 +93,7 @@ The above code snippet will ensure that none of the nmhandles perform the action
 
 === Includes ===
 
-[wiki:signeddata.repy][[BR]]
-[wiki:session.repy][[BR]]
+[wiki:SeattleLib/signeddata.repy][[BR]]
+[wiki:SeattleLib/session.repy][[BR]]
 [wiki:SeattleLib/NATLayer_rpc.repy][[BR]]
-[wiki:sockettimeout.repy][[BR]]
+[wiki:SeattleLib/sockettimeout.repy][[BR]]
