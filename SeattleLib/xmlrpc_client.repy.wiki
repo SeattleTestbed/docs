@@ -31,5 +31,5 @@ print client.send_request("examples.getStateName", (1,))
 === Includes ===
 [wiki:SeattleLib/urlparse.repy][[BR]]
 [wiki:SeattleLib/httpretrieve.repy][[BR]]
-[wiki:xmlrpc_common.repy][[BR]]
+[wiki:SeattleLib/xmlrpc_common.repy][[BR]]
 
