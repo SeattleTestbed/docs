@@ -23,6 +23,6 @@ DORadvertise_lookup(key, maxvals=100, timeout=None)
 ???couldn't find any?
 
 === Include ===
-[wiki:sockettimeout.repy][[BR]]
-[wiki:httpretrieve.repy][[BR]]
-[wiki:xmlparse.repy][[BR]]
+[wiki:SeattleLib/sockettimeout.repy][[BR]]
+[wiki:SeattleLib/httpretrieve.repy][[BR]]
+[wiki:SeattleLib/xmlparse.repy][[BR]]
