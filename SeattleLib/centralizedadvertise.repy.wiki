@@ -33,7 +33,7 @@ centralizedadvertise_announce(mycontext['experiment_name'], my_advetisement_info
 }}}
 
 === Includes ===
-[wiki:sockettimeout.repy][[BR]][wiki:serialize.repy]
+[wiki:SeattleLib/sockettimeout.repy][[BR]][wiki:SeattleLib/serialize.repy]
 
 
 
