@@ -71,6 +71,6 @@ class _httpretrieve_filelikeobject:
 ?
 
 === Includes ===
-[wiki:sockettimeout.repy][[BR]]
-[wiki:urlparse.repy][[BR]]
-[wiki:urllib.repy][[BR]]
+[wiki:SeattleLib/sockettimeout.repy][[BR]]
+[wiki:SeattleLib/urlparse.repy][[BR]]
+[wiki:SeattleLib/urllib.repy][[BR]]
