@@ -1,6 +1,6 @@
 = cv.repy =
 
-Much like how [wiki:semaphore.repy] provide a level of abstraction to locks, this module provides an even higher level in terms of conditional variables. A programmer could use this to implement locking within a program. For instance, the [wiki:parallelize.repy] module requires locking to prevent errors.
+Much like how [wiki:SeattleLib/semaphore.repy] provide a level of abstraction to locks, this module provides an even higher level in terms of conditional variables. A programmer could use this to implement locking within a program. For instance, the [wiki:SeattleLib/parallelize.repy] module requires locking to prevent errors.
 
 === Functions ===
 
@@ -51,4 +51,4 @@ def cv_notify_all(handle):
 
 === Includes ===
 
-[wiki:semaphore.repy] 
+[wiki:SeattleLib/semaphore.repy] 
