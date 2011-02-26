@@ -1,8 +1,22 @@
 {{{
 #!html
-<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="640" height="480">
+<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="660" height="500">
   <param name="src" value="https://seattle.cs.washington.edu/static/demo.mov">
   <param name="controller" value="true">
   <param name="autoplay" value="true">
+
+  <!--[if gte IE 7]> <!-->
+  <object type="video/quicktime" data="https://seattle.cs.washington.edu/static/demo.mov" width="660" height="500">
+    <param name="controller" value="true">
+    <param name="autoplay" value="true">
+    alt : <a href="https://seattle.cs.washington.edu/static/demo.mov">Seattle Demo Video</a>
+  </object>
+  <!--<![endif]-->
+
+  <!--[if lt IE 7]>
+   alt : <a href="demo.mov">demo.mov</a>
+  <![endif]-->
+
 </object>
+
 }}}
