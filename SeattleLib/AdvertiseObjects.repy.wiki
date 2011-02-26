@@ -1,4 +1,4 @@
-= Advertiseobject.repy =
+= AdvertiseObjects.repy =
 
 Provides two objects which makes advertising more efficient. Can be used as an alternative to [wiki:Advertise.repy].
 
