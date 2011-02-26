@@ -41,4 +41,4 @@ def semaphore_down(semaphorehandle):
 
 === Includes ===
 
-[wiki:uniqueid.repy]
+[wiki:SeattleLib/uniqueid.repy]
