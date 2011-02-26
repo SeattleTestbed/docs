@@ -2,7 +2,7 @@
 
 XMl-RPC client for remote GeoIP server. Given an IP:port of a GeoIP XML-RPC server, allows location lookup of hostnames and IP addresses.
 
-This module is an addition to the basic implementation found in [wiki:xmlrpc_client.repy]. A GeoIP client essentially allows for on the go location lookup of various nodes around the world. This module is optional and not required, as clients can freely choose to use the more tested [wiki:xmlrpc_client.repy] instead.
+This module is an addition to the basic implementation found in [wiki:SeattleLib/xmlrpc_client.repy]. A GeoIP client essentially allows for on the go location lookup of various nodes around the world. This module is optional and not required, as clients can freely choose to use the more tested [wiki:SeattleLib/xmlrpc_client.repy] instead.
 
 
 === Functions ===
@@ -63,4 +63,4 @@ client = geoip_client(server_address)
 
 === Includes ===
 
-[wiki:xmlrpc_client.repy]
+[wiki:SeattleLib/xmlrpc_client.repy]
