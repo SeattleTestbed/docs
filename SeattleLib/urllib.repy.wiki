@@ -2,7 +2,7 @@
 
 This module provides many url modifying functions which allow for urls to be safely used in URL or XML documents.
 
-Please note that although one may include module directly, this module is included by a lot of other files where its needed. See [wiki:xmlrpc_server.repy]. This means in most cases the programmers should not have to include this module. Only in special cases do clients need to uses this module directly. This wiki page can be used as a reference to what urllib.repy can do.
+Please note that although one may include module directly, this module is included by a lot of other files where its needed. See [wiki:SeattleLib/xmlrpc_server.repy]. This means in most cases the programmers should not have to include this module. Only in special cases do clients need to uses this module directly. This wiki page can be used as a reference to what urllib.repy can do.
 
 === Classes & Functions ===
 {{{
