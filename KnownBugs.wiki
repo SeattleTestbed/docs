@@ -2,18 +2,7 @@
 
 This page is used to track and list known bugs from the various components of Seattle.
 
-----
-[[TOC(inline)]]
-----
-
-[[BR]]
 == Repy ==
-----
-
-General Bugs
- * There exists a potential race condition where the "user-code" repy process will be stopped indefinitely when the resource parent is killed.   This race will only be triggered by a user who kills processes.  As a result this bug does not impact the node manager stopping repy, use of repyhelper in programs, or any "normal" termination cases.
-    * If the process running the user code is put to sleep by its monitor parent, and then the parent suffers an unexpected death, its possible that the repy process will be left in the sleep state indefinitely and as such cannot detect the death of its parent to exit. See ticket #413.
-    * This only affects *NIX systems, since Windows uses an internal monitor thread, so its death will always result in the termination of the process.
 
 Network Related Bugs
  * There exists a potential race condition while repy attempts to cleanup a network socket.
