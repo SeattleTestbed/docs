@@ -8,7 +8,7 @@ This guide describes how Seattle works from the perspective of the people who pa
 
 == Human Perspective ==
 
-New resources are added to the Seattle testbed in a three step process. First a person we call a '''planner''' [http://seattle.cs.washington.edu/customized_installer/ creates a customized installer] which defines how the planner would like to allocate their resources when Seattle is installed on a computer. Then, someone we call a '''donor''' runs the customized installer on their local system and a small percentage of the resources on their computer are added to the testbed according to the allocations set out by the planner. '''Researchers''' who are granted resources on the newly added computer will then be able to run experiments or share those resource with other researchers.
+New resources are added to the Seattle testbed in a three step process. First a person we call a '''planner''' [wiki:CustomInstallerBuilder creates a customized installer] which defines how the planner would like to allocate their resources when Seattle is installed on a computer. Then, someone we call a '''donor''' runs the customized installer on their local system and a small percentage of the resources on their computer are added to the testbed according to the allocations set out by the planner. '''Researchers''' who are granted resources on the newly added computer will then be able to run experiments or share those resource with other researchers.
 
 [[Image(SeattlePicture1.jpg)]]
 
