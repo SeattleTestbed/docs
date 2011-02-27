@@ -1,6 +1,6 @@
 = Trac Service =
 
-Seattle runs Trac v 0.11.1 and will soon be upgraded to 0.11.5. This page describes how to install Trac, how to configure it, what plugins our Trac installation includes, etc. Finally it shows how to upgrade the Trac service to the latest version.
+This page describes how to install Trac, how to configure it, what plugins our Trac installation includes, etc. Finally it shows how to upgrade the Trac service to the latest version.
 
 ----
 [[TOC(inline)]]
