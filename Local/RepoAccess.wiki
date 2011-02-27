@@ -61,7 +61,7 @@ svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/
 
 If you want to perform the checkout as another user (e.g., "USER"), then use the following command:
 {{{
-svn co svn+ssh://BOB@seattle.cs.washington.edu/seattle/trunk/
+svn co svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
 }}}
 
 All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in the proper format prior to making any commits. You can use the dos2unix tool on {{{seattle.cs}}} to convert DOS-formatted files to Unix format.
