@@ -1,23 +1,18 @@
 = Documentation Style Guidelines =
-----
 
  * Begin the page with a heading, enclosed with: {{{= =}}}
  * The immediate next paragraph of the document should contain a purpose summary for the document
  * Immediately following the purpose summary, insert the following snippet:
 {{{
-----
 [[TOC(inline)]]
-----
 }}}
  * All section titles in the rest of the document must use nested heading tags: {{{== ==}}}, {{{=== ===}}}, and so on. 
  * Each section title must be '''preceded''' by a line break {{{[[BR]]}}} and immediately followed by a horizontal line {{{----}}}. Here's an example:
 {{{
-[[BR]]
 == Sending pings between a group of computers ==
-----
 }}}
 
- * Python/Repy code and Seash terminal interaction examples must be enclosed with: {{{{{{#!python }}}}}}. Here's an example:
+ * Python/Repy code and Seash terminal interaction examples must be enclosed with: {{{{{{#!python }}}}}} or {{{{{{#!repy }}}}}}. Here's an example:
 {{{
 {{{
 #!python
