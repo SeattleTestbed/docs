@@ -3,8 +3,8 @@
 This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
  
  * Accessing SVN, subscribing to the mailing list, running code from SVN, using the wiki
-   * '''[wiki:RepoAccess SVN access] instructions'''
-   * '''[wiki:WikiSvnAccounts Getting accounts] for Seattle SVN, Wiki, testbed machines, and seattle-devel'''
+   * '''[wiki:Local/RepoAccess SVN access] instructions'''
+   * '''[wiki:ContributorAccounts Getting accounts] for Seattle SVN, Wiki, testbed machines, and seattle-devel'''
    * '''[wiki:ManagingTracTickets Managing Trac tickets]'''
    * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
 
@@ -13,7 +13,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:PythonTutorial Subset of Python Tutorial] with basic information about the subset of Python needed to write code in Repy
    * [wiki:PythonVsRepy Python You Need to Forget to Use Repy]
    * [wiki:RepyTutorial Repy Tutorial]
-   * [wiki:RepyLibrary Repy Library] reference
+   * [wiki:RepyApi Repy Library] reference
    * [wiki:PortingPythonToRepy Porting Python to Repy Guide]
    * [wiki:RepyHelper Importing Repy code into Python using repyhelper]
 
@@ -26,12 +26,12 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:SeattleGeniTesting Running a GENI test server]
    * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
-   * [wiki:ContinuousBuild Continuous Build]
+   * [wiki:Local/ContinuousBuild Continuous Build]
 
  * Style guidelines for documentation, python code, web code
-   * '''[wiki:CodingStyle Style guidelines] for writing code for Seattle'''
-   * '''[wiki:DocsFormatting Documentation format guidelines] for creating wiki pages'''
-   * [wiki:WebCodingStyle Web style guidelines] for writing web code for Seattle
+   * '''[wiki:CodingStyle Python/Repy style guidelines] for most Seattle programming'''
+   * [wiki:WebCodingStyle Web style guidelines] for web programming
+   * '''[wiki:Local/WikiFormatting Documentation format guidelines] for wiki pages'''
 
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
@@ -47,29 +47,29 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Deployment
    * [wiki:BaseInstallers Building] the base installers
      * [wiki:NsisSystemSetup System setup instructions] to be able to build the Windows GUI installer
-   * [wiki:VersionDeployment Deploying] a new version
+   * [wiki:Local/VersionDeployment Deploying] a new version
    * [wiki:SeattleGeniProductionHttp Updating] the production SeattleGENI code
    * [wiki:BuildDemokit Building the Demokit]
-   * [wiki:Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
+   * [wiki:Libraries/Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
 
  * Developer Resources
-   * [wiki:ExperimentLibrary Experiment Library] for use in scripting communication with nodes, etc.
+   * [wiki:Libraries/ExperimentLibrary Experiment Library] for use in scripting communication with nodes, etc.
    * [wiki:DevelopingWithEclipse Developing with Eclipse]
 
  * Project Resources
    * [wiki:SeattleResources A full listing of Seattle project services]
-   * [wiki:SeattleAccountManagement Creating and deleting accounts for developers]
+   * [wiki:Local/ContributorAccountManagement Creating and deleting accounts for developers]
    * [wiki:SeattleAdminResources Resources needed by Seattle sysadmin]
 
  * Events relevant to Seattle and Seattle team information
    * [wiki:SeattleTalks Upcoming talks] about Seattle
-   * '''[wiki:ProjectMembers Project Members] contact information'''
+   * '''[wiki:Local/ContributorContactInfo Project Members] contact information'''
  
  * Other
    * [wiki:ContainmentInSeattle] about controlling node outgoing traffic
    * [wiki:MobileCeNotes Windows CE] implementation notes and problems
    * [wiki:BenchmarkCustomInstallerInfo Benchmark and Custom Installer Info] implementation notes and problems.
    * [wiki:RepyNetworkRestrictions Repy Network Restrictions] information and errata.
-   * [wiki:StatsLibrary Statistics Library] for analyzing date regarding nodes & vessels on Seattle.
-   * [wiki:GeoIPServer Running a GeoIP Server]
+   * [wiki:Libraries/StatisticsLibrary Statistics Library] for analyzing date regarding nodes & vessels on Seattle.
+   * [wiki:Applications/GeoIpServer Running a GeoIP Server]
    * How to run the [wiki:RunningSecLayerBenchmarks security layer benchmarks]
