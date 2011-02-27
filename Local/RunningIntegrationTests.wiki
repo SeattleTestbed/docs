@@ -1,25 +1,15 @@
-= Seattle Blackbox Tests =
+= Running Integration Tests on Blackbox =
+Locally, we run integration tests on the {{{blackbox.cs}}} server. These tests are intended to test large portions of the Seattle system end-to-end.
 
-----
 [[TOC(inline)]]
-----
 
-== Overview ==
-----
-
-Blackbox tests or integration tests are intended to test large portions of the Seattle system end-to-end.
-
-[[BR]]
 == Configuration ==
-----
 
  * Seattle blackbox tests live on blackbox.cs in /home/integrationtester/cron_tests/
  * The tests run as the integrationtester user on a cron schedule scheduled by the user cron of the integrationtester user
  * The test logs are written to /home/integrationtester/cron_logs/
 
-[[BR]]
 == centralizedputget Test ==
-----
 
 === Purpose ===
 Attempt to put a (k,v) into our centralized hash table and then get it back. On error send an email to some folks.
@@ -39,9 +29,8 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/centralizedputget.py > /home/integrationtester/deploy_test/cron_log.centralizedputget
 }}}
 
-[[BR]]
+
 == opendhtputget Test ==
-----
 
 === Purpose ===
 Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
@@ -61,9 +50,8 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
 }}}
 
-[[BR]]
+
 == downloadandinstallseattle Test ==
-----
 
 === Purpose ===
 Download, install and check the resulting Seattle installation for correct state (onepercent state).
