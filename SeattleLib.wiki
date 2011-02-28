@@ -13,7 +13,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:SeattleLib/openDHTadvertise.repy openDHTadvertise.repy]
  
 
- * [wiki:SeattleLib/Cryptography] (click for a description)
+ * [wiki:SeattleLib/Cryptography Cryptography] (click for a description)
   * [wiki:SeattleLib/md5py.repy md5py.repy]
   * [wiki:SeattleLib/pycryptorsa.repy pycryptorsa.repy]
   * [wiki:SeattleLib/pyDes.repy pyDes.repy]
@@ -23,19 +23,19 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:SeattleLib/sshkey_paramiko.repy sshkey_paramiko.repy]'''
   * [wiki:SeattleLib/signeddata.repy signeddata.repy]
 
- * [wiki:SeattleLib/Time Time Module] (click for a description)
+ * [wiki:SeattleLib/Time Time] (click for a description)
   * [wiki:SeattleLib/ntp_time.repy ntp_time.repy]
   * [wiki:SeattleLib/tcp_time.repy tcp_time.repy]
   * '''[wiki:SeattleLib/time.repy time.repy]'''
   * [wiki:SeattleLib/time_interface.repy time_interface.repy]
 
- * [wiki:SeattleLib/DataEncoding Data Encoding] (click for a description)
+ * [wiki:SeattleLib/DataEncoding Data encoding] (click for a description)
   * [wiki:SeattleLib/base64.repy base64.repy]
   * [wiki:SeattleLib/binascii.repy binascii.repy]
   * '''[wiki:SeattleLib/deserialize.repy deserialize.repy]'''
   * '''[wiki:SeattleLib/serialize.repy serialize.repy]'''
 
- * [wiki:XML+URLparsing XML / URL parsing] (click for a description)
+ * [wiki:SeattleLib/UrlParsingAndXml URL parsing / XML] (click for a description)
   * [wiki:SeattleLib/httpretrieve.repy httpretrieve.repy]
   * [wiki:SeattleLib/xmlparse.repy xmlparse.repy]
   * [wiki:SeattleLib/xmlrpc_client.repy xmlrpc_client.repy]
@@ -43,19 +43,19 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:SeattleLib/xmlrpc_server.repy xmlrpc_server.repy]'''
   * [wiki:SeattleLib/urllib.repy urllib.repy]
 
- * [wiki:Concurrency+Parallelism Concurrency / Parallelism] (click for a description)
+ * [wiki:SeattleLib/ConcurrencyAndParallelism Concurrency / Parallelism] (click for a description)
   * [wiki:SeattleLib/cv.repy cv.repy]
   * [wiki:SeattleLib/parallelize.repy parallelize.repy]
   * [wiki:SeattleLib/semaphore.repy semaphore.repy]
   * '''[wiki:SeattleLib/uniqueid.repy uniqueid.repy]'''
 
- * [wiki:DomainInfo+DataRetrieval Domain info / Data retrieval] (click for a description)
+ * [wiki:SeattleLib/DataRetrieval Data retrieval] (click for a description)
   * [wiki:SeattleLib/domainnameinfo.repy domainnameinfo.repy]
   * [wiki:SeattleLib/geoip_client.repy geoip_client.repy]
   * [wiki:SeattleLib/httpserver.repy httpserver.repy]
   * [wiki:SeattleLib/servicelookup.repy servicelookup.repy]
 
- * [wiki:Network+ClientCommunication Network + Client Communication] (click for a description)
+ * [wiki:SeattleLib/NetworkCommunication Network communication] (click for a description)
   * [wiki:SeattleLib/getvesselsresources.repy getvesselsresources.repy]
   * [wiki:SeattleLib/Multiplexer.repy Multiplexer.repy]
   * [wiki:SeattleLib/nmclient.repy nmclient.repy]
@@ -63,7 +63,7 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * '''[wiki:SeattleLib/sockettimeout.repy sockettimeout.repy]'''
   * '''[wiki:SeattleLib/session.repy session.repy]'''
 
- * [wiki:ProgrammerResources+DataStructures Programmer Resources / Data Structures] (click for a description)
+ * [wiki:SeattleLib/ProgrammerResources Programmer resources] (click for a description)
   * [wiki:SeattleLib/argparse.repy argparse.repy]
   * [wiki:SeattleLib/dylink.repy dylink.repy]
   * [wiki:SeattleLib/listops.repy listops.repy]
