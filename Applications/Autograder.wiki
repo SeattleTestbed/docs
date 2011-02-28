@@ -1,43 +1,39 @@
-
-
 == What is the autograder? ==
-
 The autograder is a convenient auxiliary Seattle feature that allows instructors to collect and grade student submissions via a web interface.  
 We provide fair and repeatable grading of student submissions by installing Seattle and deploying student code and custom test suites on  specified network topologies on Emulab. We collect the test results, run them through grading scripts and store the information for easy viewing. 
 
 
 == What can I do? ==
-'''As an instructor ...'''
-    	-Grade individual or groups of submissions with the click of a button
-        [[BR]]-View numeric scores and detailed grading results
-	[[BR]]-Download zip files of student submissions
+As an instructor…
+  * Grade individual or groups of submissions with the click of a button
+  * View numeric scores and detailed grading results
+  * Download zip files of student submissions
 	
 
-'''As a student ...'''
-	-Submit assignments with the click of a button
-	[[BR]]-Resubmit assignments
-	[[BR]]-View grading results for all submitted assignments
-	[[BR]]-Download submissions in case you want them later
+As a student…
+  * Submit assignments with the click of a button
+  * Resubmit assignments
+  * View grading results for all submitted assignments
+  * Download submissions in case you want them later
 
 
 == Components ==
-'''website''' - contains front end logic dealing with user interactions
-[[BR]]'''remote_emulab''' - contains methods that connect to and interact with emulab
-[[BR]]'''nm_remote_api''' - contains methods that interact with nodes remotely (so once Seattle has been installed on the Emulab machines, you use this to interact with these Seattle nodes)
-[[BR]]'''data_interface''' - contains methods that access and modify the database
-[[BR]]'''autograder_api''' - utilizes remote_emulab, nm_remote_api, and data_interface to form a single simple api for creating testing scripts
-[[BR]]'''autograder_runner''' - runs through the business logic of grading an assignment or group of assignments with specified testing and grading scripts
-
+  * '''website''' - contains front end logic dealing with user interactions
+  * '''remote_emulab''' - contains methods that connect to and interact with emulab
+  * '''nm_remote_api''' - contains methods that interact with nodes remotely (so once Seattle has been installed on the Emulab machines, you use this to interact with these Seattle nodes)
+  * '''data_interface''' - contains methods that access and modify the database
+  * '''autograder_api''' - utilizes remote_emulab, nm_remote_api, and data_interface to form a single simple api for creating testing scripts
+  * '''autograder_runner''' - runs through the business logic of grading an assignment or group of assignments with specified testing and grading scripts
 
 
 == How does it work? ==
 [[Image(autograder.png)]]
-[[BR]]1) Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
-[[BR]]2) Instructor clicks the grade button for the assignment.  The assignment is marked as 'grading in progress' and the autograder_runner is started.
-[[BR]]3) autograder_runner locates corresponding test and grade scripts for the assignment and calls a method in it named 'run_testing' from the test script
-[[BR]]4) autograder_runner takes results from 'run_testing' and passes it as a parameter to a method 'run_grading' 
-[[BR]]5) autograder_runner takes results from 'run_grading' and stores them into the database
 
+  1. Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
+  1. Instructor clicks the grade button for the assignment.  The assignment is marked as 'grading in progress' and the autograder_runner is started.
+  1. autograder_runner locates corresponding test and grade scripts for the assignment and calls a method in it named 'run_testing' from the test script
+  1. autograder_runner takes results from 'run_testing' and passes it as a parameter to a method 'run_grading' 
+  1. autograder_runner takes results from 'run_grading' and stores them into the database
 
 
 == How do I create an assignment solution? ==
