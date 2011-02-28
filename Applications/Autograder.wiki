@@ -1,6 +1,5 @@
 
 
-
 == What is the autograder? ==
 
 The autograder is a convenient auxiliary Seattle feature that allows instructors to collect and grade student submissions via a web interface.  
@@ -32,7 +31,7 @@ We provide fair and repeatable grading of student submissions by installing Seat
 
 
 == How does it work? ==
-[[Image(pic1.png)]]
+[[Image(autograder.png)]]
 [[BR]]1) Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
 [[BR]]2) Instructor clicks the grade button for the assignment.  The assignment is marked as 'grading in progress' and the autograder_runner is started.
 [[BR]]3) autograder_runner locates corresponding test and grade scripts for the assignment and calls a method in it named 'run_testing' from the test script
