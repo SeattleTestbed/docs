@@ -52,12 +52,12 @@ class '''!ShimNetworkError''' (!ShimException):
   due to network connectivity.
 
 
-class '''!ShimTCPError''' (!ShimNetworkError):
+class '''ShimTCPError''' (!ShimNetworkError):
   This indicates that there was a TCP network related
   error that occured.
 
 
-class '''!ShimUDPError''' (!ShimNetworkError):
+class '''ShimUDPError''' (!ShimNetworkError):
   This indicates that there was a UDP network related
   error that occured.
 
