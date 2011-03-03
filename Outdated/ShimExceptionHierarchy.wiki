@@ -1,0 +1,79 @@
+= Shim Exception Hierarchy =
+
+== Description ==
+----
+This page displays the shim exception hierarchy. It lists all the expected shim exceptions that may be raised and a description of what they are.
+[[br]]
+
+== Exception Hierarchy ==
+----
+Exception hierarchy:
+ * !ShimException
+  * !InvalidShimContext
+  * !ShimArgumentError
+  * !ShimNotFoundError
+  * !ShimNetworkError
+   * ShimTCPError
+   * ShimUDPError
+   * !ShimAdvertisementError
+    * !ShimAdvertisementLookupError
+    * !ShimAdvertisementAnnounceError
+[[br]]
+
+== Exception Description ==
+----
+class '''!ShimException''' (Exception):
+ 
+  The base shim exception. All other exceptions
+  are derived from here.
+  
+
+
+class '''!InvalidShimContext''' (!ShimException):
+  This error means that the global context does
+  not match the expected context for a shim.
+
+
+class '''!ShimArgumentError''' (!ShimException):
+  This indicates that an argument was provided
+  that does not match the expected argument for
+  a function.
+  
+
+
+class '''!ShimNotFoundError''' (!ShimException):
+  This error would be raised if a shim name
+  is provided that is not found.
+
+
+
+class '''!ShimNetworkError''' (!ShimException):
+  The base error for any shim exceptions that is raised
+  due to network connectivity.
+
+
+class '''!ShimTCPError''' (!ShimNetworkError):
+  This indicates that there was a TCP network related
+  error that occured.
+
+
+class '''!ShimUDPError''' (!ShimNetworkError):
+  This indicates that there was a UDP network related
+  error that occured.
+
+
+class '''!ShimAdvertisementError''' (!ShimNetworkError):
+  This error indicates that there was an error
+  with the advertisement system while either doing lookup
+  or announce.
+
+
+class '''!ShimAdvertisementLookupError''' (!ShimAdvertisementError):
+  This error indicates that a shim error occured
+  while doing an advertisement lookup.
+
+
+class '''!ShimAdvertisementAnnounceError''' (!ShimAdvertisementError):
+  This error indicates that a shim error occured
+  while doing an advertisement announce.
+
