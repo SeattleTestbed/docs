@@ -12,12 +12,6 @@ Exception hierarchy:
   * !InvalidShimContext
   * !ShimArgumentError
   * !ShimNotFoundError
-  * !ShimNetworkError
-   * ShimTCPError
-   * ShimUDPError
-   * !ShimAdvertisementError
-    * !ShimAdvertisementLookupError
-    * !ShimAdvertisementAnnounceError
 [[br]]
 
 == Exception Description ==
@@ -44,36 +38,4 @@ class '''!ShimArgumentError''' (!ShimException):
 class '''!ShimNotFoundError''' (!ShimException):
   This error would be raised if a shim name
   is provided that is not found.
-
-
-
-class '''!ShimNetworkError''' (!ShimException):
-  The base error for any shim exceptions that is raised
-  due to network connectivity.
-
-
-class '''ShimTCPError''' (!ShimNetworkError):
-  This indicates that there was a TCP network related
-  error that occured.
-
-
-class '''ShimUDPError''' (!ShimNetworkError):
-  This indicates that there was a UDP network related
-  error that occured.
-
-
-class '''!ShimAdvertisementError''' (!ShimNetworkError):
-  This error indicates that there was an error
-  with the advertisement system while either doing lookup
-  or announce.
-
-
-class '''!ShimAdvertisementLookupError''' (!ShimAdvertisementError):
-  This error indicates that a shim error occured
-  while doing an advertisement lookup.
-
-
-class '''!ShimAdvertisementAnnounceError''' (!ShimAdvertisementError):
-  This error indicates that a shim error occured
-  while doing an advertisement announce.
 
