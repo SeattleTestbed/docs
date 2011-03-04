@@ -8,7 +8,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
 General instructions for use are as follows:
 
-First, download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit. The main file you will be using is huxiang_creator.py, which will handle the rest of the files. huxiang_server.repy is basically a compiled version of huxiang_client.repy, so if you want to make any changes to how HTTP requests are handled, all edits should be made to huxiang_client.repy before re-compiling as huxiang_server.repy, which is further explained in the steps below.
+First, download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit. Whether than keeping the files in a separate folder within the demokit, move the files into the main demokit folder. The main file you will be using is huxiang_creator.py. huxiang_server.repy is basically a compiled version of huxiang_client.repy, so if you want to make any changes to how HTTP requests are handled, all edits should be made to huxiang_client.repy before re-compiling as huxiang_server.repy. Steps on doing so are further explained below.
 
 Within the demokit folder, follow the instructions in setting up the Experimental Library [wiki:ExperimentLibrary here]. There should now be a folder called "ExperimentalLibrary" in the demokit folder. Also, to keep things simple, keep a copy of your publickey and privatekey file within the demokit folder
 
