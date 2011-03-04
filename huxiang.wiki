@@ -48,6 +48,13 @@ There may be a variable amount of time delay between execution of the program to
 
 
 
+== Restrictions ==
+There are a few restrictions that users must be aware of when hosting websites through huxiang:
+- The home folder of the web files being uploaded must contain an "index.html" that will act as the homepage of the website
+- Links between pages hosted on the same server must be relative addresses instead of solid ones
+
+
+
 == Further Information ==
 
 Further information about advertise_announce, settimer, and _rehost_callback can be found at the [wiki:Zenodotus zenodotus] page.
