@@ -40,7 +40,16 @@ PROJECT_URL = BASE_URL
 
 {{{RANDOM_STRING}}} should be a random string of your own choosing — do not share it with others. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
- * '''Step 4:''' Still within the "custominstallerbuilder" directory, run the django test server:
+ * '''Step 4:''' From within the "custominstallerbuilder" directory, download the base installers:
+
+{{{
+$ cd html/static/installers/base
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_linux.tgz
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_mac.tgz
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_win.zip
+}}}
+
+ * '''Step 5:''' Still within the "custominstallerbuilder" directory, run the django test server:
 
 {{{
 $ ./manage.py runserver 0.0.0.0:PORT
