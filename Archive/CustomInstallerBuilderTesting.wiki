@@ -14,7 +14,16 @@ $ cd custominstallerbuilder
 $ cp -R local_template local
 }}}
 
- * '''Step 3:''' Edit "local/settings.py" to match your local configuration. On blackbox.cs, it is sufficient to change the following lines:
+ * '''Step 3:''' From within the "custominstallerbuilder" directory, download the base installers:
+
+{{{
+$ cd html/static/installers/base
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_linux.tgz
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_mac.tgz
+$ wget http://seattlegeni.cs.washington.edu/dist/seattle_win.zip
+}}}
+
+ * '''Step 4:''' Edit "local/settings.py" to match your local configuration. On blackbox.cs, it is sufficient to change the following lines:
 
 {{{
 SECRET_KEY = '***** This should be changed to a random string *****'
@@ -39,15 +48,6 @@ PROJECT_URL = BASE_URL
 }}}
 
 {{{RANDOM_STRING}}} should be a random string of your own choosing — do not share it with others. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
-
- * '''Step 4:''' From within the "custominstallerbuilder" directory, download the base installers:
-
-{{{
-$ cd html/static/installers/base
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_linux.tgz
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_mac.tgz
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_win.zip
-}}}
 
  * '''Step 5:''' Still within the "custominstallerbuilder" directory, run the django test server:
 
