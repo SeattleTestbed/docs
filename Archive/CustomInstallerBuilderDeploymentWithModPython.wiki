@@ -1,6 +1,9 @@
 = Deploying the Custom Installer Builder =
 This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using common Apache configurations. To run the Custom Installer Builder using a Django test server, follow [CustomInstallerBuilderTesting these instructions] instead.
 
+== For all configurations ==
+Start by performing the '''first three steps''' of [CustomInstallerBuilderTesting these instructions]. This will help you download the Custom Installer Builder and gather the requisite files.
+
 == Using Apache + mod_python ==
 Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the httpd.conf file, but the configuration will also work within a VirtualHost directive, for example.
 
