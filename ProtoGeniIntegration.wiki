@@ -21,7 +21,7 @@ The SeattleGENI project also has its own XML-RPC server which provides a richer 
     'credentials' : [list_of_credentials]}
 }}}
   1. slice_urn - slice_urn is an urn that describes what slice you want. A description of what urns are can be found [http://www.protogeni.net/trac/protogeni/wiki/URNs here] 
-  1. rspec - rspec is an integer in string form. The integer can be between 1-10. A rspec value of 0 or over 10 will return an unsuccessful result. The rspec is the number of nodes that the user wants to acquire after creating the sliver. An user can acquire a maximum of 10 nodes when creating a sliver. The nodes that are returned are a mix of LAN and WAN nodes.
+  1. rspec - rspec is an integer in string form. The integer can be between 1-10. A rspec value of 0 or over 10 will return an unsuccessful result. The rspec is the number of nodes that the user wants to acquire after creating the sliver. An user can acquire a maximum of 10 nodes when creating a sliver. The nodes that are returned are a mix of nodes across the Seattle/MillionNodeGENI.
   1. credentials - credentials is a list of credential that the user can provide. The list for this call should only contain one credential. If more then one credential is provided, then an unsuccessful result is returned. To see what a credential should look like, check below.
 
 [[BR]]
