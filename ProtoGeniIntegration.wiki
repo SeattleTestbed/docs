@@ -9,6 +9,8 @@ This is an XML-RPC interface that integrates the SeattleGENI project with the Pr
 
 This allows users from different project to acquire resources from the SeattleGENI project as long as they have the proper credentials. SeattleGENI has implemented the two api calls: !CreateSliver() and !DeleteSlice(). These two calls allow users to acquire resources and release resources from the SeattleGENI project. The XML-RPC server is located at !https://blackbox.cs.washington.edu/xmlrpc/ A tarball of the XML-RPC server as well as the components required to set it up is attached at the bottom of this page.
 
+The SeattleGENI project also has its own XML-RPC server which provides a richer interface to interact with SeattleGENI resources. A description of the SeattleGENI XML-RPC server and the various api calls that are available can be found at the [wiki:SeattleGeniApi SeattleGENI API] page.
+
 [[BR]]
 == !CreateSliver(argument_dict) ==
 ----
@@ -19,7 +21,7 @@ This allows users from different project to acquire resources from the SeattleGE
     'credentials' : [list_of_credentials]}
 }}}
   1. slice_urn - slice_urn is an urn that describes what slice you want. A description of what urns are can be found [http://www.protogeni.net/trac/protogeni/wiki/URNs here] 
-  1. rspec - rspec is an integer in string form. The integer can be between 1-10. A rspec value of 0 or over 10 will return an unsuccessful result. 
+  1. rspec - rspec is an integer in string form. The integer can be between 1-10. A rspec value of 0 or over 10 will return an unsuccessful result. The rspec is the number of nodes that the user wants to acquire after creating the sliver. An user can acquire a maximum of 10 nodes when creating a sliver. The nodes that are returned are a mix of LAN and WAN nodes.
   1. credentials - credentials is a list of credential that the user can provide. The list for this call should only contain one credential. If more then one credential is provided, then an unsuccessful result is returned. To see what a credential should look like, check below.
 
 [[BR]]
