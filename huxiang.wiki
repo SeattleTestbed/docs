@@ -1,4 +1,4 @@
-== What is HuXiang? ==
+== What is huxiang? ==
 
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
 
@@ -10,7 +10,7 @@ General instructions for use are as follows:
 
 First, download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit. Whether than keeping the files in a separate folder within the demokit, move the files into the main demokit folder. The main file you will be using is huxiang_creator.py. huxiang_server.repy is basically a compiled version of huxiang_client.repy, so if you want to make any changes to how HTTP requests are handled, all edits should be made to huxiang_client.repy before re-compiling as huxiang_server.repy. Steps on doing so are further explained below.
 
-Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:ExperimentLibrary here]. There should now be a folder called "ExperimentLibrary" in the demokit folder. Also, to keep things simple, keep a copy of your publickey and privatekey file within the demokit folder
+Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:Libraries/ExperimentLibrary here]. There should now be a folder called "ExperimentLibrary" in the demokit folder. Also, to keep things simple, keep a copy of your publickey and privatekey file within the demokit folder
 
 Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc. Note that in the HTML coding, make sure address linking between files are based on relative directory, not static addresses.
 For example, instead of using:
