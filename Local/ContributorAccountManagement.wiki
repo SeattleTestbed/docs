@@ -1,29 +1,21 @@
-= Seattle Account Management =
+= Contributor Account Management =
+This page describes how to create, manage, and delete accounts for contributors to the Seattle project.
 
-This page describes how to create accounts for new developers that join the Seattle project and how to manage them and delete them when necessary.
-----
+
 [[TOC(inline)]]
-----
 
 == Overview ==
-----
 When a new developer joins the Seattle project accounts have to be created for the developer. Accounts need to be created so the developer can login to the Trac page, can checkout and commit to our SVN and have access to our several testbed machines. The developer also needs to be added to the developers email list.
 
-[[BR]]
 == Account creation ==
-----
 Accounts for developers need to be created for our Trac system, seattle.cs.washington.edu, all the testbed machines and optionally for blackbox.cs.washington.edu and maybe betabox.cs.washington.edu. The initial password assigned to the developers should be random and unique. The password should be a mixture of letters, numbers and symbols. Once the accounts have been created, an email should be sent to the developer with their account info and the email should remind the developer to change the password as soon as possible.
 
-[[BR]]
 == Creating/Deleting Trac Account ==
-----
 To create a Trac account, you have to be an admin on our Seattle Trac page. After logging in as an admin, click on the 'Admin' tab on the left side of the page. Then go to the Accounts->Users section under the Administration section. Then fill in the information for the new user in the 'Add Account' box on the right side of the page.
 
 To remove an user, check the box next to the user you want to remove and then click on the 'remove selected accounts' at the bottom of the page.
 
-[[BR]]
 == Creating accounts on testbed machines ==
-----
  * Windows XP and Vista
   * We have two windows machine currently: testbed-xp2.cs.washington.edu and testbed-vista1.cs.washington.edu.
   * Click on Start->Control Panel->User Accounts.
@@ -50,9 +42,8 @@ To remove an user, check the box next to the user you want to remove and then cl
  * Mac machines
   * Coming soon!!
 
-[[BR]]
+
 == Deleting accounts on testbed machines ==
-----
  * Windows XP and Vista
   * Click on Start->Control Panel->User Accounts.
   * Click on the account you are planning to remove.
@@ -70,12 +61,10 @@ To remove an user, check the box next to the user you want to remove and then cl
  * Mac machines.
   * Coming soon!!
 
-[[BR]]
+
 == SVN access for users ==
-----
 To give a user access to our SVN so they can commit, they must first have an account on seattle.cs.washington.edu as that is where our SVN resides. Open up the /etc/groups file and add the user to the 'dev:' group. Deleting the user account from seattle.cs.washington.edu will remove their access to the Seattle SVN.
 
-[[BR]]
+
 == Adding developers to mailing list ==
-----
 To add a developer to the developers mailing list, you must be an admin for the mailing list. Visit the [https://mailman.cs.washington.edu/mailman/admin/seattle-devel seattle-devel administrative page] click on the Membership Management->Mass Subscription link. Enter the developers email address and subscribe him. 
