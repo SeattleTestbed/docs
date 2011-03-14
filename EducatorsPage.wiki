@@ -6,17 +6,17 @@ This page contains information for educators wishing to use Seattle in the class
 == Complete Assignments ==
 The following set of assignments have complete descriptions, and have fully documented instructor solutions. These assignments are geared toward an undergraduate class in networks or distributed systems.
 
- * The [TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
+ * The [wiki:TakeHomeAssignment Take-Home Assignment] introduces [SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
- * The [StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it is simple to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.  For comparison, Part 1 of [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html this assignment] is a C version of the assignment.
+ * The [wiki:StopAndWaitAssignment Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it is simple to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.  For comparison, Part 1 of [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html this assignment] is a C version of the assignment.
 
- * The [SlidingWindowAssignment Sliding Window Assignment] is an advanced extension to the Stop and Wait Assignment above.
+ * The [wiki:SlidingWindowAssignment Sliding Window Assignment] is an advanced extension to the Stop and Wait Assignment above.
 
- * The [LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   Students implement Dijkstra's shortest path routing and then apply this to route packets in an attempt to minimize latency.
+ * The [wiki:LinkStateAssignment Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   Students implement Dijkstra's shortest path routing and then apply this to route packets in an attempt to minimize latency.
 
- * The [WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
+ * The [wiki:WebServerAssignment Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [ChatServerAssignment Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
 
- * The [ChordAssignment Distributed Hash Table Assignment] has students build a peer-to-peer routing layer.   Students begin by building an implementation of the popular DHT Chord.   This will work well for routing messages over LAN topologies, but will fail in many WAN scenarios due to non-transitive connectivity.   Students then use one-hop detour routing to route around failures.
+ * The [wiki:ChordAssignment Distributed Hash Table Assignment] has students build a peer-to-peer routing layer.   Students begin by building an implementation of the popular DHT Chord.   This will work well for routing messages over LAN topologies, but will fail in many WAN scenarios due to non-transitive connectivity.   Students then use one-hop detour routing to route around failures.
 
 
 == Other Assignment Ideas ==
@@ -38,7 +38,7 @@ A more complex set of assignments can also be designed for use with Seattle. The
 == Project Ideas ==
 Advanced undergraduate and graduate courses in networks and distributed systems can also use Seattle for a class project. Seattle project can involve everything from highly scalable, and complex distributed systems, to measurements of global Internet traffic patterns, to ubiquitous computing topics. The two project ideas below are examples of what such a graduate-level project would entail.
 
-  * [RepyMapReduce A MapReduce service]
+  * [wiki:RepyMapReduce A MapReduce service]
 
     The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of !MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their !MapReduce service.  An example use of !MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one !MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple !MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
 
