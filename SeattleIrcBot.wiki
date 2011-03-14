@@ -1,34 +1,33 @@
-= seattlebot: irc bot in the #seattle channel =
+= !SeattleBot: The Seattle IRC Bot =
+!SeattleBot is an instance of {{{supybot}}} running on {{{seattle.cs}}} which logs the Freenode {{{#seattle}}} channel and provides information from Trac when tickets or changesets are mentioned.
 
-seattlebot is an instance of the supybot running on seattle.cs which logs the freenode #seattle channel and provides information from Trac when tickets or changesets are mentioned.
+'''Note:''' This service is not related to the IRC messages that will get posted by the [wiki:Local/MonitorProcessService Monitor Process Service] in the event of a service failure.
 
-seattlebot is unrelated to the irc messages that will get posted by MonitorProcessService in the event of a service failure.
 
-== Logging ==
+== Log storage ==
+!SeattleBot is configured to log to {{{/home/seattlebot/logs/ChannelLogger/freenode/#seattle/}}} on {{{seattle.cs}}}. The logs can also be [https://seattle.cs.washington.edu/irclogs/ viewed online].
 
-Currently seattlebot is configured to log to /home/seattlebot/logs/ChannelLogger/freenode/#seattle/
-
-The logs can be viewed through the website here: https://seattle.cs.washington.edu/irclogs/
 
 == Trac info in IRC ==
+When a user in {{{#seattle}}} mentions ticket numbers or changeset numbers, !SeattleBot tries to grab relevant information from Trac and deliver it to the channel. For example, including the following text in a message should cause !SeattleBot to speak up:
 
-When a user in #seattle mentions ticket numbers or changeset numbers, seattlebot tries to grab the relevant page from Trac and display info about what was mentioned. For example, including the following in a message in #seattle should cause seattlebot to speak up:
+{{{
+#100
+ticket 100
+ticket:100
+}}}
 
-!#100 [[BR]]
-ticket 100 [[BR]]
-!ticket:100 [[BR]]
+{{{
+r200
+changeset 200
+changeset:200
+}}}
 
-!r200 [[BR]]
-changeset 200 [[BR]]
-!changeset:200 [[BR]]
-
-!wiki:WikiStart
-
-See the regex's used in !SupyTrac/plugins.py for more specifics. Notably, single-digit tickets as well as single- and double-digit changesets are currently ignored.
+See the regular expressions used in !SupyTrac/plugins.py for more specifics. Notably, single-digit tickets as well as single- and double-digit changesets are currently ignored.
 
 == Installation Instructions ==
 
-A user account on seattle.cs was created which has supybot installed from the Ubuntu repositories. Installation instructions are as follow:
+A user account on {{{seattle.cs}}} was created which has {{{supybot}}} installed from the Ubuntu repositories. Installation instructions are as follow:
 
 {{{
 mkdir /home/seattlebot/plugins
@@ -73,11 +72,13 @@ In order to work with the installed version of Trac, the following changes were 
          author = soup.findAll('dd', attrs={'class': 'author'})[0].string
 }}}
 
-All plugins besides !ChannelLog and !SupyTrac were disabled in the /home/seattlebot/seattlebot.conf. 
+All plugins besides !ChannelLog and !SupyTrac were disabled in the {{{/home/seattlebot/seattlebot.conf}}}. 
 
-The following was added to /etc/rc.local to start supybot on startup:
+The following was added to {{{/etc/rc.local}}} to start {{{supybot}}} on startup:
 
+{{{
 sudo -u seattlebot supybot /home/seattlebot/seattlebot.conf >>/home/seattlebot/stdout-stderr.log 2>&1 &
+}}}
 
 To make the logs available through the website, the following was added to /etc/apache2/sites-available/default's https vhost:
 
