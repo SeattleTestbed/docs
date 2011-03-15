@@ -1,5 +1,7 @@
 = Documentation Style Guidelines =
 
+== Article structure and contents ==
+
  * Begin the page with a heading, enclosed with: {{{= =}}}
  * The immediate next paragraph of the document should contain a purpose summary for the document
  * Immediately following the purpose summary, insert the following snippet:
@@ -23,3 +25,21 @@ print "hello world"
  * For adding HTML code the {{{#!html}}} directive should be used
  
  * For CSS code, use the {{{#!C}}} directive
+
+== Linking to other articles within the wiki ==
+To prevent broken links, all links to other articles within the wiki should be made explicitly by using the "{{{wiki:}}}" prefix. For example, instead of doing one of these...
+
+{{{
+ProgrammersPage
+[ProgrammersPage]
+[ProgrammersPage Programmer Portal]
+}}}
+
+...use one of these...
+
+{{{
+[wiki:ProgrammersPage]
+[wiki:ProgrammersPage Programmer Portal]
+}}}
+
+Because the name of an article may change unexpectedly, the latter method is preferred.
