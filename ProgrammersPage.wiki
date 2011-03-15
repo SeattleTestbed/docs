@@ -25,7 +25,7 @@ After doing one of the above tutorials, do the following tutorial to learn how t
 == Other Resources ==
  * An easy way to start learning Seattle is to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo].
 
- * Use the [RepyLibrary Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
+ * Use the [RepyApi Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
 
  * There is a growing list of library code you can download and use with Repy (see [http://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib/ seattlelib] in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
 
