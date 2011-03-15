@@ -3,25 +3,25 @@
  * InternalRepyError
  * RepyError
    * NetworkError
-     * PortInUseError
-     * InternetConnectivityError
-     * AddressBindingError
-     * ConnectionRefusedError
-     * [wiki:FutureRepyExceptions/LocalIPChanged]
-     * SocketClosedLocal
-     * SocketClosedRemote
-     * SocketWouldBlockError
+     * [wiki:FutureRepyExceptions/PortInUseError PortInUseError]
+     * [wiki:FutureRepyExceptions/InternetConnectivityError InternetConnectivityError]
+     * [wiki:FutureRepyExceptions/AddressBindingError AddressBindingError]
+     * [wiki:FutureRepyExceptions/ConnectionRefusedError ConnectionRefusedError]
+     * [wiki:FutureRepyExceptions/LocalIPChanged LocalIPChanged]
+     * [wiki:FutureRepyExceptions/SocketClosedLocal SocketClosedLocal]
+     * [wiki:FutureRepyExceptions/SocketClosedRemote SocketClosedRemote]
+     * [wiki:FutureRepyExceptions/SocketWouldBlockError SocketWouldBlockError]
    * RestrictionError
-     * PortRestrictedError
+     * [wiki:FutureRepyExceptions/PortRestrictedError PortRestrictedError]
    * CodeUnsafeError
    * ContextUnsafeError
    * TimeoutError
    * FileError
-     * FileNotFoundError
-     * SeekPastEndOfFileError
-     * FileInUseError
+     * [wiki:FutureRepyExceptions/FileNotFoundError FileNotFoundError]
+     * [wiki:FutureRepyExceptions/SeekPastEndOfFileError SeekPastEndOfFileError]
+     * [wiki:FutureRepyExceptions/FileInUseError FileInUseError]
    * LockDoubleReleaseError
    * RepyArgumentError
    * ResourceUsageError
-     * ResourceExhaustedError
-     * ResourceForbiddenError
+     * [wiki:FutureRepyExceptions/ResourceExhaustedError ResourceExhaustedError]
+     * [wiki:FutureRepyExceptions/ResourceForbiddenError ResourceForbiddenError]
