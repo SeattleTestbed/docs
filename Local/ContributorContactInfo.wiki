@@ -1,4 +1,4 @@
-= Project Members and Affiliates =
+= Contributor Contact Information =
 '''If you are working on Seattle, please add your information to this table.''' Please include as much information as you are willing to disclose, and keep the list sorted alphabetically by SVN username.
 
 You can often find other Seattle contributors on IRC in room {{{#seattle}}} on {{{freenode.net}}}.
