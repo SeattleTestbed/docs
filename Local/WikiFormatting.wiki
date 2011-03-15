@@ -26,7 +26,7 @@ print "hello world"
  
  * For CSS code, use the {{{#!C}}} directive
 
-== Linking to other articles within the wiki ==
+== Linking to other articles within the wiki == #links
 To prevent broken links, all links to other articles within the wiki should be made explicitly by using the "{{{wiki:}}}" prefix. For example, instead of doing one of these...
 
 {{{
