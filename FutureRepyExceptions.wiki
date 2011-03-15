@@ -7,7 +7,7 @@
      * InternetConnectivityError
      * AddressBindingError
      * ConnectionRefusedError
-     * [wiki:LocalIPChanged]
+     * [wiki:FutureRepyExceptions/LocalIPChanged]
      * SocketClosedLocal
      * SocketClosedRemote
      * SocketWouldBlockError
