@@ -36,3 +36,9 @@ $> python repy.py restrictions.default repy_www_sandbox.0.1.1.repy 12345
 The !HuXiang project was developed by the student Alan Loh at University of Washington. It allows a SeattleGENI user to host a website on a node without worrying about any configuration of hosting. Furthermore !HuXiang takes advantage of the fact that we are able to register a domain name through our zenodotus server and is able to register the website you are hosting with the domain name of your choice. 
 
 You can learn more about the !HuXiang project by visiting its wiki page at [wiki:huxiang HuXiang Project]. You can download the required files from the wiki page and follow the instructions easily to host a website in minutes! 
+[[br]]
+
+=== Seobinggo ===
+The Seobinggo project was developed as a peer-to-peer backup system. It allows you to backup any of your local file, which are backed up locally as well as remotely on a peer node. The data that is backed up is encrypted with a publickey so unless you have the equivalent privatekey you won't be able to retrieve the backup file.
+
+To learn more about the Seobinggo project please take a look at the [wiki:Applications/Seobinggo Seobinggo wiki] page
