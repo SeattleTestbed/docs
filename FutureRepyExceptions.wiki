@@ -1,8 +1,9 @@
-!FutureRepyExceptionHierarchy:
+= Future Repy Exception Hierarchy =
+This is the planned exception hierarchy for RepyV2, currently in development.
 
- * InternalRepyError
- * RepyError
-   * NetworkError
+ * [wiki:FutureRepyExceptions/InternalRepyError InternalRepyError]
+ * [wiki:FutureRepyExceptions/RepyError RepyError]
+   * [wiki:FutureRepyExceptions/NetworkError NetworkError]
      * [wiki:FutureRepyExceptions/PortInUseError PortInUseError]
      * [wiki:FutureRepyExceptions/InternetConnectivityError InternetConnectivityError]
      * [wiki:FutureRepyExceptions/AddressBindingError AddressBindingError]
@@ -11,17 +12,17 @@
      * [wiki:FutureRepyExceptions/SocketClosedLocal SocketClosedLocal]
      * [wiki:FutureRepyExceptions/SocketClosedRemote SocketClosedRemote]
      * [wiki:FutureRepyExceptions/SocketWouldBlockError SocketWouldBlockError]
-   * RestrictionError
+   * [wiki:FutureRepyExceptions/RestrictionError RestrictionError]
      * [wiki:FutureRepyExceptions/PortRestrictedError PortRestrictedError]
-   * CodeUnsafeError
-   * ContextUnsafeError
-   * TimeoutError
-   * FileError
+   * [wiki:FutureRepyExceptions/CodeUnsafeError CodeUnsafeError]
+   * [wiki:FutureRepyExceptions/ContextUnsafeError ContextUnsafeError]
+   * [wiki:FutureRepyExceptions/TimeoutError TimeoutError]
+   * [wiki:FutureRepyExceptions/FileError FileError]
      * [wiki:FutureRepyExceptions/FileNotFoundError FileNotFoundError]
      * [wiki:FutureRepyExceptions/SeekPastEndOfFileError SeekPastEndOfFileError]
      * [wiki:FutureRepyExceptions/FileInUseError FileInUseError]
-   * LockDoubleReleaseError
-   * RepyArgumentError
-   * ResourceUsageError
+   * [wiki:FutureRepyExceptions/LockDoubleReleaseError LockDoubleReleaseError]
+   * [wiki:FutureRepyExceptions/RepyArgumentError RepyArgumentError]
+   * [wiki:FutureRepyExceptions/ResourceUsageError ResourceUsageError]
      * [wiki:FutureRepyExceptions/ResourceExhaustedError ResourceExhaustedError]
      * [wiki:FutureRepyExceptions/ResourceForbiddenError ResourceForbiddenError]
