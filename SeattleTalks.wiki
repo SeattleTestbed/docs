@@ -114,4 +114,4 @@
 
 || 2:30-4PM Mar 15th, 2011 || San Cristobal, Sheraton Puerto Rico Convention Center Hotel, Puerto Rico || GEC 10 || Justin, Monzur || Tutorial, Demo
 
-|| 11:20AM-12noon Mar 16th, 2011 || San Juan, Sheraton Puerto Rico Convention Center Hotel, Puerto Rico || GEC 10 || Justin, Monzur || Plenary Live Demo
+|| 11:20AM-12noon Mar 16th, 2011 || San Juan, Sheraton Puerto Rico Convention Center Hotel, Puerto Rico || GEC 10 Plenary Session || Justin, Monzur || Live Demo of [wiki:huxiang HuXiang]
