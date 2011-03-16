@@ -7,25 +7,25 @@ This page features information and references regarding how to use write program
 == Before You Begin ==
 Make sure you have all the necessary tools installed:
 
- * '''Step 1''': Python2.5 or Python2.6 must be installed in order to use Repy.  [http://www.python.org/download/releases/2.6.4/ Download Python2.6] '''WINDOWS USERS:''' For instructions on how to check if you already have the correct version of Python installed, and for directions on how to install Python2.6, [InstallPythonOnWindows click here]
+ * '''Step 1''': Python2.5 or Python2.6 must be installed in order to use Repy.  [http://www.python.org/download/releases/2.6.4/ Download Python2.6] '''WINDOWS USERS:''' For instructions on how to check if you already have the correct version of Python installed, and for directions on how to install Python2.6, [wiki:InstallPythonOnWindows click here]
 
  * '''Step 2''': You will have to download and install repy before starting the tutorials below: '''[https://seattle.cs.washington.edu/geni/download/flibble/ Download repy!]'''
 
 == Tutorials ==
 You can start with several different tutorials depending on your background.
 
- * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
+ * [wiki:PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
 
- * [PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
+ * [wiki:PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
 
 After doing one of the above tutorials, do the following tutorial to learn how to use Repy specific features and functionality:
 
- * [RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
+ * [wiki:RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
 == Other Resources ==
  * An easy way to start learning Seattle is to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo].
 
- * Use the [RepyApi Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
+ * Use the [wiki:RepyApi Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
 
  * There is a growing list of library code you can download and use with Repy (see [http://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib/ seattlelib] in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
 
