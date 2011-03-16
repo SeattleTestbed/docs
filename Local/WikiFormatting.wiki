@@ -27,13 +27,9 @@ print "hello world"
  * For CSS code, use the {{{#!C}}} directive
 
 == Linking to other articles within the wiki == #links
-To prevent broken links due to renamed articles, all links to other articles within the wiki should be made explicitly by using the "{{{wiki:}}}" prefix. For example, instead of doing one of these...
+To prevent broken links due to renamed articles, all links to other articles within the wiki should be made explicitly by using the "{{{wiki:}}}" prefix. 
 
-{{{
-ProgrammersPage
-[ProgrammersPage]
-[ProgrammersPage Programmer Portal]
-}}}
+For example, do:
 
 ...use one of these...
 
@@ -42,4 +38,14 @@ ProgrammersPage
 [wiki:ProgrammersPage Programmer Portal]
 }}}
 
-Because the name of an article may change unexpectedly, the latter method is preferred.
+'''Do not do'''
+
+{{{
+ProgrammersPage
+[ProgrammersPage]
+[ProgrammersPage Programmer Portal]
+}}}
+
+
+
+Because the name of an article may change unexpectedly, the wiki: style is preferred.
