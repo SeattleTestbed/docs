@@ -98,5 +98,20 @@
 
 || 4:30-7PM Nov 10th, 2010 || Paul Allen Center Atrium, University of Washington  || ACM Research Night || Justin, Jeff || Poster Presentation
 
-|| Jan 25th, 2011 || (?)  || University of North Carolina, Charlotte  || Justin || Talk, Demo
+|| Jan 25th, 2011 || Closed  || University of North Carolina, Charlotte  || Justin || Talk, Demo
+
+|| Feb 4th, 2011 ||  Not open to public || Worcester Polytechnic Institute  || Justin || Talk, Demo
+
+|| Feb 8th, 2011 || Closed Talk  || Northeastern University  || Justin || Talk, Demo
+
+|| Feb 14th, 2011 || Not public  || Syracuse University  || Justin || Talk, Demo
+
+|| Feb 18th, 2011 || Closed || NYU Poly  || Justin || Talk, Demo
+
+|| March 1st, 2011 || Closed Talk  || George Washington University  || Justin || Talk, Demo
+
+|| March 8th, 2011 || Not open to the public  || George Mason University  || Justin || Talk, Demo
+
 || 2:30-4PM Mar 15th, 2011 || San Cristobal, Sheraton Puerto Rico Convention Center Hotel, Puerto Rico || GEC 10 || Justin, Monzur || Tutorial, Demo
+
+|| 11:20AM-12noon Mar 16th, 2011 || San Juan, Sheraton Puerto Rico Convention Center Hotel, Puerto Rico || GEC 10 || Justin, Monzur || Plenary Live Demo
