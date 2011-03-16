@@ -1,0 +1,1 @@
+In the FutureRepyExceptionHierarchy, InternetConnectivityError is an exception raised when the repy program tries to connect to a remote tcp ip/port or send a datagram to a remote udp ip/port, and there is no route to that ip (for example, if the user's laptop gets disconnected from an access point because they are on a moving bus).
