@@ -41,9 +41,9 @@ For example, do:
 '''Do not do'''
 
 {{{
-ProgrammersPage
-[ProgrammersPage]
-[ProgrammersPage Programmer Portal]
+BadName
+[BadName]
+[BadName This is a bad example]
 }}}
 
 
