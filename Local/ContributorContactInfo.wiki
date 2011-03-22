@@ -5,17 +5,10 @@ You can often find other Seattle contributors on IRC in room {{{#seattle}}} on {
 
 
 || '''Name''' || '''Email''' || '''SVN Username''' || '''Trac Username''' || '''Phone''' ||
-|| Alan Loh || yaluen at uw || alanloh || alanloh || 425-273-5651 ||
-|| Alex Hanson || alexjh at cs || alexjh || alexjh || ||
-|| Armon Dadgar || armond at cs || armon ||  armon || 206-914-6233 ||
-|| Eric Kimbrel || kimbrl at cs || kimbrl || kimbrl || ||
-|| Ivan Beschastnikh || ivan at cs || ivan || ivan || ||
-|| Jeff Rasley || jeffra45 at cs || jeffra45 || jeffra45 || ||
-|| Justin Samuel || jsamuel at cs || jsamuel || jsamuel || ||
 || Justin Cappos || justinc at cs  || justinc || justinc || ||
-|| Stephen Sievers || sjs25 at uw || sjs25 || sjs25 || 425-343-2381 ||
-|| Steven Portzer || sportzer at cs || sportzer || sportzer || ||
-|| Monzur Muhammad || monzum at cs || monzum || monzum || ||
-|| Yafete Yemuru || yemuru at gmail || yemuru || yemuru || ||
-|| Zack Boka || zackrb at cs || zackrb || zackrb || ||
+|| Alex Hanson || alexjh at cs || alexjh || alexjh || ||
+|| Alan Loh || yaluen at uw || alanloh || alanloh || 425-273-5651 ||
 || Sebastian Morgan || sebass63 at gmail || sebass63 || sebass63 || 206-498-5597 ||
+|| Monzur Muhammad || monzum at cs || monzum || monzum || ||
+|| Steven Portzer || sportzer at cs || sportzer || sportzer || ||
+|| Jeff Rasley || jeffra45 at cs || jeffra45 || jeffra45 || ||
