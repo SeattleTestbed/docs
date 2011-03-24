@@ -3,16 +3,23 @@
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
 
 
+== Setting Up ==
+1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing it.
 
-== How do I use it? ==
+2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
-General instructions for use are as follows:
+3. Download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit.
 
-First, download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit. Whether than keeping the files in a separate folder within the demokit, move the files into the main demokit folder. The main file you will be using is huxiang_creator.py. huxiang_server.repy is basically a compiled version of huxiang_client.repy, so if you want to make any changes to how HTTP requests are handled, all edits should be made to huxiang_client.repy before re-compiling as huxiang_server.repy. Steps on doing so are further explained below.
+4. Whether than keeping the recently extracted files in a separate folder within the demokit, move a copy of each file into the main demokit folder.
 
-Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:Libraries/ExperimentLibrary here]. There should now be a folder called "ExperimentLibrary" in the demokit folder. Also, to keep things simple, keep a copy of your publickey and privatekey file within the demokit folder
+5. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
 
-Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc. Note that in the HTML coding, make sure address linking between files are based on relative directory, not static addresses.
+6. Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:Libraries/ExperimentLibrary here].
+
+There should now be a folder called "ExperimentLibrary" in the demokit folder.
+
+7. Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
+Note: Make sure address linking between files are based on relative directory, not absolute URLs.
 For example, instead of using:
 {{{
 <a href="https://seattle.cs.washington.edu/html/index.html">Home Page</a>
@@ -23,15 +30,22 @@ for a link to the home page, change it to:
 }}}
 ...instead.
 
-If you made any changes to huxiang_client.repy, pre-process the file through [wiki:SeattleLib/repypp.py repypp.py] and output it as huxiang_server.repy. Otherwise, the huxiang_server.repy included in the tarball should work fine.
 
-Making sure the keyname you're using owns at least one vessel, run huxiang_creator.py with the following five arguments:
+== Hosting the Site ==
+The main file you will be using is huxiang_creator.py, while huxiang_server.repy will handle the server side of things for the hosted website. If you want to make any changes to the server's callback function in handling HTTP requests, edits in code and functionality can be made to huxiang_client.repy before recompiling the file into huxiang_server.repy.
+If you made any changes to huxiang_client.repy, be sure to pre-process the file through [wiki:SeattleLib/repypp.py repypp.py] with the command:
+{{{
+$ python repypp.py huxiang_client.repy huxiang_server.repy
+}}}
+or else the website hosting behavior will not reflect the changes you made.
 
-  - The GENI port number (63xxx) associated with the keyname you're using
+Otherwise, the huxiang_server.repy included in the tarball should work fine.
 
-  - A single word string that will be used as part of the ".zenodotus.cs.washington.edu" address your site will be hosted under
+Run huxiang_creator.py with the following five arguments:
 
-  - Directory path of the publickey file you're using relative to the current folder you're running the program (or just the name of the publickey file if it's located in the current folder)
+  - A single-word string used to set part of the hosted website's home address. It cannot include any spaces or symbols
+
+  - Directory path of the publickey file you're using, relative to the folder you're running the application from (or just the name of the publickey file if it's located in the current folder)
 
   - Directory path of the privatekey file of the same keyname.
 
@@ -39,22 +53,41 @@ Making sure the keyname you're using owns at least one vessel, run huxiang_creat
 
 As an example of how the command should look:
 {{{
-$ python huxiang_creator.py 63111 example guest.publickey guest.privatekey ./example_web_site
+$ python huxiang_creator.py example guest.publickey guest.privatekey ./example_web_site
 }}}
-With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' through the GENI port 63111 at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:6311'. It is important that you include the arguments in the order listed above, or the program will not run correctly.
+With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' through the GENI port 63111 at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:63111'. It is important that you include the arguments in the order listed above or else the application will throw an error.
 
 
-There may be a variable amount of time delay between execution of the program to the web site actually being accessible through a browser. The only way to check the status of the nodes hosting the website is manually through the experiment manager seash. Any error messages that gets printed out can be found in the respective node's log, displayed with the command 'show log'
-
+The only way to check the status of the nodes hosting the website is manually through the experiment manager seash. Any error messages that gets printed out can be found in the respective node's log, displayed with the command 'show log'
 
 
 == Restrictions ==
 There are a few restrictions that users must be aware of when hosting websites through huxiang:
   - The home folder of the web files being uploaded must contain an "index.html" that will act as the homepage of the website
 
-  - Links between pages hosted on the same server must be relative addresses instead of solid ones
+  - As stated above, links between pages hosted on the same server must be relative addresses instead of solid ones
+
+== Troubleshooting ==
+'''All of the nodes are timing out when trying to upload huxiang_server.repy'''
+A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
+
+'''I tried running huxiang_creator.py, but it's throwing an error about requiring M2Crypto to be installed'''
+(for Ubuntu ver 10.04 and later) You can simply install the required package through the command:
+{{{
+$ sudo apt-get install python-m2crypto
+}}}
+In addition, in the seattlegeni_xmlrpc.py file within the ExperimentLib folder, you may also need to set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. If you don't know where
+this is on your own system, you can download this file from a site you trust. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+
+'''I can't access the hosted website, but the hosting node says it's running just fine.'''
+Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
+
+'''One of the images are missing on the site, but I'm pretty sure I downloaded all of the required files to host the web page separately'''
+A common issue with the "Save Page as..." function of browsers is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents.
 
 
+== Other Currently Known Problems ==
+- Doing a "?location" query request results in a page displaying "httpserver: Callback function raised an exception: Function 'openconn' called with incorrect arguments. Arguments were args:('geoip.cs.washington.edu', 12679, None, None, None), kwargs:{}"
 
 == Further Information ==
 
