@@ -1,24 +1,24 @@
-== What is huxiang? ==
+= What is huxiang? =
 
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
 
 
 == Setting Up ==
-1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing it.
+ 1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing it.
 
-2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
+ 2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
-3. Download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit.
+ 3. Download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit.
 
-4. Whether than keeping the recently extracted files in a separate folder within the demokit, move a copy of each file into the main demokit folder.
+ 4. Whether than keeping the recently extracted files in a separate folder within the demokit, move a copy of each file into the main demokit folder.
 
-5. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
+ 5. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
 
-6. Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:Libraries/ExperimentLibrary here].
+ 6. Within the demokit folder, follow the instructions in setting up the Experiment Library [wiki:Libraries/ExperimentLibrary here].
 
-There should now be a folder called "ExperimentLibrary" in the demokit folder.
+ * There should now be a folder called "!ExperimentLibrary" in the demokit folder.
 
-7. Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
+ 7. Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
 Note: Make sure address linking between files are based on relative directory, not absolute URLs.
 For example, instead of using:
 {{{
@@ -69,25 +69,24 @@ There are a few restrictions that users must be aware of when hosting websites t
 
 == Troubleshooting ==
 '''All of the nodes are timing out when trying to upload huxiang_server.repy'''
-A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
+ A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
 
 '''I tried running huxiang_creator.py, but it's throwing an error about requiring M2Crypto to be installed'''
-(for Ubuntu ver 10.04 and later) You can simply install the required package through the command:
+ (for Ubuntu ver 10.04 and later) You can simply install the required package through the command:
 {{{
 $ sudo apt-get install python-m2crypto
 }}}
-In addition, in the seattlegeni_xmlrpc.py file within the ExperimentLib folder, you may also need to set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. If you don't know where
-this is on your own system, you can download this file from a site you trust. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+ In addition, in the seattlegeni_xmlrpc.py file within the ExperimentLib folder, you may also need to set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. If you don't know where this is on your own system, you can download this file from a site you trust. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 '''I can't access the hosted website, but the hosting node says it's running just fine.'''
-Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
+ Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
 
 '''One of the images are missing on the site, but I'm pretty sure I downloaded all of the required files to host the web page separately'''
-A common issue with the "Save Page as..." function of browsers is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents.
+ A common issue with the "Save Page as..." function of browsers is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents.
 
 
 == Other Currently Known Problems ==
-- Doing a "?location" query request results in a page displaying "httpserver: Callback function raised an exception: Function 'openconn' called with incorrect arguments. Arguments were args:('geoip.cs.washington.edu', 12679, None, None, None), kwargs:{}"
+ - Doing a "?location" query request occasionally results in a page displaying "httpserver: Callback function raised an exception: Function 'openconn' called with incorrect arguments. Arguments were args:('geoip.cs.washington.edu', 12679, None, None, None), kwargs:{}" that also breaks the site for that hosting node.
 
 == Further Information ==
 
