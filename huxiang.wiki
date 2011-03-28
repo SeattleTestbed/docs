@@ -1,10 +1,13 @@
 = What is huxiang? =
 
-Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By simply modifying the provided REPY file to fit your website's structure, the process is as simple as running the program on one of your nodes and passing it your respective SeattleGENI port number for the argument.
+Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host your own website through one of Seattle's nodes. By following the listed instructions and providing the application your SeattleGENI public and private key, as well as the directory path to the folder containing files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
 
+== Requirements ==
+ * A Linux operating system
+ * M2Crypto installed
 
 == Setting Up ==
- 1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing it.
+ 1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
 
  2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
@@ -19,7 +22,8 @@ Taking advantage of the ability to register a domain name for a node's IP addres
  * There should now be a folder called "!ExperimentLibrary" in the demokit folder.
 
  7. Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
-Note: Make sure address linking between files are based on relative directory, not absolute URLs.
+ * IMPORTANT: Make sure you have an "index.html" file that will act as the homepage for your hosting site
+ * Note: Also, make sure address linking between files are based on relative directory, not absolute URLs.
 For example, instead of using:
 {{{
 <a href="https://seattle.cs.washington.edu/html/index.html">Home Page</a>
@@ -29,6 +33,8 @@ for a link to the home page, change it to:
 <a href="index.html">Home Page</a>
 }}}
 ...instead.
+
+ 8. In the seattlegeni_xmlrpc.py file within the ExperimentLib folder, set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where this is on your own system, download this file from trustworthy site into the demokit folder. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 
 == Hosting the Site ==
@@ -61,6 +67,14 @@ With the above command, all the files within the folder 'example_web_site' will 
 The only way to check the status of the nodes hosting the website is manually through the experiment manager seash. Any error messages that gets printed out can be found in the respective node's log, displayed with the command 'show log'
 
 
+== Renewing Hosting ==
+To renew your website hosting up to a week's period of time, follow these instructions: 
+ 1. Log on to your SeattleGENI account [http://seattlegeni.cs.washington.edu/ here]
+ 2. Once logged in, go to the "My Vessels" tab on the page
+ 3. Under the "My Vessels" tab, there should be a list of all vessels you currently own and the amount of time before they expire. Click the "renew all" button at the top of the rightmost column.
+ 4. Expiration time should now reset to roughly seven days.
+
+
 == Restrictions ==
 There are a few restrictions that users must be aware of when hosting websites through huxiang:
   - The home folder of the web files being uploaded must contain an "index.html" that will act as the homepage of the website
@@ -76,7 +90,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 {{{
 $ sudo apt-get install python-m2crypto
 }}}
- In addition, in the seattlegeni_xmlrpc.py file within the ExperimentLib folder, you may also need to set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. If you don't know where this is on your own system, you can download this file from a site you trust. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+ 
 
 '''I can't access the hosted website, but the hosting node says it's running just fine.'''
  Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
