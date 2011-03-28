@@ -4,7 +4,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
 == Requirements ==
  * A Linux operating system
- * M2Crypto installed
+ * [http://chandlerproject.org/bin/view/Projects/MeTooCrypto M2Crypto] installed
 
 == Setting Up ==
  1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
@@ -24,17 +24,18 @@ Taking advantage of the ability to register a domain name for a node's IP addres
  7. Create a new folder within the same demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
  * IMPORTANT: Make sure you have an "index.html" file that will act as the homepage for your hosting site
  * Note: Also, make sure address linking between files are based on relative directory, not absolute URLs.
-For example, instead of using:
+
+ For example, instead of using:
 {{{
 <a href="https://seattle.cs.washington.edu/html/index.html">Home Page</a>
 }}}
-for a link to the home page, change it to:
+ for a link to the home page, change it to:
 {{{
 <a href="index.html">Home Page</a>
 }}}
-...instead.
+ ...instead.
 
- 8. In the seattlegeni_xmlrpc.py file within the ExperimentLib folder, set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where this is on your own system, download this file from trustworthy site into the demokit folder. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+ 8. In the seattlegeni_xmlrpc.py file within the !ExperimentLib folder, set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where this is on your own system, download this file from trustworthy site into the demokit folder. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 
 == Hosting the Site ==
@@ -85,11 +86,12 @@ There are a few restrictions that users must be aware of when hosting websites t
 '''All of the nodes are timing out when trying to upload huxiang_server.repy'''
  A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
 
-'''I tried running huxiang_creator.py, but it's throwing an error about requiring M2Crypto to be installed'''
+'''How do I install M2Crypto?'''
  (for Ubuntu ver 10.04 and later) You can simply install the required package through the command:
 {{{
 $ sudo apt-get install python-m2crypto
 }}}
+ Otherwise, for more details, check the link provided above.
  
 
 '''I can't access the hosted website, but the hosting node says it's running just fine.'''
