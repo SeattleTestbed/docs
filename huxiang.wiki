@@ -62,7 +62,7 @@ As an example of how the command should look:
 {{{
 $ python huxiang_creator.py example guest.publickey guest.privatekey ./example_web_site
 }}}
-With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' through the GENI port 63111 at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:63111'. It is important that you include the arguments in the order listed above or else the application will throw an error.
+With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:(port number)', where (port number) is the 63--- port number assigned to "guest". It is important that you include the arguments in the order listed above or else the application will throw an error.
 
 
 The only way to check the status of the nodes hosting the website is manually through the experiment manager seash. Any error messages that gets printed out can be found in the respective node's log, displayed with the command 'show log'
