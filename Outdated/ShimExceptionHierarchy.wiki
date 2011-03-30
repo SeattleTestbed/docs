@@ -9,6 +9,7 @@ This page displays the shim exception hierarchy. It lists all the expected shim 
 ----
 Exception hierarchy:
  * !ShimException
+  * !ShimStackError
   * !ShimConfigError
   * !ShimArgumentError
   * !ShimNotFoundError
@@ -21,6 +22,12 @@ class '''!ShimException''' (Exception):
   The base shim exception. All other exceptions
   are derived from here.
   
+
+class '''!ShimStackError''' (!ShimStackError):
+  This error will usually be raised if we are unable
+  to manipulate the shim stack. For example if we
+  are trying to do a pop() or peek() on an empty stack.
+
 
 class '''!ShimConfigError''' (!ShimException):
   This error means that the shim library could not
