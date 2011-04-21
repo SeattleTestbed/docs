@@ -38,11 +38,11 @@ def random_int_below(upper_bound):
    Returns an random integer in the range [0,upper_bound)
     
    Notes: [[BR]]
+   * The random integer returned will be greater than or equal to zero. 
+   * The random integer returned will be less than the upper_bound.
    * Handles the case where upper_bound has more bits than returned by a single call to the underlying generator.
-   * upper_bound is the random integer returned will be in [0, upper_bound). Results will be integers less than this argument.
    * Raises TypeError if non-integer values for upper_bound.
    * Raises ValueError if the upper_bound is negative or 0.
-   * Returns a random integer between [0, upper_bound).
 
 
 {{{
@@ -52,10 +52,9 @@ def random_randrange(start, stop=None, step=1):
     
    Notes: [[BR]]
    * The random integer returned will be greater than or equal to start. 
-   * The random integer returned will be less than stop. Results will be integers less than this argument.
+   * The random integer returned will be less than stop.
    * step determines which elements from the range will be considered.
    * Raises ValueError if: Non-integer for start or stop argument, Empty range, if start < 0 and stop is None, Empty range, or Zero or non-integer step for range.
-   * Returns a random item from (start, stop[, step]) 'exclusive'
    
 
 
@@ -65,9 +64,8 @@ def random_randint(lower_bound, upper_bound):
    Return random integer in range [lower_bound, upper_bound], including both end points.
     
    Notes: [[BR]]
-   * The random integer returned will be less than upper_bound.
+   * The random integer returned will be less than or equal to the upper_bound.
    * The random integer returned will be greater than or equal to the lower_bound.
-   * Returns a random integer from [lower_bound, upper_bound] 'inclusive'  
 
 
 {{{
