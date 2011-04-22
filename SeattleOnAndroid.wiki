@@ -5,11 +5,30 @@ And no, neither running Repy scripts locally nor donating vessels currently work
 Our device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
 = Setting up Python =
- 1. On the home screen, press Menu. Go to Settings > Applications and check Unknown Sources. This is needed for the next two steps.
- 1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.t
- 1. Download the Python interpreter for Android ([Py4A]) from [http://code.google.com/p/android-scripting/downloads/detail?name=PythonForAndroid_r4.apk&can=2&q= here]. Congratulations! You can now run Python code from within SL4A!
 
+As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. (Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.)
 
- 1. Bashrc, export PYTHONPATH
+ 1. On the home screen, press Menu. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
+ 1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.
+ 1. Download the Python 2.6.2 interpreter for Android ([Py4A]) from [http://code.google.com/p/android-scripting/downloads/detail?name=PythonForAndroid_r4.apk&can=2&q= here]. Again, tap on the download notification to install. Congratulations! You can now run Python code from within SL4A, either using scripts from files or an interactive interpreter.
+ 1. Undo Step 1 for obvious security reasons.
 
-To be continued... 
+For running Repy programs locally, SL4A is not the optimal choice, but shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here.
+
+For {{{sh}}} (which is the default shell also greeting you via {{{adb shell}}}), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure AndroidTerm to run it on startup.
+
+For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}}:
+{{{
+#
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/data/com.googlecode.pythonforandroid/files/python/lib
+export PYTHONPATH=$PYTHONPATH:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python
+export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
+}}}
+
+Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}}.
+
+For the bashrc, I got hints from [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT).
+
+On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
+
+You can now download and unzip Seattle to a folder of your choice.
