@@ -39,7 +39,8 @@ After downloading and unzipping the Seattle Linux installer, I'm currently out o
 
 If I do {{{python seattleinstaller.py}}}, I'm back to the prompt immediately. It turns out this is a sub-sub-sub shell, so if I {{{exit}}} thrice, I am finally presented with an error relating to 
 
-{{{nix_common_api.py, line 23
+{{{
+nix_common_api.py, line 23
     _strerror = libc.strerror
   File "..../lib/python2.6/ctypes/__init__.py", line 366, in __getattr__
   File "..../lib/python2.6/ctypes/__init__.py", line 371, in __getitem__
