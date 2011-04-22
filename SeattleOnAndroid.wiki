@@ -1,11 +1,15 @@
 DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback is appreciated to turn this into an installation instruction like wiki:SeattleOnNokia
 
-Our device here is a ZTE Blade Android 2.3 ("Gingerbread") phone runnimg Cyanogenmod 7.
+And no, neither running Repy scripts locally nor donating vessels currently work. Sorry!
+
+Our device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
 = Setting up Python =
  1. On the home screen, press Menu. Go to Settings > Applications and check Unknown Sources. This is needed for the next two steps.
  1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.t
  1. Download the Python interpreter for Android ([Py4A]) from [http://code.google.com/p/android-scripting/downloads/detail?name=PythonForAndroid_r4.apk&can=2&q= here]. Congratulations! You can now run Python code from within SL4A!
+
+
  1. Bashrc, export PYTHONPATH
 
 To be continued... 
