@@ -9,6 +9,7 @@ These graphs were compiled from data collected between February 24, 2011 and Apr
 
  * [wiki:CollectedNodeData/NodesOnline Number of Nodes Online Over Time]
  * [wiki:CollectedNodeData/CumulativeTimeOnline Cumulative Proportion of Time Online]
+ * [wiki:CollectedNodeData/ContactableVsAdvertising Scatter Plot of Proportions of Time Contactable and Advertising]
  * [wiki:CollectedNodeData/MobileNodes Nodes Which Changed IP Address]
  * [wiki:CollectedNodeData/CumulativeUptime Cumulative Time Contactable of Unstable Nodes]
  * [wiki:CollectedNodeData/UnstableNodes Advertising and Contactability Patterns of Unstable Nodes]
