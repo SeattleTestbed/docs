@@ -1,5 +1,5 @@
 = Nodes which Changed IP Address =
 
-[[Image(mobilenodes.jpeg)]]
+[[Image(mobilenodes.jpg)]]
 
 This graph displays lines corresponding to the periods of time when the selected nodes were online, and uses different colors to give an idea of when nodes changed IP address. The graph shows that Seattle has some mobile node, although some of the node on in the graph probably just have dynamically assigned IP addresses. Also visible in this graph are some nice diurnal cycles. One last point on interest is that while the graph clearly shows it isn't safe to assume that a node will always have the same IP address, less obvious is that a given advertising IP address won't necessarily correspond to the same node over time. The bottom two rows, for example, are nodes in the same network which switched IP addresses when they came back online.
