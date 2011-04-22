@@ -8,18 +8,17 @@ Our device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanoge
 
 As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. (Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.)
 
- 1. On the home screen, press Menu. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
+ 1. On the home screen, press ''Menu''. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
  1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.
  1. Download the Python 2.6.2 interpreter for Android ([Py4A]) from [http://code.google.com/p/android-scripting/downloads/detail?name=PythonForAndroid_r4.apk&can=2&q= here]. Again, tap on the download notification to install. Congratulations! You can now run Python code from within SL4A, either using scripts from files or an interactive interpreter.
  1. Undo Step 1 for obvious security reasons.
 
 For running Repy programs locally, SL4A is not the optimal choice, but shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here.
 
-For {{{sh}}} (which is the default shell also greeting you via {{{adb shell}}}), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure AndroidTerm to run it on startup.
+For {{{sh}}} (which is the default shell also greeting you via [http://developer.android.com/guide/developing/tools/adb.html {{{adb shell}}}]), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you can write an rc script and configure AndroidTerm to run it on startup: Press ''Menu'', go to ''Settings > Start command'' and enter /path/to/your/script.
 
 For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}} (Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}} as the superuser) :
 {{{
-#
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/data/com.googlecode.pythonforandroid/files/python/lib
 export PYTHONPATH=/mnt/sdcard/com.googlecode.pythonforandroid/extras/python:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6/lib-dynload
 export PYTHONHOME=/data/data/com.googlecode.pythonforandroid/files/python
@@ -31,3 +30,5 @@ These lines are inspired by [http://code.google.com/p/python-for-android/source/
 On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
 
 You can now download and unzip Seattle to a folder of your choice.
+
+= Seattle =
