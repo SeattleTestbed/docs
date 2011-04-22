@@ -31,4 +31,6 @@ On my installation with {{{bash}}}, the Python interpreter can now be run from a
 
 You can now download and unzip Seattle to a folder of your choice.
 
+
 = Seattle =
+After downloading and unzipping the Seattle Linux installer, I'm currently out of luck. One issue is with the Seattle install.sh files (one in {{{seattle}}}, the other in {{{seattle/seattle_repy}}}) as the shell is not located in {{{/bin/sh}}} on Android, but in {{{/system/bin/sh}}}. If I do {{{python seattleinstaller.py}}}, I'm back to the prompt immediately. It turns out this is a sub-sub-sub shell, so if I {{{exit}}} thrice, I am finally presented with an error.
