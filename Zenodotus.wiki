@@ -83,6 +83,11 @@ While this is running in at least one node, your users will no longer have to ty
 
 
 
+'''Zenodotus supports DNS chaining as well'''.
+If you want to use your own DNS service, you can register an advertise value of "CNAME name.zenodotus.cs.washington.edu" : Hostname to indicate that a subserver exists, and RRs known by that server should follow the form "mypage.name.zenodotus.cs.washington.edu", where 'name' is the name of your service.
+
+
+
 == Debugging ==
 
 It is important to note that we currently only support simple A lookup queries. A functionality expansion is being worked on, and can be expected fairly soon. For now, however, just remember that there is no support for other query types.
