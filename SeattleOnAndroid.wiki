@@ -17,17 +17,16 @@ For running Repy programs locally, SL4A is not the optimal choice, but shell acc
 
 For {{{sh}}} (which is the default shell also greeting you via {{{adb shell}}}), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure AndroidTerm to run it on startup.
 
-For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}}:
+For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}} (Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}} as the superuser) :
 {{{
 #
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/data/com.googlecode.pythonforandroid/files/python/lib
-export PYTHONPATH=$PYTHONPATH:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python
+export PYTHONPATH=/mnt/sdcard/com.googlecode.pythonforandroid/extras/python:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6/lib-dynload
+export PYTHONHOME=/data/data/com.googlecode.pythonforandroid/files/python
 export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
 }}}
 
-Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}}.
-
-For the bashrc, I got hints from [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT).
+These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
 
 On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
 
