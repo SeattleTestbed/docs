@@ -1,0 +1,3 @@
+DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback is appreciated to turn this into an installation instruction like wiki:SeattleOnNokia
+
+Our device here is a ZTE Blade Android 2.3 ("Gingerbread") phone runnimg Cyanogenmod 7. I installed the Scripting Layer for Android ([ http://code.google.com/p/android-scripting/ SL4A]), and the Python interpreter. To be continued...
