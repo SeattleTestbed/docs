@@ -1,6 +1,6 @@
 = Graphs of Seattle's Nodes =
 
-This page links to graphs showing various properties of Seattle nodes along with short descriptions of their significance.
+This page links to graphs showing various properties of Seattle nodes along with short explanations of the graphs.
 
 ----
 [[TOC(inline)]]
@@ -23,4 +23,4 @@ These graphs were compiled from data collected between February 24, 2011 and Apr
 == Other Graphs and Data ==
 ----
 
-If you have wiki access, feel free to add any interesting graphs or other data you have to this section.  To add your graph to the wiki, create a subpage of this page (i.e. something along the lines of !CollectedNodeData/YourGraphName). The page should have a heading, the graph, a several sentence description explaining the graph, and a line saying who collected the data and when it was collected. For examples, see any of the graphs in the above section. Then, add a bullet point and link with a descriptive title to this section.
+If you have wiki access, feel free to add to this section any interesting graphs or other data you have.  To add your graph to the wiki, create a subpage of this page (i.e. something along the lines of !CollectedNodeData/YourGraphName). The page should have a heading, the graph, a several sentence description explaining the graph, and a line saying who collected the data and when it was collected. For examples, see any of the graphs in the above section. Then, add a bullet point and a link with a descriptive title to this section.
