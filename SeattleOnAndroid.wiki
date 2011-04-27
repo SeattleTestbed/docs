@@ -28,7 +28,7 @@ export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
 export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 }}}
 
-These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
+(The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
 
 On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
 
@@ -116,3 +116,8 @@ localhost seattle_repy # diff ../../seattle/seattle_repy/start_seattle.sh start_
  # Change to the seattle directory (this "cd" command allows the user to call the
  #   script from any directory.
 }}}
+
+=== Challenges To Overcome ===
+ * The "Linux on ARMv6" target in seattleinstaller.py is tailored to Nokia N800/900. On Android, there is no /etc/rc2.d; you must be root and remount /etc read-writeable to edit init.d. (By the way, I had no luck with init.d at all.)
+ * {{{cron}}} is missing on Android. The SL4A has "triggers", maybe these can be used.
+ * Android {{{ps}}} is a very strange beast. It's really a link to {{{{/system/bin/toolbox}}}, a busybox workalike, but doesn't find {{{python nmmain.py}}}. Busybox ps does however.
