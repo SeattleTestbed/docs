@@ -1,6 +1,6 @@
-DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to albert.rafetseder@univie.ac.at) is appreciated to make it work and then turn this page into an installation instruction like wiki:SeattleOnNokia
+DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated to make it work and then turn this page into an installation instruction like wiki:SeattleOnNokia
 
-And no, neither running Repy scripts locally nor donating vessels currently work. Sorry!
+Running Repy scripts locally does work with a couple of patches, but donating vessels doesn't because the installation fails for various reasons. Sorry!
 
 [http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
@@ -44,7 +44,75 @@ Put a restrictions file (LinkToExampleRestrictionsFile) into your {{{seattle_rep
 {{{
 python repy.py restrictions.example your_repy_program.repy
 }}}
-you must patch {{{nix_common_api.py}}} because {{{ctypes.util.find_library}}} fails on Android. ([http://docs.python.org/library/ctypes#finding-shared-libraries The Python docs] say find_library uses ldconfig, gcc, and objdump to locate the library, neither of which are available on Android.)
+you must patch {{{nix_common_api.py}}} because {{{ctypes.util.find_library}}} fails on Android. ([http://docs.python.org/library/ctypes#finding-shared-libraries The Python docs] say find_library uses ldconfig, gcc, and objdump to locate the library, neither of which are available on Android.) Here's the relevant patch (you'll probably need to adapt the path/to/libc on your device):
+{{{
+localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_common_api.py
+--- ../../seattle/seattle_repy/nix_common_api.py
++++ nix_common_api.py
+@@ -17,7 +17,7 @@
+ import textops
+ 
+ # Get the standard library
+-libc = ctypes.CDLL(ctypes.util.find_library("c"))
++libc = ctypes.CDLL("/system/lib/libc.so")
+ 
+ # Functions
+ _strerror = libc.strerror
+}}}
 
 == Installing Seattle As A Service ==
-The Seattle install.sh files (one in {{{seattle}}}, the other in {{{seattle/seattle_repy}}}) won't run out of the box as the shell is not located in {{{/bin/sh}}} on Android, but in {{{/system/bin/sh}}}. Patch the files according to the '''patches I'll provide ASAP'''. 
+DISCLAIMER: This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
+
+The Seattle install.sh files (one in {{{seattle}}}, the other in {{{seattle/seattle_repy}}}) won't run out of the box as the shell is not located in {{{/bin/sh}}} on Android, but in {{{/system/bin/sh}}}. Patch the files according to the patches below.
+
+{{{
+
+localhost seattle # diff ../seattle/install.sh install.sh
+--- ../seattle/install.sh
++++ install.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/system/bin/sh
+ 
+ cd "`echo $0 | sed 's/install.sh/seattle_repy/'`"
+ ./install.sh $*
+
+
+
+localhost seattle_repy # diff ../../seattle/seattle_repy/install.sh install.sh
+--- ../../seattle/seattle_repy/install.sh
++++ install.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/system/bin/sh
+ which_out=`which python`
+ if [ "$which_out" = "" ]; then
+     echo seattle requires that python be installed on your computer.
+
+
+
+
+localhost myseattle # diff ../seattle/start_seattle.sh start_seattle.sh 
+--- ../seattle/start_seattle.sh
++++ start_seattle.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/system/bin/sh
+ 
+ cd "`echo $0 | sed 's/start_seattle.sh/seattle_repy/'`"
+ ./start_seattle.sh
+\ No newline at end of file
+
+
+
+
+localhost seattle_repy # diff ../../seattle/seattle_repy/start_seattle.sh start_seattle.sh 
+--- ../../seattle/seattle_repy/start_seattle.sh
++++ start_seattle.sh
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/system/bin/sh
+ 
+ # Change to the seattle directory (this "cd" command allows the user to call the
+ #   script from any directory.
+}}}
