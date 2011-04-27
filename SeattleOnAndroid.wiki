@@ -8,7 +8,7 @@ Running Repy scripts locally does work with a couple of patches, but donating ve
 
 = Setting up Python =
 
-As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. (Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.)
+As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. (Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.) (Another note to self: Include links to the official installation instructions for SL4A and Py4A.)
 
  1. On the home screen, press ''Menu''. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
  1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.
@@ -37,7 +37,7 @@ You can now proceed to downloading Seattle.
 
 = Seattle =
 == General Installation Pitfalls ==
-Download the Seattle Linux installer. If you downloaded Seattle to the standard download folder on the SD card, it won't run even if correctly patched (stating "Bad interpreter: Permission denied") unless you remount the SD card with the {{{exec}}} option (as hinted in the [http://www.google.com/url?sa=t&source=web&cd=3&ved=0CDcQFjAC&url=http%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D27138&ei=uQCyTcTYBsWZOt2-1PgI&usg=AFQjCNExH-jP9IMTAfbYdNgrWKZoXF_9iA Ubuntu forums]). I moved the Seattle directory to {{{/data/data/edu.washington.cs.seattle/}}}, where the patched scripts can finally be started.
+Download the Seattle Linux installer. If you downloaded Seattle to the standard download folder on the SD card, it won't run even if correctly patched (stating "Bad interpreter: Permission denied") unless you remount the SD card with the {{{exec}}} option (as hinted [http://www.google.com/url?sa=t&source=web&cd=3&ved=0CDcQFjAC&url=http%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D27138&ei=uQCyTcTYBsWZOt2-1PgI&usg=AFQjCNExH-jP9IMTAfbYdNgrWKZoXF_9iA here]). I moved the Seattle directory to {{{/data/data/edu.washington.cs.seattle/}}}, where the patched scripts can finally be started.
 
 == Running Repy Scripts Locally ==
 Put a restrictions file (LinkToExampleRestrictionsFile) into your {{{seattle_repy}}} directory. Before you can run
@@ -120,4 +120,4 @@ localhost seattle_repy # diff ../../seattle/seattle_repy/start_seattle.sh start_
 === Challenges To Overcome ===
  * The "Linux on ARMv6" target in seattleinstaller.py is tailored to Nokia N800/900. On Android, there is no /etc/rc2.d; you must be root and remount /etc read-writeable to edit init.d. (By the way, I had no luck with init.d at all.)
  * {{{cron}}} is missing on Android. The SL4A has "triggers", maybe these can be used.
- * Android {{{ps}}} is a very strange beast. It's really a link to {{{{/system/bin/toolbox}}}, a busybox workalike, but doesn't find {{{python nmmain.py}}}. Busybox ps does however.
+ * Android {{{ps}}} is a very strange beast. It's really a link to {{{/system/bin/toolbox}}}, a busybox workalike, but doesn't find {{{python nmmain.py}}}. Busybox ps does however. Both are picky about their callargs.
