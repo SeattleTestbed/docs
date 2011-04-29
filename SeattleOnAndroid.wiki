@@ -1,6 +1,6 @@
 DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated to make it work and then turn this page into an installation instruction like wiki:SeattleOnNokia
 
-Running Repy scripts locally does work with a couple of patches, but donating vessels doesn't because the installation fails for various reasons. Sorry!
+Running Repy scripts locally already works with a couple of patches, as does donating vessels. The installation and registration for autostart still fails for various reasons. Sorry!
 
 [http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
@@ -8,7 +8,7 @@ Running Repy scripts locally does work with a couple of patches, but donating ve
 
 = Setting up Python =
 
-As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. (Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.) (Another note to self: Include links to the official installation instructions for SL4A and Py4A.)
+As far as I know, you cannot install Python as a standalone app right now. Therefore, these steps cover the installation of the Scripting Layer for Android, into which the actual Python interpreter will be installed. ''(Note to self: Restore our phone from a plain image and try out all the steps. I'm pretty sure I'm forgetting something.) (Another note to self: Include links to the official installation instructions for SL4A and [http://code.google.com/p/android-scripting/wiki/InstallingInterpreters Py4A].)''
 
  1. On the home screen, press ''Menu''. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
  1. Download the Scripting Layer for Android ([http://code.google.com/p/android-scripting/ SL4A]) from [http://android-scripting.googlecode.com/files/sl4a_r4.apk here]. Tap on the download notification to install.
@@ -17,7 +17,7 @@ As far as I know, you cannot install Python as a standalone app right now. There
 
 For running Repy programs locally, SL4A is not the optimal choice, but shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here.
 
-For {{{sh}}} (which is the default shell also greeting you via [http://developer.android.com/guide/developing/tools/adb.html adb]'s {{{shell}}} command), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you can write an rc script and configure AndroidTerm to run it on startup: Press ''Menu'', go to ''Settings > Start command'' and enter /path/to/your/script.
+For {{{sh}}} (which is the default shell also greeting you via [http://developer.android.com/guide/developing/tools/adb.html adb]'s {{{shell}}} command), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure !AndroidTerm to run it on startup: Press ''Menu'', go to ''Settings > Start command'' and enter /path/to/your/script.
 
 For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}} (Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}} as the superuser) :
 {{{
@@ -28,6 +28,7 @@ export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
 export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 }}}
 
+''(Note to self: Explain why some parts of the installation end up on /sdcard and others in /data/data. Search SL4A docs for hints how to move everything to one place.)''
 (The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
 
 On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
@@ -59,6 +60,15 @@ localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_c
  # Functions
  _strerror = libc.strerror
 }}}
+
+== Donating resources ==
+Although installing Seattle through the install scripts doesn't quite work right now, you can still donate resources by manually starting the node manager.
+
+ 1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to step 2. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite {{{seattle_repy/vesselinfo}}} with the version found in the customized installer.
+ 1. Grab a current version of {{{runonce.py}}} [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN. If it includes {{{import tempfile}}}, you're fine.
+ 1. 
+
+
 
 == Installing Seattle As A Service ==
 DISCLAIMER: This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
