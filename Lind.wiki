@@ -1,6 +1,6 @@
 = Lind: Secure Lightweight Cloud Computing =
 
-Lind is an attempt to provide a new secure lightweight cloud computing environment.  The goal of the project is to create a lightweight cloud runtime environment for x86, using NaCl and Seattle-Repy.  The project will implement a useful subset of the POSIX API within NaCl to run through Repy.  This wiki page details the motivation and design of Lind, and explains how you can start using it yourself.
+Lind is an attempt to provide a new secure lightweight cloud computing environment.  The goal of the project is to create a lightweight cloud runtime environment for x86, using [http://code.google.com/p/nativeclient/ Native Client (NaCl)] and [wiki:RepyApi Repy].  The project will implement a useful subset of the POSIX API within NaCl to run through Repy.  This wiki page details the motivation and design of Lind, and explains how you can start using it yourself.
 
 [[TOC(inline)]]
 
@@ -8,4 +8,4 @@ Lind is an attempt to provide a new secure lightweight cloud computing environme
 [[BR]]
 == Motivation ==
 ----
-The motivation of this NaCl Repy hybrid is to expand NaCl’s access to the system to commonly used functionality like sockets and simple file I/O, while still providing the necessary spatial and  performance isolation [3] as well as portability to make running untrusted applications anywhere possible.  We think when coupled NaCl’s safe execution, this makes a safe and powerful environment for some class applications which have complex compute requirements, but simple system access needs. 
+The motivation of this NaCl Repy hybrid is to expand NaCl’s access to the system to commonly used functionality like sockets and simple file I/O, while still providing the necessary spatial and  performance [https://seattle.cs.washington.edu/html/netadmins.html isolation]. as well as portability to make running untrusted applications anywhere possible.  We think when coupled NaCl’s safe execution, this makes a safe and powerful environment for some class applications which have complex compute requirements, but simple system access needs. 
