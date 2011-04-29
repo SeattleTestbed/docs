@@ -65,9 +65,11 @@ localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_c
 Although installing Seattle through the install scripts doesn't quite work right now, you can still donate resources by manually starting the node manager.
 
  1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to step 2. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite {{{seattle_repy/vesselinfo}}} with the version found in the customized installer.
- 1. Grab a current version of {{{runonce.py}}} [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN. If it includes {{{import tempfile}}}, you're fine.
- 1. 
-
+ 1. Grab a current version of {{{runonce.py}}} [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN. If it includes the line {{{import tempfile}}}, you're fine.
+ 1. In the {{{seattle_repy}}} directory, run {{{python seattleinstaller.py}}}. It will erroneously claim it's installing on a Nokia N800/900 (due to it recognizing a ARM6 processor), and won't be able to configure Seattle for autostart.
+ 1. Be quick to kill the {{{softwareupdater}}}, or it will overwrite all your precious patched files. ''(Note to self: Do check this item. Still not sure about it.)''
+ 1. Run {{{python nmmain.py}}}. It will take a while to register at the advertisement server.
+ 1. If you put your user key into the {{{vesselinfo}}} file, you can try to access your device using seash now.
 
 
 == Installing Seattle As A Service ==
