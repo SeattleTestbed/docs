@@ -24,4 +24,4 @@ Lind connects !NaCl and !RePy using !NaCl's IMC system.  IMC provides socket and
 [[BR]]
 == Getting Lind ==
 ----
-We are working on the first version of Lind now.  If you would like to be an early beta tester please email [mailto:cmatthew@cs.uvic.ca Chris].
+We are working on the first version of Lind now.  If you would like to be an early beta tester please email Chris.
