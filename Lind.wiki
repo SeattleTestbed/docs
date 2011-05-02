@@ -9,3 +9,19 @@ Lind is an attempt to provide a new secure lightweight cloud computing environme
 == Motivation ==
 ----
 The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the system to commonly used functionality like sockets and simple file I/O, while still providing the necessary spatial and  performance [https://seattle.cs.washington.edu/html/netadmins.html isolation]. as well as portability to make running untrusted applications anywhere possible.  We think when coupled !NaCl’s safe execution, this makes a safe and powerful environment for some class applications which have complex compute requirements, but simple system access needs. 
+
+[[BR]]
+== Design ==
+----
+=== Goals ===
+ * Minimal additions to the !NaCl TCB.
+ * Use Python where possible
+
+=== Description ===
+
+Lind connects !NaCl and !RePy using !NaCl's IMC system.  IMC provides socket and message passing like interfaces between an a !NaCl program and an external process.  
+
+[[BR]]
+== Getting Lind ==
+----
+We are working on the first version of Lind now.  If you would like to be an early beta tester please email [mailto:cmatthew@cs.uvic.ca Chris].
