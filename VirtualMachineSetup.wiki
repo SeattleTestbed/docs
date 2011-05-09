@@ -1,0 +1,18 @@
+= Setting up virtual machine = 
+This page guides you on how to set up a virtual machine system on a fresh ubuntu machine.
+
+
+[[TOC(inline)]]
+
+== Introduction ==
+Often times it is necessary to set up virtual machines (VM) on a machine in order to run multiple different operating systems as well as multiple instances of a certain type of operating system on a machine. This is useful specially for testing purposes. For our project Seattle, we try to test our software on all the major different operating systems to ensure that there aren't any OS specific bug. In order to do this we have set up VMware (a virtualization software for desktops and servers).
+
+[[br]]
+== Getting VMware ==
+----
+For our purpose we want to setup VMware server, which can be downloaded at the [http://www.vmware.com/products/server/overview.html VMware website here]. Once you have hit the 'download' button, it will ask you to either register a new account or log in with an existing account. If you don't have an account please create a new account.
+
+[[br]]
+== Setup Instructions ==
+----
+
