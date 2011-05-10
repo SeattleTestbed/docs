@@ -10,9 +10,115 @@ Often times it is necessary to set up virtual machines (VM) on a machine in orde
 [[br]]
 == Getting VMware ==
 ----
-For our purpose we want to setup VMware server, which can be downloaded at the [http://www.vmware.com/products/server/overview.html VMware website here]. Once you have hit the 'download' button, it will ask you to either register a new account or log in with an existing account. If you don't have an account please create a new account.
+For our purpose we want to setup VMware server, which can be downloaded at the [http://www.vmware.com/products/server/overview.html VMware website here]. Once you have hit the 'download' button, it will ask you to either register a new account or log in with an existing account. If you don't have an account please create a new account. '''NOTE: You will be provided with a serial number. This will be needed during installation.'''
 
 [[br]]
 == Setup Instructions ==
 ----
 
+ === Prerequisites ===
+ 1. Install xinetd
+ {{{
+root@my-machine# apt-get install xinetd
+}}}
+ 1. Install perl
+ {{{
+root@my-machine# apt-get install perl
+}}}
+ 1. Install 'make'
+ {{{
+root@my-machine# apt-get install make
+}}}
+
+ === Main Installation Process ===
+ 1. Create a new user account (for our purpose: virtual_machines)
+ 1. Copy/download the VMware .gz file to the home directory (/home/virtual_machines)
+ 1. Extract the VMware .gz file.
+ 1. At this point we are going to grab a helpful script to help us install vmware.
+ 1. Run the command:
+ {{{
+root@my-machine:/home/virtual_machines# wget --no-check-certificate http://codebin.cotescu.com/vmware/vmware-server-2.0.x-kernel-2.6.3x-install.sh
+
+root@my-machine:/home/virtual_machines# mv VMware-server-2.0.2-203138.x86_64.tar.gz raducotescu-vmware-server-linux-2.6.3x-kernel-bb26dce/
+
+root@my-machine:/home/virtual_machines# cd raducotescu-vmware-server-linux-2.6.3x-kernel-bb26dce/
+
+root@my-machine:/home/virtual_machines/raducotescu-vmware-server-linux-2.6.3x-kernel-bb26dce# ./vmware-server-2.0.x-kernel-2.6.3x-install.sh
+}}}
+ 1. At this point the installation should start. It will install all the appropriate library files that is needed if it hasn't already been installed. 
+ 1. It will prompt you for some information on where to install certain files. Here is an example:
+ {{{
+Starting VMware Server original install script...
+Creating a new VMware Server installer database using the tar4 format.
+
+Installing VMware Server.
+
+In which directory do you want to install the binary files?
+[/usr/bin]
+
+What is the directory that contains the init directories (rc0.d/ to rc6.d/)?
+[/etc]
+
+What is the directory that contains the init scripts?
+[/etc/init.d]
+
+In which directory do you want to install the daemon files?
+[/usr/sbin]
+
+In which directory do you want to install the library files?
+[/usr/lib/vmware]
+
+The path "/usr/lib/vmware" does not exist currently. This program is going to
+create it, including needed parent directories. Is this what you want?
+[yes]
+
+In which directory do you want to install the manual files?
+[/usr/share/man] /home/virtual_machines/vmware_installation/share/man
+
+The path "/home/virtual_machines/vmware_installation/share/man" does not exist
+currently. This program is going to create it, including needed parent
+directories. Is this what you want? [yes] yes
+
+In which directory do you want to install the documentation files?
+[/usr/share/doc/vmware] /home/virtual_machines/vmware_installation/share/doc
+
+The path "/home/virtual_machines/vmware_installation/share/doc" does not exist
+currently. This program is going to create it, including needed parent
+directories. Is this what you want? [yes] yes
+
+The installation of VMware Server 2.0.2 build-203138 for Linux completed
+successfully. You can decide to remove this software from your system at any
+time by invoking the following command: "/usr/bin/vmware-uninstall.pl".
+
+Before running VMware Server for the first time, you need to configure it by
+invoking the following command: "/usr/bin/vmware-config.pl". Do you want this
+program to invoke the command for you now? [yes] yes
+
+Making sure services for VMware Server are stopped.
+
+Stopping VMware autostart virtual machines:
+   Virtual machines                                                   failed
+Stopping VMware management services:
+   VMware Virtual Infrastructure Web Access
+   VMware Server Host Agent                                           failed
+Stopping VMware services:
+   VMware Authentication Daemon                                        done
+   Virtual machine monitor                                             done
+}}} 
+
+
+
+[[br]]
+== Configuring VMware Server ==
+----
+ 1. Go into the directory that you installed VMware server in. [/home/virtual_machines]
+ 1. cd into where you where you asked to put the binary files in. [/home/virtual_machines/vmware_installation/]
+ 1. Run the vmware-config.pl file. (Unless you answered yes when the installation file asked weather to launch the vmware-config.pl file or not).
+ {{{
+root@my-machine:/home/virtual_machines/vmware_installation# perl vmware-config.pl
+}}}
+ 1. This will ask you to read and agree on the End User License. Type in yes after you have read it.
+ 1. After this the script will go ahead and configure a whole bunch of things and it will regularly prompt you for several things. It is safe to just use all the default values the script provides. Note that this will find an appropriate subnet to use NAT on.
+ 1. '''IMPORTANT:''' During the installation it will ask you to provide (or use the default) port numbers for http connection and secure http (https) connection. Memorize these port numbers as they will be needed later when configuring the VM through firefox. By default the ports are '''8222''' and '''8333''' 
+ 1. While its installing, it will ask for your serial number. Provide the serial number that was provided to you through the VMware website.
+ 1. You should be done configuring the VMware server!
