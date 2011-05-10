@@ -315,7 +315,7 @@ and the prompt should now say "username@WAN !>".  If you are curious, you can fi
 
 {{{
 #!python
-username@WAN !> show locations
+username@WAN !> show location
 }}}
 
 
