@@ -119,6 +119,53 @@ root@my-machine:/home/virtual_machines/vmware_installation# perl vmware-config.p
 }}}
  1. This will ask you to read and agree on the End User License. Type in yes after you have read it.
  1. After this the script will go ahead and configure a whole bunch of things and it will regularly prompt you for several things. It is safe to just use all the default values the script provides. Note that this will find an appropriate subnet to use NAT on.
- 1. '''IMPORTANT:''' During the installation it will ask you to provide (or use the default) port numbers for http connection and secure http (https) connection. Memorize these port numbers as they will be needed later when configuring the VM through firefox. By default the ports are '''8222''' and '''8333''' 
+ 1. '''IMPORTANT:''' During the installation it will ask you to provide (or use the default) port numbers for http connection and secure http (https) connection. Memorize these port numbers as they will be needed later when configuring the VM through firefox. By default the ports are '''8222''' and '''8333'''
+ 1. It may also at some point ask you to enter a TCP port. By default this port number is '''902''' 
  1. While its installing, it will ask for your serial number. Provide the serial number that was provided to you through the VMware website.
  1. You should be done configuring the VMware server!
+
+[[br]]
+== VMware Management ==
+----
+The VMware Server management can be accessed through a browser. The next set of steps has been tested with Internet Explorer 8 on Windows 7 machine. Note that on Windows 7 I was unable to use Firefox to run these commands as the VMware Server management page would not load. I was also unable to run it on Chrome, as the VMware Server management requires you to install a certain plugin for the browser which at this point doesn't seem to be available for Chrome.
+
+=== Accessing Server Management Remotely ===
+For our purpose we are going to access the VMware Server management service remotely as it is more convenient. In order to do this, we will have to set up ssh tunneling. This will differ on weather you are on Linux/Mac, or on Windows. We will be forwarding the three ports '''8222, 8333,''' and '''902'''. These are the default ports for the management system, unless you changed them during installation of the VMware Server.
+
+==== SSH Tunneling ====
+
+===== '''Linux/Mac''' =====
+ 1. Open up a terminal.
+ 1. Type in the command below. For this example lets assume that 'local_machine' is the machine that you are currently working on and 'vmware_machine' is the machine that you have installed the VMware Server on.
+ {{{
+user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:8333 -L 902:vmware_machine:902 vmware_machine
+}}}
+ 1. Once you type in the command, it will ask for your login name and password for the vmware_machine. Go ahead and log in.
+ 1. You should now have ssh tunneling set up for the ports 8222, 8333 and 902.
+
+===== '''Windows''' ===== 
+ 1. In order to do SSH tunneling on Windows, you will need the program Putty. If you don't have Putty, you can download it [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html here]
+ 1. Open up Putty and enter in the name of the vmware_machine in the "Host Name (or IP address)" area in the Session category.
+ 1. Click on the category: Connection->SSH->Tunnels
+ 1. Now we are going to add the ports for the SSH tunneling. 
+ 1. Enter in 8222 for the 'Source Port', and vmware_machine:8222 for the 'Destination'. Make sure that 'Local' is selected under the 'Destination'. Add the forwarded port.
+ 1. Repeat the last step for the ports 8333 and 902.
+ 1. Make sure to save the session for future connections.
+ 1. Open the connection and type in your login name and password when the vmware_machine prompts you for it.
+ 1. You should now have SSH tunneling on your Windows machine!
+ 1. A graphical guide for port forwarding using Putty can be found [http://thedaneshproject.com/posts/ssh-tunneling-with-putty-linux/ here]
+
+
+
+
+==== After SSH Tunneling ====
+ 1. Open up a browser (IE8 in this case). Type in the address http://127.0.0.1:8222.
+ 1. You may be redirected to a secure http page at https://127.0.0.1:8333/ui/
+ 1. Go ahead and add the exceptions for the SSL. 
+ 1. It should load the VMware Server management login page asking for your username and password of the VMware administrator.
+ 1. This username would have been defined when you installed the VMware Server. In our case we had chosen the '''user name: "virtual_machines"'''. The password will be the password for the account virtual_machines on the vmware_machine.
+ 1. You should be able to log in and be able to start creating and configuring VMs!
+ 
+[[br]]
+=== Creating a new VM ===
+----
