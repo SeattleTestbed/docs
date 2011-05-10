@@ -169,3 +169,11 @@ user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:83
 [[br]]
 === Creating a new VM ===
 ----
+ 1. Log in to the VMware Server management page.
+ 1. 
+
+
+[[br]]
+== Detailed Guide to VMware Server ==
+----
+A more detailed guide can be found in the [http://www.vmware.com/pdf/vmserver2.pdf VMware Server Documentation]. Feel free to look through it for advanced notes.
