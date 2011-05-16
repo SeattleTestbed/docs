@@ -170,7 +170,30 @@ user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:83
 === Creating a new VM ===
 ----
  1. Log in to the VMware Server management page.
- 1. 
+ 1. On the left hand side of the VMware Server management page, click on the name of the machine under the 'Inventory' section.
+ 1. You can create a new VM two ways. You can click on the "Create Virtual Machine" link on the right frame in the management page under the "Commands" section, or you can click on the Menu: Virtual Machine-> Create Virtual Machine.
+ 1. A new window should pop up titled "Create Virtual Machine", which will lead you through creating a VM process. 
+ 1. Most of the options they provide, you can choose the default with a few exceptions. Below are a list of things you should modify and choose instead of the default value provided.
+ 1. When they ask for the "Guest Operating System" choose the appropriate OS you want to install on the VM.
+ 1. In the "Properties" section, when they ask for what kind of "Network Connection" we want, change it from "HostOnly" to "NAT".
+ 1. For the CD/DVD Drive section, instead of choosing "Use a Physical Drive", choose the "Use an ISO Image" option.
+ 1. You should now be asked to choose an ISO image. Make sure you already have the proper ISO image in the right directory in the vmware_machine. The directory where you want to store the ISO image is the directory you directed to store the ISO image during installation of the VMware Server. In our case we used the location /home/virtual_machines/VM_files/
+ 1. Once you have chosen the right ISO image, continue on.
+ 1. When you are asked about "Floppy Drive", choose "Don't Add a Floppy Drive".
+ 1. When you are asked about "USB Controller", choose "Don't Add a USB Controller".
+ 1. After you have verified everything, go ahead and create the VM.
+ 1. Once you have finished, the VM we just created will show up in the "Inventory" section on the left frame of the server management page under the name of the vmware_machine.
+ 1. Select the VM that was just created and click on the "Console" tab next to the "Summary" tab in the middle of the management page.
+ 1. There should be a black page displayed which states that the VM is powered off. 
+ 1. When you log onto the VMware Server management page for the first time and visit the "Console" section, it may ask you to install a plugin. Go ahead and install the plugin and restart the browser.
+ 1. Once you are in the "Console" section, power on the VM by clicking on the play button, or under the "Summary" tab in the "Commands" menu, there is a "Power On" command that you can use.
+ 1. Once you power on the VM and go to the "Console" section, it should say: "Open the console in a new window". Click anywhere on the black screen and a little VMware window should pop up which displays the desktop of the new VM that was created. 
+ 1. You should be able to install the OS now by following the installation instructions of the operating system.
+ 1. Once the installation is done, all there is left to do is set up the NAT configuration, so the VM could be accessed from the outside world.
+
+[[br]]
+=== Configuring NAT Network for VM ===
+----
 
 
 [[br]]
