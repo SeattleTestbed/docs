@@ -194,6 +194,24 @@ user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:83
 [[br]]
 === Configuring NAT Network for VM ===
 ----
+Configuring the network for each of the VM is pretty straightforward. First find out what the IP address of the new VM that was created is. You can do this by opening up a terminal in the new VM and using the command 'ifconfig' or 'ipconfig' depending on the operating system that was installed. Take note of the IP address and then open up the file /etc/vmware/vmnet8/nat/nat.conf for editing. Under the [incomingtcp] section, forward the appropriate ports. The common ports that you would want to forward are '''80''' and '''22'''. Port 22 will be used for ssh, and port 80 will be used for http access. You might also want to forward port 443, if you want to have secure http (https) access. Below is an example:
+
+The IP address of the VM in this case is 192.168.159.130
+{{{
+[incomingtcp]
+
+# Forward the three VM ports through real ports of the vmware_machine
+30000 = 192.168.159.130:22
+30001 = 192.168.159.130:80
+30002 = 192.168.159.130:443
+}}}
+
+This configuration will forward port 22 of the VM through port 30000 of the vmware_machine, port 80 will be forwarded through port 30001 and port 443 will be forwarded through port 30002. In order to SSH into the machine you can use the command:
+
+{{{
+user@local-machine$ ssh -p 30000 username@vmware_machine
+}}}
+ 
 
 [[br]]
 === Cloning a VM ===
