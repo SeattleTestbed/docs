@@ -1,5 +1,5 @@
 = Setting up virtual machine = 
-This page guides you on how to set up a virtual machine system on a fresh ubuntu machine.
+This page guides you on how to set up a virtual machine system on a fresh ubuntu machine. This guide is based on installing VMware Server 2 on Ubuntu 11.04, Linux 2.6.38-8-server.
 
 
 [[TOC(inline)]]
