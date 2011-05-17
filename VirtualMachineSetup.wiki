@@ -177,7 +177,7 @@ user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:83
  1. When they ask for the "Guest Operating System" choose the appropriate OS you want to install on the VM.
  1. In the "Properties" section, when they ask for what kind of "Network Connection" we want, change it from "HostOnly" to "NAT".
  1. For the CD/DVD Drive section, instead of choosing "Use a Physical Drive", choose the "Use an ISO Image" option.
- 1. You should now be asked to choose an ISO image. Make sure you already have the proper ISO image in the right directory in the vmware_machine. The directory where you want to store the ISO image is the directory you directed to store the ISO image during installation of the VMware Server. In our case we used the location /home/virtual_machines/VM_files/
+ 1. You should now be asked to choose an ISO image. Make sure you already have the proper ISO image in the right directory in the vmware_machine. The directory where you want to store the ISO image is the directory you directed to store the ISO image during installation of the VMware Server. In our case we used the location /home/virtual_machines/VM_files/ (by default it may be at: /var/lib/vmware/Virtual Machines).
  1. Once you have chosen the right ISO image, continue on.
  1. When you are asked about "Floppy Drive", choose "Don't Add a Floppy Drive".
  1. When you are asked about "USB Controller", choose "Don't Add a USB Controller".
@@ -194,6 +194,11 @@ user@local_machine:~/$ ssh -L 8222:vmware_machine:8222 -L 8333:vmware_machine:83
 [[br]]
 === Configuring NAT Network for VM ===
 ----
+
+[[br]]
+=== Cloning a VM ===
+----
+The VMware Server does not have a cloning mechanism unfortunately. In order to clone a VM, it has to be done manually.
 
 
 [[br]]
