@@ -1,10 +1,11 @@
 DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated to make it work and then turn this page into an installation instruction like wiki:SeattleOnNokia
 
-Running Repy scripts locally already works with a couple of patches, as does donating vessels. The installation and registration for autostart still fails for various reasons. Sorry!
+Running Repy scripts locally already works with a couple of patches, as does donating vessels and letting experimenters run code on them. The installation and registration for autostart still fails for various reasons. Sorry!
 
 [http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
 ----
+
 
 = Setting up Python =
 
@@ -73,7 +74,7 @@ Although installing Seattle through the install scripts doesn't quite work right
 
 
 == Installing Seattle As A Service ==
-DISCLAIMER: This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
+DISCLAIMER: Don't follow these instructions as of now. This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
 
 The Seattle install.sh files (one in {{{seattle}}}, the other in {{{seattle/seattle_repy}}}) won't run out of the box as the shell is not located in {{{/bin/sh}}} on Android, but in {{{/system/bin/sh}}}. Patch the files according to the patches below.
 
