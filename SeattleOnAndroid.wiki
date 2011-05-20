@@ -76,9 +76,11 @@ Although installing Seattle through the install scripts doesn't work in all aspe
  1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to the next step. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite the {{{vesselinfo}}} file with the version found in the customized installer.
  1. Check if {{{runonce.py}}} from the Seattle archive you extracted already includes the line {{{import tempfile}}}. Else grab a current version  [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN that doesn't [ticket:997 use a hardcoded temp directory].
  1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer will claim it's installing on a Nokia N800/900 (due to it recognizing an ARM6 processor), and won't be able to configure Seattle for autostart. 
- 1. You might want to run {{{python softwareupdater.py}}} now. Note that it will overwrite all your precious patched files, and I'm not quite sure how to find out that it has finished before you reapply the patches.
+ 1. You might want to run {{{python softwareupdater.py &}}} now. Note that it will overwrite all your precious patched files, and I'm not quite sure how to find out that it has finished before you reapply the patches.
  1. Run {{{python nmmain.py}}}. It will take a while to register at the advertisement server.
  1. If you downloaded a customized installer that has your user key in the {{{vesselinfo}}} file, you can try to access your device using seash now.
+
+Although the node manager is not registered to automatically start when the device boots, it can be run manually now. The software updater isn't started automatically either. It might be a good idea to run it from time to time to make sure you benefit from the latest improvements. Don't forget to apply the patches afterwards.
 
 -----
 
