@@ -51,7 +51,7 @@ You can now proceed to downloading Seattle.
 Download the Seattle Linux installer (it could be a customized installer as well). If you downloaded Seattle to the standard download folder on the SD card, it won't run even if correctly patched (stating "Bad interpreter: Permission denied") unless you remount the SD card with the {{{exec}}} option (as hinted [http://www.google.com/url?sa=t&source=web&cd=3&ved=0CDcQFjAC&url=http%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D27138&ei=uQCyTcTYBsWZOt2-1PgI&usg=AFQjCNExH-jP9IMTAfbYdNgrWKZoXF_9iA here]). I rather moved the Seattle directory to {{{/data/data/edu.washington.cs.seattle/}}}, where the patched scripts can finally be started.
 
 == Running Repy Scripts Locally ==
-Put a restrictions file (e.g. the one from the [http://seattlegeni.cs.washington.edu/dist/demokit.zip Seattle demokit]) into your {{{seattle_repy}}} directory. Patch {{{nix_common_api.py}}} because {{{ctypes.util.find_library}}} fails on Android. ([http://docs.python.org/library/ctypes#finding-shared-libraries The Python docs] say find_library uses ldconfig, gcc, and objdump to locate the library, neither of which are available on our Android.) Here's the relevant patch (you'll probably need to adapt the path/to/libc on your device):
+Put a restrictions file (e.g. the one from the [http://seattlegeni.cs.washington.edu/dist/demokit.zip Seattle demokit]) into your {{{seattle_repy}}} directory. Patch {{{nix_common_api.py}}} because {{{ctypes.util.find_library}}} fails on Android. ([http://docs.python.org/library/ctypes#finding-shared-libraries The Python docs] say find_library uses ldconfig, gcc, and objdump to locate the library, neither of which are available on our Android.) Here's the relevant patch (you'll probably need to adapt the {{{path/to/libc}}} on your device):
 {{{
 localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_common_api.py
 --- ../../seattle/seattle_repy/nix_common_api.py
@@ -67,16 +67,19 @@ localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_c
  _strerror = libc.strerror
 }}}
 
+Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}}!
+
 == Donating resources ==
-Although installing Seattle through the install scripts doesn't quite work right now, you can still donate resources by manually starting the node manager.
+Although installing Seattle through the install scripts doesn't work in all aspects right now, you can still donate resources by manually starting the node manager.
 
- 1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to step 2. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite {{{seattle_repy/vesselinfo}}} with the version found in the customized installer.
- 1. Check if {{{runonce.py}}} included in the Seattle zip already includes the line {{{import tempfile}}}. Else grab a current version  [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN.
- 1. In the {{{seattle_repy}}} directory, run {{{python seattleinstaller.py}}}. It will erroneously claim it's installing on a Nokia N800/900 (due to it recognizing an ARM6 processor), and won't be able to configure Seattle for autostart. 
- 1. Be quick to kill the {{{softwareupdater}}}, or it will overwrite all your precious patched files. ''(Note to self: Do check this item. Still not sure about it.)''
+ 1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to step 2. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite the {{{vesselinfo}}} file with the version found in the customized installer.
+ 1. Check if {{{runonce.py}}} from the Seattle archive you extracted already includes the line {{{import tempfile}}}. Else grab a current version  [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN that doesn't [ticket:997 use a hardcoded temp directory].
+ 1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer will claim it's installing on a Nokia N800/900 (due to it recognizing an ARM6 processor), and won't be able to configure Seattle for autostart. 
+ 1. You might want to run {{{python softwareupdater.py}}} now. Note that it will overwrite all your precious patched files, and I'm not quite sure how to find out that it has finished before you reapply the patches.
  1. Run {{{python nmmain.py}}}. It will take a while to register at the advertisement server.
- 1. If you put your user key into the {{{vesselinfo}}} file, you can try to access your device using seash now.
+ 1. If you downloaded a customized installer that has your user key in the {{{vesselinfo}}} file, you can try to access your device using seash now.
 
+-----
 
 == Installing Seattle As A Service ==
 DISCLAIMER: Don't follow these instructions as of now. This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
