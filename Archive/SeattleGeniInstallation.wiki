@@ -120,17 +120,15 @@ python preparetest.py TEMP_FOLDER
     1. Navigate to the TEMP_FOLDER.
     1. Run the command:
 {{{
-python generatekey.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
+python generatekeys.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
 }}}
        An example would be:
 {{{
-python generatekey.py acceptdonation
+python generatekeys.py acceptdonation
 }}}
     1. Generate a key pair for all four state keys.
-    1. Create a folder in your /tmp/deploy/seattlegeni/node_state_transitions/
+    1. Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
        folder and copy the four publickeys over to that folder.
-    1. Remember the name of this folder as you will need it when you configure
-       the website/settings.py file in the next phase.
     1. You can delete the privatekeys if you want to as we won't need them.
     1. Delete the TEMP_FOLDER and all its content at this point if you want to.
   * '''Setup the website and start a development version of it'''
@@ -140,50 +138,8 @@ python generatekey.py acceptdonation
       * Specify the name of the seattlegeni
         database, as well as the database username, password, etc.
       * Set a long, random string the value of SECRET_KEY.
-      * If this is a production launch, also set the following in website/settings.py
-{{{
-#!python
-# If DEBUG is True, then error details will be shown on the website and ADMINS
-# will not receive an email when an error occurs. So, this should be False in
-# production.
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
-
-# The directory where we keep the public keys of the node state keys.
-STATE_KEYS_DIR = "path/to/statekeys"
-
-# The directory where the base installers named seattle_linux.tgz, seattle_mac.tgz,
-# and seattle_win.zip are located.
-BASE_INSTALLERS_DIR = "" # usually you would use something like /var/www/dist/ for this.
-
-# The directory in which customized installers created by seattlegeni will be
-# stored. A directory within this directory will be created for each user.
-USER_INSTALLERS_DIR = os.path.join(BASE_INSTALLERS_DIR, "geni")
-
-# The url that corresponds to USER_INSTALLERS_DIR
-USER_INSTALLERS_URL = "https://hostname/dist/geni"
-
-# Email addresses of people that should be emailed when a 500 error occurs on
-# the site when DEBUG = False (that is, in production). Leave this to be empty
-# if nobody should receive an email. 
-ADMINS = (
-# ('Your Name', 'your_email@domain.com'),
-)
-
-# To be able to send mail to ADMINS when there is an error, django needs to
-# know about an SMTP server it can use. That info is defined here.
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'an.error.sending.account@gmail.com'
-EMAIL_HOST_PASSWORD = 'PASSWORD_HERE'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-# Email address that 500 error notifications will be sent from.
-SERVER_EMAIL = "error@seattlegeni.server.hostname"
-
-# We use this so we know which server the email came from by the subject line.
-EMAIL_SUBJECT_PREFIX = "[localhost] "
-}}}
+      * If this is a production launch, also set DEBUG to False,
+        and uncomment and change the fields for sending ADMINS email.
     * Set your environment variables:
 {{{
 #!sh
@@ -263,31 +219,6 @@ python polling/check_active_db_nodes.py
 #!sh   
 python node_state_transitions/TRANSITION_SCRIPT_NAME.py
 }}}
-
-
-[[BR]]
-== Generating and Deploying Seattle Installers ==
-----
-
-Now that we have set up the GENI website, we want to be able to distribute the Seattle 
-installers and the demokit through the website. We need to follow couple of steps to 
-do this. 
-
- 1. We will need a distribution folder to store the installer files. Usually you would want
- to create the folder dist/ in the directory /var/www/.
- 1. We also need a folder to hold all the users custom installers. So we will create the 
- folder geni/ in the /var/www/dist/ directory. We are not going to store anything in 
- this folder, the custom installers for the users will be automatically generated and 
- stored here.
- 1. Now we need to create the base installers. In order to do this, follow the instruction
- on the [wiki:BaseInstallers] page.
- 1. After you have created all the installers, copy over all the tarballs and the zip files
- in the /var/www/dist/ directory.
- 1. We will also need to create the demokit at this point, if you want to distribute the demokit.
- 1. Follow the instructions on the [wiki:BuildDemokit] to build the demokit.
- 1. Once the demokit has been built, copy over the file demokit.zip in the directory /var/www/dist/.
- 1. You should now be able to successfully distribute Seattle installation files and the demokit!
-
 
 
 [[BR]]
@@ -381,7 +312,27 @@ Be sure to restart Apache after you are done changing the configuration files.
 #!sh
 $ /etc/init.d/apache2 restart
 }}}
+If Apache gives the error:
+{{{
+Invalid command 'SSLEngine', perhaps misspelled or defined by a module not included in the server configuration
+}}}
 
+then you need to enable ssl by running:
+{{{
+#!sh
+$ sudo a2enmod ssl
+}}}
+
+If you try to access your SeattleGENI installation's website now, then it's possible you'll see an exception like this:
+{{{
+Cannot open file for translation '/home/sportzer/geni_dev/seattle/rsa.repy': [Errno 13] Permission denied: '/home/sportzer/geni_dev/seattle/rsa_repy.py'
+}}}
+
+This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper get invoked, so as a workaround you can cd to the seattle directory and change the permissions:
+{{{
+#!sh
+$ chmod a+w *_repy.py
+}}}
 
 
 [[BR]]
