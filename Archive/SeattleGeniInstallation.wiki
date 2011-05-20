@@ -316,8 +316,8 @@ NameVirtualHost *:443
 <VirtualHost *:80>
     # Redirect requests for the server index page or that are geni-related
     # to the https site.
-    RedirectMatch ^/$ https://mysite/geni/html/register
-    RedirectMatch ^/geni https://mysite/geni/html/register
+    RedirectMatch ^/$ https://mysite/geni/html/login
+    RedirectMatch ^/geni https://mysite/geni/html/login
 </VirtualHost>
 
 # SSL
@@ -351,9 +351,9 @@ NameVirtualHost *:443
     </Location>
 
     # Make sure various locations people might request redirect somewhere that works.
-    RedirectMatch ^/$ https://mysite/geni/html/register
-    RedirectMatch ^/geni/?$ https://mysite/geni/html/register
-    RedirectMatch ^/geni/html/?$ https://mysite/geni/html/register
+    RedirectMatch ^/$ https://mysite/geni/html/login
+    RedirectMatch ^/geni/?$ https://mysite/geni/html/login
+    RedirectMatch ^/geni/html/?$ https://mysite/geni/html/login
 
     # Don't require a slash on the end of the admin url.
     RedirectMatch ^/geni/admin$ https://mysite/geni/admin/
