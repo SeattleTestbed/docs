@@ -92,8 +92,10 @@ cd /tmp/deploy/seattlegeni
       Note: all future steps/instructions will assume you are in this directory. 
   * '''Future tip'''
     * Starting all of the processes described below is simplified by using the script
-      `deploymentscripts/start_seattlegeni_components.sh`. See the section on
-      "Notes for Production" for more information. For reference, we'll explain
+      `deploymentscripts/start_seattlegeni_components.sh`. If you do this, make sure to
+      change PYTHONPATH, SEATTLEGENI_DIR, and LOG_DIR to the correct locations for your
+      deployment, change geni in SUDO_CMD to the correct username, and create the
+      directory for LOG_DIR if it doesn't already exist. For reference, we'll explain
       here how to start the individual components as well as include first-time
       configuration information. Note that when starting these manually, you need
       to start them in the order shown. Most importantly, first the lockserver,
