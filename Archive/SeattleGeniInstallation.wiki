@@ -360,7 +360,18 @@ NameVirtualHost *:443
 </VirtualHost>
 }}}
 
-To configure SSL you will probably need to install openssl to generate a private key/CSR (Certificate Signing Request), and then possibly purchase a certificate for your site. For more information see [http://slacksite.com/apache/certificate.php this page].
+To use this configuration for your SeattleGENI installation, change "mysite" to your domain
+name, change "/home/geni/live/" in the site media location and Python path to the directory
+where you deployed SeattleGENI, and make sure "/admin_media" is aliased to a valid directory,
+as the exact location will vary if, for example, you have a different version of Python installed.
+A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
+
+To configure SSL you will probably need to install openssl to generate a private key/CSR
+(Certificate Signing Request), and then possibly purchase a certificate for your site.
+For more information see [http://slacksite.com/apache/certificate.php this page]. Put your
+SSL key and certificate in a directory named /etc/apache2/ssl (or change the configuration
+to correctly reference them). If you generate your own certificate instead of buying one,
+remove the line for "SSLCertificateChainFile".
 
 Be sure to restart Apache after you are done changing the configuration files.
 
