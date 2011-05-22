@@ -93,7 +93,7 @@ cd /tmp/deploy/seattlegeni
   * '''Future tip'''
     * Starting all of the processes described below is simplified by using the script
       `deploymentscripts/start_seattlegeni_components.sh`, whose use is described in
-      the section on [wiki:SeattleGeniInstallation#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
+      the section on [#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
       For reference, we'll explain here how to start the individual components as well
       as include first-time configuration information. Note that when starting these
       manually, you need to start them in the order shown. Most importantly, first the
