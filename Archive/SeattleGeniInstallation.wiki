@@ -92,15 +92,13 @@ cd /tmp/deploy/seattlegeni
       Note: all future steps/instructions will assume you are in this directory. 
   * '''Future tip'''
     * Starting all of the processes described below is simplified by using the script
-      `deploymentscripts/start_seattlegeni_components.sh`. If you do this, make sure to
-      change PYTHONPATH, SEATTLEGENI_DIR, and LOG_DIR to the correct locations for your
-      deployment, change geni in SUDO_CMD to the correct username, and create the
-      directory for LOG_DIR if it doesn't already exist. For reference, we'll explain
-      here how to start the individual components as well as include first-time
-      configuration information. Note that when starting these manually, you need
-      to start them in the order shown. Most importantly, first the lockserver,
-      then the backend, then everything else. However, we're not going to describe
-      the initial setup in this order.
+      `deploymentscripts/start_seattlegeni_components.sh`, whose use is described in
+      the section on [wiki:SeattleGeniInstallation#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
+      For reference, we'll explain here how to start the individual components as well
+      as include first-time configuration information. Note that when starting these
+      manually, you need to start them in the order shown. Most importantly, first the
+      lockserver, then the backend, then everything else. However, we're not going to
+      describe the initial setup in this order.
   * '''Generating state keys'''
     Four different state keys need to be created in order for all the backend scripts
     to work. The name of the four key files should be:
@@ -328,11 +326,34 @@ If you try to access your SeattleGENI installation's website now, then it's poss
 Cannot open file for translation '/home/sportzer/geni_dev/seattle/rsa.repy': [Errno 13] Permission denied: '/home/sportzer/geni_dev/seattle/rsa_repy.py'
 }}}
 
-This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper get invoked, so as a workaround you can cd to the seattle directory and change the permissions:
+This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper
+get invoked, so as a workaround you can cd to the seattle directory and change the permissions:
 {{{
 #!sh
 $ chmod a+w *_repy.py
 }}}
+
+
+[[BR]]
+== Running start_seattlegeni_components.sh ==
+----
+
+If you have all the components of SeattleGENI (including Apache) configured,
+the script deploymentscripts/start_seattlegeni_components.sh will start up all the individual
+components in the correct order.
+
+Before running start_seattlegeni_components.sh, make sure to change PYTHONPATH, SEATTLEGENI_DIR,
+and LOG_DIR to the correct locations for your deployment, change geni in SUDO_CMD to the correct
+username, and create the directory for LOG_DIR if it doesn't already exist.
+
+To run start_seattlegeni_components.sh, cd the deploymentscripts directory and run the following commands:
+{{{
+#!sh
+$ sudo su
+$ ./start_seattlegeni_components.sh
+}}}
+
+If one or more of the SeattleGENI scripts is already running, kill them before running start_seattlegeni_components.sh.
 
 
 [[BR]]
