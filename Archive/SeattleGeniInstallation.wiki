@@ -100,12 +100,15 @@ cd /tmp/deploy/seattlegeni
       lockserver, then the backend, then everything else. However, we're not going to
       describe the initial setup in this order.
   * '''Generating state keys'''
-    Four different state keys need to be created in order for all the backend scripts
-    to work. The name of the four key files should be:
+    Seven different state keys need to be created in order for all the backend scripts
+    to work. The name of the seven key files should be:
     * acceptdonation.publickey
+    * movingto_canonical.publickey
     * canonical.publickey
-    * movingtoonepercent_manyevents.publickey
+    * movingto_onepercentmanyevents.publickey
     * onepercentmanyevents.publickey
+    * movingto_twopercent.publickey
+    * twopercent.publickey
     Note that the privatekey of the key pairs is not necessary. To generate the keys 
     follow these instructions: 
     1. Create a temporary folder.
@@ -217,6 +220,11 @@ python polling/check_active_db_nodes.py
 #!sh   
 python node_state_transitions/TRANSITION_SCRIPT_NAME.py
 }}}
+  * The four transitions scripts that you probably want running are:
+    * transition_donation_to_canonical
+    * transition_canonical_to_twopercent
+    * transition_twopercent_to_twopercent
+    * transition_onepercentmanyevents_to_canonical
 
 
 [[BR]]
