@@ -102,24 +102,24 @@ cd /tmp/deploy/seattlegeni
   * '''Generating state keys'''
     Seven different state keys need to be created in order for all the backend scripts
     to work. The name of the seven key files should be:
-    * acceptdonation.publickey
-    * movingto_canonical.publickey
-    * canonical.publickey
-    * movingto_onepercentmanyevents.publickey
-    * onepercentmanyevents.publickey
-    * movingto_twopercent.publickey
-    * twopercent.publickey
-    Note that the privatekey of the key pairs is not necessary. To generate the keys 
-    follow these instructions: 
-    1. Create a temporary folder.
-    1. Navigate to the trunk/ folder.
-    1. Run the command:
+    1. acceptdonation.publickey
+    1. movingto_canonical.publickey
+    1. canonical.publickey
+    1. movingto_onepercentmanyevents.publickey
+    1. onepercentmanyevents.publickey
+    1. movingto_twopercent.publickey
+    1. twopercent.publickey
+    * Note that the privatekey of the key pairs is not necessary. To generate the keys 
+      follow these instructions: 
+      * Create a temporary folder.
+      * Navigate to the trunk/ folder.
+      * Run the command:
 {{{
 python preparetest.py TEMP_FOLDER
 }}}
-       where the temp folder is the folder created in step 1.
-    1. Navigate to the TEMP_FOLDER.
-    1. Run the command:
+        where the temp folder is the folder created in step 1.
+      * Navigate to the TEMP_FOLDER.
+      * Run the command:
 {{{
 python generatekeys.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
 }}}
@@ -127,11 +127,11 @@ python generatekeys.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
 {{{
 python generatekeys.py acceptdonation
 }}}
-    1. Generate a key pair for all four state keys.
-    1. Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
-       folder and copy the four publickeys over to that folder.
-    1. You can delete the privatekeys if you want to as we won't need them.
-    1. Delete the TEMP_FOLDER and all its content at this point if you want to.
+      * Generate a key pair for all four state keys.
+      * Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
+        folder and copy the four publickeys over to that folder.
+      * You can delete the privatekeys if you want to as we won't need them.
+      * Delete the TEMP_FOLDER and all its content at this point if you want to.
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a mysql database for seattlegeni (e.g.
       called `seattlegeni`).
@@ -220,11 +220,11 @@ python polling/check_active_db_nodes.py
 #!sh   
 python node_state_transitions/TRANSITION_SCRIPT_NAME.py
 }}}
-  * The four transitions scripts that you probably want running are:
-    * transition_donation_to_canonical
-    * transition_canonical_to_twopercent
-    * transition_twopercent_to_twopercent
-    * transition_onepercentmanyevents_to_canonical
+    * The four transitions scripts that you probably want running are:
+      * transition_donation_to_canonical
+      * transition_canonical_to_twopercent
+      * transition_twopercent_to_twopercent
+      * transition_onepercentmanyevents_to_canonical
 
 
 [[BR]]
