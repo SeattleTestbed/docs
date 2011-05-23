@@ -354,14 +354,23 @@ Before running start_seattlegeni_components.sh, make sure to change PYTHONPATH, 
 and LOG_DIR to the correct locations for your deployment, change geni in SUDO_CMD to the correct
 username, and create the directory for LOG_DIR if it doesn't already exist.
 
+First, if one or more of the SeattleGENI scripts is already running, kill them before running start_seattlegeni_components.sh.
+
 To run start_seattlegeni_components.sh, cd the deploymentscripts directory and run the following commands:
 {{{
 #!sh
-$ sudo su
+$ sudo -i
+$ screen
 $ ./start_seattlegeni_components.sh
 }}}
+This will start the script in a new screen session running as root. Hit CTRL-A followed by D to detach the screen session.
 
-If one or more of the SeattleGENI scripts is already running, kill them before running start_seattlegeni_components.sh.
+To later reattach to the session in order to stop or restart start_seattlegeni_components.sh:
+{{{
+#!sh
+$ sudo -i
+$ screen -r
+}}}
 
 
 [[BR]]
