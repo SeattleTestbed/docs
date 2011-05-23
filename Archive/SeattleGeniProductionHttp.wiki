@@ -5,7 +5,6 @@ This page describes how to redeploy SeattleGENI from the current svn trunk as we
 as some additional configuration information for using SeattleGENI in production.
 
  * For info on installing the necessary software to run GENI, see [wiki:SeattleGeniInstallation].
- * For info on running a test/development version of the GENI portal using the Django built-in HTTP test server, see [wiki:SeattleGeniTesting]
 
 ----
 [[TOC(inline)]]
