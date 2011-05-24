@@ -8,6 +8,9 @@ Seattle is a platform for networking and distributed systems research. It's free
 
 Seattle runs on end-user systems in a safe and contained manner, with support for several platforms. Users install and run Seattle with minimal impact on system security and performance. Sandboxes are established on the user's computer to limit the consumption of resources such as CPU, memory, storage space, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
+For more information, please check out our [http://seattle.cs.washington.edu/static/SeattleMovieFinal.mov overview movie].
+
+
 == Features ==
  * Community-driven and free.
  * Scalable architecture.
