@@ -1,5 +1,13 @@
-
 == Exploring the Delay Space with Seattle ==
 
+'''Under construction'''.
 
-Under construction.
+=== Modified divide-and-conquer algorithm ===
+The all-pairs-ping algorithm we used is based on a modified divide-and-conquer algorithm. Therefore we use a central coordination instance to avoid interferences between each measurement try. 
+To obtain the latency matrices with this approach we implement the two following programs: the "Controller"-Program that is monitoring and controlling the steps of the divide-and-conquer algorithm and the "Node"-Program that is responsible for performing the measurements on each tested Seattle vessel.
+
+==== Controller ====
+
+==== Node ====
+
+=== Results ===
