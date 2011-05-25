@@ -4,7 +4,7 @@
 '''Under construction'''.
 
 === Modified divide-and-conquer algorithm ===
-[[Image(allpairsping.png, 240px, right)]]
+[[Image(allpairsping.png, 240px, right, nolink)]]
 The all-pairs-ping algorithm we used is based on a modified divide-and-conquer algorithm. Therefore we use a central coordination instance to avoid interferences between each measurement try.[[BR]]
 To obtain the latency matrices with this approach we implement the two following programs: the "controller" program that is monitoring and controlling the steps of the divide-and-conquer algorithm and the "node" program that is responsible for performing the measurements on each tested Seattle vessel.
 
@@ -14,7 +14,7 @@ The program [raw-attachment:node.repy] is responsible for the execution of the m
 ==== Controller ====
 This program [raw-attachment:controller.repy] is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It must only be installed on one Seattle vessel to coordinate all vessels on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.[[BR]]
 In the divide step the list ''S'' is split into two sublists ''S,,1,,'' and ''S,,2,,''. If the length of ''S'' is odd, ''S,,1,,'' receives the last remaining node.[[BR]]
-[[Image(conquer.png, 480px)]][[BR]]
+[[Image(conquer.png, 480px, nolink)]][[BR]]
 In the conquer phase, the controller sends a message to each node of the sublist ''S,,1,,'' to indicate, which node of ''S,,2,,'' should be measured. Furthermore by permuting the measured list, the controller will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step, it will perform all measurements bidirectionally.[[BR]]
 When the measurements have been performed bidirectionally and the lenght of one of the remaining sublists is greater than one, the divide-and-conquer algorithm starts with this sublist recursively again. 
 
