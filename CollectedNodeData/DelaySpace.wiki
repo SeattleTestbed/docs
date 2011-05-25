@@ -1,6 +1,6 @@
 == Exploring the Delay Space with Seattle ==
-
 '''Under construction'''.
+[[TOC(inline)]]
 
 === Modified divide-and-conquer algorithm ===
 The all-pairs-ping algorithm we used is based on a modified divide-and-conquer algorithm. Therefore we use a central coordination instance to avoid interferences between each measurement try.[[BR]]
