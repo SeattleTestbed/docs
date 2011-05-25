@@ -30,17 +30,9 @@ The program is started in ''seash.py'' by executing:[[BR]]
 controller.repy [port] [ipfile] [measures] [waittime]
 }}}
 
-- port is Your specific port for Seattle
-    - ipfile is a file You uploaded to the Controller-Node before, with all IPs that should be measured
-    - measures is the number of measurements, that should be performed
-    - waittime is the time waited between the measurements
-
-1. [port]: Your specific port for Seattle
-
-2. [ipfile]: A file You uploaded to the controller Vessel withl all IPs that should be measured
-
-3. [measures]: The number of measurements, that should be performed
-
-4. [waittime]: A specific wait time between each measurement
+-[port]: Your specific port for Seattle
+-[ipfile]: A file You uploaded to the controller Vessel withl all IPs that should be measured
+-[measures]: The number of measurements, that should be performed
+-[waittime]: A specific wait time between each measurement
 
 === Results ===
