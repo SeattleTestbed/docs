@@ -31,8 +31,8 @@ controller.repy [port] [ipfile] [measures] [waittime]
 }}}
 
     - [port]: Your specific port for Seattle
-    - [ipfile]: A file You uploaded to the controller Vessel withl all IPs that should be measured
-    - [measures]: The number of measurements, that should be performed
-    - [waittime]: A specific wait time between each measurement
+    - [ipfile]: A file you uploaded to the controller Vessel with all IPs that should be measured
+    - [measures]: The number of measurements that should be performed
+    - [waittime]: A specific waiting time between each measurement
 
 === Results ===
