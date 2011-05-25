@@ -12,7 +12,7 @@ This program is responsible for the execution of the measurements. It is execute
 ==== Controller ====
 This program is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It must only be installed on one Seattle vessel to coordinate all vessels on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.[[BR]]
 In the divide step the list ''S'' is split into two sublists ''S,,1,,'' and ''S,,2,,''. If the length of ''S'' is odd, ''S,,1,,'' receives the last remaining node.[[BR]]
-In the conquer phase, the controller sends a message to each node of the sublist ''S,,1,,'' to indicate, which node of ''S,,2,,'' should be measured. Furthermore by permuting the measured list, the controller will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step will perform all measurements bidirectionally.[[BR]]
+In the conquer phase, the controller sends a message to each node of the sublist ''S,,1,,'' to indicate, which node of ''S,,2,,'' should be measured. Furthermore by permuting the measured list, the controller will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step, it will perform all measurements bidirectionally.[[BR]]
 When the measurements have been performed bidirectionally and the lenght of one of the remaining sublists is greater than one, the divide-and-conquer algorithm starts with this sublist recursively again. 
 
 === Results ===
