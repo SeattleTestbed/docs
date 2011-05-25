@@ -5,8 +5,8 @@
 
 === Modified divide-and-conquer algorithm ===
 [[Image(allpairsping.png, 240px, right, nolink)]]
-The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. Therefore, we use a central coordination instance to avoid interferences between each measurement trial.[[BR]]
-To obtain the latency matrices with this approach we implemented the two following programs: the "controller" program that is monitoring and controlling the steps of the divide-and-conquer algorithm and the "node" program that is responsible for performing the measurements on each tested Seattle vessel.
+The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. We use a central coordination instance to avoid interferences between each measurement trial.[[BR]]
+To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.
 
 ==== Node ====
 The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the controller each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
