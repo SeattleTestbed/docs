@@ -16,7 +16,7 @@ The program is started in ''seash.py'' by executing:
 node.repy [port]
 }}}
 
-[port]: Your specific port for Seattle
+    - [port]: Your specific port for Seattle
 
 ==== Controller ====
 This program [raw-attachment:controller.repy] is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It must only be installed on one Seattle vessel to coordinate all vessels on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.[[BR]]
@@ -30,9 +30,9 @@ The program is started in ''seash.py'' by executing:[[BR]]
 controller.repy [port] [ipfile] [measures] [waittime]
 }}}
 
--[port]: Your specific port for Seattle
--[ipfile]: A file You uploaded to the controller Vessel withl all IPs that should be measured
--[measures]: The number of measurements, that should be performed
--[waittime]: A specific wait time between each measurement
+    - [port]: Your specific port for Seattle
+    - [ipfile]: A file You uploaded to the controller Vessel withl all IPs that should be measured
+    - [measures]: The number of measurements, that should be performed
+    - [waittime]: A specific wait time between each measurement
 
 === Results ===
