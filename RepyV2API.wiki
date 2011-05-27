@@ -1247,3 +1247,35 @@ TODO: others should review this, change its name as needed, etc.
    <Returns>
       A string with details of the last exception that occurred in the current thread, or None if there is no such exception.
 
+
+
+[[BR]] 
+==== safelyexecutenativecode(binary, arglist) ====
+----
+
+Execute native code that has been compiled using the NaCl toolchain.   
+
+ * Doc string:
+
+   <Purpose>
+     Executes code in an arbitrary programming language that was compiled using the toolchain.
+
+   <Arguments>
+
+     binary:  The binary contents of the program to check.
+
+     arglist: A list of strings that should be used as the command line arguments.
+
+   <Exceptions>
+     A CodeUnsafeError is raised if the binary does not pass verification.   
+     RepyArgumentError is raised if the binary is not a string or the arglist does not contain only strings
+
+   <Side Effects>
+     Another process will be launched to execute the program. This has memory and CPU ramifications,
+     that will be accounted for in the current vessel. 
+
+   <Resource Consumption>
+     TODO (we may change the resource model to account for processes separately from threads)
+
+   <Returns>
+     A tuple containing a send socket and a recv socket.   These allow communication with the NaCl process.   (More to come on these)
