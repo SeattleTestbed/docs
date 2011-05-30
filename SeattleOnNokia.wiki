@@ -1,5 +1,5 @@
 = Using Seattle on the Nokia N800 and N810 =
-This article is comprised of two sections: The first section explains how to install Seattle on the Nokia N800 Internet Tablet. The second section (optional) explains how to run the Seattle unit tests on the Nokia N800 Internet Tablet. The third section describes the modification necessary to run Seattle on the N810.
+This article is comprised of three sections: The first section explains how to install Seattle on the Nokia N800 Internet Tablet. The second section (optional) explains how to run the Seattle unit tests on the Nokia N800 Internet Tablet. The third section describes the modification necessary to run Seattle on the N810.
 ----
 [[TOC(inline)]]
 ----
