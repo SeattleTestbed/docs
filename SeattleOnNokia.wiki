@@ -1,5 +1,5 @@
-= Using Seattle on the Nokia N800 =
-This article is comprised of two sections: The first section explains how to install Seattle on the Nokia N800 Internet Tablet. The second section (optional) explains how to run the Seattle unit tests on the Nokia N800 Internet Tablet.
+= Using Seattle on the Nokia N800 and N810 =
+This article is comprised of two sections: The first section explains how to install Seattle on the Nokia N800 Internet Tablet. The second section (optional) explains how to run the Seattle unit tests on the Nokia N800 Internet Tablet. The third section describes the modification necessary to run Seattle on the N810.
 ----
 [[TOC(inline)]]
 ----
@@ -68,3 +68,36 @@ python utf.py -m repytests
  4. The unit tests should take about an hour. In the end it will report the number of passes/failures.
 [[BR]]
 
+----
+== Notes for Nokia N810 Tablet ==
+This section describes the difference between the above N800, and the N810 installation.
+[[BR]]
+
+----
+
+=== Python ===
+
+For Python, you will need to install the "maemo-python-device-env" package; however, this Python package lacks some important modules which Seattle uses. You must add these modules manually.
+
+For Python 2.5.2, you might not be able to install Seattle due to two missing packages: compiler.py and getpass.py. To overcome this setback:
+
+ 1. Visit http://www.python.org/download/releases/2.5.2/ and download the 2.5.2 release for other platforms;
+ 2. unpack the downloaded file;
+ 3. locate the files compiler.py and getpass.py and copy them to where maemo-python-device-env was installed on N800 (somewhere on your pythonpath).
+ 4. Install Seattle as usual.
+
+[[BR]]
+
+----
+=== N810 Notes: ===
+
+ a. You will just locate the files you need from the release downloaded from the Python official website and copy them. Do not install the release!
+
+ b. to check where maemo-python-device-env was installed you could use the following lines in Python interactive mode:
+
+{{{
+import sys
+print sys.path
+}}}
+
+[[BR]]
