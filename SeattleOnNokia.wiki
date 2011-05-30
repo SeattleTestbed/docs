@@ -73,7 +73,7 @@ python utf.py -m repytests
 This section describes the difference between the above N800, and the N810 installation.
 [[BR]]
 
-----
+
 
 === Python ===
 
@@ -88,7 +88,7 @@ For Python 2.5.2, you might not be able to install Seattle due to two missing pa
 
 [[BR]]
 
-----
+
 === N810 Notes: ===
 
  a. You will just locate the files you need from the release downloaded from the Python official website and copy them. Do not install the release!
