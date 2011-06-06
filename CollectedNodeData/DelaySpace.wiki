@@ -40,7 +40,8 @@ controller.repy [port] [ipfile] [measures] [waittime]
 For the statistical analysis of the collected data we implemented the following: the quantils, the mean value and an estimation of the variance and the deviation.
 
 ==== Mean value ====
-{{{!repy
+{{{
+#!repy
 def calcmean(floatlist):
     result = 0.0
     for f in floatlist:
@@ -51,7 +52,8 @@ def calcmean(floatlist):
 }}}
 
 ==== Estimation of the variance and deviation ====
-{{{!repy
+{{{
+#!repy
 def calcestimate(floatlist):
     result = 0.0
     mean = calcmean(floatlist)
@@ -64,7 +66,8 @@ def calcestimate(floatlist):
     return result
 }}}
 
-{{{!repy
+{{{
+#!repy
 def calcdeviation(floatlist):
     result = calcestimate(floatlist)
     result = result ** .5
@@ -72,7 +75,8 @@ def calcdeviation(floatlist):
 }}}
 
 ==== Quantils ====
-{{{!repy
+{{{
+#!repy
 def calcquantil(sortedfloatlist, quantil=0.25):
     result = 0
     n = len(sortedfloatlist)
