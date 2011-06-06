@@ -9,7 +9,7 @@ The all-pairs-ping algorithm we use is based on a modified divide-and-conquer al
 To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.
 
 ==== Node ====
-[[Image(measurements.png, 320px, right, nolink)]]
+[[Image(measurements.png, 360px, right, nolink)]]
 The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the controller each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
 The program is started in ''seash.py'' by executing:
 {{{
@@ -37,8 +37,57 @@ controller.repy [port] [ipfile] [measures] [waittime]
     - [waittime]: A specific waiting time between each measurement
 
 === Calculations ===
+For the statistical analysis of the collected data we implemented the following: the quantils, the mean value and an estimation of the variance and the deviation.
+
+==== Mean value ====
+{{{!repy
+def calcmean(floatlist):
+    result = 0.0
+    for f in floatlist:
+        result += f
+    if len(floatlist) > 0:
+        result /= len(floatlist)
+    return result
+}}}
+
+==== Estimation of the variance and deviation ====
+{{{!repy
+def calcestimate(floatlist):
+    result = 0.0
+    mean = calcmean(floatlist)
+    for f in floatlist:
+        result += (f - mean) ** 2
+    if len(floatlist) > 1:
+        result /= (len(floatlist) - 1)
+    else:
+        result = 0
+    return result
+}}}
+
+{{{!repy
+def calcdeviation(floatlist):
+    result = calcestimate(floatlist)
+    result = result ** .5
+    return result
+}}}
+
+==== Quantils ====
+{{{!repy
+def calcquantil(sortedfloatlist, quantil=0.25):
+    result = 0
+    n = len(sortedfloatlist)
+    datapoint = n * quantil
+    if int(datapoint) is not 0:
+        if datapoint % int(datapoint) > 0:
+            datapoint = int(datapoint)
+            result = sortedfloatlist[int(datapoint)]
+        else:
+            result = (sortedfloatlist[int(datapoint - 1)] + sortedfloatlist[int(datapoint)]) / 2
+    return result
+}}}
 
 === Displaying the results ===
+
 
 == Results ==
 The results of the first test of 50 nodes is represented in [raw-attachment:latencymap.csv]. This map contains the mean values of the 50 percent quantil reduced measure lists between two nodes[[BR]]
