@@ -10,6 +10,7 @@ To obtain the latency matrices, we implemented the two following programs: the "
 
 ==== Node ====
 The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the controller each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
+[[Image(measurements.png, 480px, nolink)]]
 The program is started in ''seash.py'' by executing:
 {{{
 #!repy 
