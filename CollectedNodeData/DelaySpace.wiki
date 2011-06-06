@@ -6,8 +6,7 @@
 === Modified divide-and-conquer algorithm ===
 [[Image(allpairsping.png, 200px, right, nolink)]]
 The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. We use a central coordination instance to avoid interferences between each measurement trial.
-To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.[[BR]]
-To get the programs operating, first acquire your vessels and exclude one node from the whole group; second run "node.repy" on all members of the group, acquire their IPs to a file and third upload the IP file to the node, that was removed from the group, and run "controller.repy" on it.
+To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.
 
 ==== Controller ====
 This program [raw-attachment:controller.repy] is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It may only be installed on one Seattle vessel to coordinate all vessels on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.[[BR]]
@@ -36,6 +35,9 @@ node.repy [port]
 }}}
 
     - [port]: Your specific port for Seattle
+
+=== Executing the programs ===
+To get the programs operating, first acquire your vessels and exclude one node from the whole group; second run "node.repy" on all members of the group, acquire their IPs to a file and third upload the IP file to the node, that was removed from the group, and run "controller.repy" on it.
 
 === Calculations ===
 For the statistical analysis of the collected data we implemented the following: the quantils, the mean value and an estimation of the variance and the deviation.
