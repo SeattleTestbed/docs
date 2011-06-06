@@ -4,12 +4,12 @@
 '''Under construction'''.
 
 === Modified divide-and-conquer algorithm ===
-[[Image(allpairsping.png, 240px, right, nolink)]]
+[[Image(allpairsping.png, 200px, right, nolink)]]
 The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. We use a central coordination instance to avoid interferences between each measurement trial.
 To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.
 
 ==== Node ====
-[[Image(measurements.png, 360px, right, nolink)]]
+[[Image(measurements.png, 320px, right, nolink)]]
 The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the controller each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
 The program is started in ''seash.py'' by executing:
 {{{
