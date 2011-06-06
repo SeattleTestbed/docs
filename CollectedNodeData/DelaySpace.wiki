@@ -36,3 +36,5 @@ controller.repy [port] [ipfile] [measures] [waittime]
     - [waittime]: A specific waiting time between each measurement
 
 === Results ===
+The results of the first test of 50 nodes is represented in [raw-attachment:latencymap.csv]. This map contains the mean values of the 50 percent quantil reduced measure lists between two nodes[[BR]]
+In [raw-attachment:measuremap.csv] all results are presented row wise with the additional information of the distances between the nodes and their location.
