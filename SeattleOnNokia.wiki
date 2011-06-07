@@ -83,7 +83,7 @@ For Python 2.5.2, you might not be able to install Seattle due to two missing pa
 
  1. Visit http://www.python.org/download/releases/2.5.2/ and download the 2.5.2 release for other platforms;
  2. unpack the downloaded file;
- 3. locate the files compiler.py and getpass.py and copy them to where maemo-python-device-env was installed on N800 (somewhere on your pythonpath).
+ 3. locate the files compiler.py and getpass.py and copy them to where maemo-python-device-env was installed on N810 (somewhere on your pythonpath).
  4. Install Seattle as usual.
 
 [[BR]]
