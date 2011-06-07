@@ -94,7 +94,15 @@ def calcquantil(sortedfloatlist, quantil=0.25):
 }}}
 
 === Displaying the results ===
+The controller can display the results in several ways.
 
+==== On a website ====
+
+==== In a csv file ====
+
+==== In a LaTeX table ====
+
+==== Visualization as TikZ graphic ====
 
 == Results ==
 The results of the first test of 50 nodes is represented in [raw-attachment:latencymap.csv]. This map contains the mean values of the 50 percent quantil reduced measure lists between two nodes[[BR]]
