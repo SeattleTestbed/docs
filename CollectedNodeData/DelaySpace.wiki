@@ -97,8 +97,56 @@ def calcquantil(sortedfloatlist, quantil=0.25):
 The controller can display the results in several ways.
 
 ==== On a website ====
+The website is generated after one measurement round is done. You can call it in a Browser using the IP of the node, the controller program runs on, followed by your Seattle port.
+{{{
+#!repy
+def show_status(srcip, srcport, connobj, ch, mainch):
+    webpage = "<html><head><title>RoundTripTime</title></head><body><h1>RoundTripTimes measured by " + getmyip() + '</h1>'
+    if mycontext['int_measured'] < len(mycontext['list_availableips']):
+        print "Html in progress"
+        webpage += "<b>Still in Progress...</b>"
+    else:
+        for i in range(9):
+            webpage += "<h2>"
+            webpage += getmeasurelabel(i)
+            webpage += "</h2>"
+            webpage += generatetable(i)
+   
+    webpage += '</html>'
+    connobj.send('HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ' + str(len(webpage)) + '\nServer: Seattle Testbed\n\n' + webpage)
+    connobj.close()
+}}}
 
 ==== In a csv file ====
+The Controller generates a csv file you can download. It contains all measurement values.
+{{{
+#!repy
+def generate_csv(sorted=False, file="results"):
+    filestring = file + ".csv"
+    myfileobject = open(filestring, "w")
+    writestring = "From; To;"
+    for i in range(mycontext['int_tries']):
+        writestring += str(i + 1) + "; "
+    writestring += "\n"
+    for fromip in mycontext['list_availableips']:       
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                writestring += fromip + "; "
+                writestring += toip + "; "               
+                if sorted:
+                    currentlist = getsortedlist(fromip, toip)
+                else:
+                    currentlist = getlist(fromip, toip)                   
+                for value in currentlist:
+                    writestring += str(value) + "; "
+                if len(currentlist) < mycontext['int_tries']:
+                    writestring += addsemicolon(mycontext['int_tries'] - len(currentlist))
+                writestring += "\n"           
+        writestring += "\n"                   
+   
+    myfileobject.write(writestring)
+    myfileobject.close() 
+}}}
 
 ==== In a LaTeX table ====
 
