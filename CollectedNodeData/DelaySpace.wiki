@@ -149,6 +149,7 @@ def generate_csv(sorted=False, file="results"):
 }}}
 
 ==== In a LaTeX table ====
+Another representation of the results is a LaTeX file, the Controller generates. It contains the allpairs matrices as longtables of all presented calculations.
 
 ==== Visualization as TikZ graphic ====
 
