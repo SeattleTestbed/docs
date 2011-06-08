@@ -150,6 +150,37 @@ def generate_csv(sorted=False, file="results"):
 
 ==== In a LaTeX table ====
 Another representation of the results is a LaTeX file, the Controller generates. It contains the allpairs matrices as longtables of all presented calculations.
+{{{
+#!repy
+def generate_tex(size=0, file="results"):
+    filestring = file + ".tex"
+    myfileobject = open(filestring, "w")
+    writestring = "\\begin{landscape}\n"
+    writestring += "\\section{Results of the measurements of controller " + getmyip().replace(".", ".\"\"") + "}\n"
+    if size is 0:
+        writestring += "\\normalsize\n"
+    elif size is 1:
+        writestring += "\\small\n"
+    elif size is 2:
+        writestring += "\\footnotesize\n"
+    elif size is 3:
+        writestring += "\\tiny\n"
+    else:
+        writestring += ""
+   
+    writestring += generate_longtable(0)
+    writestring += generate_longtable(1)
+    writestring += generate_longtable(2)
+    writestring += generate_longtable(3)
+    writestring += generate_longtable(4)
+    writestring += generate_longtable(5)
+    writestring += generate_longtable(6)
+    writestring += generate_longtable(7)
+    writestring += generate_longtable(8)
+    writestring += "\\end{landscape}\n\\normalsize"
+    myfileobject.write(writestring)
+    myfileobject.close()
+}}}
 
 ==== Visualization as TikZ graphic ====
 
