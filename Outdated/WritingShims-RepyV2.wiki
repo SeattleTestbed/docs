@@ -1,0 +1,28 @@
+= Introduction =
+
+This little tutorial shows how to use Repy V2 Shims as well as show you how to create your own Shims.
+
+----
+[[TOC(inline)]]
+----
+
+[[BR]]
+== What are shims ==
+----
+
+A shim is a way for a programmer to add or modify network functionality in a way that is completely transparent to the application programmer.   The key word is ''transparent'', since the application (intentionally) cannot tell if a shim is in use or not.   This allows application programmers to focus on their application's logic, while utilizing rich network functionality that may have been added by many different parties.   
+
+Shims are combined together to form a ''shim stack'' which is an ordered set of shims that will act on a specific network communication (a listening socket, message, or connected socket).   Any number of shims can be used together in a shim stack.
+
+
+The key features a shim must have:
+
+1) it must provide the semantics of the repy network interface
+
+2) it must be constructed to use the semantics of the repy network interface
+
+3) it must have a small number of required methods necessary for the construction and management of shim stacks
+
+[[BR]]
+== Using Shims in Application ==
+----
