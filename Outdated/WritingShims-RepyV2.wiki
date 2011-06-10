@@ -26,3 +26,4 @@ The key features a shim must have:
 [[BR]]
 == Using Shims in Application ==
 ----
+As mentioned above, Shims can be used to modify the network behavior without changing any semantics. An example would be suppose you have an application  
