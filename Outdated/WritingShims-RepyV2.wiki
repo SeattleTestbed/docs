@@ -26,4 +26,33 @@ The key features a shim must have:
 [[BR]]
 == Using Shims in Application ==
 ----
-As mentioned above, Shims can be used to modify the network behavior without changing any semantics. An example would be suppose you have an application  
+As mentioned above, Shims can be used to modify the network behavior without changing any semantics. Lets take a look at an echo server application:
+
+{{{
+#!python
+def echo_server(sockobj):
+  def _echo_helper():
+    while True:
+      msg = sockobj.recv(1024)
+      sockobj.send(msg)
+  return _echo_helper
+
+
+if callfunc == 'initialize':
+  serverip = getmyip()
+  serverport = 12345
+
+  # Open a server connection.
+  server_sock = listenforconnection(serverip, serverport)
+
+  while True:
+    try:
+      (remoteip, remoteport, sockobj) = server_sock.getconnection()
+    except SocketWouldBlockError:
+      continue
+    else:
+      # Launch the echo server.
+      createthread(echo_server(sockobj))
+}}}
+
+Now lets assume that the user wants to 
