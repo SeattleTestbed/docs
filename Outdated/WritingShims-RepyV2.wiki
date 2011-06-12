@@ -301,3 +301,16 @@ def openconnection(self, destip, destport, localip, localport, timeout):
   next_sockobj = self.get_next_shim_layer().openconnection(destip, destport, localip, localport, timeout)
   # Do something else.
 }}}
+
+[[BR]]
+== Shim deployment ==
+----
+
+All the shim modules are inter-dependent. The main entry point, !ShimStackInterface, dynamically loads the different Shims that the application will use as long as the Shims are in the same directory. At the same time, a shim can instantiate the !ShimStackInterface to create an internal shim stack. However it is easier to just use the ShimStack module to create new ShimStacks within a Shim as ShimStackInterface is used more to interact with the application.
+
+First, check your shim and ensure that it does not `include` any shim-related files. Do not, for instance, `include` other shims or the !ShimStackInterface in your shim, because they are already included within the !ShimStackInterface.
+
+Write up your application and run it normally as if you are running a normal repy file.
+{{{
+python repy.py restrictions_file dylink.repy my_application.repy
+}}}
