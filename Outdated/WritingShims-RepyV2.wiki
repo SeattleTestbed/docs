@@ -55,7 +55,7 @@ if callfunc == 'initialize':
       createthread(echo_server(sockobj))
 }}}
 
-Now lets assume that the user wants to compress all the data that it receives and sends. Instead of modifying the entire code base to add in some encryption code, we are going to use the CompressionShim which will do the job for us. We are going to add two extra lines, and modify one line. We are going to import the ShimStackInterface module, declare a new ShimStackInterface object with the CompressionShim and then call the listenforconnection metiod of the ShimStackInterface object. Here is the modified code:
+Now lets assume that the user wants to compress all the data that it receives and sends. Instead of modifying the entire code base to add in some encryption code, we are going to use the CompressionShim which will do the job for us. We are going to add two extra lines, and modify one line. We are going to import the ShimStackInterface module, declare a new ShimStackInterface object with the CompressionShim and then call the listenforconnection method of the ShimStackInterface object. Here is the modified code:
 
 {{{
 #!python
