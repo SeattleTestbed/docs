@@ -326,7 +326,7 @@ $ sudo a2enmod ssl
 
 If you try to access your SeattleGENI installation's website now, then it's possible you'll see an exception like this:
 {{{
-Cannot open file for translation '/home/sportzer/geni_dev/seattle/rsa.repy': [Errno 13] Permission denied: '/home/sportzer/geni_dev/seattle/rsa_repy.py'
+Cannot open file for translation '/home/geni/live/seattle/rsa.repy': [Errno 13] Permission denied: '/home/geni/live/seattle/rsa_repy.py'
 }}}
 
 This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper
@@ -351,11 +351,12 @@ username, and create the directory for LOG_DIR if it doesn't already exist.
 
 First, if one or more of the SeattleGENI scripts is already running, kill them before running start_seattlegeni_components.sh.
 
-To run start_seattlegeni_components.sh, cd the deploymentscripts directory and run the following commands:
+To run start_seattlegeni_components.sh, run the following commands with the correct directory substituted for /home/geni/live:
 {{{
 #!sh
 $ sudo -i
 $ screen
+$ cd /home/geni/live/seattlegeni/deploymentscripts
 $ ./start_seattlegeni_components.sh
 }}}
 This will start the script in a new screen session running as root. Hit CTRL-A followed by D to detach the screen session.
