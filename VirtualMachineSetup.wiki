@@ -206,6 +206,10 @@ The IP address of the VM in this case is 192.168.159.130
 30002 = 192.168.159.130:443
 }}}
 
+'''Restart VMware after editing the configuration file.'''
+{{{
+$> sudo /etc/init.d/vmware restart
+}}}
 This configuration will forward port 22 of the VM through port 30000 of the vmware_machine, port 80 will be forwarded through port 30001 and port 443 will be forwarded through port 30002. In order to SSH into the machine you can use the command:
 
 {{{
