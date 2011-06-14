@@ -297,8 +297,8 @@ NameVirtualHost *:443
 To use this configuration for your SeattleGENI installation, change "mysite" to your domain
 name, change "/home/geni/live/" in the site media location and Python path to the directory
 where you deployed SeattleGENI, and make sure "/admin_media" is aliased to a valid directory,
-as the exact location will vary if, for example, you have a different version of Python installed.
-A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
+as the exact location will vary depending on the version of Python installed and how you
+installed Django. A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
 
 To configure SSL you will probably need to install openssl to generate a private key/CSR
 (Certificate Signing Request), and then possibly purchase a certificate for your site.
