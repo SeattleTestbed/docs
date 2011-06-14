@@ -1257,25 +1257,39 @@ Execute native code that has been compiled using the NaCl toolchain.
 
  * Doc string:
 
-   <Purpose>
-     Executes code in an arbitrary programming language that was compiled using the toolchain.
+     <Purpose>
 
-   <Arguments>
+    Experimental! Executes code in an arbitrary programming language that was compiled 
+    using the toolchain.
 
-     binary:  The binary contents of the program to check.
+  <Arguments>
 
-     arglist: A list of strings that should be used as the command line arguments.
+    binary: The file name of the binary to launch.
 
-   <Exceptions>
-     A CodeUnsafeError is raised if the binary does not pass verification.   
-     RepyArgumentError is raised if the binary is not a string or the arglist does not contain only strings
+    arglist: A list of strings that should be used as the command line arguments.
 
-   <Side Effects>
-     Another process will be launched to execute the program. This has memory and CPU ramifications,
-     that will be accounted for in the current vessel. 
+  <Exceptions>
 
-   <Resource Consumption>
-     TODO (we may change the resource model to account for processes separately from threads)
+    TODO
 
-   <Returns>
-     A tuple containing a send socket and a recv socket.   These allow communication with the NaCl process.   (More to come on these)
+    A CodeUnsafeError? is raised if the binary does not pass verification. 
+
+    RepyArgumentError? is raised if the binary is not a string or the arglist 
+    does not contain only strings
+    
+    LaunchFailedError? is raised if the launch fails
+
+  <Side Effects>
+
+    Another process will be launched to execute the program. This has memory 
+    and CPU ramifications, that will be accounted for in the current vessel.
+
+  <Resource Consumption>
+
+    TODO (we may change the resource model to account for processes 
+    separately from threads)
+
+  <Returns>
+
+    A NaclRuntime object which can be used to check if the process is alive,
+    and send and receive data to the process. 
