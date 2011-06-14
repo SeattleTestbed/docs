@@ -125,7 +125,7 @@ python generatekeys.py acceptdonation
 }}}
       * Generate a key pair for all four state keys.
       * Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
-        folder and copy the four publickeys over to that folder.
+        folder and copy the seven publickeys over to that folder.
       * You can delete the privatekeys if you want to as we won't need them.
       * Delete the TEMP_FOLDER and all its content at this point if you want to.
   * '''Setup the website and start a development version of it'''
