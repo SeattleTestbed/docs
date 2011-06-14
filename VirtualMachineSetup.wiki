@@ -206,7 +206,7 @@ The IP address of the VM in this case is 192.168.159.130
 30002 = 192.168.159.130:443
 }}}
 
-'''Restart VMware after editing the configuration file.'''
+'''Restart VMware after editing the configuration file.''' Before you restart the VMware server, make sure that all the VMs are powered off by powering them off through the VMware management page through the browser. Otherwise the VMware server will not restart properly.
 {{{
 $> sudo /etc/init.d/vmware restart
 }}}
