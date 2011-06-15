@@ -3,7 +3,7 @@
 
 '''Under construction'''.
 
-=== Modified divide-and-conquer algorithm ===
+=== Modified Divide-and-Conquer Algorithm ===
 [[Image(allpairsping.png, 200px, right, nolink)]]
 The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. It uses a central coordination instance to avoid interferences between each measurement trial.
 To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle vessel.
@@ -12,7 +12,7 @@ To obtain the latency matrices, we implemented the two following programs: the "
 This program [raw-attachment:controller.repy] is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It may only be installed on one Seattle vessel to coordinate all vessels on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.[[BR]]
 In the divide step the list ''S'' is split into two sublists ''S,,1,,'' and ''S,,2,,''. If the length of ''S'' is odd, ''S,,1,,'' receives the last remaining node.[[BR]]
 [[Image(conquer.png, 480px, nolink)]][[BR]]
-In the conquer phase, the controller sends a message to each node of the sublist ''S,,1,,'' to indicate, which node of ''S,,2,,'' should be measured. Furthermore, by permuting the measured list, the controller will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step, it will perform all measurements bidirectionally.[[BR]]
+In the conquer phase, the controller sends a message to each node of the sublist ''S,,1,,'' to indicate, which node of ''S,,2,,'' should be measured. Furthermore, by permuting the measured list, the ''controller'' will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step, it will perform all measurements bidirectionally.[[BR]]
 When the measurements have been performed bidirectionally and the length of one of the remaining sublists is greater than one, the divide-and-conquer algorithm starts with this sublist recursively again.
 The program is started in ''seash.py'' by executing:[[BR]]
 {{{
@@ -27,7 +27,7 @@ controller.repy [port] [ipfile] [measures] [waittime]
 
 ==== Node ====
 [[Image(measurements.png, 360px, right, nolink)]]
-The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the controller each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
+The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle vessels which should be measured. Being governed by the ''controller'' each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.[[BR]]
 The program is started in ''seash.py'' by executing:
 {{{
 #!repy 
@@ -36,13 +36,13 @@ node.repy [port]
 
     - [port]: Your specific port for Seattle
 
-=== Executing the programs ===
+=== Executing the Programs ===
 To get the programs running, first acquire your vessels and exclude one node from the whole group; then, run "node.repy" on all members of the group, export their IPs to a file and finally, upload the IP file to the node that was removed from the group and run "controller.repy" on it.
 
 === Calculations ===
-For the statistical analysis of the collected data the following metrics are provided: the quantiles, the mean value and an estimation of the variance and the deviation.
+For the statistical analysis of the collected data, the following metrics are provided: the quantiles, the mean value and an estimation of the variance and the deviation.
 
-==== Mean value ====
+==== Mean Value ====
 {{{
 #!repy
 def calcmean(floatlist):
@@ -54,7 +54,7 @@ def calcmean(floatlist):
     return result
 }}}
 
-==== Estimation of the variance and deviation ====
+==== Estimation of the Variance and Deviation ====
 {{{
 #!repy
 def calcestimate(floatlist):
@@ -93,10 +93,10 @@ def calcquantil(sortedfloatlist, quantil=0.25):
     return result
 }}}
 
-=== Displaying the results ===
+=== Displaying the Results ===
 The controller can display the results in several ways:
 
-==== On a website ====
+==== On a Website ====
 The website is generated after one measurement round is done. You can access it with a Browser using the IP of the dedicated Controller node in conjunction with your Seattle port (e.g. http://1.2.3.4:1234).
 {{{
 #!repy
@@ -117,7 +117,7 @@ def show_status(srcip, srcport, connobj, ch, mainch):
     connobj.close()
 }}}
 
-==== In a CSV file ====
+==== In a CSV File ====
 The Controller generates a CSV file that can be downloaded. It contains all measurement values.
 {{{
 #!repy
@@ -148,8 +148,8 @@ def generate_csv(sorted=False, file="results"):
     myfileobject.close() 
 }}}
 
-==== In a LaTeX table ====
-Another representation of the results is a LaTeX file, the Controller generates. It contains the all-pairs-matrices as tables of all conducted calculations.
+==== In a LaTeX Table ====
+Another possible representation of the results is as a LaTeX file. It contains the all-pairs-matrices as tables of all conducted calculations and can be obtained from the ''controller'' too.
 {{{
 #!repy
 def generate_tex(size=0, file="results"):
@@ -182,8 +182,8 @@ def generate_tex(size=0, file="results"):
     myfileobject.close()
 }}}
 
-==== Visualization as TikZ graphic ====
-A graphical visualization of the divide-and-conquer algorithm is given as TikZ graphic. It is also generated by the Controller and shows all single steps the algorithm is recursively traversing.
+==== Visualization as TikZ Graphic ====
+A graphical visualization of the divide-and-conquer algorithm is given as TikZ graphic. It is also generated by the ''controller'' and shows all single steps the algorithm is recursively traversing.
 {{{
 #!repy
 def generate_tikz(file="tikzgraphics"):
