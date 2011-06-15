@@ -77,7 +77,7 @@ def calcdeviation(floatlist):
     return result
 }}}
 
-==== Quantils ====
+==== Quantiles ====
 {{{
 #!repy
 def calcquantil(sortedfloatlist, quantil=0.25):
