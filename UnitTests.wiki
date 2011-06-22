@@ -124,3 +124,18 @@ python testnmthreadingerror.py
 This will start the test running, and will output a status report with the results of the test. 
 [[BR]]
 [[BR]]
+
+
+
+[[BR]]
+== Running Seattle Library Tests ==
+----
+Running the Seattle library tests is much like the node manager and repy tests.   First, prepare the files in the a directory.
+Next, type the following command:
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python utf.py -m seattlelibtests
+}}}
+
+[[BR]]
