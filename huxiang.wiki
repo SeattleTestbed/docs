@@ -16,13 +16,15 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
  4. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
 
- 5. Within the demokit folder, follow the instructions in setting up Overlord [wiki:Libraries/Overlord here].
+ 5. Within the demokit directory in your console, follow the instructions in setting up Overlord [wiki:Libraries/Overlord here].
+
+ * Within the instructions, you will also be asked to set up the Seattle Experiment Library within the overlord folder. Please follow the steps in doing so as well
 
  * There should now be a folder called "overlord" in the demokit folder.
 
  6. Create a new folder within demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
  * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to make the necessary changes following the instructions under the "Changing Homepage Directory" section below.
- * Note: Also, make sure address linking between files are based on relative directory, not absolute URLs.
+ * Make sure address linking between files are based on relative directory, not absolute URLs.
 
  For example, instead of using:
 {{{
@@ -34,22 +36,24 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 }}}
  ...instead.
 
- 7. Within the folder "overlord", in the !experimentlibrary folder, open up seattlegeni_xmlrpc.py and set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where this is on your own system, download this file from a trustworthy site and into the !experimentlibrary folder. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+ 7. Within the folder "overlord", in the !experimentlibrary folder, open up seattlegeni_xmlrpc.py and set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where that is on your own system, download a PEM file from a trustworthy site and into the !experimentlibrary folder without making any changes to seattlegeni_xmlrpc.py. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 
 == Changing Homepage Directory ==
-If the home page of the website is something other than index.html, make sure to change the filename that mycontext['home_page'] is set to in huxiang_client.repy, and then preprocess the file into huxiang_server.repy again as instructed at the beginning of the section below, "Hosting the Site". The place to make the changes should appear after the documentation at the beginning of the file and after the import statements, like so:
+If the home page of the website is something other than index.html, make sure to change the filename that mycontext['home_page'] is set to in huxiang_client.repy, and then pre-process the file into huxiang_server.repy again as instructed at the beginning of the section below, "Hosting the Site". The place to make the changes should appear after the documentation at the beginning of the file and after the import statements, like so:
 {{{
 # TO CHANGE THE WEBPAGE THE HOME ADDRESS REDIRECTS TO, #
 #     EDIT 'index.html' TO THE DESIRED WEBPAGE FILE    #
 mycontext['home_page'] = 'index.html'
 }}}
-For example, if a user didn't want to make edits to the rest of their files because the main page is now "index.html" instead of "homepage.htm", they would simply make the following change:
+For example, if a user didn't want to make edits to the rest of web files because the main page is now "index.html" instead of "homepage.htm", they would simply make the following change:
 {{{
 # TO CHANGE THE WEBPAGE THE HOME ADDRESS REDIRECTS TO, #
 #     EDIT 'index.html' TO THE DESIRED WEBPAGE FILE    #
 mycontext['home_page'] = 'homepage.htm'
 }}}
+instead of renaming "homepage.htm" to "index.html"
+
 
 == Hosting the Site ==
 The main file you will be using is huxiang_creator.py, while huxiang_server.repy will handle the server side of things for the hosted website. If you want to make any changes to the server's callback function in handling HTTP requests, edits in code and functionality can be made to huxiang_client.repy before recompiling the file into huxiang_server.repy.
