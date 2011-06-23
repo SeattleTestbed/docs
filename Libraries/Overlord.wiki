@@ -10,7 +10,7 @@ To begin setup, create a new directory of Overlord:
 mkdir overlord
 }}}
 
-Overlord requires the Seattle Experiment Library, which can be obtained by following the steps on [ExperimentLibrary the associated wiki page]. Note that the {{{experimentlibrary}}} directory must be a direct subdirectory of the {{{overlord}}} directory created above.
+Overlord requires the Seattle Experiment Library, which can be obtained by following the steps on [wiki:Libraries/ExperimentLibrary the associated wiki page]. Note that the {{{experimentlibrary}}} directory must be a direct subdirectory of the {{{overlord}}} directory created above.
 
 Also note that Overlord depends on Experiment Library functions that make secure connections to SeattleGENI. To perform secure SSL communication with SeattleGENI, you must:
   * Have a GENI user's public and private key files in the {{{overlord}}} directory
