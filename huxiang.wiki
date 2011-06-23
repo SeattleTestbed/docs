@@ -2,24 +2,20 @@
 
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your SeattleGENI username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
 
-
-
 = Requirements =
  * A Linux or Mac operating system
  * [http://chandlerproject.org/bin/view/Projects/MeTooCrypto M2Crypto] installed
 
-
-
 = Restrictions =
 There are a few restrictions that users must be aware of when hosting websites through huxiang:
 
-  - As stated above, links between pages hosted on the same server must be relative addresses instead of solid ones
+  - Stated below later on in detail, links between pages hosted on the same server must be relative addresses instead of solid ones
+
+  - To avoid problems uploading files on to nodes, keep file sizes limited to about 1 MB at max
 
   - The computer running the file must remain on for Overlord to do its regular maintenance on the webhosting. Otherwise, the website will remain up for a maximum of 7 days since shut-down or until an error occurs with all the nodes
 
   - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer running it wakes up
-
-
 
 = Setting Up =
  1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
