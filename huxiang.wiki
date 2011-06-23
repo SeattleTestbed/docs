@@ -11,7 +11,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
  2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
- 3. Download the tarball file listed at the end of this page and extract its contents into the same folder as your Seattle demokit.
+ 3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.cs.washington.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here] and extract its contents into the same folder as your Seattle demokit.
  * Whether than keeping the recently extracted files in a separate folder within the demokit, move a copy of each file into the main demokit folder.
 
  4. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
