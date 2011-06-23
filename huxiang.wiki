@@ -2,11 +2,26 @@
 
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your SeattleGENI username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
 
-== Requirements ==
+
+
+= Requirements =
  * A Linux or Mac operating system
  * [http://chandlerproject.org/bin/view/Projects/MeTooCrypto M2Crypto] installed
 
-== Setting Up ==
+
+
+= Restrictions =
+There are a few restrictions that users must be aware of when hosting websites through huxiang:
+
+  - As stated above, links between pages hosted on the same server must be relative addresses instead of solid ones
+
+  - The computer running the file must remain on for Overlord to do its regular maintenance on the webhosting. Otherwise, the website will remain up for a maximum of 7 days since shut-down or until an error occurs with all the nodes
+
+  - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer running it wakes up
+
+
+
+= Setting Up =
  1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
 
  2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
@@ -94,16 +109,7 @@ Alternatively, perform a keyboard interrupt within the console if the huxiang_cr
 
 
 
-== Restrictions ==
-There are a few restrictions that users must be aware of when hosting websites through huxiang:
-
-  - As stated above, links between pages hosted on the same server must be relative addresses instead of solid ones
-
-  - The computer running the file must remain on for Overlord to do its regular maintenance on the webhosting. Otherwise, the website will remain up for a maximum of 7 days since shut-down or until an error occurs with all the nodes
-
-  - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer running it wakes up
-
-== Troubleshooting ==
+= Troubleshooting =
 '''All of the nodes are timing out when trying to upload huxiang_server.repy'''
  A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
 
@@ -123,7 +129,7 @@ $ sudo apt-get install python-m2crypto
 
 
 
-== Further Information ==
+= Further Information =
 
 For more about how the assignment of names to node's IP addresses work, visit the Zenodotus page [wiki:Zenodotus here].
 
