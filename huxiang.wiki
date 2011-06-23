@@ -23,7 +23,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
  * There should now be a folder called "overlord" in the demokit folder.
 
  6. Create a new folder within demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
- * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to follow the instructions in making the necessary changes in the section "Changing Homepage Directory" below.
+ * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to follow the instructions in making the necessary changes in the section [wiki:huxiang#ChangingHomepageDirectory Changing Homepage Directory] below.
  * Make sure address linking between files are based on relative directory, not absolute URLs.
 
  For example, instead of using:
