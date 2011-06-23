@@ -22,7 +22,7 @@ For example,
 {{{
 python seattleinstaller.py --repy-prepend-dir security_layers --repy-prepend "private_encasementlib.repy private_custom_layer private_hideprivate_layer.repy"
 }}}
-would copy all the files in the security_layers directory to new vessels and run user repy programs inside of the security layers. If the user program calls part of the repy API, any file operation will first be sanitized by private_hideprivate_layer.repy to make sure the user can't access to private files, and then any call overridden in private_custom_layer will be passed through that security layer.
+would install Seattle and cause it to copy all the files in the security_layers directory to new vessels and run user repy programs inside of the security layers. If the user program calls part of the repy API, any file operation will first be sanitized by private_hideprivate_layer.repy to make sure the user can't access to private files, and then any call overridden in private_custom_layer will be passed through that security layer.
 
 
 [[BR]]
