@@ -11,19 +11,19 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
  2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
- 3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.cs.washington.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here] and extract its contents into the same folder as your Seattle demokit.
- * Whether than keeping the recently extracted files in a separate folder within the demokit, move a copy of each file into the main demokit folder.
+ 3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.cs.washington.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here]) and extract its contents into the same folder as your Seattle demokit.
+ * Whether than keeping the recently extracted files in a separate folder within the demokit directory, move a copy of each file into the main demokit folder.
 
- 4. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit's folder
+ 4. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit folder
 
- 5. Within the demokit directory in your console, follow the instructions in setting up Overlord [wiki:Libraries/Overlord here].
+ 5. Within the demokit directory on your console, follow the instructions in setting up Overlord [wiki:Libraries/Overlord here].
 
  * Within the instructions, you will also be asked to set up the Seattle Experiment Library within the overlord folder. Please follow the steps in doing so as well
 
  * There should now be a folder called "overlord" in the demokit folder.
 
  6. Create a new folder within demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
- * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to make the necessary changes following the instructions under the "Changing Homepage Directory" section below.
+ * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to follow the instructions in making the necessary changes in the section "Changing Homepage Directory" below.
  * Make sure address linking between files are based on relative directory, not absolute URLs.
 
  For example, instead of using:
@@ -36,7 +36,8 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 }}}
  ...instead.
 
- 7. Within the folder "overlord", in the !experimentlibrary folder, open up seattlegeni_xmlrpc.py and set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Alternatively, if you don't know where that is on your own system, download a PEM file from a trustworthy site and into the !experimentlibrary folder without making any changes to seattlegeni_xmlrpc.py. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
+ 7. Within the folder "overlord", in the !experimentlibrary folder, open up seattlegeni_xmlrpc.py and set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Do the same for the seattlegeni_xmlrpc.py file in your main demokit directory
+ * Alternatively, if you don't know where that is on your own system, download a PEM file from a trustworthy site and into the !experimentlibrary folder without making any changes to seattlegeni_xmlrpc.py. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 
 == Changing Homepage Directory ==
