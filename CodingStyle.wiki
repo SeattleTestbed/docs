@@ -747,7 +747,17 @@ except KeyError:
 
 
 
+    - Use {{{assert}}} sparingly.   
 
+      Assert has some tricky semantics because it is a statement, not a function.   Thus you cannot call assert with a string to raise in the logical way
+
+{{{
+assert(x = y, 'x and y must be equal')   # BAD CODE
+}}}
+
+The above code will actually always be True because the tuple (bool, 'string') is True.
+
+      You should use assertions only when it is truly and internal error (i.e. somewhere it should be impossible to reach.   Even so, it is fine to log / exitall instead.
 
 
 
