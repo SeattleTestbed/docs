@@ -47,6 +47,8 @@ There are a few restrictions that users must be aware of when hosting websites t
 }}}
  ...instead.
 
+ * While the 'Save Page as...' function of most web browsers is sufficient for saving a copy of a web page, for those who do not want to go through the trouble of saving each page of a website one by one and editing the links within each file, a better alternative is [http://www.httrack.com HTTrack Website Copier]. The program is capable of doing internal linking automatically for you when you download the site as a whole, and catches certain files that a browser may miss through 'Save Page as...'
+
  7. Within the folder "overlord", in the !experimentlibrary folder, open up seattlegeni_xmlrpc.py and set the value of CA_CERTIFICATES_FILE to the location of a PEM file containing CA certificates that you trust. Do the same for the seattlegeni_xmlrpc.py file in your main demokit directory
  * Alternatively, if you don't know where that is on your own system, download a PEM file from a trustworthy site and into the !experimentlibrary folder without making any changes to seattlegeni_xmlrpc.py. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
