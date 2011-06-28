@@ -15,7 +15,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 
   - The computer running the file must remain on for Overlord to do its regular maintenance on the webhosting. Otherwise, the website will remain up for a maximum of 7 days since shut-down or until an error occurs with all the nodes
 
-  - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer running it wakes up
+  - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer resumes operation
 
 = Setting Up =
  1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
@@ -33,7 +33,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 
  * There should now be a folder called "overlord" in the demokit folder.
 
- 6. Create a new folder within demokit, and store in it all the web files that will be incorporated into the hosted website. This can include HTML, CSS, image files, etc.
+ 6. Either create your own web files or download the website you want to copy, and store it within a new folder in demokit. This can include HTML, CSS, image files, and other files that make up your webiste.
  * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to follow the instructions in making the necessary changes in the section [wiki:huxiang#ChangingHomepageDirectory Changing Homepage Directory] below.
  * Make sure address linking between files are based on relative directory, not absolute URLs.
 
@@ -54,7 +54,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 
 
 == Changing Homepage Directory ==
-If the home page of the website is something other than index.html, make sure to change the filename that mycontext['home_page'] is set to in huxiang_client.repy, and then pre-process the file into huxiang_server.repy again as instructed at the beginning of the section below, "Hosting the Site". The place to make the changes should appear after the documentation at the beginning of the file and after the import statements, like so:
+If the home page of the website is something other than index.html, make sure to change the filename that mycontext[ 'home_page'] is set to in huxiang_client.repy, and then pre-process the file into huxiang_server.repy again as instructed at the beginning of the section below, "Hosting the Site". The place to make the changes should appear after the documentation at the beginning of the file and after the import statements, like so:
 {{{
 # TO CHANGE THE WEBPAGE THE HOME ADDRESS REDIRECTS TO, #
 #     EDIT 'index.html' TO THE DESIRED WEBPAGE FILE    #
