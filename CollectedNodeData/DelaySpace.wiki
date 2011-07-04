@@ -209,3 +209,10 @@ def generate_tikz(file="tikzgraphics"):
 == Results ==
 The results of a first test run with 50 nodes is provided in [raw-attachment:latencymap.csv]. This map contains the mean values of the median reduced measurement lists between two nodes[[BR]]
 In [raw-attachment:measuremap.csv] all results are presented row wise with the additional information of the distances between the nodes and their location.
+=== First Measurement ===
+The first measurment was a run of 103 nodes. The results are given in ... and the row wise presentation of the 10,506 measure pairs with the additional information of their distances can be found in ...
+
+=== Second Measurment ===
+
+=== Third Mesurment ===
+
