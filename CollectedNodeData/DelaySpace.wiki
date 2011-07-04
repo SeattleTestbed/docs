@@ -213,7 +213,7 @@ In [raw-attachment:measuremap.csv] all results are presented row wise with the a
 The first measurment was a run of 103 nodes. The results are given in [raw-attachment:first_latencymap.csv] and the row wise presentation of the 10,506 measure pairs with the additional information of their distances can be found in [raw-attachment:first_measuremap.csv]
 
 === Second Measurment ===
-The first measurment was a run of 107 nodes. The results are given in [raw-attachment:second_latencymap.csv].
+The first measurment was a run of 109 nodes. The results are given in [raw-attachment:second_latencymap.csv].
 
 === Third Mesurment ===
 
