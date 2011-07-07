@@ -216,4 +216,5 @@ The first measurement was conducted with 103 nodes. The results are given in [ra
 The second measurement included 109 nodes. The results are given in [raw-attachment:second_latencymap.csv].
 
 === Third Measurement ===
+The second measurement included 107 nodes. The results are given in [raw-attachment:third_latencymap.csv].
 
