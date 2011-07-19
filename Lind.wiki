@@ -13,6 +13,8 @@ The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the sy
 [[BR]]
 == Design ==
 ----
+[[Image(LindDesignDocument.png)]]
+[[Image(LindDesignDocument (1).png)]]
 === Goals ===
  * Minimal additions to the !NaCl TCB.
  * Use Seattle secured Python where possible
