@@ -48,11 +48,12 @@ Lind connects !NaCl and !RePy using !NaCl's IMC system.  IMC provides socket and
 
 Code can be broken down into trusted and untrusted.  The majority of the untrusted Lind code is sandboxed by !NaCl or !RePy.  In Lind, the TCB (trusted code base) is the native client sel_ldr and the !RePy VM, but we also make a some minor additions including using the !NaCl Python IMC bindings, and adding a new !RePy system call to launch a !NaCl instance.
 
-The whole system runs in 3 or more process:
+The whole system runs in 2 or more process:
 
-  * The !RePy VM
   * One or more !NaCl sel_ldrs
-  * The !RePy auditing process
+  * The !RePy VM
+  * The !RePy auditor.   On most Windows OSes, this is a separate thread of the RePy VM.   On most other OSes, this is a separate process.
+
 
 [[Image(LindDesignDocument (1).png)]]
 
