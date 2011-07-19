@@ -14,7 +14,7 @@ The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the sy
 == Design ==
 ----
 [[Image(LindDesignDocument.png)]]
-[[Image(LindDesignDocument (1).png)]]
+
 === Goals ===
  * Minimal additions to the !NaCl TCB.
  * Use Seattle secured Python where possible
@@ -22,6 +22,18 @@ The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the sy
 === Description ===
 
 Lind connects !NaCl and !RePy using !NaCl's IMC system.  IMC provides socket and message passing like interfaces between an a !NaCl program and an external process.  
+
+=== Trust Domains ===
+
+Code can be broken down into trusted and untrusted.  The majority of the untrusted Lind code is sandboxed by !NaCl or !RePy.  In Lind, the TCB (trusted code base) is the native client sel_ldr and the !RePy VM, but we also make a some minor additions including using the !NaCl Python IMC bindings, and adding a new !RePy system call to launch a !NaCl instance.
+
+The whole system runs in 3 or more process:
+
+  * The !RePy VM
+  * One or more !NaCl sel_ldrs
+  * The !RePy auditing process
+
+[[Image(LindDesignDocument (1).png)]]
 
 [[BR]]
 == How programs are built and run ==
