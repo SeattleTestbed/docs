@@ -13,7 +13,28 @@ The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the sy
 [[BR]]
 == Design ==
 ----
-[[Image(LindDesignDocument.png)]]
+
+Lind is designed to minimize its footprint within the TCB. To do that, most of the Lind code runs within !NaCl !RePy. 
+
+We have added support to allow !RePy programs to launch !NaCl instances via a new !RePy system call.  The ''safe_execute'' system call allows the application to specify a file from within its working directory to execute.  safe_execute uses a process similar to sel_launcher to fork a new sel_ldr process with the program and arguments.  When !NaCl starts it establishes IMC connection to communicate, these channels are opened and then handed over to the !RePy program. From the !RePy program you are able to query if the !NaCl instance is still running, get its channels and kill it. All other operations are blocked from the !RePy program.
+
+Using the safe_execute mechanism, we can build a library OS.  The !RePy program runs an RPC server which allows for it to service calls from the !NaCl instance.  With in the !NaCl instance, we run a modified glibc where each system call of interest is redirected to the !RePy server.  The initial version of Lind will focus on networking and file I/O.  So for example, the fopen system call, is marshaled and sent via RPC to the !RePy server.  The !RePy server opens the file on behalf of the !NaCl program (with all the restrictions !RePy programs have on their file operations).  
+
+=== Faking System Calls ===
+
+One nice property of the Lind design is that we can pick which system calls we will support with Lind.   System calls broadly fall into a few categories. First, system calls which we leave alone. Those are calls like brk.  Second, some calls are emulated, for example open.  Third, some calls will be faked.  Faked calls are those which there will be no direct analog for in !RePy.  For instance file system permission related calls will be faked because !RePy programs do not have access to the global file system, only their own local file system.
+
+=== Library OS ===
+
+One part of Lind is the library OS built with !RePy.  Though in the early stages of development, we intend to make a component based system, where components satisfy different subsystems requests.  The intent is to allow custom steps including transparent in memory file systems, or over network file systems.  Finally, we intend to support process migration, so that will be designed into the OS base.
+
+=== Why Seattle ===
+
+There are several things that using Seattle gives us.  !RePy has more advanced policy mechanism with regards to resource consumption. !RePy has rate limiting for file and network I/O.   It has white and black lists for network connections ports etc.  It has memory use monitoring, and CPU consumption monitoring. 
+
+
+[[Image(LindDesignDocument.png)]][[BR]]
+Conceptional view of the Lind library OS.
 
 === Goals ===
  * Minimal additions to the !NaCl TCB.
