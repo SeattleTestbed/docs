@@ -15,7 +15,7 @@ The motivation of this !NaCl Repy hybrid is to expand !NaCl’s access to the sy
 ----
 === Goals ===
  * Minimal additions to the !NaCl TCB.
- * Use Python where possible
+ * Use Seattle secured Python where possible
 
 === Description ===
 
