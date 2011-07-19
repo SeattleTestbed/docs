@@ -52,7 +52,7 @@ The whole system runs in 2 or more process:
 
   * One or more !NaCl sel_ldrs
   * The !RePy VM
-  * The !RePy auditor.   On most Windows OSes, this is a separate thread of the RePy VM.   On most other OSes, this is a separate process.
+  * The !RePy auditor.   On most Windows OSes, this is a separate thread of the !RePy VM.   On most other OSes, this is a separate process.
 
 
 [[Image(LindDesignDocument (1).png)]]
