@@ -9,7 +9,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 = Restrictions =
 There are a few restrictions that users must be aware of when hosting websites through huxiang:
 
-  - Stated below later on in detail, links between pages hosted on the same server must be relative addresses instead of solid ones
+  - Stated below later on in detail, links between pages hosted on the same server must be relative addresses instead of absolute ones
 
   - To avoid problems uploading files on to nodes, keep file sizes limited to about 1 MB at max
 
@@ -34,7 +34,6 @@ There are a few restrictions that users must be aware of when hosting websites t
  * There should now be a folder called "overlord" in the demokit folder.
 
  6. Either create your own web files or download the website you want to copy, and store it within a new folder in demokit. This can include HTML, CSS, image files, and other files that make up your webiste.
- * IMPORTANT: By default, the Huxiang webserver expects the web-files folder to contain an "index.html" file to act as the home page. If that is not the case, be sure to follow the instructions in making the necessary changes in the section [wiki:huxiang#ChangingHomepageDirectory Changing Homepage Directory] below.
  * Make sure address linking between files are based on relative directory, not absolute URLs.
 
  For example, instead of using:
@@ -53,22 +52,6 @@ There are a few restrictions that users must be aware of when hosting websites t
  * Alternatively, if you don't know where that is on your own system, download a PEM file from a trustworthy site and into the !experimentlibrary folder without making any changes to seattlegeni_xmlrpc.py. One such place to download this file is [http://curl.haxx.se/ca/cacert.pem here]
 
 
-== Changing Homepage Directory ==
-If the home page of the website is something other than index.html, make sure to change the filename that mycontext[ 'home_page'] is set to in huxiang_client.repy, and then pre-process the file into huxiang_server.repy again as instructed at the beginning of the section below, "Hosting the Site". The place to make the changes should appear after the documentation at the beginning of the file and after the import statements, like so:
-{{{
-# TO CHANGE THE WEBPAGE THE HOME ADDRESS REDIRECTS TO, #
-#     EDIT 'index.html' TO THE DESIRED WEBPAGE FILE    #
-mycontext['home_page'] = 'index.html'
-}}}
-For example, if a user didn't want to make edits to the rest of web files because the main page is now "index.html" instead of "homepage.htm", they would simply make the following change:
-{{{
-# TO CHANGE THE WEBPAGE THE HOME ADDRESS REDIRECTS TO, #
-#     EDIT 'index.html' TO THE DESIRED WEBPAGE FILE    #
-mycontext['home_page'] = 'homepage.htm'
-}}}
-instead of renaming "homepage.htm" to "index.html"
-
-
 == Hosting the Site ==
 The main file you will be using is huxiang_creator.py, while huxiang_server.repy will handle the server side of things for the hosted website. If you want to make any changes to the server's callback function in handling HTTP requests, edits in code and functionality can be made to huxiang_client.repy before recompiling the file into huxiang_server.repy.
 If you made any changes to huxiang_client.repy, be sure to pre-process the file through [wiki:SeattleLib/repypp.py repypp.py] with the command:
@@ -79,7 +62,7 @@ or else the website hosting behavior will not reflect the changes you made.
 
 Otherwise, the huxiang_server.repy included in the tarball should work fine.
 
-Run huxiang_creator.py with the following three arguments:
+Run huxiang_creator.py with the following four arguments:
 
   - A single-word string used to set part of the hosted website's home address. It cannot include any spaces or symbols
 
@@ -87,11 +70,13 @@ Run huxiang_creator.py with the following three arguments:
 
   - Directory path of the file folder holding the web site files you're hosting.
 
+  - Directory path from the base file folder to the file that will act as the homepage of your website
+
 As an example of how the command should look:
 {{{
-$ python huxiang_creator.py example guest ./example_web_site
+$ python huxiang_creator.py example guest ./example_web_site ./html/index.html
 }}}
-With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:(port number)', where (port number) is the SeattleGENI port number assigned to "guest". The number is immediately available and labeled as "Port" the moment you sign on to SeattleGENI. It is important that you include the arguments in the order listed above or else the application will throw an error.
+With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:(port number)', where (port number) is the SeattleGENI port number assigned to "guest". The number is immediately available and labeled as "Port" the moment you sign on to SeattleGENI. The user will then finally be directed to .../html/index.html, which will act as your website's homepage. It is important that you include the arguments in the order listed above or else the application will throw an error.
 
 
 The check the status of your webhosting, simply open up the "huxiang_webhosting.log" file with any text editor, and it will show you information on the number of nodes currently hosting the site, any errors that occurred, actions taken by Overlord to handle the errors, and other messages.
