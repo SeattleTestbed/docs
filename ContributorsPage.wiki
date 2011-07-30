@@ -23,7 +23,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * '''[wiki:UnitTests Running Repy and / or node manager unit tests]'''
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
-   * [wiki:SeattleGeniTesting Running a GENI test server]
+   * [wiki:SeattleGeniInstallation Running a GENI test server]
    * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
    * [wiki:Local/ContinuousBuild Continuous Build]
