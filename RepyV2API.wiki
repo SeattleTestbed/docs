@@ -364,7 +364,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
       AlreadyListeningError if the (localip, localport) tuple is already used
       for a listening TCP socket.
 
-      CleanupInProgress if the (localip, localport, destip, destport) tuple is
+      CleanupInProgressError if the (localip, localport, destip, destport) tuple is
       still being cleaned up by the OS.
 
       ConnectionRefusedError (descends NetworkError) if the connection cannot 
