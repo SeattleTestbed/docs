@@ -47,14 +47,17 @@ You can run the code in your local machine and in the vessels you control.
 ==== Executing programs locally in Repy ====
 ----
 
-You need to open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Then you can execute the following command to run the code above.
+First, you should make sure that you have the files named repy.py [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your current directory before executing a repy program.
+
+Now open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Then you can execute the following command to run the same program listed above.   (Note that you can download the example.1.1.repy file and all other example files from this [raw-attachment:examples_linux.zip link]).
+
+
 
 {{{
 #!python
 python repy.py restrictions.test example.1.1.repy
 }}}
 
-We need to make sure that you have the files named repy.py [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your current directory before executing the program like above.
 
 Output is following
 
