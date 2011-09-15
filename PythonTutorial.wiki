@@ -21,14 +21,14 @@ You can download Repy [https://seattle.cs.washington.edu/geni/download/flibble/ 
 
 === How python programs are executed === 
 ----
-Python is an interpreted language, which in a nutshell means that you do not need to compile python code in order to execute it. Here's an example program that prints ‘Hello World’.
+Python is an interpreted language, which in a nutshell means that you do not need to compile python code in order to execute it. Here's an example of a program that prints ‘Hello World’.
 
 {{{
 #!python
 print “Hello, World”
 }}}
 
-To execute this program, you can place the above source code into file, say ‘test.py’, and then run the program by executing the following statement on the command line:
+To execute this program, you can place the above source code into a file, say ‘test.py’, and then run the program by executing the following statement on the command line:
 
 {{{
 #!python
@@ -38,8 +38,8 @@ python test.py
 This is the normal way to execute python code. However, since this tutorial is written for those who use Repy, we need to explain the different way to run Repy programs.
 
 There are two ways to execute programs.
-You can run your programs in your local computer or in a remote vessel that you control.
-Although our final goal is to run programs in the vessels, we explain the way to run programs on a local computer here because it's simple.
+You can run your programs on your local computer or on a remote vessel that you control.
+Although our final goal is to run programs on the vessels, we explain the way to run programs on a local computer here because it's simple.
 
 You can learn how to execute in the vessels in the [RepyTutorial Repy Tutorial].
 
