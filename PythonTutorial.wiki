@@ -709,3 +709,5 @@ TypeError: unsupported operand type(s) for /: ’str’ and ’str’
 
 As you can see, the finally clause is executed in any event.
 
+Note that an uncaught exception will cause the script to terminate.
+
