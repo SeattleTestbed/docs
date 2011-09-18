@@ -84,9 +84,9 @@ To run a program, you should use the experiment manager seash. Seash allows you 
 python seash.py
 }}}
 
-'''Step 2. Log in with my ID
+'''Step 2. Log in with your key
 
-Before logging in, you have to load your public and private keys. You can get keys in the  [https://seattlegeni.cs.washington.edu/ SeattleGENI] website. You need to make sure that you have two files, your public and private key. The name of files is your ID and extension of files are publickey and privatekey.
+Before logging in, you have to load your public and private keys. You can get the keys at the  [https://seattlegeni.cs.washington.edu/ SeattleGENI] website. You need to make sure that you have two files, your public and private key. The name of each file is your ID and the extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be {{{john.publickey}}} and {{{john.privatekey}}}.   These files must be placed in the directory where you run {{{seash}}}.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
@@ -124,7 +124,7 @@ john@ !> on browsegood
 
 '''Step 5. Run a program
 
-We assume the program named example.1.1.repy is stored in the current directory, which prints "Hello, World".
+In this case, the program named example.1.1.repy is stored in the current directory. Note that the results will not be printed.
 
 {{{
 #!python
@@ -132,6 +132,8 @@ john@browsegood !> run example.1.1.repy
 }}}
 
 '''Step 6. Look up the result of the program executed
+
+In order to see the output, run 'show log', as is done below:
 
 {{{
 #!python
@@ -144,7 +146,7 @@ Log from '10.0.1.2:2888:v9':
 Hello World
 }}}
 
-'''Step 7. Look up the information about the vessel you control
+'''Step 7. Look up the information about the vessels you control
 
 {{{
 #!python
@@ -162,8 +164,7 @@ ID Own       Name          Status          Owner Information
 john@browsegood !> exit
 }}}
 
-Help command helps you look up the commands you can use in repy.  
-And also you can fine more practical example in the [TakeHomeAssignment Take home assignment] page.                
+You can find more practical examples in the [TakeHomeAssignment Take home assignment] page.                
 
 [[BR]]
 === A Hello World example (example 1.2) ===
