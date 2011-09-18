@@ -22,9 +22,7 @@ If you want you can look at the installer options using the {{{--usage}}} option
 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
-All attached files works on Windows systems.
-
-Here is another [raw-attachment:examples_linux.zip link] to the zip file containing all files working on Linux and Mac systems.
+All attached files work on Windows systems.
 
 [[BR]]
 === File execution (example 1.1) ===
