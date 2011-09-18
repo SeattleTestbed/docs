@@ -156,7 +156,7 @@ os.remove(f)
 === Time ===
 ----
 ==== time.sleep() ====
-  Repy's '''sleep()''' function behaves similarly to [[http://docs.python.org/library/time.html#time.time time.sleep()]], causing execution of the current program to halt for the specified number of seconds. 
+  Repy's '''sleep()''' function behaves similarly to [[http://docs.python.org/library/time.html#time.sleep time.sleep()]], causing execution of the current program to halt for the specified number of seconds. 
 
 ==== Timer ====
   In python, to start a timer you typically have code such as:
