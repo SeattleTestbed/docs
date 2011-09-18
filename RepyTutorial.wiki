@@ -218,16 +218,13 @@ The waitforconn() function returns a commhandle. A commhandle is a way for your 
 {{{
 waitforconn(IP address, Port number, Callback function)
 
-IP address : The server address users want to connect to
-Port number : Port number users connect to with IP address
-Callback function : Callback function is executed when users connect 
+IP address : IP address to listen on 
+Port number : The port to bind to
+Callback function : Callback function to be executed whenever a TCP connection is made to that IP/port
 
-Return : commhandle
-
-
-waitforconn is the one of the examples. 
-waitforconn calls callback function given as argument only whenever connection is created.
 }}}
+To read more about waitforconn(), visit the [wiki:RepyApi#waitforconnlocaliplocalportfunction API]
+
 
 The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
 {{{ 
