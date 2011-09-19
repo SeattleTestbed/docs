@@ -366,7 +366,7 @@ Start the program using the shell, then open a web browser and in the address ba
 [raw-attachment:example.1.4.repy example.1.4.repy]
 ----
 
-The previous program would wait forever for a user to connect so it could display a webpage.   What if you wanted to have the program timeout after 1 minute?   To do this, we'll register a timer that will close the connection.
+The previous program would run forever, waiting for a user to connect so it could display a webpage.   What if you wanted the program to stop running after 1 minute?   To do this, we'll register a timer that will close the connection.
 
 {{{
 #!python
