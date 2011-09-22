@@ -45,10 +45,27 @@ You can run the code in your local machine and in the vessels you control.
 ==== Executing programs locally in Repy ====
 ----
 
-First, you should make sure that you have the files named repy.py [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your current directory before executing a repy program.
+===== Advanced Instructions =====
+To run a repy program from the command line, run the following with the correct values substituted in:
 
-Now open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Then you can execute the following command to run the same program listed above.   (Note that you can download the example.1.1.repy file and all other example files from this [raw-attachment:examples.zip link]).
+{{{
+python <path to repy.py> <path to restrictions file> <path to source file>
+}}}
 
+For example, if your current working directory is the location where repy is installed, restrictions.test is in "C:\seattle\examples\restrictions.test", and your source file is  "C:\seattle\examples\example.1.1.repy", you can run the repy program with the following command:
+
+{{{
+#!python
+python repy.py "C:\seattle\examples\restrictions.test" "C:\seattle\examples\example.1.1.repy"
+}}}
+
+===== Basic Instructions =====
+
+First, make sure that you have the repy files [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your seattle_repy directory. 
+
+Install repy by running the relevant installer. For windows, it is "install.bat".
+
+Then open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Execute the following command to run the example program listed above.   (Note that you can download the example.1.1.repy file and all other example files from this [raw-attachment:examples.zip link]).
 
 
 {{{
@@ -57,7 +74,7 @@ python repy.py restrictions.test example.1.1.repy
 }}}
 
 
-Output is following
+The output is the following:
 
 {{{
 #!python
@@ -67,7 +84,7 @@ Terminated
 
 "Hello World" was printed, and then the last sentence means that the program was terminated successfully. 
 
-Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems have different messages.
+Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems may have different messages.
 
 [[BR]]
 ==== Executing programs remotely in vessels ====
