@@ -66,13 +66,12 @@ Hello World
 Terminated
 }}}
 
-"Hello World" was printed twice, and then the last sentence means that the program was terminated successfully. 
 
-Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems have different messages.
+"Terminated" indicates that the program was terminated successfully. (This may not be displayed on all operating systems, and other operating systems may have different messages.)
 
-The test.py is called two times.
+"Hello World" is printed twice because of repys' architecture, which calls test.py twice.
 
-If you want to print "Hello World" only one time, you can change the code like below:
+If you want to print "Hello World" only once, you can change the code to the following:
 
 {{{
 #!python
