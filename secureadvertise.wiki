@@ -1,0 +1,79 @@
+
+== Purpose ==
+
+secureadvertise is our next-generation advertise server implementing the repy v2 API. Unlike its predecessor, users will be unable to modify advertisements submitted by other others. If you advertise something to this server such as a zenodotus IP, you be confident that other users cannot poison your DNS redirection as they have been capable with the previous service. If you advertise under one public key, only users with your private key (i.e. you) can add/refresh those entries.
+
+In addition to enhanced security, performance has been improved. Because the repy v2 API's networking interface has been reworked, all TCP receive operations have been sped up by 100 milliseconds, resulting in a nearly 200ms improvement on a typical advertise query in spite of the new security implementation.
+
+
+== Contents ==
+
+The secureadvertise suite consists of two modules and a helpful client-side application:
+
+secureadvertise_client.repy
+secureadvertise_server.repy
+secureclient.repy
+
+The secureadvertise_client and server files provide core advertise functionality, while secureclient is a useful utility for debugging and example code. secureadvertise_client is similar to the old centralizedadvertise module, and this server file operates in a similar way to the former advertise server.
+
+Below is an overview of how to use these various files.
+
+
+== secureadvertise_client ==
+
+This module contains two public methods:
+
+secureadvertise_announce(public_key, private_key, value, ttlval):
+
+- public_key is your public key in dictionary form
+- private_key is your private key in dictionary form
+- value is the entry to be added to advertise under your public key
+- ttlval is the amount of time the entry should be valid before expiration
+
+secureadvertise_lookup(key, maxvals=100)
+
+- key is your public key, in dictionary form.
+- maxvals is the maximum number of values to return
+
+
+It is worth noting that while the announce method is authenticated using the public/private key pairs, lookup is public. Anyone can read data from the advertise server, but only you can modify your own entries. As yet there is still no way to remove entries before they naturally expire.
+
+
+
+== secureadvertise_server ==
+
+This is not a module, but an application. Currently it prints all data to the console by default. You can run it using the following, provided you have the repy v2 build dependencies it requires:
+
+
+{{{
+python repy.py restrictions.advertiseserver dylink.repy secureadvertise_server.repy
+}}}
+
+Presently the only command-line argument is '-v', which indicates that the server should provide verbose debug output.
+
+
+
+== secureclient.repy ==
+
+The secure advertise client is the most obviously useful file in the set, ironically containing a minority of the code. You can use it a few different ways, as follows:
+
+
+{{{
+python repy.py restrictions.test dylink.repy secureclient.repy createkeys
+}}}
+
+This will create a public and private key in the current directory, overwriting any existing keys that may already be there. Keep in mind that you must have both public and private keys in the directory for any of the other functionality to work.
+
+
+{{{
+python repy.py restrictions.test dylink.repy secureclient.repy put <advertise value> <ttl>
+}}}
+
+Advertises the given value under your public key, with expiration time ttl. You must have a public and private key in the current directory called advertise.publickey and advertise.privatekey respectively for this to work.
+
+
+{{{
+python repy.py restrictions.test dylink.repy secureclient.repy get
+}}}
+
+Gets the advertise entries associated with your public key and reports them back via terminal.
