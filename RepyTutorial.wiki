@@ -765,7 +765,7 @@ if callfunc == 'initialize':
   print getmyip()
 }}}
 
-This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname_ex see socket.gethostbyname_ex.
+This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname_ex see the [wiki:RepyApi#gethostbyname_exname RepyApi].
 
 [[BR]]
 === Sending and receiving messages (example 4.2) ===
