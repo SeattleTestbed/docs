@@ -1,6 +1,6 @@
 = Centralized Advertise Service =
 
-The Centralized Advertise daemon implements a centralized DHT. This DHT is used by Seattle nodes when OpenDHT is not available. This service runs on seattle.cs, which is also known as satya.cs
+The Centralized Advertise daemon implements a hash table abstraction in a centralized manner. This service is used by Seattle nodes in coordination with DOR and OpenDHT. This service runs on seattle.cs, which is also known as satya.cs
 
 ----
 [[TOC(inline)]]
@@ -9,7 +9,7 @@ The Centralized Advertise daemon implements a centralized DHT. This DHT is used 
 == Configuration ==
 ----
 
- * The advertise server files reside on the machine seattle.cs.washington.edu and the current version of the central advertise server is located in the directory /home/geni/advertiseserver_dployed.
+ * The advertise server files reside on the machine seattle.cs.washington.edu and the current version of the central advertise server is located in the directory /home/geni/advertiseserver_deployed.
 
 [[BR]]
 == Deployment ==
@@ -42,5 +42,3 @@ $ ps auwx | grep advertise | grep -v grep
 }}}
 
 An alternative way to kill the central advertise server would be to reopen the SCREEN mode under the geni account and send a kill signal (ctrl-c), to the terminal that is running the central advertise server.
-
-wiki:SeattleLibWiki
