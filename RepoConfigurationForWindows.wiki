@@ -1,0 +1,59 @@
+= Configuring SVN on Windows =
+This is a guide on setting up SVN for developers running Windows.
+
+[[TOC(inline)]]
+
+
+
+
+== Get SVN ==
+Download win32svn from http://sourceforge.net/projects/win32svn/
+Install it.
+
+=== Configure icon paths ===
+Creating an env var:
+<create .cmd file>
+SET APR_ICONV_PATH = C:\Program Files\Subversion\iconv
+Advanced:
+Create a new env_variable:
+APR_ICONV_PATH
+And set it to your install path (the following is the default)
+C:\Program Files\Subversion\iconv
+
+=== Test Environment variables ===
+Attempt to run 'svn' in the command line.
+echo %APR_ICONV_PATH%
+
+== Set up SSH keys ==
+<Purpose of setting up keys>
+
+=== Generate the keys ===
+<Generate key pic>
+Save as:
+Public Key:  id_rsa.pub
+Private Key: id_rsa
+<FIND BEST LOC TO STORE PRIVATE KEY>
+
+=== Upload the keys ===
+Download winscp from here: http://winscp.net/download/winscp435.zip
+< winscp connect dialog>
+
+=== Configure SVN to use the keys ===
+http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/
+%APPDATA%\Subversion\config
+Note slashes
+
+=== Test the keys ===
+It is possible to test the keys using plink.
+
+== Checkout Time! ==
+Now that
+
+== Possible Errors ==
+
+=== Unable to use key file ===
+'''Command''': (co command)
+
+'''Error''': Unable to use key file <Path to file> (OpenSSH SSH-2 private key)
+
+'''Fix''': Check the path in your subversion config to plink.exe
