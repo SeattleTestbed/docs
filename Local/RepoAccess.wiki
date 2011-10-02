@@ -54,6 +54,8 @@ Repository Root: https://seattle.cs.washington.edu/svn
 == Contributor / Developer access ==
 '''Test all code before checking it into SVN.'''
 
+For Windows, see [wiki:RepoConfigurationForWindows Configuring SVN on Windows]
+
 To commit changes to the repository, you must have an ssh account on {{{seattle.cs}}}, which hosts the Seattle SVN server. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following command to checkout (co) the trunk from anywhere:
 {{{
 svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/
@@ -78,7 +80,6 @@ All text files maintained in our repository are in [http://en.wikipedia.org/wiki
 umask 002
 /usr/bin/svnserve --root=/var/local/svn --tunnel
 }}}
-
 
 
 == Example SVN commands ==
