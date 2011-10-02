@@ -4,7 +4,8 @@ This is a guide on setting up SVN for developers running Windows.
 [[TOC(inline)]]
 
 
-
+== Prerequisites ==
+In order to access the SVN repository you must have a ssh account on `seattle.cs.washington.edu`. To gain access email seattle-devel@cs.
 
 == Get SVN ==
 Download the `win32svn` installer from [http://sourceforge.net/projects/win32svn/files/1.6.17/Setup-Subversion-1.6.17.msi/download]
@@ -48,17 +49,42 @@ C:\Program Files\Subversion\iconv
 == Set up SSH keys ==
 
 === Generate the keys ===
+The first step in using SSH keys is to generate the keys. If you've used SSH keys before, you can skip this step.
+
+The easiest way to generate keys on Windows is with `puttygen`. You can download it [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html here].
+
 <Generate key pic>
-Save as:
-Public Key:  id_rsa.pub
-Private Key: id_rsa
-<FIND BEST LOC TO STORE PRIVATE KEY>
+First, click on `Generate`, and move the mouse around, until enough randomness was generated.
+
+In the upper portion of the window there is a text field labeled `Public key for pasting into OpenSSH authorized_keys file:`. Right click, and select `Select All`, and then right click again and select `Copy`. The content of this text field is '''different''' from what you would get with the `Save public key` button. Do not try to copy this generated public key. ''It won’t work''.
+
+Paste that text into a new file called `authorized_keys`.
+
+Then, click on the `Save private key` button.
+
+You may get a warning "Are you sure you want to save this key without a passphrase to protect it?". Click Yes.
+
+Save the private Key as `id_rsa`.
 
 === Upload the keys ===
-Download winscp from here: http://winscp.net/download/winscp435.zip
+The next step is to upload your public key to the server. We will be doing this with WinSCP
+
+Download winscp from [http://winscp.net/download/winscp435.zip here]. 
+
+Extract the files, and run `winscp.exe`. Fill in the connection details with the server, your username, and your password:
 < winscp connect dialog>
 
-=== Configure SVN to use the keys ===
+You may get a warning that the host certificate was not in the cache. Click `Yes`.
+<winscp warning dialog>
+
+<winscp main dialog>
+
+Create a new folder on the server called `.ssh`.
+<new folder dialog>
+
+Click and drag the `authorized_keys` file you made before into the `.ssh` folder.
+
+=== Configure SVN to use the private key ===
 http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/
 %APPDATA%\Subversion\config
 Note slashes
