@@ -13,7 +13,7 @@ Download the `win32svn` installer from [http://sourceforge.net/projects/win32svn
 Install it.
 
 === Configure icon paths ===
-For some reason, the environment variables for the icons are not set by default.
+The environment variable for the icons is not set by default.
 
 The easiest way to configure it is to simply save the following code as iconv.bat file, and run it.
 
