@@ -150,4 +150,5 @@ If you got this far, you set up SVN correctly. Congrats!
 '''Fix''': In your subversion config, check the path to id_rsa.ppk
 
 == External Sources ==
-[http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/]
+[http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/][[BR]]
+[http://linuxproblem.org/art_9.html]
