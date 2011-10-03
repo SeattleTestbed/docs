@@ -21,8 +21,7 @@ Install it.
 === Configure icon paths ===
 The environment variable for the icons is not set by default.
 
-The easiest way to configure it is to simply save the following code as iconv.bat file, and run it.
-
+Open up a command prompt (see this [http://www.youtube.com/watch?v=qrQMLOykSH4 video] for details) and type:
 {{{
 SET APR_ICONV_PATH = C:\Program Files\Subversion\iconv
 }}}
@@ -30,7 +29,7 @@ SET APR_ICONV_PATH = C:\Program Files\Subversion\iconv
 === Test Environment variables ===
 Now that we've installed svn, we should test that it was installed correctly.
 
-Open up a command prompt (see this [http://www.youtube.com/watch?v=qrQMLOykSH4 video] for details), and type `svn --version`, and hit the `enter` key. The output should be similar to the following:
+Open up a command prompt, type `svn --version`, and hit the `enter` key. The output should be similar to the following:
 {{{
 C:\Users\User>svn --version
 
