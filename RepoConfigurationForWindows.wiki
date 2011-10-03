@@ -7,6 +7,12 @@ This is a guide on setting up SVN for developers running Windows.
 == Prerequisites ==
 In order to access the SVN repository you must have a ssh account on `seattle.cs.washington.edu`. To gain access email seattle-devel@cs.
 
+You will need the following programs over the course of this guide:
+
+[http://sourceforge.net/projects/win32svn/files/1.6.17/Setup-Subversion-1.6.17.msi/download win32svn installer][[BR]]
+[http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html puttygen and plink][[BR]]
+[http://winscp.net/eng/download.php WinSCP][[BR]]
+
 == Get SVN ==
 Download the `win32svn` installer from [http://sourceforge.net/projects/win32svn/files/1.6.17/Setup-Subversion-1.6.17.msi/download]
 
@@ -64,7 +70,7 @@ Then, click on the `Save private key` button.
 
 You may get a warning "Are you sure you want to save this key without a passphrase to protect it?". Click Yes.
 
-Save the private Key as `id_rsa`.
+Save the private Key as `id_rsa.ppk`.
 
 === Upload the keys ===
 The next step is to upload your public key to the server. We will be doing this with WinSCP
@@ -77,6 +83,7 @@ Extract the files, and run `winscp.exe`. Fill in the connection details with the
 You may get a warning that the host certificate was not in the cache. Click `Yes`.
 <winscp warning dialog>
 
+You'll then see something like this:
 <winscp main dialog>
 
 Create a new folder on the server called `.ssh`.
@@ -84,22 +91,60 @@ Create a new folder on the server called `.ssh`.
 
 Click and drag the `authorized_keys` file you made before into the `.ssh` folder.
 
+=== Test the private key ===
+You'll need `plink`, a command-line interface to the PuTTY back end. You can download plink [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html here]
+
+Open a command prompt, and run
+{{{
+c:\path\to\plink.exe -i c:\path\to\id_rsa.ppk user@seattle.cs.washington.edu
+}}}
+
+If there are no errors, you'll have shell access to seattle.cs.washington.edu.
+
 === Configure SVN to use the private key ===
-http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/
-%APPDATA%\Subversion\config
-Note slashes
+The next step is to configure SVN to use `plink` and the private key you made before.
 
-=== Test the keys ===
-It is possible to test the keys using plink.
+Open `%APPDATA%\Subversion\config` with a text editor.[[BR]]
+On '''XP''' `%APPDATA%` is `C:\Documents and Settings\<Username>\Application Data`[[BR]]
+On '''7/Vista''' `%APPDATA%` is `C:\Users\<Username>\AppData\Roaming`[[BR]]
 
-== Checkout Time! ==
-Now that
+Add the following line to the `[tunnels]` section in the `config` file:
+{{{
+ssh=c:/path/to/plink.exe -i c:/path/to/id_rsa.ppk
+}}}
+
+Note that the backslashes Windows normally uses are replaced with forward slashes. In the svn config files, backslashes are escape characters. In order to put backslashes in the path, they'd each need to be escaped.
+
+
+== Test SVN ==
+Now it is time to verify that SVN can use `plink` to connect to the repository.
+
+Open a command prompt, and run 
+{{{
+svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+}}}
+
+It should display a list of the files in the repository.
+
+If you got this far, you set up SVN correctly. Congrats!
 
 == Possible Errors ==
 
+=== Can't create tunnel ===
+'''Command''': svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+
+'''Error''': "svn: Can't create tunnel: The parameter is incorrect."
+
+'''Fix''': Check the path in your subversion config to id_rsa.ppk
+
 === Unable to use key file ===
-'''Command''': (co command)
 
-'''Error''': Unable to use key file <Path to file> (OpenSSH SSH-2 private key)
 
-'''Fix''': Check the path in your subversion config to plink.exe
+'''Command''': svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+
+'''Error''': "Unable to use key file path/to/id_rsa.ppk (unable to open file)"
+
+'''Fix''': In your subversion config, check the path to id_rsa.ppk
+
+== External Sources ==
+[http://agateau.wordpress.com/2007/07/03/windows-svnssh-and-the-subversion-command-line-client/]
