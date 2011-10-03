@@ -59,15 +59,19 @@ The first step in using SSH keys is to generate the keys. If you've used SSH key
 
 The easiest way to generate keys on Windows is with `puttygen`. You can download it [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html here].
 
-<Generate key pic>
-First, click on `Generate`, and move the mouse around, until enough randomness was generated.
+[[Image(Create key.png)]][[BR]]
+Click on `Generate`, and move the mouse until enough randomness was generated.
 
-In the upper portion of the window there is a text field labeled `Public key for pasting into OpenSSH authorized_keys file:`. Right click, and select `Select All`, and then right click again and select `Copy`. The content of this text field is '''different''' from what you would get with the `Save public key` button. Do not try to copy this generated public key. ''It won’t work''.
+[[Image(puttygen - add comment.png)]][[BR]]
+An optional step that can be done is to fill in the `Comment` field with your email address.[[BR]]
+
+In the upper portion of the window there is a text field labeled `Public key for pasting into OpenSSH authorized_keys file:`. Right click, and select `Select All`, and then right click again and select `Copy`. The content of this text field is '''different''' from what you would get with the `Save public key` button. If you use the file from the `Save public key` button ''It will not work''.
 
 Paste that text into a new file called `authorized_keys`.
 
 Then, click on the `Save private key` button.
 
+[[Image(puttygen - no passphrase.png)]][[BR]]
 You may get a warning "Are you sure you want to save this key without a passphrase to protect it?". Click Yes.
 
 Save the private Key as `id_rsa.ppk`.
@@ -77,17 +81,17 @@ The next step is to upload your public key to the server. We will be doing this 
 
 Download winscp from [http://winscp.net/download/winscp435.zip here]. 
 
-Extract the files, and run `winscp.exe`. Fill in the connection details with the server, your username, and your password:
-< winscp connect dialog>
+Extract the files, and run `winscp.exe`. Fill in the connection details with the server, your username, and your password:[[BR]]
+[[Image(winscp - connect dialog.png)]]
 
-You may get a warning that the host certificate was not in the cache. Click `Yes`.
-<winscp warning dialog>
+You may get a warning that the host certificate was not in the cache. Click `Yes`.[[BR]]
+[[Image(winscp - warning dialog.png)]]
 
-You'll then see something like this:
-<winscp main dialog>
+You'll then see something like this:[[BR]]
+[[Image(WinSCP main dialog.png)]]
 
-Create a new folder on the server called `.ssh`.
-<new folder dialog>
+Create a new folder on the server called `.ssh`.[[BR]]
+[[Image(winscp - Create Folder.png)]]
 
 Click and drag the `authorized_keys` file you made before into the `.ssh` folder.
 
