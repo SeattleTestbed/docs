@@ -9,6 +9,55 @@ Accessing SVN is important for all contributors, regardless of whether they are 
 Anybody can [https://seattle.cs.washington.edu/browser/seattle/trunk browse the SVN] tree using their web browser. This is available to anonymous users.
 
 
+== Setting up Subversion ==
+
+=== On Windows ===
+
+==== Get SVN ====
+Download the `win32svn` installer from [http://sourceforge.net/projects/win32svn/files/1.6.17/Setup-Subversion-1.6.17.msi/download]
+
+Install it.
+
+==== Configure icon paths ====
+The environment variable for the icons is not set by default.
+
+Open up a command prompt (see this [http://www.youtube.com/watch?v=qrQMLOykSH4 video] for details) and type:
+{{{
+SET APR_ICONV_PATH = C:\Program Files\Subversion\iconv
+}}}
+
+==== Test Environment variables ====
+Now that we've installed svn, we should test that it was installed correctly.
+
+Open up a command prompt, type `svn --version`, and hit the `enter` key. The output should be similar to the following:
+{{{
+C:\Users\User>svn --version
+
+svn, version 1.6.17 (r1128011)
+
+   compiled Jun  2 2011, 23:35:08
+
+
+Copyright (C) 2000-2009 CollabNet.
+
+Subversion is open source software, see http://subversion.apache.org/
+
+This product includes software developed by CollabNet (http://www.Collab.Net/).
+}}}
+
+The next thing to test is that the path to the iconv folder was set correctly. To do that, type `echo %APR_ICONV_PATH%` into the command prompt, and hit `enter`. The output should be similar to the following:
+{{{
+C:\Users\User> echo %APR_ICONV_PATH%
+C:\Program Files\Subversion\iconv
+}}}
+
+=== On Linux ===
+Open a terminal.[[BR]]
+Type the following into the terminal, and then hit `enter`:
+{{{
+sudo apt-get install subversion
+}}}
+
 
 == Anonymous access ==
 To check out the repository anonymously (read-only):
