@@ -10,7 +10,7 @@ Using the following line from the terminal:
 python repy.py restrictions.advertiseserver dylink.repy advertise_v2.repy -v
 }}}
 
-Note that you will need to copy the appropriate dependencies from the repy_v2 repository, located here: [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2]. The seattlelib and repy directories contain the dependencies you will need.
+Note that you will need to copy the appropriate dependencies from the repy_v2 repository, located here: [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2]. The seattlelib and repy directories contain the dependencies you will need. This can take up to a minute to execute because dylink.repy is slow.
 
 Additionally, there is an incompatibility with emulfile.repy. It's no big deal, but on line 47 you must change
 
