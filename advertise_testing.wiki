@@ -65,11 +65,6 @@ thread_count: The number of queries to send simultaneously per test.
 test_type: This can have values of either 'PUT', 'GET', or '*', which uses both PUT and GET queries. This selects the sort of queries that will be sent to the advertise server.  For testing the v2 server, 'PUT' is ideal. However, either can be used*. 
 
 
-
-
-
-
-
 [[BR]]
 [[BR]]
 [[BR]]
@@ -79,22 +74,5 @@ test_type: This can have values of either 'PUT', 'GET', or '*', which uses both 
 [[BR]]
 [[BR]]
 [[BR]]
-[[BR]]
-[[BR]]
-[[BR]]
-[[BR]]
-[[BR]]
-[[BR]]
-
-
-
-
-
-
-
-
-
-
-
 
 * '*' has a lower tolerance than 'PUT' or 'GET' for some reason. When sending queries of mixed types, this program develops threading issues even at simultaneous query counts as low as six. This is because the GET queries tend to take longer than 300ms when the server is overloaded. If you stick to 'PUT' queries in your volume testing, this application should remain reliable up to sixteen simultaneous queries.
