@@ -55,9 +55,13 @@ if callfunc == 'initialize':
 }}}
 
 servername: The IP or hostname of the server you've hosted the v2 server on.
+
 serverport: The port on which the v2 server is listening on.
+
 test_count: The number of times to test the server.
+
 thread_count: The number of queries to send simultaneously per test.
+
 test_type: This can have values of either 'PUT', 'GET', or '*', which uses both PUT and GET queries. This selects the sort of queries that will be sent to the advertise server.  For testing the v2 server, 'PUT' is ideal. However, either can be used*. 
 
 
@@ -66,6 +70,21 @@ test_type: This can have values of either 'PUT', 'GET', or '*', which uses both 
 
 
 
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
+[[BR]]
 
 
 
