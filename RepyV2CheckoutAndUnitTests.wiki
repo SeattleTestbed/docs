@@ -1,0 +1,63 @@
+= Checking out Repy V2 and Running the included unit tests =
+This is guide is meant to help new developers check out Repy V2 on their machine, and run the included unit tests.
+
+[[TOC(inline)]]
+
+== Prerequisites ==
+As with all code related to Repy, you first need to have python v2.5 or 2.6 installed.
+
+Before doing this tutorial, you should have set up subversion, as outlined [wiki:Local/RepoAccess#SettingupSubversion here].
+
+You may also need Contributor / Developer access to seattle, which will require an ssh account on seattle.cs.washington.edu.
+
+== Checkout the repository ==
+To checkout Repy V2 from the repository, run the following, replacing USER with your username:
+{{{
+svn co svn+ssh://user@seattle.cs.washington.edu/seattle/branches/repy_v2
+
+}}}
+
+This will create a folder `repy_v2` with the code from the repository.
+
+== Running the unit tests ==
+=== Preparing the tests ===
+Before running the unit tests, you first need to prepare them.
+
+To do that, first change into the repy_v2 directory.
+
+'''WARNING''': The `preparetest.py` script first erases all the files in the target directory. Make sure to use an empty directory.
+
+{{{
+python preparetest.py -t prepared_tests/
+}}}
+
+=== Running the tests ===
+To run the tests, change to `preparetests.py`'s target directory. For us, that was `prepared_tests`
+
+Run the tests by invoking `utf.py` as follows:
+{{{
+python utf.py -a
+}}}
+
+This will run all unit tests in that directory.
+== Possible issues ==
+
+
+=== Python 2.7 exceptions ===
+If you have python 2.7 installed, you may have tests fail with the following message:
+{{{
+Exception exception_hierarchy.RunBuiltinException: RunBuiltinException() in <module 'threading' from '/usr/lib/python2.7/threading.pyc'> ignored
+}}}
+
+This is possibly because `python` is called without the full path inside of the test running code, which would call `python2.7`.
+
+You can check which version of python is called by running `python --version` in the command line.
+
+ To fix this problem, (in Linux) run the following commands:
+{{{
+sudo mv usr/bin/python /usr/bin/python.bak
+sudo ln -s usr/bin/python2.6 /usr/bin/python
+}}}
+
+This will change the default python used to version 2.6.[[BR]]
+Note: The steps are the same with python 2.5.
