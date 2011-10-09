@@ -27,6 +27,7 @@ To do that, first change into the repy_v2 directory.
 
 '''WARNING''': The `preparetest.py` script first erases all the files in the target directory. Make sure to use an empty directory.
 
+We will use `prepared_tests` as our target directory for the prepared unit tests.
 {{{
 python preparetest.py -t prepared_tests/
 }}}
