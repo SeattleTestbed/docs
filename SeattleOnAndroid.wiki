@@ -1,6 +1,15 @@
-DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated to make it work and then turn this page into an installation instruction like wiki:SeattleOnNokia
+= Seattle on Android =
 
-Running Repy scripts locally already works with a couple of patches, as does donating vessels and letting experimenters run code on them. The installation and registration for autostart still fails for various reasons. Sorry! The medium-term perspective is to build an Android Package (APK) that contains Python and the Seattle installer.
+2011-10-10 I'm happy to announce that our '''native Android installer''' (APK) for Seattle is almost here. We are still working to polish it, so installing Seattle is a safe and simple thing for you.
+
+Thus, I advise against following the instructions below anymore. I'll keep them around until we have the definite Android package, but it's unlikely that you want to go through all the hassle for any reason.
+
+Thank you,
+Albert (''albert.rafetseder at univie.ac.at'')
+----
+DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated.
+
+Running Repy scripts locally already works with a couple of patches, as does donating vessels and letting experimenters run code on them. We can't install and register for autostart using Seattle's Python scripts. Sorry! At the moment, we are building an Android Package (APK) that contains Python and the Seattle installer.
 
 [http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
@@ -13,7 +22,7 @@ Here is a general outline of steps to be performed.
  1. Patching Seattle's {{{nix_common_api.py}}} and {{{runonce.py}}} so you can run the installer which will configure the node manager (for donating resources).
  1. Running the node manager.
 
-Currently, I don't know how to (correctly) setup Seattle for running at boot time, but we are working on this.
+We can't setup Seattle for running at boot time using Python, but our native installer can.
 
 
 = Setting up Python =
@@ -38,7 +47,6 @@ export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
 export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 }}}
 
-''(Note to self: Explain why some parts of the installation end up on /sdcard and others in /data/data. Search SL4A docs for hints how to move everything to one place.)''
 (The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
 
 On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
@@ -83,65 +91,3 @@ Although installing Seattle through the install scripts doesn't work in all aspe
 Although the node manager is not registered to automatically start when the device boots, it can be run manually now. The software updater isn't started automatically either. It might be a good idea to run it from time to time to make sure you benefit from the latest improvements. Don't forget to apply the patches afterwards.
 
 -----
-
-== Installing Seattle As A Service ==
-DISCLAIMER: Don't follow these instructions as of now. This is unfinished work in progress. I'm not trying to "do the right thing" in every respect, but get Seattle on Android installed by adapting the Linux/Nokia-specific code paths.
-
-The Seattle install.sh files (one in {{{seattle}}}, the other in {{{seattle/seattle_repy}}}) won't run out of the box as the shell is not located in {{{/bin/sh}}} on Android, but in {{{/system/bin/sh}}}. Patch the files according to the patches below.
-
-{{{
-
-localhost seattle # diff ../seattle/install.sh install.sh
---- ../seattle/install.sh
-+++ install.sh
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/system/bin/sh
- 
- cd "`echo $0 | sed 's/install.sh/seattle_repy/'`"
- ./install.sh $*
-
-
-
-localhost seattle_repy # diff ../../seattle/seattle_repy/install.sh install.sh
---- ../../seattle/seattle_repy/install.sh
-+++ install.sh
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/system/bin/sh
- which_out=`which python`
- if [ "$which_out" = "" ]; then
-     echo seattle requires that python be installed on your computer.
-
-
-
-
-localhost myseattle # diff ../seattle/start_seattle.sh start_seattle.sh 
---- ../seattle/start_seattle.sh
-+++ start_seattle.sh
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/system/bin/sh
- 
- cd "`echo $0 | sed 's/start_seattle.sh/seattle_repy/'`"
- ./start_seattle.sh
-\ No newline at end of file
-
-
-
-
-localhost seattle_repy # diff ../../seattle/seattle_repy/start_seattle.sh start_seattle.sh 
---- ../../seattle/seattle_repy/start_seattle.sh
-+++ start_seattle.sh
-@@ -1,4 +1,4 @@
--#!/bin/sh
-+#!/system/bin/sh
- 
- # Change to the seattle directory (this "cd" command allows the user to call the
- #   script from any directory.
-}}}
-
-=== Challenges To Overcome ===
- * The "Linux on ARMv6" target in seattleinstaller.py is tailored to Nokia N800/900. On Android, there is no /etc/rc2.d; you must be root and remount /etc read-writeable to edit init.d. (By the way, I had no luck with init.d at all.)
- * {{{cron}}} is missing on Android. The SL4A has "triggers", maybe these can be used.
- * Android {{{ps}}} is a very strange beast. It's really a link to {{{/system/bin/toolbox}}}, a busybox workalike, but doesn't find {{{python nmmain.py}}}. Busybox ps does however. Both are picky about their callargs.
