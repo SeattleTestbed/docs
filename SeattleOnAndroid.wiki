@@ -2,10 +2,13 @@
 
 2011-10-10 I'm happy to announce that our '''native Android installer''' (APK) for Seattle is almost here. We are still working to polish it, so installing Seattle is a safe and simple thing for you.
 
+[[Image(seattle-on-android.jpg)]]
+
 Thus, I advise against following the instructions below anymore. I'll keep them around until we have the definite Android package, but it's unlikely that you want to go through all the hassle for any reason.
 
 Thank you,
 Albert (''albert.rafetseder at univie.ac.at'')
+[[BR]]
 ----
 DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated.
 
