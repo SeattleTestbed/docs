@@ -341,7 +341,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
 
       localport: The local port to use for communication
 
-      timeout: The maximum amount of time to wait to connect.   This may
+      timeout: The maximum amount of time (in seconds) to wait to connect.   This may
                be a floating point number or an integer
 
 
