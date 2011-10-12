@@ -37,10 +37,10 @@ To run the tests, change to `preparetests.py`'s target directory. For us, that w
 
 Run the tests by invoking `utf.py` as follows:
 {{{
-python utf.py -a
+python utf.py -m repyv2api
 }}}
 
-This will run all unit tests in that directory.
+This will run all unit tests that are part of the module `repyv2api`, which includes all unit tests for repyv2.
 == Possible issues ==
 
 
