@@ -2,6 +2,12 @@
 
 Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your SeattleGENI username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
 
+= Huxiang Client versus Huxiang Server =
+
+This wiki page is meant to help you setup your own Huxiang server that you can maintain on your own computer. But for those who just want to get a webpage quickly hosted, alternatively you could use the Huxiang online server to do the hosting for you, with some restrictions
+
+You can access the server [http://huxiang_online.zenodotus.cs.washington.edu:63140 here] or [http://128.208.4.96:63140 here] (if previous link doesn't work).
+
 = Requirements =
  * A Linux or Mac operating system
  * [http://chandlerproject.org/bin/view/Projects/MeTooCrypto M2Crypto] installed
@@ -108,7 +114,7 @@ $ sudo apt-get install python-m2crypto
  Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
 
 '''One of the images are missing on the site, but I'm pretty sure I downloaded all of the required files to host the web page separately'''
- A common issue with the "Save Page as..." function of browsers such as Firefox is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents, or use [http://www.httrack.com HTTrack]
+ A common issue with the "Save Page as..." function of browsers such as Firefox is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents, or use [http://www.httrack.com HTTrack] to get a more comprehensive download of the page.
 
 
 
