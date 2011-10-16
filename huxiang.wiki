@@ -94,7 +94,7 @@ Alternatively, perform a keyboard interrupt within the console if the huxiang_cr
 
 = Troubleshooting =
 '''All of the nodes are timing out when trying to upload huxiang_server.repy'''
- A solution is currently being worked on to resolve the timeout issue. For now, if none of the acquired vessels worked, release them all through the [http://seattlegeni.cs.washington.edu/ SeattleGENI] and try running huxiang_creator.py again.
+ The problem should be fixed now. Make sure you are using the latest version of overlord and demokit.
 
 '''How do I install M2Crypto?'''
  (for Ubuntu ver 10.04 and later) You can simply install the required package through the command:
@@ -108,7 +108,7 @@ $ sudo apt-get install python-m2crypto
  Make sure you inputted the URL of the hosted site into your browser correctly. Also, there may be a variable amount of delay between execution of the application to the web site actually being accessible through a browser. 
 
 '''One of the images are missing on the site, but I'm pretty sure I downloaded all of the required files to host the web page separately'''
- A common issue with the "Save Page as..." function of browsers such as Firefox is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents.
+ A common issue with the "Save Page as..." function of browsers such as Firefox is the inability to save images used in the CSS style sheet. The only way to circumvent this at the moment is to manually save the images into the same folder as the rest of the web page's file contents, or use [http://www.httrack.com HTTrack]
 
 
 
