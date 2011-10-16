@@ -549,8 +549,10 @@ Seek to the offset in the file and then write some data to a file.
       Allows the user program to write data to a file.
 
     <Arguments>
-      data: The data to write
-      offset: An absolute offset into the file to write
+      data:
+        The data to write
+      offset:
+        An absolute offset into the file to write
 
     <Exceptions>
       RepyArgumentError is raised if the offset is negative or the data is not
