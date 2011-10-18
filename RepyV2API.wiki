@@ -473,7 +473,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
       Opens a file on disk, uses a file descriptor.
 
    <Resource Consumption>
-      Consumes 4K of fileread. If the file is created, then 4K of filewrite is used.
+      Consumes 4K of fileread. If the file does not exist, and is created, 4K of filewrite is used.
       If a handle to the object is created, then a file descriptor is used.
 
    <Returns>
