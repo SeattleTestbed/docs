@@ -9,7 +9,7 @@ A security layer is a layer between the user and a public function or method. It
 
 For example, many operating systems only allow privileged users to read or modify certain files. With a security layer we can allow access to only some files, even though we would normally have access to them.
 
-== Creating a Security Layer==
+== Creating a Security Layer ==
 Repy allows the creation of custom security layers. This guide will cover creating layers for functions and methods.
 
 === Header ===
