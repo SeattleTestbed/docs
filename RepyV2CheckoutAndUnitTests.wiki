@@ -1,5 +1,5 @@
 = Checking out Repy V2 and Running the included unit tests =
-This is guide is meant to help new developers check out Repy V2 on their machine, and run the included unit tests.
+This guide is meant to help new developers check out Repy V2 on their machine, and run the included unit tests.
 
 [[TOC(inline)]]
 
