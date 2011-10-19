@@ -152,7 +152,6 @@ To do that, save the following code to a new file, `slacker_sleep_test.repy`
 # Repy V2 Security Layer Sample - Function - Test
 # slacker_sleep_test.repy
 
-
 log("Start")
 sleep(0.000000001)
 log("Finish")
@@ -216,7 +215,24 @@ CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN
 secure_dispatch_module()
 }}}
 
+We should then write some code to test our security layer. Given the simplicity of our changes, this should be enough:
+{{{
+# Repy V2 Security Layer Sample - Methods - Test
+# no_first_byte_test.repy
+
+tempfile = openfile("sample.txt",True)
+tempfile.writeat("Hello",0)
+try:
+  tempfile.readat(2,0)
+except:
+  pass
+else:
+  log("No exception was thrown")
+}}}
+
+We can run the code through the security layer by running: `python repy.py restrictions.default encasementlib.repy no_first_byte.repy no_first_byte_test.repy`
+
 == Further Reference ==
 [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
 
-[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2\benchmarking-support\all-logsec.py] is security layer that performs logging functions.
+[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
