@@ -1,6 +1,6 @@
 
-= Writing and Using custom Security Layers in Repy V2 =
-This guide is meant to explain security layers in Repy V2, how to write a custom security layer, and how to run code with them.
+= Writing and Using Custom Security Layers in Repy V2 =
+This guide is meant to explain security layers in Repy V2, how to write a custom security layer, and how to run code with a custom security layer.
 
 [[TOC(inline)]]
 
@@ -24,10 +24,10 @@ Change into the `prepared_tests` directory.
 
 Run the following code:
 {{{
-python repy.py restrictions.default encasementlib.repy [your_security_layer].repy [your_program].repy
+python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy
 }}}
 
-where [your_security_layer] is the name of your security layer, and [your_program] is your repy program.
+where [security_layer] is the name of the security layer, and [program] is the repy program.
 
 
 == Writing a Security Layer ==
@@ -157,7 +157,7 @@ sleep(0.000000001)
 log("Finish")
 }}}
 
-Run the test code by calling `python repy.py restrictions.default encasementlib.repy [your_security_layer].repy [your_program].repy`
+Run the test code by calling `python repy.py restrictions.default encasementlib.repy slacker_sleep.repy slacker_sleep_test.repy`
 
 If there was a noticeable delay between Start and Finish, the layer worked properly. 
 
