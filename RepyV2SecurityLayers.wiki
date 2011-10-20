@@ -97,7 +97,7 @@ class NoFirstByteFile():
 
 sec_file_def = {"obj-type":NoFirstByteFile,
                 "name":"NoFirstByteFile",
-                "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
                 "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:None,TARGET:NoFirstByteFile.writeat},
                 "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:NoFirstByteFile.close}
                }
@@ -198,7 +198,7 @@ class NoFirstByteFile():
 
 sec_file_def = {"obj-type":NoFirstByteFile,
                 "name":"NoFirstByteFile",
-                "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
                 "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:None,TARGET:NoFirstByteFile.writeat},
                 "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:NoFirstByteFile.close}
                }
