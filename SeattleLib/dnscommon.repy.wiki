@@ -10,6 +10,12 @@ convert_dictionary_to_packet(dictionary arg)
 
 Which work exactly as you would expect. These two methods convert between bitstrings that can be used in DNS network operations and dictionary representations detailed within dnscommon itself. The dictionary format is complex, as you would expect for a direct DNS query construction. As way of compensation, you have total control over what your DNS packet looks like.
 
+There is one additional public method,
+
+generate_packet(dictionary arg)
+
+which takes a dictionary identical in structure to the "questions" section of the larger dictionary below. It uses a default set of packet descriptors included in dnscommon.repy as "default_flags". This can be overridden as a second argument in the generate_packet method.
+
 
 == Dictionary Format ==
 
@@ -35,9 +41,9 @@ Which work exactly as you would expect. These two methods convert between bitstr
 176	    'authority_record_count'   integer (16 bit)
 177	    'additional_record_count'  integer (16 bit)   )
 178	    'questions': array of dictionaries containing:
-179	    'name'                  string (formatted unicode, IP Address)
-180	    'type'                  string (formatted unicode, eg A, AAAA, MX)
-181	    'class'                 string (formatted unicode, eg IN, HE, CH)
+179	        'name'                  string (formatted unicode, IP Address)
+180	        'type'                  string (formatted unicode, eg A, AAAA, MX)
+181	        'class'                 string (formatted unicode, eg IN, HE, CH)
 182	    'answers': array of dictionaries containing:
 183	    'name'                  string (formatted unicode, IP Address)
 184	        'type'                  string (formatted unicode, eg A, AAAA, MX)
