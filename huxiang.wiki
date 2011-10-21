@@ -6,7 +6,7 @@ Taking advantage of the ability to register a domain name for a node's IP addres
 
 This wiki page is meant to help you setup your own Huxiang server that you can maintain on your own computer. But for those who just want to get a webpage quickly hosted, alternatively you could use the Huxiang online server to do the hosting for you, with some restrictions
 
-You can access the server [http://huxiang_online.zenodotus.cs.washington.edu:63140 here] or [http://128.208.4.96:63140 here] (if previous link doesn't work).
+You can access the server [http://huxiang_online.zenodotus.cs.washington.edu:63177 here] or [http://128.208.4.96:63177 here] (if previous link doesn't work).
 
 = Requirements =
  * A Linux or Mac operating system
