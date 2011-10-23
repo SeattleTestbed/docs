@@ -17,3 +17,14 @@ CheckAPI's primary version uses security layers to interpose on API calls, log t
 {{{
 python repy.py <restrictions file> encasementlib.repy dylink.repy check_api.repy <program under test>
 }}}
+
+
+== Current Limitations == 
+
+'''Garbage Collection:''' [[BR]][[BR]]
+Application code that relies on Python to garbage collect an object and implicitly close it for you is not current supported. If an application calls openfile() and does not store it into any variable the file will remain open until the program exits. This is because of a number of reasons:
+ * In order for this to work properly the __del__ function must be overridden in wrapper functions for objects such as the file-descriptor object returned by openfile.
+ * However, the only time __del__ is called internally by Python is when there are no references to the object in memory. Currently, references to these objects are stored in the ongoing trace. They will be cleared out once the systolic buffer is cleared and/or when the program exits.
+ * This may be fixed by adding the __del__ functions and by changing the way CheckAPI deals with objects. I believe I can remove the storage of the object reference themselves and just log the initial object id. More testing is required to implement and check this in.
+
+A prime example of this incorrect behavior is seen in the unit test: ut_repyv2api_removefileperformsresourceaccounting.py
