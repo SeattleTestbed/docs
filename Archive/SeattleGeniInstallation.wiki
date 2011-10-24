@@ -241,6 +241,8 @@ all connections to '''http'''://mysite/geni/* to use
 deployed to the directory /home/geni/live rather than /tmp/deploy, which
 was the deployment directory given as an example in the steps above.
 
+Depending on you configuration of apache, you may want to add the below code to: /etc/apache2/sites-available/default
+
 {{{
 #!sh
 NameVirtualHost *:80
