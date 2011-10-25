@@ -161,9 +161,10 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 === API functions ===
 ----
 
+==== Network functions ====
       
 [[BR]] 
-==== gethostbyname(name) ====
+===== gethostbyname(name) =====
 ----
 (from the Python documentation)   Translate a host name to IPv4 address format. The IPv4 address is returned as a string, such as '100.50.200.5'. If the host name is an IPv4 address itself it is returned unchanged.
 
@@ -196,7 +197,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
      The IPv4 address as a string.
 
 [[BR]]
-==== getmyip() ====
+===== getmyip() =====
 ----
 Returns the localhost's "Internet facing" IP address.   It may raise an exception on hosts that are not connected to the Internet.
 
@@ -221,7 +222,7 @@ Returns the localhost's "Internet facing" IP address.   It may raise an exceptio
       The localhost's IP address
 
 [[BR]]
-==== sendmessage(destip, destport, message, localip, localport) ====
+===== sendmessage(destip, destport, message, localip, localport) =====
 ----
 
 (rename of ~~sendmess~~)
@@ -274,52 +275,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
 
 	 
 [[BR]] 
-==== listenformessage(localip, localport) ==== 
----- 
-Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.   This call will raise an exception if it would block.
-
-
-
-* Doc string: 
-	 
-    <Purpose>
-        Sets up a UDPServerSocket to receive incoming UDP messages.
-
-    <Arguments>
-        localip:
-            The local IP to register the handler on.
-        localport:
-            The port to listen on.
-
-    <Exceptions>
-        DuplicateTupleError (descends NetworkError) if the port cannot be
-        listened on because some other process on the system is listening on
-        it.
-
-        AlreadyListeningError if there is already a UDPServerSocket with the same
-        IP and port.
-
-        RepyArgumentError if the port number or ip is wrong type or obviously
-        invalid.
-
-        AddressBindingError (descends NetworkError) if the IP address isn't a
-        local IP.
-
-        ResourceForbiddenError if the port is not allowed.
-
-    <Side Effects>
-        Prevents other UDPServerSockets from using this port / IP
-
-    <Resource Consumption>
-        This operation consumes an insocket and requires that the provided messport is allowed.
-
-    <Returns>
-        The UDPServerSocket.
-
-
-
-[[BR]]
-==== openconnection(destip, destport, localip, localport, timeout) ====
+===== openconnection(destip, destport, localip, localport, timeout) =====
 ----
 
 (rename of ~~openconn~~)
@@ -386,10 +342,110 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
       recv, and close just like you would an actual socket object in python.
 
 
-
-	 
 [[BR]] 
-==== listenforconnection(localip, localport) ==== 
+===== socket.close() =====
+----
+Closes the socket.   Any further local calls to recv / send will result in an exception.
+
+ * Doc string:
+
+       <Purpose>
+        Closes a socket.   Pending remote recv() calls will return with the 
+        remaining information.   Local recv / send calls will fail after this.
+
+      <Arguments>
+        None
+
+      <Exceptions>
+        None
+
+      <Side Effects>
+        Pending local recv calls will either return or have an exception.
+
+      <Resource Consumption>
+        If the connection is closed, no resources are consumed. This operation
+        uses 64 bytes of netrecv, and 128 bytes of netsend.
+        This call also stops consuming an outsocket.
+
+      <Returns>
+        True if this is the first close call to this socket, False otherwise.
+
+
+
+
+[[BR]] 
+===== socket.recv(numbytes) =====
+----
+Receives data that was sent by the connected party using send.   Note that this may return less than numbytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   
+
+ * Doc string:
+
+      <Purpose>
+        Receives data from a socket.   It may receive fewer bytes than 
+        requested.   
+
+      <Arguments>
+        bytes: 
+           The maximum number of bytes to read.   
+
+      <Exceptions>
+        SocketClosedLocal is raised if the socket was closed locally.
+
+        SocketClosedRemote is raised if the socket was closed remotely.
+
+        SocketWouldBlockError is raised if the socket operation would block.
+
+      <Side Effects>
+        None.
+
+      <Resource Consumptions>
+        This operations consumes 64 + amount of data  in bytes
+        worth of netrecv, and 64 bytes of netsend.
+  
+      <Returns>
+        The data received from the socket (as a string).   If an empty string is returned,
+        the other side has closed the socket and no more data will arrive.
+
+[[BR]] 
+===== socket.send(message) =====
+----
+
+Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may raise an exception if the sender and receiver buffers fill (the buffer size is undefined).   If the other party closes the connection, send will raise an exception.
+
+ * Doc string:
+
+
+      <Purpose>
+        Sends data on a socket.   It may send fewer bytes than requested.   
+
+      <Arguments>
+        message:
+          The string to send.
+
+      <Exceptions>
+        SocketClosedLocal is raised if the socket is closed locally.
+
+        SocketClosedRemote is raised if the socket is closed remotely.
+
+        SocketWouldBlockError is raised if the operation would block.
+
+      <Side Effects>
+        None.
+
+      <Resource Consumption>
+        This operations consumes 64 + size of sent data of netsend and
+        64 bytes of netrecv.
+
+      <Returns>
+        The number of bytes sent.   Be sure not to assume this is always the 
+        complete amount!
+
+
+
+
+
+[[BR]]
+===== listenforconnection(localip, localport) =====
 ---- 
 Binds to a IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.   This call raises an exception instead of blocking.
 
@@ -427,11 +483,170 @@ Binds to a IP and port and waits for incoming TCP connections.  If this function
   <Returns>
     A TCPServerSocket object.
 
+[[BR]] 
+
+===== tcpserversocket.getconnection() =====
+----
+Receives a connection that was initiated to an IP and port.   waitforconn can be built in a user level library on top of this.
+
+ * Doc string:
+
+    <Purpose>
+      Accepts an incoming connection to a listening TCP socket.
+
+    <Arguments>
+      None
+
+    <Exceptions>
+      Raises SocketClosedLocal if close() has been called.
+
+      Raises SocketWouldBlockError if the operation would block.
+
+      Raises ResourcesExhaustedError if there are no free outsockets.
+
+    <Resource Consumption>
+      If successful, consumes 128 bytes of netrecv (64 bytes for
+      a SYN and ACK packet) and 64 bytes of netsend (1 ACK packet).
+      Uses an outsocket.
+
+    <Returns>
+      A tuple containing: (remote ip, remote port, socket object)
+
+
+[[BR]] 
+===== tcpserversocket.close() =====
+----
+Closes the socket.   Any further local calls to getconnection will result in an exception.
+
+ * Doc string:
+
+    <Purpose>
+      Closes the listening TCP socket.
+
+    <Arguments>
+      None
+
+    <Exceptions>
+      None
+
+    <Side Effects>
+      The IP and port can be re-used after closing.
+
+    <Resource Consumption>
+      Releases the insocket used.
+
+    <Returns>
+      True, if this is the first call to close.
+      False otherwise.
+
+
+[[BR]] 
+===== listenformessage(localip, localport) =====
+---- 
+Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.   This call will raise an exception if it would block.
+
+
+
+* Doc string: 
+	 
+    <Purpose>
+        Sets up a UDPServerSocket to receive incoming UDP messages.
+
+    <Arguments>
+        localip:
+            The local IP to register the handler on.
+        localport:
+            The port to listen on.
+
+    <Exceptions>
+        DuplicateTupleError (descends NetworkError) if the port cannot be
+        listened on because some other process on the system is listening on
+        it.
+
+        AlreadyListeningError if there is already a UDPServerSocket with the same
+        IP and port.
+
+        RepyArgumentError if the port number or ip is wrong type or obviously
+        invalid.
+
+        AddressBindingError (descends NetworkError) if the IP address isn't a
+        local IP.
+
+        ResourceForbiddenError if the port is not allowed.
+
+    <Side Effects>
+        Prevents other UDPServerSockets from using this port / IP
+
+    <Resource Consumption>
+        This operation consumes an insocket and requires that the provided messport is allowed.
+
+    <Returns>
+        The UDPServerSocket.
 
 
 
 [[BR]]
-==== openfile(filename, create) ====
+===== udpserversocket.getmessage() =====
+----
+Receives a message that was sent to an IP and port.   recvmess can be built in a user level library on top of this.
+
+ * Doc string:
+
+      <Purpose>
+        Obtains an incoming message that was sent to an IP and port.
+
+    <Arguments>
+        None.
+
+    <Exceptions>
+        SocketClosedLocal if UDPServerSocket.close() was called.
+
+        Raises SocketWouldBlockError if the operation would block.
+
+    <Side Effects>
+        None
+
+    <Resource Consumption>
+        This operation consumes 64 + size of message bytes of netrecv
+
+    <Returns>
+        A tuple consisting of the remote IP, remote port, and message.
+
+
+
+
+[[BR]] 
+===== udpserversocket.close() =====
+----
+Closes the udp server socket.   Any further local calls to getmessage will result in an exception.
+
+ * Doc string:
+
+     <Purpose>
+        Closes a socket that is listening for messages.
+
+    <Arguments>
+        None.
+
+    <Exceptions>
+        None.
+
+    <Side Effects>
+        The IP address and port can be reused by other UDPServerSockets after
+        this.
+
+    <Resource Consumption>
+        If applicable, this operation stops consuming the corresponding
+        insocket.
+
+    <Returns>
+        True if this is the first close call to this socket, False otherwise.
+
+
+[[BR]]
+==== File functions ====
+
+===== openfile(filename, create) =====
 ----
 
 (Replaces: ~~open~~, ~~file~~.)
@@ -481,7 +696,7 @@ If create is True, the file is created if it does not exist.   Neither mode trun
 
 
 [[BR]]
-==== file.close() ====
+===== file.close() =====
 ----
 
 Close the file. A closed file cannot be read or written any more. Any operation which requires that the file be open will raise a FileClosedError after the file has been closed. 
@@ -505,7 +720,7 @@ Close the file. A closed file cannot be read or written any more. Any operation 
 
 
 [[BR]]
-==== file.readat(sizelimit, offset) ====
+===== file.readat(sizelimit, offset) =====
 ----
 
 Seek to a location in a file and reads up to sizelimit bytes from the file, returning what is read. If sizelimit is None, the file is read to EOF.
@@ -538,7 +753,7 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
       end of the file, or if the sizelimit was 0.
 
 [[BR]]
-==== file.writeat(data, offset) ====
+===== file.writeat(data, offset) =====
 ----
 
 Seek to the offset in the file and then write some data to a file.
@@ -575,7 +790,7 @@ Seek to the offset in the file and then write some data to a file.
 
 
 [[BR]]
-==== listfiles() ====
+===== listfiles() =====
 ----
 
 
@@ -602,7 +817,7 @@ Returns a list of file names for the files in the vessel.
       A list of strings (file names)
 
 [[BR]]
-==== removefile(filename) ====
+===== removefile(filename) =====
 ----
 
 Deletes a file in the vessel.   If the file does not exist, an exception is raised.
@@ -634,35 +849,8 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
       None
 
 [[BR]]
-==== exitall() ====
-----
-
-Terminates the program immediately.   The program will not execute the "exit" callfunc or finally blocks.
-
- * Doc string:
-
-   <Purpose>
-      Allows the user program to stop execution of the program without
-      passing an exit to the main program or calling finally blocks.
-
-   <Arguments>
-      None.
-
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      There isn't a guaranteed time which this function is realized.   This means that
-      other threads may execute while this call is being processed.
-
-   <Resource Consumption>
-      None.
-
-   <Returns>
-      The current thread does not resume after exit
-
-[[BR]]
-==== createlock() ====
+==== Threading functions ====
+===== createlock() =====
 ----
 
 Returns a lock object that can be used for mutual exclusion and critical section protection.
@@ -690,7 +878,7 @@ Returns a lock object that can be used for mutual exclusion and critical section
       The lock object.
 
 [[BR]]
-==== lock.acquire(blocking) ====
+===== lock.acquire(blocking) =====
 ----
 
 Blocks until the lock is available, then takes it (lock is an object obtained by calling createlock()).
@@ -719,7 +907,7 @@ If the "blocking" argument is False, the method returns False immediately instea
       True if the lock was acquired, False otherwise.
 
 [[BR]]
-==== lock.release() ====
+===== lock.release() =====
 ----
 
 Releases the lock. This call raises an exception (?) if the lock is already unlocked.
@@ -746,63 +934,7 @@ Releases the lock. This call raises an exception (?) if the lock is already unlo
       None.
 
 [[BR]]
-==== getruntime() ====
-----
-
-Returns a float containing the number of seconds the program has been running.   This time is guaranteed to be monotonic.
-
- * Doc string:
-
-
-   <Purpose>
-      Return the amount of time the program has been running.   This is in
-      wall clock time. This is guaranteed to be monotonic.
-
-   <Arguments>
-      None
-
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      None
-
-   <Resource Consumption>
-      None.
-
-   <Returns>
-      The elapsed time as float
-
-[[BR]]
-==== randombytes() ====
-----
-
-Returns a string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to 1024.   It is assumed that a client library that regularly needs small amounts of random data will cache data received from this call and return smaller values.
-
- * Doc string:
-
-
-   <Purpose>
-      Return a string of random bytes with length 1024
-
-   <Arguments>
-      None.
-
-   <Exceptions>
-      None.
-
-   <Side Effects>
-      This function is metered because it may involve using a hardware
-      source of randomness.
-
-   <Resource Consumption>
-      This operation consumes 1024 bytes of random data.
-
-   <Returns>
-      The string of bytes.
-
-[[BR]]
-==== createthread(function) ====
+===== createthread(function) =====
 ----
 
 Armon: Removed the "args" argument. We only accept a function. If they want to call a function with arguments,
@@ -838,7 +970,7 @@ Start a new thread to call a function.   The thread is charged to your program.
 
 
 [[BR]]
-==== sleep(seconds) ====
+===== sleep(seconds) =====
 ----
 
 Sleeps the current thread for some time (waits for a specific time before executing any further instructions).   This thread will not consume CPU cycles during this time.
@@ -867,223 +999,9 @@ Sleeps the current thread for some time (waits for a specific time before execut
       None.
 
 
-[[BR]] 
-==== socket.close() ====
-----
-Closes the socket.   Any further local calls to recv / send will result in an exception.
 
- * Doc string:
-
-       <Purpose>
-        Closes a socket.   Pending remote recv() calls will return with the 
-        remaining information.   Local recv / send calls will fail after this.
-
-      <Arguments>
-        None
-
-      <Exceptions>
-        None
-
-      <Side Effects>
-        Pending local recv calls will either return or have an exception.
-
-      <Resource Consumption>
-        If the connection is closed, no resources are consumed. This operation
-        uses 64 bytes of netrecv, and 128 bytes of netsend.
-        This call also stops consuming an outsocket.
-
-      <Returns>
-        True if this is the first close call to this socket, False otherwise.
-
-
-
-
-[[BR]] 
-==== socket.recv(numbytes) ====
-----
-Receives data that was sent by the connected party using send.   Note that this may return less than numbytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   
-
- * Doc string:
-
-      <Purpose>
-        Receives data from a socket.   It may receive fewer bytes than 
-        requested.   
-
-      <Arguments>
-        bytes: 
-           The maximum number of bytes to read.   
-
-      <Exceptions>
-        SocketClosedLocal is raised if the socket was closed locally.
-
-        SocketClosedRemote is raised if the socket was closed remotely.
-
-        SocketWouldBlockError is raised if the socket operation would block.
-
-      <Side Effects>
-        None.
-
-      <Resource Consumptions>
-        This operations consumes 64 + amount of data  in bytes
-        worth of netrecv, and 64 bytes of netsend.
-  
-      <Returns>
-        The data received from the socket (as a string).   If an empty string is returned,
-        the other side has closed the socket and no more data will arrive.
-
-[[BR]] 
-==== socket.send(message) ====
-----
-
-Sends data to the connected party.   Note that this may send less than the entire message.   If the connection is disconnected, there is no guarantee that the other party was able to recv the data.  If the other party doesn't call recv, send may raise an exception if the sender and receiver buffers fill (the buffer size is undefined).   If the other party closes the connection, send will raise an exception.
-
- * Doc string:
-
-
-      <Purpose>
-        Sends data on a socket.   It may send fewer bytes than requested.   
-
-      <Arguments>
-        message:
-          The string to send.
-
-      <Exceptions>
-        SocketClosedLocal is raised if the socket is closed locally.
-
-        SocketClosedRemote is raised if the socket is closed remotely.
-
-        SocketWouldBlockError is raised if the operation would block.
-
-      <Side Effects>
-        None.
-
-      <Resource Consumption>
-        This operations consumes 64 + size of sent data of netsend and
-        64 bytes of netrecv.
-
-      <Returns>
-        The number of bytes sent.   Be sure not to assume this is always the 
-        complete amount!
-
-
-
-[[BR]] 
-==== tcpserversocket.getconnection() ====
-----
-Receives a connection that was initiated to an IP and port.   waitforconn can be built in a user level library on top of this.
-
- * Doc string:
-
-    <Purpose>
-      Accepts an incoming connection to a listening TCP socket.
-
-    <Arguments>
-      None
-
-    <Exceptions>
-      Raises SocketClosedLocal if close() has been called.
-
-      Raises SocketWouldBlockError if the operation would block.
-
-      Raises ResourcesExhaustedError if there are no free outsockets.
-
-    <Resource Consumption>
-      If successful, consumes 128 bytes of netrecv (64 bytes for
-      a SYN and ACK packet) and 64 bytes of netsend (1 ACK packet).
-      Uses an outsocket.
-
-    <Returns>
-      A tuple containing: (remote ip, remote port, socket object)
-
-
-[[BR]] 
-==== tcpserversocket.close() ====
-----
-Closes the socket.   Any further local calls to getconnection will result in an exception.
-
- * Doc string:
-
-    <Purpose>
-      Closes the listening TCP socket.
-
-    <Arguments>
-      None
-
-    <Exceptions>
-      None
-
-    <Side Effects>
-      The IP and port can be re-used after closing.
-
-    <Resource Consumption>
-      Releases the insocket used.
-
-    <Returns>
-      True, if this is the first call to close.
-      False otherwise.
-
-
-[[BR]] 
-==== udpserversocket.getmessage() ====
-----
-Receives a message that was sent to an IP and port.   recvmess can be built in a user level library on top of this.
-
- * Doc string:
-
-      <Purpose>
-        Obtains an incoming message that was sent to an IP and port.
-
-    <Arguments>
-        None.
-
-    <Exceptions>
-        SocketClosedLocal if UDPServerSocket.close() was called.
-
-        Raises SocketWouldBlockError if the operation would block.
-
-    <Side Effects>
-        None
-
-    <Resource Consumption>
-        This operation consumes 64 + size of message bytes of netrecv
-
-    <Returns>
-        A tuple consisting of the remote IP, remote port, and message.
-
-
-
-
-[[BR]] 
-==== udpserversocket.close() ====
-----
-Closes the udp server socket.   Any further local calls to getmessage will result in an exception.
-
- * Doc string:
-
-     <Purpose>
-        Closes a socket that is listening for messages.
-
-    <Arguments>
-        None.
-
-    <Exceptions>
-        None.
-
-    <Side Effects>
-        The IP address and port can be reused by other UDPServerSockets after
-        this.
-
-    <Resource Consumption>
-        If applicable, this operation stops consuming the corresponding
-        insocket.
-
-    <Returns>
-        True if this is the first close call to this socket, False otherwise.
-
-
-
-[[BR]] 
-==== getthreadname() ====
+[[BR]]
+===== getthreadname() =====
 ----
 
 (added call)
@@ -1111,8 +1029,94 @@ Returns a unique name that indicates the thread's name.   Don't use this to deri
    <Returns>
      A string identifier.
 
-[[BR]] 
-==== createvirtualnamespace(code, name) ====
+[[BR]]  
+==== Miscellaneous functions ====
+===== getruntime() =====
+----
+
+Returns a float containing the number of seconds the program has been running.   This time is guaranteed to be monotonic.
+
+ * Doc string:
+
+
+   <Purpose>
+      Return the amount of time the program has been running.   This is in
+      wall clock time. This is guaranteed to be monotonic.
+
+   <Arguments>
+      None
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      None
+
+   <Resource Consumption>
+      None.
+
+   <Returns>
+      The elapsed time as float
+
+[[BR]]
+===== randombytes() =====
+----
+
+Returns a string of random bytes of data derived from a hardware source of randomness.   The size of the string will be equal to 1024.   It is assumed that a client library that regularly needs small amounts of random data will cache data received from this call and return smaller values.
+
+ * Doc string:
+
+
+   <Purpose>
+      Return a string of random bytes with length 1024
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      This function is metered because it may involve using a hardware
+      source of randomness.
+
+   <Resource Consumption>
+      This operation consumes 1024 bytes of random data.
+
+   <Returns>
+      The string of bytes.
+
+[[BR]]
+===== exitall() =====
+----
+
+Terminates the program immediately.   The program will not execute the "exit" callfunc or finally blocks.
+
+ * Doc string:
+
+   <Purpose>
+      Allows the user program to stop execution of the program without
+      passing an exit to the main program or calling finally blocks.
+
+   <Arguments>
+      None.
+
+   <Exceptions>
+      None.
+
+   <Side Effects>
+      There isn't a guaranteed time which this function is realized.   This means that
+      other threads may execute while this call is being processed.
+
+   <Resource Consumption>
+      None.
+
+   <Returns>
+      The current thread does not resume after exit
+
+[[BR]]
+
+===== createvirtualnamespace(code, name) =====
 ----
 
 (added call)
@@ -1153,7 +1157,7 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
      A virtualnamespace object
 
 [[BR]] 
-==== virtualnamespace.evaluate(context) ====
+===== virtualnamespace.evaluate(context) =====
 ----
 
 (added call)
@@ -1187,7 +1191,7 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
 
 
 [[BR]] 
-==== getresources() ====
+===== getresources() =====
 ----
 
 (added call)
@@ -1224,7 +1228,7 @@ Determines the resource usage limits and current usage, and provides info on the
       and for how many seconds it was stopped. This array holds at most the latest 100 entries.
 
 [[BR]] 
-==== getlasterror() ====
+===== getlasterror() =====
 ----
 
 TODO: others should review this, change its name as needed, etc.
@@ -1252,7 +1256,7 @@ TODO: others should review this, change its name as needed, etc.
 
 
 [[BR]] 
-==== safelyexecutenativecode(binary, arglist) ====
+===== safelyexecutenativecode(binary, arglist) =====
 ----
 
 Execute native code that has been compiled using the NaCl toolchain.   
