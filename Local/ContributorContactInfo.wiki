@@ -7,6 +7,7 @@ You can often find other Seattle contributors on IRC in room {{{#seattle}}} on {
 || '''Name''' || '''Email''' || '''SVN Username''' || '''Trac Username''' || '''Phone''' ||
 || Justin Cappos || justinc at cs  || justinc || justinc || ||
 || Alex Hanson || alexjh at cs || alexjh || alexjh || ||
+|| Moshe Kaplan || mk.moshe.kaplan at gmail || mkaplan || mkaplan || ||
 || Alan Loh || yaluen at uw || alanloh || alanloh || 425-273-5651 ||
 || Sebastian Morgan || sebass63 at gmail || sebass63 || sebass63 || 206-498-5597 ||
 || Monzur Muhammad || monzum at cs || monzum || monzum || ||
