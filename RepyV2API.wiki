@@ -199,12 +199,12 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 [[BR]]
 ===== getmyip() =====
 ----
-Returns the localhost's "Internet facing" IP address.   It may raise an exception on hosts that are not connected to the Internet.
+Returns the localhost's "Internet facing" IP address.   If there are multiple interfaces, this IP will be on the interface that will be used by default to handle traffic to Internet hosts.   Note that if the node is behind a NAT or similar, this may be a private IP.  It may raise an exception on hosts that are not connected to the Internet.
 
  * Doc string:
 
    <Purpose>
-      Provides the external IP of this computer.   Does some clever trickery.
+      Provides the IP of this computer on its public facing interface.   Does some clever trickery.
 
    <Arguments>
       None
