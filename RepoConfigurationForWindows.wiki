@@ -53,7 +53,9 @@ C:\Program Files\Subversion\iconv
 
 == Set up SSH keys ==
 
-=== Generate the keys ===
+=== Preparing the keys ===
+
+==== Generating new keys ====
 The first step in using SSH keys is to generate the keys. If you've used SSH keys before, you can skip this step.
 
 The easiest way to generate keys on Windows is with `puttygen`. You can download it [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html here].
@@ -74,6 +76,14 @@ Then, click on the `Save private key` button.
 You may get a warning "Are you sure you want to save this key without a passphrase to protect it?". Click Yes.
 
 Save the private Key as `id_rsa.ppk`.
+
+==== Use an existing key ====
+It is also possible to use an existing ssh key with putty.
+
+Download puttygen.exe from the Putty website.
+Execute puttygen.exe
+Click on `File` > `Load Private Key`
+Then click on `Save private key`. That will convert the private key into a format `plink` can use.
 
 === Upload the keys ===
 The next step is to upload your public key to the server. We will be doing this with WinSCP
