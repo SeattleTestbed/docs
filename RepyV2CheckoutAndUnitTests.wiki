@@ -58,8 +58,8 @@ You can check which version of python is called by running `python --version` in
 
  To fix this problem, (in Linux) run the following commands:
 {{{
-sudo mv usr/bin/python /usr/bin/python.bak
-sudo ln -s usr/bin/python2.6 /usr/bin/python
+sudo mv /usr/bin/python /usr/bin/python.bak
+sudo ln -s /usr/bin/python2.6 /usr/bin/python
 }}}
 
 This will change the default python used to version 2.6.[[BR]]
