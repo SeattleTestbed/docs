@@ -157,7 +157,10 @@ sleep(0.000000001)
 log("Finish")
 }}}
 
-Run the test code by calling `python repy.py restrictions.default encasementlib.repy slacker_sleep.repy slacker_sleep_test.repy`
+Run the test code by calling:
+{{{
+python repy.py restrictions.default encasementlib.repy slacker_sleep.repy slacker_sleep_test.repy
+}}}
 
 If there was a noticeable delay between Start and Finish, the layer worked properly. 
 
@@ -230,7 +233,10 @@ else:
   log("No exception was thrown")
 }}}
 
-We can run the code through the security layer by running: `python repy.py restrictions.default encasementlib.repy no_first_byte.repy no_first_byte_test.repy`
+We can run the code through the security layer by running: 
+{{{
+python repy.py restrictions.default encasementlib.repy no_first_byte.repy no_first_byte_test.repy
+}}}
 
 == Further Reference ==
 [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
