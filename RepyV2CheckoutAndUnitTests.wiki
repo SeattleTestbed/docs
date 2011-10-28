@@ -45,6 +45,16 @@ python utf.py -m repyv2api
 This will run all unit tests that are part of the module `repyv2api`, which includes all unit tests for repyv2.
 == Possible issues ==
 
+=== utf.py does not exist ===
+When running
+{{{
+python utf.py -m repyv2api
+}}}
+You may get an error `python: can't open file 'utf.py': [Errno 2] No such file or directory`
+
+This is because `preparetest.py` was ran without the `-t` switch.
+
+Rerunning `preparetest.py` with `-t` will copy all of the needed files.
 
 === Python 2.7 exceptions ===
 If you have python 2.7 installed, you may have tests fail with the following message:
