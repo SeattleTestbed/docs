@@ -52,15 +52,17 @@ If you have python 2.7 installed, you may have tests fail with the following mes
 Exception exception_hierarchy.RunBuiltinException: RunBuiltinException() in <module 'threading' from '/usr/lib/python2.7/threading.pyc'> ignored
 }}}
 
-This is possibly because `python` is called without the full path inside of the test running code, which would call `python2.7`.
+This is possibly because your default `python` may be `python2.7`.
 
 You can check which version of python is called by running `python --version` in the command line.
 
- To fix this problem, (in Linux) run the following commands:
+ To fix this problem, run repy with the correct version of python
 {{{
-sudo mv /usr/bin/python /usr/bin/python.bak
-sudo ln -s /usr/bin/python2.6 /usr/bin/python
+python2.6 utf.py -m repyv2api
+}}}
+Note that you can also call python with the full path
+{{{
+/usr/bin/python2.6 utf.py -m repyv2api
 }}}
 
-This will change the default python used to version 2.6.[[BR]]
-Note: The steps are the same with python 2.5.
+Note: The steps are the same if you have python 2.5.
