@@ -20,3 +20,4 @@ Each type of benchmark has it's own script to initiate the benchmarks.
 
 Each benchmark file has some configurable settings that can be edited. For example, the number and type of security layers to benchmark with may be changed. This is done by changing the constants in the bash files.
 
+All benchmarks can be found at: [browser:seattle/branches/repy_v2/benchmarking-support/ benchmarking-support].
