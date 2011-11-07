@@ -14,6 +14,8 @@ CheckAPI is used to check for behavioral differences between implementations of 
 
 CheckAPI's primary version uses security layers to interpose on API calls, log them and then verify them against a model of the API. The first step in using CheckAPI is to copy all of the required files from https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/checkapi/ into a directory that contains all of the required Repy V2 files. This can be done via preparetest.py
 
+If the application you are running with CheckAPI will try and '''open any existing files''' in the filesystem they must be added to the check_api_initial_filestate.input file that is used at initialization time of CheckAPI. If this is not done then the model will not know that a given file exists but the implementation will and this will result in a conformance failure.
+
 {{{
 python preparetest.py -checkapi <directory_name>
 }}}
