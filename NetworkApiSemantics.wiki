@@ -17,7 +17,7 @@ To aid in the description of call interactions I will define some useful abstrac
 
 ''tcp_listen_table'' - a table with columns localip,localport for all tcp listeners
 
-''udp_listen_talbe'' - a table with columns localip,localport
+''udp_listen_table'' - a table with columns localip,localport
 
 
 ----
