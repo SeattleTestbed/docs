@@ -37,3 +37,13 @@ Application code that relies on Python to garbage collect an object and implicit
  * This may be fixed by adding the __del__ functions and by changing the way CheckAPI deals with objects. I believe I can remove the storage of the object reference themselves and just log the initial object id. More testing is required to implement and check this in.
 
 A prime example of this incorrect behavior is seen in the unit test: ut_repyv2api_removefileperformsresourceaccounting.py
+
+== Future Work ==
+
+'''Core Model File System State:'''[[BR]]
+ * Currently the user of CheckAPI must list in the check_api_initial_filestate.input file '''all''' of the possible files that an application may want to access on the filesystem. This can sometimes be difficult to tell if the applications you are using are ones that you did not make yourself. It may be nice for the CheckAPI core model to attempt to import a file into its model state if and only if it exists in the file system. For example:
+    * If while in the middle of executing an application it calls openfile("repy.py", create=False) where repy.py was not listed in the check_api_initial_filestate.input file before execution this would normally cause an model conformance failure. This is because the model has no idea that this file exists in its file system where as the implementation checks the file system and opens it without any problem.
+ * Where as an updated version of the core model, specifically the openfile() API call, would check the the filesystem (via the implementation openfile() call) to see if the file in question existed, if it does then it would import the file and its contents into the core model's in memory state.
+ * It should be noted, however, that this could mask some bugs related to openfile reporting that a file exists when it shouldn't, or errors like this. I imagine these would be rare though.
+
+
