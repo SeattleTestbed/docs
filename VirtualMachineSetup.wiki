@@ -10,7 +10,7 @@ Often times it is necessary to set up virtual machines (VM) on a machine in orde
 [[br]]
 == Getting VMware ==
 ----
-For our purpose we want to setup VMware server, which can be downloaded at the [http://www.vmware.com/products/server/overview.html VMware website here]. Once you have hit the 'download' button, it will ask you to either register a new account or log in with an existing account. If you don't have an account please create a new account. '''NOTE: You will be provided with a serial number. This will be needed during installation.'''
+For our purpose we want to setup VMware server, which can be downloaded at the [http://downloads.vmware.com/d/info/datacenter_downloads/vmware_server/1_0 VMware website here]. Once you have hit the 'download' button, it will ask you to either register a new account or log in with an existing account. If you don't have an account please create a new account. '''NOTE: You will be provided with a serial number. This will be needed during installation.'''
 
 [[br]]
 == Setup Instructions ==
