@@ -13,7 +13,7 @@ export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 cd /mnt/sdcard/repy_v2
 sh
 }}}
-This should be sufficient for getting python working and usable from a command line. To get a working installation of repy_v2, you need to checkout the repy_v2 branch from svn and run preparetest.py to get a directory with all the repy v2 files. Then, you need to patch nix_common_api.py by changing the line
+This should be sufficient for getting python working and usable from a command line. To get a working installation of repy v2, you need to checkout the repy v2 branch from svn and run preparetest.py to get a directory with all the repy v2 files. Then, you need to patch nix_common_api.py by changing the line
 {{{
 libc = ctypes.CDLL(ctypes.util.find_library("c"))
 }}}
