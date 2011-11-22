@@ -46,4 +46,20 @@ A prime example of this incorrect behavior is seen in the unit test: ut_repyv2ap
  * Where as an updated version of the core model, specifically the openfile() API call, would check the the filesystem (via the implementation openfile() call) to see if the file in question existed, if it does then it would import the file and its contents into the core model's in memory state.
  * It should be noted, however, that this could mask some bugs related to openfile reporting that a file exists when it shouldn't, or errors like this. I imagine these would be rare though.
 
-
+== API Calls Currently Not Verified by CheckAPI ==
+ * createlock(), lock.acquire(blocking), lock.release()
+    * Soon!
+ * sleep(), getruntime()
+    * Not modeling time.
+ * getthreadname()
+    * Assumed correct for CheckAPI to work.
+ * exitall()
+    * Nothing to verify. However, this currently forces a final verification of other calls when executed.
+ * createvirtualnamespace(code, name), virtualnamespace.evaluate(context)
+    * Not modeling namespace calls.
+ * getresources()
+    * Some aspects of resources are being verified but not the getresources call itself.
+ * getlasterror()
+    * Not supported.
+ * safelyexecutenativecode(binary, arglist)
+    * Not modeling Lind related calls.
