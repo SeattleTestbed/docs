@@ -2,8 +2,6 @@
 
 CheckAPI is used to check for behavioral differences between implementations of Repy V2 on various supported hardware. This document serves as a guide on how to use CheckAPI, additionally it covers its current limitations. 
 
-'''*This document is not complete yet, there will be more added soon*'''
-
 ----
 [[TOC(inline)]]
 ----
