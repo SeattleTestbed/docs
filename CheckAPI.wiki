@@ -65,3 +65,15 @@ Some API calls are not currently being verified by CheckAPI. Below is a list of 
     * Not supported.
  * safelyexecutenativecode(binary, arglist)
     * Not modeling Lind related calls.
+
+== Unit Tests that are not supported with CheckAPI ==
+A handful of repyv2 unit tests are not supported with CheckAPI. This is mostly because of resource usage assumptions that the unit tests have.
+ * ut_repyv2api_fileclosereleasesresource.py
+ * ut_repyv2api_filereadatperformsresourceaccounting.py
+ * ut_repyv2api_filewriteatperformsresourceaccounting.py
+ * ut_repyv2api_openfileconsumesfilehandles.py -> resources & listfiles issue.
+ * ut_repyv2api_initialusevaluesaresane.py
+ * ut_repyv2api_openfileperformsresourceaccounting.py
+ * ut_repyv2api_listfilesperformsresourceaccounting.py
+ * ut_repyv2api_removefileperformsresourceaccounting.py
+
