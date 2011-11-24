@@ -1,4 +1,4 @@
-= Performance Isolation of Seattle =
+= Performance Isolation Benchmarks =
 
 == Setup ==
 First it is necessary to setup a folder to run the benchmarks. This can be done like so:
@@ -10,6 +10,8 @@ python preparetest.py bench
 cp benchmarking-support/* bench/
 cp for_test/* bench/
 }}}
+
+The for_test.zip can be found in this page.
 
 == Running the Benchmarks ==
 Each type of benchmark has it's own script to initiate the benchmarks.
