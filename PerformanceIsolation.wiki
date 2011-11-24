@@ -1,0 +1,33 @@
+= Performance Isolation of Seattle =
+
+== Setup ==
+First it is necessary to setup a folder to run the benchmarks. This can be done like so:
+
+{{{
+cd $SEATTLE/branches/repy_v2/
+mkdir bench/
+python preparetest.py bench
+cp benchmarking-support/* bench/
+cp for_test/* bench/
+}}}
+
+== Running the Benchmarks ==
+Each type of benchmark has it's own script to initiate the benchmarks.
+ * To run the cpu bomb tests, invoke ./cpubomb.sh
+ * To run the fork bomb test, invoke ./fork.sh
+ * To run the disk bomb test, invoke ./disk.sh
+ * To run the memory bomb tests, run ./memory.sh
+
+== Instructions for benchmark-blockstore.py ==
+Change the arguments of blockstore.py to the prefix of your public/private keys and a valid port number (e.g, 12345).
+For example, if your keys are my_name.publickey and my_name.privatekey, the first argument would be my_name.
+
+== Result of the benchmarks ==
+The benchmarks will return several result files to illustrate the isolation of Seattle. 
+The results of benchmarks are related to the kind of them, for example: cpu bomb are cpu1.txt, cpu2.txt, cpu3.txt, cpu4.txt.
+
+== Thanks ==
+We are very appreciate it if you can send the results of the benchmarks to us with the performance of your computer(such as OS, cpu, memory, etc). And we are also very appreciate it if you can contact us if you meet any problems.
+Please contact: enchl317@gmail.com
+
+
