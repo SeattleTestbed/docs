@@ -28,6 +28,6 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 == Thanks ==
 We are very appreciate it if you can send the results of the benchmarks to us with the performance of your computer(such as OS, cpu, memory, etc). And we are also very appreciate it if you can contact us if you meet any problems.
 
-Please contact: enchl317@gmail.com
+Please contact: enchl317 at gmail.com
 
 
