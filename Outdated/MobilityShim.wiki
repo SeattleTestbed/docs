@@ -6,6 +6,7 @@ As it stands now, the mobility shim doesn't really work, and there are additiona
 [[TOC(inline)]]
 ----
 
+
 [[BR]]
 
 == Shims ==
@@ -62,7 +63,9 @@ The coordination shim makes sure that the client's shim stack is balanced with t
  * The coordination shim is suppose to somehow help the mobility shim recover from disconnections if the server changes it's IP, but there's really no support for the client opening a connection to a given Zenodotus hostname, and even if there was, the coordination shim is suppose to be at the top of the shim stack, so that really won't help a mobility shim below it reconnect
  * Allowing the application to pass a Zenodotus hostname into listenforconnection as the local IP changes semantics, since the local IP is suppose to be an IP
 
+
 [[BR]]
+
 == Situations and Results ==
 ----
 
@@ -102,3 +105,29 @@ If the server is behind a NAT, then you need to use the NAT shim somewhere in th
 If we put the mobility shim above the NAT shim, then we run into problems with disconnections breaking the connection created by the NAT shim's listenforconnection method to get new connections from the server. Additionally, if the server changes IP, then we still have problems reconnecting.
 
 If we put the mobility shim between the NAT shim and the forwarder, then the changes which support the client being behind a NAT would work here. This follows from the fact that the NAT forwarder doesn't open any connections to either the server or the client. We could even have both the client and the server being behind NATs and changing IP address, and the configuration would still be able to recover from disconnections. This is, of course, assuming the NAT forwarder's IP address doesn't change.
+
+
+[[BR]]
+
+== Detecting and Handling Disconnections ==
+----
+
+[[BR]]
+
+=== Intentional Disconnection ===
+----
+This is the simple case. Once we have a separate exception for unintentional socket disconnections, this will be trivial to handle, but currently the mobility shim sends a message to the other side of the connection when closing to signal that the disconnection is intentional.
+
+[[BR]]
+
+=== Unintentional Disconnection, Socket Closed Exception Raised ===
+----
+This is easy to detect. If the socket wasn't closed intentionally and we see that the socket was closed, then we should try to reconnect.
+
+[[BR]]
+
+=== Unintentional Disconnection, Socket Closed Exception Not Raised ===
+----
+I'm not entirely sure when a socket closed exception is raised when there's a disconnection and when we just get !SocketWouldBlock, but it doesn't really matter. If we don't get a socket closed exception then the socket isn't actually closed and we'll be able to send/recv again once we are reconnected. If the other side gets closed intentionally or unintentionally then we'll find out once we get our connectivity back. Regardless, we won't be able to reconnect if we don't have any connectivity, so there's no point in trying to detect the disconnection by doing anything clever.
+
+The one caveat is that we can get connectivity back while still being disconnected if our IP changes. Basically, we still don't have connectivity through the network interface we used to open the connection, but we gain connectivity through a different network interface. If this happens then we want to reconnect through the new IP, but the socket may not raise an exception to let us know about the disconnection. To detect this special case, it's sufficient to check if our IP has changed. We only want to have the client do this since the mobility shim by itself isn't intended to handle the server changing it's IP, and the server can accept reconnections from the client even if the server doesn't know it's been disconnected.
