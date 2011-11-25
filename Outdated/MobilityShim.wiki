@@ -109,7 +109,7 @@ If we put the mobility shim between the NAT shim and the forwarder, then the cha
 
 [[BR]]
 
-== Detecting and Handling Disconnections ==
+== Detecting Disconnections ==
 ----
 
 [[BR]]
