@@ -72,4 +72,5 @@ A handful of repyv2 unit tests are not supported with CheckAPI. This is mostly b
  * ut_repyv2api_openfileperformsresourceaccounting.py
  * ut_repyv2api_listfilesperformsresourceaccounting.py
  * ut_repyv2api_removefileperformsresourceaccounting.py
+ * ut_repyv2api_stoptimesaresane.py
 
