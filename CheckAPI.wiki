@@ -47,8 +47,6 @@ A prime example of this incorrect behavior is seen in the unit test: ut_repyv2ap
 == API Calls Currently Not Verified by CheckAPI ==
 Some API calls are not currently being verified by CheckAPI. Below is a list of the calls that are currently not supported with a brief explanation as to why they are not included. If an API call from [https://seattle.cs.washington.edu/wiki/FutureRepyAPI FutureRepyAPI] is not included in this list it means it is supported by CheckAPI.
 
- * createlock(), lock.acquire(blocking), lock.release()
-    * Soon!
  * sleep(), getruntime()
     * Not modeling time.
  * getthreadname()
