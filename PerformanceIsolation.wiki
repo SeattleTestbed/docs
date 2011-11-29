@@ -1,7 +1,11 @@
 = Performance Isolation Benchmarks =
 
 
-This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page.
+This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  
+
+Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
+
+Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page.
 
 ----
 
