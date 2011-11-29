@@ -2,7 +2,8 @@
 
 
 == Description ==
-This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are performing well or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
+This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   You can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  Running these benchmarks will take about XX minutes, depending on the speed of your system and type of benchmarks you will run.
+
 
 
 == Setup ==
@@ -48,17 +49,17 @@ To run the tests in Windows, run the *.bat files.
 
 
 == Running the Benchmarks in VMs ==
-It is highly recommended to run the Python benchmarks in VMs, such as VMware Working Station, Virtual Box, Xen, etc. 
+It is highly recommended to run the Python benchmarks in VMs, such as VMware Workstation, Virtual Box, Xen, etc. 
 
 
 Setup Python benchmarks in VMs:
- * Create 5 different VMs in the Working Station. 
+ * Create 5 different VMs in the Workstation. 
  * Run the Python tests separately without stress in first 4 VMs and gain the results. 
  * Run the stress file in the 5th VM. 
  * Run the Python tests separately in first 4 VMs and gain the results
 
 Example:
-Take running CPU benchmarks in VMWare Working Station as an example. 
+Take running CPU benchmarks in VMWare Workstation as an example. 
 
 Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs and gain the results files. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs and get the results. 
 
@@ -76,6 +77,8 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 
 == Thanks ==
 We would appreciate it if you can send the results of the benchmarks to us and also include your computer specifications(such as OS, cpu(including cores and threads of the cpu), memory, etc).  We would also appreciate it if you could contact us if you encounter any problems.
+
+More specifics!!!   How do I get the above information?
 
 Please contact: enchl317 at gmail.com
 
