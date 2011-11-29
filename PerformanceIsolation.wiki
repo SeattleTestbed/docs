@@ -38,7 +38,7 @@ This will create a folder `repy_v2` with the code from the repository.
 Create a folder to run the benchmarks. This can be done like so:
 
 {{{
-cd $SEATTLE/branches/repy_v2/
+cd $SEATTLE/repy_v2/
 mkdir bench/
 python preparetest.py bench
 cp benchmarking-support/* bench/
