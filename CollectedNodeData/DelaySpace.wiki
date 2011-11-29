@@ -21,7 +21,7 @@ controller.repy [port] [ipfile] [measures] [waittime]
 }}}
 
     - [port]: Your specific port for Seattle
-    - [ipfile]: A file you uploaded to the controller Vessel with all IPs that should be measured
+    - [ipfile]: A file you uploaded to the controller Vessel with all IPs that should be measured (You might use {{{show ip to ipfile.txt}}} in Seash to save the ipfile)
     - [measures]: The number of measurements that should be performed
     - [waittime]: A specific waiting time between each measurement
 
