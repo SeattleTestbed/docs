@@ -29,7 +29,7 @@ The for_test_repy can be found in the zip file.
 Set up Python tests:
 
 
-Normal tests can be run without Seattle. Users can either run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
+Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
 
 If the OS is Windows, iozone is needed to support the disk test. It can be downloaded in the link below:
 http://www.iozone.org/src/current/IozoneSetup.zip
