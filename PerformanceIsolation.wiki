@@ -5,6 +5,7 @@ This set of benchmarks will provide information about the performance isolation 
 
 [[TOC(inline)]]
 
+----
 
 == Setup ==
 First, it is necessary to determine the kind of OS. Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
