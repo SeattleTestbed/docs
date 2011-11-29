@@ -55,16 +55,17 @@ The others are the same as setup benchmarks in Linux.
 
 
 
-== Running the Benchmarks without VMs ==
+== Running the Repy Benchmarks ==
 Each type of benchmark has its own script to initiate the benchmarks.
  * To run the cpu bomb tests, invoke ./cpubomb.sh
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
- * To run the memory bomb tests, run ./memory.sh
+ * To run the memory bomb tests, invoke ./memorybomb.sh
 To run the tests in Windows, run the *.bat files.
 
 
-== Running the Benchmarks in VMs ==
+== Running the Python Benchmarks ==
+=== Running the Benchmarks in VMs ===
 It is highly recommended to run the Python benchmarks in VMs, such as VMware Workstation, Virtual Box, Xen, etc. 
 
 
@@ -78,6 +79,17 @@ Example:
 Take running CPU benchmarks in VMWare Workstation as an example. 
 
 Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs and gain the results files. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs and get the results. 
+
+=== Running the Benchmarks without VMs ===
+This is just for tests and we do not recommend users to do this.
+
+Each type of benchmark has its own script to initiate the benchmarks.
+ * To run the cpu bomb tests, invoke ./cpubomb.sh
+ * To run the fork bomb test, invoke ./fork.sh
+ * To run the disk bomb test, invoke ./disk.sh
+ * To run the memory bomb tests, invoke ./memorybomb.sh
+To run the tests in Windows, run the *.bat files.
+
 
 
 == Result of the benchmarks ==
