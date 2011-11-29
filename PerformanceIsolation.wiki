@@ -1,7 +1,7 @@
 = Performance Isolation Benchmarks =
 
 
-This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   You can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  Running these benchmarks will take about XX minutes, depending on the speed of your system and type of benchmarks you will run.
+This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page.
 
 ----
 
@@ -9,14 +9,13 @@ This set of benchmarks will provide information about the performance isolation 
 
 ----
 
-== Setup ==
-First, it is necessary to determine the kind of OS. Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
+== Setup Repy tests ==
 
 
-Set up Repy tests: 
+Notice: the repy test can only be tested upon Seattle platform of Repy_v2. For how to download and use repy_v2, please refer to the link below:
 
+https://seattle.cs.washington.edu/wiki/RepyV2CheckoutAndUnitTests
 
-Notice: the repy test can only be tested upon Seattle platform. 
 Create a folder to run the benchmarks. This can be done like so:
 
 {{{
@@ -30,7 +29,7 @@ cp for_test_repy/* bench/
 The for_test_repy can be found in the zip file.
 
 
-Set up Python tests:
+== Set up Python tests ==
 
 
 Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
