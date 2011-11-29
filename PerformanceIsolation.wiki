@@ -2,11 +2,11 @@
 
 
 == Description ==
-This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are doing good or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
+This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are preforming well or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
 
 
 == Setup ==
-First, it is necessary to determine the kind of OS. Benchmarks which support two different kinds of OS are offered and can be downloaded of both Windows version and Linux version to make a test. The links can be seen on the bottom of this Wiki page. 
+First, it is necessary to determine the kind of OS. Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be seen on the bottom of this Wiki page. 
 
 
 Set up Repy tests: 
@@ -69,13 +69,13 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 
 
 == Warnings ==
- * 1.Since this is a kind of resources bomb benchmarks, the Python version may cause huge destruction to the computer. So, it is highly recommended to run these benchmarks in VMs. 
- * 2. Don't be worried of the Repy benchmarks. They are safe enough. 
- * 3. The tests may cause a lot of time which depends on the performance of the computer. If the Terminal is forced to close , please kill the processes manually in the system monitor. 
+ * 1. Since this is a type of resources bomb benchmarks, the Python version may cause huge destruction to the computer. Because of this, it is highly recommended to run these benchmarks instead in VMs. 
+ * 2. Don't be worried by the Repy benchmarks. They are safe enough. 
+ * 3. The tests may take a lot of time to finish depending on the computer specifications. If the Terminal is forced to close , please kill the processes manually in the system monitor. 
 
 
 == Thanks ==
-We are very appreciate it if you can send the results of the benchmarks to us with the performance of your computer(such as OS, cpu(including cores and threads of the cpu), memory, etc). And we are also very appreciate it if you can contact us if you meet any problems.
+We would appreciate it if you can send the results of the benchmarks to us and also include your computer specifications(such as OS, cpu(including cores and threads of the cpu), memory, etc).  We would also appreciate it if you could contact us if you encounter any problems.
 
 Please contact: enchl317 at gmail.com
 
