@@ -2,15 +2,17 @@
 
 
 == Description ==
-This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. We can use them to illustrate the whether the VMs are doing good or not in isolation of some certain fields, such as cpu, memory, disk, forks, etc. 
+This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are doing good or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
 
 
 == Setup ==
-First, it is necessary to determine which OS you are using. Two different kinds of cores of OS are offered. Users can download benchmarks of both Windows version and Linux version to make a test. The links can be seen on the bottom of this Wiki page. 
-After that, users can make a test. Notice: the repy test can only be tested upon Seattle platform. 
+First, it is necessary to determine the kind of OS. Benchmarks which support two different kinds of OS are offered and can be downloaded of both Windows version and Linux version to make a test. The links can be seen on the bottom of this Wiki page. 
+
 
 Set up Repy tests: 
 
+
+Notice: the repy test can only be tested upon Seattle platform. 
 Create a folder to run the benchmarks. This can be done like so:
 
 {{{
@@ -23,27 +25,40 @@ cp for_test_repy/* bench/
 
 The for_test_repy can be found in the zip file.
 
-Set up Normal tests:
 
-Normal tests can be run without Seattle. Users can just run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
+Set up Python tests:
 
-If you are running in Windows, you should download iozone first to support the disk test. It can be downloaded in the link below:
+
+Normal tests can be run without Seattle. Users can either run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
+
+If the OS is Windows, iozone is needed to support the disk test. It can be downloaded in the link below:
 http://www.iozone.org/src/current/IozoneSetup.zip
-After unzip it, run the setup and set the directory under the for_test_python and for_test_python. 
+Run the setup and install it under both the for_test_python and for_test_python directory. 
 
 
 == Running the Benchmarks without VMs ==
-Each type of benchmark has it's own script to initiate the benchmarks.
+Each type of benchmark has its own script to initiate the benchmarks.
  * To run the cpu bomb tests, invoke ./cpubomb.sh
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, run ./memory.sh
-To run the tests in Windows, just run the *.bat files.
+To run the tests in Windows, run the *.bat files.
 
 
 == Running the Benchmarks in VMs ==
-We highly recommend you to run the normal benchmarks in VMs, such as VMware Working Station, Virtual Box, Xen, etc. Users can create 5 different VMs in the Working Station. Then run the tests separately with and without stress to find the difference. 
-Take running CPU benchmarks in VMWare Working Station as an example. We can run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py first in 4 different VMs. And then, run cpubomb.py in the fifth VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py first in the other 4 different VMs and get the results. 
+It is highly recommended to run the Python benchmarks in VMs, such as VMware Working Station, Virtual Box, Xen, etc. 
+
+
+Setup Python benchmarks in VMs:
+ * Create 5 different VMs in the Working Station. 
+ * Run the Python tests separately without stress in first 4 VMs and gain the results. 
+ * Run the stress file in the 5th VM. 
+ * Run the Python tests separately in first 4 VMs and gain the results
+
+Example:
+Take running CPU benchmarks in VMWare Working Station as an example. 
+
+Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs and gain the results files. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs and get the results. 
 
 
 == Result of the benchmarks ==
@@ -52,9 +67,9 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 
 
 == Warnings ==
- * 1.Since this is a kind of resources bomb benchmarks, the python version may cause huge destruction to your computer. So, we highly recommend you to run these benchmarks in VMs. 
- * 2. Don't be worried of the Repy benchmarks. They are safe. 
- * 3. The tests may cause a lot of time which depends on the performance of your computer. If you force to close the Terminal, please kill the processes manually in the system monitor. 
+ * 1.Since this is a kind of resources bomb benchmarks, the Python version may cause huge destruction to the computer. So, it is highly recommended to run these benchmarks in VMs. 
+ * 2. Don't be worried of the Repy benchmarks. They are safe enough. 
+ * 3. The tests may cause a lot of time which depends on the performance of the computer. If the Terminal is forced to close , please kill the processes manually in the system monitor. 
 
 
 == Thanks ==
