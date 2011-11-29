@@ -2,7 +2,7 @@
 
 
 == Description ==
-This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are preforming well or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
+This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. Those benchmarks can illustrate whether the VMs are performing well or not in isolation of some certain resources, such as cpu, memory, disk, forks, etc. 
 
 
 == Setup ==
