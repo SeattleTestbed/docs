@@ -1,32 +1,60 @@
 = Performance Isolation Benchmarks =
 
+
+== Description ==
+This is a set of benchmarks which are used to test the performance isolation of Seattle and VMs. We can use them to illustrate the whether the VMs are doing good or not in isolation of some certain fields, such as cpu, memory, disk, forks, etc. 
+
+
 == Setup ==
-First it is necessary to setup a folder to run the benchmarks. This can be done like so:
+First, it is necessary to determine which OS you are using. Two different kinds of cores of OS are offered. Users can download benchmarks of both Windows version and Linux version to make a test. The links can be seen on the bottom of this Wiki page. 
+After that, users can make a test. Notice: the repy test can only be tested upon Seattle platform. 
+
+Set up Repy tests: 
+
+Create a folder to run the benchmarks. This can be done like so:
 
 {{{
 cd $SEATTLE/branches/repy_v2/
 mkdir bench/
 python preparetest.py bench
 cp benchmarking-support/* bench/
-cp for_test/* bench/
+cp for_test_repy/* bench/
 }}}
 
-The for_test.zip can be found in this page.
+The for_test_repy can be found in the zip file.
 
-== Running the Benchmarks ==
+Set up Normal tests:
+
+Normal tests can be run without Seattle. Users can just run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
+
+
+== Running the Benchmarks without VMs ==
 Each type of benchmark has it's own script to initiate the benchmarks.
  * To run the cpu bomb tests, invoke ./cpubomb.sh
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, run ./memory.sh
+To run the tests in Windows, just run the *.bat files.
+
+
+== Running the Benchmarks in VMs ==
+We highly recommend you to run the normal benchmarks in VMs, such as VMware Working Station, Virtual Box, Xen, etc. Users can create 5 different VMs in the Working Station. Then run the tests separately with and without stress to find the difference. 
+Take running CPU benchmarks in VMWare Working Station as an example. We can run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py first in 4 different VMs. And then, run cpubomb.py in the fifth VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py first in the other 4 different VMs and get the results. 
 
 
 == Result of the benchmarks ==
 The benchmarks will return several result files to illustrate the isolation of Seattle. 
 The results of benchmarks are related to the kind of them, for example: cpu bomb are cpu1.txt, cpu2.txt, cpu3.txt, cpu4.txt.
 
+
+== Warnings ==
+1. Since this is a kind of resources bomb benchmarks, the python version may cause huge destruction to your computer. So, we highly recommend you to run these benchmarks in VMs. 
+2. Don't be worried of the Repy benchmarks. They are safe. 
+3. The tests may cause a lot of time which depends on the performance of your computer. If you force to close the Terminal, please kill the processes manually in the system monitor. 
+
+
 == Thanks ==
-We are very appreciate it if you can send the results of the benchmarks to us with the performance of your computer(such as OS, cpu, memory, etc). And we are also very appreciate it if you can contact us if you meet any problems.
+We are very appreciate it if you can send the results of the benchmarks to us with the performance of your computer(such as OS, cpu(including cores and threads of the cpu), memory, etc). And we are also very appreciate it if you can contact us if you meet any problems.
 
 Please contact: enchl317 at gmail.com
 
