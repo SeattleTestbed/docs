@@ -32,7 +32,9 @@ Set up Python tests:
 Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
 
 If the OS is Windows, iozone is needed to support the disk test. It can be downloaded in the link below:
+
 http://www.iozone.org/src/current/IozoneSetup.zip
+
 Run the setup and install it under both the for_test_python and for_test_python directory. 
 
 
