@@ -1,7 +1,6 @@
 == Exploring the Delay Space with Seattle ==
 [[TOC(inline)]]
 
-'''Under construction'''.
 
 === Modified Divide-and-Conquer Algorithm ===
 [[Image(allpairsping.png, 200px, right, nolink)]]
