@@ -101,6 +101,7 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 The first 2 numbers in each file illustrate the run time of calculating Fibonacci(37) without stress. And the other 3 numbers in each file illustrate the run time of calculating Fibonacci(37) with stress. 
 
 If the first 2 numbers do not differ from the other 3 very much, the performance isolation is quite good. 
+
 If the first 2 numbers do differ from the other 3 very much, the performance isolation is bad. 
 
 
