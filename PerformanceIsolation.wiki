@@ -9,7 +9,10 @@ This set of benchmarks will provide information about the performance isolation 
 
 ----
 
-== Setup Repy tests ==
+
+== Setup Benchmarks in Linux ==
+
+=== Setup Repy tests ===
 
 
 Notice: the repy test can only be tested upon Seattle platform of Repy_v2. For how to download and use repy_v2, please refer to the link below:
@@ -29,16 +32,23 @@ cp for_test_repy/* bench/
 The for_test_repy can be found in the zip file.
 
 
-== Set up Python tests ==
+=== Setup Python tests ===
 
 
 Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
+
+
+== Setup Benchmarks in Windows ==
+
 
 If the OS used is Windows, iozone is needed to support the disk test. It can be downloaded from the link below:
 
 http://www.iozone.org/src/current/IozoneSetup.zip
 
-Run the setup and install it under both the for_test_python and for_test_repy directory. 
+Run the iozoneSetup.exe and install it under both the for_test_python and for_test_repy directory. 
+
+The others are the same as setup benchmarks in Linux. 
+
 
 
 == Running the Benchmarks without VMs ==
