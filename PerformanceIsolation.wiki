@@ -27,6 +27,10 @@ Set up Normal tests:
 
 Normal tests can be run without Seattle. Users can just run the sh/bat script files to run the tests or run them in the VMs(highly recommended).
 
+If you are running in Windows, you should download iozone first to support the disk test. It can be downloaded in the link below:
+http://www.iozone.org/src/current/IozoneSetup.zip
+After unzip it, run the setup and set the directory under the for_test_python and for_test_python. 
+
 
 == Running the Benchmarks without VMs ==
 Each type of benchmark has it's own script to initiate the benchmarks.
