@@ -1,9 +1,9 @@
 = Performance Isolation Benchmarks =
 
 
-== Description ==
 This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   You can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  Running these benchmarks will take about XX minutes, depending on the speed of your system and type of benchmarks you will run.
 
+[[TOC(inline)]]
 
 
 == Setup ==
