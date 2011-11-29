@@ -61,7 +61,9 @@ Each type of benchmark has its own script to initiate the benchmarks.
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, invoke ./memorybomb.sh
+If Permission not Allowed, please use chmod 755 to change the permission of the script or right click the script file to change the permission. 
 To run the tests in Windows, run the *.bat files.
+
 
 
 == Running the Python Benchmarks ==
@@ -96,6 +98,11 @@ To run the tests in Windows, run the *.bat files.
 The benchmarks will return several result files to illustrate the isolation of Seattle. 
 The results of benchmarks are related to the kind of them, for example: cpu bomb are cpu1.txt, cpu2.txt, cpu3.txt, cpu4.txt.
 
+The first 2 numbers in each file illustrate the run time of calculating Fibonacci(37) without stress. And the other 3 numbers in each file illustrate the run time of calculating Fibonacci(37) with stress. 
+
+If the first 2 numbers do not differ from the other 3 very much, the performance isolation is quite good. 
+If the first 2 numbers do differ from the other 3 very much, the performance isolation is bad. 
+
 
 == Warnings ==
  * 1. Since this is a type of resources bomb benchmarks, the Python version may cause huge destruction to the computer. Because of this, it is highly recommended to run these benchmarks instead in VMs. 
@@ -106,7 +113,6 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 == Thanks ==
 We would appreciate it if you can send the results of the benchmarks to us and also include your computer specifications(such as OS, cpu(including cores and threads of the cpu), memory, etc).  We would also appreciate it if you could contact us if you encounter any problems.
 
-More specifics!!!   How do I get the above information?
 
 Please contact: enchl317 at gmail.com
 
