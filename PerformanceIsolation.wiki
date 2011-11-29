@@ -52,9 +52,9 @@ The results of benchmarks are related to the kind of them, for example: cpu bomb
 
 
 == Warnings ==
-1. Since this is a kind of resources bomb benchmarks, the python version may cause huge destruction to your computer. So, we highly recommend you to run these benchmarks in VMs. 
-2. Don't be worried of the Repy benchmarks. They are safe. 
-3. The tests may cause a lot of time which depends on the performance of your computer. If you force to close the Terminal, please kill the processes manually in the system monitor. 
+ * 1.Since this is a kind of resources bomb benchmarks, the python version may cause huge destruction to your computer. So, we highly recommend you to run these benchmarks in VMs. 
+ * 2. Don't be worried of the Repy benchmarks. They are safe. 
+ * 3. The tests may cause a lot of time which depends on the performance of your computer. If you force to close the Terminal, please kill the processes manually in the system monitor. 
 
 
 == Thanks ==
