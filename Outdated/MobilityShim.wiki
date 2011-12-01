@@ -1,6 +1,6 @@
 = Behavior of the Mobility Shim and Related Shims =
 
-As it stands now, the mobility shim doesn't really work, and there are additional issues that prevent it from working well with other shims to handle disconnections when IPs change or NATs are involved.
+The major issues with the mobility shim and NAT shim are all fixed. We still don't have a shim for handling the server changing IP, though.
 
 ----
 [[TOC(inline)]]
@@ -40,8 +40,7 @@ The NAT shim allows a server to be behind a NAT by forwarding all traffic throug
  * Forwarder relays traffic between server and client
 
 ==== Issues ====
- * If the connection between the server and the forwarder is broken by a disconnection, then the server socket will raise !SocketClosedLocal if getconnection is called, which I'm fairly sure shouldn't happen if the socket hasn't actually been closed locally.
- * The NAT shim uses a small enough timeout when connecting to a forwarder to register itself as a server, and the coordination shim is slow enough when first connecting, that in practice you can't listen for connections unless you increase the DEFAULT_TIMEOUT value in natpunchshim.repy
+None that I'm aware of
 
 [[BR]]
 
@@ -91,9 +90,9 @@ Putting the client behind a NAT doesn't actually make a difference from not havi
 ----
 If the server is behind a NAT, then you need to use the NAT shim somewhere in the shim stack. Shims can then either be above the NAT shim or between the NAT shim and the NAT forwarder.
 
-If we put the mobility shim above the NAT shim, then we run into problems with disconnections breaking the connection created by the NAT shim's listenforconnection method to get new connections from the server. Additionally, if the server changes IP, then we still have problems reconnecting. After completely fixing the NAT shim and writing a new shim to handle the server changing IP, then we won't have to have anything special in the forwarder's shim stack since it will be possible to accommodate putting the mobility shim above the NAT shim. Once this works properly, we should even be able to handle switching NAT forwarders if the old one stops working.
+If we put the mobility shim between the NAT shim and the forwarder, then everything will work since the NAT forwarder doesn't open any connections to either the server or the client. We could even have both the client and the server being behind NATs and changing IP address, and the configuration would still be able to recover from disconnections. This is, of course, assuming the NAT forwarder's IP address doesn't change.
 
-If we put the mobility shim between the NAT shim and the forwarder, then everything will work as long as we use a sane value for DEFAULT_TIMEOUT in natpunchshim.repy. This follows from the fact that the NAT forwarder doesn't open any connections to either the server or the client. We could even have both the client and the server being behind NATs and changing IP address, and the configuration would still be able to recover from disconnections. This is, of course, assuming the NAT forwarder's IP address doesn't change.
+If we put the mobility shim above the NAT shim, then I think we run into problems if the server changes IP. Once we have a shim that handles the server changing IP, we should be able to handle this, though.
 
 
 [[BR]]
