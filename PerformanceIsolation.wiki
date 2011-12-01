@@ -128,7 +128,7 @@ If the first 2 numbers do not differ from the other 3 very much, the performance
 
 If the first 2 numbers do differ from the other 3 very much, which means that the contention by the stress has slowed down the runtime and the performance isolation is bad. 
 
-And at last, the percentage of the increase if the runtime between before and after stress is given, which can show the performance isolation clearly. 
+And at last, the percentage of the increase of the runtime between before and after stress is given, which can show the performance isolation clearly. 
 
 
 == Overhead of the VMs ==
