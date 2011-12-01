@@ -3,9 +3,9 @@
 
 This set of benchmarks will provide information about the performance isolation and the overhead of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  By checking the amount of memory the VMs are using, it is easy to find out the overhead of the different VMs. 
 
-Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
+Running these benchmarks will take about 10-15 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
 
-Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux / Mac OS X version (hereafter referred to as the Linux version). Either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
+Benchmarks which support three different kinds of OS are offered, a Windows version and a Linux and a Mac OS X version. Either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
 
 ----
 
@@ -59,6 +59,13 @@ Python tests can be run without Seattle. Users can either run the sh/bat script 
 
 
 
+== Setup Benchmarks in Macos ==
+
+
+The steps for setup in Macos are the same as the ones for Linux. 
+
+
+
 == Setup Benchmarks in Windows ==
 
 
@@ -82,6 +89,7 @@ Each type of benchmark has its own script to initiate the benchmarks.
 If Permission not Allowed, please use chmod 755 to change the permission of the script or right click the script file to change the permission. 
 
 To run the tests in Windows, run the *.bat files.
+And do not worry about the network communication which may be shown in the terminal. It is just acting the role of the timer. 
 
 
 
