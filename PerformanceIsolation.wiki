@@ -69,7 +69,7 @@ Run the iozoneSetup.exe and install it under both the for_test_python and for_te
 
 The other steps for setup in Windows are the same as the ones for Linux. 
 
-
+----
 
 == Running the Repy Benchmarks ==
 Each type of benchmark has its own script to initiate the benchmarks.
@@ -109,7 +109,7 @@ Each type of benchmark has its own script to initiate the benchmarks.
  * To run the memory bomb tests, invoke ./memorybomb.sh
 To run the tests in Windows, run the *.bat files.
 
-
+----
 
 == Interpreting the result of the benchmarks ==
 The benchmarks will return several result files to illustrate the isolation of Seattle. 
