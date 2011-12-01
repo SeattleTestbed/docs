@@ -1,7 +1,7 @@
 = Performance Isolation Benchmarks =
 
 
-This set of benchmarks will provide information about the performance isolation of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  
+This set of benchmarks will provide information about the performance isolation and the overhead of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  By checking the memory which VMs are using, it is easy to find out the overhead of the different VMs. 
 
 Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
 
@@ -16,7 +16,7 @@ Benchmarks which support two different kinds of OS are offered, a Windows versio
 
 == Setup Benchmarks in Linux ==
 
-=== Setup Repy tests ===
+=== Setup Repy Tests ===
 
 
 Notice: the repy test can only be tested upon Seattle platform of Repy_v2. For how to download and use repy_v2.
@@ -48,10 +48,17 @@ cp for_test_repy/* bench/
 The for_test_repy can be found in the zip file.
 
 
-=== Setup Python tests ===
+=== Setup Python Tests ===
 
 
 Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
+
+
+=== Setup Java Tests ===
+
+
+Java tests are used to 
+
 
 
 == Setup Benchmarks in Windows ==
