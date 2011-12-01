@@ -121,7 +121,16 @@ The first 2 numbers in each file illustrate the run time of calculating Fibonacc
 
 If the first 2 numbers do not differ from the other 3 very much, the performance isolation is quite good. 
 
-If the first 2 numbers do differ from the other 3 very much, the performance isolation is bad. 
+If the first 2 numbers do differ from the other 3 very much, which means that the contention by the stress has slowed down the runtime and the performance isolation is bad. 
+
+And at last, the percentage of the increase if the runtime between before and after stress is given, which can show the performance isolation clearly. 
+
+
+== Overhead of the VMs ==
+Another important thing of a good VM is its overhead. It can be understood easily that it is much better if your VM is lightweight which means you can run hundreds and thousands VMs together than only 5 or 6 VMs together. We can calculate the overhead of the VMs by measuring the memory it will take. And we can also conclude the number of VMs your computer can run by dividing the whole memory of your computer. 
+
+
+To measure the memory which a VM will cost, we can just open the System Monitor of your OS and check the memory it will take for a certain VM. Also you can change the whole memory you are using now by adding or reducing a VM and then find out the difference between them. 
 
 
 == Warnings ==
@@ -131,7 +140,7 @@ If the first 2 numbers do differ from the other 3 very much, the performance iso
 
 
 == Thanks ==
-We would appreciate it if you can send the results of the benchmarks to us and also include your computer specifications(such as OS, cpu(including cores and threads of the cpu), memory, etc).  We would also appreciate it if you could contact us if you encounter any problems.
+We would appreciate it if you can send the results of the benchmarks to us and also include your computer specifications(such as OS, cpu(including cores and threads of the cpu), memory, etc) and the performance of the VMs(such as the version, overhead, cpu cores, cpu performance, memory, disk of the VMs).  We would also appreciate it if you could contact us if you encounter any problems.
 
 
 Please contact: enchl317 at gmail.com
