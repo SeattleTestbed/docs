@@ -37,6 +37,8 @@ svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2
 This will create a folder `repy_v2` with the code from the repository.
 
 
+Download the linux.zip file from the bottom of this page and extract it to the $SEATTLE/repy_v2/ 
+
 Create a folder to run the benchmarks. This can be done like so:
 
 {{{
@@ -44,7 +46,7 @@ cd $SEATTLE/repy_v2/
 mkdir bench/
 python preparetest.py bench
 cp benchmarking-support/* bench/
-cp for_test_repy/* bench/
+cp linux/for_test_repy/* bench/
 }}}
 
 The for_test_repy can be found in the zip file.
