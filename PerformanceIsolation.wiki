@@ -5,7 +5,9 @@ This set of benchmarks will provide information about the performance isolation 
 
 Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
 
-Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page.
+Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
+
+The MACOS is the same as the Linux version. 
 
 ----
 
@@ -81,6 +83,7 @@ Each type of benchmark has its own script to initiate the benchmarks.
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, invoke ./memorybomb.sh
 If Permission not Allowed, please use chmod 755 to change the permission of the script or right click the script file to change the permission. 
+
 To run the tests in Windows, run the *.bat files.
 
 
