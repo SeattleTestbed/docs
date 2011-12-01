@@ -5,9 +5,7 @@ This set of benchmarks will provide information about the performance isolation 
 
 Running these benchmarks will take about 6-7 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
 
-Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux version, either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
-
-The MACOS is the same as the Linux version. 
+Benchmarks which support two different kinds of OS are offered, a Windows version and a Linux / Mac OS X version (hereafter referred to as the Linux version). Either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
 
 ----
 
