@@ -74,7 +74,7 @@ http://www.iozone.org/src/current/IozoneSetup.zip
 
 Run the iozoneSetup.exe and install it under both the for_test_python and for_test_repy directory. 
 
-The other steps for setup in Windows are the same as setup benchmarks in Linux. 
+The other steps for setup in Windows are the same as the ones for Linux. 
 
 
 
@@ -99,7 +99,7 @@ Setup Python benchmarks in VMs:
  * Create 5 different VMs in the Workstation. 
  * Run the Python tests separately without stress in first 4 VMs TWICE by "python ***.py" and the results will be saved in the file "***x.txt". (*** means the kind of the test and x means the number of the VM)
  * Run the stress file in the 5th VM. 
- * Run the Python tests separately THREE TIMES in first 4 VMs and the results will also be saved in the "***x.txt" file. 
+ * Run the Python tests separately THREE TIMES simultaneously in first 4 VMs(run the same test in each VM at the same time) and the results will also be saved in the "***x.txt" file. 
 
 Example:
 Take running CPU benchmarks in VMWare Workstation as an example. 
@@ -107,7 +107,7 @@ Take running CPU benchmarks in VMWare Workstation as an example.
 Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs TWICE and gain the results files. This will produce cpu1.txt, cpu2.txt, cpu3.txt and cpu4.txt respectively in the four VMs and each of them will contain 2 numbers of runtime without stress. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs THREE TIMES and get the results. And now those txt files should contain 5 numbers and the last three numbers are the runtime with stress.
 
 === Running the Benchmarks without VMs ===
-This is just for tests and we do not recommend users to do this.
+This is just for testing purposes and we do not recommend users to do this.
 
 Each type of benchmark has its own script to initiate the benchmarks.
  * To run the cpu bomb tests, invoke ./cpubomb.sh
@@ -118,31 +118,31 @@ To run the tests in Windows, run the *.bat files.
 
 
 
-== Result of the benchmarks ==
+==Interpreting the result of the benchmarks ==
 The benchmarks will return several result files to illustrate the isolation of Seattle. 
-The results of benchmarks are related to the kind of them, for example: cpu bomb are cpu1.txt, cpu2.txt, cpu3.txt, cpu4.txt.
+The file names of the benchmark results are related to the type of the test, for example: cpu bomb are cpu1.txt, cpu2.txt, cpu3.txt, cpu4.txt.
 
 The first 2 numbers in each file illustrate the run time of calculating Fibonacci(37) without stress. And the other 3 numbers in each file illustrate the run time of calculating Fibonacci(37) with stress. 
 
-If the first 2 numbers do not differ from the other 3 very much, the performance isolation is quite good. 
+If the first 2 numbers do not differ from the other 3 very much, than it shows that the performance isolation is quite good. 
 
-If the first 2 numbers do differ from the other 3 very much, which means that the contention by the stress has slowed down the runtime and the performance isolation is bad. 
+If the first 2 numbers differ largely from the other 3 it shows that the contention due to the stress has slowed down the runtime and that the performance isolation is bad and not effective. 
 
-And at last, the percentage of the increase of the runtime between before and after stress is given, which can show the performance isolation clearly. 
+Finally, the percentage of the increase of the runtime between before and after stress is given, which can show the performance isolation effects more clearly. 
 
 
 == Overhead of the VMs ==
-Another important thing of a good VM is its overhead. It can be understood easily that it is much better if your VM is lightweight which means you can run hundreds and thousands VMs together than only 5 or 6 VMs together. We can calculate the overhead of the VMs by measuring the memory it will take. And we can also conclude the number of VMs your computer can run by dividing the whole memory of your computer. 
+Another important factor of a good VM is its overhead.  If your VM is lightweight, it means you can run hundreds and thousands VMs together compared to a heavyweight VM, which can only run 5 or 6 VMs together. We can calculate the overhead of the VMs by measuring the memory it will take. We can also determine the number of VMs your computer can run by dividing the whole memory of your computer. An example; if a VM takes up 1 GB of RAM and a computer has 8 GB total we can run around 7 VMs(depending on the RAM required by the OS) 
 
 
-To measure the memory which a VM will cost, we can just open the System Monitor of your OS and check the memory it will take for a certain VM. Also you can change the whole memory you are using now by adding or reducing a VM and then find out the difference between them. 
+To measure the memory which a VM will cost, we can just open the System Monitor of your OS and check the memory it will take for a certain VM. Another method you can use to determine memory cost is to change the whole memory being used currently by adding or removing a VM and then find out the difference between them. 
 
 
-In Seattle, we can find the overhead of Seattle from the memory each python process uses shown in the System Monitor.
+In Seattle, we can determine the overhead by the memory each python process uses which is shown in the System Monitor.
 
 
 == Warnings ==
- * 1. Since this is a type of resources bomb benchmarks, the Python version may cause huge destruction to the computer. Because of this, it is highly recommended to run these benchmarks instead in VMs. 
+ * 1. Since this is a type of resources bomb benchmarks, the Python version may cause huge destruction to the computer. Because of this, it is highly recommended to run these benchmarks instead using VMs. 
  * 2. Don't be worried by the Repy benchmarks. They are safe enough. 
  * 3. The tests may take a lot of time to finish depending on the computer specifications. If the Terminal is forced to close , please kill the processes manually in the system monitor. 
 
