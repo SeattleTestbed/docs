@@ -58,11 +58,6 @@ The for_test_repy can be found in the zip file.
 Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
 
 
-=== Setup Java Tests ===
-
-
-Java tests are used to 
-
 
 
 == Setup Benchmarks in Windows ==
