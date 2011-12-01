@@ -21,7 +21,9 @@ The MACOS is the same as the Linux version.
 === Setup Repy Tests ===
 
 
-Notice: the repy test can only be tested upon Seattle platform of Repy_v2. For how to download and use repy_v2.
+Notice: the repy test can only be tested upon Seattle platform of Repy_v2. 
+
+For how to download and use repy_v2.
 
 
 To checkout Repy V2 from the repository with your ssh credentials, run the following, replacing USER with your username:
