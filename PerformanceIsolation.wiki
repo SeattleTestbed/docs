@@ -92,14 +92,14 @@ It is highly recommended to run the Python benchmarks in VMs, such as VMware Wor
 
 Setup Python benchmarks in VMs:
  * Create 5 different VMs in the Workstation. 
- * Run the Python tests separately without stress in first 4 VMs and gain the results. 
+ * Run the Python tests separately without stress in first 4 VMs TWICE by "python ***.py" and the results will be saved in the file "***x.txt". (*** means the kind of the test and x means the number of the VM)
  * Run the stress file in the 5th VM. 
- * Run the Python tests separately in first 4 VMs and gain the results
+ * Run the Python tests separately THREE TIMES in first 4 VMs and the results will also be saved in the "***x.txt" file. 
 
 Example:
 Take running CPU benchmarks in VMWare Workstation as an example. 
 
-Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs and gain the results files. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs and get the results. 
+Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs TWICE and gain the results files. This will produce cpu1.txt, cpu2.txt, cpu3.txt and cpu4.txt respectively in the four VMs and each of them will contain 2 numbers of runtime without stress. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs THREE TIMES and get the results. And now those txt files should contain 5 numbers and the last three numbers are the runtime with stress.
 
 === Running the Benchmarks without VMs ===
 This is just for tests and we do not recommend users to do this.
