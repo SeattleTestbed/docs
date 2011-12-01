@@ -23,7 +23,7 @@ The MACOS is the same as the Linux version.
 
 Notice: the repy test can only be tested upon Seattle platform of Repy_v2. 
 
-For how to download and use repy_v2.
+Instructions on how to download and use repy_v2:
 
 
 To checkout Repy V2 from the repository with your ssh credentials, run the following, replacing USER with your username:
@@ -74,7 +74,7 @@ http://www.iozone.org/src/current/IozoneSetup.zip
 
 Run the iozoneSetup.exe and install it under both the for_test_python and for_test_repy directory. 
 
-The others are the same as setup benchmarks in Linux. 
+The other steps for setup in Windows are the same as setup benchmarks in Linux. 
 
 
 
@@ -136,6 +136,9 @@ Another important thing of a good VM is its overhead. It can be understood easil
 
 
 To measure the memory which a VM will cost, we can just open the System Monitor of your OS and check the memory it will take for a certain VM. Also you can change the whole memory you are using now by adding or reducing a VM and then find out the difference between them. 
+
+
+In Seattle, we can find the overhead of Seattle from the memory each python process uses shown in the System Monitor.
 
 
 == Warnings ==
