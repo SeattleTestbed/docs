@@ -81,7 +81,7 @@ The other steps for setup in Windows are the same as the ones for Linux.
 
 == Running the Repy Benchmarks ==
 Each type of benchmark has its own script to initiate the benchmarks.
- * cd $SEATTLE/repy_v2/linux/for_test_python
+ * cd $SEATTLE/repy_v2/linux/for_test_repy
  * To run the cpu bomb tests, invoke ./cpubomb.sh
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
@@ -113,7 +113,7 @@ Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 dif
 This is just for testing purposes and we do not recommend users to do this.
 
 Each type of benchmark has its own script to initiate the benchmarks.
- * cd $SEATTLE/repy_v2/
+ * cd $SEATTLE/repy_v2/linux/for_test_python
  * To run the cpu bomb tests, invoke ./cpubomb.sh
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
