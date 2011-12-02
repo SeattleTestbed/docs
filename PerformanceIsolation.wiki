@@ -99,8 +99,9 @@ It is highly recommended to run the Python benchmarks in VMs, such as VMware Wor
 
 
 Setup Python benchmarks in VMs:
- * Create 5 different VMs in the Workstation. 
- * Run the Python tests separately without stress in first 4 VMs TWICE by "python ***.py" and the results will be saved in the file "***x.txt". (*** means the kind of the test and x means the number of the VM)
+ * Create 5 different VMs in the Workstation.
+ * cd $SEATTLE/repy_v2/linux/for_test_python
+ * Run the Python tests separately without stress in first 4 VMs TWICE by "python ***.py" and the results will be saved in the file "***x.txt". (*** means the kind of the test and x means the number of the VM. example: python cpubomb1.py )
  * Run the stress file in the 5th VM. 
  * Run the Python tests separately THREE TIMES simultaneously in first 4 VMs(run the same test in each VM at the same time) and the results will also be saved in the "***x.txt" file. 
 
