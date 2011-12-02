@@ -89,6 +89,9 @@ Each type of benchmark has its own script to initiate the benchmarks.
 If Permission not Allowed, please use chmod 755 to change the permission of the script or right click the script file to change the permission. 
 
 To run the tests in Windows, run the *.bat files.
+
+
+Be sure that you should connect to the Internet when you are running tests in Windows.
 And do not worry about the network communication which may be shown in the terminal. It is just acting the role of the timer. 
 
 
@@ -110,6 +113,8 @@ Take running CPU benchmarks in VMWare Workstation as an example.
 
 Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs TWICE and gain the results files. This will produce cpu1.txt, cpu2.txt, cpu3.txt and cpu4.txt respectively in the four VMs and each of them will contain 2 numbers of runtime without stress. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs THREE TIMES and get the results. And now those txt files should contain 5 numbers and the last three numbers are the runtime with stress.
 
+Be sure that you should connect to the Internet when you are running tests in Windows.
+
 === Running the Benchmarks without VMs ===
 This is just for testing purposes and we do not recommend users to do this.
 
@@ -120,6 +125,8 @@ Each type of benchmark has its own script to initiate the benchmarks.
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, invoke ./memorybomb.sh
 To run the tests in Windows, run the *.bat files.
+
+Be sure that you should connect to the Internet when you are running tests in Windows.
 
 ----
 
