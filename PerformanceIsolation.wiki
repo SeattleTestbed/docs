@@ -113,6 +113,8 @@ Take running CPU benchmarks in VMWare Workstation as an example.
 
 Run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py separately first in 4 different VMs TWICE and gain the results files. This will produce cpu1.txt, cpu2.txt, cpu3.txt and cpu4.txt respectively in the four VMs and each of them will contain 2 numbers of runtime without stress. Run cpubomb.py in the 5th VM and run cpubomb1.py, cpubomb2.py, cpubomb3.py, cpubomb4.py in the first 4 different VMs THREE TIMES and get the results. And now those txt files should contain 5 numbers and the last three numbers are the runtime with stress.
 
+The stress files are cpubomb.py, fork.py, memorybomb.py and run_iozone, respectively. 
+
 Be sure that you should connect to the Internet when you are running tests in Windows.
 
 === Running the Benchmarks without VMs ===
