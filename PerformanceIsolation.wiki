@@ -13,11 +13,7 @@ Benchmarks which support three different kinds of OS are offered, a Windows vers
 
 ----
 
-
-== Setup Benchmarks in Linux ==
-
-=== Setup Repy Tests ===
-
+== Setup Seattle ==
 
 Notice: the repy test can only be tested upon Seattle platform of Repy_v2. 
 
@@ -35,6 +31,14 @@ svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2
 }}} 
 
 This will create a folder `repy_v2` with the code from the repository.
+
+---
+
+
+== Setup Benchmarks in Linux ==
+
+=== Setup Repy Tests ===
+
 
 
 Download the linux.zip file from the bottom of this page and extract it to the $SEATTLE/repy_v2/ 
