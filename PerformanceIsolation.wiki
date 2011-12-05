@@ -32,7 +32,7 @@ svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2
 
 This will create a folder `repy_v2` with the code from the repository.
 
----
+----
 
 
 == Setup Benchmarks in Linux ==
