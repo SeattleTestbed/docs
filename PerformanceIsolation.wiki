@@ -81,6 +81,17 @@ Run the iozoneSetup.exe and install it under both the for_test_python and for_te
 
 The other steps for setup in Windows are the same as the ones for Linux. 
 
+Create a folder to run the benchmarks. This can be done like so:
+
+{{{
+cd $SEATTLE/repy_v2/
+mkdir bench/
+python preparetest.py bench
+copy all the files in benchmarking-support directory to the bench directory
+copy all the files in windows/for_test_repy directory to the bench directory
+}}}
+
+
 ----
 
 == Running the Repy Benchmarks ==
