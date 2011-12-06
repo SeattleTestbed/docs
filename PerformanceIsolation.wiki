@@ -86,7 +86,6 @@ Be sure that you should connect to the Internet when you are running tests in Wi
 
 
 == Running the Benchmarks in Virtual Machines ==
-=== Running the Benchmarks in VMs ===
 
 It is highly recommended to run the benchmarks in VMs, such as VMware Workstation, Virtual Box, Xen, etc. 
 
