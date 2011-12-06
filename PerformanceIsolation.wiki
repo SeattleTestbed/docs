@@ -3,7 +3,7 @@
 
 This set of benchmarks will provide information about the performance isolation and the overhead of different virtual machine technologies.   By comparing the results of performance with and without stress in different VMs, you can use this to determine how well different types of VM software isolate performance of resources like CPU, memory, disk, and threads / processes.  By checking the amount of memory the VMs are using, it is easy to find out the overhead of the different VMs. 
 
-Running these benchmarks will take about 10-15 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
+We have two sets of benchmarks, one testing Seattle's upcoming Repy V2, and another non-Repy specific. Running these benchmarks will take about 10-15 minutes, depending on the speed of your system and type of benchmarks you will run. You can decide which benchmarks you want to run. 
 
 Benchmarks which support three different kinds of OS are offered, a Windows version and a Linux and a Mac OS X version. Either can be downloaded to run the test.  The links can be found on the bottom of this Wiki page. 
 
@@ -13,108 +13,83 @@ Benchmarks which support three different kinds of OS are offered, a Windows vers
 
 ----
 
-== Setup Seattle ==
+== Setting up The Benchmarks ==
 
-Notice: the repy test can only be tested upon Seattle platform of Repy_v2. 
+=== Set up Repy V2 ===
 
-Instructions on how to download and use repy_v2:
-
-
-To checkout Repy V2 from the repository with your ssh credentials, run the following, replacing USER with your username:
-{{{
-svn co svn+ssh://USER@seattle.cs.washington.edu/seattle/branches/repy_v2
-}}}
-
-If you do not have an ssh account, you can check the code out anonymously:
+Check out Repy V2 from the repository. You can check the code out anonymously:
 {{{
 svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2
 }}} 
 
-This will create a folder `repy_v2` with the code from the repository.
+If you have ssh credentials on seattle.cs.washington.edu, you might alternatively run the following, replacing USER with your username:
+{{{
+svn co svn+ssh://USER@seattle.cs.washington.edu/seattle/branches/repy_v2
+}}}
 
-----
+Either command will create a folder `repy_v2` with the code from the repository.
 
-
-== Setup Benchmarks in Linux ==
 
 === Setup Repy Tests ===
 
 
+Depending on your operating system, download linux.zip, macos.zip, or windows.zip file from the bottom of this page and extract it to  the repy_v2 directory created in the previous step.
 
-Download the linux.zip file from the bottom of this page and extract it to the $SEATTLE/repy_v2/ 
-
-Create a folder to run the benchmarks. This can be done like so:
+Next, create a folder to run the benchmarks. On Linux and Mac, this can be done like so:
 
 {{{
-cd $SEATTLE/repy_v2/
+cd path/to/repy_v2/
 mkdir bench/
 python preparetest.py bench
 cp benchmarking-support/* bench/
-cp linux/for_test_repy/* bench/
+cp linux/for_test_repy/* bench/   # On Mac, use "cp mac/for_test_repy/* bench/" instead.
+}}}
+
+On Windows, use
+
+{{{
+cd path\to\repy_v2
+mkdir bench
+python preparetest.py bench
+copy benchmarking-support\* bench\
+copy windows\for_test_repy\* bench\
 }}}
 
 
+=== Setting up the Disk Benchmark on Windows ===
 
-=== Setup Python Tests ===
-
-
-Python tests can be run without Seattle. Users can either run the sh/bat script files to run the tests(which may cause CRASH) or run them in the VMs(highly recommended).
-
-
-
-
-== Setup Benchmarks in Macos ==
-
-
-The steps for setup in Macos are the same as the ones for Linux. 
-
-
-
-== Setup Benchmarks in Windows ==
-
-
-If the OS used is Windows, iozone is needed to support the disk test. It can be downloaded from the link below:
+On Windows, iozone needs to be installed separately. It can be downloaded from the link below:
 
 http://www.iozone.org/src/current/IozoneSetup.zip
 
-Run the iozoneSetup.exe and install it under both the for_test_python and for_test_repy directory. 
-
-The other steps for setup in Windows are the same as the ones for Linux. 
-
-Create a folder to run the benchmarks. This can be done like so:
-
-{{{
-cd $SEATTLE/repy_v2/
-mkdir bench/
-python preparetest.py bench
-copy all the files in benchmarking-support directory to the bench directory
-copy all the files in windows/for_test_repy directory to the bench directory
-}}}
-
-
-----
-
-== Running the Repy Benchmarks ==
-Each type of benchmark has its own script to initiate the benchmarks.
- * cd $SEATTLE/repy_v2/linux/for_test_repy
- * To run the cpu bomb tests, invoke ./cpubomb.sh
- * To run the fork bomb test, invoke ./fork.sh
- * To run the disk bomb test, invoke ./disk.sh
- * To run the memory bomb tests, invoke ./memorybomb.sh
-If Permission not Allowed, please use chmod 755 to change the permission of the script or right click the script file to change the permission. 
-
-To run the tests in Windows, run the *.bat files.
-
-
-Be sure that you should connect to the Internet when you are running tests in Windows.
-And do not worry about the network communication which may be shown in the terminal. It is just acting the role of the timer. 
+Run iozoneSetup.exe and install it under both the for_test_python and for_test_repy directories. 
 
 
 
-== Running the Python Benchmarks ==
+
+== Running the Benchmarks ==
+
+''NOTE'': These benchmarks are quite resource-intensive and may lock your machine for considerable amounts of time. Please be patient! For better control, consider running the tests inside of virtual machines (see below for instructions).
+
+Each type of benchmark has its own script to initiate the benchmarks. On Linux or Mac, 
+ * cd for_test_repy
+ * To run the CPU benchmark, invoke ./cpubomb.sh
+ * To run the fork benchmark, invoke ./fork.sh
+ * To run the disk benchmark, invoke ./disk.sh
+ * To run the memory benchmark, invoke ./memorybomb.sh
+
+If you can't run the scripts due to a "Permission not Allowed" or similar error, please use chmod 755 to change the permission of the script to make it executable. 
+
+To run the tests in Windows, run the corresponding *.bat files.
+
+Be sure that you should connect to the Internet when you are running tests in Windows. Do not worry about the network communication which may be shown in the terminal. It is just acting the role of the timer. 
+
+
+
+== Running the Benchmarks in Virtual Machines ==
 === Running the Benchmarks in VMs ===
-It is highly recommended to run the Python benchmarks in VMs, such as VMware Workstation, Virtual Box, Xen, etc. 
 
+It is highly recommended to run the benchmarks in VMs, such as VMware Workstation, Virtual Box, Xen, etc. 
 
 Setup Python benchmarks in VMs:
  * Create 5 different VMs in the Workstation.
@@ -141,6 +116,7 @@ Each type of benchmark has its own script to initiate the benchmarks.
  * To run the fork bomb test, invoke ./fork.sh
  * To run the disk bomb test, invoke ./disk.sh
  * To run the memory bomb tests, invoke ./memorybomb.sh
+
 To run the tests in Windows, run the *.bat files.
 
 Be sure that you should connect to the Internet when you are running tests in Windows.
