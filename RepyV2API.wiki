@@ -1031,6 +1031,24 @@ Returns a unique name that indicates the thread's name.   Don't use this to deri
 
 [[BR]]  
 ==== Miscellaneous functions ====
+===== log(*args) =====
+Prints output to the console
+ * Doc string:
+
+  <Purpose>
+    Used to store program output. Prints output to the console by default.
+
+  <Arguments>
+    Takes a variable number of arguments to print. They are wrapped in str(), so it is not necessarily a string.
+
+  <Exceptions>
+    None
+
+  <Returns>
+    Nothing
+
+[[BR]]
+
 ===== getruntime() =====
 ----
 
