@@ -7,6 +7,8 @@ This page contains information useful to developers working on Seattle.   Anythi
    * '''[wiki:ContributorAccounts Getting accounts] for Seattle SVN, Wiki, testbed machines, and seattle-devel'''
    * '''[wiki:ManagingTracTickets Managing Trac tickets]'''
    * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
+   * [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands] 
+   * [http://ariejan.net/2007/07/03/how-to-create-and-apply-a-patch-with-subversion How to create and apply a patch with SVN] 
 
  * Programming in Repy
    * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
