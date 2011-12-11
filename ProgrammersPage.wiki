@@ -22,9 +22,11 @@ After doing one of the above tutorials, do the following tutorial to learn how t
 
  * [wiki:RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
 
-If you would prefer to use Repy V2, see this tutorial on how to check it out from subversion and run the unit tests on your system:
+If you would prefer to use Repy V2, it is worthwhile to read through the following tutorials:
 
  * [wiki:RepyV2CheckoutAndUnitTests Checking out Repy V2 and Running the included unit tests]
+
+ * [wiki:RepyV2SecurityLayers How to use Security Layers with Repy V2]
 
 == Other Resources ==
  * An easy way to start learning Seattle is to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo].
