@@ -55,24 +55,3 @@ You may get an error `python: can't open file 'utf.py': [Errno 2] No such file o
 This is because `preparetest.py` was ran without the `-t` switch.
 
 Rerunning `preparetest.py` with `-t` will copy all of the needed files.
-
-=== Python 2.7 exceptions ===
-If you have python 2.7 installed, you may have tests fail with the following message:
-{{{
-Exception exception_hierarchy.RunBuiltinException: RunBuiltinException() in <module 'threading' from '/usr/lib/python2.7/threading.pyc'> ignored
-}}}
-
-This is possibly because your default `python` may be `python2.7`.
-
-You can check which version of python is called by running `python --version` in the command line.
-
- To fix this problem, run repy with the correct version of python
-{{{
-python2.6 utf.py -m repyv2api
-}}}
-Note that you can also call python with the full path
-{{{
-/usr/bin/python2.6 utf.py -m repyv2api
-}}}
-
-Note: The steps are the same if you have python 2.5.
