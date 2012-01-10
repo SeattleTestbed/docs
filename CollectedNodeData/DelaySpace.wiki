@@ -1,6 +1,7 @@
 == Exploring the Delay Space with Seattle ==
 [[TOC(inline)]]
 
+This work was performed by [http://www.uni-bamberg.de/en/ktr/staff/eittenberger-philipp/ Philipp Eittenberger], Marcel Großmann and Udo Krieger from the [http://www.uni-bamberg.de/en/ktr/ Computer Networks Group (KTR)] of Otto-Friedrich University Bamberg, Germany.
 
 === Modified Divide-and-Conquer Algorithm ===
 [[Image(allpairsping.png, 200px, right, nolink)]]
