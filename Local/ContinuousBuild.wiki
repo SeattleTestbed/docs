@@ -32,7 +32,7 @@ Generally:
   * cp trunk/continuousbuild/config.py.sample trunk/continuousbuild/config.py
   * create a directory for output, e.g. trunk/continuousbuild/output
   * edit trunk/continuousbuild/config.py so that it puts log output in trunk/continuousbuild/output
-  * Edit the user's crontab so taht cron_run_tests.sh gets run hourly.
+  * Edit the user's crontab so that cron_run_tests.sh gets run hourly.
   * Put the blackbox.cs continuousbuild user's ssh pubkey in the slave continuousbuild user's .ssh/authorized_keys file.
 
 After setting things up on the slave, go to the master (blackbox.cs), edit /home/continuousbuild/pull_test_results.sh, and modify it to rsync over the files from the new slave.
