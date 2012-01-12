@@ -1,7 +1,4 @@
-As mentioned before, the goal of Seattle is to create a platform for networking and distributed systems research. This page  attempts to explain the different parts of Seattle and how they come together to meet this goal.
-
-
-It does this in a few steps:
+The goal of Seattle is to create a platform for networking and distributed systems research. This page attempts to explain the different parts of Seattle and how they come together to meet this goal.
 
 = Repy =
 
