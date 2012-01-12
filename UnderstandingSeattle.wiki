@@ -5,7 +5,7 @@ The goal of Seattle is to create a platform for networking and distributed syste
 The first part of the Seattle is Repy. Repy is the sandbox which restricts API calls and limits the consumption of resources such as CPU, memory, storage space, and network bandwidth.
 
 == Safe API ==
-Repy has a limited API for accessing system resources. This is in order to prevent a malicious user using a bug in the Python libraries to escape from the sandbox. The full API is available [wiki:FutureRepyAPI Repy V2 here].
+Repy has a limited API for accessing system resources. This is in order to prevent a malicious user using a bug in the Python libraries to escape from the sandbox. The full API is available [wiki:FutureRepyAPI here].
 
 == Safety Analysis ==
 Repy disallows code that could allow the program direct access to system resources. Instead, it only allows calls that are in the Repy API. Because Repy is largely a subset of Python, it can leverage the Python interpreter to examine the program's abstract syntax tree. If forbidden code is inside of the script, Repy refuses to run it.
