@@ -44,7 +44,7 @@ The following are defined in the repyhelper module:
       be shared, or the translation should have it's own. Default True
     callfunc:
       Optional parameter for what the callfunc of this translation should be.
-      Should be valid python string. Deafault "import"
+      Should be a valid python string. Default "import"
     callargs:
       A list of strings to use as the repy's "callargs" variable. Default empty list.
       
