@@ -13,11 +13,9 @@ For example, many operating systems only allow privileged users to read or modif
 === Preparing the location ===
 You first need to prepare the location. The full directions are [wiki:RepyV2CheckoutAndUnitTests#Preparingthetests here]. Below is a summary:
 
-Change into the `repy_v2` directory.
-
-Create folder called `prepared_tests`
-
-Run `python preparetest.py -t prepared_tests/`
+ * Change into the `repy_v2` directory.
+ * Create a folder called `prepared_tests`
+ * Run `python preparetest.py -t prepared_tests/`
 
 === Running the code ===
 Change into the `prepared_tests` directory.
