@@ -27,7 +27,7 @@ Run the following code:
 python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy
 }}}
 
-where [security_layer] is the name of the security layer, and [program] is the repy program.
+where `[security_layer]` is the name of the security layer, and `[program]` is the repy program.
 
 
 == Writing a Security Layer ==
