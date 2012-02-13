@@ -38,5 +38,5 @@ Explains how to go about deploying a new version of the code, which consists of 
     * Pushing the update to all existing nodes (through the SoftwareUpdater) is done by this update_and_build.py script, not the remaining steps.
     * The remaining steps are only to make installers downloaded from SeattleGeni be the new version you are releasing.
   1. Navigate to the base installer directory (/var/www/dist as of January 2009).
-  1. scp the new files here (these will be the versioned files, e.g. seattle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /var/www/dist on the seattle geni server (seattlegeni.cs.washington.edu).
+  1. scp the new files here (these will be the versioned files, e.g. seattle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /home/custominstallerbuilder/live/custominstallerbuilder/html/static/installers/base/ (this is where the custom installer builder resides) on the seattle geni server (seattlegeni.cs.washington.edu).
   1. Remove any installers cached in /var/www/dist/geni/*_dist/.   You can do {{{rm -rf /var/www/dist/geni/*_dist/}}}.
