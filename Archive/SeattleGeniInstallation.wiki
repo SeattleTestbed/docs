@@ -326,6 +326,12 @@ then you need to enable ssl by running:
 $ sudo a2enmod ssl
 }}}
 
+For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. If they don't have the right permissions, run the following command in your SeattleGENI directory:
+{{{
+#!sh
+$ chmod -R o+rx seattle/ seattlegeni/
+}}}
+
 If you try to access your SeattleGENI installation's website now, then it's possible you'll see an exception like this:
 {{{
 Cannot open file for translation '/home/geni/live/seattle/rsa.repy': [Errno 13] Permission denied: '/home/geni/live/seattle/rsa_repy.py'
