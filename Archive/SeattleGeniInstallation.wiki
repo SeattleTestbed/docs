@@ -326,7 +326,7 @@ then you need to enable ssl by running:
 $ sudo a2enmod ssl
 }}}
 
-For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. If they don't have the right permissions, run the following command in your SeattleGENI directory:
+For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your SeattleGENI directory:
 {{{
 #!sh
 $ chmod -R o+rx seattle/ seattlegeni/
