@@ -40,7 +40,8 @@ The following links will aid students in becoming comfortable with Python, Repy 
 [[BR]]
 === Building a security layer  ===
 ----
-Students are now ready to build a reference monitor.  A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
+
+Students are now ready to build a reference monitor. There are a number of sub-steps to this.     
 [[BR]]
 === Testing your security layer ===
 ----
@@ -51,6 +52,8 @@ In the second half of the assignment students will create programs which write "
 == Notes and Resources ==
 ----
    
+ * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
+
  * The following link is an excellent source for information about security layers: http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf
 
  * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
