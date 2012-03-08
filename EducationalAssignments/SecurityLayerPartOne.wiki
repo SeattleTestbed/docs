@@ -1,7 +1,7 @@
 
 = Building a reference monitor =  
 
-This assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then will write a series of test cases to insure their reference monitor is secure.  Finally, they will attack their classmates reference monitors.  
+This assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then will write a series of test cases to insure their reference monitor is secure. 
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
 
@@ -42,7 +42,7 @@ The following links will aid students in becoming comfortable with Python, Repy 
 ----
 Students are now ready to build a reference monitor.  A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
 [[BR]]
-=== Attacking other security layers ===
+=== Attacking security layers ===
 ----
 In the second half of the assignment students will create programs which write "MZ" to the first two characters of a file.  These programs should be similar to the test cases used in the first half of the assignment.  Attacks should include several methods of attempting to write "MZ" to a file.  Students will then test their attack on a collection of reference monitors supplied by the instructor.  Students should attack at least five other reference monitors.  Students should be graded based on how well their reference monitor performs when attacked by others.  Also students should be graded on how well they critique the reference monitors of others.
 
@@ -76,7 +76,12 @@ As extra credit, students may make a second reference monitor which disallows 'p
 == What to turn in? ==
 ----
 
-
+In the first half of the assignment:
  * Turn in a repy file called reference_monitor_[student's name or id number].repy
  * For extra credit turn in a second repy file called extra_credit_[student's name or id number].repy
 
+
+For the second half of the assignment:
+
+ * Turn in the test cases used to attack a given reference monitor.
+ * Turn in the write up of each reference monitor attacked, with critique of the reference monitor. Critique should include all test cases that worked.
