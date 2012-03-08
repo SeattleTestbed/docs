@@ -1,7 +1,7 @@
 
 = Building a Security Layer =  
 
-This assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then will write a series of test cases to insure their reference monitor is secure. 
+This exercise is intended to teach students how security mechanisms work.  Specifically, this assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then they will write a series of test cases to insure their reference monitor is secure. 
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
 
@@ -35,17 +35,21 @@ The following links will aid students in becoming comfortable with Python, Repy 
  * Python tutorial: '''[http://docs.python.org/tutorial/ here]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy here]'''
 [[BR]]
+=== 
+
+[[BR]]
 == Implementation ==
 
 [[BR]]
 === Building a security layer  ===
 ----
 
-Students are now ready to build a reference monitor. In order to run a security layer, students should be comfortable with command line utilities.  The following call at a terminal will execute a given reference monitor:
+Students are now ready to build a reference monitor.
 
-{{{
-python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy
-}}}
+ In order to run a security layer, students should be comfortable with command line utilities.  The following call at a terminal will execute a given reference monitor:
+
+{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
+
 
  
 [[BR]]
