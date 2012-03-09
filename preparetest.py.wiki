@@ -8,6 +8,13 @@ The purpose of `preparetest.py` is to initialize a directory with the required f
 == History ==
 `preparetest.py` was adapted from the bash script `preparetest`.
 
+== Usage ==
+
+{{{
+python preparetest.py [-t] [-v] [-c] [-r] <target>
+}}}
+
+where `<target>` is the target directory that the files will be copied to.
 
 == Operation explained ==
 `preparetest.py` takes a target directory, and initializes it with all the files required to run Repy programs. It does this in a few steps:
