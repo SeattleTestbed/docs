@@ -89,9 +89,9 @@ This will allow students to test their security layer.
 == Notes and Resources ==
 ----
    
- * A list of command line utilities for windows can be found '''[http://commandwindows.com/command3.htm here]'''
+ * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
 
- * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html here]'''
+ * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html]'''
 
  * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
 
