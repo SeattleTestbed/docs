@@ -107,7 +107,8 @@ This will allow students to test their security layer.
  * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
 
  * For a complete list of syntax in Repyv2 pleas visit: '''[wiki:FutureRepyAPI]'''
- * The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
+ 
+* The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
 
  * '''[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py]''' is an empty security layer that doesn't perform any operations.
 
