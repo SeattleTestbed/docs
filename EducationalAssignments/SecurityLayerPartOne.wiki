@@ -1,7 +1,7 @@
 
 = Building a Security Layer =  
 
-This exercise is intended to teach students how security mechanisms work.  Specifically, this assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then they will write a series of test cases to insure their reference monitor is secure. 
+This exercise is intended to teach students how security mechanisms work.  Specifically, this assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then they will write a series of test cases to ensure their reference monitor is secure. 
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
 
@@ -14,10 +14,10 @@ This exercise is intended to teach students how security mechanisms work.  Speci
 Through this assignment students will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: Students are expected to only disallow "MZ" to the be the first two characters.    All other characters should be allowed.
- * Efficiency: Students are expected to disallow this write with a minimum amount of code.
- * Security: The attacker should not be able to get around the security layer.
+ * Efficiency: Students are expected to disallow this write with a minimum amount of resources  used.
+ * Security: The attacker should not be able to circumvent the security layer.
 
-First, students will write a security layer which blocks "MZ" in the first two characters of a file.  Second, students will create test files, to insure their security layer accomplishes the intended task. 
+First, students will write a security layer which blocks writing "MZ" in the first two characters of a file.  Second, students will create test files, to insure their security layer accomplishes the intended task. 
 
 '''Note:''' A full discourse of how to write test cases and security layers is given below.      
 
@@ -32,8 +32,8 @@ Students will need Python and the Repy API in order to complete this assignment.
 === Helpful links ===
 ----
 The following links will aid students in becoming comfortable with Python, Repy and seattle:
- * Python tutorial: '''[http://docs.python.org/tutorial/ here]'''
- * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy here]'''
+ * Python tutorial: '''[http://docs.python.org/tutorial/]'''
+ * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
 
 [[BR]]
 == Implementation ==
