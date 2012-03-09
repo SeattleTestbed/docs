@@ -1,5 +1,5 @@
-= Writing and Using Custom Security Layers in Repy V2 =
-The purpose of this page is to explain the 
+
+The purpose of this page is to explain the purpose and usage of `preparetest.py`
 
 [[TOC(inline)]]
 == Purpose ==
