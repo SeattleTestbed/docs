@@ -44,7 +44,7 @@ The following links will aid students in becoming comfortable with Python, Repy 
 
 Students are now ready to build a reference monitor.   '''[wiki:RepyV2SecurityLayers This]''' will give students a feel for the syntax used to build security layers.  Please note In order to complete this assignment students should have familiarity with basic object oriented programming, function calls, dictionaries, and network traffic. 
 
-Students will perform type checking on readat() and writeat(), two functions used in Repy to read and write a file.  An example for a modification to writeat() is shown below:
+Students will augment `readat()` and `writeat()`, two functions used in Repy to read and write a file.  An example for a modification to `writeat()` is shown below:
 
 {{{
 	def writeat(self,data,offset):
