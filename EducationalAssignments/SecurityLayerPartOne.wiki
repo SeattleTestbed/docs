@@ -71,7 +71,7 @@ x=openfile("something.file",True)
  
 # Attempt to write "MZ" to the file
 try:
-  writeat("MZ",0)
+  x.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
