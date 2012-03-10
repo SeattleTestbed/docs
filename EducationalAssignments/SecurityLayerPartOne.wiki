@@ -74,7 +74,7 @@ Before this code is analyzed and explained, it should be noted that this code is
 === Code analysis === 
 First lets talk about the structure of the code.  Notice, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
 
-Next lets look at the details of the if statement.  Notice that `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store data which will be written to the file.  The method `startswith()` checks to see if the file starts with certain characters, in this case "MZ".  
+Within the if-statement `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store data which will be written to the file.  The method `startswith()` checks to see if the file starts with certain characters, in this case "MZ".  
 
 Last, lets look at `(offset == 0)`.  The offset tells the computer how many spaces into the file we should start writing.  Thus offset = 0, means we start at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  This is due to the fact that the natural numbers start with zero.
 [[BR]]
