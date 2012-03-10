@@ -110,11 +110,9 @@ This simple attack attempts to write "MZ" to a file directly.  Please be aware t
 [[BR]]
 === Running your security layer ===
 ----
-Finally, in order to run a security layer use
+Finally, to run a security layer use at the terminal to run your security layer with your attack
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
-
-into the terminal.
 
 Make sure you have preparetest.py unpacked or this won't work!
 [[BR]]
