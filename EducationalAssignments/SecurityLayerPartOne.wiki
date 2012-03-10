@@ -19,7 +19,6 @@ Through this assignment you will gain familiarity with Repy, Python and command 
 
 [[BR]]
 == Prerequisites ==
-
 [[BR]]
 === Getting to know Python/Repy ===
 ----
