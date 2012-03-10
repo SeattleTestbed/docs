@@ -72,7 +72,7 @@ def writeat(self,data,offset):
 Before this code is analyzed and explained, it should be noted that this code is not intended to be exhaustive of all the security protocols you should implement.  For example, a good security layer should be thread safe.  If you don't know what that means please look at [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
 [[BR]]
 === Code analysis === 
-First lets talk about the structure of the code.  Notice, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
+Notice the overall structure of the code.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
 
 Within the if-statement `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store information which will be written to the file.  The method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
