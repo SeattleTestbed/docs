@@ -1,7 +1,7 @@
 
 = Building a Security Layer =  
 
-This assignment is geared towards understanding security mechanisms.  Specifically, this assignment illustrates how to create, use and test security layers. The vehicle for this security layer is a a reference monitor.   A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system. 
+This assignment is geared towards understanding security mechanisms.  Specifically, this assignment illustrates how to create, use and test security layers. The vehicle for this security layer is a reference monitor.   A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system. 
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
 
