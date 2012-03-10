@@ -11,7 +11,7 @@ This assignment is geared towards understanding security mechanisms.  Specifical
 [[BR]]
 == Overview ==
 ----
-Through this assignment students will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+Through this assignment you will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
