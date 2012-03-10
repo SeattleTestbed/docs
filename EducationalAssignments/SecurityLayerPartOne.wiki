@@ -28,7 +28,7 @@ You will need Python and the Repy API in order to complete this assignment.  Pyt
 ==== A basic tutorial on how to get RepyV2 ====
 
 
-First, make sure you have RepyV2.  Run the following command to get it (if you don't already):
+First, make sure you have RepyV2.  Run the following command to get it (if you don't already have it):
 
 {{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
 
