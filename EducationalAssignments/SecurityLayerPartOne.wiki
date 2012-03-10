@@ -76,11 +76,11 @@ First lets talk about the structure of the code.  Notice, the if-statement conta
 
 Within the if-statement `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store information which will be written to the file.  The method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
-Last, lets look at `(offset == 0)`.  The offset tells the computer how many spaces into the file we should start writing.  Thus offset = 0, means we start at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  This is due to the fact that the natural numbers start with zero.
+Lastly, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  This is has heuristic meaning in computer science.  Specifically, the first element of a data structure is usually the 0th element.  
 [[BR]]
 === Testing your security layer ===
 ----
-Once the security layer is written its time to test it.  This is done by 'attacks'.  Attacks should include several methods of attempting to write "MZ" to a file.  An example of an attack could be:
+Once the security layer is written its time to test it.  This is done by 'attacking' the security layer.  Attacks are defined as attempts mitigate a given security protocol.  In this case, attacks should include several methods of attempting to write "MZ" to a file.  An example of an attack could be:
 {{{
 # Open a file
 x=openfile("something.file",True)
@@ -102,13 +102,15 @@ finally:
   x.close()
 }}}
 
-This simple attack attempts to write "MZ" to a file in directly.  This attack is not intended to be exhaustive of all possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
+This simple attack attempts to write "MZ" to a file directly.  Please be aware this attack is not intended to be exhaustive.  There are many possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
 
-'''Note:''' There is good reason for preventing MZ to the be the first two characters of a given file.  If a file begins with MZ then the computer could interpret it as an executable.  For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
+'''Note:''' All attacks should be written in as Repy files, using the .repy extension.
+
+'''Note:''' There is good reason for preventing this type of action.  If a file begins with MZ then the computer could interpret it as an executable.  For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
 [[BR]]
 === Running your security layer ===
 ----
-Finally, in order to run a security layer with some code type
+Finally, in order to run a security layer use
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
 
