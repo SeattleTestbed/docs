@@ -1,7 +1,7 @@
 
 = Building a Security Layer =  
 
-This exercise is intended to teach students how security mechanisms work.  Specifically, this assignment illustrates how to create, use and test security layers. First, students will write a security layer called a reference monitor.   Then they will write a series of test cases to ensure their reference monitor is secure. 
+This assignment is geared towards understanding security mechanisms.  Specifically, this assignment illustrates how to create, use and test security layers. The vehicle for this security layer is a a reference monitor.   A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system. 
 
 '''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
 
@@ -13,13 +13,9 @@ This exercise is intended to teach students how security mechanisms work.  Speci
 ----
 Through this assignment students will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: Students are expected to only disallow "MZ" to the be the first two characters.    All other characters should be allowed.
- * Efficiency: Students are expected to disallow this write with a minimum amount of resources  used.
- * Security: The attacker should not be able to circumvent the security layer.
-
-First, students will write a security layer which blocks writing "MZ" in the first two characters of a file.  Second, students will create test files, to insure their security layer accomplishes the intended task. 
-
-'''Note:''' A full discourse of how to write test cases and security layers is given below.      
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+ * Security: The attacker should not be able to circumvent the security layer.     
 
 [[BR]]
 == Prerequisites ==
@@ -27,7 +23,24 @@ First, students will write a security layer which blocks writing "MZ" in the fir
 [[BR]]
 === Getting to know Python/Repy ===
 ----
-Students will need Python and the Repy API in order to complete this assignment.  Repy can be downloaded '''[https://seattle.cs.washington.edu/geni/download/flibble/ here]'''.  Once obtained students should read the Repy tutorial found [wiki:RepyTutorial here].
+You will need Python and the Repy API in order to complete this assignment.  Repy can be downloaded at '''[https://seattle.cs.washington.edu/geni/download/flibble/]'''.  Once obtained students should read [wiki:RepyTutorial].
+
+==== A basic tutorial on how to get RepyV2 ====
+
+
+First, make sure you have RepyV2.  Run the following command to get it (if you don't already):
+
+{{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
+
+In order to make sure the above command ran correctly run:
+
+{{{python preparetest.py [destdir]}}}
+
+Then run 
+
+{{{python repy.py restrictions.default [progname]}}}
+
+in order to make sure Repy files can run.
 [[BR]]
 === Helpful links ===
 ----
@@ -39,12 +52,17 @@ The following links will aid students in becoming comfortable with Python, Repy 
 == Implementation ==
 
 [[BR]]
-=== Building a security layer  ===
+=== Building the security layer  ===
 ----
-
-Students are now ready to build a reference monitor.   '''[wiki:RepyV2SecurityLayers This]''' will give students a feel for the syntax used to build security layers.  Please note In order to complete this assignment students should have familiarity with basic object oriented programming, function calls and dictionaries. 
-
-Students will augment `readat()` and `writeat()`, two functions used in Repy to read and write a file.  An example for a modification to `writeat()` is shown below:
+[[BR]]
+==== Assignment specifications ====
+----
+The reference monitor implemented in this assignment is supposed to prevent "MZ" from being written to the first two characters. The security layer will do this by adding 'security' rules to existing code.  Repy has specific syntax for how to wrap functions in files.    
+'''[wiki:RepyV2SecurityLayers]''' will give students a feel for the syntax used to build security layers.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details.
+[[BR]]
+==== A basic defense ====
+----
+So, now that you have a feel for the syntax of writing a security layer, let's look at what a preventative security might look like.  Below is some code that prevents "MZ" to be written in a very simple way.
 
 {{{
 def writeat(self,data,offset):
@@ -57,12 +75,19 @@ def writeat(self,data,offset):
 
 }}} 
 
-The above code, checks to if a file starts with "MZ".  This simple reference monitor is not intended to be exhaustive of all forms of attacks students should block against.  However, it represents an example of something that should be blocked.  
+Before this code is analyzed and explained, it should be noted that this code is not intended to be exhaustive of all the security protocols you should implement.  For example, a good security layer should be thread safe.  If you don't know what that means please look at [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+[[BR]]
+==== Code analysis ==== 
+----
+First lets talk about the structure of the code.  Notice that the if-statement contains all the mitigations for writing "MZ"(in this case one of them).  If none of the "alarms" are tripped then the `writeat()` function is executed normally.  
 
+Next lets look at the details of the if statement.  Notice that `data.startswith("MZ")` is used as condition.  In the above code snippet, `data` is a variable used to store data which will be written to the file.  The method `startswith()` checks to see if the file starts with certain characters, in this case "MZ".  
+
+Last, lets look at `(offset == 0)`.  The offset tells the computer how many spaces into the file we should start writing.  Thus if offset =4, the computer would start at the 5th position.  This is due to the nature of lists and strings.
 [[BR]]
 === Testing your security layer ===
 ----
-In the second half of the assignment students will create programs which write "MZ" to the first two characters of a file.  These programs should be similar to the test cases used in the first half of the assignment.  Attacks should include several methods of attempting to write "MZ" to a file. Students will be graded on how well, the reference monitor defends against a series of test cases, generated by the instructor.
+Once the security layer is written its time to test it.  This is done by 'attacks'.  Attacks should include several methods of attempting to write "MZ" to a file. Students will be graded on how well, the reference monitor defends against a series of test cases, generated by the instructor.
 
 Once the security layer is in place, a number of attacks need to be written.  An example of a simple attack is as follows:
 {{{
@@ -86,16 +111,20 @@ finally:
   x.close()
 }}}
 
-This simple attack attempts to write "MZ" to a file in straight forward way.  This attack is not intended to be exhaustive of all possible attacks students could implement.  However, notice if this code is run with the above security layer, it will raise an error.  Feel free to copy the code and give it a try!
+This simple attack attempts to write "MZ" to a file in straight forward way.  This attack is not intended to be exhaustive of all possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
 
+'''Note:''' There is good for preventing MZ to the be the first two characters of a given file.  If a file begins with MZ then the computer could interpret it as an executable.  For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
 [[BR]]
 === Running your security layer ===
 ----
-Finally, in order to run a security layer, students should be comfortable with command line utilities.  The following call at a terminal will execute a given reference monitor:
+Finally, in order to run a security layer,  you'll need a basic understanding of command line utilities. 
+
+
+The following call at a terminal will execute a given reference monitor:
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
 
-This will allow students to test their security layer.
+Make sure you have preparetest.py unpacked or this won't work!
 [[BR]]
 == Notes and Resources ==
 ----
@@ -122,10 +151,10 @@ This will allow students to test their security layer.
 [[BR]]
 == Extra Credit ==
 ----
-As extra credit, students may make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  This second reference monitor should be tested by students in a similar fashion as the first.  This is a natural extension of the first exercise. 
+For extra credit, make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  You will need to follow all the instructions above in order to do the extra credit.  However, there is clearly more that needs to be figured out.  
 [[BR]]
 == What to turn in? ==
 ----
 
- * Turn in a repy file called reference_monitor_[student's name or id number].repy
- * For extra credit turn in a second repy file called extra_credit_[student's name or id number].repy
+ * Turn in a repy file called reference_monitor_[ name or id number].repy
+ * For extra credit turn in a second repy file called extra_credit_[ name or id number].repy
