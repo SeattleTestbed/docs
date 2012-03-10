@@ -50,11 +50,11 @@ in order to make sure Repy files can run.  Please note Repy files end in extensi
 === Building the security layer  ===
 ----
 [[BR]]
-==== Assignment specifications ====
+=== Assignment specifications ===
 ----
 The goal of this assignment is to prevent "MZ" from being written to the first two characters of a file. The security layer will do this by adding 'security' rules to existing code.  Repy has specific syntax for how to wrap functions.  '''[wiki:RepyV2SecurityLayers]''' will give you a feel for the syntax used to build security layers.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.
 [[BR]]
-==== A basic defense ====
+=== A basic defense ===
 ----
 Time to start coding!  Let's inspect a basic security layer.  Below is some code that prevents "MZ" to be written in a very simple way.
 
@@ -71,7 +71,7 @@ def writeat(self,data,offset):
 
 Before this code is analyzed and explained, it should be noted that this code is not intended to be exhaustive of all the security protocols you should implement.  For example, a good security layer should be thread safe.  If you don't know what that means please look at [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
 [[BR]]
-==== Code analysis ==== 
+=== Code analysis === 
 ----
 First lets talk about the structure of the code.  Notice that the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
 
@@ -139,8 +139,6 @@ Make sure you have preparetest.py unpacked or this won't work!
 {{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
-
-
 [[BR]]
 == Extra Credit ==
 ----
