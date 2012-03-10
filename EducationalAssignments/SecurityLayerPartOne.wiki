@@ -40,7 +40,7 @@ Then run
 
 {{{python repy.py restrictions.default [progname]}}}
 
-in order to make sure Repy files can run.
+in order to make sure Repy files can run.  Please note Repy files end in extension `.repy`.   
 [[BR]]
 === Helpful links ===
 ----
