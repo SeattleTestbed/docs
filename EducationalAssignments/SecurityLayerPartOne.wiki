@@ -42,12 +42,10 @@ Then run
 
 in order to make sure Repy files can run.  Please note Repy files end in extension `.repy`.   
 [[BR]]
-=== Helpful links ===
+=== Tutorials for Repy and Python ===
 ----
-The following links will aid students in becoming comfortable with Python, Repy and seattle:
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
-
 [[BR]]
 == Implementation ==
 
