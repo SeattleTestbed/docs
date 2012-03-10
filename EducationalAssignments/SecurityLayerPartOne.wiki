@@ -19,7 +19,6 @@ Through this assignment you will gain familiarity with Repy, Python and command 
 
 [[BR]]
 == Prerequisites ==
-[[BR]]
 === Getting to know Python/Repy ===
 ----
 You will need Python and the Repy API in order to complete this assignment.  Python comes with most linux distributions.  Python for Mac OS can be downloaded at [http://www.python.org/getit/mac/]. Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
