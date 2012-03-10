@@ -9,7 +9,7 @@ This assignment is geared towards understanding security mechanisms.  Specifical
 
 
 [[BR]]
-== Overview ==
+= Overview =
 ----
 Through this assignment you will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -18,7 +18,7 @@ Through this assignment you will gain familiarity with Repy, Python and command 
  * Security: The attacker should not be able to circumvent the security layer.     
 
 [[BR]]
-== Prerequisites ==
+= Prerequisites =
 === Getting to know Python/Repy ===
 ----
 Python and the Repy API are required to complete this assignment.  Python comes with most linux distributions.  Python for Mac OS can be downloaded at [http://www.python.org/getit/mac/]. Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
@@ -46,7 +46,7 @@ in order to make sure Repy files can run.  Please note Repy files end in extensi
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
 [[BR]]
-== Implementation ==
+= Implementation =
 === Building the security layer  ===
 ----
 === Assignment specifications ===
@@ -116,7 +116,7 @@ into the terminal.
 
 Make sure you have preparetest.py unpacked or this won't work!
 [[BR]]
-== Notes and Resources ==
+= Notes and Resources =
 ----
    
  * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
@@ -139,11 +139,11 @@ Make sure you have preparetest.py unpacked or this won't work!
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
-== Extra Credit ==
+= Extra Credit =
 ----
 For extra credit, make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  You will need to follow all the instructions above in order to do the extra credit.  However, there is clearly more that needs to be figured out.  
 [[BR]]
-== What to turn in? ==
+= What to turn in? =
 ----
 
  * Turn in a repy file called reference_monitor_[ name or id number].repy
