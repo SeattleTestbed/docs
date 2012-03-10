@@ -59,7 +59,7 @@ The goal of this assignment is to prevent "MZ" from being written to the first t
 [[BR]]
 ==== A basic defense ====
 ----
-So, now that you have a feel for the syntax of writing a security layer, let's look at what such layer might look like.  Below is some code that prevents "MZ" to be written in a very simple way.
+Time to start coding!  Let's inspect a basic security layer.  Below is some code that prevents "MZ" to be written in a very simple way.
 
 {{{
 def writeat(self,data,offset):
