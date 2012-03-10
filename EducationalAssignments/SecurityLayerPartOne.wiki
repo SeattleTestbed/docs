@@ -19,12 +19,11 @@ Through this assignment you will gain familiarity with Repy, Python and command 
 
 [[BR]]
 == Prerequisites ==
-==== Getting to know Python/Repy ====
+=== Getting to know Python/Repy ===
 ----
 You will need Python and the Repy API in order to complete this assignment.  Python comes with most linux distributions.  Python for Mac OS can be downloaded at [http://www.python.org/getit/mac/]. Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
 
-==== A basic tutorial on how to get RepyV2 ====
-
+=== A basic tutorial on how to get RepyV2 ===
 
 First, make sure you have RepyV2.  Run the following command to get it (if you don't already have it):
 
@@ -40,7 +39,7 @@ Then run
 
 in order to make sure Repy files can run.  Please note Repy files end in extension `.repy`.   
 [[BR]]
-==== Tutorials for Repy and Python ====
+=== Tutorials for Repy and Python ===
 ----
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
