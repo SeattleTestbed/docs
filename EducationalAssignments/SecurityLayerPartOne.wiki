@@ -30,16 +30,17 @@ First, make sure you have RepyV2.  Run the following command to get it (if you d
 {{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
 
 '''Note:'''If you are using windows, you will need python in your path variables.  A tutorial can be found [http://www.computerhope.com/issues/ch000549.htm here]
+
   
 Next run to unpack the files:
 
 {{{python preparetest.py [destdir]}}}
 
-Then run 
+To run repy files use the following syntax:
 
-{{{python repy.py restrictions.default [progname]}}}
+{{{python repy.py restrictions.default [progname].repy}}} 
 
-in order to make sure Repy files can run.  Please note Repy files end in extension `.repy`.   
+Please note Repy files end in extension `.repy`.   
 [[BR]]
 === Tutorials for Repy and Python ===
 ----
