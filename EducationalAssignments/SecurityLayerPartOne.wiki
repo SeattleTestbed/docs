@@ -49,7 +49,6 @@ in order to make sure Repy files can run.  Please note Repy files end in extensi
 [[BR]]
 === Building the security layer  ===
 ----
-[[BR]]
 === Assignment specifications ===
 ----
 The goal of this assignment is to prevent "MZ" from being written to the first two characters of a file. The security layer will do this by adding 'security' rules to existing code.  Repy has specific syntax for how to wrap functions.  '''[wiki:RepyV2SecurityLayers]''' will give you a feel for the syntax used to build security layers.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.
