@@ -32,7 +32,7 @@ First, make sure you have RepyV2.  Run the following command to get it (if you d
 
 {{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
 
-In order to make sure the above command ran correctly run:
+Next run to unpack the files:
 
 {{{python preparetest.py [destdir]}}}
 
