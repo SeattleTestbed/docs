@@ -20,7 +20,7 @@ where `<target>` is the preexisting target directory that the files will be copi
 `preparetest.py` takes a target directory, and initializes it with all the files required to run Repy programs. It does this in a few steps:
 
  * It first deletes all contents of the target.
- * It then copies any required repy and python files.
+ * It then copies all of the required repy and python files.
  * It then calls `repypp.py` to process all of the mix files in the target.
 
 == Options ==
