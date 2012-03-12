@@ -85,7 +85,7 @@ The second condition, `(offset == 0)` determines the starting point of the curso
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker.  Remember the attackers objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will know how to better defend against such an adversary.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
+In this part of the assignment you will pretend to be an attacker.  Remember the attackers objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
 
 {{{
 # Open a file
