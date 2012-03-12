@@ -74,7 +74,7 @@ Notice the overall structure of the code.  First off, the if-statement contains 
 
 Within the if-statement `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store information which will be written to the file.  The method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
-Lastly, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  This is has heuristic meaning in computer science.  Specifically, the first element of a data structure is usually the 0th element.  
+Lastly, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  Starting with 0 rather than 1 has heuristic meaning in computer science.  Specifically, the first element of a data structure is usually the 0th element.  
 [[BR]]
 === Testing your security layer ===
 ----
@@ -97,7 +97,7 @@ else:
  
 finally:
   # Close the file after our attempt.
-  x.close()
+  myfile.close()
 }}}
 
 This simple attack attempts to write "MZ" to a file directly.  Please be aware this attack is not intended to be exhaustive.  There are many possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
