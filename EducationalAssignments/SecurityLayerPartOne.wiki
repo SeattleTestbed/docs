@@ -77,7 +77,7 @@ Keep in mind the above security layer would only stop one kind of attack.  Thus 
 
 [[BR]]
 === Code analysis === 
-Despite the simplicity of the example, it still follows the design principles of accuracy, efficiency, and security.  Accuracy is preserved, since only "MZ" is blocked.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is preserved.  This is because "MZ" cannot be written as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.     
+Despite the simplicity of the example, it still follows the design principles of accuracy, efficiency, and security.  Accuracy is preserved, since only "MZ" is blocked.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is preserved.  This is because "MZ" cannot be written to a file as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.     
 
 Now let's look at the structure of the code.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.  Within the if-statement `data.startswith("MZ")` to check for an illegal write.  Specifically, `data` is a variable used to store information which will be written to the file.  And the method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
