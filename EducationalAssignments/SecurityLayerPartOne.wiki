@@ -58,8 +58,6 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 === Building the security layer  ===
 ----
 '''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
-
-
 [[BR]]
 === A basic defense ===
 
