@@ -11,7 +11,7 @@ Once your reference monitor has been created, you will learn how to ensure it is
 == Overview ==
 ----
 
-In this assignment an attacker is attempting to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
