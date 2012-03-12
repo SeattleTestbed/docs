@@ -1,17 +1,17 @@
 
 = Building a Security Layer =  
 
-This assignment is geared towards understanding security mechanisms.  Specifically, this assignment illustrates how to create, use and test security layers. The vehicle for this security layer is a reference monitor.   A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system. 
-
-'''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
+This assignment will help you understand security mechanisms.  The assignment guides you through the steps of creating such a security layer, called a reference monitor.  A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system.  
+Once your reference monitor has been created, you will learn how to ensure it is secure.  Testing the security layer is done by running a series of  test cases that an adversary may use to circumvent your system.  This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
 
 [[TOC(inline)]]
 
 
 [[BR]]
-= Overview =
+== Overview ==
 ----
-Through this assignment you will gain familiarity with Repy, Python and command line utilities. Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+
+Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
@@ -19,20 +19,23 @@ Through this assignment you will gain familiarity with Repy, Python and command 
 
 [[BR]]
 = Prerequisites =
-=== Getting to know Python/Repy ===
+=== Getting Python/Repy ===
 ----
-Python and the Repy API are required to complete this assignment.  Python comes with most linux distributions.  Python for Mac OS can be downloaded at [http://www.python.org/getit/mac/]. Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
-
-=== A basic tutorial on how to get RepyV2 ===
-----
-First, make sure you have RepyV2.  Run the following command to get it (if you don't already have it):
-
-{{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
+Please note you must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  If you are using a Mac, Python can be downloaded at [http://www.python.org/getit/mac/]. If you are using linux it is likely you already have Python, in order to verify this, simply open a terminal and type {{{python}}}.  It should load a screen which will tell you the version you are using.  
 
 '''Note:'''If you are using windows, you will need python in your path variables.  A tutorial on adding variables to your path in windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
-  
-Once you have RepyV2 run the command found below.  This command will save the downloaded files to a directory of your choosing.
+Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
+
+=== How to get RepyV2 ===
+----
+Now that you have Repy, you simply need to get RepyV2.  The following command downloads RepyV2:
+
+{{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
+
+If the above command didn't work, you may need to download subversion.  Subversion can be downloaded at, [http://subversion.apache.org/packages.html], the windows installation is found at the bottom of the page.
+
+Once you have RepyV2 run the command found below.  This command will initialize the downloaded files in a directory of your choosing.
 
 {{{python preparetest.py [destdir]}}}
 
@@ -44,6 +47,8 @@ Please note Repy files end in extension `.repy`.
 [[BR]]
 === Tutorials for Repy and Python ===
 ----
+Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are an excellent source of information.
+
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
 [[BR]]
@@ -52,11 +57,15 @@ Please note Repy files end in extension `.repy`.
 ----
 === Assignment specifications ===
 
-The goal of this assignment is to prevent "MZ" from being written to the first two characters of a file. The security layer will do this by adding 'security' rules to existing code.  Repy has specific syntax for how to wrap functions.  '''[wiki:RepyV2SecurityLayers]''' will give you a feel for the syntax used to build security layers.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.
+In this assignment an attacker is attempting to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means.      
+
+'''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
+
+'''Note:''' For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
 [[BR]]
 === A basic defense ===
 
-Time to start coding!  Let's inspect a basic security layer.  Below is some code that prevents "MZ" to be written in a very simple way.
+Time to start coding!  Let's inspect a basic security layer.  
 
 {{{
 def writeat(self,data,offset):
@@ -67,18 +76,21 @@ def writeat(self,data,offset):
 
 }}} 
 
-Before this code is analyzed and explained, it should be noted that this code is not intended to be exhaustive of all the security protocols you should implement.  For example, a good security layer should be thread safe.  If you don't know what that means please look at [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+It's important to understand that the above security layer would stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+
+
 [[BR]]
 === Code analysis === 
-Notice the overall structure of the code.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.    
+Despite the simplicity of the security layer, it still follows the design principles of accuracy, efficiency, and security.  Accuracy is preserved, since only "MZ" is blocked.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is preserved.  This is because "MZ" cannot be written as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.     
 
-Within the if-statement `data.startswith("MZ")` is used as a condition.  In the above code snippet, `data` is a variable used to store information which will be written to the file.  The method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
+Now let's look at the structure of the code.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.  Within the if-statement `data.startswith("MZ")` to check for an illegal write.  Specifically, `data` is a variable used to store information which will be written to the file.  And the method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
-Lastly, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start at the 5th position.  Starting with 0 rather than 1 has heuristic meaning in computer science.  Specifically, the first element of a data structure is usually the 0th element.  
+The second condition, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, this means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start writing to the 5th position of the file.  Starting with 0 rather than 1 has heuristic meaning in computer science.   
 [[BR]]
 === Testing your security layer ===
 ----
-Once the security layer is written its time to test it.  This is done by 'attacking' the security layer.  Attacks are defined as attempts mitigate a given security protocol.  In this case, attacks should include several methods of attempting to write "MZ" to a file.  An example of an attack could be:
+In this part of the assignment you will pretend to be an attacker.  Remember the attackers objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will know how to better defend against such an adversary.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
+
 {{{
 # Open a file
 myfile=openfile("something.file",True)
@@ -100,19 +112,15 @@ finally:
   myfile.close()
 }}}
 
-This simple attack attempts to write "MZ" to a file directly.  Please be aware this attack is not intended to be exhaustive.  There are many possible attacks you could implement.  However, notice if this code is run with the above security layer, it will not pass.  Feel free to copy the code and give it a try!
-
 '''Note:''' All attacks should be written in as Repy files, using the .repy extension.
-
-'''Note:''' There is good reason for preventing this type of action.  If a file begins with MZ then the computer could interpret it as an executable.  For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
 [[BR]]
 === Running your security layer ===
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy }}}
+{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [attack_program].repy }}}
 
-Make sure you have preparetest.py unpacked or this won't work!
+Make sure you went through the "How to get RepyV2" section or this won't work!
 [[BR]]
 = Notes and Resources =
 ----
@@ -139,7 +147,9 @@ Make sure you have preparetest.py unpacked or this won't work!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second reference monitor which disallows 'p0wnd' to be written anywhere in a file.  You will need to follow all the instructions above in order to do the extra credit.  However, there is clearly more that needs to be figured out.  
+For extra credit, make a second reference monitor which stops an attacker from writing 'p0wnd' anywhere in a file.  You should also test the security layer by trying to write 'p0wnd' anywhere in the file.  
+
+'''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
 [[BR]]
 = What to turn in? =
 ----
