@@ -60,12 +60,10 @@ Time to start coding!  Let's inspect a basic security layer.  Below is some code
 
 {{{
 def writeat(self,data,offset):
-	append("SecureFile.writeat")
-	if data.startswith("MZ") and (offset == 0):	
-		raise ValueError("Cannot start file with MZ!")
-	else:
-		append("SecureFile.writeat")
-		return self.file.writeat(data,offset)
+  if data.startswith("MZ") and (offset == 0):   
+    raise ValueError("Cannot start file with MZ!")
+  else:
+    return self.file.writeat(data,offset)
 
 }}} 
 
