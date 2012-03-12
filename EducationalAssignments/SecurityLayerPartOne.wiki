@@ -18,9 +18,7 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
  * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
  * Security: The attacker should not be able to circumvent the security layer.     
-
 [[BR]]
-= Prerequisites =
 === Getting Python/Repy ===
 ----
 Please note you must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  If you are using a Mac, Python can be downloaded at [http://www.python.org/getit/mac/]. If you are using linux it is likely you already have Python, in order to verify this, simply open a terminal and type {{{python}}}.  It should load a screen which will tell you the version you are using.  
