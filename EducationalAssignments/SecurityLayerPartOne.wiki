@@ -11,6 +11,8 @@ Once your reference monitor has been created, you will learn how to ensure it is
 == Overview ==
 ----
 
+In this assignment an attacker is attempting to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
+
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
@@ -56,8 +58,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 === Building the security layer  ===
 ----
 === Assignment specifications ===
-
-In this assignment an attacker is attempting to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means.      
+     
 
 '''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 
