@@ -51,7 +51,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
- * For a complete list of syntax in Repyv2 please visit: '''[wiki:FutureRepyAPI]'''
+ * list of RepyV2 syntax: '''[wiki:FutureRepyAPI]'''
 [[BR]]
 = Implementation =
 === Building the security layer  ===
