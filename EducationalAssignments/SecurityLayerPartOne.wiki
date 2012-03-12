@@ -51,6 +51,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
+ * For a complete list of syntax in Repyv2 please visit: '''[wiki:FutureRepyAPI]'''
 [[BR]]
 = Implementation =
 === Building the security layer  ===
@@ -130,9 +131,9 @@ Make sure you went through the "How to get RepyV2" section or this won't work!
 
  * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on '''how to test security layers'''. 
 
- * For a complete list of syntax in Repyv2 pleas visit: '''[wiki:FutureRepyAPI]'''
+ * For a complete list of syntax in Repyv2 please visit: '''[wiki:FutureRepyAPI]'''
  
-* The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
+ * The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
 
  * '''[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py]''' is an empty security layer that doesn't perform any operations.
 
