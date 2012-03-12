@@ -29,10 +29,10 @@ First, make sure you have RepyV2.  Run the following command to get it (if you d
 
 {{{svn co https://seattle.cs.washington.edu/svn/seattle/branches/repy_v2}}}
 
-'''Note:'''If you are using windows, you will need python in your path variables.  A tutorial can be found [http://www.computerhope.com/issues/ch000549.htm here]
+'''Note:'''If you are using windows, you will need python in your path variables.  A tutorial on adding variables to your path in windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
   
-Next run the command found below in order to save the files to a directory:
+Once you have RepyV2 run the command found below.  This command will save the downloaded files to a directory of your choosing.
 
 {{{python preparetest.py [destdir]}}}
 
