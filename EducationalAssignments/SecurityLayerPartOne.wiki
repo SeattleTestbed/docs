@@ -72,7 +72,7 @@ def writeat(self,data,offset):
 
 }}} 
 
-It's important to understand that the above security layer would stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
 
 
 [[BR]]
