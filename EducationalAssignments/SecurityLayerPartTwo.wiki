@@ -21,9 +21,6 @@ Note: For a full description on MZ executable files see  http://www.fileformat.i
      
 
 [[BR]]
-== Prerequisites ==
-
-[[BR]]
 === Prerequists ===
 
 This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:SecurityLayerPartOne#GettingPythonRepy] for a tutorial on how to get them.  
