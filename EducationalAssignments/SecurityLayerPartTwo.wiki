@@ -58,8 +58,6 @@ finally:
 }}}
 [[BR]]
 ==== Code Analysis ====
-----
-
 {{{
 try:
   text = openfile(filename, True)
@@ -76,9 +74,6 @@ finally:
 }}} 
 [[BR]]
 ==== Code Analysis ====
-----
-
-
   
 [[BR]]
 == Notes and Resources ==
