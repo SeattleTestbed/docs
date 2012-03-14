@@ -72,7 +72,7 @@ finally:
   # Close the file after our attempt.
   myfile.close()
 }}}
-
+==== Code analysis ====
 
 {{{
 try:
