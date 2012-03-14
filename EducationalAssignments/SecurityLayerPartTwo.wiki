@@ -1,49 +1,50 @@
 
-= Attacking a reference monitor =  
+= Security layer testing and penetration =  
 
-This assignment illustrates how to attack reference monitors.  Attacks will based on the test cases developed in '''[https://seattle.cs.washington.edu/wiki/EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne]'''.  
-
-'''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  These instructions also illustrate how to check if Python is already installed.
+This assignment will teach you about security layers.  The assignment guides you through the steps of testing a security layer. The security layer you will be testing is called a reference monitor.  It is possible to do this assignment separately however it is recommended that this assignment be you completed after [wiki:SecurityLayerPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 [[TOC(inline)]]
-
-
 [[BR]]
 == Overview ==
 ----
-Students will be sent reference monitors from other students in the class.  They will attack these reference monitors by writing a series of robust test cases. These cases will attempt to write "MZ" to the first two characters of a file.  After testing, students will write a report of their findings, including all attacks that succeeded and failed.  Also students should include a critique of the references monitors they where given.  This will act as a natural introduction to code auditing.   
+In this assignment you are a tester.  You have been sent a bunch of reference monitors that need testing before they are deployed.  Your job will be to ensure an attacker cannot circumvent these security layers.  In order to do this, you will attempt to write "MZ" to the first two characters of a file.  If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
 
-'''Note:''' A full discourse of how to write test cases is given below.      
+Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+
+Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed.
+Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+Security: The attacker should not be able to circumvent the security layer.
+
+After testing, write a report on your findings, including all attacks that succeeded and failed.  The write up should include a critique of what was done well or done poorly.  In effect, if the design paradigms stated above were followed well, then the security layer was well written.  If one or more of the design concepts listed above was not present, then that should be reflected in the write up.  This assignment will give you the basics of code auditing and code analysis.  
+
+Note: For a full description on MZ executable files see  http://www.fileformat.info/format/exe/corion-mz.htm 
+     
 
 [[BR]]
 == Prerequisites ==
 
 [[BR]]
-=== Getting to know Python/Repy ===
-----
-Students will need Python and the Repy API in order to complete this assignment.  Repy can be downloaded '''[https://seattle.cs.washington.edu/geni/download/flibble/ here]'''.  Once obtained students should read the Repy tutorial found [wiki:RepyTutorial here].
+=== Prerequists ===
+
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:SecurityLayerPartOne#GettingPythonRepy] for a tutorial on how to get them.  
 [[BR]]
 === Helpful links ===
 ----
 The following links will aid students in becoming comfortable with Python, Repy and seattle:
  * Python tutorial: '''[http://docs.python.org/tutorial/ here]'''
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy here]'''
+ * list of RepyV2 syntax: '''[wiki:FutureRepyAPI]'''
 [[BR]]
-== Implementation ==
-
-
-[[BR]]
-=== Attacking other security layers ===
+=== Testing security layers ===
 ----
+==== Hypothesis, test case, counter example ====
 
-A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial students are shown '''how to test their security layers with an example'''. 
+The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is secure."  The question you will ask when running your test cases is always the same - "Is this reference monitor secure when I do ''this''"? Where ''this'' is some specific test, executed in some specific way.  The hypothesis is always either true or false, thus there is always a clear answer.  
 
-The example provided in the link is a basic attack.  In order to complete the assignment students will be provided with a set of reference monitors, by the professor.  They will create attacks which attempt to write "MZ" to the first two characters of a file.  Attacks should include several methods of attempting to do this.  Students should be provided with at least five reference monitors to test their attack. 
- 
-If this assignment is used in conjunction with '''[https://seattle.cs.washington.edu/wiki/EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne]''', students should be graded based on how well their reference monitor performs when attacked by others.   In addition instructors may choose to remove points if student's reference monitor is successfully attacked.  In all cases students should be graded on how well they critique the reference monitors of others.
+If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  
 
-'''Note:''' These other reference monitors should come from the other students.
- In addition instructors may choose to remove points if student's reference monitor is successfully attacked.
+TODO: Add example test cases and analysis of those cases
+TODO: Link to test cases in [wiki:SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers] 
 
   
 [[BR]]
@@ -55,10 +56,6 @@ If this assignment is used in conjunction with '''[https://seattle.cs.washington
  * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
 
  * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
-
- * Students are able to add multiple security layers to Repy, this may be useful for testing different mitigations separately.
-
- * It may be instructive to have students attack more than five reference monitors.
 
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
 
@@ -73,4 +70,4 @@ Students can be provided with a second set of reference monitors.  These attempt
  
  * Turn in the test cases used to attack a given reference monitor.  
  * Turn in the write up of each reference monitor attacked, with critique of the reference monitor.  Critique should include all test cases that worked.
- * Turn in test cases and write up for Extra Credit as well.
+ * Write up for 'p0wnd' reference monitors.
