@@ -43,6 +43,29 @@ If we can find a case where the hypothesis is false, then the security layer is 
 [[BR]]
 ==== Examples of tests ====
 Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers].  However, these examples may not be detailed enough, hence listed here are a series of examples of test cases:
+
+{{{
+# Open a file
+myfile=openfile("something.file",True)
+ 
+# Attempt to write "MZ" to the file
+try:
+  myfile.writeat("MZ",0)
+ 
+# It raised an Exception (as it was supposed to):
+except ValueError:
+  pass
+ 
+# No Exception was raised:
+else:
+  log("Wrote an MZ!!!")
+ 
+finally:
+  # Close the file after our attempt.
+  myfile.close()
+}}}
+
+
 {{{
 try:
   text = openfile(filename, True)
