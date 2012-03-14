@@ -36,9 +36,17 @@ The following links will aid students in becoming comfortable with Python, Repy 
 ----
 ==== Hypothesis, test case, counter example ====
 
-The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is secure."  The question you will ask when running your test cases is always the same - "Is this reference monitor secure when I do ''this''"? Where ''this'' is some specific test, executed in some specific way.  The hypothesis is always either true or false, thus there is always a clear answer.  
+The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is well designed."  The questions you will ask when running your test cases will always be the same
+       
+ * "Is this reference monitor secure?"
+ 
+ * "Does this reference monitor hamper performance?"
 
-If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  
+ * "Does this reference monitor prevent actions that should be allowed?"
+
+Notice that these questions are parallels of the security paradigms: security, efficiency and accuracy, respectively.  
+
+If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  Hence all test cases should be designed to test for these three types of flaws.
 
 [[BR]]
 ==== Examples of tests ====
