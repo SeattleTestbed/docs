@@ -29,15 +29,15 @@ where `<target>` is the preexisting target directory that the files will be copi
  * `-t` or `--testfiles` copies in all the files required to run the unit tests
  * `-v` or `--verbose` displays significantly more output on failure to process a mix file
  * `-c` or `--checkapi` copies the checkapi source files
- * `-r` or `--randomports` replaces the default ports of `12345`, `12346`, and `12347` with 3 random ports between `52000` and `53000`.
+ * `-r` or `--randomports` replaces the default ports of `12345`, `12346`, and `12347` with three random ports between `52000` and `53000`.
 
 == Examples ==
 
 === Using preparetest to prepare and run the unit tests ===
 {{{
-user@vm:~/repyv2_co$ cd repy_v2/
-user@vm:~/repyv2_co/repy_v2$ mkdir test
-user@vm:~/repyv2_co/repy_v2$ python preparetest.py -t test
-user@vm:~/repyv2_co/repy_v2$ cd test
-user@vm:~/repyv2_co/repy_v2/test$ python utf.py -m repyv2api
+user@vm:~$ cd repy_v2/
+user@vm:~/repy_v2$ mkdir test
+user@vm:~/repy_v2$ python preparetest.py -t test
+user@vm:~/repy_v2$ cd test
+user@vm:~/repy_v2/test$ python utf.py -m repyv2api
 }}}
