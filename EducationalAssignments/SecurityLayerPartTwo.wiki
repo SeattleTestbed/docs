@@ -40,8 +40,44 @@ The goal of a good tester is to test hypotheses.  A hypothesis is just a scienti
 
 If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  
 
-TODO: Add example test cases and analysis of those cases
-TODO: Link to test cases in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers] 
+[[BR]]
+==== Examples of tests ====
+Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers].  However, these examples may not be detailed enough, hence listed here are a series of examples of test cases:
+{{{
+try:
+  text = openfile(filename, True)
+  text.writeat("A",0)
+except Exception:
+  count = count + 1
+  log("ERROR #" + str(count) + ": Case 1 - Throws error for file with just an 'A'. This should be legal\n")
+else:
+  pass
+finally:
+  text.close()
+  removefile(filename)
+}}}
+[[BR]]
+==== Code Analysis ====
+----
+
+{{{
+try:
+  text = openfile(filename, True)
+  text.writeat("XZ",0)
+  text.writeat("M",0)
+except Exception:
+  pass
+else:
+  count = count + 1
+  log("ERROR #" + str(count) + ": Case " + str(case) + ": MANAGED AN MZ!\n")
+finally:
+  text.close()
+  removefile(filename)
+}}} 
+[[BR]]
+==== Code Analysis ====
+----
+
 
   
 [[BR]]
