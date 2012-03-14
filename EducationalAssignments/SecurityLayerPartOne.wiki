@@ -108,7 +108,7 @@ finally:
   myfile.close()
 }}}
 
-'''Note:''' All attacks should be written in as Repy files, using the .repy extension.
+'''Note:''' All attacks should be written as Repy files, using the .repy extension.
 [[BR]]
 === Running your security layer ===
 ----
