@@ -49,7 +49,7 @@ Notice that these questions are parallels of the security paradigms: security, e
 If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  Hence all test cases should be designed to test for these three types of flaws.
 
 [[BR]]
-==== Examples of tests ====
+=== Examples of tests ===
 Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers].  However, these examples may not be detailed enough, hence listed here are a series of examples of test cases:
 ==== Test case 1 ====
 {{{
