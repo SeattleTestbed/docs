@@ -21,7 +21,7 @@ Note: For a full description on MZ executable files see  http://www.fileformat.i
      
 
 [[BR]]
-=== Prerequists ===
+== Prerequisites ==
 
 This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/SecurityLayerPartOne#GettingPythonRepy SecurityLayerPartOne] for a tutorial on how to get them.  
 [[BR]]
@@ -32,9 +32,9 @@ The following links will aid students in becoming comfortable with Python, Repy 
  * Seattle tutorial: '''[https://seattle.cs.washington.edu/wiki/PythonVsRepy]'''
  * list of RepyV2 syntax: '''[wiki:FutureRepyAPI]'''
 [[BR]]
-=== Testing security layers ===
+== Testing security layers ==
 ----
-==== Hypothesis, test case, counter example ====
+=== Hypothesis, test case, counter example ===
 
 The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is well designed."  The questions you will ask when running your test cases will always be the same
        
