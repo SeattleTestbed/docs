@@ -73,7 +73,7 @@ finally:
   myfile.close()
 }}}
 ==== Code analysis ====
-This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("something.file",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.
+In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("something.file",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 ==== Test case 2 ====
 {{{
 try:
@@ -90,7 +90,12 @@ finally:
 }}}
 [[BR]]
 ==== Code Analysis ====
-
+In this case, we are verifying the accuracy of the security layer.  This is done in the `text.writeat("A",0)` statement.  The test case, tries to write a character that should be allowed to the file.  If "A" cannot be written the reference monitor fails the usability test.  Notice that Exception statement counts the number of errors logged.  This is done with the following two lines of code:
+{{{
+ count = count + 1
+  log("ERROR #" + str(count) + ": Case 1 - Throws error for file with just an 'A'. This should be legal\n")
+}}}
+The count keeps track of the number of reference monitors that failed.  Thus this test case is intended for running multiple reference monitors in succession.  
 ==== Test case 3 ====
 {{{
 try:
@@ -108,7 +113,7 @@ finally:
 }}} 
 [[BR]]
 ==== Code Analysis ====
-  
+In this code we are doing something tricky.  Rather than writing "M" and then "Z", we try to write a place holder character first and then go back and write "M".  This code is an example of something a creative attacker may do.  It takes advantage of reference monitors that only look for "MZ", written together.  Thus unless your reference monitor blocks for "M" in the first position and "Z" for the second position, your reference monitor will fail this attack. 
 [[BR]]
 == Notes and Resources ==
 ----
