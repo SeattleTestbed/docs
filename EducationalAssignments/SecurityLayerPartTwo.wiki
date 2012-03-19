@@ -1,7 +1,7 @@
 
 = Security layer testing and penetration =  
 
-In this assignment you will learn how to attack a security layers.  The security layer you will be testing is called a reference monitor.  It is possible to do this assignment separately however it is recommended that this assignment be you completed after [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
+In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be you completed after [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 [[TOC(inline)]]
 [[BR]]
