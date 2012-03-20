@@ -118,7 +118,7 @@ In this code we are doing something tricky.  Rather than writing "M" and then "Z
 == Notes and Resources ==
 ----
    
- * The following link is an excellent source for information about security layers: http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf
+ * The following link is an excellent source for information about security layers: http://www.cs.washington.edu/homes/justinc/papers/cappos_seattle_ccs_10.pdf
 
  * [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
 
