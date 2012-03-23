@@ -74,46 +74,16 @@ finally:
 }}}
 ==== Code analysis ====
 In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("something.file",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
-==== Test case 2 ====
-{{{
-try:
-  text = openfile(filename, True)
-  text.writeat("A",0)
-except Exception:
-  count = count + 1
-  log("ERROR #" + str(count) + ": Case 1 - Throws error for file with just an 'A'. This should be legal\n")
-else:
-  pass
-finally:
-  text.close()
-  removefile(filename)
-}}}
-[[BR]]
-==== Code Analysis ====
-In this case, we are verifying the accuracy of the security layer.  This is done in the `text.writeat("A",0)` statement.  The test case, tries to write a character that should be allowed to the file.  If "A" cannot be written the reference monitor fails the usability test.  Notice that Exception statement counts the number of errors logged.  This is done with the following two lines of code:
-{{{
- count = count + 1
-  log("ERROR #" + str(count) + ": Case 1 - Throws error for file with just an 'A'. This should be legal\n")
-}}}
-The count keeps track of the number of reference monitors that failed.  Thus this test case is intended for running multiple reference monitors in succession.  
-==== Test case 3 ====
-{{{
-try:
-  text = openfile(filename, True)
-  text.writeat("XZ",0)
-  text.writeat("M",0)
-except Exception:
-  pass
-else:
-  count = count + 1
-  log("ERROR #" + str(count) + ": Case " + str(case) + ": MANAGED AN MZ!\n")
-finally:
-  text.close()
-  removefile(filename)
-}}} 
-[[BR]]
-==== Code Analysis ====
-In this code we are doing something tricky.  Rather than writing "M" and then "Z", we try to write a place holder character first and then go back and write "M".  This code is an example of something a creative attacker may do.  It takes advantage of reference monitors that only look for "MZ", written together.  Thus unless your reference monitor blocks for "M" in the first position and "Z" for the second position, your reference monitor will fail this attack. 
+
+=== Hints and Ideas for testing ===
+
+When writing your own tests it is important to test for a complete set of possible penetrations.  Keep in mind, it only takes one test case to break through a security layer.  Some of the things you may want to test for include:
+
+ * threading
+ * writing to one position at a time
+ * writing to both positions at once
+ 
+And more!  Remember a good security layer can't be broken by anyone!  Which is all part of the fun!  It's about solving a puzzle.  First you make the puzzle - write the security layer, then you solve the puzzle - try to bypass it.  If your puzzle is "good enough", no one will be able to break it, no matter what.  
 [[BR]]
 == Notes and Resources ==
 ----
