@@ -1,7 +1,7 @@
 
 = Building a Security Layer =  
 
-This assignment will help you understand security mechanisms.  The assignment guides you through the steps of creating a security layer, called a reference monitor.  A reference monitor is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system.  
+This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a security layer, called a reference monitor.  It is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system.  
 Once your reference monitor has been created, you will learn how to ensure it is secure.  Testing the security layer is done by running a series of  test cases that an adversary may use to circumvent your system.  This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
 
 [[TOC(inline)]]
