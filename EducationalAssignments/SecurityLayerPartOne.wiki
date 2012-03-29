@@ -62,11 +62,12 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 ----
 '''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  If you are having trouble understanding the RepyV2SecurityLayers page, review dictionaries, object oriented programming, wrapping and functions.  Also the general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 [[BR]]
-=== A basic defense ===
+=== A basic (and inadequate) defense ===
 
 Time to start coding!  Let's inspect a basic security layer.  
 
 {{{
+
 def writeat(self,data,offset):
   if data.startswith("MZ") and (offset == 0):   
     raise ValueError("Cannot start file with MZ!")
@@ -145,6 +146,9 @@ Make sure you went through the "How to get RepyV2" section or this won't work!
  * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
+
+'''Your security layer should produce no output!!!'''   If it encounters an attempt to write MZ, you should raise a ValueError and allow execution to continue.
+
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
