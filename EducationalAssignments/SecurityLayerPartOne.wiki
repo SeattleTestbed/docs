@@ -1,8 +1,11 @@
 
 = Building a Security Layer =  
 
-This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a security layer, called a reference monitor.  It is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor verifies the nature of the request against a table of allowable access types for each process on the system.  
-Once your reference monitor has been created, you will learn how to ensure it is secure.  Testing the security layer is done by running a series of  test cases that an adversary may use to circumvent your system.  This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
+This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  It is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor receives calls that are destined for the virtual machine or operating system and allows your code to perform different actions if desired.   This can be used to allow, deny, or change the behavior of any set of calls.
+  
+One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the [wiki:EducationalAssignments/SecurityLayerPartTwo next assignment].  
+
+This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
 
 [[TOC(inline)]]
 
