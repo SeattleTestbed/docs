@@ -15,15 +15,14 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  If the attacker succeeds then the file will become an executable.  Your assignment is to prevent this from happening.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your assignment is to prevent a program from writing a file with the first two characters containing "MZ".  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, ...
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
  * Security: The attacker should not be able to circumvent the security layer.     
 
-'''Note:''' For a full description on MZ executable files see [http://www.fileformat.info/format/exe/corion-mz.htm]
 [[BR]]
 === Getting Python/Repy ===
 ----
