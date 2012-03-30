@@ -13,3 +13,5 @@ You can often find other Seattle contributors on IRC in room {{{#seattle}}} on {
 || Monzur Muhammad || monzum at cs || monzum || monzum || ||
 || Steven Portzer || sportzer at cs || sportzer || sportzer || ||
 || Jeff Rasley || jeffra45 at cs || jeffra45 || jeffra45 || ||
+|| Sushant Bhadkamkar || sushant at nyu || sushant || sushant || ||
+
