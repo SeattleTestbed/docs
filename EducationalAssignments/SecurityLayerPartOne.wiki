@@ -4,7 +4,7 @@
 This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  It is defined as a secure, always-used and fully-testable module that controls all software access to data objects or devices. The reference monitor receives calls that are destined for the virtual machine or operating system and allows your code to perform different actions if desired.   This can be used to allow, deny, or change the behavior of any set of calls.
 
   
-One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the [wiki:EducationalAssignments/SecurityLayerPartTwo next assignment].  
+One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the [wiki:EducationalAssignments/SecurityLayerPartTwo next assignment].)  
 
 This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
 
@@ -15,13 +15,13 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your assignment is to prevent a program from writing a file with the first two characters containing "MZ".  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  If the attacker is unable to write "MZ" to the first two characters of the file, your system will remain secure.  The future of the system depends on your ability to write good secure code!  By the end of this assignment, you should have an idea of what that means. 
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your assignment is to prevent a program from writing a file with the first two characters containing "MZ".  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  By the end of this assignment, you should have an idea of what that means. 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, ...
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to write "MX" to a file this should be allowed.  As a second example "ZM" should not be blocked from the first two characters either.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
- * Security: The attacker should not be able to circumvent the security layer.     
+ * Security: The attacker should not be able to circumvent the security layer.  Hence, if "MZ" can be written two the first two characters, the security is compromised.     
 
 [[BR]]
 === Getting Python/Repy ===
@@ -67,6 +67,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 Time to start coding!  Let's inspect a basic security layer.  
 
 {{{
+
 
 def writeat(self,data,offset):
   if data.startswith("MZ") and (offset == 0):   
