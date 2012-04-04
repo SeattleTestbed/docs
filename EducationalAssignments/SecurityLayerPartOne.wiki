@@ -67,13 +67,59 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 Time to start coding!  Let's inspect a basic security layer.  
 
 {{{
+# Repy V2 Security Layer Sample - Methods - Code
+# no_first_byte.repy
+
+# Defining constants for later use
+TYPE="type"
+ARGS="args"
+RETURN="return"
+EXCP="exceptions"
+TARGET="target"
+FUNC="func"
+OBJC="objc"
 
 
-def writeat(self,data,offset):
+# Creating our class
+class NoFirstByteFile():
+  def __init__(self,file):
+    self.file = file
+
+  def readat(self,bytes,offset):
+    if(offset == 0):
+        raise RepyArgumentError("You can't read that first bit!")
+    return self.file.readat(bytes,offset)
+
+ def writeat(self,data,offset):
   if data.startswith("MZ") and (offset == 0):   
     raise ValueError("Cannot start file with MZ!")
   else:
     return self.file.writeat(data,offset)
+
+  def close(self):
+    return self.file.close()
+
+# Creating the mappings for our class 
+
+sec_file_def = {"obj-type":NoFirstByteFile,
+                "name":"NoFirstByteFile",
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
+                "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:None,TARGET:NoFirstByteFile.writeat},
+                "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:NoFirstByteFile.close}
+               }
+
+# Creating a new version of openfile so it creates a NoFirstByteFile object, instead of a normal file.
+def openfile_restricted(filename, create):
+  f = openfile(filename,create)
+  return NoFirstByteFile(f)
+	
+# Mapping openfile to our new version of openfile
+CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:openfile_restricted}
+
+# Dispatch
+secure_dispatch_module()
+
+
 
 }}} 
 
@@ -82,9 +128,10 @@ Keep in mind the above security layer would only stop one kind of attack.  Thus 
 
 [[BR]]
 === Code analysis === 
-Despite the simplicity of the example, it still follows the design principles of accuracy, efficiency, and security.  Accuracy is preserved, since only "MZ" is blocked.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is preserved.  This is because "MZ" cannot be written to a file as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.     
 
-Now let's look at the structure of the code.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.  Within the if-statement `data.startswith("MZ")` is used to check for an illegal write.  Specifically, `data` is a variable used to store information which will be written to the file.  And the method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
+Despite the simplicity of the `writeat()` function, it still follows the design principles of accuracy, efficiency, and security.  Accuracy is preserved, since only "MZ" is blocked.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is preserved.  This is because "MZ" cannot be written to a file as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.     
+
+Now let's look at the structure of `writeat()`.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.  Within the if-statement `data.startswith("MZ")` is used to check for an illegal write.  Specifically, `data` is a variable used to store information which will be written to the file.  And the method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
 The second condition, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start writing to the 5th position of the file.  Starting with 0 rather than 1 has heuristic meaning in computer science.   
 [[BR]]
