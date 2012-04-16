@@ -1,4 +1,4 @@
-= Repy Library Reference = 
+= Repy Programming Guide = 
 
 ----
 [[TOC(inline)]]
