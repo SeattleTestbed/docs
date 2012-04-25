@@ -90,9 +90,9 @@ class NoFirstByteFile():
         raise RepyArgumentError("You can't read that first bit!")
     return self.file.readat(bytes,offset)
 
- def writeat(self,data,offset):
-  if data.startswith("MZ") and (offset == 0):   
-    raise ValueError("Cannot start file with MZ!")
+  def writeat(self,data,offset):
+    if data.startswith("MZ") and (offset == 0):   
+      raise ValueError("Cannot start file with MZ!")
   else:
     return self.file.writeat(data,offset)
 
