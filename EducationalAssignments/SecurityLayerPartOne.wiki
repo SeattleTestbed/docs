@@ -93,8 +93,8 @@ class NoFirstByteFile():
   def writeat(self,data,offset):
     if data.startswith("MZ") and (offset == 0):   
       raise ValueError("Cannot start file with MZ!")
-  else:
-    return self.file.writeat(data,offset)
+    else:
+      return self.file.writeat(data,offset)
 
   def close(self):
     return self.file.close()
