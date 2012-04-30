@@ -139,7 +139,7 @@ In this part of the assignment you will pretend to be an attacker.  Remember the
 
 {{{
 # Open a file
-myfile=openfile("something.file",True)
+myfile=openfile("something.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
