@@ -86,8 +86,6 @@ class NoFirstByteFile():
     self.file = file
 
   def readat(self,bytes,offset):
-    if(offset == 0):
-        raise RepyArgumentError("You can't read that first bit!")
     return self.file.readat(bytes,offset)
 
   def writeat(self,data,offset):
