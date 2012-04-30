@@ -107,8 +107,8 @@ sec_file_def = {"obj-type":NoFirstByteFile,
                }
 
 # Creating a new version of openfile so it creates a NoFirstByteFile object, instead of a normal file.
-def openfile_restricted(filename, create):
-  f = openfile(filename,create)
+def openfile_restricted(look.txt, create):
+  f = openfile(look.txt,create)
   return NoFirstByteFile(f)
 	
 # Mapping openfile to our new version of openfile
