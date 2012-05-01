@@ -120,6 +120,19 @@ secure_dispatch_module()
 
 
 }}} 
+=== Using the example layer ===
+It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
+{{{
+
+# Creating a new version of openfile so it creates a NoFirstByteFile object, instead of a normal file.
+def openfile_restricted(look.txt, create):
+  f = openfile(look.txt,create)
+  return NoFirstByteFile(f)
+
+}}}
+
+look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
+
 
 Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
 
