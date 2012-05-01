@@ -147,7 +147,7 @@ try:
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
-  pass
+  log("The security layer correctly blocked the write!!!")
  
 # No Exception was raised:
 else:
