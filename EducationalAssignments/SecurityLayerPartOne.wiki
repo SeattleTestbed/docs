@@ -42,7 +42,7 @@ If the above command didn't work, you may need to download subversion.  Subversi
 
 Once you have RepyV2 run the command found below.  This command will initialize the downloaded files in a directory of your choosing.
 
-{{{python preparetest.py [destdir]}}}
+{{{python preparetest.py -t [destdir]}}}
 
 Finally use the command found below in order to run repy files:
 
