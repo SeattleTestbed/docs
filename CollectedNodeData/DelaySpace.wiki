@@ -3,6 +3,12 @@
 
 This work was performed by [http://www.uni-bamberg.de/en/ktr/staff/eittenberger-philipp/ Philipp Eittenberger], [http://www.uni-bamberg.de/en/ktr/staff/grossmann-marcel/ Marcel Großmann] and Udo Krieger from the [http://www.uni-bamberg.de/en/ktr/ Computer Networks Group (KTR)] of Otto-Friedrich University Bamberg, Germany.
 
+Further information can be found in: 
+
+Philipp M. Eittenberger, Marcel Großmann, Udo R. Krieger:[[BR]]
+Doubtless in Seattle: Exploring the Internet Delay Space.[[BR]]
+8th Euro-NF Conference on Next Generation Internet 2012 (NGI 2012), Karlskrona, Sweden, 25-27 June 2012.[[BR]]
+
 === Modified Divide-and-Conquer Algorithm ===
 [[Image(allpairsping.png, 200px, right, nolink)]]
 The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. It uses a central coordination instance to avoid interferences between each measurement trial.
