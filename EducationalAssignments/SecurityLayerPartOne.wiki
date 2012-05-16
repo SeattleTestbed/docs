@@ -2,7 +2,7 @@
 = Building a Security Layer =  
 
 
-This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  A reference monitor is a access control concept that refers to an abstract machine
+This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  A reference monitor is an access control concept that refers to an abstract machine
 that mediates all accesses to objects by subjects.  This can be used to allow, deny, or change the behavior of any set of calls.
   
 One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the [wiki:EducationalAssignments/SecurityLayerPartTwo next assignment].)  
@@ -16,7 +16,7 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for a [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your assignment is to prevent a program from writing a file with the first two characters containing "MZ".  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for a [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your goal is to prevent the attacker from succeeding.  Thus you must stop a program from creating a file with "MZ" as the first two characters.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
