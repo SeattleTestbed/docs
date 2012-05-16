@@ -60,7 +60,7 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
  * command line errors:
 
-In the above command line call, you must have repy.py, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  Upon initial installation restrictions.default is often missing from the common working directory.  You must simply find it by searching through your repy files and copy/paste it into the current working directory.
+In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  Upon initial installation `restrictions.default` is often missing from the directory where `repy.py` is installed.  You must simply find it by searching through your repy files and copy/paste it into the current working directory.  A copy of `restrictions.default` exists in the directory ...\repy_v2\repy\tests.
 
  * Downloading the wrong version of seattle:
 
@@ -68,7 +68,7 @@ Seattle is operating system dependent.  If you download the windows version, you
 
 Advanced trouble shooting:
 
-To run the unit test, which will automatically tell you if you have errors with your installing please see:
+To run the unit test, which will automatically tell you if you have errors with your installation please see:
 
  * [wiki:RepyV2CheckoutAndUnitTests]
 
