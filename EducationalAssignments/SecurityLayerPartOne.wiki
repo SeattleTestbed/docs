@@ -62,7 +62,7 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
 '''restrictions.default is missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  Upon initial installation `restrictions.default` is often missing from the directory where `repy.py` is installed.  You must simply find it by searching through your repy files and copy/paste it into the current working directory.  A copy of `restrictions.default` exists in the directory ...\repy_v2\repy\tests.
 
-'''encasementlib.repy is missing:''' It might also be the case that you are missing `encasementlib.repy` from the working directory.  It can be found in repy\pre
+'''encasementlib.repy is missing:''' It might also be the case that you are missing `encasementlib.repy` from the working directory.  It can be found in ...\repy_v2\repy\pre
 
  * Downloading the wrong version of seattle:
 
