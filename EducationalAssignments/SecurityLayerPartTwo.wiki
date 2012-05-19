@@ -50,30 +50,41 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 [[BR]]
 === Examples of tests ===
-Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers].  However, these examples may not be detailed enough, hence listed here are a series of examples of test cases:
-==== Test case 1 ====
+Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+==== Test case  ====
 {{{
 # Open a file
-myfile=openfile("something.file",True)
+myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-  myfile.writeat("MZ",0)
+	myfile.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
-  pass
+  log("The security layer correctly blocked the write!!!")
  
-# No Exception was raised:
+# No Exception was raise
 else:
   log("Wrote an MZ!!!")
  
 finally:
   # Close the file after our attempt.
-  myfile.close()
+	myfile.close()
 }}}
 ==== Code analysis ====
-In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("something.file",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
+
+{{{
+
+# Open a file
+myfile=openfile("look.txt",True)
+
+}}}
+look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
+
+
+In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
 === Hints and Ideas for testing ===
 
