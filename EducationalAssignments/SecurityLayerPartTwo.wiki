@@ -15,7 +15,15 @@ Accuracy: The security layer should only stop certain actions from being blocked
 Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
 Security: The attacker should not be able to circumvent the security layer.
 
-After testing, write a report on your findings, including all attacks that succeeded and failed.  The write up should include a critique of what was done well or done poorly.  In effect, if the design paradigms stated above were followed well, then the security layer was well written.  If one or more of the design concepts listed above was not present, then that should be reflected in the write up.  This assignment will give you the basics of code auditing and code analysis.  
+Within the context of this assignment these design paradigms translate to:
+
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to write "MX" to a file this should be allowed.  As a second example "ZM" should not be blocked from the first two characters either.
+
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
+
+ * Security: The attacker should not be able to circumvent the security layer.  Hence, if "MZ" can be written two the first two characters, the security is compromised. 
+
+After testing, write a report on your findings, including all attacks that succeeded and failed.  The write up should include a critique of what was done well or done poorly.  In effect, if the design paradigms stated above were followed well, then the security layer was well written.  If one or more of the design concepts listed above was not present, then that should be reflected in the write up.  If a security layer was not well written, the report should say how.  For instance, if the security layer does not block all forms of attack, then security has failed.  If the security layer takes an hour to run but still blocks all attacks, then efficiency has failed.  If possible explain why their code is bad, citing specific examples.  This assignment will give you the basics of code auditing and code analysis.  
 
 Note: For a full description on MZ executable files see  http://www.fileformat.info/format/exe/corion-mz.htm 
      
@@ -58,7 +66,7 @@ myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-	myfile.writeat("MZ",0)
+        myfile.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
@@ -83,8 +91,13 @@ myfile=openfile("look.txt",True)
 }}}
 look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
 
-
 In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+
+The try, except, else and finally statements are part of a design principle known as exception handling.  For more information on exception handling please visit: 
+
+ * [http://docs.python.org/tutorial/errors.html]
+ * [http://wiki.python.org/moin/HandlingExceptions]
+ * [http://www.tutorialspoint.com/python/python_exceptions.htm]
 
 === Hints and Ideas for testing ===
 
