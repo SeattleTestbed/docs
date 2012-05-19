@@ -45,6 +45,7 @@ Once you have RepyV2 run the command found below.  This command will initialize 
 
 {{{python preparetest.py -t [destdir]}}}
 
+Please note, the directory you decide to unpack the files to show be the directory you use to run all your code!  Please save all files you intend to run in this directory.  
 Finally use the command found below in order to run repy files:
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy}}} 
@@ -60,13 +61,11 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
  * command line errors:
 
-'''restrictions.default is missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  Upon initial installation `restrictions.default` is often missing from the directory where `repy.py` is installed.  You must simply find it by searching through your repy files and copy/paste it into the current working directory.  A copy of `restrictions.default` exists in the directory ...\repy_v2\repy\tests.
-
-'''encasementlib.repy is missing:''' It might also be the case that you are missing `encasementlib.repy` from the working directory.  It can be found in ...\repy_v2\repy\pre
+'''restrictions.default is missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  It is likely you are trying to run repy files from the wrong directory, if this is the case.  Since `repy.py` exists in multiple directories, it is possible to run `.repy` files from other than the the one you are supposed to use.  However, this will always cause an error.  
 
  * Downloading the wrong version of seattle:
 
-Seattle is operating system dependent.  If you download the windows version, you need to use the windows command line.  For windows 7 this is powershell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the linux version you must use either cygwin or a linux OS.  
+Seattle is operating system dependent.  If you download the windows version, you need to use the windows command line.  For windows 7 this is powershell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the linux version you must use a linux OS.  
 
 Advanced trouble shooting:
 
@@ -92,10 +91,22 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 Time to start coding!  Let's inspect a basic security layer.  
 
 {{{
-# Repy V2 Security Layer Sample - Methods - Code
-# no_first_byte.repy
-
-# Defining constants for later use
+"""
+This security layer interposes on a textfile 
+and gives it open, close, read and write access.
+However, a user cannot start the document with the letters,
+MZ.
+If a user tries to the security layer will raise an exception.
+Note:
+	This security layer uses encasementlib.repy, restrictions.default, repy.py and python
+	Also you need to give it an application to run.
+	This security layer never runs explicitedly but instead interposes functions
+	from above layers.
+	
+	"""	
+	
+BUFFER = []
+	
 TYPE="type"
 ARGS="args"
 RETURN="return"
@@ -104,60 +115,48 @@ TARGET="target"
 FUNC="func"
 OBJC="objc"
 
+class SecureFile():
+	def __init__(self,file):
+		self.file = file
 
-# Creating our class
-class NoFirstByteFile():
-  def __init__(self,file):
-    self.file = file
+	def readat(self,bytes,offset):
+		BUFFER.append("SecureFile.readat")
+		return self.file.readat(bytes,offset)
 
-  def readat(self,bytes,offset):
-    return self.file.readat(bytes,offset)
-
-  def writeat(self,data,offset):
-    if data.startswith("MZ") and (offset == 0):   
-      raise ValueError("Cannot start file with MZ!")
-    else:
-      return self.file.writeat(data,offset)
-
-  def close(self):
-    return self.file.close()
-
-# Creating the mappings for our class 
-
-sec_file_def = {"obj-type":NoFirstByteFile,
-                "name":"NoFirstByteFile",
-                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:NoFirstByteFile.readat},
-                "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:None,TARGET:NoFirstByteFile.writeat},
-                "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:NoFirstByteFile.close}
-               }
-
-# Creating a new version of openfile so it creates a NoFirstByteFile object, instead of a normal file.
-def openfile_restricted(look.txt, create):
-  f = openfile(look.txt,create)
-  return NoFirstByteFile(f)
+	def writeat(self,data,offset):
+		BUFFER.append("SecureFile.writeat")
+		if data.startswith("MZ") and (offset == 0):	
+			raise ValueError("Cannot start file with MZ!")
+		else:
+			BUFFER.append("SecureFile.writeat")
+			return self.file.writeat(data,offset)
 	
-# Mapping openfile to our new version of openfile
-CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:openfile_restricted}
+	def close(self):
+		BUFFER.append("SecureFile.close")
+		return self.file.close()
+	
+	
+sec_file_def = {"obj-type":SecureFile,
+	            "name":"SecureFile",
+	            "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
+	            "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,long),TARGET:SecureFile.writeat},
+	            "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
+	           }
 
-# Dispatch
+def secure_openfile(filename, create):
+  BUFFER.append("openfile")
+  f = openfile(filename,create)
+  return SecureFile(f)
+
+CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
+
 secure_dispatch_module()
+
 
 }}} 
 
 === Using the example layer ===
 
-It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
-
-{{{
-
-# Creating a new version of openfile so it creates a NoFirstByteFile object, instead of a normal file.
-def openfile_restricted(look.txt, create):
-  f = openfile(look.txt,create)
-  return NoFirstByteFile(f)
-
-}}}
-
-look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
 
 Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
 
@@ -177,30 +176,40 @@ In this part of the assignment you will pretend to be an attacker.  Remember the
 
 {{{
 # Open a file
-myfile=openfile("something.txt",True)
+myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-  myfile.writeat("MZ",0)
+	myfile.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
   log("The security layer correctly blocked the write!!!")
  
-# No Exception was raised:
+# No Exception was raise
 else:
   log("Wrote an MZ!!!")
  
 finally:
   # Close the file after our attempt.
-  myfile.close()
+	myfile.close()
 }}}
 
 '''Note:''' All attacks should be written as Repy files, using the .repy extension.
 
 ==== Code Analysis ====
+It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
+
+{{{
+
+# Open a file
+myfile=openfile("look.txt",True)
+
+}}}
+look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
+
 This code attempts to write "MZ" to the file directly.  First the file is opened using
-`myfile=openfile("something.file",True)`.  Next `myfile.writeat("MZ",0)` tries to write "MZ" to the file.  The 0 refers to an offset of zero.  The `try:` statement tells the program to "try" this case.  Notice that the `except` is executed if an error is raised.  If the security layer fails the test then the else statement is executed.  The `finally:` statement will always run, closing the file.
+`myfile=openfile("look.txt",True)`.  Next `myfile.writeat("MZ",0)` tries to write "MZ" to the file.  The 0 refers to an offset of zero.  The `try:` statement tells the program to "try" this case.  Notice that the `except` is executed if an error is raised.  If the security layer fails the test then the else statement is executed.  The `finally:` statement will always run, closing the file.
 [[BR]]
 === Running your security layer ===
 ----
