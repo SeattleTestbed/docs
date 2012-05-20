@@ -63,7 +63,7 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
  * command line errors:
 
-'''restrictions.default is missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  It is likely you are trying to run repy files from the wrong directory, if this is the case.  Since `repy.py` exists in multiple directories, it is possible to run `.repy` files from other than the the one you are supposed to use.  However, this will always cause an error.  
+'''restrictions.default is missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  It is likely you are trying to run repy files from the wrong directory, if this is the case.  Since `repy.py` exists in multiple directories, it is possible to run `.repy` files from directories other than the the one you are supposed to use.  However, this will always cause an error.  
 
  * Downloading the wrong version of seattle:
 
