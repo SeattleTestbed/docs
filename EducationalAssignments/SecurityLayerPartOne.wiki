@@ -20,7 +20,7 @@ In this assignment an attacker attempts to write "MZ" to the first two character
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to write "MX" to a file this should be allowed.  As a second example "ZM" should not be blocked from the first two characters either.
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to write "MX" to a file this should be allowed.  As a second example "ZM" should be allowed as well.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
  * Security: The attacker should not be able to circumvent the security layer.  Hence, if "MZ" can be written two the first two characters, the security is compromised.     
 
