@@ -156,7 +156,7 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 [[BR]]
 == Extra Credit ==
 ----
-Students can be provided with a second set of reference monitors.  These attempt to prevent students from writing 'p0wnd' to a file. 
+Write and test a second reference monitor that stops "p0wnd" from being written anywhere in a file.  You should include more test cases in the extra credit!
 [[BR]]
 == What to turn in? ==
 ----
