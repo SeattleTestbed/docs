@@ -187,19 +187,19 @@ myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-	myfile.writeat("MZ",0)
+    myfile.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
-  log("The security layer correctly blocked the write!!!")
+    log("The security layer correctly blocked the write!!!")
  
 # No Exception was raise
 else:
-  log("Wrote an MZ!!!")
+    log("Wrote an MZ!!!")
  
 finally:
   # Close the file after our attempt.
-	myfile.close()
+    myfile.close()
 }}}
 
 '''Note:''' All attacks should be written as Repy files, using the .repy extension.
