@@ -179,7 +179,7 @@ The second condition, `(offset == 0)` determines the starting point of the curso
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker.  Remember the attackers objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
+In this part of the assignment you will pretend to be an attacker.  Remember the attacker's objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
 
 {{{
 # Open a file
@@ -224,7 +224,7 @@ Finally, type the following commands at the terminal to run your security layer 
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [attack_program].repy }}}
 
-Make sure you went through the "How to get RepyV2" section or this won't work!
+Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Notes and Resources =
 ----
@@ -254,7 +254,7 @@ Make sure you went through the "How to get RepyV2" section or this won't work!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second reference monitor which stops an attacker from writing 'p0wnd' anywhere in a file.  You should also test the security layer by trying to write 'p0wnd' anywhere in the file.  
+For extra credit, make a second security layer which stops an attacker from writing 'p0wnd' anywhere in a file.  This security layer will be similar to the first one you wrote, except now you must handle the case of `offset != 0` as well as a few other things.  You should also write an attack layer which attempts to write 'p0wnd' to a file.  
 
 '''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
 [[BR]]
