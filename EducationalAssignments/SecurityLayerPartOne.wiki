@@ -53,7 +53,12 @@ Finally use the command found below in order to run repy files:
 
 Please note Repy files end in extension `.repy`.   
 
-In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  The sample security layer is found in [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense] and the sample attack is found in [https://seattle.cs.washington.edu/wiki/EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer]. If they failed, please go through the trouble shooting section found below.
+In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
+
+ * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense] 
+ * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer]
+
+If they failed, please go through the trouble shooting section found below.
 === Trouble shooting repy ===
 If you can't get repy files to run, some of the following common errors may have occurred:
 
