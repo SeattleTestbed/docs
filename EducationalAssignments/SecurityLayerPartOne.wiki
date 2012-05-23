@@ -55,8 +55,8 @@ Please note Repy files end in extension `.repy`.
 
 In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
 
- * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense] 
- * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer]
+ * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
+ * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the trouble shooting section found below.
 === Trouble shooting repy ===
