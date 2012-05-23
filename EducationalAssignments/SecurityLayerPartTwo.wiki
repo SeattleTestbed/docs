@@ -125,7 +125,7 @@ In this case we are verifying the accuracy of the reference monitor.  This code 
 If this case produces anything other than "Write okay", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from starting with "MZ", not containing "MZ".
 
 ==== More information on: Try, Except, Else, Finally ====
-The try, except, else and finally statements are part of a design principle known as exception handling.  For more information on exception handling please visit: 
+The try, except, else and finally statements are part of '''exception handling'''.  For more information on exception handling please visit: 
 
  * [http://docs.python.org/tutorial/errors.html]
  * [http://wiki.python.org/moin/HandlingExceptions]
