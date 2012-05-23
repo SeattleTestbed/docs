@@ -135,8 +135,8 @@ class SecureFile():
 		if data.startswith("MZ") and (offset == 0):	
 			raise ValueError("Cannot start file with MZ!")
 		else:
-			BUFFER.append("SecureFile.writeat")
-			return self.file.writeat(data,offset)
+		     BUFFER.append("SecureFile.writeat")
+		     return self.file.writeat(data,offset)
 	
 	def close(self):
 		BUFFER.append("SecureFile.close")
