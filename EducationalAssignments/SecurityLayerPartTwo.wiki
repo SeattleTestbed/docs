@@ -11,9 +11,11 @@ In this assignment you are a tester.  You have been sent a bunch of reference mo
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
-Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed.
-Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
-Security: The attacker should not be able to circumvent the security layer.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed.
+
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+
+ * Security: The attacker should not be able to circumvent the security layer.
 
 Within the context of this assignment these design paradigms translate to:
 
