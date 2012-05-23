@@ -69,7 +69,7 @@ myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-        myfile.writeat("MZ",0)
+  myfile.writeat("MZ",0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
@@ -81,7 +81,7 @@ else:
  
 finally:
   # Close the file after our attempt.
-	myfile.close()
+  myfile.close()
 }}}
 ==== Code analysis ====
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
@@ -104,7 +104,7 @@ myfile=openfile("look.txt",True)
  
 # Attempt to write "MZ" to the file
 try:
-        myfile.writeat("MZ",1)
+  myfile.writeat("MZ",1)
  
 # It raised an Exception :
 except ValueError:
@@ -116,7 +116,7 @@ else:
  
 finally:
   # Close the file after our attempt.
-	myfile.close()
+  myfile.close()
 }}}
 ==== Code analysis ====
 
