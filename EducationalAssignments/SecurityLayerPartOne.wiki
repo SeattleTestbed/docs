@@ -58,7 +58,7 @@ In order to test whether or not these steps worked, please copy and paste the co
  * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense] 
  * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer]
 
-If they failed, please go through the trouble shooting section found below.
+If you got an error, please go through the trouble shooting section found below.
 === Trouble shooting repy ===
 If you can't get repy files to run, some of the following common errors may have occurred:
 
