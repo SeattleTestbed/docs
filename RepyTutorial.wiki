@@ -181,7 +181,7 @@ ID Own       Name          Status          Owner Information
 john@browsegood !> exit
 }}}
 
-You can find more practical examples in the [TakeHomeAssignment Take home assignment] page.                
+You can find more practical examples in the [EducationalAssignments/TakeHome Take home assignment] page.                
 
 [[BR]]
 === A Hello World example (example 1.2) ===
