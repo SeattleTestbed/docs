@@ -1,6 +1,6 @@
 = Seattle Experiment Library =
 
-The Experiment Library provides a means of scripting interaction with individual nodes and vessels as well as with SeattleGENI. Whereas [SeattleShell Seash] is for interactive use, the Experiment Library allows for writing Python scripts to acquire vessels, run experiments, download logs, etc.
+The Experiment Library provides a means of scripting interaction with individual nodes and vessels as well as with the Seattle Clearinghouse. Whereas [SeattleShell Seash] is for interactive use, the Experiment Library allows for writing Python scripts to acquire vessels, run experiments, download logs, etc.
 
 = Getting the Experiment Library =
 
@@ -10,7 +10,7 @@ You can obtain the experiment library by running the following commands:
 mkdir experimentlibrary
 cd experimentlibrary
 svn export https://seattle.cs.washington.edu/svn/seattle/trunk/experimentmanager
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/seattlegeni/xmlrpc_clients/seattlegeni_xmlrpc.py
+svn export https://seattle.cs.washington.edu/svn/seattle/trunk/seattlegeni/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
 svn export https://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib
 svn export https://seattle.cs.washington.edu/svn/seattle/trunk/portability
 svn export https://seattle.cs.washington.edu/svn/seattle/trunk/repy
