@@ -204,7 +204,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -225,11 +225,11 @@ The initialize portion has two options.  If you run it locally, it says, wait fo
 It is localhost and means this computer. It is used to access the computer currently used.
 }}}
 
-Otherwise, you're running it remotely and need to pass it your GENIport.  For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the Seattle GENI website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
+Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
 
 [[Image(geniport.jpg)]]
 
-You should write your GENIport down as you'll need this value repeatedly.
+You should write your Clearinghouseport down as you'll need this value repeatedly.
 
 The waitforconn() function returns a commhandle. A commhandle is a way for your program to refer to a connection. You can pass a commhandle to other functions to do operations. For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
 {{{
@@ -280,11 +280,11 @@ default@ !> on %1
 default@%1 !>
 }}}
 
-Then, run this program passing it your GENIport.
+Then, run this program passing it your Clearinghouse port.
 
 {{{
 #!python
-default@%1 !> run example.1.2.repy GENIport
+default@%1 !> run example.1.2.repy Clearinghouseport
 default@%1 !> list                            
   ID   Own                  Name                Status      Owner Information
   %1             IP address:port:vesselname     Started     
@@ -292,7 +292,7 @@ default@%1 !> list
 
 Notice that the program is "Started" instead of "Terminated". It's still running! 
 
-Now open a web browser and in the address bar type: IP_of_%1:GENIport.  For example, if 1.2.3.4 is the IP address of %1, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321". If the node doesn't respond, try again.    You should see the hello world webpage.
+Now open a web browser and in the address bar type: IP_of_%1:Clearinghouseport.  For example, if 1.2.3.4 is the IP address of %1, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321". If the node doesn't respond, try again.    You should see the hello world webpage.
 
 To stop the program, in the shell type:
 
@@ -332,7 +332,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -363,7 +363,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -376,7 +376,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn(ip,port,hello) 
 }}}
 
-Start the program using the shell, then open a web browser and in the address bar type: IP_of_vessel:GENIport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
+Start the program using the shell, then open a web browser and in the address bar type: IP_of_vessel:Clearinghouseport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
 
 [[BR]]
 === Adding a Timer and listing the elapsed time (example 1.4) ===
@@ -406,7 +406,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -426,7 +426,7 @@ The timer (when called) will stop the communication. settimer returns an eventha
 
 getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
 
-Start the program and then open a web browser and in the address bar type: IPaddress_of_vessel:GENIport.  You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
+Start the program and then open a web browser and in the address bar type: IPaddress_of_vessel:Clearinghouseport.  You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
 
 [[BR]]
 === Interacting with Timers (example 1.5) ===
@@ -464,7 +464,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -517,7 +517,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -573,7 +573,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
