@@ -103,7 +103,7 @@ python seash.py
 
 '''Step 2. Log in with your key
 
-Before logging in, you have to load your public and private keys. You can get the keys at the  [https://seattlegeni.cs.washington.edu/ SeattleGENI] website. You need to make sure that you have two files, your public and private key. The name of each file is your ID and the extension of files are publickey and privatekey.
+Before logging in, you have to load your public and private keys. You can get the keys at the  [https://seattlegeni.cs.washington.edu/ SeattleClearinghouse] website. You need to make sure that you have two files, your public and private key. The name of each file is your ID and the extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be {{{john.publickey}}} and {{{john.privatekey}}}.   These files must be placed in the directory where you run {{{seash}}}.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
@@ -117,7 +117,7 @@ john@ !>
 
 '''Step 3. Locate the resources(computers) you can use
 
-This command will tell the shell to locate resources that have been assigned to your account through the SeattleGENI website. In order to assign resources to your account, you must go to the SeattleGENI website, log into your account and get more resources under the 'My Vessels' tab.
+This command will tell the shell to locate resources that have been assigned to your account through the SeattleClearinghouse website. In order to assign resources to your account, you must go to the SeattleClearinghouse website, log into your account and get more resources under the 'My Vessels' tab.
 
 {{{
 #!python
