@@ -117,7 +117,7 @@ john@ !>
 
 '''Step 3. Locate the resources(computers) you can use
 
-This command will tell the shell to locate resources that have been assigned to your account through the SeattleClearinghouse website. In order to assign resources to your account, you must go to the SeattleClearinghouse website, log into your account and get more resources under the 'My Vessels' tab.
+This command will tell the shell to locate resources that have been assigned to your account through the !SeattleClearinghouse website. In order to assign resources to your account, you must go to the !SeattleClearinghouse website, log into your account and get more resources under the 'My Vessels' tab.
 
 {{{
 #!python
