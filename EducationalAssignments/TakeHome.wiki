@@ -13,12 +13,12 @@ This assignment consists of 11 steps and should take between 30-120 minutes to c
 [[TOC(inline)]]
 ----
 [[BR]]
-= Using the GENI website and the Seash =
+= Using the Clearinghouse website and the Seash =
 [[BR]]
 == Step 1 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.cs.washington.edu/geni/ GENI website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.cs.washington.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
 
 In the top pane, select LAN and choose 5 vessels, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
@@ -42,7 +42,7 @@ You will see a prompt like " !> " once seash starts.  Seash will allow you to ea
 == Step 3 : Browsing your resources ==
 ----
 
-Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing ''username'' with the user name you used to log into the Seattle GENI website)'''
+Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing ''username'' with the user name you used to log into the Seattle Clearinghouse website)'''
 
 {{{
 #!python
@@ -201,9 +201,9 @@ It is common when using lots of distributed computers to have a few of them not 
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle GENI assigns the same UDP port to all of a user's vessels. 
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. 
 
-To figure out which port you should use, log into the Seattle GENI website and on the Profile page, look to see what port number it indicates.   '''You should write down your port number as you'll need this value repeatedly.'''
+To figure out which port you should use, log into the Seattle Clearinghouse website and on the Profile page, look to see what port number it indicates.   '''You should write down your port number as you'll need this value repeatedly.'''
 
 We'll measure connectivity by sending UDP pings from a target computer to a destination.  At the " username@LAN !> " prompt type
 
@@ -212,19 +212,19 @@ We'll measure connectivity by sending UDP pings from a target computer to a dest
 username@LAN !> list
 }}}
 
-This will allow you to see the IP of %2.  Now type (replacing ''GENIport'' with your port number)
+This will allow you to see the IP of %2.  Now type (replacing ''port'' with your port number)
 
 {{{
 #!python
-username@LAN !> on %2 run udppingserver.repy GENIport
+username@LAN !> on %2 run udppingserver.repy port
 }}}
 
 
-You can ping from %1 to %2 by typing the line listed below.   Replace ''IP_of_%2'' with the IP address of computer %2 as shown by your previous list command.   It will be something like 1.2.3.4.   Also replace ''GENIport'' with your port number.
+You can ping from %1 to %2 by typing the line listed below.   Replace ''IP_of_%2'' with the IP address of computer %2 as shown by your previous list command.   It will be something like 1.2.3.4.   Also replace ''port'' with your port number.
 
 {{{
 #!python
-username@LAN !> on %1 run udpping.repy IP_of_%2 GENIport
+username@LAN !> on %1 run udpping.repy IP_of_%2 port
 }}}
 
 
@@ -270,14 +270,14 @@ Now type
 username@LAN !> upload neighboriplist.txt
 }}}
 
-This adds the file with nodes to ping to all of the computers in the LAN group. Now type (substituting your port for ''GENIport'')
+This adds the file with nodes to ping to all of the computers in the LAN group. Now type (substituting your port for ''port'')
 
 {{{
 #!python
-username@LAN !> run allpairsping.repy GENIport
+username@LAN !> run allpairsping.repy port
 }}}
 
-You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
+You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:port.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
 
 Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).   If a row is completely missing, you'll notice the corresponding column is likely empty as well.   This indicates that the node you are looking at is mostly likely down.   
 
@@ -287,7 +287,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle GENI website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Under the My Vessels tab, in the "Get more resources" pane, select WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
+Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle Clearinghouse website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Under the My Vessels tab, in the "Get more resources" pane, select WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
 
 Back in seash, type
 
@@ -337,10 +337,10 @@ Then type
 
 {{{
 #!python
-username@WAN !> run allpairsping.repy GENIport
+username@WAN !> run allpairsping.repy port
 }}}
 
-Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:GENIport.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage of a different computer if the problem persists.
+Finally, check the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:port.   If you can't see this from a specific node, try to refresh a few times.   You should try to load the webpage of a different computer if the problem persists.
 
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like the image below.
 
@@ -362,26 +362,26 @@ username@WAN !> stop
 
 Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity".   Non-transitive connectivity usually happens because of configuration errors or convergence failures in the BGP protocol.   
 
-Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of a node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the node who can talk to both nodes.   Then type (replacing ''node1IP'', ''node2IP'', and ''GENIport'')
+Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of a node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the node who can talk to both nodes.   Then type (replacing ''node1IP'', ''node2IP'', and ''port'')
 
 {{{
 #!python
-username@WAN !> on %number run udpforward.repy node1IP node2IP GENIport
+username@WAN !> on %number run udpforward.repy node1IP node2IP port
 }}}
 
-Now start the udppingserver on node1 by doing (replacing ''%node1'' with the node number for node1 and ''GENIport'')
+Now start the udppingserver on node1 by doing (replacing ''%node1'' with the node number for node1 and ''port'')
 
 {{{
 #!python
-username@WAN !> on %node1 run udppingserver.repy GENIport
+username@WAN !> on %node1 run udppingserver.repy port
 }}}
 
 
-To send a ping packet, run: (replacing ''%node2'' with the node number for node2, ''intermediateIP'' with the IP address of the computer that can talk to both nodes, and ''GENIport'')
+To send a ping packet, run: (replacing ''%node2'' with the node number for node2, ''intermediateIP'' with the IP address of the computer that can talk to both nodes, and ''port'')
 
 {{{
 #!python
-username@WAN !> on %node2 run udpping.repy intermediateIP GENIport
+username@WAN !> on %node2 run udpping.repy intermediateIP port
 }}}
 
 You can look at the log on node1 or node2 to see that the packets were delivered (using the "show log" command).   However, on node2 you'll notice that the ping packets came from the intermediate IP address instead of node1.   You'll also see that node1 got the response from the intermediate node (instead of directly from node2).
@@ -404,9 +404,9 @@ username@WAN !> on %node1 show log
 
 The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.  You will need to download the demokit and keys like you previously did in Step 2.
 
-If you can't run Repy on your home computer, you can also obtain a computer using Seattle GENI.   If you use Seattle GENI, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
+If you can't run Repy on your home computer, you can also obtain a computer using Seattle Clearinghouse.   If you use Seattle Clearinghouse, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
 
-Either way, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your GENI user name)
+Either way, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your Clearinghouse user name)
 
 {{{
 #!python
@@ -422,7 +422,7 @@ Then type
 
 and you'll see the prompt changes to "username@ !>". 
 
-Check on the Seattle GENI website to see if you still have nodes to use.   If not, under My Vessels, select WAN, choose 1 computer, and click "Get".  
+Check on the Seattle Clearinghouse website to see if you still have nodes to use.   If not, under My Vessels, select WAN, choose 1 computer, and click "Get".  
 
 Now under seash at the " username@ !>" prompt, type
 
@@ -431,17 +431,17 @@ Now under seash at the " username@ !>" prompt, type
 username@ !> browse
 }}}
 
-You should see the IP of at least one WAN node. Write down the IP address of the WAN node.   Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing either {{{"host `hostname`"}}} or {{{ifconfig}}} on a Mac).   Start the pingserver on the WAN node with the following command in seash (replacing ''GENIport'' with your port number):
+You should see the IP of at least one WAN node. Write down the IP address of the WAN node.   Write down the IP address of your computer (you can obtain this by typing "ipconfig" at a prompt in Windows, by typing "hostname -i" on Linux, or by typing either {{{"host `hostname`"}}} or {{{ifconfig}}} on a Mac).   Start the pingserver on the WAN node with the following command in seash (replacing ''port'' with your port number):
 {{{
 #!python
-username@ !> on %WANnode run udppingserver.repy GENIport
+username@ !> on %WANnode run udppingserver.repy port
 }}}
 
-Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!) after you cd to the directory the demokit is in.   Remember to replace ''WANIP'' with the WAN node's IP address and ''GENIport'' with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
+Ping the WAN node from your local computer by typing the following command at a terminal window (not in seash!) after you cd to the directory the demokit is in.   Remember to replace ''WANIP'' with the WAN node's IP address and ''port'' with your port.   If you are running this on a remote system, you should use seash and replace the {{{python repy.py restrictions.allowallports}}} portion of the command with 'run'.
 
 
 {{{
-python repy.py restrictions.allowallports udpping.repy WANIP GENIport
+python repy.py restrictions.allowallports udpping.repy WANIP port
 }}}
 
 
@@ -466,14 +466,14 @@ Then start the ping server on the local computer by running the following comman
 
 
 {{{
-python repy.py restrictions.allowallports udppingserver.repy GENIport
+python repy.py restrictions.allowallports udppingserver.repy port
 }}}
 
 Next ping the local node from the WAN node
 
 {{{
 #!python
-username@ !> on %WANnode run udpping.repy localIP GENIport
+username@ !> on %WANnode run udpping.repy localIP port
 }}}
 
 
@@ -494,4 +494,4 @@ If you have a firewall, your home computer may not be able to receive incoming c
 
 == Conclusion ==
 
-That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you would like to [DonatingResources donate resources] to the Seattle project, you call install Seattle on your home computer.   Clicking on the Get Donations tab from your Seattle GENI account and picking the appropriate installer to download will credit the donation to your account.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
+That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you would like to [DonatingResources donate resources] to the Seattle project, you call install Seattle on your home computer.   Clicking on the Get Donations tab from your Seattle Clearinghouse account and picking the appropriate installer to download will credit the donation to your account.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
