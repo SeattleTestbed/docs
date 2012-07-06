@@ -1,26 +1,26 @@
-	= SeattleClearinghouse XML-RPC Client Library =
+	= Seattle Clearinghouse XML-RPC Client Library =
 [[BR]]
-The SeattleClearinghouse XML-RPC Client Library is a Python XMLRPC client for communicating with the SeattleClearinghouse XML-RPC Interface.
+The Seattle Clearinghouse XML-RPC Client Library is a Python XMLRPC client for communicating with the Seattle Clearinghouse XML-RPC Interface.
 
-You can download the the client from here: [source:seattle/trunk/seattlegeni/xmlrpc_clients/seattleclearinghouse_xmlrpc.py SeattleClearinghouse Python XMLRPC Client]. Look for the link to "original format" at the bottom of that page to download the file.
+You can download the the client from here: [source:seattle/trunk/seattlegeni/xmlrpc_clients/seattleclearinghouse_xmlrpc.py Seattle Clearinghouse Python XMLRPC Client]. Look for the link to "original format" at the bottom of that page to download the file.
 
 [[BR]]
 === Usage ===
   1. Download the client code linked to above (it is a Python module).
   1. In your Python script, import seattleclearinghouse_xmlrpc.[[BR]]
-  1. Create an instance (or multiple instances, if desired) of the class seattleclearinghouse_xmlrpc.SeattleClearinghouseClient.[[BR]]
+  1. Create an instance (or multiple instances, if desired) of the class seattleclearinghouse_xmlrpc.!SeattleClearinghouseClient.[[BR]]
      The following parameters can be passed to the constructor:
      * ''username'': Your username. (Required)
      * ''private_key_string'': Your private key. (Either this or the api_key is required)
      * ''api_key'': Your api_key.
-     * ''xmlrpc_url'': The url where the SeattleClearinghouse XMLRPC server is located. (Defaults is our main SeattleClearinghouse testbed's xmlrpc url.)
+     * ''xmlrpc_url'': The url where the Seattle Clearinghouse XMLRPC server is located. (Defaults is our main Seattle Clearinghouse testbed's xmlrpc url.)
      * ''allow_ssl_insecure'': True/False, if set to True, allows SSL to operate in an INSECURE manner. '''Do not use allow_ssl_insecure=True in production code.''' (Default is False)
      * ''ca_certs_file'': The location of a file containing your trusted CA certificates. (Default is a file named `cacert.pem` in the same directory that you place `seattleclearinghouse_xmlrpc.py` in.)
   1. Once a client object has been created, simply invoke the object's methods.
 
 [[BR]]
 === Using Secure SSL ===
-In order to perform secure SSL communication with SeattleClearinghouse:
+In order to perform secure SSL communication with Seattle Clearinghouse:
   * You must have M2Crypto installed.
   * You must set the value of CA_CERTIFICATES_FILE to the location of a PEM
     file containing CA certificates that you trust. If you don't know where
@@ -30,16 +30,16 @@ In order to perform secure SSL communication with SeattleClearinghouse:
 If you can't fulfill the above requirements, you can still use this client with
 XMLRPC servers that use https but you will be vulnerable to a man-in-the-middle
 attack. To enable this insecure mode, include the argument `allow_ssl_insecure=True`
-when creating a SeattleClearinghouseClient instance.
+when creating a !SeattleClearinghouseClient instance.
 
 [[BR]]
-=== SeattleClearinghouseClient Methods ===
+=== !SeattleClearinghouseClient Methods ===
 Please note, these methods are not the same as the XML-RPC API calls.
 The clientlib methods are simply convenient wrappers for those calls. 
-As such, most methods here have identical return values as the actual XMLRPC calls. Refer to the [wiki:SeattleGeniApi SeattleClearinghouse XMLRPC API spec] for more info about what these functions return.
+As such, most methods here have identical return values as the actual XMLRPC calls. Refer to the [wiki:SeattleGeniApi Seattle Clearinghouse XMLRPC API spec] for more info about what these functions return.
 
-Available methods on SeattleClearinghouseClient objects:
-  The acquire methods all return a list of acquired resources, following the SeattleClearinghouse XMLRPC API spec.
+Available methods on !SeattleClearinghouseClient objects:
+  The acquire methods all return a list of acquired resources, following the Seattle Clearinghouse XMLRPC API spec.
   * ''acquire_lan_resources(num)'':  Acquires ''num'' LAN vessels.
   * ''acquire_wan_resources(num)'':  Acquires ''num'' WAN vessels.
   * ''acquire_nat_resources(num)'':  Acquires ''num'' NAT vessels.
@@ -56,23 +56,23 @@ Available methods on SeattleClearinghouseClient objects:
   * ''get_public_key()'':  Get user's public key.
 
 === Exceptions ===
-The following exceptions can be raised by SeattleClearinghouseClient methods:[[BR]]
-  * SeattleClearinghouseError -- Base class for all exceptions raised by the SeattleClearinghouseClient.
+The following exceptions can be raised by !SeattleClearinghouseClient methods:[[BR]]
+  * !SeattleClearinghouseError -- Base class for all exceptions raised by the !SeattleClearinghouseClient.
   * !CommunicationError -- Indicates that XMLRPC communication failed.
   * !InternalError -- Indicates an unexpected error occurred, probably either a bug in this
-    client or a bug in SeattleClearinghouse.
+    client or a bug in Seattle Clearinghouse.
   * !AuthenticationError -- Indicates an authentication failure (invalid username and/or API key).
   * !InvalidRequestError -- Indicates that the request is invalid.
   * !NotEnoughCreditsError -- Indicates that the requested operation requires more vessel credits to
     be available then the account currently has.
-  * !UnableToAcquireResourcesError -- Indicates that the requested operation failed because SeattleClearinghouse was unable
+  * !UnableToAcquireResourcesError -- Indicates that the requested operation failed because Seattle Clearinghouse was unable
     to acquire the requested resources.
 
 See the comments in the seattleclearinghouse_xmlrpc.py file for details on when each exception is raised.
 
 [[BR]]
 === Example ===
-Here is an example of how to use the SeattleClearinghouse XML-RPC Client. This could be a python script which you run.[[BR]]
+Here is an example of how to use the Seattle Clearinghouse XML-RPC Client. This could be a python script which you run.[[BR]]
 {{{
 #!python
 """
@@ -90,7 +90,7 @@ import seattleclearinghouse_xmlrpc
 USERNAME = "your_username"
 
 # Only one of either the API key or the private key is needed. If providing
-# your API key, be sure to pass the API key to the SeattleClearinghouseClient
+# your API key, be sure to pass the API key to the !SeattleClearinghouseClient
 # constructor below.
 #API_KEY = "your_api_key"
 PRIVATE_KEY_STRING = open("your_username.privatekey").read()
@@ -128,7 +128,7 @@ def do_example_acquire_renew_release():
           "credits: " + str(err))
     return
   except seattleclearinghouse_xmlrpc.UnableToAcquireResourcesError, err:
-    print("Couldn't acquire vessels because SeattleClearinghouse doesn't have enough " +
+    print("Couldn't acquire vessels because Seattle Clearinghouse doesn't have enough " +
           "of what we asked for: " + str(err))
     return
   print("Acquired WAN vessel: " + str(newly_acquired_vessels))
@@ -164,10 +164,10 @@ def do_example_acquire_renew_release():
 def main():
   try:
     do_example_acquire_renew_release()
-  except seattleclearinghouse_xmlrpc.SeattleClearinghouseError:
+  except seattleclearinghouse_xmlrpc.Seattle ClearinghouseError:
     # In a real script, you'd want to handle this. Could be an authentication
     # error, communication error, etc. You can use the fine-grained exceptions
-    # rather than the base exception of SeattleClearinghouseError to do different
+    # rather than the base exception of Seattle ClearinghouseError to do different
     # things based on what the actual problem was.
     raise
 
