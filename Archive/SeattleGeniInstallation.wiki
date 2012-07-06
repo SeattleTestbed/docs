@@ -1,9 +1,9 @@
-= SeattleGENI Installation !HowTo =
+= SeattleClearinghouse Installation !HowTo =
 
-This document explains how to do a fresh install of the SeattleGENI portal on
+This document explains how to do a fresh install of the SeattleClearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
- * For info on deploying the production SeattleGENI code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
+ * For info on deploying the production SeattleClearinghouse code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
 
 ----
 [[TOC(inline)]]
@@ -11,9 +11,9 @@ a machine that is running a Debian-like Linux operating system such as Ubuntu.
 == Install Dependencies ==
 ----
 
-SeattleGENI requires at least the following software to be installed:
+SeattleClearinghouse requires at least the following software to be installed:
  
- * [http://www.python.org/ Python] -- the language SeattleGENI is written in
+ * [http://www.python.org/ Python] -- the language SeattleClearinghouse is written in
  * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
  * [http://www.mysql.com/ MySQL] -- the database
  * [http://www.apache.org/ Apache] -- the web server
@@ -62,7 +62,7 @@ Be sure to repeat the process for a separate database called `keydb`.
 
 
 [[BR]]
-== Deploying and running SeattleGENI ==
+== Deploying and running SeattleClearinghouse ==
 ----
 
   * '''Initial preparation'''
@@ -228,7 +228,7 @@ python node_state_transitions/TRANSITION_SCRIPT_NAME.py
 == Configure Apache sites ==
 ----
 
-To provide encryption, SeattleGENI relies on SSL. Therefore you will need to
+To provide encryption, SeattleClearinghouse relies on SSL. Therefore you will need to
 setup two !VirtualHost entries at the minimum: one for connections to
 port 80 (HTTP), and one for connections to port 443 (SSL).
 
@@ -298,9 +298,9 @@ NameVirtualHost *:443
 </VirtualHost>
 }}}
 
-To use this configuration for your SeattleGENI installation, change "mysite" to your domain
+To use this configuration for your SeattleClearinghouse installation, change "mysite" to your domain
 name, change "/home/geni/live/" in the site media location and Python path to the directory
-where you deployed SeattleGENI, and make sure "/admin_media" is aliased to a valid directory,
+where you deployed SeattleClearinghouse, and make sure "/admin_media" is aliased to a valid directory,
 as the exact location will vary depending on the version of Python installed and how you
 installed Django. A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
 
@@ -328,13 +328,13 @@ then you need to enable ssl by running:
 $ sudo a2enmod ssl
 }}}
 
-For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your SeattleGENI directory:
+For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your SeattleClearinghouse directory:
 {{{
 #!sh
 $ chmod -R o+rx seattle/ seattlegeni/
 }}}
 
-If you try to access your SeattleGENI installation's website now, then it's possible you'll see an exception like this:
+If you try to access your SeattleClearinghouse installation's website now, then it's possible you'll see an exception like this:
 {{{
 Cannot open file for translation '/home/geni/live/seattle/rsa.repy': [Errno 13] Permission denied: '/home/geni/live/seattle/rsa_repy.py'
 }}}
@@ -351,7 +351,7 @@ $ chmod a+w *_repy.py
 == Running start_seattlegeni_components.sh ==
 ----
 
-If you have all the components of SeattleGENI (including Apache) configured,
+If you have all the components of SeattleClearinghouse (including Apache) configured,
 the script deploymentscripts/start_seattlegeni_components.sh will start up all the individual
 components in the correct order.
 
@@ -359,7 +359,7 @@ Before running start_seattlegeni_components.sh, make sure to change PYTHONPATH, 
 and LOG_DIR to the correct locations for your deployment, change geni in SUDO_CMD to the correct
 username, and create the directory for LOG_DIR if it doesn't already exist.
 
-First, if one or more of the SeattleGENI scripts is already running, kill them before running start_seattlegeni_components.sh.
+First, if one or more of the SeattleClearinghouse scripts is already running, kill them before running start_seattlegeni_components.sh.
 
 To run start_seattlegeni_components.sh, run the following commands with the correct directory substituted for /home/geni/live:
 {{{
@@ -383,5 +383,5 @@ $ screen -r
 == Conclusion ==
 ----
 
-Congratulations! You should now have a fully operational SeattleGENI
+Congratulations! You should now have a fully operational SeattleClearinghouse
 installation that you can access at https://mysite/geni/
