@@ -1,16 +1,16 @@
-= SeattleGENI API =
+= Seattle Clearinghouse API =
 [[BR]]
-An XML-RPC interface to SeattleGENI is available, for clients wishing to access SeattleGENI functionality without going through the SeattleGENI website. The XML-RPC server is located at the following address: {{{https://seattlegeni.cs.washington.edu/xmlrpc/}}}
+An XML-RPC interface to Seattle Clearinghouse is available, for clients wishing to access Seattle Clearinghouse functionality without going through the Seattle Clearinghouse website. The XML-RPC server is located at the following address: {{{https://seattlegeni.cs.washington.edu/xmlrpc/}}}
 
-For examples on how to use XML-RPC with SeattleGENI, check out the [wiki:SeattleGeniClientLib SeattleGENI XML-RPC Client Library].
+For examples on how to use XML-RPC with Seattle Clearinghouse, check out the [wiki:SeattleGeniClientLib Seattle Clearinghouse XML-RPC Client Library].
 
 [[BR]]
 === Authentication ===
-In order to talk with SeattleGENI over XML-RPC, authentication is required.[[BR]]
+In order to talk with Seattle Clearinghouse over XML-RPC, authentication is required.[[BR]]
 The authentication structure takes the form of the following dictionary:
    ''{'username':'YOUR_USERNAME', 'api_key':'YOUR_API_KEY'}''
 
-The value of ''YOUR_USERNAME'' is the same username you use to login to the SeattleGENI website. The value of ''YOUR_API_KEY'' is the API key you can find on SeattleGENI when viewing the profile page for your account.[[BR]]
+The value of ''YOUR_USERNAME'' is the same username you use to login to the Seattle Clearinghouse website. The value of ''YOUR_API_KEY'' is the API key you can find on Seattle Clearinghouse when viewing the profile page for your account.[[BR]]
 [[BR]]
 '''This structure is expected as the first argument in every XML-RPC API call (except where otherwise noted).[[BR]]'''
 All XML-RPC functions will return an XML-RPC Fault Code 101 if authentication fails.
@@ -49,11 +49,11 @@ Returns a list of dictionaries, where each dictionary contains information about
       ''handle'' has an undefined type but is used in future calls to release_resources. ''Make no assumptions about the type of this item.''[[BR]]
       ''expires_in_seconds'' is an integer representing the number of seconds until this vessel's acquisition will expire.[[BR]]
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 Raises an XML-RPC Fault Code 103 if the account doesn't have enough credits available to acquire the requested vessels.[[BR]]
-Raises an XML-RPC Fault Code 105 if SeattleGENI could not fulfill the request (e.g. there are not enough vessels of the requested type available).[[BR]]
+Raises an XML-RPC Fault Code 105 if Seattle Clearinghouse could not fulfill the request (e.g. there are not enough vessels of the requested type available).[[BR]]
 
 [[BR]]
 === acquire_specific_vessels(auth, vesselhandle_list) ===
@@ -66,7 +66,7 @@ The '''vesselhandle_list''' is a list of vessel handles.
 
 Returns a list of dictionaries like that returned by '''acquire_resources'''.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 Raises an XML-RPC Fault Code 103 if the account doesn't have enough credits available to acquire the requested vessels.[[BR]]
@@ -77,7 +77,7 @@ Raises an XML-RPC Fault Code 103 if the account doesn't have enough credits avai
 
 Release resources (vessels) previously acquired by the account.  The handles in '''list_of_handles''' indicate the vessels to be released.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
@@ -87,7 +87,7 @@ Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 Renew resources (vessels) previously acquired by the account.  The handles in '''list_of_handles''' indicate the vessels to be renewed. Vessels are renewed for 7 days.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 Raises an XML-RPC Fault Code 103 if the account doesn't have enough credits available to renew any of its acquired vessels. This can happen, for example, if the account acquired vessels based on donations that have since gone offline resulting in the account being over its vessel credit limit.[[BR]]
@@ -100,7 +100,7 @@ Returns a list of resources (vessels) currently acquired by the user.
 
 The return list is of the same form as returned by acquire_resources.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
@@ -117,7 +117,7 @@ Returns a dictionary of the form:
       ''max_vessel'' is an integer, indicating the total vessels allowed.   This may vary as donations are credited to the user or go offline.   [[BR]]
       ''user_affiliation'' is a string and represents the affiliation provided by the user when registering for an account.   This field is not validated so should not be trusted.[[BR]]
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
@@ -127,7 +127,7 @@ Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 Returns the user's public key as a string.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 101 if authentication failed.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
@@ -140,7 +140,7 @@ Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 Returns the user's api key encrypted with the user's public key.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 ----
@@ -158,7 +158,7 @@ structure contains a password instead of an api key. Thus, the structure is:
 
 Generates a new api key for the user and returns the new api key.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 [[BR]]
@@ -167,5 +167,5 @@ Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
 
 Sets the user's public key.
 
-Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in SeattleGENI.[[BR]]
+Raises an XML-RPC Fault Code 1 or 100 if an internal error occurred in Seattle Clearinghouse.[[BR]]
 Raises an XML-RPC Fault Code 102 if any arguments were invalid.[[BR]]
