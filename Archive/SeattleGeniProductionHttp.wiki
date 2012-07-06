@@ -58,7 +58,7 @@ We use the following logrotate configuration (found in `/etc/logrotate.d/seattle
 ----
 
 To deploy !SeattleClearinghouse code from SVN trunk into production:
-  1. Log in to either !SeattleClearinghouse.cs or betabox.cs (depending on which installation you are updating).
+  1. Log in to either seattlegeni.cs or betabox.cs (depending on which installation you are updating).
   1. Get a root shell: `sudo -i`
   1. Open the screen running as root: `screen -r`
   1. There should be only one session in the screen and you will find yourself looking at a running instance of `start_seattlegeni_components.sh` with output that looks like this:
