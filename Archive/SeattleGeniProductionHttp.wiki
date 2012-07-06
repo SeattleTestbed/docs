@@ -1,10 +1,10 @@
-= SeattleGENI in Production =
+= !SeattleClearinghouse in Production =
 
-The SeattleGENI portal runs on Apache and uses mod_python to interface with django.
-This page describes how to redeploy SeattleGENI from the current svn trunk as well
-as some additional configuration information for using SeattleGENI in production.
+The !SeattleClearinghouse portal runs on Apache and uses mod_python to interface with django.
+This page describes how to redeploy !SeattleClearinghouse from the current svn trunk as well
+as some additional configuration information for using !SeattleClearinghouse in production.
 
- * For info on installing the necessary software to run GENI, see [wiki:SeattleGeniInstallation].
+ * For info on installing the necessary software to run GENI, see [wiki:!SeattleClearinghouseInstallation].
 
 ----
 [[TOC(inline)]]
@@ -13,7 +13,7 @@ as some additional configuration information for using SeattleGENI in production
 == File and Directory Permissions ==
 ----
 
-The way we have things setup on seattlegeni and betabox, if you try to access the website before running the other service after you have just deployed then you are likely to get a permissions error of apache not being able to write files in /home/geni/live/seattle. However, this is not a problem if you use the start_seattlegeni_components.sh script because it will start the lockserver and backend before restarting apache, and the result will be that all of the '.repy' files that need to be turned into '_repy.py' will have already been processed, so the website (mod_python running under apache's user) won't try to do that.
+The way we have things setup on !SeattleClearinghouse and betabox, if you try to access the website before running the other service after you have just deployed then you are likely to get a permissions error of apache not being able to write files in /home/geni/live/seattle. However, this is not a problem if you use the start_seattlegeni_components.sh script because it will start the lockserver and backend before restarting apache, and the result will be that all of the '.repy' files that need to be turned into '_repy.py' will have already been processed, so the website (mod_python running under apache's user) won't try to do that.
 
 == Apache Settings ==
 ----
@@ -28,7 +28,7 @@ Note that the GENI site uses a SSL certificate and uses HTTPS (port 443) for all
 == Logrotate ==
 ----
 
-The SeattleGENI website's log data goes to the apache error log. However, the log files of the
+The !SeattleClearinghouse website's log data goes to the apache error log. However, the log files of the
 individual scripts (polling daemons, transition scripts, lockserver, and backend) go to file
 in the /home/geni/logs directory. These need to be rotated by logrotate.
 
@@ -41,7 +41,7 @@ We use the following logrotate configuration (found in `/etc/logrotate.d/seattle
   compress
   missingok
   notifempty
-  # The seattlegeni scripts don't know how to start a new log file, so we have
+  # The !SeattleClearinghouse scripts don't know how to start a new log file, so we have
   # logrotate make a copy of the log files and truncate the original ones.
   copytruncate
   # move the compressed files into the 'archived' directory that's in the same
@@ -54,11 +54,11 @@ We use the following logrotate configuration (found in `/etc/logrotate.d/seattle
 
 
 [[BR]]
-== Redeploying SeattleGENI from SVN ==
+== Redeploying !SeattleClearinghouse from SVN ==
 ----
 
-To deploy SeattleGENI code from SVN trunk into production:
-  1. Log in to either seattlegeni.cs or betabox.cs (depending on which installation you are updating).
+To deploy !SeattleClearinghouse code from SVN trunk into production:
+  1. Log in to either !SeattleClearinghouse.cs or betabox.cs (depending on which installation you are updating).
   1. Get a root shell: `sudo -i`
   1. Open the screen running as root: `screen -r`
   1. There should be only one session in the screen and you will find yourself looking at a running instance of `start_seattlegeni_components.sh` with output that looks like this:
@@ -73,7 +73,7 @@ Starting transition script transition_canonical_to_onepercentmanyevents
 Starting transition script transition_onepercentmanyevents_to_onepercentmanyevents
 All components started. Kill this process (CTRL-C or 'kill 24038') to stop all started components (except apache).
 }}}
-  1. Press CTRL-C and wait for `start_seattlegeni_components.sh` to exit (you will see "Shutting down seattlegeni components." a few times, that's OK).
+  1. Press CTRL-C and wait for `start_seattlegeni_components.sh` to exit (you will see "Shutting down !SeattleClearinghouse components." a few times, that's OK).
   1. Run the command `/home/geni/update_seattlegeni_from_trunk.sh`. Answer "y" when it asks. It will look like this:
 {{{
 root@betabox:~# /home/geni/update_seattlegeni_from_trunk.sh
