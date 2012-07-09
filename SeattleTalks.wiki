@@ -138,3 +138,6 @@
 || 2-4PM May 24th, 2012 || !MetroTech 2, 10th floor, large conference room, Brooklyn, NYU-Poly || Seattle Group Meeting || Various || Talk, Demo
 
 || 9AM-9:30 July 8th, 2012 || Boston (GEC 14) || GEC Educational Seminar || Justin || Talk, Demo
+
+
+|| 4:30PM-4:45 July 9th, 2012 || Boston (GEC 14) || Curriculum GENI Meeting || Justin || Talk
