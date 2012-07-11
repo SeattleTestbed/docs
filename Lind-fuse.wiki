@@ -1,0 +1,87 @@
+= The Lind-FUSE driver =
+
+
+== Installation ==
+
+Beyond [wiki:ProgrammersPage installing Seattle], you will need to install fuse-python. 
+
+You need to have python-fuse installed to use lind fuse.  Right now there is not a lind-fuse installer.
+
+Python fuse is in the Ubuntu package manager as "python-fuse" or it can be downloaded here:
+
+http://pypi.python.org/pypi/fuse-python/
+
+If you don't use the package manager, to install the package:
+{{{
+#!sh
+$ tar zxvf fuse-python-0.2.tar.gz
+$ cd fuse-python-0.2
+$ sudo python setup.py install
+}}}
+
+The kernel you are using must also support fuse.  That is most kernels now-a-days.  Though it is untested, if you are using a Mac you can try installing [http://code.google.com/p/macfuse/ MacFuse].
+
+Finding the Lind file system.  Lind has many subsystems, and is install in a central location. For those subsystems to interact, they use an environment variable named REPY_PATH, which is set to the loca\
+tion of the Lind and its Repy subfolder.
+
+
+To check if you have fuse:
+{{{
+#!sh
+ls -l /dev/fuse
+}}}
+
+== Use ==
+
+To use lind-fuse, you can simply mount a file system, and perform operations on it. Then unmount it.  Some operations are not currently supported (such as df)
+
+=== Example ===
+
+{{{
+#!sh
+$ cd somepath
+$ mkdir mountpoint   # make an empty directory
+$ python <path_to_repy_install>/repy/lind_fuse.py mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
+$ cd mountpoint   # now try it out
+$ ls
+$ cp -r /var/logs .
+$ ls
+$ cd ..  # when you are done
+$ fusermount -u mountpoint  # un-mount the file system.
+}}}
+
+This should work as any user (not just root).
+
+The lind file system backing file used (or created) by the system will be whatever is in the local directory.
+
+
+=== Development ===
+
+The core Lind-fuse files are:
+
+ * lind-fuse.py: the driver which all the filesystem calls are sent to
+ * test_lindfuse.sh: a small tester for the file system
+ * lind_fs_calls.py: the implementation of the file system calls
+ * lind_fs_constants.py: some useful file system related constants
+
+
+lind fuse uses the python-fuse interface.  The code is very simple. Two classes, one which handles filesystem related system calls, and the other which does file related system calls.  To debug what is going on, you can run lind-fuse in the foreground, so you can see its output:
+
+{{{
+#!sh
+$ python lind_fuse.py mountpoint -f
+}}}
+
+Output will come out in this shell. Now go to another and do things in mountpoint.
+
+To see which calls are being issued into your file system, set the logging global to true in lind-fuse.py.  You must reinstall before the changes will be reflected.
+
+{{{
+#!python
+LOGGING = True
+}}}
+
+
+== Limitations ==
+
+Many system calls are not implented in lind-fuse.  Most of the basic ones related to file directory creation and read/write work though.  More could be added easily.
