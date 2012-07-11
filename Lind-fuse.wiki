@@ -60,7 +60,7 @@ The lind file system backing file used (or created) by the system will be whatev
 The core Lind-fuse files are:
 
  * lind-fuse.py: the driver which all the filesystem calls are sent to
- * test_lindfuse.sh: a small tester for the file system
+ * test_fuse.sh: a small tester for the file system
  * lind_fs_calls.py: the implementation of the file system calls
  * lind_fs_constants.py: some useful file system related constants
 
