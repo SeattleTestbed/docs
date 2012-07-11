@@ -3,6 +3,15 @@
 
 == Installation ==
 
+Install the nacl_repy branch of Seattle.
+
+{{{
+#!sh
+$ svn co https://seattle.cs.washington.edu/svn/seattle/branches/nacl_repy
+$ cd nacl_repy
+$ python preparetest.py -t /some/place/to/install/repy
+}}}
+
 Beyond [wiki:ProgrammersPage installing Seattle], you will need to install fuse-python. 
 
 You need to have python-fuse installed to use lind fuse.  Right now there is not a lind-fuse installer.
@@ -41,7 +50,7 @@ To use lind-fuse, you can simply mount a file system, and perform operations on 
 #!sh
 $ cd somepath
 $ mkdir mountpoint   # make an empty directory
-$ python <path_to_repy_install>/repy/lind_fuse.py mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
+$ python <path_to_repy_install>/lind_fuse.py mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
 $ cd mountpoint   # now try it out
 $ ls
 $ cp -r /var/logs .
