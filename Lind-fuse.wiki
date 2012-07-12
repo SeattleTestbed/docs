@@ -1,24 +1,26 @@
 = The Lind-FUSE driver =
 
 
-== Installation ==
+== Install FUSE ==
 
-Install the nacl_repy branch of Seattle.
+
+You need to have python-fuse installed to use lind fuse.  Right now there is not a lind-fuse installer.   The mechanism to install FUSE depends on your OS.
+
+
+=== Linux ===
+
+
+First try to install it using your package manager.   For example, on Ubuntu use the following command:
 
 {{{
 #!sh
-$ svn co https://seattle.cs.washington.edu/svn/seattle/branches/nacl_repy
-$ cd nacl_repy
-$ python preparetest.py -t /some/place/to/install/repy
+# apt-get install python-fuse
 }}}
 
-Beyond [wiki:ProgrammersPage installing Seattle], you will need to install fuse-python. 
+(On !RedHat / Fedora, you'll need to use {{{yum}}} instead.   On !OpenSuSE, you'll need to use {{{yast}}}.)
 
-You need to have python-fuse installed to use lind fuse.  Right now there is not a lind-fuse installer.
 
-Python fuse is in the Ubuntu package manager as "python-fuse" or it can be downloaded here:
-
-http://pypi.python.org/pypi/fuse-python/
+If none of these work, try to download the tarball at the following link instead:   http://pypi.python.org/pypi/fuse-python/
 
 If you don't use the package manager, to install the package:
 {{{
@@ -28,7 +30,32 @@ $ cd fuse-python-0.2
 $ sudo python setup.py install
 }}}
 
-The kernel you are using must also support fuse.  That is most kernels now-a-days.  Though it is untested, if you are using a Mac you can try installing [http://code.google.com/p/macfuse/ MacFuse].
+
+
+=== Mac instructions (untested) ===
+
+
+If you are using a Mac you can try installing [http://code.google.com/p/macfuse/ MacFuse].   Then follow the Linux instructions above where it mentions to download the tarball and make fuse-python directly.
+
+
+
+== Load the Appropriate Seattle code ==
+
+You will need to get the nacl_repy branch of Seattle from SVN.   
+
+{{{
+#!sh
+$ svn co https://seattle.cs.washington.edu/svn/seattle/branches/nacl_repy
+}}}
+
+Once that happens, run the {{{preparetest.py}}} script to copy the files into a directory of your choice (existing files there will be removed).   For example, to use ~/test-fuse do the following:
+
+{{{
+#!sh
+$ cd nacl_repy
+$ mkdir ~/test-fuse
+$ python preparetest.py -t ~/test-fuse
+}}}
 
 Finding the Lind file system.  Lind has many subsystems, and is install in a central location. For those subsystems to interact, they use an environment variable named REPY_PATH, which is set to the loca\
 tion of the Lind and its Repy subfolder.
