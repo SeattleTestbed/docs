@@ -1,5 +1,8 @@
-= The Lind-FUSE driver =
+= Installing Lind-FUSE =
 
+This document describes the steps you'll need to follow to mount the Lind POSIX file system on a normal machine.   This will require the installation of FUSE and its Python bindings as well as the code for Lind.   In the end, the Lind code (written in Repy V2) will be called to serve as a file system.
+
+[[TOC(inline)]]
 
 == Install FUSE ==
 
