@@ -69,7 +69,7 @@ Finding the Lind file system.  Lind has many subsystems, and is installed in a c
 
 {{{
 #!sh
-$ export REPY_PATH=~/test-fuse/
+$ export REPY_PATH=~/nacl_repy/
 }}}
 
 
