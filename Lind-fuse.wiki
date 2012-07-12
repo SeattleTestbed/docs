@@ -34,6 +34,11 @@ $ sudo python setup.py install
 }}}
 
 
+To check if you have fuse:
+{{{
+#!sh
+ls -l /dev/fuse
+}}}
 
 === Mac instructions (untested) ===
 
@@ -60,15 +65,13 @@ $ mkdir ~/test-fuse
 $ python preparetest.py -t ~/test-fuse
 }}}
 
-Finding the Lind file system.  Lind has many subsystems, and is install in a central location. For those subsystems to interact, they use an environment variable named REPY_PATH, which is set to the loca\
-tion of the Lind and its Repy subfolder.
+Finding the Lind file system.  Lind has many subsystems, and is installed in a central location. For those subsystems to interact, they use an environment variable named REPY_PATH, which is set to the location of the Lind and its Repy subfolder.
 
-
-To check if you have fuse:
 {{{
 #!sh
-ls -l /dev/fuse
+$ export REPY_PATH=~/test-fuse/
 }}}
+
 
 == Use ==
 
