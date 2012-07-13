@@ -74,15 +74,15 @@ To use lind-fuse, you can simply mount a file system, and perform operations on 
 
 {{{
 #!sh
-$ cd somepath
-$ mkdir mountpoint   # make an empty directory
-$ python <path_to_repy_install>/lind_fuse.py mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
-$ cd mountpoint   # now try it out
+$ cd /tmp
+$ mkdir /tmp/lind-fuse-mountpoint   # make an empty directory
+$ python ~/test-fuse/lind_fuse.py /tmp/lind-fuse-mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
+$ cd lind-fuse-mountpoint   # now try it out
 $ ls
 $ cp -r /var/logs .
 $ ls
 $ cd ..  # when you are done
-$ fusermount -u mountpoint  # un-mount the file system.
+$ fusermount -u lind-fuse-mountpoint  # un-mount the file system.
 }}}
 
 This should work as any user (not just root).
