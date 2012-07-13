@@ -37,7 +37,7 @@ $ sudo python setup.py install
 To check if you have fuse:
 {{{
 #!sh
-ls -l /dev/fuse
+$ ls -l /dev/fuse
 }}}
 
 === Mac instructions (untested) ===
