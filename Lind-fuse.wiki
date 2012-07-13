@@ -17,7 +17,7 @@ First try to install it using your package manager.   For example, on Ubuntu use
 
 {{{
 #!sh
-# apt-get install python-fuse
+$ sudo apt-get install python-fuse
 }}}
 
 (On !RedHat / Fedora, you'll need to use {{{yum}}} instead.   On !OpenSuSE, you'll need to use {{{yast}}}.)
