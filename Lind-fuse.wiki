@@ -109,9 +109,6 @@ $ python lind_fuse.py mountpoint -f -v
 
 Output will come out in this shell. Now go to another and do things in mountpoint.
 
-To see which calls are being issued into your file system, set the logging global to true in lind-fuse.py.  You must reinstall before the changes will be reflected.
-
-
 == Limitations ==
 
 Many system calls are not implented in lind-fuse.  Most of the basic ones related to file directory creation and read/write work though.  More could be added easily.
