@@ -65,13 +65,6 @@ $ mkdir ~/test-fuse
 $ python preparetest.py -t ~/test-fuse
 }}}
 
-Finding the Lind file system.  Lind has many subsystems, and is installed in a central location. For those subsystems to interact, they use an environment variable named REPY_PATH, which is set to the location of the Lind and its Repy subfolder.
-
-{{{
-#!sh
-$ export REPY_PATH=~/nacl_repy/
-}}}
-
 
 == Use ==
 
