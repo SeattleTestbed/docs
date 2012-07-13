@@ -104,17 +104,12 @@ lind fuse uses the python-fuse interface.  The code is very simple. Two classes,
 
 {{{
 #!sh
-$ python lind_fuse.py mountpoint -f
+$ python lind_fuse.py mountpoint -f -v
 }}}
 
 Output will come out in this shell. Now go to another and do things in mountpoint.
 
 To see which calls are being issued into your file system, set the logging global to true in lind-fuse.py.  You must reinstall before the changes will be reflected.
-
-{{{
-#!python
-LOGGING = True
-}}}
 
 
 == Limitations ==
