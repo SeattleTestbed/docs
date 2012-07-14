@@ -38,19 +38,19 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
    * [wiki:SeattleDownload Download and installation instructions] for Seattle
-   * [wiki:SeattleGeniInstallation Installing SeattleClearinghouse] for the Clearinghouse portal
+   * [wiki:SeattleGeniInstallation Installing Seattle Clearinghouse] for the Clearinghouse portal
    * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
-   * [wiki:SeattleGeniApi SeattleClearinghouse XML-RPC API]
-   * [wiki:SeattleGeniClientLib SeattleClearinghouse XML-RPC Client Library]
+   * [wiki:SeattleGeniApi Seattle Clearinghouse XML-RPC API]
+   * [wiki:SeattleGeniClientLib Seattle Clearinghouse XML-RPC Client Library]
    * [wiki:CustomInstallerBuilderApi Custom Installer Builder XML-RPC API]
 
  * Deployment
    * [wiki:BaseInstallers Building] the base installers
      * [wiki:NsisSystemSetup System setup instructions] to be able to build the Windows GUI installer
    * [wiki:Local/VersionDeployment Deploying] a new version
-   * [wiki:SeattleGeniProductionHttp Updating] the production !SeattleClearinghouse code
+   * [wiki:SeattleGeniProductionHttp Updating] the production Seattle Clearinghouse code
    * [wiki:BuildDemokit Building the Demokit]
    * [wiki:Libraries/Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
 
