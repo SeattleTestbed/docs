@@ -142,5 +142,6 @@
 
 || 4:30PM-4:45 July 9th, 2012 || Boston (GEC 14) || Curriculum GENI Meeting || Justin || Talk
 
+|| 6PM-8PM July 10th, 2012 || Boston (GEC 14) || Demo Session || Justin || Poster, Demo
 
 || lunch July 18th, 2012 || San Jose || Ericsson || Vijay || Talk, Demo
