@@ -344,7 +344,7 @@ Finally, check the result of all of the nodes pinging each other by opening your
 
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like the image below.
 
-[[Image(nontransitiveconnectivity.jpeg)]]
+[[Image(Non-transitive connectivity image.jpg)]]
 
 Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that seash doesn't try to contact the nodes you aren't using any more.
 
@@ -494,4 +494,4 @@ If you have a firewall, your home computer may not be able to receive incoming c
 
 == Conclusion ==
 
-That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you would like to [DonatingResources donate resources] to the Seattle project, you call install Seattle on your home computer.   Clicking on the Get Donations tab from your Seattle Clearinghouse account and picking the appropriate installer to download will credit the donation to your account.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
+That's all for the take home assignment.   You've just seen non-transitive connectivity in practice, used one hop detour routing to circumvent it, and also determined if your computer is behind a NAT.   We hope this has been informative and enjoyable.   If you would like to [DonatingResources donate resources] to the Seattle project, you call install Seattle on your home computer.   Clicking on the Get Donations tab from your Seattle Clearinghouse account and picking the appropriate installer to download will credit the donation to your account.   If you have any comments or questions please contact justinc -AT- cs -DOT- washington -DOT- edu
