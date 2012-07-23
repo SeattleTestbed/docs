@@ -346,7 +346,7 @@ What do you observe? Is the connectivity graph complete and do all of the nodes 
 
 [[Image(Non-transitive connectivity image.jpg, 90%)]]
 
-Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that seash doesn't try to contact the nodes you aren't using any more.
+Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.  (One way of locating non-transitive connectivity quickly is to donate resources to Seattle so you can try 20 VMs at a time.)   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that seash doesn't try to contact the nodes you aren't using any more.
 
 
 
