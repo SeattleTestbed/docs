@@ -40,13 +40,10 @@ else:
   print 'Could not locate a port!'
   sys.exit(1)
     
-import iwlistlib
-
 
 def isSeattleSensor():
   return True
 
-# NOTE: the system.* calls are defined by the !SimpleXMLRPCServer in Python.   Your library's use may vary.
 
 def mySensorName():
   return "Hello World Sensor"
@@ -65,7 +62,9 @@ def readSensorForLanguage(language):
     raise Exception("Unsupported language")
 
 
+# NOTE: the system.* calls are defined by the !SimpleXMLRPCServer in Python by calling the following.   Your library's use may vary.
 server.register_introspection_functions()
+
 server.register_function(mySensorName)
 server.register_function(readSensor)
 server.register_function(readSensorForLanguage)
