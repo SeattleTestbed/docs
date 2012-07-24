@@ -1,0 +1,17 @@
+= Using Sensors In Seattle =
+
+A Seattle / Repy program cannot access resources like GPS, wifi signal strength information, motion sensors, etc.   However, many users would like to provide information about resources like this to researchers.   To facilitate the exchange of information, we provide an API that sensor applications (installed separately from Seattle) can use to make the sensor available to local Repy programs.
+
+[[TOC(inline)]]
+
+== Overview ==
+
+The API that is provided by sensors may vary significantly from application to application.   The philosophy is to provide an API that is as simple as possible but would allow a variety of sensor applications to operate.   We intentionally under constrain the interface to make it as easy as possible to use in the base case.   Further parts of this document describe how to do slightly more advanced functionality while providing this API.
+
+== Required API ==
+
+All sensors must provide an XMLRPC interface bound to 127.0.0.1 on any port from 63090-63099.   This XMLRPC interface must support at least the following two calls:  {{{isSeattleSensor()}}} and {{{system.listMethods()}}}.   (See [http://docs.python.org/library/simplexmlrpcserver.html the SimpleXMLRPCAPI] for general details on Python, but similar libraries exist on other platforms.)   The {{{isSeattleSensor()}}} call must return True.   The {{{system.listMethods()}}} should list the available calls.   
+
+It is also *recommended* that you provide calls for {{{system.methodHelp}}} and {{{system.methodSignature}}}.
+
+== Example Use ==
