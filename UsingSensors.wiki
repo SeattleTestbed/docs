@@ -41,15 +41,19 @@ else:
   sys.exit(1)
     
 def isSeattleSensor():
+  """ isSeattleSensor() always returns True"""
   return True
 
 def mySensorName():
+  """ my sensor name is "Hello World Sensor"."""
   return "Hello World Sensor"
 
 def readSensor():
+  """ Read data from the hello world sensor"""
   return "Hello World!"
 
 def readSensorForLanguage(language):
+  """ Read data from the hello world sensor in a few languages.   Pass in a string."""
   if language == 'English':
     return "Hello World!"
   elif language == 'German':
@@ -121,4 +125,3 @@ print s.readSensor()
 print s.readSensorForLanguage('English')
 
 }}}
-
