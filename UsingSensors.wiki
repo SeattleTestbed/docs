@@ -29,21 +29,19 @@ import sys
 
 for sensorport in [63095, 63096, 63097, 63098, 63099, 63090, 63091, 63092, 63093, 63094]:
   try:
-    server = SimpleXMLRPCServer(("localhost", sensorport),
-                            requestHandler=RequestHandler)
+    server = SimpleXMLRPCServer.SimpleXMLRPCServer(("localhost", sensorport))
     server.register_introspection_functions()
   except socket.error:
     print 'port:',sensorport,'failed.   Trying backup port...' 
     continue
+  print "Listening on port",sensorport,"..." 
   break
 else:
   print 'Could not locate a port!'
   sys.exit(1)
     
-
 def isSeattleSensor():
   return True
-
 
 def mySensorName():
   return "Hello World Sensor"
@@ -61,7 +59,6 @@ def readSensorForLanguage(language):
   else:
     raise Exception("Unsupported language")
 
-
 # NOTE: the system.* calls are defined by the !SimpleXMLRPCServer in Python by calling the following.   Your library's use may vary.
 server.register_introspection_functions()
 
@@ -70,7 +67,11 @@ server.register_function(readSensor)
 server.register_function(readSensorForLanguage)
 server.register_function(isSeattleSensor)
 
-server.serve_forever()
+try:
+    print 'Use Control-C to exit'
+    server.serve_forever()
+except KeyboardInterrupt:
+    print 'Exiting'
 
 }}}
 
@@ -80,8 +81,18 @@ Repy sensor reading code:
 import xmlrpclib
 import sys
 
-# I really should check multiple ports...
-s = xmlrpclib.ServerProxy('http://localhost:63095')
+for sensorport in [63095, 63096, 63097, 63098, 63099, 63090, 63091, 63092, 63093, 63094]:
+  try:
+    s = xmlrpclib.ServerProxy('http://localhost:'+str(sensorport))
+  except socket.error:
+    print 'port:',sensorport,'failed.   Trying backup port...' 
+    continue
+  print "Connected to port",sensorport
+  print
+  break
+else:
+  print 'Could not locate a port!'
+  sys.exit(1)
 
 # should check the error status...
 try: 
@@ -102,7 +113,12 @@ for methodname in methodlist:
   if thissignature == ():
     print 'Empty call returns:',safe_eval("s."+methodname+"()")
 
+print s.isSeattleSensor()
+print s.mySensorName()
+print s.readSensor()
+print s.readSensorForLanguage('English')
+
 }}}
 
 
-Note: I didn't test the above code!   Beware of bugs!!!
+Note: The above code has been tested. If you find any bugs please let us know!!!
