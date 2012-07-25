@@ -107,7 +107,10 @@ methodlist = s.system.listMethods()
 
 for methodname in methodlist:
   thissignature = s.system.methodSignature(methodname)
-  print 'Method:',methodname,'has the signature', thissignature
+  if thissignature == 'signatures not supported':
+    print 'Method:',methodname,'has an unknown signature.'
+  else:  
+    print 'Method:',methodname,'has the signature', thissignature
 
   if thissignature == ():
     print 'Empty call returns:',safe_eval("s."+methodname+"()")
@@ -119,5 +122,3 @@ print s.readSensorForLanguage('English')
 
 }}}
 
-
-Note: The above code has been tested. If you find any bugs please let us know!!!
