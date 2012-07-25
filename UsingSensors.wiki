@@ -88,7 +88,6 @@ for sensorport in [63095, 63096, 63097, 63098, 63099, 63090, 63091, 63092, 63093
     print 'port:',sensorport,'failed.   Trying backup port...' 
     continue
   print "Connected to port",sensorport
-  print
   break
 else:
   print 'Could not locate a port!'
