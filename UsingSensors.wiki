@@ -14,7 +14,7 @@ All sensors must provide an XMLRPC interface bound to 127.0.0.1 on any port from
 
 '''Note: it is completely fine for a sensor to hide calls it does not want to be called by general clients.'''   In other words, if you have a call that performs a potentially disruptive act, you need not list it.   Keep in mind that this is not a security mechanism.   It is just to prevent a simple and general client from calling it without understanding what it does.
 
-It is also *recommended* that you provide the call {{{system.methodHelp}}}.   This is not required and clients *must not* rely on their existence.
+It is also '''recommended''' that you provide the call {{{system.methodHelp}}}.   This is not required and clients '''must not''' rely on their existence.
 
 == Example Use ==
 
@@ -57,13 +57,13 @@ def readSensorForLanguage(language):
   if language == 'English':
     return "Hello World!"
   elif language == 'German':
-    return "Hallo Weld!"
+    return "Hallo Welt!"
   elif language == 'Mandarin':
     return "Ni Hao!"
   else:
     raise Exception("Unsupported language")
 
-# NOTE: the system.* calls are defined by the !SimpleXMLRPCServer in Python by calling the following.   Your library's use may vary.
+# NOTE: the system.* calls are defined by the SimpleXMLRPCServer in Python by calling the following.   Your library's use may vary.
 server.register_introspection_functions()
 
 server.register_function(mySensorName)
@@ -82,46 +82,51 @@ except KeyboardInterrupt:
 
 Repy sensor reading code:
 {{{
-import xmlrpclib
-import sys
+include xmlrpc_client.repy
 
-for sensorport in [63095, 63096, 63097, 63098, 63099, 63090, 63091, 63092, 63093, 63094]:
-  try:
-    s = xmlrpclib.ServerProxy('http://localhost:'+str(sensorport))
-  except socket.error:
-    print 'port:',sensorport,'failed.   Trying backup port...' 
-    continue
-  print "Connected to port",sensorport
-  break
-else:
-  print 'Could not locate a port!'
-  sys.exit(1)
+if callfunc=="initialize":
+  for sensorport in [63095, 63096, 63097, 63098, 63099, 63090, 
+    63091, 63092, 63093, 63094]:
+    try:
+      s = xmlrpc_client_Client('http://localhost:'+str(sensorport))
+    except socket.error:
+      print 'port:', sensorport, 'failed.   Trying backup port...' 
+      continue
+    print "Connected to port", sensorport
+    break
+  else:
+    print 'Could not locate a port!'
+    exitall()
 
-# should check the error status...
-try: 
-  if not s.isSeattleSensor():
-    print 'something other than a Seattle sensor was bound to the port...'
-    sys.exit(1)
-except:
-    print 'Got an error when checking if this is a Seattle sensor...'
-    sys.exit(1)
-  
-# Get the list of available methods
-methodlist = s.system.listMethods()
+  # should check the error status...
+  try: 
+    if not s.send_request("isSeattleSensor", ()):
+      print 'something other than a Seattle sensor was bound to the port...'
+      exitall()
+  except Exception, e:
+    print 'Got an error when checking if this is a Seattle sensor:', str(e)
+    exitall()
 
-for methodname in methodlist:
-  thissignature = s.system.methodSignature(methodname)
-  if thissignature == 'signatures not supported':
-    print 'Method:',methodname,'has an unknown signature.'
-  else:  
-    print 'Method:',methodname,'has the signature', thissignature
+  # Get the list of available methods
+  methodlist = s.send_request("system.listMethods", ())
 
-  if thissignature == ():
-    print 'Empty call returns:',safe_eval("s."+methodname+"()")
+  for methodname in methodlist:
+    # NOTE: Wrap the methodname string inside a tuple, otherwise
+    # xmlrpc_common will treat the string's characters as separate params
+    thissignature = s.send_request("system.methodSignature", (methodname,))
 
-print s.isSeattleSensor()
-print s.mySensorName()
-print s.readSensor()
-print s.readSensorForLanguage('English')
+    # BUG: This is true for all signatures, but shouldn't be.
+    if thissignature == 'signatures not supported':
+      print 'Method:', methodname, 'has an unknown signature.'
+    else:  
+      print 'Method:',methodname,'has the signature', thissignature
+
+    if thissignature == ():
+      print 'Empty call returns:', s.send_request(methodname, ())
+
+  print s.send_request("isSeattleSensor", ())
+  print s.send_request("mySensorName", ())
+  print s.send_request("readSensor", ())
+  print s.send_request("readSensorForLanguage", ('Mandarin',))
 
 }}}
