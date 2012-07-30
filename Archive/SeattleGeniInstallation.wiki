@@ -165,8 +165,10 @@ python website/manage.py syncdb
 python website/manage.py runserver
 }}}
       You will now have a local development server running on port 8000.
-      This is convenient for development and testing your seattlegeni instance but should not be used in production.
-      Using runserver does not require configuring apache. 
+      This is convenient for development and testing your seattlegeni instance 
+      but should not be used in production.  Using runserver does not require 
+      configuring apache.  For a simple way to make your local development 
+      server visible to the public internet consider using [http://pagekite.net PageKite]. 
     * For production, run the site through apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
       
   * '''Start the lockserver'''
