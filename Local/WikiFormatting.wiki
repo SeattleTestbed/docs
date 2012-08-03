@@ -1,5 +1,9 @@
 = Documentation Style Guidelines =
 
+This document described how to edit wiki pages so that they have a uniform look and feel.   This is especially important for longer pages.
+
+[[TOC(inline)]]
+
 == Article structure and contents ==
 
  * Begin the page with a heading, enclosed with: {{{= =}}}
