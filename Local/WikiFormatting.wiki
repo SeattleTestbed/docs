@@ -4,7 +4,9 @@ This document described how to edit wiki pages so that they have a uniform look 
 
 [[TOC(inline)]]
 
+[[BR]]
 == Article structure and contents ==
+----
 
  * Begin the page with a heading, enclosed with: {{{= =}}}
  * The immediate next paragraph of the document should contain a purpose summary for the document
@@ -15,7 +17,9 @@ This document described how to edit wiki pages so that they have a uniform look 
  * All section titles in the rest of the document must use nested heading tags: {{{== ==}}}, {{{=== ===}}}, and so on. 
  * Each section title must be '''preceded''' by a line break {{{[[BR]]}}} and immediately followed by a horizontal line {{{----}}}. Here's an example:
 {{{
+[[BR]]
 == Sending pings between a group of computers ==
+----
 }}}
 
  * Python/Repy code and Seash terminal interaction examples must be enclosed with: {{{{{{#!python }}}}}} or {{{{{{#!repy }}}}}}. Here's an example:
@@ -30,7 +34,10 @@ print "hello world"
  
  * For CSS code, use the {{{#!C}}} directive
 
+[[BR]]
 == Linking to other articles within the wiki == #links
+----
+
 To prevent broken links due to renamed articles, all links to other articles within the wiki should be made explicitly by using the "{{{wiki:}}}" prefix. 
 
 For example, do:
