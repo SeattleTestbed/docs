@@ -1,6 +1,6 @@
 = Building Seattle On Android =
 
-This document describes how do build the APK file for Seattle on Android.   This package contains the UI for Seattle that is used by the Android users.   However, the core Seattle code (i.e. the Python bits) are downloaded at install time.
+This document describes how do build the APK file for Seattle on Android.   This package contains the UI for Seattle that is used by the Android users.   However, the non-installer Seattle code (i.e. everything in the Linux installer) is downloaded at install time.   This is done to make crediting users for donations work smoothly.
 
 [[TOC(inline)]]
 
