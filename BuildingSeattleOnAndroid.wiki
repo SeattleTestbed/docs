@@ -28,10 +28,12 @@ sdk.dir=/Users/justincappos/android-sdk-macosx/
 Now you need to update the project so that it is ready to build.   From the SeattleOnAndroid directory, do:
 
 {{{
-android update project --name SeattleOnAndroid --target android-16 --path . 
+android update project --name SeattleOnAndroid --target android-7 --path . 
 }}}
 
-Note that if android (from your isn't in your path you will need to specify the full path for it.  
+The target should match that in the file above.
+
+Note that if android isn't in your path you will need to specify the full path for it.  
 
 
 [[BR]]
