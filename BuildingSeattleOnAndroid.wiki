@@ -54,9 +54,9 @@ More to come.
 [[BR]]
 == Signing and Distributing the APK ==
 
-{{{
-Signing and aligning the release version
+Signing and aligning the release version.   These details are from the README.   I don't understand them.
 
+{{{
 jarsigner -keystore <keystore_path> -storepass <keystore_pass> -keypass <key_pass> <apk_path> <key_name> -digestalg SHA1 -sigfile CERT
 zipalign <align> -f <unaligned_apk_path> <output_apk_path>
 
