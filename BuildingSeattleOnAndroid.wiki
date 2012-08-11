@@ -49,24 +49,15 @@ You can also do {{{ant release}}} to create a version of the APK that is ready f
 == Testing the APK ==
 ----
 
-More to come.
+You should build and test the APK on both virtual and real Android devices.   To create virtual devices, follow the instructions at: http://developer.android.com/tools/devices/index.html
+
+
 
 [[BR]]
 == Signing and Distributing the APK ==
 
-Signing and aligning the release version.   These details are from the README.   I don't understand them.
+See the following docs:
 
-{{{
-jarsigner -keystore <keystore_path> -storepass <keystore_pass> -keypass <key_pass> <apk_path> <key_name> -digestalg SHA1 -sigfile CERT
-zipalign <align> -f <unaligned_apk_path> <output_apk_path>
+http://developer.android.com/tools/publishing/app-signing.html
 
-<keystore_path>: path to keystore file
-<keystore_pass>: keystore password
-<key_pass>: key password
-<apk_path>: path to unsigned apk
-<key_name>: name of the private key to use
-
-<align>: alignment in bytes, 4 would probably be a good bet
-<unaligned_apk_path>: path to signed, but yet unaligned apk
-<output_apk_path>: output path for the aligned apk
-}}}
+http://developer.android.com/tools/publishing/preparing.html
