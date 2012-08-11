@@ -52,7 +52,9 @@ You can also do {{{ant release}}} to create a version of the APK that is ready f
 You should build and test the APK on both virtual and real Android devices.   To create virtual devices, follow the instructions at: http://developer.android.com/tools/devices/index.html   
 Once you've created a device, you should start it.    
 
-Then to install the APK, open a terminal and go to the sdk/platform-tools/ directory.   From there, run {{{ ./adb devices}}} and you should see your device listed as running.   To install the test APK you built, run {{{ ./adb install path/to/your/apk}}}.
+Then to install the APK, open a terminal and go to the sdk/platform-tools/ directory.   From there, run {{{ ./adb devices}}} and you should see your device listed as running.   To install the test APK you built, run {{{ ./adb install path/to/your/apk}}}.   
+
+Then on the emulated phone, enter the applications menu and you'll see a !SeattleOnAndroid icon.   Click on this to start the installation process.   Note: this will require you to also download and install Python.
 
 
 
