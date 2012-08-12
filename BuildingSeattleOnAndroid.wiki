@@ -61,7 +61,10 @@ Then on the emulated phone, enter the applications menu and you'll see a !Seattl
 == Fixing Problems with the APK ==
 
 
-Akos, help please!
+If the install goes smoothly, you can use the menu option on the Seattle installer and then view the log files there.   This is the easiest way to see the log information from the node manager, software updater, and install scripts.
+
+If the APK does not work, Akos recommends using logcat.   A short tutorial to logcat can be found at:
+http://developer.android.com/tools/help/logcat.html
 
 [[BR]]
 == Signing and Distributing the APK ==
