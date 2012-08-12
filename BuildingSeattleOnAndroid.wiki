@@ -57,6 +57,11 @@ Then to install the APK, open a terminal and go to the sdk/platform-tools/ direc
 Then on the emulated phone, enter the applications menu and you'll see a !SeattleOnAndroid icon.   Click on this to start the installation process.   Note: this will require you to also download and install Python.
 
 
+[[BR]]
+== Fixing Problems with the APK ==
+
+
+Akos, help please!
 
 [[BR]]
 == Signing and Distributing the APK ==
