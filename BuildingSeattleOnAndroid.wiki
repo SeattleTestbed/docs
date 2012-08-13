@@ -69,8 +69,24 @@ http://developer.android.com/tools/help/logcat.html
 [[BR]]
 == Signing and Distributing the APK ==
 
-See the following docs:
+First, build the APK with {{{ ant release }}}.   Then you need to sign the release.   You will need to use the existing key / key store for the seattle project.   To sign using this, do:
+
+{{{  $ jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore ~/seattle/trunk/dist/android/SeattleOnAndroid/bin/SeattleOnAndroid-release-unsigned.apk soakey
+}}}
+
+Note that the location to the unsigned APK file may be different on your system.
+
+You can now verify the file is signed using {{{ jarsigner -verify SeattleOnAndroid-release-unsigned.apk }}}.   It should say {{{ jar verified. }}}
+
+
+The final step is to align the jar file.   To do this, use the zipalign program in the tools directory.   The command will look like this:
+
+{{{ zipalign -v 4 SeattleOnAndroid-release-unsigned.apk SeattleOnAndroid-release-aligned.apk }}}
+
+You are now ready to upload the APK.   If you have questions or problems, see the following docs for more information:
 
 http://developer.android.com/tools/publishing/app-signing.html
 
 http://developer.android.com/tools/publishing/preparing.html
+
+http://developer.android.com/distribute/googleplay/publish/preparing.html
