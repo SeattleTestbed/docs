@@ -69,7 +69,9 @@ http://developer.android.com/tools/help/logcat.html
 [[BR]]
 == Signing and Distributing the APK ==
 
-First, build the APK with {{{ ant release }}}.   Then you need to sign the release.   You will need to use the existing key / key store for the seattle project.   To sign using this, do:
+Each release pushed to the Android Play store must have an increasing versionCode number.   Edit !AndroidManifest.xml and edit this value and the versionName string as well.
+
+Next, build the APK with {{{ ant release }}}.   Then you need to sign the release.   You will need to use the existing key / key store for the seattle project.   To sign using this, do:
 
 {{{  $ jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore my-release-key.keystore ~/seattle/trunk/dist/android/SeattleOnAndroid/bin/SeattleOnAndroid-release-unsigned.apk soakey
 }}}
