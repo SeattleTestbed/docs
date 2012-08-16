@@ -3,7 +3,10 @@ This page contains information for educators wishing to use Seattle in the class
 
 [[TOC(inline)]]
 
-== Complete Assignments ==
+== Networking / Distributed Systems Assignments ==
+
+=== Complete Assignments ===
+
 The following set of assignments have complete descriptions, and have fully documented instructor solutions. These assignments are geared toward an undergraduate class in networks or distributed systems.
 
  * The [wiki:EducationalAssignments/TakeHome Take-Home Assignment] introduces [wiki:SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
@@ -19,7 +22,7 @@ The following set of assignments have complete descriptions, and have fully docu
  * The [wiki:EducationalAssignments/Chord Distributed Hash Table Assignment] has students build a peer-to-peer routing layer.   Students begin by building an implementation of the popular DHT Chord.   This will work well for routing messages over LAN topologies, but will fail in many WAN scenarios due to non-transitive connectivity.   Students then use one-hop detour routing to route around failures.
 
 
-== Other Assignment Ideas ==
+=== Other Assignment Ideas ===
 A more complex set of assignments can also be designed for use with Seattle. The following assignment ideas are intended to show the scope of assignments Seattle can support.
 
 
@@ -35,7 +38,7 @@ A more complex set of assignments can also be designed for use with Seattle. The
     Some cloud computing models provide an interface to a global, persistent store (like Amazon's S3 or Google's !AppEngine). While Seattle provides local persistent storage, there is no preexisting global store. Such a system can be constructed from a set of nodes that cooperatively replicate and manage data. This project requires that student implementations operate correctly over LAN with multiple readers / writers and gracefully recovers from node failures. For a more difficult project, the global store can be required to run on globally distributed nodes. This extension teaches students to deal with high failure likelihood and to overcome non-transitive connectivity, both of which are typical problems for distributed systems deployed at global scale.
 
 
-== Project Ideas ==
+=== Project Ideas ===
 Advanced undergraduate and graduate courses in networks and distributed systems can also use Seattle for a class project. Seattle project can involve everything from highly scalable, and complex distributed systems, to measurements of global Internet traffic patterns, to ubiquitous computing topics. The two project ideas below are examples of what such a graduate-level project would entail.
 
   * [wiki:RepyMapReduce A MapReduce service]
@@ -54,3 +57,14 @@ Advanced undergraduate and graduate courses in networks and distributed systems 
 
    A Seattle service may use millions of nodes, but it may also use hundreds of just a dozen of nodes. Distributed Hash Table (DHTs) are typically used to provide data storage to systems with thousands to millions of nodes. However, for systems comprised of just a dozen nodes, it is simpler and much more efficient to use a database. Traditional databases, however, do not cope well with peer-to-peer environments (e.g. such as in the Seattle platform). In this project, your aim will be to explore, design, and implement a data store organization that combines the advantages of databases with the resilience of DHTs. You will design a database that supports ACID properties, but that can also thrive in a peer-to-peer settings in which nodes join and leave the network unpredictably and in which nodes have disparate resources at their disposal.
 
+
+
+== Security / Operating Systems Assignments ==
+
+
+ * The [wiki:EducationalAssignments/SecurityLayersPartOne Implementing Security Policies] introduces students to constructing a reference monitor.   A student will implement a simple security policy that is meant to restrict access to files on a system.
+
+ * The [wiki:EducationalAssignments/SecurityLayersPartTwo Attacking Security Policies] follows up on the previous assignment by having students attack the security policies implemented in the previous assignment.   Students get practical experience with how an attacker will try to violate security assumptions in a system.
+
+
+(More to come!)
