@@ -62,9 +62,9 @@ Advanced undergraduate and graduate courses in networks and distributed systems 
 == Security / Operating Systems Assignments ==
 
 
- * The [wiki:EducationalAssignments/SecurityLayersPartOne Implementing Security Policies] introduces students to constructing a reference monitor.   A student will implement a simple security policy that is meant to restrict access to files on a system.
+ * The [wiki:EducationalAssignments/SecurityLayerPartOne Implementing Security Policies] introduces students to constructing a reference monitor.   A student will implement a simple security policy that is meant to restrict access to files on a system.
 
- * The [wiki:EducationalAssignments/SecurityLayersPartTwo Attacking Security Policies] follows up on the previous assignment by having students attack the security policies implemented in the previous assignment.   Students get practical experience with how an attacker will try to violate security assumptions in a system.
+ * The [wiki:EducationalAssignments/SecurityLayerPartTwo Attacking Security Policies] follows up on the previous assignment by having students attack the security policies implemented in the previous assignment.   Students get practical experience with how an attacker will try to violate security assumptions in a system.
 
 
 (More to come!)
