@@ -1,0 +1,28 @@
+= Beta Clearing House =
+
+The Beta Clearing House is the machine that holds the beta version of our public clearing house as well as a small beta network where a 
+handful of Seattle nodes are deployed for beta testing. Everything that is pushed on to the production must first be deployed on the 
+Beta Clearing House and tested for bugs and discrepancies before we can safely push it to the production clearinghouse or the production
+nodes.
+[[br]]
+
+__''' Machine Host Name:'''__
+[[br]]
+'''[http://betaseattleclearinghouse.poly.edu betaseattleclearinghouse.poly.edu]''' 
+----
+[[TOC(inline)]]
+----
+
+== Services on Betabox ==
+=== Clearinghouse ===
+----
+The beta clearinghouse is a collection of nodes that runs on the beta testbed. The beta version may have bugs in them as this is where the developers
+test out all the latest features of the product. The clearinghouse consists of the main front end webserver which allows users to register or login to
+their public testbed account in order to donate or acquire nodes in order to run their experiment. 
+[[br]]
+The service is run under the user: '''geni'''
+[[br]]
+Instructions on how to deploy a new clearinghouse can be found at this page: [wiki: SeattleGeniInstallation]
+=== Custominstaller Builder ===
+=== Central Advertise Server V2 ===
+=== Installer Builder/Software Updater Server === 
