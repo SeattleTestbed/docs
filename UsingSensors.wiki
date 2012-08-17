@@ -151,7 +151,7 @@ Right click on your Android project, choose properties -> "Java Build Path" tab,
 
 [http://www.zugiart.com/2010/09/java-apache-simple-xmlrpc-server/ zen] developed a simple and light weight SimpleXmlRPcServer using the above Apache library, which allows us to very quickly craft a standalone, simple XMLRPC server using the above Apache library. No servlet or container is required. 
 
-Two classes are needed for the server, '''SimpleXmlRPcServer''' and '''SimpleXmlRPcRequestHandlerFactory''' on zen's page. Simply place these two classes in your project then you are ready to go (in case the website goes down in the future, I attached the code here). According to zen, the code "supports single instance handler object, but not yet multi-threaded". 
+Two classes are needed for the server, '''SimpleXmlRPcServer''' and '''SimpleXmlRPcRequestHandlerFactory''' on zen's page. Simply place these two classes in your project then you are ready to go (in case the website goes down in the future, I attached the code below. Remember to replace the first line with your own package name). According to zen, the code "supports single instance handler object, but not yet multi-threaded". 
 
 === Example Use ===
 
