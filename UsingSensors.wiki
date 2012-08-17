@@ -130,3 +130,102 @@ if callfunc=="initialize":
   print s.send_request("readSensorForLanguage", ('Mandarin',))
 
 }}}
+
+== Sensors on Android == 
+
+Smartphones often come with a number of embedded sensors and chips, such as an accelerometer, GPS, Wifi card, etc. New sensing applications therefore can turn an everyday phone into a smart sensor. As we have Seattle ported on Android platform ([https://seattle.cs.washington.edu/wiki/SeattleOnAndroid SeattleOnAndroid]), here is a brief introduction how to provide APIs that an Android application can use to make the sensor available to Seattle on Android.
+
+=== XMLRPC Library ===
+
+Python has a set of quick and easy [http://docs.python.org/library/simplexmlrpcserver.html the SimpleXMLRPCAPI] available. However, Android Java applications have to import their own library. [http://ws.apache.org/xmlrpc/ Apache WS-XMLRPC] is one of the most popular Java XMLRPC libraries. Here are a few steps how to import it, and create a light weight SimpleXmlRPcServer for Android. 
+
+==== Importing Apache ====
+
+Download the Apache library from [http://ws.apache.org/xmlrpc/ Apache WS-XMLRPC]. The jar files in /apache-xmlrpc-version-number/lib/ are what you need. Create a new folder ''libs'' in your Eclipse Android project (the libs folder will be automatically created by Eclipse with higher version (>15) of Android API).
+
+Right click libs and choose Import -> General -> File System, then Next. Browse in the filesystem to find the library's parent directory (i.e., /apache-xmlrpc-version-number/lib/). Click the directory name, then check the relevant jar files in the right pane. This puts the library physically into your project. 
+
+Right click on your Android project, choose properties -> "Java Build Path" tab, click the Libraries tab, then "Add JARs...", navigate to the new jar files you just imported in the ''libs'' directory and add it. They should now appear under “Referenced Libraries” in your project. This is the moment when your new jar files are converted for use on Android.
+
+==== SimpleXmlRPcServer for Android ====
+
+[http://www.zugiart.com/2010/09/java-apache-simple-xmlrpc-server/ zen] developed a simple and light weight SimpleXmlRPcServer using the above Apache library, which allows us to very quickly craft a standalone, simple XMLRPC server using the above Apache library. No servlet or container is required. 
+
+Two classes are needed for the server, '''SimpleXmlRPcServer''' and '''SimpleXmlRPcRequestHandlerFactory''' on zen's page. Simply place these two classes in your project then you are ready to go. According to zen, the code "supports single instance handler object, but not yet multi-threaded". 
+
+=== Example Use ===
+
+Here are some example code for building Android sensor (XMLRPC server) and a client. 
+
+Sensor code:
+{{{
+public class RpcServer extends IntentService {
+        private int[] portArray = new int[] {63090, 63091, 63092, 63093, 63094, 63095, 63096, 63097, 63098, 63099};
+	private int port = 0;
+        .........
+        
+        @Override
+	protected void onHandleIntent(Intent intent) {	
+                SimpleXmlRpcServer server;
+                int i;
+		for (i = 0; i < portArray.length; i++) {
+			port = portArray[i];
+			try {
+				server = new SimpleXmlRpcServer(port);
+				server.addHandler("yanyan", new SimpleXMLRpcTest());
+				server.serve_forever();
+				Toast.makeText(context, "Server Listening on: " + Integer.toString(port), Toast.LENGTH_LONG).show();
+				break;
+			} catch (Exception e) {
+				String text = Log.getStackTraceString(e);
+				Log.e("RpcServer Exception", text);
+			}
+		}		
+		if (i == portArray.length) {
+                        Log.e("RpcServer Exception", "Could not locate a port!");
+		}
+	}
+}
+
+public class SimpleXMLRpcTest {
+
+	public String hello(){
+		return "hello world";
+	}
+ 
+        public boolean isSeattleSensor() {
+                return true;
+        }
+}	
+}}}
+
+Sensor reading code:
+{{{
+XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
+int i;
+for (i = 0; i < portArray.length; i++) {
+	port = portArray[i];
+	try {
+		config.setServerURL(new URL("http://127.0.0.1:" + Integer.toString(port)));
+		XmlRpcClient client = new XmlRpcClient();
+		client.setConfig(config);
+		Object[] params = new Object[]{};
+
+		String result = (String) client.execute("yanyan." + hello, params);
+		response = result;
+		Log.d("ClientActivity got response ", result);
+		break;
+	} catch (XmlRpcException e) {
+		String text = Log.getStackTraceString(e);
+		Log.e("RpcClient Exception", text);
+	} catch (MalformedURLException e) {
+		if (e.getMessage().contains("refused")) continue;
+	} 
+}
+
+if (i == portArray.length) {
+	Log.e("ClientActivity", "Could not locate a port!");
+}
+}}}
+
+In sensor code ''server.addHandler("yanyan", new SimpleXMLRpcTest())'', the string label for the handler can be anything. But the client code ''client.execute("yanyan." + hello, params)'' has to use the same string label. Another important thing is, XMLRPC can only work on a normal Java class, not Activity or Service. Therefore I made a class SimpleXMLRpcTest outside RPcServer, which extends IntentService. The client code can be placed in Activity and has no constraints. 
