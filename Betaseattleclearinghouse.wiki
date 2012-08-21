@@ -23,8 +23,8 @@ test out all the latest features of the product. The clearinghouse consists of t
 their public testbed account in order to donate or acquire nodes in order to run their experiment. 
 [[br]]
 The service is run under the user: '''geni'''
-[[br]]
-Instructions on how to deploy a new clearinghouse can be found at this page: [wiki: SeattleGeniInstallation]
+[[br]][[br]]
+Instructions on how to deploy a new clearinghouse can be found at this page: [wiki: SeattleGeniInstallation]. If you are moving the clearinghouse from one machine to another, then you may also need to copy over the two databases '''keydb''' and '''seattlegeni''' database. Instructions on how to backup and restore mysql databases can be found in this page: [http://www.thegeekstuff.com/2008/09/backup-and-restore-mysql-database-using-mysqldump/ BackupRestoreMySQL]. Note that the username and password for each of the databases can be found in the file /home/geni/database_info.txt on the system.
 
 ==== Known Issues ====
 While loading the clearinghouse on to the new machine, there were some issues that we needed to get around due to the operating system/default configurations already on the machine.
