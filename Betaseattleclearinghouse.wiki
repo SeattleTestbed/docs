@@ -1,8 +1,8 @@
-= Beta Clearing House =
+= Beta Clearinghouse =
 
-The Beta Clearing House is the machine that holds the beta version of our public clearing house as well as a small beta network where a 
+The Beta Clearinghouse is the machine that holds the beta version of our public clearinghouse as well as a small beta network where a 
 handful of Seattle nodes are deployed for beta testing. Everything that is pushed on to the production must first be deployed on the 
-Beta Clearing House and tested for bugs and discrepancies before we can safely push it to the production clearinghouse or the production
+Beta Clearinghouse and tested for bugs and discrepancies before we can safely push it to the production clearinghouse or the production
 nodes.
 [[br]]
 
