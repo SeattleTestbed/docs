@@ -9,6 +9,8 @@ nodes.
 __''' Machine Host Name:'''__
 [[br]]
 '''[http://betaseattleclearinghouse.poly.edu betaseattleclearinghouse.poly.edu]''' 
+[[br]]
+__Operating System__: Red Hat 4.4.6-4
 ----
 [[TOC(inline)]]
 ----
@@ -23,6 +25,36 @@ their public testbed account in order to donate or acquire nodes in order to run
 The service is run under the user: '''geni'''
 [[br]]
 Instructions on how to deploy a new clearinghouse can be found at this page: [wiki: SeattleGeniInstallation]
+
+==== Known Issues ====
+While loading the clearinghouse on to the new machine, there were some issues that we needed to get around due to the operating system/default configurations already on the machine.
+
+__Configuring Apache:__
+The version of Apache available on RedHat is slightly different then the one available on Ubuntu/Mint or other distros. The installation path is in /etc/httpd/. The configuration file is located at /etc/httpd/conf/httpd.conf. Below are some of the issues that I ran into while configuring the Apache conf file.
+[[br]]
+ * Load ssl module. The ssl module was initially not installed on the machine. In order to install it, run the command:
+{{{
+# yum install mod_ssl
+}}}
+ Once installed, open up the httpd.conf file and add this line after all the !LoadModule lines:
+{{{
+LoadModule ssl_module /modules/mod_ssl.so
+}}}
+ * Load python module. The python module was not available from the package manager so I had to manually install this. First retrieve the tarball of the latest version from here: [http://archive.apache.org/dist/httpd/modpython/ PythonModule]. In order to install mod-python, you must first also install have apxs installed as well as the python-devel library package installed. Run these commands:
+{{{
+# yum install httpd-devel
+# yum install python-devel
+}}}
+ Once these libraries are installed, and you have downloaded the mod_python tarball, run these commands.
+{{{
+# tar xzvf mod_python-3.3.1.tgz
+# cd mod_python-3.3.1
+# ./configure --with-apxs=/usr/sbin/apxs --with-python=/usr/bin/python2.6
+# make 
+# make install
+}}}
+ '''BUG:''' The mod_python file that you downloaded may have a bug in it. Please go to this [https://bugzilla.redhat.com/show_bug.cgi?id=465246 BugReport] to apply the patch if running make throws an error.
+
 === Custominstaller Builder ===
 === Central Advertise Server V2 ===
 === Installer Builder/Software Updater Server === 
