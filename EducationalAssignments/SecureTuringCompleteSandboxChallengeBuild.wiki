@@ -28,7 +28,7 @@ Put intuitively, a turing complete sandbox (with infinite memory) can be used to
  1. You must provide a program computing the first ten fibonacci numbers.   The resulting program should output these numbers or place the first ten numbers in these memory locations when exiting.
 
 Extra credit:
- 1. You must implement a turing complete sandbox within your sandbox.   This can be your sandbox or can be a classic turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory than your full sandbox.
+ 1. You can implement a turing complete sandbox within your sandbox.   This can be your sandbox or can be a classic turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory available than your full sandbox.
 
 
 
@@ -38,9 +38,9 @@ Extra credit:
 
 You must turn in a '''zip-file or tarball''' containing the following:
 
- 1. Detailed documentation explaining the file format and operations supported by your turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. 
+ 1. Detailed documentation explaining the file format and operations supported by your turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. If you did not do the extra credit, you must explain in the document why you believe your sandbox is turing-complete.   This must be in PDF format.
  1. The source code for the turing-complete sandbox
  1. The binary source for the example programs must be included.
- 1. A Makefile that builds the turing-complete sandbox from source on an Ubuntu XX.X VM.   
+ 1. A Makefile that builds the turing-complete sandbox from source on an Ubuntu 10.04 VM.   
  1. A README file that explains how to build the sandbox and run the example programs from the command line.
 
