@@ -1,0 +1,86 @@
+Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle vessels. For a basic tutorial on how to use seash, see the [wiki:RepyTutorial Repy Tutorial].
+
+== Command Dictionary ==
+The command dictionary contains command nodes that determine how seash responds to various input. Each command node represents a recognized command keyword, and may have child command nodes that represent keywords that should come after that command. For example, if a user types in "upload myiplist.txt useriplist.txt", seash will look in the dictionary to find the 'upload' keyword in the root. It will then recognize that myiplist.txt and useriplist.txt are both possible filenames, going through the two filename nodes:
+
+{{{
+root
+ |
+ |- browse
+ |- reset
+ |- upload
+ |    |- [filename]
+ |         |- [filename]
+ |
+ |- DOWNLOAD
+ |    |- [FILENAME]
+ |         |- [FILENAME]
+ |
+ |- loadkeys
+ |    |- [identity]
+ |- remove
+...
+}}}
+
+Each command node is defined in the following manner:
+
+{{{
+#!python
+command_dict = { 
+  'mycommandtoken': {
+    'name': 'tokenname',
+    'callback': command_callback,
+    'summary': 'summary text for the command',
+    'help_text': 'comprehensive help text for the command',
+    'display_keyword': 'display this command in the list of commands when the help command contains this display keyword.',
+    'children': {} # command dictionaries of subsequent child commands
+  }
+}
+}}}
+
+ * mycommandtoken: What the user should input to use this command. This should be a single word. If the user should type in 'browse', then this should be 'browse'. This can also be a user-entered argument. These arguments include [TARGET], [FILENAME], [KEYNAME], and [ARGUMENT]. 
+ * name: A unique tag that can be used in the callback function to identify a specific token.
+ * callback: The callback function to run if this command was entered. It should take two parameters: an input_dict that contains the parsed input as a command dictionary, as well as an environmentdict that describes seash's current state.
+ * summary: A short summary of what the command does.
+ * help_text: A detailed explanation of what the command should do and can do.
+ * display_keyword: When showing help for a command, the summaries of any sub-commands are shown. This is the keyword that should be specified in order for this summary to show. Omit this if a command should be shown by default.
+ * children: A dictionary containing command tokens that map to command nodes for subsequent commands.
+
+The root dictionary is treated as a list of children. Therefore, the command dictionary should be as such:
+{{{
+#!python
+command_dictionary = {
+  'show': {
+    ...
+  },
+  'add': {
+    ...
+  },
+  ...
+}
+}}}
+
+== Extending seash ==
+Seash has support for adding additional commands via modules that are imported on startup. These modules should be placed in the /modules/ folder. The importer will automatically import modules ending in *_module.py. 
+
+Defining a module is relatively straightforward. The only requirement for a module is that it must have a command_dict defined in the module namespace for all the commands that should be added. These command_dicts should be specified in a similar manner as described in the command dictionary section above. However, the root-level command need not be only one word. It can be a string containing several command tokens separated by whitespace, and the importer will add the command to the correct position in the dictionary.
+
+{{{
+#!python
+command_dict = {
+  'show location':{
+      'name':'location',
+      'callback': show_location_callback,
+      'summary': "Display location information (countries) for the nodes",
+      'help_text':"""...""",
+      'children':{}},
+
+  'show coordinates':{
+      'name':'coordinates',
+      'callback': show_coordinates_callback,
+      'summary':'Display the latitude & longitude of the node',
+      'help_text':"""...""",
+      'children':{}},
+}
+
+}}}
