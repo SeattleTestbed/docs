@@ -39,7 +39,7 @@ Extra credit:
 == Threat Model ==
 ----
 
-You should assume that an adversary will be supplying the program and data to run in your sandbox.   This program can perform any operation supported by your sandbox.   The adversary should not be able to perform actions like write files arbitrarily with the permissions of the sandbox's user (for example, overwriting the sandbox code).   
+You should assume that an adversary will be supplying the program and data to run in your sandbox.   The adversary must not be able to perform actions like write files arbitrarily with the permissions of the sandbox's user (for example, overwriting the sandbox code).   
 
 
 [[BR]]
