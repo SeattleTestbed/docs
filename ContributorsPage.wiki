@@ -38,7 +38,7 @@ This page contains information useful to developers working on Seattle.   Anythi
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
    * [wiki:SeattleDownload Download and installation instructions] for Seattle
-   * [wiki:SeattleGeniInstallation Installing your own instance of Seattle Clearinghouse] for the Clearinghouse portal
+   * [wiki:SeattleGeniInstallation Installing your own instance of Seattle Clearinghouse]
    * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
