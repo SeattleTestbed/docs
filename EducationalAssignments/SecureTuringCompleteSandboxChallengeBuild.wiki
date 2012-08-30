@@ -9,7 +9,11 @@ The Secure Turing Complete Sandbox Challenge attempts to provide some evidence f
 == Turing Completeness ==
 ----
 
-Put intuitively, a turing complete sandbox (with infinite memory) can be used to compute any computable problem.   For our purposes, such a sandbox can make several simplifying assumptions that are common for many systems:
+Put intuitively, a turing complete sandbox (with infinite memory) can be used to compute any computable problem.   A turing complete sandbox takes a program and data as input.   (The program and data can be stored in the same area or separate ones.)   Any turing complete sandbox can compute any problem that can be computed by any other sandbox.
+
+Your sandbox only needs to handle computation.   If you elect, you can support some form of I/O, but apart from having a mechanism to provide an initial program and data, this is not required except as specified below.
+
+For our purposes, such a sandbox can make several simplifying assumptions that are common for many systems:
 
  1. The amount of memory can be restricted to a specific value.   This is common for assembly language, C code, or byte code interpreters (like the JVM).
  1. The I/O of the sandbox can be very limited.   It is not necessary to support file I/O, network I/O, or keyboard interaction.   It is permissible to require that the program's source and data are loaded into memory when the sandbox is initialized.   
