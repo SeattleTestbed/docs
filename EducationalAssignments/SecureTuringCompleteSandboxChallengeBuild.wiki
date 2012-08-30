@@ -35,6 +35,12 @@ Extra credit:
  1. You can implement a turing complete sandbox within your sandbox.   This can be your sandbox or can be a classic turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory available than your full sandbox.
 
 
+[[BR]]
+== Threat Model ==
+----
+
+You should assume that an adversary will be supplying the program and data to run in your sandbox.   This program can perform any operation supported by your sandbox.   The adversary should not be able to perform actions like write files arbitrarily with the permissions of the sandbox's user (for example, overwriting the sandbox code).   
+
 
 [[BR]]
 == What To Turn In ==
