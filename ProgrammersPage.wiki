@@ -42,6 +42,7 @@ Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file 
 }}}
 
 == Editing Repy files ==
+=== Vim ===
 João Moreno has also provided a [http://www.vim.org/scripts/script.php?script_id=2546 VIM syntax file] for Repy that will syntax color Repy programs.
 
 You can also choose to automatically color Repy code with python-mode in emacs.  In your .emacs file, add the following line:
@@ -49,3 +50,11 @@ You can also choose to automatically color Repy code with python-mode in emacs. 
 {{{
 (add-to-list 'auto-mode-alist '("\\.repy$" . python-mode))
 }}}
+
+=== gedit ===
+In order to have proper syntax highlighting for Repy, `repy.lang` needs to be moved into the folder that stores the defined languages. It is a slightly modified version of the python language spec.
+
+ * For system-wide changes, move it to: `/usr/share/gtksourceview-3.0/language-specs/repy.lang`
+ * For a single user, move it to: `~/.local/share/gtksourceview-3.0/language-specs/repy.lang`
+
+You can download `repy.lang` [raw-attachment:repy.lang here]
