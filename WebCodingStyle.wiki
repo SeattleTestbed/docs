@@ -18,8 +18,16 @@ Django code is written in Python, and falls under the purview of Seattle CodingS
 == Django views ==
 ----
 
-Views are python functions which take a web request and return a web response.  These responses can be anything from redirects to 404 errors.  All of the Clearinghouse web pages are defined in views.py as well as all of the Django variables they use.  All web pages must be defined in views.py and also mapped to a URL in the urls.py file.
-  
+Views are python functions which take a web request and return a web response.  These responses can be anything from redirects to 404 errors.  All of the Clearinghouse web pages are defined in views.py as well as all of the Django variables they use.  
+
+ All web pages must be defined in views.py and also mapped to a URL in the urls.py file.  In most cases the URL, view function and URL tag will all the same name to avoid confusion.
+{{{
+#!python
+urlpatterns = patterns('seattlegeni.website.html.views',                    
+                       (r'^register$', 'register',{},'register'),
+                       (r'^login$', 'login',{},'login'), 
+                       (r'^logout$', 'logout',{},'logout'), )
+}}} 
  Decorators must be explained. Always.  A Decorator is the "@whatever" before a views.py function.::
 
   - Django makes use of decorators to simplify complex functions. Each use of a decorator must be explained in the {{{<Note>}}} section of the function's docstring. Example:
