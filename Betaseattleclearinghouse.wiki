@@ -55,6 +55,31 @@ LoadModule ssl_module /modules/mod_ssl.so
 }}}
  '''BUG:''' The mod_python file that you downloaded may have a bug in it. Please go to this [https://bugzilla.redhat.com/show_bug.cgi?id=465246 BugReport] to apply the patch if running make throws an error.
 
+ * Make sure to listen on the proper ports in the Apace configuration file.
+{{{
+Listen 80
+Listen 443
+}}}
+ * The Python path needs to be set properly.  The Django section in the Apache configuration file should look similar to this:
+{{{
+ # Django
+    <Location /geni/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE seattlegeni.website.settings
+        PythonOption django.root /geni
+        PythonInterpreter geni
+        PythonPath "['/home/usr/tmp', '/home/usr/tmp/seattle', '/usr/lib/python2.6/site-packages'] + sys.path"
+        PythonDebug On    
+    </Location> 
+}}}
+   '/home/usr/tmp' is the location of the deployed seattle and seattlegeni folders.
+   '/usr/lib/python2.6/site-packages' is the location of Django.
+
+ * Make sure the Apache user has proper permission to access the Seattle Clearinghouse code.   Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your Seattle Clearinghouse directory:
+{{{
+# chmod -R o+rx seattle/ seattlegeni/
+}}}
 === Custominstaller Builder ===
 === Central Advertise Server V2 ===
 === Installer Builder/Software Updater Server === 
