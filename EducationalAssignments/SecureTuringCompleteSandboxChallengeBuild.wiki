@@ -51,7 +51,7 @@ You must turn in a '''zip-file or tarball''' containing the following:
 
  1. Detailed documentation explaining the file format and operations supported by your turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. If you did not do the extra credit, you must explain in the document why you believe your sandbox is turing-complete.   This must be in PDF format.
  1. The source code for the turing-complete sandbox
- 1. The binary source for the example programs must be included.
+ 1. The source for the example programs must be included.   If these programs are in binary because of your file format, this is fine.
  1. A Makefile that builds the turing-complete sandbox from source on an Ubuntu 12.X VM.   
  1. A README file that explains how to build the sandbox and run the example programs from the command line.
 
