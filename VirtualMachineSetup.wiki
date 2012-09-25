@@ -224,6 +224,25 @@ The VMware Server does not have a cloning mechanism unfortunately. In order to c
 
 
 [[br]]
+== Known Issues/Problems ==
+----
+Sometimes a particular VM might become unresponsive or the VM might not have any network connectivity. VMWare has been known to stop working. If this happens then the vmware service needs to be restarted. You can restart it the commands:
+{{{
+$> sudo /etc/init.d/vmware restart
+
+or
+
+$> sudo service vmware restart
+}}}
+
+If you are unable to restart the service with the errors that certain services cannot be stopped, then you might have to forcibly kill some processes by searching for the processes using the command 'ps -ef | grep vm'. If nothing seems to be working and things seem to have gone bad then you might have to reconfigure VMWare by running the script:
+{{{
+$> sudo /usr/bin/vmware-config.pl
+}}}
+
+'''WARNING:''' If you reconfigure VMWare make sure to back things up first. Specially the nat.conf file located at /etc/vmware/vmnet8/nat/nat.conf. Once you have reconfigured VMWare, the individual VMs will be assigned new private IP addresses, so you will have to edit nat.conf and modify the port forwarding section with the new IP addresses.
+
+[[br]]
 == Detailed Guide to VMware Server ==
 ----
 A more detailed guide can be found in the [http://www.vmware.com/pdf/vmserver2.pdf VMware Server Documentation]. Feel free to look through it for advanced notes.
