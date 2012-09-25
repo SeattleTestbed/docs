@@ -242,6 +242,10 @@ $> sudo /usr/bin/vmware-config.pl
 
 '''WARNING:''' If you reconfigure VMWare make sure to back things up first. Specially the nat.conf file located at /etc/vmware/vmnet8/nat/nat.conf. Once you have reconfigured VMWare, the individual VMs will be assigned new private IP addresses, so you will have to edit nat.conf and modify the port forwarding section with the new IP addresses.
 
+==== Helpful Links ====
+ * [http://nicksworld69.blogspot.com/2009/11/vmware-server-problems.html]
+ * [http://www.webhostingtalk.com/showthread.php?t=904044]
+
 [[br]]
 == Detailed Guide to VMware Server ==
 ----
