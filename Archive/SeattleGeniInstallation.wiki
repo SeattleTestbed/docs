@@ -20,7 +20,7 @@ Seattle Clearinghouse requires at least the following software to be installed:
  * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for https:// support
  * [http://www.djangoproject.com/ Django] -- necessary to run Django code
-
+ * [https://github.com/omab/django-social-auth Django Social Auth] -- necessary for OpenID and Oauth support
 Most of these can be installed through a package manager. For example, on a Debian-based system:
 
 {{{
@@ -32,6 +32,71 @@ $ apt-get install ntp
 
 The version of Django required is 1.3, which is available at https://www.djangoproject.com/download/.
 
+
+[[BR]]
+== Setup OpenID and OAuth ==
+----
+
+Seattle Clearinghouse requires [https://github.com/omab/django-social-auth Django Social Auth] to handle OpenID and Oauth support.  This application depends on:
+ * [http://pypi.python.org/pypi/python-openid/ python-openid ]
+ * [https://github.com/simplegeo/python-oauth2/ python-oauth2 ]
+
+Using something like easy_install will install these for you.
+{{{
+#!sh
+$ easy_install django-social-auth
+}}}
+  
+
+By default Gmail and Yahoo login are enabled.  If desired Windows Live, Github and Facebook login can be enabled with some additional steps-OPTIONAL-.
+
+ '''Facebook'''
+  * Register a new application at [http://developers.facebook.com/setup/ Facebook App Creation ]
+  * set App Domains in Facebook edit App page
+{{{ 
+yoursite.com
+}}}
+  * click the Website with Facebook Login checkmark and set site URL
+{{{
+https://yoursite.com
+}}}
+  * Uncomment and fill out {{{App ID}}} and {{{App Secret}}} values in settings.py
+{{{
+#!python
+FACEBOOK_APP_ID                   = ' your appid'
+FACEBOOK_API_SECRET               = ' your api secret key'
+}}}
+ '''Windows Live'''
+ * Register a new application at [https://manage.dev.live.com/Applications/Index Live Connect Developer Center ]
+ * Set redirect domain 
+{{{ 
+https://yoursite.com
+}}}
+ * Uncomment and fill out {{{LIVE_CLIENT_ID}}} and {{{LIVE_CLIENT_SECRET}}} values in settings.py
+{{{
+#!python
+LIVE_CLIENT_ID                  = ' your appid'
+LIVE_CLIENT_SECRET              = ' your api secret key'
+}}}
+
+ '''Github'''
+ * Register a new application at [https://github.com/settings/applications/new Live GitHub Developers ]
+ * Set URL and callback URL
+{{{ 
+https://yoursite.com
+}}}
+ * Uncomment and fill out {{{GITHUB_APP_ID}}} and {{{GITHUB_API_SECRET}}} values in settings.py
+{{{
+#!python
+GITHUB_APP_ID                  = ' your appid'
+GITHUB_API_SECRET              = ' your api secret key'
+}}}
+
+If you already have a working copy of the Clearinghouse and you are updating to allow OpenID and OAuth support you will need to add the Django Social Auth db tables. This is done automatically by:
+{{{
+#!sh
+$ python website/manage.py syncdb
+}}}
 
 [[BR]]
 == Create MySQL databases ==
