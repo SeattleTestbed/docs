@@ -245,8 +245,7 @@ Make sure you went through the "How to get RepyV2" section!
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
 
-'''Your security layer should produce no output!!!'''   If it encounters an attempt to write MZ, you should raise a !ValueError and allow execution to continue.
-
+'''Your security layer should produce no output!!'''   If it encounters an attempt to read the secure data, you should raise a `ValueError` exception and allow execution to continue.
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
