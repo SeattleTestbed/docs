@@ -91,7 +91,7 @@ myfile=openfile("look.txt",True)
 }}}
 look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
 
-In this case we are verifying the security of the reference monitor.  This code attempts to read the data written on the first offset value. First the file is opened using myfile=openfile("look.txt",True). Next myfile.readat(1,0) tries to read from the file. The 0 refers to an offset of zero and 1 refers to number of characters being read. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+In this case we are verifying the security of the reference monitor.  This code attempts to read the data written on the first offset value. First the file is opened using `myfile=openfile("look.txt",True)`. Next `myfile.readat(1,0)` tries to read from the file. The 0 refers to an offset of zero and 1 refers to number of characters being read. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
 ==== Test case 2:  ====
 
@@ -118,7 +118,7 @@ finally:
 }}}
 ==== Code analysis ====
 
-In this case we are verifying the accuracy of the reference monitor.  This code attempts to write "abcd" to the file directly.We assume that secure data is written in the file on the first four offset values. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("abcd",0) tries to write "abcd" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"abcd"` to the file directly.We assume that secure data is written in the file on the first four offset values. First the file is opened using `myfile=openfile("look.txt",True)`. Next `myfile.writeat("abcd",0)` tries to write `"abcd"` to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
 If this case produces anything other than "Write okay", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from reading the secure data not overwriting it.
 
