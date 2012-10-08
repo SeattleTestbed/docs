@@ -21,7 +21,7 @@ In this assignment you will create a security layer which stops the attacker fro
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to overwrite the secure data using a normal write this should be allowed and the user should be able to read this data back.
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to overwrite the secure data using a normal write this should be allowed and the user should be able to read this data back.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
  * Security: The attacker should not be able to circumvent the security layer.  Hence, if the data written using private write can be read back, the security is compromised.
 
