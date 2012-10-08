@@ -17,7 +17,7 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment you will create a security layer which stops the attacker from reading data securely written in a file.You will create a function called '''private write'''which allows the user to write data into a file which cannot be read back from the file.The data can be overwritten but isn't readable under any circumstance. You will do this by adding security rules to the functions available for reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!  
+In this assignment you will create a security layer which stops the attacker from reading data securely written in a file.You will create a function called '''private write''' which allows the user to write data into a file which cannot be read back from the file.The data can be overwritten but isn't readable under any circumstance. You will do this by adding security rules to the functions available for reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!  
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
