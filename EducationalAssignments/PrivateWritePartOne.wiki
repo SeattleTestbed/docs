@@ -17,13 +17,13 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment you will create a security layer which stops the attacker from reading data securely written in a file.You will create a function called '''private write''' which allows the user to write data into a file which cannot be read back from the file.The data can be overwritten but isn't readable under any circumstance. You will do this by adding security rules to the functions available for reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!  
+In this assignment you will create a security layer which stops the attacker from reading data securely written in a file.You will create a function called '''privatewrite''' which allows the user to write data into a file which cannot be read back from the file.The data can be overwritten but isn't readable under any circumstance. You will do this by adding security rules to the functions available for reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!  
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to overwrite the secure data using a normal write this should be allowed and the user should be able to read this data back.
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
- * Security: The attacker should not be able to circumvent the security layer.  Hence, if the data written using private write can be read back, the security is compromised.
+ * Security: The attacker should not be able to circumvent the security layer.  Hence, if the data written using privatewrite can be read back, the security is compromised.
 
 [[BR]]
 === Getting Python/Repy ===
