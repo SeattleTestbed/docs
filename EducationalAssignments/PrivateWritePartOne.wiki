@@ -65,7 +65,7 @@ If you can't get repy files to run, some of the following common errors may have
 
  * using print instead of log:
 
-Repy is a subset of python however it does not have the same syntax.  For a full list of acceptable syntax please see: [wiki:RepyApi]
+Repy is a subset of python however it does not have the same syntax.  For a full list of acceptable syntax please see: [wiki:FutureRepyApi]
 
  * command line errors:
 
