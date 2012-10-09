@@ -60,7 +60,7 @@ In order to test whether or not these steps worked, please copy and paste the co
  * Sample attack layer:  [wiki:EducationalAssignments/PrivateWritePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the trouble shooting section found below.
-=== Trouble shooting repy ===
+=== Troubleshooting repy ===
 If you can't get repy files to run, some of the following common errors may have occurred:
 
  * using print instead of log:
