@@ -191,17 +191,20 @@ x=myfile.readat(10,0)
 log(x)
 
 try:
-		#Try to read the secure data from the file
-		y=myfile.readat(5,15)
+  #Try to read the secure data from the file
+  y=myfile.readat(5,15)
 
-except Exception:
-	log("Read Blocked ")		#If security layer successful
+except ValueError:
+  #If security layer successful, this should fail
+  pass
 
 else:
-	log("Secure data compromised ")	#If security layer fails
+  #If security layer fails
+  log("Secure data compromised!")	
 
 finally:
-	myfile.close()		#Close the file
+  #Close the file
+  myfile.close()
 }}}
 
 '''Note:''' All attacks should be written as Repy files, using the .repy extension.
