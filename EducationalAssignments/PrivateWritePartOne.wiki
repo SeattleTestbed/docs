@@ -122,7 +122,7 @@ OBJC="objc"
 class SecureFile():
 	def __init__(self,file):
 		self.file = file
-		self.prwrite_offset_list=[]   #List of offsets values containing Private Data
+		self.prwrite_offset_list=[]   #List of offset values containing Private Data
 		
 	def readat(self,bytes,offset):
 		if(offset in self.prwrite_offset_list):
