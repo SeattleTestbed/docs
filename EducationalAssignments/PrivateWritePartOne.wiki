@@ -122,20 +122,19 @@ OBJC="objc"
 class SecureFile():
 	def __init__(self,file):
 		self.file = file
-		mycontext['pw_offset_list']=[]
+		self.prwrite_offset_list=[]   #List of offsets values for containing Private Data
 		
 	def readat(self,bytes,offset):
-		if(offset in mycontext['pw_offset_list']):
-			raise ValueError	
+		if(offset in self.prwrite_offset_list):
+			raise ValueError
 		return self.file.readat(bytes,offset)
 
    	def writeat(self,data,offset):
 	 	self.file.writeat(data,offset)
 
 	def privatewrite(self,data,offset):
-			current_offset=offset
-			for current_offset in range((len(data)+offset)):			
-				mycontext['pw_offset_list'].append(current_offset)
+			for current_offset in range(offset,(len(data)+offset)):
+				self.prwrite_offset_list.append(current_offset)
 			self.file.writeat(data,offset)
 
 	def close(self):
@@ -153,8 +152,7 @@ def secure_openfile(filename, create):
   f = openfile(filename,create)
   return SecureFile(f)
 
-CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}	#Maps the securefile to the API of Sandbox
-
+CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}	
 
 
 secure_dispatch_module()
@@ -178,16 +176,17 @@ Looking at the structure of `privatewrite()`,the flag is set for the offsets in 
 In this part of the assignment you will pretend to be an attacker.  Remember the attacker's objective is to read the `secure data` written in the file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to read the secure data from the file.  An example of an attack is found below:
 {{{
 myfile=openfile("look.txt",True)  #Open a file
+
+#Write some data to file
+myfile.writeat("The three golden rules to ensure computer security are: do not own a computer; do not power it on; and do not use it",0)
+
+#Write private data to file
+myfile.privatewrite("This is secure ",15)
+
+x=myfile.readat(10,0)
+log(x)
+
 try:
-		#Write some data to file
-		myfile.writeat("The three golden rules to ensure computer security are: do not own a computer; do not power it on; and do not use it",0)
-
-		#Write private data to file
-		myfile.privatewrite("This is secure ",15)
-
-		x=myfile.readat(10,0)
-		log(x)
-
 		#Try to read the secure data from the file
 		y=myfile.readat(5,15)
 
