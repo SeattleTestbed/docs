@@ -122,7 +122,7 @@ OBJC="objc"
 class SecureFile():
   def __init__(self,file):
     # OBVIOUSLY WRONG!!!
-    mycontext['privatedata'] = True
+    mycontext['privatedata'] = False
     self.file = file
 
   def readat(self,bytes,offset):
