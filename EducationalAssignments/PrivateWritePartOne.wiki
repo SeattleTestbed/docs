@@ -8,7 +8,7 @@ that mediates all access to objects by subjects.  This can be used to allow, den
 One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the
 [wiki:EducationalAssignments/PrivateWritePartTwo next assignment])  
 
-This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
+This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of access control and confidentiality have been embedded into the steps of this assignment.    
 
 [[TOC(inline)]]
 
