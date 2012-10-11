@@ -172,7 +172,7 @@ Keep in mind the above security layer would only stop one kind of attack.  Thus 
 The `privatewrite()` function attempts to follow the design principles of accuracy, efficiency, and security.  However it does so inadequately.For example the data is blocked even if its overwritten using a normal `writeat()` function.
 It is more important to make a security system that is infeasible to break, rather than impossible to break.  However this security layer does not yet create the necessary infeasibility requirements for most attacks.  Thus we see that there is a grey area of what is an acceptable level of impedance.       
 
-Looking at the structure of `privatewrite()`,the flag is set for the offsets in which the private data is written.The for loop traverses through the entire offsets which will be written in the file and places them in a list. During the `readat()` function, the list is checked against and accordingly the data is either displayed or not displayed.   
+Looking at the structure of `privatewrite()`,the flag `privatedata` is set when data is written using `privatewrite()`. During the `readat()` function, the flag is checked against and accordingly the data is either displayed or an exception is raised.   
 [[BR]]
 === Testing your security layer ===
 ----
