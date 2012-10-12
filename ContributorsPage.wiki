@@ -75,3 +75,4 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:Libraries/StatisticsLibrary Statistics Library] for analyzing date regarding nodes & vessels on Seattle.
    * [wiki:Applications/GeoIpServer Running a GeoIP Server]
    * How to run the [wiki:RunningSecLayerBenchmarks security layer benchmarks]
+   * [http://selexor.poly.edu/ SeleXor] for additional control over the vessel acquisition process.
