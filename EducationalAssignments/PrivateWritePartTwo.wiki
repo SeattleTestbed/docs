@@ -158,6 +158,25 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 == Extra Credit ==
 ----
 Find bugs in the extra credit reference monitors given the altered threat model.  You should include more test cases in the extra credit!
+
+[[BR]]
+== How to run your tests on many reference monitors ==
+----
+
+If you are using Mac or Linux, you can do something like the following:
+
+Create a directory that the security layers will write their files into.   You need to run repy with only access to this directory.   You can write a test program that does log(str(listfiles())) to see if you are in the right place.
+
+Then you can type the following in the bash shell to execute the testcases with the reference monitors:
+{{{
+for referencemonitor in reference_monitor_*; do for testcase in [firstname]_[lastname]_*; do rm testdirectory/*; cp $referencemonitor $testcase encasementlib.repy; python repy.py [path to files and arguments] encasementlib.repy $referencemonitor $testcase; done; done
+}}}
+
+This will print out the output from each program.
+
+If you are a Windows user and you create your own solution that does the same thing, please post it on the forum.
+
+
 [[BR]]
 == What to turn in? ==
 ----
