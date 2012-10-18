@@ -264,5 +264,5 @@ Protect the file against read and write operations involving persistent data. If
 = What to turn in? =
 ----
 
- * Turn in a repy file called reference_monitor_[ name or id number].repy
+ * Turn in a repy file called reference_monitor_[ name or id number].repy.   Be sure your reference monitor *never produces output*.   It should raise a ValueError if the readat should be blocked, but never, ever call log() to output information or raise unexpected errors.
  * For extra credit turn in a second repy file called extra_credit_[ name or id number].repy
