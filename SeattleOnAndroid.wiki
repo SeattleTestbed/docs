@@ -51,12 +51,12 @@ Not all of their path names work on our phone. I'm not blaming the original auth
 Repy is the restricted version of Python Seattle supports. To install the Repy runtime environment, you need to prepare the required files beforehand:
 
  1. Check out {{{trunk}}} (>=r5656) from Seattle's SVN
- 1. Create a directory for the required files, let's call it {{{/target}}}.
+ 1. Create a directory for the files we will upload to the Android device, let's call it {{{/target}}}.
  1. Inside {{{trunk}}}, run {{{python preparetest.py /target}}}.
  1. Download a restrictions file [attachment:restrictions.test:wiki:RepyTutorial such as this one] to {{{/target}}}.
+ 1. Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}.
 
-Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}. Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line!
-
+Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line!
 
 
 
