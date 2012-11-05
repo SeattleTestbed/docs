@@ -1,18 +1,11 @@
 = Seattle on Android =
 
-2011-10-10 I'm happy to announce that our '''native Android installer''' (APK) for Seattle is almost here. We are still working to polish it, so installing Seattle is a safe and simple thing for you.
-
-[[Image(seattle-on-android.jpg)]]
-
-Thus, I advise against following the instructions below anymore. I'll keep them around until we have the definite Android package, but it's unlikely that you want to go through all the hassle for any reason.
-
-Thank you,
-Albert (''albert.rafetseder at univie.ac.at'')
+This page discusses our port of Seattle to the Android platform. You will be able to download a native Android installer (APK) Real Soon Now from our clearinghouse web site.
 [[BR]]
 ----
-DISCLAIMER: For the moment, I'm only collecting my notes on this page. Any feedback (to ''albert.rafetseder at univie.ac.at'') is appreciated.
 
-Running Repy scripts locally already works with a couple of patches, as does donating vessels and letting experimenters run code on them. We can't install and register for autostart using Seattle's Python scripts. Sorry! At the moment, we are building an Android Package (APK) that contains Python and the Seattle installer.
+[[TOC(inline)]]
+
 
 [http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
 
