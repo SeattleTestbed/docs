@@ -11,27 +11,25 @@ This page discusses our port of Seattle to the Android platform. You will be abl
 
 ----
 
-= Overview =
+== Overview ==
 Here is a general outline of steps to be performed. You will get access to Python, Repy (Seattle's runtime), and the Seattle Node Manager, respectively.
  1. Set up [http://code.google.com/p/android-scripting/wiki/InstallingInterpreters Python for Android (Py4A)].
  1. [wiki:RepoAccess#Anonymousaccess Check out] the latest version of Seattle from SVN (r5656 and later should work).
  1. Install Seattle on the command line. This won't give you autostart capabilities, though.
 
-= Setting up Python =
+== Setting up Python ==
 
  1. On the home screen, press ''Menu''. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
  1. Download the Python 2.6.2 interpreter for Android ([Py4A]) from [http://code.google.com/p/python-for-android/downloads/list= here]. Tap on the download notification to install. Congratulations! You can now run Python code from within the Py4A GUI, either using scripts from files or an interactive interpreter.
  1. Undo Step 1 for obvious security reasons.
 
+=== Python from shell ===
 
-
-= Setting up Repy =
-
-Repy is the restricted version of Python Seattle supports. For running Repy programs locally, Py4A is not the optimal choice, but shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here.
+Shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here. Be sure to adapt the actual paths to your device/installation.
 
 For {{{sh}}} (which is the default shell also greeting you via [http://developer.android.com/guide/developing/tools/adb.html adb]'s {{{shell}}} command), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure !AndroidTerm to run it on startup: Press ''Menu'', go to ''Settings > Start command'' and enter /path/to/your/script.
 
-For {{{bash}}}, add the following lines to {{{/system/etc/bash/bashrc}}} (Make sure /system/etc is mounted writable by issuing {{{mount -o rw,remount /system}}} as the superuser) :
+For {{{bash}}}, mount {{{/system/etc}}} writable by issuing {{{mount -o rw,remount /system}}} as the superuser. Add the following lines to {{{/system/etc/bash/bashrc}}} :
 {{{
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/data/com.googlecode.pythonforandroid/files/python/lib
 export PYTHONPATH=/mnt/sdcard/com.googlecode.pythonforandroid/extras/python:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6/lib-dynload
@@ -40,35 +38,27 @@ export TEMP=$TEMP:/mnt/sdcard/com.googlecode.pythonforandroid/extras/python/tmp/
 export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 }}}
 
-(The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository], but not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
+(The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository].
 
-On my installation with {{{bash}}}, the Python interpreter can now be run from any path in the filesystem, and can {{{import socket}}} etc.
-
-You can now proceed to downloading Seattle.
+#!comment out all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
 
 
-= Seattle =
-== General Installation Pitfalls ==
-Download the Seattle Linux installer (it could be a customized installer as well). If you downloaded Seattle to the standard download folder on the SD card, it won't run even if correctly patched (stating "Bad interpreter: Permission denied") unless you remount the SD card with the {{{exec}}} option (as hinted [http://www.google.com/url?sa=t&source=web&cd=3&ved=0CDcQFjAC&url=http%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D27138&ei=uQCyTcTYBsWZOt2-1PgI&usg=AFQjCNExH-jP9IMTAfbYdNgrWKZoXF_9iA here]). I rather moved the Seattle directory to {{{/data/data/edu.washington.cs.seattle/}}}, where the patched scripts can finally be started.
 
-== Running Repy Scripts Locally ==
-Put a restrictions file (e.g. the one from the [http://seattlegeni.cs.washington.edu/dist/demokit.zip Seattle demokit]) into your {{{seattle_repy}}} directory. Patch {{{nix_common_api.py}}} because {{{ctypes.util.find_library}}} fails on Android. ([http://docs.python.org/library/ctypes#finding-shared-libraries The Python docs] say find_library uses ldconfig, gcc, and objdump to locate the library, neither of which are available on our Android.) Here's the relevant patch (you'll probably need to adapt the {{{path/to/libc}}} on your device):
-{{{
-localhost seattle_repy # diff ../../seattle/seattle_repy/nix_common_api.py nix_common_api.py
---- ../../seattle/seattle_repy/nix_common_api.py
-+++ nix_common_api.py
-@@ -17,7 +17,7 @@
- import textops
- 
- # Get the standard library
--libc = ctypes.CDLL(ctypes.util.find_library("c"))
-+libc = ctypes.CDLL("/system/lib/libc.so")
- 
- # Functions
- _strerror = libc.strerror
-}}}
+== Setting up Repy ==
 
-Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}}!
+Repy is the restricted version of Python Seattle supports. To install the Repy runtime environment, you need to prepare the required files beforehand:
+
+ 1. Check out {{{trunk}}} (>=r5656) from Seattle's SVN
+ 1. Create a directory for the required files, let's call it {{{/target}}}.
+ 1. Inside {{{trunk}}}, run {{{python preparetest.py /target}}}.
+ 1. Download a restrictions file [attachment:restrictions.test:wiki:RepyTutorial such as this one] to {{{/target}}}.
+
+Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}. Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}}!
+
+
+
+== Setting up Seattle ==
+
 
 == Donating resources ==
 Although installing Seattle through the install scripts doesn't work in all aspects right now, you can still donate resources by manually starting the node manager.
