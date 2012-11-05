@@ -40,8 +40,10 @@ export PATH=$PATH:/data/data/com.googlecode.pythonforandroid/files/python/bin
 
 (The last line is needed to make the {{{Popen}}} calls to the Python interpreter work). These lines are inspired by [http://code.google.com/p/python-for-android/source/browse/python-build/standalone_python.sh this file in the Py4A repository].
 
-#!comment out all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
-
+{{{
+#!comment
+Not all of their path names work on our phone. I'm not blaming the original authors -- pathnames are a botch in Android, everything shows up in multiple places (/etc == /system/etc and so on), and all of a sudden you find yourself on a device not supporting links (sdcard, its filesystem is VFAT) or mounted read-only but listed as temp directory.
+}}}
 
 
 == Setting up Repy ==
@@ -53,24 +55,19 @@ Repy is the restricted version of Python Seattle supports. To install the Repy r
  1. Inside {{{trunk}}}, run {{{python preparetest.py /target}}}.
  1. Download a restrictions file [attachment:restrictions.test:wiki:RepyTutorial such as this one] to {{{/target}}}.
 
-Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}. Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}}!
+Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}. Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line!
 
 
 
-== Setting up Seattle ==
 
+== Setting up the Seattle Node Manager ==
 
-== Donating resources ==
-Although installing Seattle through the install scripts doesn't work in all aspects right now, you can still donate resources by manually starting the node manager.
+Before you can install the Seattle Node Manager, you need to tell the command-line installer which vessels of what size it should create, and who should be able to access them. For altruistic donations, use the {{{vesselinfo}}} file from [https://seattlegeni.cs.washington.edu/geni/download/flibble/ an installer package]. If you want to have {{{seash}}} access to your own device, use the [wiki:CustomInstallerBuilder]. Either way, push the {{{vesselinfo}}} file into the directory you created for Repy. Then,
 
- 1. If you didn't patch {{{nix_common_api.py}}} already, do it now, according to the patch above.
- 1. Decide whom to donate your resources to. If you want to donate to the general public, proceed to the next step. To make sure you and your developer friends have access to the device, create a [https://seattlegeni.cs.washington.edu/custom_install/ customized installer] ([https://seattle.cs.washington.edu/wiki/CustomInstallerBuilder how to]) including everyone's public user keys. If you already have the Seattle files on your Android device, just overwrite the {{{vesselinfo}}} file with the version found in the customized installer.
- 1. Check if {{{runonce.py}}} from the Seattle archive you extracted already includes the line {{{import tempfile}}}. Else grab a current version  [https://seattle.cs.washington.edu/export/4408/seattle/trunk/nodemanager/runonce.py (>=r4407) ] from SVN that doesn't [ticket:997 use a hardcoded temp directory].
- 1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer will claim it's installing on a Nokia N800/900 (due to it recognizing an ARM6 processor), and won't be able to configure Seattle for autostart. 
- 1. You might want to run {{{python softwareupdater.py &}}} now. Note that it will overwrite all your precious patched files, and I'm not quite sure how to find out that it has finished before you reapply the patches.
+ 1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer won't be able to configure Seattle for autostart.
  1. Run {{{python nmmain.py}}}. It will take a while to register at the advertisement server.
- 1. If you downloaded a customized installer that has your user key in the {{{vesselinfo}}} file, you can try to access your device using seash now.
+ 1. If you downloaded a customized installer that has your user key in the {{{vesselinfo}}} file, you can try to access your device using {{{seash}}} now.
 
-Although the node manager is not registered to automatically start when the device boots, it can be run manually now. The software updater isn't started automatically either. It might be a good idea to run it from time to time to make sure you benefit from the latest improvements. Don't forget to apply the patches afterwards.
+Although the node manager is not registered to automatically start when the device boots, it can be run manually now. The software updater isn't started automatically either.
 
 -----
