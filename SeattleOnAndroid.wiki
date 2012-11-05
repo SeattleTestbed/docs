@@ -62,6 +62,10 @@ Congrats, now you can run {{{python repy.py restrictions.that_you_have your_scri
 
 == Setting up the Seattle Node Manager ==
 
+'''This doesn't work at the moment. seattleinstaller.py is not in the list of files preparetests.py thinks are necessary.'''
+
+{{{
+#!comment
 Before you can install the Seattle Node Manager, you need to tell the command-line installer which vessels of what size it should create, and who should be able to access them. For altruistic donations, use the {{{vesselinfo}}} file from [https://seattlegeni.cs.washington.edu/geni/download/flibble/ an installer package]. If you want to have {{{seash}}} access to your own device, use the [wiki:CustomInstallerBuilder]. Either way, push the {{{vesselinfo}}} file into the directory you created for Repy. Then,
 
  1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer won't be able to configure Seattle for autostart.
@@ -69,5 +73,5 @@ Before you can install the Seattle Node Manager, you need to tell the command-li
  1. If you downloaded a customized installer that has your user key in the {{{vesselinfo}}} file, you can try to access your device using {{{seash}}} now.
 
 Although the node manager is not registered to automatically start when the device boots, it can be run manually now. The software updater isn't started automatically either.
-
+}}}
 -----
