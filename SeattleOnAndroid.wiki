@@ -7,7 +7,7 @@ This page discusses our port of Seattle to the Android platform. You will be abl
 [[TOC(inline)]]
 
 
-[http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running Cyanogenmod 7.
+[http://cs.univie.ac.at/research/research-groups/future-communication/ Our] device here is a ZTE Blade Android 2.3 ("Gingerbread") phone running [http://www.cyanogenmod.org/ CyanogenMod] 7.
 
 ----
 
@@ -16,6 +16,11 @@ Here is a general outline of steps to be performed. You will get access to Pytho
  1. Set up [http://code.google.com/p/android-scripting/wiki/InstallingInterpreters Python for Android (Py4A)].
  1. [wiki:RepoAccess#Anonymousaccess Check out] the latest version of Seattle from SVN (r5656 and later should work).
  1. Install Seattle on the command line. This won't give you autostart capabilities, though.
+
+PS: Quite a few command line settings on this page requires your device to be rooted, ie, you need root privilege on your phone to run these settings. How to root a device largely depends on the phone, Android version, etc. Fortunately [http://www.cyanogenmod.org/ CyanogenMod] firmware is rooted by default. I will use a separate page for rooting a device, but still, my example may not apply to you. 
+
+PPS: Terminal commands on android are either the limited version of standard Linux, or even not implemented (when you use adb shell, you can see all of the implemented commands in /system/bin). There is an app called Busybox in Play store which has better implementation of many (but not all) commands. But to use Busybox, your device needs to be rooted. 
+
 
 == Setting up Python ==
 
