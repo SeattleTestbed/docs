@@ -14,15 +14,15 @@ This page discusses our port of Seattle to the Android platform. You will be abl
 == Overview ==
 Here is a general outline of steps to be performed. You will get access to Python, Repy (Seattle's runtime), and the Seattle Node Manager, respectively.
  1. Set up [http://code.google.com/p/android-scripting/wiki/InstallingInterpreters Python for Android (Py4A)].
- 1. [wiki:RepoAccess#Anonymousaccess Check out] the latest version of Seattle from SVN (r5656 and later should work).
- 1. Install Seattle on the command line. This won't give you autostart capabilities, though.
+ 1. [wiki:RepoAccess#Anonymousaccess Check out] the latest version of Seattle from SVN (r5656 and later should work): {{{svn co https://seattle.cs.washington.edu/svn/seattle/}}} The code is available at seattle/trunk/dist/android
+ 1. Install Seattle on the command line. This won't give you autostart capabilities, though. Import the code in seattle/trunk/dist/android as an "existing android project" from within Eclipse. Then just "run as" on the android emulator or your device. 
 
 PS: Quite a few command line settings on this page requires your device to be rooted, ie, you need root privilege on your phone to run these settings. How to root a device largely depends on the phone, Android version, etc. Fortunately [http://www.cyanogenmod.org/ CyanogenMod] firmware is rooted by default. I will use a separate page for rooting a device, but still, my example may not apply to you. 
 
 PPS: Terminal commands on android are either the limited version of standard Linux, or even not implemented (when you use adb shell, you can see all of the implemented commands in /system/bin). There is an app called Busybox in Play store which has better implementation of many (but not all) commands. But to use Busybox, your device needs to be rooted. 
 
 
-== Setting up Python ==
+== Setting up Python for Android ==
 
  1. On the home screen, press ''Menu''. Go to ''Settings > Applications'' and make sure ''Unknown Sources'' is checked. This is needed for installing non-Market APKs right after downloading them.
  1. Download the Python 2.6.2 interpreter for Android ([Py4A]) from [http://code.google.com/p/python-for-android/downloads/list= here]. Tap on the download notification to install. Congratulations! You can now run Python code from within the Py4A GUI, either using scripts from files or an interactive interpreter.
@@ -30,11 +30,13 @@ PPS: Terminal commands on android are either the limited version of standard Lin
 
 === Python from shell ===
 
+To get shell access to your device, run {{{adb shell}}} which comes within your android-sdk/platform-tools (the location may vary depending on your OS or other settings). [http://developer.android.com/tools/help/adb.html adb] is Android debug bridge, which lets you communicate with an emulator instance or connected Android device. 
+
 Shell access to the Python interpreter is tricky to add because the shell knows nothing about Python's paths yet. Depending on which shell you have, there are different routes to take from here. Be sure to adapt the actual paths to your device/installation.
 
 For {{{sh}}} (which is the default shell also greeting you via [http://developer.android.com/guide/developing/tools/adb.html adb]'s {{{shell}}} command), I don't know yet where it takes its run commands (.shrc) from. If you have [https://github.com/jackpal/Android-Terminal-Emulator/wiki Jackpal's AndroidTerm2] installed, you could write an rc script and configure !AndroidTerm to run it on startup: Press ''Menu'', go to ''Settings > Start command'' and enter /path/to/your/script.
 
-For {{{bash}}}, mount {{{/system/etc}}} writable by issuing {{{mount -o rw,remount /system}}} as the superuser. Add the following lines to {{{/system/etc/bash/bashrc}}} :
+For {{{bash}}}, mount {{{/system/etc}}} writable by issuing {{{mount -o rw,remount /system}}} as the superuser (you need a rooted device here). Add the following lines to {{{/system/etc/bash/bashrc}}} :
 {{{
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/data/com.googlecode.pythonforandroid/files/python/lib
 export PYTHONPATH=/mnt/sdcard/com.googlecode.pythonforandroid/extras/python:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6:/data/data/com.googlecode.pythonforandroid/files/python/lib/python2.6/lib-dynload
