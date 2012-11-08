@@ -63,6 +63,8 @@ Repy is the restricted version of Python Seattle supports. To install the Repy r
  1. Download a restrictions file [attachment:restrictions.test:wiki:RepyTutorial such as this one] to {{{/target}}}.
  1. Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}.
 
+Meanwhile, to allow RePy collect data from your phone, you have to get [https://seattle.cs.washington.edu/wiki/UsingSensors Seattle Sensor] running. Seattle and Sensor communicate with each other via XML-RPC. 
+
 Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line!
 
 
