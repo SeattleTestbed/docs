@@ -59,6 +59,25 @@ For example, if your current working directory is the location where repy is ins
 python repy.py "C:\seattle\examples\restrictions.test" "C:\seattle\examples\example.1.1.repy"
 }}}
 
+
+
+===== Interactive Testing =====
+To use repy functions from an interactive python interpreter, you can open Python and map the symbols from repyportability into your namespace.   For example, to get a randomfloat through repy, do:
+
+{{{
+Justin-Capposs-MacBook-Pro:test2 justincappos$ python
+Python 2.7.1 (r271:86832, Jun 16 2011, 16:59:05) 
+[GCC 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2335.15.00)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from repyportability import *
+>>> randomfloat()
+0.18776749685771188
+}}}
+
+Note that this will not provide the security and performance isolation from Repy.   As a result, you can also do things that are not allowed in Repy.
+
+
+
 ===== Basic Instructions =====
 
 First, make sure that you have the repy files [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your seattle_repy directory. 
