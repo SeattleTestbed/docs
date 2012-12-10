@@ -42,6 +42,15 @@ class bundle_Bundle:
    Provides a simple object-oriented API to manipulate bundles.
 
 {{{
+def bundle_Bundle(self, bundlefname, mode):
+}}}
+   Creates a bundle object.  Its behavior depends on the mode specified.
+|| Mode || Effects ||
+|| w    || Creates a new Bundle file. If a Bundle already exists, it raises a bundle_InvalidOperationError.  ||
+|| a    || If this is an existing Bundle, opens it for modification.  If it doesn't exist yet, create it. ||
+|| r    || Opens a bundle in read-only mode. ||
+
+{{{
 def bundle_Bundle.add_files(self, filenames):
 }}}
    Adds the specified files to the bundle object.  The files must be in the current working directory.
