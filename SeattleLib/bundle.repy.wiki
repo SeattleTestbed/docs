@@ -42,7 +42,7 @@ class bundle_Bundle:
    Provides a simple object-oriented API to manipulate bundles.
 
 {{{
-def bundle_Bundle(self, bundlefname, mode):
+def bundle_Bundle.__init__(self, bundlefname, mode):
 }}}
    Creates a bundle object.  Its behavior depends on the mode specified.
 || Mode || Effects ||
