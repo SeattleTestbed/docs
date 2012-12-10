@@ -1,0 +1,116 @@
+= bundle.repy =
+
+bundle.repy provides an utility for packaging multiple files into a single file.  Its main intent is to allow repy programmers to easily upload static dependencies along with their repy programs.  When bundling files with a repy program, the repy program will automatically extract all files bundled within it when it is executed.
+
+=== Command Line Invocation ===
+
+A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
+
+To create a bundle, use the following command. Note: If output_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.
+{{{
+$ python bundler.py c [-f | input_fname] output_fname
+}}}
+
+To restore a bundle to a normal file, use the following command. Note: If output_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.
+{{{
+$ python bundler.py r* [-f | output_file] output_fname
+}}}
+
+These actions involve manipulating bundles.  Their syntax is as follows:
+{{{
+$ python bundler.py action bundle_fname file1 file2 ...
+}}}
+|| Action || Description || 
+|| a      || Adds the specified files||
+|| e      || Extracts the specified files||
+|| r      || Removes the specified files||
+
+These actions perform some operation on the entire bundle. Their syntax is as follows:
+{{{
+$ python bundler.py action bundle_fname
+}}}
+|| Action || Description ||
+|| e*     || Extracts all files; existing files will be overwritten||
+|| l     || Lists all files within the bundle||
+
+=== Classes and Functions ===
+You can also access the bundle functionality through an API.
+
+{{{
+class bundle_Bundle:
+}}}
+   Provides a simple object-oriented API to manipulate bundles.
+
+{{{
+def bundle_Bundle.add_files(self, filenames):
+}}}
+   Adds the specified files to the bundle object.  The files must be in the current working directory.
+   If the files already exist, a bundle_InvalidOperationError is raised.
+
+{{{
+def bundle_Bundle.remove_files(self, filenames):
+}}}
+   Removes the specified files from the bundle object. 
+   If the files don't exist, a bundle_InvalidOperationError is raised.
+
+{{{
+def bundle_Bundle.extract_files(self, filenames):
+}}}
+   Extracts the specified files to the current working directory.
+   If the files already exist in the directory, they will be overwritten.
+   If the file doesn't exist, a bundle_InvalidOperationError is raised.
+
+{{{
+def bundle_Bundle.extract_to_string(self, fname):
+}}}
+   Extracts the specified file and returns its contents as a single string.
+   If the file doesn't exist, a bundle_InvalidOperationError is raised.
+
+{{{
+def bundle_Bundle.list(self):
+}}}
+   Returns the contents of the bundle as a dictionary containing filenames as keys, and a description dictionary as its values.
+   The description dictionary contains the 'length' key.  It is designed in this way to allow new fields to be added in as needed.
+
+{{{
+def bundle_Bundle.close(self):
+}}}
+   Closes the internal file object.
+
+{{{
+def bundle_clear_bundle_from_file(fn):
+}}}
+   Removes all traces of a bundle from the specified file.
+   Raises an InvalidOperationError if the file is not a valid bundle.
+
+
+=== Usage ===
+
+
+{{{
+# Creating an archive
+myarchive = bundle_bundle('myarchive', 'w')
+myarchive.add('log1')
+myarchive.add('log2')
+myarchive.close()
+
+# Modifying the archive
+myarchive.open('a')
+myarchive.remove('log2')
+myarchive.add('replacement')
+myarchive.close()
+
+# Reading data from the archive
+myarchive.open('r')
+myarchive.list()
+
+# Read to a string
+log1contents = myarchive.extract_to_string('log1')
+
+# Extract everything
+myarchive.extract_all()
+}}}
+
+=== Includes ===
+ * [wiki:SeattleLib/base64.repy]
+ * [wiki:SeattleLib/serialize.repy]
