@@ -6,14 +6,14 @@ bundle.repy provides an utility for packaging multiple files into a single file.
 
 A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
 
-To create a bundle, use the following command. Note: If output_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.
+To create a bundle, use the following command. Note: If output_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.  Overwriting the original file will embed the original file's contents within a bundle.  If the original file doesn't exist, the bundle will be empty.
 {{{
-$ python bundler.py c [-f | input_fname] output_fname
+$ python bundler.py c [input_fname | -f] output_fname
 }}}
 
 To restore a bundle to a normal file, use the following command. Note: If output_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.
 {{{
-$ python bundler.py r* [-f | output_file] output_fname
+$ python bundler.py r* input_fname [-f | output_fname]
 }}}
 
 These actions involve manipulating bundles.  Their syntax is as follows:
