@@ -840,7 +840,7 @@ Sets a timer that when it expires will start a new thread to call a function wit
 
    <Arguments>
       waittime:
-         The minimum amount of time to wait before delivering the thread
+         The minimum amount of time to wait before delivering the thread, in seconds
       function:
          The function to call
       args:
