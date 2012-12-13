@@ -1,6 +1,31 @@
 = Testing the Custom Installer Builder =
 This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on one of the Seattle project systems. It should be easy to apply a similar procedure to test the Custom Installer Builder on your own system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
 
+== Install Dependencies ==
+----
+
+Custom Installer requires at least the following software to be installed:
+ 
+ * [http://www.python.org/ Python] -- the language Custom Installer is written in
+ * [http://www.apache.org/ Apache] -- the web server
+ * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://www.djangoproject.com/ Django] -- necessary to run Django code
+ * '''zip''' -- necessary for packaging window installers and keys
+
+{{{
+#!sh
+$ apt-get install apache2 libapache2-mod-python
+$ apt-get install ntp
+$ apt-get install zip
+}}}
+
+The version of Django required is 1.3.5, which is available at https://www.djangoproject.com/download/ or through a package manager.
+{{{
+#!sh
+$ pip install django==1.3.5
+}}}
+At this time we do not support Django version 1.4 or higher.
+
  * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
 
 {{{
