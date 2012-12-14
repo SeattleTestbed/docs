@@ -12,14 +12,24 @@ Seattle uses the [wiki:CustomInstallerBuilderTesting custom installer builder] t
 42 SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC = "https://seattlegeni.cs.washington.edu/custom_install/xmlrpc/"
 }}}
 
-Unless in the rare case a Clearinghouse instance is running it's own custom installer builder, SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC should be set to the same value as in trunk (like above). 
+ * Unless in the rare case a Clearinghouse instance is running it's own custom installer builder, SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC should be set to the same value as in trunk (like above). 
+ * Using the custom installer builder is the only way a Clearinghouse instance should generate installers.
+ * The custom installer builder is a web application separate from the Seattle Clearinghouse application.  
 
-Using the custom installer builder is the only way a Clearinghouse instance should generate installers.
+== High Level Event Sequence ==
+1. A user clicks on a 'Download Installer for "platform"' link on a Seattle Clearinghouse.
+This request is sent to the Custom installer builder server associated with that Clearinghouse.
 
-The custom installer builder is a separate web application created using Django.  
+2.The custom installer builder dynamically creates a installer for this request based on which platform was specified.
+This dynamic installer is created by bundling a platform specific base installer (already on the CIB server) with the donation public key of the user sending the request.  This donation public key is transparent to the user.    
+
+3. The custom installer builder sends the URL of the dynamically created installer to the clearinghouse.
+
+4. The user downloads the requested installer from this URL.
+
 
 == Base Installer ==
-Base Installers are created by running dist/make_base_installers.py.  This program must be passed in a public and private key.  These keys are used to identify the custom installer builder that the installers are associated with.
+The base installers of the custom installer builder are created by running dist/make_base_installers.py.  This program must be passed in a public and private key.  These keys are used to identify the custom installer builder that the installers are associated with.  These base installers are used to dynamically generate all installers created by the custom installer builder server.
 
 Example of usage on command line:
 {{{
@@ -27,11 +37,9 @@ Example of usage on command line:
 $ python ./Seattle/trunk/dist/make_base_installers.py a ./Seattle/trunk/ user.publickey user.privatekey ./Installers/
 }}}
 
-
-
 == Custom installer workflow ==
 The custom installer creates a vesselinfo file that is used by the nodemanager upon installation. This vesselinfo file dictates how the vessels are created. A default vesselinfo file is provided, but if you would like more control over how the resources on your machine are split up between your different vessels, or would like to dedicate specific vessels to specific users, you may also do that through the custom installer builder.
 
 A copy of the base installer is made for each user. The custom installer builder accepts a donation public key and creates a vesselinfo file. After this file is embedded into the installer, the installer is complete and may be distributed to users.
-
+More information can be found at [wiki:BenchmarkCustomInstallerInfo].
 == Placeholder ==
