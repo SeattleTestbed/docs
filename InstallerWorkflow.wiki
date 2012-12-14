@@ -1,0 +1,14 @@
+= Installer Workflow =
+
+This document describes the steps taken to build a working Seattle installer.  From initial setup to when a user downloads a installer.
+
+[[TOC(inline)]]
+
+== Base Installer ==
+Base Installers are created by running dist/make_base_installers.py.  These base_installers 
+
+
+== Custom installer workflow ==
+Custom installer workflow
+
+== Placeholder ==
