@@ -42,4 +42,6 @@ The custom installer creates a vesselinfo file that is used by the nodemanager u
 
 A copy of the base installer is made for each user. The custom installer builder accepts a donation public key and creates a vesselinfo file. After this file is embedded into the installer, the installer is complete and may be distributed to users.
 More information can be found at [wiki:BenchmarkCustomInstallerInfo].
+
 == Placeholder ==
+TODO add information about transition scripts and crediting of donations.
