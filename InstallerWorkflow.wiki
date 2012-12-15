@@ -1,6 +1,10 @@
 = Installer Workflow =
 
-This document describes the steps taken to build a working Seattle installer.  From initial setup to when a user downloads a installer.
+This document describes how installers work, specifically how the clearinghouse uses the [wiki:CustomInstallerBuilderTesting custom installer builder] to track and manage user installations.   One thing that is often surprising to people is that the installer the user downloads from a clearinghouse, comes from the custom installer builder (over XMLRPC).   In fact, nowhere in the installer does it explicitly mention the clearinghouse.   The installer is indistinguishable from a user created installer.
+
+Before understanding how this works, it is important to first understand how users can locate VMs that have their public key.   
+
+JAC: the doc needs node state transitions explained.
 
 [[TOC(inline)]]
 == Overview ==
