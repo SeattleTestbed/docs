@@ -9,32 +9,14 @@ bundle.repy provides an utility for packaging multiple files into a single file.
  === Command-Line ===
 A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
 
-To create a bundle, use the following command. Note: If source_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.  Overwriting the original file will embed the original file's contents within a bundle.  If the original file doesn't exist, the bundle will be empty.
-{{{
-$ python bundler.py c output_fname [-f | source_fname]
-}}}
-
-To restore a bundle to a normal file, use the following command. Note: If source_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.
-{{{
-$ python bundler.py r* output_fname [-f | source_fname]
-}}}
-
-These actions involve manipulating bundles.  Their syntax is as follows:
-{{{
-$ python bundler.py action bundle_fname file1 file2 ...
-}}}
-|| Action || Description || 
-|| a      || Adds the specified files||
-|| e      || Extracts the specified files||
-|| r      || Removes the specified files||
-
-These actions perform some operation on the entire bundle. Their syntax is as follows:
-{{{
-$ python bundler.py action bundle_fname
-}}}
-|| Action || Description ||
-|| e*     || Extracts all files; existing files will be overwritten||
-|| l     || Lists all files within the bundle||
+|| Action || Syntax || Description ||
+|| c      || $ python bundler.py c source_fname output_fname || Creates a bundle.  You can either create the bundle as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. ||
+|| a      || $ python bundler.py a bundle_fname file1 file2 ... || Adds the specified files to the bundle. ||
+|| e      || $ python bundler.py e bundle_fname file1 file2 ... || Extracts the specified files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| e*     || $ python bundler.py e* bundle_fname || Extracts all files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| l      || $ python bundler.py l bundle_fname || Lists the contents of the bundle. ||
+|| r      || $ python bundler.py r bundle_fname file1 file2 ... || Removes the specified files from the bundle.  Note: This data cannot be recovered! ||
+|| r*     || $ python bundler.py r* source_fname output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  You can either save the result as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. || 
 
  === API ===
 You can also access the bundle functionality through an API.
