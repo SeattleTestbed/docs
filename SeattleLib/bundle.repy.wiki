@@ -80,7 +80,7 @@ def bundle_clear_bundle_from_file(fn):
 
  == Usage Example ==
  === Command-Line ===
-We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' as a single file called '''destination.bundle.repy''', and then run it on a vessel via seash.
+We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' into an auto-extracting repy program, '''autoextract_bundle.repy'''.  '''data2.txt''' is a file that we do NOT want included.
 
 Assume that we have the following files in the current directory:
  * source.repy - This is our program that needs the files data1.png and data3.html.
@@ -88,9 +88,77 @@ Assume that we have the following files in the current directory:
  * data2.txt
  * data3.html
 
+==== Creating the Intermediary Bundle ====
+First, we must create an intermediary non-self-extracting bundle.  This bundle has to first pass through the repy preprocessor to have all the auto-extraction script's dependencies embedded into it.
 {{{
+#!sh
+$ python bundler.py c source.repy data.bundle
+}}}
+==== Adding Files ====
+Now, let's add the files that we want to embed into the bundle.  The files here are '''data1.png''', '''data2.txt''', and '''data3.html'''.
+{{{
+#!sh
+$ python bundler.py a data.bundle data1.png data2.txt data3.html
+}}}
+
+==== Removing Accidental Inclusions ====
+It seems like we've accidentally included '''data2.txt'''.  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
+{{{
+#!sh
+$ python bundle.py r data.bundle data2.txt
+}}}
+
+==== Contents Verification ====
+Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''data1.png''' and '''data3.html'''.  The listed file sizes are their sizes within the bundle.
+{{{
+#!sh
+$ python bundle.py l data.bundle
+}}}
+And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
+{{{
+Bundle contents:
+Filename   Size (bytes)
+data1.png  23536
+data3.html 1338
+}}}
+
+==== Generate Auto-Extract Bundle ====
+Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
+Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
+{{{
+#!sh
+$ python repypp.py data.bundle autoextract_bundle.repy
+}}}
+
+Congratulations, you now have an auto-extracting bundle named autoextract_bundle.
+==== Extracting Bundle Contents ====
+Even though the most useful feature of the bundler is its self-extraction feature, you can also extract files from the bundle manually.  You can do it in two ways:
+
+You can do it on a file-by-file basis:
+{{{
+#!sh
+$ python bundle.py e destination.bundle.repy data1.png data3.html
+}}}
+
+Or you can tell the bundler to extract everything simultaneously:
+{{{
+#!sh
+$ python bundle.py e* destination.bundle.repy
+}}}
+
+==== Clearing a Bundle / Source File Recovery ====
+However, now suppose you need access to the original source file, but you only have access to the bundle (you accidentally deleted the original source file, or it was never provided to you to begin with, etc).  You can use the clear function to remove all traces of a bundle from a file.
+{{{
+#!sh
+$ python bundle.py r* destination.bundle.repy source_copy.repy
+}}}
+
+=== API ===
+
+{{{
+#!python
 # Create the bundle "destination.repy"
-$ python bundler.py c source.repy destination.bundle
+mybundle = bundle_bundle("destination.bundle", src='source.repy')
 
 # Add the files
 $ python bundler.py a destination.bundle data1.png data2.txt data3.html
@@ -119,33 +187,6 @@ $ python bundle.py e* destination.bundle.repy
 
 # But now suppose we lost source.repy, and we want to recover it from the bundle.
 $ python bundle.py r* destination.bundle.repy source_copy.repy
-
-}}}
-
-=== API ===
-
-{{{
-# Creating an archive
-myarchive = bundle_bundle('myarchive', 'w')
-myarchive.add('log1')
-myarchive.add('log2')
-myarchive.close()
-
-# Modifying the archive
-myarchive.open('a')
-myarchive.remove('log2')
-myarchive.add('replacement')
-myarchive.close()
-
-# Reading data from the archive
-myarchive.open('r')
-myarchive.list()
-
-# Read to a string
-log1contents = myarchive.extract_to_string('log1')
-
-# Extract everything
-myarchive.extract_all()
 }}}
 
  == Includes ==
