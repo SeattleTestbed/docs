@@ -76,6 +76,47 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Returns::
   None
 
+==== bundle.contents() ====
+ Purpose::
+  Returns the contents of the bundle.
+ Arguments::
+  None
+ Side Effects::
+  None
+ Exceptions::
+  None
+ Returns::
+  A dictionary showing the details of each file contained within the bundle.  An example value is shown below.
+
+Example return value:
+{{{
+#!python
+{'thefirstfile': {'length': 142}, 'thesecondfile': {'length': 11}}
+}}}
+
+
+==== bundle_clear_bundle_contents() ====
+ Purpose::
+  Clears all traces of a bundle from the specified file.
+ Arguments::
+  '''bundlefn''' (str): The name of the bundle to clear.  It must be in the current directory. [[BR]]
+  '''outputfn''' (str/None) (optional): If set, the result will be generated in this file.  Otherwise, overwrite must be set to True. [[BR]]
+  '''overwrite''' (bool) (optional): If set, the original file will be overwritten with the result.  Otherwise, outputfn must be set. [[BR]]
+ Side Effects::
+  The specified file will have all of its bundle data removed.  The result will be the file that was used to create the bundle. [[BR]]
+  A temporary file will be created in the current directory, and will be removed when the function returns.
+ Exceptions::
+  None
+ Returns::
+  None
+
+Example return value:
+{{{
+#!python
+{'thefirstfile': {'length': 142}, 'thesecondfile': {'length': 11}}
+}}}
+
+
 
  == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
 We have a repy program '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
