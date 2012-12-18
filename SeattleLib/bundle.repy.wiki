@@ -1,8 +1,11 @@
-= bundle.repy =
+ = bundle.repy =
 
 bundle.repy provides an utility for packaging multiple files into a single file.  Its main intent is to allow repy programmers to easily upload static dependencies along with their repy programs.  When bundling files with a repy program, the repy program will automatically extract all files bundled within it when it is executed.
 
-=== Command Line Invocation ===
+[[TOC(inline)]]
+
+
+ == Command Line Invocation ==
 
 A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
 
@@ -33,7 +36,7 @@ $ python bundler.py action bundle_fname
 || e*     || Extracts all files; existing files will be overwritten||
 || l     || Lists all files within the bundle||
 
-=== Classes and Functions ===
+ == Classes and Functions ==
 You can also access the bundle functionality through an API.
 
 {{{
@@ -93,7 +96,7 @@ def bundle_clear_bundle_from_file(fn):
    Raises an InvalidOperationError if the file is not a valid bundle.
 
 
-=== Usage ===
+ == Usage ==
 We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' as a single file called '''destination.bundle.repy''', and then run it on a vessel via seash.
 
 Assume that we have the following files in the current directory:
@@ -160,6 +163,6 @@ log1contents = myarchive.extract_to_string('log1')
 myarchive.extract_all()
 }}}
 
-=== Includes ===
+ == Includes ==
  * [wiki:SeattleLib/base64.repy]
  * [wiki:SeattleLib/serialize.repy]
