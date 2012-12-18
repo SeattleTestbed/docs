@@ -24,7 +24,7 @@ A command-line wrapper of this class is available.  The functionality provided i
  === Repy API ===
 The bundle is designed to be used directly by a repy program.  It exposes an object-oriented interface to manipulating bundles. 
 
-==== bundle.!__init!__() ====
+==== bundle_bundle.!__init!__() ====
  Purpose::
   Creates a new bundle object.  Various bundle operations may then be performed.
  Arguments::
@@ -39,7 +39,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Returns::
   None
 
-==== bundle.add_files() ====
+==== bundle_bundle.add_files() ====
  Purpose::
   Adds the specified files into the bundle.
  Arguments::
@@ -51,7 +51,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Returns::
   None
 
-==== bundle.extract_files() ====
+==== bundle_bundle.extract_files() ====
  Purpose::
   Extracts the specified files from the bundle, and then write them into the current directory.
  Arguments::
@@ -64,7 +64,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Returns::
   None
 
-==== bundle.remove_files() ====
+==== bundle_bundle.remove_files() ====
  Purpose::
   Removes the specified files from the bundle.
  Arguments::
@@ -76,7 +76,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Returns::
   None
 
-==== bundle.contents() ====
+==== bundle_bundle.contents() ====
  Purpose::
   Returns the contents of the bundle.
  Arguments::
