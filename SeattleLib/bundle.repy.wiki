@@ -1,13 +1,13 @@
  = bundle.repy =
 
-bundle.repy provides an utility for packaging multiple files into a single file.  Its main intent is to allow repy programmers to easily upload static dependencies along with their repy programs.  When bundling files with a repy program, the repy program will automatically extract all files bundled within it when it is executed.
+bundle.repy provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.  Not all bundles must be self-extracting, as you can also create bundles (e.g. in your program via the API) to facilitate file transfer.  Aside from self-extraction, there is no difference between a self-extracting bundle and a non-self-extracting bundle.  All of the actions described in this document can be performed on either bundle type, and will produce the same results.
 
 [[TOC(inline)]]
 
 
  == How to Use ==
  === Command-Line ===
-A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
+A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API. 
 
 || Action || Syntax || Description ||
 || c      || $ python bundler.py c source_fname output_fname || Creates a bundle.  You can either create the bundle as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. ||
@@ -105,14 +105,14 @@ $ python bundler.py a data.bundle data1.png data2.txt data3.html
 It seems like we've accidentally included '''data2.txt'''.  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
 {{{
 #!sh
-$ python bundle.py r data.bundle data2.txt
+$ python bundler.py r data.bundle data2.txt
 }}}
 
 ==== Contents Verification ====
 Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''data1.png''' and '''data3.html'''.  The listed file sizes are their sizes within the bundle.
 {{{
 #!sh
-$ python bundle.py l data.bundle
+$ python bundler.py l data.bundle
 }}}
 And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
 {{{
@@ -137,20 +137,20 @@ Even though the most useful feature of the bundler is its self-extraction featur
 You can do it on a file-by-file basis:
 {{{
 #!sh
-$ python bundle.py e destination.bundle.repy data1.png data3.html
+$ python bundler.py e autoextract_bundle.repy data1.png data3.html
 }}}
 
 Or you can tell the bundler to extract everything simultaneously:
 {{{
 #!sh
-$ python bundle.py e* destination.bundle.repy
+$ python bundler.py e* autoextract_bundle.repy
 }}}
 
 ==== Clearing a Bundle / Source File Recovery ====
 However, now suppose you need access to the original source file, but you only have access to the bundle (you accidentally deleted the original source file, or it was never provided to you to begin with, etc).  You can use the clear function to remove all traces of a bundle from a file.
 {{{
 #!sh
-$ python bundle.py r* destination.bundle.repy source_copy.repy
+$ python bundler.py r* autoextract_bundle.repy source_copy.repy
 }}}
 
 === API ===
