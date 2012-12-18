@@ -5,8 +5,8 @@ bundle.repy provides an utility for packaging multiple files into a single file.
 [[TOC(inline)]]
 
 
- == Command Line Invocation ==
-
+ == How to Use ==
+ === Command-Line ===
 A command-line wrapper of this class is available.  The functionality provided is largely identical to that provided by the API.
 
 To create a bundle, use the following command. Note: If source_fname is unspecified, you must pass the -f flag to indicate that you want to overwrite the original file.  Overwriting the original file will embed the original file's contents within a bundle.  If the original file doesn't exist, the bundle will be empty.
@@ -36,7 +36,7 @@ $ python bundler.py action bundle_fname
 || e*     || Extracts all files; existing files will be overwritten||
 || l     || Lists all files within the bundle||
 
- == Classes and Functions ==
+ === API ===
 You can also access the bundle functionality through an API.
 
 {{{
@@ -96,7 +96,8 @@ def bundle_clear_bundle_from_file(fn):
    Raises an InvalidOperationError if the file is not a valid bundle.
 
 
- == Usage ==
+ == Usage Example ==
+ === Command-Line ===
 We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' as a single file called '''destination.bundle.repy''', and then run it on a vessel via seash.
 
 Assume that we have the following files in the current directory:
@@ -138,6 +139,8 @@ $ python bundle.py e* destination.bundle.repy
 $ python bundle.py r* destination.bundle.repy source_copy.repy
 
 }}}
+
+=== API ===
 
 {{{
 # Creating an archive
