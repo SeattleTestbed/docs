@@ -119,12 +119,6 @@ Example return value:
  Returns::
   None
 
-Example return value:
-{{{
-#!python
-{'thefirstfile': {'length': 142}, 'thesecondfile': {'length': 11}}
-}}}
-
 
 [[BR]]
  == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
