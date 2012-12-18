@@ -55,7 +55,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Purpose::
   Extracts the specified files from the bundle, and then write them into the current directory.
  Arguments::
-  '''fnames''' (list<str>): The names of the files to add to the bundle, as a list. [[br]]
+  '''fnames''' (list<str>): The names of the files to extract from the bundle. [[br]]
  Side Effects::
   The contents of each file that is specified will be read from the bundle, decoded using base64, and then written into the current directory. [[br]]
   Existing files in the current directory that share the same filename as any of the specified files will be overwritten.
@@ -68,7 +68,7 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
  Purpose::
   Removes the specified files from the bundle.
  Arguments::
-  '''fnames''' (list<str>): The names of the files to extract from the bundle, as a list. [[br]]
+  '''fnames''' (list<str>): The names of the files to remove from the bundle. [[br]]
  Side Effects::
   The specified bundle contents will be removed from the bundle.  Any data lost is not recoverable. A temporary copy of the bundle is created in the local directory, and is removed when this function returns.
  Exceptions::
