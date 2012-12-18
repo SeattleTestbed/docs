@@ -20,6 +20,63 @@ A command-line wrapper of this class is available.  The functionality provided i
 || r      || $ python bundler.py r bundle_fname file1 file2 ... || Removes the specified files from the bundle.  Note: This data cannot be recovered! ||
 || r*     || $ python bundler.py r* source_fname output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  You can either save the result as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. || 
 
+
+ === Repy API ===
+The bundle is designed to be used directly by a repy program.  It exposes an object-oriented interface to manipulating bundles. 
+
+==== bundle.!__init!__() ====
+ Purpose::
+  Creates a new bundle object.  Various bundle operations may then be performed.
+ Arguments::
+  '''bundlefn''' (str): Where the bundle is, or where to create it.  It must be in the current directory.[[br]]
+  '''mode''' (str): 'r' for readonly, 'w' to create a new bundle, 'a' to modify an existing bundle.[[br]]
+  '''srcfn''' (str/None)(optional): Only used if opening in 'w' mode.  If this is set, overwrite must be False.  The contents of this file will be included with the output bundle.[[br]]
+  '''overwrite''' (bool) (optional): Only used if opening in 'w' mode.  Either this or overwrite may be specified.  If set to True, srcfn must be None.  The contents of the file referred to by bundlefn will be overwritten.  The original contents will be embedded in this new file.
+ Side Effects::
+  If opening in 'w' or 'a', the bundle will be created if it does not already exist in the current directory.
+ Exceptions::
+  None
+ Returns::
+  None
+
+==== bundle.add_files() ====
+ Purpose::
+  Adds the specified files into the bundle.
+ Arguments::
+  '''fnames''' (list<str>): The names of the files to add to the bundle, as a list. [[br]]
+ Side Effects::
+  The contents of each file that is specified will be read, encoded using base64, and then written into the end of the bundle.
+ Exceptions::
+  None
+ Returns::
+  None
+
+==== bundle.extract_files() ====
+ Purpose::
+  Extracts the specified files from the bundle, and then write them into the current directory.
+ Arguments::
+  '''fnames''' (list<str>): The names of the files to add to the bundle, as a list. [[br]]
+ Side Effects::
+  The contents of each file that is specified will be read from the bundle, decoded using base64, and then written into the current directory. [[br]]
+  Existing files in the current directory that share the same filename as any of the specified files will be overwritten.
+ Exceptions::
+  None
+ Returns::
+  None
+
+==== bundle.remove_files() ====
+ Purpose::
+  Removes the specified files from the bundle.
+ Arguments::
+  '''fnames''' (list<str>): The names of the files to extract from the bundle, as a list. [[br]]
+ Side Effects::
+  The specified bundle contents will be removed from the bundle.  Any data lost is not recoverable. A temporary copy of the bundle is created in the local directory, and is removed when this function returns.
+ Exceptions::
+  None
+ Returns::
+  None
+
+
  == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
 We have a repy program '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
 
