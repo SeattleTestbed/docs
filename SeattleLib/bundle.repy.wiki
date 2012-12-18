@@ -80,7 +80,7 @@ def bundle_clear_bundle_from_file(fn):
    Raises an InvalidOperationError if the file is not a valid bundle.
 
 
- == Command-Line Usage Example: Creating a Self-Extracting HTTP Server script==
+ == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
 We have a repy program '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
 
 Assume that we have the following files in the current directory:
