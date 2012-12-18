@@ -2,6 +2,8 @@
 
 bundle.repy provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.  Not all bundles must be self-extracting, as you can also create bundles (e.g. in your program via the API) to facilitate file transfer.  Aside from self-extraction, there is no difference between a self-extracting bundle and a non-self-extracting bundle.  All of the actions described in this document can be performed on either bundle type, and will produce the same results.
 
+Bundles are identified by a '''.bundle''' extension.  Self-extracting bundles are identified by a '''.bundle.repy''' extension.
+
 [[TOC(inline)]]
 
 
@@ -78,115 +80,80 @@ def bundle_clear_bundle_from_file(fn):
    Raises an InvalidOperationError if the file is not a valid bundle.
 
 
- == Usage Example ==
- === Command-Line ===
-We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' into an auto-extracting repy program, '''autoextract_bundle.repy'''.  '''data2.txt''' is a file that we do NOT want included.
+ == Usage Example: Command Line ==
+We have a file '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
 
 Assume that we have the following files in the current directory:
- * source.repy - This is our program that needs the files data1.png and data3.html.
- * data1.png
- * data2.txt
- * data3.html
+ * httpserver.repy - This is our simple http server that serves the files '''logo.png''' and '''index.html'''.
+ * logo.png
+ * index.html
+ * error.log
 
-==== Creating the Intermediary Bundle ====
+=== Creating the Intermediary Bundle ===
 First, we must create an intermediary non-self-extracting bundle.  This bundle has to first pass through the repy preprocessor to have all the auto-extraction script's dependencies embedded into it.
 {{{
 #!sh
-$ python bundler.py c source.repy data.bundle
-}}}
-==== Adding Files ====
-Now, let's add the files that we want to embed into the bundle.  The files here are '''data1.png''', '''data2.txt''', and '''data3.html'''.
-{{{
-#!sh
-$ python bundler.py a data.bundle data1.png data2.txt data3.html
+$ python bundler.py c httpserver.repy server.bundle
 }}}
 
-==== Removing Accidental Inclusions ====
-It seems like we've accidentally included '''data2.txt'''.  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
+=== Adding Files ===
+Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
 {{{
 #!sh
-$ python bundler.py r data.bundle data2.txt
+$ python bundler.py a server.bundle logo.png index.html error.log
 }}}
 
-==== Contents Verification ====
-Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''data1.png''' and '''data3.html'''.  The listed file sizes are their sizes within the bundle.
+=== Removing Accidental Inclusions ===
+It seems like we've accidentally included '''error.log'''!  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
 {{{
 #!sh
-$ python bundler.py l data.bundle
+$ python bundler.py r server.bundle error.log
+}}}
+
+=== Contents Verification ===
+Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''logo.png''' and '''index.html'''.  The listed file sizes are their sizes within the bundle.
+{{{
+#!sh
+$ python bundler.py l server.bundle
 }}}
 And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
 {{{
 Bundle contents:
 Filename   Size (bytes)
-data1.png  23536
-data3.html 1338
+logo.png   23536
+index.html 1338
 }}}
 
-==== Generate Auto-Extract Bundle ====
+=== Generate Auto-Extract Bundle ===
 Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
 Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
 {{{
 #!sh
-$ python repypp.py data.bundle autoextract_bundle.repy
+$ python repypp.py server.bundle httpserver.bundle.repy
 }}}
 
-Congratulations, you now have an auto-extracting bundle named autoextract_bundle.
-==== Extracting Bundle Contents ====
+Congratulations, you now have an auto-extracting bundle named httpserver.bundle.repy!
+
+=== Extracting Bundle Contents ===
 Even though the most useful feature of the bundler is its self-extraction feature, you can also extract files from the bundle manually.  You can do it in two ways:
 
 You can do it on a file-by-file basis:
 {{{
 #!sh
-$ python bundler.py e autoextract_bundle.repy data1.png data3.html
+$ python bundler.py e httpserver.bundle.repy logo.png index.html
 }}}
 
 Or you can tell the bundler to extract everything simultaneously:
 {{{
 #!sh
-$ python bundler.py e* autoextract_bundle.repy
+$ python bundler.py e* httpserver.bundle.repy
 }}}
 
-==== Clearing a Bundle / Source File Recovery ====
-However, now suppose you need access to the original source file, but you only have access to the bundle (you accidentally deleted the original source file, or it was never provided to you to begin with, etc).  You can use the clear function to remove all traces of a bundle from a file.
+=== Clearing a Bundle / Source File Recovery ===
+However, now suppose you need access to the original httpserver code.  However, you only have access to the bundle, as a colleague of yours never bothered to include a version of the original source code.  You can use the clear function to remove all traces of a bundle from a file.
 {{{
 #!sh
-$ python bundler.py r* autoextract_bundle.repy source_copy.repy
-}}}
-
-=== API ===
-
-{{{
-#!python
-# Create the bundle "destination.repy"
-mybundle = bundle_bundle("destination.bundle", src='source.repy')
-
-# Add the files
-$ python bundler.py a destination.bundle data1.png data2.txt data3.html
-
-# Suppose we accidentally included data2.txt.
-$ python bundle.py r destination.bundle data2.txt
-
-# Just to make sure the bundle contains what we want...
-$ python bundle.py l destination.bundle
-Bundle contents:
-Filename   Size (bytes)
-data1.png  36
-data3.html 224
-
-# Preprocess the bundle for auto-extraction (This step is optional, you only need it if you want to be able to run the bundle)
-$ python repypp.py destination.bundle destination.bundle.repy
-
-# Congratulations, you now have an auto-extracting bundle named destination_bundle.repy!
-# Now suppose we want to extract what's inside destination.bundle.repy
-
-# We can do it one by one...
-$ python bundle.py e destination.bundle.repy data1.png data3.html
-
-# Or we can extract everything simultaneously
-$ python bundle.py e* destination.bundle.repy
-
-# But now suppose we lost source.repy, and we want to recover it from the bundle.
-$ python bundle.py r* destination.bundle.repy source_copy.repy
+$ python bundler.py r* httpserver.bundle.repy original_httpserver.repy
 }}}
 
  == Includes ==
