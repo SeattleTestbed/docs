@@ -94,7 +94,47 @@ def bundle_clear_bundle_from_file(fn):
 
 
 === Usage ===
+We have a file '''source.repy''', and it depends on the files '''data1.png''' and '''data2.html'''. We would like to bundle the files alongside '''source.repy''' as a single file called '''destination.bundle.repy''', and then run it on a vessel via seash.
 
+Assume that we have the following files in the current directory:
+ * source.repy - This is our program that needs the files data1.png and data3.html.
+ * data1.png
+ * data2.txt
+ * data3.html
+
+{{{
+# Create the bundle "destination.repy"
+$ python bundler.py c source.repy destination.bundle
+
+# Add the files
+$ python bundler.py a destination.bundle data1.png data2.txt data3.html
+
+# Suppose we accidentally included data2.txt.
+$ python bundle.py r destination.bundle data2.txt
+
+# Just to make sure the bundle contains what we want...
+$ python bundle.py l destination.bundle
+Bundle contents:
+Filename   Size (bytes)
+data1.png  36
+data3.html 224
+
+# Preprocess the bundle for auto-extraction (This step is optional, you only need it if you want to be able to run the bundle)
+$ python repypp.py destination.bundle destination.bundle.repy
+
+# Congratulations, you now have an auto-extracting bundle named destination_bundle.repy!
+# Now suppose we want to extract what's inside destination.bundle.repy
+
+# We can do it one by one...
+$ python bundle.py e destination.bundle.repy data1.png data3.html
+
+# Or we can extract everything simultaneously
+$ python bundle.py e* destination.bundle.repy
+
+# But now suppose we lost source.repy, and we want to recover it from the bundle.
+$ python bundle.py r* destination.bundle.repy source_copy.repy
+
+}}}
 
 {{{
 # Creating an archive
