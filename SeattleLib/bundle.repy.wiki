@@ -184,15 +184,15 @@ Assume that we have the following files in the current directory:
  * index.html
  * error.log
 [[BR]]
-=== Creating the Intermediary Bundle ===
+=== Creating a Data Bundle ===
 ----
-First, we must create an intermediary non-self-extracting bundle.  This bundle has to first pass through the repy preprocessor to have all the auto-extraction script's dependencies embedded into it.
+First, we must create a data bundle.  The data bundle contains the script for auto-extraction, but lacks the dependencies needed to perform the operation.  We can pass this bundle through the repy preprocessor to enable the auto-extraction feature later, when we are done inserting files.
 {{{
 #!sh
 $ python bundler.py c httpserver.repy server.bundle
 }}}
 [[BR]]
-=== Adding Files ===
+=== Adding Files to a Bundle ===
 ----
 Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
 {{{
@@ -202,7 +202,7 @@ $ python bundler.py a server.bundle logo.png index.html error.log
 
 
 [[BR]]
-=== Removing Accidental Inclusions ===
+=== Removing Elements from a Bundle ===
 ----
 It seems like we've accidentally included '''error.log'''!  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
 {{{
@@ -211,7 +211,7 @@ $ python bundler.py r server.bundle error.log
 }}}
 
 [[BR]]
-=== Contents Verification ===
+=== Checking a Bundle's Contents ===
 ----
 Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''logo.png''' and '''index.html'''.  The listed file sizes are their sizes within the bundle.
 {{{
@@ -227,7 +227,7 @@ index.html 1338
 }}}
 
 [[BR]]
-=== Generate Auto-Extract Bundle ===
+=== Generating the Auto-Extracting Bundle ===
 ----
 Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
 Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
@@ -239,7 +239,7 @@ $ python repypp.py server.bundle httpserver.bundle.repy
 Congratulations, you now have an auto-extracting bundle named httpserver.bundle.repy!
 
 [[BR]]
-=== Extracting Bundle Contents ===
+=== Extracting Files from a Bundle ===
 ----
 Even though the most useful feature of the bundler is its self-extraction feature, you can also extract files from the bundle manually.  You can do it in two ways:
 
@@ -274,9 +274,9 @@ Suppose you plan to use several hundred vessels to parse a two related data sets
 For this demonstration, we will work with generating chunk !#143.
 
 [[BR]]
-=== Bundle Creation ===
+=== Creating a Data Bundle ===
 ----
-In order to create an auto-extracting bundle, we must first create an intermediary data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate the intermediary bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''. 
+In order to create an auto-extracting bundle, we must first create a data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate a data bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''. 
 
 {{{
 #!repy
@@ -299,7 +299,7 @@ experiment_bundle.add_files(dataFnames)
 
 
 [[BR]]
-=== Generating an Auto-Extract Bundle ===
+=== Generating the Auto-Extracting Bundle ===
 ----
 The experiment bundle is now finalized. We are ready convert it to an auto-extract bundle. To do this, we need to utilize the repy preprocessor. The output auto-extracting bundle will be called '''experiment143.bundle.repy'''.
 
