@@ -378,6 +378,15 @@ Or do them all simultaneously.
 obtainedbundle.extract_all_files()
 }}}
 
+
+=== Clearing a Bundle / Original Source File Recovery ===
+Now suppose you forgot to back up all your experiment data, and the only thing you have left is a experiment bundle '''experiment143.bundle.repy''' that you've previously deployed to a vessel, and you'd like to recover the original experiment script to the file '''experiment_copy.repy'''.
+
+{{{
+#!repy
+bundle_clear_bundle_contents('experiment143.bundle.repy', 'experiment_copy.repy''')
+}}}
+
  [[BR]]
 == Includes ==
 ----
