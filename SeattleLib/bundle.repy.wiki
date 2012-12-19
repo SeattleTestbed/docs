@@ -55,7 +55,8 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
   None
  Returns::
   None
-[[BR]]==== bundle_bundle.add_files() ====
+[[BR]]
+==== bundle_bundle.add_files() ====
 ----
  Purpose::
   Adds the specified files into the bundle.
