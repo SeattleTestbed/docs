@@ -1,9 +1,38 @@
 = repypp.py =
 
-A preprocessor for repy.  It includes dependent files as needed. This is used to help the programmer avoid the need to use import. They
-can instead use "include X" which works somewhat like "from X import *". 
+As repy does not allow the use of import statements, the repy preprocessor provides programmers with a means of including code from other modules along with their programs.  After passing through the preprocessor, the resulting file will contain the contents of the included modules, inlined alongside your program code.  From a programming perspective, this is very similar to '''from module import *'''.
 
-Note "include" must be the first character on the line. (no indentation allowed!).
+Files needed preprocessing should have a '''*.mix''' extension, and processed files should have a '''*.repy''' extension. Note "include" must be the first character on the line. (no indentation allowed!).
+
+Source mycode.mix:
+{{{
+#!repy
+include serialize.repy
+include base64.repy
+
+# Your code here...
+def my_function():
+  """
+  ...
+  """
+}}}
+
+Result mycode.repy:
+{{{
+#!repy
+#begin include serialize.repy
+<Contents of serialize.repy>
+#end include serialize.repy
+#begin include base64.repy
+<Contents of base64.repy>
+#end include base64.repy
+
+# Your code here...
+def my_function():
+  """
+  ...
+  """
+}}}
 
 === Functions ===
 
@@ -29,5 +58,8 @@ def recursive_build_outdata(filename, includedfiles,filedict):
 
 === Usage ===
 
-
-Note since this module essentially running in the background, an user can just use the keyword "include" and then any module in the Seattle Standard Library.
+To use this module via the command line, simply pass the source file and the output file names:
+{{{
+#!sh
+$ python repypp.py sourcefilefn.mix outputfilefn.repy
+}}}
