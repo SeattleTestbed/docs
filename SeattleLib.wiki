@@ -77,3 +77,4 @@ The bolded links are modules are meant for direct usage by the client. They ofte
   * [wiki:SeattleLib/textops.py textops.py]
   * [wiki:SeattleLib/urlparse.repy urlparse.repy]
   * [wiki:SeattleLib/dnscommon.repy dnscommon.repy]
+  * [wiki:SeattleLib/bundle.repy bundle.repy]
