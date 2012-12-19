@@ -272,43 +272,111 @@ Suppose you plan to use several hundred vessels to parse a two related data sets
 
 For this demonstration, we will work with generating chunk !#143.
 
-
 [[BR]]
 === Bundle Creation ===
 ----
 In order to create an auto-extracting bundle, we must first create an intermediary data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate the intermediary bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''. 
+
+{{{
+#!repy
+# We assume that the experiment doesn't already exist in the current directory.
+experiment_bundle = bundle_bundle('experiment143.bundle', 'w', source='experiment.repy')
+}}}
+
 
 [[BR]]
 === Adding Files to a Bundle ===
 ----
 Now, we add the experiment data to the experiment script. These data elements are '''rawDataA143''' and '''rawDataB143'''.  For sake of demonstration, we assume that the data elements will be first written to files in the current directory, named '''rawDataA143''' and '''rawDataB143'''. We will bundle these files into '''experiment143.bundle'''.
 
+{{{
+#!repy
+# The filenames of the files to add
+dataFnames = ['rawDataA143', 'rawDataB143']
+experiment_bundle.add_files(dataFnames)
+}}}
+
+
 [[BR]]
 === Generating an Auto-Extract Bundle ===
 ----
 The experiment bundle is now finalized. We are ready convert it to an auto-extract bundle. To do this, we need to utilize the repy preprocessor. The output auto-extracting bundle will be called '''experiment143.bundle.repy'''.
+
+{{{
+#!repy
+import sys
+import subprocess
+generation_process = subprocess.Popen(
+    [sys.executable, 'repypp.py', 'experiment143.bundle', 'experiment143.bundle.repy'], 
+    stdout=subprocess.PIPE, 
+    stdin=subprocess.PIPE, 
+    stderr=subprocess.PIPE)
+generation_process.wait()
+}}}
 
 [[BR]]
 === Adding Strings to a Bundle ===
 ----
 We will assume that you have a script that will acquire the vessels and start the experiment for you.  '''experiment143.bundle.repy''' will automatically extract the files that were bundled with it, and start executing. Now suppose that the experiment script is ready to dump its first set of data, '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.  These datum are already in strings.  Additionally, we have already instantiated a bundle in the variable '''outputbundle'''.
 
+{{{
+#!repy
+outputbundle.add_string('parsed_usage_data143_000', parsed_usage_data)
+outputbundle.add_string('parsed_performance_data143_000', parsed_performance_data)
+outputbundle.add_string('dataset_quality143_000', dataset_quality)
+}}}
+
 [[BR]]
 === Removing Elements from a Bundle ===
 ----
 We don’t have unlimited disk space on our vessel, so we prefer to overwrite our bundle instead of generating thousands of files. To do this, we will first remove our old bundled data, and then add the new strings into it. We will only demonstrate the removal of the data, as adding them back is done the same way as described above. Once again, the data elements in question are in the bundle with the filenames '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.
+{{{
+#!repy
+old_filenames = ['parsed_usage_data143_000', 'parsed_performance_data143_000', 'dataset_quality143_000']
+outputbundle.remove_files(old_filenames)
+}}}
 
 [[BR]]
 === Checking a Bundle’s Contents ===
 ----
 Assume that we have a script that will fetch the parsed bundles and place them in the current directory. The collection service will periodically check the current directory for new updates, and extract the parsed data from them. Since we only need to retrieve data, we’ll open this bundle in read-only mode. First we need to check the bundle contents to find which update this is.
 
+{{{
+#!repy
+bundle_contents = obtainedbundle.contents()
+}}}
+
+Printing bundle_contents might produce the following output:
+{{{
+#!python
+{'parsed_usage_data143_000': {'length': 623}, 'parsed_performance_data143_000': {'length': 1342}, 'dataset_quality143_000': {'length': 987231}}
+}}}
+
 [[BR]]
 === Reading Strings from a Bundle ===
 ----
 Now, after we extracted the experiment # and update #, we can extract the actual data. The experiment # and update # are stored in '''experiment_number''' and '''update_number''', respectively.
+{{{
+#!python
+parsed_usage_data = obtainedbundle.extract_string('parsed_usage_data143_000')
+parsed_performance_data = obtainedbundle.extract_string('parsed_performance_data143_000')
+dataset_quality = obtainedbundle.extract_string('dataset_quality143_000')
+}}}
 
+=== Extracting Files from a Bundle ===
+In addition, we can also extract these files into files directly. 
+We can do them one by one...
+{{{
+#!python
+fnames_to_extract = ['parsed_usage_data143_000', 'parsed_performance_data143_000', 'dataset_quality143_000']
+obtainedbundle.extract_files(fnames_to_extract)
+}}}
 
+Or do them all simultaneously.
+{{{
+#!python
+obtainedbundle.extract_all_files()
+}}}
 
  [[BR]]
 == Includes ==
