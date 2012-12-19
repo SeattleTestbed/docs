@@ -263,6 +263,53 @@ However, now suppose you need access to the original httpserver code.  However, 
 $ python bundler.py r* httpserver.bundle.repy original_httpserver.repy
 }}}
 
+
+
+[[BR]]
+== API Usage Example: Creating an Automated Experiment Script ==
+----
+Suppose you plan to use several hundred vessels to parse a two related data sets. You have the test script ('''experiment.repy''') written and ready for deployment. You have a script ('''generate_experiment.py''') that partitions the data into 1000 pairs ('''rawdataAXXX''', '''rawdataBXXX''') that the test script will utilize. The vessels will generate three types of output per update, '''UsageDataXXX_YYY''', '''PerformanceDataXXX_YYY''', and '''DatasetQualityXXX_YYY''', where XXX is the experiment #, and YYY is the update #. These vessels will periodically send the results back to the main server, so that not all data is lost if these vessels go down.
+
+For this demonstration, we will work with generating chunk !#143.
+
+
+[[BR]]
+=== Bundle Creation ===
+----
+In order to create an auto-extracting bundle, we must first create an intermediary data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate the intermediary bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''. 
+
+[[BR]]
+=== Adding Files to a Bundle ===
+----
+Now, we add the experiment data to the experiment script. These data elements are '''rawDataA143''' and '''rawDataB143'''.  For sake of demonstration, we assume that the data elements will be first written to files in the current directory, named '''rawDataA143''' and '''rawDataB143'''. We will bundle these files into '''experiment143.bundle'''.
+
+[[BR]]
+=== Generating an Auto-Extract Bundle ===
+----
+The experiment bundle is now finalized. We are ready convert it to an auto-extract bundle. To do this, we need to utilize the repy preprocessor. The output auto-extracting bundle will be called '''experiment143.bundle.repy'''.
+
+[[BR]]
+=== Adding Strings to a Bundle ===
+----
+We will assume that you have a script that will acquire the vessels and start the experiment for you.  '''experiment143.bundle.repy''' will automatically extract the files that were bundled with it, and start executing. Now suppose that the experiment script is ready to dump its first set of data, '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.  These datum are already in strings.  Additionally, we have already instantiated a bundle in the variable '''outputbundle'''.
+
+[[BR]]
+=== Removing Elements from a Bundle ===
+----
+We don’t have unlimited disk space on our vessel, so we prefer to overwrite our bundle instead of generating thousands of files. To do this, we will first remove our old bundled data, and then add the new strings into it. We will only demonstrate the removal of the data, as adding them back is done the same way as described above. Once again, the data elements in question are in the bundle with the filenames '''parsed_usage_dataXXX_YYY''', '''parsed_performance_dataXXX_YYY''', and '''dataset_qualityXXX_YYY'''.
+
+[[BR]]
+=== Checking a Bundle’s Contents ===
+----
+Assume that we have a script that will fetch the parsed bundles and place them in the current directory. The collection service will periodically check the current directory for new updates, and extract the parsed data from them. Since we only need to retrieve data, we’ll open this bundle in read-only mode. First we need to check the bundle contents to find which update this is.
+
+[[BR]]
+=== Reading Strings from a Bundle ===
+----
+Now, after we extracted the experiment # and update #, we can extract the actual data. The experiment # and update # are stored in '''experiment_number''' and '''update_number''', respectively.
+
+
+
  [[BR]]
 == Includes ==
 ----
