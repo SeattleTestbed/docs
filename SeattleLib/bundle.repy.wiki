@@ -384,7 +384,7 @@ Now suppose you forgot to back up all your experiment data, and the only thing y
 
 {{{
 #!repy
-bundle_clear_bundle_contents('experiment143.bundle.repy', 'experiment_copy.repy''')
+bundle_clear_bundle_contents('experiment143.bundle.repy', 'experiment_copy.repy')
 }}}
 
  [[BR]]
