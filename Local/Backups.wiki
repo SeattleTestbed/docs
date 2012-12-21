@@ -96,3 +96,6 @@ Current backup-related entries in root's crontab:
 ### scp_backups_to_other_system.sh: Saturday night scp'ing of backups to another system.
 0       1       *       *       0       /backups/scripts/scp_backups_to_other_system.sh
 }}}
+
+== Links ==
+[http://www.thegeekstuff.com/2008/09/backup-and-restore-mysql-database-using-mysqldump/ Backing Up and Restoring Database]
