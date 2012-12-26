@@ -1,8 +1,10 @@
  = bundle.repy =
 ----
-bundle.repy provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.  Not all bundles must be self-extracting, as you can also create bundles (e.g. in your program via the API) to facilitate file transfer.  Aside from self-extraction, there is no difference between a self-extracting bundle and a non-self-extracting bundle.  All of the actions described in this document can be performed on either bundle type, and will produce the same results.
+bundle.repy provides an utility for packaging multiple files into a single file.  This document describes usage via the '''Repy API'''.   For details on how to use it via the command line, go [wiki:SeattleLib/bundler.py here].
 
-Bundles are identified by a '''.bundle''' extension.  Self-extracting bundles are identified by a '''.bundle.repy''' extension.
+bundle.repy is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.
+
+Bundles are identified by a '''.bundle.repy''' extension.
 
 [[TOC(inline)]]
 
@@ -23,250 +25,6 @@ A command-line wrapper of this class is available, and is accessed via the Pytho
 || r*     || $ python bundler.py r* source_fname output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  You can either save the result as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. || 
 
 [[BR]]
- === Repy API ===
-----
-The bundle is designed to be used directly by a repy program.  It exposes an object-oriented interface to manipulating bundles. 
-[[BR]]
-==== bundle_bundle.!__init!__() ====
-----
- Purpose::
-  Creates a new bundle object.  Various bundle operations may then be performed.
- Arguments::
-  '''bundlefn''' (str): Where the bundle is, or where to create it.  It must be in the current directory.[[br]]
-  '''mode''' (str): 'r' for readonly, 'w' to create a new bundle, 'a' to modify an existing bundle.[[br]]
-  '''srcfn''' (str/None)(optional): Only used if opening in 'w' mode.  If this is set, overwrite must be False.  The contents of this file will be included with the output bundle.[[br]]
-  '''overwrite''' (bool) (optional): Only used if opening in 'w' mode.  Either this or overwrite may be specified.  If set to True, srcfn must be None.  The contents of the file referred to by bundlefn will be overwritten.  The original contents will be embedded in this new file.
- Side Effects::
-  If opening in 'w' or 'a', the bundle will be created if it does not already exist in the current directory.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.add_file() ====
-----
- Purpose::
-  Adds the specified file into the bundle.
- Arguments::
-  '''fname''' (str): The name of the file to add to the bundle. [[br]]
- Side Effects::
-  The content of the specified file will be read, encoded using base64, and then written into the end of the bundle.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.add_files() ====
-----
- Purpose::
-  Adds the specified files into the bundle.
- Arguments::
-  '''fnames''' (list<str>): The names of the files to add to the bundle. [[br]]
- Side Effects::
-  The contents of each file that is specified will be read, encoded using base64, and then written into the end of the bundle.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.extract_file() ====
-----
- Purpose::
-  Extracts the specified file from the bundle, and then writes it into the current directory.
- Arguments::
-  '''fname''' (str): The name of the file to extract from the bundle. [[br]]
- Side Effects::
-  The contents of the specified file will be read from the bundle, decoded using base64, and then written into the current directory. [[br]]
-  If a file in the current directory has the specified filename, it will be overwritten.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.extract_files() ====
-----
- Purpose::
-  Extracts the specified files from the bundle, and then write them into the current directory.
- Arguments::
-  '''fnames''' (list<str>): The names of the files to extract from the bundle. [[br]]
- Side Effects::
-  The contents of each file that is specified will be read from the bundle, decoded using base64, and then written into the current directory. [[br]]
-  Existing files in the current directory that share the same filename as any of the specified files will be overwritten.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.extract_string() ====
-----
- Purpose::
-  Extracts the specified contents of the specified file from the bundle and returns it as a string.
- Arguments::
-  '''fname''' (str): The name of the file to extract from the bundle. [[br]]
- Side Effects::
-  The contents of the specified file will be read from the bundle and then decoded using base64. [[br]]
- Exceptions::
-  None
- Returns::
-  The file's contents as a single string.
-[[BR]]
-==== bundle_bundle.remove_file() ====
-----
- Purpose::
-  Removes the specified file from the bundle.
- Arguments::
-  '''fname''' (str): The name of the file to remove from the bundle. [[br]]
- Side Effects::
-  The specified bundle content will be removed from the bundle.  Any data lost is not recoverable. A temporary copy of the bundle is created in the local directory, and is removed when this function returns.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.remove_files() ====
-----
- Purpose::
-  Removes the specified files from the bundle.
- Arguments::
-  '''fnames''' (list<str>): The names of the files to remove from the bundle. [[br]]
- Side Effects::
-  The specified bundle contents will be removed from the bundle.  Any data lost is not recoverable. A temporary copy of the bundle is created in the local directory, and is removed when this function returns.
- Exceptions::
-  None
- Returns::
-  None
-[[BR]]
-==== bundle_bundle.contents() ====
-----
- Purpose::
-  Returns the contents of the bundle.
- Arguments::
-  None
- Side Effects::
-  None
- Exceptions::
-  None
- Returns::
-  A dictionary showing the details of each file contained within the bundle.  An example value is shown below.
-
-Example return value:
-{{{
-#!python
-{'thefirstfile': {'length': 142}, 'thesecondfile': {'length': 11}}
-}}}
-
-[[BR]]
-==== bundle_clear_bundle_contents() ====
-----
- Purpose::
-  Clears all traces of a bundle from the specified file.
- Arguments::
-  '''bundlefn''' (str): The name of the bundle to clear.  It must be in the current directory. [[BR]]
-  '''outputfn''' (str/None) (optional): If set, the result will be generated in this file.  Otherwise, overwrite must be set to True. [[BR]]
-  '''overwrite''' (bool) (optional): If set, the original file will be overwritten with the result.  Otherwise, outputfn must be set. [[BR]]
- Side Effects::
-  The specified file will have all of its bundle data removed.  The result will be the file that was used to create the bundle. [[BR]]
-  A temporary file will be created in the current directory, and will be removed when the function returns.
- Exceptions::
-  None
- Returns::
-  None
-
-
-[[BR]]
- == Command-Line Usage Example: Creating a Self-Extracting HTTP Server Bundle ==
-----
-We have a repy program '''httpserver.repy''', and it depends on the files '''logo.png''' and '''index.html'''. We would like to bundle the files alongside '''httpserver.repy''' into an auto-extracting repy program, '''httpserver.bundle.repy'''.  '''error.log''' is a file that we do NOT want included.
-
-Assume that we have the following files in the current directory:
- * httpserver.repy - This is our simple http server that serves the files '''logo.png''' and '''index.html'''.
- * logo.png
- * index.html
- * error.log
-[[BR]]
-=== Creating a Data Bundle ===
-----
-First, we must create a data bundle.  The data bundle contains the script for auto-extraction, but lacks the dependencies needed to perform the operation.  We can pass this bundle through the repy preprocessor to enable the auto-extraction feature later, when we are done inserting files.
-{{{
-#!sh
-$ python bundler.py c httpserver.repy server.bundle
-}}}
-[[BR]]
-=== Adding Files to a Bundle ===
-----
-Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
-{{{
-#!sh
-$ python bundler.py a server.bundle logo.png index.html error.log
-}}}
-
-
-[[BR]]
-=== Removing Elements from a Bundle ===
-----
-It seems like we've accidentally included '''error.log'''!  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
-{{{
-#!sh
-$ python bundler.py r server.bundle error.log
-}}}
-
-[[BR]]
-=== Checking a Bundle's Contents ===
-----
-Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''logo.png''' and '''index.html'''.  The listed file sizes are their sizes within the bundle.
-{{{
-#!sh
-$ python bundler.py l server.bundle
-}}}
-And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
-{{{
-Bundle contents:
-Filename   Size (bytes)
-logo.png   23536
-index.html 1338
-}}}
-
-[[BR]]
-=== Generating the Auto-Extracting Bundle ===
-----
-Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
-Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
-{{{
-#!sh
-$ python repypp.py server.bundle httpserver.bundle.repy
-}}}
-
-Congratulations, you now have an auto-extracting bundle named httpserver.bundle.repy!
-
-[[BR]]
-=== Extracting Files from a Bundle ===
-----
-Even though the most useful feature of the bundler is its self-extraction feature, you can also extract files from the bundle manually.  You can do it in two ways:
-
-You can do it on a file-by-file basis:
-{{{
-#!sh
-$ python bundler.py e httpserver.bundle.repy logo.png index.html
-}}}
-
-Or you can tell the bundler to extract everything simultaneously:
-{{{
-#!sh
-$ python bundler.py e* httpserver.bundle.repy
-}}}
-
-[[BR]]
-=== Clearing a Bundle / Source File Recovery ===
-----
-However, now suppose you need access to the original httpserver code.  However, you only have access to the bundle, as a colleague of yours never bothered to include a version of the original source code.  You can use the clear function to remove all traces of a bundle from a file.
-{{{
-#!sh
-$ python bundler.py r* httpserver.bundle.repy original_httpserver.repy
-}}}
-
-
-
-[[BR]]
 == API Usage Example: Creating an Automated Experiment Script ==
 ----
 Suppose you plan to use several hundred vessels to parse a two related data sets. You have the test script ('''experiment.repy''') written and ready for deployment. You have a script ('''generate_experiment.py''') that partitions the data into 1000 pairs ('''rawdataAXXX''', '''rawdataBXXX''') that the test script will utilize. The vessels will generate three types of output per update, '''UsageDataXXX_YYY''', '''PerformanceDataXXX_YYY''', and '''DatasetQualityXXX_YYY''', where XXX is the experiment #, and YYY is the update #. These vessels will periodically send the results back to the main server, so that not all data is lost if these vessels go down.
@@ -276,22 +34,22 @@ For this demonstration, we will work with generating chunk !#143.
 [[BR]]
 === Creating a Data Bundle ===
 ----
-In order to create an auto-extracting bundle, we must first create a data bundle. This data bundle will have our experiment script embedded into it. This bundle will be preprocessed to create an auto-extracting bundle later. To generate a data bundle, we first instantiate a new Bundle, '''experiment143.bundle'''. We will add this functionality to our generation script, '''generate_experiment.py'''.  There are two ways we can go about creating bundles, though only the first method is applicable for the current task:
+In order to create an auto-extracting bundle, we must first instantiate a new Bundle, '''experiment143.bundle.repy'''. We will add this functionality to our generation script, '''generate_experiment.py'''.  There are two ways we can go about creating bundles, though only the first method is applicable for the current task:
 
 {{{
 #!repy
 # We assume that the experiment doesn't already exist in the current directory.
-experiment_bundle = bundle_bundle('experiment143.bundle', 'w', source='experiment.repy')
+experiment_bundle = bundle_bundle('experiment143.bundle.repy', 'w', source='experiment.repy')
 
 # Not always the best idea, overwrite the original file.
-experiment_bundle = bundle_bundle('experiment143.bundle', 'w', overwrite=True)
+experiment_bundle = bundle_bundle('experiment143.bundle.repy', 'w', overwrite=True)
 }}}
 
 
 [[BR]]
 === Adding Files to a Bundle ===
 ----
-Now, we add the experiment data to the experiment script. These data elements are '''rawDataA143''' and '''rawDataB143'''.  For sake of demonstration, we assume that the data elements will be first written to files in the current directory, named '''rawDataA143''' and '''rawDataB143'''. We will bundle these files into '''experiment143.bundle'''.
+Now, we add the experiment data to the experiment script. These data elements are '''rawDataA143''' and '''rawDataB143'''.  For sake of demonstration, we assume that the data elements will be first written to files in the current directory, named '''rawDataA143''' and '''rawDataB143'''. We will bundle these files into '''experiment143.bundle.repy'''.
 
 {{{
 #!repy
@@ -300,23 +58,6 @@ dataFnames = ['rawDataA143', 'rawDataB143']
 experiment_bundle.add_files(dataFnames)
 }}}
 
-
-[[BR]]
-=== Generating the Auto-Extracting Bundle ===
-----
-The experiment bundle is now finalized. We are ready convert it to an auto-extract bundle. To do this, we need to utilize the repy preprocessor. The output auto-extracting bundle will be called '''experiment143.bundle.repy'''.
-
-{{{
-#!repy
-import sys
-import subprocess
-generation_process = subprocess.Popen(
-    [sys.executable, 'repypp.py', 'experiment143.bundle', 'experiment143.bundle.repy'], 
-    stdout=subprocess.PIPE, 
-    stdin=subprocess.PIPE, 
-    stderr=subprocess.PIPE)
-generation_process.wait()
-}}}
 
 [[BR]]
 === Adding Strings to a Bundle ===
