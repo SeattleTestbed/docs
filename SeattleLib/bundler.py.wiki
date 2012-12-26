@@ -1,6 +1,6 @@
- = bundle.repy =
+ = bundler.py =
 ----
-bundler.py provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.  Not all bundles must be self-extracting, as you can also create bundles (e.g. in your program via the API) to facilitate file transfer.  Aside from self-extraction, there is no difference between a self-extracting bundle and a non-self-extracting bundle.  All of the actions described in this document can be performed on either bundle type, and will produce the same results.
+bundler.py provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.
 
 Bundles are identified by a '''.bundle''' extension.  Self-extracting bundles are identified by a '''.bundle.repy''' extension.
 
@@ -47,10 +47,10 @@ Assume that we have the following files in the current directory:
 [[BR]]
 === Creating a Data Bundle ===
 ----
-First, we must create a data bundle.  The data bundle contains the script for auto-extraction, but lacks the dependencies needed to perform the operation.  We can pass this bundle through the repy preprocessor to enable the auto-extraction feature later, when we are done inserting files.
+First, we must create a bundle that will contain code from '''httpserver.repy'''.
 {{{
 #!sh
-$ python bundler.py c httpserver.repy server.bundle
+$ python bundler.py c httpserver.repy server.bundle.repy
 }}}
 [[BR]]
 === Adding Files to a Bundle ===
@@ -58,7 +58,7 @@ $ python bundler.py c httpserver.repy server.bundle
 Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
 {{{
 #!sh
-$ python bundler.py a server.bundle logo.png index.html error.log
+$ python bundler.py a server.bundle.repy logo.png index.html error.log
 }}}
 
 
@@ -68,7 +68,7 @@ $ python bundler.py a server.bundle logo.png index.html error.log
 It seems like we've accidentally included '''error.log'''!  Thankfully, we don't have to start afresh; we can simply remove the extraneous file.
 {{{
 #!sh
-$ python bundler.py r server.bundle error.log
+$ python bundler.py r server.bundle.repy error.log
 }}}
 
 [[BR]]
@@ -77,7 +77,7 @@ $ python bundler.py r server.bundle error.log
 Before we finalize the auto-extracting bundle, it would be wise to make sure that the bundle contains all the files that we want it to have.  We need two files, '''logo.png''' and '''index.html'''.  The listed file sizes are their sizes within the bundle.
 {{{
 #!sh
-$ python bundler.py l server.bundle
+$ python bundler.py l server.bundle.repy
 }}}
 And we should get the following output (filesizes are simulated, actual values depend on the size of your files):
 {{{
@@ -85,16 +85,6 @@ Bundle contents:
 Filename   Size (bytes)
 logo.png   23536
 index.html 1338
-}}}
-
-[[BR]]
-=== Generating the Auto-Extracting Bundle ===
-----
-Finally, we can pass the intermediary bundle through the repy preprocessor to generate an auto-extracting bundle.
-Note that this step is '''optional'''. You only need it if you want to be able to run the bundle through repy.  If you're creating a bundle only as a means of packaging files together, you do '''not''' need to do this step.
-{{{
-#!sh
-$ python repypp.py server.bundle httpserver.bundle.repy
 }}}
 
 Congratulations, you now have an auto-extracting bundle named httpserver.bundle.repy!
