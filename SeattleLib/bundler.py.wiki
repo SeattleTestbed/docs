@@ -1,8 +1,10 @@
  = bundler.py =
 ----
-bundler.py provides an utility for packaging multiple files into a single file.  It is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.
+bundler.py provides an utility for packaging multiple files into a single file.  This document describes usage via the '''command line'''.  For details on how to use it via the Repy API, go [wiki:SeattleLib/bundle.repy here].
 
-Bundles are identified by a '''.bundle''' extension.  Self-extracting bundles are identified by a '''.bundle.repy''' extension.
+bundler.py is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.
+
+Bundles are identified by a '''.bundle.repy''' extension.
 
 [[TOC(inline)]]
 
