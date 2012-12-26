@@ -15,9 +15,13 @@ To create a bundle '''myprog.bundle.repy''', containing the files '''a.txt''', '
 
 {{{
 #!sh
-python bundler.py c myprog.repy myprog.bundle.repy # Create a bundle myprog.bundle.repy containing the contents of myprog.repy.
-python bundler.py a myprog.bundle.repy a.txt bfile cdat # list the files that we want to add
+# Create a bundle myprog.bundle.repy containing the contents of myprog.repy.
+python bundler.py c myprog.repy myprog.bundle.repy
+# List their filenames (They cannot contain spaces) in the same line.
+python bundler.py a myprog.bundle.repy a.txt bfile cdat
 }}}
+
+You now have an auto-extracting bundle, '''myprog.bundle.repy'''!
 
 [[BR]]
  == How to Use ==
