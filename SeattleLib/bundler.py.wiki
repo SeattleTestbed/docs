@@ -1,6 +1,8 @@
  = bundler.py =
 ----
-bundler.py provides an utility for packaging multiple files into a single file.  This document describes usage via the '''command line'''.  For details on how to use it via the Repy API, go [wiki:SeattleLib/bundle.repy here].
+Have you ever wanted to upload and manage Seattle programs that include multiple files?   The bundler utility makes this easy.   
+
+bundler.py provides an utility for packaging multiple files into a single file, much like a self-extracting zipfile.  This document describes usage via the '''command line'''.  For details on how to use it via the Repy API, go [wiki:SeattleLib/bundle.repy here].
 
 bundler.py is designed with the intention to allow repy programmers to easily upload static files along with their repy programs.  You can write your program assuming that these files will be present in the local directory, bundle the said files into the program and then distribute it.  The extraction of these files is done for you, before execution.
 
@@ -11,7 +13,7 @@ Bundles are identified by a '''.bundle.repy''' extension.
 [[BR]]
  == Quickstart Guide ==
 ----
-To create a bundle '''myprog.bundle.repy''', containing the files '''a.txt''', '''bfile''' and '''cdat''' within the program '''myprog.repy''', do the following:
+To create a bundle '''myprog.bundle.repy''', containing a program '''the files '''a.txt''', '''bfile''' and '''cdat''' within the program '''myprog.repy''', do the following:
 
 {{{
 #!sh
@@ -21,7 +23,17 @@ python bundler.py c myprog.repy myprog.bundle.repy
 python bundler.py a myprog.bundle.repy a.txt bfile cdat
 }}}
 
-You now have an auto-extracting bundle, '''myprog.bundle.repy'''!
+You now have an auto-extracting bundle, '''myprog.bundle.repy'''.   You can upload and use this via seash as follows:
+
+{{{
+#!sh
+# This uploads and runs the bundle, which unpacks the files...
+username@ !> on %1 run myprog.bundle.repy
+
+# Now you can run the program myprog.repy and a.txt bfile and cdat will be there
+username@ !> on %1 run myprog.repy
+}}}
+
 
 [[BR]]
  == How to Use ==
