@@ -43,12 +43,13 @@ username@ !> on %1 run myprog.repy
 A command-line wrapper of this class is available, and is accessed via the Python program '''bundler.py'''.  The functionality provided is largely identical to that provided by the API.
 
 || Action || Syntax || Description ||
-|| '''c'''reate      || $ python bundler.py c source_fname output_fname || Creates a bundle.  You can either create the bundle as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. ||
-|| '''a'''dd      || $ python bundler.py a bundle_fname file1 file2 ... || Adds the specified files to the bundle. ||
-|| '''e'''xtract      || $ python bundler.py e bundle_fname file1 file2 ... || Extracts the specified files from the bundle.  You can use the -all flag to '''extract all files'''.  Existing files in the current directory with the same name(s) will be overwritten.||
-|| '''l'''ist      || $ python bundler.py l bundle_fname || Lists the contents of the bundle. ||
-|| '''r'''emove      || $ python bundler.py r bundle_fname file1 file2 ... || Removes the specified files from the bundle.  Note: This data cannot be recovered!||
-|| '''r'''emove all     || $ python bundler.py r source_fname -all output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  You can either save the result as a new file (recommended), or overwrite the existing file.  You need to pass in an output filename, or pass the -f flag if you would like to overwrite. ||
+|| '''c'''reate || $ python bundler.py c source_fname output_fname || Creates a bundle at output_fname.  ||
+|| '''a'''dd || $ python bundler.py a bundle_fname file1 file2 ... || Adds the specified files to the bundle. ||
+|| '''e'''xtract || $ python bundler.py e bundle_fname file1 file2 ... || Extracts the specified files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| e'''x'''tract all || $ python bundler.py x bundle_fname || Extracts all files from the bundle.  Existing files in the current directory with the same name(s) will be overwritten.||
+|| '''l'''ist || $ python bundler.py l bundle_fname || Lists the contents of the bundle. ||
+|| '''r'''emove || $ python bundler.py r bundle_fname file1 file2 ... || Removes the specified files from the bundle.  Note: This data cannot be recovered!||
+|| '''w'''ipe || $ python bundler.py w source_fname output_fname || Removes all traces of a bundle from a file.  A useful side effect is that it removes all bundled files from the bundle, as well as restoring the bundle to the file that was originally used to create the bundle.  ||
 
 
 [[BR]]
@@ -120,7 +121,7 @@ $ python bundler.py e httpserver.bundle.repy logo.png index.html
 Or you can tell the bundler to extract everything simultaneously:
 {{{
 #!sh
-$ python bundler.py e httpserver.bundle.repy -all
+$ python bundler.py x httpserver.bundle.repy
 }}}
 
 [[BR]]
@@ -129,5 +130,5 @@ $ python bundler.py e httpserver.bundle.repy -all
 However, now suppose you need access to the original httpserver code.  However, you only have access to the bundle, as a colleague of yours never bothered to include a version of the original source code.  You can use the clear function to remove all traces of a bundle from a file.
 {{{
 #!sh
-$ python bundler.py r httpserver.bundle.repy -all original_httpserver.repy
+$ python bundler.py w httpserver.bundle.repy original_httpserver.repy
 }}}
