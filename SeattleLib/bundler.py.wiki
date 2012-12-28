@@ -73,7 +73,7 @@ $ python bundler.py c httpserver.repy server.bundle.repy
 [[BR]]
 === Adding Files to a Bundle ===
 ----
-Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.logdata1.png''' on purpose.
+Now, let's add the files that we want to embed into the bundle.  The files here are '''logo.png''' and '''index.html'''.  Since we can make mistakes, we'll also include '''error.log''' on purpose.
 {{{
 #!sh
 $ python bundler.py a server.bundle.repy logo.png index.html error.log
