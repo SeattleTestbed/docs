@@ -48,7 +48,7 @@ There is a wide variety of other platforms and testbeds readily available, each 
 
 Learn the basics:
 
- * Watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo]!
+ * For more information, please check out our [http://seattle.cs.washington.edu/static/SeattleMovieFinal.mov overview movie].
  * Learn more about [wiki:UnderstandingSeattle/SeattleComponents how Seattle works].
  * Try [wiki:UnderstandingSeattle/DonatingResources donating resources] to other users.
  * Complete the [wiki:EducationalAssignments/TakeHome take-home assignment] to get hands-on experience with Seattle.
