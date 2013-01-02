@@ -63,7 +63,7 @@ Assume that we have the following files in the current directory:
  * index.html
  * error.log
 [[BR]]
-=== Creating a Data Bundle ===
+=== Creating a Bundle ===
 ----
 First, we must create a bundle that will contain code from '''httpserver.repy'''.
 {{{
