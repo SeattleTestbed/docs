@@ -11,7 +11,7 @@ Bundles are identified by a '''.bundle.repy''' extension.
 [[BR]]
 == Repy API ==
 ----
-The bundle is designed to be used directly by a repy program.  It exposes an object-oriented interface to manipulating bundles.
+The bundle is designed to be used directly by a repy program.  It exposes an object-oriented interface to manipulating bundles.  After every method, you may assume that the bundle object is intact and can be used.  
 [[BR]]
 === bundle_bundle.!__init!__() ===
 ----
@@ -24,8 +24,9 @@ The bundle is designed to be used directly by a repy program.  It exposes an obj
   '''overwrite''' (bool) (optional): Only used if opening in 'w' mode.  Either this or overwrite may be specified.  If set to True, srcfn must be None.  The contents of the file referred to by bundlefn will be overwritten.  The original contents will be embedded in this new file.
  Side Effects::
   If opening in 'w' or 'a', the bundle will be created if it does not already exist in the current directory.
+  A file handle will be opened to allow manipulation of the underlying bundle file.
  Exceptions::
-  None
+  If bundle refuses to open, check to make sure that there are no existing open file handles to the bundle's filename.
  Returns::
   None
 [[BR]]
@@ -167,7 +168,7 @@ Suppose you plan to use several hundred vessels to parse a two related data sets
 For this demonstration, we will work with generating chunk !#143.
 
 [[BR]]
-=== Creating a Data Bundle ===
+=== Creating a Bundle ===
 ----
 In order to create an auto-extracting bundle, we must first instantiate a new Bundle, '''experiment143.bundle.repy'''. We will add this functionality to our generation script, '''generate_experiment.py'''.  There are two ways we can go about creating bundles, though only the first method is applicable for the current task:
 
