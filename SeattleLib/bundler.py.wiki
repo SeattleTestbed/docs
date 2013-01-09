@@ -27,11 +27,9 @@ You now have an auto-extracting bundle, '''myprog.bundle.repy'''.   You can uplo
 
 {{{
 #!sh
-# This uploads and runs the bundle, which unpacks the files...
+# This uploads and runs the bundle.  
+# a.txt bfile and cdat will be there when your code is executed.
 username@ !> on %1 run myprog.bundle.repy
-
-# Now you can run the program myprog.repy and a.txt bfile and cdat will be there
-username@ !> on %1 run myprog.repy
 }}}
 
 
