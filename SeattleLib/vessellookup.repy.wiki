@@ -23,7 +23,7 @@ username@ !> on %all show vessellocation to vessellocations.txt
 username@ !> on %all upload vessellocations.txt
 }}}
 
-And then in your program file, you may use that file as so:
+And then in your program file, you can pass the nodelocations in the file to the lookup functions:
 {{{
 #!repy
 vessel_comm_port = {}
