@@ -3,7 +3,7 @@ Follow the instructions below for your operating system to install Seattle on yo
 [[BR]]
 
 == Windows ==
- 1. [https://seattle.cs.washington.edu/geni/download/flibble/ Download] the Seattle zip file to your computer
+ 1. [https://seattleclearinghouse.poly.edu/download/flibble/ Download] the Seattle zip file to your computer
  1. Extract the zip file to the directory in which you would like to install Seattle.
  1. Double click (or run from the command line) '''install.bat'''.[[BR]]
  
@@ -12,7 +12,7 @@ To check that Seattle is running, look in Task Manager for the process ''pythonw
 
 == Linux ==
 Note: You must have Python 2.5 or 2.6 installed
- 1. [https://seattle.cs.washington.edu/geni/download/flibble/ Download] the Seattle tarball to your computer
+ 1. [https://seattleclearinghouse.poly.edu/download/flibble/ Download] the Seattle tarball to your computer
  1. Extract the tarball to the directory in which you would like to install Seattle.
  1. Navigate to that directory and run ''./install.sh''.[[BR]]
 
@@ -20,7 +20,7 @@ To check that Seattle is running, try running: ''ps -f | grep nmmain.py | grep -
 
 == Mac ==
 Note: You must have Python 2.5 or 2.6 installed
- 1. [https://seattle.cs.washington.edu/geni/download/flibble/ Download] the Seattle tarball to your computer
+ 1. [https://seattleclearinghouse.poly.edu/download/flibble/ Download] the Seattle tarball to your computer
  1. Extract the tarball to the directory in which you would like to install Seattle.
  1. Navigate to that directory and double click '''install.sh''' or run ''./install.sh'' from the command line.[[BR]]
 
