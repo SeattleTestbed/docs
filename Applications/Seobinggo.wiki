@@ -33,7 +33,7 @@ IN THE WORK.
 
 
         a. Download and install Seattle.
-           {{{https://seattlegeni.cs.washington.edu/geni/download/flibble/}}}
+           {{{https://seattleclearinghouse.poly.edu/download/flibble/}}}
 
         b. Untar the package
                 {{{tar -zxvf Seobinggo.tar.gz}}}
