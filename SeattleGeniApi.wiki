@@ -1,6 +1,6 @@
 = Seattle Clearinghouse API =
 [[BR]]
-An XML-RPC interface to Seattle Clearinghouse is available, for clients wishing to access Seattle Clearinghouse functionality without going through the Seattle Clearinghouse website. The XML-RPC server is located at the following address: {{{https://seattlegeni.cs.washington.edu/xmlrpc/}}}
+An XML-RPC interface to Seattle Clearinghouse is available, for clients wishing to access Seattle Clearinghouse functionality without going through the Seattle Clearinghouse website. The XML-RPC server is located at the following address: {{{https://seattleclearinghouse.poly.edu/xmlrpc/}}}
 
 For examples on how to use XML-RPC with Seattle Clearinghouse, check out the [wiki:SeattleGeniClientLib Seattle Clearinghouse XML-RPC Client Library].
 
