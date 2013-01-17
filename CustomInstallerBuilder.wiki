@@ -11,7 +11,7 @@ On the backend, there is also an [wiki:CustomInstallerBuilderApi XML-RPC interfa
 = A Tour of the Web Interface =
 [[Image(cib.png)]]
 
-Start by opening the [https://seattlegeni.cs.washington.edu/custom_install/ Custom Installer Builder] in your web browser.
+Start by opening the [https://custombuilder.poly.edu/custom_install/ Custom Installer Builder] in your web browser.
 
 == Step 1 : Build Installers ==
 First, '''create users''' in the top half of the page. You can upload a public key for existing users, or allow the Custom Installer Builder to generate cryptographic keys for you.
