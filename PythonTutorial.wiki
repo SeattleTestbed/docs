@@ -6,7 +6,7 @@ This tutorial is written for those who have background knowledge of object orien
 
 '''ALL USERS:'''
 You have to install Repy before starting the tutorial.
-You can download Repy [https://seattle.cs.washington.edu/geni/download/flibble/ here].
+You can download Repy [https://seattleclearinghouse.poly.edu/download/flibble/ here].
 
 ----
 [[TOC(inline)]]
