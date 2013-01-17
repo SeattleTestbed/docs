@@ -16,7 +16,7 @@ It is assumed that you have a basic understanding of network programming such as
 == General Operations with examples ==
 ----
 You have to install Repy before starting the tutorial.
-You can download Repy [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here].   
+You can download Repy [https://seattleclearinghouse.poly.edu/download/flibble/ here].   
 
 If you want you can look at the installer options using the {{{--usage}}} option.   You can also simply install the software using the defaults.
 
@@ -80,7 +80,7 @@ Note that this will not provide the security and performance isolation from Repy
 
 ===== Basic Instructions =====
 
-First, make sure that you have the repy files [https://seattlegeni.cs.washington.edu/geni/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your seattle_repy directory. 
+First, make sure that you have the repy files [https://seattleclearinghouse.poly.edu/download/flibble/ (download)] and [raw-attachment:restrictions.test restrictions.test] in your seattle_repy directory. 
 
 Install repy by running the relevant installer. For windows, it is "install.bat".
 
@@ -122,7 +122,7 @@ python seash.py
 
 '''Step 2. Log in with your key
 
-Before logging in, you have to load your public and private keys. You can get the keys at the  [https://seattlegeni.cs.washington.edu/ SeattleClearinghouse] website. You need to make sure that you have two files, your public and private key. The name of each file is your ID and the extension of files are publickey and privatekey.
+Before logging in, you have to load your public and private keys. You can get the keys at the  [https://seattleclearinghouse.poly.edu/ SeattleClearinghouse] website. You need to make sure that you have two files, your public and private key. The name of each file is your ID and the extension of files are publickey and privatekey.
 For example, if your ID were john, the two files would be {{{john.publickey}}} and {{{john.privatekey}}}.   These files must be placed in the directory where you run {{{seash}}}.
 
 If you successfully logged in, you could notice that the prompt starts with you ID.
