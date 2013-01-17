@@ -24,7 +24,7 @@ There are a few restrictions that users must be aware of when hosting websites t
   - Overlord will also temporarily cease operations when the computer goes into sleep mode, but will automatically perform a maintenance round the moment the computer resumes operation
 
 = Setting Up =
- 1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattlegeni.cs.washington.edu/geni/download/flibble/ here], and follow the instructions on installing and starting it up.
+ 1. If you haven't done so already, to ensure you will have the necessary credits to use Seattle's P2P resources, download the version of Seattle appropriate to your operating system [https://seattleclearinghouse.poly.edu/download/flibble/ here], and follow the instructions on installing and starting it up.
 
  2. Next, download the Seattle demokit [http://seattlegeni.cs.washington.edu/dist/demokit.zip here] and extract the files to its default folder "demokit"
 
