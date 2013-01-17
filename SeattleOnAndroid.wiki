@@ -78,7 +78,7 @@ Congrats, now you can run {{{python repy.py restrictions.that_you_have your_scri
 
 {{{
 #!comment
-Before you can install the Seattle Node Manager, you need to tell the command-line installer which vessels of what size it should create, and who should be able to access them. For altruistic donations, use the {{{vesselinfo}}} file from [https://seattlegeni.cs.washington.edu/geni/download/flibble/ an installer package]. If you want to have {{{seash}}} access to your own device, use the [wiki:CustomInstallerBuilder]. Either way, push the {{{vesselinfo}}} file into the directory you created for Repy. Then,
+Before you can install the Seattle Node Manager, you need to tell the command-line installer which vessels of what size it should create, and who should be able to access them. For altruistic donations, use the {{{vesselinfo}}} file from [https://seattleclearinghouse.poly.edu/download/flibble/ an installer package]. If you want to have {{{seash}}} access to your own device, use the [wiki:CustomInstallerBuilder]. Either way, push the {{{vesselinfo}}} file into the directory you created for Repy. Then,
 
  1. Run {{{python seattleinstaller.py}}}. You might want to increase the percentage of resources donated using e.g. {{{--percent 50}}}. On our phone, 10 percent of resources mean even [source:/trunk/repy/apps/allpairsping/allpairsping.repy allpairsping] needs to much RAM to run. The installer won't be able to configure Seattle for autostart.
  1. Run {{{python nmmain.py}}}. It will take a while to register at the advertisement server.
