@@ -50,7 +50,7 @@ hypotheses on a Internet-like testbed without charge.   You are helping these pe
 == Installing Seattle ==
 ----
 
-Installing Seattle on your machine is easy. First you will need to download an installer.   If you were referred to Seattle by a Seattle user, they may give you a link to an installer that credits the donated resources to them.   If not, you can download [https://seattle.cs.washington.edu/geni/download/flibble/ download a general installer] that credits your donations to a general fund for students to use.   
+Installing Seattle on your machine is easy. First you will need to download an installer.   If you were referred to Seattle by a Seattle user, they may give you a link to an installer that credits the donated resources to them.   If not, you can download [https://seattleclearinghouse.poly.edu/download/flibble/ download a general installer] that credits your donations to a general fund for students to use.   
 
 
 Then uncompress the file and start the install script ({{{install.bat}}} on Windows or {{{install.sh}}} on other OSes).   The installer does three things: 
