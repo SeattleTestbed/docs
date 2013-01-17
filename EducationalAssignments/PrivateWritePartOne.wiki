@@ -32,7 +32,7 @@ Please note you must have Python2.5 or Python2.6, to complete this assignment. I
 
 '''Note:'''If you are using windows, you will need python in your path variables.  A tutorial on adding variables to your path in windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
-Repy can be downloaded at [https://seattle.cs.washington.edu/geni/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
+Repy can be downloaded at [https://seattleclearinghouse.poly.edu/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
 
 === How to get RepyV2 ===
 ----
