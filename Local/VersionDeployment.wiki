@@ -1,11 +1,11 @@
 = Deploying a New Version =
 Explains how to go about deploying a new version of the code, which consists of two main steps: updating the files that the software updaters on each node check for updates, and replacing the base installers that are incorporated in new installations.
 
-'''If you only want to make a release candidate build (or one that includes tests) available to the Custom Installer Builder, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattlegeni.cs).'''
+'''If you only want to make a release candidate build (or one that includes tests) available to the Custom Installer Builder, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattleclearinghouse.poly.edu).'''
 
 == Step by Step ==
  1. Make sure the [wiki:Local/ContinuousBuild continuous build] shows all tests passing (aside from any expected, non-critical failures such as new build machines not fully configured or flaky tests).
- 1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattlegeni) testbed.
+ 1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattleclearinghouse) testbed.
   1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
   1. `cd /home/release`
   1. Update to the current svn trunk: `svn up trunk`
@@ -21,7 +21,7 @@ Explains how to go about deploying a new version of the code, which consists of 
       * `trunk/nodemanager/nmmain.py`
     * If you `svn diff` these files, the output should look like [attachment:blackbox-version-push-svn-diff.txt these diffs].
   1. Now, we actually deploy the new version. Still from the `/home/release` directory, do the following (these are separate actions, their order does not matter):
-    * To update the base installers used by seattlegeni on betabox, run the following:
+    * To update the base installers used by Seattle Clearinghouse on betabox, run the following:
       * `./rebuild_base_installers_for_seattlegeni.sh VERSION_HERE`
       * [attachment:blackbox-rebuild-base-installers-output.txt example output]
     * To update existing clients (that is, to make the updated files available to clients that are checking the update site), run the following: 
@@ -36,7 +36,7 @@ Explains how to go about deploying a new version of the code, which consists of 
   1. Run "python update_and_build.py .. path/to/publickey path/to/privatekey version".
     * '''Important: At this point, all nodes will be updating to the new version.'''
     * Pushing the update to all existing nodes (through the SoftwareUpdater) is done by this update_and_build.py script, not the remaining steps.
-    * The remaining steps are only to make installers downloaded from SeattleGeni be the new version you are releasing.
+    * The remaining steps are only to make installers downloaded from Seattle Clearinghouse be the new version you are releasing.
   1. Navigate to the base installer directory (/var/www/dist as of January 2009).
-  1. scp the new files here (these will be the versioned files, e.g. seattle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /home/custominstallerbuilder/live/custominstallerbuilder/html/static/installers/base/ (this is where the custom installer builder resides) on the seattle geni server (seattlegeni.cs.washington.edu).
+  1. scp the new files here (these will be the versioned files, e.g. seattle_linux0.1d.tgz, and the unversioned files, e.g. seattle_linux.tgz) over to /home/custominstallerbuilder/live/custominstallerbuilder/html/static/installers/base/ (this is where the custom installer builder resides) on the seattle geni server (seattleclearinghouse.poly.edu).
   1. Remove any installers cached in /var/www/dist/geni/*_dist/.   You can do {{{rm -rf /var/www/dist/geni/*_dist/}}}.
