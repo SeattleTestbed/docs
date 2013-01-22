@@ -5,16 +5,16 @@ This page describes the XML-RPC server for the Protogeni Integration.
 ----
 [[BR]]
 == Introduction ==
-This is an XML-RPC interface that integrates the SeattleGENI project with the ProtoGENI project. You do not need to run your own instance of this code to access SeattleGENI resources through ProtoGENI.   You can leverage an instance of the software which we run to provide resources to ProtoGENI users. An instance of the XML-RPC server is currently running at https://blackbox.cs.washington.edu/xmlrpc/ (note that this page cannot be viewed in html format, can only be accessed via XML-RPC communication.)
+This is an XML-RPC interface that integrates the Seattle Clearinghouse project with the ProtoGENI project. You do not need to run your own instance of this code to access Seattle Clearinghouse resources through ProtoGENI.   You can leverage an instance of the software which we run to provide resources to ProtoGENI users. An instance of the XML-RPC server is currently running at https://blackbox.cs.washington.edu/xmlrpc/ (note that this page cannot be viewed in html format, can only be accessed via XML-RPC communication.)
 
-This allows users from different project to acquire resources from the SeattleGENI project as long as they have the proper credentials. SeattleGENI has implemented the two api calls: !CreateSliver() and !DeleteSlice(). These two calls allow users to acquire resources and release resources from the SeattleGENI project. The XML-RPC server is located at !https://blackbox.cs.washington.edu/xmlrpc/ A tarball of the XML-RPC server as well as the components required to set it up is attached at the bottom of this page.
+This allows users from different project to acquire resources from the Seattle Clearinghouse project as long as they have the proper credentials. Seattle Clearinghouse has implemented the two api calls: !CreateSliver() and !DeleteSlice(). These two calls allow users to acquire resources and release resources from the SeattleClearinghouse project. The XML-RPC server is located at !https://blackbox.cs.washington.edu/xmlrpc/ A tarball of the XML-RPC server as well as the components required to set it up is attached at the bottom of this page.
 
-The SeattleGENI project also has its own XML-RPC server which provides a richer interface to interact with SeattleGENI resources. A description of the SeattleGENI XML-RPC server and the various api calls that are available can be found at the [wiki:SeattleGeniApi SeattleGENI API] page.
+The Seattle Clearinghouse project also has its own XML-RPC server which provides a richer interface to interact with Seattle Clearinghouse resources. A description of the Seattle Clearinghouse XML-RPC server and the various api calls that are available can be found at the [wiki:SeattleGeniApi SeattleGENI API] page.
 
 [[BR]]
 == !CreateSliver(argument_dict) ==
 ----
-!CreateSliver is used to acquire resources from the SeattleGENI project. It takes in a dictionary with three items: slice_urn, rspec and a list of credentials. The dictionary is of the form:
+!CreateSliver is used to acquire resources from the Seattle Clearinghouse project. It takes in a dictionary with three items: slice_urn, rspec and a list of credentials. The dictionary is of the form:
 {{{
    {'slice_urn'   : "urn:publicid:IDN+SeattleGENI+slice+mytestslice",
     'rspec'       : "some_integer", 
@@ -96,7 +96,7 @@ $> python preparetest.py /folder/to/copy/seattle_libraries_to
 $> python prepare_seattlegeni_server.py target_folder
 }}}
  1. Set up the .conf file for apache. An example of what the .conf file should look like is provided (seattlegeni_apache.conf). A more detailed description on how to edit this file is located at the bottom of this file.
- 1. Edit the file protogeni_user_file.txt and add all the seattlegeni users that have been specifically allocated for the protogeni integration. You can acquire seattlegeni usernames by registering an username through the SeattleGENI website at: https://seattlegeni.cs.washington.edu . The format of each line in protogeni_user_file.txt is:
+ 1. Edit the file protogeni_user_file.txt and add all the Seattle Clearinghnouse users that have been specifically allocated for the protogeni integration. You can acquire Seattle Clearinghouse usernames by registering an username through the Clearinghouse website at: https://seattleclearinghouse.poly.edu . The format of each line in protogeni_user_file.txt is:
 {{{
 seattlegeni_username:password_for_user:1:0:0
 }}}
