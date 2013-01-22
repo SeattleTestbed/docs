@@ -1,6 +1,6 @@
 = What is huxiang? =
 
-Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your SeattleGENI username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
+Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your Seattle Clearinghouse username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
 
 = Huxiang Client versus Huxiang Server =
 
@@ -31,7 +31,7 @@ There are a few restrictions that users must be aware of when hosting websites t
  3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.cs.washington.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here]) and extract its contents into the same folder as your Seattle demokit.
  * Whether than keeping the recently extracted files in a separate folder within the demokit directory, move a copy of each file into the main demokit folder.
 
- 4. If you haven't done so already, register for a public and private key for SeattleGENI [https://seattlegeni.cs.washington.edu/geni/html/register here], and download the publickey and privatekey file into your demokit folder
+ 4. If you haven't done so already, register for a public and private key for Seattle Clearinghouse [https://seattleclearinghouse.poly.edu/html/register here], and download the publickey and privatekey file into your demokit folder
 
  5. Within the demokit directory on your console, follow the instructions in setting up Overlord [wiki:Libraries/Overlord here].
 
@@ -72,7 +72,7 @@ Run huxiang_creator.py with the following four arguments:
 
   - A single-word string used to set part of the hosted website's home address. It cannot include any spaces or symbols
 
-  - The SeattleGENI username the website will be hosted under.
+  - The Seattle Clearinghouse username the website will be hosted under.
 
   - Directory path of the file folder holding the web site files you're hosting.
 
@@ -82,7 +82,7 @@ As an example of how the command should look:
 {{{
 $ python huxiang_creator.py example guest ./example_web_site ./html/index.html
 }}}
-With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:(port number)', where (port number) is the SeattleGENI port number assigned to "guest". The number is immediately available and labeled as "Port" the moment you sign on to SeattleGENI. The user will then finally be directed to .../html/index.html, which will act as your website's homepage. It is important that you include the arguments in the order listed above or else the application will throw an error.
+With the above command, all the files within the folder 'example_web_site' will be hosted on all the nodes currently owned by 'guest' at the address 'example.zenodotus.cs.washington.edu'. For a user to access the site, the URL the person would browse for is 'example.zenodotus.cs.washington.edu:(port number)', where (port number) is the Seattle Clearinghouse port number assigned to "guest". The number is immediately available and labeled as "Port" the moment you sign on to Seattle Clearinghouse. The user will then finally be directed to .../html/index.html, which will act as your website's homepage. It is important that you include the arguments in the order listed above or else the application will throw an error.
 
 
 The check the status of your webhosting, simply open up the "huxiang_webhosting.log" file with any text editor, and it will show you information on the number of nodes currently hosting the site, any errors that occurred, actions taken by Overlord to handle the errors, and other messages.
@@ -125,5 +125,4 @@ For more about how the assignment of names to node's IP addresses work, visit th
 Basically, when running in a node, this will associate the set zenodotus address with the node's IP Address. When a user types in the address along with your respective port number into the browser, they will automatically be directed to the home page of the site. Any further URL requests will result in the server doing a check to see that the requested path matches the site map's configuration, and either send back the web file associated with page requested or display an error message.
 
 Also, when a user requests a query for the location of the node by adding "?location" into anywhere in the path, the server will automatically bring up a frame at the top of the page displaying the coordinates of the node and its location, if available.
-
 
