@@ -13,7 +13,7 @@ Seattle uses the [wiki:CustomInstallerBuilderTesting custom installer builder] t
 {{{
 #!py
 41 # The XML-RPC interface to the Custom Installer Builder.
-42 SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC = "https://seattlegeni.cs.washington.edu/custom_install/xmlrpc/"
+42 SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC = "https://custombuilder.poly.edu/custom_install/xmlrpc/"
 }}}
 
  * Unless in the rare case a Clearinghouse instance is running it's own custom installer builder, SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC should be set to the same value as in trunk (like above). 
