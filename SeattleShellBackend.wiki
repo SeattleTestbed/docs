@@ -126,6 +126,10 @@ locations.  To get started using this module, acquire several vessels through th
 Clearinghouse, use the 'browse' command, and then in any group, run either 'show location' 
 or 'show coordinates'.
 
+
+show location    -- Display location information (countries) for the nodes
+show coordinates -- Display the latitude & longitude of the node
+
 }}}
 [[BR]]
 === Installing/Uninstalling Modules ===
