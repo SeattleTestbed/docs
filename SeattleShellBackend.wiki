@@ -43,7 +43,7 @@ command_dictionary = {
 }
 }}}
 [[BR]]
-== Extending seash ==
+== Extending seash: seash's Module system ==
 ----
 
 Seash has support for adding additional commands via modules that are imported on startup. These modules should be placed in the /modules/ folder. The importer will automatically import modules ending in *_module.py. 
@@ -75,4 +75,44 @@ command_dict = {
       'help_text':"""...""",}
 }
 
+}}}
+
+== Using modules ==
+Modules are imported when you initially start seash.  However, they are not enabled by default.
+
+To enable a module, use the {{{enable}}} command:
+{{{
+user@ !> help enable
+enable modulename
+
+Enables use of the specified module.  You can only enable modules if they do not
+contain commands that conflict with existing commands.
+
+
+user@ !> enable modulename
+user@ !> enable modulename
+Module 'modulename' is already enabled.
+
+user@ !> enable conflictingmodule
+Module 'conflictingmodule' cannot be enabled due to these conflicting commands:
+show info (default)
+get (selexor)
+
+user@ !>
+}}}
+
+Similarly, you can disable modules using the {{{disable}}} command:
+{{{
+user@ !> help disable
+disable modulename
+
+Disables the specified module.  You will no longer be able to access the commands 
+that were found in the disabled module until the module is re-enabled.
+
+
+user@ !> disable modulename
+user@ !> disable modulename
+Module 'modulename' is not enabled.
+
+user@ !> 
 }}}
