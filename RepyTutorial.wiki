@@ -246,7 +246,7 @@ It is localhost and means this computer. It is used to access the computer curre
 
 Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
 
-[[Image(geniport.jpg)]]
+[[Image(clearinghouseport.png)]]
 
 You should write your Clearinghouseport down as you'll need this value repeatedly.
 
