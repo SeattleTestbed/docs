@@ -871,7 +871,30 @@ print "python "+carter_script+" "+dist_char+" "+prefix+"/vesselinfodir/ "+prefix
 }}}
 
 
+   - Use else statements for handling errors, not for normal flow in most cases.
 
+For example, if you have a function that is supposed to take a positive integer argument, don't do the following:
+
+{{{
+#!python
+if x > 0:
+   ...
+else: # x must be 0
+   ...
+}}}
+
+It may be the case that x is negative, a different type, etc.   Instead do the following:
+
+
+{{{
+#!python
+if x > 0:
+   ...
+elif x == 0: # x must be 0
+   ...
+else:
+   raise InternalError('Expected x to be a positive integer, not "'+str(x)+'"')
+}}}
 
 
 
