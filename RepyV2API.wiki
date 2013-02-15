@@ -667,8 +667,8 @@ If create is True, the file is created if it does not exist.   Neither mode trun
    <Arguments>
       filename:
         The file that should be operated on. It must not contain 
-        characters other than 'a-zA-Z0-9.-_' and cannot be '.', '..' or
-        the empty string.
+        characters other than 'a-z0-9.-_' and cannot start with a '.' 
+        or be the empty string.
 
       create:
          A Boolean flag which specifies if the file should be created
@@ -828,9 +828,9 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
       Allows the user program to remove a file in their area.
 
    <Arguments>
-      filename: the name of the file to remove.   It must not contain 
-      characters other than 'a-zA-Z0-9.-_' and cannot be '.', '..' or
-      the empty string.
+      filename: the name of the file to remove.  It must not contain 
+        characters other than 'a-z0-9.-_' and cannot start with a '.' 
+        or be the empty string.
 
    <Exceptions>
       RepyArgumentError is raised if the filename is invalid.
