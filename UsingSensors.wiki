@@ -2,10 +2,6 @@
 
 A Seattle / Repy program cannot access resources like GPS, wifi signal strength information, motion sensors, etc.   However, many users would like to provide information about resources like this to researchers.   To facilitate the exchange of information, we provide an API that sensor applications (installed separately from Seattle) can use to make the sensor available to local Repy programs.
 
-==  Seattle Sensors Appropriate Data Use Pannel  ==
-
-With platform maturing and more data captured, we might share data with other institutions. Shared datasets should comply with the IRB policies of a specific institution. So if you are interested in using our data, please contact your local IRB for permission, and provide a justification to our Seattle Sensors Appropriate Data Use Panel. Our panel will conduct a review of your justification. If approved, we will responsibly disclose our data with you. 
-
 [[TOC(inline)]]
 
 == Overview ==
