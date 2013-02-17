@@ -43,9 +43,9 @@ Options to customize the editor window.
 [[BR]]
 == Known issues ==
 ----
- * Print does not work, use log() instead
+ * `print` does not work, use `log()` instead
  * Infinity loops can only be stopped by shutting down the entire server
- * Exitall() does not work
+ * `exitall()` does not work
  * Thread Exceptions: A thread exception in one thread does not exit the entire evaluation in a Virutal Namespace. So far exceptions in a thread are caught and logged but the execution of other healthy threads continues.
  *  TCP/UDP listeners are not isolated
  * A listener registered on one `IP:PORT` will override another listener previously registered on this `IP:PORT`
