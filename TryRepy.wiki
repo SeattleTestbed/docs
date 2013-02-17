@@ -17,15 +17,15 @@ Try Repy is a web-based software development and execution environment for Repy,
 ----
 
 '''Editor''': 
-The editor is always displayed on the left side. You can write repy code to it and evaluate it on the server. To submit the code press `cmd + return` (mac), `ctrl + return` (win), or the `submit` button beneath the editor window. Until the code has been evaluated, code submission is locked.
+The editor is always displayed on the left side. You can write Repy code to it and evaluate it on the server. To submit the code press `cmd + return` (mac), `ctrl + return` (win), or the `submit` button beneath the editor window. Until the code has been evaluated, code submission is locked.
 
 '''Callargs''': 
 You can append space separated call arguments in the input line beneath the editor window, when submitting code.
 
-'''Standard output''': 
+'''Standard Output''': 
 This displays the output of your submitted program. It gives "real time" feedback.
 
-'''Session log''': 
+'''Session Log''': 
 This retrieves and displays the entire log for every submitted and evaluated code of a session.
 
 '''Insert Files''': 
