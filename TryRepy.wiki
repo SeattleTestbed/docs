@@ -1,5 +1,5 @@
 = Try Repy! =
-Try Repy is a web-based software development and execution environment for Repy, which was implemented in the course of a bachelor seminar in the year 2011 at the research group of Future Communication at the University of Vienna. This document provides a brief description on how to install and use Try Repy and an overview of known issues and future work.  You can also download the thesis of the bachelor seminar in order to get an insight into the context Try Repy was developed in. [[TOC(inline)]]
+Try Repy is a web-based software development and execution environment for Repy, which was implemented in the course of a bachelor seminar in the year 2011 at the research group of Future Communication at the University of Vienna. This document provides a brief description on how to install and use Try Repy and an overview of known issues and future work.  You can also download the [http://seattle.cs.washington.edu/static/try_repy_thesis.pdf thesis] of the bachelor seminar in order to get an insight into the context Try Repy was developed in. [[TOC(inline)]]
 
 [[BR]]
 == Installation & Usage ==
