@@ -1,0 +1,59 @@
+= Try Repy! =
+Try Repy is a web-based software development and execution environment for Repy, which was implemented in the course of a bachelor seminar in the year 2011 at the research group of Future Communication at the University of Vienna. This document provides a brief description on how to install and use Try Repy and an overview of known issues and future work.  You can also download the thesis of the bachelor seminar in order to get an insight into the context Try Repy was developed in. [[TOC(inline)]]
+
+[[BR]]
+== Installation & Usage ==
+----
+ 1. Checkout a copy of [source:seattle/trunk/repy/apps/tryrepy Try Repy] from the seattle repository.
+ 1. Make sure, the file `restrictions.tryrepy` contains a line with the serverport where you are going to run Try Repy: `resource connport <serverport>`.
+ 1. Run the following commands inside the `tryrepy` directory.
+{{{
+./tr_build.sh
+./tr_run.sh </abspath/to/seattle_repy> <serverport>
+}}}
+
+[[BR]]
+== Description of the web-interface ==
+----
+
+'''Editor''': 
+The editor is always displayed on the left side. You can write repy code to it and evaluate it on the server. To submit the code press `cmd + return` (mac), `ctrl + return` (win), or the `submit` button beneath the editor window. Until the code has been evaluated, code submission is locked.
+
+'''Callargs''': 
+You can append space separated call arguments in the input line beneath the editor window, when submitting code.
+
+'''Standard output''': 
+This displays the output of your submitted program. It gives "real time" feedback.
+
+'''Session log''': 
+This retrieves and displays the entire log for every submitted and evaluated code of a session.
+
+'''Insert Files''': 
+Insert files to the editor window, whether at cursor position or at the top of the editor window. 
+
+'''Insert Characters''': 
+Insert special characters at cursor position.
+
+'''Code Snippets''': 
+Insert code snippets at cursor position.
+
+'''Editor Options''': 
+Options to customize the editor window.
+
+[[BR]]
+== Known issues ==
+----
+ * Print does not work, use log() instead
+ * Infinity loops can only be stopped by shutting down the entire server
+ * Exitall() does not work
+ * Thread Exceptions: A thread exception in one thread does not exit the entire evaluation in a Virutal Namespace. So far exceptions in a thread are caught and logged but the execution of other healthy threads continues.
+ *  TCP/UDP listeners are not isolated
+ * A listener registered on one `IP:PORT` will override another listener previously registered on this `IP:PORT`
+
+[[BR]]
+== Future work ==
+----
+ * Network ressource scheduling
+ * Isolation of UDP and TCP listener
+ * Repy preprocessing
+ * Thread Exceptions should stop entire program
