@@ -46,9 +46,27 @@ command_dictionary = {
 == Extending seash: seash's Module system ==
 ----
 
-Seash has support for adding additional commands via modules that are imported on startup. These modules should be placed in a subdirectory within the /modules/ folder. The importer will try to look for a *.seashplugin.py file in each module folder and import it.  There should only be one such file in each module.
+Seash has support for adding additional commands via modules that are imported on startup. These modules should be placed in a subdirectory within the /modules/ folder. These modules are standard python packages.
 
-Defining a module is relatively straightforward.  There must be a __init__.py file that contains the main command_dict for the module.  It defines all the commands that are to be part of the module.  These command_dicts should be specified in a similar manner as described in the command dictionary section above. 
+[[BR]]
+=== Creating a Module ===
+Defining a module is relatively straightforward.  First, create the {{{__init__.py}}} file that contains the {{{moduledata}}} dictionary in the module namespace that is loaded by the module importer.  It should look like the following:
+
+{{{
+#!python
+# The actual definitions of command_dict, module_help, and input_preprocessor are in 
+# subsequent sections to improve readability of this example.
+moduledata = {
+  'command_dict': command_dict,
+  'help_text': module_help,
+  'url': "http://update.url/",
+  'input_preprocessor': input_preprocessor,
+}
+}}}
+[[BR]]
+==== The Command Dictionary ====
+
+The command_dict defines all the commands that are to be part of the module.  These command_dicts should be specified in a similar manner as described in the command dictionary section above. 
 
 {{{
 #!python
@@ -65,8 +83,9 @@ command_dict = {
       'summary':'Display the latitude & longitude of the node',
       'help_text':"""...""",}
 }}}
-
-You must also have module-level documentation.  You do this by specifying a module_help string on the module-level namespace.
+[[BR]]
+==== Module Level Documentation ====
+You must also have module-level documentation.
 
 {{{
 #!python
@@ -79,12 +98,37 @@ Clearinghouse, use the 'browse' command, and then in any group, run either 'show
 or 'show coordinates'.
 """
 }}}
-
-You must also specify an update URL to where your module can be found.  This will be used with the updater to automatically update the module.  To disable this feature, set the URL to {{{None}}}.
+[[BR]]
+==== Automatic Updating ====
+You must also specify an update URL to where your module can be found.  This will be used with the updater to automatically update the module.  To disable this feature, set the URL to {{{None}}}.  Note, this is not functional yet.  All modules should not have this set until then.
 {{{
 #!python
-url = '''http://seattle.poly.edu/plugins/geoip/'''
+# This is already set in the moduledata above so this is no longer needed.
+# It is only shown as an example.
+moduledata['url'] = "http://update.url/"
 }}}
+
+[[BR]]
+==== Input Preprocessor ====
+The input preprocessor is available for modules to tap into raw input from the command line to perform initial preprocessing.  This is used especially in the variables module.  This preprocessor will be given one string as input, and must return one string representing the results of the preprocessing.  
+
+This example is a simple example that replaces every instance of $USERPORT with a user's port.
+{{{
+#!python
+def input_preprocessor(user_input):
+  port_token = '$USERPORT'
+  retstr = ''
+  # Hardcoded for now, probably should be looked up
+  # through SeattleClearinghouseClient
+  user_port = 63100
+  while port_token in user_input:
+    before, port_token, user_input = user_input.partition(port_token)
+    retstr += before + user_port
+  else:
+    retstr += user_input
+  return retstr
+}}}
+
 [[BR]]
 === Current Module Information ===
 ----
@@ -112,9 +156,9 @@ selexor - https://seattle.poly.edu/plugins/selexor/
 [[BR]]
 === Module-Level Help ===
 ----
-To view information about a particular module, use the {{{help module modulename}}} command.  This helptext is defined by the module creator.
+To view information about a particular module, use the {{{modulehelp modulename}}} command.  This helptext is defined by the module creator.
 {{{
-user@ !> help module geoip
+user@ !> modulehelp geoip
 GeoIP Module
 
 This module includes commands that provide information regarding vessels' geographical 
