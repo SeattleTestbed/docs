@@ -1,4 +1,4 @@
-Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle vessels. For a basic tutorial on how to use seash, see the [wiki:RepyTutorial Repy Tutorial].
+Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle vessels.  This will describe how seash is designed.  If you are a user interested in learning how to use Seash, please go to the [SeattleShell main Seattle Shell page].
 [[BR]]
 == Command Dictionary ==
 ----
@@ -29,21 +29,25 @@ command_dict = {
  * display_keyword: When showing help for a command, the summaries of any sub-commands are shown. This is the keyword that should be specified in order for this summary to show. Omit this if a command should be shown by default.
  * children: A dictionary containing command tokens that map to command nodes for subsequent commands.
 
-The root dictionary is treated as a list of children. Therefore, the command dictionary should be as such:
+The root dictionary is treated as a list of children. Therefore, the command dictionary should be as such (everything except for the command names are hidden for ease of reading):
 {{{
 #!python
 command_dictionary = {
   'show': {
     ...
+    'users': {...}
+    ...
   },
   'add': {
+    ...
+    '[GROUP]': {...}
     ...
   },
   ...
 }
 }}}
 [[BR]]
-== Extending seash: seash's Module system ==
+== Defining New Modules ==
 ----
 
 Seash has support for adding additional commands via modules that are imported on startup. These modules should be placed in a subdirectory within the /modules/ folder. These modules are standard python packages.
@@ -66,7 +70,7 @@ moduledata = {
 [[BR]]
 ==== The Command Dictionary ====
 
-The command_dict defines all the commands that are to be part of the module.  These command_dicts should be specified in a similar manner as described in the command dictionary section above. 
+The command_dict defines all the commands that are to be part of the module.  These command_dicts should be specified in a similar manner as described in the command dictionary section above.
 
 {{{
 #!python
@@ -104,7 +108,8 @@ You must also specify an update URL to where your module can be found.  This wil
 {{{
 #!python
 # This is already set in the moduledata above so this is no longer needed.
-# It is only shown as an example.
+# It is only shown as an example.  Set it to None if you do not want to 
+# support updating.
 moduledata['url'] = "http://update.url/"
 }}}
 
@@ -127,125 +132,4 @@ def input_preprocessor(user_input):
   else:
     retstr += user_input
   return retstr
-}}}
-
-[[BR]]
-=== Current Module Information ===
-----
-To view information on all currently installed modules, you can use the {{{show modules}}} command.
-{{{
-user@ !> help show modules
-show modules
-
-Shows information on all installed modules.  Modules will be separated into 
-two categories: enabled and disabled.  Each entry will be in the following 
-format:
-  [module name] - [URL where the module was installed from, if available]
-
-The URL will be missing if the module was installed manually.
-
-
-user@ !> show modules
-Enabled Modules:
-geoip - https://seattle.poly.edu/plugins/geoip/
-
-Disabled Modules:
-selexor - https://seattle.poly.edu/plugins/selexor/  
-
-}}}
-[[BR]]
-=== Module-Level Help ===
-----
-To view information about a particular module, use the {{{modulehelp modulename}}} command.  This helptext is defined by the module creator.
-{{{
-user@ !> modulehelp geoip
-GeoIP Module
-
-This module includes commands that provide information regarding vessels' geographical 
-locations.  To get started using this module, acquire several vessels through the Seattle
-Clearinghouse, use the 'browse' command, and then in any group, run either 'show location' 
-or 'show coordinates'.
-
-
-show location    -- Display location information (countries) for the nodes
-show coordinates -- Display the latitude & longitude of the node
-
-}}}
-[[BR]]
-=== Installing/Uninstalling Modules ===
-----
-To install a new module, you can use the {{{install}}} command.
-{{{
-user@ !> help install
-install modulename url_to_module
-
-Downloads the specified module as modulename and enables it if possible.  
-The module will be automatically updated when you run seash.
-
-
-user@ !> install selexor https://seattle.poly.edu/plugins/selexor
-Module 'selexor' has been successfully installed and enabled.
-
-user@ !> install selexor https://seattle.poly.edu/plugins/selexor
-Module 'selexor' already exists.  You can either uninstall it using 'uninstall'
-or install it under a different name.
-
-}}}
-
-To uninstall an existing module, you can use the {{{uninstall}}} command.
-
-{{{
-user@ !> help uninstall
-uninstall modulename
-
-Uninstalls the specified module.  Use with caution, as you cannot undo this action!
-You can use 'show modules' to view a list of all installed modules.
-
-
-user@ !> uninstall selexor
-Module 'selexor' has been successfully uninstalled.
-
-user@ !> uninstall selexor
-Module 'selexor' is not installed.
-
-}}}
-
-[[BR]]
-=== Enabling/Disabling Modules ===
-----
-Modules are imported when you initially start seash, but they may not be enabled depending on conflicting modules, you disabled them on a previous run, etc.  To enable a module, use the {{{enable}}} command:
-{{{
-user@ !> help enable
-enable modulename
-
-Enables use of the specified module.  You can only enable modules if they do not
-contain commands that conflict with existing commands.
-
-
-user@ !> enable modulename
-user@ !> enable modulename
-Module 'modulename' is already enabled.
-
-user@ !> enable conflictingmodule
-Module 'conflictingmodule' cannot be enabled due to these conflicting commands:
-show info (default)
-get (selexor)
-
-user@ !>
-}}}
-
-Similarly, you can disable modules using the {{{disable}}} command.  This is useful if you have modules that have conflicting commands.  You can disable a module you're not currently using and enable the new module to use the conflicting command.
-{{{
-user@ !> help disable
-disable modulename
-
-Disables the specified module.  You will no longer be able to access the commands 
-that were found in the disabled module until the module is re-enabled.
-
-
-user@ !> disable modulename
-user@ !> disable modulename
-Module 'modulename' is not enabled.
-
-user@ !> 
 }}}
