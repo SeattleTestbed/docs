@@ -447,7 +447,7 @@ Sends data to the connected party.   Note that this may send less than the entir
 [[BR]]
 ===== listenforconnection(localip, localport) =====
 ---- 
-Binds to a IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.   This call raises an exception instead of blocking.
+Binds to an IP and port and waits for incoming TCP connections.  If this function is called multiple times on the same ip and port without the first tcpserversocket being closed, the second call with have an exception.  These ports are separate from the message ports and so both a message and connection listener can use the same port.   This call raises an exception instead of blocking.
 
 * Doc string: 
 	 
@@ -543,7 +543,7 @@ Closes the socket.   Any further local calls to getconnection will result in an 
 [[BR]] 
 ===== listenformessage(localip, localport) =====
 ---- 
-Binds to a IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call with have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.   This call will raise an exception if it would block.
+Binds to an IP and port and waits for incoming UDP messages.  If this function is called multiple times on the same ip and port without the first udpserversocket being closed, the second call will have an exception.  These ports are separate from the connection ports and so both a message and connection listener can use the same port.   This call will raise an exception if it would block.
 
 
 
