@@ -11,7 +11,7 @@ This assignment will illustrate an important network routing strategy called Lin
 [[BR]]
 == Step 1 : Building an initial connectivity map ==
 ----
-First, acquire some number of hosts for your experiment via the geni website. Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You should run this script locally on your your machine.   You can then save this list to a file, and use seash to upload this file to all of your geni nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
+First, acquire some number of hosts for your experiment via the [https://seattleclearinghouse.poly.edu Seattle Clearinghouse] website . Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You should run this script locally on your your machine.   You can then save this list to a file, and use seash to upload this file to all of your geni nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
 
 
 
