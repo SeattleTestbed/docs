@@ -1,0 +1,40 @@
+= Seash Modules =
+
+This page describes the functionality that is available from each available module within [SeattleShell Seash].
+
+[[TOC(inline)]]
+
+== GeoIP ==
+The GeoIP module contains commands that allow you to obtain geographical information about acquired vessels.  To use this module, you must first have browsed for vessels.  You may use these following commands while in a group:
+
+ * show coordinates - Show the longitude/latitude of each vessel.
+ * show location - Show the city name (if available) and country of which each vessel resides in.
+
+{{{
+#!sh
+user@all !> show location
+%1(143.215.131.199): Atlanta, GA, United States
+%2(129.97.74.14): Waterloo, ON, Canada
+
+user@all !> show coordinates
+%1(143.215.131.199): 33.8004, -84.3865
+%2(129.97.74.14): 43.4667, -80.5333
+}}}
+
+== Variables ==
+This module allows you to define custom user variables.  The values of these variables can then be retrieved later.
+
+To define a variable, use the {{{set}}} command.  You can then retrieve the value later by prepending $ to the respective variable name.
+{{{
+user !> set username myusername
+user !> as $username
+myusername !>
+}}}
+
+You may also enclose the variable name with $'s if you do not want a space to be appended after the variable's value.  A case when this is useful is when you want to refer to a directory name.
+{{{
+ !> set username myusername
+ !> loadkeys /home/$username$/mykey as $username
+ !> as $username
+ myusername !>
+}}}
