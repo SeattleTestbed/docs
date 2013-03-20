@@ -157,6 +157,27 @@ user@ !>
 }}}
 
 [[BR]]
+=== Input Parsing ===
+Modules may also modify your command line input before they reach the command parser.  An example of this would be the variables module.  When this occurs, the resulting parsed string is displayed underneath your input by default.  This can be toggled by using the {{{set showparse}}} command:
+
+{{{
+ !> set showparse on
+ !> set username myname
+ !> loadkeys ..\keys\$username
+Parsed as: loadkeys ..\keys\myname
+(You can disable displaying parsed input by using 'set showparse')
+ !> as $username
+Parsed as: as myname
+
+myname@ !> set showparse off
+myname@ !> set username myname
+myname@ !> loadkeys ..\keys\$username
+myname@ !> as $username
+myname@ !>
+}}}
+
+
+[[BR]]
 == Further Information ==
 ----
 For more information on how to use Seash in practice, refer to the [EducationalAssignments/TakeHome Take Home Assignment].
