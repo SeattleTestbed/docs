@@ -38,6 +38,8 @@ exit                             -- exits the shell
 [[BR]]
 == Using Modules ==
 ----
+In addition to using built-in Seash commands, additional functionality can be added into Seash by using modules.  More information about specific modules can be found at the [SeashModules Seash Modules page].
+
 === Current Module Information ===
 To view information on all currently installed modules, you can use the {{{show modules}}} command.
 {{{
