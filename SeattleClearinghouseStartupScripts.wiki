@@ -1,0 +1,8 @@
+= Seattle Clearinghouse Start up Scripts =
+This page describes which scripts need to automatically start on system boot and how to set them up.
+
+
+[[TOC(inline)]]
+
+== Overview ==
+TODO
