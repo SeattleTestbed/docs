@@ -668,7 +668,7 @@ try:
     place = x.index(8)
 except IndexError:
     x.append(8)
-    place = len(x)
+    place = len(x) - 1
 }}}
 
 The try statement has another optional clause which is intended to define clean-up actions that must be executed under all circumstances. A finally clause is always executed before leaving the try statement, whether an exception has occurred or not. For example:
