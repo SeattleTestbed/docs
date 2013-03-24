@@ -76,7 +76,7 @@ To use lind-fuse, you can simply mount a file system, and perform operations on 
 #!sh
 $ cd /tmp
 $ mkdir /tmp/lind-fuse-mountpoint   # make an empty directory
-$ python ~/test-fuse/lind_fuse.py /tmp/lind-fuse-mountpoint  # given the mountpoint you just made, mount a Lind-fuse filesystem into it.
+$ python ~/test-fuse/lind_fuse.py -f /tmp/lind-fuse-mountpoint & # given the mountpoint you just made, mount a Lind-fuse filesystem into it. '&' will make it run in background.
 $ cd lind-fuse-mountpoint   # now try it out
 $ ls
 $ cp -r /var/logs .
