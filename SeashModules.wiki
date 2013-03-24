@@ -5,6 +5,46 @@ This page describes the functionality that is available from each available modu
 [[TOC(inline)]]
 
 [[BR]]
+== Clearinghouse ==
+----
+The Clearinghouse module contains commands that pertain to acquiring and releasing vessels.  You must use commands in this module as an identity with both public and private keys loaded.
+
+[[BR]]
+=== Acquiring Vessels ===
+You acquire vessels using the {{{get}}} command.  It takes two parameters:  The number of vessels to acquire, and the condition that the acquired vessels must satisfy.  You can omit the type value.  Valid values for type include: wan, lan, and nat.
+
+{{{
+#!sh
+ !> loadkeys guest0
+ !> as guest0
+guest0@ !> get 3 wan
+['129.97.74.14:1224']
+Added targets: %1(129.97.74.14:1224:v10), %2(129.97.74.14:1224:v4), %3(129.97.74.14:1224:v6)
+Added group 'acquired' with 3 targets
+}}}
+
+[[BR]]
+=== Releasing Vessels ===
+You release vessels using the {{{release}}} command, by specifying the group of the vessels you want to release.  If you omit this value, vessels in the default group is released.
+
+{{{
+#!sh
+ !> loadkeys guest0
+ !> as guest0
+ !> loadkeys guest0
+ !> as guest0
+guest0@ !> browse
+['129.97.74.14:1224']
+Added targets: %1(129.97.74.14:1224:v10), %2(129.97.74.14:1224:v4), %3(129.97.74.14:1224:v6)
+Added group 'browsegood' with 3 targets
+guest0@ !> release browsegood
+guest0@ !> on browsegood list
+guest0@ !>
+}}}
+
+
+
+[[BR]]
 == GeoIP ==
 ----
 The GeoIP module contains commands that allow you to obtain geographical information about acquired vessels.  To use this module, you must first have browsed for vessels.  You may use these following commands while in a group:
