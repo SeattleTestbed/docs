@@ -46,6 +46,8 @@ These states were previously used, and are no longer in use.
 ----
 The following diagram shows the states that a node should transition between during normal execution.  
 
+[[Image(Node States.svg)]]
+
 [[BR]]
 [[BR]]
 == Active Seattle Clearinghouse Components ==
