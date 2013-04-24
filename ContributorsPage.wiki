@@ -69,6 +69,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * '''[wiki:Local/ContributorContactInfo Project Members] contact information'''
  
  * Other
+   * [wiki:SeattleBackend  Seattle Backend]
    * [wiki:ContainmentInSeattle] about controlling node outgoing traffic
    * [wiki:MobileCeNotes Windows CE] implementation notes and problems
    * [wiki:BenchmarkCustomInstallerInfo Benchmark and Custom Installer Info] implementation notes and problems.
