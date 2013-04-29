@@ -17,7 +17,7 @@ Networking and Python experience are a plus, but not required.
 
 
 == IPv6 ==
-Seattle currently doesn't support IPv6.   We'd like to be able to support IPv6 in Seattle's version of restricted version Python, the node manager, the software updater, the backend to the seattlegeni website, and any other necessary components.   
+Seattle currently doesn't support IPv6.   We'd like to be able to support IPv6 in Seattle's version of restricted version Python, the node manager, the software updater, the backend to the Seattle Clearinghouse website, and any other necessary components.   
 
 As with all work on the Seattle project, this work will be done in cooperation with other developers on a "Strike Force".   
 
