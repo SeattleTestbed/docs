@@ -2,7 +2,7 @@
 
 Seattle Clearinghouse uses the MySQL database, and InnoDB table types.
 
- * For info on installing/configuring the database, creating the necessary tables, etc, see [wiki:SeattleGeniInstallation].
+ * For info on installing/configuring the database, creating the necessary tables, etc, see [wiki:Archive/SeattleGeniInstallation].
 
 ----
 [[TOC(inline)]]
@@ -19,7 +19,7 @@ For example, this file defines the directory where MySQL tables live on disk: /v
 == Starting/Stopping/Restarting MySQL ==
 ----
 
-Log into seattlegeni.cs as root or run the following commands as sudo to start/stop/restart mysql:
+Log into seattleclearinghouse.poly.edu as root or run the following commands as sudo to start/stop/restart mysql:
 
 {{{
 $ /etc/init.d/mysql start
