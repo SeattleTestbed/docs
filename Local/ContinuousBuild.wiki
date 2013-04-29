@@ -43,7 +43,7 @@ The following is information specific to setting up the continuous build system 
 
 == Python ==
 
-The continuous build on testbed-opensuse is running on Python 2.6.3 which was built by us. The 2.5.1 version of python available on the system by default has problems with sqlite, which are required to run the seattlegeni tests.
+The continuous build on testbed-opensuse is running on Python 2.6.3 which was built by us. The 2.5.1 version of python available on the system by default has problems with sqlite, which are required to run the Seattle Clearinghouse tests.
 
 Python was built by the `continuousbuild` user with:
 
@@ -93,7 +93,7 @@ The most noteworthy issue for the setup on testbed-freebsd is that bsd systems d
 export PATH=/home/continuousbuild/bin:$PATH
 }}}
 
-We also don't bother running seattlegeni tests here, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
+We also don't bother running Seattle Clearinghouse tests here, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
 
 = Slave Setup on testbed-mac =
 
@@ -105,4 +105,4 @@ So, we put the following in cron_run_tests.sh (that is, we keep the same PATH th
 export PATH="/Users/continuousbuild/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
 }}}
 
-We also don't bother running seattlegeni tests on testbed-mac, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
+We also don't bother running Seattle Clearinghouse tests on testbed-mac, so we have set `SKIP_TEST_RUNNERS = ['run_seattlegeni_tests.sh']` in trunk/continuousbuild/config.py.
