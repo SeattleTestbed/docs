@@ -12,7 +12,7 @@ mkdir overlord
 
 Overlord requires the Seattle Experiment Library, which can be obtained by following the steps on [wiki:Libraries/ExperimentLibrary the associated wiki page]. Note that the {{{experimentlibrary}}} directory must be a direct subdirectory of the {{{overlord}}} directory created above.
 
-Also note that Overlord depends on Experiment Library functions that make secure connections to SeattleGENI. To perform secure SSL communication with SeattleGENI, you must:
+Also note that Overlord depends on Experiment Library functions that make secure connections to Seattle Clearinghouse. To perform secure SSL communication with Seattle Clearinghouse, you must:
   * Have a GENI user's public and private key files in the same directory as the application incorporating Overlord's API
     * The filenames must be of the form "USERNAME.publickey" and "USERNAME.privatekey"
   * Have [http://chandlerproject.org/Projects/MeTooCrypto M2Crypto] installed
@@ -41,14 +41,14 @@ example = overlord.Overlord(GENI_USERNAME, VESSEL_COUNT, PROGRAM_FILENAME, LOG_F
 }}}
 
 `init()` performs all of the initial configuration of vessel deployment. It takes four arguments:
-  i. A valid SeattleGENI username
+  i. A valid Seattle Clearinghouse username
   ii. The number of vessels on which to deploy
   iii. The type of vessels on which to deploy (wan, lan, etc)
   iv. The filename of the Repy program to deploy
   v. (optional) The file that Overlord will log to
     * Passing no argument or 'None' will simply have Overlord log directly to console
 
-`run()` initiates deployment and runs forever, maintaining the user-defined number of deployed vessels. Any arguments passed to run() will be passed directly to the Repy program run on vessels. For example, many services require an argument local port on which to listen for connections. For such services, the !SeattleGeni user's local port (available within the config dictionary of the Overlord object) must be passed to `run()`.
+`run()` initiates deployment and runs forever, maintaining the user-defined number of deployed vessels. Any arguments passed to run() will be passed directly to the Repy program run on vessels. For example, many services require an argument local port on which to listen for connections. For such services, the !Seattle Clearinghouse user's local port (available within the config dictionary of the Overlord object) must be passed to `run()`.
 
 Once `run()` is called, Overlord will deploy the Repy program on the specified number of vessels and periodically check to ensure that the service is up and running.
 
