@@ -1,6 +1,6 @@
-= GENI Database Service =
+= Seattle Clearinghouse Database Service =
 
-GENI uses the MySQL database, and InnoDB table types.
+Seattle Clearinghouse uses the MySQL database, and InnoDB table types.
 
  * For info on installing/configuring the database, creating the necessary tables, etc, see [wiki:SeattleGeniInstallation].
 
