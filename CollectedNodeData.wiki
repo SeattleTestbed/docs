@@ -10,7 +10,7 @@ This page links to graphs showing various properties of Seattle nodes along with
 == Node Monitoring Graphs ==
 ----
 
-These graphs were compiled from data collected between February 24, 2011 and April 6, 2011. The data was collected using the [wiki:Libraries/ExperimentLibrary Experiment Library] to monitor the nodes advertising under the SeattleGENI node announcement public key. The monitoring script determined whether nodes were actually contactable by attempting to browse the node whenever is started or stopped advertising.
+These graphs were compiled from data collected between February 24, 2011 and April 6, 2011. The data was collected using the [wiki:Libraries/ExperimentLibrary Experiment Library] to monitor the nodes advertising under the Seattle Clearinghouse node announcement public key. The monitoring script determined whether nodes were actually contactable by attempting to browse the node whenever is started or stopped advertising.
 
  * [wiki:CollectedNodeData/NodesOnline Number of Nodes Online Over Time]
  * [wiki:CollectedNodeData/CumulativeTimeOnline Cumulative Proportion of Time Online]
