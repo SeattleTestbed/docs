@@ -1,6 +1,6 @@
-= Production Geni XMLRPC Service =
+= Production Seattle Clearinghouse XMLRPC Service =
 
-The Geni XMLRPC service is available at https://seattlegeni.cs.washington.edu/xmlrpc/
+The Seattle Clearinghouse XMLRPC service is available at https://seattleclearinghouse.poly.edu/xmlrpc
 
 == Setup Notes ==
 
@@ -21,4 +21,3 @@ Note that for the proxy to work, the apache modules {{{proxy}}} and {{{proxy_htt
 sudo a2enmod proxy
 sudo a2enmod proxy_http
 }}}
-
