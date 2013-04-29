@@ -52,7 +52,7 @@ The following diagram shows the states that a node should transition between dur
 [[BR]]
 == Active Seattle Clearinghouse Components ==
 ----
-These scripts must be running at all times on the production Clearinghouse at all times.  They should be started as user root in a screen by running \seattlegeni\deploymentscripts\start_seattlegeni_components.sh
+These scripts must be running on the production Clearinghouse at all times.  They should be started as user root in a screen by running \seattlegeni\deploymentscripts\start_seattlegeni_components.sh
  * lockserver_daemon.py
  * backend_daemon.py
  * check_active_db_nodes.py
