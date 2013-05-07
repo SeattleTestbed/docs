@@ -206,3 +206,28 @@ You may also enclose the variable name with $'s if you do not want a space to be
  !> as $username
  myusername !>
 }}}
+
+
+
+[[BR]]
+== Factoids ==
+----
+The Factoids module prints random factoid when you run [SeattleShell Seash]. It also contains a command which allows you to see available factoids which is:
+
+ * show factoids [number of factoids]/all - Prints factoids onto the screen. You can specify the number of factoids you want to see or you can specify 'all' to see all available factoids.
+
+{{{
+user@ !> show factoids 2
+- You can save seash's current state using 'savestate' command.
+- You can load seash's previous state using 'loadstate' command.
+
+user@ !> show factoids all
+- You can save seash's current state using 'savestate' command.
+- You can load seash's previous state using 'loadstate' command.
+- You can set user variables using 'set' command.
+- You can press the Tab key to enable tab complete when typing commands.
+- You can see available seash factoids using 'show factoids [number of facctoids]/all' command.
+- You can list all available seash modules using 'show modules' command.
+
+user@ !>
+}}}
