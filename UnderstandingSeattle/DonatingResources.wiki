@@ -14,10 +14,11 @@ Donating resources with Seattle is a safe and easy way to help students and rese
 
 
 The overall philosophy of the Seattle project is use donated resources in a way that is safe and secure 
-(including performance-isolation). Programs that run
+(including performance-isolation). Seattle has key technical innovations that make it so that
+Seattle programs are isolated from other applications you run.   This means that run
 donated resources are isolated so that a program can't write or read
 files it isn't supposed to or do other bad things to your computer. 
-Seattle also ensures fair play by isolating the performance of Seattle programs from your other programs you use.
+Seattle leverages technology that ensures fair play by isolating the performance of Seattle programs from your other programs you use.
 Our promise to you is to use no more than 10% of your computer's resources (things like RAM, CPU time, network bandwidth, and hard drive space).
 
 
