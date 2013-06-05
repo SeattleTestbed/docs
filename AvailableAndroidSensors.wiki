@@ -17,7 +17,7 @@ availMem[[BR]]
 memThreshold[[BR]]
 cpu
 
-== !GPSLocationSensor ==
+== GPSLocationSensor ==
 longitude[[BR]]
 latitude[[BR]]
 altitude[[BR]]
