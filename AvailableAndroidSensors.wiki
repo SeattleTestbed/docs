@@ -1,3 +1,58 @@
 = Available Android Sensors =
 
-This page is currently a placeholder.   It will store information about Android Apps that are sensors for Seattle.
+== !BatterySensor ==
+level[[BR]]
+temperature[[BR]]
+voltage[[BR]]
+technology[[BR]]
+plugged
+
+== !DeviceInfoSensor ==
+androidversion[[BR]]
+tac[[BR]]
+vendorname[[BR]]
+modelname[[BR]]
+totalMem[[BR]]
+availMem[[BR]]
+memThreshold[[BR]]
+cpu
+
+== !GPSLocationSensor ==
+longitude[[BR]]
+latitude[[BR]]
+altitude[[BR]]
+accuracy[[BR]]
+bearing[[BR]]
+speed[[BR]]
+satellites[[BR]]
+address[[BR]]
+
+== !NetworkLocationSensor ==
+longitude[[BR]]
+latitude[[BR]]
+altitude[[BR]]
+accuracy[[BR]]
+address[[BR]]
+speed
+
+== !RadioSensor ==
+mcc[[BR]]
+mnc[[BR]]
+cid[[BR]]
+lac[[BR]]
+networktype[[BR]]
+signalstrength[[BR]]
+subscriberid[[BR]]
+roaming[[BR]]
+servicestate[[BR]]
+operator[[BR]]
+
+== !WifiConnectionSensor ==
+ssid[[BR]]
+ssid_hidden[[BR]]
+bssid[[BR]]
+ip[[BR]]
+mac[[BR]]
+supplicant_state[[BR]]
+rssi[[BR]]
+speed
