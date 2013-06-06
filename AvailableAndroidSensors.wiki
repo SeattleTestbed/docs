@@ -48,11 +48,11 @@ servicestate: indicating in service or out of service[[BR]]
 operator: current registered operator name[[BR]]
 
 == !WifiConnectionSensor ==
-ssid[[BR]]
-ssid_hidden[[BR]]
-bssid[[BR]]
-ip[[BR]]
-mac[[BR]]
-supplicant_state[[BR]]
-rssi[[BR]]
-speed
+ssid: service set identifier (SSID) of the current 802.11 network.[[BR]]
+ssid_hidden: true if this network does not broadcast its SSID[[BR]]
+bssid: basic service set identifier (BSSID) of the current access point, in the form of a six-byte MAC address. The BSSID may be null if there is no network currently connected[[BR]]
+ip: IP address once connected[[BR]]
+mac: MAC address of the phone[[BR]]
+supplicant_state: Return the detailed state of the supplicant's negotiation with an access point[[BR]]
+rssi: received signal strength indicator in dBm[[BR]]
+speed: link speed in Mbps
