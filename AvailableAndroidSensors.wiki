@@ -56,3 +56,9 @@ mac: MAC address of the phone[[BR]]
 supplicant_state: Return the detailed state of the supplicant's negotiation with an access point (disconnected, scanning, associating, associated, complete, etc)[[BR]]
 rssi: received signal strength indicator in dBm[[BR]]
 speed: link speed in Mbps
+
+== BluetoothSensor ==
+localDeviceName [[BR]]
+localMAC[[BR]]
+sBondedDevices[[BR]]
+sScannedDevices[[BR]]
