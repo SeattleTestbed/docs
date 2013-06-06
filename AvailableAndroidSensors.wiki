@@ -1,21 +1,20 @@
 = Available Android Sensors =
 
 == !BatterySensor ==
-level[[BR]]
-temperature[[BR]]
-voltage[[BR]]
-technology[[BR]]
-plugged
+level:  integer field containing the current battery level[[BR]]
+temperature: integer containing the current battery temperature[[BR]]
+voltage: integer containing the current battery voltage level[[BR]]
+technology: String describing the technology of the current battery
 
 == !DeviceInfoSensor ==
-androidversion[[BR]]
-tac[[BR]]
-vendorname[[BR]]
-modelname[[BR]]
-totalMem[[BR]]
-availMem[[BR]]
-memThreshold[[BR]]
-cpu
+androidversion: The user-visible version string[[BR]]
+tac: the unique device ID, for example, the IMEI for GSM and the MEID or ESN for CDMA phones[[BR]]
+vendorname: The manufacturer of the product/hardware[[BR]]
+modelname: The end-user-visible name for the end product[[BR]]
+totalMem: total memory on the phone[[BR]]
+availMem: available memory on the phone[[BR]]
+memThreshold: lower threshold of phone memory[[BR]]
+cpu: CPU usage in pertentage
 
 == GPSLocationSensor ==
 longitude[[BR]]
