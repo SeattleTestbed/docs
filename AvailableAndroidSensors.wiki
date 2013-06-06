@@ -21,10 +21,10 @@ longitude[[BR]]
 latitude[[BR]]
 altitude[[BR]]
 accuracy[[BR]]
-bearing[[BR]]
-speed[[BR]]
-satellites[[BR]]
-address[[BR]]
+bearing: direction[[BR]]
+speed: in m/s[[BR]]
+satellites: number of satellites in line of sight[[BR]]
+address: your current address[[BR]]
 
 == !NetworkLocationSensor ==
 longitude[[BR]]
@@ -35,16 +35,17 @@ address[[BR]]
 speed
 
 == !RadioSensor ==
-mcc[[BR]]
-mnc[[BR]]
-cid[[BR]]
-lac[[BR]]
-networktype[[BR]]
-signalstrength[[BR]]
-subscriberid[[BR]]
-roaming[[BR]]
-servicestate[[BR]]
-operator[[BR]]
+mcc: mobile country code[[BR]]
+mnc: mobile network code[[BR]]
+MNC is used in combination with MCC (also known as a "MCC / MNC tuple") to uniquely identify a mobile phone operator/carrier
+cid: GSM cell ID[[BR]]
+lac: GSM location area code[[BR]]
+networktype: GPS or Network[[BR]]
+signalstrength: received signal strength[[BR]]
+subscriberid: the unique subscriber ID, for example, the IMSI for a GSM phone[[BR]]
+roaming: current roaming indicator of phone[[BR]]
+servicestate: indicating in service or out of service[[BR]]
+operator: current registered operator name[[BR]]
 
 == !WifiConnectionSensor ==
 ssid[[BR]]
