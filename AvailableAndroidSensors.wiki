@@ -57,7 +57,10 @@ supplicant_state: Return the detailed state of the supplicant's negotiation with
 rssi: received signal strength indicator in dBm[[BR]]
 speed: link speed in Mbps
 
-== BluetoothSensor ==
+== !WifiSensor ==
+scannedDevicesSV: a list of up to 5 APs around the device
+
+== !BluetoothSensor ==
 localDeviceName [[BR]]
 localMAC[[BR]]
 sBondedDevices[[BR]]
