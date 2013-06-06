@@ -53,6 +53,6 @@ ssid_hidden: true if this network does not broadcast its SSID[[BR]]
 bssid: basic service set identifier (BSSID) of the current access point, in the form of a six-byte MAC address. The BSSID may be null if there is no network currently connected[[BR]]
 ip: IP address once connected[[BR]]
 mac: MAC address of the phone[[BR]]
-supplicant_state: Return the detailed state of the supplicant's negotiation with an access point[[BR]]
+supplicant_state: Return the detailed state of the supplicant's negotiation with an access point (disconnected, scanning, associating, associated, complete, etc)[[BR]]
 rssi: received signal strength indicator in dBm[[BR]]
 speed: link speed in Mbps
