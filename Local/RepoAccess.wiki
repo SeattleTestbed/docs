@@ -6,7 +6,7 @@ Accessing SVN is important for all contributors, regardless of whether they are 
 
 
 == Browsing SVN through Trac ==
-Anybody can [https://seattle.cs.washington.edu/browser/seattle/trunk browse the SVN] tree using their web browser. This is available to anonymous users.
+Anybody can [https://seattle.poly.edu/browser/seattle/trunk browse the SVN] tree using their web browser. This is available to anonymous users.
 
 
 == Setting up Subversion ==
@@ -63,26 +63,26 @@ sudo apt-get install subversion
 To check out the repository anonymously (read-only):
 
 {{{
-svn co https://seattle.cs.washington.edu/svn/seattle/trunk/
+svn co https://seattle.poly.edu/svn/seattle/trunk/
 }}}
 
 
 If you have previously checked out from our repository using an {{{http://}}} url rather than {{{https://}}}, you can update the source with the following command (issued from the root of your local SVN folder):
 
 {{{
-svn switch --relocate http://seattle.cs.washington.edu/svn https://seattle.cs.washington.edu/svn
+svn switch --relocate http://seattle.poly.edu/svn https://seattle.poly.edu/svn
 }}}
 
 
 Depending on your system, you may be asked to accept the SSL certificate. Here is an example, showing our certificate's correct SHA1 fingerprint:
 
 {{{
-~/trunk$ svn switch --relocate http://seattle.cs.washington.edu/svn https://seattle.cs.washington.edu/svn
-Error validating server certificate for 'https://seattle.cs.washington.edu:443':
+~/trunk$ svn switch --relocate http://seattle.poly.edu/svn https://seattle.poly.edu/svn
+Error validating server certificate for 'https://seattle.poly.edu:443':
  - The certificate is not issued by a trusted authority. Use the
    fingerprint to validate the certificate manually!
 Certificate information:
- - Hostname: seattle.cs.washington.edu
+ - Hostname: seattle.poly.edu
  - Valid: from Tue, 20 Oct 2009 20:13:04 GMT until Thu, 21 Oct 2010 19:06:54 GMT
  - Issuer: 07969287, http://certificates.godaddy.com/repository, GoDaddy.com, Inc., Scottsdale, Arizona, US
  - Fingerprint: c3:b7:3e:d9:2c:f7:3d:45:7b:68:40:81:27:9a:51:45:a1:97:a6:6f
@@ -93,8 +93,8 @@ After running the command, you can verify your new settings with `svn info`:
 {{{
 ~/trunk$ svn info
 ...
-URL: https://seattle.cs.washington.edu/svn/seattle/trunk
-Repository Root: https://seattle.cs.washington.edu/svn
+URL: https://seattle.poly.edu/svn/seattle/trunk
+Repository Root: https://seattle.poly.edu/svn
 ...
 }}}
 
@@ -105,17 +105,17 @@ Repository Root: https://seattle.cs.washington.edu/svn
 
 For Windows, see [wiki:RepoConfigurationForWindows Configuring SVN on Windows]
 
-To commit changes to the repository, you must have an ssh account on {{{seattle.cs}}}, which hosts the Seattle SVN server. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following command to checkout (co) the trunk from anywhere:
+To commit changes to the repository, you must have an ssh account on {{{seattle.poly}}}, which hosts the Seattle SVN server. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following command to checkout (co) the trunk from anywhere:
 {{{
-svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk/
+svn co svn+ssh://seattle.poly.edu/seattle/trunk/
 }}}
 
 If you want to perform the checkout as another user (e.g., "USER"), then use the following command:
 {{{
-svn co svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+svn co svn+ssh://USER@seattle.poly.edu/seattle/trunk/
 }}}
 
-All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in the proper format prior to making any commits. You can use the dos2unix tool on {{{seattle.cs}}} to convert DOS-formatted files to Unix format.
+All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in the proper format prior to making any commits. You can use the dos2unix tool on {{{seattle.poly}}} to convert DOS-formatted files to Unix format.
 
 '''Note to sysadmins:''' {{{svn+ssh}}} relies on {{{/usr/bin/svnserve}}}. However, to make it so that users don't need to specify the SVN repository root on the server, we have to modify arguments to {{{svnserve}}}. The following wrapper script lives at {{{/usr/local/bin/svnserve}}}:
 
@@ -136,17 +136,17 @@ umask 002
 
 To look inside a directory without checking anything out:
 {{{
-svn list svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy
+svn list svn+ssh://seattle.poly.edu/seattle/trunk/repy
 }}}
 
 To check out the entire Seattle repository:
 {{{
-svn checkout svn+ssh://seattle.cs.washington.edu/seattle
+svn checkout svn+ssh://seattle.poly.edu/seattle
 }}}
 
 To check out a subdirectory of the repository:
 {{{
-svn checkout svn+ssh://seattle.cs.washington.edu/seattle/trunk/repy
+svn checkout svn+ssh://seattle.poly.edu/seattle/trunk/repy
 }}}
 
 To find out some basic information about a checked-out copy, such as the repository root, last changed rev/author/date do:
