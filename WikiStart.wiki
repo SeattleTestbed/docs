@@ -8,9 +8,9 @@ Seattle is a platform for networking and distributed systems research. It's free
 
 Seattle runs on end-user systems in a safe and contained manner, with support for several platforms. Users install and run Seattle with minimal impact on system security and performance. Sandboxes are established on the user's computer to limit the consumption of resources such as CPU, memory, storage space, and network bandwidth. Programs are only allowed to operate inside of a sandbox, ensuring that other files and programs on the computer are kept private and safe. This allows researchers and students to safely run code without impacting performance or security.
 
-For more information, please check out our [http://seattle.cs.washington.edu/static/SeattleMovieFinal.mov overview movie].
+For more information, please check out our [http://seattle.poly.edu/static/SeattleMovieFinal.mov overview movie].
 
-For a less technical overview of Seattle check out [https://seattle.cs.washington.edu/html/ the Seattle homepage].
+For a less technical overview of Seattle check out [https://seattle.poly.edu/html/ the Seattle homepage].
 
 == Features ==
  * Community-driven and free.
@@ -48,7 +48,7 @@ There is a wide variety of other platforms and testbeds readily available, each 
 
 Learn the basics:
 
- * For more information, please check out our [http://seattle.cs.washington.edu/static/SeattleMovieFinal.mov overview movie].
+ * For more information, please check out our [http://seattle.poly.edu/static/SeattleMovieFinal.mov overview movie].
  * Learn more about [wiki:UnderstandingSeattle/SeattleComponents how Seattle works].
  * Try [wiki:UnderstandingSeattle/DonatingResources donating resources] to other users.
  * Complete the [wiki:EducationalAssignments/TakeHome take-home assignment] to get hands-on experience with Seattle.
