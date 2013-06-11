@@ -68,7 +68,7 @@ Repy is the restricted version of Python Seattle supports. To install the Repy r
 
 If you want to allow Repy to collect data from your phone, you have to get a [https://seattle.cs.washington.edu/wiki/UsingSensors Seattle Sensor] running. [https://play.google.com/store/apps/details?id=at.univie.sensorium Here] is one implementation that interfaces lots of sensors on your Android device, and makes values available in a GUI and programmatically over an XML-RPC interface.
 
-Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line!
+Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line! An example test script can be found [https://seattle.poly.edu/attachment/wiki/SeattleOnAndroid/test_script.repy here]. 
 
 
 
