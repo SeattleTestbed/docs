@@ -31,49 +31,6 @@ python utf.py -m repytests
 }}}
 This will start all of the repy unit tests running, and will output which tests pass and fail, and give failure details intermittently for the ones that do fail.
 
-[[BR]]
-== Running CPU Throttling Check Locally (advanced) ==
-----
-To run the repy CPU throttling test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
-
-{{{
-python preparetest.py -t /path/to/test/directory
-cd /path/to/test/directory
-python run_tests.py --obsolete -cpu
-}}}
-
-This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement. The --obsolete flag is necessary because we are in the middle of transitioning our tests to our new unit testing framework. However, the cpu tests are not yet converted.
-
-[[BR]]
-== Running Network Restriction Check Locally (advanced) ==
-----
-To run the repy network restriction tests locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
-
-{{{
-python preparetest.py -t /path/to/test/directory
-cd /path/to/test/directory
-python utf.py -m repynetworktests
-}}}
-
-This will start the test running, and will output a status report with the results of the test.
-
-
-[[BR]]
-== Running Threading Error Check Locally (advanced) ==
-----
-
-
-'''Be warned that this test is designed to push the system to its thread limit. This means you may experience system instability. Windows and OSX seem to remain stable, but near the end of the test Linux will exhaust its system wide thread availability.'''
-
-To run the repy threading error test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
-
-{{{
-python preparetest.py -t /path/to/test/directory
-cd /path/to/test/directory
-python run_tests.py --obsolete -threaderr
-}}}
-
-This will start the test running, and will output a status report with the results of the test. The --obsolete flag is necessary because the run_tests script is being phased out, and we are encouraging the use of our new unit testing framework.
 
 
 
@@ -139,3 +96,54 @@ python utf.py -m seattlelibtests
 }}}
 
 [[BR]]
+
+
+
+----
+= Note, the below tests rarely need to be run.   They may be disruptive and hard to run. =
+
+[[BR]]
+== Running Network Restriction Check Locally (advanced) ==
+----
+To run the repy network restriction tests locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python utf.py -m repynetworktests
+}}}
+
+This will start the test running, and will output a status report with the results of the test.
+
+
+[[BR]]
+== Running Threading Error Check Locally (advanced) ==
+----
+
+
+'''Be warned that this test is designed to push the system to its thread limit. This means you may experience system instability. Windows and OSX seem to remain stable, but near the end of the test Linux will exhaust its system wide thread availability.'''
+
+To run the repy threading error test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python run_tests.py --obsolete -threaderr
+}}}
+
+This will start the test running, and will output a status report with the results of the test. The --obsolete flag is necessary because the run_tests script is being phased out, and we are encouraging the use of our new unit testing framework.
+
+
+
+[[BR]]
+== Running CPU Throttling Check Locally (advanced) ==
+----
+To run the repy CPU throttling test locally, first navigate to the trunk directory of your svn working directory in a terminal, then execute the following commands:
+
+{{{
+python preparetest.py -t /path/to/test/directory
+cd /path/to/test/directory
+python run_tests.py --obsolete -cpu
+}}}
+
+This will start the test running, and will output a status report with the results of the test. The effectiveness of CPU throttling is hard to judge into Pass and Fail, so that is left to the users judgement. The --obsolete flag is necessary because we are in the middle of transitioning our tests to our new unit testing framework. However, the cpu tests are not yet converted.
