@@ -22,8 +22,8 @@ This page contains information useful to developers working on Seattle.   Anythi
 
  * Testing
    * '''[wiki:UnitTestFramework Writing Tests for Seattle's Unit Test Framework]'''
-   * '''[wiki:UnitTestFrameworkRunning Running Tests with Seattle's Unit Test Framework]'''
    * '''[wiki:UnitTests Running Repy and / or node manager unit tests]'''
+   * [wiki:UnitTestFrameworkRunning Supplemental information about Running Tests with Seattle's Unit Test Framework]
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
    * [wiki:SeattleGeniInstallation Running a Clearinghouse test server]
