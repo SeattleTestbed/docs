@@ -55,7 +55,7 @@ def geoip_location_str(location_dict):
 === Usage ===
 
 {{{
-client = geoip_client(server_address)
+client = geoip_init_client(server_address)
 
 # Where server_address is the ip address of a remote GeoIP XMl-RPC server.
 }}}
