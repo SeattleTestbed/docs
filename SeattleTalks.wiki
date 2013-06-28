@@ -190,3 +190,5 @@
 || 2:30-3:30PM May 15th, 2013 || Stonybrook Seminar || Seattle in education / security || Justin || Talk, Demo
 
 || noon-3PM May 31th, 2013 || May 2013 Research Group Meeting || Seattle research projects || Justin, etc. || Talk, Demo
+
+|| 1PM-3PM June 26th, 2013 || GENI Summer Camp || Seattle tutorial || Justin || Talk, Demo, Tutorial
