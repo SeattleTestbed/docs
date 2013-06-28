@@ -192,3 +192,5 @@
 || noon-3PM May 31th, 2013 || May 2013 Research Group Meeting || Seattle research projects || Justin, etc. || Talk, Demo
 
 || 1PM-3PM June 26th, 2013 || GENI Summer Camp || Seattle tutorial || Justin || Talk, Demo, Tutorial
+
+|| June 28th, 2013 || ERC Workshop || Seattle on lightweight devices || Justin || Talk, Demo
