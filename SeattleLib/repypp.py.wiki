@@ -17,7 +17,12 @@ def my_function():
   """
 }}}
 
-Result mycode.repy:
+Then in seattle_repy do:
+
+{{{python repypp.py mycode.mix mycode.repy}}}
+
+After this, mycode.repy will be automatically generated for you. And you can now run this in repy. Every time you make any changes to mycode.mix, do the above command again to regenerate updated mycode.repy file. Result mycode.repy looks like this:
+
 {{{
 #!repy
 #begin include serialize.repy
