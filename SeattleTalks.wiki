@@ -194,3 +194,5 @@
 || 1PM-3PM June 26th, 2013 || GENI Summer Camp || Seattle tutorial || Justin || Talk, Demo, Tutorial
 
 || June 28th, 2013 || ERC Workshop || Seattle on lightweight devices || Justin || Talk, Demo
+
+|| 1:30PM-2:15PM July 8th, 2013 || CSAW Summer Research Program for Faculty, NYU Poly || Seattle + Other Research Topics || Justin || Talk, Demo
