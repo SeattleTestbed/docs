@@ -8,13 +8,13 @@ This module is an addition to the basic implementation found in [wiki:SeattleLib
 === Functions ===
 
 {{{
-def geoip_init_client(url="http://geoip.cs.washington.edu:12679"):
+def geoip_init_client(url="http://geoip.poly.edu:12679"):
 }}} 
    Creates a new GeoIP XML-RPC client object.
    
    Notes: [[BR]]
    * url is a URL (protocol://ip:port) of GeoIP XML-RPC server.
-   * url is defaulted to http://geoip.cs.washington.edu:12679
+   * url is defaulted to http://geoip.poly.edu:12679
 
 
 {{{
