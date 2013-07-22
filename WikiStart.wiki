@@ -59,4 +59,4 @@ Check out the portal pages for in-depth information:
  * [wiki:EducatorsPage Educator Portal]: Example assignments for students using Seattle.
  * [wiki:ContributorsPage Contributors Portal]: Detailed information about how to contribute to the project.
 
-If you are using Seattle and need support, send an email to our [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users mailing list].
+If you have questions about Seattle, send an email to jcappos@poly.edu or visit the [seattle-users@googlegroups.com Seattle-users google group].
