@@ -4,7 +4,16 @@ This page describes following :
 
  * Existing features which are available in Repy V1 and modified in Repy V2.
 
- * New features introduced in Repy V2.
+ * New features which are introduced in Repy V2.
+
+[[TOC(inline)]]
+
+== Existing features which are available in Repy V1 and modified in Repy V2 ==
+ 
+ 
+
+== New features which are introduced in Repy V2 ==
+
 
  
  
