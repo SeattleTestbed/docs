@@ -9,6 +9,30 @@ This page describes following :
 [[TOC(inline)]]
 
 == Existing features which are available in Repy V1 and modified in Repy V2 ==
+
+=== Output data to stdout ===
+
+{{{print}}} command in RepyV1 is replaced by {{{log}}} command in Repy V2.
+
+Repy V1
+{{{
+#!python
+print "Hello World!"
+print "Hello World!" + "\n"
+print (str(9000) + " is an integer value.")
+print ("Python is " + "easier than C!")
+
+ }}}
+
+Repy V2
+{{{
+#!python
+log ("Hello World!")
+log ("Hello World!", "\n")
+log (str(9000) + " is an integer value.")
+log ("Python is " + "easier than C!")
+ }}}
+
  
  
 
