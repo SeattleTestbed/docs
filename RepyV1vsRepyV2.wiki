@@ -35,6 +35,7 @@ log ("Python is " + "easier than C!")
 
 === Files === 
 
+==== Opening File ====
 {{{open}}} command in Repy V1 is replaced by {{{openfile}}} command in Repy V2
 
 Repy V1
@@ -52,19 +53,50 @@ openfile("test.txt",True)
   False : Do not create test.txt file if it does not exist.
 }}}
 
- 
+==== Writing to the File ====
+{{{write}}} command used in Repy V1 to write data to a file, is replaced by {{{writeat}}} in Repy V2
 
-== Improved Features on Repy V2 ==
+Repy V1
+{{{
+#!python
+fileObject.write("Data to write!!\n")
+}}}
+Repy V2
+{{{
+#!python
+fileObject.writeat("Data to write!!\n",offset)
+  offset: An absolute offset to write data at in the file.
+}}}
 
- * Better "Write once, run anywhere".
+==== Reading from the file ====
+{{{read}}} command used in Repy V1 to read data from a file, is replaced by {{{readat}}} in Repy V2
+
+Repy V1
+{{{
+#!python
+fileObject.read(size)
+  size : Optional numeric argument. If size is not specified then
+         entire contents of the file are read. If specified size bytes are read and returned. 
+}}}
+Repy V2
+{{{
+#!python
+fileObject.readat(size,offset)
+  size   : Mandatory argument. None, indicates read the entire contents of the file.
+  offset : Seek to a specific offset before reading 
+}}}
+
+== Improved Features of Repy V2 ==
+
+ * Improved "Write once, run anywhere".
 
  * Simpler API.
 
  * Better performance isolation.
 
- * Easier to extend
+ * Easier to extend.
 
- * Easy to add references
+
 
 
 
