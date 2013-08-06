@@ -90,11 +90,15 @@ fileObject.readat(size,offset)
 
  * Improved "Write once, run anywhere".
 
+ * Improved performance.
+   
  * Simpler API.
 
  * Better performance isolation.
 
  * Easier to extend.
+ 
+ * Enhanced Security
 
 
 
