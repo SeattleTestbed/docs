@@ -33,7 +33,27 @@ log (str(9000) + " is an integer value.")
 log ("Python is " + "easier than C!")
  }}}
 
- 
+=== Files === 
+
+{{{open}}} command in Repy V1 is replaced by {{{openfile}}} command in Repy V2
+
+Repy V1
+{{{
+#!python
+open ("test.txt", True)
+
+  True  : Create test.txt file if it does not exist.
+  False : Do not create test.txt file if it does not exist.
+}}}
+Repy V2
+{{{
+#!python
+openfile("test.txt",True)
+Where,
+  True : Create test.txt file if it does not exist.
+  False : Do not create test.txt file if it does not exist.
+}}}
+
  
 
 == New features which are introduced in Repy V2 ==
