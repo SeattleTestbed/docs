@@ -4,7 +4,7 @@ This page describes following :
 
  * Existing features which are available in Repy V1 and modified in Repy V2.
 
- * New features which are introduced in Repy V2.
+ * Improved features of Repy V2
 
 [[TOC(inline)]]
 
@@ -48,13 +48,26 @@ Repy V2
 {{{
 #!python
 openfile("test.txt",True)
-  True : Create test.txt file if it does not exist.
+  True  : Create test.txt file if it does not exist.
   False : Do not create test.txt file if it does not exist.
 }}}
 
  
 
-== New features which are introduced in Repy V2 ==
+== Improved Features on Repy V2 ==
+
+ * Better "Write once, run anywhere".
+
+ * Simpler API.
+
+ * Better performance isolation.
+
+ * Easier to extend
+
+ * Easy to add references
+
+
+
 
 
  
