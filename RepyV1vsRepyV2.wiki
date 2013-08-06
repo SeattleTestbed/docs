@@ -10,7 +10,7 @@ This page describes following :
 
 == Existing features which are available in Repy V1 and modified in Repy V2 ==
 
-=== Output data to stdout ===
+=== Printing output to stdout ===
 
 {{{print}}} command in RepyV1 is replaced by {{{log}}} command in Repy V2.
 
