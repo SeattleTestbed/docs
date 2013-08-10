@@ -72,11 +72,11 @@ but some of the instructions or names of menu items may change slightly.
   * So, now you need to open a shell, go to your workspace's seattle directory
     (the one created for the project), and checkout trunk:
 {{{
-svn co svn+ssh://seattle.cs.washington.edu/seattle/trunk
+svn co svn+ssh://seattle.poly.edu/seattle/trunk
 }}} 
     If you don't have ssh access and want to use read-only svn access, you can use:
 {{{
-svn co https://seattle.cs.washington.edu/svn/seattle/trunk
+svn co https://seattle.poly.edu/svn/seattle/trunk
 }}} 
     * That will actually get you a trunk/ directory inside of the seattle
       directory. That's fine for our purposes. If you want things setup
