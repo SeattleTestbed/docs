@@ -50,4 +50,4 @@ The art of ticket management is not a strict art. But there are a few hints that
 
  * Use revision numbers in ticket comments when closing tickets (e.g. fixed in r101) -- the r101 is the format that will cause trac to understand that this refers to a commit.
 
- * Use the Trac [https://seattle.cs.washington.edu/timeline timeline] to track what has been happening recently -- to see new tickets, new commits, etc.
+ * Use the Trac [https://seattle.poly.edu/timeline timeline] to track what has been happening recently -- to see new tickets, new commits, etc.
