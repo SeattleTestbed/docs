@@ -7,7 +7,7 @@ There are three types of accounts that all developers need.   In addition, all d
 
 == SVN ==
 
-For SVN access you will be granted a Unix account on seattle.cs.washington.edu. You '''must''' change your password to something else after your temporary password is emailed to you. This machine hosts the Wiki and the SVN repository. Use it for Seattle development.
+For SVN access you will be granted a Unix account on seattle.poly.edu. You '''must''' change your password to something else after your temporary password is emailed to you. This machine hosts the Wiki and the SVN repository. Use it for Seattle development.
 
 == Wiki ==
 
