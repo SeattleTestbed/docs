@@ -25,7 +25,7 @@ If the continuous build doesn't seem to be running even though the crontab is se
 
 Generally:
   * Create a user account for running the continuous build tests (call it "continuousbuild", if you can).
-  * Go to the home directory for the user (e.g. /home/continuousbuild) and 'svn co http://seattle.cs.washington.edu/svn/seattle/trunk"
+  * Go to the home directory for the user (e.g. /home/continuousbuild) and 'svn co http://seattle.poly.edu/svn/seattle/trunk"
   * From your own system's copy of trunk which you've checked out while authenticated, copy the 'assignments' directory to the copy of trunk you've checked out without authentication on this slave system. The software updater tests need the assignments/webserver/ directory in order to run.
   * cp trunk/continuousbuild/cron_run_tests.sh to /home/continuousbuild
   * Modify /home/continuousbuild/cron_run_tests.sh as needed (e.g. setting the PATH)
