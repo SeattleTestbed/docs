@@ -29,7 +29,7 @@ At this time we do not support Django version 1.4 or higher.
  * '''Step 1:''' Check out the Custom Installer Builder from the SVN repository.
 
 {{{
-$ svn co https://seattle.cs.washington.edu/svn/seattle/trunk/custominstallerbuilder/
+$ svn co https://seattle.poly.edu/svn/seattle/trunk/custominstallerbuilder/
 }}}
 
  * '''Step 2:''' From within the "custominstallerbuilder" directory, copy the "local_template" folder to "local".
