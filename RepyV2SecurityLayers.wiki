@@ -237,6 +237,6 @@ python repy.py restrictions.default encasementlib.repy no_first_byte.repy no_fir
 }}}
 
 == Further Reference ==
-[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
+[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
 
-[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
+[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
