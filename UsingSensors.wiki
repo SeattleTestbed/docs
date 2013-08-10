@@ -133,7 +133,7 @@ if callfunc=="initialize":
 
 == Sensors on Android == 
 
-Smartphones often come with a number of embedded sensors and chips, such as an accelerometer, GPS, Wifi card, etc. New sensing applications therefore can turn an everyday phone into a smart sensor. As we have Seattle ported on Android platform ([https://seattle.cs.washington.edu/wiki/SeattleOnAndroid SeattleOnAndroid]), here is a brief introduction how to provide APIs that an Android application can use to make the sensor available to Seattle on Android.
+Smartphones often come with a number of embedded sensors and chips, such as an accelerometer, GPS, Wifi card, etc. New sensing applications therefore can turn an everyday phone into a smart sensor. As we have Seattle ported on Android platform ([https://seattle.poly.edu/wiki/SeattleOnAndroid SeattleOnAndroid]), here is a brief introduction how to provide APIs that an Android application can use to make the sensor available to Seattle on Android.
 
 === XMLRPC Library ===
 
