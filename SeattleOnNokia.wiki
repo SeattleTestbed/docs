@@ -56,7 +56,7 @@ Note: This part is '''optional''' and not required for the installation of Seatt
 [[BR]]
 
 === Directions ===
- 1. The tarball for the unit tests can be obtained [https://seattle.cs.washington.edu/static/nokiadev/seattle_testnokia-r3516.tgz here]. The tarball contains all of the repy files necessary to run the unit tests as a standalone.
+ 1. The tarball for the unit tests can be obtained [https://seattle.poly.edu/static/nokiadev/seattle_testnokia-r3516.tgz here]. The tarball contains all of the repy files necessary to run the unit tests as a standalone.
  2. Untar the file by doing the following:
 {{{
 tar zxf seattle_testnokia-r3516.tgz 
