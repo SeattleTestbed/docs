@@ -88,7 +88,7 @@ Did this change the picture quality?
 == Step 6 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.cs.washington.edu/geni/ Clearinghouse website].   If you don't already have an account, go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account, go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
 
 In the top pane, select WAN and choose 5 vessels, and click "Get".  At this point, you should have vessels (VMs) that you can use to run your code!
 
