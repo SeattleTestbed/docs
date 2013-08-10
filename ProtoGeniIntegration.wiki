@@ -85,7 +85,7 @@ Files that are required to setup and run the XML-RPC server:
 === Steps to setup XML-RPC server ===
 ----
  1. Create a folder where you want to have the XMLRPC server running from.
- 1. Make sure that you have either all the seattle library files in the folder or have the seattle libraries in your PYTHONPATH. If you do not have the Seattle library files you can get it from our svn at https://seattle.cs.washington.edu/svn/seattle/trunk/ Once you have checked out our repository, go into trunk and run the command:
+ 1. Make sure that you have either all the seattle library files in the folder or have the seattle libraries in your PYTHONPATH. If you do not have the Seattle library files you can get it from our svn at https://seattle.poly.edu/svn/seattle/trunk/ Once you have checked out our repository, go into trunk and run the command:
 {{{
 $> python preparetest.py /folder/to/copy/seattle_libraries_to
 }}}
