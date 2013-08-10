@@ -3,7 +3,7 @@
 [[BR]]
 == Introduction ==
 This page describes some of the steps that need to be taken in order to renew the SSL certificates for the various machines and servers that we have running for the Seattle projects. We have acquired our certificates for our server from [http://www.godaddy.com/ GoDaddy.com]. We have two main servers running for the Seattle project and they will need to be renewed when their expiration date approaches:
- * [http://seattle.cs.washington.edu Seattle]
+ * [http://seattle.poly.edu Seattle]
  * [http://seattleclearinghouse.poly.edu Seattle Clearinghouse]
 
 In order to check the current expiration date of the server, go to the site and click on the SSL verified blob right next to the address bar (might be green or blue color). Once you click on it a little dialog should pop up. Click on 'More Information' and another menu should pop up. Under the 'Security' section, click on 'View Certificate' and it should show you the SSL certificate with the expiration date.
