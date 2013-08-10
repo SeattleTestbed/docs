@@ -27,7 +27,7 @@ Explains how to go about deploying a new version of the code, which consists of 
     * To update existing clients (that is, to make the updated files available to clients that are checking the update site), run the following: 
       * `./push_update_to_all_clients.sh`
       * [attachment:blackbox-push-update-output.txt example output]
- 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use vessels from betabox's updated nodes), log on to the main seattle server (seattle.cs.washington.edu).
+ 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use vessels from betabox's updated nodes), log on to the main seattle server (seattle.poly.edu).
   1. Make sure you are logged in as someone who will have full access to the update and base installer directories.
   1. Figure out which public and private keys you will use.
   1. Open trunk/nodemanager/nmmain.py and find where the version constant is set.
