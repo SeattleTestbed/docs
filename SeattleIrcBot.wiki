@@ -5,7 +5,7 @@
 
 
 == Log storage ==
-!SeattleBot is configured to log to {{{/home/seattlebot/logs/ChannelLogger/freenode/#seattle/}}} on {{{seattle.cs}}}. The logs can also be [https://seattle.cs.washington.edu/irclogs/ viewed online].
+!SeattleBot is configured to log to {{{/home/seattlebot/logs/ChannelLogger/freenode/#seattle/}}} on {{{seattle.cs}}}. The logs can also be [https://seattle.poly.edu/irclogs/ viewed online].
 
 
 == Trac info in IRC ==
