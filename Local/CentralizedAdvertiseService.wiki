@@ -9,7 +9,7 @@ The Centralized Advertise daemon implements a hash table abstraction in a centra
 == Configuration ==
 ----
 
- * The advertise server files reside on the machine seattle.cs.washington.edu and the current version of the central advertise server is located in the directory /home/geni/advertiseserver_deployed.
+ * The advertise server files reside on the machine seattle.poly.edu and the current version of the central advertise server is located in the directory /home/geni/advertiseserver_deployed.
 
 [[BR]]
 == Deployment ==
@@ -25,7 +25,7 @@ This will update all the files, but will not start up the advertise server.
 == Starting/Stopping the Service ==
 ----
 === Starting Central Advertise Server ===
-To start the advertise server you must first be logged into seattle.cs.washington.edu as the user: geni. Note, that you have to log in as 'geni' rather then sudo into the account. We will deploy the central advertise server in 'SCREEN' mode, that way even if we close the connection to the machine, the central advertise server will keep running. If there was a previous version of SCREEN already running we want to re-open it and then start up the advertise server. Follow the commands below:
+To start the advertise server you must first be logged into seattle.poly.edu as the user: geni. Note, that you have to log in as 'geni' rather then sudo into the account. We will deploy the central advertise server in 'SCREEN' mode, that way even if we close the connection to the machine, the central advertise server will keep running. If there was a previous version of SCREEN already running we want to re-open it and then start up the advertise server. Follow the commands below:
 {{{
 geni@satya:~$ screen -r
 
