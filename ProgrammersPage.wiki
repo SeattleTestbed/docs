@@ -35,7 +35,7 @@ If you would prefer to use Repy V2, it is worthwhile to read through the followi
 
  * Refer  [wiki:RepyV1vsRepyV2 Difference between Repy V1 and Repy V2] to understand the new features introduced in Repy V2 and the difference between the existing features in Repy V1 and Repy V2.
 
- * There is a growing list of library code you can download and use with Repy (see [http://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib/ seattlelib] in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
+ * There is a growing list of library code you can download and use with Repy (see [http://seattle.poly.edu/svn/seattle/trunk/seattlelib/ seattlelib] in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
 
  * Documentation about the Seattle Standard Library can be seen at [wiki:SeattleLib]
 {{{
