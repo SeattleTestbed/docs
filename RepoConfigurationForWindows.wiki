@@ -5,7 +5,7 @@ This is a guide on setting up SVN for developers running Windows.
 
 
 == Prerequisites ==
-In order to access the SVN repository you must have a ssh account on `seattle.cs.washington.edu`. To gain access email seattle-devel@cs.
+In order to access the SVN repository you must have a ssh account on `seattle.poly.edu`. To gain access email seattle-devel@cs.
 
 You will need the following programs over the course of this guide:
 
@@ -109,10 +109,10 @@ You'll need `plink`, a command-line interface to the PuTTY back end. You can dow
 
 Open a command prompt, and run
 {{{
-c:\path\to\plink.exe -i c:\path\to\id_rsa.ppk user@seattle.cs.washington.edu
+c:\path\to\plink.exe -i c:\path\to\id_rsa.ppk user@seattle.poly.edu
 }}}
 
-If there are no errors, you'll have shell access to seattle.cs.washington.edu.
+If there are no errors, you'll have shell access to seattle.poly.edu.
 
 === Configure SVN to use the private key ===
 The next step is to configure SVN to use `plink` and the private key you made before.
@@ -134,7 +134,7 @@ Now it is time to verify that SVN can use `plink` to connect to the repository.
 
 Open a command prompt, and run 
 {{{
-svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+svn ls svn+ssh://USER@seattle.poly.edu/seattle/trunk/
 }}}
 
 It should display a list of the files in the repository.
@@ -144,7 +144,7 @@ If you got this far, you set up SVN correctly. Congrats!
 == Possible Errors ==
 
 === Can't create tunnel ===
-'''Command''': svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+'''Command''': svn ls svn+ssh://USER@seattle.poly.edu/seattle/trunk/
 
 '''Error''': "svn: Can't create tunnel: The parameter is incorrect."
 
@@ -153,7 +153,7 @@ If you got this far, you set up SVN correctly. Congrats!
 === Unable to use key file ===
 
 
-'''Command''': svn ls svn+ssh://USER@seattle.cs.washington.edu/seattle/trunk/
+'''Command''': svn ls svn+ssh://USER@seattle.poly.edu/seattle/trunk/
 
 '''Error''': "Unable to use key file path/to/id_rsa.ppk (unable to open file)"
 
