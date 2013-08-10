@@ -14,7 +14,7 @@ This page discusses our port of Seattle to the Android platform. You will be abl
 == Overview ==
 Here is a general outline of steps to be performed. You will get access to Python, Repy (Seattle's runtime), and the Seattle Node Manager, respectively.
  1. Set up [http://code.google.com/p/android-scripting/wiki/InstallingInterpreters Python for Android (Py4A)].
- 1. [wiki:RepoAccess Check out] the latest version of Seattle from SVN (r5656 and later should work): {{{svn co https://seattle.cs.washington.edu/svn/seattle/}}}
+ 1. [wiki:RepoAccess Check out] the latest version of Seattle from SVN (r5656 and later should work): {{{svn co https://seattle.poly.edu/svn/seattle/}}}
  1. Install Seattle on the command line. This won't give you autostart capabilities, though.
 
 (If you want to work on the SeattleOnAndroid GUI (not discussed here), import the code in {{{seattle/trunk/dist/android}}} as an "existing Android project" from within Eclipse. Then just "run as" on the android emulator or your device.)
@@ -66,7 +66,7 @@ Repy is the restricted version of Python Seattle supports. To install the Repy r
  1. Download a restrictions file [attachment:restrictions.test:wiki:RepyTutorial such as this one] to {{{/target}}}.
  1. Finally, upload the contents of {{{/path/to/files}}} to your Android device, e.g. using {{{adb push /target /seattle/on/android/directory}}}.
 
-If you want to allow Repy to collect data from your phone, you have to get a [https://seattle.cs.washington.edu/wiki/UsingSensors Seattle Sensor] running. [https://play.google.com/store/apps/details?id=at.univie.sensorium Here] is one implementation that interfaces lots of sensors on your Android device, and makes values available in a GUI and programmatically over an XML-RPC interface.
+If you want to allow Repy to collect data from your phone, you have to get a [https://seattle.poly.edu/wiki/UsingSensors Seattle Sensor] running. [https://play.google.com/store/apps/details?id=at.univie.sensorium Here] is one implementation that interfaces lots of sensors on your Android device, and makes values available in a GUI and programmatically over an XML-RPC interface.
 
 Congrats, now you can run {{{python repy.py restrictions.that_you_have your_script.repy}}} from the command line! An example test script can be found [https://seattle.poly.edu/attachment/wiki/SeattleOnAndroid/test_script.repy here]. 
 
