@@ -44,7 +44,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 
  For example, instead of using:
 {{{
-<a href="https://seattle.cs.washington.edu/html/index.html">Home Page</a>
+<a href="https://seattle.poly.edu/html/index.html">Home Page</a>
 }}}
  for a link to the home page, change it to:
 {{{
