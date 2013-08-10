@@ -18,7 +18,7 @@ This assignment consists of 11 steps and should take between 30-120 minutes to c
 == Step 1 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.cs.washington.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
 
 In the top pane, select LAN and choose 5 vessels, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
