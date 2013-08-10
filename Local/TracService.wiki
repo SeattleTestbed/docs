@@ -53,7 +53,7 @@ In order to ensure that Trac is hosted properly, we have to modify some apache c
 /etc/init.d/apache2 reload
 }}} 
 
-Here is what the apache configuration file on seattle.cs.washington.edu looks like:
+Here is what the apache configuration file on seattle.poly.edu looks like:
 '''default'''
 {{{
 #NameVirtualHost *:80
@@ -75,7 +75,7 @@ NameVirtualHost 128.208.3.86:443
     ServerSignature On
 
     <Directory />
-        redirect permanent /index.html https://seattle.cs.washington.edu
+        redirect permanent /index.html https://seattle.poly.edu
         Options FollowSymLinks
         AllowOverride None
     </Directory>
@@ -88,7 +88,7 @@ NameVirtualHost 128.208.3.86:443
 
     <Location /geni/>
         redirect permanent /geni/ https://seattlegeni.cs.washington.edu/geni/
-#       redirect permanent /geni/ http://seattle.cs.washington.edu/geniseattle_downtime.html
+#       redirect permanent /geni/ http://seattle.poly.edu/geniseattle_downtime.html
         Options FollowSymLinks
     </Location>
 
@@ -122,11 +122,11 @@ NameVirtualHost 128.208.3.86:443
  #      PythonHandler mod_python.testhandler
  #   </Location>
 
-    Redirect permanent /customized_installer/ http://seattle.cs.washington.edu/customized_installer/
+    Redirect permanent /customized_installer/ http://seattle.poly.edu/customized_installer/
 
     <Location /geni/>
         redirect permanent /geni/ https://seattlegeni.cs.washington.edu/geni/
-    #   redirect permanent /geni/ http://seattle.cs.washington.edu/geniseattle_downtime.html
+    #   redirect permanent /geni/ http://seattle.poly.edu/geniseattle_downtime.html
         Options FollowSymLinks
     </Location>
 
@@ -252,7 +252,7 @@ or if apache is already running
 
 Make sure that before any upgrade to Trac is done, that both the old Trac and SVN are backed up (look in the backup and restore section). The upgrade is done in 5 easy steps, to find the steps go to the [http://trac.edgewall.org/wiki/TracUpgrade TracUpgrade] site.
 
-'''Remember to use Screen in order to the upgrade, in case you get disconnected from seattle.cs.washington.edu before the upgrade is completely done'''
+'''Remember to use Screen in order to the upgrade, in case you get disconnected from seattle.poly.edu before the upgrade is completely done'''
 
 [[BR]]
 == Plugins ==
