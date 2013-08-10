@@ -17,7 +17,7 @@ At the bottom of this page, you can click and download:
 You can also checkout the latest code anonymously directly from SVN:
 {{{
 #!sh
-svn co http://seattle.cs.washington.edu/svn/seattle/trunk/ # get whole Seattle
+svn co http://seattle.poly.edu/svn/seattle/trunk/ # get whole Seattle
 cd trunk/repy/apps/tcp/ # goto root of library
 }}}
 
@@ -36,11 +36,11 @@ The code has the following layout:
   * units/ - testing how each function of a class works in isolation
 
 == Using the Library ==
-If you want to use the [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy single file]:
+If you want to use the [https://seattle.poly.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy single file]:
 {{{
 #!sh
 # 1. Get the single file version, '''tcp.repy'''
-wget https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy
+wget https://seattle.poly.edu/raw-attachment/wiki/TopSecretReadme/tcp.repy
 # 2. Add ''include tcp.repy'' to the top of your Repy file
 emacs file.repy
 # 3. Pre-process your Repy file:
@@ -49,7 +49,7 @@ python repypp.py file.repy file.out
 python repy.py restictions.file file.out
 }}}
 
-If you downloaded the [https://seattle.cs.washington.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tarball] or
+If you downloaded the [https://seattle.poly.edu/raw-attachment/wiki/TopSecretReadme/tcp.tgz tarball] or
 checked out the SVN, here's some basic steps to follow if your starting from a clean directory:
 {{{
 #!sh
