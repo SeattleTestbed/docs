@@ -290,7 +290,7 @@ Eric's thesis.   If you're not him, this isn't for you!
 ----
 (Tickets #267, #306, #307, #308, #309, #310 but this is the tip of the iceberg)
 
-Our project is growing and developing more and more complex code. As a result, we need relevant system and technical support to maintain our operations. This includes (1) making regular backups of essential data (2) maintaining accounts across our systems/wiki (3) documenting our setup so that its easy to reproduce/setup a version of seattle.cs.washington.edu from scratch (e.g. in case of crash) (4) adding robustness to our services by creating availability ping tests (5) running simple tests for essential services -- e.g. does the website work?, is mysql running?, etc (6) creating proper daemon scripts for daemons that we currently run as users by hand, etc.
+Our project is growing and developing more and more complex code. As a result, we need relevant system and technical support to maintain our operations. This includes (1) making regular backups of essential data (2) maintaining accounts across our systems/wiki (3) documenting our setup so that its easy to reproduce/setup a version of seattle.poly.edu from scratch (e.g. in case of crash) (4) adding robustness to our services by creating availability ping tests (5) running simple tests for essential services -- e.g. does the website work?, is mysql running?, etc (6) creating proper daemon scripts for daemons that we currently run as users by hand, etc.
 
 [[BR]]
 == ~~  Tutorial / TakeHomeAssignment clean up --- Justin (Justin) --- 2 tokens ~~ ==
