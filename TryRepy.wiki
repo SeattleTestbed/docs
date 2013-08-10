@@ -1,8 +1,8 @@
 = Try Repy! =
 
-Try Repy is a web-based software development and execution environment for Repy. It lets you experiment with Repy code from within your web browser. Just point your browser at a Try Repy server -- you don't need to install Seattle on your local machine. Behind the scenes, Try Repy leverages Seattle's [wiki:FutureRepyAPI#createvirtualnamespacecodename VirtualNamespaces] to provide Repy sandboxes for users. The web frontend is based on [https://c9.io/ Cloud9], an AJAX (Asynchronous !JavaScript and XML) source code editor / IDE.
+Try Repy is a web-based software development and execution environment for Repy. It lets you experiment with Repy code from within your web browser. Just point your browser at a Try Repy server -- you don't need to install Seattle on your local machine. Behind the scenes, Try Repy leverages Seattle's [wiki:RepyV2API#createvirtualnamespacecodename VirtualNamespaces] to provide Repy sandboxes for users. The web frontend is based on [https://c9.io/ Cloud9], an AJAX (Asynchronous !JavaScript and XML) source code editor / IDE.
 
-Below we will give a user-oriented introduction to Try Repy, and then talk about deploying one's own Try Repy server. More details are available  [http://seattle.cs.washington.edu/static/try_repy_thesis.pdf here] (Lukas Pühringer: Try Repy! A web-based Development and Execution Environment for Restricted Python. Bachelor's thesis, University of Vienna, 2011).
+Below we will give a user-oriented introduction to Try Repy, and then talk about deploying one's own Try Repy server. More details are available  [http://seattle.poly.edu/static/try_repy_thesis.pdf here] (Lukas Pühringer: Try Repy! A web-based Development and Execution Environment for Restricted Python. Bachelor's thesis, University of Vienna, 2011).
 
 [[BR]]
 
