@@ -9,11 +9,11 @@ You can obtain the experiment library by running the following commands:
 {{{
 mkdir experimentlibrary
 cd experimentlibrary
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/experimentmanager
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/seattlegeni/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/seattlelib
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/portability
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/repy
+svn export https://seattle.poly.edu/svn/seattle/trunk/experimentmanager
+svn export https://seattle.poly.edu/svn/seattle/trunk/seattlegeni/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
+svn export https://seattle.poly.edu/svn/seattle/trunk/seattlelib
+svn export https://seattle.poly.edu/svn/seattle/trunk/portability
+svn export https://seattle.poly.edu/svn/seattle/trunk/repy
 rm -rf seattlelib/test seattlelib/tests portability/tests repy/apps repy/tests repy/winAPItests
 mv experimentmanager/* seattlelib/* portability/* repy/* ./
 rmdir experimentmanager seattlelib portability repy
