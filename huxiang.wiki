@@ -28,7 +28,7 @@ There are a few restrictions that users must be aware of when hosting websites t
 
  2. Next, download the Seattle demokit and extract the files to its default folder "demokit"
 
- 3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.cs.washington.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here]) and extract its contents into the same folder as your Seattle demokit.
+ 3. Download the huxiang_webserver.tar file (either at the end of this page or [https://seattle.poly.edu/raw-attachment/wiki/huxiang/huxiang_webserver.tar here]) and extract its contents into the same folder as your Seattle demokit.
  * Whether than keeping the recently extracted files in a separate folder within the demokit directory, move a copy of each file into the main demokit folder.
 
  4. If you haven't done so already, register for a public and private key for Seattle Clearinghouse [https://seattleclearinghouse.poly.edu/html/register here], and download the publickey and privatekey file into your demokit folder
