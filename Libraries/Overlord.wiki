@@ -20,7 +20,7 @@ Also note that Overlord depends on Experiment Library functions that make secure
 
 Once all of these dependencies are squared away, you can get a copy of Overlord by running the following command:
 {{{
-svn export https://seattle.cs.washington.edu/svn/seattle/trunk/overlord/overlord.py
+svn export https://seattle.poly.edu/svn/seattle/trunk/overlord/overlord.py
 }}}
 
 
