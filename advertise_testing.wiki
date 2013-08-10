@@ -2,7 +2,7 @@
 
 To run the V2 server, please use the file advertise_v2.repy located here:
 
-[https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2/seattlelib/advertiseserver_v2.repy] (Download link at bottom of page)
+[https://seattle.poly.edu/browser/seattle/branches/repy_v2/seattlelib/advertiseserver_v2.repy] (Download link at bottom of page)
 
 Using the following line from the terminal:
 
@@ -10,7 +10,7 @@ Using the following line from the terminal:
 python repy.py restrictions.advertiseserver dylink.repy advertise_v2.repy -v
 }}}
 
-Note that you will need to copy the appropriate dependencies from the repy_v2 repository, located here: [https://seattle.cs.washington.edu/browser/seattle/branches/repy_v2]. The seattlelib and repy directories contain the dependencies you will need. This can take up to a minute to execute because dylink.repy is slow.
+Note that you will need to copy the appropriate dependencies from the repy_v2 repository, located here: [https://seattle.poly.edu/browser/seattle/branches/repy_v2]. The seattlelib and repy directories contain the dependencies you will need. This can take up to a minute to execute because dylink.repy is slow.
 
 Additionally, there is an incompatibility with emulfile.repy. It's no big deal, but on line 47 you must change
 
@@ -30,7 +30,7 @@ Alternatively you can make sure none of the server dependencies have capital let
 
 advertise_test_routine.repy is actually a repy v1 test file that works with the v2 server, because from a client perspective the two servers operate in the same way. It is located in the trunk's seattlelib file, here:
 
-[https://seattle.cs.washington.edu/browser/seattle/trunk/seattlelib/advertise_test_routine.repy]
+[https://seattle.poly.edu/browser/seattle/trunk/seattlelib/advertise_test_routine.repy]
 
 As with the server, you will need to load dependencies for this, which can be found in the trunk's seattlelib and repy folders.
 
