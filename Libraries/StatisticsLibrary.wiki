@@ -1,5 +1,5 @@
 == Statistics Library ==
-This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data. The library primarily deals with a custom data structure called 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid').  You can find the [https://seattle.cs.washington.edu/browser/seattle/trunk/node_stats_and_info/stat_lib Statistics Library] in the 'node_stats_and_info' folder in trunk.
+This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data. The library primarily deals with a custom data structure called 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid').  You can find the [https://seattle.poly.edu/browser/seattle/trunk/node_stats_and_info/stat_lib Statistics Library] in the 'node_stats_and_info' folder in trunk.
 
 ----
 == Structure of 'node_dicts' ==
