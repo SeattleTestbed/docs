@@ -1,6 +1,6 @@
 = Managing Sprints =
 
-The [http://seattle.cs.washington.edu/svn/seattle/trunk/milestones.txt milestones.txt file] located in /seattle/trunk/milestones.txt maintains sprint information for Seattle strike forces.
+The [http://seattle.poly.edu/svn/seattle/trunk/milestones.txt milestones.txt file] located in /seattle/trunk/milestones.txt maintains sprint information for Seattle strike forces.
 
 == milestones.txt format ==
 
