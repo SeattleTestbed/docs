@@ -53,7 +53,7 @@ You will need to get the nacl_repy branch of Seattle from SVN.
 
 {{{
 #!sh
-$ svn co https://seattle.cs.washington.edu/svn/seattle/branches/nacl_repy
+$ svn co https://seattle.poly.edu/svn/seattle/branches/nacl_repy
 }}}
 
 Once that happens, run the {{{preparetest.py}}} script to copy the files into a directory of your choice (existing files there will be removed).   For example, to use ~/test-fuse do the following:
