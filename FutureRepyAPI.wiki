@@ -1,2 +1,1 @@
-Please refer to page : 
-   https://seattle.poly.edu/wiki/RepyV2API
+#REDIRECT [[RepyV2API:]]
