@@ -1,1 +1,1 @@
-#REDIRECT [[RepyV2API]]
+#REDIRECT [[https://seattle.poly.edu/wiki/RepyV2API]]
