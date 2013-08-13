@@ -39,7 +39,7 @@ python repy.py <restrictions file> encasementlib.repy dylink.repy check_api.repy
  * It should be noted, however, that this could mask some bugs related to openfile reporting that a file exists when it shouldn't, or errors like this. I imagine these would be rare though.
 
 == API Calls Currently Not Verified by CheckAPI ==
-Some API calls are not currently being verified by CheckAPI. Below is a list of the calls that are currently not supported with a brief explanation as to why they are not included. If an API call from [https://seattle.poly.edu/wiki/FutureRepyAPI FutureRepyAPI] is not included in this list it means it is supported by CheckAPI.
+Some API calls are not currently being verified by CheckAPI. Below is a list of the calls that are currently not supported with a brief explanation as to why they are not included. If an API call from [https://seattle.poly.edu/wiki/RepyV2API RepyV2API] is not included in this list it means it is supported by CheckAPI.
 
  * sleep(), getruntime()
     * Not modeling time.
