@@ -1,0 +1,21 @@
+= Getting Started =
+
+This page has useful information for prospective contributors to the Seattle project.
+
+[[BR]]
+== Welcome ==
+Thank you for your interest in joining the Seattle project.  To bring you quickly up to speed to being an active contributor, we ask that you do the following:
+
+ 1. Start by reading the wiki pages on Seattle.  The [https://seattle.poly.edu/wiki main wiki page] is a good start.  This will give you a better sense of what Seattle is and how its structured.
+
+ 2. Pick a few tickets from the ticket system to work on.  You should look for tickets with the [https://seattle.poly.edu/search?q=newcomer&noquickjump=1&ticket=on Newcomer label].  Before you start working on a ticket, reassign the ticket to yourself so that other newcomers don't end up duplicating your work.  Comment on any findings or insights that you may have, and also post any concerns or questions that arise.
+
+ 3. When you are done with your ticket, make sure your code complies to our [wiki:CodingStyle code style guidelines].  Have someone else on the team review your code.  When they give you the OK, contact Justin and he will provide feedback if necessary.  If your code is good, someone will create an SVN account for you, and you will be able to commit your changes to SVN.
+
+ 4. After completing the above, you should contact Justin so that you can join the regular weekly group meetings.
+
+[[BR]]
+== Stuck? ==
+We are willing to provide you with assistance, but you must first demonstrate to us that you have at least attempted to solve the problem.  Questions should be concise and to-the-point.  Take a look at Eric Raymond's "[http://www.catb.org/esr/faqs/smart-questions.html How To Ask Questions The Smart Way]".
+
+If you are still stuck, send an e-mail to the Seattle Developers google group at ''!seattle-devel@googlegroups.com''.  You can also stop by Justin's lab at RH 221 to interact with other students working on Seattle and its related projects.
