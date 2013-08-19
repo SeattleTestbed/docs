@@ -21,6 +21,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:SeattleLib Seattle Standard Library] reference
    * [wiki:PortingPythonToRepy Porting Python to Repy Guide]
    * [wiki:RepyHelper Importing Repy code into Python using repyhelper]
+   * [wiki:RepyV1vsRepyV2 Difference between Repy V1 and Repy V2]
 
  * Testing
    * '''[wiki:UnitTestFramework Writing Tests for Seattle's Unit Test Framework]'''
