@@ -17,20 +17,35 @@ This page describes following :
 Repy V1
 {{{
 #!python
-print "Hello World!"
-print "Hello World!" + "\n"
-print (str(9000) + " is an integer value.")
-print ("Python is " + "easier than C!")
-
+    print "By default print adds new line character"
+    print "Two string messages" , "can be concatenated using comma(,)"
+    print "Two string messages" + " can be concatenated using plus(+) sign too"
+    print "Message can be enclosed only in double quotes."
+    print ("Message can be enclosed in paranthesis followed by double quotes too")
+Output:
+    By default print adds new line character
+    Two string messages can be concatenated using comma(,)
+    Two string messages can be concatenated using plus(+) sign too
+    Message can be enclosed only in double quotes.
+    Message can be enclosed in paranthesis followed by double quotes too
  }}}
 
 Repy V2
 {{{
 #!python
-log ("Hello World!")
-log ("Hello World!", "\n")
-log (str(9000) + " is an integer value.")
-log ("Python is " + "easier than C!")
+    log ("log does not add new line character by default.")
+    log ("Explicitly line feed character should be used. \n")
+    log ("Two string messages" , "can be concatenated using comma(,) \n")
+    log ("Two string messages" + " can be concatenated using plus(+) sign too \n")
+    log ("Message can be enclosed only within parathesis followed by double quotes")
+
+Output:
+    log does not add new line character by default. Explicitly line feed character should be used. 
+    Two string messages can be concatenated using comma(,) 
+    Two string messages can be concatenated using plus(+) sign too 
+    Message can be enclosed only within parathesis followed by double quotes
+
+
  }}}
 
 === Files === 
