@@ -1,6 +1,8 @@
 = Contributor Portal =
 
 This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
+
+'''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
  
  * Accessing SVN, subscribing to the mailing list, running code from SVN, using the wiki
    * '''[wiki:Local/RepoAccess SVN access] instructions'''
