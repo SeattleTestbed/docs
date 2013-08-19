@@ -20,15 +20,15 @@ Repy V1
     print "By default print adds new line character"
     print "Two string messages" , "can be concatenated using comma(,)"
     print "Two string messages" + " can be concatenated using plus(+) sign too"
-    print "Message can be enclosed only in double quotes."
-    print ("Message can be enclosed in paranthesis followed by double quotes too")
+    print "Message can be enclosed in double quotes."
+    print ("Message can be enclosed in parentheses followed by double quotes too")
 
 Output:
     By default print adds new line character
     Two string messages can be concatenated using comma(,)
     Two string messages can be concatenated using plus(+) sign too
-    Message can be enclosed only in double quotes.
-    Message can be enclosed in paranthesis followed by double quotes too
+    Message can be enclosed in double quotes.
+    Message can be enclosed in parentheses followed by double quotes too
  }}}
 
 Repy V2
@@ -38,35 +38,43 @@ Repy V2
     log ("Explicitly line feed character should be used. \n")
     log ("Two string messages" , "can be concatenated using comma(,) \n")
     log ("Two string messages" + " can be concatenated using plus(+) sign too \n")
-    log ("Message can be enclosed only within parathesis followed by double quotes")
+    log ("Message can be enclosed only within parentheses followed by double quotes")
 
 Output:
     log does not add new line character by default. Explicitly line feed character should be used. 
     Two string messages can be concatenated using comma(,) 
     Two string messages can be concatenated using plus(+) sign too 
-    Message can be enclosed only within parathesis followed by double quotes
-
-
+    Message can be enclosed only within parentheses followed by double quotes
  }}}
 
 === Files === 
 
 ==== Opening File ====
-{{{open}}} command in Repy V1 is replaced by {{{openfile}}} command in Repy V2
+{{{open}}} command in Repy V1 is replaced by {{{openfile}}} command in Repy V2. 
 
 Repy V1
 {{{
 #!python
-open ("test.txt", True)
-  True  : Create test.txt file if it does not exist.
-  False : Do not create test.txt file if it does not exist.
+file object = open(file_name [, access_mode])
+
+Parameter details:
+ file_name: It is a string value that contains the name of the file that you want to access.
+ access_mode: The access_mode determines the mode in which the file has to be opened,
+  - r    : Opens file for readonly.
+  - r+   : Opens file for read and write both. File would not be created if it does not exist
+  - w/w+ : Opens file for read and write both.File would be created if it does not exist
+  - a/a+ : Opens file for append.File would be created if it does not exist.
 }}}
 Repy V2
 {{{
 #!python
-openfile("test.txt",True)
-  True  : Create test.txt file if it does not exist.
-  False : Do not create test.txt file if it does not exist.
+file object =  openfile(file_name,create)
+ 
+Parameter details:
+ file_name: It is a string value that contains the name of the file that you want to access.
+ create   : It is a bool value, that specifies if the file should be created if it does not exist. If the file  
+            exists, this flag has no effect.
+ Note: By default each file is opened in both read and write mode.
 }}}
 
 ==== Writing to the File ====
