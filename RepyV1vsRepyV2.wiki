@@ -47,6 +47,8 @@ Output:
     Message can be enclosed only within parentheses followed by double quotes
  }}}
 
+For more details on RepyV2 {{{log}}} function,please refer  [wiki:RepyV2API#logargs Repy V2 API log section]
+
 === Files === 
 
 ==== Opening File ====
@@ -77,6 +79,8 @@ Parameter details:
  Note: By default each file is opened in both read and write mode.
 }}}
 
+For more details on RepyV2 {{{openfile}}} function,please refer  [wiki:RepyV2API#openfilefilenamecreate Repy V2 API openfile section]
+
 ==== Closing file ====
 
 Syntax for closing a file remains same in Repy V1 and Repy V2. 
@@ -86,10 +90,10 @@ file_object.close()
 }}}
 
 Only difference is, in Repy V1 after closing the file if any input/output operations are performed which requires that the file be opened would raise a general {{{Exception}}} with a message indicating that given operation is not allowed. Whereas, in Repy V2 a more specific exception {{{FileClosedError}}} would be raised. This will help user to easily debug his issue.
- 
 
+For more details on RepyV2 {{{close}}} function,please refer  [wiki:RepyV2API#file.close Repy V2 API close section]
 
-==== Reading from the file ====
+==== Reading File ====
 {{{read}}} command used in Repy V1 to read data from a file, is replaced by {{{readat}}} in Repy V2
 
 Repy V1
@@ -97,32 +101,55 @@ Repy V1
 #!python
 fileObject.read(size)
   size : Optional numeric argument. If size is not specified then
-         entire contents of the file are read. If specified size bytes are read and returned. 
+         entire contents of the file are read. If size is specified than equivalent number of bytes are  
+         returned.By default bytes are always read from the beginning of the file.
 }}}
 Repy V2
 {{{
 #!python
 fileObject.readat(size,offset)
-  size   : Mandatory argument. None, indicates read the entire contents of the file.
-  offset : Seek to a specific offset before reading 
+  size   : Mandatory numeric argument. None, indicates read the entire contents of the file.
+  offset : Mandatory numeric argument.Indicates seek to a specific offset before reading. '0' indicates start  
+           reading from the beginning of the file 
 }}}
 
+In Repy V1, for reading a file from a specific offset, user would first need to call following function: 
+{{{
+#!python
+fileObject.seek(offset, from_what)
+   offset    : The offset into the file
+   from_what : The position is computed from adding offset to a reference point; the reference point is 
+               selected by the from_what argument
+               0 : Indicates beginning of the file
+               1 : Indicates current file position
+               2 : Indicates end of the file 
+                   Its an optional argument. By default it uses 0 i.e. beginning of the file
 
+}}}
 
-==== Writing to the File ====
-{{{write}}} command used in Repy V1 to write data to a file, is replaced by {{{writeat}}} in Repy V2
+For more details on RepyV2 {{{readat}}} function,please refer  [wiki:RepyV2API#file.readatsizelimitoffset Repy V2 API readat section]
+
+==== Writing to File ====
+{{{write}}} command used in Repy V1 to write data to a file, is replaced by {{{writeat}}} in Repy V2.
 
 Repy V1
 {{{
 #!python
-fileObject.write("Data to write!!\n")
+fileObject.write(data)
+  data : Data to be written in the file
 }}}
 Repy V2
 {{{
 #!python
-fileObject.writeat("Data to write!!\n",offset)
-  offset: An absolute offset to write data at in the file.
+fileObject.writeat(data,offset)
+  data  : Data to be written in the file
+  offset: Indicates seek to a specific offset before writing. '0' indicates start writing  
+          from the beginning of the file. 
 }}}
+
+In Repy V1, for writing to a file from a specific offset, user would first need to call {{{seek(offset, from_what)}}} function.
+
+For more details on RepyV2 {{{writeat}}} function,please refer  [wiki:RepyV2API#file.writeatdataoffset Repy V2 API writeat section]
 
 == Improved Features of Repy V2 ==
 
