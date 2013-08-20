@@ -116,7 +116,7 @@ For details on exceptions raised by RepyV2 {{{writeat}}} function,please refer  
 
 ==== Getting host by name ====
 
-{{{gethostbyname_ex}}} is Repy V1 is replaced by {{{gethostbyname}}} in Repy V2
+{{{gethostbyname_ex}}} in Repy V1 is replaced by {{{gethostbyname}}} in Repy V2
 
 Repy V1
 {{{
@@ -142,6 +142,34 @@ gethostbyname(hostname)
 }}}
 
 For details on exceptions raised by RepyV2 {{{gethostbyname}}} function,please refer  [wiki:RepyV2API#gethostbynamename Repy V2 API gethostbyname section]
+
+==== Sending message to destination host/port ====
+{{{sendmess}}} in Repy V1 is replaced by {{{sendmessage}}} in Repy V2
+
+Repy V1
+{{{
+#!python
+sendmess(desthost, destport, message, localip, localport)
+   desthost: The host to send a message to.
+   destport: The port to send the message to.
+   message : The message to send.
+   localhost : (optional)The local IP to send the message from. 
+   localport : (optional)The local port to send the message from (0 for a random port).
+
+}}}
+
+Repy V2
+{{{
+#!python
+sendmessage(destip, destport, message, localip, localport)
+   desthost: The host to send a message to.
+   destport: The port to send the message to.
+   message : The message to send.
+   localhost : (optional)The local IP to send the message from. 
+   localport : (optional)The local port to send the message from (0 for a random port).
+}}}
+
+For details on exceptions raised by RepyV2 {{{sendmessage}}} function,please refer  [wiki:RepyV2API#sendmessagedestipdestportmessagelocaliplocalport Repy V2 API sendmessage section]
 
 === Threading functions ===
 
