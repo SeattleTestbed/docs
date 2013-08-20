@@ -55,7 +55,7 @@ Output:
 Repy V1
 {{{
 #!python
-file object = open(file_name [, access_mode])
+file file_object = open(file_name [, access_mode])
 
 Parameter details:
  file_name: It is a string value that contains the name of the file that you want to access.
@@ -68,29 +68,26 @@ Parameter details:
 Repy V2
 {{{
 #!python
-file object =  openfile(file_name,create)
+file file_object =  openfile(file_name,create)
  
 Parameter details:
- file_name: It is a string value that contains the name of the file that you want to access.
- create   : It is a bool value, that specifies if the file should be created if it does not exist. If the file  
+ file_name: String value that contains the name of the file that you want to access.
+ create   : Bool value, that specifies if the file should be created if it does not exist. If the file  
             exists, this flag has no effect.
  Note: By default each file is opened in both read and write mode.
 }}}
 
-==== Writing to the File ====
-{{{write}}} command used in Repy V1 to write data to a file, is replaced by {{{writeat}}} in Repy V2
+==== Closing file ====
 
-Repy V1
+Syntax for closing a file remains same in Repy V1 and Repy V2. 
 {{{
 #!python
-fileObject.write("Data to write!!\n")
+file_object.close()
 }}}
-Repy V2
-{{{
-#!python
-fileObject.writeat("Data to write!!\n",offset)
-  offset: An absolute offset to write data at in the file.
-}}}
+
+Only difference is, in Repy V1 after closing the file if any input/output operations are performed which requires that the file be opened would raise a general {{{Exception}}} with a message indicating that given operation is not allowed. Whereas, in Repy V2 a more specific exception {{{FileClosedError}}} would be raised. This will help user to easily debug his issue.
+ 
+
 
 ==== Reading from the file ====
 {{{read}}} command used in Repy V1 to read data from a file, is replaced by {{{readat}}} in Repy V2
@@ -108,6 +105,23 @@ Repy V2
 fileObject.readat(size,offset)
   size   : Mandatory argument. None, indicates read the entire contents of the file.
   offset : Seek to a specific offset before reading 
+}}}
+
+
+
+==== Writing to the File ====
+{{{write}}} command used in Repy V1 to write data to a file, is replaced by {{{writeat}}} in Repy V2
+
+Repy V1
+{{{
+#!python
+fileObject.write("Data to write!!\n")
+}}}
+Repy V2
+{{{
+#!python
+fileObject.writeat("Data to write!!\n",offset)
+  offset: An absolute offset to write data at in the file.
 }}}
 
 == Improved Features of Repy V2 ==
