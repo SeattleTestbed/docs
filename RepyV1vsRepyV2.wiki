@@ -115,7 +115,9 @@ For details on exceptions raised by RepyV2 {{{writeat}}} function,please refer  
 === Network functions ===
 
 ==== Getting host by name ====
+
 {{{gethostbyname_ex}}} is Repy V1 is replaced by {{{gethostbyname}}} in Repy V2
+
 Repy V1
 {{{
 #!python
