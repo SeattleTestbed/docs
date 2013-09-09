@@ -16,7 +16,7 @@ For a less technical overview of Seattle check out [https://seattle.poly.edu/htm
  * Community-driven and free.
  * Scalable architecture.
  * Non-intrusive and safe for end users.
- * Already installed on about 1,000 machines across hundreds of universities worldwide.
+ * Already installed on tens of thousands of computers around the world.
  * Provides access to systems behind a wide array of network technologies.
  * Easy to learn, based on a subset of [http://www.python.org/ Python].
  * Simple and clean programs:
@@ -26,6 +26,7 @@ For a less technical overview of Seattle check out [https://seattle.poly.edu/htm
    * Windows (XP or newer)
    * Mac OS X
    * Linux
+   * Many BSD variants
    * Portable devices (Tablets, Android phones, jailbroken iPhones/iPads)
 
 == Is Seattle for me? ==
@@ -42,6 +43,7 @@ There is a wide variety of other platforms and testbeds readily available, each 
  * [http://boinc.berkeley.edu/ BOINC] and [http://www.cs.wisc.edu/condor/ Condor] also allow users to donate resources. However, the emphasis is on computational power, with a preference toward using a few supercomputers rather than a large group of cheaper PCs. Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
  * [http://aws.amazon.com/ec2/ Amazon's EC2] is a paid service that provides operating-system virtual machines. Seattle instead relies on donated resources and provides programming-language virtual machines. 
  * [http://code.google.com/appengine/ Google's AppEngine] executes programs written in a constrained version of Python and supports high-level abstractions (such as global non-relational storage). It is useful for building locality-oblivious web applications that fit the HTTP request/response protocol model. However, its transparent handling of scalability and locality make it unsuitable for those wishing to teach or otherwise address these fundamental topics of distributed systems. !AppEngine is run on Google-controlled resources instead of donated resources.
+ * [https://www.torproject.org/ The Tor Project] is a widely used platform that protects users from Internet surveillance.   While some users have built Seattle applications for this purpose, simply installing Seattle does not provide any direct privacy benefits.   
  * [wiki:UnderstandingSeattle/RelatedWork More related work...]
 
 == How do I learn more? ==
