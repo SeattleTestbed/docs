@@ -47,7 +47,7 @@ You should assume that an adversary will be supplying the program and data to ru
 == What To Turn In ==
 ----
 
-You must turn in a '''zip-file or tarball''' containing the following:
+You must turn in the URL and SHA1 hash of the head of your github project.   The project must contain the following:
 
  1. Detailed documentation explaining the file format and operations supported by your turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. If you did not do the extra credit, you must explain in the document why you believe your sandbox is turing-complete.   This must be in PDF format.
  1. The source code for the turing-complete sandbox
