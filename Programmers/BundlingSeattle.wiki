@@ -1,7 +1,5 @@
 It is easy to include Seattle alongside your application.  These instructions are not absolute; they can be tweaked to suit your specific use case.
 
-Bundling Seattle for iOS and Android are slightly more complicated, and will be included here in the future.  Getting a Python interpreter to run from a specific application on those platforms is not as trivial as it is with Windows/OSX/Linux.
-
 [[BR]]
  == Requirements ==
 ----
