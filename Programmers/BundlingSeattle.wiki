@@ -1,17 +1,48 @@
-It is easy to include Seattle alongside your application.  These instructions are not absolute; they can be tweaked to suit your specific use case.
+Suppose that an application that you are developing requires some calculation intensive task that you'd like to run on the Seattle network.  In this case, you need to bundle (i.e. include) Seattle alongside your application.  This is trivial to do on Windows, OSX and Linux machines.
 
 [[BR]]
  == Requirements ==
 ----
-In order for Seattle to function, you need to make sure that Python 2.5 or Python 2.6 is installed on your target system.  The Windows installer has Python 2.5 bundled alongside with it.
+In order for Seattle to function, you need to make sure that Python 2.5 or Python 2.6 is installed on your target system.  The Windows installer has Python 2.5 bundled alongside with it, so manual installation of Python is not 
+
+[[BR]]
+ == Note for Windows machines ==
+----
+When installing on Windows machines, you will find *.bat files instead of *.sh files.  The *.sh files are Unix script files for Linux/OSX.  You can simply run the *.bat files with the same filename.
 
 [[BR]]
  == Bundling Seattle ==
 ----
- 1. Download the [https://seattleclearinghouse.poly.edu/html/getdonations Seattle installer] under your Clearinghouse account.  This will provide your Clearinghouse account with donation credits for each installation.  You need to include this Seattle installer alongside your application's installer.
 
- 2. After installing your application, unzip/untar the Seattle installer and run its installer.  This can be done by running {{{install.sh}}} or {{{install.bat}}}, depending on the operating system you are on.
+[[BR]]
+ === Download the Seattle Installer ===
+Download the [https://seattleclearinghouse.poly.edu/html/getdonations Seattle installer] for your target operating system under your Clearinghouse account.  This will provide your Clearinghouse account with donation credits for each installation.
 
- 3. After this is done, start Seattle by running {{{start_seattle.sh}}} or {{{start_seattle.bat}}}, again depending on the target operating system.  This will start 2 scripts: {{{nmmain.py}}} and {{{softwareupdater.py}}}.  nmmain.py is the node manager that interacts with Seattle and also manages the vessels that will run on your target system.  softwareupdater.py will periodically check for the latest version of Seattle, and update your target systems as necessary.
+[[BR]]
+ === Bundle the Seattle Installer ===
+Take the installer from the previous step and include it alongside your application's installer.  This step depends largely on your application's installer, refer to your installer's manual for instructions.
 
- 4. Before uninstalling your application, be sure to stop and then uninstall Seattle before doing so.  This can be done by running the {{{stop_seattle.sh}}} and {{{uninstall.sh}}} scripts for Unix-like systems, or {{{stop_seattle.bat}}} and {{{uninstall.bat}}} for Windows.
+[[BR]]
+ === Extract and Install Seattle ===
+In your application's installer, unzip/untar the Seattle installer.  Inside the extracted folder, you will find {{{install.sh}}}.  Run this and Seattle will be installed.  From this point on, Seattle will automatically start when the target system is booted up.
+
+[[BR]]
+ === Start Seattle ===
+You can start Seattle by running {{{start_seattle.sh}}}.  You are done!
+
+This will start 2 scripts: {{{nmmain.py}}} and {{{softwareupdater.py}}}.  nmmain.py is the node manager that interacts with Seattle and also manages the vessels that will run on your target system.  softwareupdater.py will periodically check for the latest version of Seattle, and update your target systems as necessary.
+
+[[BR]]
+ == Removing Seattle ==
+----
+When the user does not want to continue using your application, you must be sure to also remove Seattle as you are uninstalling your application.  This is very easy to do.
+
+[[BR]]
+ === Stop Seattle ===
+Before uninstalling Seattle, you must first stop Seattle.  You do this by running {{{stop_seattle.sh}}} from the Seattle directory.  This will stop Seattle from auto-starting on system boot.  
+
+[[BR]]
+ === Uninstall Seattle ===
+You can now uninstall Seattle.  This can be done by running {{{uninstall.sh}}}.
+
+After uninstalling Seattle, you can delete the directory that you extracted Seattle to.
