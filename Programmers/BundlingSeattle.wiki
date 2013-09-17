@@ -3,46 +3,14 @@ Suppose that an application that you are developing requires some calculation in
 [[BR]]
  == Requirements ==
 ----
-In order for Seattle to function, you need to make sure that Python 2.5 or Python 2.6 is installed on your target system.  The Windows installer has Python 2.5 bundled alongside with it, so manual installation of Python is not 
-
-[[BR]]
- == Note for Windows machines ==
-----
-When installing on Windows machines, you will find *.bat files instead of *.sh files.  The *.sh files are Unix script files for Linux/OSX.  You can simply run the *.bat files with the same filename.
+In order for Seattle to function, you need to make sure that Python 2.5 or Python 2.6 is installed on your target system.  The Windows installer has Python 2.5 bundled alongside with it, so manual installation of Python is not needed.
 
 [[BR]]
  == Bundling Seattle ==
 ----
 
-[[BR]]
- === Download the Seattle Installer ===
-Download the [https://seattleclearinghouse.poly.edu/html/getdonations Seattle installer] for your target operating system under your Clearinghouse account.  This will provide your Clearinghouse account with donation credits for each installation.
+Download the [https://seattleclearinghouse.poly.edu/html/getdonations Seattle installer] for your target operating system under your Clearinghouse account.  This will provide your Clearinghouse account with donation credits for each installation.  If you do not use installers from your account, then your Clearinghouse account will not be credited with these donations.
 
-[[BR]]
- === Bundle the Seattle Installer ===
-Take the installer from the previous step and include it alongside your application's installer.  This step depends largely on your application's installer, refer to your installer's manual for instructions.
+You then take the installer from the previous step and include it alongside your application's installer.  This step depends largely on your application's installer, refer to your installer's manual for instructions.  From this point onwards, you follow a standard Seattle installation procedure.  Seattle will automatically start itself when the user's machine reboots.
 
-[[BR]]
- === Extract and Install Seattle ===
-In your application's installer, unzip/untar the Seattle installer.  Inside the extracted folder, you will find {{{install.sh}}}.  Run this and Seattle will be installed.  From this point on, Seattle will automatically start when the target system is booted up.
-
-[[BR]]
- === Start Seattle ===
-You can start Seattle by running {{{start_seattle.sh}}}.  You are done!
-
-This will start 2 scripts: {{{nmmain.py}}} and {{{softwareupdater.py}}}.  nmmain.py is the node manager that interacts with Seattle and also manages the vessels that will run on your target system.  softwareupdater.py will periodically check for the latest version of Seattle, and update your target systems as necessary.
-
-[[BR]]
- == Removing Seattle ==
-----
-When the user does not want to continue using your application, you must be sure to also remove Seattle as you are uninstalling your application.  This is very easy to do.
-
-[[BR]]
- === Stop Seattle ===
-Before uninstalling Seattle, you must first stop Seattle.  You do this by running {{{stop_seattle.sh}}} from the Seattle directory.  This will stop Seattle from auto-starting on system boot.  
-
-[[BR]]
- === Uninstall Seattle ===
-You can now uninstall Seattle.  This can be done by running {{{uninstall.sh}}}.
-
-After uninstalling Seattle, you can delete the directory that you extracted Seattle to.
+To monitor if Seattle is running, you can check for {{{python nmmain.py}}} and {{{python softwareupdater.py}}} via {{{ps}}} on Unix-like machines.  nmmain.py is the node manager that interacts with Seattle and also manages the vessels that will run on your target system.  softwareupdater.py will periodically check for the latest version of Seattle, and update your target systems as necessary.
