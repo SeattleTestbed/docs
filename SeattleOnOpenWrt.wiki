@@ -17,7 +17,7 @@ opkg install kmod-fs-ext4
 opkg install block-mount
 mkdir /mnt/key
 }}}
-Additionally {{{/etc/fstab}}} needs to be modified in order to automount the pen drive if seattle should be started automatically on system startup:
+Additionally {{{/etc/fstab}}} needs to be modified in order to automount the pen drive if Seattle should be started automatically on system startup:
 {{{
 config 'mount'
   option 'target' '/mnt/key'
@@ -44,7 +44,7 @@ export PATH=$PATH:/opt/usr/bin:/opt/usr/sbin
 export LD_LIBRARY_PATH=/opt/lib:/opt/usr/lib
 
 opkg install ldconfig
-echo ``/opt/usr/lib'' > /etc/ld.so.conf
+echo "/opt/usr/lib" > /etc/ld.so.conf
 ldfconfig 
 }}}
 
