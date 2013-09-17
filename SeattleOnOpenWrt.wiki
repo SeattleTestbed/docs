@@ -1,4 +1,4 @@
-= OpenWrt on Seattle =
+= Openwrt on Seattle =
 
 [https://openwrt.org/ OpenWrt] is a lightweight Linux System for embedded devices such as routers. This article shows how to install and run Seattle on OpenWrt using the current Linux Seattle Installer.
 
@@ -27,7 +27,7 @@ config 'mount'
   option 'enabled' '1'                                                                                                                                                       
   option 'enabled_fsck' '0'  
 }}}
-OpenWrt's packackemanger [http://wiki.openwrt.org/doc/techref/opkg opkg] can be configured to install packages on an external device. The following command install Python 2.6 on a previously mounted usb pen drive. Python 2.6 is preferred over Python 2.7 because of a bug that causes Seattle's Unit Tests to fail.
+OpenWrt's packackemanger [http://wiki.openwrt.org/doc/techref/opkg opkg] can be configured to install packages on an external device. The following command install Python 2.6 on a previously mounted usb pen drive. Python 2.6 is preferred over Python 2.7 because of a [http://bugs.python.org/issue5099 bug] that causes Seattle's Unit Tests to fail.
 {{{
 echo ``dest usb /mnt/key'' >> /etc/opkg.conf
 
@@ -49,7 +49,7 @@ ldfconfig
 }}}
 
 == Installation ==
-Actually the Linux Seattle Installer already installs Seattle on OpenWrt without any need for code modification. There are some complaints though. Two of them can be ignored. First, the installer unsuccessfully greps for a line in "/proc/cpuinfo" and therefore fails the cpu resource benchmark. And second, there is a warning that Seattle was not properly started even though it was ticket:1195. One problem that remains is that Seattle won't start automatically on system startup ticket:1194. There is not necessarily a complaint about this in the installation output. An alternative to start Seattle on boot is to use "init.d'", e.g. /etc/init.d/seattle: 
+Actually the Linux Seattle Installer already installs Seattle on OpenWrt without any need for code modification. There are some complaints though. Two of them can be ignored. First, the installer unsuccessfully greps for a line in "/proc/cpuinfo" and therefore fails the cpu resource benchmark. And second, there is a warning that Seattle was not properly started even though it was (#1195). One problem that remains is that Seattle won't start automatically on system startup (#1194). There is not necessarily a complaint about this in the installation output. An alternative to start Seattle on boot is to use "init.d'", e.g. /etc/init.d/seattle: 
 {{{
 #!/bin/sh /etc/rc.common
  
@@ -68,3 +68,6 @@ chmod +x /etc/init.d/seattle
 /etc/init.d/seattle enable
 }}}
 
+== Usage and Unit Test ==
+For routers with restricted computational resources like the used test device, the code evaluation time in “safe.py” has to be given a higher value to avoid safety evaluation timeout. 
+Nevertheless, there are still some unit tests that fail for unknown reasons, so OpenWrt on Seattle is definitely work in progress.
