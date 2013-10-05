@@ -61,7 +61,7 @@ speed: link speed in Mbps
 scannedDevicesSV: a list of up to 5 APs around the device
 
 == !BluetoothSensor ==
-localDeviceName [[BR]]
-localMAC[[BR]]
-sBondedDevices[[BR]]
-sScannedDevices[[BR]]
+localDeviceName: name of your Bluetooth device [[BR]]
+localMAC: MAC address of your Bluetooth device[[BR]]
+sBondedDevices: list of name, MAC address and RSSI of the devices bonded to local Bluetooth interfacec [[BR]]
+sScannedDevices: list of name, MAC address and RSSI of the scanned Bluetooth devices nearby[[BR]]
