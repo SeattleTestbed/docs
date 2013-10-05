@@ -40,7 +40,7 @@ mnc: mobile network code[[BR]]
 MNC is used in combination with MCC (also known as a "MCC / MNC tuple") to uniquely identify a mobile phone operator/carrier
 cid: GSM cell ID[[BR]]
 lac: GSM location area code[[BR]]
-networktype: GPS or Network[[BR]]
+networktype: UMTS, GPRS, EDGE, HSPA etc.[[BR]]
 signalstrength: received signal strength[[BR]]
 subscriberid: the unique subscriber ID, for example, the IMSI for a GSM phone[[BR]]
 roaming: current roaming indicator of phone[[BR]]
