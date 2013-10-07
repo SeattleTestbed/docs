@@ -1,4 +1,4 @@
-Suppose that an application that you are developing requires some calculation intensive task that you'd like to run on the Seattle network.  In this case, you need to bundle (i.e. include) Seattle alongside your application.  This is trivial to do on Windows, OSX and Linux machines.
+Suppose that an application that you are developing requires some calculation intensive task that you'd like to run on the Seattle network.  In this case, you can bundle (i.e. include) Seattle alongside your application and deploy it on user machines.  This is trivial to do on Windows, OSX and Linux machines.
 
 [[BR]]
  == Requirements ==
