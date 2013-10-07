@@ -4,7 +4,7 @@ The !SeattleClearinghouse portal runs on Apache and uses mod_python to interface
 This page describes how to redeploy !SeattleClearinghouse from the current svn trunk as well
 as some additional configuration information for using !SeattleClearinghouse in production.
 
- * For info on installing the necessary software to run GENI, see [wiki:!SeattleClearinghouseInstallation].
+ * For info on installing the necessary software to run the Clearinghouse, see [wiki:SeattleGeniInstallation].
 
 ----
 [[TOC(inline)]]
