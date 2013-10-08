@@ -1,5 +1,5 @@
 = Educator Portal =
-This page contains information for educators wishing to use Seattle in the classroom.  We would love for you to tell us about your experiences using Seattle in the classroom. For a quick intro you might also want to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo] of Seattle in action! If you have any questions about any of the materials on this page, please contact {{{ justinc -AT- cs -DOT- washington -DOT- edu }}}
+This page contains information for educators wishing to use Seattle in the classroom.  We would love for you to tell us about your experiences using Seattle in the classroom. For a quick intro you might also want to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo] of Seattle in action! If you have any questions about any of the materials on this page, please contact {{{ jcappos -AT- poly -DOT- edu }}}
 
 [[TOC(inline)]]
 
