@@ -1,4 +1,4 @@
-=Building a Security Layer=
+= Building a Security Layer =
 
 This assignment will help you understand security mechanisms. You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2. A reference monitor is an access control concept that refers to an abstract machine that mediates all access to objects by subjects. This can be used to allow, deny, or change the behavior of any set of calls. One critical aspect of creating a reference monitor is to ensure it cannot be bypassed. While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected. (The test cases may be turned in as part of the next assignment)
 
@@ -8,7 +8,7 @@ This assignment is intended to prepare you for thinking about security paradigms
 
 
 [[BR]]
-==Overview==
+== Overview ==
 ----
 In this assignment you will create a security layer which stops the user from reading data, writing over existing data, or writing new data to the end of a file without having the permission to do so.  You will write five functions: setread, setwrite, setappend, readat, and writeat.  The setread, setwrite, and setappend functions enable and disable read, write, and append permissions, respectively.  The user may have all, some, or none of the permissions enabled at any given time.  By default, these permissions are disabled.  The readat function will allow the user to read data from the file if and only if the user has read permissions.  The writeat function will allow the user to overwrite existing data if and only if write permissions are enabled.  Similarly, the user may append new data to the file if and only if append permissions are enabled.  Attempting to overwrite or append data when the user does not have permissions to do so will result in nothing being written.  If both append and write permissions are disabled when a writeat is called, a ValueError is raised.  You will do this by adding security rules to the functions available for setting the permissions, as well as reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!
 
@@ -19,7 +19,7 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written without permission, the security is compromised.
 
 [[BR]]
-==Getting Python/Repy==
+== Getting Python/Repy ==
 ----
 Please note you must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  If you are using a Mac, Python can be downloaded at [http://www.python.org/getit/mac/]. If you are using linux it is likely you already have Python, in order to verify this, simply open a terminal and type {{{python}}}.  It should load a screen which will tell you the version you are using.  
 
