@@ -145,7 +145,7 @@ OBJC="objc"
 class SecureFile():
   def __init__(self,file):
     # globals
-    mycontext[‘debug’] = False   
+    mycontext['debug'] = False   
     mycontext['read'] = False
     mycontext['write'] = False
     mycontext['append'] = False
@@ -212,8 +212,8 @@ The above functions attempt to follow the design principles of accuracy, efficie
 In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to read the secure data written in the file. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus the attack you write should include several methods of attempting to read the secure data from the file. An example of an attack is found below:
 
 {{{
-if “look.txt” in listfiles():
-  removefile(“look.txt”)
+if "look.txt" in listfiles():
+  removefile("look.txt")
 myfile=openfile("look.txt",True)  #Open a file
 
 #Write some data to file
@@ -228,14 +228,14 @@ log(x)
 
 #Try to overwrite data without permissions
 myfile.setwrite(False)
-myfile.writeat(“SECURITY”,8)   # no exception because append is allowed...   (seems odd)
+myfile.writeat("SECURITY",8)   # no exception because append is allowed...   (seems odd)
 y=myfile.readat(16,0)
-if y == “This is secureTY”:
+if y == "This is secureTY":
   #If security layer successful, this should pass
   pass
 else:
   #If security layer fails
-  log(“Data compromised!”)
+  log("Data compromised!")
 
 #Close the file
 myfile.close()
