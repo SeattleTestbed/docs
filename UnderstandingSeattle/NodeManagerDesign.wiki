@@ -75,6 +75,9 @@ The interface is:
     !StartVessel(vesselname, args)   -- private to owner, user
         Begins executing a vessel with a set of arguments (including the command name).
 
+    !StartVesselEx(vesselname, program_platform, args)   -- private to owner, user
+        Begins executing a vessel with a set of arguments (including the command name) on a given programming platform (RepyV1/RepyV2).
+
     !StopVessel(vesselname)   -- private to owner, user
         Stops the execution of a vessel.   Does not clean up the state for the vessel.
 
