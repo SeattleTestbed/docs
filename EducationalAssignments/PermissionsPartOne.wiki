@@ -253,7 +253,7 @@ myfile=openfile("look.txt",True)
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
 
-This code attempts to read the “This is secure” from the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeatwrites some data to the file. Then the privatewrite function is used to write some data securely to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.
+This code attempts to read the “This is secure” from the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file with permissions. Then the write permissions are removed, and writeat is once again used to write some data to the file, some of which attempts to overwrite the existing data. If the security layer is written properly, only the appended data will be written.
 
 
 === Running your security layer ===
