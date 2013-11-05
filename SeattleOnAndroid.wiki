@@ -1,5 +1,9 @@
 = Seattle on Android =
 
+
+'''THIS PAGE IS OUT OF DATE!   PLEASE DOWNLOAD THE [https://play.google.com/store/apps/details?id=com.seattletestbed#?t=W251bGwsMSwxLDIxMiwiY29tLnNlYXR0bGV0ZXN0YmVkIl0. SEATTLE ON ANDROID] APP IN THE ANDROID MARKETPLACE!!!'''
+
+
 This page discusses our port of Seattle to the Android platform. You will be able to download a native Android installer (APK) Real Soon Now from our clearinghouse web site. In the meantime, find instructions how to install Python, the Seattle runtime, and the Seattle Node Manager below.
 [[BR]]
 ----
