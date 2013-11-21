@@ -115,7 +115,7 @@ You should now talk to any system administrators to get the relevant ports open,
 [[BR]]
 == Deployed Advertise Instances ==
 ----
- * Centralized Advertise V1 (TCP): advertiseserver.poly.edu:10102
- * Centralized Advertise V2 (TCP): advertiseserver_v2.poly.edu:10102
- * Centralized Advertise V3 (TCP): advertiseserver_v3.poly.edu:10102
- * UDP Advertise (UDP): udpadvertiseserver.poly.edu:10102
+ * Centralized Advertise V1 (TCP, Repy): advertiseserver.poly.edu:10102
+ * Centralized Advertise V2 (TCP, Python): advertiseserver_v2.poly.edu:10102
+ * Centralized Advertise V3 (TCP, Python): advertiseserver_v3.poly.edu:10102
+ * UDP Advertise (UDP, Repy): udpadvertiseserver.poly.edu:10102
