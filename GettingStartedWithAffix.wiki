@@ -1,0 +1,2 @@
+AR: My vision of how a Getting Started guide for Affix should look like. Improvements welcome (it's a wiki)!
+
