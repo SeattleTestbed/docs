@@ -1,5 +1,7 @@
 = How To Submit a Patch To Seattle =
 
+More than a hundred developer have submitted code that has been accepted in our repository.   We'd love to have your contribution too!
+
 First of all, please check that we have not already fixed the bug that you have found or added the feature you want.   To do this, please update SVN and check out the latest version of the software.   If we have fixed it, but not pushed the release yet, feel free to let us know this problem is an issue and so you would like us to push!
 
 
@@ -7,4 +9,8 @@ If the patch is small (like a one line bug fix), just email a diff to the develo
 
 If the patch is more significant, please email the developers list.   They will create a ticket for the feature or bug first.   The development team will discuss the patch on the mailing list and multiple developers will weigh in.
 
+Larger patches also much match the code style guidelines for the project.   (A core member does this for you for tiny patches.)   
+
 In general, the BDFL (Justin) is very protective of the trusted code base (the Repy VM, node manager, and Software updater).   As such, you should definitely discuss any proposed feature additions to these components '''before''' writing code.
+
+Many developers who submitted a patch ended up being part of the core team and earning commit access.   We look forward to your contributions!
