@@ -1,1 +1,10 @@
-= Guidelines for Patch Acceptance =
+= How To Submit a Patch To Seattle =
+
+First of all, please check that we have not already fixed the bug that you have found or added the feature you want.   To do this, please update SVN and check out the latest version of the software.   If we have fixed it, but not pushed the release yet, feel free to let us know this problem is an issue and so you would like us to push!
+
+
+If the patch is small (like a one line bug fix), just email a diff to the developers mailing list.   Please either give the revision from SVN or the version of the installer (look in nmmain.py) so that we know what to compare it with.
+
+If the patch is more significant, please email the developers list.   They will create a ticket for the feature or bug first.   The development team will discuss the patch on the mailing list and multiple developers will weigh in.
+
+In general, the BDFL (Justin) is very protective of the trusted code base (the Repy VM, node manager, and Software updater).   As such, you should definitely discuss any proposed feature additions to these components '''before''' writing code.
