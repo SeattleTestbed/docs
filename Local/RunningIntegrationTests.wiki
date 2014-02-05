@@ -1,14 +1,15 @@
 = Running Integration Tests on Blackbox =
-Locally, we run integration tests on the {{{blackbox.cs}}} server. These tests are intended to test large portions of the Seattle system end-to-end.
+Locally, we run integration tests on the {{{blackbox.poly.edu}}} server. These tests are intended to test large portions of the Seattle system end-to-end.
 
 [[TOC(inline)]]
 
 == Configuration ==
 
- * Seattle blackbox tests live on blackbox.cs in /home/integrationtester/cron_tests/
+ * Seattle blackbox tests live on blackbox.poly.edu in /home/integrationtester/cron_tests/
  * The tests run as the integrationtester user on a cron schedule scheduled by the user cron of the integrationtester user
  * The test logs are written to /home/integrationtester/cron_logs/
 
+----
 == centralizedputget Test ==
 
 === Purpose ===
@@ -29,28 +30,7 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/centralizedputget.py > /home/integrationtester/deploy_test/cron_log.centralizedputget
 }}}
 
-
-== opendhtputget Test ==
-
-=== Purpose ===
-Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
-
-=== Deployment ===
-To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. 
-
-In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on <folder_1>. Then copy over the file deploy_opendhtputget.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_centralizedputget script using the following line:
-{{{
-python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
-}}}
-<target_log_folder> is the folder where you want the logs from the opendhtputget script to be stored.
-
-=== Schedule ===
-This script runs once an hour. The current crontab line on blackbox looks like:
-{{{
-30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
-}}}
-
-
+----
 == downloadandinstallseattle Test ==
 
 === Purpose ===
@@ -71,13 +51,14 @@ This script runs once a day. The current crontab line on blackbox looks like:
 15 16 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/downloadandinstallseattle.py > /home/integrationtester/deploy_test/cron_log.downloadandinstallseattle
 }}}
 
+----
 == geoip_lookup Test ==
 
 === Purpose ===
 Verify that the GeoIP servers are running and functional.
 
 === Deployment ===
-To deploy this test, run preparetest.py from trunk to an empty directory. Then, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/geoip_lookup/geoip_lookup.py to the above directory.
+To deploy this test, run preparetest.py from trunk to an empty directory. Then, copy trunk/integrationtests/common/* and trunk/integrationtests/geoip_lookup/geoip_lookup.py to the above directory.
 
 === Schedule ===
 This script runs every 15 minutes. The current crontab line on blackbox looks like:
@@ -85,13 +66,14 @@ This script runs every 15 minutes. The current crontab line on blackbox looks li
 */15 * * * * /usr/bin/python /home/integrationtester/cron_tests/geoip_lookup/geoip_lookup.py >> /home/integrationtester/cron_logs/cron_log.geoip_lookup 2>&1
 }}}
 
+----
 == ping_machines Test ==
 
 === Purpose ===
 Verify that our production and testing machines are running and contactable.
 
 === Deployment ===
-To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/ping_machines/ping_machines.py to an empty directory.
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/ping_machines/ping_machines.py to an empty directory.
 
 === Schedule ===
 This script runs once every hour. The current crontab line on blackbox looks like:
@@ -99,6 +81,7 @@ This script runs once every hour. The current crontab line on blackbox looks lik
 25 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/ping_machines/ping_machines.py >> /home/integrationtester/cron_logs/cron_log.ping_machines 2>&1
 }}}
 
+----
 == monitor_disk Test ==
 
 === Purpose ===
@@ -113,13 +96,14 @@ This script runs once every 6 hours. The current crontab line on blackbox looks 
 0 */6 * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_disk/monitor_disk.py >> /home/integrationtester/cron_logs/cron_log.monitor_disk
 }}}
 
+----
 == custom_installer build_installers Test ==
 
 === Purpose ===
 Verifies that installers can be successfully built.
 
 === Deployment ===
-To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
 
 === Schedule ===
 This script runs once every day. The current crontab line on blackbox looks like:
@@ -127,18 +111,90 @@ This script runs once every day. The current crontab line on blackbox looks like
 2 15 * * * /usr/bin/python /home/integrationtester/cron_tests/custom_installer_tester/test_build_installers.py >> /home/integrationtester/cron_logs/cron_log.test_build_installers 2>&1
 }}}
 
+----
 == custom_installer test_invalid_input Test ==
 
 === Purpose ===
 Tests that the custom installer builder reports failures when given invalid requests.
 
 === Deployment ===
-To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
 
 === Schedule ===
 This script runs once every day. The current crontab line on blackbox looks like:
 {{{
 2 16 * * * /usr/bin/python /home/integrationtester/cron_tests/custom_installer_tester/test_invalid_input.py >> /home/integrationtester/cron_logs/cron_log.test_invalid_input 2>&1
+}}}
+
+----
+== timeserver time_servers_running Test ==
+
+=== Purpose ===
+Send out emails if fewer than 8 timeservers are running.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/time/* to an empty directory.
+
+=== Schedule ===
+This script runs once every day. The current crontab line on blackbox looks like:
+{{{
+2 16 * * * /usr/bin/python /home/integrationtester/cron_tests/custom_installer_tester/test_invalid_input.py >> /home/integrationtester/cron_logs/cron_log.test_invalid_input 2>&1
+}}}
+
+----
+== timeserver tcp_time Test ==
+
+=== Purpose ===
+Verifies that the time servers are returning correct values.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/time/* to an empty directory.  '''You can skip this step if you have deployed the time_servers_running test already, as you can run both tests from the same directory.'''
+
+=== Schedule ===
+This script runs once every hour. The current crontab line on blackbox looks like:
+{{{
+40 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/timeserver_tests/test_time_tcp.py >> /home/integrationtester/cron_logs/cron_log.time_tcp 2>&1
+}}}
+
+----
+== lookup_node_states Test ==
+
+=== Purpose ===
+Checks that our nodecounts in each node state are reasonable.  Sends out an e-mail if they aren't.
+
+=== Deployment ===
+To deploy this test, first run preparetest.py to an empty directory. Then, copy trunk/integrationtests/common/* and trunk/integrationtests/lookup_node_states/test_lookup_node_states.py to the same directory. Copy the state keys from trunk/seattlegeni/node_state_transitions/statekeys (trunk/seattlegeni/node_state_transitions/beta_statekeys for the beta clearinghouse) to the same directory. 
+
+=== Schedule ===
+This script runs once every hour. The current crontab line on blackbox looks like:
+{{{
+
+54 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/lookup_node_states/test_lookup_node_states.py >> /home/integrationtester/cron_logs/cron_log.lookup_node_states 2>&1
+
+}}}
+
+----
+= Deprecated Tests =
+These tests verify functionality that have been deprecated, and are no longer in use.
+
+== opendhtputget Test ==
+
+=== Purpose ===
+Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
+
+=== Deployment ===
+To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. 
+
+In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on <folder_1>. Then copy over the file deploy_opendhtputget.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_centralizedputget script using the following line:
+{{{
+python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
+}}}
+<target_log_folder> is the folder where you want the logs from the opendhtputget script to be stored.
+
+=== Schedule ===
+This script runs once an hour. The current crontab line on blackbox looks like:
+{{{
+30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
 }}}
 
 
