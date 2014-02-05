@@ -71,4 +71,74 @@ This script runs once a day. The current crontab line on blackbox looks like:
 15 16 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/downloadandinstallseattle.py > /home/integrationtester/deploy_test/cron_log.downloadandinstallseattle
 }}}
 
+== geoip_lookup Test ==
+
+=== Purpose ===
+Verify that the GeoIP servers are running and functional.
+
+=== Deployment ===
+To deploy this test, run preparetest.py from trunk to an empty directory. Then, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/geoip_lookup/geoip_lookup.py to the above directory.
+
+=== Schedule ===
+This script runs every 15 minutes. The current crontab line on blackbox looks like:
+{{{
+*/15 * * * * /usr/bin/python /home/integrationtester/cron_tests/geoip_lookup/geoip_lookup.py >> /home/integrationtester/cron_logs/cron_log.geoip_lookup 2>&1
+}}}
+
+== ping_machines Test ==
+
+=== Purpose ===
+Verify that our production and testing machines are running and contactable.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/ping_machines/ping_machines.py to an empty directory.
+
+=== Schedule ===
+This script runs once every hour. The current crontab line on blackbox looks like:
+{{{
+25 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/ping_machines/ping_machines.py >> /home/integrationtester/cron_logs/cron_log.ping_machines 2>&1
+}}}
+
+== monitor_disk Test ==
+
+=== Purpose ===
+Checks the current machine to make sure that it is not running out of disk space. This script should be run on each machine.
+
+=== Deployment ===
+To deploy this test, run preparetest.py from trunk to an empty directory. Then, copy trunk/integrationtests/ping_machines/ping_machines.py to the above directory.
+
+=== Schedule ===
+This script runs once every 6 hours. The current crontab line on blackbox looks like:
+{{{
+0 */6 * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_disk/monitor_disk.py >> /home/integrationtester/cron_logs/cron_log.monitor_disk
+}}}
+
+== custom_installer build_installers Test ==
+
+=== Purpose ===
+Verifies that installers can be successfully built.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
+
+=== Schedule ===
+This script runs once every day. The current crontab line on blackbox looks like:
+{{{
+2 15 * * * /usr/bin/python /home/integrationtester/cron_tests/custom_installer_tester/test_build_installers.py >> /home/integrationtester/cron_logs/cron_log.test_build_installers 2>&1
+}}}
+
+== custom_installer test_invalid_input Test ==
+
+=== Purpose ===
+Tests that the custom installer builder reports failures when given invalid requests.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/ping_machines/common/* and trunk/integrationtests/custom_installer_tests/test_build_installers.py to an empty directory.
+
+=== Schedule ===
+This script runs once every day. The current crontab line on blackbox looks like:
+{{{
+2 16 * * * /usr/bin/python /home/integrationtester/cron_tests/custom_installer_tester/test_invalid_input.py >> /home/integrationtester/cron_logs/cron_log.test_invalid_input 2>&1
+}}}
+
 
