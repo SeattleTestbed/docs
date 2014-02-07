@@ -18,7 +18,7 @@ The way we have things setup on !SeattleClearinghouse and betabox, if you try to
 == Apache Settings ==
 ----
 
-The Apache settings on our server can all be found in /etc/apache2/. The general information is described in GeniInstallation.
+The Apache settings on our server can all be found in /etc/apache2/. The general information is described in wiki:SeattleGeniInstallation.
 
 The primary configuration file (that specific the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
 
