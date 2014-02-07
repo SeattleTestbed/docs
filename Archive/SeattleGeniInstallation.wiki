@@ -138,7 +138,7 @@ Be sure to repeat the process for a separate database called `keydb`.
     * Checkout the seattle trunk from svn.
 {{{
 #!sh
-svn co http://seattle.poly.edu/svn/seattle/trunk
+svn co https://seattle.poly.edu/svn/seattle/trunk
 }}}
     * Deploy all necessary files to a directory of your choice. The directory
       you deploy to should be the name of a directory that does not yet exist.
