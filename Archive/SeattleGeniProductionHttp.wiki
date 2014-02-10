@@ -4,7 +4,7 @@ The !SeattleClearinghouse portal runs on Apache and uses mod_python to interface
 This page describes how to redeploy !SeattleClearinghouse from the current svn trunk as well
 as some additional configuration information for using !SeattleClearinghouse in production.
 
- * For info on installing the necessary software to run the Clearinghouse, see [wiki:SeattleGeniInstallation].
+ * For info on installing the necessary software to run the Clearinghouse, see [wiki:Archive/SeattleGeniInstallation].
 
 ----
 [[TOC(inline)]]
@@ -20,7 +20,7 @@ The way we have things setup on !SeattleClearinghouse and betabox, if you try to
 
 The Apache settings on our server can all be found in /etc/apache2/. The general information is described in wiki:SeattleGeniInstallation.
 
-The primary configuration file (that specific the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
+The primary configuration file (that specifies the django path, and URL mappings, http/https mappings, etc) is /etc/apache2/sites-enabled/000-default
 
 Note that the GENI site uses a SSL certificate and uses HTTPS (port 443) for all URLs that map into the GENI portal.
 
