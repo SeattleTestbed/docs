@@ -133,6 +133,7 @@ Be sure to repeat the process for a separate database called `keydb`.
 [[BR]]
 == Deploying and running Seattle Clearinghouse ==
 ----
+In this section, we will deploy and run a copy of the Seattle Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a user account named {{{geni}}}, and following the steps below as this user.
 
   * '''Initial preparation'''
     * Checkout the seattle trunk from svn.
@@ -147,6 +148,7 @@ svn co https://seattle.poly.edu/svn/seattle/trunk
 #!sh 
 python ./trunk/seattlegeni/deploymentscripts/deploy_seattlegeni.py ./trunk /tmp/deploy
 }}} 
+    (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
     * Change to the seattlegeni directory that is in the directory you deployed
       to. For example:
 {{{
