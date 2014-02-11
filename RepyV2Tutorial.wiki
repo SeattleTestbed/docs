@@ -15,7 +15,18 @@ It is assumed that you have a basic understanding of network programming such as
 [[BR]]
 == General Operations with examples ==
 ----
-You have to install Repy before starting the tutorial.
+You have to install Repy before starting the tutorial. Make sure you have an SVN client and Python installed on your machine (Mac and many Linux boxes already ship with that).
+
+1. First, checkout the newest version of Repy V2 from SVN: {{{svn co https://seattle.poly.edu/svn/seattle/branches/}}}
+
+2. Create a directory of your choosing, inside of which Repy V2 will live. Unix example: {{{mkdir ~/testv2}}}
+
+3. Set up Repy V2: {{{python ./branches/repy_v2/preparetest.py -t ~/testv2}}} This copies over everything Repy V2 needs to run in the directory you created previously.
+
+4. To run any code in Repy V2 (e.g., example.r2py), launch Repy from its directory: {{{cd ~/testv2 ;; python repy.py restrictions.test example.r2py}}}
+
+{{{
+#!comment
 You can download Repy [https://seattleclearinghouse.poly.edu/download/flibble/ here].   
 
 If you want you can look at the installer options using the {{{--usage}}} option.   You can also simply install the software using the defaults.
@@ -23,23 +34,24 @@ If you want you can look at the installer options using the {{{--usage}}} option
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
 Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
 All attached files work on Windows systems.
+}}}
 
 [[BR]]
 === File execution (example 1.1) ===
 [source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test], [source:seattle/trunk/repy/apps/example/example.1.1.repy example.1.1.repy]
 ----
 
-Let's start with the file named "example.1.1.repy", which prints the string "Hello World".
-We use repy instead of py as the file extension for files in Repy.
+Let's start with the file named "example.1.1.r2py", which prints the string "Hello World!".
+We use r2py instead of py as the file extension for files in Repy V2.
 
 {{{
 #!python
-if callfunc == 'initialize':
-    print "Hello World"
+log("Hello World!\n")
 }}}
 
 There are two different ways to run Repy programs.
 You can run the code in your local machine and in the vessels you control.
+
 
 [[BR]]
 ==== Executing programs locally in Repy ====
@@ -60,7 +72,8 @@ python repy.py "C:\seattle\examples\restrictions.test" "C:\seattle\examples\exam
 }}}
 
 
-
+{{{
+#!comment
 ===== Interactive Testing =====
 To use repy functions from an interactive python interpreter, you can open Python and map the symbols from repyportability into your namespace.   For example, to get a randomfloat through repy, do:
 
@@ -928,3 +941,4 @@ For more information about resources and restrictions see the resources and rest
 ----
 
 This concludes a brief tour of the Repy functionality.   This guide has covered all of the API calls for Repy.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
+}}}
