@@ -259,32 +259,34 @@ Otherwise, you're running it remotely and need to pass it your Clearinghouse por
 
 You should write your Clearinghouseport down as you'll need this value repeatedly.
 
+The listenforconnection() function binds to an IP and port and waits for incoming TCP connections, and returns a TCPServerSocket object. 
 {{{
-#!comment
-The waitforconn() function returns a commhandle. A commhandle is a way for your program to refer to a connection. You can pass a commhandle to other functions to do operations. For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
-{{{
-waitforconn(IP address, Port number, Callback function)
+
+TCP Server Socket = listenforconnection(IP address, Port number)
 
 IP address : IP address to listen on 
 Port number : The port to bind to
-Callback function : Callback function to be executed whenever a TCP connection is made to that IP/port
+TCP Server Socket : A way to obtain incoming connections
 
 }}}
-To read more about waitforconn(), visit the [wiki:RepyApi#waitforconnlocaliplocalportfunction API]
+To read more about listenforconnection(), visit the [wiki:RepyV2API#listenforconnectionlocaliplocalport API]
 
+The getconnection() function receives a connection that was initiated to an IP and port, and returns a tuple containing: (remote ip, remote port, socket object). You can pass the returned socket object to other functions to do operations. For example, when you want to send some data to the remote host you can call send(), and you can close this connection by calling close(). 
+{{{
 
-The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection (using the commhandle).
+Remote IP, Remote Port, Socket Object = server_socket.getconnection()
+
+Socket Object : End-point of a bidirectional communication flow across the Internet.
+
+}}}
+To read more about getconnection(), also visit the [wiki:RepyV2API#tcpserversocket.getconnection API]
+
+The function hello sends the webpage (the text in quotes) using the sockobj and then closes the current connection.
 {{{ 
-hello(IP address, Port number, Socket Object, commhandle1, commhandle2)
+hello(IP address, Port number, Socket Object)
 
 The ip address and port : the users are connecting to.
-Socket Object : End-point of a bidirectional communication flow across the Internet.
-Commhandle1 : Handle created by connection
-Commhandle2 : Handle created for establishing connection, which hello is registered on
 
-In the Berkeley sockets API in the C language, 
-Commhandle1 is the new socket created by accept function,
-and commhadle2 is initial socket created by socket function.
 }}}
 
 '''Running locally
@@ -300,6 +302,8 @@ Then open a web browser and in the address bar type: 127.0.0.1:12345  (this says
 
 To stop the program, press CTRL-C.
 
+{{{
+#!comment
 '''Running remotely
 
 Open seash the same as in the previous example but choose a single vessel.
