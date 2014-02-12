@@ -41,17 +41,15 @@ All attached files work on Windows systems.
 [source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test], [https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.1.1.r2py example.1.1.r2py]
 ----
 
-Let's start with the file named "example.1.1.r2py", which prints the string "Hello World".
-We use r2py instead of py as the file extension for files in Repy V2.
+Let's start with the file named "example.1.1.r2py", which prints the string "Hello World". We use '''r2py''' instead of py as the file extension for files in Repy V2.
 
 {{{
 #!python
-log("Hello World\n")
+log("Hello World")
 }}}
 
 There are two different ways to run Repy programs.
 You can run the code in your local machine and in the vessels you control.
-
 
 [[BR]]
 ==== Executing programs locally in Repy ====
@@ -102,20 +100,19 @@ The output is the following:
 {{{
 #!python
 Hello World
+Terminated
 }}}
 
-"Hello World" was printed.
+"Hello World" was printed, and the last line means that the program was terminated successfully. Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems may have different messages.
 
 [[BR]]
 
-{{{
-#!comment
 ==== Executing programs remotely in vessels ====
 ----
 
-You can also access the resources donated to you and run the program example.1.1.repy in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
+You can also access the resources donated to you and run the program example.1.1.r2py in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
 
-'''Step 1. Run programs in the Seattle 
+'''Step 1. Run programs in Seattle 
 
 To run a program, you should use the experiment manager seash. Seash allows you to control the files running in sandboxes you control.
 
@@ -138,7 +135,7 @@ If you successfully logged in, you could notice that the prompt starts with you 
 john@ !>
 }}}
 
-'''Step 3. Locate the resources(computers) you can use
+'''Step 3. Locate the resources (laptops, smartphones, etc.) you can use
 
 This command will tell the shell to locate resources that have been assigned to your account through the !SeattleClearinghouse website. In order to assign resources to your account, you must go to the !SeattleClearinghouse website, log into your account and get more resources under the 'My Vessels' tab.
 
@@ -164,11 +161,12 @@ john@ !> on browsegood
 
 '''Step 5. Run a program
 
-In this case, the program named example.1.1.repy is stored in the current directory. Note that the results will not be printed.
+In this case, the program named example.1.1.r2py is stored in the current directory. Note that the results will not be printed.
 
 {{{
 #!python
-john@browsegood !> run example.1.1.repy
+john@browsegood !> upload example.1.1.r2py
+john@browsegood !> start example.1.1.r2py
 }}}
 
 '''Step 6. Look up the result of the program executed
@@ -206,6 +204,8 @@ john@browsegood !> exit
 
 You can find more practical examples in the [EducationalAssignments/TakeHome Take home assignment] page.                
 
+{{{
+#!comment
 [[BR]]
 === A Hello World example (example 1.2) ===
 [source:seattle/trunk/repy/apps/example/example.1.2.repy example.1.2.repy]
