@@ -38,15 +38,15 @@ All attached files work on Windows systems.
 
 [[BR]]
 === File execution (example 1.1) ===
-[source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test], [source:seattle/trunk/repy/apps/example/example.1.1.repy example.1.1.repy]
+[source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test], [https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.1.1.r2py example.1.1.r2py]
 ----
 
-Let's start with the file named "example.1.1.r2py", which prints the string "Hello World!".
+Let's start with the file named "example.1.1.r2py", which prints the string "Hello World".
 We use r2py instead of py as the file extension for files in Repy V2.
 
 {{{
 #!python
-log("Hello World!\n")
+log("Hello World\n")
 }}}
 
 There are two different ways to run Repy programs.
@@ -61,19 +61,16 @@ You can run the code in your local machine and in the vessels you control.
 To run a repy program from the command line, run the following with the correct values substituted in:
 
 {{{
-python <path to repy.py> <path to restrictions file> <path to source file>
+python <path to repy.py> <path to restrictions file> <path to source code>
 }}}
 
-For example, if your current working directory is the location where repy is installed, restrictions.test is in "C:\seattle\examples\restrictions.test", and your source file is  "C:\seattle\examples\example.1.1.repy", you can run the repy program with the following command:
+For example, if your current working directory is the location where Repy V2 is installed, restrictions.test is in "~/seattle/examples/restrictions.test", and your source code is  "~/seattle/examples/example.1.1.r2py", you can run the repy program with the following command:
 
 {{{
 #!python
-python repy.py "C:\seattle\examples\restrictions.test" "C:\seattle\examples\example.1.1.repy"
+python repy.py ~/seattle/examples/restrictions.test ~/seattle/examples/example.1.1.r2py
 }}}
 
-
-{{{
-#!comment
 ===== Interactive Testing =====
 To use repy functions from an interactive python interpreter, you can open Python and map the symbols from repyportability into your namespace.   For example, to get a randomfloat through repy, do:
 
@@ -83,26 +80,20 @@ Python 2.7.1 (r271:86832, Jun 16 2011, 16:59:05)
 [GCC 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2335.15.00)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from repyportability import *
->>> randomfloat()
-0.18776749685771188
+>>> getruntime()
+4.664378881454468
 }}}
 
-Note that this will not provide the security and performance isolation from Repy.   As a result, you can also do things that are not allowed in Repy.
-
+Note that this will not provide the security and performance isolation from Repy V2.   As a result, you can also do things that are not allowed in Repy V2.
 
 
 ===== Basic Instructions =====
 
-First, make sure that you have the repy files [https://seattleclearinghouse.poly.edu/download/flibble/ (download)] and [source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test] in your seattle_repy directory. 
-
-Install repy by running the relevant installer. For windows, it is "install.bat".
-
-Then open a command prompt (Windows) or shell (Unix) and change to the seattle_repy directory in the installer.   Execute the following command to run the example program listed above.   (Note that you can download the example.1.1.repy file and all other example files from this [raw-attachment:examples.zip link]).
-
+First, make sure that you have the repy files downloaded and [source:seattle/trunk/repy/apps/example/restrictions.test restrictions.test] in your Seattle Repy V2 directory. Open a command prompt (Windows) or shell (Unix) and change to the Seattle Repy V2 directory in the installer.   Execute the following command to run the example program listed above.  
 
 {{{
 #!python
-python repy.py restrictions.test example.1.1.repy
+python repy.py restrictions.test example.1.1.r2py
 }}}
 
 
@@ -111,14 +102,14 @@ The output is the following:
 {{{
 #!python
 Hello World
-Terminated
 }}}
 
-"Hello World" was printed, and then the last sentence means that the program was terminated successfully. 
-
-Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems may have different messages.
+"Hello World" was printed.
 
 [[BR]]
+
+{{{
+#!comment
 ==== Executing programs remotely in vessels ====
 ----
 
