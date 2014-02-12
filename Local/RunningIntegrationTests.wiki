@@ -31,6 +31,20 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 }}}
 
 ----
+== clearinghouse testlookupnodestates Test ==
+
+=== Purpose ===
+Attempts to acquire, renew and release vessels from the Clearinghouse.
+
+=== Deployment ===
+To deploy the testlookupnodestates test, create a folder where you want to deploy the test script. Run preparetest.py to that folder. Then copy over the file testlookupnodestates.py to that folder.
+
+=== Schedule ===
+This script runs once an hour. The current crontab line on blackbox looks like:
+{{{
+0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && cd /home/integrationtester/cron_tests/test_vessel_acquire_release/ && /usr/bin/python /home/integrationtester/cron_tests/test_vessel_acquire_release/test_vessel_acquire_renew_release.py >> /home/integrationtester/cron_logs/cron_log.test_vessel_acquire_renew_release 2>&1
+}}}
+----
 == downloadandinstallseattle Test ==
 
 === Purpose ===
@@ -174,15 +188,15 @@ This script runs once every hour. The current crontab line on blackbox looks lik
 }}}
 
 ----
-= Deprecated Tests =
+== Deprecated Tests ==
 These tests verify functionality that have been deprecated, and are no longer in use.
 
-== opendhtputget Test ==
+=== opendhtputget Test ===
 
-=== Purpose ===
+==== Purpose ====
 Attempt to put a (k,v) into OpenDHT and then get it back. On error send an email to some folks.
 
-=== Deployment ===
+==== Deployment ====
 To deploy opendhtputget, run the deploy_opendhtputget.py located in trunk/integrationtests/deployment_scripts/. Run the script with the option -c in order to set up the crontab on the machine as well to run opendhtputget once an hour. 
 
 In order to set everything up, create a folder in the same directory that the folder trunk/ is located <folder_1>. Create a second folder <target_folder> where you want to deploy the opendhtputget script. Run preparetest.py on <folder_1>. Then copy over the file deploy_opendhtputget.py and setup_crontab.py from the deploy_scripts/ folder to <folder_1>. Copy over preparetest.py from trunk/ to <folder_1> Then run the deploy_centralizedputget script using the following line:
@@ -191,7 +205,7 @@ python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
 }}}
 <target_log_folder> is the folder where you want the logs from the opendhtputget script to be stored.
 
-=== Schedule ===
+==== Schedule ====
 This script runs once an hour. The current crontab line on blackbox looks like:
 {{{
 30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
