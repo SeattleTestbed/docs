@@ -204,40 +204,45 @@ john@browsegood !> exit
 
 You can find more practical examples in the [EducationalAssignments/TakeHome Take home assignment] page.                
 
-{{{
-#!comment
 [[BR]]
 === A Hello World example (example 1.2) ===
-[source:seattle/trunk/repy/apps/example/example.1.2.repy example.1.2.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.1.2.r2py example.1.2.repy]
 ----
 
 In this example, we'll wait for the user to browse a port we listen on. When the user browses our page, we'll display a hello world webpage and then exit. 
 
 {{{
 #!python
-def hello(ip, port, sockobj, thiscommhandle, listencommhandle):
+def hello(ip, port, sockobj):
   httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
   sockobj.send("<html><head><title>Hello World</title></head>\
-                <body><h1> Hello World! </h1></body></html>")
-  stopcomm(thiscommhandle)   
-  # close my connection with this user (we could also do sockobj.close())
+                <body><h1> Hello World! </h1></body></html>")  
+  # close my connection with this user 
+  sockobj.close()   
 
-if callfunc == 'initialize':
-  if len(callargs) > 1:
-    raise Exception("Too many call arguments")
+if len(callargs) > 1:
+  raise Exception("Too many call arguments")
 
-  # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
-  elif len(callargs) == 1:
-    port = int(callargs[0])
-    ip = getmyip()
+# Running remotely: whenever this vessel gets a connection 
+# on its IPaddress:Clearinghouseport it'll call hello
+elif len(callargs) == 1:
+  port = int(callargs[0])
+  ip = getmyip()
 
-  # Running locally:
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  else:
-    port = 12345
-    ip = '127.0.0.1'
-  listencommhandle = waitforconn(ip,port,hello)
+# Running locally: whenever we get a connection
+# on 127.0.0.1:12345 we'll call hello
+else:
+  port = 12345
+  ip = '127.0.0.1'
+
+server_socket = listenforconnection(ip, port)
+
+while True:
+  try:
+    ret_ip, ret_port, ret_socket = server_socket.getconnection()
+    hello(ret_ip, ret_port, ret_socket)    
+  except SocketWouldBlockError as e:
+    continue
 
 }}}
 
@@ -248,12 +253,14 @@ The initialize portion has two options.  If you run it locally, it says, wait fo
 It is localhost and means this computer. It is used to access the computer currently used.
 }}}
 
-Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
+Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the !SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
 
 [[Image(clearinghouseport.png)]]
 
 You should write your Clearinghouseport down as you'll need this value repeatedly.
 
+{{{
+#!comment
 The waitforconn() function returns a commhandle. A commhandle is a way for your program to refer to a connection. You can pass a commhandle to other functions to do operations. For example, when you want to close a connection you can call stopcomm with the commhandle for the connection that should be closed.
 {{{
 waitforconn(IP address, Port number, Callback function)
