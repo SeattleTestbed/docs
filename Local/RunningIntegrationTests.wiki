@@ -187,6 +187,25 @@ This script runs once every hour. The current crontab line on blackbox looks lik
 
 }}}
 
+
+----
+== zenodotus_alive Test ==
+
+=== Purpose ===
+Checks that DNS records for zenodotus.poly.edu refer to blackbox.
+
+=== Deployment ===
+To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationtests/zenodotus/zenodotus_alive.py to a new directory.
+
+=== Schedule ===
+This script runs once every 6 hours. The current crontab line on blackbox looks like:
+{{{
+# Zenodotus DNS monitoring test (Once every 6 hours)
+0 */6 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/zenodotus/zenodotus_alive.py
+
+}}}
+
+
 ----
 == Deprecated Tests ==
 These tests verify functionality that have been deprecated, and are no longer in use.
