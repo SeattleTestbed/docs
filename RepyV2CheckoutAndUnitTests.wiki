@@ -9,14 +9,14 @@ As with all code related to Repy, you first need to have python v2.5 or 2.6 inst
 Before doing this tutorial, you should have set up subversion, as outlined [wiki:Local/RepoAccess#SettingupSubversion here].
 
 == Checkout the repository ==
-To checkout Repy V2 from the repository with your ssh credentials, run the following, replacing USER with your username:
-{{{
-svn co svn+ssh://USER@seattle.poly.edu/seattle/branches/repy_v2
-}}}
-
-If you do not have an ssh account, you can check the code out anonymously:
+To checkout the Repy V2 code run the following command:
 {{{
 svn co https://seattle.poly.edu/svn/seattle/branches/repy_v2
+}}}
+
+If you have SVN access you can do the following instead:
+{{{
+svn co svn+ssh://USER@seattle.poly.edu/seattle/branches/repy_v2
 }}} 
 
 This will create a folder `repy_v2` with the code from the repository.
