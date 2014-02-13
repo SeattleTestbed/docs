@@ -20,13 +20,13 @@ Create an empty directory called {{{keygen/}}}, and from {{{trunk/}}}, run {{{pr
 $ python preparetest.py ./keygen/
 }}}
 
-From the {{{keygen/}}} directory, run {{{generatekeys.py}}}.  It takes an output filename and a key length.  The key length defaults to 1024 if not specified.
+From the {{{keygen/}}} directory, run {{{generatekeys.py}}}.  It takes an output filename and a key length.  The key length defaults to 1024 if not specified.  The following code snippet will generate two files: myupdatekeys.privatekey and myupdatekeys.publickey.
 {{{
 #!sh
 $ python generatekeys.py myupdatekeys 2048
 }}}
 
-Keep these keys in a safe location.  You no longer need this directory, and it is safe to delete it.
+Keep the two generated keys in a safe location.  You no longer need this directory, and it is safe to delete it.
 
 
 
@@ -77,10 +77,10 @@ You must now make sure your web server can serve the all the files in your updat
 [[BR]]
 ----
 === Propagating New Updates ===
-Deploying a new update is extremely easy.  For safety reasons, we will create a new directory instead of using the existing one.  Create a new directory called new_updatesite/, and put the files that you want new clients to update to there. Make sure to copy the metainfo file from the existing {{{updatesite/}}} directory. Now regenerate the metainfo file in the new directory.  Note that the -n is missing, as we already have a metainfo file.
+Deploying a new update is extremely easy.  For safety reasons, we will create a new directory instead of using the existing one.  Create a new directory called new_updatesite/, and put the files that you want new clients to update to there. Make sure to copy the metainfo file from the existing {{{updatesite/}}} directory. Now regenerate the metainfo file in the new directory.  Note that the -n is missing, as we already have a metainfo file.  {{{Also, be SURE to use the same key that you used to initially sign the metainfo file.}}}
 
 {{{
 $ python writemetainfo.py ../myupdatekeys.privatekey ../myupdatekeys.publickey
 }}}
 
-If there are no problems, then back up the old update directory, and rename the new update directory so that it is served by your web server. The update will propagate to clients within an hour.  (Clients wait up to an hour before checking the designated URL for updates.)
+You may want to test the new directory by changing an existing client's softwareupdater to point to the new directory, and then let it perform a software update.  If there are no problems, then back up the old update directory, and rename the new update directory so that it is served by your web server. The update will propagate to clients within an hour.  (Clients wait up to an hour before checking the designated URL for updates.)
