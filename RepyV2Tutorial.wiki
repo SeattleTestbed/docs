@@ -780,25 +780,33 @@ Alternatively, we could instead close the socket and check this condition.   Exa
 
 {{{
 #!python
-if callfunc == 'initialize':
+def close_after(t):
+  def sleep_for():
+    # after sleeping t sec, terminate the program
+    sleep(t)
+    socketobject.close() 
+  return sleep_for
 
-  # open a connection to the google web server
-  socketobject = openconn("www.google.com",80) 
+# open a connection to the google web server
+destip = gethostbyname("www.google.com")
+socketobject = openconnection(destip, 80, getmyip(), 12345, 5)
+  
+# this is a HTTP request...
+httprequest = "GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n"
+socketobject.send(httprequest)
 
-  # this is a HTTP request...
-  socketobject.send("GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n") 
-
-  # We'll loop and print information from google. 
-  # We don't "speak" HTTP, so we'll set a timer to close the socket in 3 seconds
-  settimer(3, socketobject.close, ())
-
-  while True:
-     try:
-       print socketobject.recv(4096)
-     except Exception, e:    # we got an exception.   Did they close the socket?
-       if str(e) != "Socket closed":
-         raise
-       break
+terminate_program = close_after(10)
+createthread(terminate_program)
+  
+while True:
+  try:
+    log(socketobject.recv(4096), "\n")
+  except SocketWouldBlockError as e:
+    continue
+  except SocketClosedRemote as e:
+    break
+  except SocketClosedLocal as e:
+    break
 }}}
 
 {{{
