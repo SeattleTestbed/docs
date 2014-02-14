@@ -901,8 +901,7 @@ This program will print the number of seconds since Jan 1st, 1900 from a time se
 
 Getting the time from a synchronized time source is a handy thing to do (so this isn't bad code to repurpose for your code).   You shouldn't ask for the time repeatedly from the time servers though (they consider requests more frequent than 4 seconds apart to be a DoS attack).   You can ask once for a global reference time and then use getruntime to measure the elapsed time.
 
-{{{
-#!comment
+
 [[BR]]
 == Restrictions ==
 ----
@@ -994,5 +993,4 @@ For more information about resources and restrictions see the resources and rest
 == Conclusion ==
 ----
 
-This concludes a brief tour of the Repy functionality.   This guide has covered all of the API calls for Repy.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
-}}}
+This concludes a brief tour of the Repy V2 functionality.   This guide has covered all of the API calls for Repy V2.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
