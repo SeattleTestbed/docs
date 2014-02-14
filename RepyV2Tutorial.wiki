@@ -425,52 +425,71 @@ while True:
 
 Start the program using the shell, then open a web browser and in the address bar type: IP_of_vessel:Clearinghouseport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment. Once again, use the shell to stop the program.
 
-{{{
-#!comment
 [[BR]]
 === Adding a Timer and listing the elapsed time (example 1.4) ===
-[source:seattle/trunk/repy/apps/example/example.1.4.repy example.1.4.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.1.4.r2py example.1.4.r2py]
 ----
 
 The previous program would run forever, waiting for a user to connect so it could display a webpage.   What if you wanted the program to stop running after 1 minute?   To do this, we'll register a timer that will close the connection.
 
 {{{
 #!python
-def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
+def hello(ip, port, sockobj):
+  try:
+    httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
+  except SocketWouldBlockError as e:
+    sockobj.close()  
+    return
   mycontext['pagecount'] = mycontext['pagecount'] + 1
   sockobj.send("<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World!</h1>\
-                <p>You are visitor "+str(mycontext['pagecount'])+
-                "<p>I've been running "+str(getruntime())+" seconds</body></html>")
-  stopcomm(thiscommhandle)   # close my connection with this user
- 
-def stop_listening(commhandle):
-  stopcomm(commhandle)   # this will deregister hello
+                <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>") 
+  # close my connection with this user 
+  sockobj.close()  
 
-if callfunc == 'initialize':
-  mycontext['pagecount'] = 0
 
-  if len(callargs) > 1:
-    raise Exception("Too many call arguments")
+def close_after(t):
+  def sleep_for():
+    # after sleeping t sec, close the server
+    sleep(t)
+    exitall()
+  return sleep_for
 
-  # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
-  elif len(callargs) == 1:
-    port = int(callargs[0])
-    ip = getmyip()
 
-  # Running locally:
-  # whenever we get a connection on 127.0.0.1:12345 we'll call hello
-  else:
-    port = 12345
-    ip = '127.0.0.1'
-  listencommhandle = waitforconn(ip,port,hello)
-  
-  # wait 60 seconds, then call stop_listening with listencommhandle
-  eventhandle = settimer(60, stop_listening, (listencommhandle,)) 
+mycontext['pagecount'] = 0
+
+if len(callargs) > 1:
+  raise Exception("Too many call arguments")
+
+# Running remotely: whenever this vessel gets a connection 
+# on its IPaddress:Clearinghouseport it'll call hello
+elif len(callargs) == 1:
+  port = int(callargs[0])
+  ip = getmyip()
+
+# Running locally: whenever we get a connection
+# on 127.0.0.1:12345 we'll call hello
+else:
+  port = 12345
+  ip = '127.0.0.1'
+
+server_socket = listenforconnection(ip, port)
+close_server = close_after(60)
+createthread(close_server)
+
+while True:
+  try:
+    ret_ip, ret_port, ret_socket = server_socket.getconnection()
+    hello(ret_ip, ret_port, ret_socket)     
+  except SocketWouldBlockError as e:
+    continue
+  except SocketClosedLocal as e:
+    log("The server is going to close now!\n")
+    break
 }}}
  
+{{{
+#!comment
 The timer (when called) will stop the communication. settimer returns an eventhandle. An eventhandle is similar to a commhandle in that it can be used to interact with an event. listencommhandle is not the arguments of settimer but that of stop_listening. The comma next to stop_listening and parentheses surrounding listencommhandle indicate that.
 
 getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
