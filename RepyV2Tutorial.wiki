@@ -809,29 +809,28 @@ while True:
     break
 }}}
 
-{{{
-#!comment
 [[BR]]
 == Network Operations 2 ==
 ----
 
 [[BR]]
 === Looking up IP addresses (example 4.1) ===
-[source:seattle/trunk/repy/apps/example/example.4.1.repy example.4.1.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.4.1.r2py example.4.1.r2py]
 ----
 
 In this example, we'll look up some IP addresses using gethostname_ex:
 
 {{{
 #!python
-if callfunc == 'initialize':
-  print gethostbyname_ex("www.google.com")
-  print gethostbyname_ex("www.wikipedia.com")
-  print getmyip()
+log(gethostbyname("www.google.com"), "\n")
+log(gethostbyname("www.wikipedia.com"), "\n")
+log(getmyip(), "\n")
 }}}
 
-This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname_ex see the [wiki:RepyApi#gethostbyname_exname RepyApi].
+This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname see the [wiki:RepyV2API#gethostbynamename Repy API].
 
+{{{
+#!comment
 [[BR]]
 === Sending and receiving messages (example 4.2) ===
 [source:seattle/trunk/repy/apps/example/example.4.2.repy example.4.2.repy]
