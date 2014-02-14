@@ -713,7 +713,7 @@ You should see output that first lists the file names in the current directory (
 
  [[BR]]
 === Interacting with other computers (example 3.1)  ===
-[source:seattle/trunk/repy/apps/example/example.3.1.repy example.3.1.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.3.1.r2py example.3.1.r2py]
 ----
 
 In this example, we'll retrieve a webpage and print it on the screen.   We're not going to translate all of the HTML or remove the HTTP headers, so it will be a bit messy.  
@@ -740,31 +740,40 @@ while True:
    
 You should see google's webpage along with some numbers and other information (this is the HTTP protocol).   However, the program does not stop (at least until you press CTRL-C)!   This is because HTTP 1.1 allows us to issue multiple page requests on a single connection.  
 
-{{{
-#!comment
 [[BR]]
 === Causing a program to exit (example 3.2) ===
-[source:seattle/trunk/repy/apps/example/example.3.2.repy example.3.2.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.3.2.r2py example.3.2.r2py]
 ----
 
-In this example, we'll change the previous program to exit after we receive the data from google.   To do this we'll use a function called exitall().   This function causes the program to abort and all threads to exit immediately.   We can add this to a timer to the previous example as follows:
+In this example, we'll change the previous program to exit after we receive the data from google.   To do this we'll use a function called exitall().   This function causes the program to abort and all threads to exit immediately.   We can add this to a thread that sleeps for t seconds and then terminates, to the previous example as follows:
 
 {{{
 #!python
-if callfunc == 'initialize':
+def close_after(t):
+  def sleep_for():
+    # after sleeping t sec, terminate the program
+    sleep(t)
+    exitall() 
+  return sleep_for
 
-  # open a connection to the google web server
-  socketobject = openconn("www.google.com",80)   
+# open a connection to the google web server
+destip = gethostbyname("www.google.com")
+socketobject = openconnection(destip, 80, getmyip(), 12345, 5)
   
-  # this is a HTTP request...
-  socketobject.send("GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n")
+# this is a HTTP request...
+httprequest = "GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n"
+socketobject.send(httprequest)
 
-  # We'll loop and print information from google. 
-  # We don't "speak" HTTP, so we'll set a timer to exit in 3 seconds
-  settimer(3, exitall, ())
+terminate_program = close_after(10)
+createthread(terminate_program)
   
-  while True:
-     print socketobject.recv(4096)
+while True:
+  try:
+    log(socketobject.recv(4096), "\n")
+  except SocketWouldBlockError as e:
+    continue
+  except SocketClosedRemote as e:
+    break
 }}}
  
 Alternatively, we could instead close the socket and check this condition.   Example code that shows this is below
@@ -792,6 +801,8 @@ if callfunc == 'initialize':
        break
 }}}
 
+{{{
+#!comment
 [[BR]]
 == Network Operations 2 ==
 ----
