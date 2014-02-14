@@ -27,7 +27,7 @@ python deploy_centralizedputget.py -c <target_folder> <target_log_folder>
 === Schedule ===
 This script runs once an hour. The current crontab line on blackbox looks like:
 {{{
-0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/centralizedputget.py > /home/integrationtester/deploy_test/cron_log.centralizedputget
+0 * * * * /usr/bin/python /home/integrationtester/deploy_test/centralizedputget.py > /home/integrationtester/deploy_test/cron_log.centralizedputget
 }}}
 
 ----
@@ -42,7 +42,7 @@ To deploy the testlookupnodestates test, create a folder where you want to deplo
 === Schedule ===
 This script runs once an hour. The current crontab line on blackbox looks like:
 {{{
-0 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && cd /home/integrationtester/cron_tests/test_vessel_acquire_release/ && /usr/bin/python /home/integrationtester/cron_tests/test_vessel_acquire_release/test_vessel_acquire_renew_release.py >> /home/integrationtester/cron_logs/cron_log.test_vessel_acquire_renew_release 2>&1
+0 * * * * cd /home/integrationtester/cron_tests/test_vessel_acquire_release/ && /usr/bin/python /home/integrationtester/cron_tests/test_vessel_acquire_release/test_vessel_acquire_renew_release.py >> /home/integrationtester/cron_logs/cron_log.test_vessel_acquire_renew_release 2>&1
 }}}
 ----
 == downloadandinstallseattle Test ==
@@ -62,7 +62,7 @@ python deploy_downloadandinstallseattle.py -c <target_folder> <target_log_folder
 === Schedule ===
 This script runs once a day. The current crontab line on blackbox looks like:
 {{{
-15 16 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/downloadandinstallseattle.py > /home/integrationtester/deploy_test/cron_log.downloadandinstallseattle
+15 16 * * * /usr/bin/python /home/integrationtester/deploy_test/downloadandinstallseattle.py > /home/integrationtester/deploy_test/cron_log.downloadandinstallseattle
 }}}
 
 ----
@@ -92,7 +92,7 @@ To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationt
 === Schedule ===
 This script runs once every hour. The current crontab line on blackbox looks like:
 {{{
-25 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/ping_machines/ping_machines.py >> /home/integrationtester/cron_logs/cron_log.ping_machines 2>&1
+25 * * * * /usr/bin/python /home/integrationtester/cron_tests/ping_machines/ping_machines.py >> /home/integrationtester/cron_logs/cron_log.ping_machines 2>&1
 }}}
 
 ----
@@ -167,7 +167,7 @@ To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationt
 === Schedule ===
 This script runs once every hour. The current crontab line on blackbox looks like:
 {{{
-40 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/timeserver_tests/test_time_tcp.py >> /home/integrationtester/cron_logs/cron_log.time_tcp 2>&1
+40 * * * * /usr/bin/python /home/integrationtester/cron_tests/timeserver_tests/test_time_tcp.py >> /home/integrationtester/cron_logs/cron_log.time_tcp 2>&1
 }}}
 
 ----
@@ -183,7 +183,7 @@ To deploy this test, first run preparetest.py to an empty directory. Then, copy 
 This script runs once every hour. The current crontab line on blackbox looks like:
 {{{
 
-54 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/lookup_node_states/test_lookup_node_states.py >> /home/integrationtester/cron_logs/cron_log.lookup_node_states 2>&1
+54 * * * * /usr/bin/python /home/integrationtester/cron_tests/lookup_node_states/test_lookup_node_states.py >> /home/integrationtester/cron_logs/cron_log.lookup_node_states 2>&1
 
 }}}
 
@@ -201,7 +201,7 @@ To deploy this test, copy trunk/integrationtests/common/* and trunk/integrationt
 This script runs once every 6 hours. The current crontab line on blackbox looks like:
 {{{
 # Zenodotus DNS monitoring test (Once every 6 hours)
-0 */6 * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/cron_tests/zenodotus/zenodotus_alive.py
+0 */6 * * * /usr/bin/python /home/integrationtester/cron_tests/zenodotus/zenodotus_alive.py
 
 }}}
 
@@ -227,7 +227,6 @@ python deploy_opendhtputget.py -c <target_folder> <target_log_folder>
 ==== Schedule ====
 This script runs once an hour. The current crontab line on blackbox looks like:
 {{{
-30 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='repyrepy' && /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
+30 * * * * /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
 }}}
-
 
