@@ -921,56 +921,6 @@ This program will print the number of seconds since Jan 1st, 1900 from a time se
 Getting the time from a synchronized time source is a handy thing to do (so this isn't bad code to repurpose for your code).   You shouldn't ask for the time repeatedly from the time servers though (they consider requests more frequent than 4 seconds apart to be a DoS attack).   You can ask once for a global reference time and then use getruntime to measure the elapsed time.
 
 
-[[BR]]
-== Restrictions ==
-----
-
-In the previous examples, we've been running code on our local system which we have control over.   When deploying Repy programs, you may instead end up running your code on systems that don't belong to you.   Since you don't control these systems, the users are likely to have a set of restrictions on what you can do on their computer.   You may be unable to write files to disk, not be able to send packets to certain IP addresses, or prevented from performing operations.  
-
-To get a restriction / restrictions file, in the shell type: show resources.   If you look at a restrictions file, you'll see a bunch of lines like this (ignore the resource lines for now):
-
-{{{
-#!python
-call sendmess allow
-call stopcomm allow                     # it doesn't make sense to restrict
-call recvmess allow
-call openconn allow
-call waitforconn allow
-call socket.close allow                 # let's not restrict
-call socket.send allow                  # let's not restrict
-call socket.recv allow                  # let's not restrict
-
-# open and file.__init__ both have built in restrictions...
-call open arg 0 is junk_test.out allow  # can write to junk_test.out
-call open arg 1 is r allow              # allow an explicit read
-call open noargs is 1 allow             # allow an implicit read
-call file.__init__ arg 0 is junk_test.out allow # can write to junk_test.out
-call file.__init__ arg 1 is r allow     # allow an explicit read
-call file.__init__ noargs is 1 allow    # allow an implicit read
-call file.close allow                   # shouldn't restrict
-call file.flush allow                   # they are free to use
-call file.next allow                    # free to use as well...
-call file.read allow                    # allow read
-call file.readline allow                # shouldn't restrict
-call file.readlines allow               # shouldn't restrict
-call file.seek allow                    # seek doesn't restrict
-call file.write allow                   # shouldn't restrict (open restricts)
-call file.writelines allow              # shouldn't restrict (open restricts)
-call sleep allow                        # harmless
-call settimer allow                     # we can't really do anything smart
-call canceltimer allow                  # should be okay
-call exitall allow                      # should be harmless
-call log.write allow                    # allows printing to the log
-call log.writelines allow               # a different format of printing to the log
-call getmyip allow                      # They can get the external IP address
-call listdir allow                      # They can list the files they created
-call removefile allow                   # They can remove the files they create
-call randomfloat allow                  # can get random numbers
-call getruntime allow                   # can get the elapsed time
-call getlock allow                      # can get a lock
-}}}
-
-These lines specify which functions the program is allowed to call.   They may also list the arguments that can be passed.   When you create a program, you should decide which actions it needs to perform.   It is easier for you to locate computers you can run on if your program has fewer requirements.   You can specify that a function can only be called with a certain number of arguments or certain arguments.   This can be helpful to restrict your program to use certain filenames or functions.  
 
 [[BR]]
 == Resources ==
@@ -1006,7 +956,7 @@ These lines specify the type and quantity of resources the program can consume. 
 
 Alternatively, other resources like memory, disk used, sockets, etc. are not renewable.   In other words, the resource has a hard limit and is does does not automatically replenish itself over time.   When you use too much of one of these resources, the call in your program which causes it to be over the limit may raise an exception or in some cases the program may be killed outright.  
 
-For more information about resources and restrictions see the resources and restrictions guide.
+The restrictions lines (with call information) is obsolete for Repy V2 and is ignored.   The RepyV2SecurityLayers functionality is a replacement that improves upon the previous technology.
 
 [[BR]]
 == Conclusion ==
