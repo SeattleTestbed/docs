@@ -707,8 +707,6 @@ log("\nThe files: " + str(callargs) + " should now be missing from " + str(listf
 
 You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you will get an error because Repy programs are not allowed to use certain characters in file names.
 
-{{{
-#!comment
 [[BR]]
 == Network Operations 1 ==
 ----
@@ -722,21 +720,28 @@ In this example, we'll retrieve a webpage and print it on the screen.   We're no
 
 {{{
 #!python
-if callfunc == 'initialize':
- 
-  # open a connection to the google web server
-  socketobject = openconn("www.google.com",80)   
+# open a connection to the google web server
+destip = gethostbyname("www.google.com")
+socketobject = openconnection(destip, 80, getmyip(), 12345, 5)
   
-  # this is a HTTP request...
-  socketobject.send("GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n")
-
-  while True:
-     print socketobject.recv(4096)
+# this is a HTTP request...
+httprequest = "GET /index.html HTTP/1.1\r\nHost: www.google.com\r\n\r\n"
+socketobject.send(httprequest)
+  
+while True:
+  try:
+    log(socketobject.recv(4096), "\n")
+  except SocketWouldBlockError as e:
+    continue
+  except SocketClosedRemote as e:
+    break
 
 }}}
    
 You should see google's webpage along with some numbers and other information (this is the HTTP protocol).   However, the program does not stop (at least until you press CTRL-C)!   This is because HTTP 1.1 allows us to issue multiple page requests on a single connection.  
 
+{{{
+#!comment
 [[BR]]
 === Causing a program to exit (example 3.2) ===
 [source:seattle/trunk/repy/apps/example/example.3.2.repy example.3.2.repy]
