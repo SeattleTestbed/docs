@@ -1274,7 +1274,7 @@ TODO: others should review this, change its name as needed, etc.
 
 
 [[BR]] 
-===== safelyexecutenativecode(binary, arglist) =====
+===== (Future call) safelyexecutenativecode(binary, arglist) =====
 ----
 
 Execute native code that has been compiled using the NaCl toolchain.   (Future proposed call  -- not available)
