@@ -1,4 +1,4 @@
-= Repy Tutorial =
+= Repy V2 Tutorial =
 
 ----
 [[TOC(inline)]]
