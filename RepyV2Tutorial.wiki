@@ -653,14 +653,14 @@ Race conditions can happen with threads created by several different functions i
 
 [[BR]]
 === Introduction to Files (example 2.1) ===
-[source:seattle/trunk/repy/apps/example/example.2.1.repy example.2.1.repy], [source:seattle/trunk/repy/apps/example/hello.file hello.file]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.2.1.r2py example.2.1.r2py], [source:seattle/trunk/repy/apps/example/hello.file hello.file]
 ----
 
 We'll now switch gears from our hello world web server and focus instead on writing data to files.   The first program we'll write the string "hello world" to a file and then read it back out and print it.
 
 {{{
 #!python
-# In repyV2 we use openfile(filename, create)
+# Repy V2 uses openfile(filename, create)
 # Boolean value decide whether creating file if such file doesn't exist
 myfileobject = openfile("hello.file", True)
   
@@ -679,40 +679,36 @@ newfileobject.close()
 
 This program should print hello world (and an extra newline from '\n'). 
 
-{{{
-#!comment
 [[BR]]
 === Listing and Removing Files (example 2.2) ===
-[source:seattle/trunk/repy/apps/example/example.2.2.repy example.2.2.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.2.2.r2py example.2.2.r2py]
 ----
 
 In this example, we'll change our program to write information to a few different files and after we're finished, we'll remove the files.   Instead of coding in the program which files to write information to, we'll let our command line arguments specify which files to write.
 
 {{{
 #!python
-if callfunc == 'initialize':
-  for filename in callargs:   # callargs has all of the command line arguments in it.
-    
-    # just like python's open() function
-    myfileobject = open(filename,"w")   
-    
-    # we also could have used myfileobject.write("hello world\n")
-    print >> myfileobject, "hello world"
+for filename in callargs:   # callargs has all of the command line arguments in it.
 
-    myfileobject.close()
+  myfileobject = openfile(filename, True)
+  myfileobject.writeat("hello world\n", 0) 
+  myfileobject.close()   
+  
+  # Check the list of file names for files in the vessel by listfiles()
+  # This may include things other than our files.
+  myfilelist = listfiles()
+  log(myfilelist)
+  
+for filename in callargs:   # let's remove our files now...
+  removefile(filename)  
 
-    # now we'll go through and print the files in this directory
-    # it may include things other than our files.
-    print listdir()
-
-  for filename in callargs:   # let's remove our files now...
-    removefile(filename)  
-
-  print "The files:",callargs," should now be missing from ",listdir()  
+log("\nThe files: " + str(callargs) + " should now be missing from " + str(listfiles()))
 }}}
 
 You should see output that first lists the file names in the current directory (along with the files you chose to write) and then shows the listing missing the files.   Note that if you choose file names with characters like "/", "\", "@", or other non-alphanumeric characters you will get an error because Repy programs are not allowed to use certain characters in file names.
 
+{{{
+#!comment
 [[BR]]
 == Network Operations 1 ==
 ----
