@@ -829,13 +829,9 @@ log(getmyip(), "\n")
 
 This will print IP address, hostname and other information for google and wikipedia and will also print the current computer's IP address.   For more information about the format of the data returned from gethostbyname see the [wiki:RepyV2API#gethostbynamename Repy API].
 
-{{{
-#!comment
 [[BR]]
 === Sending and receiving messages (example 4.2) ===
 [https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.4.2.r2py example.4.2.r2py]
-
-{{{python repy.py restrictions.test dylink.repy example.4.2.r2py}}}
 
 ----
 
@@ -844,46 +840,69 @@ In this example, we'll manually send a NTP (time) lookup message and print the r
 
 {{{
 #!python
-# See RFC 2030 (http://www.ietf.org/rfc/rfc2030.txt) for details about NTP
+dy_import_module_symbols("random")
 
+# See RFC 2030 (http://www.ietf.org/rfc/rfc2030.txt) for details about NTP
 # this unpacks the data from the packet and changes it to a float
 def convert_timestamp_to_float(timestamp):   
-  integerpart = (ord(timestamp[0])<<24) + (ord(timestamp[1])<<16)
-                 + (ord(timestamp[2])<<8) + (ord(timestamp[3]))
-  floatpart = (ord(timestamp[4])<<24) + (ord(timestamp[5])<<16)
-               + (ord(timestamp[6])<<8) + (ord(timestamp[7]))
+  integerpart = (ord(timestamp[0])<<24) + (ord(timestamp[1])<<16) + (ord(timestamp[2])<<8) + (ord(timestamp[3]))
+  floatpart = (ord(timestamp[4])<<24) + (ord(timestamp[5])<<16) + (ord(timestamp[6])<<8) + (ord(timestamp[7]))
   return integerpart + floatpart / float(2**32)
 
-def decode_NTP_packet(ip, port, mess, ch):
-  print "From "+str(ip)+":"+str(port)+", I received NTP data."
-  print "NTP Reference Identifier:",mess[12:16]
-  print "NTP Transmit Time (in seconds since Jan 1st, 1900):", convert_timestamp_to_float(mess[40:48])
-  stopcomm(ch)
 
-if callfunc == 'initialize':
-  ip = getmyip()
-  timeservers = ["time-a.nist.gov", "time-b.nist.gov", "time-a.timefreq.bldrdoc.gov", 
-                 "time-b.timefreq.bldrdoc.gov", "time-c.timefreq.bldrdoc.gov", 
-                 "utcnist.colorado.edu", "time.nist.gov", "time-nw.nist.gov", 
-                 "nist1.symmetricom.com", "nist1-dc.WiTime.net", "nist1-ny.WiTime.net", 
-                 "nist1-sj.WiTime.net", "nist.expertsmi.com", "nist.netservicesgroup.com"]
+def decode_NTP_packet(ip, port, mess, sockobj):
+  log("From " + str(ip) + ":" + str(port) + ", I received NTP data.\n")
+  log("NTP Reference Identifier:", mess[12:16], '\n')
+  log("NTP Transmit Time (in seconds since Jan 1st, 1900):", convert_timestamp_to_float(mess[40:48]), '\n')
+  sockobj.close() 
 
-  # choose a random time server from the list
-  servername = timeservers[int(randomfloat()*len(timeservers))]
-  print "Using: ", servername
 
-  # this sends a request, version 3 in "client mode"
-  ntp_request_string = chr(27)+chr(0)*47
-  recvmess(ip,12345, decode_NTP_packet)
-  sendmess(servername,123, ntp_request_string, ip, 12345) # port 123 is used for NTP
+timeservers = ["time-a.nist.gov", "time-b.nist.gov", "time-a.timefreq.bldrdoc.gov", 
+               "time-b.timefreq.bldrdoc.gov", "time-c.timefreq.bldrdoc.gov", 
+               "utcnist.colorado.edu", "time.nist.gov", "time-nw.nist.gov", 
+               "nist1.symmetricom.com", "nist1-dc.WiTime.net", "nist1-ny.WiTime.net", 
+               "nist1-sj.WiTime.net", "nist.expertsmi.com", "nist.netservicesgroup.com"]
+
+# choose a random time server from the list
+servername = timeservers[int(randomfloat()*len(timeservers))]
+log("Using: ", servername, '\n')
+serverip = gethostbyname(servername)
+
+# this sends a request, version 3 in "client mode"
+ntp_request_string = chr(27)+chr(0)*47
+
+ip = getmyip()
+port = 34612  # this port number is in restriction file: "resource messport 34612   # use for getting an NTP update"
+
+# binds to an IP and port and waits for incoming UDP messages
+udpserversocket = listenformessage(ip, port)
+
+sendmessage(serverip, 123, ntp_request_string, ip, port) # port 123 is used for NTP
+
+while True:
+  try:
+    remoteip, remoteport, message = udpserversocket.getmessage() 
+    decode_NTP_packet(remoteip, remoteport, message, udpserversocket)
+  except SocketWouldBlockError as e:
+    continue
+  except SocketClosedLocal as e:
+    break
 }}}
 
-This will print the number of seconds since Jan 1st, 1900 from a time server. If you run the program multiple times, you'll see it chooses servers randomly from the timeservers list.  
+To run this program locally, you need to do 
 
-One thing to note, connection functions like opencomm and waitforcomm use different ports (TCP) than message functions like sendmess and recvmess (UDP).  
+{{{python repy.py restrictions.test dylink.repy example.4.2.r2py}}} 
+
+on command line. The port allowed for NTP communication can be found in the restriction file where 
+
+{{{resource messport xxxxx   # use for getting an NTP update}}}
+
+This program will print the number of seconds since Jan 1st, 1900 from a time server. If you run the program multiple times, you'll see it chooses servers randomly from the timeservers list.  
 
 Getting the time from a synchronized time source is a handy thing to do (so this isn't bad code to repurpose for your code).   You shouldn't ask for the time repeatedly from the time servers though (they consider requests more frequent than 4 seconds apart to be a DoS attack).   You can ask once for a global reference time and then use getruntime to measure the elapsed time.
 
+{{{
+#!comment
 [[BR]]
 == Restrictions ==
 ----
