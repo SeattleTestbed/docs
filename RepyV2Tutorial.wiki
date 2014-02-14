@@ -833,7 +833,10 @@ This will print IP address, hostname and other information for google and wikipe
 #!comment
 [[BR]]
 === Sending and receiving messages (example 4.2) ===
-[source:seattle/trunk/repy/apps/example/example.4.2.repy example.4.2.repy]
+[https://seattle.poly.edu/attachment/wiki/RepyV2Tutorial/example.4.2.r2py example.4.2.r2py]
+
+{{{python repy.py restrictions.test dylink.repy example.4.2.r2py}}}
+
 ----
 
 In this example, we'll manually send a NTP (time) lookup message and print the raw data that is returned.   Rather than hard code a server into our program, we'll randomly choose a server from a list of publicly available time servers.   A lot of the complexity in this program comes with encoding and decoding NTP data.  
