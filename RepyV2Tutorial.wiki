@@ -643,6 +643,7 @@ if callfunc == 'initialize':
 Now if you run the program repeatedly, it shouldn't be possible to trigger a race condition.   Note that since only one event can be in the section of the code protected with locks, if you put a sleep in there and rapidly browse, you may have your program slow down because there are not enough free threads / events.  
 
 Race conditions can happen with threads created by several different functions including waitforconn, recvmess, and settimer.   Remember that any callbacks or timers may be executing at the same time as your other code.   If you need to prevent multiple threads from modifying a variable or executing a piece of code at the same time, use a lock!
+}}}
 
 
 [[BR]]
@@ -659,32 +660,27 @@ We'll now switch gears from our hello world web server and focus instead on writ
 
 {{{
 #!python
-if callfunc == 'initialize':
+# In repyV2 we use openfile(filename, create)
+# Boolean value decide whether creating file if such file doesn't exist
+myfileobject = openfile("hello.file", True)
   
-  # just like python's open() function
-  myfileobject = open("hello.file","w")   
-  
-  # we also could have used myfileobject.write("hello world\n")
-  print >> myfileobject, "hello world"     
-  
-  myfileobject.close()
+# Use fileobject.writeat(data, offset) to write data into file
+myfileobject.writeat("hello world\n", 0)
+myfileobject.close()
 
-  # we can use file instead of open.   They work the same...
-  newfileobject = file("hello.file","r")   
+newfileobject = openfile("hello.file", False)
   
-  print newfileobject.read()
-  newfileobject.close()
+# Use fileobject.readat(sizelimit, offset) to read data from file
+myfilecontent = newfileobject.readat(None, 0)
+
+log(myfilecontent)
+newfileobject.close()
 }}}
 
-This program should print hello world (and an extra newline from print). The Repy file object is similar to python's file object so you can do things like:
+This program should print hello world (and an extra newline from '\n'). 
 
 {{{
-#!python
-for line in file("hello.file","r"):
-  # code here
-  ...
-}}}
-
+#!comment
 [[BR]]
 === Listing and Removing Files (example 2.2) ===
 [source:seattle/trunk/repy/apps/example/example.2.2.repy example.2.2.repy]
