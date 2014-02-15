@@ -55,6 +55,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:BaseInstallers Building] the base installers
      * [wiki:NsisSystemSetup System setup instructions] to be able to build the Windows GUI installer
    * [wiki:Local/VersionDeployment Deploying] a new version
+   * [wiki:SoftwareUpdaterSetup Setting up] the software updater
    * [wiki:SeattleGeniProductionHttp Updating] the production Seattle Clearinghouse code
    * [wiki:BuildDemokit Building the Demokit]
    * [wiki:Libraries/Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on vessels
