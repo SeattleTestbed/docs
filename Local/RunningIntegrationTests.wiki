@@ -105,11 +105,25 @@ Checks the current machine to make sure that it is not running out of disk space
 To deploy this test, run preparetest.py from trunk to an empty directory. Then, copy trunk/integrationtests/ping_machines/ping_machines.py to the above directory.
 
 === Schedule ===
-This script runs once every 6 hours. The current crontab line on blackbox looks like:
+This script runs once every 3 hours. The current crontab line on blackbox and the Clearinghouse looks like:
 {{{
-0 */6 * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_disk/monitor_disk.py >> /home/integrationtester/cron_logs/cron_log.monitor_disk
+0 */3 * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_disk/monitor_disk.py >> /home/integrationtester/cron_logs/cron_log.monitor_disk
 }}}
 
+----
+== monitor_process Test ==
+
+=== Purpose ===
+Ensures that critical system processes are running.  This test should be run on both seattle.poly.edu and seattleclearinghouse.poly.edu.
+
+=== Deployment ===
+Copy over the files in ~/trunk/integrationtests/common/* and ~/trunk/integrationtests/monitor_disk/* to a new directory.
+
+=== Running ===
+This script is run once every 15 minutes.  Note the -seattleclearinghouse argument.
+{{{
+*/15 * * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_script/monitor_processes.py -seattleclearinghouse >> /home/integrationtester/cron_logs/cron_log.monitor_processes 2>&1
+}}}
 ----
 == custom_installer build_installers Test ==
 
