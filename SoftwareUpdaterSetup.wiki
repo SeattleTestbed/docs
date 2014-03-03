@@ -77,7 +77,7 @@ You must now make sure your web server can serve the all the files in your updat
 [[BR]]
 ----
 === Propagating New Updates ===
-Deploying a new update is extremely easy.  For safety reasons, we will create a new directory instead of using the existing one.  Create a new directory called new_updatesite/, and put the files that you want new clients to update to there. Make sure to copy the metainfo file from the existing {{{updatesite/}}} directory. Now regenerate the metainfo file in the new directory.  Note that the -n is missing, as we already have a metainfo file.  '''Also, be SURE to use the same key that you used to initially sign the metainfo file.'''
+Deploying a new update is extremely easy.  For safety reasons, we will create a new directory instead of using the existing one.  Create a new directory called new_updatesite/, and put the files that you want new clients to update to there. Make sure to copy the metainfo file from the existing {{{updatesite/}}} directory so {{{writemetainfo.py}}} can do a few sanity checks on what was updated etc. Now regenerate the metainfo file in the new directory.  Note that the -n is missing, as we already have a metainfo file.  '''Also, be SURE to use the same key that you used to initially sign the metainfo file.'''
 
 {{{
 $ python writemetainfo.py ../myupdatekeys.privatekey ../myupdatekeys.publickey
