@@ -21,7 +21,7 @@ You have to install Repy before starting the tutorial. Make sure you have an SVN
 
 2. Create a directory of your choosing, inside of which Repy V2 will live. Unix example: {{{mkdir ~/testv2}}}
 
-3. Set up Repy V2: {{{python ./branches/repy_v2/preparetest.py -t ~/testv2}}} This copies over everything Repy V2 needs to run in the directory you created previously.
+3. Set up Repy V2: {{{cd ./branches/repy_v2/ ; python preparetest.py -t ~/testv2}}} This copies over everything Repy V2 needs to run in the directory you created previously.
 
 4. To run any code in Repy V2 (e.g., example.r2py), launch Repy from its directory: {{{cd ~/testv2 ;; python repy.py restrictions.test example.r2py}}}
 
