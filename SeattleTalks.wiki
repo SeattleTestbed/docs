@@ -191,8 +191,25 @@
 
 || noon-3PM May 31th, 2013 || May 2013 Research Group Meeting || Seattle research projects || Justin, etc. || Talk, Demo
 
+|| June 20th, 2013 || NYU WIRELESS Verizon || Seattle tutorial || Justin || Talk, Demo, Tutorial
+
 || 1PM-3PM June 26th, 2013 || GENI Summer Camp || Seattle tutorial || Justin || Talk, Demo, Tutorial
 
 || June 28th, 2013 || ERC Workshop || Seattle on lightweight devices || Justin || Talk, Demo
 
 || 1:30PM-2:15PM July 8th, 2013 || CSAW Summer Research Program for Faculty, NYU Poly || Seattle + Other Research Topics || Justin || Talk, Demo
+
+|| Aug 7th, 2014 || NYU WIRELESS Samsung || Seattle || Justin || Talk, Demo
+
+
+|| Dec 5th, 2014 || NYU WIRELESS Time Warner Cable || Seattle || Justin || Talk, Demo
+
+
+|| Jan 9th, 2014 || NYU WIRELESS Cisco Talk || Seattle || Justin || Talk, Demo
+
+
+|| Feb 3rd, 2014 || NYU WIRELESS Forbes Talk || Seattle || Justin || Talk, Demo
+
+|| March 5th, 2014 || Georgia Tech Research Seminar || Seattle + Sensibility Testbed || Justin || Talk, Demo
+
+|| March 5th, 2014 || Georgia Tech 6250 || Seattle || Justin || Talk, Demo
