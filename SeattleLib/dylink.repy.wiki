@@ -2,13 +2,13 @@
 
 This module is designed to help dynamically link against other modules, and to provide a import like functionality in repy. This module will soon phase out [wiki:SeattleLib/repypp.py].
 
-dylink.repy's main mechanisms are dy_import_module, dy_import_module_symbols and dy_dispatch_module. dy_import_module_symbols allows importing directly into the current context (ala from X import *) and dy_import_module allows importing as an encapsulated module (ala import X as Y).
+{{{dylink.repy}}}'s main mechanisms are {{{dy_import_module}}}, {{{dy_import_module_symbols}}} and {{{dy_dispatch_module}}}. {{{dy_import_module_symbols}}} allows importing directly into the current context (a la Python's {{{from X import *}}}) and {{{dy_import_module}}} allows importing as an encapsulated module (a la {{{import X as Y}}}).
 
-dy_dispatch_module is a convenience for programs that want to behavior as "modules". These are behavior altering programs, that don't execute any code, but provide new code or alter behavior of builtin calls. These types of modules expect to be chained and to recursively call into the next module in the chain. 
+{{{dy_dispatch_module}}} is a convenience for programs that want to behavior as "modules". These are behavior altering programs, that don't execute any code, but provide new code or alter behavior of builtin calls. These types of modules expect to be chained and to recursively call into the next module in the chain. 
 
-dy_dispatch_module will take the globally defined CHILD_CONTEXT and evaluate the next module in that context. Modules are free to alter CHILD_CONTEXT prior to calling dy_dispatch_module.
+{{{dy_dispatch_module}}} will take the globally defined {{{CHILD_CONTEXT}}} and evaluate the next module in that context. Modules are free to alter {{{CHILD_CONTEXT}}} prior to calling {{{dy_dispatch_module}}}.
 
-Modules being imported are called with callfunc set to "import" to allow modules to have special behavior. If the module performs some action on import, it is possible that dy_* never returns, as with import in Python.
+Modules being imported are called with {{{callfunc}}} set to "import" to allow modules to have special behavior. If the module performs some action on import, it is possible that {{{dy_}}}* never returns, as with {{{import}}} in Python.
 
 === Functions ===
  
