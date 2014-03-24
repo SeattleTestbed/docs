@@ -70,10 +70,11 @@ python repy.py ~/seattle/examples/restrictions.test ~/seattle/examples/example.1
 }}}
 
 ===== Interactive Testing =====
-To use repy functions from an interactive python interpreter, you can open Python and map the symbols from repyportability into your namespace.   For example, to get a randomfloat through repy, do:
+To use Repy functions from an interactive python interpreter, go to your Seattle directory (e.g. {{{~/seattle/seattle_repy}}}), open Python, and map the symbols from repyportability into your namespace.   For example, to get a randomfloat through repy, do:
 
 {{{
-Justin-Capposs-MacBook-Pro:test2 justincappos$ python
+Justin-Capposs-MacBook-Pro:test2 justincappos$ cd ~/seattle/seattle_repy
+Justin-Capposs-MacBook-Pro:seattle_repy justincappos$ python
 Python 2.7.1 (r271:86832, Jun 16 2011, 16:59:05) 
 [GCC 4.2.1 (Based on Apple Inc. build 5658) (LLVM build 2335.15.00)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
