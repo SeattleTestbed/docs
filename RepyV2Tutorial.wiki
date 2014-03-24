@@ -214,7 +214,8 @@ In this example, we'll wait for the user to browse a port we listen on. When the
 {{{
 #!python
 def hello(ip, port, sockobj):
-  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
+  # Receive HTTP header, but we'll ignore it
+  httpheader = sockobj.recv(512)
   response_body = "<html><head><title>Hello World</title></head>\
                 <body><h1> Hello World! </h1></body></html>"
   # Send a simple HTTP header before the actual HTML
