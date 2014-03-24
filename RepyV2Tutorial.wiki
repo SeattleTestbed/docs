@@ -215,10 +215,13 @@ In this example, we'll wait for the user to browse a port we listen on. When the
 #!python
 def hello(ip, port, sockobj):
   httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
-  sockobj.send("<html><head><title>Hello World</title></head>\
-                <body><h1> Hello World! </h1></body></html>")  
-  # close my connection with this user 
-  sockobj.close()   
+  response_body = "<html><head><title>Hello World</title></head>\
+                <body><h1> Hello World! </h1></body></html>"
+  # Send a simple HTTP header before the actual HTML
+  sockobj.send("HTTP/1.1 200 OK\r\nContent-Length: " +
+    str(len(response_body)) + "\r\n\r\n" + response_body)
+  # close my connection with this user
+  sockobj.close()
 
 if len(callargs) > 1:
   raise Exception("Too many call arguments")
