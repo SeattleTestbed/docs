@@ -213,3 +213,6 @@
 || March 5th, 2014 || Georgia Tech Research Seminar || Seattle + Sensibility Testbed || Justin || Talk, Demo
 
 || March 5th, 2014 || Georgia Tech 6250 || Seattle || Justin || Talk, Demo
+
+|| March 27th, 2014 || AIMS Workshop (San Diego) || Seattle / Sensibility || Justin || Talk, Demo?
+
