@@ -61,7 +61,7 @@ def dy_dispatch_module(eval_context=None):
 
  
 = Notes On Usage =
-Using the {{{dy_*}}} functions in your code requires that you designate {{{dylink.repy}}} the program you want to {{{runv2}}}/{{{startv2}}} in seash, and give it the name of your program as the first parameter, like so:
+Using the {{{dy_*}}} functions in your code requires that you designate {{{dylink.repy}}} the program you want to {{{runv2}}}/{{{startv2}}} in seash, and give it the name of your program as the first parameter. Assuming you have already {{{upload}}}ed dylink and my_program:
 {{{
 alice@%1 !> startv2 dylink.repy my_program.r2py PARAMS_TO_MY_PROGRAM
 }}}
