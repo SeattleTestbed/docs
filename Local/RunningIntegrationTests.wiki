@@ -125,6 +125,27 @@ This script is run once every 15 minutes.  Note the -seattleclearinghouse argume
 */15 * * * * /usr/bin/python /home/integrationtester/cron_tests/monitor_script/monitor_processes.py -seattleclearinghouse >> /home/integrationtester/cron_logs/cron_log.monitor_processes 2>&1
 }}}
 ----
+== test_nat_servers_running ==
+
+=== Purpose ===
+
+Checks that our nat forwarders are alive.  Sends out an e-mail if they aren't.
+
+=== Deployment ===
+
+To deploy this test, first run [source:seattle/branches/repy_v2/preparetest.py] '''(note: repyV2 branch)''' to an empty directory. Then, copy trunk/integrationtests/common/* and trunk/integrationtests/nat/test_nat_servers_running.py to the same directory.  To run, simply run python test_nat_servers_running.py from that directory.
+
+=== Schedule ===
+
+This script runs once every hour. The current crontab line on blackbox looks like:
+
+{{{
+# NAT forwarders monitoring test (Hourly)
+50 * * * * export GMAIL_USER='seattle.devel@gmail.com' && export GMAIL_PWD='7S1qzQvnY0aQ' && /usr/bin/python /home/integrationtester/cron_tests/nat_tests/test_nat_servers_running.py >> /home/integrationtester/cron_logs/cron_log.nat_servers_running 2>&1
+}}}
+
+
+----
 == custom_installer build_installers Test ==
 
 === Purpose ===
@@ -243,4 +264,3 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 {{{
 30 * * * * /usr/bin/python /home/integrationtester/deploy_test/opendhtputget.py > /home/integrationtester/deploy_test/cron_log.opendhtputget
 }}}
-
