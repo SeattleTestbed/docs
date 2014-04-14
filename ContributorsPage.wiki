@@ -30,6 +30,7 @@ This page contains information useful to developers working on Seattle.   Anythi
    * [wiki:UnitTestFrameworkRunning Supplemental information about Running Tests with Seattle's Unit Test Framework]
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
+   * [wiki:Local/RunningIntegrationTests Running Integration Tests]
    * [wiki:SeattleGeniInstallation Running a Clearinghouse test server]
    * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
