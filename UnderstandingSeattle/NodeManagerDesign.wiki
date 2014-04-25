@@ -37,7 +37,7 @@ The node manager provides an interface that allows manipulation of vessels and i
         A list of public keys that are allowed to issue a subset of the API calls
 
     resourcefile
-        This is the resources and restrictions file for the vessel
+        This is the resource file for the vessel
 
     status
         What the execution status of the vessel is.   Allowed values are: Fresh (has never been started), Stopped (was running but stopped by NM command), Started (has been started and is running when last checked), Terminated (the vessel stopped of its own volition, possibly due to an error), or Stale (it last reported a start of "Started" but significant time has elapsed, likely due to a system crash)
@@ -72,7 +72,7 @@ The interface is:
     !GetOffcutResources()    -- public
         Returns the offcut resources
 
-    !StartVessel(vesselname, args)   -- private to owner, user
+    !StartVessel(vesselname, args) '''(obsolete use !StartVesselEx)'''  -- private to owner, user
         Begins executing a vessel with a set of arguments (including the command name).
 
     !StartVesselEx(vesselname, program_platform, args)   -- private to owner, user
@@ -118,7 +118,7 @@ The interface is:
     !JoinVessels(vesselname1, vesselname2)     -- private to owner
         Merge two vessels into two one larger vessel.   The resource information is determined by adding the resources in the two vessels along with the offcut resources.   A new vessel is created with a new vesselname.   The restrictions are written so that any action that either could have performed can be performed by the created vessel.   The created vessel is considered new and is given a new vesselname.   The owner key must have previously been identical on both vessels and will be copied to the new vessel.   The filesystem and log of the new vessel is freshly made.   Returns the new vesselname.
 
-    !SetRestrictions(vesselname, restrictiondata)   -- private to owner
+    !SetRestrictions(vesselname, restrictiondata) '''(obsolete use [wiki:SecurityLayers])'''  -- private to owner
         Sets the restrictions for a vessel.   The restrictions may only contain "deny" entries.
 
 
