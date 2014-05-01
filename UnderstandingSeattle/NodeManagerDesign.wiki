@@ -36,17 +36,19 @@ The node manager provides an interface that allows manipulation of vessels and i
     userkey(s)
         A list of public keys that are allowed to issue a subset of the API calls
 
+   ownerinformation
+        This contains opaque data about the vessel that the owner defines.   This information is flushed anytime the vessel's owner key changes.   The information field is a field that only the current owner could have set and may be used to advertise a service, etc.
+
+    advertise
+        This boolean indicates whether or not the vessel should be advertised in announce services like OpenDHT.   It is set to true when the owner changes.
+
+    oldmetadata         This is needed for replay attack, freeze attack, etc. prevention   (this is internally tracked by the node manager and is not externally visible)
+
     resourcefile
         This is the resource file for the vessel
 
     status
         What the execution status of the vessel is.   Allowed values are: Fresh (has never been started), Stopped (was running but stopped by NM command), Started (has been started and is running when last checked), Terminated (the vessel stopped of its own volition, possibly due to an error), or Stale (it last reported a start of "Started" but significant time has elapsed, likely due to a system crash)
-
-    ownerinformation
-        This contains opaque data about the vessel that the owner defines.   This information is flushed anytime the vessel's owner key changes.   The information field is a field that only the current owner could have set and may be used to advertise a service, etc.
-
-    advertise
-        This boolean indicates whether or not the vessel should be advertised in announce services like OpenDHT.   It is set to true when the owner changes.
 
     logfile
         This is the circular log file that the vessel uses
@@ -55,7 +57,6 @@ The node manager provides an interface that allows manipulation of vessels and i
         This is a file that the vessel checks and if it exists, the vessel exits.   This is used to stop a vessel.
 
 
-    oldmetadata         This is needed for replay attack, freeze attack, etc. prevention
 
        
 There is also a special set of resources called the offcut resources.   The offcut resources are the amount of capability lost when a vessel is split into two vessels and the amount of capability gained when two vessels are joined.   It accounts for the management overhead of monitoring a vessel.
