@@ -36,7 +36,7 @@ The node manager provides an interface that allows manipulation of vessels and i
     userkey(s)
         A list of public keys that are allowed to issue a subset of the API calls
 
-   ownerinformation
+    ownerinformation
         This contains opaque data about the vessel that the owner defines.   This information is flushed anytime the vessel's owner key changes.   The information field is a field that only the current owner could have set and may be used to advertise a service, etc.
 
     advertise
