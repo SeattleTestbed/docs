@@ -42,7 +42,8 @@ The node manager provides an interface that allows manipulation of vessels and i
     advertise
         This boolean indicates whether or not the vessel should be advertised in announce services like OpenDHT.   It is set to true when the owner changes.
 
-    oldmetadata         This is needed for replay attack, freeze attack, etc. prevention   (this is internally tracked by the node manager and is not externally visible)
+    oldmetadata        
+         This is needed for replay attack, freeze attack, etc. prevention   (this is internally tracked by the node manager and is not externally visible)
 
     resourcefile
         This is the resource file for the vessel
