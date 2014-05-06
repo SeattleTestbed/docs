@@ -181,9 +181,9 @@ The intent is that we will build libraries that will provide 'rich' functionalit
          The host name to translate.
 
    <Exceptions>
-     !RepyArgumentError (descends from NetworkError) if the name is not a string
+     !RepyArgumentError (descends from !NetworkError) if the name is not a string
 
-     !NetworkAddressError (descends from NetworkError) if the address cannot
+     !NetworkAddressError (descends from !NetworkError) if the address cannot
      be resolved.
 
    <Side Effects>
@@ -248,7 +248,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
          The local port to send the message from
 
    <Exceptions>
-      !AddressBindingError (descends NetworkError) when the local IP isn't
+      !AddressBindingError (descends !NetworkError) when the local IP isn't
         a local IP.
 
       !ResourceForbiddenError (descends ResourceException?) when the local
@@ -307,13 +307,13 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
       the types and values of arguments. If the localip matches the destip,
       and the localport matches the destport this will also be raised.
 
-      !AddressBindingError (descends NetworkError) if the localip isn't 
+      !AddressBindingError (descends !NetworkError) if the localip isn't 
       associated with the local system or is not allowed.
 
       !ResourceForbiddenError (descends ResourceError) if the localport isn't 
       allowed.
 
-      !DuplicateTupleError (descends NetworkError) if the (localip, localport, 
+      !DuplicateTupleError (descends !NetworkError) if the (localip, localport, 
       destip, destport) tuple is already used.   This will also occur if the 
       operating system prevents the local IP / port from being used.
 
@@ -323,7 +323,7 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
       !CleanupInProgressError if the (localip, localport, destip, destport) tuple is
       still being cleaned up by the OS.
 
-      !ConnectionRefusedError (descends NetworkError) if the connection cannot 
+      !ConnectionRefusedError (descends !NetworkError) if the connection cannot 
       be established because the destination port isn't being listened on.
 
       !TimeoutError (common to all API functions that timeout) if the 
@@ -559,7 +559,7 @@ Binds to an IP and port and waits for incoming UDP messages.  If this function i
             The port to listen on.
 
     <Exceptions>
-        !DuplicateTupleError (descends NetworkError) if the port cannot be
+        !DuplicateTupleError (descends !NetworkError) if the port cannot be
         listened on because some other process on the system is listening on
         it.
 
@@ -569,7 +569,7 @@ Binds to an IP and port and waits for incoming UDP messages.  If this function i
         !RepyArgumentError if the port number or ip is wrong type or obviously
         invalid.
 
-        !AddressBindingError (descends NetworkError) if the IP address isn't a
+        !AddressBindingError (descends !NetworkError) if the IP address isn't a
         local IP.
 
         !ResourceForbiddenError if the port is not allowed.
