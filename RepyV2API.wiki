@@ -251,7 +251,7 @@ Sends a UDP message to a destination host / port using a specified localip and l
       !AddressBindingError (descends !NetworkError) when the local IP isn't
         a local IP.
 
-      !ResourceForbiddenError (descends ResourceException?) when the local
+      !ResourceForbiddenError (descends !ResourceException) when the local
         port isn't allowed
 
       !RepyArgumentError when the local IP and port aren't valid types
