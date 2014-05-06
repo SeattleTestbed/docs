@@ -1189,14 +1189,14 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
 
     <Arguments>
       context: A global context to use when executing the code.
-      This should be a SafeDict object, but if a dict object is provided
-      it will automatically be converted to a SafeDict object.
+      This should be a !SafeDict object, but if a dict object is provided
+      it will automatically be converted to a !SafeDict object.
 
     <Exceptions>
       A !RepyArgumentError exception will be raised if the provided context is not
       a dictionary or safe dictionary object 
 
-      !ContextUnsafeError is raised if the context is a dict but cannot be converted into a SafeDict.
+      !ContextUnsafeError is raised if the context is a dict but cannot be converted into a !SafeDict.
 
       Any that may be raised by the code that is being evaluated.
 
@@ -1204,7 +1204,7 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
     <Returns>
       The context dictionary that was used during evaluation.
       If the context was a dict object, this will be a new
-      SafeDict object. If the context was a SafeDict object,
+      !SafeDict object. If the context was a !SafeDict object,
       then this will return the same context object.
 
 
