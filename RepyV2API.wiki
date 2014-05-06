@@ -181,9 +181,9 @@ The intent is that we will build libraries that will provide 'rich' functionalit
          The host name to translate.
 
    <Exceptions>
-     RepyArgumentError (descends from NetworkError) if the name is not a string
+     !RepyArgumentError (descends from NetworkError) if the name is not a string
 
-     NetworkAddressError (descends from NetworkError) if the address cannot
+     !NetworkAddressError (descends from NetworkError) if the address cannot
      be resolved.
 
    <Side Effects>
@@ -210,7 +210,7 @@ Returns the localhost's "Internet facing" IP address.   If there are multiple in
       None
 
    <Exceptions>
-      InternetConnectivityError if the host is not connected to the internet.
+      !InternetConnectivityError if the host is not connected to the internet.
 
    <Side Effects>
       None.
@@ -248,19 +248,19 @@ Sends a UDP message to a destination host / port using a specified localip and l
          The local port to send the message from
 
    <Exceptions>
-      AddressBindingError (descends NetworkError) when the local IP isn't
+      !AddressBindingError (descends NetworkError) when the local IP isn't
         a local IP.
 
-      ResourceForbiddenError (descends ResourceException?) when the local
+      !ResourceForbiddenError (descends ResourceException?) when the local
         port isn't allowed
 
-      RepyArgumentError when the local IP and port aren't valid types
+      !RepyArgumentError when the local IP and port aren't valid types
         or values
 
-      AlreadyListeningError if there is an existing listening UDP socket
+      !AlreadyListeningError if there is an existing listening UDP socket
       on the same local IP and port.
 
-      DuplicateTupleError if there is another sendmessage on the same
+      !DuplicateTupleError if there is another sendmessage on the same
       local IP and port to the same remote host.
 
    <Side Effects>
@@ -303,33 +303,33 @@ Open a TCP connection to a remote computer, returning a socket object.   There i
 
     <Exceptions>
 
-      RepyArgumentError if the arguments are invalid.   This includes both
+      !RepyArgumentError if the arguments are invalid.   This includes both
       the types and values of arguments. If the localip matches the destip,
       and the localport matches the destport this will also be raised.
 
-      AddressBindingError (descends NetworkError) if the localip isn't 
+      !AddressBindingError (descends NetworkError) if the localip isn't 
       associated with the local system or is not allowed.
 
-      ResourceForbiddenError (descends ResourceError) if the localport isn't 
+      !ResourceForbiddenError (descends ResourceError) if the localport isn't 
       allowed.
 
-      DuplicateTupleError (descends NetworkError) if the (localip, localport, 
+      !DuplicateTupleError (descends NetworkError) if the (localip, localport, 
       destip, destport) tuple is already used.   This will also occur if the 
       operating system prevents the local IP / port from being used.
 
-      AlreadyListeningError if the (localip, localport) tuple is already used
+      !AlreadyListeningError if the (localip, localport) tuple is already used
       for a listening TCP socket.
 
-      CleanupInProgressError if the (localip, localport, destip, destport) tuple is
+      !CleanupInProgressError if the (localip, localport, destip, destport) tuple is
       still being cleaned up by the OS.
 
-      ConnectionRefusedError (descends NetworkError) if the connection cannot 
+      !ConnectionRefusedError (descends NetworkError) if the connection cannot 
       be established because the destination port isn't being listened on.
 
-      TimeoutError (common to all API functions that timeout) if the 
+      !TimeoutError (common to all API functions that timeout) if the 
       connection times out
 
-      InternetConnectivityError if the network is down, or if the host
+      !InternetConnectivityError if the network is down, or if the host
       cannot be reached from the local IP that has been bound to.
 
     <Resource Consumption>
@@ -389,11 +389,11 @@ Receives data that was sent by the connected party using send.   Note that this 
            The maximum number of bytes to read.   
 
       <Exceptions>
-        SocketClosedLocal is raised if the socket was closed locally.
+        !SocketClosedLocal is raised if the socket was closed locally.
 
-        SocketClosedRemote is raised if the socket was closed remotely.
+        !SocketClosedRemote is raised if the socket was closed remotely.
 
-        SocketWouldBlockError is raised if the socket operation would block.
+        !SocketWouldBlockError is raised if the socket operation would block.
 
       <Side Effects>
         None.
@@ -423,11 +423,11 @@ Sends data to the connected party.   Note that this may send less than the entir
           The string to send.
 
       <Exceptions>
-        SocketClosedLocal is raised if the socket is closed locally.
+        !SocketClosedLocal is raised if the socket is closed locally.
 
-        SocketClosedRemote is raised if the socket is closed remotely.
+        !SocketClosedRemote is raised if the socket is closed remotely.
 
-        SocketWouldBlockError is raised if the operation would block.
+        !SocketWouldBlockError is raised if the operation would block.
 
       <Side Effects>
         None.
@@ -461,17 +461,17 @@ Binds to an IP and port and waits for incoming TCP connections.  If this functio
         The local port to listen on
 
   <Exceptions>
-    Raises AlreadyListeningError if another TCPServerSocket or process has bound
+    Raises !AlreadyListeningError if another TCPServerSocket or process has bound
     to the provided localip and localport.
 
-    Raises DuplicateTupleError if another process has bound to the
+    Raises !DuplicateTupleError if another process has bound to the
     provided localip and localport.
 
-    Raises RepyArgumentError if the localip or localport are invalid
+    Raises !RepyArgumentError if the localip or localport are invalid
 
-    Raises ResourceForbiddenError if the ip or port is not allowed.
+    Raises !ResourceForbiddenError if the ip or port is not allowed.
 
-    Raises AddressBindingError if the IP address isn't a local ip.
+    Raises !AddressBindingError if the IP address isn't a local ip.
 
   <Side Effects>
     The IP / Port combination cannot be used until the TCPServerSocket
@@ -498,11 +498,11 @@ Receives a connection that was initiated to an IP and port.   waitforconn can be
       None
 
     <Exceptions>
-      Raises SocketClosedLocal if close() has been called.
+      Raises !SocketClosedLocal if close() has been called.
 
-      Raises SocketWouldBlockError if the operation would block.
+      Raises !SocketWouldBlockError if the operation would block.
 
-      Raises ResourcesExhaustedError if there are no free outsockets.
+      Raises !ResourcesExhaustedError if there are no free outsockets.
 
     <Resource Consumption>
       If successful, consumes 128 bytes of netrecv (64 bytes for
@@ -559,20 +559,20 @@ Binds to an IP and port and waits for incoming UDP messages.  If this function i
             The port to listen on.
 
     <Exceptions>
-        DuplicateTupleError (descends NetworkError) if the port cannot be
+        !DuplicateTupleError (descends NetworkError) if the port cannot be
         listened on because some other process on the system is listening on
         it.
 
-        AlreadyListeningError if there is already a UDPServerSocket with the same
+        !AlreadyListeningError if there is already a UDPServerSocket with the same
         IP and port.
 
-        RepyArgumentError if the port number or ip is wrong type or obviously
+        !RepyArgumentError if the port number or ip is wrong type or obviously
         invalid.
 
-        AddressBindingError (descends NetworkError) if the IP address isn't a
+        !AddressBindingError (descends NetworkError) if the IP address isn't a
         local IP.
 
-        ResourceForbiddenError if the port is not allowed.
+        !ResourceForbiddenError if the port is not allowed.
 
     <Side Effects>
         Prevents other UDPServerSockets from using this port / IP
@@ -599,9 +599,9 @@ Receives a message that was sent to an IP and port.   recvmess can be built in a
         None.
 
     <Exceptions>
-        SocketClosedLocal if UDPServerSocket.close() was called.
+        !SocketClosedLocal if !UDPServerSocket.close() was called.
 
-        Raises SocketWouldBlockError if the operation would block.
+        Raises !SocketWouldBlockError if the operation would block.
 
     <Side Effects>
         None
@@ -632,7 +632,7 @@ Closes the udp server socket.   Any further local calls to getmessage will resul
         None.
 
     <Side Effects>
-        The IP address and port can be reused by other UDPServerSockets after
+        The IP address and port can be reused by other !UDPServerSockets after
         this.
 
     <Resource Consumption>
@@ -675,13 +675,13 @@ If create is True, the file is created if it does not exist.   Neither mode trun
          if it does not exist.   If the file exists, this flag has no effect.
 
    <Exceptions>
-      RepyArgumentError is raised if the filename is invalid or create is not a boolean type.
+      !RepyArgumentError is raised if the filename is invalid or create is not a boolean type.
 
-      FileInUseError is raised if a handle to the file is already open.
+      !FileInUseError is raised if a handle to the file is already open.
 
-      ResourceExhaustedError is raised if there are no available file handles.
+      !ResourceExhaustedError is raised if there are no available file handles.
 
-      FileNotFoundError is raised if the filename is not found, and create is False.
+      !FileNotFoundError is raised if the filename is not found, and create is False.
 
 
    <Side Effects>
@@ -710,7 +710,7 @@ Close the file. A closed file cannot be read or written any more. Any operation 
       None.
 
     <Exceptions>
-      FileClosedError is raised if the file is already closed.
+      !FileClosedError is raised if the file is already closed.
 
     <Resource Consumption>
       Releases a file handle.
@@ -738,11 +738,11 @@ Seek to a location in a file and reads up to sizelimit bytes from the file, retu
         Seek to a specific absolute offset before reading.
 
     <Exceptions>
-      RepyArgumentError is raised if the offset or size is negative.
+      !RepyArgumentError is raised if the offset or size is negative.
 
-      FileClosedError is raised if the file is already closed.
+      !FileClosedError is raised if the file is already closed.
 
-      SeekPastEndOfFileError is raised if trying to read past the end of the file.
+      !SeekPastEndOfFileError is raised if trying to read past the end of the file.
 
     <Resource Consumption>
       Consumes 4K of fileread for each 4K aligned-block of the file read.
@@ -770,12 +770,12 @@ Seek to the offset in the file and then write some data to a file.
         An absolute offset into the file to write
 
     <Exceptions>
-      RepyArgumentError is raised if the offset is negative or the data is not
+      !RepyArgumentError is raised if the offset is negative or the data is not
       a string.
 
-      FileClosedError is raised if the file is already closed.
+      !FileClosedError is raised if the file is already closed.
 
-      SeekPastEndOfFileError is raised if trying to write past the EOF.
+      !SeekPastEndOfFileError is raised if trying to write past the EOF.
 
 
     <Side Effects>
@@ -833,11 +833,11 @@ Deletes a file in the vessel.   If the file does not exist, an exception is rais
         or be the empty string.
 
    <Exceptions>
-      RepyArgumentError is raised if the filename is invalid.
+      !RepyArgumentError is raised if the filename is invalid.
 
-      FileNotFoundError is raised if the file does not exist
+      !FileNotFoundError is raised if the file does not exist
 
-      FileInUseError is raised if the file is already open.
+      !FileInUseError is raised if the file is already open.
 
    <Side Effects>
       None
@@ -922,7 +922,7 @@ Releases the lock. This call raises an exception (?) if the lock is already unlo
       None.
 
    <Exceptions>
-      LockDoubleReleaseError if release() is called on an unlocked lock.
+      !LockDoubleReleaseError if release() is called on an unlocked lock.
 
    <Side Effects>
       Unlocks the object.
@@ -954,9 +954,9 @@ Start a new thread to call a function.   The thread is charged to your program.
          The function to call
 
    <Exceptions>
-      RepyArgumentError if the function is not callable.
+      !RepyArgumentError if the function is not callable.
 
-      ResourceExhaustedError if there are no events available.
+      !ResourceExhaustedError if there are no events available.
 
    <Side Effects>
       Starts a new thread
@@ -1156,7 +1156,7 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
 
 
    <Exceptions>
-     A CodeUnsafeError will be raised if the static code analysis fails. This can be due to unsafe constructs,
+     A !CodeUnsafeError will be raised if the static code analysis fails. This can be due to unsafe constructs,
      invalid syntax, or an evaluation timeout.
 
    <Side Effects>
@@ -1193,10 +1193,10 @@ Evaluates the code wrapped by the virtualnamespace in a given context.
       it will automatically be converted to a SafeDict object.
 
     <Exceptions>
-      A RepyArgumentError exception will be raised if the provided context is not
+      A !RepyArgumentError exception will be raised if the provided context is not
       a dictionary or safe dictionary object 
 
-      ContextUnsafeError is raised if the context is a dict but cannot be converted into a SafeDict.
+      !ContextUnsafeError is raised if the context is a dict but cannot be converted into a SafeDict.
 
       Any that may be raised by the code that is being evaluated.
 
@@ -1277,7 +1277,7 @@ TODO: others should review this, change its name as needed, etc.
 ===== (Future call) safelyexecutenativecode(binary, arglist) =====
 ----
 
-Execute native code that has been compiled using the NaCl toolchain.   (Future proposed call  -- not available)
+Execute native code that has been compiled using the !NaCl toolchain.   (Future proposed call  -- not available)
 
  * Doc string:
 
@@ -1296,12 +1296,12 @@ Execute native code that has been compiled using the NaCl toolchain.   (Future p
 
     TODO
 
-    A CodeUnsafeError? is raised if the binary does not pass verification. 
+    A !CodeUnsafeError is raised if the binary does not pass verification. 
 
-    RepyArgumentError? is raised if the binary is not a string or the arglist 
+    !RepyArgumentError is raised if the binary is not a string or the arglist 
     does not contain only strings
     
-    LaunchFailedError? is raised if the launch fails
+    !LaunchFailedError is raised if the launch fails
 
   <Side Effects>
 
@@ -1315,5 +1315,5 @@ Execute native code that has been compiled using the NaCl toolchain.   (Future p
 
   <Returns>
 
-    A NaclRuntime object which can be used to check if the process is alive,
+    A !NaclRuntime object which can be used to check if the process is alive,
     and send and receive data to the process. 
