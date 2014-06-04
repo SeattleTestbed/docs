@@ -19,6 +19,4 @@ An account will also be created on all of the testbed machines for you.   You ca
 
 = Subscribe to the Mailing List =
 
-To subscribe to the seattle-devel mailing list, please see [https://mailman.cs.washington.edu/mailman/listinfo/seattle-devel this page]. For this list, send email to '''seattle-devel at cs.washington.edu'''.
-
-Additionally you'll want to subscribe to the seattle-users mailing list. Please see [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users this page] for instructions. For this list, send email to '''seattle-users at cs.washington.edu'''.
+Our mailing list is seattle-devel "at" googlegroups.com.
