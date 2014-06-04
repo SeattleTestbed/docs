@@ -2,6 +2,8 @@
 
 This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
 
+Note: We've recently moved our CVS and ticket system to !GitHub. Please see [https://github.com/SeattleTestbed our organization's page] there for the latest code, to discuss open issues, and to create forks off our code base for your contributione!
+
 '''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
  
  * Accessing our !GitHub repositories, subscribing to the mailing list, using the wiki
