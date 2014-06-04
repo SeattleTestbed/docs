@@ -6,12 +6,12 @@ This page contains information useful to developers working on Seattle.   Anythi
  
  * Accessing our GitHub repositories, subscribing to the mailing list, running code from SVN, using the wiki
    * Check out (i.e. {{{git clone}}}) our repos from [https://github.com/SeattleTestbed]
-   * ~~[wiki:Local/RepoAccess SVN access] instructions~~
    * '''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''
    * '''[wiki:ManagingTracTickets Managing Trac tickets]'''
    * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
-   * [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands] 
-   * [http://ariejan.net/2007/07/03/how-to-create-and-apply-a-patch-with-subversion How to create and apply a patch with SVN] 
+   * ~~[wiki:Local/RepoAccess SVN access] instructions~~
+   * ~~[http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]~~
+   * ~~[http://ariejan.net/2007/07/03/how-to-create-and-apply-a-patch-with-subversion How to create and apply a patch with SVN]~~
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
 
  * Programming in Repy
