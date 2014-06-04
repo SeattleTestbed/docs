@@ -12,6 +12,8 @@ For more information, please check out our [http://seattle.poly.edu/static/Seatt
 
 For a less technical overview of Seattle check out [https://seattle.poly.edu/html/ the Seattle homepage].
 
+If you would like to contribute to Seattle, [https://github.com/SeattleTestbed fork our repos on GitHub].
+
 == Features ==
  * Community-driven and free.
  * Scalable architecture.
