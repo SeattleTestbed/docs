@@ -2,10 +2,10 @@
 
 More than a hundred developer have submitted code that has been accepted in our repository.   We'd love to have your contribution too!   You will find a lot of helpful information on the ContributorsPage.
 
-First of all, please check that we have not already fixed the bug that you have found or added the feature you want.   To do this, please update SVN and check out the latest version of the software.   If we have fixed it, but not pushed the release yet, feel free to let us know this problem is an issue and so you would like us to push!
+First of all, please check that we have not already fixed the bug that you have found or added the feature you want.   To do this, please check out the latest version of the software [https://github.com/SeattleTestbed from GitHub].   If we have fixed it, but not merged into master and pushed the release yet, feel free to let us know this problem is an issue and so you would like us to push!
 
 
-If the patch is small (like a one line bug fix), just email a diff to the developers mailing list.   Please either give the revision from SVN or the version of the installer (look in nmmain.py) so that we know what to compare it with.
+If the patch is small (like a one line bug fix), just email a diff to the developers mailing list.   Please either give the commit hash or the version of the installer (look in nmmain.py) so that we know what to compare it with.
 
 If the patch is more significant, please email the developers list.   They will create a ticket for the feature or bug first.   The development team will discuss the patch on the mailing list and multiple developers will weigh in.
 
