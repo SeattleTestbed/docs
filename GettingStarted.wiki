@@ -10,11 +10,9 @@ Thank you for your interest in joining the Seattle project.  To bring you quickl
 
  2. Join our [https://groups.google.com/forum/?hl=en#!forum/seattle-devel Google group]!  This is where you can find help and look for interesting news relating to Seattle.
 
- 3. Pick a few tickets from the ticket system to work on.  You should look for tickets with the '''Newcomer''' label.  Before you start working on a ticket, reassign the ticket to yourself so that other newcomers don't end up duplicating your work.  Comment on any findings or insights that you may have, and also post any concerns or questions that arise.  Project members, feel free to add your respective ticket systems here for ease of access for new contributors.
-   * [https://seattle.poly.edu/search?q=newcomer&noquickjump=1&ticket=on Seattle's Ticket System]
-   * [https://selexor.poly.edu/projects/project/search?q=newcomer&noquickjump=1&ticket=on SeleXor's Ticket System]
+ 3. Pick a few tickets from [https://github.com/SeattleTestbed our repositories] to work on.  You should look for tickets with the '''Newcomer''' label.  Before you start working on a ticket, reassign the ticket to yourself so that other newcomers don't end up duplicating your work.  Comment on any findings or insights that you may have, and also post any concerns or questions that arise.  Project members, feel free to add your respective ticket systems here for ease of access for new contributors.
 
- 4. When you are done with your ticket, make sure your code complies to our [wiki:CodingStyle code style guidelines].  Have someone else on the team review your code.  When they give you the OK, contact Justin and he will provide feedback if necessary.  If your code is good, someone will create an SVN account for you, and you will be able to commit your changes to SVN.
+ 4. When you are done with your ticket, make sure your code complies to our [wiki:CodingStyle code style guidelines].  Have someone else on the team review your code.  When they give you the OK, contact Justin and he will provide feedback if necessary.  If your code is good, someone will merge in your changes.
 
  5. After completing the above, you should contact Justin so that you can join some of the regular weekly meetings.  You should talk to some of the other contributors to help you find the projects that interest you the most.
 
