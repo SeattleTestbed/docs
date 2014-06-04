@@ -4,7 +4,7 @@ This page contains information useful to developers working on Seattle.   Anythi
 
 '''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
  
- * Accessing our !GitHub repositories, subscribing to the mailing list, running code from SVN, using the wiki
+ * Accessing our !GitHub repositories, subscribing to the mailing list, using the wiki
    * Check out (i.e. {{{git clone}}}) our repos from [https://github.com/SeattleTestbed]
    * '''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''
    * '''[wiki:ManagingTracTickets Managing Trac tickets]'''
