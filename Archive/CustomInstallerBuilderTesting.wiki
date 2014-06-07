@@ -39,14 +39,13 @@ $ cd custominstallerbuilder
 $ cp -R local_template local
 }}}
 
- * '''Step 3:''' From within the "custominstallerbuilder" directory, download the base installers:
-
+ * '''Step 3:''' Build the base installers and place them in the "custominstallerbuilder".  Make sure the {{{SOFTWARE_UPDATE_URL}}} and {{{PUBLIC_KEY_FILE}}} values in {{{rebuild_base_installers_for_seattlegeni.sh}}}. VERSION_OF_RELEASE is an identifier that we will use to identify this particular set of installers.
 {{{
-$ cd html/static/installers/base
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_linux.tgz
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_mac.tgz
-$ wget http://seattlegeni.cs.washington.edu/dist/seattle_win.zip
+cd ../dist/
+python rebuild_base_installers_for_seattlegeni.sh VERSION_OF_RELEASE
+cp 
 }}}
+
 
  * '''Step 4:''' Edit "local/settings.py" to match your local configuration. On blackbox.cs, it is sufficient to change the following lines:
 
@@ -67,10 +66,12 @@ SECRET_KEY = 'RANDOM_STRING'
 ...
 SERVE_STATIC = True
 ...
-BASE_URL = 'http://blackbox.cs.washington.edu:PORT/'
+BASE_URL = 'http://blackbox.poly.edu:PORT/'
 ...
 PROJECT_URL = BASE_URL
 }}}
+
+If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} instead. You may use your public facing IP if you want it to be accessible via the internet.
 
 {{{RANDOM_STRING}}} should be a random string of your own choosing — do not share it with others. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
 
