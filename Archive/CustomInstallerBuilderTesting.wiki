@@ -39,11 +39,12 @@ $ cd custominstallerbuilder
 $ cp -R local_template local
 }}}
 
- * '''Step 3:''' Build the base installers and place them in the "custominstallerbuilder".  Make sure the {{{SOFTWARE_UPDATE_URL}}} and {{{PUBLIC_KEY_FILE}}} values in {{{rebuild_base_installers_for_seattlegeni.sh}}}. VERSION_OF_RELEASE is an identifier that we will use to identify this particular set of installers.
+ * '''Step 3:''' Build the base installers and place them in the "custominstallerbuilder/html/static/installers/base" directory.  Make sure the {{{SOFTWARE_UPDATE_URL}}} and {{{PUBLIC_KEY_FILE}}} values in {{{rebuild_base_installers_for_seattlegeni.sh}}}. VERSION_OF_RELEASE is an identifier that we will use to identify this particular set of installers.
+
 {{{
-cd ../dist/
-python rebuild_base_installers_for_seattlegeni.sh VERSION_OF_RELEASE
-cp 
+$ cd ../dist/
+$ python rebuild_base_installers_for_seattlegeni.sh VERSION_OF_RELEASE
+$ mv seattle_linux.tgz seattle_mac.tgz seattle_win.zip seattle_android.zip ../custominstallerbuilder/html/static/installers/base
 }}}
 
 
