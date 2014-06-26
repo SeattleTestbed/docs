@@ -26,7 +26,7 @@ include	advertise.repy
 _REFRESH_FREQUENCY = 600
 
 # Put the address here,	since it's a constant.
-_ADDRESS_NAME = "hello.zenodotus.cs.washington.edu"
+_ADDRESS_NAME = "hello.zenodotus.poly.edu"
 
 
 
@@ -45,10 +45,10 @@ if callfunc == 'initialize':
   # For	example	purposes, let's suppose	you're running a service called
   # helloworld that displays "Hello, World!" In	a web page when	the user
   # connects to	a REPY node you control	via web	browser. It makes sense
-  # to use the hostname	"hello.zenodotus.cs.washington.edu", so	that's
+  # to use the hostname	"hello.zenodotus.poly.edu", so that's
   # what we'll advertise.
 
-  # Associates "hello.zenodotus.cs.washington.edu" : <Node's IP> for
+  # Associates "hello.zenodotus.poly.edu" : <Node's IP> for
   # _REFRESH_FREQUENCY seconds.
   #
   # ########
@@ -75,16 +75,16 @@ if callfunc == 'initialize':
 '''To run this code on a Seattle node, you will need to pre-process the code using [wiki:SeattleLib/repypp.py repypp.py]'''
 
 
-When running in a node, this will associate helloworld.zenodotus.cs.washington.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
+When running in a node, this will associate helloworld.zenodotus.poly.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
 
 Note that there is a bug in the above code. If the node this is running in has its computer clock reset during the runtime, getruntime() will fail to provide increasing values, and the node will fail to update for a time, which will give the illusion that it has been terminated. There doesn't seem to be a good way to solve this.
 
-While this is running in at least one node, your users will no longer have to type a URL of the form <IP Address>:<Port> in to their browser to access your service. Instead, they can type in something more friendly, as in the example above: 'hello.zenodotus.cs.washington.edu:631XX'. It is important to remember that this hosting service can't solve the port issue, since REPY vessels can only use GENIports for networking operations. As such, your users will still have to append the GENIport to their URLs.
+While this is running in at least one node, your users will no longer have to type a URL of the form <IP Address>:<Port> in to their browser to access your service. Instead, they can type in something more friendly, as in the example above: 'hello.zenodotus.poly.edu:631XX'. It is important to remember that this hosting service can't solve the port issue, since REPY vessels can only use GENIports for networking operations. As such, your users will still have to append the GENIport to their URLs.
 
 
 
 '''Zenodotus supports DNS chaining as well'''.
-If you want to use your own DNS service, you can register an advertise value of "CNAME name.zenodotus.cs.washington.edu" : Hostname to indicate that a subserver exists, and RRs known by that server should follow the form "mypage.name.zenodotus.cs.washington.edu", where 'name' is the name of your service.
+If you want to use your own DNS service, you can register an advertise value of "CNAME name.zenodotus.poly.edu" : Hostname to indicate that a subserver exists, and RRs known by that server should follow the form "mypage.name.zenodotus.poly.edu", where 'name' is the name of your service.
 
 
 
