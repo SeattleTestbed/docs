@@ -49,9 +49,9 @@ The directory you decide to unpack the files to should be the directory you use 
 
 Finally use the command found below in order to run repy files:
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy}}} 
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
 
-Please note Repy files end in extension `.repy`.   
+Please note Repy files end in extension `.r2py`.   
 
 In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
 
@@ -68,7 +68,7 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
  * command line errors:
 
-'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.repy` files from directories other than the the one you are supposed to use.  
+'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
 
  * Downloading the wrong version of seattle:
 
@@ -107,7 +107,7 @@ However, a user cannot start the document with the letters,
 MZ.
 If a user tries to the security layer will raise an exception.
 Note:
-	This security layer uses encasementlib.repy, restrictions.default, repy.py and python
+	This security layer uses encasementlib.r2py, restrictions.default, repy.py and python
 	Also you need to give it an application to run.
 	This security layer never runs explicitedly but instead interposes functions
 	from above layers.
@@ -205,7 +205,7 @@ finally:
     myfile.close()
 }}}
 
-'''Note:''' All attacks should be written as Repy files, using the .repy extension.
+'''Note:''' All attacks should be written as Repy files, using the .r2py extension.
 
 === Code Analysis ===
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
@@ -225,7 +225,7 @@ This code attempts to write "MZ" to the file directly.  First the file is opened
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [attack_program].repy }}}
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
 
 [[BR]]
 
@@ -248,7 +248,7 @@ Finally, type the following commands at the terminal to run your security layer 
 
  * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
 
 '''Your security layer should produce no output!!!'''   If it encounters an attempt to write MZ, you should raise a !ValueError and allow execution to continue.
 
@@ -265,5 +265,5 @@ For extra credit, make a second security layer which stops an attacker from writ
 = What to turn in? =
 ----
 
- * Turn in a repy file called reference_monitor_[ name or id number].repy
- * For extra credit turn in a second repy file called extra_credit_[ name or id number].repy
+ * Turn in a repy file called reference_monitor_[ name or id number].r2py
+ * For extra credit turn in a second repy file called extra_credit_[ name or id number].r2py
