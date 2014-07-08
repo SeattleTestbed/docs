@@ -56,7 +56,7 @@ python preparetest.py ~/path/to/build/dir
 
 (You will see a few warning messages during building, but they can be ignored for the task at hand.) Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
 ----
-(If you cannot install from source, [[Image(repy_v2.zip)]] is a tarball including a pre-built runtime.)
+(If you cannot install from source, [here] is a tarball including a pre-built runtime.)
 ----
 
 
