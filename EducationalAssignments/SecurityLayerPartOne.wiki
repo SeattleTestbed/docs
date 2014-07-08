@@ -25,7 +25,7 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
  * Security: The attacker should not be able to circumvent the security layer.  Hence, if "MZ" can be written two the first two characters, the security is compromised.     
 
 [[BR]]
-=== Getting Python/Repy ===
+=== Getting Python ===
 ----
 Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
 
@@ -33,7 +33,7 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 Repy can be downloaded at [https://seattleclearinghouse.poly.edu/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
 
-=== How to get RepyV2 ===
+=== Getting RepyV2 ===
 ----
 Now that you have Repy, you simply need to get RepyV2.  Using the command line, navigate to the directory where repy is installed and then run the following command to get RepyV2:
 
@@ -83,17 +83,19 @@ To run the unit test, which will automatically tell you if you have errors with 
 [[BR]]
 === Tutorials for Repy and Python ===
 ----
-Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are an excellent source of information.
+Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are excellent sources of information.
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
  * list of RepyV2 syntax: '''[wiki:RepyV2API]'''
 [[BR]]
-=== Building the security layer  ===
+
+== Building the security layer  ==
 ----
 '''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 [[BR]]
-=== A basic (and inadequate) defense ===
+
+== A basic (and inadequate) defense ==
 
 Time to start coding!  Let's inspect a basic security layer.  
 
@@ -162,7 +164,7 @@ secure_dispatch_module()
 
 }}} 
 
-=== Using the example layer ===
+== Using the example layer ==
 
 
 Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
@@ -177,7 +179,8 @@ Now let's look at the structure of `writeat()`.  First off, the if-statement con
 
 The second condition, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start writing to the 5th position of the file.  Starting with 0 rather than 1 has heuristic meaning in computer science.   
 [[BR]]
-=== Testing your security layer ===
+
+== Testing your security layer ==
 ----
 In this part of the assignment you will pretend to be an attacker.  Remember the attacker's objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
 
@@ -224,8 +227,8 @@ Finally, type the following commands at the terminal to run your security layer 
 
 {{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [attack_program].repy }}}
 
-Make sure you went through the "How to get RepyV2" section!
 [[BR]]
+
 = Notes and Resources =
 ----
    
@@ -258,6 +261,7 @@ For extra credit, make a second security layer which stops an attacker from writ
 
 '''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
 [[BR]]
+
 = What to turn in? =
 ----
 
