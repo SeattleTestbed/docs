@@ -70,12 +70,13 @@ In order to test whether or not these steps worked, please copy and paste the co
  * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the trouble shooting section found below.
-=== Trouble shooting repy ===
-If you can't get repy files to run, some of the following common errors may have occurred:
 
- * using print instead of log:
+=== Trouble shooting Repy code ===
+If you can't get Repy files to run, some of the following common errors may have occurred:
 
-Repy is a subset of python however it does not have the same syntax.  For a full list of acceptable syntax please see: [wiki : RepyApi]
+ * using `print` instead of `log`:
+
+Repy is a subset of Python, but its syntax is slightly different.  For example, Python's `print` statement cannot be used; Repy has `log` for that. For a full list of acceptable syntax please see wiki:RepyV2API.
 
  * command line errors:
 
