@@ -246,7 +246,7 @@ Finally, type the following commands at the terminal to run your security layer 
 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
 
-'''Make sure you use filenames that are all lowercase letters!!!!'''
+'''Make sure you use filenames that are all lowercase letters!
 
 [[BR]]
 
