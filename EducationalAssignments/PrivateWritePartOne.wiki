@@ -26,71 +26,91 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
  * Security: The attacker should not be able to circumvent the security layer.  Hence, if the data written using privatewrite can be read back, the security is compromised.
 
 [[BR]]
-=== Getting Python/Repy ===
+=== Getting Python ===
 ----
-Please note you must have Python2.5 or Python2.6, to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  If you are using a Mac, Python can be downloaded at [http://www.python.org/getit/mac/]. If you are using linux it is likely you already have Python, in order to verify this, simply open a terminal and type {{{python}}}.  It should load a screen which will tell you the version you are using.  
+Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
 
-'''Note:'''If you are using windows, you will need python in your path variables.  A tutorial on adding variables to your path in windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
+'''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
-Repy can be downloaded at [https://seattleclearinghouse.poly.edu/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
-
-=== How to get RepyV2 ===
+=== Getting RepyV2 ===
 ----
-Now that you have Repy, you simply need to get RepyV2.  Using the command line, navigate to the directory where repy is installed and then run the following command to get RepyV2:
+The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
-{{{svn co https://seattle.poly.edu/svn/seattle/branches/repy_v2}}}
+Here's how to do that. Assuming you are running on a Unixoid OS,
 
-If the above command didn't work, you may need to download subversion.  Subversion can be downloaded at, [http://subversion.apache.org/packages.html], the windows installation is found at the bottom of the page.
+{{{
+# Create a directory for the required Git repositories
+mkdir SeattleTestbed
+cd SeattleTestbed
 
-Once you have RepyV2, navigate to the directory repy_v2, then create a new directory and run the command found below.  The new directory will be the `destdir` in the command found below.  This command will initialize the downloaded files into the newly created directory.
+# Check out the repos required for building Repy
+git clone https://github.com/SeattleTestbed/dist.git
+git clone https://github.com/SeattleTestbed/repy_v1.git
+git clone https://github.com/SeattleTestbed/repy_v2.git
+git clone https://github.com/SeattleTestbed/seattlelib_v2.git
 
-{{{python preparetest.py -t [destdir]}}}
+# Prepare a build directory, and build into it
+cd dist
+mkdir ~/path/to/build/dir
+python preparetest.py ~/path/to/build/dir
+}}}
 
-The directory you decide to unpack the files to should be the directory you use to run all your code!  Please save all files you intend to run in this directory.  
+(You will see a few warning messages during building, but they can be ignored for the task at hand.) Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+----
+(If you cannot install from source, [here] is a tarball including a pre-built runtime.)
+----
 
-Finally use the command found below in order to run repy files:
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [program].repy}}} 
 
-Please note Repy files end in extension `.repy`.   
+Use the command found below in order to run Repy files:
+
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
+
+Please note Repy files end in extension `.r2py`.   
 
 In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
 
- * Sample security layer: [wiki:EducationalAssignments/PrivateWritePartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
- * Sample attack layer:  [wiki:EducationalAssignments/PrivateWritePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
+ * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
+ * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the trouble shooting section found below.
-=== Troubleshooting repy ===
-If you can't get repy files to run, some of the following common errors may have occurred:
 
- * using print instead of log:
+=== Trouble shooting Repy code ===
+If you can't get Repy files to run, some of the following common errors may have occurred:
 
-Repy is a subset of python however it does not have the same syntax.  For a full list of acceptable syntax please see: [wiki:RepyV2API]
+ * using `print` instead of `log`:
+
+Repy is a subset of Python, but its syntax is slightly different.  For example, Python's `print` statement cannot be used; Repy has `log` for that. For a full list of acceptable syntax please see wiki:RepyV2API.
 
  * command line errors:
 
-'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.repy, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.repy` files from directories other than the the one you are supposed to use.  
+'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
 
+{{{
+#!comment
+AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
  * Downloading the wrong version of seattle:
 
-Seattle is operating system dependent.  If you download the windows version, you need to use the windows command line.  For windows 7 this is powershell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the linux version you must use a linux OS and linux terminal.  
+Seattle is operating system dependent.  If you download the Windows version, you need to use the Windows command line.  For Windows 7 this is PowerShell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the Linux version you must use a Linux OS and Linux terminal.  
 
+AR: This is obviously outdated.
 Advanced trouble shooting:
 
 To run the unit test, which will automatically tell you if you have errors with your installation please see:
 
  * [wiki:RepyV2CheckoutAndUnitTests]
-
+}}}
 [[BR]]
 === Tutorials for Repy and Python ===
 ----
-Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are an excellent source of information.
+Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are excellent sources of information.
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
  * list of RepyV2 syntax: '''[wiki:RepyV2API]'''
 [[BR]]
-=== Building the security layer  ===
+
+== Building the security layer  ==
 ----
 '''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 [[BR]]
