@@ -145,7 +145,7 @@ that all reads must go through your security layer and so you can add an
 additional file or modify the file format.
 
 Note:
-    This security layer uses encasementlib.repy, restrictions.default, repy.py and python
+    This security layer uses encasementlib.r2py, restrictions.default, repy.py and Python
     Also you need to give it an application to run.
     This security layer never runs explicitly but instead interposes functions
     from above layers.
@@ -260,7 +260,7 @@ else:
 myfile.close()
 }}}
 
-'''Note:''' All attacks should be written as Repy files, using the .repy extension.
+'''Note:''' All attacks should be written as Repy files, using the .r2py extension.
 
 ==== Code Analysis ====
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
@@ -279,7 +279,7 @@ This code attempts to read the “This is secure” from the file directly. Firs
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer].repy [attack_program].repy }}}
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
 
 Make sure you went through the "How to get RepyV2" section!
 [[BR]]
@@ -302,7 +302,7 @@ Make sure you went through the "How to get RepyV2" section!
 
  * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
-{{{python repy.py restrictions.default encasementlib.repy [security_layer1].repy [security_layer2].repy [security_layer3].repy [program].repy}}}
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
 
 '''Your security layer should produce no output!! '''If it encounters an attempt to read the secure data, you should raise a ValueError exception and allow execution to continue.
 
@@ -316,6 +316,6 @@ Remember permissions for files after they are closed andreopened.   This would i
 = What to turn in? =
 ----
 
- * Turn in a repy file called reference_monitor_[ polyusername ].repy with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a ValueError if the calls should be blocked, but never, ever call log() to output information.   Never raise unexpected errors.
+ * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a ValueError if the calls should be blocked, but never, ever call log() to output information.   Never raise unexpected errors.
 
- * For extra credit turn in a second repy file called extra_credit_[polyusername].repy
+ * For extra credit turn in a second repy file called extra_credit_[polyusername].r2py
