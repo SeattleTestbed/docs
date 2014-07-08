@@ -85,12 +85,13 @@ Repy is a subset of Python, but its syntax is slightly different.  For example, 
 
 '''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
 
+{{{
+#!comment
+AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
  * Downloading the wrong version of seattle:
 
 Seattle is operating system dependent.  If you download the Windows version, you need to use the Windows command line.  For Windows 7 this is PowerShell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the Linux version you must use a Linux OS and Linux terminal.  
 
-{{{
-#!comment
 AR: This is obviously outdated.
 Advanced trouble shooting:
 
