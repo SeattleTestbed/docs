@@ -31,8 +31,6 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 '''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
-Repy can be downloaded at [https://seattleclearinghouse.poly.edu/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
-
 === Getting RepyV2 ===
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
@@ -58,7 +56,7 @@ python preparetest.py ~/path/to/build/dir
 
 (You will see a few warning messages during building, but they can be ignored for the task at hand.) Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
 ----
-(If you cannot install from source, [here] is a tarball including a pre-built runtime.)
+(If you cannot install from source, [[Image(repy_v2.zip)]] is a tarball including a pre-built runtime.)
 ----
 
 
