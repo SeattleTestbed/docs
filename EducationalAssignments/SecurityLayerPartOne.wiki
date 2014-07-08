@@ -16,7 +16,7 @@ This assignment is intended to prepare you for thinking about security paradigms
 == Overview ==
 ----
 
-In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for a [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your goal is to prevent the attacker from succeeding.  Thus you must stop a program from creating a file with "MZ" as the first two characters.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your goal is to prevent the attacker from succeeding.  Thus you must stop a program from creating a file with "MZ" as the first two characters.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -27,9 +27,9 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 [[BR]]
 === Getting Python/Repy ===
 ----
-Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
+Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
 
-'''Note:'''If you are using windows, you will need python in your path variables.  A tutorial on adding variables to your path in windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
+'''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
 Repy can be downloaded at [https://seattleclearinghouse.poly.edu/download/flibble/].  Once you have Repy, the [wiki:RepyTutorial] will help you understand the basics of using Repy.
 
@@ -39,7 +39,7 @@ Now that you have Repy, you simply need to get RepyV2.  Using the command line, 
 
 {{{svn co https://seattle.poly.edu/svn/seattle/branches/repy_v2}}}
 
-If the above command didn't work, you may need to download subversion.  Subversion can be downloaded at, [http://subversion.apache.org/packages.html], the windows installation is found at the bottom of the page.
+If the above command didn't work, you may need to download subversion.  Subversion can be downloaded at, [http://subversion.apache.org/packages.html], the Windows installation is found at the bottom of the page.
 
 Once you have RepyV2, navigate to the directory repy_v2, then create a new directory and run the command found below.  The new directory will be the `destdir` in the command found below.  This command will initialize the downloaded files into the newly created directory.
 
@@ -72,7 +72,7 @@ Repy is a subset of python however it does not have the same syntax.  For a full
 
  * Downloading the wrong version of seattle:
 
-Seattle is operating system dependent.  If you download the windows version, you need to use the windows command line.  For windows 7 this is powershell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the linux version you must use a linux OS and linux terminal.  
+Seattle is operating system dependent.  If you download the Windows version, you need to use the Windows command line.  For Windows 7 this is PowerShell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the Linux version you must use a Linux OS and Linux terminal.  
 
 Advanced trouble shooting:
 
@@ -229,9 +229,9 @@ Make sure you went through the "How to get RepyV2" section!
 = Notes and Resources =
 ----
    
- * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
+ * A list of command line utilities for Windows can be found at '''[http://commandwindows.com/command3.htm]'''
 
- * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html]'''
+ * A list of command line utilities for Linux/Mac '''[http://www.pixelbeat.org/cmdline.html]'''
 
  * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on '''how to test security layers'''. 
 
