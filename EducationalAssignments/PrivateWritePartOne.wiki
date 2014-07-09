@@ -165,7 +165,7 @@ class SecureFile():
 
 sec_file_def = {"obj-type":SecureFile,
             	"name":"SecureFile",
-                "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
                 "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,type(None)),TARGET:SecureFile.writeat},
              	"privatewrite":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,type(None)),TARGET:SecureFile.privatewrite},
                 "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
