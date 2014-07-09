@@ -126,37 +126,36 @@ However, a user cannot start the document with the letters,
 MZ.
 If a user tries to the security layer will raise an exception.
 Note:
-	This security layer uses encasementlib.r2py, restrictions.default, repy.py and python
-	Also you need to give it an application to run.
-	This security layer never runs explicitly but instead interposes functions
-	from above layers.
-	
-	"""	
-	
+  This security layer uses encasementlib.r2py, restrictions.default, repy.py and python
+  Also you need to give it an application to run.
+  This security layer never runs explicitly but instead interposes functions
+  from above layers.
+
+"""	
+
+# This is just an example global variable.   It stores a list of the calls the application makes.
 BUFFER = []
-	
+
 
 class SecureFile():
-	def __init__(self,privilegedfo):
-		self.privilegedfo = privilegedfo
+  def __init__(self,privilegedfo):
+    self.privilegedfo = privilegedfo
 
-	def readat(self,bytes,offset):
-		BUFFER.append("SecureFile.readat")
-		return self.privilegedfo.readat(bytes,offset)
+  def readat(self,bytes,offset):
+    BUFFER.append("readat")
+    return self.privilegedfo.readat(bytes,offset)
 
-	def writeat(self,data,offset):
-		BUFFER.append("SecureFile.writeat")
-		if data.startswith("MZ") and (offset == 0):	
-			raise ValueError("Cannot start file with MZ!")
-		else:
-		     BUFFER.append("SecureFile.writeat")
-		     return self.privilegedfo.writeat(data,offset)
+  def writeat(self,data,offset):
+    BUFFER.append("writeat")
+    if data.startswith("MZ") and (offset == 0):	
+      raise ValueError("Cannot start file with MZ!")
+    else:
+      BUFFER.append("writeat")
+      return self.privilegedfo.writeat(data,offset)
 	
-	def close(self):
-		BUFFER.append("SecureFile.close")
-		return self.privilegedfo.close()
-	
-	
+  def close(self):
+    BUFFER.append("close")
+    return self.privilegedfo.close()
 
 
 def secure_openfile(filename, create):
@@ -177,17 +176,15 @@ FUNC="func"
 OBJC="objc"
 
 sec_file_def = {"obj-type":SecureFile,
-	            "name":"SecureFile",
-	            "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
-	            "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(None),TARGET:SecureFile.writeat},
-	            "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
-	           }
+    "name":"SecureFile",
+    "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
+    "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(None),TARGET:SecureFile.writeat},
+    "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
+}
 
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
 
 secure_dispatch_module()
-
-
 }}} 
 
 == Using the example layer ==
@@ -227,7 +224,7 @@ else:
     log("Wrote an MZ!!!\n")
  
 finally:
-  # Close the file after our attempt.
+    # Close the file after our attempt.
     myfile.close()
 }}}
 
