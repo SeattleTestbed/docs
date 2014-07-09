@@ -120,7 +120,7 @@ finally:
 }}}
 ==== Code analysis ====
 
-In this case we are verifying the accuracy of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",1) tries to write "MZ" to the file. The 1 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+In this case we are verifying the accuracy of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",1) tries to write "MZ" to the file. The 1 refers to the fact that the characters are placed as the second and third characters in the file. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
 If this case produces anything other than "Write okay", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from starting with "MZ", not containing "MZ".
 
