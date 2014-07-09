@@ -128,13 +128,46 @@ If a user tries to the security layer will raise an exception.
 Note:
 	This security layer uses encasementlib.r2py, restrictions.default, repy.py and python
 	Also you need to give it an application to run.
-	This security layer never runs explicitedly but instead interposes functions
+	This security layer never runs explicitly but instead interposes functions
 	from above layers.
 	
 	"""	
 	
 BUFFER = []
 	
+
+class SecureFile():
+	def __init__(self,privilegedfo):
+		self.privilegedfo = privilegedfo
+
+	def readat(self,bytes,offset):
+		BUFFER.append("SecureFile.readat")
+		return self.privilegedfo.readat(bytes,offset)
+
+	def writeat(self,data,offset):
+		BUFFER.append("SecureFile.writeat")
+		if data.startswith("MZ") and (offset == 0):	
+			raise ValueError("Cannot start file with MZ!")
+		else:
+		     BUFFER.append("SecureFile.writeat")
+		     return self.privilegedfo.writeat(data,offset)
+	
+	def close(self):
+		BUFFER.append("SecureFile.close")
+		return self.privilegedfo.close()
+	
+	
+
+
+def secure_openfile(filename, create):
+  BUFFER.append("openfile")
+  # Open a file from the layer below (likely the sandbox)
+  privilegedfo = openfile(filename,create)
+  return SecureFile(privilegedfo)
+
+
+# You can ignore the code below here.   It just sets of the security layer so that the application calls it instead of
+# the original API functions.
 TYPE="type"
 ARGS="args"
 RETURN="return"
@@ -143,38 +176,12 @@ TARGET="target"
 FUNC="func"
 OBJC="objc"
 
-class SecureFile():
-	def __init__(self,file):
-		self.file = file
-
-	def readat(self,bytes,offset):
-		BUFFER.append("SecureFile.readat")
-		return self.file.readat(bytes,offset)
-
-	def writeat(self,data,offset):
-		BUFFER.append("SecureFile.writeat")
-		if data.startswith("MZ") and (offset == 0):	
-			raise ValueError("Cannot start file with MZ!")
-		else:
-		     BUFFER.append("SecureFile.writeat")
-		     return self.file.writeat(data,offset)
-	
-	def close(self):
-		BUFFER.append("SecureFile.close")
-		return self.file.close()
-	
-	
 sec_file_def = {"obj-type":SecureFile,
 	            "name":"SecureFile",
 	            "readat":{TYPE:FUNC,ARGS:((int,long),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
 	            "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(None),TARGET:SecureFile.writeat},
 	            "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
 	           }
-
-def secure_openfile(filename, create):
-  BUFFER.append("openfile")
-  f = openfile(filename,create)
-  return SecureFile(f)
 
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
 
