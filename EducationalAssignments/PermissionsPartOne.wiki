@@ -228,7 +228,7 @@ The above functions attempt to follow the design principles of accuracy, efficie
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to read the secure data written in the file. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus the attack you write should include several methods of attempting to read the secure data from the file. An example of an attack is found below:
+In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass permissions. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus the attack you write should include several methods of attempting to bypass permissions. An example of an attack is found below:
 
 {{{
 if "look.txt" in listfiles():
