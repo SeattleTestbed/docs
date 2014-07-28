@@ -1164,7 +1164,7 @@ Wraps any arbitrary code after performing a safety evaluation. Provides a method
   
      Another process will be launched to check the code for safety. This has memory and CPU ramifications,
      since we will not account for it's resource consumption. The memory use will likely exceed what is allowed
-     per vessel, since the memory used seems to grow faster-than-linarly with respect to LOC. 
+     per VM, since the memory used seems to grow faster-than-linarly with respect to LOC. 
 
      It usually takes 0.2-0.3 seconds to launch a process, pipe the code, evaluate for safety, and return.
 
