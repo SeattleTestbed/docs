@@ -34,7 +34,7 @@ This script runs once an hour. The current crontab line on blackbox looks like:
 == clearinghouse testlookupnodestates Test ==
 
 === Purpose ===
-Attempts to acquire, renew and release vessels from the Clearinghouse.
+Attempts to acquire, renew and release VMs from the Clearinghouse.
 
 === Deployment ===
 To deploy the testlookupnodestates test, create a folder where you want to deploy the test script. Run preparetest.py to that folder. Then copy over the file testlookupnodestates.py to that folder.
