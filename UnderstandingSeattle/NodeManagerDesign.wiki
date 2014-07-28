@@ -60,7 +60,7 @@ The node manager provides an interface that allows manipulation of VMs and infor
 
 
        
-There is also a special set of resources called the offcut resources.   The offcut resources are the amount of capability lost when a vessel is split into two VMs and the amount of capability gained when two VMs are joined.   It accounts for the management overhead of monitoring a VM.
+There is also a special set of resources called the offcut resources.   The offcut resources are the amount of capability lost when a VM is split into two VMs and the amount of capability gained when two VMs are joined.   It accounts for the management overhead of monitoring a VM.
        
 
 The interface is:  
