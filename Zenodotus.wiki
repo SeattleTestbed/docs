@@ -79,7 +79,7 @@ When running in a node, this will associate helloworld.zenodotus.poly.edu with y
 
 Note that there is a bug in the above code. If the node this is running in has its computer clock reset during the runtime, getruntime() will fail to provide increasing values, and the node will fail to update for a time, which will give the illusion that it has been terminated. There doesn't seem to be a good way to solve this.
 
-While this is running in at least one node, your users will no longer have to type a URL of the form <IP Address>:<Port> in to their browser to access your service. Instead, they can type in something more friendly, as in the example above: 'hello.zenodotus.poly.edu:631XX'. It is important to remember that this hosting service can't solve the port issue, since REPY vessels can only use GENIports for networking operations. As such, your users will still have to append the GENIport to their URLs.
+While this is running in at least one node, your users will no longer have to type a URL of the form <IP Address>:<Port> in to their browser to access your service. Instead, they can type in something more friendly, as in the example above: 'hello.zenodotus.poly.edu:631XX'. It is important to remember that this hosting service can't solve the port issue, since REPY VMs can only use GENIports for networking operations. As such, your users will still have to append the GENIport to their URLs.
 
 
 
