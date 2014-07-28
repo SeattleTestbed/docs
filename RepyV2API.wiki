@@ -794,7 +794,7 @@ Seek to the offset in the file and then write some data to a file.
 ----
 
 
-Returns a list of file names for the files in the vessel.   
+Returns a list of file names for the files in the VM.   
 
  * Doc string:
 
@@ -820,7 +820,7 @@ Returns a list of file names for the files in the vessel.
 ===== removefile(filename) =====
 ----
 
-Deletes a file in the vessel.   If the file does not exist, an exception is raised.
+Deletes a file in the VM.   If the file does not exist, an exception is raised.
 
  * Doc string:
 
@@ -1306,7 +1306,7 @@ Execute native code that has been compiled using the !NaCl toolchain.   (Future 
   <Side Effects>
 
     Another process will be launched to execute the program. This has memory 
-    and CPU ramifications, that will be accounted for in the current vessel.
+    and CPU ramifications, that will be accounted for in the current VM.
 
   <Resource Consumption>
 
