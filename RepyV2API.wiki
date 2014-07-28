@@ -103,7 +103,7 @@ The intent is that we will build libraries that will provide 'rich' functionalit
 
 ||openfile||opens file objects. ||example 2.1||
 
-||listfiles||Returns a list of file names for the files in the vessel||example 2.2||
+||listfiles||Returns a list of file names for the files in the VM||example 2.2||
 
 ||removefile||similar to Python's os.remove() function||example 2.2||
 
