@@ -39,7 +39,7 @@ if callfunc == 'initialize':
 }}}
 
 There are two different ways to run Repy programs.
-You can run the code in your local machine and in the vessels you control.
+You can run the code in your local machine and in the VMs you control.
 
 [[BR]]
 ==== Executing programs locally in Repy ====
@@ -106,7 +106,7 @@ Terminated
 Not all users will see "Terminated". This only shows up on some operating systems. Other operating systems may have different messages.
 
 [[BR]]
-==== Executing programs remotely in vessels ====
+==== Executing programs remotely in VMs ====
 ----
 
 You can also access the resources donated to you and run the program example.1.1.repy in the resources you can control. You need to follow the steps below in the shell in order to  run the program in resources.
@@ -136,7 +136,7 @@ john@ !>
 
 '''Step 3. Locate the resources(computers) you can use
 
-This command will tell the shell to locate resources that have been assigned to your account through the !SeattleClearinghouse website. In order to assign resources to your account, you must go to the !SeattleClearinghouse website, log into your account and get more resources under the 'My Vessels' tab.
+This command will tell the shell to locate resources that have been assigned to your account through the !SeattleClearinghouse website. In order to assign resources to your account, you must go to the !SeattleClearinghouse website, log into your account and get more resources under the 'My VMs' tab.
 
 {{{
 #!python
@@ -149,9 +149,9 @@ Added group 'browsegood' with 2 targets
 The command browse produced the output that shows resources(targets) you can control. 
 }}}
 
-In the first target %1(10.0.1.1:1224:v9), %1 is the alias of the target, 10.0.1.1 is IP address, 1224 is port number, and v9 is vessel name. The vessel is the partial portion of whole donated resources. It means that the donated resources could be one vessel or divided and assigned to more than one person. 
+In the first target %1(10.0.1.1:1224:v9), %1 is the alias of the target, 10.0.1.1 is IP address, 1224 is port number, and v9 is VM name. The VM is the partial portion of whole donated resources. It means that the donated resources could be one VM or divided and assigned to more than one person. 
 
-'''Step 4. Access the resources(vessels)
+'''Step 4. Access the resources(VMs)
 
 {{{
 #!python
@@ -182,7 +182,7 @@ Log from '10.0.1.2:2888:v9':
 Hello World
 }}}
 
-'''Step 7. Look up the information about the vessels you control
+'''Step 7. Look up the information about the VMs you control
 
 {{{
 #!python
@@ -223,7 +223,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -244,7 +244,7 @@ The initialize portion has two options.  If you run it locally, it says, wait fo
 It is localhost and means this computer. It is used to access the computer currently used.
 }}}
 
-Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. To figure out which port you should use, log into the SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
+Otherwise, you're running it remotely and need to pass it your Clearinghouse port.  For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's VMs. To figure out which port you should use, log into the SeattleClearinghouse website and on the Profile page, look to see what port number it indicates. You'll see a page like below.
 
 [[Image(clearinghouseport.png)]]
 
@@ -291,7 +291,7 @@ To stop the program, press CTRL-C.
 
 '''Running remotely
 
-Open seash the same as in the previous example but choose a single vessel.
+Open seash the same as in the previous example but choose a single VM.
 
 {{{
 #!python
@@ -306,7 +306,7 @@ Then, run this program passing it your Clearinghouse port.
 default@%1 !> run example.1.2.repy Clearinghouseport
 default@%1 !> list                            
   ID   Own                  Name                Status      Owner Information
-  %1             IP address:port:vesselname     Started     
+  %1             IP address:port:VMname     Started     
 }}}
 
 Notice that the program is "Started" instead of "Terminated". It's still running! 
@@ -320,7 +320,7 @@ To stop the program, in the shell type:
 default@%1 !> stop  # This will stop any programs that are still running...  
 default@%1 !> list                          
   ID    Own                Name                Status          Owner Information
-  %1             IP address:port:vesselname    Stopped   
+  %1             IP address:port:VMname    Stopped   
 }}}
 
 Notice that the program is now "Stopped".   It's not running
@@ -351,7 +351,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -382,7 +382,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -395,7 +395,7 @@ if callfunc == 'initialize':
   listencommhandle = waitforconn(ip,port,hello) 
 }}}
 
-Start the program using the shell, then open a web browser and in the address bar type: IP_of_vessel:Clearinghouseport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
+Start the program using the shell, then open a web browser and in the address bar type: IP_of_VM:Clearinghouseport.  You should see the hello world webpage and a count of 1. You can refresh the page and the count should increment.   Once again,use the shell to stop the program
 
 [[BR]]
 === Adding a Timer and listing the elapsed time (example 1.4) ===
@@ -445,7 +445,7 @@ The timer (when called) will stop the communication. settimer returns an eventha
 
 getruntime() is used to provide the amount of time that has elapsed since the program was started.   Note that it may be possible for the elapsed time to be > 60 seconds in this program because there may be some lag between when the program started and when your code ran or a delay in running the stop_listening event.
 
-Start the program and then open a web browser and in the address bar type: IPaddress_of_vessel:Clearinghouseport.  You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
+Start the program and then open a web browser and in the address bar type: IPaddress_of_VM:Clearinghouseport.  You'll notice that the webpage displays and after 1 minute the program will stop listening and stop itself.   You'll see that the program's status is "Terminated" because it caused itself to exit (as opposed to "Stopped" where you stopped it while it was running).
 
 [[BR]]
 === Interacting with Timers (example 1.5) ===
@@ -483,7 +483,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -536,7 +536,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -592,7 +592,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
