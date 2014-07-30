@@ -32,7 +32,7 @@ Explains how to go about deploying a new version of the code, which consists of 
       * `./push_update_to_all_clients.sh`
       * [attachment:blackbox-push-update-output.txt example output]
       * '''After this point, all nodes on the clearinghouse will have updated to the latest version! '''
- 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use vessels from betabox's updated nodes), it is time to do a push on production.
+ 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use VMs from betabox's updated nodes), it is time to do a push on production.
   1. Repeat the entirety of step 2, but on seattle.poly.edu instead. There are a few key differences, however:
     * In step 2.5, the only differences between our copy of trunk and what's in svn is the version string in `trunk/nodemanager/nmmain.py`. The files trunk/preparetest.py, trunk/dist/initial_files.fi and trunk/dist/final_files.fi may also be different if you had to edit them in step 4.
       * You should see the following as 'M':
