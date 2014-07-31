@@ -13,7 +13,7 @@ The main job of the installer is to modify the user's crontab to add an entry fo
 Below is a step-by-step explanation of exactly what the installer does: [[BR]]
  * Pre-installation
    * Process the arguments passed into the installer
-   * Run necessary tests and benchmarking to generate the vessel resource files, vessel directories, and the vesseldict file
+   * Run necessary tests and benchmarking to generate the vessel (or VM) resource files, vessel directories, and the vesseldict file
  * Installation
    * Set up the crontab to run seattle at boot
      * Test that cron is running on the system
@@ -34,7 +34,7 @@ The main job of the installer is to setup seattle to run automatically at boot. 
 Below is a step-by-step explanation of exactly what the installer does: [[BR]]
  * Pre-installation
    * Process the arguments passed into the installer
-   * Run necessary tests and benchmarking to generate the vessel resource files, vessel directories, and the vesseldict file
+   * Run necessary tests and benchmarking to generate the vessel/VM resource files, vessel directories, and the vesseldict file
  * Installation
    * Pre-process the '''uninstall.bat''' batch file to include the full path to the startup script in the startup folder (regardless of whether or not the script will actually be added to the startup folder). This is done because the startup folder is located in different places depending on the version of Windows, and the uninstaller will need to know where to look for this script in order to remove it if it is present.
    * Pre-process the '''start_seattle_shortcut.bat''' batch file to include the full file path to the actual '''start_seattle.bat''' batch file in the seattle directory so that the seattle script in the Startup folder knows where the seattle directory is in order to start seattle.
