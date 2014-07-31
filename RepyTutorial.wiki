@@ -425,7 +425,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this vessel gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
