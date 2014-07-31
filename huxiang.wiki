@@ -1,6 +1,6 @@
 = What is huxiang? =
 
-Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your Seattle Clearinghouse username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the vessels you borrowed (see the section on "Renewing Hosting")
+Taking advantage of the ability to register a domain name for a node's IP address through [wiki:Zenodotus zenodotus], you can host and maintain your own website through one of Seattle's nodes by the means of Overlord. By following the listed instructions and providing the application a word for your zenodotus address, your Seattle Clearinghouse username, and the directory path to the folder containing the files that make up the website, your website will be up for three hours unless you renew the VMs you borrowed (see the section on "Renewing Hosting")
 
 = Huxiang Client versus Huxiang Server =
 
