@@ -12,7 +12,7 @@ The primary goal of this work is to ensure that nodes can only send packets to o
 
 Our solution is to use a set of trusted central servers to host a service to manage addresses of machines that have opted in to receiving Seattle traffic. We call this service the Seattle Node Directory Service.  The opt-in machines are responsible for registering (and periodically re-registering) to continue receiving Seattle traffic. In order to prevent spoofing, when a machine wishes to register with the Seattle Node Directory Service, it must first do so through TCP. In response to a registration the Seattle Node Directory Service generates a random renewal key and sends it to the registering machine. The machine can then use this key to renew its registration via UDP. This is done to improve performance, as TCP is expensive and a TCP-only registration system will not scale adequately.
  
-Seattle nodes will make decisions about what traffic to allow or deny locally. To do this, nodes cache the relevant parts of the node directory. In most cases, two vessels will communicate only if they share one or more user or owner keys (i.e. if they host vessels that have an overlapping set of users). However, exceptions such as vessels that provide public services may also be handled.
+Seattle nodes will make decisions about what traffic to allow or deny locally. To do this, nodes cache the relevant parts of the node directory. In most cases, two VMs will communicate only if they share one or more user or owner keys (i.e. if they host VMs that have an overlapping set of users). However, exceptions such as VMs that provide public services may also be handled.
 
 If a program attempts to send a packet to an address not in the node's cache, the node sends a packet to the directory service asking if the address is valid. If the directory service replies positively, the address is added to the node's cache. If the cache becomes full, the least recently used entry is evicted to make room for the new entry.
  
@@ -20,6 +20,6 @@ To maintain the node's cache of addresses as current as possible, the Seattle No
 
 
 == Feedback ==
-[wiki:NatIntegration Integration with NAT Nodes]
+[wiki:Outdated/NatIntegration Integration with NAT Nodes]
 
 
