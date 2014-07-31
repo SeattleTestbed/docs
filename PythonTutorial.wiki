@@ -38,10 +38,10 @@ python test.py
 This is the normal way to execute python code. However, since this tutorial is written for those who use Repy, we need to explain the different way to run Repy programs.
 
 There are two ways to execute programs.
-You can run your programs on your local computer or on a remote vessel that you control.
-Although our final goal is to run programs on the vessels, we explain the way to run programs on a local computer here because it's simple.
+You can run your programs on your local computer or on a remote VM that you control.
+Although our final goal is to run programs on the VMs, we explain the way to run programs on a local computer here because it's simple.
 
-You can learn how to execute in the vessels in the [RepyTutorial Repy Tutorial].
+You can learn how to execute in the VMs in the [RepyTutorial Repy Tutorial].
 
 [[BR]]
 ==== Executing programs locally in Repy ====
