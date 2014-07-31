@@ -126,8 +126,8 @@ These are defined in views.py specifically for each web page.
   Gaetano Pressimone Aug 14 2012
   
 <Purpose>
-  Django template file for Seattle Clearinghouse's 'My Vessels' page.  The page 
-  allows a logged in user to acquire, renew or remove vessels.
+  Django template file for Seattle Clearinghouse's 'My VMs' page.  The page 
+  allows a logged in user to acquire, renew or remove VMs.
 
 <extends>
   control/control_base.html
@@ -143,24 +143,24 @@ These are defined in views.py specifically for each web page.
     The currently logged in user.
 	
   my_vessels: 
-    list of infodicts of the user's currently acquired vessels.
+    list of infodicts of the user's currently acquired VMs.
     .node_ip:  last known ip
     .node_port:  last known port
-    .vessel_id:  vessel name
-    .node_id:  identifier for the node that the vessel is on
-    .handle:  node id + ":" + vessel name
+    .vessel_id:  VM name
+    .node_id:  identifier for the node that the VM is on
+    .handle:  node id + ":" + VM name
     .is_active:  whether the node is active
-    .expires_in_seconds: expiration time, in seconds, for the vessel
+    .expires_in_seconds: expiration time, in seconds, for the VM
 
   num_vessels: 
     Length of my_vessels list.
 
   sh_vessels: 
-    List of shared vessels that are used by other but which belong to this user.
+    List of shared VMs that are used by other but which belong to this user.
 
   get_form:
-    The form to acquire vessels.  See forms.py for more info.
-    .num: number of acquirable vessels.
+    The form to acquire VMs.  See forms.py for more info.
+    .num: number of acquirable VMs.
     .env: environmental variables example WAN, LAN, NAT, Random
 
   action_summary: 
