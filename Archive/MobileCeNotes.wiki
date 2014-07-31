@@ -37,7 +37,7 @@ As touched on in the Unit test evaluation section, there are some major issues o
     * This causes repy test's to fail pre-emptively, since they require network connectivity
     * Slow CPU causes problems for tests that are timing based or require threads to work
  *  Some times there is odd behavior with the OS, example being the exit calls
- * A goal of repy is to use 10% of user resources, however the barebones python interpreter uses 1.7 megs, a simple repy program (e.g. hello world) uses about 2.7 megs of RAM. On my phone, I have only 25 megs available to user programs, meaning hello world is the extent of 10%. It remains to be seen how we can run the NM, a repy vessel, and a software updater.
+ * A goal of repy is to use 10% of user resources, however the barebones python interpreter uses 1.7 megs, a simple repy program (e.g. hello world) uses about 2.7 megs of RAM. On my phone, I have only 25 megs available to user programs, meaning hello world is the extent of 10%. It remains to be seen how we can run the NM, a repy VM, and a software updater.
  * Due to CPU scheduling, sandboxing of CPU works ineffectively meaning it may be possible to temporarily "brick" the device when doing CPU intensive operations.
  * Installation of Seattle is not extremely friendly, due to the package management used by WinCE, since it requires the user first install Python using a CAB file, then install seattle, and alter the repy_constants file if necessary.
  * Lack of subprocess and unknown availability of netstat means that we do not support existsListeningNetworkSocket on WinCE.
