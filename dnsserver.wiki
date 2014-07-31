@@ -25,7 +25,7 @@ def dnsserver_registercallback(listen_port, listen_ip, callback_function):
   <Arguments>
     listen_port
       The UDP port on which we listen for DNS messages. If this is being used 
-      in a vessel, it must be a GENIPORT.
+      in a VM, it must be a GENIPORT.
 
     listen_ip
       The IP address on which we listen for DNS messages. This will generally 
