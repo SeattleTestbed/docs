@@ -21,5 +21,5 @@ Brent: Look to add circular logging to the node manager and look at handling exc
 
 Jan 17th - Jan 22nd
 
-Both: Ensure logging works for your application and test that files can be retrieved from our "service vessel"
+Both: Ensure logging works for your application and test that files can be retrieved from our "service VM"
 
