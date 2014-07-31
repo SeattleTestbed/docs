@@ -288,7 +288,7 @@ except InvalidFileModeException:
 
 ==== Illegal File Names ====
 
-Python allows many characters within the open method such as ".." to traverse directories. Because Repy has no concept of "directories" for programs running in the vessels, it must be more restrictive of allowed file names.
+Python allows many characters within the open method such as ".." to traverse directories. Because Repy has no concept of "directories" for programs running in the VMs, it must be more restrictive of allowed file names.
 
 Python:
 {{{
@@ -315,13 +315,13 @@ Given the nature of repy, it is necessary to be able to signal users that they h
 
 Recoverable resource errors generally fall into two categories: attempting to use a resource that isn't allowed, and overusing recoverable resources.
 
-When trying to use a resource that wasn't permitted in a vessel's restrictions file, a !ResourceNotAllowedError will be raised. In the case of overusing a resource, a !ResourceExhaustedError will be raised. These will make it more clear why an error occured when trying to use a node's resources, and avoid the hacky string parsing currently required for recovery. 
+When trying to use a resource that wasn't permitted in a VMl's restrictions file, a !ResourceNotAllowedError will be raised. In the case of overusing a resource, a !ResourceExhaustedError will be raised. These will make it more clear why an error occured when trying to use a node's resources, and avoid the hacky string parsing currently required for recovery. 
 
 [[BR]]
 == Internal Errors ==
 ----
 
-The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, an {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. The rationale behind this is that we want to hide potential repy weaknesses to typical users, and ensure that a corrupt vessel doesn't resume execution in a potentially harmful state. 
+The above errors are meant to be the exceptions exposed to users. If a corrupt internal state is detected by repy, an {{{InternalError}}} will be raised. When this occurs, a user's repy program will terminate instantly. The rationale behind this is that we want to hide potential repy weaknesses to typical users, and ensure that a corrupt VM doesn't resume execution in a potentially harmful state. 
 
 !InternalError's aren't meant to be recoverable, and are meant to only occur in extraordinary cases. They're meant to provide a notification to the user that an error occurred that (hopefully) wasn't their fault, and execution had to terminate. Ideally these won't occur, and only errors that were actually caused by the user will get thrown to them. !InternalError is supposed to be a shadow/umbrella error that lets the user know something was FUBAR'ed, but a) doesn't fall into the category of one of the other exceptions, and b) was an error which they aren't expected to able to recover from. 
 
