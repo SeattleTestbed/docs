@@ -27,7 +27,7 @@ results = proxy.api_version()
 
  * build_installers(vessels, user_data=None)
 
-    Builds an installer for each of the specified platforms using the given vessel and user information. In the absence of provided user data, cryptographic keys will automatically be generated.
+    Builds an installer for each of the specified platforms using the given vessel/VM and user information. In the absence of provided user data, cryptographic keys will automatically be generated.
 
     A sample call:
 {{{
