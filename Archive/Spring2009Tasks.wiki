@@ -110,7 +110,7 @@ Compare and contrast different Python testing frameworks.   Write a small amount
 ----
 Related to ticket #228
 
-Build a framework that deploys and monitors a simple repy service.   It should get vessels for the service, run the code, and when instances die, log information and restart them on new nodes.
+Build a framework that deploys and monitors a simple repy service.   It should get VMs for the service, run the code, and when instances die, log information and restart them on new nodes.
 
 [[BR]]
 == ~~Remote deployment Seattle   ---   Justin ('''Kon''')   ---   3 tokens (ongoing)~~  ==
@@ -162,12 +162,12 @@ The name of the build_installers.py should be something like installer_utils. Iv
 
 
 [[BR]]
-== ~~Monitor nodes we can log into, get vessel logs from nodes, work with database, state of node should be logged    ---   Justin (Kon)   ---   4 tokens~~  ==
+== ~~Monitor nodes we can log into, get VM logs from nodes, work with database, state of node should be logged    ---   Justin (Kon)   ---   4 tokens~~  ==
 ----
 
 We want a monitoring program to go and check the status of nodes.   We have scripts that can be run on nodes that we can ssh to that provides detailed information.  
 
-We also should go and pull the logs from the service vessels.
+We also should go and pull the logs from the service VMs.
 
 Grab information from the GENI database and check its accuracy.
 
@@ -215,7 +215,7 @@ The bandwidth code right now is specific to client or server, and only allows a 
 
 There needs to be a way to determine the offcut resources size on an arbitrary platform. This will vary a lot from system to system and so needs to be determined at install time.
 
-We need to make the installers and custom installer creator work together to deal with the 10% resource changes. The end result is that the installer will work based upon percentages. The total resources will be determined by the benchmarking scripts and the appropriate percentages will be assigned to each of the vessels.
+We need to make the installers and custom installer creator work together to deal with the 10% resource changes. The end result is that the installer will work based upon percentages. The total resources will be determined by the benchmarking scripts and the appropriate percentages will be assigned to each of the VMs.
 
 
 
@@ -376,7 +376,7 @@ Maintain generated keys in a process (not database). Communicate with this proce
 ==  ~~  Write NTP forwarder   ---   Justin ('''Zachary''') --- squishy 2 tokens (including tutorials)  ~~ ==
 ----
 
-==  ~~  Read the local vessel's resource file (given a user port)   ---   Justin ('''Monzur''') --- squishy 2 tokens (including tutorials) ~~ ==
+==  ~~  Read the local VM's resource file (given a user port)   ---   Justin ('''Monzur''') --- squishy 2 tokens (including tutorials) ~~ ==
    
 [[BR]]
 = Collaboration =
