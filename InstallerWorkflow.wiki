@@ -1,6 +1,6 @@
 = Installer Workflow =
 
-This document describes how installers work, specifically how the clearinghouse uses the [wiki:CustomInstallerBuilderTesting custom installer builder] to track and manage user installations.   One thing that is often surprising to people is that the installer the user downloads from a clearinghouse, comes from the custom installer builder (over XMLRPC).   In fact, nowhere in the installer does it explicitly mention the clearinghouse.   The installer is indistinguishable from a user created installer.
+This document describes how installers work, specifically how the clearinghouse uses the [wiki:Archive/CustomInstallerBuilderTesting custom installer builder] to track and manage user installations.   One thing that is often surprising to people is that the installer the user downloads from a clearinghouse, comes from the custom installer builder (over XMLRPC).   In fact, nowhere in the installer does it explicitly mention the clearinghouse.   The installer is indistinguishable from a user created installer.
 
 Before understanding how this works, it is important to first understand how users can locate VMs that have their public key.   
 
@@ -8,7 +8,7 @@ JAC: the doc needs node state transitions explained.
 
 [[TOC(inline)]]
 == Overview ==
-Seattle uses the [wiki:CustomInstallerBuilderTesting custom installer builder] to generate Seattle installers.  A unique installer is generated dynamically by the CIB every time a user clicks download. A Seattle Clearinghouse frontend specifies which custom installer to use in website/settings.py.
+Seattle uses the [wiki:Archive/CustomInstallerBuilderTesting custom installer builder] to generate Seattle installers.  A unique installer is generated dynamically by the CIB every time a user clicks download. A Seattle Clearinghouse frontend specifies which custom installer to use in website/settings.py.
 
 {{{
 #!py
@@ -42,7 +42,7 @@ $ python ./Seattle/trunk/dist/make_base_installers.py a ./Seattle/trunk/ user.pu
 }}}
 
 == Custom installer workflow ==
-The custom installer creates a vesselinfo file that is used by the nodemanager upon installation. This vesselinfo file dictates how the vessels are created. A default vesselinfo file is provided, but if you would like more control over how the resources on your machine are split up between your different vessels, or would like to dedicate specific vessels to specific users, you may also do that through the custom installer builder.
+The custom installer creates a vesselinfo file that is used by the nodemanager upon installation. This vesselinfo file dictates how the vessels are created. A default vesselinfo file is provided, but if you would like more control over how the resources on your machine are split up between your different vessels/VMs, or would like to dedicate specific vessels to specific users, you may also do that through the custom installer builder.
 
 A copy of the base installer is made for each user. The custom installer builder accepts a donation public key and creates a vesselinfo file. After this file is embedded into the installer, the installer is complete and may be distributed to users.
 More information can be found at [wiki:BenchmarkCustomInstallerInfo].
