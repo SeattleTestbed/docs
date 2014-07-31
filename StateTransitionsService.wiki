@@ -12,7 +12,7 @@ The state transition daemons track node configuration state. Primarily they are 
 Each state transition daemon is a python script that runs '''all the time'''. These scripts are essential because they configure newly installed Seattle nodes for use by the GENI. Each script ''transitions'' the node from some prior state to a new state. The transition might require sending commands to the node manager, creating new database records, etc. Here are the three state transition scripts that run on seattlegeni.cs:
 
  * '''donation_to_canonical''' -- transition a node from a newly installed state (donation state) into the canonical state
- * '''canonical_to_onepercentmanyevents''' -- transitions a node from the canonical state into the one percent manyevents state in which the node is ready to be used by GENI. If a node fails to get split, it is joined back up so there is only one vessel remaining.
+ * '''canonical_to_onepercentmanyevents''' -- transitions a node from the canonical state into the one percent manyevents state in which the node is ready to be used by GENI. If a node fails to get split, it is joined back up so there is only one VM remaining.
  * '''onepercentmanyevents_to_onepercentmanyevents''' -- transitions a node from the one percent manyevents state back into the one percent manyevents state, updating some time-dependent information about the node in the database
 
 [[BR]]
