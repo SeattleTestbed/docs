@@ -19,7 +19,7 @@ Currently there is no caching system for advertise data, since this information 
 
 == Use ==
 
-Setting this up is fairly straightforward: Simply load the preprocessed REPY file on to a vessel, and execute it, passing the program your GENIPORT as its only argument. It will immediately begin listening for DNS connections on your GENIPORT.
+Setting this up is fairly straightforward: Simply load the preprocessed REPY file on to a VM, and execute it, passing the program your GENIPORT as its only argument. It will immediately begin listening for DNS connections on your GENIPORT.
 
 
 == Debugging/Testing ==
