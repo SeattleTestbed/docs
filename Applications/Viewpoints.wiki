@@ -32,7 +32,7 @@ IN THE WORK.
 
 1.      If you do not have a !Seattle Clearinghouse account, go to https://seattleclearinghouse.poly.edu and register.
 
-2.      Log on to !Seattle Clearinghouseand acquire 10 WAN vessels.  
+2.      Log on to !Seattle Clearinghouseand acquire 10 WAN VMs.  
 
 3.      Download the demokit form !Seattle Clearinghouse
 
@@ -44,7 +44,7 @@ IN THE WORK.
 
 7.      Now go over to your browser and type in http://127.0.0.1:12345/. You should retrieve the display of the viewpoints webpage.
 
-8.      Click on the acquire vessels show button. This will generate the possible viewpoint locations using your available !Seattle Clearinghouse nodes.(Note: this will take a few seconds, please wait)
+8.      Click on the acquire VMs show button. This will generate the possible viewpoint locations using your available !Seattle Clearinghouse nodes.(Note: this will take a few seconds, please wait)
 
 9.      When you have the available locations. Copy over one location to the Viewpoints Location field.
 
