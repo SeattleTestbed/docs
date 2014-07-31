@@ -88,9 +88,9 @@ Did this change the picture quality?
 == Step 6 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account, go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account, go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources. 
 
-In the top pane, select WAN and choose 5 vessels, and click "Get".  At this point, you should have vessels (VMs) that you can use to run your code!
+In the top pane, select WAN and choose 5 VMs, and click "Get".  At this point, you should have VMs that you can use to run your code!
 
 [[BR]]
 == Step 7 : Running Seash ==
@@ -124,25 +124,25 @@ Then, type
 !> as username
 }}}
 
-This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for vessels you control by typing browse:
+This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for VMs you control by typing browse:
 
 {{{
 #!python
 username@ !> browse
 }}}
 
-This will search for vessels that you control so that seash can access them.  You should see several vessels added.  The output from browse command will look something like the following:
+This will search for VMs that you control so that seash can access them.  You should see several vessels added.  The output from browse command will look something like the following:
 
 {{{
 #!python
 username@ !> browse            
-Added targets: %1(IP:port:vesselname), %2(IP:port:vesselname), %3(IP:port:vesselname), ...
+Added targets: %1(IP:port:VMname), %2(IP:port:VMname), %3(IP:port:VMname), ...
 Added group 'browsegood' with X targets      
 }}}
 
 This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.  
 
-If some of the virtual machines were not recognized, feel free to go to the My Vessels tab and remove those VMs.   You can then acquire new ones.   If you browse again, you should see the new computers as recognized.   (Your old ones will still be known to seash too.)
+If some of the virtual machines were not recognized, feel free to go to the My VM tab and remove those VMs.   You can then acquire new ones.   If you browse again, you should see the new computers as recognized.   (Your old ones will still be known to seash too.)
 
 [[BR]]
 == Step 9 : examining characteristics of remote computers ==
