@@ -75,7 +75,7 @@ Overview:
       * The possible reasons to do so include:
         * Being able to have the Polling Daemons be untrusted components (e.g. run in less secure environments)
         * Allow the Backend to more efficiently handle nodemanager communication.
-          * Example: background releasing of vessels while maintaining locks on those vessels. This may not be the greatest example, but ideas along these lines may be easier to implement if the nodemanager communication is kept in one place.
+          * Example: background releasing of VMs while maintaining locks on those VMs. This may not be the greatest example, but ideas along these lines may be easier to implement if the nodemanager communication is kept in one place.
   * The Backend will do locking through the Lockserver as needed.
 
 APIs used:
@@ -107,7 +107,7 @@ to be guaranteed exclusive access to some parts of the system.
         * user resource acquisition/release
         * user deletion
     * ''node''
-      * node locks must be obtained anytime operations on a node or any of its vessels are performed.
+      * node locks must be obtained anytime operations on a node or any of its VMs are performed.
       * examples of cases where used:
         * node state transition scripts
         * user key change
@@ -149,7 +149,7 @@ APIs used:
 
 == An Example Request Being Handled ==
 
-A user requests new vessels through the website (either through HTTP or XML-RPC).
+A user requests new VMs/vessel through the website (either through HTTP or XML-RPC).
 
 ''In the Website''
 
@@ -157,33 +157,33 @@ The details of the request are passed to the Controller Interface (which is part
 
 The Controller sees that the request needs to have a ''user'' lock and obtains one through the Lockserver API (blocking until the lock is obtained).
 
-The Controller determines whether the user is allowed the requested resources (that is, whether or not the user already has too many acquired vessels). If not, the user lock is released and a proper response is returned to the frontend.
+The Controller determines whether the user is allowed the requested resources (that is, whether or not the user already has too many acquired VMs). If not, the user lock is released and a proper response is returned to the frontend.
 
-The Controller determines whether there are sufficient resources available to fulfill the request and, if so, which resources (e.g. specific vessels) those are. This is done without locking and so there is no guarantee at this point that the resources will be able to be acquired for this user. If there are not sufficient resources, the user lock is released and the proper response is returned to the frontend.
+The Controller determines whether there are sufficient resources available to fulfill the request and, if so, which resources (e.g. specific VMs) those are. This is done without locking and so there is no guarantee at this point that the resources will be able to be acquired for this user. If there are not sufficient resources, the user lock is released and the proper response is returned to the frontend.
 
-At this point the Controller knows a set of vessels it wants to acquire for the user. The Controller repeatedly uses Privileged Operation API calls to acquire the needed individual vessels for the user. (If implemented in this way where the Controller does not first obtain a node lock, then the Controller must include its Lockserver session id in Privileged Operation API calls in order for the Backend to be able to use the same Lockserver session id.)
+At this point the Controller knows a set of VMs it wants to acquire for the user. The Controller repeatedly uses Privileged Operation API calls to acquire the needed individual VMs for the user. (If implemented in this way where the Controller does not first obtain a node lock, then the Controller must include its Lockserver session id in Privileged Operation API calls in order for the Backend to be able to use the same Lockserver session id.)
 
 ''In the Backend''
 
-The Privileged Operation Backend receives the request (through its XML-RPC interface) to assign a specific vessel to a specific user.
+The Privileged Operation Backend receives the request (through its XML-RPC interface) to assign a specific VM to a specific user.
 
-The Backend obtains a lock for the node that the vessel is on through the Lockserver API (blocking until the lock is obtained).
+The Backend obtains a lock for the node that the VM is on through the Lockserver API (blocking until the lock is obtained).
 
-Now that the Backend has a lock for the vessel's node, it uses the Database API to determine if the vessel is available for assignment to a user (that is, ensure it is not assigned to another user, ensures the correct port for the user exists on the vessel, ensures that the node the vessel is on is considered active, etc.). If the vessel is not available for assignment, the node lock is released and a proper response is returned (which in this case is a response to the Controller).
+Now that the Backend has a lock for the VM's node, it uses the Database API to determine if the VM is available for assignment to a user (that is, ensure it is not assigned to another user, ensures the correct port for the user exists on the VM, ensures that the node the VM is on is considered active, etc.). If the VM is not available for assignment, the node lock is released and a proper response is returned (which in this case is a response to the Controller).
 
-The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the vessel. If the call fails, the Backend releases the node lock and returns a proper response.
+The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the VM. If the call fails, the Backend releases the node lock and returns a proper response.
 
 (The Geni Nodemanager API is used in combination with the Key DB API to perform signed nodemanager communication.)
 
-Once the !ChangeUser call to the nodemanager is complete, the Backend uses the Database API to update the database to indicate this vessel's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the vessel but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
+Once the !ChangeUser call to the nodemanager is complete, the Backend uses the Database API to update the database to indicate this VM's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the VM but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
 
 The Backend then releases the lock on the node and responds to the Website that the acquisitions was successful.
 
 ''In the Website''
 
-The Controller repeats the process of using the Backend to acquire vessels for the user. When acquisitions fail, the Controller does its best to try to accommodate the request until it is no longer possible to fulfill the request. If it is no longer possible to fulfill the request, the Controller makes calls to the Backend to release each vessel that had been successfully acquired. If the system crashes during the individual vessel acquisition/release process, the result will be that the user account will be left in a valid state but with a partial set of the resources they had requested, which is an acceptable failure effect.
+The Controller repeats the process of using the Backend to acquire VMs for the user. When acquisitions fail, the Controller does its best to try to accommodate the request until it is no longer possible to fulfill the request. If it is no longer possible to fulfill the request, the Controller makes calls to the Backend to release each VM that had been successfully acquired. If the system crashes during the individual VM acquisition/release process, the result will be that the user account will be left in a valid state but with a partial set of the resources they had requested, which is an acceptable failure effect.
 
-When the Controller has finished (either by giving up and releasing any acquired vessels or by acquiring the desired vessels), the Controller releases the user lock and returns a proper response to the frontend so that the frontend can give the appropriate response to the request (either HTTP or XML-RPC, however the request came in).
+When the Controller has finished (either by giving up and releasing any acquired VMs or by acquiring the desired VMs), the Controller releases the user lock and returns a proper response to the frontend so that the frontend can give the appropriate response to the request (either HTTP or XML-RPC, however the request came in).
 
 ----
 
@@ -201,7 +201,7 @@ Logging will be available in multiple ways:
 
 Ultimately, various logged information should be summarized and available through a website so that the status of the site can be easily monitored. Log files by themselves tend to not be looked at by humans except after something is known to be going wrong. Where possible and efficient, some data may be logged to a database in order to facilitate easy summarization of the data (this wouldn't replace file logging).
 
-Whether logged to a database or text files, a summarization/visualization of log data helps to identify logic bugs or other problems in the system. For example, there may be no critical exceptions happening but an unusually high percentage of vessel acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
+Whether logged to a database or text files, a summarization/visualization of log data helps to identify logic bugs or other problems in the system. For example, there may be no critical exceptions happening but an unusually high percentage of VM acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
 ----
 
@@ -236,8 +236,8 @@ The details of the models (database schemas) are below.
       * A !GeniUser record represents a !SeattleGeni user. This class extends the django.contrib.auth.models.User class.
     * fields:
       * usable_vessel_port
-        * the port which must be assigned to a vessel for the user to be able to acquire that vessel.
-        * this field may go away later on if users are no longer always assigned to the same port on all vessels.
+        * the port which must be assigned to a vessel/VM for the user to be able to acquire that VM.
+        * this field may go away later on if users are no longer always assigned to the same port on all VMs.
       * affiliation
         * the text the user supplied which identifies the organization they are affiliated with.
       * user_pubkey
@@ -275,7 +275,7 @@ The details of the models (database schemas) are below.
         * the !SeattleGeni's owner key for this node.
          * the private key is always stored in the Key DB and is accessible using this public key.
       * extra_vessel_name
-        * the extra vessel will (at least in the near future) have the node's free resources assigned to it, so the name needs to be known in order to do things with those resources.
+        * the extra vessel/VM will (at least in the near future) have the node's free resources assigned to it, so the name needs to be known in order to do things with those resources.
     * notes
       * The subnet will be calculated as needed rather than stored unless the database impact is too high. If it needs to be saved, it will be an indexed string field. (The current implementation as the concatenated first three octets without periods looks flawed unless I'm reading it wrong).
 
@@ -295,27 +295,27 @@ The details of the models (database schemas) are below.
 
   * Vessel
     * purpose:
-      * A vessel record represents a vessel that !SeattleGeni has setup on a node. Note that this is '''not''' tied to an individual donation of resources from that node.
+      * A vessel record represents a VM that !SeattleGeni has setup on a node. Note that this is '''not''' tied to an individual donation of resources from that node.
     * fields:
       * node (foreign key to the nodes table)
       * name
-        * the name used to refer to the vessel when communicating with the nodemanager
+        * the name used to refer to the VM when communicating with the nodemanager
       * acquired_by_user (foreign key to the users table)
-        * if this vessel has been acquired by a user, this is the user who acquired it
+        * if this VM has been acquired by a user, this is the user who acquired it
       * date_acquired
       * date_expires
-        * the date after which the vessel should be taken away from the user who has acquired it.
+        * the date after which the VM should be taken away from the user who has acquired it.
 
   * !VesselPort
     * purpose:
-      * A !VesselPort record represents a port that is assigned to a vessel. A single vessel can have multiple ports assigned to it (multiple !VesselPort records).
+      * A !VesselPort record represents a port that is assigned to a vessel/VM. A single VM can have multiple ports assigned to it (multiple !VesselPort records).
     * fields:
       * vessel (foreign key to vessels table)
       * port
 
   * !VesselUserAccessMap
     * purpose:
-      * A !VesselUserAccessMap record represents user access to vessels. This is a many-to-many relationship. The user who acquired the vessel will always have a mapping to that vessel. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
+      * A !VesselUserAccessMap record represents user access to VMs. This is a many-to-many relationship. The user who acquired the VM will always have a mapping to that VM. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
     * fields:
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
@@ -343,7 +343,7 @@ There will likely be additional tables for logging.
   * '''Indexing'''
     * The current database schema does not appear to make use of additional indexes for performance.
     * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten. Indexes will be added where logical and should be tested using a large database with performance profiling.
-  * '''Vessel acquisition''': If a user acquires a vessel, the vessel counts towards that user's vessel limit. In the future, limits may be by resources (e.g. diskspace) rather than number of vessels.
-  * '''Vessel releasing''': Releasing a vessel means to clear the list of users with access to the node and to return the vessel credit to the user who had acquired the vessel. (The vessel may be reset, etc.)
-  * '''Vessel multi-user access''': A vessel can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the vessel can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the vessel, so initial implementation will probably use that approach. (Adding additional users to a vessel may not be available through the UI for this version, but the functionality will be easy to implement.)
-  * '''Sharing''': allowing other users to create vessels against your available resources is not re-incorporated in the design at this time.
+  * '''Vessel acquisition''': If a user acquires a VM, the VM counts towards that user's VM limit. In the future, limits may be by resources (e.g. diskspace) rather than number of VMs.
+  * '''Vessel releasing''': Releasing a VM/vessel means to clear the list of users with access to the node and to return the VM credit to the user who had acquired the VM. (The VM may be reset, etc.)
+  * '''Vessel multi-user access''': A VM can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the VM can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the VM, so initial implementation will probably use that approach. (Adding additional users to a VM may not be available through the UI for this version, but the functionality will be easy to implement.)
+  * '''Sharing''': allowing other users to create VMs against your available resources is not re-incorporated in the design at this time.
