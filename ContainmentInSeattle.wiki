@@ -44,7 +44,7 @@ Prior to this section, please complete the steps in the 'Building and Configurin
 python deploycncexperiment.py wan <number clients> <experiment run duration in seconds> <number of client groups>
 }}}
 
-The nummber of client groups argument basically indicates the nubmer of unique keys. The script will set up clients to have one userkey each. So for 2 client groups, half of the vessels will have one key, and the other half will share a completely different key. 
+The nummber of client groups argument basically indicates the nubmer of unique keys. The script will set up clients to have one userkey each. So for 2 client groups, half of the VMs will have one key, and the other half will share a completely different key. 
 
 For example, the following command will run an experiment with 100 clients for 20 minutes, with all clients sharing the same single userkey.
 {{{
@@ -67,7 +67,7 @@ The report will be stored in the file temp.txt.
 
 
 == CNC Core Modules ==
-The following modues are used in the Seattle Node Containment system. Please note that unless specified otherwise, when we refer to the term userkey, we mean cncuserkey, not the userkeys Seattle uses to assign vessels. Cncuserkeys are essentially hashes of Seattle userkeys.
+The following modues are used in the Seattle Node Containment system. Please note that unless specified otherwise, when we refer to the term userkey, we mean cncuserkey, not the userkeys Seattle uses to assign VMs. Cncuserkeys are essentially hashes of Seattle userkeys.
 
 keyrangelib.repy - Library that provides utility and helper functions for key range related tasks. These include tasks such as converting from Seattle userkeys to cncuserkeys, or looking up the address of the supporting server for a particular userkey.
 
@@ -75,13 +75,13 @@ cncSignData.repy - Handles tasks related to packet signing. This is essentially 
 
 cncperformance.repy - Includes funtions whose purpose is to improve the performance of the cnc system. Currently it only provides functionality for compressing and restoring ip,port information, but more may be added to this modeule later as optimizations are made.
 
-cncmultifilelog.repy - provides simple interface to the cnc system for logging. It allows for two types of logging, single and multi-file. Multifile logging splits logs accross many files which is helpful for downloading experiment data from vessels as it avoids timeouts associated with retriveving what would otherwise be massive log files.
+cncmultifilelog.repy - provides simple interface to the cnc system for logging. It allows for two types of logging, single and multi-file. Multifile logging splits logs accross many files which is helpful for downloading experiment data from VMs as it avoids timeouts associated with retriveving what would otherwise be massive log files.
 
 cncFileParser.repy - used to read configuration files for both client and server.
 
 cncperfutils.repy - This module handles tracking of the order packets arrive in for diagnostic/debugging purposes. All calls to this method should be removed from production code (debug and experiments only).
 
-cncclient.repy - provides client interface to the containment system. It handles registration, update processing and other cnc related tasks transparently. To use this library, the caller (which will be the dedicated vessel on each node hosting the client service) must first call cncclient_initialize, specifying a free port that can be used by the system. cnc_sendmess and cnc_openconn are written to handle the restricting of sending traffic and opening connections. Similar methods need to be written for receiving traffic and waiting for connections.
+cncclient.repy - provides client interface to the containment system. It handles registration, update processing and other cnc related tasks transparently. To use this library, the caller (which will be the dedicated VM on each node hosting the client service) must first call cncclient_initialize, specifying a free port that can be used by the system. cnc_sendmess and cnc_openconn are written to handle the restricting of sending traffic and opening connections. Similar methods need to be written for receiving traffic and waiting for connections.
 
 cncStandaloneServer.repy - Server module for the containment system. Handles registration, update dissemination, and query requests for a specified keyrange.
 
@@ -90,12 +90,12 @@ These modules are used only for running experiments, collecting data, and analyz
 
 cncallpairsping.repy - all-pairs-ping program that has containment restrictions on sending traffic. It detects which addresses to ping using the seattle contralized advertize server (looking up the specific experiment name, each client only pings other client with which it shares at least one key). For debugging and test purposes, it provides callers the option of specifying a set of userkeys to use (in place of Seattle userkeys). 
 
-cncdeploylib.mix - provides numerous low level utilities for management of vessels. These include uploading of files, collecting log information (which is split accross multiple files as it has been collected with multifilelog), and ressetting/stopping of vessels.
+cncdeploylib.mix - provides numerous low level utilities for management of VMs. These include uploading of files, collecting log information (which is split accross multiple files as it has been collected with multifilelog), and ressetting/stopping of VMs.
 
-deployallpairspingtest.mix - provides methods used to automatically deploy the all pairs ping program on vessels. Not standalone, used to provide helper methods to deploycncexperiment.mix
+deployallpairspingtest.mix - provides methods used to automatically deploy the all pairs ping program on VMs. Not standalone, used to provide helper methods to deploycncexperiment.mix
 
-deploycncservers.mix - provides methods used to automatically deploy the cnc servers on vessels. Note, this method of testing the cnc system is not reccomended. Not standalone, used to provide helper methods to 
+deploycncservers.mix - provides methods used to automatically deploy the cnc servers on VMs. Note, this method of testing the cnc system is not reccomended. Not standalone, used to provide helper methods to 
 
-deploycncexperiment.mix - support for automatically aquiring arbitrary numbers of vessels and running containment experiments. The recommeded way to use this script is to first manually configure and start the server, then use this script to aquire and start clients.
+deploycncexperiment.mix - support for automatically aquiring arbitrary numbers of VMs and running containment experiments. The recommeded way to use this script is to first manually configure and start the server, then use this script to aquire and start clients.
 
 analyze_logs.py - a result analysis script that will parse log files from the Seattle Node Directory service and from its clients to determine information such as cache accuracy, load on clients, and load on servers.
