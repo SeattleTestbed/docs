@@ -25,9 +25,9 @@ Other resources -- like the CPU and memory usage-- are not able to be directly c
 For more detailed information, see [wiki:UnderstandingSeattle/CodeSafety CodeSafety]
 
 = Node Manager =
-The node manager manages the different sandboxed programs (called vessels) that are running on a computer. The node manager stores information about the vessels it controls and allows vessels to be started, stopped, combined, split, and changed.
+The node manager manages the different sandboxed programs (called vessels or VM ) that are running on a computer. The node manager stores information about the VMs it controls and allows VMs to be started, stopped, combined, split, and changed.
 
-Programmers can then connect to the node manager, send a file, and then run that code on the remote vessel. The easiest way to do this is with the Experiment Manager `seash`.
+Programmers can then connect to the node manager, send a file, and then run that code on the remote VM. The easiest way to do this is with the Experiment Manager `seash`.
 
 
 For more detailed information, see [wiki:UnderstandingSeattle/NodeManagerDesign Node Manager] and [wiki:UnderstandingSeattle/SeattleComponents Seattle Components].
