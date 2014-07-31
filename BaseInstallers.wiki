@@ -1,5 +1,5 @@
 = Building Base Installers =
-Explains how to go about building the base installers (everything you need to distribute the program except custom vessel information).
+Explains how to go about building the base installers (everything you need to distribute the program except custom VM information).
 
 '''NOTE:''' In order to build the Windows GUI installer, NSIS must be properly installed and configured on the system building the base installers. [wiki:NsisSystemSetup Click here] for quick detailed instructions on how to do this.
 ----
@@ -71,8 +71,8 @@ sudo -u test_user ln -s -f seattle_0.1_test_version_win.zip seattle_win.zip
 [[BR]]
 == Using the base installers to test your code ==
 ----
-You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the vessel information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
+You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the VM information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
 {{{
 python make_base_installers.py at .. updater_keys/updater.publickey updater_keys/updater.privatekey output/dir
 }}}
-Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample vessel information.
+Before running the installer on any system, you will want to first run "python nminit.py" from inside the install directory. This will generate some sample VM information.
