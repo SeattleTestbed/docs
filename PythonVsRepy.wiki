@@ -120,7 +120,7 @@ if callfunc == "initialize":
 
 ==  Python Modules ==
 ----
-Python modules aren't directly allowed in Repy. This is to ensure safety for Seattle users, so all code run in a vessel can be strictly controlled. Many Python modules have Repy equivalents, which are listed below:
+Python modules aren't directly allowed in Repy. This is to ensure safety for Seattle users, so all code run in a VM can be strictly controlled. Many Python modules have Repy equivalents, which are listed below:
 
 [[BR]]
 === Files ===
@@ -139,7 +139,7 @@ Python modules aren't directly allowed in Repy. This is to ensure safety for Sea
 #!python
 os.listdir('.')
     }}}
-  Since file access is only allowed within a Vessel, there is no need to provide {{{listdir()}}} with any arguments. The list will contain all the files in the current working directory. 
+  Since file access is only allowed within a VM, there is no need to provide {{{listdir()}}} with any arguments. The list will contain all the files in the current working directory. 
 ==== os.remove() ====
   Remove a file from the user program area. Has the same filename character restrictions as {{{open}}} 
   The following Repy code
