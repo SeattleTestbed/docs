@@ -53,7 +53,7 @@ Wednesday 10:30-11:30pm in CSE 314.
    * return : {"success", "error"} just like above
    * note: percent must be > 0 (local js check as well as remote django check)
 
- * ajax_getvessels : gets more vessels
+ * ajax_getvessels : gets more vessels/VMs
    * args : {numvessels : 16, env : 'LAN' or 'WAN' or 'Random'}
    * return : {"success" : True/False, "error" as above, "mypercent" : 50, "vessels" : [{"vesselid" : vid, "status" : status, "expiresin" : expirein}...]}
 
