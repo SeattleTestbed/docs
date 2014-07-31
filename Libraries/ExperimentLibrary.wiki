@@ -1,6 +1,6 @@
 = Seattle Experiment Library =
 
-The Experiment Library provides a means of scripting interaction with individual nodes and vessels as well as with the Seattle Clearinghouse. Whereas [SeattleShell Seash] is for interactive use, the Experiment Library allows for writing Python scripts to acquire vessels, run experiments, download logs, etc.
+The Experiment Library provides a means of scripting interaction with individual nodes and VMs as well as with the Seattle Clearinghouse. Whereas [SeattleShell Seash] is for interactive use, the Experiment Library allows for writing Python scripts to acquire VMs, run experiments, download logs, etc.
 
 = Getting the Experiment Library =
 
