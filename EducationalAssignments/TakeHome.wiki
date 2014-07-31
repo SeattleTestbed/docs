@@ -18,11 +18,11 @@ This assignment consists of 11 steps and should take between 30-120 minutes to c
 == Step 1 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My Vessels tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources. 
 
-In the top pane, select LAN and choose 5 vessels, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
+In the top pane, select LAN and choose 5 VMs, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
-At this point, you should have vessels (VMs) that you can use to run your code!
+At this point, you should have VMs  that you can use to run your code!
 
 [[BR]]
 == Step 2 : Running Seash ==
@@ -56,20 +56,20 @@ Then, type
 !> as username
 }}}
 
-This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for vessels you control by typing browse:
+This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for VMs you control by typing browse:
 
 {{{
 #!python
 username@ !> browse
 }}}
 
-This will search for vessels that you control (so that seash can locate them).  You should see several vessels added (if not, you should wait a few minutes and then try again, as sometimes it takes
-time for the vessel information to propagate).  The output from browse command will look something like the following:
+This will search for VMs that you control (so that seash can locate them).  You should see several VMs added (if not, you should wait a few minutes and then try again, as sometimes it takes
+time for the VM information to propagate).  The output from browse command will look something like the following:
 
 {{{
 #!python
 username@ !> browse            
-Added targets: %1(IP:port:vesselname), %2(IP:port:vesselname), %3(IP:port:vesselname), ...
+Added targets: %1(IP:port:VMname), %2(IP:port:VMname), %3(IP:port:VMname), ...
 Added group 'browsegood' with X targets      
 }}}
 
@@ -191,9 +191,9 @@ The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has alread
 username@LAN !> stop
 }}}
 
-You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).   You may also have some vessels that have not been used (Fresh) or are in an error state (Stale).  
+You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).   You may also have some VMs that have not been used (Fresh) or are in an error state (Stale).  
 
-It is common when using lots of distributed computers to have a few of them not function correctly, so it is normal to have a few in the wrong state after a command.   You can usually continue the series of operations and ignore the failed vessels or else retry the operation on the failed vessels.
+It is common when using lots of distributed computers to have a few of them not function correctly, so it is normal to have a few in the wrong state after a command.   You can usually continue the series of operations and ignore the failed VMs or else retry the operation on the failed VMs.
 
 [[BR]]
 = Measuring Connectivity =
@@ -201,7 +201,7 @@ It is common when using lots of distributed computers to have a few of them not 
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's vessels. 
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's VMs. 
 
 To figure out which port you should use, log into the Seattle Clearinghouse website and on the Profile page, look to see what port number it indicates.   '''You should write down your port number as you'll need this value repeatedly.'''
 
@@ -287,7 +287,7 @@ If you refresh the page occasionally, you'll see that the latencies change as th
 == Step 9 : Pinging behavior in the wide-area ==
 ----
 
-Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle Clearinghouse website. You will see the nodes that you're using are listed under the My Vessels tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Under the My Vessels tab, in the "Get more resources" pane, select WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / vessels around the world have been added for you to use.
+Now we'll run the all pairs ping on computers distributed around the world. Log back into the Seattle Clearinghouse website. You will see the nodes that you're using are listed under the My VMs tab. Click on "remove all".  Now that you've given back your resources, you can add other resources. Under the My VMs tab, in the "Get more resources" pane, select WAN (instead of LAN), choose 10 computers, and click "Get".   Now you'll see that ten computers / VMs around the world have been added for you to use.
 
 Back in seash, type
 
@@ -422,7 +422,7 @@ Then type
 
 and you'll see the prompt changes to "username@ !>". 
 
-Check on the Seattle Clearinghouse website to see if you still have nodes to use.   If not, under My Vessels, select WAN, choose 1 computer, and click "Get".  
+Check on the Seattle Clearinghouse website to see if you still have nodes to use.   If not, under My VMs, select WAN, choose 1 computer, and click "Get".  
 
 Now under seash at the " username@ !>" prompt, type
 
