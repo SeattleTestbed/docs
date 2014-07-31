@@ -7,11 +7,11 @@ This page describes the functionality that is available from each available modu
 [[BR]]
 == Clearinghouse ==
 ----
-The Clearinghouse module contains commands that pertain to acquiring and releasing vessels.  You must use commands in this module as an identity with both public and private keys loaded.
+The Clearinghouse module contains commands that pertain to acquiring and releasing VMs/vessels.  You must use commands in this module as an identity with both public and private keys loaded.
 
 [[BR]]
-=== Acquiring Vessels ===
-You acquire vessels using the {{{get}}} command.  It takes two parameters:  The number of vessels to acquire, and the condition that the acquired vessels must satisfy.  You can omit the type value.  Valid values for type include: wan, lan, and nat.
+=== Acquiring VMs ===
+You acquire VMs using the {{{get}}} command.  It takes two parameters:  The number of VMs to acquire, and the condition that the acquired VMs must satisfy.  You can omit the type value.  Valid values for type include: wan, lan, and nat.
 
 {{{
 #!sh
@@ -24,8 +24,8 @@ Added group 'acquired' with 3 targets
 }}}
 
 [[BR]]
-=== Releasing Vessels ===
-You release vessels using the {{{release}}} command, by specifying the group of the vessels you want to release.  If you omit this value, vessels in the default group is released.
+=== Releasing VMs ===
+You release VMs using the {{{release}}} command, by specifying the group of the VMs you want to release.  If you omit this value, VMs in the default group is released.
 
 {{{
 #!sh
@@ -47,10 +47,10 @@ guest0@ !>
 [[BR]]
 == GeoIP ==
 ----
-The GeoIP module contains commands that allow you to obtain geographical information about acquired vessels.  To use this module, you must first have browsed for vessels.  You may use these following commands while in a group:
+The GeoIP module contains commands that allow you to obtain geographical information about acquired VMs.  To use this module, you must first have browsed for VMs.  You may use these following commands while in a group:
 
- * show coordinates - Show the longitude/latitude of each vessel.
- * show location - Show the city name (if available) and country of which each vessel resides in.
+ * show coordinates - Show the longitude/latitude of each VM.
+ * show location - Show the city name (if available) and country of which each VM resides in.
 
 {{{
 #!sh
@@ -98,8 +98,8 @@ To view information about a particular module, use the {{{modulehelp modulename}
 user@ !> modulehelp geoip
 GeoIP Module
 
-This module includes commands that provide information regarding vessels' geographical 
-locations.  To get started using this module, acquire several vessels through the Seattle
+This module includes commands that provide information regarding VMs' geographical 
+locations.  To get started using this module, acquire several VMs through the Seattle
 Clearinghouse, use the 'browse' command, and then in any group, run either 'show location' 
 or 'show coordinates'.
 
