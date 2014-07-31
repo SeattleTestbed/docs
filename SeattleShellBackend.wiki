@@ -1,4 +1,4 @@
-Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle vessels.  This will describe how seash is designed.  If you are a user interested in learning how to use Seash, please go to the [SeattleShell main Seattle Shell page].
+Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle VMs.  This will describe how seash is designed.  If you are a user interested in learning how to use Seash, please go to the [SeattleShell main Seattle Shell page].
 [[TOC(inline)]]
 
 
@@ -99,8 +99,8 @@ You must also have module-level documentation.
 module_help = """
 GeoIP Module
 
-This module includes commands that provide information regarding vessels' geographical 
-locations.  To get started using this module, acquire several vessels through the Seattle
+This module includes commands that provide information regarding VMs' geographical 
+locations.  To get started using this module, acquire several VMs through the Seattle
 Clearinghouse, use the 'browse' command, and then in any group, run either 'show location' 
 or 'show coordinates'.
 """
