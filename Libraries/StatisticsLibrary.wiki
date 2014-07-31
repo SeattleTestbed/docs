@@ -1,5 +1,5 @@
 == Statistics Library ==
-This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data. The library primarily deals with a custom data structure called 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid').  You can find the [https://seattle.poly.edu/browser/seattle/trunk/node_stats_and_info/stat_lib Statistics Library] in the 'node_stats_and_info' folder in trunk.
+This library is used to collect statistics about Seattle nodes/vessels/VMs and then run specific analysis on the group of data. The library primarily deals with a custom data structure called 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid').  You can find the [https://seattle.poly.edu/browser/seattle/trunk/node_stats_and_info/stat_lib Statistics Library] in the 'node_stats_and_info' folder in trunk.
 
 ----
 == Structure of 'node_dicts' ==
@@ -9,19 +9,19 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
    * '''responsetime''': a number in seconds corresponding to the time it took to run 'browse_node' (from the experiment library) on this specific node
    * '''version''': version of the node
    * '''nodeid''': unique node id of the node
-   * '''vessels''': a list of vessel dictionaries (output of browse_node on the node) corresponding to the specific node
+   * '''vessels''': a list of VM dictionaries (output of browse_node on the node) corresponding to the specific node
      * vesselhandle: 'nodeid:vesselname'
-     * vesselname: name of the vessel, ie. "v1"
-     * ownerkey: a dictionary with the the vessel's owner key, keys: 'e' and 'n'
+     * vesselname: name of the VM, ie. "v1"
+     * ownerkey: a dictionary with the the VM's owner key, keys: 'e' and 'n'
      * nodelocation: 'ip:port'
      * userkeys: 0, 1 or >1 keys in a list where each key is a dictionary with keywords 'e' and 'n'
      * nodeid: unique node id of the node
      * version: version of the corresponding node
-     * status: the status of the vessel at the time of polling
+     * status: the status of the VM at the time of polling
 ----
 == Methods ==
  * '''poll_data'''()
-   * Stores a collection of data ('node_dicts') relating to nodes/vessels and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
+   * Stores a collection of data ('node_dicts') relating to nodes/vessels/VMs and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
 
  * '''import_data'''(absolute_path_to_file)
    * Takes a file name (in pickle form) and returns a node_list
@@ -30,11 +30,11 @@ This library is used to collect statistics about Seattle nodes/vessels and then 
    * Returns a dictionary with its keys as versions and its contents as a list of nodes with that specific version 
 
   * '''get_all_vessels'''(node_dicts)
-   * Returns a list of all the vessel dictionaries associated to the dictionary of nodes passed in.
+   * Returns a list of all the VM/vessel dictionaries associated to the dictionary of nodes passed in.
  * '''production_beta_key_split'''(node_dicts)
    * Returns a dictionary with 3 keys: production, beta and other nodes; in the form of {'production':node_dicts}. Where each node_dict now has a new key of production, beta or other and its contents being the name of the key.
      * The actual items in each node_dict are the same as before but they have an added key of 'production, beta or other' and the contents being the name of the key found for that node.
-     * NOTE: Temporarily this method returns a dictionary with 2 keys: 'production_beta_key_dicts' and 'nodes_with_multi_keys' which corresponds to special nodes that have duplicate keys in the nodes vessels userkeys list.
+     * NOTE: Temporarily this method returns a dictionary with 2 keys: 'production_beta_key_dicts' and 'nodes_with_multi_keys' which corresponds to special nodes that have duplicate keys in the nodes VMs userkeys list.
 
  * '''split_lan_nodes'''(node_dicts)
    *     Takes a dictionary of node_dicts and splits them based on their ip addresses (adding NAT nodes to a special NAT category).  If 'node a' and 'node b' are both part of the '10.8.10.X' network they will be grouped together so you can tell how many nodes are part of the same local network.  It returns a dictionary of the form {'10.8.10.X':[node_dicts]}, where '[node_dicts]' is a list of node_dicts that are in the 10.8.10.X network.
