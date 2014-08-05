@@ -47,11 +47,11 @@ Let's start with the file named "example.1.1.r2py", which prints the string "Hel
 
 {{{
 #!python
-log("Hello World")
+log("Hello World\n")
 }}}
 
 There are two different ways to run Repy programs.
-You can run the code in your local machine and in the VMs you control.
+You can run the code in your local machine, and in the VMs you control.
 
 [[BR]]
 ==== Executing programs locally in Repy ====
