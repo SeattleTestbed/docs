@@ -10,18 +10,20 @@
 
 This guide provides an introduction to using the Repy V2 sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write Repy programs, manage the restrictions on programs, and understand whether Repy is appropriate for a specific task or program.
 
-It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial python tutorial] in this site. You do not need to be a Python expert to use Repy, but as Repy is a subset of Python, being able to write a simple Python program is essential.
+It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/ or the [PythonTutorial Python tutorial] in this site. You do not need to be a Python expert to use Repy, but as Repy is a subset of Python, being able to write a simple Python program is essential.
 
 [[BR]]
 == General Operations with examples ==
 ----
-You have to install Repy before starting the tutorial. Make sure you have an SVN client and Python installed on your machine (Mac and many Linux boxes already ship with that).
+You have to install Repy V2 before starting the tutorial. Make sure you have a Git client and Python installed on your machine (Mac and many Linux boxes already ship with that).
 
-1. First, checkout the newest version of Repy V2 from SVN: {{{svn co https://seattle.poly.edu/svn/seattle/branches/}}}
+1. First, clone the newest version of Repy V2 from !GitHub: {{{git clone https://github.com/SeattleTestbed/repy_v2}}}
 
 2. Create a directory of your choosing, inside of which Repy V2 will live. Unix example: {{{mkdir ~/testv2}}}
 
-3. Set up Repy V2: {{{cd ./branches/repy_v2/ ; python preparetest.py -t ~/testv2}}} This copies over everything Repy V2 needs to run in the directory you created previously.
+3. Set up Repy V2: 
+ 1. {{{cd repy_v2/scripts ; python initialize.py }}} This downloads all of Repy V2's dependencies.
+ 2. {{{cd dist ; python build.py ~/testv2}}} This copies over everything Repy V2 needs to run in the directory you created previously.
 
 4. To run any code in Repy V2 (e.g., example.r2py), launch Repy from its directory: {{{cd ~/testv2 ; python repy.py restrictions.test example.r2py}}}
 
