@@ -2,7 +2,9 @@
 
 This page outlines how to deploy install the Custom Installer Builder (including its dependencies) on a Linux machine.
 
-[toc]
+------
+[[TOC(inline)]]
+------
 
 == Setting up a user account ==
 First of all, we recommend to set up a user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
