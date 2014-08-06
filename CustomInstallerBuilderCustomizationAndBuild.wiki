@@ -28,36 +28,17 @@ Done? Great, because that's all of the customization required! Let's build insta
 
 == Building base installers ==
 
-Go to `$REPO_PARENT_DIR/dist` now. Run the build script.
+Go back to `$REPO_PARENT_DIR/dist` where `rebuild_base_installers_for_seattlegeni.sh` resides. Run the script, supplying it the nodemanager `version` string you set earlier.
 
-__Step 4__: Build the base installers and place them in the "custominstallerbuilder/html/static/installer/base" directory.
+{{{
+#!sh
+$ ./rebuild_base_installers_for_seattlegeni.sh THE-VERSION-STRING
+}}}
 
-
-	$ cd ../dist/
-	$ ./rebuild_base_installers_for_seattlegeni.sh VERSION_OF_RELEASE
-	$ pushd /var/www/dist (location your BASE_INSTALLER_DIRECTORY is set to)
-	$ cp seattle_linux.tgz seattle_mac.tgz seattle_win.zip seattle_android.zip /user/trunk/dist
-	$ popd
-	$ cd /attic/trunk/dist
-	$ tar -xf seattle_linux.tgz
-
-(change seattle_linux.tgz to match whichever operating system you are installing this for)
-
-__Step 5__: Install Seattle with the base installers.(Optional)
-	
-	$ cd seattle
-	$ ./install.sh
+After a bit of processing and signing files with the softwareupdater's cryptographic key, the base installers are ready in the `$BASE_INSTALLER_DIRECTORY` you set (`/var/www/dist` per default).
 
 
 
-__Step 7__: Still within the "custominstallerbuilder" directory, run the django test server:
+== Next up... ==
 
-	$ ./manage.py runserver 0.0.0.0:PORT
-
- This command assumes that the Seattle standard library is in your Python path.
-
- If it isn't, then run:
-
- 	$ export PYTHONPATH=home/user/attic/trunk/dist/seattle/seattle_repy
-
-You should now be able to access your Custom Installer Builder test server at the address specified for BASE_URL above. 
+Continue now to [wiki:CustomInstallerBuilderTesting testing] or [wiki:https://seattle.poly.edu/wiki/CustomInstallerBuilderDeployment deploying in production] the Custom Installer Builder.
