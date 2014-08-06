@@ -91,6 +91,6 @@ If you are setting up the Custom Installer Builder on a non-Seattle production m
 USER=cib
 }}}
 
-## Everything set up and configured!
+== Everything set up and configured! ==
 
-Continue now to [making the last changes and building installers...](CustomizationAndBuild)
+Continue now to [wiki:CustomInstallerBuilderCustomizationAndBuild making the last changes and building installers...]
