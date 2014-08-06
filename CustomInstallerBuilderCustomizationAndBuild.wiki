@@ -41,4 +41,4 @@ After a bit of processing and signing files with the softwareupdater's cryptogra
 
 == Next up... ==
 
-Continue now to [wiki:CustomInstallerBuilderTesting testing] or [wiki:https://seattle.poly.edu/wiki/CustomInstallerBuilderDeployment deploying in production] the Custom Installer Builder.
+Continue now to [wiki:CustomInstallerBuilderTesting testing] or [wiki:CustomInstallerBuilderDeployment deploying in production] the Custom Installer Builder.
