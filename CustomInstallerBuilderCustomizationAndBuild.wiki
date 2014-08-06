@@ -10,7 +10,7 @@ In `$REPO_PARENT_DIR` there is a subdirectory for the `nodemanager`. Go there, a
 
 Change the version string to reflect your project / clearinghouse / Custom Installer Builder name, and also the current build. You will later need this string when launching the build script.
 
-''NOTE: This string will be used as a part of the base installer's file name. Use only printable, non-whitespace, ASCII characters that do not require escaping!'' Avoid spaces, forward and backslashes, `*`, `#`, `&`, etc.
+'''NOTE: This string will be used as a part of the base installer's file name. Use only printable, non-whitespace, ASCII characters that do not require escaping!''' Avoid spaces, forward and backslashes (`/\`), quotes/ticks of all kinds (`'"``), shell glob characters (`?`, `*`), and other characters with special meanings to the shell (`#&><|()[]{}!$;` etc.).
 
 A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) are fine.
 
