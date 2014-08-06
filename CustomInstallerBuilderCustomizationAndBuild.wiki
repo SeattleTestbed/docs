@@ -1,8 +1,8 @@
 = Customize and build your base installers =
-This page describes the customizations to code required before you can build base installers, and also the actual build process. We assume you have [wiki:CustomInstallerBuilderInstall installed] and [wiki:CustomInstallerBuilderConfiguration configured] the Custom Installer Builder already.
+This page describes the customizations to code required before you can build base installers, and also the actual build process. We assume you have [wiki:CustomInstallerBuilderInstallation installed] and [wiki:CustomInstallerBuilderConfiguration configured] the Custom Installer Builder already.
 
 -----
-[[TOC(inline)]
+[[TOC(inline)]]
 -----
 
 == Set nodemanager version ==
