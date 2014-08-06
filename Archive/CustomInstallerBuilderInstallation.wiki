@@ -1,6 +1,6 @@
 = Installing the Custom Installer Builder =
 
-This page outlines how to deploy install the Custom Installer Builder (including its dependencies) on a Linux machine.
+This page outlines how to install the Custom Installer Builder (including its dependencies) on a Linux machine.
 
 ------
 [[TOC(inline)]]
@@ -66,4 +66,4 @@ This goes and clones additional repositories that are required for building inst
 == Done (for now) ==
 That's it! You now have all of the code and config files required for the Custom Installer Builder!
 
-Continue to wiki:CustomInstallerBuilderConfiguration, wiki:CustomInstallerBuilderCustomizationAndBuild). **running a test server**, and **running a production server**.
+Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:CustomInstallerBuilderTesting running a test server], and [wiki:CustomInstallerBuilderDeployment running a production server].
