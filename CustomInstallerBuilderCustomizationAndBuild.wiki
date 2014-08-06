@@ -32,7 +32,7 @@ Go back to `$REPO_PARENT_DIR/dist` where `rebuild_base_installers_for_seattlegen
 
 {{{
 #!sh
-$ ./rebuild_base_installers_for_seattlegeni.sh THE-VERSION-STRING
+$ ./rebuild_base_installers_for_seattlegeni.sh YOUR-VERSION-STRING
 }}}
 
 After a bit of processing and signing files with the softwareupdater's cryptographic key, the base installers are ready in the `$BASE_INSTALLER_DIRECTORY` you set (`/var/www/dist` per default).
