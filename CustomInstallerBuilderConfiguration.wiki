@@ -2,7 +2,7 @@
 Now that you have [wiki:CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
 
 -----
-[[TOC(Inline)]]
+[[TOC(inline)]]
 -----
 
 
