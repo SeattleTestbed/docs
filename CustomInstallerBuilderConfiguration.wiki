@@ -2,19 +2,23 @@
 Now that you have [wiki:CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
 
 -----
-[TOC(Inline)]
+[[TOC(Inline)]]
 -----
 
-## Create and configure `local`
+
+== Create and configure local settings ==
 Back in the `custominstallerbuilder` directory, copy the `local_template` folder to `local` (this is where Django will expect the configuration files to live).
-```bash
+
+{{{
+#!sh
 $ cd ~/custominstallerbuilder   # Go into the repo we checked out during setup
 $ cp -R local_template local
-```
+}}}
 
 Edit "local/settings.py" to match your local configuration. This is what is contained in the original file (with omissions):
 
-```
+{{{
+#!python
 SECRET_KEY = '***** This should be changed to a random string *****'
 ...
 SERVE_STATIC = False
@@ -22,10 +26,12 @@ SERVE_STATIC = False
 BASE_URL = 'http://domain.com/'
 ...
 PROJECT_URL = BASE_URL + 'custominstallerbuilder/'
-```
+}}}
+
 
 Change it to reflect your setup:
-```
+{{{
+#!python
 SECRET_KEY = "Don't dare to think using this as your random string either"
 ...
 SERVE_STATIC = True
@@ -33,48 +39,57 @@ SERVE_STATIC = True
 BASE_URL = 'http://YOUR-URL:PORT/'
 ...
 PROJECT_URL = BASE_URL
-```
+}}}
 
-* SECRET_KEY should be a random string of your own choosing. Do not share it with others!
-* If you are testing locally, use http://127.0.0.1:PORT/ for the `BASE_URL`. You may use your public facing IP if you want it to be accessible via the internet.
-* PORT must be an open port number greater than 1024. For smaller port numbers, administrative privileges (`sudo`) are required. 
+Specifically,
+ * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others!
+ * If you are testing locally, use `http://127.0.0.1:PORT/` for the `BASE_URL`. You may use your public facing IP if you want it to be accessible via the internet.
+ * `PORT` must be an open port number greater than 1024. For smaller port numbers, administrative privileges (`sudo`) are required. 
 
 Save the file, and you are done with configuring Django for your Custom Installer Builder. Good job!
 
-## Adapt the build scripts
+
+
+== Adapt the build scripts ==
 Go to the `custominstallerbuilder/scripts/` directory again. In the `dist` subdir, edit `rebuild_base_installers_for_seattlegeni.sh` to match your local configuration.
 
-Specifically, adapt the file names (including full paths) to your softwareupdater's public and private keys:
-```bash
+Adapt the file names (including full paths) to your softwareupdater's public and private keys:
+{{{
+#!sh
 PUBLIC_KEY_FILE=/path/to/publickey
 PRIVATE_KEY_FILE=/path/to/privatekey
-```
+}}}
 
 You can generate a keypair in the correct format from [https://seattleclearinghouse.poly.edu/html/profile]( https://seattleclearinghouse.poly.edu/html/profile) using  your (or creating a new) user account.
 
 Similarly, the softwareupdater URL must be given:
-```bash
+{{{
+#!sh
 SOFTWARE_UPDATE_URL=http://blackbox.poly.edu/updatesite/
-```
+}}}
 
 Also, change
-```bash
+{{{
+#!sh
 REPO_PARENT_DIR=/home/cib/custominstallerbuilder/scripts/
-```
+}}}
 
 to the location of your `scripts` folder.
 
 You can also change 
-```bash
+{{{
+#!sh
 BASE_INSTALLER_DIRECTORY=/var/www/dist
 BASE_INSTALLER_ARCHIVE_DIR=/var/www/dist/old_base_installers
-```
+}}}
+
 to where you would like the base installers located. Just make sure that the path exists.
 
 If you are setting up the Custom Installer Builder on a non-Seattle production machine, you also need to change the user name to your Custom Installer Builder user (if you created one):
-```bash
+{{{
+#!sh
 USER=cib
-```
+}}}
 
 ## Everything set up and configured!
 
