@@ -1,21 +1,24 @@
-# Installing the Custom Installer Builder
+= Installing the Custom Installer Builder =
 
 This page outlines how to deploy install the Custom Installer Builder (including its dependencies) on a Linux machine.
 
-## Setting up a user account
+[toc]
+
+== Setting up a user account ==
 First of all, we recommend to set up a user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
 
-The user **should not be granted interactive login** for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user **should not have root privileges** or be able to acquire them.
+The user ''should not be granted interactive login'' for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user ''should not have root privileges'' or be able to acquire them.
 
 Any user name will be fine. We'll use `cib` in the instructions.
 
-## Install Dependencies
+
+== Install Dependencies ==
 The Custom Installer Builder requires a few pieces of software to run:
-* [Python](http://www.python.org/) in version 2.5-2.7 -- the language Custom Installer Builder is written in
-* [Apache](http://www.apache.org/) -- the web server
-* [mod_python](http://www.modpython.org/) -- necessary for interfacing with Django code
-* [Django](http://djangoproject.com) -- necessary to run Django code
-* zip -- necessary for packaging window installers and keys 
+ * [Python](http://www.python.org/) in version 2.5-2.7 -- the language Custom Installer Builder is written in
+ * [Apache](http://www.apache.org/) -- the web server
+ * [mod_python](http://www.modpython.org/) -- necessary for interfacing with Django code
+ * [Django](http://djangoproject.com) -- necessary to run Django code
+ * zip -- necessary for packaging window installers and keys 
 
 Python is often available on a typical Linux install. Be sure to check the version though, we need 2.5, 2.6, or 2.7.
 
@@ -33,7 +36,9 @@ The Custom Installer Builder requires Django, a Python web framework, in version
 $ sudo pip install django==1.3.5
 ```
 
-## Download Custom Installer Builder code base
+
+
+== Download Custom Installer Builder code base ==
 Now log in as the user who will be hosting the Custom Installer Builder (in our case that's `cib`). Check out the Custom Installer Builder code base from GitHub:
 
 ```bash
@@ -51,7 +56,8 @@ $ python initialize.py
 This goes and clones additional repositories that are required for building installers into the `scripts` dir.
 
 
-## Done (for now)
+
+== Done (for now) ==
 That's it! You now have all of the code and config files required for the Custom Installer Builder!
 
-Continue to [configuring your Custom Installer Builder](wiki/Configuration), [customization](wiki/CustomizationAndBuild). **running a test server**, and **running a production server**.
+Continue to wiki:CustomInstallerBuilderConfiguration, wiki:CustomInstallerBuilderCustomizationAndBuild). **running a test server**, and **running a production server**.
