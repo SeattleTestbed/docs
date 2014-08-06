@@ -1,0 +1,63 @@
+= Customize and build your base installers =
+This page describes the customizations to code required before you can build base installers, and also the actual build process. We assume you have [wiki:CustomInstallerBuilderInstall installed] and [wiki:CustomInstallerBuilderConfiguration configured] the Custom Installer Builder already.
+
+-----
+[[TOC(inline)]
+-----
+
+== Set nodemanager version ==
+In `$REPO_PARENT_DIR` there is a subdirectory for the `nodemanager`. Go there, and edit `nmmain.py`. It includes a line starting with `version = `.
+
+Change the version string to reflect your project / clearinghouse / Custom Installer Builder name, and also the current build. You will later need this string when launching the build script.
+
+''NOTE: This string will be used as a part of the base installer's file name. Use only printable, non-whitespace, ASCII characters that do not require escaping!'' Avoid spaces, forward and backslashes, `*`, `#`, `&`, etc.
+
+A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) are fine.
+
+
+== Check softwareupdater URL and key pair ==
+Remember the public/private key pair whose filenames and paths you [wiki:CustomInstallerBuilderConfiguration#Adaptthebuildscripts configured] in the build script? In order for your installers to be able to validate updates that you push, the `softwareupdater` component must include your (or your update site's) public key.
+
+For this, change into the `softwareupdater` subdir of `custominstallerbuilder/scripts/` and edit `softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first int of your public key, and the value of key `'n'` with the second.
+
+Furthermore, change the line starting with `softwareurl = ` to contain your softwareupdater's URL.
+
+Done? Great, because that's all of the customization required! Let's build installers now!
+
+
+
+== Building base installers ==
+
+Go to `$REPO_PARENT_DIR/dist` now. Run the build script.
+
+__Step 4__: Build the base installers and place them in the "custominstallerbuilder/html/static/installer/base" directory.
+
+
+	$ cd ../dist/
+	$ ./rebuild_base_installers_for_seattlegeni.sh VERSION_OF_RELEASE
+	$ pushd /var/www/dist (location your BASE_INSTALLER_DIRECTORY is set to)
+	$ cp seattle_linux.tgz seattle_mac.tgz seattle_win.zip seattle_android.zip /user/trunk/dist
+	$ popd
+	$ cd /attic/trunk/dist
+	$ tar -xf seattle_linux.tgz
+
+(change seattle_linux.tgz to match whichever operating system you are installing this for)
+
+__Step 5__: Install Seattle with the base installers.(Optional)
+	
+	$ cd seattle
+	$ ./install.sh
+
+
+
+__Step 7__: Still within the "custominstallerbuilder" directory, run the django test server:
+
+	$ ./manage.py runserver 0.0.0.0:PORT
+
+ This command assumes that the Seattle standard library is in your Python path.
+
+ If it isn't, then run:
+
+ 	$ export PYTHONPATH=home/user/attic/trunk/dist/seattle/seattle_repy
+
+You should now be able to access your Custom Installer Builder test server at the address specified for BASE_URL above. 
