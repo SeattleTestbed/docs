@@ -69,7 +69,20 @@ This goes and clones additional repositories that are required for building inst
 
 
 
+== Create Repy runtime ==
+The Custom Installer Builder uses Repy for some of its functionality. Create a Repy runtime in `~/custominstallerbuilder/repy_runtime` like so:
+
+{{{
+#!sh
+$ # While still in the scripts/ directory
+$ cd dist
+$ mkdir ~/custominstallerbuilder/repy_runtime
+$ python build.py ~/custominstallerbuilder/repy_runtime
+}}}
+
+
+
 == Done (for now) ==
-That's it! You now have all of the code and config files required for the Custom Installer Builder!
+That's it! You now have all of the code and config files required for the Custom Installer Builder in place!
 
 Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:CustomInstallerBuilderTesting running a test server], and [wiki:CustomInstallerBuilderDeployment running a production server].
