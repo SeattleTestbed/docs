@@ -85,7 +85,7 @@ BASE_INSTALLER_ARCHIVE_DIR=/var/www/dist/old_base_installers
 
 to where you would like the base installers located. Just '''make sure that the paths exist'''.
 
-If you are setting up the Custom Installer Builder on a non-Seattle production machine, you also need to change the user name to your Custom Installer Builder user (if you created one):
+Also change the user name to your Custom Installer Builder user:
 {{{
 #!sh
 USER=cib
