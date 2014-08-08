@@ -71,13 +71,19 @@ IDENTIFIED BY 'password';
 }}}
 where you would replace the 'password' with the password you want to use for the user 'seattlegeni'
 
-'''Repeat the process''', substituting `keydb` for `seattlegeni`.
+'''Repeat the process''', substituting `keydb` for `seattlegeni`. Afterwards, type `\q` to leave the MySQL prompt:
+
+{{{
+#!sh
+mysql> \q
+Bye!
+$
+}}}
 
 
-[[BR]]
-== Deploying and running Seattle Clearinghouse ==
-----
-In this section, we will deploy and run a copy of the Seattle Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a user account named {{{geni}}}, and following the steps below as this user.
+
+== Deploying and running Clearinghouse ==
+In this section, we will deploy and run a copy of the Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a separate user account, e.g. named {{{ch}}}, and following the steps below as this user.
 
   * '''Initial preparation'''
     * Checkout the seattle trunk from svn.
