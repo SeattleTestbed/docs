@@ -1,7 +1,7 @@
 = Testing the Custom Installer Builder =
 This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
 
-We'll assume that you have completed the previous steps to [wiki:CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
+We'll assume that you have completed the previous steps to [wiki:Archive/CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
 
 ----
 [[TOC(inline)]]
@@ -23,17 +23,19 @@ If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} for the `B
 
 
 == Start Django test server ==
-Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, change to the `custominstallerbuilder/repy_runtime` directory, and run the django test server:
+Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, from the `~/custominstallerbuilder/` directory, run the Django test server:
 
 {{{
 #!sh
 $ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
-$ cd ~/custominstallerbuilder/repy_runtime
-$ ../manage.py runserver 0.0.0.0:PORT
+$ cd ~/custominstallerbuilder
+$ ./manage.py runserver 0.0.0.0:PORT   # This will log some information to the prompt
+Validating models...
+
+0 errors found.
+Django version 1.3.5, using settings 'local.settings'
+Development server is running at http://0.0.0.0:8080/
+Quit the server with CONTROL-C.
 }}}
 
-This command assumes that the Seattle standard library (located in 'trunk/seattlelib') is in your Python path.
-
-You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above.
-
-== 
+You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:CustomInstallerBuilderDeployment production deployment guide] will add the missing bits and pieces of configuration to rectify that.
