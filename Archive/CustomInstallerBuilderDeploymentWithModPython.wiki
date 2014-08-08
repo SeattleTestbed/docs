@@ -1,13 +1,16 @@
 = Deploying the Custom Installer Builder =
-This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using common Apache configurations. To run the Custom Installer Builder using a Django test server, follow [CustomInstallerBuilderTesting these instructions] instead.
+This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using common Apache configurations. See also our instructions on [wiki:CustomInstallerBuilderInstallation installing], [wiki:CustomInstallerBuilderConfiguration configuring], [[wiki:CustomInstallerBuilderCustomizationAndBuild customizing], and [[wiki:CustomInstallerBuilderTesting testing] your Custom Installer Builder site.
 
-== For all configurations ==
-Start by performing the '''first three steps''' of [CustomInstallerBuilderTesting these instructions]. This will help you download the Custom Installer Builder and gather the requisite files.
+----
+[[TOC(inline)]]
+----
 
-== Using Apache + mod_python ==
-Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the httpd.conf file, but the configuration will also work within a VirtualHost directive, for example.
+== Configuring Apache + mod_python ==
+As noted in the [wiki:CustomInstallerBuilderInstallation installation instructions], we will use Apache as the front-end web server to our Custom Installer Builder.
 
-The directories within PythonPath should be modified to match your system configuration. In the following line, django.root should match the URL segment given in the Location directive. As always, disable debugging once you have successfully deployed the Custom Installer Builder.
+Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example.
+
+The directories within `PythonPath` should be modified to match your system configuration. In the following line, `django.root` should match the URL segment given in the `Location` directive. As always, disable debugging once you have successfully deployed the Custom Installer Builder.
 
 For more information on deploying Django projects with mod_python, reference the [http://docs.djangoproject.com/en/dev/howto/deployment/modpython/ Django website].
 {{{
@@ -17,26 +20,29 @@ For more information on deploying Django projects with mod_python, reference the
   PythonHandler django.core.handlers.modpython
   
   SetEnv DJANGO_SETTINGS_MODULE custominstallerbuilder.local.settings 
-  PythonPath "['/parent/of/custominstallerbuilder', '/path/to/seattlelib'] + sys.path"
+  PythonPath "['/home/cib', '/home/cib/custominstallerbuilder/repy_runtime'] + sys.path"
   PythonOption django.root /custominstallerbuilder
   PythonInterpreter custominstallerbuilder
   
   PythonDebug On
 </Location>
 
-Alias "/custominstallerbuilder/static/" "/path/to/custominstallerbuilder/html/static/"
+Alias "/custominstallerbuilder/static/" "/home/cib/custominstallerbuilder/html/static/"
 <Location "/custominstallerbuilder/static/">
   SetHandler None
 </Location>
 }}}
 
+
 == Other configurations ==
-The Custom Installer Builder is a normal Django project. General instructions for [http://docs.djangoproject.com/en/dev/howto/deployment/ Deploying Django] can be found on the Django project website. Make sure that the /path/to/seattlelib is within your Python path, regardless of your deployment method.
+The Custom Installer Builder is a normal Django project. General instructions for [http://docs.djangoproject.com/en/dev/howto/deployment/ Deploying Django] can be found on the Django project website. Make sure that the path to the Repy runtime is within your Python path, regardless of your deployment method.
 
 
 = Updating the base installers =
-New base installers should be placed into the "/path/to/custominstallerbuilder/html/static/installers/base" directory. To force pre-built installers to be rebuilt upon next request, execute this command:
+New base installers should be placed into the `~/custominstallerbuilder/html/static/installers/base` directory. To force pre-built installers to be rebuilt upon next request, execute this command:
+
 {{{
+#!sh
 $ python /path/to/custominstallerbuilder/manage.py cleaninstallers
 }}}
 
