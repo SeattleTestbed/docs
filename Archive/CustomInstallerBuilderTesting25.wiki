@@ -1,0 +1,39 @@
+= Testing the Custom Installer Builder =
+This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
+
+We'll assume that you have completed the previous steps to [wiki:CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
+
+----
+[[TOC(inline)]]
+----
+== Revisit Django settings ==
+
+Under the Custom Installer Builder's user account, edit `custominstallerbuilder/local/settings.py`  to match your local configuration. Ensure that the following items are set up correctly:
+
+{{{
+SERVE_STATIC = True
+...
+BASE_URL = 'http://your-actual-custominstallerbuilder-test-url:PORT/'  # Note the trailing slash!
+...
+PROJECT_URL = BASE_URL
+}}}
+
+If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} for the `BASE_URL`. You may use your public facing IP if you want it to be accessible via the Internet. {{{PORT}}} must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
+
+
+
+== Start Django test server ==
+Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, change to the `custominstallerbuilder/repy_runtime` directory, and run the django test server:
+
+{{{
+#!sh
+$ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
+$ cd ~/custominstallerbuilder/repy_runtime
+$ ../manage.py runserver 0.0.0.0:PORT
+}}}
+
+This command assumes that the Seattle standard library (located in 'trunk/seattlelib') is in your Python path.
+
+You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above.
+
+== 
