@@ -16,11 +16,13 @@ Any user name will be fine. We'll use `cib` in the instructions.
 
 == Install Dependencies ==
 The Custom Installer Builder requires a few pieces of software to run:
- * [Python](http://www.python.org/) in version 2.5-2.7 -- the language Custom Installer Builder is written in
- * [Apache](http://www.apache.org/) -- the web server
- * [mod_python](http://www.modpython.org/) -- necessary for interfacing with Django code
- * [Django](http://djangoproject.com) -- necessary to run Django code
+ * [http://www.python.org/ Python] in version 2.5-2.7 -- the language Custom Installer Builder is written in
+ * [http://www.apache.org/ Apache] -- the web server
+ * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://djangoproject.com Django] -- necessary to run Django code
  * zip -- necessary for packaging window installers and keys 
+ * [https://git-scm.com/ Git] -- source code management system, used to install Seattle dependencies
+ * [https://pypi.python.org/pypi/pip/ Pip] -- Python package management tool
 
 Python is often available on a typical Linux install. Be sure to check the version though, we need 2.5, 2.6, or 2.7.
 
@@ -31,6 +33,8 @@ $ sudo apt-get install apache2
 $ sudo apt-get install libapache2-mod-python
 $ sudo apt-get install ntp
 $ sudo apt-get install zip
+$ sudo apt-get install git
+$ sudo apt-get install python-pip
 }}}
 
 The Custom Installer Builder requires Django, a Python web framework, in version 1.3.5, which is available at  [https://www.djangoproject.com/download/](https://www.djangoproject.com/download/) or through a package manager. (At this time we do not support Django version 1.4 or higher.)
