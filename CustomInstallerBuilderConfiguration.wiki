@@ -70,7 +70,7 @@ Enabled modules:
  !>
 }}}
 
-To generate a keypair, type `genkeys softwareupdater 4096` (or any other name you like). This generates two files, `softwareupdater.publickey` and `softwareupdater.privatekey` in the `repy_runtime` directory. The key length is set to `4096` bits in this example. (This is the minimum recommendable length at the time of writing.)
+To generate a keypair, type `genkeys`, followed by the desired key name and key length. 4096 is the minimum recommendable length at the time of writing. Assuming you call the key `softwareupdater`, this generates two files, `softwareupdater.publickey` and `softwareupdater.privatekey` in the `repy_runtime` directory:
 
 {{{
 #!sh
