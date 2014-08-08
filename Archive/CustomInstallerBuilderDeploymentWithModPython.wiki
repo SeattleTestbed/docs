@@ -1,12 +1,12 @@
 = Deploying the Custom Installer Builder =
-This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using common Apache configurations. See also our instructions on [wiki:CustomInstallerBuilderInstallation installing], [wiki:CustomInstallerBuilderConfiguration configuring], [[wiki:CustomInstallerBuilderCustomizationAndBuild customizing], and [[wiki:CustomInstallerBuilderTesting testing] your Custom Installer Builder site.
+This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Builder] using common Apache configurations. See also our instructions on [wiki:Archive/CustomInstallerBuilderInstallation installing], [wiki:CustomInstallerBuilderConfiguration configuring], [wiki:CustomInstallerBuilderCustomizationAndBuild customizing], and [wiki:Archive/CustomInstallerBuilderTesting testing] your Custom Installer Builder site.
 
 ----
 [[TOC(inline)]]
 ----
 
 == Configuring Apache + mod_python ==
-As noted in the [wiki:CustomInstallerBuilderInstallation installation instructions], we will use Apache as the front-end web server to our Custom Installer Builder.
+As noted in the [wiki:Archive/CustomInstallerBuilderInstallation installation instructions], we will use Apache as the front-end web server to our Custom Installer Builder.
 
 Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example.
 
