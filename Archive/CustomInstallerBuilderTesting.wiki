@@ -13,7 +13,7 @@ Under the Custom Installer Builder's user account, edit `custominstallerbuilder/
 {{{
 SERVE_STATIC = True
 ...
-BASE_URL = 'http://your-actual-custominstallerbuilder-test-url:PORT/'
+BASE_URL = 'http://your-actual-custominstallerbuilder-test-url:PORT/'  # Note the trailing slash!
 ...
 PROJECT_URL = BASE_URL
 }}}
