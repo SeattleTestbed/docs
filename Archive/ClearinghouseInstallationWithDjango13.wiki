@@ -1,0 +1,471 @@
+= Clearinghouse Installation !HowTo =
+
+This document explains how to do a fresh install of the Seattle Clearinghouse portal on
+a machine that is running a Debian-like Linux operating system such as Ubuntu.
+
+ * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
+
+----
+[[TOC(inline)]]
+----
+== Install Dependencies ==
+----
+
+Clearinghouse requires at least the following software to be installed:
+ 
+ * [http://www.python.org/ Python] -- the language Seattle Clearinghouse is written in
+ * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
+ * [http://www.mysql.com/ MySQL] -- the database
+ * [http://www.apache.org/ Apache] -- the web server
+ * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
+ * [http://www.djangoproject.com/ Django] -- necessary to run Django code
+
+Optionally,
+ * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support
+
+Most of these can be installed through a package manager. For example, on a Debian-based system:
+
+{{{
+#!sh
+$ sudo apt-get install apache2 libapache2-mod-python
+$ sudo apt-get install mysql-server mysql-client python-mysqldb
+$ sudo apt-get install ntp
+$ sudo apt-get install openssl
+}}}
+
+The version of Django required is 1.3.5, which is available at https://www.djangoproject.com/download/ or through a package manager.
+{{{
+#!sh
+$ pip install django==1.3.5
+}}}
+At this time we do not support Django version 1.4 or higher.
+
+[[BR]]
+== Optional: Setup OpenID and OAuth ==
+----
+
+Clearinghouse can optionally handle OpenID and Oauth. For this, it requires [https://github.com/omab/django-social-auth Django Social Auth].  This application depends on:
+ * [http://pypi.python.org/pypi/python-openid/ python-openid ]
+ * [https://github.com/simplegeo/python-oauth2/ python-oauth2 ]
+
+Using something like `easy_install` will install these for you.
+{{{
+#!sh
+$ easy_install django-social-auth
+}}}
+  
+
+By default Gmail and Yahoo login are enabled.  If desired Windows Live, Github and Facebook login can be enabled with some additional steps.
+
+ '''Facebook'''
+  * Register a new application at [http://developers.facebook.com/setup/ Facebook App Creation ]
+  * set App Domains in Facebook edit App page
+{{{ 
+yoursite.com
+}}}
+  * click the Website with Facebook Login checkmark and set site URL
+{{{
+https://yoursite.com
+}}}
+  * Uncomment and fill out {{{App ID}}} and {{{App Secret}}} values in settings.py
+{{{
+#!python
+FACEBOOK_APP_ID                   = ' your appid'
+FACEBOOK_API_SECRET               = ' your api secret key'
+}}}
+ '''Windows Live'''
+ * Register a new application at [https://manage.dev.live.com/Applications/Index Live Connect Developer Center ]
+ * Set redirect domain 
+{{{ 
+https://yoursite.com
+}}}
+ * Uncomment and fill out {{{LIVE_CLIENT_ID}}} and {{{LIVE_CLIENT_SECRET}}} values in settings.py
+{{{
+#!python
+LIVE_CLIENT_ID                  = ' your appid'
+LIVE_CLIENT_SECRET              = ' your api secret key'
+}}}
+
+ '''Github'''
+ * Register a new application at [https://github.com/settings/applications/new Live GitHub Developers ]
+ * Set URL and callback URL
+{{{ 
+https://yoursite.com
+}}}
+ * Uncomment and fill out {{{GITHUB_APP_ID}}} and {{{GITHUB_API_SECRET}}} values in settings.py
+{{{
+#!python
+GITHUB_APP_ID                  = ' your appid'
+GITHUB_API_SECRET              = ' your api secret key'
+}}}
+
+If you already have a working copy of the Clearinghouse and you are updating to allow OpenID and OAuth support you will need to add the Django Social Auth db tables. This is done automatically by:
+{{{
+#!sh
+$ python website/manage.py syncdb
+}}}
+
+[[BR]]
+
+
+
+
+== Create MySQL databases ==
+----
+
+You need two mysql databases and seperate users with access to each.
+  * First database name: `seattlegeni`
+  * Second database name: `keydb`
+
+For simplicity you can make the database usernames correspond to the database names.
+
+Here's an example of creating a database and a user:
+
+{{{
+#!sh
+mysql -u root -p
+
+mysql> create database seattlegeni;
+
+mysql> GRANT ALL PRIVILEGES 
+ON seattlegeni.* 
+TO 'seattlegeni'@'localhost'
+IDENTIFIED BY 'password';
+}}}
+where you would replace the 'password' with the password you want to use for the user 'seattlegeni'
+
+Be sure to repeat the process for a separate database called `keydb`.
+
+
+[[BR]]
+== Deploying and running Seattle Clearinghouse ==
+----
+In this section, we will deploy and run a copy of the Seattle Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a user account named {{{geni}}}, and following the steps below as this user.
+
+  * '''Initial preparation'''
+    * Checkout the seattle trunk from svn.
+{{{
+#!sh
+svn co https://seattle.poly.edu/svn/seattle/trunk
+}}}
+    * Deploy all necessary files to a directory of your choice. The directory
+      you deploy to should be the name of a directory that does not yet exist.
+      For example:
+{{{
+#!sh 
+python ./trunk/seattlegeni/deploymentscripts/deploy_seattlegeni.py ./trunk /tmp/deploy
+}}} 
+    (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
+    * Change to the seattlegeni directory that is in the directory you deployed
+      to. For example:
+{{{
+#!sh 
+cd /tmp/deploy/seattlegeni
+}}}
+      Note: all future steps/instructions will assume you are in this directory. 
+  * '''Future tip'''
+    * Starting all of the processes described below is simplified by using the script
+      `deploymentscripts/start_seattlegeni_components.sh`, whose use is described in
+      the section on [#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
+      For reference, we'll explain here how to start the individual components as well
+      as include first-time configuration information. Note that when starting these
+      manually, you need to start them in the order shown. Most importantly, first the
+      lockserver, then the backend, then everything else. However, we're not going to
+      describe the initial setup in this order.
+  * '''Generating state keys'''
+    Seven different state keys need to be created in order for all the backend scripts
+    to work. The name of the seven key files should be:
+    1. acceptdonation.publickey
+    1. movingto_canonical.publickey
+    1. canonical.publickey
+    1. movingto_onepercentmanyevents.publickey
+    1. onepercentmanyevents.publickey
+    1. movingto_twopercent.publickey
+    1. twopercent.publickey
+    * Note that the privatekey of the key pairs is not necessary. To generate the keys 
+      follow these instructions: 
+      * Create a temporary folder.
+      * Navigate to the trunk/ folder.
+      * Run the command:
+{{{
+python preparetest.py TEMP_FOLDER
+}}}
+        where the temp folder is the folder created in step 1.
+      * Navigate to the TEMP_FOLDER.
+      * Run the command:
+{{{
+python generatekeys.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
+}}}
+       An example would be:
+{{{
+python generatekeys.py acceptdonation
+}}}
+      * Generate a key pair for all four state keys.
+      * Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
+        folder and copy the seven publickeys over to that folder.
+      * You can delete the privatekeys if you want to as we won't need them.
+      * Delete the TEMP_FOLDER and all its content at this point if you want to.
+  * '''Setup the website and start a development version of it'''
+    * Be sure you've already created a mysql database for seattlegeni (e.g.
+      called `seattlegeni`).
+    * Edit website/settings.py
+      * Specify the name of the seattlegeni
+        database, as well as the database username, password, etc.
+      * Set a long, random string the value of SECRET_KEY.
+      * If this is a production launch, also set DEBUG to False,
+        and uncomment and change the fields for sending ADMINS email.
+    * Set your environment variables:
+{{{
+#!sh
+export PYTHONPATH=$PYTHONPATH:/tmp/deploy:/tmp/deploy/seattle
+export DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
+}}}
+      Note: the /tmp/deploy path entry is to make available the two packages
+      'seattlegeni' and 'seattle' which the deployment script created in the
+      /tmp/deploy directory. The /tmp/deploy/seattle path item is to ensure
+      that repyhelper can find repy files in the python path, as the repy files
+      were placed in this directory by the deployment script.
+      You will have to do this in each of the shell terminals you work in for 
+      the steps below. Alternatively you can edit the .bashrc file in your home
+      directory and add the two lines in:
+{{{
+PYTHONPATH=$PYTHONPATH:/tmp/deploy:/tmp/deploy/seattle
+DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
+}}}
+    * Create the database structure:
+{{{
+#!sh
+python website/manage.py syncdb
+}}}
+    * For development, start the django development webserver:
+{{{
+#!sh
+python website/manage.py runserver
+}}}
+      You will now have a local development server running on port 8000.
+      This is convenient for development and testing your seattlegeni instance 
+      but should not be used in production.  Using runserver does not require 
+      configuring apache.  For a simple way to make your local development 
+      server visible to the public internet consider using [http://pagekite.net PageKite]. 
+      In case you are connected via {{{ssh}}}, you can use port forwarding to make the 
+      development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
+      Then, open http://localhost:8000/ in your local browser and interact with your install.
+    * For production, run the site through apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
+      
+  * '''Start the lockserver'''
+    * Set your environment variables the same way as shown above.
+    * In a new shell, start the lockserver:
+{{{
+#!sh  
+python lockserver/lockserver_daemon.py
+}}}      
+  * '''Setup the key database and start the backend'''
+    * Make sure have a mysql database to use for the key database (e.g. called
+      `keydb`)
+    * Make sure that the file keydb/config.py is not readable by the user the
+      website is running as (this is only something to worry about for production
+      launch, if you are just developing or testing, this is not required.)
+    * Edit the file keydb/config.py and set the database information for the key
+      database.
+    * Create the key database structure by executing the contents of the file
+      keydb/schema.sql on the new key database you created.
+{{{
+#!sh  
+mysql -u[username] -p --database=[keydbname] < keydb/schema.sql
+}}}
+    * Edit the file backend/config.py and set a value for the authcode.
+    * For production launch, make sure that the file backend/config.py is not
+      readable by the website.
+    * Set your environment variables the same way as shown above.
+    * In a new shell, start the backend_daemon from the backend directory
+      (because the repy files need to be in the directory it is run from):
+{{{
+#!sh  
+cd backend
+python backend_daemon.py
+}}}      
+  * '''Start the polling daemons'''
+    * Set your environment variables the same way as shown above. (Not necessary 
+      if you have added it to the .bashrc file)
+    * There's only one polling daemon at the moment. To start it:
+{{{
+#!sh   
+python polling/check_active_db_nodes.py
+}}}
+  * '''Start the node state transition scripts'''
+    * Set your environment variables the same way as shown above. (Not necessary 
+      if you have added it to the .bashrc file)
+    * Start each transition script you intend to run:
+{{{
+#!sh   
+python node_state_transitions/TRANSITION_SCRIPT_NAME.py
+}}}
+    * The four transitions scripts that you probably want running are:
+      * transition_donation_to_canonical
+      * transition_canonical_to_twopercent
+      * transition_twopercent_to_twopercent
+      * transition_onepercentmanyevents_to_canonical
+
+
+[[BR]]
+== Configure Apache sites ==
+----
+
+To provide encryption, Seattle Clearinghouse relies on SSL. Therefore you will need to
+setup two !VirtualHost entries at the minimum: one for connections to
+port 80 (HTTP), and one for connections to port 443 (SSL).
+
+Here is a somewhat minimal configuration to serve the geni website from
+https://mysite/geni/. Note that in this snippet, the second
+!VirtualHost entry assumes that you have a server certificate and key
+file setup, and the Location directive assumes that your geni
+installation lives in /home/geni/ and that your django settings module
+is seattlegeni.website.settings. The first !VirtualHost is only provided to redirect
+all connections to '''http'''://mysite/geni/* to use
+'''https'''://mysite/geni/*. Also, the seattlegeni installation was
+deployed to the directory /home/geni/live rather than /tmp/deploy, which
+was the deployment directory given as an example in the steps above.
+
+Depending on you configuration of apache, you may want to add the below code to: /etc/apache2/sites-available/default
+
+{{{
+#!sh
+NameVirtualHost *:80
+NameVirtualHost *:443
+
+# HTTP
+<VirtualHost *:80>
+    # Redirect requests for the server index page or that are geni-related
+    # to the https site.
+    RedirectMatch ^/$ https://mysite/geni/html/login
+    RedirectMatch ^/geni https://mysite/geni/html/login
+</VirtualHost>
+
+# SSL
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/server.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+    SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
+
+    Alias /site_media "/home/geni/live/seattlegeni/website/html/media"
+    <Location "/site_media">
+        SetHandler None
+    </Location>
+
+    Alias /admin_media "/usr/local/lib/python2.5/site-packages/django/contrib/admin/media"
+    <Location "/admin_media">
+        SetHandler None
+    </Location>
+
+    <Location /geni/>
+        SetHandler python-program
+        PythonHandler django.core.handlers.modpython
+        SetEnv DJANGO_SETTINGS_MODULE seattlegeni.website.settings
+        PythonOption django.root /geni
+        PythonDebug Off
+        # We add /usr/local/lib/python2.5/site-packages to ensure that our
+        # manual installation of django 1.1 to /usr/local is in the path
+        # before any copy of django installed through the distro's repositories.
+        PythonPath "['/home/geni/live/', '/home/geni/live/seattle', '/usr/local/lib/python2.5/site-packages'] + sys.path"
+    </Location>
+
+    # Make sure various locations people might request redirect somewhere that works.
+    RedirectMatch ^/$ https://mysite/geni/html/login
+    RedirectMatch ^/geni/?$ https://mysite/geni/html/login
+    RedirectMatch ^/geni/html/?$ https://mysite/geni/html/login
+
+    # Don't require a slash on the end of the admin url.
+    RedirectMatch ^/geni/admin$ https://mysite/geni/admin/
+</VirtualHost>
+}}}
+
+To use this configuration for your Seattle Clearinghouse installation, change "mysite" to your domain
+name, change "/home/geni/live/" in the site media location and Python path to the directory
+where you deployed Seattle Clearinghouse, and make sure "/admin_media" is aliased to a valid directory,
+as the exact location will vary depending on the version of Python installed and how you
+installed Django. A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
+
+To configure SSL you will probably need to install openssl to generate a private key/CSR
+(Certificate Signing Request), and then possibly purchase a certificate for your site.
+For more information see [http://slacksite.com/apache/certificate.php this page]. Put your
+SSL key and certificate in a directory named /etc/apache2/ssl (or change the configuration
+to correctly reference them). If you generate your own certificate instead of buying one,
+remove the line for "SSLCertificateChainFile".
+
+Be sure to restart Apache after you are done changing the configuration files.
+
+{{{
+#!sh
+$ /etc/init.d/apache2 restart
+}}}
+If Apache gives the error:
+{{{
+Invalid command 'SSLEngine', perhaps misspelled or defined by a module not included in the server configuration
+}}}
+
+then you need to enable ssl by running:
+{{{
+#!sh
+$ sudo a2enmod ssl
+}}}
+
+For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your Seattle Clearinghouse directory:
+{{{
+#!sh
+$ chmod -R o+rx seattle/ seattlegeni/
+}}}
+
+If you try to access your Seattle Clearinghouse installation's website now, then it's possible you'll see an exception like this:
+{{{
+Cannot open file for translation '/home/geni/live/seattle/rsa.repy': [Errno 13] Permission denied: '/home/geni/live/seattle/rsa_repy.py'
+}}}
+
+This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper
+get invoked, so as a workaround you can cd to the seattle directory and change the permissions:
+{{{
+#!sh
+$ chmod a+w *_repy.py
+}}}
+
+
+[[BR]]
+== Running start_seattlegeni_components.sh ==
+----
+
+If you have all the components of Seattle Clearinghouse (including Apache) configured,
+the script deploymentscripts/start_seattlegeni_components.sh will start up all the individual
+components in the correct order.
+
+Before running start_seattlegeni_components.sh, make sure to change PYTHONPATH, SEATTLEGENI_DIR,
+and LOG_DIR to the correct locations for your deployment, change geni in SUDO_CMD to the correct
+username, and create the directory for LOG_DIR if it doesn't already exist.
+
+First, if one or more of the Seattle Clearinghouse scripts is already running, kill them before running start_seattlegeni_components.sh.
+
+To run start_seattlegeni_components.sh, run the following commands with the correct directory substituted for /home/geni/live:
+{{{
+#!sh
+$ sudo -i
+$ screen
+$ cd /home/geni/live/seattlegeni/deploymentscripts
+$ ./start_seattlegeni_components.sh
+}}}
+This will start the script in a new screen session running as root. Hit CTRL-A followed by D to detach the screen session.
+
+To later reattach to the session in order to stop or restart start_seattlegeni_components.sh:
+{{{
+#!sh
+$ sudo -i
+$ screen -r
+}}}
+
+
+[[BR]]
+== Conclusion ==
+----
+
+Congratulations! You should now have a fully operational Seattle Clearinghouse
+installation that you can access at https://mysite/geni/
