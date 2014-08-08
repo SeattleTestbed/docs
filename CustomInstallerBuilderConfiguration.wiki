@@ -70,17 +70,17 @@ Enabled modules:
  !>
 }}}
 
-To generate a keypair, type `genkeys desired-name 4096`. This generates two files, `desired-name.publickey` and `desired-name.privatekey` in the `repy_runtime` directory. The key length is set to `4096` bits in this example. (This is the minimum recommendable length at the time of writing.)
+To generate a keypair, type `genkeys softwareupdater 4096` (or any other name you like). This generates two files, `softwareupdater.publickey` and `softwareupdater.privatekey` in the `repy_runtime` directory. The key length is set to `4096` bits in this example. (This is the minimum recommendable length at the time of writing.)
 
 {{{
 #!sh
- !> genkeys desired-name 4096
-Created identity 'desired-name'
+ !> genkeys softwareupdater 4096
+Created identity 'softwareupdater'
  !> exit
 $
 }}}
 
-Now move the key files to a location of your choosing. Back in `rebuild_base_installers_for_seattlegeni.sh`, remember to update the path-to-keyfiles.
+Now move the key files to a location of your choosing. Back in `rebuild_base_installers_for_seattlegeni.sh`, remember to update the path-to and name of keyfiles.
 
 Furthermore, the softwareupdater URL must be given:
 {{{
