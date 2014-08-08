@@ -71,7 +71,7 @@ IDENTIFIED BY 'password';
 }}}
 where you would replace the 'password' with the password you want to use for the user 'seattlegeni'
 
-'''Repeat the process''' for a separate database called `keydb`.
+'''Repeat the process''', substituting `keydb` for `seattlegeni`.
 
 
 [[BR]]
