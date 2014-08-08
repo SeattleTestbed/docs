@@ -23,11 +23,13 @@ If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} for the `B
 
 
 == Start Django test server ==
-In the `custominstallerbuilder` directory, run the django test server:
+Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, change to the `custominstallerbuilder/repy_runtime` directory, and run the django test server:
 
 {{{
 #!sh
-$ ./manage.py runserver 0.0.0.0:PORT
+$ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
+$ cd ~/custominstallerbuilder/repy_runtime
+$ ../manage.py runserver 0.0.0.0:PORT
 }}}
 
 This command assumes that the Seattle standard library (located in 'trunk/seattlelib') is in your Python path.
