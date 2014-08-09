@@ -27,4 +27,9 @@ The current installable Seattle components are Seash, Repy_v2, Overlord and Expe
 
 
 To build the test-directory by copying over test-files, make use of '-t' switch with 'build.py' script. 
-Example: python build.py -t path_to_target_directory[[BR]]
+Example: 
+{{{
+python build.py -t path_to_target_directory
+}}}
+
+[[BR]]
