@@ -1,5 +1,5 @@
 
-==Build Instructions==
+== Build Instructions ==
 
 1. Check out the repository that you want to build from SeattleTestbed (https://github.com/SeattleTestbed). At present check out 'new_build' branch of the repository as it hasn't been merged to the master branch.[[BR]]
 Example: git clone https://github.com/SeattleTestbed/seash -b new_build.[[BR]]
