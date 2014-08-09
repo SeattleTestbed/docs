@@ -23,7 +23,7 @@ It will copy all the files necessary to build the particular Seattle Component i
 '''Note:''' Make sure you have created the empty 'target_directory' (of any name of your choice) before running the 'build.py' script. And while running that script, make sure you provide the absolute path to the target directory and not the relative path.[[BR]]
 
 
-The current installable Seattle components are Seash, Repy_v2, Overlord and Experiment manager. However, since Overlord and Experiement Manager are currently being ported to Repy_v2 and will temporarily will not work with these build scripts.[[BR]]
+The current installable Seattle components are Seash, Repy_v2, Overlord and Experiment manager. However, Overlord and Experiement Manager are currently being ported to Repy_v2 and will temporarily not work with these build scripts.[[BR]]
 
 
 To build the test-directory by copying over test-files. make use of '-t' switch with 'build.py' script. 
