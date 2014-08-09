@@ -1,12 +1,24 @@
 
 == Build Instructions ==
 
-1. Check out the repository that you want to build from SeattleTestbed (https://github.com/SeattleTestbed). At present check out 'new_build' branch of the repository as it hasn't been merged to the master branch.[[BR]]
-Example: git clone https://github.com/SeattleTestbed/seash -b new_build.[[BR]]
+1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository as it hasn't been merged to the master branch.[[BR]]
+Example: 
+{{{
+git clone https://github.com/SeattleTestbed/seash -b new_build
+}}}
+[[BR]]
 2. There will be a 'scripts' folder inside the repo directory, and within that there will be 'initialize.py' script.[[BR]]
-3. Run that as: 'python initialize.py' and this will start checking-out all the dependent repositories into your current working directory. It will make use of 'config_initialize.txt' to fetch the list of dependencies.[[BR]]
+3. Run that as:
+{{{
+python initialize.py
+}}}
+This will start checking-out all the dependent repositories into your current working directory. It will make use of 'config_initialize.txt' to fetch the list of dependencies.[[BR]]
 4. Once done with that, you will find a 'dist' directory which has been checked out along with other repositories. Inside 'dist', there will be 'build.py' script. So, now, change your current working directory to 'dist'.[[BR]]
-5. Run the 'build.py' script as 'python build.py path_to_target_directory'. It will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
+5. Run the 'build.py' script as: 
+{{{
+python build.py path_to_target_directory
+}}}
+It will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
 '''Note:''' Make sure you have created the empty 'target_directory' (of any name of your choice) before running the 'build.py' script. And while running that script, make sure you provide the absolute path to the target directory and not the relative path.[[BR]]
 
