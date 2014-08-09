@@ -6,7 +6,6 @@ Example:
 {{{
 git clone https://github.com/SeattleTestbed/seash -b new_build
 }}}
-[[BR]]
 2. There will be a 'scripts' folder inside the repo directory, and within that there will be 'initialize.py' script.[[BR]]
 3. Run that as:
 {{{
