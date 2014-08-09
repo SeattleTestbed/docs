@@ -1,7 +1,7 @@
 
 == Build Instructions ==
 
-1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository as it hasn't been merged to the master branch.[[BR]]
+1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository, as the build scripts haven't been merged to the master branch yet.[[BR]]
 Example: 
 {{{
 git clone https://github.com/SeattleTestbed/seash -b new_build
