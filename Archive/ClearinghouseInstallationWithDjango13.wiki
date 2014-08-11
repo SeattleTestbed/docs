@@ -126,16 +126,15 @@ cd /tmp/TARGET/clearinghouse
       lockserver, then the backend, then everything else. However, we're not going to
       describe the initial setup in this order.
   * '''Generating state keys'''
-    Seven different state keys need to be created in order for all the backend scripts
-    to work. The name of the seven key files should be:
-    1. acceptdonation.publickey
-    1. movingto_canonical.publickey
-    1. canonical.publickey
-    1. movingto_onepercentmanyevents.publickey
-    1. onepercentmanyevents.publickey
-    1. movingto_twopercent.publickey
-    1. twopercent.publickey
-    * Note that the privatekey of the key pairs is not necessary. To generate the keys 
+    Seven different state keys need to be created in order for all the [wiki:SeattleBackend backend scripts] to work. The name of these keys should be:
+    1. `acceptdonation`
+    1. `movingto_canonical`
+    1. `canonical`
+    1. `movingto_onepercentmanyevents`
+    1. `onepercentmanyevents`
+    1. `movingto_twopercent`
+    1. `twopercent`
+    * To generate the keys 
       follow these instructions: 
       * Navigate to the folder you previously deployed the Repy runtime to, `/tmp/TARGET/seattle`.
       * Run the command:
@@ -147,7 +146,7 @@ python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
 python generatekeys.py acceptdonation 4096
 }}}
       * Generate a key pair for all state keys per the list above.
-      * Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
+      * Create a folder named `statekeys` in your /tmp/TARGET/clearinghouse/node_state_transitions/
         folder and copy the seven publickeys over to that folder.
       * As noted, you can delete the `*.privatekey` files as we won't need them.
 
