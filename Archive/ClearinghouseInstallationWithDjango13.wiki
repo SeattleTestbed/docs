@@ -146,23 +146,20 @@ python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
 python generatekeys.py acceptdonation 4096
 }}}
       * Generate a key pair for all state keys per the list above.
-      * Create a folder named `statekeys` in your /tmp/TARGET/clearinghouse/node_state_transitions/
-        folder and copy the seven publickeys over to that folder.
-      * As noted, you can delete the `*.privatekey` files as we won't need them.
+      * Create a folder  ´/tmp/TARGET/clearinghouse/node_state_transitions/`, and then a folder `statekeys` below it. Copy the seven publickeys over to `statekeys`. As noted, we do not need the privatekey files.
+      * Once copied to their final destination, delete `*.publickey *.privatekey` from the `seattle` folder.
 
   * '''Setup the website and start a development version of it'''
-    * Be sure you've already created a mysql database for seattlegeni (e.g.
+    * Be sure you've already created a MySQL database for the clearinghouse (e.g.
       called `seattlegeni`).
-    * Edit website/settings.py
-      * Specify the name of the seattlegeni
-        database, as well as the database username, password, etc.
-      * Set a long, random string the value of SECRET_KEY.
-      * If this is a production launch, also set DEBUG to False,
-        and uncomment and change the fields for sending ADMINS email.
+    * Edit `/tmp/TARGET/clearinghouse/website/settings.`
+      * Specify the name of the clearinghouse database, as well as the database username, password, etc.
+      * Set SECRET_KEY to a long, random string.
+      * If this is a production launch, also set DEBUG to False, and uncomment and change the fields for sending ADMINS email.
     * Set your environment variables:
 {{{
 #!sh
-export PYTHONPATH=$PYTHONPATH:/tmp/deploy:/tmp/deploy/seattle
+export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/clearinghouse/seattle
 export DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
 }}}
       Note: the /tmp/deploy path entry is to make available the two packages
