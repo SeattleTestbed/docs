@@ -137,27 +137,20 @@ cd /tmp/TARGET/clearinghouse
     1. twopercent.publickey
     * Note that the privatekey of the key pairs is not necessary. To generate the keys 
       follow these instructions: 
-      * Create a temporary folder.
-      * Navigate to the trunk/ folder.
+      * Navigate to the folder you previously deployed the Repy runtime to, `/tmp/TARGET/seattle`.
       * Run the command:
 {{{
-python preparetest.py TEMP_FOLDER
+python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
 }}}
-        where the temp folder is the folder created in step 1.
-      * Navigate to the TEMP_FOLDER.
-      * Run the command:
+       This creates a keypair `NAME_OF_YOUR_KEY_FILES.publickey`, `NAME_OF_YOUR_KEY_FILES.privatekey` using a key length of 4096 (the minimum recommended at the time of writing). An example would be:
 {{{
-python generatekeys.py NAME_OF_YOUR_PUBKEY_PRIV_KEY
+python generatekeys.py acceptdonation 4096
 }}}
-       An example would be:
-{{{
-python generatekeys.py acceptdonation
-}}}
-      * Generate a key pair for all four state keys.
+      * Generate a key pair for all state keys per the list above.
       * Create a folder named statekeys in your /tmp/deploy/seattlegeni/node_state_transitions/
         folder and copy the seven publickeys over to that folder.
-      * You can delete the privatekeys if you want to as we won't need them.
-      * Delete the TEMP_FOLDER and all its content at this point if you want to.
+      * As noted, you can delete the `*.privatekey` files as we won't need them.
+
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a mysql database for seattlegeni (e.g.
       called `seattlegeni`).
