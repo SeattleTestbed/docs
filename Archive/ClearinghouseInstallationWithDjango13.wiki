@@ -160,19 +160,17 @@ python generatekeys.py acceptdonation 4096
 {{{
 #!sh
 export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/clearinghouse/seattle
-export DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
+export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 }}}
-      Note: the /tmp/deploy path entry is to make available the two packages
-      'seattlegeni' and 'seattle' which the deployment script created in the
-      /tmp/deploy directory. The /tmp/deploy/seattle path item is to ensure
-      that repyhelper can find repy files in the python path, as the repy files
-      were placed in this directory by the deployment script.
+      Note: the /tmp/TARGET path entry is to make available the two packages
+      `clearinghouse` and `seattle` which the deployment script created in the
+      target directory. The Seattle path item is to ensure that the Repy runtime works.
       You will have to do this in each of the shell terminals you work in for 
       the steps below. Alternatively you can edit the .bashrc file in your home
       directory and add the two lines in:
 {{{
-PYTHONPATH=$PYTHONPATH:/tmp/deploy:/tmp/deploy/seattle
-DJANGO_SETTINGS_MODULE='seattlegeni.website.settings'
+PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/clearinghouse/seattle
+DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 }}}
     * Create the database structure:
 {{{
