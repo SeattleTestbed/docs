@@ -93,21 +93,19 @@ git clone https://github.com/aaaaalbert/clearinghouse.git
 cd clearinghouse/scripts
 python initialize.py
 }}}
-    * Deploy all necessary files to a directory of your choice. The directory
-      you deploy to should be the name of a directory that does not yet exist.
-      For example:
+    * Deploy all necessary files to a directory of your choice. (We'll use `/tmp/TARGET` in these instructions.) The directory you deploy to should be the name of a directory that does not yet exist. For example:
 {{{
 #!sh 
-python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/YOUR_TARGET_DIR
+python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
 }}} 
     (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
 
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
 #!sh
-mkdir YOUR_TARGET_DIR/seattle
+mkdir /tmp/TARGET/clearinghouse/seattle
 cd clearinghouse/scripts/dist
-python build.py YOUR_TARGET_DIR/seattle   # Use absolute target path!
+python build.py /tmp/TARGET/clearinghouse/seattle   # Use absolute target path!
 }}}
 
 
@@ -115,9 +113,9 @@ python build.py YOUR_TARGET_DIR/seattle   # Use absolute target path!
       to. For example:
 {{{
 #!sh 
-cd /tmp/YOUR_TARGET_DIR/clearinghouse
+cd /tmp/TARGET/clearinghouse
 }}}
-      Note: all future steps/instructions will assume you are in this directory. 
+      '''Note: All future steps/instructions will assume you are in this directory.'''
   * '''Future tip'''
     * Starting all of the processes described below is simplified by using the script
       `deploymentscripts/start_seattlegeni_components.sh`, whose use is described in
