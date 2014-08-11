@@ -86,24 +86,36 @@ $
 In this section, we will deploy and run a copy of the Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a separate user account, e.g. named {{{clearinghouse}}}, and following the steps below as this user.
 
   * '''Initial preparation'''
-    * Clone the Clearinghouse repository into your home directory.
+    * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
 git clone https://github.com/aaaaalbert/clearinghouse.git
+cd clearinghouse/scripts
+python initialize.py
 }}}
     * Deploy all necessary files to a directory of your choice. The directory
       you deploy to should be the name of a directory that does not yet exist.
       For example:
 {{{
 #!sh 
-python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py ./trunk /tmp/deploy
+python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/YOUR_TARGET_DIR
 }}} 
     (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
-    * Change to the seattlegeni directory that is in the directory you deployed
+
+    * Deploy the Repy runtime, following the instructions of the script called previously.
+{{{
+#!sh
+mkdir YOUR_TARGET_DIR/seattle
+cd clearinghouse/scripts/dist
+python build.py YOUR_TARGET_DIR/seattle   # Use absolute target path!
+}}}
+
+
+    * Change to the `clearinghouse` directory that is in the directory you deployed
       to. For example:
 {{{
 #!sh 
-cd /tmp/deploy/seattlegeni
+cd /tmp/YOUR_TARGET_DIR/clearinghouse
 }}}
       Note: all future steps/instructions will assume you are in this directory. 
   * '''Future tip'''
