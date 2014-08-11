@@ -146,7 +146,7 @@ python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
 python generatekeys.py acceptdonation 4096
 }}}
       * Generate a key pair for all state keys per the list above.
-      * Create a folder  ´/tmp/TARGET/clearinghouse/node_state_transitions/`, and then a folder `statekeys` below it. Copy the seven publickeys over to `statekeys`. As noted, we do not need the privatekey files.
+      * Create a folder  `/tmp/TARGET/clearinghouse/node_state_transitions/ `, and then a folder `statekeys` below it. Copy the seven publickeys over to `statekeys`. As noted, we do not need the privatekey files.
       * Once copied to their final destination, delete `*.publickey *.privatekey` from the `seattle` folder.
 
   * '''Setup the website and start a development version of it'''
