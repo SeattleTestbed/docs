@@ -64,22 +64,23 @@ Test cases are briefly described in [wiki:EducationalAssignments/PermissionsPart
 # Open a file
 myfile=openfile("look.txt",True)
 myfile.setwrite(True)
+myfile.setappend(True)
+
  
 myfile.writeat("SECURITY",0)
-myfile.setread(True)
 
-# Attempt to read the secure data from the file
+# Attempt to read data from the file
 try:
   myfile.readat(1,0)
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
-  # The security layer correctly blocked the write!!!
+  # The security layer correctly blocked the read!!!
   pass
  
 # No Exception was raised!
 else:
-  log("Secure data compromised")
+  log("Read without permission")
  
 finally:
   # Close the file after our attempt.
@@ -108,7 +109,6 @@ myfile.setappend(True)
 myfile.setread(True) 
 myfile.writeat("abcd",0)
 
-#  This should work because the write isn't private...
 try:
   output=myfile.readat(4,0)
 # It raised an Exception :
