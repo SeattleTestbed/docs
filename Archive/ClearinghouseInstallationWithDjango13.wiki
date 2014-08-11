@@ -152,7 +152,7 @@ python generatekeys.py acceptdonation 4096
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
       called `seattlegeni`).
-    * Edit `/tmp/TARGET/clearinghouse/website/settings.`
+    * Edit `/tmp/TARGET/clearinghouse/website/settings.py`
       * Specify the name of the clearinghouse database, as well as the database username, password, etc.
       * Set SECRET_KEY to a long, random string.
       * If this is a production launch, also set DEBUG to False, and uncomment and change the fields for sending ADMINS email.
