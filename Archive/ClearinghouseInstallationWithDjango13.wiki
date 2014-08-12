@@ -20,9 +20,7 @@ Clearinghouse requires at least the following software to be installed:
  * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
  * [http://www.djangoproject.com/ Django] -- necessary to run Django code
-
-Optionally,
- * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support
+ * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support.
 
 Most of these can be installed through a package manager. For example, on a Debian-based system:
 
@@ -77,7 +75,7 @@ where you would replace the 'password' with the password you want to use for the
 #!sh
 mysql> \q
 Bye!
-$
+$ 
 }}}
 
 
@@ -103,11 +101,17 @@ python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
 #!sh
-mkdir /tmp/TARGET/clearinghouse/seattle
+mkdir /tmp/TARGET/seattle
 cd clearinghouse/scripts/dist
-python build.py /tmp/TARGET/clearinghouse/seattle   # Use absolute target path!
+python build.py /tmp/TARGET/seattle   # Use absolute target path!
 }}}
 
+
+    * Add an empty file `__init__.py` to the Repy runtime so that Django will be able to import it correctly:
+{{{
+#!sh
+touch /tmp/TARGET/seattle/__init__.py
+}}}
 
     * Change to the `clearinghouse` directory that is in the directory you deployed
       to. For example:
