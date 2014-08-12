@@ -163,7 +163,7 @@ python generatekeys.py acceptdonation 4096
     * Set your environment variables:
 {{{
 #!sh
-export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/clearinghouse/seattle
+export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/seattle
 export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 }}}
       Note: the /tmp/TARGET path entry is to make available the two packages
@@ -173,7 +173,7 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
       the steps below. Alternatively you can edit the .bashrc file in your home
       directory and add the two lines in:
 {{{
-PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/clearinghouse/seattle
+PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/seattle
 DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 }}}
     * Create the database structure:
