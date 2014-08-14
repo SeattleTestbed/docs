@@ -2,10 +2,12 @@
 == Build Instructions ==
 
 1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository, as the build scripts haven't been merged to the master branch yet.[[BR]]
-Example: 
+For example, if you are building seash, do: 
 {{{
 git clone https://github.com/SeattleTestbed/seash -b new_build
 }}}
+Of course, you will want to replace seash with the repository name you are interested in.
+
 2. There will be a 'scripts' folder inside the repo directory, and within that there will be 'initialize.py' script.[[BR]]
 3. Run that as:
 {{{
