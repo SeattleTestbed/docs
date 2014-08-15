@@ -1,32 +1,39 @@
+= Build Instructions =
+This page guides you through the build process for the repositories at [https://github.com/SeattleTestbed Seattle Testbed's GitHub page].
 
-== Build Instructions ==
-
+----
+[[TOC(inline)]]
+----
 
 == For Users ==
 
-
-1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository, as the build scripts haven't been merged to the master branch yet.[[BR]]
-For example, if you are building seash, do: 
+1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out `new_build` branch of the repository, as the build scripts haven't been merged to the master branch yet.[[BR]]
+For example, if you are building [wiki:SeattleShell seash], do: 
 {{{
-git clone https://github.com/SeattleTestbed/seash -b new_build
+#!sh
+$ git clone https://github.com/SeattleTestbed/seash -b new_build
 }}}
-Of course, you will want to replace seash with the repository name you are interested in.
+Of course, you will want to replace `seash` with the repository name you are interested in.
 
-2. There will be a 'scripts' folder inside the repo directory, and within that there will be 'initialize.py' script.[[BR]]
-3. Run that as:
+2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize.py` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
 {{{
+#!sh
+cd seash/scripts
 python initialize.py
 }}}
-This will start checking-out all the dependent repositories into your current working directory. It will make use of 'config_initialize.txt' to fetch the list of dependencies.[[BR]]
-4. Once done with that, you will find a 'dist' directory which has been checked out along with other repositories. Inside 'dist', there will be 'build.py' script. So, now, change your current working directory to 'dist'.[[BR]]
-5. Run the 'build.py' script as: 
+`initialize` Git-clones the dependent repositories into your current working directory. It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
+4. Once done with that, you will find a `dist` directory which has been checked out along with other repositories. Inside `dist`, there is the actual build script, `build.py`. Before calling it, set up a target folder for the build:
 {{{
-python build.py path_to_target_directory
+#!sh
+mkdir TARGET_FOLDER
 }}}
-It will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
-
-'''Note:''' Make sure you have created the empty 'target_directory' (of any name of your choice) before running the 'build.py' script. And while running that script, make sure you provide the absolute path to the target directory and not the relative path.[[BR]]
-
+5. Change directory to `dist`, and run the build script, giving it the absolute path to your desired target folder:[[BR]]
+{{{
+#!sh
+cd dist
+python build.py /absolute/path/to/TARGET_FOLDER
+}}}
+`build.py` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
 The current installable Seattle components are Seash, Repy_v2, Overlord and Experiment manager. However, Overlord and Experiement Manager are currently being ported to Repy_v2 and will temporarily not work with these build scripts.[[BR]]
 
@@ -38,7 +45,6 @@ python build.py -t path_to_target_directory
 }}}
 
 [[BR]]
-
 
 == For Developers ==
 
