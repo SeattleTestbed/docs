@@ -40,17 +40,36 @@ python build.py /absolute/path/to/TARGET_FOLDER
 }}}
 `build.py` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
+'''Done!''' Your target folder now contains a runnable version of the component![[BR]]
+
 
 
 == Building and Running Unit Tests ==
+When making changes to the code (or build scripts!) you will want to ensure that the change does not have side effects or breaks functionality that had been working before. In order to ensure this, each component comes with a set of ''unit tests''.
 
-To build the test-directory by copying over test-files, make use of '-t' switch with 'build.py' script. 
-Example: 
+The steps of the previous section intrinsically downloaded the required unit test files. You just need to run the build script again to create a ''testable'' build. Use the `-t` command line option to indicate you want the test files to be included:
 {{{
-python build.py -t path_to_target_directory
+#!sh
+mkdir TEST_TARGET_DIR
+cd COMPONENT/scripts/dist
+python build.py -t /absolute/path/to/TEST_TARGET_DIR
+}}}
+
+Then, change to the test target directory and start the unit tests:
+{{{
+#!sh
+cd TEST_TARGET_DIR
+python utf.py -a
 }}}
 
 [[BR]]
+
+The unit test framework prints out the test name and result (plus debugging information if available), e.g.:
+{{{
+	Running: ut_nm_addfiletovessel.r2py                         [ PASS ]
+}}}
+
+
 
 == For Developers ==
 
