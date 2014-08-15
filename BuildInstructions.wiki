@@ -8,7 +8,7 @@ This page guides you through the build process for the repositories at [https://
 == Building components ==
 This section describes how to build components from their source repositories on [https://github.com/SeattleTestbed GitHub].
 
-1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. Check out `new_build` branch of the repository, as the new build scripts haven't been merged to the master branch yet.[[BR]]
+1. Clone the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. Be sure to check out the `new_build` branch of the repository, as the new build scripts haven't been merged to the master branch yet.[[BR]]
 For example, if you are building [wiki:SeattleShell seash], do: 
 {{{
 #!sh
@@ -23,7 +23,7 @@ cd seash/scripts
 python initialize.py
 }}}
 `initialize` Git-clones the dependent repositories into your current working directory. It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
-4. Once done with that, you will find a `dist` directory which has been checked out along with other repositories. Inside `dist`, there is the actual build script, `build.py`. Before calling it, set up a target folder for the build:
+4. Once done with that, you will find a `dist` directory which has been cloned along with other repositories. Inside `dist`, there is the actual build script, `build.py`. Before calling it, set up a target folder for the build:
 {{{
 #!sh
 mkdir TARGET_FOLDER
@@ -52,7 +52,7 @@ python build.py -t path_to_target_directory
 The new Seattle build procedure makes use of four scripts: 
 {{{initialize.py, build.py, config_initialize.txt}}} and {{{config_build.txt}}} [[BR]]
 The  {{{config_initialize.txt}}} and {{{config_build.txt}}} are configuration files. [[BR]]
-{{{config_initialize.txt}}} provides {{{initialize.py}}} with the names and links of dependent repositories to check-out from [https://github.com/SeattleTestbed SeattleTestbed]. [[BR]]
+{{{config_initialize.txt}}} provides {{{initialize.py}}} with the names and links of dependent repositories to clone from [https://github.com/SeattleTestbed SeattleTestbed]. [[BR]]
 {{{config_build.txt}}} provides {{{build.py}}} with the names and paths of necessary files that are to be copied over from the cloned repos to the {{{target_directory}}} to build the required Seattle component.[[BR]]
 Here is snap-shot of sample {{{config_initialize.txt}}}
  {{{
