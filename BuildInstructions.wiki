@@ -1,5 +1,5 @@
 = Build Instructions =
-This page guides you through the build process for the repositories at [https://github.com/SeattleTestbed Seattle Testbed's GitHub page]. The first section discusses what is required to get hold of a repo and build it so that it can be run. In part two, we explain how our initialize and build scripts work behind the scenes.
+This page guides you through the build process for the repositories at [https://github.com/SeattleTestbed Seattle Testbed's GitHub page]. The first section discusses what is required to get hold of a repo and build it so that it can be run. The second section describes how to run unit tests. The last part explains how our initialize and build scripts work behind the scenes.
 
 ----
 [[TOC(inline)]]
