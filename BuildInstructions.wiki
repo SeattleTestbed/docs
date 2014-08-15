@@ -7,6 +7,10 @@ This page guides you through the build process for the repositories at [https://
 
 == Building components ==
 This section describes how to build components from their source repositories on [https://github.com/SeattleTestbed GitHub].
+Currently, these components have been set up to be buildable and runnable: `seash`, `repy_v2`, `overlord`, and `experimentmanager`. The other components can be built for unit test mode (see below).
+
+'''Note:''' Overlord and Experiment Manager are currently being ported to RepyV2 and will not fully work.[[BR]]
+
 
 1. Clone the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. Be sure to check out the `new_build` branch of the repository, as the new build scripts haven't been merged to the master branch yet.[[BR]]
 For example, if you are building [wiki:SeattleShell seash], do: 
@@ -36,8 +40,9 @@ python build.py /absolute/path/to/TARGET_FOLDER
 }}}
 `build.py` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
-The current installable Seattle components are Seash, Repy_v2, Overlord and Experiment manager. However, Overlord and Experiement Manager are currently being ported to Repy_v2 and will temporarily not work with these build scripts.[[BR]]
 
+
+== Building and Running Unit Tests ==
 
 To build the test-directory by copying over test-files, make use of '-t' switch with 'build.py' script. 
 Example: 
