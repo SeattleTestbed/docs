@@ -1,6 +1,10 @@
 
 == Build Instructions ==
 
+
+== For Users ==
+
+
 1. Check out the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. At present check out 'new_build' branch of the repository, as the build scripts haven't been merged to the master branch yet.[[BR]]
 For example, if you are building seash, do: 
 {{{
@@ -34,3 +38,79 @@ python build.py -t path_to_target_directory
 }}}
 
 [[BR]]
+
+
+== For Developers ==
+
+The new Seattle build procedure makes use of four scripts: 
+{{{initialize.py, build.py, config_initialize.txt}}} and {{{config_build.txt}}} [[BR]]
+The  {{{config_initialize.txt}}} and {{{config_build.txt}}} are configuration files. [[BR]]
+{{{config_initialize.txt}}} provides {{{initialize.py}}} with the names and links of dependent repositories to check-out from [https://github.com/SeattleTestbed SeattleTestbed]. [[BR]]
+{{{config_build.txt}}} provides {{{build.py}}} with the names and paths of necessary files that are to be copied over from the cloned repos to the {{{target_directory}}} to build the required Seattle component.[[BR]]
+Here is snap-shot of sample {{{config_initialize.txt}}}
+ {{{
+# These are custominstallerbuilder's dependencies. They are essentially 
+# everything that is required to build a Seattle base installer (including 
+# support for RepyV1 and RepyV2, a nodemanager, Affix, and a softwareupdater).
+#
+# Note that there is no config_build.txt, as build.py can't currently be 
+# used to build a base installer, as this requires copying stuff to 
+# subdirectories of the target dir.
+#
+# See the installation instructions at 
+# https://github.com/SeattleTestbed/custominstallerbuilder/wiki/
+https://github.com/SeattleTestbed/repy_v1
+https://github.com/SeattleTestbed/repy_v2
+https://github.com/SeattleTestbed/seattlelib_v1
+https://github.com/SeattleTestbed/seattlelib_v2
+https://github.com/SeattleTestbed/nodemanager
+https://github.com/SeattleTestbed/softwareupdater
+https://github.com/SeattleTestbed/portability
+https://github.com/SeattleTestbed/dist -b new_build_v1
+https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release
+https://github.com/SeattleTestbed/clearinghouse
+https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release
+https://github.com/SeattleTestbed/resource.git
+}}}
+Here is a snap-shot of sample {{{config_build.txt}}}
+{{{
+# Build file for the Repy runtime that the custominstallerbuilder requires. 
+# (Essentially identical with repy_v2's config_build.txt).
+#
+# If it were not for the problems with repyportability / repyhelper / 
+# dylink, the custominstallerbuilder code could do plain Python `import`'s 
+# from Repy files, and be done. Since that doesn't work currently, 
+# we build a directory containing the full runtime instead.
+#
+# Contributors please note:
+# Be sure to revisit this workaround whenever progress is made on 
+# SeattleTestbed/portability#25 through 28!
+repy_v2/*
+portability/*
+seattlelib_v2/*
+seash/*
+clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
+dist/LICENSE.TXT
+affix/*
+affix/components/*
+}}}
+[[BR]]
+Within configuration, one can add comments prefixed with "#". [[BR]]
+Within {{{config_build.txt}}}, one can also add {{{test}}} prefix which specifies the test files that are copied over to the {{{target_directory}}}. [[BR]]
+Example:
+{{{
+repy_v2/*
+portability/*
+seattlelib_v2/*
+seash/*
+clearinghouse/*
+utf/*
+dist/LICENSE.txt
+# Tests
+test repy_v2/testsV2/*
+test portability/tests/*
+test seash/tests/*
+test seattlelib_v2/tests/*
+test clearinghouse/tests/*
+test utf/tests/*
+}}}
