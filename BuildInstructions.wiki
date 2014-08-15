@@ -112,8 +112,8 @@ affix/components/*
 }}}
 
 
-Within the configuration files, one can add comments on lines prefixed with `#`. [[BR]]
-Within `config_build.txt`, lines starting with `test` specify the test files that are copied over to the target directory if the build script is called in test mode (`build.py -t target_dir`). 
+One can add comments to the configuration files by prefixing lines with `#`. [[BR]]
+Within `config_build.txt`, lines starting with `test ` specify the test files (or file patterns) that are copied over to the target directory if the build script is called in test mode (`build.py -t target_dir`). 
 
 Example:
 {{{
