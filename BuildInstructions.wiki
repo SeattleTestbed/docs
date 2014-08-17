@@ -27,12 +27,13 @@ cd seash/scripts
 python initialize.py
 }}}
 `initialize` Git-clones the dependent repositories into your current working directory. It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
+
 4. Once done with that, you will find two direcotries, namely `dependencies` and `common`. `dependencies` directory contains all the cloned dependencies and `common` directory contains all the common files. Inside `common`, there is the actual build script, `build.py`. Before calling it, you have the option to set up a target folder for the build:
 {{{
 #!sh
 mkdir TARGET_FOLDER
 }}}
-But this is optional step. If you don't setup a target directory, `build.py` will itself create a target folder named `build`.
+But this is optional step. If you don't setup a target directory, `build.py` will itself create a target folder named `build`.[[BR]]
 5. Change directory to `common`, and run the build script. You have option to give it the absolute path to your desired target folder that you created earlier or you can let the build script create `build` folder on its own:[[BR]]
 {{{
 #!sh
