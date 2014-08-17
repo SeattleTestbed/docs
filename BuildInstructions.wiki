@@ -16,7 +16,7 @@ Currently, these components have been set up to be buildable and runnable: `seas
 For example, if you are building [wiki:SeattleShell seash], do: 
 {{{
 #!sh
-$ git clone https://github.com/SeattleTestbed/seash -b new_build_v1
+$ git clone -b new_build_v1 https://github.com/SeattleTestbed/seash
 }}}
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
