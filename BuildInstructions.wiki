@@ -12,11 +12,11 @@ Currently, these components have been set up to be buildable and runnable: `seas
 '''Note:''' Overlord and Experiment Manager are currently being ported to RepyV2 and will not fully work.[[BR]]
 
 
-1. Clone the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. Be sure to check out the `new_build` branch of the repository, as the new build scripts haven't been merged to the master branch yet.[[BR]]
+1. Clone the repository that you want to build from [https://github.com/SeattleTestbed SeattleTestbed]. Be sure to check out the `new_build_v1` branch of the repository, as the new build scripts haven't been merged to the master branch yet.[[BR]]
 For example, if you are building [wiki:SeattleShell seash], do: 
 {{{
 #!sh
-$ git clone https://github.com/SeattleTestbed/seash -b new_build
+$ git clone https://github.com/SeattleTestbed/seash -b new_build_v1
 }}}
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
