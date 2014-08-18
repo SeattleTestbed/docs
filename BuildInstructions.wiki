@@ -35,7 +35,7 @@ mkdir TARGET_FOLDER
 }}}
 If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository.[[BR]]
 
-4. If you haven't implemented the previous optional step, then you don't need to change your current working directory, which is `script/`. Run the `build.py` script as:
+4. If you haven't implemented the previous optional step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build.py` script as:
 {{{
 #!sh
 ./build
@@ -46,7 +46,7 @@ But if you created the target folder earlier (as mentioned in '''Step -3 '''), y
 cd COMPONENT/scripts
 ./build /absolute/path/to/TARGET_FOLDER
 }}}
-'''Note:''' Make sure you change your working directory to `script/` before running `build`.[[BR]]
+'''Note:''' Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
 `build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
 '''Done! ''' Your target folder now contains a runnable version of the component! [[BR]]
