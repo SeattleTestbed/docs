@@ -33,7 +33,7 @@ cd seash/scripts
 #!sh
 mkdir TARGET_FOLDER
 }}}
-If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository.[[BR]]
+If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository `COMPONENT/RUNNABLE`.[[BR]]
 
 4. If you haven't implemented the previous optional step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build.py` script as:
 {{{
@@ -108,7 +108,7 @@ https://github.com/SeattleTestbed/softwareupdater DEPENDENCIES/softwareupdater
 https://github.com/SeattleTestbed/portability DEPENDENCIES/portability
 https://github.com/SeattleTestbed/common DEPENDENCIES/common
 https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release DEPENDENCIES/affix
-https://github.com/SeattleTestbed/clearinghouse dDEPENDENCIES/clearinghouse
+https://github.com/SeattleTestbed/clearinghouse DEPENDENCIES/clearinghouse
 https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release DEPENDENCIES/seash
 https://github.com/SeattleTestbed/resource.git DEPENDENCIES/resource
 }}}
