@@ -20,34 +20,34 @@ $ git clone -b new_build_v1 https://github.com/SeattleTestbed/seash
 }}}
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
-2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize.py` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
+2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
 {{{
 #!sh
 cd seash/scripts
-python initialize.py
+./initialize
 }}}
-`initialize` Git-clones the dependent repositories into your current working directory. It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
+`initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
 
-3. Once done with that, you will find two directories, namely `dependencies` and `common`. `dependencies` directory contains all the cloned dependencies and `common` directory contains all the common files. Inside `common`, there is the actual build script, `build.py`. Before calling it, you have the option to set up a target folder for the build:
+3. Once done with that, you will find `DEPENDENCIES` directory created as a sub-directory inside your main repository. It contains all the cloned dependencies. Inside `DEPENDENCIES`, there is a sub-directory named `common` which contains the actual build script, `build.py`. Before calling it, you have the option to set up a target folder for the build. But this step is '''optional''':
 {{{
 #!sh
 mkdir TARGET_FOLDER
 }}}
-But this is optional step. If you don't setup a target directory, `build.py` will itself create a target folder named `build`.[[BR]]
+If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository.[[BR]]
 
-4. Change directory to `common`, and run the build script. You have option to give it the absolute path to your desired target folder that you created earlier or you can let the build script create `build` folder on its own:[[BR]]
+4. If you haven't implemented the previous optional step, then you don't need to change your current working directory, which is `script/`. Run the `build.py` script as:
 {{{
 #!sh
-cd common
-python build.py /absolute/path/to/TARGET_FOLDER
+./build
 }}}
-or
+But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give it the absolute path to your desired target folder.
 {{{
 #!sh
-cd common
-python build.py
+cd COMPONENT/scripts
+./build /absolute/path/to/TARGET_FOLDER
 }}}
-`build.py` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
+'''Note:''' Make sure you change your working directory to `script/` before running `build`.[[BR]]
+`build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
 '''Done! ''' Your target folder now contains a runnable version of the component! [[BR]]
 
@@ -60,21 +60,21 @@ The steps of the previous section intrinsically downloaded the required unit tes
 {{{
 #!sh
 mkdir TEST_TARGET_DIR
-cd COMPONENT/scripts/dist
-python build.py -t /absolute/path/to/TEST_TARGET_DIR
+cd COMPONENT/scripts
+./build -t 
 }}}
 or
 {{{
 #!sh
 mkdir TEST_TARGET_DIR
 cd COMPONENT/scripts/dist
-python build.py -t 
+./build -t /absolute/path/to/TEST_TARGET_DIR
 }}}
 
-Then, change to the test target directory and start the unit tests:
+Then, change to the test target directory (which will either be `RUNNABLE` or `TEST_TARGET_DIR` of your choice that you created) and start the unit tests:
 {{{
 #!sh
-cd TEST_TARGET_DIR
+cd ../RUNNABLE
 python utf.py -a
 }}}
 
@@ -88,42 +88,42 @@ The unit test framework prints out the test name and result (plus debugging info
 
 == How The Build Process Works ==
 
-The new Seattle build procedure makes use of two scripts, `initialize.py` and `build.py`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
+The new Seattle build procedure makes use of two scripts, `initialize` and `build`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
 
-`config_initialize.txt` provides `initialize.py` with Git links to dependent repositories. `initialize.py` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
+`config_initialize.txt` provides `initialize` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
 
-`config_build.txt` provides `build.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
+`config_build.txt` provides `build` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
 
 A sample `config_initialize.txt` looks like this:
  {{{
 # These are custominstallerbuilder's dependencies. They are essentially 
 # everything that is required to build a Seattle base installer (including 
 # support for RepyV1 and RepyV2, a nodemanager, Affix, and a softwareupdater).
-https://github.com/SeattleTestbed/repy_v1 dependencies/repy_v1
-https://github.com/SeattleTestbed/repy_v2 dependencies/repy_v2
-https://github.com/SeattleTestbed/seattlelib_v1 dependencies/seattlelib_v1
-https://github.com/SeattleTestbed/seattlelib_v2 dependencies/seattlelib_v2
-https://github.com/SeattleTestbed/nodemanager dependencies/nodemanager
-https://github.com/SeattleTestbed/softwareupdater dependencies/softwareupdater
-https://github.com/SeattleTestbed/portability dependencies/portability
-https://github.com/SeattleTestbed/common
-https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release dependencies/affix
-https://github.com/SeattleTestbed/clearinghouse dependencies/clearinghouse
-https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release dependencies/seash
-https://github.com/SeattleTestbed/resource.git dependencies/resource
+https://github.com/SeattleTestbed/repy_v1 DEPENDENCIES/repy_v1
+https://github.com/SeattleTestbed/repy_v2 DEPENDENCIES/repy_v2
+https://github.com/SeattleTestbed/seattlelib_v1 DEPENDENCIES/seattlelib_v1
+https://github.com/SeattleTestbed/seattlelib_v2 DEPENDENCIES/seattlelib_v2
+https://github.com/SeattleTestbed/nodemanager DEPENDENCIES/nodemanager
+https://github.com/SeattleTestbed/softwareupdater DEPENDENCIES/softwareupdater
+https://github.com/SeattleTestbed/portability DEPENDENCIES/portability
+https://github.com/SeattleTestbed/common DEPENDENCIES/common
+https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release DEPENDENCIES/affix
+https://github.com/SeattleTestbed/clearinghouse dDEPENDENCIES/clearinghouse
+https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release DEPENDENCIES/seash
+https://github.com/SeattleTestbed/resource.git DEPENDENCIES/resource
 }}}
 
 Here is the corresponding {{{config_build.txt}}}:
 {{{
 # Build file for the Repy runtime that the custominstallerbuilder requires. 
 # (Essentially identical with repy_v2's config_build.txt).
-dependencies/repy_v2/*
-dependencies/portability/*
-dependencies/seattlelib_v2/*
-dependencies/seash/*
-dependencies/clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
-dependencies/affix/*
-dependencies/affix/components/*
+repy_v2/*
+portability/*
+seattlelib_v2/*
+seash/*
+clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
+affix/*
+affix/components/*
 }}}
 
 
@@ -132,17 +132,13 @@ Within `config_build.txt`, lines starting with `test ` specify the test files (o
 
 Example:
 {{{
-dependencies/repy_v2/*
-dependencies/portability/*
-dependencies/seattlelib_v2/*
-dependencies/seash/*
-dependencies/clearinghouse/*
+repy_v2/*
+portability/*
+seattlelib_v2/*
+seash/*
+clearinghouse/*
 # Tests
-test dependencies/repy_v2/testsV2/*
-test dependencies/portability/tests/*
-test dependencies/seash/tests/*
-test dependencies/seattlelib_v2/tests/*
-test dependencies/clearinghouse/tests/*
+test ../testsV2/*
 }}}
 
 
@@ -152,9 +148,11 @@ The required directory layout for a repository supporting this build method is t
 {{{
 the_component/     # Repo base directory, includes code etc.
 the_component/scripts/
-the_component/scripts/initialize.py
-the_component/scripts/config_build.py
+the_component/scripts/initialize
+the_component/scripts/build
 the_component/scripts/config_initialize.txt
+the_component/scripts/config_build.txt
+the_component/DEPENDENCIES/common/build.py
 }}}
 
-Note that `build.py` is not part of `scripts/`. Running `initialize.py` clones the dependent repositories into `scripts/dependencies` and clones the `common` repository which contains `build.py`.
+'''Note:''' The `/DEPENDENCIES/common/build.py` is not part of `scripts/`. Running `initialize` clones the dependent repositories into `the_component/DEPENDENCIES` and clones the `common` repository which contains `build.py`. You don't have to specially run `build'py`script. The script `the_component/scripts/build` indirectly runs `build.py` and takes care of it.
