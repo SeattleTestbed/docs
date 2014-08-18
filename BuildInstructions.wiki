@@ -40,14 +40,14 @@ If you don't setup a target directory, `build.py` will itself create a target fo
 #!sh
 ./build
 }}}
-But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give it the absolute path to your desired target folder.
+But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give it the absolute path to your desired target folder.[[BR]]
+Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
 {{{
 #!sh
 cd COMPONENT/scripts
 ./build /absolute/path/to/TARGET_FOLDER
 }}}
-'''Note:''' Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
-`build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
+`build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will indirectly call `../DEPENDENCIES/common/build.py` and make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
 '''Done! ''' Your target folder now contains a runnable version of the component! [[BR]]
 
