@@ -55,7 +55,7 @@ $ ./build /absolute/path/to/TARGET_FOLDER
 }}}
 `build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will indirectly call `../DEPENDENCIES/common/build.py` and make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
-'''Done! ''' Your target folder now contains a runnable version of the component![[BR]]
+'''Done! ''' Your target folder now contains a runnable version of the component! [[BR]]
 Target_Folder will either be `COMPONENT/RUNNABLE` or whatever target_directory you passed as an argument to `build`.[[BR]]
 
 
