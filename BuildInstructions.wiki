@@ -29,29 +29,29 @@ Of course, you will want to replace `seash` with the repository name you are int
 2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
 {{{
 #!sh
-cd seash/scripts
-./initialize
+$ cd seash/scripts
+$ ./initialize
 }}}
 `initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
 
-3. Next you have to run `scripts/build` scripts. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
+3. Next you have to run `scripts/build` script. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
 {{{
 #!sh
-mkdir TARGET_FOLDER
+$ mkdir TARGET_FOLDER
 }}}
 If you don't setup a target directory, `build` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
 
 4. If you haven't implemented the previous (optional) step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build` script as:
 {{{
 #!sh
-./build
+$ ./build
 }}}
-But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give the absolute path to your desired target folder.[[BR]]
+But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give the absolute path to your desired target folder as an argument to the `build` script.[[BR]]
 Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
 {{{
 #!sh
-cd COMPONENT/scripts
-./build /absolute/path/to/TARGET_FOLDER
+$ cd COMPONENT/scripts
+$ ./build /absolute/path/to/TARGET_FOLDER
 }}}
 `build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will indirectly call `../DEPENDENCIES/common/build.py` and make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
 
@@ -65,23 +65,23 @@ When making changes to the code (or build scripts!) you will want to ensure that
 The steps of the previous section intrinsically downloaded the required unit test files. You just need to run the build script again to create a ''testable'' build. Use the `-t` command line option to indicate you want the test files to be included:
 {{{
 #!sh
-mkdir TEST_TARGET_DIR
-cd COMPONENT/scripts
-./build -t 
+$ mkdir TEST_TARGET_DIR
+$ cd COMPONENT/scripts
+$ ./build -t 
 }}}
 or
 {{{
 #!sh
-mkdir TEST_TARGET_DIR
-cd COMPONENT/scripts/dist
-./build -t /absolute/path/to/TEST_TARGET_DIR
+$ mkdir TEST_TARGET_DIR
+$ cd COMPONENT/scripts/dist
+$ ./build -t /absolute/path/to/TEST_TARGET_DIR
 }}}
 
 Then, change to the test target directory (which will either be `RUNNABLE` or `TEST_TARGET_DIR` of your choice that you created) and start the unit tests:
 {{{
 #!sh
-cd ../RUNNABLE
-python utf.py -a
+$ cd ../RUNNABLE
+$ python utf.py -a
 }}}
 
 The unit test framework prints out the test name and result (plus debugging information if available), e.g.:
