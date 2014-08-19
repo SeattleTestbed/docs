@@ -18,7 +18,7 @@ For example, if you are building [wiki:SeattleShell seash], do:
 #!sh
 $ git clone -b new_build_v1 https://github.com/SeattleTestbed/seash
 }}}
-If you usually use `SSH` instead of `https` to clone your repos, you can do:
+If you usually use `SSH` instead of `https` to clone your git repos, you can do:
 {{{
 #!sh
 $ git clone -b new_build_v1 git@github.com:SeattleTestbed/seash.git
