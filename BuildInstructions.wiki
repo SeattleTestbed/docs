@@ -41,12 +41,12 @@ $ mkdir TARGET_FOLDER
 }}}
 If you don't setup a target directory, `build` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
 
-4. If you haven't implemented the previous (optional) step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build` script as:
+4. If you haven't implemented the previous (optional) step, then you can run `build` directly from your current working directory, which is `COMPONENT/scripts`:
 {{{
 #!sh
 $ ./build
 }}}
-But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give the absolute path to your desired target folder as an argument to the `build` script.[[BR]]
+If you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to pass the absolute path to your desired target folder as an argument to the `build`.[[BR]]
 Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
 {{{
 #!sh
@@ -94,11 +94,13 @@ The unit test framework prints out the test name and result (plus debugging info
 
 == How The Build Process Works ==
 
-The new Seattle build procedure makes use of two scripts, `initialize` and `build`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
+The new Seattle build procedure makes use of three scripts, `initialize`, `build` and `build.py`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
 
 `config_initialize.txt` provides `initialize` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
 
-`config_build.txt` provides `build` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
+`config_build.txt` provides `build.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
+
+`build` is a shell-script that automates the running of `build.py` from inside the `COMPONENTS/scripts/` directory, so that the users don't need to change their current working directory  to `../DEPENDENCIES/common/` in order to run `build.py`.
 
 A sample `config_initialize.txt` looks like this:
  {{{
