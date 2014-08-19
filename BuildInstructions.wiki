@@ -18,6 +18,12 @@ For example, if you are building [wiki:SeattleShell seash], do:
 #!sh
 $ git clone -b new_build_v1 https://github.com/SeattleTestbed/seash
 }}}
+If you normally use `SSH` instead of `https` to clone your repos, you can do:
+{{{
+#!sh
+$ git clone -b new_build_v1 git@github.com:SeattleTestbed/seash.git
+}}}
+
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
 2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
