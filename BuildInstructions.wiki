@@ -41,7 +41,7 @@ mkdir TARGET_FOLDER
 }}}
 If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
 
-4. If you haven't implemented the previous(optional) step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build` script as:
+4. If you haven't implemented the previous (optional) step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build` script as:
 {{{
 #!sh
 ./build
