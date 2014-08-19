@@ -32,21 +32,21 @@ Of course, you will want to replace `seash` with the repository name you are int
 cd seash/scripts
 ./initialize
 }}}
-`initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
+`initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
 
-3. Once done with that, you will find `DEPENDENCIES` directory created as a sub-directory inside your main repository. It contains all the cloned dependencies. Inside `DEPENDENCIES`, there is a sub-directory named `common` which contains the actual build script, `build.py`. Before calling it, you have the option to set up a target folder for the build. But this step is '''optional''':
+3. Next you have to run `scripts/build` scripts. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
 {{{
 #!sh
 mkdir TARGET_FOLDER
 }}}
-If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
+If you don't setup a target directory, `build` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
 
 4. If you haven't implemented the previous (optional) step, then you don't need to change your current working directory, which is `COMPONENT/scripts`. Run the `build` script as:
 {{{
 #!sh
 ./build
 }}}
-But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give it the absolute path to your desired target folder.[[BR]]
+But if you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to give the absolute path to your desired target folder.[[BR]]
 Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
 {{{
 #!sh
