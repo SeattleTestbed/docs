@@ -161,4 +161,4 @@ the_component/scripts/config_build.txt
 the_component/DEPENDENCIES/common/build.py
 }}}
 
-'''Note:''' The `/DEPENDENCIES/common/build.py` is not part of `scripts/`. Running `initialize` clones the dependent repositories into `the_component/DEPENDENCIES` and clones the `common` repository which contains `build.py`. User don't need to specially run `build.py` script. The script `the_component/scripts/build` indirectly runs `build.py` and takes care of it.
+'''Note:''' The `/DEPENDENCIES/common/build.py` is not part of `scripts/`. Running `initialize` clones the dependent repositories into `the_component/DEPENDENCIES` and clones the `common` repository which contains `build.py`. Users don't need to specially run `build.py` script. The script `the_component/scripts/build` indirectly runs `build.py` and takes care of it.
