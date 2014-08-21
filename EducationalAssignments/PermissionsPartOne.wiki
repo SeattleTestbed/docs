@@ -38,19 +38,25 @@ Here's how to do that. Assuming you are running on a Unixoid OS,
 mkdir SeattleTestbed
 cd SeattleTestbed
 
-# Check out the repos required for building Repy
-git clone https://github.com/SeattleTestbed/dist.git
-git clone https://github.com/SeattleTestbed/repy_v1.git
-git clone https://github.com/SeattleTestbed/repy_v2.git
-git clone https://github.com/SeattleTestbed/seattlelib_v2.git
+# Check out the repository required for building Repy
+git clone -b new_build_v1 https://github.com/SeattleTestbed/repy_v2
 
-# Prepare a build directory, and build into it
+# this will create a directory repy_v2. Go to the scripts folder inside  repy_v2 folder.
+cd repy_v2/scripts
+
+#run initialize.py which is inside scripts folder. This will checkout the required repos and create a new directory dist.
+ python initialize.py
+
+#make a target folder anywhere you want which will contain your runnable components. Now go inside dist and run the build command.
 cd dist
-mkdir ~/path/to/build/dir
-python preparetest.py ~/path/to/build/dir
+python build.py target_folder_path
+
+#go to target directory and save your r2py file in this directory.
+
+
 }}}
 
-(You will see a few warning messages during building, but they can be ignored for the task at hand.) Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+
 ----
 (If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
 ----
