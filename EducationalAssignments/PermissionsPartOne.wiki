@@ -29,10 +29,7 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 === Getting RepyV2 ===
 ----
-The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
-
-----
-The easiest way to do this is to download the sandbox as a [attachment:repyv2_commit_3499642.zip zipfile].  Unzip this and run the files / code from the resulting directory.
+The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip zipfile].  Unzip this and run the files / code from the resulting directory.
 ----
 
 Use the command found below in order to run Repy files:
@@ -48,7 +45,7 @@ In order to test whether or not these steps worked, please copy and paste the co
 
 If you got an error, please go through the trouble shooting section found below.
 
-=== Trouble shooting Repy code ===
+=== Troubleshooting Repy code ===
 If you can't get Repy files to run, some of the following common errors may have occurred:
 
  * using `print` instead of `log`:
