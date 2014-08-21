@@ -31,7 +31,7 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
-Here's how to do that. Assuming you are running on a Unixoid OS,
+Here's how to do that. Assuming you are running on Linux or Mac OS,
 
 {{{
 # Create a directory for the required Git repositories
@@ -316,7 +316,7 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Extra Credit =
 ----
-Remember permissions for files after they are closed andreopened.   This would include situations where your security layer is itself closed and reopened (for example, if the system restarts).   You can assume that all reads must go through your security layer and so you can add an additional file or modify the file format.
+Remember permissions for files after they are closed and reopened.   This would include situations where your security layer is itself closed and reopened (for example, if the system restarts).   You can assume that all reads must go through your security layer and so you can add an additional file or modify the file format.
 
 [[BR]]
 = What to turn in? =
