@@ -61,7 +61,7 @@ Target_Folder will either be `COMPONENT/RUNNABLE` or whatever target_directory y
 
 
 == Building and Running Unit Tests ==
-When making changes to the code (or build scripts!) you will want to ensure that the change does not have side effects or breaks functionality that had been working before. In order to ensure this, most components are ''testable'' and come with a set of ''unit tests'' (''Testable'' components have a `tests` or `test` directory within the repository) .
+When making changes to the code (or build scripts!) you will want to ensure that the change does not have side effects or breaks functionality that had been working before. In order to ensure this, most components are ''testable'' and come with a set of ''unit tests'' (''Testable'' components have `tests` or `test` directory within their repository) .
 
 The steps of the previous section intrinsically downloaded the required unit test files. You just need to run the build script again to create a ''testable'' build. Use the `-t` command line option to indicate you want the test files to be included:
 {{{
