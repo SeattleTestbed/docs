@@ -31,37 +31,9 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
-Here's how to do that. Assuming you are running on Linux or Mac OS,
-
-{{{
-# Create a directory for the required Git repositories
-mkdir SeattleTestbed
-cd SeattleTestbed
-
-# Check out the repository required for building Repy
-git clone -b new_build_v1 https://github.com/SeattleTestbed/repy_v2
-
-# this will create a directory repy_v2. Go to the scripts folder inside  repy_v2 folder.
-cd repy_v2/scripts
-
-#run initialize.py which is inside scripts folder. This will checkout the required repos and create a new directory dist.
- python initialize.py
-
-#make a target folder anywhere you want which will contain your runnable components. Now go inside dist and run the build command.
-cd dist
-python build.py target_folder_path
-
-#go to target directory and save your r2py file in this directory.
-
-
-}}}
-
-
 ----
-(If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
+The easiest way to do this is to download the sandbox as a [attachment:repyv2_commit_3499642.zip zipfile].  Unzip this and run the files / code from the resulting directory.
 ----
-
-
 
 Use the command found below in order to run Repy files:
 
