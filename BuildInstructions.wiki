@@ -74,7 +74,7 @@ or
 {{{
 #!sh
 $ mkdir TEST_TARGET_DIR
-$ cd COMPONENT/scripts/dist
+$ cd COMPONENT/scripts
 $ ./build -t /absolute/path/to/TEST_TARGET_DIR
 }}}
 
