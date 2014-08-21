@@ -57,7 +57,7 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 [[BR]]
 === Examples of tests ===
-Test cases are briefly described in [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne] and [wiki:RepyV2SecurityLayers] and [wiki:EducationalAssignments/PermissionFileSize PermissionFileSize]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described in [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 ==== Test case 1:  ====
 
 {{{
