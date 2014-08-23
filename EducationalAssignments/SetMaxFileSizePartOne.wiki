@@ -10,15 +10,15 @@ This assignment is intended to prepare you for thinking about security paradigms
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a security layer which stops the user from reading data, writing over existing data, or writing new data to the end of a file without having the permission to do so.  You will write five functions: setread, setwrite, setappend, readat, and writeat.  The setread, setwrite, and setappend functions enable and disable read, write, and append permissions, respectively.  The user may have all, some, or none of the permissions enabled at any given time.  By default, these permissions are disabled.  The readat function will allow the user to read data from the file if and only if the user has read permissions.  The writeat function will allow the user to overwrite existing data if and only if write permissions are enabled.  Similarly, the user may append new data to the file if and only if append permissions are enabled.  Attempting to overwrite or append data when the user does not have permissions to do so will result in nothing being written.  If both append and write permissions are disabled when a writeat is called, a ValueError is raised.  You will do this by adding security rules to the functions available for setting the permissions, as well as reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!
+In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. It should raise error if user tries to write at a place which is beyond size limit. If data is to be written then it must occupy the size with in file size limit otherwise the extra data would be automatically truncated. Also if user tries to  write some data which cannt reach the file size then it should set the remaining places on file with 0. You will write setmaxfilesize function which will take file size as parameter and will set it in global variable of security layer.  The readat function will allow the user to read data from the file .  The writeat function will allow the user to write data to file with the above specified conditions. .  You will do this by adding security rules to the functions .Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to overwrite data and append new data in the same write, and has permissions to write, but not append, then the corresponding data would be overwritten, but would stop at the end of the file and would not append anything.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to read data or write data with in file size limit, then it should not stop user from doing it.
 
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write.
 
- * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written without permission, the security is compromised.
+ * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written beyond specified size, the security is compromised.
 
 [[BR]]
 === Getting Python ===
