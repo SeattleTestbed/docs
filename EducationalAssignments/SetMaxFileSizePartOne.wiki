@@ -90,6 +90,7 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
+"""
 This security layer interposes on a textfile and gives it read, write, or append access.
 A user can only read, write, or append to that file when that specific mode is enabled for that file.   Multiple files can be be simultaneously opened and have different modes.
 
@@ -143,6 +144,7 @@ class SecureFile():
     mycontext['read'] = False
     mycontext['write'] = False
     mycontext['append'] = False
+    mycontext['size'] = 0
     # local (per object) reference to the underlying file
     self.file = file
 
@@ -152,21 +154,33 @@ class SecureFile():
   def setwrite(self,enabled):
     mycontext['write'] = enabled
 
-  def setappend(self,enabled):
-    mycontext['append'] = enabled
-
-  def readat(self,bytes,offset):
-    if not mycontext['read']:
-      raise ValueError
-    return self.file.readat(bytes,offset)
+  def setmaxfilesize(self,size):
+    mycontext['size'] = size
 
   def writeat(self,data,offset):
-    if not mycontext['write']:
-      return
-    if not mycontext['append']:
-      return
-    self.file.writeat(data,offset)
+    datalen = len(data)
+    size_after_data = datalen + offset 
+    size_diff = abs(size_after_data - mycontext['size'])
 
+    #raise error if user try to write beyond permitted file size
+    if offset >= mycontext['size']:
+      raise ValueError
+
+    #truncate data if its starting position is within size but data goes beyond permitted file  size
+    elif size_after_data > mycontext['size']:
+      data = data [0:-size_diff]
+      self.file.writeat(data,offset)
+  
+
+    #fill out the remaining places with zeros to make file of required size 
+    elif size_after_data < mycontext['size']:
+      self.file.writeat(data,offset)
+      while size_after_data < mycontext['size']:
+        self.file.writeat("0",size_after_data)
+        size_after_data = size_after_data+1
+
+  def readat(self,bytes,offset):
+    return self.file.readat(bytes,offset)
 
   def close(self):
     return self.file.close()
@@ -175,9 +189,9 @@ sec_file_def = {"obj-type":SecureFile,
                 "name":"SecureFile",
                 "setread":{TYPE:FUNC,ARGS:[bool],EXCP:Exception,RETURN:(type(None)),TARGET:SecureFile.setread},
                 "setwrite":{TYPE:FUNC,ARGS:[bool],EXCP:Exception,RETURN:(type(None)),TARGET:SecureFile.setwrite},
-                "setappend":{TYPE:FUNC,ARGS:[bool],EXCP:Exception,RETURN:(type(None)),TARGET:SecureFile.setappend},
-                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
+                "setmaxfilesize":{TYPE:FUNC,ARGS:[int],EXCP:Exception,RETURN:(type(None)),TARGET:SecureFile.setmaxfilesize},
                 "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,type(None)),TARGET:SecureFile.writeat},
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
                 "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
            }
 
@@ -188,7 +202,6 @@ def secure_openfile(filename, create):
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
 
 secure_dispatch_module()
-
 }}}
 
 === Using the example layer ===
