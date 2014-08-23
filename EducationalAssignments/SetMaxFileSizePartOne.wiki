@@ -90,7 +90,6 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
-"""
 This security layer interposes size restrictions on a textfile.
 The security layer comes into play when a user tries to write data on a text file. There are three cases here:
 
