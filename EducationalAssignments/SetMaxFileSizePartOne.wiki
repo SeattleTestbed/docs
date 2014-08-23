@@ -90,7 +90,6 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
-"""
 This security layer interposes on a textfile and gives it read, write, or append access.
 A user can only read, write, or append to that file when that specific mode is enabled for that file.   Multiple files can be be simultaneously opened and have different modes.
 
@@ -170,7 +169,6 @@ class SecureFile():
     elif size_after_data > mycontext['size']:
       data = data [0:-size_diff]
       self.file.writeat(data,offset)
-  
 
     #fill out the remaining places with zeros to make file of required size 
     elif size_after_data < mycontext['size']:
@@ -178,6 +176,7 @@ class SecureFile():
       while size_after_data < mycontext['size']:
         self.file.writeat("0",size_after_data)
         size_after_data = size_after_data+1
+
 
   def readat(self,bytes,offset):
     return self.file.readat(bytes,offset)
@@ -223,30 +222,25 @@ if "look.txt" in listfiles():
   removefile("look.txt")
 myfile=openfile("look.txt",True)  #Open a file
 
-#Write some data to file
-myfile.setread(True)
-myfile.setwrite(True)
-myfile.setappend(True)
-myfile.writeat("This is secure",0)
 
-# This read is in the region written by writeat and should not be blocked...
-x=myfile.readat(14,0)
-log(x)
+#set maximum file size allowed to 10
+myfile.setmaxfilesize(10)
 
-#Try to overwrite data without permissions
-myfile.setwrite(False)
-myfile.writeat("SECURITY",8)   # no exception because append is allowed...   (seems odd)
-y=myfile.readat(16,0)
-if y == "This is secureTY":
-  #If security layer successful, this should pass
-  pass
-else:
-  #If security layer fails
-  log("Data compromised!")
+# this should write "test" to file and fill zero till file size
+myfile.writeat("test",0)
+data = myfile.readat(None,0)
+log("data on file: " + data + "\n")
+
+
+#the following writeat should write data till file size is 10 and truncate the remaining data because data size is greater than allowed max size 
+myfile.writeat("abcdnvnlvfjdkgjfdlkj",1)
+data = myfile.readat(None,0)
+log("data on file now: " + data + "\n")
+
+#if we set the offset to 10 then it should raise error. User can try that too
 
 #Close the file
-myfile.close()
-}}}
+myfile.close()}}}
 
 '''Note:''' All attacks should be written as Repy files, using the .r2py extension.
 
