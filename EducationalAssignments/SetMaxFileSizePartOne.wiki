@@ -10,7 +10,7 @@ This assignment is intended to prepare you for thinking about security paradigms
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. It should raise error if user tries to write at a place which is beyond size limit. If data is to be written then it must occupy the size with in file size limit otherwise the extra data would be automatically truncated. Also if user tries to  write some data which cannt reach the file size then it should set the remaining places on file with 0. You will write setmaxfilesize function which will take file size as parameter and will set it in global variable of security layer.  The readat function will allow the user to read data from the file .  The writeat function will allow the user to write data to file with the above specified conditions. .  You will do this by adding security rules to the functions .Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!
+In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. It should raise error if user tries to write at a place which is beyond size limit. If data is to be written then it must occupy the size with in file size limit otherwise the extra data should be automatically truncated. Also if user tries to  write some data which cannot reach the file size then it should set the remaining places on file with 0. You will write setmaxfilesize() function which will take file size as parameter and will set it in global variable of security layer.  The readat() function will allow the user to read data from the file .  The writeat() function will allow the user to write data to file with the above specified conditions. .  You will do this by adding security rules to the functions .Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -95,7 +95,7 @@ The security layer comes into play when a user tries to write data on a text fil
 
 - If data on file goes beyond the permitted file size, then extra data would be truncated and remaining would be written on file
 - If data to be written is less than the size specified, then "0"s would be written till file is of specified size
-- If someone tries to write at the place of specified size, an error would be raised
+- If someone tries to write at the place of specified size, an error would be raised. For example if the permitted file size is 10 and someone tries to write on file with offset 10 or larger then it                will raise raise error
 
 
 For efficiency purposes, you *MUST NOT* call readat inside of writeat.   It
