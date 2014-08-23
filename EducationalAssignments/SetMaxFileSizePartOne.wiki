@@ -90,34 +90,17 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
-This security layer interposes on a textfile and gives it read, write, or append access.
-A user can only read, write, or append to that file when that specific mode is enabled for that file.   Multiple files can be be simultaneously opened and have different modes.
+This security layer interposes size restrictions on a textfile.
+The security layer comes into play when a user tries to write data on a text file. There are three cases here:
 
-Read-only: You may read the contents of a file, but not write or append.
-If you attempt to read when read mode is disabled, a ValueError is raised.
+- If data on file goes beyond the permitted file size, then extra data would be truncated and remaining would be written on file
+- If data to be written is less than the size specified, then "0"s would be written till file is of specified size
+- If someone tries to write at the place of specified size, an error would be raised
 
-Write-only: You may overwrite the contents of a file, but not append to the file.
-If you attempt to do so, the file should be overwritten to the length of the file, and then writing stops.
-
-Append-only: You may append data to the end of the file, but not overwrite 
-anything that is already written.   If a write starts before the end of the
-file, but continues afterward, only the data after the current end of
-file should be written.
-
-More than one mode may be enabled at once, e.g. Write and Append allows you to overwrite existing file data and append data to the end of the file.
-
-writeat must return a ValueError if and only if both write and append are 
-blocked.  readat must return a value error if and only if read is blocked.   
 
 For efficiency purposes, you *MUST NOT* call readat inside of writeat.   It
 is fine to call readat during file open if desired.
 
-
-Extra credit (?): remember permissions for files after they are closed and
-reopened.   This would include situations where your security layer is itself
-closed and reopened (for example, if the system restarts).   You can assume
-that all reads must go through your security layer and so you can add an 
-additional file or modify the file format.
 
 Note:
     This security layer uses encasementlib.r2py, restrictions.default, repy.py and Python
@@ -169,14 +152,15 @@ class SecureFile():
     elif size_after_data > mycontext['size']:
       data = data [0:-size_diff]
       self.file.writeat(data,offset)
+  
 
     #fill out the remaining places with zeros to make file of required size 
     elif size_after_data < mycontext['size']:
+      log("size is less\n")
       self.file.writeat(data,offset)
       while size_after_data < mycontext['size']:
         self.file.writeat("0",size_after_data)
         size_after_data = size_after_data+1
-
 
   def readat(self,bytes,offset):
     return self.file.readat(bytes,offset)
@@ -201,6 +185,7 @@ def secure_openfile(filename, create):
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
 
 secure_dispatch_module()
+
 }}}
 
 === Using the example layer ===
