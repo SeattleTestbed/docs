@@ -240,7 +240,8 @@ log("data on file now: " + data + "\n")
 #if we set the offset to 10 then it should raise error. User can try that too
 
 #Close the file
-myfile.close()}}}
+myfile.close()
+}}}
 
 '''Note:''' All attacks should be written as Repy files, using the .r2py extension.
 
