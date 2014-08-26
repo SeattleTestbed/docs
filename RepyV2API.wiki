@@ -385,7 +385,7 @@ Receives data that was sent by the connected party using send.   Note that this 
         requested.   
 
       <Arguments>
-        bytes: 
+        numbytes: 
            The maximum number of bytes to read; must be at least 1.
 
       <Exceptions>
