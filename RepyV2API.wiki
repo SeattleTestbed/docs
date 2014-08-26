@@ -376,7 +376,7 @@ Closes the socket.   Any further local calls to recv / send will result in an ex
 [[BR]] 
 ===== socket.recv(numbytes) =====
 ----
-Receives data that was sent by the connected party using send.   Note that this may return less than numbytes worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the other party who calls recv may get 'helloGuten Tag', 'h', or any other subset of the total data.   
+Receives data that was sent by the connected party using send.   Note that this may return less than `numbytes` worth of data.   Also, note that if the other party does {{{s.send('hello'); s.send('Guten Tag')}}}, the party who calls recv may get `'helloGuten Tag'`, `'h'`, or any other subset of the total data.   
 
  * Doc string:
 
@@ -386,7 +386,7 @@ Receives data that was sent by the connected party using send.   Note that this 
 
       <Arguments>
         bytes: 
-           The maximum number of bytes to read.   
+           The maximum number of bytes to read; must be at least 1.
 
       <Exceptions>
         !SocketClosedLocal is raised if the socket was closed locally.
@@ -394,6 +394,8 @@ Receives data that was sent by the connected party using send.   Note that this 
         !SocketClosedRemote is raised if the socket was closed remotely.
 
         !SocketWouldBlockError is raised if the socket operation would block.
+
+        !RepyArgumentError if `numbytes` is less than 1.
 
       <Side Effects>
         None.
