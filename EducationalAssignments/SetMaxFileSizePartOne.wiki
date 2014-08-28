@@ -151,7 +151,7 @@ def secure_openfile(filename, create):
 # The code here sets up type checking and variable hiding for you.  You should not need to change anything below here.
 sec_file_def = {"obj-type":SecureFile,
                 "name":"SecureFile",
-                "setmaxfilesize":{"type":"func","args":[int],"exceptions":Exception,"return":(type(None)),"target":SecureFile.setmaxfilesize},
+                "setmaxfilesize":{"type":"func","args":(int,long),"exceptions":Exception,"return":(type(None)),"target":SecureFile.setmaxfilesize},
                 "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(int,type(None)),"target":SecureFile.writeat},
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
                 "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
