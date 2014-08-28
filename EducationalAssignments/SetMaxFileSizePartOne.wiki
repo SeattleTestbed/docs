@@ -113,7 +113,6 @@ Note:
     """ 
 
 
-
 class SecureFile():
   def __init__(self,file):
     # globals
@@ -134,20 +133,9 @@ class SecureFile():
     if offset >= mycontext['size']:
       raise ValueError
 
-    #truncate data if its starting position is within size but data goes beyond permitted file  size
-    elif size_after_data > mycontext['size']:
-      data = data [0:-size_diff]
-      self.file.writeat(data,offset)
+    # Write the requested data to the file using the sandbox's writeat call
+    self.file.writeat(data,offset)
   
-
-    #fill out the remaining places with zeros to make file of required size 
-    elif size_after_data < mycontext['size']:
-      log("size is less\n")
-      self.file.writeat(data,offset)
-      while size_after_data < mycontext['size']:
-        self.file.writeat("0",size_after_data)
-        size_after_data = size_after_data+1
-
   def readat(self,bytes,offset):
     return self.file.readat(bytes,offset)
 
