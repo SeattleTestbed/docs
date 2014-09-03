@@ -93,7 +93,7 @@ python initialize.py
     * Deploy all necessary files to a directory of your choice. (We'll use `/tmp/TARGET` in these instructions.) The directory you deploy to should be the name of a directory that does not yet exist. For example:
 {{{
 #!sh 
-python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
+python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
 }}} 
     (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
 
@@ -101,7 +101,7 @@ python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
 {{{
 #!sh
 mkdir /tmp/TARGET/seattle
-cd clearinghouse/scripts/dist
+cd clearinghouse/scripts/common
 python build.py /tmp/TARGET/seattle   # Use absolute target path!
 }}}
 
