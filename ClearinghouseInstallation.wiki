@@ -86,7 +86,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
     * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
-git clone https://github.com/aaaaalbert/clearinghouse.git
+git clone https://github.com/aaaaalbert/clearinghouse.git -b make-github-aware-#134
 cd clearinghouse/scripts
 python initialize.py
 }}}
