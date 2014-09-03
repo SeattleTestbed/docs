@@ -108,18 +108,18 @@ A sample `config_initialize.txt` looks like this:
 # These are custominstallerbuilder's dependencies. They are essentially 
 # everything that is required to build a Seattle base installer (including 
 # support for RepyV1 and RepyV2, a nodemanager, Affix, and a softwareupdater).
-https://github.com/SeattleTestbed/repy_v1 DEPENDENCIES/repy_v1
-https://github.com/SeattleTestbed/repy_v2 DEPENDENCIES/repy_v2
-https://github.com/SeattleTestbed/seattlelib_v1 DEPENDENCIES/seattlelib_v1
-https://github.com/SeattleTestbed/seattlelib_v2 DEPENDENCIES/seattlelib_v2
-https://github.com/SeattleTestbed/nodemanager DEPENDENCIES/nodemanager
-https://github.com/SeattleTestbed/softwareupdater DEPENDENCIES/softwareupdater
-https://github.com/SeattleTestbed/portability DEPENDENCIES/portability
-https://github.com/SeattleTestbed/common DEPENDENCIES/common
-https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release DEPENDENCIES/affix
-https://github.com/SeattleTestbed/clearinghouse DEPENDENCIES/clearinghouse
-https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release DEPENDENCIES/seash
-https://github.com/SeattleTestbed/resource.git DEPENDENCIES/resource
+https://github.com/SeattleTestbed/repy_v1 ../DEPENDENCIES/repy_v1
+https://github.com/SeattleTestbed/repy_v2 ../DEPENDENCIES/repy_v2
+https://github.com/SeattleTestbed/seattlelib_v1 ../DEPENDENCIES/seattlelib_v1
+https://github.com/SeattleTestbed/seattlelib_v2 ../DEPENDENCIES/seattlelib_v2
+https://github.com/SeattleTestbed/nodemanager ../DEPENDENCIES/nodemanager
+https://github.com/SeattleTestbed/softwareupdater ../DEPENDENCIES/softwareupdater
+https://github.com/SeattleTestbed/portability ../DEPENDENCIES/portability
+https://github.com/SeattleTestbed/common ../DEPENDENCIES/common
+https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release ../DEPENDENCIES/affix
+https://github.com/SeattleTestbed/clearinghouse ../DEPENDENCIES/clearinghouse
+https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release ../DEPENDENCIES/seash
+https://github.com/SeattleTestbed/resource.git ../DEPENDENCIES/resource
 }}}
 
 Here is the corresponding {{{config_build.txt}}}:
