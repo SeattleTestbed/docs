@@ -105,13 +105,6 @@ cd clearinghouse/DEPENDENCIES/common
 python build.py /tmp/TARGET/seattle   # Use absolute target path!
 }}}
 
-
-    * Add an empty file `__init__.py` to the Repy runtime so that Django will be able to import it correctly:
-{{{
-#!sh
-touch /tmp/TARGET/seattle/__init__.py
-}}}
-
     * Change to the `clearinghouse` directory that is in the directory you deployed
       to. For example:
 {{{
