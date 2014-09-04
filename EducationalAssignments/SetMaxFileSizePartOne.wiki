@@ -254,9 +254,8 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second security layer which stops an attacker from writing 'p0wnd' anywhere in a file.  This security layer will be similar to the first one you wrote, except now you must handle the case of `offset != 0` as well as a few other things.  You should also write an attack layer which attempts to write 'p0wnd' to a file.  
-
-'''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
+For extra credit, make a second security layer which automatically sets a file to specified size when it is closed and reopened. For example, a file is opened and has size 10. The size specified is 4 before it was opened. Now it is closed. When the file is reopened, it should be of size 4 then. This security layer will be similar to the first one you wrote.  You should also write an attack layer which attempts to reopen a file without any change to file size. Do not submit this code inside your assignment. Submit a separate copy for extra credit. 
+ 
 [[BR]]
 
 = What to turn in? =
