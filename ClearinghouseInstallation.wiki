@@ -101,7 +101,7 @@ python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
 {{{
 #!sh
 mkdir /tmp/TARGET/seattle
-cd clearinghouse/scripts/common
+cd clearinghouse/DEPENDENCIES/common
 python build.py /tmp/TARGET/seattle   # Use absolute target path!
 }}}
 
