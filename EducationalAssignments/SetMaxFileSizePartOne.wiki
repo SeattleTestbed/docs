@@ -251,6 +251,13 @@ Make sure you went through the "How to get RepyV2" section!
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
+[[BR]]
+= Extra Credit =
+----
+For extra credit, make a second security layer which stops an attacker from writing 'p0wnd' anywhere in a file.  This security layer will be similar to the first one you wrote, except now you must handle the case of `offset != 0` as well as a few other things.  You should also write an attack layer which attempts to write 'p0wnd' to a file.  
+
+'''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
+[[BR]]
 
 = What to turn in? =
 ----
