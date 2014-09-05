@@ -254,7 +254,7 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second security layer which automatically sets a file to specified size when it is closed and reopened. For example, a file is opened and has size 10. The size specified is 4 before it was opened. Now it is closed. When the file is reopened, it should be of size 4 then. This security layer will be similar to the first one you wrote.  You should also write an attack layer which attempts to reopen a file without any change to file size. Do not submit this code inside your assignment. Submit a separate copy for extra credit. 
+For extra credit, make a second security layer which retains its specified size even if it is closed after setting size and reopened again. For example, We have specified size 10 for a file and it is closed. now someone opens the file and tries to write it so that its size becomes larger than 10. The security layer shouldn't allow it. It should imply all the restrictions even after reopening that we had set for this file before being closed. You should also write an attack program which tries to change the file size after it is reopened. Do not submit this code inside your assignment. Submit a separate copy for extra credit. 
  
 [[BR]]
 
