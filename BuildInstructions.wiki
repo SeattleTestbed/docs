@@ -26,7 +26,7 @@ $ git clone -b new_build_v1 git@github.com:SeattleTestbed/seash.git
 
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
-2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize.py` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
+2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts/` folder which in turn contains a script called `initialize.py` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
 {{{
 #!sh
 $ cd seash/scripts
