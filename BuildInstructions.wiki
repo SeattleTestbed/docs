@@ -26,34 +26,34 @@ $ git clone -b new_build_v1 git@github.com:SeattleTestbed/seash.git
 
 Of course, you will want to replace `seash` with the repository name you are interested in.
 
-2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
+2. This yields a folder named like the repository you cloned. Inside of it, there is a `scripts` folder which in turn contains a script called `initialize.py` to fetch the dependencies of this component. Continuing with our example `seash`:[[BR]]
 {{{
 #!sh
 $ cd seash/scripts
-$ ./initialize
+$ python initialize.py
 }}}
 `initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
 
-3. Next you have to run `scripts/build` script. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
+3. Next you have to run `scripts/build.py` script. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
 {{{
 #!sh
 $ mkdir TARGET_FOLDER
 }}}
-If you don't setup a target directory, `build` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
+If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
 
-4. If you haven't implemented the previous (optional) step, then you can run `build` directly from your current working directory, which is `COMPONENT/scripts`:
+4. If you haven't implemented the previous (optional) step, then you can execute `build.py` directly from your current working directory, which is `COMPONENT/scripts`:
 {{{
 #!sh
-$ ./build
+$ python build.py
 }}}
 If you created the target folder earlier (as mentioned in '''Step -3 '''), you have the option to pass the absolute path to your desired target folder as an argument to the `build`.[[BR]]
-Make sure you change your working directory to `COMPONENT/scripts` before running `build`.[[BR]]
+Make sure you change your working directory to `COMPONENT/scripts` before running `build.py`.[[BR]]
 {{{
 #!sh
 $ cd COMPONENT/scripts
-$ ./build /absolute/path/to/TARGET_FOLDER
+$ python build.py absolute/path/to/TARGET_FOLDER
 }}}
-`build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will indirectly call `../DEPENDENCIES/common/build.py` and make use of 'config_build.txt' in order to fetch the list of files and directories to copy to target.[[BR]]
+`build` will copy all the files necessary to build the particular Seattle Component into the target directory. It will indirectly call `../DEPENDENCIES/common/build_component.py` and make use of `config_build.txt` in order to fetch the list of files and directories to copy to target.[[BR]]
 
 '''Done! ''' Your target folder now contains a runnable version of the component! [[BR]]
 Target_Folder will either be `COMPONENT/RUNNABLE` or whatever target_directory you passed as an argument to `build`.[[BR]]
@@ -68,14 +68,14 @@ The steps of the previous section intrinsically downloaded the required unit tes
 #!sh
 $ mkdir TEST_TARGET_DIR
 $ cd COMPONENT/scripts
-$ ./build -t 
+$ python build.py -t 
 }}}
 or
 {{{
 #!sh
 $ mkdir TEST_TARGET_DIR
 $ cd COMPONENT/scripts
-$ ./build -t /absolute/path/to/TEST_TARGET_DIR
+$ python build.py -t absolute/path/to/TEST_TARGET_DIR
 }}}
 
 Then, change to the test target directory (which will either be `RUNNABLE` or `TEST_TARGET_DIR` of your choice that you created) and start the unit tests:
@@ -97,11 +97,11 @@ The unit test framework prints out the test name and result (plus debugging info
 
 The new Seattle build procedure makes use of three scripts, `initialize`, `build` and `build.py`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
 
-`config_initialize.txt` provides `initialize` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
+`config_initialize.txt` provides `initialize.py` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
 
-`config_build.txt` provides `build.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
+`config_build.txt` provides `build_component.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
 
-`build` is a shell-script that automates the running of `build.py` from inside the `COMPONENTS/scripts/` directory, so that the users don't need to change their current working directory  to `../DEPENDENCIES/common/` in order to run `build.py`.
+`build` is a wrapper-script that automates the running of `build_component.py` from inside the `COMPONENTS/scripts/` directory, so that the users don't need to change their current working directory  to `../DEPENDENCIES/common/` in order to run `build.py`.
 
 A sample `config_initialize.txt` looks like this:
  {{{
@@ -126,13 +126,13 @@ Here is the corresponding {{{config_build.txt}}}:
 {{{
 # Build file for the Repy runtime that the custominstallerbuilder requires. 
 # (Essentially identical with repy_v2's config_build.txt).
-repy_v2/*
-portability/*
-seattlelib_v2/*
-seash/*
-clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
-affix/*
-affix/components/*
+DEPENDENCIES/repy_v2/*
+DEPENDENCIES/portability/*
+DEPENDENCIES/seattlelib_v2/*
+DEPENDENCIES/seash/*
+DEPENDENCIES/clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
+DEPENDENCIES/affix/*
+DEPENDENCIES/affix/components/*
 }}}
 
 
@@ -141,13 +141,13 @@ Within `config_build.txt`, lines starting with `test ` specify the test files (o
 
 Example:
 {{{
-repy_v2/*
-portability/*
-seattlelib_v2/*
-seash/*
-clearinghouse/*
+DEPENDENCIES/repy_v2/*
+DEPENDENCIES/portability/*
+DEPENDENCIES/seattlelib_v2/*
+DEPENDENCIES/seash/*
+DEPENDENCIES/clearinghouse/*
 # Tests
-test ../testsV2/*
+test testsV2/*
 }}}
 
 
@@ -157,11 +157,11 @@ The required directory layout for a repository supporting this build method is t
 {{{
 the_component/     # Repo base directory, includes code etc.
 the_component/scripts/
-the_component/scripts/initialize
-the_component/scripts/build
+the_component/scripts/initialize.py
+the_component/scripts/build.py
 the_component/scripts/config_initialize.txt
 the_component/scripts/config_build.txt
-the_component/DEPENDENCIES/common/build.py
+the_component/DEPENDENCIES/common/build_component.py
 }}}
 
-'''Note:''' The `/DEPENDENCIES/common/build.py` is not part of `scripts/`. Running `initialize` clones the dependent repositories into `the_component/DEPENDENCIES` and one of these cloned dependencies is `common` which contains `build.py`. Users don't need to manually run `build.py` script. The script `the_component/scripts/build` indirectly runs `build.py` and takes care of it.
+'''Note:''' The `DEPENDENCIES/common/build_component.py` is not part of `scripts/`. Running `initialize.py` clones the dependent repositories into `the_component/DEPENDENCIES/` and one of these cloned dependencies is `common` which contains `build_component.py`. Users don't need to manually run `build_component.py` script. The script `scripts/build.py` indirectly runs `build_component.py` and takes care of it.
