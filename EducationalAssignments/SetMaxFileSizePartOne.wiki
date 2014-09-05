@@ -93,10 +93,10 @@ Time to start coding!  Let's inspect a basic security layer.
 """
 This security layer interposes size restrictions on a textfile.
 The security layer comes into play when a user tries to write data on a text file. There are three cases here:
-
-- If data on file goes beyond the permitted file size, then extra data would be truncated and remaining would be written on file
+- If file is already larger than size then truncate it.
+- If data on file goes beyond the permitted file size during write operation on file, then extra data would be truncated and remaining would be written on file
 - If data to be written is less than the size specified, then "0"s would be written till file is of specified size
-- If someone tries to write at the place of specified size, an error would be raised. For example if the permitted file size is 10 and someone tries to write on file with offset 10 or larger then it will raise an error
+- If someone tries to write on or after the place of specified size, an error would be raised. For example if the permitted file size is 10 and someone tries to write on file with offset 10 or larger then it will raise an error
 
 
 
