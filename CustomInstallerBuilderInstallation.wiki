@@ -65,7 +65,7 @@ $ cd scripts   # Part of said repo
 $ python initialize.py
 }}}
 
-This goes and clones additional repositories that are required for building installers into the `scripts` dir.
+This goes and clones additional repositories that are required for building installers into the directory `../DEPENDENCIES`.
 
 
 
@@ -75,7 +75,6 @@ The Custom Installer Builder uses Repy for some of its functionality. Create a R
 {{{
 #!sh
 $ # While still in the scripts/ directory
-$ cd dist
 $ mkdir ~/custominstallerbuilder/repy_runtime
 $ python build.py ~/custominstallerbuilder/repy_runtime
 }}}
