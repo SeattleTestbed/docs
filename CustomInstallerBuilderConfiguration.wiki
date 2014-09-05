@@ -51,7 +51,7 @@ Save the file, and you are done with configuring Django for your Custom Installe
 
 
 == Adapt the build scripts ==
-Go to the `custominstallerbuilder/scripts/` directory again. In the `dist` subdir, edit `rebuild_base_installers_for_seattlegeni.sh` to match your local configuration.
+Go to the `custominstallerbuilder/DEPENDENCIES/dist` directory. Edit `rebuild_base_installers_for_seattlegeni.sh` to match your local configuration.
 
 Adapt the file names (including full paths) to your softwareupdater's public and private keys:
 {{{
@@ -60,7 +60,12 @@ PUBLIC_KEY_FILE=/path/to/publickey
 PRIVATE_KEY_FILE=/path/to/privatekey
 }}}
 
-You can generate a keypair in the correct format from [https://seattleclearinghouse.poly.edu/html/profile]( https://seattleclearinghouse.poly.edu/html/profile) using  your (or creating a new) user account, or alternatively use the program `seash.py` from the `repy_runtime` directory previously generated for this:
+{{{
+#!comment 
+           Use softwareupdater/generate_keys.py instead?????
+}}}
+
+You can generate a keypair in the correct format from [https://seattleclearinghouse.poly.edu/html/profile]( https://seattleclearinghouse.poly.edu/html/profile) using your (or creating a new) user account, or alternatively use the program `seash.py` from the `repy_runtime` directory previously generated for this:
 {{{
 #!sh
 cd ~/custominstallerbuilder/repy_runtime
