@@ -44,7 +44,7 @@ Of course, you will want to replace `seash` with the repository name you are int
 $ cd seash/scripts
 $ python initialize.py
 }}}
-`initialize` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository . It will make use of `config_initialize.txt` to fetch the list of dependencies.[[BR]]
+`initialize.py` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository. It takes its instructions from `config_initialize.txt` to fetch the list of dependencies.[[BR]]
 
 3. Next you have to run `scripts/build.py` script. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
 {{{
