@@ -86,7 +86,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
     * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
-git clone https://github.com/aaaaalbert/clearinghouse.git -b make-github-aware-#134
+git clone https://github.com/SeattleTestbed/clearinghouse.git
 cd clearinghouse/scripts
 python initialize.py
 }}}
@@ -100,9 +100,9 @@ python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
 #!sh
-mkdir /tmp/TARGET/seattle
-cd clearinghouse/DEPENDENCIES/common
-python build.py /tmp/TARGET/seattle   # Use absolute target path!
+mkdir /tmp/TARGET
+cd clearinghouse/scripts
+python build.py /tmp/TARGET
 }}}
 
     * Change to the `clearinghouse` directory that is in the directory you deployed
