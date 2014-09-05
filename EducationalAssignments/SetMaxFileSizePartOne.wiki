@@ -10,7 +10,7 @@ This assignment is intended to reinforce concepts about access control and refer
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and will set it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since Repy V2 does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location past the end of the file size limit, a ValueError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data discarded.
+In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and will set it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since Repy V2 does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location past the end of the file size limit, a !ValueError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data discarded.
 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
@@ -247,7 +247,7 @@ Make sure you went through the "How to get RepyV2" section!
 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
 
-'''Your security layer should produce no output!! '''If it encounters an attempt to read the secure data, you should raise a ValueError exception and allow execution to continue.
+'''Your security layer should produce no output!! '''If it encounters an attempt to read the secure data, you should raise a !ValueError exception and allow execution to continue.
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
@@ -261,6 +261,6 @@ For extra credit, make a second security layer which retains its specified size 
 = What to turn in? =
 ----
 
- * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a ValueError if the calls should be blocked, but never, ever call log() to output information.   Never raise unexpected errors.
+ * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a !ValueError if the calls should be blocked, but never, ever call log() to output information.   Never raise unexpected errors.
 
  * For extra credit turn in a second repy file called extra_credit_[polyusername].r2py
