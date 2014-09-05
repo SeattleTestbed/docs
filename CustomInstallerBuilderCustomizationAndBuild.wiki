@@ -18,7 +18,7 @@ A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) are fine.
 == Check softwareupdater URL and key pair ==
 Remember the public/private key pair whose filenames and paths you [wiki:CustomInstallerBuilderConfiguration#Adaptthebuildscripts configured] in the build script? In order for your installers to be able to validate updates that you push, the `softwareupdater` component must include your (or your update site's) public key.
 
-For this, change into the `softwareupdater` subdir of `custominstallerbuilder/scripts/` and edit `softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first int of your public key, and the value of key `'n'` with the second.
+For this, change into the `softwareupdater` subdir of `custominstallerbuilder/DEPENDENCIES/` and edit `softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first int of your public key, and the value of key `'n'` with the second.
 
 Furthermore, change the line starting with `softwareurl = ` to contain your softwareupdater's URL.
 
