@@ -7,10 +7,12 @@ This page guides you through building the components of [https://github.com/Seat
 
 == Prerequisites ==
 Before you begin, make sure that you have the following pieces of software on your computer:
- * [https://www.python.org/downloads/ Python 2.5, 2.6, or 2.7]. ''Note: Please check your Python version! We don't support Python 3 at the moment.''
+ * [https://www.python.org/downloads/ Python 2.5, 2.6, or 2.7].
  * [http://www.git-scm.com/download Git 1.7] (or later)
 
 Many operating systems (such as Linux and Mac OS X) ship with these installed.
+
+''Note: Please double-check your Python version! We don't support Python 3 at the moment.''
 
 
 
