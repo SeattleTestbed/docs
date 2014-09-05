@@ -30,7 +30,7 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 === Getting RepyV2 ===
 ----
-The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip zipfile].  Unzip this and run the files / code from the resulting directory.
+The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne zipfile].  Unzip this and run the files / code from the resulting directory.
 ----
 
 Use the command found below in order to run Repy files:
