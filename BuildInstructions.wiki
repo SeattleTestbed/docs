@@ -46,12 +46,13 @@ $ python initialize.py
 }}}
 `initialize.py` Git-clones the dependent repositories into `DEPENDENCIES` directory which will be created as a sub-directory inside your main repository. It takes its instructions from `config_initialize.txt` to fetch the dependencies.[[BR]]
 
-3. Next you have to run `scripts/build.py` script. But before you do that, you have the option to set up a target folder for the build. But this step is '''optional''':
+3. To build a runnable component from the source dependencies, run the `scripts/build.py` script. You may supply it an optional target folder for the build (which must be created first):
 {{{
 #!sh
 $ mkdir TARGET_FOLDER
+$ python build.py full/path/to/TARGET_FOLDER
 }}}
-If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside your main repository (`COMPONENT/RUNNABLE`).[[BR]]
+If you don't setup a target directory, `build.py` will itself create a target folder named `RUNNABLE` which will be a sub-directory inside the component's main repository, e.g. `seash/RUNNABLE`.[[BR]]
 
 4. If you haven't implemented the previous (optional) step, then you can execute `build.py` directly from your current working directory, which is `COMPONENT/scripts`:
 {{{
