@@ -5,6 +5,15 @@ This page guides you through building the components of [https://github.com/Seat
 [[TOC(inline)]]
 ----
 
+== Prerequisites ==
+Before you begin, make sure that you have the following pieces of software on your computer:
+ * [https://www.python.org/downloads/ Python 2.5, 2.6, or 2.7]. 'Note: Please check your Python version! We don't support Python 3 at the moment.'
+ * [http://www.git-scm.com/download Git 1.7] (or later)
+
+Many operating systems (such as Linux and Mac OS X) ship with these installed.
+
+
+
 == Building components ==
 This section describes how to build components from their source repositories on [https://github.com/SeattleTestbed GitHub].
 Currently, these components have been set up to be buildable and runnable: `seash`, `repy_v2`, `overlord`, and `experimentmanager`. The other components can be built for unit test mode (see below).
