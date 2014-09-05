@@ -17,8 +17,9 @@ Many operating systems (such as Linux and Mac OS X) ship with these installed.
 
 
 == Building components ==
-This section describes how to build components from their source repositories on [https://github.com/SeattleTestbed GitHub].
-Currently, these components have been set up to be buildable and runnable: `seash`, `repy_v2`, `overlord`, and `experimentmanager`. The other components can be built for unit test mode (see below).
+This section describes how to build components from their source repositories on [https://github.com/SeattleTestbed GitHub], using the command line. We'll use a Unix-like system throughout our examples.
+
+Currently, components that have been set up to be buildable and runnable are `seash`, `repy_v2`, `overlord`, and `experimentmanager`. The other components can be built for unit test mode (see below).
 
 '''Note:''' Overlord and Experiment Manager are currently being ported to RepyV2 and will not fully work.[[BR]]
 
