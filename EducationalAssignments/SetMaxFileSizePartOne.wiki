@@ -91,17 +91,9 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
-This security layer interposes size restrictions on a textfile.
-The security layer comes into play when a user tries to write data on a text file. There are three cases here:
-- If file is already larger than size then truncate it.
-- If data on file goes beyond the permitted file size during write operation on file, then extra data would be truncated and remaining would be written on file
-- If data to be written is less than the size specified, then "0"s would be written till file is of specified size
-- If someone tries to write on or after the place of specified size, an error would be raised. For example if the permitted file size is 10 and someone tries to write on file with offset 10 or larger then it will raise an error
+This security layer interposes size restrictions on a file.  If a call is made to setmaxfilesize, the file must not be allowed to grow larger than the specified value.  If a user tries to write that starts before the end of file and extends past the allowed size, bytes past the allowed size are discarded.  If a write starts at or past the
+allowed size, a SeekPastEndOfFileError must be raised.  If a file already contains more than the maximum file size bytes when the call is made, the file must be truncated so that it is of the appropriate size. 
 
-
-
-For efficiency purposes, you *MUST NOT* call readat inside of writeat or inside of setmaxfilesize.   It
-is fine to call readat during file open if desired.
 
 
 Note:
@@ -147,6 +139,13 @@ def secure_openfile(filename, create):
   f = openfile(filename,create)
   return SecureFile(f)
 
+def secure_listfiles():
+  return listfiles()
+
+def secure_removefile(filename):
+  return removefile(filename)
+
+
 
 # The code here sets up type checking and variable hiding for you.  You should not need to change anything below here.
 sec_file_def = {"obj-type":SecureFile,
@@ -158,6 +157,8 @@ sec_file_def = {"obj-type":SecureFile,
            }
 
 CHILD_CONTEXT_DEF["openfile"] = {"type":"objc","args":(str,bool),"exceptions":Exception,"return":sec_file_def,"target":secure_openfile}
+CHILD_CONTEXT_DEF["listfiles"] = {"type":"func","args":None,"exceptions":Exception,"return":ListOfStr(),"target":secure_listfiles}
+CHILD_CONTEXT_DEF["removefile"] = {"type":"func","args":(str,),"exceptions":Exception,"return":None,"target":secure_removefile}
 
 # Execute the user code
 secure_dispatch_module()
@@ -175,35 +176,29 @@ The above functions attempt to follow the design principles of accuracy, efficie
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass permissions. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus the attack you write should include several methods of attempting to bypass permissions. An example of an attack is found below:
+In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the file size restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus you should write several methods of attempting to bypass the size restrictions in different test files. An example of an attack is found below:
 
 {{{
 if "look.txt" in listfiles():
-  removefile("look.txt")
-myfile=openfile("look.txt",True)  #Open a file
+  removefile("testfile.txt")
+myfile=openfile("testfile.txt",True)  #Open a file
 
 
 #set maximum file size allowed to 10
 myfile.setmaxfilesize(10)
 
-# this should write "test" to file and fill zero till file size
-myfile.writeat("test",0)
+# this should write "test" to file
+myfile.writeat("test123456abcdefg",0)
 data = myfile.readat(None,0)
-log("data on file: " + data + "\n")
+if data != 'test123456':
+  log("ERROR!  Didn't stop me from writing past the maximum file size.")
 
-
-#the following writeat should write data till file size is 10 and truncate the remaining data because data size is greater than allowed max size 
-myfile.writeat("abcdnvnlvfjdkgjfdlkj",1)
-data = myfile.readat(None,0)
-log("data on file now: " + data + "\n")
-
-#if we set the offset to 10 then it should raise error. User can try that too
 
 #Close the file
 myfile.close()
 }}}
 
-'''Note:''' All attacks should be written as Repy files, using the .r2py extension.
+'''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
 
 ==== Code Analysis ====
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
