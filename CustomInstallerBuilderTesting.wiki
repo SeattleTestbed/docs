@@ -23,11 +23,19 @@ If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} for the `B
 
 
 == Start Django test server ==
-Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, from the `~/custominstallerbuilder/` directory, run the Django test server:
+Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory, and `DJANGO_SETTINGS_MODULE` points to your local settings file:
 
 {{{
 #!sh
 $ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
+$ export DJANGO_SETTINGS_MODULE='custominstallerbuilder.local.settings'
+}}}
+
+
+Then, from the `~/custominstallerbuilder/` directory, run the Django test server:
+
+{{{
+#!sh
 $ cd ~/custominstallerbuilder
 $ ./manage.py runserver 0.0.0.0:PORT   # This will log some information to the prompt
 Validating models...
