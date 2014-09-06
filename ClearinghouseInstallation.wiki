@@ -37,7 +37,7 @@ Django, the web framework the clearinghouse uses, is available at https://www.dj
 #!sh
 $ pip install django==1.6.7
 }}}
-
+Depending on your actual OS and setup, this command might require `sudo` privileges.
 
 
 == Optional: Setup OpenID and OAuth ==
