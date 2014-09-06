@@ -1,7 +1,7 @@
 = Testing the Custom Installer Builder with Django 1.6 Support =
 This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
 
-We'll assume that you have completed the previous steps to [wiki:CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
+We'll assume that you have completed the previous steps to [wiki:Archive/CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
 
 ----
 [[TOC(inline)]]
@@ -23,11 +23,11 @@ If you are testing locally, you will use {{{http://127.0.0.1:PORT/}}} for the `B
 
 
 == Start Django test server ==
-Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory, and `DJANGO_SETTINGS_MODULE` points to your local settings file:
+Ensure that the environment variable `PYTHONPATH` includes both the parent directory of your deployed `clearinghouse` and the Repy runtime directory, and `DJANGO_SETTINGS_MODULE` points to your local settings file:
 
 {{{
 #!sh
-$ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
+$ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/custominstallerbuilder/repy_runtime
 $ export DJANGO_SETTINGS_MODULE='custominstallerbuilder.local.settings'
 }}}
 
