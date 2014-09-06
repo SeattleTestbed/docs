@@ -91,16 +91,21 @@ Time to start coding!  Let's inspect a basic security layer.
 
 {{{
 """
-This security layer interposes size restrictions on a file.  If a call is made to setmaxfilesize, the file must not be allowed to grow larger than the specified value.  If a user tries to write that starts before the end of file and extends past the allowed size, bytes past the allowed size are discarded.  If a write starts at or past the
-allowed size, a SeekPastEndOfFileError must be raised.  If a file already contains more than the maximum file size bytes when the call is made, the file must be truncated so that it is of the appropriate size. 
+This security layer interposes size restrictions on a file.  If a call is made 
+to setmaxfilesize, the file must not be allowed to grow larger than the 
+specified value.  If a user tries to write that starts before the end of file 
+and extends past the allowed size, bytes past the allowed size are discarded.  
+If a write starts at or past the allowed size, a SeekPastEndOfFileError must 
+be raised.  If a file already contains more than the maximum file size bytes 
+when the call is made, the file must be truncated so that it is of the 
+appropriate size. 
 
 
 
 Note:
     This security layer uses encasementlib.r2py, restrictions.default, repy.py and Python
     Also you need to give it an application to run.
-    This security layer never runs explicitly but instead interposes functions
-    from above layers.
+    python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py 
     
     """ 
 
