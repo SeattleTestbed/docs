@@ -83,7 +83,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
 == Building the security layer  ==
 ----
-'''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
+'''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 [[BR]]
 === A basic (and inadequate) defense ===
 
@@ -114,6 +114,7 @@ class SecureFile():
   def __init__(self,file):
     # globals
     mycontext['debug'] = False   
+    # starts as "None", which allows writes of any size.
     mycontext['size'] = None
     # local (per object) reference to the underlying file
     self.file = file
@@ -152,7 +153,7 @@ def secure_removefile(filename):
 # The code here sets up type checking and variable hiding for you.  You should not need to change anything below here.
 sec_file_def = {"obj-type":SecureFile,
                 "name":"SecureFile",
-                "setmaxfilesize":{"type":"func","args":(int,long),"exceptions":Exception,"return":(type(None)),"target":SecureFile.setmaxfilesize},
+                "setmaxfilesize":{"type":"func","args":(int,long, type(None)),"exceptions":Exception,"return":(type(None)),"target":SecureFile.setmaxfilesize},
                 "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(int,type(None)),"target":SecureFile.writeat},
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
                 "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
