@@ -22,8 +22,8 @@ You have to install Repy V2 before starting the tutorial. Make sure you have a G
 2. Create a directory of your choosing, inside of which Repy V2 will live. Unix example: {{{mkdir ~/testv2}}}
 
 3. Set up Repy V2: 
- 1. {{{cd repy_v2/scripts ; ./initialize }}} This downloads all of Repy V2's dependencies in repy_v2/DEPENDENCIES folder.
- 2. {{{./build Absolute/path/to/testv2}}} This copies over everything Repy V2 needs to run in the `testv2` directory you created previously.
+ 1. {{{cd repy_v2/scripts ; python initialize.py }}} This downloads all of Repy V2's dependencies into a folder `repy_v2/DEPENDENCIES`.
+ 2. Still from the `scripts/` directory, run {{{python build.py ~/testv2}}} to copy over everything Repy V2 needs to run into the `testv2` directory you created previously.
 
 4. To run any code in Repy V2 (e.g., example.r2py), launch Repy from its directory: {{{cd ~/testv2 ; python repy.py restrictions.test example.r2py}}}
 
