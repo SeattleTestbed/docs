@@ -95,8 +95,17 @@ python initialize.py
 {{{
 #!sh 
 python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
-}}} 
-    (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
+}}}
+
+
+
+{{{
+#!comment
+    (Historical note: For a live deployment, the path likely is {{{/home/geni/live}}}).
+}}}
+
+
+
 
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
