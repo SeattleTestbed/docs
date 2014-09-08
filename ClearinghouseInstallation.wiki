@@ -64,11 +64,16 @@ mysql> create database seattlegeni;
 mysql> GRANT ALL PRIVILEGES 
 ON seattlegeni.* 
 TO 'seattlegeni'@'localhost'
-IDENTIFIED BY 'password';
-}}}
-where you would replace the 'password' with the password you want to use for the user 'seattlegeni'
+IDENTIFIED BY 'desired password for seattlegeni';
 
-'''Repeat the process''', substituting `keydb` for `seattlegeni`. Afterwards, type `\q` to leave the MySQL prompt:
+mysql> create database keydb;
+
+mysql> GRANT ALL PRIVILEGES 
+ON keydb.* 
+TO 'keydb'@'localhost'
+IDENTIFIED BY 'desired password for keydb';
+}}}
+where you would replace the password strings with suitable ones. Afterwards, type `\q` to leave the MySQL prompt:
 
 {{{
 #!sh
