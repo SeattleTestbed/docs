@@ -1,189 +1,269 @@
-= Using SVN =
-Accessing SVN is important for all contributors, regardless of whether they are able to commit code themselves.
+= Github and Git =
+Seattle's code base and ticket system are hosted on [https://github.com/ Github].
+Github is a collaboration, code review, and code management application popularly
+used in open source projects by distributed developers.  Seattle contributions
+are expected to be [https://help.github.com/articles/using-pull-requests pull requests]
+to repositories of the [https://github.com/SeattleTestbed SeattleTestbed] organization.
+
+Git is a free and open source distributed [http://en.wikipedia.org/wiki/Version_control_system VCS]
+(Version Control System).  A version control system helps manage changes to files.  Users may run Git locally
+on their computer to modify repositories and its files hosted on Github.  The following document covers the
+basics of using Git and submitting a pull request to one of Seattle's Github repositories.
 
 [[TOC(inline)]]
 
 
 
-== Browsing SVN through Trac ==
-Anybody can [https://seattle.poly.edu/browser/seattle/trunk browse the SVN] tree using their web browser. This is available to anonymous users.
+== Git Installation ==
+Github provides platform-specific installers for Mac and Windows users.  Installation instructions
+is provided for each supported platform in the links below.
+
+[https://mac.github.com Mac]
+
+[https://windows.github.com Windows]
+
+[http://git-scm.com/download/linux Linux]
 
 
-== Setting up Subversion ==
+Linux users may install Git using their distribution's package manager.
+Installation commands for many Linux distributions is availabe in [http://git-scm.com/download/linux Linux].
 
-=== On Windows ===
-
-==== Get SVN ====
-Download the `win32svn` installer from [http://sourceforge.net/projects/win32svn/files/1.6.17/Setup-Subversion-1.6.17.msi/download]
-
-Install it.
-
-==== Configure icon paths ====
-The environment variable for the icons is not set by default.
-
-Open up a command prompt (see this [http://www.youtube.com/watch?v=qrQMLOykSH4 video] for details) and type:
+Debian-based distributions can use [http://en.wikipedia.org/wiki/Advanced_Packaging_Tool APT] (Advanced Packaging Tool).
 {{{
-SET APR_ICONV_PATH = C:\Program Files\Subversion\iconv
+$ sudo apt-get install git
 }}}
 
-==== Test Environment variables ====
-Now that we've installed svn, we should test that it was installed correctly.
+== Git Setup ==
 
-Open up a command prompt, type `svn --version`, and hit the `enter` key. The output should be similar to the following:
+Git requires the configuration of a username and email address before a repository
+can be created or modified.  User information configured after installing Git is
+used for all local repositories.
+
+
+=== Configure Git User Information ===
+
+Configure the user name and email included in the ''Author'' field of each commit.
+
 {{{
-C:\Users\User>svn --version
+$ git config --global user.name "John Smith"
 
-svn, version 1.6.17 (r1128011)
-
-   compiled Jun  2 2011, 23:35:08
-
-
-Copyright (C) 2000-2009 CollabNet.
-
-Subversion is open source software, see http://subversion.apache.org/
-
-This product includes software developed by CollabNet (http://www.Collab.Net/).
+$ git config --global user.email "john.smith@example.com"
 }}}
 
-The next thing to test is that the path to the iconv folder was set correctly. To do that, type `echo %APR_ICONV_PATH%` into the command prompt, and hit `enter`. The output should be similar to the following:
+Example commit log output containing the configured user information:
 {{{
-C:\Users\User> echo %APR_ICONV_PATH%
-C:\Program Files\Subversion\iconv
+$ git log
+commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
+Author: John Smith <john.smith@example.com>
+Date:   Tue Sep 2 14:46:36 2014 -0400
+
+    Add a README to the project.
 }}}
 
-=== On Linux ===
-Open a terminal.[[BR]]
-Type the following into the terminal, and then hit `enter`:
-{{{
-sudo apt-get install subversion
-}}}
+== Github Setup ==
+Before a pull request can be submitted to a [https://github.com/SeattleTestbed SeattleTestbed]
+repository, a user account must be created on Github.  A free user account is also needed to create
+new repositories and fork (create a copy) ones that already exist on Github.
 
 
-== Anonymous access ==
-To check out the repository anonymously (read-only):
+== Creation of Github User Account ==
 
-{{{
-svn co https://seattle.poly.edu/svn/seattle/trunk/
-}}}
+A Github user account can be created at https://github.com/join
 
-
-If you have previously checked out from our repository using an {{{http://}}} url rather than {{{https://}}}, you can update the source with the following command (issued from the root of your local SVN folder):
-
-{{{
-svn switch --relocate http://seattle.poly.edu/svn https://seattle.poly.edu/svn
-}}}
+Once the user account is created, the ''https://github.com/john-smith'' URL will
+be available.  ''john-smith'' should match the user name chosen during the creation
+of the Github account.
 
 
-Depending on your system, you may be asked to accept the SSL certificate. Here is an example, showing our certificate's correct SHA1 fingerprint:
+=== Fork a SeattleTestbed Repository ===
 
-{{{
-~/trunk$ svn switch --relocate http://seattle.poly.edu/svn https://seattle.poly.edu/svn
-Error validating server certificate for 'https://seattle.poly.edu:443':
- - The certificate is not issued by a trusted authority. Use the
-   fingerprint to validate the certificate manually!
-Certificate information:
- - Hostname: seattle.poly.edu
- - Valid: from Tue, 20 Oct 2009 20:13:04 GMT until Thu, 21 Oct 2010 19:06:54 GMT
- - Issuer: 07969287, http://certificates.godaddy.com/repository, GoDaddy.com, Inc., Scottsdale, Arizona, US
- - Fingerprint: c3:b7:3e:d9:2c:f7:3d:45:7b:68:40:81:27:9a:51:45:a1:97:a6:6f
-(R)eject, accept (t)emporarily or accept (p)ermanently?
-}}}
-
-After running the command, you can verify your new settings with `svn info`:
-{{{
-~/trunk$ svn info
-...
-URL: https://seattle.poly.edu/svn/seattle/trunk
-Repository Root: https://seattle.poly.edu/svn
-...
-}}}
+General instructions on forking repositories and managing pull requests is available
+[https://help.github.com/articles/fork-a-repo here]
 
 
+Forking one of the [https://github.com/SeattleTestbed SeattleTestbed] repositories
+requires clicking a ''fork'' button on theh repository's Github page, which creates
+a copy of the repository and saves it to a repository directly controlled by the user.
+The URL of the forked repository can then be used with Git to create and save a local
+copy.  
 
-== Contributor / Developer access ==
-'''Test all code before checking it into SVN.'''
+Navigate to the [https://github.com/SeattleTestbed/repy_v2 repy_v2] repository
+and click on the ''fork'' button in the upper right-hand corner of the page.
+[[Image(https://github-images.s3.amazonaws.com/help/repository/fork_button.jpg)]]
 
-For Windows, see [wiki:RepoConfigurationForWindows Configuring SVN on Windows]
+== Clone a Git Repository ==
 
-To commit changes to the repository, you must have an ssh account on {{{seattle.poly}}}, which hosts the Seattle SVN server. To gain access email seattle-devel@cs. Once you have ssh access to the machine, you can use the following command to checkout (co) the trunk from anywhere:
-{{{
-svn co svn+ssh://seattle.poly.edu/seattle/trunk/
-}}}
-
-If you want to perform the checkout as another user (e.g., "USER"), then use the following command:
-{{{
-svn co svn+ssh://USER@seattle.poly.edu/seattle/trunk/
-}}}
-
-All text files maintained in our repository are in [http://en.wikipedia.org/wiki/Newline Unix format]. Make sure that your files are in the proper format prior to making any commits. You can use the dos2unix tool on {{{seattle.poly}}} to convert DOS-formatted files to Unix format.
-
-'''Note to sysadmins:''' {{{svn+ssh}}} relies on {{{/usr/bin/svnserve}}}. However, to make it so that users don't need to specify the SVN repository root on the server, we have to modify arguments to {{{svnserve}}}. The following wrapper script lives at {{{/usr/local/bin/svnserve}}}:
+The ''clone'' command creates a local copy of a remotely hosted Github repository.  In the following
+example, the ''repy_v2'' repository is cloned to the Github page of the ''john-smith'' user.  Substitute
+the user account created above if following along with these examples.
 
 {{{
-#!/bin/bash
-
-# This wrapper lives in /usr/local/bin so it will come before the actual binary at /usr/bin/svnserve
-# in people's paths. We don't replace the real binary with a wrapper (renaming the real binary)
-# because then it will get clobbered anytime svn is updated.
-
-umask 002
-/usr/bin/svnserve --root=/var/local/svn --tunnel
+$ git clone https://github.com/john-smith/repy_v2
+Cloning into 'repy_v2'...
+remote: Counting objects: 1547, done.
+remote: Total 1547 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (1547/1547), 1.06 MiB | 0 bytes/s, done.
+Resolving deltas: 100% (778/778), done.
+Checking connectivity... done.
 }}}
 
 
-== Example SVN commands ==
-'''Test all code before checking it into SVN.'''
+A ''repy_v2'' folder is created in the current directory.  You must switch to
+the cloned repository's directory, or one of its sub-directories, to successfully
+issue Github commands.
 
-To look inside a directory without checking anything out:
 {{{
-svn list svn+ssh://seattle.poly.edu/seattle/trunk/repy
-}}}
-
-To check out the entire Seattle repository:
-{{{
-svn checkout svn+ssh://seattle.poly.edu/seattle
+$ cd repy_v2/
 }}}
 
-To check out a subdirectory of the repository:
+=== Set Alias for Forked Repository ===
+An alias of the forked repository can be created to better manage repository changes and
+keep the remote and forked repositories in sync.  The alias can refer to the forked repository
+by name instead of its full URL.  The ''upstream'' alias is set to the forked ''repy_v2''
+repository.
+
+
 {{{
-svn checkout svn+ssh://seattle.poly.edu/seattle/trunk/repy
+$ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 }}}
 
-To find out some basic information about a checked-out copy, such as the repository root, last changed rev/author/date do:
+
+=== Retrieve Latest Version of Forked Repository ===
+Fetching and merging the latest changes of upstream can be done with the
+''pull'' command.
 {{{
-svn info
+$ git pull upstream master
+From https://github.com/SeattleTestbed/repy_v2
+ * branch            master     -> FETCH_HEAD
+  * [new branch]      master     -> upstream/master
+  Already up-to-date.
 }}}
 
-To contribute code back to the SVN server, first perform an update, then a commit:
+=== Add a New Feature Branch ===
+
+List all known branches of the repository.  A
+[http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is Git branch] can
+be viewed as a set of commits   
+
 {{{
-svn update
-svn commit
+$ git branch
+* master
 }}}
 
-To track new files/directories, or remove those which are already tracked:
 {{{
-svn add [filename]
-}}}
-{{{
-svn remove [filename]
+$ git branch new_feature
 }}}
 
-If you have conflicts, you must tell SVN explicitly that you have resolved them, otherwise SVN will fail to commit/update these files:
 {{{
-svn resolve [filename]
+$ git checkout new_feature
+Switched to branch 'new_feature'
 }}}
 
-If you perform an {{{svn status}}} in a folder, it recursively lists all the Modified (M), Deleted (D) and Added (A) files. It will also list files that are in conflict (C) and those about which SVN does not know (?). To see what modifications were made to individual files marked with an M, you can perform a {{{diff}}}:
+
+=== Commit a New File to the Repository ===
+Create a README.txt file and save it. 
+
 {{{
-svn status
-}}}
-{{{
-svn diff [filename]
+$ git status
+On branch new_feature
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+    README.txt
+
+    nothing added to commit but untracked files present (use "git add" to track)
 }}}
 
-If the Seattle SVN repository moves to a new machine, you can relocate your existing checked-out version using the following command. Here {{{old_repo}}} and {{{new_repo}}} are paths to the old and new roots of the repository that you can find out with {{{svn info}}}:
 {{{
-svn sw --relocate old_repo new_repo
+$ git add README.txt
+
+$ git status
+On branch new_feature
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+    new file:   README.txt
 }}}
 
-For more information about using SVN, reference this list of [http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands useful SVN commands].
+{{{
+$ git commit -m "Add a README file to the project"
+[new_feature 7660f34] Add a README file to the project
+ 1 file changed, 1 insertion(+)
+  create mode 100644 README.txt
+}}}
+
+{{{
+$ git status
+On branch new_feature
+nothing to commit, working directory clean
+}}}
+
+To get a list of commit messages made thus far.  The "Add a README file to the project" commit
+message should now be listed in the log.
+{{{
+$ git log
+}}}
+
+=== Push the Commit to Github ===
+
+{{{
+$ git push origin new_feature
+
+Username for 'https://github.com': john-smith 
+Password for 'https://john-smith@github.com': 
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 308 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/john-smith/repy_v2
+ * [new branch]      new_feature -> new_feature
+}}}
+
+
+=== Pull Request ===
+
+Visit the forked ''repy_v2'' repository and click on the green button next to the drop-down list of branches.
+The review page provides a field to enter a summary of the commit changes and review changes before
+submitting a pull request. 
+[[Image(https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-start-review-button.png)]]
+
+
+
+== Miscellaneous Git commands ==
+
+Show the changes in README.txt that have not been committed.
+{{{
+$ git diff README.txt
+diff --git a/README.txt b/README.txt
+index 70a3d0f..93bce69 100644
+--- a/README.txt
++++ b/README.txt
+@@ -1 +1,2 @@
+ README file.
+ +new line added here.
+}}}
+
+Mark the README.txt as remove and stage it for removal.
+{{{
+$ git rm README.txt
+}}}
+
+
+Unstage the modified README.txt file and reset its contents to the current version on the repository.
+{{{
+$ git reset README.txt
+}}}
+
+Move a file to a new location but let Git know of the change.
+{{{
+$ git mv
+}}}
+
+Temporarily store modified files in order to change branches.
+
+{{{
+$ git stash
+$ git stash list
+$ git stash pop
+}}}
