@@ -30,12 +30,14 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 === Getting RepyV2 ===
 ----
-The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne zipfile].  Unzip this and run the files / code from the resulting directory.
-----
-
+The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne zipfile]. 
+Unzip this and copy your files to unzipped directory.
 Use the command found below in order to run Repy files:
 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
+----
+
+
 
 Please note Repy files end in extension `.r2py`.   
 
@@ -83,7 +85,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
 == Building the security layer  ==
 ----
-'''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
+The following program is a basic and incomplete sample code for you to get an idea about writing security layer. Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 [[BR]]
 === A basic (and inadequate) defense ===
 
