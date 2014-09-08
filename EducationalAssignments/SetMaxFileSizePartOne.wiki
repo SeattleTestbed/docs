@@ -80,12 +80,12 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
- * list of RepyV2 syntax: '''[wiki:RepyV2API]'''
+ * list of RepyV2 API calls: '''[wiki:RepyV2API]'''
 [[BR]]
 
 == Building the security layer  ==
 ----
-The following program is a basic and incomplete sample code for you to get an idea about writing security layer. Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
+The following program is a basic and incomplete sample code for you to get an idea about writing security layer. Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  
 [[BR]]
 === A basic (and inadequate) defense ===
 
@@ -173,7 +173,9 @@ secure_dispatch_module()
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the file size restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers. Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented. Keep in mind attacks are attempts to mitigate a given security protocol. If even one case succeeds, then your security layer has been compromised. Thus you should write several methods of attempting to bypass the size restrictions in different test files. An example of an attack is found below:
+In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the file size restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers.  
+
+An example of an attack is found below:
 
 {{{
 if "testfile.txt" in listfiles():
@@ -200,7 +202,7 @@ myfile.close()
 
 '''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
 
-==== Code Analysis ====
+==== Choice of File Names ====
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
 
 {{{
