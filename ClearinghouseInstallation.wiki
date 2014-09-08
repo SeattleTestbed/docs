@@ -225,21 +225,24 @@ mysql -ukeydb -p --database=keydb < keydb/schema.sql
     * Edit the file 'backend/config.py' and set a value for the authcode.
     * Make sure that the file `backend/config.py` is not readable by the web server user.
     * In a new shell, again set your environment variables the same way as shown above.
-    * Start the backend_daemon from the backend directory
+    * Start the backend_daemon. Due to a bug, this must be done from the `seattle` directory currently
       (because the repy files need to be in the directory it is run from):
 {{{
 #!sh  
-cd /tmp/TARGET/clearinghouse/backend
-python backend_daemon.py
-}}}      
+cd /tmp/TARGET/seattle
+python ../clearinghouse/backend/backend_daemon.py
+}}}
+
   * '''Start the polling daemons'''
-    * Set your environment variables the same way as shown above. (Not necessary 
-      if you have added it to the .bashrc file)
-    * There's only one polling daemon at the moment. To start it:
+    * Start a new shell and set your environment variables the same way as shown above.
+    * Start the polling daemon. Due to a bug, this must be done from the `seattle` directory currently
+      (because the repy files need to be in the directory it is run from):
 {{{
 #!sh   
-python polling/check_active_db_nodes.py
+cd /tmp/TARGET/seattle
+python ../clearinghouse/polling/check_active_db_nodes.py
 }}}
+
   * '''Start the node state transition scripts'''
     * Set your environment variables the same way as shown above. (Not necessary 
       if you have added it to the .bashrc file)
