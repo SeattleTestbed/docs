@@ -1,8 +1,8 @@
 = Implement a Defensive Security System =
 
-This assignment will help you understand security mechanisms. You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2. A reference monitor is an access control concept that refers to an abstract machine that mediates all access to objects by subjects. This can be used to allow, deny, or change the behavior of any set of calls. One critical aspect of creating a reference monitor is to ensure it cannot be bypassed. While not a perfect way of validating your reference monitor, it is useful to create test cases to see whether your security layer will work as expected. (The test cases may be turned in as part of the next assignment.)
+This assignment will help you understand security mechanisms. You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2. A reference monitor is an access control concept that refers to an abstract machine that mediates all access to objects by subjects. This can be used to allow, deny, or change the behavior of any set of calls. While not a perfect way of validating your reference monitor, it is useful to create test cases to see whether your security layer will work as expected. (The test cases may be turned in as part of the next assignment.)
 
-This assignment is intended to reinforce concepts about access control and reference monitors in a hands-on manner. The ideas of access control and confidentiality have been embedded into the steps of this assignment.
+This assignment is intended to reinforce concepts about access control and reference monitors in a hands-on manner. 
 
 [[TOC(inline)]]
 
@@ -10,14 +10,14 @@ This assignment is intended to reinforce concepts about access control and refer
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and will set it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since Repy V2 does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location past the end of the file size limit, a !SeekPastEndOfFileError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data should be discarded.
+In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and enforce it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since the Repy V2 API does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location at or past the end of the file size limit, a !SeekPastEndOfFileError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data should be discarded.
 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to read data or write data with in file size limit, then it should not stop user from doing it.
 
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write or before a call to getmaxfilesize when the file need not be truncated.
 
  * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written beyond specified size, the security is compromised.
 
