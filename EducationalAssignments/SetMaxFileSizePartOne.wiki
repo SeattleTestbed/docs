@@ -10,7 +10,7 @@ This assignment is intended to reinforce concepts about access control and refer
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and will set it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since Repy V2 does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location past the end of the file size limit, a !ValueError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data discarded.
+In this assignment you will create a security layer which stops the user from writing to a file after a specified file size. You will add a function called setmaxfilesize()  that will take a file size as parameter and will set it for the specified file.  If a file is longer than the specified size, any data past this point in the file will be truncated.  (Since Repy V2 does not have a truncate call, you will have to implement this functionality yourself.)  If a writeat() call is performed at a location past the end of the file size limit, a !SeekPastEndOfFileError should be raised.  If the writeat() starts before the file limit, any data up to the size limit should be written and all other data should be discarded.
 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
