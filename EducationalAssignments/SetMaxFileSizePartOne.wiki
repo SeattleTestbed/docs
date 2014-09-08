@@ -167,15 +167,6 @@ CHILD_CONTEXT_DEF["removefile"]["target"] = secure_removefile
 secure_dispatch_module()
 }}}
 
-=== Using the example layer ===
-
-Keep in mind the above security layer would not prevent writing without permissions, and only protects reading without permissions from certain attacks.  There are a bunch of tricks that can be used in order to circumvent this security layer easily. For instance, the above reference monitor isn't thread safe. For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].
-
-[[BR]]
-=== Code analysis === 
-
-The above functions attempt to follow the design principles of accuracy, efficiency, and security. However they do so inadequately.For example the data will not be written at all unless both permissions to write and append are enabled. It is more important to make a security system that is infeasible to break, rather than impossible to break. However this security layer does not yet create the necessary infeasibility requirements for most attacks. Thus we see that there is a grey area of what is an acceptable level of impedance.
-
 [[BR]]
 === Testing your security layer ===
 ----
