@@ -212,7 +212,7 @@ myfile=openfile("look.txt",True)
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
 
-This code attempts to read the “This is secure” from the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file with permissions. setmaxfilesize(10) sets the file size limit to 10. Now in the next writeat() method, the user is trying to write at 1000th position. If the security layer is written properly, then it will raise !SeekPastEndOfFileError and if no error is raised that means our security layer has failed to limit the size.   
+First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file. setmaxfilesize(10) sets the file size limit to 10. Now in the next writeat() method, the user is trying to write at 1000th position. If the security layer is written properly, then it will raise !SeekPastEndOfFileError and if no error is raised that means our security layer has failed to limit the size.   
 
 
 === Running your security layer ===
@@ -244,7 +244,7 @@ Make sure you went through the "How to get RepyV2" section!
 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
 
-'''Your security layer should produce no output!! '''If it encounters an attempt to read the secure data, you should raise a !ValueError exception and allow execution to continue.
+'''Your security layer should produce no output!! '''
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
