@@ -208,7 +208,7 @@ myfile=openfile("look.txt",True)
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
 
-This code attempts to read the “This is secure” from the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file with permissions. setmaxfilesize(10) sets the file size limit to 10. Now in the next writeat() method, the user is trying to write at 1000th position. If the security layer is written properly, then it will raise SeekPastEndOfFileError and if no error is raised that means our security layer has failed to limit the size.   
+This code attempts to read the “This is secure” from the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file with permissions. setmaxfilesize(10) sets the file size limit to 10. Now in the next writeat() method, the user is trying to write at 1000th position. If the security layer is written properly, then it will raise !SeekPastEndOfFileError and if no error is raised that means our security layer has failed to limit the size.   
 
 
 === Running your security layer ===
