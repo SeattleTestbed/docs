@@ -152,7 +152,7 @@ cd /tmp/TARGET/clearinghouse
       * You can also adapt the clearinghouse `TIME_ZONE`, `TESTBED` name and URL, term you would like to use for `CLEARINGHOUSE`, and project mailing lists.
 [[BR]]
 
-    * Set your environment variables:
+    * Set your environment variables (or add these lines to your `.bashrc`):
 {{{
 #!sh
 export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/seattle
@@ -163,11 +163,8 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
       target directory. The Seattle path item is to ensure that the Repy runtime works.
       You will have to do this in each of the shell terminals you work in for 
       the steps below. Alternatively you can edit the .bashrc file in your home
-      directory and add the two lines in:
-{{{
-PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/seattle
-DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
-}}}
+      directory and add the two lines in.
+
     * Create the database structure:
 {{{
 #!sh
