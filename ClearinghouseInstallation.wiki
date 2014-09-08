@@ -186,7 +186,7 @@ $ python website/manage.py runserver 0.0.0.0:8000
       This is convenient for development and testing your Clearinghouse instance 
       (but should not be used in production.)
 
-      'Hint:' In case you don't have a browser on your server, but have {{{ssh}}} access, you can use port forwarding to make the development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
+      ''Hint:'' In case you don't have a browser on your server, but have {{{ssh}}} access, you can use port forwarding to make the development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
       Then, open http://localhost:SOME_LOCAL_PORT/ in your local browser and interact with your install.
 
     * For production, run the site through Apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
@@ -216,7 +216,7 @@ The lockserver starts and tells you which port it listens on, and that a thread 
     * Make sure have a MySQL database to use for the key database. We suggested above to call it
       `keydb`.
     * Make sure that the file `keydb/config.py` is not readable by the user the
-      web server will be running as.
+      web server will be running as. 
     * Edit the file `keydb/config.py` and set the database information for the key
       database.
     * Create the key database structure by executing the contents of the file
@@ -226,8 +226,7 @@ The lockserver starts and tells you which port it listens on, and that a thread 
 mysql -u[username] -p --database=[keydbname] < keydb/schema.sql
 }}}
     * Edit the file backend/config.py and set a value for the authcode.
-    * For production launch, make sure that the file backend/config.py is not
-      readable by the website.
+    * Make sure that the file `backend/config.py` is not readable by the web server user.
     * Set your environment variables the same way as shown above.
     * In a new shell, start the backend_daemon from the backend directory
       (because the repy files need to be in the directory it is run from):
