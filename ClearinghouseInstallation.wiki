@@ -117,34 +117,23 @@ $ mkdir /tmp/TARGET/seattle
 $ cd clearinghouse/scripts
 $ python build.py /tmp/TARGET/seattle
 }}}
+[[BR]]
 
-  * '''Generating state keys'''
-    Seven different state keys need to be created in order for all the [wiki:SeattleBackend backend scripts] to work. The name of these keys should be:
-    1. `acceptdonation`
-    1. `movingto_canonical`
-    1. `canonical`
-    1. `movingto_onepercentmanyevents`
-    1. `onepercentmanyevents`
-    1. `movingto_twopercent`
-    1. `twopercent`
-    * To generate the keys 
-      follow these instructions: 
-      * Navigate to the folder you previously deployed the Repy runtime to, `/tmp/TARGET/seattle`.
-      * You will use this command to generate key pairs for all state keys:
+  * The Seattle [wiki:SeattleBackend backend scripts] require a set of public keys (called ''state keys'') to work. Before generating the keys, first create a `statekeys` directory within the deployed `clearinghouse` hierarchy:
 {{{
 #!sh
-python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
+$ mkdir /tmp/TARGET/clearinghouse/node_state_transitions/statekeys
 }}}
-       This creates a keypair `NAME_OF_YOUR_KEY_FILES.publickey`, `NAME_OF_YOUR_KEY_FILES.privatekey` using a key length of 4096 (the minimum recommended at the time of writing).
-      * To simplify the process, here's a short shell script that will generate the keys at the correct location:
+
+  * From the `seattle` runtime directory created and populated earlier, make runnable and then run the script that will generate state keys for you:
+ 
 {{{
 #!sh
-mkdir /tmp/TARGET/clearinghouse/node_state_transitions/statekeys
-for STATE_NAME in acceptdonation movingto_canonical canonical movingto_onepercentmanyevents onepercentmanyevents movingto_twopercent twopercent ; 
-  do python generatekeys.py /tmp/TARGET/clearinghouse/node_state_transitions/statekeys/$STATE_NAME 4096 ;
-done
+$ cd /tmp/TARGET/seattle
+$ chmod +x generate_state_keys.sh
+$ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
 }}}
-      * Only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
+  * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
 
     * Change to the `clearinghouse` directory that is in the directory you deployed
       to. For example:
