@@ -105,9 +105,9 @@ python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
 #!sh
-mkdir /tmp/TARGET
+mkdir /tmp/TARGET/seattle
 cd clearinghouse/scripts
-python build.py /tmp/TARGET
+python build.py /tmp/TARGET/seattle
 }}}
 
     * Change to the `clearinghouse` directory that is in the directory you deployed
