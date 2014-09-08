@@ -220,19 +220,19 @@ The lockserver starts and tells you which port it listens on, and that a thread 
     * Edit the file `keydb/config.py` and set the database information for the key
       database.
     * Create the key database structure by executing the contents of the file
-      `keydb/schema.sql` on the new key database you created.
+      `keydb/schema.sql` on the new key database you created. If set up as suggested with both the user and databse names `keydb`:
 {{{
 #!sh  
-mysql -u[username] -p --database=[keydbname] < keydb/schema.sql
+mysql -ukeydb -p --database=keydb < keydb/schema.sql
 }}}
-    * Edit the file backend/config.py and set a value for the authcode.
+    * Edit the file 'backend/config.py' and set a value for the authcode.
     * Make sure that the file `backend/config.py` is not readable by the web server user.
-    * Set your environment variables the same way as shown above.
-    * In a new shell, start the backend_daemon from the backend directory
+    * In a new shell, again set your environment variables the same way as shown above.
+    * Start the backend_daemon from the backend directory
       (because the repy files need to be in the directory it is run from):
 {{{
 #!sh  
-cd backend
+cd /tmp/TARGET/clearinghouse/backend
 python backend_daemon.py
 }}}      
   * '''Start the polling daemons'''
