@@ -235,8 +235,7 @@ python ../clearinghouse/backend/backend_daemon.py
 
   * '''Start the polling daemons'''
     * Start a new shell and set your environment variables the same way as shown above.
-    * Start the polling daemon. Due to a bug, this must be done from the `seattle` directory currently
-      (because the repy files need to be in the directory it is run from):
+    * Start the polling daemon. Again, this must be done from the `seattle` directory currently:
 {{{
 #!sh   
 cd /tmp/TARGET/seattle
@@ -244,14 +243,14 @@ python ../clearinghouse/polling/check_active_db_nodes.py
 }}}
 
   * '''Start the node state transition scripts'''
-    * Set your environment variables the same way as shown above. (Not necessary 
-      if you have added it to the .bashrc file)
-    * Start each transition script you intend to run:
+    * Set your environment variables the same way as shown above.
+    * Start each transition script you intend to run. Again, this must be done from the `seattle` directory currently:
 {{{
-#!sh   
-python node_state_transitions/TRANSITION_SCRIPT_NAME.py
+#!sh
+cd /tmp/TARGET/seattle
+python ../clearinghouse/node_state_transitions/TRANSITION_SCRIPT_NAME.py
 }}}
-    * The four transitions scripts that you probably want running are:
+    * The four transitions scripts that you want running are:
       * transition_donation_to_canonical
       * transition_canonical_to_twopercent
       * transition_twopercent_to_twopercent
