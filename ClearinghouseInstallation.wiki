@@ -13,13 +13,13 @@ a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
 Clearinghouse requires at least the following software to be installed:
  
- * [http://www.python.org/ Python] -- the language Seattle Clearinghouse is written in
+ * [http://www.python.org/ Python] in version 2.5, 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
  * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
  * [http://www.mysql.com/ MySQL] -- the database
  * [http://www.apache.org/ Apache] -- the web server
  * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
- * [http://www.djangoproject.com/ Django] -- necessary to run Django code
+ * [http://www.djangoproject.com/ Django] in version 1.6.x -- necessary to run Django code
  * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support.
 
 Most of these can be installed through a package manager. For example, on a Debian-based system:
