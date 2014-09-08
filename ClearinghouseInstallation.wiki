@@ -91,23 +91,31 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
     * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
-git clone https://github.com/SeattleTestbed/clearinghouse.git
-cd clearinghouse/scripts
-python initialize.py
+$ cd ~
+$ git clone https://github.com/SeattleTestbed/clearinghouse.git
+$ cd clearinghouse/scripts
+$ python initialize.py
 }}}
     * Deploy all necessary files to a directory of your choice. We'll use `/tmp/TARGET` in these instructions. (For an actual deployment, best use an empty directory under the clearinghouse's user account.) You'll need to give two arguments to the deployment script: The parent directory of the `clearinghouse` repo you checked out, and a directory you want to deploy to. (The latter should not yet exist.) For example:
 {{{
-#!sh 
-python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
-}}} 
-    (Note: For a live deployment, the path will likely be {{{/home/geni/live}}}).
+#!sh
+$ # Still in ~
+$ python ~/clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
+}}}
+
+
+{{{
+#!comment
+    (Historical Note: On existing Seattle live deployments, the path will likely be {{{/home/geni/live}}}).
+}}}
+
 
     * Deploy the Repy runtime, following the instructions of the script called previously.
 {{{
 #!sh
-mkdir /tmp/TARGET/seattle
-cd clearinghouse/scripts
-python build.py /tmp/TARGET/seattle
+$ mkdir /tmp/TARGET/seattle
+$ cd clearinghouse/scripts
+$ python build.py /tmp/TARGET/seattle
 }}}
 
   * '''Generating state keys'''
