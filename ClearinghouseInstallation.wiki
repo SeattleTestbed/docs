@@ -110,12 +110,6 @@ cd clearinghouse/scripts
 python build.py /tmp/TARGET/seattle
 }}}
 
-    * Change to the `clearinghouse` directory that is in the directory you deployed
-      to. For example:
-{{{
-#!sh 
-cd /tmp/TARGET/clearinghouse
-}}}
   * '''Generating state keys'''
     Seven different state keys need to be created in order for all the [wiki:SeattleBackend backend scripts] to work. The name of these keys should be:
     1. `acceptdonation`
@@ -143,6 +137,13 @@ for STATE_NAME in acceptdonation movingto_canonical canonical movingto_onepercen
 done
 }}}
       * Only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
+
+    * Change to the `clearinghouse` directory that is in the directory you deployed
+      to. For example:
+{{{
+#!sh 
+cd /tmp/TARGET/clearinghouse
+}}}
 
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
