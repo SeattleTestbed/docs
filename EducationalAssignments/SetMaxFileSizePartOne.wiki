@@ -98,7 +98,8 @@ and extends past the allowed size, bytes past the allowed size are discarded.
 If a write starts at or past the allowed size, a SeekPastEndOfFileError must 
 be raised.  If a file already contains more than the maximum file size bytes 
 when the call is made, the file must be truncated so that it is of the 
-appropriate size. 
+appropriate size. It should also raise ValueError if the size to be set is not 
+valid(e.g. less than 0 or non-number )
 
 
 
