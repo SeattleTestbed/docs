@@ -189,40 +189,38 @@ $ python website/manage.py runserver 0.0.0.0:8000
       'Hint:' In case you don't have a browser on your server, but have {{{ssh}}} access, you can use port forwarding to make the development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
       Then, open http://localhost:SOME_LOCAL_PORT/ in your local browser and interact with your install.
 
-[[BR]]
     * For production, run the site through Apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
 
------
 
------
+[[BR]]
+The last couple of steps will make it so that the backend database and scripts are set up. In a production launch, starting all of the processes described below is simplified by using a script, see the section on [#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
 
-  * '''Future tip'''
-    * Starting all of the processes described below is simplified by using the script
-      `deploymentscripts/start_seattlegeni_components.sh`, whose use is described in
-      the section on [#Runningstart_seattlegeni_components.sh running start_seattlegeni_components.sh].
-      For reference, we'll explain here how to start the individual components as well
-      as include first-time configuration information. Note that when starting these
-      manually, you need to start them in the order shown. Most importantly, first the
-      lockserver, then the backend, then everything else. However, we're not going to
-      describe the initial setup in this order.
+For reference, we'll explain here how to start the individual components as well
+as include first-time configuration information.
+''Please note'': When starting the components manually, you need to start them '''in the order shown'''. Most importantly, first start the lockserver, then the backend, then everything else.
+(However, we're not going to describe the initial setup in this order.)
 
   * '''Start the lockserver'''
+    * Create a new shell
     * Set your environment variables the same way as shown above.
-    * In a new shell, start the lockserver:
+    * Start the lockserver:
 {{{
-#!sh  
-python lockserver/lockserver_daemon.py
-}}}      
+#!sh
+$ cd /tmp/TARGET/clearinghouse
+$ python lockserver/lockserver_daemon.py
+}}}
+The lockserver starts and tells you which port it listens on, and that a thread has been started.
+(If you get an `ImportError` instead, then please check your environment variables again.)
+
   * '''Setup the key database and start the backend'''
-    * Make sure have a mysql database to use for the key database (e.g. called
-      `keydb`)
-    * Make sure that the file keydb/config.py is not readable by the user the
-      website is running as (this is only something to worry about for production
-      launch, if you are just developing or testing, this is not required.)
-    * Edit the file keydb/config.py and set the database information for the key
+    * Make sure have a MySQL database to use for the key database. We suggested above to call it
+      `keydb`.
+    * Make sure that the file `keydb/config.py` is not readable by the user the
+      web server will be running as.
+    * Edit the file `keydb/config.py` and set the database information for the key
       database.
     * Create the key database structure by executing the contents of the file
-      keydb/schema.sql on the new key database you created.
+      `keydb/schema.sql` on the new key database you created.
 {{{
 #!sh  
 mysql -u[username] -p --database=[keydbname] < keydb/schema.sql
