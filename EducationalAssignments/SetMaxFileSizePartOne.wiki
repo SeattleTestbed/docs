@@ -251,13 +251,13 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second security layer which retains its specified size even if it is closed after setting size and reopened again. For example, We have specified size 10 for a file and it is closed. now someone opens the file and tries to write it so that its size becomes larger than 10. The security layer shouldn't allow it. It should imply all the restrictions even after reopening that we had set for this file before being closed. You should also write an attack program which tries to change the file size after it is reopened. Do not submit this code inside your assignment. Submit a separate copy for extra credit. 
+For extra credit, make a second security layer which retains its specified size limits even if it is closed and reopened again. Do not submit this code inside your assignment. Submit a separate copy for extra credit.
  
 [[BR]]
 
 = What to turn in? =
 ----
 
- * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a !ValueError if the calls should be blocked, but never, ever call log() to output information.   Never raise unexpected errors.
+ * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase. Be sure your reference monitor never produces output. It should raise a !ValueError if the calls should be blocked, but never, ever call log() to output information.   '''Never raise unexpected errors.'''
 
  * For extra credit turn in a second repy file called extra_credit_[polyusername].r2py  '''You must turn in separate files for the normal assignment and extra credit'''
