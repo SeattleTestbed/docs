@@ -415,31 +415,34 @@ $ chmod a+w *_repy.py
 }}}
 
 
+
+
+
 [[BR]]
-== Running start_seattlegeni_components.sh ==
+== Running start_clearinghouse_components.sh ==
 ----
 
 If you have all the components of Seattle Clearinghouse (including Apache) configured,
-the script deploymentscripts/start_seattlegeni_components.sh will start up all the individual
-components in the correct order.
+the script `deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
+components in the correct order, and also start Apache.
 
-Before running start_seattlegeni_components.sh, make sure to change PYTHONPATH, SEATTLEGENI_DIR,
-and LOG_DIR to the correct locations for your deployment, change geni in SUDO_CMD to the correct
-username, and create the directory for LOG_DIR if it doesn't already exist.
+Before running the script, make sure to change `CLEARINGHOUSE_USER`, `CLEARINGHOUSE_DIR`, PYTHONPATH`,
+and `LOG_DIR` to the correct locations for your deployment, and create LOG_DIR` if it doesn't already exist.
 
-First, if one or more of the Seattle Clearinghouse scripts is already running, kill them before running start_seattlegeni_components.sh.
+If one or more of the Clearinghouse scripts are already running, kill them before running `start_clearinghouse_components.sh`. 
 
-To run start_seattlegeni_components.sh, run the following commands with the correct directory substituted for /home/geni/live:
+To run the script, run the following commands with the correct directory substituted for your deployment directory. This will start the script in a new `screen` session running as root.
 {{{
 #!sh
 $ sudo -i
 $ screen
-$ cd /home/geni/live/seattlegeni/deploymentscripts
-$ ./start_seattlegeni_components.sh
+$ cd path/to/clearinghouse/deployment/clearinghouse/deploymentscripts
+$ ./start_clearinghouse_components.sh
 }}}
-This will start the script in a new screen session running as root. Hit CTRL-A followed by D to detach the screen session.
 
-To later reattach to the session in order to stop or restart start_seattlegeni_components.sh:
+Hit CTRL-A followed by D to detach the screen session.
+
+To later reattach to the session in order to stop or restart `start_clearinghouse_components.sh`:
 {{{
 #!sh
 $ sudo -i
