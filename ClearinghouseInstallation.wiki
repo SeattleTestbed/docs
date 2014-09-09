@@ -240,7 +240,7 @@ mysql -ukeydb -p --database=keydb < keydb/schema.sql
     * Make sure that the file `keydb/config.py` is not readable by the user the web server will be running as, i.e. it is only user-readable (but neither group- nor world-readable), owned by the clearinghouse user, and the web server is not in the user group the file belongs to.
     * The same goes for `backend/config.py`.
 
-The backend scripts can be started with a script [#Runningstart_clearinghouse_components.sh start_clearinghouse_components.sh]. Before we can do that, Apache needs to be set up. Skip down to .....
+The backend scripts can be started with a script [#Runningstart_clearinghouse_components.sh start_clearinghouse_components.sh]. Before we can do that, Apache needs to be set up. Skip down to [#ConfigureApachesites].
 
 [[BR]]
 ----
@@ -251,10 +251,9 @@ For reference, we'll explain here how to start the individual components. You ma
 ''Please note'': When starting the components manually, you need to start them '''in the order shown'''. Most importantly, first start the lockserver, then the backend, then everything else.
 (However, we're not going to describe the initial setup in this order.)
 
+For every component that you run, we advise to set up a new `screen` instance (or use separate shells if you prefer). Make sure you have set the environment variables, `PYTHONPATH` and `DJANGO_SETTINGS_MODULE`, correctly.
+
   * '''Start the lockserver'''
-    * Create a new shell
-    * Set your environment variables the same way as shown above.
-    * Start the lockserver:
 {{{
 #!sh
 $ cd /tmp/TARGET/clearinghouse
@@ -263,21 +262,7 @@ $ python lockserver/lockserver_daemon.py
 The lockserver starts and tells you which port it listens on, and that a thread has been started.
 (If you get an `ImportError` instead, then please check your environment variables again.)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    * In a new shell, again set your environment variables the same way as shown above.
-    * Start the backend_daemon. Due to a bug, this must be done from the `seattle` directory currently
+  * Start the backend_daemon. Due to a bug, this must be done from the `seattle` directory currently
       (because the repy files need to be in the directory it is run from):
 {{{
 #!sh  
@@ -285,18 +270,14 @@ cd /tmp/TARGET/seattle
 python ../clearinghouse/backend/backend_daemon.py
 }}}
 
-  * '''Start the polling daemons'''
-    * Start a new shell and set your environment variables the same way as shown above.
-    * Start the polling daemon. Again, this must be done from the `seattle` directory currently:
+  * '''Start the polling daemons'''. Again, this must be done from the `seattle` directory currently:
 {{{
 #!sh   
 cd /tmp/TARGET/seattle
 python ../clearinghouse/polling/check_active_db_nodes.py
 }}}
 
-  * '''Start the node state transition scripts'''
-    * Set your environment variables the same way as shown above.
-    * Start each transition script you intend to run. Again, this must be done from the `seattle` directory currently:
+  * '''Start the node state transition scripts'''. Again, this must be done from the `seattle` directory currently:
 {{{
 #!sh
 cd /tmp/TARGET/seattle
@@ -309,26 +290,28 @@ python ../clearinghouse/node_state_transitions/TRANSITION_SCRIPT_NAME.py
       * transition_onepercentmanyevents_to_canonical
 
 
+
+
 [[BR]]
 == Configure Apache sites ==
 ----
 
-To provide encryption, Seattle Clearinghouse relies on SSL. Therefore you will need to
+To provide encryption and keep passwords etc. safe in transit between a user's web browser and the backend database, Clearinghouse relies on SSL. Therefore you will need to
 setup two !VirtualHost entries at the minimum: one for connections to
 port 80 (HTTP), and one for connections to port 443 (SSL).
 
-Here is a somewhat minimal configuration to serve the geni website from
+Here is a somewhat minimal configuration to serve the Clearinghouse website from
 https://mysite/geni/. Note that in this snippet, the second
 !VirtualHost entry assumes that you have a server certificate and key
 file setup, and the Location directive assumes that your geni
 installation lives in /home/geni/ and that your django settings module
 is seattlegeni.website.settings. The first !VirtualHost is only provided to redirect
 all connections to '''http'''://mysite/geni/* to use
-'''https'''://mysite/geni/*. Also, the seattlegeni installation was
-deployed to the directory /home/geni/live rather than /tmp/deploy, which
+'''https'''://mysite/geni/*. Also, the Clearinghouse installation was
+deployed to the directory /home/geni/live rather than /tmp/TARGET, which
 was the deployment directory given as an example in the steps above.
 
-Depending on you configuration of apache, you may want to add the below code to: /etc/apache2/sites-available/default
+Depending on you configuration of Apache, you may want to add the below code to: /etc/apache2/sites-available/default
 
 {{{
 #!sh
