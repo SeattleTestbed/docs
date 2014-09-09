@@ -1,13 +1,13 @@
 = Github and Git =
 Seattle's code base and ticket system are hosted on [https://github.com/ Github].
-Github is a collaboration, code review, and code management application popularly
-used in open source projects by distributed developers.  Seattle contributions
+Github is a collaboration, code review, and code management application that is popularly
+used in open source projects and by distributed developers.  Contributions to Seattle 
 are expected to be [https://help.github.com/articles/using-pull-requests pull requests]
 to repositories of the [https://github.com/SeattleTestbed SeattleTestbed] organization.
 
 Git is a free and open source distributed [http://en.wikipedia.org/wiki/Version_control_system VCS]
-(Version Control System).  A version control system helps manage changes to files.  Users may run Git locally
-on their computer to modify repositories and its files hosted on Github.  The following document covers the
+(Version Control System).  A VCS helps manage changes made to files.  Users may run Git on their local
+computers to modify a remote repository and its files that are hosted on Github.  The following document covers the
 basics of using Git and submitting a pull request to one of Seattle's Github repositories.
 
 [[TOC(inline)]]
@@ -16,7 +16,7 @@ basics of using Git and submitting a pull request to one of Seattle's Github rep
 
 == Git Installation ==
 Github provides platform-specific installers for Mac and Windows users.  Installation instructions
-is provided for each supported platform in the links below.
+are provided in the links below for each supported platform.
 
 [https://mac.github.com Mac]
 
@@ -26,9 +26,9 @@ is provided for each supported platform in the links below.
 
 
 Linux users may install Git using their distribution's package manager.
-Installation commands for many Linux distributions is availabe in [http://git-scm.com/download/linux Linux].
+Installation commands for many Linux distributions are available at [http://git-scm.com/download/linux Linux].
 
-Debian-based distributions can use [http://en.wikipedia.org/wiki/Advanced_Packaging_Tool APT] (Advanced Packaging Tool).
+Debian-based (Linux) distributions can use [http://en.wikipedia.org/wiki/Advanced_Packaging_Tool APT] (Advanced Packaging Tool).
 {{{
 $ sudo apt-get install git
 }}}
