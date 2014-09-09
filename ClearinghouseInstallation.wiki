@@ -109,22 +109,16 @@ $ python ~/clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
 }}}
 
 
-    * Deploy the Repy runtime, following the instructions of the script called previously.
+    * Deploy the Repy runtime. Create a `seattle` directory besides you deployed `clearinghouse`, and run the build script.
 {{{
 #!sh
 $ mkdir /tmp/TARGET/seattle
-$ cd clearinghouse/scripts
+$ cd ~/clearinghouse/scripts
 $ python build.py /tmp/TARGET/seattle
 }}}
 [[BR]]
 
-  * The Seattle [wiki:SeattleBackend backend scripts] require a set of public keys (called ''state keys'') to work. Before generating the keys, first create a `statekeys` directory within the deployed `clearinghouse` hierarchy:
-{{{
-#!sh
-$ mkdir /tmp/TARGET/clearinghouse/node_state_transitions/statekeys
-}}}
-
-  * From the `seattle` runtime directory created and populated earlier, make runnable and then run the script that will generate state keys for you:
+  * The Seattle [wiki:SeattleBackend backend scripts] require a set of public keys (called ''state keys'') to work. From the `seattle` runtime directory created and populated earlier, make runnable and then run the script that will generate state keys for you:
  
 {{{
 #!sh
@@ -132,9 +126,9 @@ $ cd /tmp/TARGET/seattle
 $ chmod +x generate_state_keys.sh
 $ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
 }}}
-  * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
+    * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
 
-    * Change to the `clearinghouse` directory that is in the directory you deployed
+  * Change to the `clearinghouse` directory that is in the directory you deployed
       to. For example:
 {{{
 #!sh 
