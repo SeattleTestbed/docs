@@ -48,11 +48,10 @@ $ git config --global user.email "john.smith@example.com"
 }}}
 
 You can check your user information by typing the following command:
-git config --list
 
-
-
-
+{{{
+$ git config --list
+}}}
 
 
 == Configure Github User Account ==
