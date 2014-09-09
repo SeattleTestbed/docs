@@ -159,16 +159,50 @@ python generatekeys.py NAME_OF_YOUR_KEY_FILES 4096
 python generatekeys.py acceptdonation 4096
 }}}
       * Generate a key pair for all state keys per the list above.
-      * Create a folder  `/tmp/TARGET/clearinghouse/node_state_transitions/ `, and then a folder `statekeys` below it. Copy the seven publickeys over to `statekeys`. As noted, we do not need the privatekey files.
+      * Create a folder  `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`. Copy the seven publickeys over to `statekeys`. As noted, we do not need the privatekey files.
       * Once copied to their final destination, delete `*.publickey *.privatekey` from the `seattle` folder.
 
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
       called `seattlegeni`).
     * Edit `/tmp/TARGET/clearinghouse/website/settings.py`
-      * Specify the name of the clearinghouse database, as well as the database username, password, etc.
+      * Specify the name of the clearinghouse database, as well as the database username, password, etc. Find the following lines and edit:
+{{{
+# Database
+# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+DATABASES = {
+    'default': {
+        # you can use django.db.backends.sqlite3 instead of mysql. If you
+        # decide to do so, you can leave the other fields empty
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'seattlegeni',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+}}}
       * Set SECRET_KEY to a long, random string.
+{{{
+# Make this unique, and don't share it with anybody.
+# Fill this in!
+SECRET_KEY = ''
+}}}
       * If this is a production launch, also set DEBUG to False, and uncomment and change the fields for sending ADMINS email.
+{{{
+# If DEBUG is True, then error details will be shown on the website and ADMINS
+# will not receive an email when an error occurs. So, this should be False in
+# production.
+DEBUG = False
+...
+# Email addresses of people that should be emailed when a 500 error occurs on
+# the site when DEBUG = False (that is, in production). Leave this to be empty
+# if nobody should receive an email. 
+ADMINS = (
+    ('Admin_name', 'Admin_email'),
+)
+}}}
     * Set your environment variables:
 {{{
 #!sh
@@ -203,7 +237,7 @@ python website/manage.py runserver
       In case you are connected via {{{ssh}}}, you can use port forwarding to make the 
       development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
       Then, open http://localhost:8000/ in your local browser and interact with your install.
-    * For production, run the site through apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
+    * For production, run the site through apache: [wiki:Archive/SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
       
   * '''Start the lockserver'''
     * Set your environment variables the same way as shown above.
