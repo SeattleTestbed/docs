@@ -14,7 +14,7 @@ basics of using Git and submitting a pull request to one of Seattle's Github rep
 
 
 
-= Git Installation =
+== Git Installation ==
 Github provides platform-specific installers for Mac and Windows users.  Installation instructions
 are provided in the links below for each supported platform.
 
@@ -34,7 +34,7 @@ $ sudo apt-get install git
 }}}
 
 
-= Configure Git User Information =
+== Configure Git User Information ==
 
 After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. 
 
@@ -68,7 +68,7 @@ be available.  ''john-smith'' should match the user name chosen during the creat
 of the Github account.
 
 
-=== Fork a SeattleTestbed Repository ===
+== Fork a SeattleTestbed Repository ==
 
 General instructions on forking repositories and managing pull requests is available
 [https://help.github.com/articles/fork-a-repo here]
