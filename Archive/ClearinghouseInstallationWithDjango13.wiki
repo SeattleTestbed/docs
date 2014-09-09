@@ -94,11 +94,10 @@ python initialize.py
     * Deploy all necessary files to a directory of your choice. (We'll use `/tmp/TARGET` in these instructions.) The directory you deploy to should be the name of a directory that does not yet exist. For example:
 {{{
 #!sh 
-cd ..
-python ./deploymentscripts/deploy_clearinghouse ./tmp/TARGET
+python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
 }}}
 
-
+The above command runs deploy_clearinghouse.py with two arguments. "." is the directory that contains /clearinghouse, and /tmp/TARGET is the directory that we want to deploy the clearinghouse.
 
 {{{
 #!comment
