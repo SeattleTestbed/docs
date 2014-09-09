@@ -28,16 +28,14 @@ are provided in the links below for each supported platform.
 Linux users may install Git using their distribution's package manager.
 Installation commands for many Linux distributions are available at [http://git-scm.com/download/linux Linux].
 
-Debian-based (Linux) distributions can use [http://en.wikipedia.org/wiki/Advanced_Packaging_Tool APT] (Advanced Packaging Tool).
+For example, Debian-based Linux distributions can use [http://en.wikipedia.org/wiki/Advanced_Packaging_Tool APT] (Advanced Packaging Tool).
 {{{
 $ sudo apt-get install git
 }}}
 
 == Git Setup ==
 
-Git requires the configuration of a username and email address before a repository
-can be created or modified.  User information configured after installing Git is
-used for all local repositories.
+After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. Each repository you create will use this user (author) configuration. 
 
 
 === Configure Git User Information ===
