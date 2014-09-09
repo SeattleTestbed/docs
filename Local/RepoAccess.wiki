@@ -1,14 +1,13 @@
 = Github and Git =
 Seattle's code base and ticket system are hosted on [https://github.com/ Github].
-Github is a collaboration, code review, and code management application that is popularly
+Github is a collaboration, code review, and code management web application that is popularly
 used in open source projects and by distributed developers.  Contributions to Seattle 
 are expected to be [https://help.github.com/articles/using-pull-requests pull requests]
 to repositories of the [https://github.com/SeattleTestbed SeattleTestbed] organization.
 
 Git is a free and open source distributed [http://en.wikipedia.org/wiki/Version_control_system VCS]
-(Version Control System).  A VCS helps manage changes made to files.  Users may run Git on their local
-computers to modify a remote repository and its files that are hosted on Github.  The following document covers the
-basics of using Git and submitting a pull request to one of Seattle's Github repositories.
+(Version Control System).  A VCS helps manage changes made to files.  Users run Git on their local
+computers to upload changes to remote repositories and files hosted on Github. Users edit files locally and then upload their changes to Github. The following document covers the basics of using Git and submitting a pull request to one of Seattle's Github repositories.
 
 [[TOC(inline)]]
 
@@ -56,7 +55,7 @@ $ git config --list
 
 == Configure Github User Account ==
 Before a pull request can be submitted to a [https://github.com/SeattleTestbed SeattleTestbed]
-repository, a user account must be created on Github.  A free user account is also needed to create
+repository, a user account (free) must be created on Github.  This user account is also needed to create
 new repositories and fork (create a copy) ones that already exist on Github.
 
 
