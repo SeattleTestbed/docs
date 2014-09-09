@@ -54,7 +54,7 @@ You need two mysql databases and seperate users with access to each.
 
 For simplicity you can make the database usernames correspond to the database names.
 
-Here's an example of creating a database and a user:
+Here's an example of creating a database and a user. Note that when you execute commands as the root user of mysql for the first time, the password for root is empty, so typing Enter would allow you to proceed. However, this is not safe. It is thus highly recommended that you reset your root password as instructed on [http://dev.mysql.com/doc/refman/5.0/en/resetting-permissions.html this page] (see B.5.4.1.2 Resetting the Root Password: Unix Systems).
 
 {{{
 #!sh
