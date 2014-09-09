@@ -33,14 +33,15 @@ For example, Debian-based Linux distributions can use [http://en.wikipedia.org/w
 $ sudo apt-get install git
 }}}
 
-== Git Setup ==
 
-After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. Each repository you create will use this user (author) configuration. 
 
 
 === Configure Git User Information ===
 
-Configure the user name and email included in the ''Author'' field of each commit.
+After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. Each repository you create will use this user (author) configuration. 
+
+
+To configure the Git author information, open the Terminal and type '''git config''', which will allow you to configure Git on your local machine. to add the user name and email, as shown below:
 
 {{{
 $ git config --global user.name "John Smith"
