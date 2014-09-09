@@ -28,6 +28,7 @@ Most of these can be installed through a package manager. For example, on a Debi
 #!sh
 $ sudo apt-get install apache2 libapache2-mod-python
 $ sudo apt-get install mysql-server mysql-client python-mysqldb
+$ # MySQL will prompt you to set a root database password, which you should do.
 $ sudo apt-get install ntp
 $ sudo apt-get install openssl
 }}}
@@ -58,6 +59,7 @@ Here's an example of creating a database and a user:
 {{{
 #!sh
 $ mysql -u root -p
+$ # This requires entering the database root password set during install!
 
 mysql> create database seattlegeni;
 
