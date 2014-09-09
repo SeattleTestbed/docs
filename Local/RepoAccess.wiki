@@ -80,9 +80,8 @@ and click on the ''fork'' button in the upper right-hand corner of the page.
 
 == Clone a Git Repository ==
 
-The ''clone'' command creates a local copy of a remotely hosted Github repository.  In the following
-example, the ''repy_v2'' repository is cloned to the Github page of the ''john-smith'' user.  Substitute
-the user account created above if following along with these examples.
+The ''git clone'' command creates a local copy of a remotely hosted Github repository.  In the following
+example, the ''repy_v2'' repository is cloned to the users local Git repository.  
 
 {{{
 $ git clone https://github.com/john-smith/repy_v2
