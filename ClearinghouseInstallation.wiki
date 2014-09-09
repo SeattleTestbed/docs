@@ -275,20 +275,25 @@ $ openssl x509 -req -in server.csr -signkey server.key -out server.crt
 
   * Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`.
 
+Next up, we configure Apache.
 
 
-Here is a somewhat minimal configuration to serve the Clearinghouse website from
-https://mysite/geni/. Note that in this snippet, the second
+-----
+
+This is a minimal exemplary configuration to serve the Clearinghouse website from
+https://mysite/clearinghouse/. Note that in this snippet, the second
 !VirtualHost entry assumes that you have a server certificate and key
-file setup, and the Location directive assumes that your geni
-installation lives in /home/geni/ and that your django settings module
-is seattlegeni.website.settings. The first !VirtualHost is only provided to redirect
-all connections to '''http'''://mysite/geni/* to use
-'''https'''://mysite/geni/*. Also, the Clearinghouse installation was
-deployed to the directory /home/geni/live rather than /tmp/TARGET, which
+file setup, and the `Location` directive assumes that your Clearinghouse
+installation lives in `/home/clearinghouse/live` and that your Django settings module
+is `clearinghouse.website.settings`.
+
+The first !VirtualHost provided redirects all connections to '''http'''://mysite/clearinghouse/* to use
+'''https'''://mysite/clearinghouse/*. Also, the Clearinghouse installation was
+deployed to the directory `/home/clearinghouse/deployment` rather than `/tmp/TARGET`, which
 was the deployment directory given as an example in the steps above.
 
-Depending on you configuration of Apache, you may want to add the below code to: /etc/apache2/sites-available/default
+Depending on you configuration of Apache, you may want to add the below code to `/etc/apache2/sites-available/default`.
+
 
 {{{
 #!sh
