@@ -97,7 +97,7 @@ python initialize.py
 python ./clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
 }}}
 
-The above command runs deploy_clearinghouse.py with two arguments. "." is the directory that contains /clearinghouse, and /tmp/TARGET is the directory that we want to deploy the clearinghouse.
+At this point, a /clearinghouse directory will be created under /tmp/TARGET/. Note that the above command runs deploy_clearinghouse.py with two arguments. "." is the directory that contains /clearinghouse, and /tmp/TARGET is the directory that we want to deploy the clearinghouse.
 
 {{{
 #!comment
@@ -111,7 +111,7 @@ The above command runs deploy_clearinghouse.py with two arguments. "." is the di
 {{{
 #!sh
 mkdir /tmp/TARGET/seattle
-cd clearinghouse/scripts/dist
+cd clearinghouse/scripts/
 python build.py /tmp/TARGET/seattle   # Use absolute target path!
 }}}
 
