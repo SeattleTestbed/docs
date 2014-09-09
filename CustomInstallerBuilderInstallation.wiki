@@ -53,7 +53,7 @@ Now '''log in as the user who will be hosting the Custom Installer Builder''' (i
 #!sh
 $ sudo -i -u cib
 [sudo] password for currentuser:
-$ git clone https://github.com/aaaaalbert/custominstallerbuilder.git -b new_build
+$ git clone https://github.com/aaaaalbert/custominstallerbuilder.git -b django16support
 }}}
 
 In the `custominstallerbuilder` directory created through this, locate and `cd` into `scripts/`, and run the init script:
