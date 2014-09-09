@@ -187,7 +187,7 @@ ADMINS = (
 [[BR]]
 
 
-    * Add these lines to your `.bashrc`, log out of your shell, and log in again to make the changes become effective:
+    * Add these lines to the clearinghouse user's `.bashrc`. (The changes will become effective the next time the user logs in, so you might want to log out and log in again following the edit.)
 {{{
 #!sh
 # In ~/.bashrc
@@ -197,6 +197,7 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
       Note: the /tmp/TARGET path entry is to make available the two packages
       `clearinghouse` and `seattle` which the deployment script created in the
       target directory. The Seattle path item is to ensure that the Repy runtime works.
+
 
     * Create the database structure:
 {{{
@@ -219,7 +220,7 @@ $ python website/manage.py runserver 0.0.0.0:8000
       ''Hint:'' In case you don't have a browser on your server, but have {{{ssh}}} access, you can use port forwarding to make the development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
       Then, open http://localhost:SOME_LOCAL_PORT/ in your local browser and interact with your install.
 
-    * For production, run the site through Apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
+    * For production, run the site through an Apache web server. Instructions are available  [#ConfigureApachesites below].
 
 
 [[BR]]
@@ -234,62 +235,14 @@ Finally, we will set up the backend database and scripts.
       `keydb/schema.sql` on the new key database you created. If set up as suggested with both the user and databse names `keydb`:
 {{{
 #!sh  
-mysql -ukeydb -p --database=keydb < keydb/schema.sql
+$ mysql -ukeydb -p --database=keydb < keydb/schema.sql
+# This will prompt for the keydb database password!
 }}}
-    * Edit the file 'backend/config.py' and set a value for the authcode.
+    * Edit the file 'backend/config.py' and set a value for `authcode`.
     * Make sure that the file `keydb/config.py` is not readable by the user the web server will be running as, i.e. it is only user-readable (but neither group- nor world-readable), owned by the clearinghouse user, and the web server is not in the user group the file belongs to.
     * The same goes for `backend/config.py`.
 
-The backend scripts can be started with a script [#Runningstart_clearinghouse_components.sh start_clearinghouse_components.sh]. Before we can do that, Apache needs to be set up. Skip down to [#ConfigureApachesites].
-
-[[BR]]
-----
-'''Developer's note:'''
-
-For reference, we'll explain here how to start the individual components. You may safely skip this section unless you want to modify the clearinghouse's implementation.
-
-''Please note'': When starting the components manually, you need to start them '''in the order shown'''. Most importantly, first start the lockserver, then the backend, then everything else.
-(However, we're not going to describe the initial setup in this order.)
-
-For every component that you run, we advise to set up a new `screen` instance (or use separate shells if you prefer). Make sure you have set the environment variables, `PYTHONPATH` and `DJANGO_SETTINGS_MODULE`, correctly.
-
-  * '''Start the lockserver'''
-{{{
-#!sh
-$ cd /tmp/TARGET/clearinghouse
-$ python lockserver/lockserver_daemon.py
-}}}
-The lockserver starts and tells you which port it listens on, and that a thread has been started.
-(If you get an `ImportError` instead, then please check your environment variables again.)
-
-  * Start the backend_daemon. Due to a bug, this must be done from the `seattle` directory currently
-      (because the repy files need to be in the directory it is run from):
-{{{
-#!sh  
-cd /tmp/TARGET/seattle
-python ../clearinghouse/backend/backend_daemon.py
-}}}
-
-  * '''Start the polling daemons'''. Again, this must be done from the `seattle` directory currently:
-{{{
-#!sh   
-cd /tmp/TARGET/seattle
-python ../clearinghouse/polling/check_active_db_nodes.py
-}}}
-
-  * '''Start the node state transition scripts'''. Again, this must be done from the `seattle` directory currently:
-{{{
-#!sh
-cd /tmp/TARGET/seattle
-python ../clearinghouse/node_state_transitions/TRANSITION_SCRIPT_NAME.py
-}}}
-    * The four transitions scripts that you want running are:
-      * transition_donation_to_canonical
-      * transition_canonical_to_twopercent
-      * transition_twopercent_to_twopercent
-      * transition_onepercentmanyevents_to_canonical
-
-
+The backend scripts can be started with a script [#Runningstart_clearinghouse_components.sh start_clearinghouse_components.sh]. Before we can do that, Apache needs to be set up.
 
 
 [[BR]]
@@ -421,6 +374,8 @@ $ chmod a+w *_repy.py
 [[BR]]
 == Running start_clearinghouse_components.sh ==
 ----
+
+''Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [wiki:ClearinghouseDevelopersNotes Deleopers' Notes] for details.''
 
 If you have all the components of Seattle Clearinghouse (including Apache) configured,
 the script `deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
