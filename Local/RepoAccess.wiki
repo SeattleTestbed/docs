@@ -94,9 +94,7 @@ Checking connectivity... done.
 }}}
 
 
-A ''repy_v2'' folder is created in the current directory.  You must switch to
-the cloned repository's directory, or one of its sub-directories, to successfully
-issue Github commands.
+A ''repy_v2'' folder is created in the current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or one of its sub-directories. For example:
 
 {{{
 $ cd repy_v2/
