@@ -87,14 +87,15 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
     * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
-git clone https://github.com/aaaaalbert/clearinghouse.git
+git clone https://github.com/SeattleTestbed/clearinghouse.git
 cd clearinghouse/scripts
 python initialize.py
 }}}
     * Deploy all necessary files to a directory of your choice. (We'll use `/tmp/TARGET` in these instructions.) The directory you deploy to should be the name of a directory that does not yet exist. For example:
 {{{
 #!sh 
-python ./clearinghouse/deploymentscripts/deploy_seattlegeni.py . /tmp/TARGET
+cd ..
+python ./deploymentscripts/deploy_clearinghouse ./tmp/TARGET
 }}}
 
 
