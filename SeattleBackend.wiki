@@ -34,7 +34,7 @@ Although it does not quite fit the same definition of “state” as the other k
 
 [[BR]]
 === Unused States ===
-These states were previously used, and are no longer in use.
+These states were previously used, but are no longer in use since late 2012. For clearinghouses dating back earlier, there is a small chance that it will still find nodes advertising these keys.
  * onepercent
  * onepercentmanyevents
  * movingto_onepercentmanyevents
