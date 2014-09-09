@@ -98,7 +98,7 @@ $ git clone https://github.com/SeattleTestbed/clearinghouse.git
 $ cd clearinghouse/scripts
 $ python initialize.py
 }}}
-    * Deploy all necessary files to a directory of your choice. We'll use `/tmp/TARGET` in these instructions. (For an actual deployment, best use an empty directory under the clearinghouse's user account.) You'll need to give two arguments to the deployment script: The parent directory of the `clearinghouse` repo you checked out, and a directory you want to deploy to. (The latter should not yet exist.) For example:
+    * Deploy all necessary files to a directory of your choice. We'll use `/tmp/TARGET` in these instructions. (For an actual deployment, best use an empty directory under the clearinghouse's user account.) You'll need to give two arguments to the deployment script: The parent directory of the `clearinghouse` repo you checked out, and a directory you want to deploy to. (In case the latter exists, you will be asked if you want a backup to be created.) For example:
 {{{
 #!sh
 $ python ~/clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
