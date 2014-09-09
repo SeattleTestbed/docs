@@ -253,6 +253,30 @@ To provide encryption and keep passwords etc. safe in transit between a user's w
 setup two !VirtualHost entries at the minimum: one for connections to
 port 80 (HTTP), and one for connections to port 443 (SSL).
 
+For a production launch, follow the instructions at [http://slacksite.com/apache/certificate.php this page] to understand Certificate Signing Requests and dealing with Certificate Authorities in greater detail. For testing purposes, you will want to generate a temporary self-signed certificate. Here's how.
+
+We'll assume `openssl` is available on your clearinghouse machine.
+
+  * Generate a server private key. '''Warning:''' The key does not have a passphrase! If this is a production key, make sure it's not readable by any user but `root`!
+{{{
+#!sh
+$ openssl genrsa -out server.key 4096
+}}}
+
+
+  * Generate a Certificate Signing request, and sign it yourself using the server key:
+{{{
+#!sh
+$ openssl req -new -key server.key -out server.csr
+# Follow the interactive dialog. For a testing key, you can use default values for all fields.
+
+$ openssl x509 -req -in server.csr -signkey server.key -out server.crt
+}}}
+
+  * Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`.
+
+
+
 Here is a somewhat minimal configuration to serve the Clearinghouse website from
 https://mysite/geni/. Note that in this snippet, the second
 !VirtualHost entry assumes that you have a server certificate and key
