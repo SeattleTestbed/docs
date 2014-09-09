@@ -55,15 +55,7 @@ git config --list
 
 
 
-An example of Git's commit log output. It shows the user information that was configured in the above example:
-{{{
-$ git log
-commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
-Author: John Smith <john.smith@example.com>
-Date:   Tue Sep 2 14:46:36 2014 -0400
 
-    Add a README to the project.
-}}}
 
 == Github Setup ==
 Before a pull request can be submitted to a [https://github.com/SeattleTestbed SeattleTestbed]
@@ -203,11 +195,19 @@ On branch new_feature
 nothing to commit, working directory clean
 }}}
 
-To get a list of commit messages made thus far.  The "Add a README file to the project" commit
-message should now be listed in the log.
+To get a list of commit messages made thus far type: git log 
+This will show the user information and the commit message (in this case "Add a README to the project"):
+
 {{{
 $ git log
+commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
+Author: John Smith <john.smith@example.com>
+Date:   Tue Sep 2 14:46:36 2014 -0400
+
+    Add a README to the project.
 }}}
+
+
 
 === Push the Commit to Github ===
 
