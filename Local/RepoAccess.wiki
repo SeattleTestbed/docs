@@ -38,10 +38,10 @@ $ sudo apt-get install git
 
 === Configure Git User Information ===
 
-After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. Each repository you create will use this user (author) configuration. 
+After installing Git, the next step is for the user to configure his/her author information (username and email address) so that Git will correctly log the author of a commit. 
 
 
-To configure the Git author information, open the Terminal and type '''git config''', which will allow you to configure Git on your local machine. to add the user name and email, as shown below:
+To configure Git author information, open the Terminal and type '''git config --global user.name "user's name"''', which will allow you to configure Git on your local machine. Each repository you create will use the same user (author) configuration if you use the global flag (as in the provided example). 
 
 {{{
 $ git config --global user.name "John Smith"
@@ -49,7 +49,7 @@ $ git config --global user.name "John Smith"
 $ git config --global user.email "john.smith@example.com"
 }}}
 
-Example commit log output containing the configured user information:
+An example of Git's commit log output. It shows the user information that was configured in the above example:
 {{{
 $ git log
 commit 3c9b1d0068075fdac6ed928f8e5a27ac3253ca5e
