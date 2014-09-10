@@ -64,7 +64,7 @@ A Github user account can be created at https://github.com/join
 Once users create their accounts, user-specific home pages are created. For example: ''https://github.com/john-smith''  
 
 
-== Fork a SeattleTestbed Repository ==
+== Fork a `SeattleTestbed` Repository ==
 
 Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests is available
 [https://help.github.com/articles/fork-a-repo here]
