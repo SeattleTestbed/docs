@@ -20,7 +20,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see [htt
    * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
    * [wiki:PythonTutorial Subset of Python Tutorial] with basic information about the subset of Python needed to write code in Repy
    * [wiki:PythonVsRepy Python You Need to Forget to Use Repy]
-   * [wiki:RepyTutorial Repy Tutorial]
+   * '''[wiki:RepyTutorial Repy Tutorial]'''
    * [wiki:RepyApi Repy Library] reference
    * [wiki:SeattleLib Seattle Standard Library] reference
    * [wiki:PortingPythonToRepy Porting Python to Repy Guide]
