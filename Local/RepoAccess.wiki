@@ -103,9 +103,9 @@ $ cd repy_v2/
 }}}
 
 === Set Alias for Forked Repository ===
-Setting an alias for the repository that was forked in the previous section can help developers better manage repository changes and
-keep the local and remote repositories in sync.  The alias is a string that refers to the forked repository by name instead of the
-repository's full URL.  The `upstream` alias is set to the forked `repy_v2` repository in the next example:
+Setting an alias for a repository can help developers better manage repository changes and
+keep local and remote repositories in sync.  The alias is a string that refers to the repository by name instead of the
+repository's full URL.  In the example below, the forked [https://github.com/SeattleTestbed/repy_v2 repy_v2] repository is given the '''upstream''' alias:
 
 
 {{{
@@ -115,9 +115,9 @@ $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 
 === Retrieve Latest Version of Forked Repository ===
 
-Fetching and merging the latest changes of `upstream` (alias that points to the forked repository) can be done with the
-`pull` Github command.  The `pull` command merges the changes into the local repository in addition to fetching changes
-made to the remote repository.
+Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
+`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.
+.
 
 {{{
 $ git pull upstream master
