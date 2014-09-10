@@ -226,6 +226,14 @@ submitting a pull request.
 
 
 == Miscellaneous Git commands ==
+Typing ''git help -a'' on the command-line outputs the full list of commands supported by Git.
+Consult Git's help pages for more information on each command.
+Another resource that covers useful Git commands can be found here:
+http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
+
+The remaining section below covers the most common Git commands needed by newcomers for their first pull request to
+a [https://github.com/SeattleTestbed SeattleTestbed] repository.
+
 
 Show the changes in README.txt that have not been committed.
 {{{
