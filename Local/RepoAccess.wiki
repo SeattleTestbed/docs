@@ -249,7 +249,7 @@ Consult Git's help pages for more information about each command.
 Another resource that covers useful Git commands can be found here:
 http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
 
-The section below lists useful, common Git commands that are included in the Git help pages.
+The section below lists some useful, common Git commands.
 
 
 Show changes in the README.txt that have not been committed.
