@@ -9,7 +9,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see [htt
  * Accessing our !GitHub repositories, subscribing to the mailing list, using the wiki
    * Check out (i.e. {{{git clone}}}) our repos from [https://github.com/SeattleTestbed]
    * '''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''
-   * '''[wiki:ManagingTracTickets Managing Trac tickets]'''
+   * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
    * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * ~~[wiki:Local/RepoAccess SVN access] instructions~~
    * ~~[http://wiki.greenstone.org/wiki/index.php/Useful_SVN_Commands Useful SVN Commands]~~
