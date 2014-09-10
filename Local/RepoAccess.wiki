@@ -76,7 +76,9 @@ The URL of the forked repository can then be used with Git to create and save a 
 
 Navigate to the [https://github.com/SeattleTestbed/repy_v2 repy_v2] repository
 and click on the ''fork'' button in the upper right-hand corner of the page.
-[[Image(https://github-images.s3.amazonaws.com/help/repository/fork_button.jpg)]]
+
+
+[[Image(fork.png)]]
 
 == Clone a Git Repository ==
 
