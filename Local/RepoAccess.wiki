@@ -169,7 +169,7 @@ Untracked files:
     nothing added to commit but untracked files present (use "git add" to track)
 }}}
 
-Git tells us that the README.txt file is untracked, so the first command will add it. The second command will tell us whether the file has been added successfully. 
+Git tells us that the README.txt file is untracked, so the first command (git add) will add it. The second command (git status) will tell us whether the file has been added successfully. 
 
 {{{
 $ git add README.txt
@@ -182,7 +182,7 @@ Changes to be committed:
     new file:   README.txt
 }}}
 
-After adding the file it must be committed. This creates a message about the file that will be transmitted once the file is ready to push to the master branch.
+After adding the file it must be committed. By committing a file, Git creates a message about the file that will be transmitted once the file is ready to push to the master branch.
 
 {{{
 $ git commit -m "Add a README file to the project"
