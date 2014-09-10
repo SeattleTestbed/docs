@@ -82,8 +82,8 @@ and click on the ''fork'' button in the upper right-hand corner of the page.
 
 == Clone a Git Repository ==
 
-The ''git clone'' command creates a local copy of a remotely hosted Github repository.  In the following
-example, the ''repy_v2'' repository is cloned to the users local Git repository.  
+The `git clone` command creates a local copy of a remotely hosted Github repository.  In the following
+example, the `repy_v2` repository is cloned to the users local Git repository.  
 
 {{{
 $ git clone https://github.com/john-smith/repy_v2
@@ -96,7 +96,7 @@ Checking connectivity... done.
 }}}
 
 
-A ''repy_v2'' folder is created in the current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or one of its sub-directories. For example:
+A `repy_v2` folder is created in the current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or one of its sub-directories. For example:
 
 {{{
 $ cd repy_v2/
@@ -228,7 +228,7 @@ submitting a pull request.
 
 
 == Miscellaneous Git commands ==
-Typing ''git help -a'' on the command-line outputs the full list of commands supported by Git.
+Typing '''git help -a''' on the command-line outputs the full list of commands supported by Git.
 Consult Git's help pages for more information on each command.
 Another resource that covers useful Git commands can be found here:
 http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
@@ -249,21 +249,27 @@ index 70a3d0f..93bce69 100644
  +new line added here.
 }}}
 
-Mark the README.txt as remove and stage it for removal.
+
+Mark README.txt as removed and stage it for removal.
+
 {{{
 $ git rm README.txt
 }}}
 
 
 Unstage the modified README.txt file and reset its contents to the current version on the repository.
+
 {{{
 $ git reset README.txt
 }}}
 
+
 Move a file to a new location but let Git know of the change.
+
 {{{
 $ git mv
 }}}
+
 
 Temporarily store modified files in order to change branches.
 
