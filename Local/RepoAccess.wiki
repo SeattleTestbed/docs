@@ -116,10 +116,11 @@ $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 === Retrieve Latest Version of Forked Repository ===
 
 Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
-`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  
+`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Feature Branch''.
 
-Note: '''''master''''' refers to the master project repository
-link to GitHub's info on branching
+reference image will go here!
+
+Additional info on branching: [http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is branching]
 
 {{{
 $ git pull upstream master
