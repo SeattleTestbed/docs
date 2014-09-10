@@ -212,7 +212,9 @@ Date:   Tue Sep 2 14:46:36 2014 -0400
 }}}
 
 
-=== Push the Commit to Github ===
+=== Push the Commit to the Remote (Forked) Repository ===
+
+This step will push the branch to the remote repository controlled by the user (the forked version that you created earlier). The earlier commit message, along with the file, are pushed to the user's remote repository. 
 
 {{{
 $ git push origin new_feature
@@ -230,6 +232,9 @@ To https://github.com/john-smith/repy_v2
 
 
 === Pull Request ===
+
+After the files are pushed, they can be made available to the Seattle Testbed Organization, after you (the user) initiates a pull request. 
+
 
 Visit the forked ''repy_v2'' repository and click on the green button next to the drop-down list of branches.
 The review page provides a field to enter a summary of the commit changes and review changes before
