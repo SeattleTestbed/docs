@@ -56,7 +56,7 @@ $ git config --list
 == Configure Github User Account ==
 Before a pull request can be submitted to a [https://github.com/SeattleTestbed SeattleTestbed]
 repository, a user account (free) must be created on Github.  This user account is also needed to create
-new repositories and fork (SeattleTestbed/create a copy) ones that already exist on Github.
+new repositories and fork ones that already exist on Github.
 
 
 A Github user account can be created at https://github.com/join
