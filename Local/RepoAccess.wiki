@@ -182,7 +182,7 @@ Changes to be committed:
     new file:   README.txt
 }}}
 
-After adding the file it must be committed. This allows other users to see that the file has been created locally, but is not yet available
+After adding the file it must be committed. This creates a message about the file that will be transmitted once the file is ready to push to the master branch.
 
 {{{
 $ git commit -m "Add a README file to the project"
@@ -191,7 +191,7 @@ $ git commit -m "Add a README file to the project"
   create mode 100644 README.txt
 }}}
 
-The following shows that there are no remaining untracked or new files to commit.
+If you want to check to see that all files have been added and committed, type '''git status''' again. The status should show that the directory is clean, as in the example below:
 
 {{{
 $ git status
@@ -199,8 +199,8 @@ On branch new_feature
 nothing to commit, working directory clean
 }}}
 
-To get a list of commit messages made thus far type: git log 
-This will show the user information and the commit message (in this case "Add a README to the project"):
+To get a list of commit messages made thus far type '''git log''' 
+This will show the user's information and the commit message (in this case "Add a README to the project"):
 
 {{{
 $ git log
@@ -210,7 +210,6 @@ Date:   Tue Sep 2 14:46:36 2014 -0400
 
     Add a README to the project.
 }}}
-
 
 
 === Push the Commit to Github ===
