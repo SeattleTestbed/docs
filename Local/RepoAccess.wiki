@@ -219,9 +219,10 @@ To https://github.com/john-smith/repy_v2
 
 Visit the forked ''repy_v2'' repository and click on the green button next to the drop-down list of branches.
 The review page provides a field to enter a summary of the commit changes and review changes before
-submitting a pull request. 
-[[Image(https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-start-review-button.png)]]
+submitting a pull request.
 
+
+[[Image(pull-request.png)]]
 
 
 == Miscellaneous Git commands ==
