@@ -245,15 +245,15 @@ The next page is where you will preview the commits and write/post a summary or 
 
 == Miscellaneous Git commands ==
 Typing '''git help -a''' on the command-line outputs the full list of commands supported by Git.
-Consult Git's help pages for more information on each command.
+Consult Git's help pages for more information about each command.
 Another resource that covers useful Git commands can be found here:
 http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
 
-The remaining section below covers the most common Git commands needed by newcomers for their first pull request to
-a [https://github.com/SeattleTestbed SeattleTestbed] repository.
+The section below lists useful, common Git commands that are included in the Git help pages.
 
 
-Show the changes in README.txt that have not been committed.
+Show changes in the README.txt that have not been committed.
+
 {{{
 $ git diff README.txt
 diff --git a/README.txt b/README.txt
