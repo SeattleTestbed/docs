@@ -17,7 +17,7 @@ Clearinghouse requires at least the following software to be installed:
  * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
  * [http://www.mysql.com/ MySQL] -- the database
  * [http://www.apache.org/ Apache] -- the web server
- * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://www.modwsgi.org/ mod_wsgi] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
  * [http://www.djangoproject.com/ Django] in version 1.6.x -- necessary to run Django code
  * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support.
@@ -26,7 +26,7 @@ Most of these can be installed through a package manager. For example, on a Debi
 
 {{{
 #!sh
-$ sudo apt-get install apache2 libapache2-mod-python
+$ sudo apt-get install apache2 libapache2-mod-wsgi
 $ sudo apt-get install mysql-server mysql-client python-mysqldb
 $ # MySQL will prompt you to set a root database password, which you should do.
 $ sudo apt-get install ntp
