@@ -153,8 +153,10 @@ Switched to branch 'new_feature'
 }}}
 
 
-=== Commit a New File to the Repository ===
-Create a README.txt file and save it. 
+=== Commit a New File to the Branch ===
+Create a README.txt file and save it. You do this by opening a new document in a text editor and saving as README.txt in the current directory. In the README file you would typically put instructions or details about the project. 
+
+The next step is to ask Git if it can find the README.txt file, by asking it to identify all untracked files (on the local repository):
 
 {{{
 $ git status
@@ -167,6 +169,8 @@ Untracked files:
     nothing added to commit but untracked files present (use "git add" to track)
 }}}
 
+Git tells us that the README.txt file is untracked, so the first command will add it. The second command will tell us whether the file has been added successfully. 
+
 {{{
 $ git add README.txt
 
@@ -178,12 +182,16 @@ Changes to be committed:
     new file:   README.txt
 }}}
 
+After adding the file it must be committed. This allows other users to see that the file has been created locally, but is not yet available
+
 {{{
 $ git commit -m "Add a README file to the project"
 [new_feature 7660f34] Add a README file to the project
  1 file changed, 1 insertion(+)
   create mode 100644 README.txt
 }}}
+
+The following shows that there are no remaining untracked or new files to commit.
 
 {{{
 $ git status
