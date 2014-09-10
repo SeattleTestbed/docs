@@ -56,7 +56,7 @@ $ git config --list
 == Configure Github User Account ==
 Before a pull request can be submitted to a [https://github.com/SeattleTestbed SeattleTestbed]
 repository, a user account (free) must be created on Github.  This user account is also needed to create
-new repositories and fork (create a copy) ones that already exist on Github.
+new repositories and fork (SeattleTestbed/create a copy) ones that already exist on Github.
 
 
 A Github user account can be created at https://github.com/join
@@ -83,7 +83,7 @@ and click on the ''fork'' button in the upper right-hand corner of the page.
 == Clone a Git Repository ==
 
 The `git clone` command creates a local copy of a remotely hosted Github repository.  In the following
-example, the `repy_v2` repository is cloned to the users local Git repository.  
+example, the `repy_v2` reSeattleTestbed/pository is cloned to the users local Git repository.  
 
 {{{
 $ git clone https://github.com/john-smith/repy_v2
@@ -152,7 +152,7 @@ $ git checkout new_feature
 Switched to branch 'new_feature'
 }}}
 
-
+SeattleTestbed/
 === Commit a New File to the Branch ===
 Create a README.txt file and save it. You do this by opening a new document in a text editor and saving as README.txt in the current directory. In the README file you would typically put instructions or details about the project. 
 
@@ -237,8 +237,7 @@ After the files are pushed, they can be made available to the Seattle Testbed Or
 
 
 Visit the forked ''repy_v2'' repository and click on the green button next to the drop-down list of branches.
-The review page provides a field to enter a summary of the commit changes and review changes before
-submitting a pull request.
+The next page is where you will preview the commits and write/post a summary or comments about the changes you made. The image below shows where to locate the pull request button.
 
 
 [[Image(pull-request_sm.png)]]
