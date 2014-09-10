@@ -96,7 +96,7 @@ Checking connectivity... done.
 }}}
 
 
-A `repy_v2` folder is created in the current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or one of its sub-directories. For example:
+A `repy_v2` folder is created in the local, current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or to one of its sub-directories. For example:
 
 {{{
 $ cd repy_v2/
@@ -116,7 +116,7 @@ $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 === Retrieve Latest Version of Forked Repository ===
 
 Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
-`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Feature Branch''.
+`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a (by default, the master) branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Feature Branch''.
 
 reference image will go here!
 
@@ -130,20 +130,22 @@ From https://github.com/SeattleTestbed/repy_v2
   Already up-to-date.
 }}}
 
-=== Add a New Feature Branch ===
+=== Add a New Branch Locally ===
 
-List all known branches of the repository.  A
-[http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is Git branch] can
-be viewed as a set of commits   
+First, list all known local branches of the repository, by typing the following:  
 
 {{{
 $ git branch
 * master
 }}}
 
+Next, to add a new branch, which is the preferred method for working on and adding new features, where '''''new_feature''''' is the name of the new branch:
+
 {{{
 $ git branch new_feature
 }}}
+
+The next step is to switch to the newly created branch:
 
 {{{
 $ git checkout new_feature
