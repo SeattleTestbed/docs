@@ -82,10 +82,10 @@ SOFTWARE_UPDATE_URL=http://blackbox.poly.edu/updatesite/
 Also, change
 {{{
 #!sh
-REPO_PARENT_DIR=/home/cib/custominstallerbuilder/scripts/
+REPO_PARENT_DIR=/home/cib/custominstallerbuilder/DEPENDENCIES/
 }}}
 
-to the location of your `scripts` folder.
+to the location of your `DEPENDENCIES` folder.
 
 You can also change 
 {{{
