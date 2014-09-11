@@ -12,7 +12,7 @@ Thank you for your interest in joining the Seattle project.  To bring you quickl
 
  3. Pick a few tickets from [https://github.com/SeattleTestbed our repositories] to work on.  You should look for tickets with the '''Newcomer''' label.  Before you start working on a ticket, reassign the ticket to yourself so that other newcomers don't end up duplicating your work.  Comment on any findings or insights that you may have, and also post any concerns or questions that arise.  Project members, feel free to add your respective ticket systems here for ease of access for new contributors.
 
- 4. When you are done with your ticket, make sure your code complies to our [wiki:CodingStyle code style guidelines].  Have someone else on the team review your code.  When they give you the OK, contact Justin and he will provide feedback if necessary.  If your code is good, someone will merge in your changes.
+ 4. When you are done with your ticket, make sure your code adheres to our [wiki:CodingStyle code style guidelines].  Have someone else on the team review your code.  When they give you the OK, contact Justin and he will provide feedback if necessary.  If your code is good, someone will merge in your changes.
 
  5. After completing the above, you should contact Justin so that you can join some of the regular weekly meetings.  You should talk to some of the other contributors to help you find the projects that interest you the most.
 
