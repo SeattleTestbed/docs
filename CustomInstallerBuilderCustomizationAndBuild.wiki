@@ -28,7 +28,7 @@ Done? Great, because that's all of the customization required! Let's build insta
 
 == Building base installers ==
 
-Go back to `$REPO_PARENT_DIR/dist` where `rebuild_base_installers_for_seattlegeni.sh` resides. Run the script, supplying it the nodemanager `version` string you set earlier.
+Go back to `~/custominstallerbuilder/` where `rebuild_base_installers.sh` resides. Run the script, supplying it the nodemanager `version` string you set earlier.
 
 {{{
 #!sh
