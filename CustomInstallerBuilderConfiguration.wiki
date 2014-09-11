@@ -1,5 +1,5 @@
 = Configure Your Install =
-Now that you have [wiki:CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
+Now that you have [wiki:Archive/CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
 
 -----
 [[TOC(inline)]]
@@ -67,7 +67,7 @@ cd ~/custominstallerbuilder/repy_runtime
 python generatekeys.py /path/to/key_file_name 4096
 }}}
 
-This generates a keypair consisting of files `key_file_name.publickey` and `key_file_name.privatekey` in the path specified. 4096 is the minimum recommendable length at the time of writing. Change the file mode bits with `chmod` so that the file is not group- nor world-readable, and not writable by anyone.
+This generates a keypair consisting of files `key_file_name.publickey` and `key_file_name.privatekey` in the path specified. 4096 is the minimum recommendable length at the time of writing. It is a good idea to make `root` the owner and group-owner of these files, and move them into the `root` account's home dir, `/root`.
 
 [[BR]]
 
