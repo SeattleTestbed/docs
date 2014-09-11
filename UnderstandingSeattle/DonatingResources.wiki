@@ -13,19 +13,14 @@ Donating resources with Seattle is a safe and easy way to help students and rese
 ----
 
 
-The overall philosophy of the Seattle project is use donated resources in a way that is safe and secure 
-(including performance-isolation). Seattle has key technical innovations that make it so that
-Seattle programs are isolated from other applications you run.   This means that run
-donated resources are isolated so that a program can't write or read
-files it isn't supposed to or do other bad things to your computer. 
-Seattle leverages technology that ensures fair play by isolating the performance of Seattle programs from your other programs you use.
-Our promise to you is to use no more than 10% of your computer's resources (things like RAM, CPU time, network bandwidth, and hard drive space).
+The overall philosophy of the Seattle project is to use donated resources in a way that is safe and secure (including performance-isolation). Seattle has key technical innovations that isolate Seattle programs from other applications you run. This means that donated resources are isolated while running -- a program can't write or read
+files it isn't supposed to or do other bad things to your computer. Seattle leverages technology that ensures fair play by isolating the performance of Seattle programs from other programs you use. Our promise to you is to use no more than 10% of your computer's resources (i.e., RAM, CPU time, network bandwidth, and hard drive space).
 
 
 [[BR]]
 == Risk ==
 ----
-Running any software on your system involves a small amount of risk.  A bug in any of the software you run can allow an attacker to do bad things with your computer.   Seattle is designed to make running Seattle code on your system risk free.   Seattle prevents programs from using too many resources, reading your files on the system, or doing other bad things to your computer.   
+Running any software on your system involves a small amount of risk.  A bug in any of the software you run can allow an attacker to do bad things with your computer.   Seattle is designed to make running Seattle code on your system risk free.   Seattle prevents programs from using too many resources, reading your files, or doing other mischief to harm your computer.   
 
  * '''Risk to your system''':   If we have a bug in the Seattle software that allows a malicious party to escape the protections of Seattle, they could have access with the privilege of the user account that runs Seattle.   We use a [http://portal.acm.org/citation.cfm?id=1866307.1866332 novel security design] to minimize the chance of this from happening.   To further minimize risk Seattle can be run in a restricted / non-privileged account, so if you're concerned about this, run Seattle as a restricted user.
 
