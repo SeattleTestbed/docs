@@ -2,7 +2,7 @@
 
 There are three types of accounts that all developers need.   In addition, all developers should be on the seattle-devel mailing list.
 
-'''Send email to Justin to have your accounts created.'''
+'''Send an email to Justin to have your accounts created.'''
 
 
 == SVN ==
