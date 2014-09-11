@@ -6,7 +6,7 @@ This page describes the customizations to code required before you can build bas
 -----
 
 == Set nodemanager version ==
-In `$REPO_PARENT_DIR` there is a subdirectory for the `nodemanager`. Go there, and edit `nmmain.py`. It includes a line starting with `version = `.
+In `~/custominstallerbuilder/DEPENDENCIES` there is a subdirectory for the `nodemanager`. Go there, and edit `nmmain.py`. It includes a line starting with `version = `.
 
 Change the version string to reflect your project / clearinghouse / Custom Installer Builder name, and also the current build. You will later need this string when launching the build script.
 
@@ -18,7 +18,7 @@ A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) are fine.
 == Check softwareupdater URL and key pair ==
 Remember the public/private key pair whose filenames and paths you [wiki:CustomInstallerBuilderConfiguration#Adaptthebuildscripts configured] in the build script? In order for your installers to be able to validate updates that you push, the `softwareupdater` component must include your (or your update site's) public key.
 
-For this, change into the `softwareupdater` subdir of `custominstallerbuilder/DEPENDENCIES/` and edit `softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first int of your public key, and the value of key `'n'` with the second.
+For this, change into the `softwareupdater` subdir of `~/custominstallerbuilder/DEPENDENCIES/` and edit `softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first int of your public key, and the value of key `'n'` with the second.
 
 Furthermore, change the line starting with `softwareurl = ` to contain your softwareupdater's URL.
 
