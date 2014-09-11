@@ -18,7 +18,7 @@ Any user name will be fine. We'll use `cib` in the instructions.
 The Custom Installer Builder requires a few pieces of software to run:
  * [http://www.python.org/ Python] in version 2.5-2.7 -- the language Custom Installer Builder is written in
  * [http://www.apache.org/ Apache] -- the web server
- * [http://www.modpython.org/ mod_python] -- necessary for interfacing with Django code
+ * [http://www.modwsgi.org/ mod_wsgi]  -- necessary for interfacing with Django code
  * [http://djangoproject.com Django] -- necessary to run Django code
  * zip -- necessary for packaging window installers and keys 
  * [https://git-scm.com/ Git] -- source code management system, used to install Seattle dependencies
@@ -30,7 +30,7 @@ To install the other packages, log in as a `sudo`able user and type
 {{{
 #!sh
 $ sudo apt-get install apache2
-$ sudo apt-get install libapache2-mod-python
+$ sudo apt-get install libapache2-mod-wsgi
 $ sudo apt-get install ntp
 $ sudo apt-get install zip
 $ sudo apt-get install git
