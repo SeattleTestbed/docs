@@ -53,39 +53,25 @@ Save the file, and you are done with configuring Django for your Custom Installe
 == Adapt the build scripts ==
 Go to the `custominstallerbuilder/DEPENDENCIES/dist` directory. Edit `rebuild_base_installers_for_seattlegeni.sh` to match your local configuration.
 
-Adapt the file names (including full paths) to your softwareupdater's public and private keys:
+Adapt the file names (including full paths) to your softwareupdater's public and private keys. (If you don't have softwareupdater keys yet, see below how to create them.)
 {{{
 #!sh
 PUBLIC_KEY_FILE=/path/to/publickey
 PRIVATE_KEY_FILE=/path/to/privatekey
 }}}
 
-{{{
-#!comment 
-           Use softwareupdater/generate_keys.py instead?????
-}}}
-
-You can generate a keypair in the correct format from [https://seattleclearinghouse.poly.edu/html/profile]( https://seattleclearinghouse.poly.edu/html/profile) using your (or creating a new) user account, or alternatively use the program `seash.py` from the `repy_runtime` directory previously generated for this:
+Here's how to generate a key pair in the correct format. Change to the `repy_runtime` directory previously generated, and run the `generatekeys.py` script:
 {{{
 #!sh
 cd ~/custominstallerbuilder/repy_runtime
-python seash.py   # This starts an interactive program!
-Enabled modules:
-
- !>
+python generatekeys.py /path/to/key_file_name 4096
 }}}
 
-To generate a keypair, type `genkeys`, followed by the desired key name and key length. 4096 is the minimum recommendable length at the time of writing. Assuming you call the key `softwareupdater`, this generates two files, `softwareupdater.publickey` and `softwareupdater.privatekey` in the `repy_runtime` directory:
+This generates a keypair consisting of files `key_file_name.publickey` and `key_file_name.privatekey` in the path specified. 4096 is the minimum recommendable length at the time of writing. Change the file mode bits with `chmod` so that the file is not group- nor world-readable, and not writable by anyone.
 
-{{{
-#!sh
- !> genkeys softwareupdater 4096
-Created identity 'softwareupdater'
- !> exit
-$
-}}}
+[[BR]]
 
-Now move the key files to a location of your choosing. Back in `rebuild_base_installers_for_seattlegeni.sh`, remember to update the path-to and name of keyfiles.
+Back in `rebuild_base_installers_for_seattlegeni.sh`, remember to update the path-to and name of keyfiles.
 
 Furthermore, the softwareupdater URL must be given:
 {{{
