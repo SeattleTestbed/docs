@@ -51,7 +51,7 @@ Save the file, and you are done with configuring Django for your Custom Installe
 
 
 == Adapt the build scripts ==
-Go to the `custominstallerbuilder/DEPENDENCIES/dist` directory. Edit `rebuild_base_installers_for_seattlegeni.sh` to match your local configuration.
+Go to the `~/custominstallerbuilder/` directory. Edit `rebuild_base_installers.sh` to match your local configuration.
 
 Adapt the file names (including full paths) to your softwareupdater's public and private keys. (If you don't have softwareupdater keys yet, see below how to create them.)
 {{{
@@ -71,7 +71,7 @@ This generates a keypair consisting of files `key_file_name.publickey` and `key_
 
 [[BR]]
 
-Back in `rebuild_base_installers_for_seattlegeni.sh`, remember to update the path-to and name of keyfiles.
+Back in `rebuild_base_installers.sh`, remember to update the path-to and name of keyfiles.
 
 Furthermore, the softwareupdater URL must be given:
 {{{
