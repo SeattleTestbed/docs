@@ -63,29 +63,25 @@ new repositories and fork ones that already exist on Github.
 
 A Github user account can be created at https://github.com/join
 
-Once users create their accounts, user-specific home pages are created. For example: ''https://github.com/john-smith''  
+Once users create their accounts, user-specific home pages are created. For example: ''https://github.com/john-smith''.
+A user-specific home page can contain repositories that the user has created or forked, contribution activity,
+and organizations he/she has joined. 
 
 
 == Fork a `SeattleTestbed` Repository ==
 
-Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests is available
-[https://help.github.com/articles/fork-a-repo here]
+Forking refers to making a copy of a repository and saving it to your user home page. General instructions on forking repositories and managing pull requests are available [https://help.github.com/articles/fork-a-repo here]
 
-Forking one of the [https://github.com/SeattleTestbed SeattleTestbed] repositories
-requires clicking the ''fork'' button on the selected repository's Github page, which creates
-a copy of the repository and saves it to a repository directly controlled by the user (on the user's Github home page).
-The URL of the forked repository can then be used with Git to create and save a local copy.  
+Forking a [https://github.com/SeattleTestbed SeattleTestbed] repository requires clicking the ''fork'' button on the selected repository's Github page, which creates a copy of the repository and saves it to a repository directly controlled by the user (on the user's Github home page).  The URL of the forked repository can then be used with Git to create and save a local copy.  
 
-Navigate to the [https://github.com/SeattleTestbed/repy_v2 repy_v2] repository
-and click on the ''fork'' button in the upper right-hand corner of the page.
+Navigate to the [https://github.com/SeattleTestbed/repy_v2 repy_v2] repository and click on the ''fork'' button in the upper right-hand corner of the page.
 
 
 [[Image(fork_sm.png)]]
 
 == Clone a Git Repository ==
 
-The `git clone` command creates a local copy of a remotely hosted Github repository.  In the following
-example, the `repy_v2` reSeattleTestbed/pository is cloned to the users local Git repository.  
+The '''git clone''' command creates a local copy of a remotely hosted Github repository.  So far, the '''repy_v2''' repository has only been copied and saved to the user's Github home page.  In the following example, the '''repy_v2''' `SeattleTestbed` repository is cloned to the user's local Git repository.  
 
 {{{
 $ git clone https://github.com/john-smith/repy_v2
@@ -98,7 +94,7 @@ Checking connectivity... done.
 }}}
 
 
-A `repy_v2` folder is created in the local, current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or to one of its sub-directories. For example:
+A '''repy_v2''' folder is created in the local, current working directory.  Before issuing Github commands, you need to change directories - to either the cloned repository's directory, or to one of its sub-directories. For example:
 
 {{{
 $ cd repy_v2/
@@ -118,11 +114,11 @@ $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 === Retrieve Latest Version of Forked Repository ===
 
 Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
-`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a (by default, the master) branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Feature Branch''.
+`pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a (by default, the master) branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Branch Locally''.
 
 reference image will go here!
 
-Additional info on branching: [http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is branching]
+Additional information on branching: [http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is branching]
 
 {{{
 $ git pull upstream master
