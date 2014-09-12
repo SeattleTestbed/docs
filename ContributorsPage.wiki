@@ -13,7 +13,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see [htt
    * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * [wiki:Local/RepoAccess Github and Git] instructions
    * [http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands Useful Git Commands]
-   * ~~[http://ariejan.net/2007/07/03/how-to-create-and-apply-a-patch-with-subversion How to create and apply a patch with SVN]~~
+   * [https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line How to resolve a merge conflict with Git]
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
 
  * Programming in Repy
@@ -34,7 +34,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see [htt
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
    * [wiki:Local/RunningIntegrationTests Running Integration Tests]
-   * [wiki:SeattleGeniInstallation Running a Clearinghouse test server]
+   * [wiki:Archive/SeattleGeniInstallation Running a Clearinghouse test server]
    * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
    * [wiki:Local/ContinuousBuild Continuous Build]
@@ -47,7 +47,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see [htt
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
    * [wiki:SeattleDownload Download and installation instructions] for Seattle
-   * [wiki:SeattleGeniInstallation Installing your own instance of Seattle Clearinghouse]
+   * [wiki:Archive/SeattleGeniInstallation Installing your own instance of Seattle Clearinghouse]
    * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
