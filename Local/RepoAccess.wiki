@@ -116,7 +116,7 @@ $ git remote add upstream https://github.com/SeattleTestbed/repy_v2.git
 Fetching and merging the latest changes of `upstream` (remembering that the `upstream` alias points to the forked repository) can be done with the
 `pull` Github command.  The `pull` command fetches changes made to the remote repository and merges them into your local repository.  Branches are multiple working versions of a master project (or document). The main branch is the master repository and multiple, local branches of this master may be created by users so that they can work on the project before committing their work to the master document.  The pull command expects to see a (by default, the master) branch name, which the user will find on the project's [https://github.com/SeattleTestbed/repy_v2 main repository].  Information on creating a new branch is in the next section, ''Add a New Branch Locally''.
 
-reference image will go here!
+[[Image(branches_sm.png)]]
 
 Additional information on branching: [http://git-scm.com/book/en/Git-Branching-What-a-Branch-Is branching]
 
@@ -137,28 +137,29 @@ $ git branch
 * master
 }}}
 
-Next, to add a new branch, which is the preferred method for working on and adding new features, where '''''new_feature''''' is the name of the new branch:
+Next, to add a new branch, which is the preferred method for working on and adding new features, type '''git branch new_branch''', where '''''new_branch''''' is the name of the new branch:
 
 {{{
-$ git branch new_feature
+$ git branch new_branch
 }}}
 
 The next step is to switch to the newly created branch:
 
 {{{
-$ git checkout new_feature
-Switched to branch 'new_feature'
+$ git checkout new_branch
+Switched to branch 'new_branch'
 }}}
 
-SeattleTestbed/
+
 === Commit a New File to the Branch ===
-Create a README.txt file and save it. You do this by opening a new document in a text editor and saving as README.txt in the current directory. In the README file you would typically put instructions or details about the project. 
+
+Create a `README.txt` file and save it to the local machine. You do this by opening a new document in a text editor and saving as `README.txt` in the current directory. In the README file you would typically put instructions or details about the project. 
 
 The next step is to ask Git if it can find the README.txt file, by asking it to identify all untracked files (on the local repository):
 
 {{{
 $ git status
-On branch new_feature
+On branch new_branch
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -167,7 +168,7 @@ Untracked files:
     nothing added to commit but untracked files present (use "git add" to track)
 }}}
 
-Git tells us that the README.txt file is untracked, so the first command (git add) will add it. The second command (git status) will tell us whether the file has been added successfully. 
+Git indicates that the README.txt file is untracked, so the first command (git add) will add it. The second command (git status) will tell us whether the file has been added successfully. 
 
 {{{
 $ git add README.txt
@@ -180,11 +181,11 @@ Changes to be committed:
     new file:   README.txt
 }}}
 
-After adding the file it must be committed. By committing a file, Git creates a message about the file that will be transmitted once the file is ready to push to the master branch.
+After adding the file it must be committed. By committing a file, Git creates a message about the file that will be transmitted once the file is ready to be pushed to the master branch.  A Git message should be descriptive and mention the reason for the change, or changes, to be committed.  In the following example, the `-m` flag (for message) is used and a commit message is appended in quotes.
 
 {{{
 $ git commit -m "Add a README file to the project"
-[new_feature 7660f34] Add a README file to the project
+[new_branch 7660f34] Add a README file to the project
  1 file changed, 1 insertion(+)
   create mode 100644 README.txt
 }}}
@@ -193,11 +194,11 @@ If you want to check to see that all files have been added and committed, type '
 
 {{{
 $ git status
-On branch new_feature
+On branch new_branch
 nothing to commit, working directory clean
 }}}
 
-To get a list of commit messages made thus far type '''git log''' 
+To get a list of commit messages made thus far, type '''git log'''. 
 This will show the user's information and the commit message (in this case "Add a README to the project"):
 
 {{{
@@ -212,10 +213,10 @@ Date:   Tue Sep 2 14:46:36 2014 -0400
 
 === Push the Commit to the Remote (Forked) Repository ===
 
-This step will push the branch to the remote repository controlled by the user (the forked version that you created earlier). The earlier commit message, along with the file, are pushed to the user's remote repository. 
+This step will push the branch to the remote repository controlled by the user (the forked version that you created earlier). The changes committed in the "Commit a New File to the Branch" so far exist on the local repository.  The earlier commit message, along with the file, are pushed to the user's remote repository. 
 
 {{{
-$ git push origin new_feature
+$ git push origin new_branch
 
 Username for 'https://github.com': john-smith 
 Password for 'https://john-smith@github.com': 
@@ -225,7 +226,7 @@ Compressing objects: 100% (2/2), done.
 Writing objects: 100% (3/3), 308 bytes | 0 bytes/s, done.
 Total 3 (delta 1), reused 0 (delta 0)
 To https://github.com/john-smith/repy_v2
- * [new branch]      new_feature -> new_feature
+ * [new branch]      new_branch -> new_branch
 }}}
 
 
@@ -240,6 +241,17 @@ The next page is where you will preview the commits and write/post a summary or 
 
 [[Image(pull-request_sm.png)]]
 
+A page (containing the user's Pull Request) is generated by Github and viewable by both the user and developers of the '''repy_v2''' repository.  A [https://github.com/SeattleTestbed/repy_v2 repy_v2] developer can review the user's changes and either accept, decline, or ask that the user address issues with the pull request.    The pull request's page provides a section to enter comments and allow the user and [https://github.com/SeattleTestbed/repy_v2 repy_v2] developers to collaborate.  The user can make additional changes to the pull request (for example, to address an issue raised) by pushing commits to the user's forked repository.  In the following example, the user first edits the `README.txt` file and saves the changes before issuing '''git add README.txt''': 
+
+
+{{{
+$ git add README.txt
+
+$ git commit -m "Add missing section to README noticed by reviewer"
+
+$ git push origin master
+}}}
+
 
 == Miscellaneous Git commands ==
 Typing '''git help -a''' on the command-line outputs the full list of commands supported by Git.
@@ -250,7 +262,7 @@ http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands
 The section below lists some useful, common Git commands.
 
 
-Show changes in the README.txt that have not been committed.
+To show changes/differences in the README.txt that have not been committed:
 
 {{{
 $ git diff README.txt
@@ -264,28 +276,28 @@ index 70a3d0f..93bce69 100644
 }}}
 
 
-Mark README.txt as removed and stage it for removal.
+To Mark README.txt as removed and stage it for removal:
 
 {{{
 $ git rm README.txt
 }}}
 
 
-Unstage the modified README.txt file and reset its contents to the current version on the repository.
+To unstage the modified README.txt file and reset its contents to the current version on the repository:
 
 {{{
 $ git reset README.txt
 }}}
 
 
-Move a file to a new location but let Git know of the change.
+To move a file to a new location but let Git know of the change:
 
 {{{
 $ git mv
 }}}
 
 
-Temporarily store modified files in order to change branches.
+To temporarily store modified files in order to change branches:
 
 {{{
 $ git stash
