@@ -47,6 +47,7 @@ In order to test whether or not these steps worked, please copy and paste the co
 If you got an error, please go through the trouble shooting section found below.
 
 === Troubleshooting Repy code ===
+----
 If you can't get Repy files to run, some of the following common errors may have occurred:
 
  * using `print` instead of `log`:
@@ -201,6 +202,7 @@ myfile.close()
 '''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
 
 ==== Choice of File Names ====
+----
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
 
 {{{
@@ -220,7 +222,6 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Notes and Resources =
 ----
-   
  * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
 
  * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html]'''
@@ -243,16 +244,12 @@ Make sure you went through the "How to get RepyV2" section!
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
-[[BR]]
 = Extra Credit =
 ----
 For extra credit, make a second security layer which retains its specified size limits even if it is closed and reopened again. Do not submit this code inside your assignment. Submit a separate copy for extra credit.
- 
 [[BR]]
-
 = What to turn in? =
 ----
-
  * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase.
 
 * '''Never raise unexpected errors or produce any output.'''  Your program must produce no output when run normally.
