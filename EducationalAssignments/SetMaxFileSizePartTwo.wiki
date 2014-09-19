@@ -79,26 +79,34 @@ In this case we are verifying the security of the reference monitor.  This code 
 ==== Test case 2:  ====
 
 {{{
-# Open a file
-myfile=openfile("look.txt",True)
+if "look.txt" in listfiles():
+  removefile("look.txt")
+myfile=openfile("look.txt",True)  #Open a file
 
-myfile.setappend(True)
-myfile.setread(True) 
-myfile.writeat("abcd",0)
+#write something
+myfile.writeat("TestCode",0)
 
-try:
-  output=myfile.readat(4,0)
-# It raised an Exception :
-except ValueError:
-  log("Security layer not accurate")
- 
-else:
-  # No Exception was raised (as it was supposed to)
+#set maximum file size allowed to 10
+myfile.setmaxfilesize(10)
+
+#lets see whats on file
+data = myfile.readat(None,0)
+log("data on file should be TestCode : ",data,"\n")
+
+
+#the following writeat will try to write a data that starts within permitted size but goes beyond that. 
+myfile.writeat("CheckPassOrFail",4)
+data = myfile.readat(None,0)
+if data == 'TestCheckP':
+  #security layer properly truncated extra characters
   pass
- 
-finally:
-  # Close the file after our attempt.
-  myfile.close()
+else:
+  log("file size compromised")
+
+#if we set the offset to 10 then it should raise error. User can try that too
+
+#Close the file
+myfile.close()
 }}}
 ==== Code analysis ====
 
