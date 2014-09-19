@@ -1,36 +1,28 @@
 
-= Security layer testing and penetration =  
+= Implement a Security Attack and Penetration Test System  =  
 
-In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be completed after [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
+In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be completed after [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. 
 
 [[TOC(inline)]]
 [[BR]]
 == Overview ==
 ----
-In this assignment you are a tester.  You have been sent a bunch of reference monitors that need testing before they are deployed.  Your job will be to ensure an attacker cannot circumvent these security layers.  In order to do this, you will attempt to read, write, and append data without having the proper missions enabled. If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
+In this assignment you are a tester.  You have been sent a bunch of reference monitors that need testing before they are deployed.  Your job will be to test security layer with different test cases that try to exceed the file size beyond permission. If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
 
-Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+Three design paradigms are at work in this assignment: accuracy, efficiency, and security. Your test cases should test all three of these.
 
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to read and write within size limit, then he should be allowed to do so.
 
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. 
 
- * Security: The attacker should not be able to circumvent the security layer.
+ * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written past permitted file size, the security is compromised.
 
-Within the context of this assignment these design paradigms translate to:
-
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to overwrite data and append new data in the same write, and has permissions to write, but not append, then the corresponding data would be overwritten, but would stop at the end of the file and would not append anything.
-
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write.
-
- * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written without permission, the security is compromised.
-
-You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is okay if multiple tests of yours breaking a student's reference monitor, but you will not gain additional points.
+You will submit a zip file containing all of the tests you have created. You will gain points for every student's reference monitor you find a flaw in. It is okay if multiple tests of yours breaking a student's reference monitor, but you will not gain additional points.
 
 [[BR]]
 == Prerequisites ==
-
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/PermissionsPartOne#GettingPythonRepy PermissionsPartOne] for a tutorial on how to get them.  
+----
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/SetMaxFileSizePartOne#GettingPythonRepy SetMaxFileSizePartOne] for a tutorial on how to get them.  
 [[BR]]
 === Helpful links ===
 ----
@@ -41,23 +33,8 @@ The following links will aid students in becoming comfortable with Python, Repy 
 [[BR]]
 == Testing security layers ==
 ----
-=== Hypothesis, test case, counter example ===
-
-The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is well designed."  The questions you will ask when running your test cases will always be the same
-       
- * "Is this reference monitor secure?"
- 
- * "Does this reference monitor hamper performance?"
-
- * "Does this reference monitor prevent actions that should be allowed?"
-
-Notice that these questions are parallels of the security paradigms: security, efficiency and accuracy, respectively.  
-
-If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  Hence all test cases should be designed to test for these three types of flaws.
-
-[[BR]]
 === Examples of tests ===
-Test cases are briefly described in [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described in [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 ==== Test case 1:  ====
 
 {{{
