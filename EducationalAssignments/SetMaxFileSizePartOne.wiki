@@ -17,7 +17,7 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 
  * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to read data or write data with in file size limit, then it should not stop user from doing it.
 
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write or before a call to getmaxfilesize when the file need not be truncated.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. 
 
  * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written beyond specified size, the security is compromised.
 
@@ -37,8 +37,6 @@ Use the command found below in order to run Repy files:
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
 ----
 
-
-
 Please note Repy files end in extension `.r2py`.   
 
 In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
@@ -57,7 +55,7 @@ Repy is a subset of Python, but its syntax is slightly different.  For example, 
 
  * command line errors:
 
-'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  
+'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default, encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to run repy files.  
 
 {{{
 #!comment
@@ -211,9 +209,6 @@ myfile=openfile("look.txt",True)
 }}}
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
-
-First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat writes some data to the file. setmaxfilesize(10) sets the file size limit to 10. Now in the next writeat() method, the user is trying to write at 1000th position. If the security layer is written properly, then it will raise !SeekPastEndOfFileError and if no error is raised that means our security layer has failed to limit the size.   
-
 
 === Running your security layer ===
 ----
