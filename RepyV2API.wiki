@@ -395,7 +395,7 @@ Receives data that was sent by the connected party using send.   Note that this 
 
         !SocketWouldBlockError is raised if the socket operation would block.
 
-        !RepyArgumentError if `numbytes` is less than 1.
+        !RepyArgumentError if `numbytes` is less than 1, not an `int`, or missing.
 
       <Side Effects>
         None.
@@ -429,6 +429,8 @@ Sends data to the connected party.   Note that this may send less than the entir
         !SocketClosedRemote is raised if the socket is closed remotely.
 
         !SocketWouldBlockError is raised if the operation would block.
+
+        !RepyArgumentError if `message` is not a string, or missing.
 
       <Side Effects>
         None.
