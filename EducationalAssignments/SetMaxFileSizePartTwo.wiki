@@ -130,6 +130,10 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
 
 
+== Important Note ==
+----
+Your Test Case should not output anything if the security layer passes it. It should print appropriate error message only if the security layer fails.
+
 [[BR]]
 == Extra Credit ==
 ----
