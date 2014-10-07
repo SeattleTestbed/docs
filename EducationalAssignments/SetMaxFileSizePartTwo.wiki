@@ -87,11 +87,6 @@ myfile.writeat("TestCode",0)
 #set maximum file size allowed to 10
 myfile.setmaxfilesize(10)
 
-#lets see whats on file
-data = myfile.readat(None,0)
-log("data on file should be TestCode : ",data,"\n")
-
-
 #the following writeat will try to write a data that starts within permitted size but goes beyond that. 
 myfile.writeat("CheckPassOrFail",4)
 data = myfile.readat(None,0)
