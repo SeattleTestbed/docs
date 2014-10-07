@@ -38,30 +38,28 @@ Test cases are briefly described in [wiki:EducationalAssignments/SetMaxFileSizeP
 ==== Test case 1:  ====
 
 {{{
-# Open a file
-myfile=openfile("look.txt",True)
-myfile.setwrite(True)
-myfile.setappend(True)
+if "look.txt" in listfiles():
+  removefile("look.txt")
+myfile=openfile("look.txt",True)  #Open a file
 
- 
-myfile.writeat("SECURITY",0)
+#write something
+myfile.writeat("Test",0)
 
-# Attempt to read data from the file
+#set maximum file size allowed to 10
+myfile.setmaxfilesize(10)
+
+#the following writeat offset and data is within filesize limit, so security layer should not block it
 try:
-  myfile.readat(1,0)
- 
-# It raised an Exception (as it was supposed to):
-except ValueError:
-  # The security layer correctly blocked the read!!!
-  pass
- 
-# No Exception was raised!
+  myfile.writeat("Testing",7)
+except SeekPastEndOfFileError:
+  log("Security layer failed because it blocked a valid write operation \n")
 else:
-  log("Read without permission")
- 
-finally:
-  # Close the file after our attempt.
-  myfile.close()
+  #user is allowed to write if its at valid place
+  pass
+
+
+#Close the file
+myfile.close()
 }}}
 ==== Code analysis ====
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
