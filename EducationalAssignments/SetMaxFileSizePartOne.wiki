@@ -254,4 +254,4 @@ For extra credit, make a second security layer which retains its specified size 
 
 * '''Never raise unexpected errors or produce any output.'''  Your program must produce no output when run normally.
 
- * For extra credit turn in a second repy file called extra_credit_[polyusername].r2py  '''You must turn in separate files for the normal assignment and extra credit'''
+ * For extra credit turn in a second repy file called extra_credit_[netid].r2py  '''You must turn in separate files for the normal assignment and extra credit'''
