@@ -250,7 +250,7 @@ For extra credit, make a second security layer which retains its specified size 
 [[BR]]
 = What to turn in? =
 ----
- * Turn in a repy file called reference_monitor_[ polyusername ].r2py with all letters in lowercase.
+ * Turn in a repy file called reference_monitor_[ netid ].r2py with all letters in lowercase.
 
 * '''Never raise unexpected errors or produce any output.'''  Your program must produce no output when run normally.
 
