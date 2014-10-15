@@ -227,8 +227,6 @@ Make sure you went through the "How to get RepyV2" section!
  
  * The following link is an excellent source for information about security layers: '''[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]'''
 
- * '''[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py]''' is security layer that works for logging functions.
-
  * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
