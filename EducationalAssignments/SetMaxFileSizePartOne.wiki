@@ -222,17 +222,10 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Notes and Resources =
 ----
- * A list of command line utilities for windows can be found at '''[http://commandwindows.com/command3.htm]'''
-
- * A list of command line utilities for linux/apple/powershell '''[http://www.pixelbeat.org/cmdline.html]'''
-
- * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on '''how to test security layers'''. 
-
+ 
  * For a complete list of syntax in Repyv2 please visit: '''[wiki:RepyV2API]'''
  
  * The following link is an excellent source for information about security layers: '''[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]'''
-
- * '''[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py]''' is an empty security layer that doesn't perform any operations.
 
  * '''[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py]''' is security layer that works for logging functions.
 
