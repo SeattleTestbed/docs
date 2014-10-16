@@ -237,7 +237,7 @@ Make sure you went through the "How to get RepyV2" section!
 [[BR]]
 = Extra Credit =
 ----
-For extra credit, make a second security layer which retains its specified size limits even if it is closed and reopened again. Do not submit this code inside your assignment. Submit a separate copy for extra credit.
+For extra credit, make a second security layer which retains its specified size limits even if it is closed and reopened again. The file size limit should stay after the program is terminated and restarted Do not submit this code inside your assignment. Submit a separate copy for extra credit. 
 [[BR]]
 = What to turn in? =
 ----
