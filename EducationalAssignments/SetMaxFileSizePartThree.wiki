@@ -36,8 +36,7 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 }}}
 
 === Code Analysis ===
-Let's analyze some of the bugs in this implementation.  According to the specifications in [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne], if a user attempts to write data a file with offset within range but while writing, data on file goes beyond the max file size allowed, an error should be raised.  In the code above, instead of raising an error, it would allow user to write data which makes file larger than the allowed size. So what should have been included in code is a condition which prevents the write operation when (offset+length of data) 
-becomes greater than allowed size. Can you think any security issue due to global variables?
+Let's analyze some of the bugs in this implementation.  According to the specifications in [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne], data should not go beyond permitted size during a writeat operation. In this code it is checking for valid offset but it is missing the following situation - In the code above, it would allow user to write data which starts from a valid offset but goes beyond maximum allowed file size. This makes file larger than the allowed size. So what should have been included in code is a condition which prevents the write operation when (offset+length of data) becomes greater than allowed size. Can you think any security issue due to global variables?
 
 [[BR]]
 == What to turn in? ==
