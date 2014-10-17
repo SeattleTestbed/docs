@@ -1,7 +1,7 @@
 
 = Fixing your security layer =  
 
-In this assignment you will analyze the bugs in your security layer from [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne] and fix them.  You may want to use test cases from [wiki:EducationalAssignments/PermissionsPartTwo PermissionsPartTwo] to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
+In this assignment you will analyze the bugs in your security layer from [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne] and fix them.  You may want to use test cases from [wiki:EducationalAssignments/SetMaxFileSizePartTwo SetMaxFileSizePartTwo] to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
 
 [[TOC(inline)]]
 [[BR]]
@@ -22,22 +22,29 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
  * Many reference monitors had accuracy or security bugs as a result of not properly following the instructions.  
 
 [[BR]]
-== Sample implementation of the readat function ==
+== Sample implementation of the writeat function and the security issue ==
 {{{
 
-  def readat(self,bytes,offset):
-    return self.file.readat(bytes,offset)
+  def writeat(self,data,offset):
+    
+    #raise error if user try to write beyond permitted file size
+    if offset >= mycontext['size']:
+      raise SeekPastEndOfFileError("Tried to beyond permitted file size!")
+
+    # Write the requested data to the file using the sandbox's writeat call
+    self.file.writeat(data,offset)
 }}}
 
 === Code Analysis ===
-Let's analyze one of the bugs in this implementation.  According to the specifications in [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne], if a user attempts to read from a file without read permissions, a ValueError should be raised.  In the code above, instead of raising a ValueError when readat is called without read permissions, readat will read the file and return the contents.  This is a security issue.
+Let's analyze some of the bugs in this implementation.  According to the specifications in [wiki:EducationalAssignments/SetMaxFileSizePartOne SetMaxFileSizePartOne], if a user attempts to write data a file with offset within range but while writing, data on file goes beyond the max file size allowed, an error should be raised.  In the code above, instead of raising an error, it would allow user to write data which makes file larger than the allowed size. So what should have been included in code is a condition which prevents the write operation when (offset+length of data) 
+becomes greater than allowed size. Can you think any security issue due to global variables?
 
 [[BR]]
 == What to turn in? ==
 ----
  
- * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_[poly_username].repy
-e.g. reference_monitor_jcappos.repy
+ * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_netid.r2py
+e.g. reference_monitor_jcappos.r2py
 All letters must be lowercase.
  * In addition to your reference monitor, submit a one-page PDF document, in which you discuss the different classes of bugs you had in your reference monitors and why.
 What kind of bug did you experience, what caused the bug, and what did you do to fix it?
