@@ -164,7 +164,7 @@ spam(1)
 spam (1)
 }}}
 
-    - Immediately before the open brackets that starts an indexing or
+    - Immediately before the open bracket that starts an indexing or
       slicing:
 
       Yes: 
