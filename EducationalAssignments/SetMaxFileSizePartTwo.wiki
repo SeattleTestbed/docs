@@ -145,7 +145,7 @@ Create a directory that the security layers will write their files into.   You n
 
 Then you can type the following in the bash shell to execute the testcases with the reference monitors:
 {{{
-for referencemonitor in reference_monitor_*; do for testcase in [poly_email_id]_*; do rm testdirectory/*; cp $referencemonitor $testcase encasementlib.r2py; python repy.py [path to files and arguments] encasementlib.r2py $referencemonitor $testcase; done; done
+for referencemonitor in reference_*;  do for testcase in netid_*.r2py; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase;  done;  done
 }}}
 
 This will print out the output from each program.
