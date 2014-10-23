@@ -148,7 +148,7 @@ Then you can type the following in the bash shell to execute the testcases with 
 for referencemonitor in reference_*;  do for testcase in netid_*.r2py; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase;  done;  done
 }}}
 
-This will print out the output from each program.
+
 
 
 [[BR]]
