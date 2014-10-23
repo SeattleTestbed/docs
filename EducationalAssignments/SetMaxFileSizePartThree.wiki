@@ -45,5 +45,4 @@ Let's analyze some of the bugs in this implementation.  According to the specifi
  * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_netid.r2py
 e.g. reference_monitor_jcappos.r2py
 All letters must be lowercase.
- * In addition to your reference monitor, submit a one-page PDF document, in which you discuss the different classes of bugs you had in your reference monitors and why.
-What kind of bug did you experience, what caused the bug, and what did you do to fix it?
+ * In addition to your reference monitor, fill in the form given on the link in assignment 2 part 3. You can submit the form only once so be sure to submit it properly in the first time itself. 
