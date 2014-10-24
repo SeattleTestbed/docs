@@ -54,6 +54,7 @@ python generatekey.py softwareupdater_key
 python make_base_installers.py a .. DIR_OF_UPDATER_KEYS/softwareupdater_key.publickey DIR_OF_UPDATER_KEYS/softwareupdater_key.privatekey output/dir [current_version_of_seattle]
 }}}
  1. This would have created the several installers for the different operating systems.
+ 1. To remove cached versions of user-build installers from the Custominstallerbuilder, run `manage.py cleaninstallers` from the Custominstallerbuilder's Django project directory.
  1. If you are planning on running a version of Seattle Clearinghouse as well, then you need to go through a few more extra steps. Some extra installers need to be created from the ones we just created.
  1. Run the following set of commands:
 {{{
