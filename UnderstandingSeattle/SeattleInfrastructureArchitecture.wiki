@@ -1,6 +1,14 @@
 = Seattle Infrastructure =
 == Overview ==
 
-This page explains the architecture and function of 'infrastructure' such as the Seattle Clearinghouse and Custom Installer Builder for the testbed. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
+This page explains the architecture and function of 'infrastructure' --- the Seattle Clearinghouse, Custom Installer Builder, and software updater --- for the testbed. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
 
 [[TOC(inline)]]
+
+-----
+
+= Introduction =
+The Seattle Testbed consists of a large number of Seattle VMs (virtual machines) running on computing devices provided by volunteers. These donated VMs are made available to registered users through an infrastructure component called the [https://seattleclearinghouse.poly.edu/ Seattle Clearinghouse].
+
+In addition to handing out resources donated to the general public, the Seattle Clearinghouse can also track donations on behalf of registered users. Every donation on their behalf will grant a user a greater number of resources on other machines in return.
+
