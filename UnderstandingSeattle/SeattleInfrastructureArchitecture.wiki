@@ -10,5 +10,6 @@ This page explains the architecture and function of 'infrastructure' --- the Sea
 = Introduction =
 The Seattle Testbed consists of a large number of Seattle VMs (virtual machines) running on computing devices provided by volunteers. These donated VMs are made available to registered users through an infrastructure component called the [https://seattleclearinghouse.poly.edu/ Seattle Clearinghouse].
 
-In addition to handing out resources donated to the general public, the Seattle Clearinghouse can also track donations on behalf of registered users. Every donation on their behalf will grant a user a greater number of resources on other machines in return.
+In addition to handing out resources donated to the general public, the Seattle Clearinghouse can also track donations on behalf of registered users. Every donation on their behalf will grant a user a greater number of resources on other machines in return. This 'tit-for-tat' tactic both enables users to run larger experiments, and helps scale the testbed.
 
+The Seattle Clearinghouse relies on identifying data included in each install of the Seattle Testbed software to track and credit resource donations: Depending on the user that should be credited (the general public is also treated as a user in this respect), the install announces a specific 'public key' on the Seattle advertise services.
