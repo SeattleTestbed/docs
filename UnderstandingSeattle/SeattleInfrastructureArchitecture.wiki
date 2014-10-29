@@ -1,7 +1,7 @@
 = Seattle Infrastructure =
 == Overview ==
 
-This page explains the architecture and function of ''infrastructure'' --- the Seattle Clearinghouse, Custom Installer Builder, and software updater --- for the testbed. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
+This page explains the architecture and function of the three central ''infrastructure'' components for the testbed --- the Seattle Clearinghouse, Custom Installer Builder, and the software update server. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
 
 [[TOC(inline)]]
 
@@ -15,4 +15,12 @@ In addition to handing out resources donated to the general public, the Seattle 
 The Seattle Clearinghouse relies on identifying data included in each install of the Seattle Testbed software to track and credit resource donations: Depending on the user that should be credited (the general public is also treated as a user in this respect), the install announces a user-specific ''public key'' on the Seattle advertise services.
 
 The [https://custominstallerbuilder.poly.edu/ Custom Installer Builder] is the infrastructure component putting together the base Seattle installer with a user's donation-tracking public key. The Seattle installer customized such is provided to users seeking to increase their credit of VMs on the clearinghouse. (The [wiki:UnderstandingSeattle/SeattleComponents Seattle Components wiki page] shows another use case for the Custom Installer Builder).
+
+Lastly, every Seattle install contains information which software update site (URL) to contact for downloading the latest Seattle revision when it becomes available, and also an updater public key that is used to check the integrity of updates.
+
+
+
+
+= Interfaces between the components =
+
 
