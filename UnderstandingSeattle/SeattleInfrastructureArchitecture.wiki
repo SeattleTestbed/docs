@@ -1,0 +1,6 @@
+= Seattle Infrastructure =
+== Overview ==
+
+This page explains the architecture and function of 'infrastructure' such as the Seattle Clearinghouse and Custom Installer Builder for the testbed. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
+
+[[TOC(inline)]]
