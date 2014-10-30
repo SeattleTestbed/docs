@@ -149,9 +149,9 @@ DATABASES = {
         # you can use django.db.backends.sqlite3 instead of mysql. If you
         # decide to do so, you can leave the other fields empty
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'seattlegeni',
-        'USER': 'seattlegeni',
-        'PASSWORD': 'password',
+        'NAME': 'clearinghouse',
+        'USER': 'clearinghouse',
+        'PASSWORD': 'the user\'s password',
         'HOST': '',
         'PORT': '',
     }
@@ -159,28 +159,8 @@ DATABASES = {
 }}}
 
 
-      * Set SECRET_KEY to a long, random string.
-{{{
-# Make this unique, and don't share it with anybody.
-# Fill this in!
-SECRET_KEY = ''
-}}}
-
-      * If this is a production launch, also set DEBUG to False, and uncomment and change the fields for sending ADMINS email.
-{{{
-# If DEBUG is True, then error details will be shown on the website and ADMINS
-# will not receive an email when an error occurs. So, this should be False in
-# production.
-DEBUG = False
-...
-# Email addresses of people that should be emailed when a 500 error occurs on
-# the site when DEBUG = False (that is, in production). Leave this to be empty
-# if nobody should receive an email. 
-ADMINS = (
-    ('Admin_name', 'Admin_email'),
-)
-}}}
-
+      * Set `SECRET_KEY` to a long, random string.
+      * If this is a production launch, also set `DEBUG` to False, and uncomment and change the fields for sending `ADMINS` email.
       * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to set up a wiki:CustomInstallerBuilder and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` there.
       * You can also adapt the clearinghouse `TIME_ZONE`, `TESTBED` name and URL, term you would like to use for `CLEARINGHOUSE`, and project mailing lists.
 [[BR]]
