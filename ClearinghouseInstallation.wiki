@@ -52,9 +52,9 @@ Depending on your actual OS and setup, this command might require `sudo` privile
 
 Note that even if you don't enable OpenID and OAuth, Clearinghouse requires the specific Django package installed:
 
-```
+{{{
 $ easy_install django-social-auth
-```
+}}}
 
 
 == Optional: Setup OpenID and OAuth ==
