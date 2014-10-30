@@ -20,7 +20,7 @@ Clearinghouse requires at least the following software to be installed:
  * [http://www.modwsgi.org/ mod_wsgi] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
  * [http://www.djangoproject.com/ Django] in version 1.6.x -- necessary to run Django code
- * [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support.
+ * (Optionally, [https://github.com/omab/django-social-auth Django Social Auth] -- for OpenID and Oauth support.)
 
 Most of these can be installed through a package manager. For example, on a Debian-based system:
 
