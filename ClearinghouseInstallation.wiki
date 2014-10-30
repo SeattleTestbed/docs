@@ -211,7 +211,7 @@ $ python website/manage.py runserver 0.0.0.0:8000
 
 
 [[BR]]
-Finally, we will set up the backend database and scripts.
+Before the clearinhouse is ready for production use, we will set up the backend database and scripts.
 
   * '''Setup the key database and start the backend'''
     * Make sure have a MySQL database to use for the key database. We suggested above to call it
