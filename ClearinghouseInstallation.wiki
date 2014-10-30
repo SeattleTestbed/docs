@@ -1,9 +1,9 @@
-= RepyV2-aware Clearinghouse with Django 1.6 Installation How-To =
+= Seattle Clearinghouse Installation How-To =
 
 This document explains how to do a fresh install of the Seattle Clearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
- * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
+You might want to take a look at the [wiki:UnderstandingSeattle/SeattleInfrastructureArchitecture Seattle infrastructure architecture] documentation before proceeding. This will also briefly touch on the other two infrastructure components of Seattle Testbed, the Custom Installer Builder and the software update server.
 
 ----
 [[TOC(inline)]]
