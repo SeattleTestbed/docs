@@ -139,7 +139,7 @@ $ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
       called `clearinghouse`).
-    * Find `~/deployment/clearinghouse/website/settings.py` and edit:
+    * Edit the configuration file for the clearinghouse Django project, `~/deployment/clearinghouse/website/settings.py`:
       * The clearinghouse database name and credentials in the `DATABASES` dict.
 {{{
 # Database
