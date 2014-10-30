@@ -3,7 +3,7 @@
 This document explains how to do a fresh install of the Seattle Clearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
- * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
+ * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:Archive/SeattleGeniProductionHttp]
 
 ----
 [[TOC(inline)]]
