@@ -100,7 +100,8 @@ $
 In this section, we will deploy and run a copy of the Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a separate user account, e.g. named {{{clearinghouse}}}, and following the steps below as this user.
 
   * '''Initial preparation'''
-    * Clone the Clearinghouse repository into your home directory, and let the initialize script fetch dependencies:
+    * Change to the clearinghouse user account: `sudo -i -u ch`
+    * Clone the Clearinghouse repository into `ch`'s home directory, and let the initialize script fetch dependencies:
 {{{
 #!sh
 $ cd ~
