@@ -1,4 +1,4 @@
-= Seattle Infrastructure =
+= Seattle Infrastructure Architecture =
 == Overview ==
 
 This page explains the architecture of the three central ''infrastructure'' components for the testbed --- the [https://seattleclearinghouse.poly.edu/html/accounts_help#introduction Seattle Clearinghouse], [wiki:CustomInstallerBuilder Custom Installer Builder], and the [wiki:SoftwareUpdaterSetup software update] server. For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see [wiki:UnderstandingSeattle/SeattleComponents this wiki page].
