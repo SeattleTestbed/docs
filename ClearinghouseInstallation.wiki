@@ -129,23 +129,17 @@ $ python build.py ~/deployment/seattle
  
 {{{
 #!sh
-$ cd /tmp/TARGET/seattle
+$ cd ~/deployment/seattle
 $ chmod +x generate_state_keys.sh
 $ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
 }}}
-    * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `/tmp/TARGET/clearinghouse/node_state_transitions/statekeys`.
+    * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `~/deployment/clearinghouse/node_state_transitions/statekeys`.
 
-  * Change to the `clearinghouse` directory that is in the directory you deployed
-      to. For example:
-{{{
-#!sh 
-cd /tmp/TARGET/clearinghouse
-}}}
 
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
-      called `seattlegeni`).
-    * Find `/tmp/TARGET/clearinghouse/website/settings.py` and edit:
+      called `clearinghouse`).
+    * Find `~/deployment/clearinghouse/website/settings.py` and edit:
       * The clearinghouse database name and credentials in the `DATABASES` dict.
 {{{
 # Database
