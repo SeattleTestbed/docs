@@ -8,6 +8,16 @@ You might want to take a look at the [wiki:UnderstandingSeattle/SeattleInfrastru
 ----
 [[TOC(inline)]]
 ----
+
+== Setting up a non-privileged user account ==
+First of all, we recommend to set up a user account specific to the Clearinghouse instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
+
+The user ''should not be granted interactive login'' for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user ''should not have root privileges'' or be able to acquire them.
+
+Any user name will be fine. We'll use `ch` in the instructions.
+
+
+
 == Install Dependencies ==
 ----
 
@@ -49,10 +59,10 @@ If you would like your Clearinghouse to support login not only through user acco
 == Create MySQL databases ==
 
 You need two mysql databases and seperate users with access to each.
-  * First database name: `seattlegeni`
+  * First database name: `clearinghouse`
   * Second database name: `keydb`
 
-For simplicity you can make the database usernames correspond to the database names.
+For simplicity, make the database usernames correspond to the database names.
 
 Here's an example of creating a database and a user:
 
@@ -61,12 +71,12 @@ Here's an example of creating a database and a user:
 $ mysql -u root -p
 $ # This requires entering the database root password set during install!
 
-mysql> create database seattlegeni;
+mysql> create database clearinghouse;
 
 mysql> GRANT ALL PRIVILEGES 
-ON seattlegeni.* 
-TO 'seattlegeni'@'localhost'
-IDENTIFIED BY 'desired password for seattlegeni';
+ON clearinghouse.* 
+TO 'clearinghouse'@'localhost'
+IDENTIFIED BY 'desired password for clearinghouse';
 
 mysql> create database keydb;
 
