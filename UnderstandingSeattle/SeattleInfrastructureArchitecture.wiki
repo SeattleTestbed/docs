@@ -24,6 +24,8 @@ Lastly, every Seattle install contains information which software update site (U
 
 
 = How the components interface =
+The interdependencies between the infrastructure components are thus:
 
  * The software updater public key and URL go into `softwareupdater.py`, part of the ''base installer'' packaged by the custom installer builder
- * Packaging of an installer with particular user public keys is requested 
+ * The clearinghouse requeste packaging of an installer with particular user public keys from the custom installer builder via XML-RPC over HTTPS.
+
