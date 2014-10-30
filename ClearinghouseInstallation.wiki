@@ -235,9 +235,8 @@ The backend scripts can be started with a script [#Runningstart_clearinghouse_co
 == Configure Apache sites ==
 ----
 
-To provide encryption and keep passwords etc. safe in transit between a user's web browser and the backend database, Clearinghouse relies on SSL. Therefore you will need to
-setup two !VirtualHost entries at the minimum: one for connections to
-port 80 (HTTP), and one for connections to port 443 (SSL).
+To provide encryption and keep passwords etc. safe in transit between a user's web browser and the Clearinghouse, it relies on SSL. Therefore you will need to
+set up one `VirtualHost` entry for for connections to port 443 (SSL) at the minimum.
 
 For a production launch, follow the instructions at [http://slacksite.com/apache/certificate.php this page] to understand Certificate Signing Requests and dealing with Certificate Authorities in greater detail. For testing purposes, you will want to generate a temporary self-signed certificate. Here's how.
 
@@ -273,7 +272,7 @@ file setup, and the `Location` directive assumes that your Clearinghouse
 installation lives in `/home/clearinghouse/deployment` and that your Django settings module
 is `clearinghouse.website.settings`.
 
-The first !VirtualHost provided redirects all connections to '''http'''://mysite/clearinghouse/* to use
+This config contains two `VirtualHost`s actually, the first providing redirects all connections to '''http'''://mysite/clearinghouse/* to use
 '''https'''://mysite/clearinghouse/*.
 
 Depending on you configuration of Apache, you may want to add the below code to `/etc/apache2/sites-available/default`.
@@ -286,10 +285,10 @@ NameVirtualHost *:443
 
 # HTTP
 <VirtualHost *:80>
-    # Redirect requests for the server index page or that are geni-related
-    # to the https site.
-    RedirectMatch ^/$ https://mysite/geni/html/login
-    RedirectMatch ^/geni https://mysite/geni/html/login
+    # Redirect requests for the server index or clearinghouse login 
+    # page to the HTTPS site.
+    RedirectMatch ^/$ https://mysite/ch/html/login
+    RedirectMatch ^/geni https://mysite/ch/html/login
 </VirtualHost>
 
 # SSL
@@ -298,19 +297,11 @@ NameVirtualHost *:443
     SSLEngine on
     SSLCertificateFile /etc/apache2/ssl/server.crt
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
-    SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
 
-    Alias /site_media "/home/geni/live/seattlegeni/website/html/media"
-    <Location "/site_media">
-        SetHandler None
-    </Location>
+    # If you have intermediate certificates, add them here like so:
+    #SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
 
-    Alias /admin_media "/usr/local/lib/python2.5/site-packages/django/contrib/admin/media"
-    <Location "/admin_media">
-        SetHandler None
-    </Location>
-
-    <Location /geni/>
+    <Location /ch/>
         SetHandler python-program
         PythonHandler django.core.handlers.modpython
         SetEnv DJANGO_SETTINGS_MODULE seattlegeni.website.settings
