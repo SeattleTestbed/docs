@@ -1,9 +1,14 @@
+'''Note for Seattle historians:''' This page (and its history) is not used for production uses anymore. The latest Clearinghouse installation instructions are available [wiki:Archive/ClearinghouseInstallationWithDjango13 here].
+
+----
+
+
 = Seattle Clearinghouse Installation !HowTo =
 
 This document explains how to do a fresh install of the Seattle Clearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
- * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:SeattleGeniProductionHttp]
+ * For info on deploying the production Seattle Clearinghouse code and for starting/restarting Apache, see [wiki:Archive/SeattleGeniProductionHttp]
 
 ----
 [[TOC(inline)]]
