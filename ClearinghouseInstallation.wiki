@@ -112,22 +112,16 @@ $ python initialize.py
     * Deploy all necessary files to a directory of your choice. We'll use `~/deployment` (a directory called `deployment` under the clearinghouse user's account) in these instructions. You'll need to give two arguments to the deployment script: The parent directory of the `clearinghouse` repo you checked out, and a directory you want to deploy to. (In case the latter exists, you will be asked if you want a backup to be created.) For example:
 {{{
 #!sh
-$ python ~/clearinghouse/deploymentscripts/deploy_clearinghouse.py . /tmp/TARGET
+$ python ~/clearinghouse/deploymentscripts/deploy_clearinghouse.py ~ ~/deployment
 }}}
 
 
-{{{
-#!comment
-    (Historical Note: On existing Seattle live deployments, the path will likely be {{{/home/geni/live}}}).
-}}}
-
-
-    * Deploy the Repy runtime. Create a `seattle` directory besides you deployed `clearinghouse`, and run the build script.
+    * Deploy the Repy runtime. Create a `seattle` directory within `deployment` (where the deployed `clearinghouse` dir already exists), and run the build script.
 {{{
 #!sh
-$ mkdir /tmp/TARGET/seattle
+$ mkdir ~/deployment/seattle
 $ cd ~/clearinghouse/scripts
-$ python build.py /tmp/TARGET/seattle
+$ python build.py ~/deployment/seattle
 }}}
 [[BR]]
 
