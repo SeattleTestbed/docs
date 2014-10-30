@@ -13,7 +13,7 @@ You might want to take a look at the [wiki:UnderstandingSeattle/SeattleInfrastru
 
 Clearinghouse requires at least the following software to be installed:
  
- * [http://www.python.org/ Python] in version 2.5, 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
+ * [http://www.python.org/ Python] in version 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
  * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
  * [http://www.mysql.com/ MySQL] -- the database
  * [http://www.apache.org/ Apache] -- the web server
