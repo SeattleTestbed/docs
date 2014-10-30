@@ -187,13 +187,14 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
     * Create the database structure:
 {{{
 #!sh
+cd ~/deployment/clearinghouse
 python website/manage.py syncdb
 }}}
     * For testing purposes, start the Django development webserver:
 {{{
 #!sh
 $ # Use this for running on localhost only:
-$ python website/manage.py runserver :8000
+$ python website/manage.py runserver 8000
 
 $ # Use this for listening on every interface:
 $ python website/manage.py runserver 0.0.0.0:8000
