@@ -270,13 +270,11 @@ This is a minimal exemplary configuration to serve the Clearinghouse website fro
 https://mysite/clearinghouse/. Note that in this snippet, the second
 !VirtualHost entry assumes that you have a server certificate and key
 file setup, and the `Location` directive assumes that your Clearinghouse
-installation lives in `/home/clearinghouse/live` and that your Django settings module
+installation lives in `/home/clearinghouse/deployment` and that your Django settings module
 is `clearinghouse.website.settings`.
 
 The first !VirtualHost provided redirects all connections to '''http'''://mysite/clearinghouse/* to use
-'''https'''://mysite/clearinghouse/*. Also, the Clearinghouse installation was
-deployed to the directory `/home/clearinghouse/deployment` rather than `/tmp/TARGET`, which
-was the deployment directory given as an example in the steps above.
+'''https'''://mysite/clearinghouse/*.
 
 Depending on you configuration of Apache, you may want to add the below code to `/etc/apache2/sites-available/default`.
 
