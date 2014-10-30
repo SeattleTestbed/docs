@@ -170,10 +170,10 @@ DATABASES = {
 {{{
 #!sh
 # In ~/.bashrc
-export PYTHONPATH=$PYTHONPATH:/tmp/TARGET:/tmp/TARGET/seattle
+export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle
 export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 }}}
-      Note: the /tmp/TARGET path entry is to make available the two packages
+      Note: the `/home/ch/deployment` path entry is to make available the two packages
       `clearinghouse` and `seattle` which the deployment script created in the
       target directory. The Seattle path item is to ensure that the Repy runtime works.
 
