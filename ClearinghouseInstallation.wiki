@@ -50,6 +50,12 @@ $ pip install django==1.6.7
 }}}
 Depending on your actual OS and setup, this command might require `sudo` privileges.
 
+Note that even if you don't enable OpenID and OAuth, Clearinghouse requires the specific Django package installed:
+
+```
+$ easy_install django-social-auth
+```
+
 
 == Optional: Setup OpenID and OAuth ==
 If you would like your Clearinghouse to support login not only through user accounts it manages itself, but ID/authentication services like OpenID and OAuth, or web services like Google, Facebook, or !GitHub, take a look at the [wiki:ClearinghouseSocialAuth social auth support instructions page].
