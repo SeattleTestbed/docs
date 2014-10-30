@@ -243,7 +243,7 @@ python website/manage.py runserver
       In case you are connected via {{{ssh}}}, you can use port forwarding to make the 
       development server available for testing on your local machine: {{{ssh -L SOME_LOCAL_PORT:127.0.0.1:8000 YOUR_SEATTLEGENI_SERVER}}}. 
       Then, open http://localhost:8000/ in your local browser and interact with your install.
-    * For production, run the site through apache: [wiki:SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
+    * For production, run the site through apache: [wiki:Archive/SeattleGeniInstallation#ConfigureApachesites ConfigureApachesites]
       
   * '''Start the lockserver'''
     * Set your environment variables the same way as shown above.
