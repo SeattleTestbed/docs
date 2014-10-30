@@ -216,18 +216,17 @@ Before the clearinhouse is ready for production use, we will set up the backend 
   * '''Setup the key database and start the backend'''
     * Make sure have a MySQL database to use for the key database. We suggested above to call it
       `keydb`.
-    * Edit the file `keydb/config.py` and set the database information for the key
+    * Edit the file `~/deployment/clearinghouse/keydb/config.py` and set the database information for the key
       database.
     * Create the key database structure by executing the contents of the file
       `keydb/schema.sql` on the new key database you created. If set up as suggested with both the user and databse names `keydb`:
 {{{
 #!sh  
-$ mysql -ukeydb -p --database=keydb < keydb/schema.sql
+$ mysql -ukeydb -p --database=keydb < ~/deployment/clearinghouse/keydb/schema.sql
 # This will prompt for the keydb database password!
 }}}
-    * Edit the file 'backend/config.py' and set a value for `authcode`.
-    * Make sure that the file `keydb/config.py` is not readable by the user the web server will be running as, i.e. it is only user-readable (but neither group- nor world-readable), owned by the clearinghouse user, and the web server is not in the user group the file belongs to.
-    * The same goes for `backend/config.py`.
+    * Edit the file '~/deployment/clearinghouse/backend/config.py' and set a value for `authcode`.
+    * Make sure that the files `keydb/config.py` and `backend/config.py` are not readable by the user the web server will be running as, i.e. they are only user-readable (but neither group- nor world-readable), owned by the clearinghouse user, and the web server is not in the user group the file belongs to.
 
 The backend scripts can be started with a script [#Runningstart_clearinghouse_components.sh start_clearinghouse_components.sh]. Before we can do that, Apache needs to be set up.
 
