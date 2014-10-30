@@ -23,9 +23,15 @@ Lastly, every Seattle install contains information which software update site (U
 
 
 
-= How the components interface =
-The interdependencies between the infrastructure components are thus:
+= Technical Aspects =
 
- * The software updater public key and URL go into `softwareupdater.py`, part of the ''base installer'' packaged by the custom installer builder
- * The clearinghouse requeste packaging of an installer with particular user public keys from the custom installer builder via XML-RPC over HTTPS.
+The infrastructure components use the following interfaces and configuration between one another:
 
+ 1. The software updater public key and URL go into `softwareupdater.py`, part of the ''base installer'' packaged by the custom installer builder
+ 1. The clearinghouse requests packaging of an installer with particular user public keys from the custom installer builder via XML-RPC over HTTPS. The custom installer builder URL used is stored in the clearinghouse configuration.
+
+The consequence of item 1 above is that the custom installer builder only needs to know the software updater server's URL, but is otherwise independent from it (e.g., can run on a different server).
+
+Similarly, from item 2 above, the clearinghouse can use any custom installer builder whose URL it knows and whose base installer package suits it. For example, a Seattle-based testbed might choose to use Seattle's Custom Installer Builder to avoid setting up its own.
+
+This architecture also makes it easy to deploy (or gradually update) new versions of infrastructure components while keeping others unchanged.
