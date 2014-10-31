@@ -53,6 +53,7 @@ There is a wide variety of other platforms and testbeds readily available, each 
 Learn the basics:
 
  * For more information, please check out our [http://seattle.poly.edu/static/SeattleMovieFinal.mov overview movie].
+ * For a demonstration of Seattle, please view our [https://seattle.poly.edu/static/demo.mov 5-minute video].
  * Learn more about [wiki:UnderstandingSeattle/SeattleComponents how Seattle works].
  * Try [wiki:UnderstandingSeattle/DonatingResources donating resources] to other users.
  * Complete the [wiki:EducationalAssignments/TakeHome take-home assignment] to get hands-on experience with Seattle.
