@@ -266,20 +266,21 @@ Next up, we configure Apache.
 -----
 
 This is a minimal exemplary configuration to serve the Clearinghouse website from
-https://mysite/clearinghouse/. Note that in this snippet, the second
+`https://mysite/ch/`. Note that in this snippet, the second
 !VirtualHost entry assumes that you have a server certificate and key
 file setup, and the `Location` directive assumes that your Clearinghouse
-installation lives in `/home/clearinghouse/deployment` and that your Django settings module
+installation lives in `/home/ch/deployment/clearinghouse` and that your Django settings module
 is `clearinghouse.website.settings`.
 
-This config contains two `VirtualHost`s actually, the first providing redirects all connections to '''http'''://mysite/clearinghouse/* to use
-'''https'''://mysite/clearinghouse/*.
+This config contains two `VirtualHost`s actually, the first providing redirects all connections to '''http'''://mysite/ch/* to use
+'''https'''://mysite/ch/*.
 
 Depending on you configuration of Apache, you may want to add the below code to `/etc/apache2/sites-available/default`.
 
 
 {{{
 #!sh
+# Run the Django app as the clearinghouse user
 WSGIDaemonProcess chdjango user=ch processes=5 threads=10
 WSGIProcessGroup chdjango
 
@@ -287,8 +288,8 @@ WSGIProcessGroup chdjango
 <VirtualHost *:80>
     # Redirect requests for the server index page or that are 
     # clearinghouse-related to the HTTPS site.
-    RedirectMatch ^/$ https://---SERVERNAME---/ch/html/login
-    RedirectMatch ^/ch https://---SERVERNAME---/ch/html/login
+    RedirectMatch ^/$ https://mysite/ch/html/login
+    RedirectMatch ^/ch https://mysite/ch/html/login
 </VirtualHost>
 
 # SSL
@@ -297,7 +298,9 @@ WSGIProcessGroup chdjango
     SSLEngine on
     SSLCertificateFile /etc/apache2/ssl/server.crt
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
+    # You can add intermediate certificates here.
 
+    # Point the URL https://mysite/ch to the Django app
     WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
 
     <Directory /home/ch/deployment/clearinghouse/wsgi>
