@@ -280,15 +280,15 @@ Depending on you configuration of Apache, you may want to add the below code to 
 
 {{{
 #!sh
-NameVirtualHost *:80
-NameVirtualHost *:443
+WSGIDaemonProcess chdjango user=ch processes=5 threads=10
+WSGIProcessGroup chdjango
 
 # HTTP
 <VirtualHost *:80>
-    # Redirect requests for the server index or clearinghouse login 
-    # page to the HTTPS site.
-    RedirectMatch ^/$ https://mysite/ch/html/login
-    RedirectMatch ^/geni https://mysite/ch/html/login
+    # Redirect requests for the server index page or that are geni-related
+    # to the https site.
+    RedirectMatch ^/$ https://127.0.0.1/geni/html/login
+    RedirectMatch ^/geni https://127.0.0.1/geni/html/login
 </VirtualHost>
 
 # SSL
@@ -298,28 +298,13 @@ NameVirtualHost *:443
     SSLCertificateFile /etc/apache2/ssl/server.crt
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
 
-    # If you have intermediate certificates, add them here like so:
-    #SSLCertificateChainFile /etc/apache2/ssl/gd_intermediate.crt
+    WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
 
-    <Location /ch/>
-        SetHandler python-program
-        PythonHandler django.core.handlers.modpython
-        SetEnv DJANGO_SETTINGS_MODULE seattlegeni.website.settings
-        PythonOption django.root /geni
-        PythonDebug Off
-        # We add /usr/local/lib/python2.5/site-packages to ensure that our
-        # manual installation of django 1.1 to /usr/local is in the path
-        # before any copy of django installed through the distro's repositories.
-        PythonPath "['/home/geni/live/', '/home/geni/live/seattle', '/usr/local/lib/python2.5/site-packages'] + sys.path"
-    </Location>
+    <Directory /home/ch/deployment/clearinghouse/wsgi>
+    # Apache 2.4, dude!
+    Require all granted
+    </Directory>
 
-    # Make sure various locations people might request redirect somewhere that works.
-    RedirectMatch ^/$ https://mysite/geni/html/login
-    RedirectMatch ^/geni/?$ https://mysite/geni/html/login
-    RedirectMatch ^/geni/html/?$ https://mysite/geni/html/login
-
-    # Don't require a slash on the end of the admin url.
-    RedirectMatch ^/geni/admin$ https://mysite/geni/admin/
 </VirtualHost>
 }}}
 
