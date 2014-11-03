@@ -295,10 +295,19 @@ WSGIProcessGroup chdjango
 # SSL
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
+
+    # Enable SSL
     SSLEngine on
     SSLCertificateFile /etc/apache2/ssl/server.crt
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
     # You can add intermediate certificates here.
+
+    # Point Apache to the clearinghouse's static images/CSS/JavaScript
+    Alias /site_media /home/ch/deployment/clearinghouse/website/html/media
+    <Directory /home/ch/deployment/clearinghouse/website/html/media>
+        Require all granted
+    </Directory>
+
 
     # Point the URL https://mysite/ch to the Django app
     WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
