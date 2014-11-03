@@ -308,6 +308,8 @@ WSGIProcessGroup chdjango
         Require all granted
     </Directory>
 
+    # XXX We should configure the Django admin page static files too!
+    # XXX See https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/
 
     # Point the URL https://mysite/ch to the Django app
     WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
