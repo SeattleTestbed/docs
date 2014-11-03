@@ -304,7 +304,9 @@ WSGIProcessGroup chdjango
     WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
 
     <Directory /home/ch/deployment/clearinghouse/wsgi>
-    Require all granted
+        <Files wsgi.py>
+        Require all granted
+        </Files>
     </Directory>
 
 </VirtualHost>
@@ -401,4 +403,4 @@ $ screen -r
 ----
 
 Congratulations! You should now have a fully operational Seattle Clearinghouse
-installation that you can access at https://mysite/geni/
+installation that you can access at https://mysite/ch/
