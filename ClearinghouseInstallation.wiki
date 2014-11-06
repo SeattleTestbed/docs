@@ -394,8 +394,13 @@ $ screen -r
 
 
 [[BR]]
-== Conclusion ==
+== Done! (Almost) ==
 ----
 
 Congratulations! You should now have a fully operational Seattle Clearinghouse
 installation that you can access at https://mysite/ch/
+
+
+[[BR]]
+== Monitoring ==
+----
