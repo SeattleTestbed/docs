@@ -347,31 +347,11 @@ If Apache gives the error:
 Invalid command 'SSLEngine', perhaps misspelled or defined by a module not included in the server configuration
 }}}
 
-then you need to enable ssl by running:
+then you need to enable SSL by running:
 {{{
 #!sh
 $ sudo a2enmod ssl
 }}}
-
-For importing all the required modules, Apache requires read and execute permissions for the seattle and seattlegeni directories. To ensure Apache has the correct permissions, run the following command in your Seattle Clearinghouse directory:
-{{{
-#!sh
-$ chmod -R o+rx seattle/ seattlegeni/
-}}}
-
-If you try to access your Seattle Clearinghouse installation's website now, then it's possible you'll see an exception like this:
-{{{
-Cannot open file for translation '/home/geni/live/seattle/rsa.repy': [Errno 13] Permission denied: '/home/geni/live/seattle/rsa_repy.py'
-}}}
-
-This is because Apache doesn't have permission to overwrite the *_repy.py files when repyhelper
-get invoked, so as a workaround you can cd to the seattle directory and change the permissions:
-{{{
-#!sh
-$ chmod a+w *_repy.py
-}}}
-
-
 
 
 
