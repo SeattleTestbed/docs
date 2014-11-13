@@ -191,7 +191,7 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 cd ~/deployment/clearinghouse
 python website/manage.py syncdb
 }}}
-    * For testing purposes, start the Django development webserver:
+    * For testing purposes, start the Django development webserver. This lets you check that your configs etc. have no syntax errors, and the Django app can be started. '''Note: To be able to further interact with the Clearinghouse (e.g. create user accounts and log in), you must set up Apache web server.'''
 {{{
 #!sh
 $ # Use this for running on localhost only:
