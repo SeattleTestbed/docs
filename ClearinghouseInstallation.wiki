@@ -288,6 +288,7 @@ WSGIProcessGroup chdjango
 <VirtualHost *:80>
     # Redirect requests for the server index page or that are 
     # clearinghouse-related to the HTTPS site.
+    # For "mysite", substitute your domain (or IP address if only testing)
     RedirectMatch ^/$ https://mysite/ch/html/login
     RedirectMatch ^/ch https://mysite/ch/html/login
 </VirtualHost>
@@ -323,24 +324,26 @@ WSGIProcessGroup chdjango
 </VirtualHost>
 }}}
 
-To use this configuration for your Seattle Clearinghouse installation, change "mysite" to your domain
-name, change "/home/geni/live/" in the site media location and Python path to the directory
-where you deployed Seattle Clearinghouse, and make sure "/admin_media" is aliased to a valid directory,
-as the exact location will vary depending on the version of Python installed and how you
-installed Django. A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
+To use this configuration for your Seattle Clearinghouse installation, change
+ * `"mysite"` to your domain name (or IP address in case you performing tests),
+ * `"/home/ch/deployment/"` in the site media location, and
+ * `WSGIScriptAlias` directive to the directory where you deployed Seattle Clearinghouse;
+ * also, make sure `"/admin_media"` is aliased to a valid directory, as the exact location will vary depending on the version of Python installed and how you installed Django.
+
+A good place to put this configuration is the file /etc/apache2/sites-enabled/000-default.
 
 To configure SSL you will probably need to install openssl to generate a private key/CSR
 (Certificate Signing Request), and then possibly purchase a certificate for your site.
 For more information see [http://slacksite.com/apache/certificate.php this page]. Put your
 SSL key and certificate in a directory named /etc/apache2/ssl (or change the configuration
 to correctly reference them). If you generate your own certificate instead of buying one,
-remove the line for "SSLCertificateChainFile".
+remove the line for `"SSLCertificateChainFile"`.
 
 Be sure to restart Apache after you are done changing the configuration files.
 
 {{{
 #!sh
-$ /etc/init.d/apache2 restart
+$ sudo /etc/init.d/apache2 restart
 }}}
 If Apache gives the error:
 {{{
