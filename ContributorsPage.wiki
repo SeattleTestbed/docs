@@ -2,7 +2,7 @@
 
 This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
 
-Note: We've recently moved our VCS and ticket system to !GitHub. Please see [https://github.com/SeattleTestbed our organization's page] there for the latest code, to discuss open issues, and to create forks off our code base for your contributions!
+Note: We've recently moved our VCS and ticket system to !GitHub. Please see our [https://github.com/SeattleTestbed organization's page] for the latest code, to discuss open issues, and to create forks off our code base for your contributions!
 
 '''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
  * Accessing our !GitHub repositories, building components, Github & Git tutorial, and using the wiki
