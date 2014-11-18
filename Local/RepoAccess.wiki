@@ -252,6 +252,10 @@ $ git commit -m "Add missing section to README noticed by reviewer"
 $ git push origin master
 }}}
 
+=== Resolve a Merge Conflict ===
+Merge conflicts may occur in pull requests if multiple contributors attempt to modify the same area in a file and merge the changes into the "master" branch.  For example, one contributor wishes for ''foo'' to appear in the first three characters of a file, while another contributor desires ''bar''.  When a merge conflict occurs, the affected contributors must mutually resolve the affected areas.  That is, the file in the previous example must be edited to produce one unique version; either ''foo'' appears in the first three characters, or ''bar'' does.
+
+The following page provides a comprehensive guide on resolving merge conflicts: https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
 
 == Miscellaneous Git commands ==
 Typing '''git help -a''' on the command-line outputs the full list of commands supported by Git.
