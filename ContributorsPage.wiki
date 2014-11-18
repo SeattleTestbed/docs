@@ -5,16 +5,16 @@ This page contains information useful to developers working on Seattle.   Anythi
 Note: We've recently moved our VCS and ticket system to !GitHub. Please see [https://github.com/SeattleTestbed our organization's page] there for the latest code, to discuss open issues, and to create forks off our code base for your contributions!
 
 '''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
- 
- * Accessing our !GitHub repositories, subscribing to the mailing list, using the wiki
-   * Check out (i.e. {{{git clone}}}) our repos from [https://github.com/SeattleTestbed]
+ * Accessing our !GitHub repositories, building components, Github & Git tutorial, and using the wiki
+   * Check out (i.e., {{{git clone}}}) our source code from [https://github.com/SeattleTestbed]
+   * [wiki:BuildInstructions Instructions] for building Seattle components
    * '''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''
-   * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
-   * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and generating a public / private key pair
    * [wiki:Local/RepoAccess Github and Git] instructions
    * [http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands Useful Git Commands]
    * [https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line How to resolve a merge conflict with Git]
+   * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and   generating a public / private key pair
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
+   * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
 
  * Programming in Repy
    * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
