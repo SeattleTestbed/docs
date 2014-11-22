@@ -149,3 +149,76 @@ the_component/DEPENDENCIES/common/build_component.py
 }}}
 
 '''Note:''' `build_component.py` is not part of `scripts/`. Running `initialize.py` clones the dependent repositories into `the_component/DEPENDENCIES/`, and one of these cloned dependencies is `common` which contains `build_component.py`. Users don't need to manually run `build_component.py` script. The script `scripts/build.py` indirectly runs `build_component.py` and takes care of it.
+
+
+
+== Use Cases for the Build Scripts ==
+
+=== End Users ===
+
+End users do not normally modify nor contribute source code to [https://github.com/seattletestbed SeattleTestbed], but instead build and run specific `SeattleTestbed` components.  For this use case, the build procedure for end users is straightforward and matches the procedure outlined in `How the Build Process Works`:
+
+1. `git clone` a [https://github.com/seattletestbed SeattleTestbed] repository
+
+2. cd `scripts/`
+
+3. Run `python initialize.py` to fetch the cloned repository's dependencies (as indicated in `config_initialize.txt`).
+
+4. Run `python build.py`, supplying an optional destination directory. By default, modules that are built are saved to `../RUNNABLE`
+
+End users may then navigate to the `../RUNNABLE` directory and execute a specific program. For example:
+
+{{{
+$ cd ../RUNNABLE/
+$ python seash.py
+Enabled modules:  
+
+ !> 
+}}}
+
+
+=== Developers ===
+
+Github developers typically fork (or create a new branch on [https://github.com/SeattleTestbed SeattleTestbed] if they are a member of `SeattleTestbed`) repositories and make pull requests to contribute source code.  There are multiple approaches developers may follow to build and test a component that they have modified.  Developers may either (1) build and test a buildable/non-buildable repository that they have modified, or (2) build and test a component that contains a developer-modified dependency (e.g., build and test `repy_v2` when the developer has modified `seattlelib_v2`).
+
+Approach (1) is almost identical to the end-user scenario, but developers `git clone` their modified repository, rather than one of the 
+`SeattleTestbed` repositories.
+
+Modified dependencies in approach (2) can be built and tested in two ways: (A) The modified dependency is available on Github and is specified in `config_initialize.txt` by the developer, or (B) the modified dependency is available locally and is manually added to a "DEPENDENCIES" subdirectory of the component.
+
+==== Approach A ====
+
+1. `git clone` a [https://github.com/seattletestbed SeattleTestbed] repository
+
+2. cd `scripts/`
+
+3. A "dependencies" entry in `config_initialize.txt` is edited so that it points to the developer's modified repository.  For example:
+{{{
+https://github.com/JohnSmith/seattlelib_v2 ../DEPENDENCIES/seattlelib_v2
+https://github.com/SeattleTestbed/portability ../DEPENDENCIES/portability       
+}}}
+
+4. Run `python initialize.py` to fetch the component's dependencies, including the developer's modified repository
+
+5. Run `python build.py`, supplying an optional destination directory. By default, modules that are built are saved to `../RUNNABLE`
+
+The developer may test the component by running its unit tests (`python build.py -a` is required to build testable components) or running the built program and verifying functionality.
+
+
+==== Approach B ====
+
+1. `git clone` a [https://github.com/seattletestbed SeattleTestbed] repository
+
+2. The developer creates a subdirectory named `DEPENDENCIES` under the cloned repository.
+
+3. The developer manually copies their modified component to the `DEPENDENCIES` subdirectory.
+
+4. cd `scripts/`
+
+5. `python initialize.py -s` is executed to fetch the repository's dependencies and skip the developer's modified subdirectory.
+
+6. `python build.py`, supplying an optional target directory instead of the default `../RUNNABLE`
+
+The developer may test the component by running its unit tests (`python build.py -a` is required to build testable components) or running the built program and verifying functionality.
+
+NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing directories contain the full might mask errors (e.g., repository not checked out completely due to user cancelling the process)
