@@ -221,4 +221,4 @@ The developer may test the component by running its unit tests (`python build.py
 
 The developer may test the component by running its unit tests (`python build.py -t` is required to build testable components) or running the built program and verifying functionality.
 
-NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing directories contain the full might mask errors (e.g., repository not checked out completely due to user cancelling the process)
+NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing dependencies are fully-working copies (e.g., repository not checked out completely due to user cancelling the process) and skipping incomplete dependencies might mask errors and lead to build/runtime errors.
