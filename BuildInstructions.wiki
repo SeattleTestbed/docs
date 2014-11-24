@@ -202,7 +202,7 @@ https://github.com/SeattleTestbed/portability ../DEPENDENCIES/portability
 
 5. Run `python build.py`, supplying an optional destination directory. By default, modules that are built are saved to `../RUNNABLE`
 
-The developer may test the component by running its unit tests (`python build.py -a` is required to build testable components) or running the built program and verifying functionality.
+The developer may test the component by running its unit tests (`python build.py -t` is required to build testable components) or running the built program and verifying functionality.
 
 
 ==== Approach B ====
@@ -219,6 +219,6 @@ The developer may test the component by running its unit tests (`python build.py
 
 6. `python build.py`, supplying an optional target directory instead of the default `../RUNNABLE`
 
-The developer may test the component by running its unit tests (`python build.py -a` is required to build testable components) or running the built program and verifying functionality.
+The developer may test the component by running its unit tests (`python build.py -t` is required to build testable components) or running the built program and verifying functionality.
 
 NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing directories contain the full might mask errors (e.g., repository not checked out completely due to user cancelling the process)
