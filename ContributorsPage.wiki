@@ -35,12 +35,12 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
    * [wiki:Local/RunningIntegrationTests Running Integration Tests]
    * [wiki:Archive/SeattleGeniInstallation Running a Clearinghouse test server]
-   * [wiki:CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
+   * [wiki:Archive/CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
    * [wiki:Local/ContinuousBuild Continuous Build]
 
  * Style guidelines for documentation, python code, web code
-   * '''[wiki:CodingStyle Python/Repy style guidelines] for most Seattle programming'''
+   * '''[https://github.com/secure-systems-lab/code-style-guidelines Python/Repy style guidelines] for most Seattle programming'''
    * [wiki:WebCodingStyle Web style guidelines] for web programming
    * '''[wiki:Local/WikiFormatting Documentation format guidelines] for wiki pages'''
 
@@ -60,7 +60,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
      * [wiki:NsisSystemSetup System setup instructions] to be able to build the Windows GUI installer
    * [wiki:Local/VersionDeployment Deploying] a new version
    * [wiki:SoftwareUpdaterSetup Setting up] the software updater
-   * [wiki:SeattleGeniProductionHttp Updating] the production Seattle Clearinghouse code
+   * [wiki:Archive/SeattleGeniProductionHttp Updating] the production Seattle Clearinghouse code
    * [wiki:BuildDemokit Building the Demokit]
    * [wiki:Libraries/Overlord Overlord Deployment and Monitoring Library] for deploying persistent services on VMs
 
