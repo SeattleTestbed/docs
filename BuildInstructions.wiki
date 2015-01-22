@@ -215,7 +215,7 @@ The developer may test the component by running its unit tests (`python build.py
 
 4. cd `scripts/`
 
-5. `python initialize.py -s` is executed to fetch the repository's dependencies and skip the developer's modified subdirectory.
+5. `python initialize.py -s` is executed to fetch the repository's dependencies and skip any existing subdir of `DEPENDENCIES`. This will usually be the developer's modified subdirectory, but actually '''any''' subdir, no matter its contents, will be skipped if its name matches a repo's!
 
 6. `python build.py`, supplying an optional target directory instead of the default `../RUNNABLE`
 
