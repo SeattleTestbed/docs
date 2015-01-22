@@ -91,27 +91,26 @@ The unit test framework prints out the test name and result (plus debugging info
 
 The Seattle build procedure makes use of three scripts, `initialize.py`, `build.py` and `build_component.py`, and two sets of configuration instructions, `config_initialize.txt` and `config_build.txt`.
 
-`config_initialize.txt` provides `initialize.py` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging").
+`config_initialize.txt` provides `initialize.py` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging"). Entries are of form
 
-`config_build.txt` provides `build_component.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component.
+`ADDRESS_OF_REPOSITORY [``-b'' BRANCH_IDENTIFIER] PATH_TO_CLONE_INTO`
+
+
+`config_build.txt` provides `build_component.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component. Entries are of form
+
+```
+SOURCE_PATH/FILENAME_OR_GLOB [DESTINATION_PATH_BELOW_TARGET_DIR]
+``test'' SOURCE_PATH/FILENAME_OR_GLOB [DESTINATION_PATH_BELOW_TARGET_DIR]
+```
 
 `build.py` is a wrapper-script that automates the running of `build_component.py` from inside the `scripts/` directory of a component, so that users don't need to leave the scripts directory in order to run `build.py`.
 
 A sample `config_initialize.txt` looks like this:
 {{{
-# This config was used for an old version of the custominstallerbuilder.
-https://github.com/SeattleTestbed/repy_v1 ../DEPENDENCIES/repy_v1
+# This is a sample config showing the different allowed forms of entries.
+# (And yes, this is how comment lines can be added!)
 https://github.com/SeattleTestbed/repy_v2 ../DEPENDENCIES/repy_v2
-https://github.com/SeattleTestbed/seattlelib_v1 ../DEPENDENCIES/seattlelib_v1
-https://github.com/SeattleTestbed/seattlelib_v2 ../DEPENDENCIES/seattlelib_v2
-https://github.com/SeattleTestbed/nodemanager ../DEPENDENCIES/nodemanager
-https://github.com/SeattleTestbed/softwareupdater ../DEPENDENCIES/softwareupdater
-https://github.com/SeattleTestbed/portability ../DEPENDENCIES/portability
-https://github.com/SeattleTestbed/common ../DEPENDENCIES/common
-https://github.com/aaaaalbert/affix.git -b minimal-clean-alpha-release ../DEPENDENCIES/affix
-https://github.com/SeattleTestbed/clearinghouse ../DEPENDENCIES/clearinghouse
 https://github.com/aaaaalbert/seash.git -b sync-with-affix-alpha-release ../DEPENDENCIES/seash
-https://github.com/SeattleTestbed/resource.git ../DEPENDENCIES/resource
 }}}
 
 Here is the corresponding {{{config_build.txt}}}:
@@ -119,12 +118,7 @@ Here is the corresponding {{{config_build.txt}}}:
 # Build file for the Repy runtime that the custominstallerbuilder requires. 
 ./*
 DEPENDENCIES/repy_v2/*
-DEPENDENCIES/portability/*
-DEPENDENCIES/seattlelib_v2/*
-DEPENDENCIES/seash/*
-DEPENDENCIES/clearinghouse/xmlrpc_clients/seattleclearinghouse_xmlrpc.py
-DEPENDENCIES/affix/*
-DEPENDENCIES/affix/components/*
+DEPENDENCIES/seash/* seash_subdir/
 
 # Tests
 test ./tests/*
