@@ -98,10 +98,10 @@ The Seattle build procedure makes use of three scripts, `initialize.py`, `build.
 
 `config_build.txt` provides `build_component.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component. Entries are of form
 
-```
+{{{
 SOURCE_PATH/FILENAME_OR_GLOB [DESTINATION_PATH_BELOW_TARGET_DIR]
 ``test'' SOURCE_PATH/FILENAME_OR_GLOB [DESTINATION_PATH_BELOW_TARGET_DIR]
-```
+}}}
 
 `build.py` is a wrapper-script that automates the running of `build_component.py` from inside the `scripts/` directory of a component, so that users don't need to leave the scripts directory in order to run `build.py`.
 
