@@ -94,7 +94,7 @@ The Seattle build procedure makes use of three scripts, `initialize.py`, `build.
 `config_initialize.txt` provides `initialize.py` with Git links to dependent repositories. `initialize` then Git-clones from there. Usually, we link to our main repositories, [https://github.com/SeattleTestbed github/SeattleTestbed], but linking to other repos is common during development. Note that links may include branch or commit specifiers so as to enable release management ("tagging"). Entries are of form
 
 {{{
-ADDRESS_OF_REPOSITORY [``-b'' BRANCH_IDENTIFIER] PATH_TO_CLONE_INTO`
+ADDRESS_OF_REPOSITORY [``-b'' BRANCH_IDENTIFIER] PATH_TO_CLONE_INTO
 }}}
 
 `config_build.txt` provides `build_component.py` with the names and paths of necessary files that are to be copied over from the cloned repos to the target directory to build the required Seattle component. Entries are of form
