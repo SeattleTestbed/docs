@@ -193,6 +193,8 @@ https://github.com/JohnSmith/seattlelib_v2 ../DEPENDENCIES/seattlelib_v2
 https://github.com/SeattleTestbed/portability ../DEPENDENCIES/portability       
 }}}
 
+Notice that the first entry in the example above specifies `https://github.com/JohnSmith/seattlelib_v2`, which is the developer's modified repository.
+
 4. Run `python initialize.py` to fetch the component's dependencies, including the developer's modified repository
 
 5. Run `python build.py`, supplying an optional destination directory. By default, modules that are built are saved to `../RUNNABLE`
