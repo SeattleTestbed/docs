@@ -1,6 +1,6 @@
 = Build Instructions =
-This page guides you through building the components of [https://github.com/SeattleTestbed Seattle Testbed]. The first section discusses what is required to get hold of a component's source code repository and build from it so that the component can be run. The second section describes how to run unit tests which ensure that the component works properly. The last part explains how our initialize and build scripts work behind the scenes.
-
+This page guides readers through building the components of [https://github.com/SeattleTestbed Seattle Testbed].  The Seattle Testbed is comprised of a dozen, or so, interdependent sub-components that may be individually built, run, and tested.  Specifically, this instructional guide covers the `initialize.py` and `build.py` scripts that are utilized by all of the Seattle Testbed components; these two build scripts may be used to fetch each component's dependencies, and to build the component and its unit tests.  There are sections explaining how to build components; how to build and run a component's unit tests; the different use cases for the build scripts; how contributors will typically develop and contribute source code while using the build scripts; and how the build scripts themselves work.  The guide begins by discussing the software prerequisites of the Seattle Testbed.
+ 
 ----
 [[TOC(inline)]]
 ----
@@ -220,7 +220,7 @@ The developer may test the component by running its unit tests (`python build.py
 
 NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing dependencies are fully-working copies (e.g., repository not checked out completely due to user cancelling the process) and skipping incomplete dependencies might mask errors and lead to build/runtime errors.
 
-== SeattleTestbed Development and the Build Scripts ==
+== `SeattleTestbed` Development and the Build Scripts ==
 Contributors have two methods for testing and building the source code changes that they intend to contribute to SeattleTestbed repositories:
 
 1. Edit module and test files in the root directory of the component.  That is, the files that are tracked by Git are directly edited by the contributor, and `scripts/build.py' is repeatedly executed after each edit so that testing and verification of behavior can be conducted.  Edited files may then be added, committed, and a pull request issued to https://github.com/SeattleTestbed/ from the Git-tracked, root directory.
