@@ -219,3 +219,10 @@ The developer may test the component by running its unit tests (`python build.py
 The developer may test the component by running its unit tests (`python build.py -t` is required to build testable components) or running the built program and verifying functionality.
 
 NOTE: Using the `-s` (skip mode) option with `python initialize.py` is dangerous because it doesn't check whether the existing dependencies are fully-working copies (e.g., repository not checked out completely due to user cancelling the process) and skipping incomplete dependencies might mask errors and lead to build/runtime errors.
+
+== SeattleTestbed Development and the Build Scripts ==
+Contributors have two methods for testing and building the source code changes that they intend to contribute to SeattleTestbed repositories:
+
+1. Edit module and test files in the root directory of the component.  That is, the files that are tracked by Git are directly edited by the contributor, and `scripts/build.py' is repeatedly executed after each edit so that testing and verification of behavior can be conducted.  Edited files may then be added, committed, and a pull request issued to https://github.com/SeattleTestbed/ from the Git-tracked, root directory.
+
+2. For quick & convenient editing and testing of a component's modules, the files that are built in the target directory (RUNNABLE by default) may be directly modified.  For example, a module in RUNNABLE can be updated and immediately tested from the same directory.  However, files that are edited in the target directory are not tracked by Git.  One shortcoming of this method is the manual task of moving or copying over changes to the Git-tracked directory; this approach may unfortunately lead to edits that are accidentally excluded from pull requests because edits are not eventually copied over to the Git-tracked versions of modified modules.
