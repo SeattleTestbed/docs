@@ -1,6 +1,6 @@
  = Code Style Guidelines for the Seattle project =
 
-These guidelines provide examples about what to do (or not to do) when writing code for the Seattle project.   These are based upon Justin's experiences working with Stork, [http://www.python.org/dev/peps/pep-0008/ Guido van Rossom's ] Python style guidelines, and the experiences and suggestions of team members.   Please give Justin feedback if there is anything you'd like to change.
+These guidelines provide examples about what to do (or not to do) when writing code for the Seattle project.   These are based upon Justin's experiences working with Stork, [http://www.python.org/dev/peps/pep-0008/ Guido van Rossum's ] Python style guidelines, and the experiences and suggestions of team members.   Please give Justin feedback if there is anything you'd like to change.
 
 
 ----
