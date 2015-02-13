@@ -7,9 +7,9 @@ This page outlines how to install the Custom Installer Builder (including its de
 ------
 
 == Setting up a user account ==
-First of all, we recommend to set up a user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
+First of all, we recommend to set up a new linux user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
 
-The user ''should not be granted interactive login'' for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user ''should not have root privileges'' or be able to acquire them.
+The user ''should not be granted interactive login'' for security reasons. Use `sudo -i -u thenewusername` instead to work in their directory. Needless to say, the user ''should not have root privileges'' or be able to acquire them.
 
 Any user name will be fine. We'll use `cib` in the instructions.
 
