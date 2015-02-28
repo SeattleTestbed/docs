@@ -253,7 +253,33 @@ $ git push origin master
 }}}
 
 === Resolve a Merge Conflict ===
-Merge conflicts may occur in pull requests if multiple contributors attempt to modify the same area in a file and merge the changes into the "master" branch.  For example, one contributor wishes for ''foo'' to appear in the first three characters of a file, while another contributor desires ''bar''.  When a merge conflict occurs, the affected contributors must mutually resolve the affected areas.  That is, the file in the previous example must be edited to produce one unique version; either ''foo'' appears in the first three characters, or ''bar'' does.
+
+Merge conflicts might occur with Git's push or pull actions if multiple contributors attempt to modify the same section of a file, and merge their conflicting modifications to the server’s “master" branch. For example, suppose one contributor wants "foo" to appear in the first three characters of a file, while another contributor desires "bar". When a merge conflict occurs, the affected contributors must mutually resolve the conflicting section. That is, the file in the previous example must be edited to produce one unique version of the file; either "foo" appears in the first three characters, or "bar" does.
+
+If Git detects a merge conflict after a pull or merge action, it inserts special markers in the conflicting section(s) of the file to indicate what needs to be resolved:
+
+{{{
+    <<<<<< HEAD
+    foo
+    ======
+    bar
+    >>>>>>
+}}}
+
+The text between <<<<<< HEAD and ===== is what is currently on the server’s “master” branch.  The text between ===== and >>>>>> is what is being merged and causing the conflict.  To resolve the merge conflict, a contributor must open the file in a text editor and manually remove the merge conflict markers and either keep what is currently on the “master” branch or what is being merged.  In the merge conflict example above, a contributor would keep either the text “foo” or “bar”, and remove the rest of the markers inserted by Git.  To finalize the merge conflict, the contributor must commit the resolved changes.
+
+Steps to resolve the merge conflict:
+
+Edit the file containing the merge conflict in a text editor.
+To discard what is currently on the server and replace it with “bar”, delete “foo” and the three inserted markers.
+
+1. Save the file.
+
+2. {{{$ git add}}}
+
+3. {{{$ git commit}}}
+
+4. {{{$ git push}}}
 
 The following page provides a comprehensive guide on resolving merge conflicts: https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
 
