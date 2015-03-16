@@ -53,7 +53,7 @@ Now '''log in as the user who will be hosting the Custom Installer Builder''' (i
 #!sh
 $ sudo -i -u cib
 [sudo] password for currentuser:
-$ git clone https://github.com/aaaaalbert/custominstallerbuilder.git
+$ git clone https://github.com/aaaaalbert/custominstallerbuilder.git -b django16support
 }}}
 
 In the `custominstallerbuilder` directory created through this, locate and `cd` into `scripts/`, and run the init script:
@@ -84,4 +84,4 @@ $ python build.py ~/custominstallerbuilder/repy_runtime
 == Done (for now) ==
 That's it! You now have all of the code and config files required for the Custom Installer Builder in place!
 
-Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:CustomInstallerBuilderTesting running a test server], and [wiki:CustomInstallerBuilderDeployment running a production server].
+Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:Archive/CustomInstallerBuilderTesting running a test server], and [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython running a production server].
