@@ -44,7 +44,7 @@ PROJECT_URL = BASE_URL
 Specifically,
  * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others!
  * If you are testing locally, use `http://127.0.0.1:PORT/` for the `BASE_URL`. You may use your public facing IP if you want it to be accessible via the internet.
- * `PORT` must be an open port number greater than 1024. For smaller port numbers, administrative privileges (`sudo`) are required. 
+ * If you are testing your setup using a non-privileged account, `PORT` must be an open port number greater than 1024. Purt numbers below that (such as the usual HTTP and HTTPS ports 80 and 443) require administrative privileges (`sudo`).
 
 Save the file, and you are done with configuring Django for your Custom Installer Builder. Good job!
 
