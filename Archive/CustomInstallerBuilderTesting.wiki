@@ -1,5 +1,5 @@
 = Testing the Custom Installer Builder =
-This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
+This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython these instructions] instead.
 
 We'll assume that you have completed the previous steps to [wiki:Archive/CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
 
@@ -38,4 +38,4 @@ Development server is running at http://0.0.0.0:8080/
 Quit the server with CONTROL-C.
 }}}
 
-You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:CustomInstallerBuilderDeployment production deployment guide] will add the missing bits and pieces of configuration to rectify that.
+You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython production deployment guide] will add the missing bits and pieces of configuration to rectify that.
