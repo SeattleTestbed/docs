@@ -8,29 +8,31 @@ This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Bu
 == Configuring Apache + mod_wsgi ==
 As noted in the [wiki:CustomInstallerBuilderInstallation installation instructions], we will use Apache as the front-end web server to our Custom Installer Builder.
 
-Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example.
+Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example. (Check out [wiki:SeattleInfrastructureArchitecture#DeploymentPaths this overview of deployment paths] for alternative configs.)
 
-The directories within `PythonPath` should be modified to match your system configuration. In the following line, `django.root` should match the URL segment given in the `Location` directive. As always, disable debugging once you have successfully deployed the Custom Installer Builder.
 
-For more information on deploying Django projects with mod_python, reference the [http://docs.djangoproject.com/en/dev/howto/deployment/modpython/ Django website].
+As always, remember to disable debugging once you have successfully deployed the Custom Installer Builder.
+
 {{{
-#!sh
-<Location "/custominstallerbuilder/">
-  SetHandler python-program
-  PythonHandler django.core.handlers.modpython
-  
-  SetEnv DJANGO_SETTINGS_MODULE custominstallerbuilder.local.settings 
-  PythonPath "['/home/cib', '/home/cib/custominstallerbuilder/repy_runtime'] + sys.path"
-  PythonOption django.root /custominstallerbuilder
-  PythonInterpreter custominstallerbuilder
-  
-  PythonDebug On
-</Location>
+# Let the custominstallerbuilder Django app run in a separate process
+WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
 
-Alias "/custominstallerbuilder/static/" "/home/cib/custominstallerbuilder/html/static/"
-<Location "/custominstallerbuilder/static/">
-  SetHandler None
-</Location>
+# Point the URL ending in "/cib" to the appropriate Django app
+WSGIScriptAlias /cib /home/cib/custominstallerbuilder/wsgi/wsgi.py process-group=cibdjango
+
+# Allow access to the WSGI wrapper script
+<Directory /home/cib/custominstallerbuilder/wsgi>
+    <Files wsgi.py>
+        Require all granted
+    </Files>
+</Directory>
+
+# Also allow access to JavaScript/CSS/images not served by Django
+Alias /cib/static/ /home/cib/custominstallerbuilder/html/static/
+<Directory /home/cib/custominstallerbuilder/html/static>
+    Require all granted
+</Directory>
+
 }}}
 
 
