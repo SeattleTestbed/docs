@@ -56,3 +56,44 @@ It's often more efficient to run all three services on a single server. In case 
 
 If only one hostname is available for all services, then they must be demultiplexed using different `WSGIScriptAlias` directives for each sub-URL. If using different-level sub-URLs such as `hostname/` for the clearinghouse and `hostname/cib` for the custominstallerbuilder, the catch is to put the more specific URL first. Otherwise, the first (being a prefix of the other) will match, and the wrong Django app be started. Also, separate Django processes must be started for each app, so that they don't share configuration and environment variable contents. All of this is detailed in the reference above.
 
+Here is an example of a combined clearinghouse / custominstallerbuilder `apache.conf`, with the clearinghouse app at `https://hostname/` and the custominstallerbuilder at `https://hostname/cib`.
+
+{{{
+# Have separate processes for each Django app
+WSGIDaemonProcess chdjango user=ch processes=5 threads=10
+WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
+
+<VirtualHost *:443>
+    # NOTE: Certificate etc. config omitted for brevity.
+
+    # This configures the custominstallerbuilder Django app, 
+    # and lets it access static content.
+    WSGIScriptAlias /cib /home/cib/custominstallerbuilder/wsgi/wsgi.py process-group=cibdjango
+
+    <Directory /home/cib/custominstallerbuilder/wsgi>
+        <Files wsgi.py>
+        Require all granted
+        </Files>
+    </Directory>
+
+    Alias /cib/static/ /home/cib/custominstallerbuilder/html/static/
+    <Directory /home/cib/custominstallerbuilder/html/static>
+        Require all granted
+    </Directory>
+
+
+    # This configures the clearinghouse Django app.
+    WSGIScriptAlias / /home/ch/deployment/clearinghouse/wsgi/wsgi.py process-group=chdjango
+    <Directory /home/ch/deployment/clearinghouse/wsgi>
+        <Files wsgi.py>
+        Require all granted
+        </Files>
+    </Directory>
+
+    # Allow access to the clearinghouse's static images/CSS/JavaScript
+    Alias /site_media /home/ch/deployment/clearinghouse/website/html/media
+    <Directory /home/ch/deployment/clearinghouse/website/html/media>
+        Require all granted
+    </Directory>
+</VirtualHost>
+}}}
