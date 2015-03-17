@@ -43,7 +43,14 @@ This architecture also makes it easy to deploy (or gradually update) new version
 
 The flexibility of where and how to deploy the different components influences the server and service configuration required for your specific deployment.
 
+
 == Separate Servers ==
 The simplest yet most expensive deployment path is to set up separate servers (or VMs) with distinct hostnames (and HTTPS certificates) for each of the three services. This is also the type of setup assumed for the sample Apache / `mod_wsgi` config files provided with the [wiki:ClearinghouseInstallation#ConfigureApachesites clearinghouse] and [wiki:CustomInstallerBuilderDeployment custominstallerbuilder] deployment guides.
 
-Note that 
+It does make sense to keep the contents of the base installers for custominstallerbuilder up-to-date with the what the softwareupdater ships, so combining those two services on one machine is a likely scenario. We'll see below what that means for the configuration.
+
+
+== One Combined Server ==
+
+It's often more efficient to run all three services on a single server. In case you still use separate hostnames for the services, this would be a matter of "merging" the three Apache configs per the above to contain each service under a separate `VirtualHost` directive. `mod_wsgi` will cleanly separate the Django instances for the clearinghouse and custominstallerbuilder apps, out of the box ([http://blog.dscpl.com.au/2012/10/requests-running-in-wrong-django.html ref]).
+
