@@ -12,6 +12,7 @@ We recommend you read up on [wiki:UnderstandingSeattle/SeattleInfrastructureArch
 
 Also, there are different [wiki:UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths deployment paths] to get you the functionality you want. Keep those in mind when configuring Apache later.
 
+-----
 
 == Setting up a user account ==
 First of all, on your custominstallerbuilder server or VM, we recommend to set up a new Linux user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
