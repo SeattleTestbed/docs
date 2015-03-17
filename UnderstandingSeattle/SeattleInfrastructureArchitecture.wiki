@@ -54,3 +54,5 @@ It does make sense to keep the contents of the base installers for custominstall
 
 It's often more efficient to run all three services on a single server. In case you still use separate hostnames for the services, this would be a matter of "merging" the three Apache configs per the above to contain each service under a separate `VirtualHost` directive. `mod_wsgi` will cleanly separate the Django instances for the clearinghouse and custominstallerbuilder apps, out of the box ([http://blog.dscpl.com.au/2012/10/requests-running-in-wrong-django.html ref]).
 
+If only one hostname is available for all services, then they must be demultiplexed using different `WSGIScriptAlias` directives for each sub-URL. If using different-level sub-URLs such as `hostname/` for the clearinghouse and `hostname/cib` for the custominstallerbuilder, the catch is to put the more specific URL first. Otherwise, the first (being a prefix of the other) will match, and the wrong Django app be started. Also, separate Django processes must be started for each app, so that they don't share configuration and environment variable contents. All of this is detailed in the reference above.
+
