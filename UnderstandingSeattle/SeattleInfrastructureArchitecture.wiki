@@ -35,3 +35,15 @@ The consequence of item 1 above is that the custom installer builder only needs 
 Similarly, from item 2 above, the clearinghouse can use any custom installer builder whose URL it knows and whose base installer package suits it. For example, a Seattle-based testbed might choose to use Seattle's Custom Installer Builder to avoid setting up its own.
 
 This architecture also makes it easy to deploy (or gradually update) new versions of infrastructure components while keeping others unchanged.
+
+
+
+
+= Deployment Paths =
+
+The flexibility of where and how to deploy the different components influences the server and service configuration required for your specific deployment.
+
+== Separate Servers ==
+The simplest yet most expensive deployment path is to set up separate servers (or VMs) with distinct hostnames (and HTTPS certificates) for each of the three services. This is also the type of setup assumed for the sample Apache / `mod_wsgi` config files provided with the [wiki:ClearinghouseInstallation#ConfigureApachesites clearinghouse] and [wiki:CustomInstallerBuilderDeployment custominstallerbuilder] deployment guides.
+
+Note that 
