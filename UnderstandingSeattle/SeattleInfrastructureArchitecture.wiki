@@ -67,6 +67,7 @@ WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
     # NOTE: Certificate etc. config omitted for brevity.
 
     # This configures the custominstallerbuilder Django app, 
+    # assigns it to its own process group, 
     # and lets it access static content.
     WSGIScriptAlias /cib /home/cib/custominstallerbuilder/wsgi/wsgi.py process-group=cibdjango
 
