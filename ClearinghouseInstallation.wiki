@@ -9,8 +9,17 @@ You might want to take a look at the [wiki:UnderstandingSeattle/SeattleInfrastru
 [[TOC(inline)]]
 ----
 
+== Before you begin ==
+
+We recommend you read up on [wiki:UnderstandingSeattle/SeattleInfrastructureArchitecture how the Seattle infrastructure architecture looks like] so that you have a good understanding of the components you want to have (and thus need to set up).
+
+Also, there are different [wiki:UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths deployment paths] to get you the functionality you want. Keep those in mind when configuring Apache later.
+
+-----
+
+
 == Setting up a non-privileged user account ==
-First of all, we recommend to set up a user account specific to the Clearinghouse instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
+First of all, on the server or VM you will be using for the clearinghouse, we recommend to set up a user account specific to the Clearinghouse instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
 
 The user ''should not be granted interactive login'' for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user ''should not have root privileges'' or be able to acquire them.
 
