@@ -54,5 +54,5 @@ This concludes the setup and configuration of your Custom Installer Builder inst
 
 ------
 
-== Using integration tests ==
+== Testing Your Custom Installer Builder: Integration Tests ==
 The `custominstallerbuilder/tests` directory contains a few integration tests for various aspects of the Custom Installer Builder. These include a stress test, and tests with valid and invalid build specifications. Follow the instructions in the test case scripts to set up and configure a test environment.
