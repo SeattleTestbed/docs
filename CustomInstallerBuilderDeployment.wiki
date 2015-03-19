@@ -17,20 +17,20 @@ As always, remember to disable debugging once you have successfully deployed the
 # Let the custominstallerbuilder Django app run in a separate process
 WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
 
-# Point the URL ending in "/cib" to the appropriate Django app
-WSGIScriptAlias /cib /home/cib/custominstallerbuilder/wsgi/wsgi.py process-group=cibdjango
+# Allow access to JavaScript/CSS/images not served by Django
+Alias /static/ /home/cib/custominstallerbuilder/html/static/
+<Directory /home/cib/custominstallerbuilder/html/static>
+    Require all granted
+</Directory>
+
+# Point the root URL of this server to the appropriate Django app
+WSGIScriptAlias / /home/cib/custominstallerbuilder/wsgi/wsgi.py process-group=cibdjango
 
 # Allow access to the WSGI wrapper script
 <Directory /home/cib/custominstallerbuilder/wsgi>
     <Files wsgi.py>
         Require all granted
     </Files>
-</Directory>
-
-# Also allow access to JavaScript/CSS/images not served by Django
-Alias /cib/static/ /home/cib/custominstallerbuilder/html/static/
-<Directory /home/cib/custominstallerbuilder/html/static>
-    Require all granted
 </Directory>
 
 }}}
