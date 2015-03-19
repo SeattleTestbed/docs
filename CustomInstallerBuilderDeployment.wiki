@@ -8,7 +8,7 @@ This page outlines how to deploy the [CustomInstallerBuilder Custom Installer Bu
 == Configuring Apache + mod_wsgi ==
 As noted in the [wiki:CustomInstallerBuilderInstallation installation instructions], we will use Apache as the front-end web server to our Custom Installer Builder.
 
-Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example. (Check out [wiki:SeattleInfrastructureArchitecture#DeploymentPaths this overview of deployment paths] for alternative configs.)
+Insert the following text into the appropriate area of your Apache configuration file. For simple deployments, the text may be added to the end of the `httpd.conf` file. The configuration will also work within a `VirtualHost` directive, for example. (Check out [wiki:UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths this overview of deployment paths] for alternative configs.)
 
 
 As always, remember to disable debugging once you have successfully deployed the Custom Installer Builder.
