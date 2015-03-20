@@ -120,6 +120,11 @@ RedirectMatch ^/cib$ https://host/cib/
 
 This should be done before the `WSGIScriptAlias` directive starting the Django app for `cib`.
 
+{{{#!comment
+Or maybe fix this in our own `urls.py` if that's possible, https://stackoverflow.com/questions/17156965/trailing-slash-not-added-to-root-url
+}}}
+
+
 -----
 
 It's handy to redirect the `http://` version of each page to `https://`. The Django app should never listen for incoming insecure connections because sensitive data is transferred. In the Apache config snippet below, we assume that the Clearinghouse lives under the `ch` sub-URL on the server.
