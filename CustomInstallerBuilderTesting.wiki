@@ -45,6 +45,6 @@ Development server is running at http://0.0.0.0:8080/
 Quit the server with CONTROL-C.
 }}}
 
-You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython production deployment guide] will add the missing bits and pieces of configuration to rectify that.
+You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:Archive/CustomInstallerBuilderDeployment production deployment guide] will add the missing bits and pieces of configuration to rectify that.
 
 Do keep in mind that the Django development web server is '''not meant for production use'''.
