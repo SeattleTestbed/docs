@@ -106,7 +106,7 @@ WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
 
 It's handy to redirect the `http://` version of each page to `https://`. The Django app should never listen for incoming insecure connections because sensitive data is transferred. In the Apache config snippet below, we assume that the Clearinghouse lives under the `ch` sub-URL on the server.
 
-```
+{{{
 <VirtualHost *:80>
     # Redirect requests for the server index to the HTTPS site.
     RedirectMatch ^/$ https://host/ch/html/login
@@ -115,7 +115,7 @@ It's handy to redirect the `http://` version of each page to `https://`. The Dja
     # Example: Redirect full login URL to HTTPS
     # RedirectMatch ^/ch/html/login$ https://host/ch/html/login
 </VirtualHost>
-```
+}}}
 
 -----
 
@@ -124,9 +124,9 @@ When running a server with Django apps mounted under sub-URLs, be sure to test t
 
 If the missing trailing slash is the problem (which you can test using your browser!), add a redirect to the proper URL:
 
-```
+{{{
 RedirectMatch ^/cib$ https://host/cib/
-```
+}}}
 
 
 
