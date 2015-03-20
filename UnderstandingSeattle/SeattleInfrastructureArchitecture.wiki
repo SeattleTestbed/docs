@@ -118,6 +118,7 @@ If the missing trailing slash is the problem (which you can test using your brow
 RedirectMatch ^/cib$ https://host/cib/
 }}}
 
+This should be done before the `WSGIScriptAlias` directive starting the Django app for `cib`.
 
 -----
 
