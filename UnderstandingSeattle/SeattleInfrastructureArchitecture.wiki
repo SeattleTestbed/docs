@@ -102,20 +102,10 @@ WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
 
 
 
-== Tips ==
+== Tips and Caveats ==
 
-It's handy to redirect the `http://` version of each page to `https://`. The Django app should never listen for incoming insecure connections because sensitive data is transferred. In the Apache config snippet below, we assume that the Clearinghouse lives under the `ch` sub-URL on the server.
 
-{{{
-<VirtualHost *:80>
-    # Redirect requests for the server index to the HTTPS site.
-    RedirectMatch ^/$ https://host/ch/html/login
-    # You might want to add further redirects pointing to the HTTPS login site,
-    # or else the user will see a 404 error page.
-    # Example: Redirect full login URL to HTTPS
-    # RedirectMatch ^/ch/html/login$ https://host/ch/html/login
-</VirtualHost>
-}}}
+
 
 -----
 
@@ -129,5 +119,18 @@ RedirectMatch ^/cib$ https://host/cib/
 }}}
 
 
+-----
 
+It's handy to redirect the `http://` version of each page to `https://`. The Django app should never listen for incoming insecure connections because sensitive data is transferred. In the Apache config snippet below, we assume that the Clearinghouse lives under the `ch` sub-URL on the server.
+
+{{{
+<VirtualHost *:80>
+    # Redirect requests for the server index to the HTTPS site.
+    RedirectMatch ^/$ https://host/ch/html/login
+    # You might want to add further redirects pointing to the HTTPS login site,
+    # or else the user will see a 404 error page.
+    # Example: Redirect full login URL to HTTPS
+    # RedirectMatch ^/ch/html/login$ https://host/ch/html/login
+</VirtualHost>
+}}}
 
