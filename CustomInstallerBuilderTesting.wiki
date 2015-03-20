@@ -1,5 +1,5 @@
 = Testing the Custom Installer Builder with Django 1.6 Support =
-This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython these instructions] instead.
+This page outlines how to test the [wiki:CustomInstallerBuilder Custom Installer Builder] for basic correctness using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:CustomInstallerBuilderDeployment these instructions] instead.
 
 We'll assume that you have completed the previous steps to [wiki:Archive/CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
 
