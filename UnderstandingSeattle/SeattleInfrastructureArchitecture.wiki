@@ -56,7 +56,7 @@ It's often more efficient to run all three services on a single server. In case 
 
 If only one hostname is available for all services, then they must be demultiplexed using different `WSGIScriptAlias` directives for each sub-URL. If using different-level sub-URLs such as `hostname/` for the clearinghouse and `hostname/cib` for the custominstallerbuilder, the catch is to put the more specific URL first. Otherwise, the first (being a prefix of the other) will match, and the wrong Django app be started. Also, separate Django processes must be started for each app, so that they don't share configuration and environment variable contents. All of this is detailed in the reference above.
 
-Here is an example of a combined clearinghouse / custominstallerbuilder `apache.conf`, with the clearinghouse app at `https://hostname/` and the custominstallerbuilder at `https://hostname/cib`.
+Here is an example of a combined clearinghouse / custominstallerbuilder `apache.conf`, with the clearinghouse app at `https://host/` and the custominstallerbuilder at `https://host/cib`.
 
 {{{
 # Have separate processes for each Django app
@@ -98,3 +98,36 @@ WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
     </Directory>
 </VirtualHost>
 }}}
+
+
+
+
+== Tips ==
+
+It's handy to redirect the `http://` version of each page to `https://`. The Django app should never listen for incoming insecure connections because sensitive data is transferred. In the Apache config snippet below, we assume that the Clearinghouse lives under the `ch` sub-URL on the server.
+
+```
+<VirtualHost *:80>
+    # Redirect requests for the server index to the HTTPS site.
+    RedirectMatch ^/$ https://host/ch/html/login
+    # You might want to add further redirects pointing to the HTTPS login site,
+    # or else the user will see a 404 error page.
+    # Example: Redirect full login URL to HTTPS
+    # RedirectMatch ^/ch/html/login$ https://host/ch/html/login
+</VirtualHost>
+```
+
+-----
+
+When running a server with Django apps mounted under sub-URLs, be sure to test those thoroughly. A recurring problem is that `https://host/suburl/` (note the trailing slash) works fine, while `https://host/suburl` results in a 404 error, or breaks the AJAX parts of a page. If running into this, first check your `settings.py` -- the `PROJECT_URL`, `BASE_URL`, etc. must match what a web browser will request from Apache.
+
+
+If the missing trailing slash is the problem (which you can test using your browser!), add a redirect to the proper URL:
+
+```
+RedirectMatch ^/cib$ https://host/cib/
+```
+
+
+
+
