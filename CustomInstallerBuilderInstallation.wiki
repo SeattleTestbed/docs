@@ -92,4 +92,4 @@ $ python build.py ~/repy_runtime
 == Done (for now) ==
 That's it! You now have all of the code and config files required for the Custom Installer Builder in place!
 
-Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:CustomInstallerBuilderTesting running a test server], and [wiki:CustomInstallerBuilderDeploymentWithModPython running a production server].
+Continue to [wiki:CustomInstallerBuilderConfiguration configuration], then [wiki:CustomInstallerBuilderCustomizationAndBuild customization and build], [wiki:CustomInstallerBuilderTesting running a test server], and [wiki:CustomInstallerBuilderDeployment running a production server].
