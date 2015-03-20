@@ -104,7 +104,7 @@ WSGIDaemonProcess cibdjango user=cib processes=5 threads=10
 
 == Tips and Caveats ==
 
-
+('''Abhishek's text regarding `chmod`ding files/directories will go here.''' Maybe we can figure out how to better set up paths and users so that we don't have problems with users `www-data`/`ch`/`cib` accessing different mutually disallowed parts of the filesystem.)
 
 
 -----
