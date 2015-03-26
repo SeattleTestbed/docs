@@ -27,7 +27,7 @@ Clearinghouse requires at least the following software to be installed:
  * [http://www.python.org/ Python] in version 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
  * [http://mysql-python.sourceforge.net/ Python MySQLDB] -- the python mysql interface
  * [http://www.mysql.com/ MySQL] -- the database
- * [http://www.apache.org/ Apache] -- the web server
+ * [http://www.apache.org/ Apache 2.4] -- the web server
  * [http://www.modwsgi.org/ mod_wsgi] -- necessary for interfacing with Django code
  * [http://www.openssl.org/ OpenSSL] -- necessary for `https://` support
  * [http://www.djangoproject.com/ Django] in version 1.6.x -- necessary to run Django code
