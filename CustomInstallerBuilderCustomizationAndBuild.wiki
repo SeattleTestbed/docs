@@ -1,5 +1,5 @@
 = Customize and build your base installers =
-This page describes the customizations to code required before you can build base installers, and also the actual build process. We assume you have [wiki:Archive/CustomInstallerBuilderInstallation installed] and [wiki:CustomInstallerBuilderConfiguration configured] the Custom Installer Builder already.
+This page describes the customizations to code required before you can build base installers, and also the actual build process. We assume you have [wiki:CustomInstallerBuilderInstallation installed] and [wiki:CustomInstallerBuilderConfiguration configured] the Custom Installer Builder already.
 
 -----
 [[TOC(inline)]]
@@ -43,4 +43,4 @@ After a bit of processing and signing files with the softwareupdater's cryptogra
 
 == Next up... ==
 
-Continue now to [wiki:Archive/CustomInstallerBuilderTesting testing] or [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython deploying in production] the Custom Installer Builder.
+Continue now to [wiki:CustomInstallerBuilderTesting testing] or [wiki:CustomInstallerBuilderDeployment deploying in production] the Custom Installer Builder.
