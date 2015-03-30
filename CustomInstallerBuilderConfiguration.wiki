@@ -1,5 +1,5 @@
 = Configure Your Install =
-Now that you have [wiki:Archive/CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
+Now that you have [wiki:CustomInstallerBuilderInstallation installed the Custom Installer Builder dependencies and code], let's configure your instance!
 
 -----
 [[TOC(inline)]]
