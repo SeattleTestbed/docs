@@ -138,6 +138,7 @@ $ python build.py ~/deployment/seattle
 #!sh
 $ cd ~/deployment/seattle
 $ chmod +x generate_state_keys.sh
+$ mkdir ../clearinghouse/node_state_transitions/statekeys   # Work around https://github.com/SeattleTestbed/clearinghouse/issues/149
 $ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
 }}}
     * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `~/deployment/clearinghouse/node_state_transitions/statekeys`.
