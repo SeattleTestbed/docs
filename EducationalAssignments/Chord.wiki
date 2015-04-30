@@ -190,7 +190,7 @@ reside at more than two nodes at any given time, and only one node
 when the ring is in a stable state.
 
 As specified above, you should implement the following methods 
-(SHA hash algorithm is already provided in util.repy):
+(the SHA hash algorithm is already provided in the [wiki:SeattleLib Standard Library].)
 
 {{{
 create()
