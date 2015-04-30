@@ -216,8 +216,7 @@ or reliable ones from your previous assignments.
 
 In order to test the correctness of your implementation, you need to
 dump the overlay state at some time point and run a verification
-algorithm over the dumped state. {{{dump.repy}}} will collect the state from each node, create 
-{{{NodeDump}}} objects (copy the definition from {{{util.repy}}}), 
+algorithm over the dumped state. {{{dump.repy}}} will collect the state from each node,  
 put them into a list and print the list on the console 
 (or write the list out to an output file). 
 Then, you can run some script to parse the output from
