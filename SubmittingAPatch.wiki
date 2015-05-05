@@ -4,7 +4,7 @@ More than a hundred developers have submitted code that has been accepted into o
 
 First of all, please check that we have not already fixed the bug that you have found or added the feature you want.   To do this, please check out the latest version of the software [https://github.com/SeattleTestbed from GitHub].   If we have fixed it, but have not yet merged it into the master and pushed the release, feel free to let us know about it and that you would like us to push!
 
-== GitHub contributors ==
+== !GitHub contributors ==
 
 If you have an account on [https://github.com/ GitHub] already, the easiest way to submit patches is by creating a '''Pull Request'''. The usual workflow for this is as follows:
  * Find the source repository under [https://github.com/SeattleTestbed SeattleTestbed] that contains the file you want to patch.
@@ -18,7 +18,7 @@ If you have an account on [https://github.com/ GitHub] already, the easiest way 
 
 
 
-== Contributors with no GitHub access ==
+== Contributors with no !GitHub access ==
 
 You don't have to have an account on !GitHub to contribute. If you have a small patch (such as a one line bug fix), simply email a diff of the file to the developers mailing list.   Please either give the original file's commit hash or the version of the Seattle installer (look in `nmmain.py`) so that we know what to compare it with.
 
