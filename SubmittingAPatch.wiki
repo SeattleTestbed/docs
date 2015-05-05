@@ -27,7 +27,7 @@ If the patch is more significant, please also contact the developers list. They 
 
 == Good patches ==
 
-A good patchset comes with a succint description of the problem it solves, and ways to test that the fix is actually effective. We encourage writing [wiki:UnitTestFramework '''unit tests'''] for any non-trivial fix or feature addition.
+A good patchset comes with a succint description of the problem it solves, and ways to test that the fix is actually effective. We encourage writing [wiki:UnitTestFramework Seattle unit tests] for any non-trivial fix or feature addition.
 
 For pull requests, please give your branches self-explanatory names that refer to existing issue numbers etc. (if available). 
 
