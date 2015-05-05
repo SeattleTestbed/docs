@@ -80,7 +80,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
  * Other
    * [wiki:SeattleBackend  Seattle Backend]
    * [wiki:ContainmentInSeattle] about controlling node outgoing traffic
-   * [wiki:MobileCeNotes Windows CE] implementation notes and problems
+   * ~~[wiki:Archive/MobileCeNotes Windows CE] implementation notes and problems~~
    * [wiki:BenchmarkCustomInstallerInfo Benchmark and Custom Installer Info] implementation notes and problems.
    * [wiki:RepyNetworkRestrictions Repy Network Restrictions] information and errata.
    * [wiki:Libraries/StatisticsLibrary Statistics Library] for analyzing date regarding nodes & VMs on Seattle.
