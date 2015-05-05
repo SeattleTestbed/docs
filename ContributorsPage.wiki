@@ -8,11 +8,12 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
  * Accessing our !GitHub repositories, building components, Github & Git tutorial, and using the wiki
    * Check out (i.e., {{{git clone}}}) our source code from [https://github.com/SeattleTestbed]
    * [wiki:BuildInstructions Instructions] for building Seattle components
-   * '''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''
+
    * [wiki:Local/RepoAccess Github and Git] instructions
    * [http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands Useful Git Commands]
    * [https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line How to resolve a merge conflict with Git]
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
+   * ~~'''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''~~
    * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
 
  * Programming in Repy
