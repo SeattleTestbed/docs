@@ -9,8 +9,7 @@ First of all, please check that we have not already fixed the bug that you have 
 If you have an account on [https://github.com/ GitHub] already, the easiest way to submit patches is by creating a '''Pull Request'''. The usual workflow for this is as follows:
  * Find the source repository under [https://github.com/SeattleTestbed SeattleTestbed] that contains the file you want to patch.
  * Create a '''fork''' of this repo into your !GitHub user account.
- * On your fork, create a new '''branch''' with a descriptive name for the functionality you add, or issue you fix.
- ** Examples: `fix-seash-#118`, `add-headless-install`
+ * On your fork, create a new '''branch''' with a descriptive name for the functionality you add, or issue you fix. Examples for good branch names: `fix-seash-#118`, `add-headless-install`
  * Commit to your branch, and push the results to !GitHub.
  * Once you are satisfied with your work, issue a '''pull request''' to the repository you forked from.
 
