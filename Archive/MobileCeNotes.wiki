@@ -1,3 +1,9 @@
+'''NOTE''': As of r5717, Seattle ceases to support Windows CE. See also #1041 for details.
+
+[[BR]]
+
+'''Old content:'''
+
 = Windows Mobile CE Notes =
 
 ----
