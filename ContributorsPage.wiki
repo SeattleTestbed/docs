@@ -37,7 +37,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:Archive/SeattleGeniInstallation Running a Clearinghouse test server]
    * [wiki:Archive/CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
-   * [wiki:Local/ContinuousBuild Continuous Build]
+   * ~~[wiki:Local/ContinuousBuild Continuous Build]~~
 
  * Style guidelines for documentation, python code, web code
    * '''[https://github.com/secure-systems-lab/code-style-guidelines Python/Repy style guidelines] for most Seattle programming'''
@@ -47,7 +47,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
    * [wiki:SeattleDownload Download and installation instructions] for Seattle
-   * [wiki:Archive/SeattleGeniInstallation Installing your own instance of Seattle Clearinghouse]
+   * [wiki:ClearinghouseInstallation Installing your own instance of Seattle Clearinghouse]
    * [wiki:CustomInstallerBuilder Using the Custom Installer Builder]
 
  * API specifications for user-facing services
@@ -68,9 +68,9 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:Libraries/ExperimentLibrary Experiment Library] for use in scripting communication with nodes, etc.
    * [wiki:DevelopingWithEclipse Developing with Eclipse]
 
- * Project Resources
-   * [wiki:SeattleResources A full listing of Seattle project services]
-   * [wiki:Local/ContributorAccountManagement Creating and deleting accounts for developers]
+ * ~~Project Resources~~
+   * ~~[wiki:SeattleResources A full listing of Seattle project services]~~
+   * ~~[wiki:Local/ContributorAccountManagement Creating and deleting accounts for developers]~~
    * [wiki:SeattleAdminResources Resources needed by Seattle sysadmin]
 
  * Events relevant to Seattle and Seattle team information
