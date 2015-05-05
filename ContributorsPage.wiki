@@ -12,7 +12,6 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:Local/RepoAccess Github and Git] instructions
    * [http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands Useful Git Commands]
    * [https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line How to resolve a merge conflict with Git]
-   * (obsolete unless you are doing node manager testing) --- [wiki:DeveloperSetup Developer instructions] on running the code from SVN and   generating a public / private key pair
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
    * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
 
