@@ -11,7 +11,7 @@ If you have an account on [https://github.com/ GitHub] already, the easiest way 
  * Create a '''fork''' of this repo into your !GitHub user account.
  * On your fork, create a new '''branch''' with a descriptive name for the functionality you add, or issue you fix. Examples for good branch names: `fix-seash-#118`, `add-headless-install`
  * Commit to your branch, and push the results to !GitHub.
- * Once you are satisfied with your work, issue a '''pull request''' to the repository you forked from.
+ * Once you are satisfied with your work, issue a '''pull request''' to the repository you forked from. Please add to the description of the pull request any references to existing issues and relevant commit hashes, and use '''@mentions''' to bring your work to the attention of any non-core Seattle developers.
 
 ([wiki:Local/RepoAccess Our wiki] has more details on working with Git and !GitHub.)
 
