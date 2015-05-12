@@ -169,7 +169,7 @@ DATABASES = {
 
       * Set `SECRET_KEY` to a long, random string.
       * If this is a production launch, also set `DEBUG` to False, and uncomment and change the fields for sending `ADMINS` email.
-      * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to set up a wiki:CustomInstallerBuilder and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` there.
+      * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to [wiki:CustomInstallerBuilderInstallation set up a Custom Installer Builder] and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` to that URL.
       * You can also adapt the clearinghouse `TIME_ZONE`.
       * To further '''customize the appearance''' of your setup, modify the `TESTBED` name and URL, term you would like to use for `CLEARINGHOUSE`, and project mailing lists.
 [[BR]]
