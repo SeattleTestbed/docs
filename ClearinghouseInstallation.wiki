@@ -47,7 +47,7 @@ $ sudo apt-get install openssl
 Django, the web framework the clearinghouse uses, is available at https://www.djangoproject.com/download/ or through a package manager. Please note that we currently support the 1.6 line only.
 {{{
 #!sh
-$ pip install django==1.6.7
+$ pip install django==1.6
 }}}
 Depending on your actual OS and setup, this command might require `sudo` privileges.
 
