@@ -44,18 +44,16 @@ mkdir SeattleTestbed
 cd SeattleTestbed
 
 # Check out the repos required for building Repy
-git clone https://github.com/SeattleTestbed/dist.git
-git clone https://github.com/SeattleTestbed/repy_v1.git
 git clone https://github.com/SeattleTestbed/repy_v2.git
-git clone https://github.com/SeattleTestbed/seattlelib_v2.git
 
 # Prepare a build directory, and build into it
-cd dist
+cd repy_v2/scripts
 mkdir ~/path/to/build/dir
-python preparetest.py ~/path/to/build/dir
+python initialize.py
+python build.py ~/path/to/build/dir
 }}}
 
-(You will see a few warning messages during building, but they can be ignored for the task at hand.) Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
 ----
 (If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
 ----
