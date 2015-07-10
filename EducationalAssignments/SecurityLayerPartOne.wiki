@@ -53,7 +53,8 @@ python build.py ~/path/to/build/dir
 }}}
 
 
-{{{#!comment
+{{{
+#!comment
 Albert comments: I think this note below is outdated; the tarball definitely is.
 
 (You will see a few warning messages during building, but they can be ignored for the task at hand.) 
