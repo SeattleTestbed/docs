@@ -27,13 +27,15 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 [[BR]]
 === Getting Python ===
 ----
-Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
+Please note you must have Python 2.6 or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
 
 '''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
+
+
 === Getting RepyV2 ===
 ----
-The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
+The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. ([wiki:BuildInstructions This page] describes the process in greater detail). You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
 Here's how to do that. Assuming you are running on a Unixoid OS,
 
