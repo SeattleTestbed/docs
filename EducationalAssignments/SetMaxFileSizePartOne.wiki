@@ -30,12 +30,35 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 === Getting RepyV2 ===
 ----
-The preferred way to get Repy is to download the sandbox as a [attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne zipfile]. 
-Unzip this and copy your files to unzipped directory.
+The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
+
+Here's how to do that. Assuming you are running on a Unixoid OS,
+
+{{{
+# Create a directory for the required Git repositories
+mkdir SeattleTestbed
+cd SeattleTestbed
+
+# Check out the repos required for building Repy
+git clone https://github.com/SeattleTestbed/repy_v2.git
+
+# Prepare a build directory, and build into it
+cd repy_v2/scripts
+mkdir ~/path/to/build/dir
+python initialize.py
+python build.py ~/path/to/build/dir
+}}}
+
+Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+----
+(If you cannot install from source, [attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne zipfile] is a tarball including a pre-built runtime.)
+----
+
+
+
 Use the command found below in order to run Repy files:
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
-----
+{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}}
 
 Please note Repy files end in extension `.r2py`.   
 
