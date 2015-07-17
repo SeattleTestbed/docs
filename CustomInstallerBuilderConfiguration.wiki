@@ -63,7 +63,7 @@ PRIVATE_KEY_FILE=/path/to/privatekey
 Here's how to generate a key pair in the correct format. Change to the `repy_runtime` directory previously generated, and run the `generatekeys.py` script:
 {{{
 #!sh
-cd ~/custominstallerbuilder/repy_runtime
+cd ~/repy_runtime
 python generatekeys.py /path/to/key_name 4096
 }}}
 
