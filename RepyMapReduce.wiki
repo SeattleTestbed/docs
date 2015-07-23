@@ -11,7 +11,7 @@ There are 3 main steps in a !MapReduce run.
 
 This computation can be performed on an arbitrary number of worker machines, making it scalable to nearly all sizes of computing clusters!  !MapReduce frameworks often have a primary node delegating tasks to workers, organizing and distributing the initial data, and acting as a mediator in fault situations.
 
-More detail on the use of !MapReduce is available from [http://labs.google.com/papers/mapreduce.html the original Google paper] or an open-source implementation of !MapReduce in Java: [http://hadoop.apache.org/core/ Hadoop].
+More detail on the use of !MapReduce is available from [http://research.google.com/archive/mapreduce-osdi04.pdf Google's 2004 OSDI paper] or an open-source implementation of !MapReduce in Java: [http://hadoop.apache.org/core/ Hadoop].
 [[BR]]
 [[BR]]
 -----
