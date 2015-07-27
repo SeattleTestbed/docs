@@ -31,7 +31,7 @@ If you would prefer to use Repy V2, it is worthwhile to read through the followi
 == Other Resources ==
  * An easy way to start learning Seattle is to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo].
 
- * Use the [wiki:RepyApi Repy Library Reference] as a quick guide to Repy's API once you are comfortable with the language.
+ * Use the [wiki:RepyApi Repy API Reference] as a quick guide to Repy's API once you are comfortable with the language.
 
  * Programmers writing code for Repy V2 may want to read about the [wiki:RepyV1vsRepyV2 differences between Repy V1 and Repy V2].
 
