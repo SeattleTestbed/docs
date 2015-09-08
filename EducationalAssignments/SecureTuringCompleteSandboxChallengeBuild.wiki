@@ -28,7 +28,7 @@ For our purposes, such a sandbox can make several simplifying assumptions that a
 
 '''To demonstrate the usability of your sandbox, you must implement several programs within it.'''
  
- 1. You must implement a program that counts the powers of two from 1 to 128, either outputting them or placing these numbers in the first ten positions in memory.
+ 1. You must implement a program that computes the powers of two from 1 to 128, either outputting them or placing these numbers into positions in memory that are always printed when the sandbox exits.
  1. You must provide a program computing the first ten fibonacci numbers.   The resulting program should output these numbers or place them in the first ten memory locations when exiting.
 
 Extra credit:
