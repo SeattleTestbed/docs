@@ -9,7 +9,7 @@ The Secure Turing Complete Sandbox Challenge attempts to provide some evidence a
 == Turing Completeness ==
 ----
 
-Put intuitively, a Turing complete sandbox (with infinite memory) can be used to compute any computable problem.   A Turing complete sandbox takes a program and data as input.   (The program and data can be stored in the same area or separate ones.)   Any Turing complete sandbox can compute any problem that can be computed by any other sandbox.
+Put intuitively, a Turing-complete sandbox (with infinite memory) can be used to compute any computable problem.   A Turing-complete sandbox takes a program and data as input.   (The program and data can be stored in the same area or separate ones.)   Any Turing-complete sandbox can compute any problem that can be computed by any other sandbox.
 
 Your sandbox only needs to handle computation.   If you elect, you can support some form of I/O, but apart from having a mechanism to provide an initial program and data, this is not required except as specified below.
 
@@ -29,10 +29,10 @@ For our purposes, such a sandbox can make several simplifying assumptions that a
 '''To demonstrate the usability of your sandbox, you must implement several programs within it.'''
  
  1. You must implement a program that counts from 10 to 1, either outputting them or placing these numbers in the first ten positions in memory.
- 1. You must provide a program computing the first ten fibonacci numbers.   The resulting program should output these numbers or place the first ten numbers in these memory locations when exiting.
+ 1. You must provide a program computing the first ten fibonacci numbers.   The resulting program should output these numbers or place them in the first ten memory locations when exiting.
 
 Extra credit:
- 1. You can implement a Turing complete sandbox within your sandbox.   This can be your sandbox or can be a classic Turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory available than your full sandbox.
+ 1. You can implement a Turing-complete sandbox within your sandbox.   This can be your sandbox or can be a classic Turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory available than your full sandbox.
 
 '''Note: Your sandbox must be able to execute other programs!   It cannot simply execute the above programs and nothing else.'''
 
@@ -47,7 +47,7 @@ You should assume that an adversary will be supplying the program and data to ru
 == What To Turn In ==
 ----
 
-You must turn in the URL and SHA1 hash of the head of your github project.   The project must contain the following:
+You must turn in the URL and SHA1 hash of the head of your GitHub project.   The project must contain the following:
 
  1. Detailed documentation explaining the file format and operations supported by your Turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. If you did not do the extra credit, you must explain in the document why you believe your sandbox is Turing-complete.   This must be in PDF format.
  1. The source code for the Turing-complete sandbox
