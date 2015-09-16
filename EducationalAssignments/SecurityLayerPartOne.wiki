@@ -78,9 +78,9 @@ In order to test whether or not these steps worked, please copy and paste the co
  * Sample security layer: [wiki:EducationalAssignments/SecurityLayerPartOne#Abasicandinadequatedefense basicandinadequatedefense] 
  * Sample attack layer:  [wiki:EducationalAssignments/SecurityLayerPartOne#Testingyoursecuritylayer testingyoursecuritylayer]
 
-If you got an error, please go through the trouble shooting section found below.
+If you got an error, please go through the troubleshooting section found below.
 
-=== Trouble shooting Repy code ===
+=== Troubleshooting Repy code ===
 If you can't get Repy files to run, some of the following common errors may have occurred:
 
  * using `print` instead of `log`:
@@ -99,7 +99,7 @@ AR: This doesn't apply when building from source or getting the runtime tarball 
 Seattle is operating system dependent.  If you download the Windows version, you need to use the Windows command line.  For Windows 7 this is PowerShell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the Linux version you must use a Linux OS and Linux terminal.  
 
 AR: This is obviously outdated.
-Advanced trouble shooting:
+Advanced troubleshooting:
 
 To run the unit test, which will automatically tell you if you have errors with your installation please see:
 
