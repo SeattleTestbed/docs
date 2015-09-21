@@ -139,7 +139,7 @@ Finally, type the following commands at the terminal to run your security layer 
 
 Make sure you went through the "How to get RepyV2" section!
 [[BR]]
-= Notes and Resources =
+== Notes and Resources ==
 ----
  
  * For a complete list of syntax in Repyv2 please visit: '''[wiki:RepyV2API]'''
@@ -154,10 +154,10 @@ Make sure you went through the "How to get RepyV2" section!
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
-= Extra Credit =
+== Extra Credit ==
 ----
 [[BR]]
-= What to turn in? =
+== What to turn in? ==
 ----
  * Turn in a repy file called reference_monitor_[ netid ].r2py with all letters in lowercase.
 
