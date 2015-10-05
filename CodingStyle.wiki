@@ -517,6 +517,27 @@ def redirect_stdout(stream):
   """
 }}}
 
+      Here's a copy-and-paste ready version:
+{{{
+#!python
+ """
+  <Purpose>
+    ...
+
+  <Arguments>
+    ...
+
+  <Exceptions>
+    ...
+
+  <Side Effects>
+    ...
+
+  <Returns>
+    ...
+  """
+}}}
+
       In general the use of classes is discouraged (link to below), but in the 
       cases it is clear classes should be used, use the following format:
 {{{
