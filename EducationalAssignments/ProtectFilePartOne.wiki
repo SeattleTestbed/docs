@@ -10,7 +10,7 @@ This assignment is intended to reinforce concepts about access control and refer
 [[BR]]
 == Overview ==
 ----
-In this assignment you will create a reference monitor that will, when asked to do so, protect files starting with private_ (and only those files). If the contents of a file begin with the characters “INV”, then a listfiles() call '''must not''' show that the file exists.  If the contents of a file begin with the characters “PER” then a removefile() call '''must''' raise a !RepyArgumentError.  In cases not specified above, all calls must work identically to the RepyV2 API.
+In this assignment you will create a reference monitor that will, when asked to do so, protect files starting with private_ (and only those files).  If the contents of a file begin with the characters “INV”, then a listfiles() call '''must not''' show that the file exists.  If the contents of a file begin with the characters “PER” then a removefile() call '''must''' raise a !RepyArgumentError.  In cases not specified above, all calls must work identically to the RepyV2 API.
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -60,10 +60,10 @@ Use the command found below in order to run Repy files:
 
 Please note Repy files end in extension `.r2py`.   
 
-In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
+In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.
 
- * Sample security layer:  [wiki:EducationalAssignments/SetMaxFileSizePartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
- * Sample attack layer:  [wiki:EducationalAssignments/SetMaxFileSizePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
+ * Sample security layer:  [wiki:EducationalAssignments/ProtectFilePartOne#Abasicandinadequatedefense Abasicandinadequatedefense] 
+ * Sample attack layer:  [wiki:EducationalAssignments/ProtectFilePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the troubleshooting section found below.
 
@@ -73,11 +73,11 @@ If you can't get Repy files to run, some of the following common errors may have
 
  * using `print` instead of `log`:
 
-  Repy is a subset of Python, but its syntax is slightly different.  For example, Python's `print` statement cannot be used; Repy has `log` for that. For a full list of acceptable syntax please see wiki:RepyV2API.
+  Repy is a subset of Python, but its syntax is slightly different.  For example, Python's `print` statement cannot be used; Repy has `log` for that. For a full list of acceptable syntax please see [wiki:RepyV2API].
 
  * command line errors:
 
-  '''files are missing:''' In the above command line call, you must have `repy.py`, `restrictions.default`, `encasementlib.r2py`, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to run repy files.  
+  '''files are missing:''' In the above command line call, you must have `repy.py`, `restrictions.default`, `encasementlib.r2py`, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to run Repy files.  
 
 {{{
 #!comment
@@ -100,7 +100,7 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
- * list of RepyV2 API calls: '''[wiki:RepyV2API]'''
+ * List of RepyV2 API calls: '''[wiki:RepyV2API]'''
 [[BR]]
 
 == Building the security layer  ==
@@ -109,14 +109,132 @@ The following program is a basic and incomplete sample code for you to get an id
 [[BR]]
 === A basic (and inadequate) defense ===
 
-Time to start coding!  Let's inspect a basic security layer.  
+Time to start coding!  Let's inspect a basic security layer.
+
+{{{
+INVBUFFER = []
+PERBUFFER = []
+
+
+class SecureFile():
+  def __init__(self, file, filename):
+    self.file = file
+    self.filename = filename
+
+  def readat(self, sizelimit, offset):
+    return self.file.readat(sizelimit, offset)
+
+  def writeat(self, data, offset):
+    if offset == 0 and self.filename.startswith("private_"):
+        if data == "INV":
+          INVBUFFER.append(self.filename)
+          # remove the file from the PERBUFFER if it exists
+          try:
+            PERBUFFER.remove(self.filename)
+          except ValueError:
+            pass
+        elif data == "PER":
+          PERBUFFER.append(self.filename)
+          # remove the file from the INVBUFFER if it exists
+          try:
+            INVBUFFER.remove(self.filename)
+          except ValueError:
+            pass
+    return self.file.writeat(data, offset)
+	
+  def close(self):
+    return self.file.close()
+
+
+def secure_openfile(filename, create):
+  file = openfile(filename, create)
+  return SecureFile(file, filename)
+
+
+def secure_removefile(filename):
+  if filename in PERBUFFER:
+    raise RepyArgumentError("Cannot delete this file!\n")
+  removefile(filename)
+
+
+def secure_listfiles():
+  filelist = listfiles()
+  returnlist = []
+  for filename in filelist:
+    if filename in INVBUFFER:
+      continue
+    returnlist.append(filename)
+  return returnlist
+
+
+# The code here sets up type checking and variable hiding for you. You should not need to change anything below here.
+sec_file_def = {
+  "obj-type":SecureFile,
+  "name":"SecureFile",
+  "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
+  "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(None),"target":SecureFile.writeat},
+  "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
+  }
+
+CHILD_CONTEXT_DEF["openfile"] = {"type":"objc",
+                                 "args":(str,bool),
+                                 # any? why Exception in particular?
+                                 "exceptions":Exception,
+                                 "return":sec_file_def,
+                                 "target":secure_openfile
+                                }
+
+CHILD_CONTEXT_DEF["listfiles"] = {"type":"func",
+                                  "args":None,
+                                  "return":list,
+                                  "exceptions":"any",
+                                  "target":secure_listfiles
+                                 }
+
+CHILD_CONTEXT_DEF["removefile"] = {"type":"func",
+                                   "args":(str,),
+                                   "return":None,
+                                   "exceptions":"any",
+                                   "target":secure_removefile
+                                  }
+
+# Execute the user code
+secure_dispatch_module()
+}}}
 
 [[BR]]
 === Testing your security layer ===
 ----
-In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the file size restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers.  
+In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers.  
 
 An example of an attack is found below:
+
+{{{
+if "private_testfile.txt" in listfiles():
+  removefile("private_testfile.txt")
+
+# Open a file
+myfile = openfile("private_testfile.txt", True)
+
+# Put some data in the file
+myfile.writeat("INV", 0)
+
+if "private_testfile.txt" in listfiles():
+  log("ERROR! File not invisible.\n")
+
+# Write into the file again
+myfile.writeat("PER", 0)
+
+#Close the file
+myfile.close()
+
+try:
+  removefile("private_testfile.txt")
+except RepyArgumentError:
+  pass # There should be an exception here!
+else:
+  log("ERROR! Allowed me to delete the file.\n")
+}}}
 
 '''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
 
@@ -146,20 +264,24 @@ Make sure you went through the "How to get RepyV2" section!
  
  * The following link is an excellent source for information about security layers: '''[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]'''
 
- * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
+ * It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
+ {{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
 
-'''Your security layer should produce no output!! '''
+ * '''Your security layer should produce no output!! '''
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 [[BR]]
 == Extra Credit ==
 ----
+For extra credit, make a second security layer which will prevent writing to a private_ file when the first and last three characters in the file '''match''' and are either "INV" or "PER". If the first three characters in a private_ file are "INV" and the last three are "PER", you should be able to write to the file.
+
+Note: Do not submit this code inside your assignment file. Submit a separate copy for extra credit.
+
 [[BR]]
 == What to turn in? ==
 ----
- * Turn in a repy file called reference_monitor_[ netid ].r2py with all letters in lowercase.
+ * Turn in a repy file called reference_monitor_[netid].r2py with all letters in lowercase.
 
  * '''Never raise unexpected errors or produce any output.'''  Your program must produce no output when run normally.
 
