@@ -26,6 +26,8 @@ Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. I
 
 '''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
+
+[[BR]]
 === Getting RepyV2 ===
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
@@ -67,6 +69,8 @@ In order to test whether or not these steps worked, please copy and paste the co
 
 If you got an error, please go through the troubleshooting section found below.
 
+
+[[BR]]
 === Troubleshooting Repy code ===
 ----
 If you can't get Repy files to run, some of the following common errors may have occurred:
@@ -93,6 +97,8 @@ To run the unit test, which will automatically tell you if you have errors with 
 
  * [wiki:RepyV2CheckoutAndUnitTests]
 }}}
+
+
 [[BR]]
 === Tutorials for Repy and Python ===
 ----
@@ -101,14 +107,17 @@ Now that you have Repy and Python, you may need a refresher on how to use them. 
  * Python tutorial: '''[http://docs.python.org/tutorial/]'''
  * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
  * List of RepyV2 API calls: '''[wiki:RepyV2API]'''
-[[BR]]
 
+
+[[BR]]
 == Building the security layer  ==
 ----
 The following program is a basic and incomplete sample code for you to get an idea about writing security layer. Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  
+
+
 [[BR]]
 === A basic (and inadequate) defense ===
-
+----
 Time to start coding!  Let's inspect a basic security layer.
 
 {{{
@@ -202,6 +211,7 @@ CHILD_CONTEXT_DEF["removefile"] = {"type":"func",
 secure_dispatch_module()
 }}}
 
+
 [[BR]]
 === Testing your security layer ===
 ----
@@ -238,6 +248,8 @@ else:
 
 '''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
 
+
+[[BR]]
 ==== Choice of File Names ====
 ----
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
@@ -249,6 +261,8 @@ myfile=openfile("look.txt",True)
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
 
+
+[[BR]]
 === Running your security layer ===
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
@@ -256,6 +270,8 @@ Finally, type the following commands at the terminal to run your security layer 
 {{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
 
 Make sure you went through the "How to get RepyV2" section!
+
+
 [[BR]]
 == Notes and Resources ==
 ----
@@ -271,12 +287,15 @@ Make sure you went through the "How to get RepyV2" section!
  * '''Your security layer should produce no output!! '''
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
+
+
 [[BR]]
 == Extra Credit ==
 ----
 For extra credit, make a second security layer which will prevent writing to a private_ file when the first and last three characters in the file '''match''' and are either "INV" or "PER". If the first three characters in a private_ file are "INV" and the last three are "PER", you should be able to write to the file.
 
 Note: Do not submit this code inside your assignment file. Submit a separate copy for extra credit.
+
 
 [[BR]]
 == What to turn in? ==
