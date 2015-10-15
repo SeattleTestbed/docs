@@ -11,7 +11,6 @@ In this assignment you are a tester.  You have been given a bunch of reference m
 Your test cases should test all three design paradigms at work in this assignment: accuracy, efficiency, and security.
 
  * Accuracy: The reference monitor you create should only stop the specified actions from being executed. All other actions should be allowed. For example, if a user tries to open or remove an invisible file, this should be allowed. If a user tries to delete a file “foo” that starts with the characters “PER” this is also allowed (since the file name does not start with private_). 
- * Efficiency: The reference monitor should use minimum number of resources, so it does not slow down the system. This means that the header of each private_ file must not be  re-read every time there is a listfiles() or removefile() call. The state of the files must be tracked as the system operates, including the data that is written to files.
  * Security: You should not be able to circumvent the reference monitor and cause files that should not be displayed to be displayed or files that should not be removed to be removed.
 
 You will gain points for every student's reference monitor you find a flaw in. It is okay if multiple tests of yours break a student's reference monitor, but you will not gain additional points.
