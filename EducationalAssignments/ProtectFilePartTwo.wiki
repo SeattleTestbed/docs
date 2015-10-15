@@ -8,7 +8,7 @@ In this assignment you will learn how to attack a reference monitor.  The refere
 ----
 In this assignment you are a tester.  You have been given a bunch of reference monitors that need testing before they are deployed.  Your job will be to test the security layer with different test cases that try to circumvent the restrictions set by the security layer. If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
 
-Your test cases should test all three design paradigms at work in this assignment: accuracy, efficiency, and security.
+Your test cases should test the following design paradigms at work in Part 1 of the assignment:
 
  * Accuracy: The reference monitor you create should only stop the specified actions from being executed. All other actions should be allowed. For example, if a user tries to open or remove an invisible file, this should be allowed. If a user tries to delete a file “foo” that starts with the characters “PER” this is also allowed (since the file name does not start with private_). 
  * Security: You should not be able to circumvent the reference monitor and cause files that should not be displayed to be displayed or files that should not be removed to be removed.
