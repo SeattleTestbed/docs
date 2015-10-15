@@ -14,7 +14,7 @@ In this assignment you will create a reference monitor that will, when asked to 
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
- * Accuracy: The reference monitor you create should only stop the specified actions from being blocked. All other actions should be allowed. For example, if a user tries to open or remove an invisible file, this should be allowed. If a user tries to delete a file “foo” that starts with the characters “PER” this is also allowed (since the file name does not start with private_). 
+ * Accuracy: The reference monitor you create should only stop the specified actions from being executed. All other actions should be allowed. For example, if a user tries to open or remove an invisible file, this should be allowed. If a user tries to delete a file “foo” that starts with the characters “PER” this is also allowed (since the file name does not start with private_). 
  * Efficiency: The reference monitor should use a minimum number of resources, so it does not slow down the system. This means you must not re-read the header of each private_ file every time there is a listfiles() or removefile() call.  You will need to track the state of the files as the system operates, including the data that is written to files.
  * Security: The attacker should not be able to circumvent the reference monitor and cause files that should not be displayed to be displayed or files that should not be removed to be removed.
 
