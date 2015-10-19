@@ -187,7 +187,7 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
       target directory. The Seattle path item is to ensure that the Repy runtime works.
 
 
-    * Create the database structure. You may want to create a superuser account when asked. Note that this user will be able to log in over the web using the Django `admin` page. Use a strong password, and update it frequently! (The password can be changed on the command line using `manage.py changepassword` followed by the user account name).
+    * Create the database structure. You may want to create a Django administrator account when asked (but you don't have to). Note that this user will be able to log in over the web using the Django `admin` page. Use a strong password, and update it frequently! (The password can be changed on the command line using `manage.py changepassword` followed by the user account name).
 {{{
 #!sh
 cd ~/deployment/clearinghouse
