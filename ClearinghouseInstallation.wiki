@@ -165,8 +165,6 @@ DATABASES = {
     }
 }
 }}}
-
-
       * Set `SECRET_KEY` to a long, random string.
       * If this is a production launch, also set `DEBUG` to False, and uncomment and change the fields for sending `ADMINS` email.
       * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to [wiki:CustomInstallerBuilderInstallation set up a Custom Installer Builder] and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` to that URL.
