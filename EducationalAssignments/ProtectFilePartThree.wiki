@@ -47,7 +47,7 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 ----
 Let's analyze some of the bugs in this implementation.
 
-According to the specifications in [wiki:EducationalAssignments/ProtectFilePartOne ProtectFilePartOne], a private_ file should not be visible with the listfiles() call if its contents start with "INV". The above code checks whether "INV" is being written at offset 0. What happens when there is a write at offset 1 or 2 which causes the first three characters in the file to become "INV"? This condition is not covered in the above code and will cause a file that is may need to be invisible to be listed when listfiles() is called.
+According to the specifications in [wiki:EducationalAssignments/ProtectFilePartOne ProtectFilePartOne], a private_ file should not be visible with the listfiles() call if its contents start with "INV". The above code checks whether "INV" is being written at offset 0. What happens when there is a write at offset 1 or 2 which causes the first three characters in the file to become "INV"? This condition is not covered in the above code and will cause a file that may need to be invisible to be listed when listfiles() is called.
 
 Consider another situation where {{{data}}} contains "INVISIBLE" which is to be written at offset 0 to a private_ file. In this case, at {{{if data == "INV":}}}, the condition fails as a result of which the file will not be added to INVBUFFER and would be listed when listfiles() is called even though the first three characters in the file are "INV". The if statement should've compared only the first three characters of {{{data}}} with "INV" instead of the entire string.
 
