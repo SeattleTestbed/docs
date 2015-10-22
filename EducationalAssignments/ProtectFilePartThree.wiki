@@ -1,5 +1,5 @@
 = Fixing your security layer =  
-----
+
 In this assignment you will analyze the bugs in your security layer from [wiki:EducationalAssignments/ProtectFilePartOne ProtectFilePartOne] and fix them.  You may want to use test cases from [wiki:EducationalAssignments/ProtectFilePartTwo ProtectFilePartTwo] to help identify these bugs.
 
 [[BR]]
