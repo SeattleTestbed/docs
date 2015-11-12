@@ -68,6 +68,3 @@ Restrictions on vesselinfo (failure in any of these results in a completely fail
    a. the donated resources are now chopped down by ''get_tenpercent_of_donated'' to get ten percent of the donated resources (this is ten percent because the VMs are given resources from the donated resources in increments of 10%).
    a. ''create_installer_state.main'' takes the vesselcreationlist, tenpercentdict, and the target directory and initializes the VM states.
  1. If the installation worked correctly the service logger is initialized and the log file used during the benchmark and creation of VMs is transfered and the file is removed. The installation continues as normal in seattleinstaller.py
-
-=== Difference from old scheme ===
-With the current system, only a ''vesselinfo'' file is needed to customize the base installers. The actual VMs will be created automatically by the client. In the old scheme, VMs had to be generated ahead of time.
