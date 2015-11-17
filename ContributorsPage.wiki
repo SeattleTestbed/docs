@@ -34,7 +34,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
    * [wiki:Local/RunningIntegrationTests Running Integration Tests]
-   * [wiki:Archive/SeattleGeniInstallation Running a Clearinghouse test server]
+   * [wiki:ClearinghouseInstallation Running a Clearinghouse test server]
    * [wiki:Archive/CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
    * ~~[wiki:Local/ContinuousBuild Continuous Build]~~
