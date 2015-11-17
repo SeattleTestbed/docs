@@ -1,4 +1,4 @@
-'''Note for Seattle historians:''' This page (and its history) is not used for production uses anymore. The latest Clearinghouse installation instructions are available [wiki:Archive/ClearinghouseInstallationWithDjango13 here].
+'''Note for Seattle historians:''' This page (and its history) is not used for production uses anymore. The latest Clearinghouse installation instructions are available [wiki:ClearinghouseInstallation here].
 
 ----
 
