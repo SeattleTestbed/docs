@@ -143,6 +143,12 @@ $ ./generate_state_keys.sh ../clearinghouse/node_state_transitions/statekeys
 }}}
     * Note that only the `*.publickey` files are required for the clearinghouse. You can safely remove the `*.privatekey`s from `~/deployment/clearinghouse/node_state_transitions/statekeys`.
 
+  * Create a logs directory for the clearinghouse component to write to:
+{{{
+#!sh
+$ cd ~/deployment/clearinghouse
+$ mkdir logs
+}}}
 
   * '''Setup the website and start a development version of it'''
     * Be sure you've already created a MySQL database for the clearinghouse (e.g.
@@ -381,7 +387,7 @@ To run the script, run the following commands with the correct directory substit
 #!sh
 $ sudo -i
 $ screen
-$ cd ~/deployment/clearinghouse/deploymentscripts
+$ cd ~ch/deployment/clearinghouse/deploymentscripts
 $ ./start_clearinghouse_components.sh
 }}}
 
