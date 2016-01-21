@@ -1,1 +1,1 @@
-Welcome to the seattlelib_v2 wiki!
+Please see the [general SeattleTestbed wiki](https://seattle.poly.edu/wiki).
