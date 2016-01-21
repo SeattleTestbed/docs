@@ -43,6 +43,8 @@ If you would prefer to use Repy V2, it is worthwhile to read through the followi
 Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file '''source.repy''', at the top of your code include {{{include filename.repy}}}.   Then run {{{python repypp.py source.repy out.repy}}}.   The '''filename.repy''' file does not need to be pre-processed. The file '''out.repy''' will contain the code for '''filename.repy''' included inside the code for '''source.repy''' at the appropriate place.
 }}}
 
+ * Continuous Integration Guide for Seattle Projects: [wiki:ContinuousIntegrationGuide]
+
 == Editing Repy files ==
 === Vim ===
 João Moreno has also provided a [http://www.vim.org/scripts/script.php?script_id=2546 VIM syntax file] for Repy that will syntax color Repy programs.
