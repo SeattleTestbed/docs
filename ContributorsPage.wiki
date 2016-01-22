@@ -37,7 +37,9 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:ClearinghouseInstallation Running a Clearinghouse test server]
    * [wiki:Archive/CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
-   * '''[wiki:ContinuousIntegration Continuous Integration via Travis-CI and AppVeyor]''' ~~[wiki:Local/ContinuousBuild Old Continuous Build]~~
+   * '''Continuous Integration via Travis-CI and AppVeyor:'''
+      * [https://github.com/SeattleTestbed/seattlelib_v2/wiki/Continuous-Integration-for-the-Team For team members - managing CI]
+      * [https://github.com/SeattleTestbed/seattlelib_v2/wiki/How-to-Contribute For potential contributors - how to contribute and test]
 
  * Style guidelines for documentation, python code, web code
    * '''[https://github.com/secure-systems-lab/code-style-guidelines Python/Repy style guidelines] for most Seattle programming'''
