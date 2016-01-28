@@ -211,7 +211,7 @@ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
 cd ~/deployment/clearinghouse
 python website/manage.py syncdb
 }}}
-      * (Please note that Django 1.7+ has migrated to a migration-based model from start to finish, and that syncdb is deprecated entirely and will be removed in Django 1.9. For Django 1.7 and 1.8, syncdb for initial setup may still work, but should be replaced by:
+      * (Please note that Django 1.7+ has migrated to a migration-based model from start to finish, and that syncdb is deprecated entirely and will be removed in Django 1.9. For Django 1.7 and 1.8, syncdb for initial setup may still work, but should really be replaced by the following. You may need to run migrate twice if an error occurs the first time.
 {{{
 #!sh
 cd ~/deployment/clearinghouse
