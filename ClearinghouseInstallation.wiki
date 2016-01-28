@@ -59,10 +59,10 @@ $ pip install django==1.8.3
 
 
 
-Note that even if you don't enable OpenID and OAuth, Clearinghouse requires the specific Django package installed:
+Note that even if you don't enable OpenID and OAuth, Clearinghouse requires this specific Django package installed:
 
 {{{
-$ easy_install django-social-auth
+$ pip install django-social-auth
 }}}
 
 
