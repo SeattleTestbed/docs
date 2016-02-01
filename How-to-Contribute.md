@@ -1,6 +1,3 @@
-
-## Introduction - Continuous Integration
-
 1.	Fork your favorite Seattle Testbed repository
 1.	Clone Seattle Testbed repository to your computer
 1.	Add Continuous Integration by following the steps listed [here](https://github.com/SeattleTestbed/seattlelib_v2/wiki/Continuous-Integration-for-the-Team)
