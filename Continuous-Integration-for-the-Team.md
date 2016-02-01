@@ -47,9 +47,10 @@ Given a GitHub repo for which you want to enable continuous integration using Ap
 <a name="ConfigTravis" />
 ### Configuring Travis-CI: Writing .travis.yml
 Travis's default configuration is unlikely to provide meaningful results. A .travis.yml file is required. Here's a basic sample for any Seattle project that includes buildscripts. The example below will run the unit testing framework on one version of python - 2.7 - on a Linux system on a Travis vm after performing basic updates (using apt-get).
+
 ```
-matrix:
-  include:
+matrix:                         # Matrix-include is essential to specify specific VM entries
+  include:                              
     - language: python			# Language to initiate linux VM
       python: '2.7'				# Type of python to use		
       os: linux					# The OS of the VM
@@ -95,9 +96,34 @@ Adding sections like the following under the **matrix** and **include** directiv
 ```
 
 ##### Travis-CI: Testing on OS X
+Testing on OS X is quit similar to the Linux, though not all tools may be available on OS X and needs to be installed once the VM is created. The code below shows that python is installed through pyenv and adds the installed version of python to the default path. 
+```
+matrix:
+  include:
+    - language: objective-c
+      os: osx
+      install:
+          - if [[ "$(uname -s)" == 'Darwin' ]]; then
+             pyenv install 2.6.9;
+             pyenv global 2.6.9;
+            fi
+          - export PYENV_ROOT="${HOME}/.pyenv"
+          - if [ -d "${PYENV_ROOT}" ]; then
+             export PATH="${PYENV_ROOT}/bin:${PATH}";
+             eval "$(pyenv init -)";
+            fi
+script:
+  - python --version
+  - cd ./scripts
+  - python initialize.py
+  - python build.py -t
+  - cd ../RUNNABLE
+  - python utf.py -a
+```
+###### Additional Refrences: Testing on OS X
 - [Travis docs for multiple OS setups](https://docs.travis-ci.com/user/multi-os/)
 - [Travis docs for OS X environments](https://docs.travis-ci.com/user/osx-ci-environment/)
-TODO
+
 
 
 <a name="ConfigAppVeyor" />
