@@ -201,7 +201,7 @@ If no output is specified as an argument to the directive, UTF will ignore all o
 [[BR]]
 == Setup/Shutdown Scripts ==
 ----
-Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts receptively.
+Some software modules require additional steps before and after the test execution. We refer to those as ''setup'' and ''shutdown'' scripts respectively.
 
 Suppose we are testing an IO module with several functions defined.
 
