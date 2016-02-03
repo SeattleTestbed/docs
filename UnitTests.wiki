@@ -4,7 +4,7 @@
 [[TOC(inline)]]
 ----
 
-Due to references to the SVN single-repo directory structure and preparetest.py, this document is outdated. [wiki:UnitTestFrameworkRunning] remains relevant.
+Due to references to the SVN single-repo directory structure and preparetest.py, this document is outdated. [wiki:UnitTestFrameworkRunning] remains relevant, and [wiki:BuildInstructions] contains updated information.
 
 
 [[BR]]
