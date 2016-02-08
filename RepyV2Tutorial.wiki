@@ -878,7 +878,7 @@ In this example, we'll manually send a NTP (time) lookup message and print the r
 
 {{{
 #!python
-dy_import_module_symbols("random")
+dy_import_module_symbols("random.r2py")
 
 # See RFC 2030 (http://www.ietf.org/rfc/rfc2030.txt) for details about NTP
 # this unpacks the data from the packet and changes it to a float
