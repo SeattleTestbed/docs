@@ -63,7 +63,10 @@ Albert comments: I think this note below is outdated; the tarball definitely is.
 (If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
 }}}
 
-Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+The build directory, which can be named whatever you want, is where you will put your security layer code and the programs
+that will test it.
+Once the build script has finished, this directory will contain a ready-to-use copy of the RepyV2 runtime, i.e. repy.py,
+restrictions.default, encasementlib.r2py, etc.
 ----
 
 
