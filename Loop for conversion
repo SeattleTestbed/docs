@@ -1,10 +1,11 @@
 import pickle
 from subprocess import call
 import os
-
 #githubID = {'albert': "aaaaalbert", "", "",}
 wiki_records_list = pickle.load(file("trac_wiki_dump.pickle"))
-#sorted(wiki_records_list, wiki
+#how will I know that the UNIX time sort works?
+wiki_records_list.sort(key = lambda row: row[2])
+
 for i in wiki_records_list:
   #print str(i) + "\n"
   name = i[0].encode('utf8')
