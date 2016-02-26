@@ -1,0 +1,27 @@
+import pickle
+from subprocess import call
+import os
+
+#githubID = {'albert': "aaaaalbert", "", "",}
+wiki_records_list = pickle.load(file("trac_wiki_dump.pickle"))
+#sorted(wiki_records_list, wiki
+for i in wiki_records_list:
+  #print str(i) + "\n"
+  name = i[0].encode('utf8')
+  version = i[1]
+  time = i[2]
+  author = i[3]
+  text = i[4].encode('utf8')
+  comment = i[5]
+  if not os.path.exists(os.path.dirname(name)):
+    try:
+      os.makedirs(os.path.dirname(name))
+    except OSError:
+      if not os.path.isdir(name):
+        continue
+
+  f = open(str(name) + ".txt","w")
+  f.write(text)
+  f.close()
+  #call(["git", "commit", "-a", "-m", str(version)+str(comment), "--date= ", time, "--author=", githubID[author])
+  #Ask for git ids
