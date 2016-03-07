@@ -1,1 +1,0 @@
-In the FutureRepyExceptionHierarchy, LockDoubleReleaseError is raised when `.release()` is called on a lock object that is already unlocked.

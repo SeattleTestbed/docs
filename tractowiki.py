@@ -1,7 +1,8 @@
 import pickle
 from subprocess import call
 import os
-githubID = {'albert': "aaaaalbert <>", 'justinc': "JustinCappos <>", 'sebastien': 'awwad <>', 'leonwlaw': 'linkleonard <>', 'choksi81': "choksi81<>", 'us341':"us341 <>", 'ivan': "bestchai <>", 'armon': "armon <>", 'sojc701': " <>", 'butaud': " <>", 'couvb': " <>", 'MikeMosh': ' <>'}
+
+githubID = {'enchl': ' <>', 'imcheng': ' <>', 'sal': ' <>', 'vivekdesai_22': ' <>', 'justinc': 'JustinCappos <>', 'anuhya': ' <>', 'jchilton': ' <>', 'cosminb': ' <>', 'asekine': ' <>', 'sjs25': ' <>', 'jenn': ' <>', 'alpers': ' <>', 'savvas': ' <>', 'peter': ' <>', 'yemuru': ' <>', 'alexjh': ' <>', 'shawiz': ' <>', 'jchen': ' <>', 'richard': ' <>', 'kon': ' <>', 'pheitt': ' <>', 'gessiou': ' <>', 'rishi': ' <>', 'sushant': ' <>', 'aditi': ' <>', 'couvb': ' <>', 'shurui': ' <>', 'jeffra45': ' <>', 'armon': 'armon <>', 'sportzer': ' <>', 'ericms': ' <>', 'linda': ' <>', 'choksi81': 'choksi81 <>', 'mitchellh': ' <>', 'sabiha': ' <>', 'vlad': ' <>', 'tania': ' <>', 'ivan2': ' <>', 'alanloh': ' <>', 'kimbrl': ' <>', 'cmatthew': ' <>', 'hdanny': ' <>', 'jaehong': ' <>', 'us341': 'us341 <>', 'aman': ' <>', 'albert': 'aaaaalbert <>', 'lukasp': ' <>', 'sojc701': ' <>', 'sebass63': ' <>', 'leonwlaw': 'linkleonard <>', 'evan': ' <>', 'butaud': ' <>', 'jsamuel': ' <>', 'anthony': ' <>', 'tc1466': ' <>', 'sebastien': 'awwad <>', 'yanyan': ' <>', 'trac': ' <>', 'nitin': ' <>', 'jflat06': ' <>', 'yskhoo': ' <>', 'MikeMosh': ' <>', 'cemeyer': ' <>', 'pankhuri': ' <>', 'xuefenghuang': ' <>', 'zackrb': ' <>', 'ivan': 'bestchai <>', 'gpress': ' <>', 'monzum': ' <>', 'shoosh': ' <>', 'vjeko': ' <>', 'mkaplan': ' <>'}
 wiki_records_list = pickle.load(file("trac_wiki_dump.pickle"))
 #how will I know that the UNIX time sort works?
 wiki_records_list.sort(key = lambda row: row[2])
@@ -27,7 +28,7 @@ for i in wiki_records_list:
   f.close()
   
   call(["git","add", str(name) + str(version) + ".wiki"])
-  call(["git", "commit", "-m" + str(version) + str(comment), "--date=" + str(time), "--author=" + str(githubID[author])])
+  call(["git", "commit", "-m" + str(version) + " " + str(comment), "--date=" + str(time), "--author=" + str(githubID[author])])
   call(["git", "push", "origin","master"])
     # Moin Moin Wiki is a python  and Ivan
 

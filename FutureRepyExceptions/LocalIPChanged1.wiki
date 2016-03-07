@@ -1,1 +1,0 @@
-In the FutureRepyExceptionHierarchy, LocalIPChanged occurs when the repy program calls `getconnection()` or `getmessage()`.

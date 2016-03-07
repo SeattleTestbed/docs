@@ -1,2 +1,0 @@
-== StatsLibrary ==
-This library is used to collect statistics about Seattle nodes/vessels and then run specific analysis on the group of data.
