@@ -1,7 +1,0 @@
-= Number of Nodes Online Over Time =
-
-[[Image(nodesonline.jpg)]]
-
-This graph shows for any given point in time the number of Seattle production node advertising, contactable, and the number which are both advertising and contactable. As can be seen, these different methods of estimating the number of Seattle node online produce roughly the same result. While the number of active Seattle nodes fluctuates somewhat, overall it is fairly stable. The exception is at the sudden jumps in numbers, which are caused by available !PlanetLab nodes being restarted, new collections of nodes coming online, or other similar events.
-
-Data collected by sportzer between 2/24/2011 and 4/6/2011

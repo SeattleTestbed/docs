@@ -1,7 +1,7 @@
 import pickle
 from subprocess import call
 import os
-githubID = {'albert': "aaaaalbert <>", 'justinc': "JustinCappos <>", 'sebastien': 'awwad <>', 'leonwlaw': 'linkleonard <>', 'choksi81': "choksi81<>", 'us341':"us341 <>", 'ivan': "bestchai <>", 'armon': "armon <>"}
+githubID = {'albert': "aaaaalbert <>", 'justinc': "JustinCappos <>", 'sebastien': 'awwad <>', 'leonwlaw': 'linkleonard <>', 'choksi81': "choksi81<>", 'us341':"us341 <>", 'ivan': "bestchai <>", 'armon': "armon <>", 'sojc701': " <>", 'butaud': " <>", 'couvb': " <>", 'MikeMosh': ' <>'}
 wiki_records_list = pickle.load(file("trac_wiki_dump.pickle"))
 #how will I know that the UNIX time sort works?
 wiki_records_list.sort(key = lambda row: row[2])
@@ -26,7 +26,7 @@ for i in wiki_records_list:
   f.write(text)
   f.close()
   
-  call(["git","add", "."])
+  call(["git","add", str(name) + str(version) + ".wiki"])
   call(["git", "commit", "-m" + str(version) + str(comment), "--date=" + str(time), "--author=" + str(githubID[author])])
   call(["git", "push", "origin","master"])
     # Moin Moin Wiki is a python  and Ivan

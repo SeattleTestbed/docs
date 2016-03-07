@@ -1,4 +1,0 @@
-= Micro-Machines =
- * Portability to mobile devices
- * Location services
- * MobileASL project support 

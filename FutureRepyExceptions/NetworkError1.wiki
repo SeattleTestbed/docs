@@ -1,1 +1,0 @@
-In the FutureRepyExceptionHierarchy, NetworkError is a category of exceptions raised when problems related to internet connectivity failures: when a remote host is no longer available, when a socket is closed (on either end), when the local host is disconnected from the internet, or changes IPs.

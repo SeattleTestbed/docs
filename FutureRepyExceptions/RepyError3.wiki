@@ -1,1 +1,0 @@
-RepyError is a parent exception for all exceptions raised by the API. It should '''not''' be invoked directly, but instead subclassed first.

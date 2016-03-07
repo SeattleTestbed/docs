@@ -1,7 +1,0 @@
-= Scatter Plot of Proportions of Time Contactable and Advertising =
-
-[[Image(contactablevsadvertising.jpg)]]
-
-This graph illustrates the high correlation between time spent advertising and time spent contactable. For the most part, the two values are the same. However, a number of nodes are contactable slightly more often than they are advertising and some IP addresses spent a significant proportion of the time advertising without actually being contactable.
-
-Data collected by sportzer between 2/24/2011 and 4/6/2011
