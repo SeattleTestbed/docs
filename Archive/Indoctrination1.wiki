@@ -1,5 +1,0 @@
-= Indoctrination =
-
- * Educational support
- * auto-grading
- * student support. 

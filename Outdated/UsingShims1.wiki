@@ -1,5 +1,0 @@
-Under Construction:
-
-This page will give a brief tutorial of how to code and use shims with repy programs.  We also give several examples of shims that we have used in the project.
-
-Our examples will be added first, and then the tutorial content will be filled in.

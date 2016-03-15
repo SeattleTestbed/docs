@@ -1,9 +1,0 @@
-= Documentation Guidelines =
-----
-
- * Begin the page with a heading in enclosed with: {{{= =}}}
- * The immediate next paragraph should contain a purpose summary of the document
- * Immediately following the purpose summary, is a horizontal line {{----}} followed by {{[[TOC(inline)]]}} followed by another horizontal line {{----}}
- * Special formatting for seash and python commands -- syntax highlighting and being able to detect seash command line
- * More space between headings and prior sections -- less space between header and horizontal line
- * (back to top) link on each header

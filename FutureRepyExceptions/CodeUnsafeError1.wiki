@@ -1,1 +1,0 @@
-In the FutureRepyExceptionHierarchy, CodeUnsafeError is raised when `createvirtualnamespace()` is called and the code is deemed unsafe after static analysis. It is also raised if any of the run-time safety checks fail during `virtualnamespace.evaluate()`.

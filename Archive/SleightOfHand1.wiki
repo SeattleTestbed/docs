@@ -1,4 +1,0 @@
-= Sleight Of Hand =
- * NAT traversal
- * IPv6
- * DHCP support 

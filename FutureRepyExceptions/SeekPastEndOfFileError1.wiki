@@ -1,1 +1,0 @@
-In the FutureRepyExceptionHierarchy, SeekPastEndOfFileError is raised when the `offset` parameter to `readat()` or `writeat()` is beyond the end of the file.
