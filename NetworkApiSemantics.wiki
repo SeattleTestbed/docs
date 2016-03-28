@@ -159,7 +159,7 @@ A call to recv will attempt to return to the application n bytes delivered over 
 ----
 == socket.willblock() ==
 
-A call to willblock determines if calls to send or recv will block or not.  A tuple of the form (Bool,Bool) is returned indicating if send and recv will or will not block. (True for blocking, False for non-blocking)
+A call to `willblock` determines if calls to `recv` or `send` will block or not.  A tuple of the form `(Bool, Bool)` is returned indicating if `recv` and `send` will or will not block. (`True for blocking, `False for non-blocking)
 
 ----
 == socket.close() ==
