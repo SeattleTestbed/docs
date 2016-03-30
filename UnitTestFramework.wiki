@@ -180,8 +180,9 @@ For instance, if your test file is suppose to be executed using non-default rest
 [[BR]]
 == Standard Out/Error ==
 ----
-Remember, by default UTF will cause a test to fail if there is anything written to standard out or standard error. However, if you do need to have a specific output on standard out, there is a way for UTF distinguish between bad output and good output. We need to use the ''#pragma out'' directive. What this says is that the test file which is being executed is supposed to produce output on standard out. Likewise, there is also a way for UTF to ignore certain error messages (for example if you're testing whether an error happens when it's supposed to). In this case, use the ''#pragma error'' directive.
+Remember, by default UTF will cause a test to fail if there is anything written to standard out or standard error. However, if you need to instead distinguish between good output and bad output (for example if you're testing whether an error happens when it's supposed to), you can change the way the test evaluates using the "#pragma out" and/or "#pragma error" directives. UTF will check to see that the entire string of words following the directive is written to standard out/error. If the string was not there, the test will fail. Note that when you include one or more "#pragma out" or "#pragma error" instructions, the test stops caring about any other output, and simply checks to see if the output includes what you demanded that it include.
 
+Example 1: This test passes because "Hello Out" appears somewhere in standard out. (Any other output is ignored.)
 {{{
 #!python
 
@@ -192,11 +193,47 @@ Remember, by default UTF will cause a test to fail if there is anything written 
 #pragma out Hello Out.
 
 print 'Hello Out.'
+print 'Some other unimportant stuff.'
 }}}
 
-UTF will check to see that the entire string of words following the directive is written to standard out. If the string was not there, the test will fail.
+Example 2: This test fails because even though standard out matches the pragma out direction, standard error is still expected not to contain anything.
+{{{
+# This must be a substring of standard out for the test to pass.
+#pragma out Hello Out.
 
-If no output is specified as an argument to the directive, UTF will ignore all output to standard out or standard error, depending on which pragma directive you used.
+print 'Hello Out.'
+raise Exception('Some error occurs and the test fails because we expect no errors!')
+}}}
+
+Example 3: This test passes even though there is an unexpected error.
+{{{
+#pragma error assertion is always true, perhaps remove parentheses?
+assert(False, "Whoops.")
+raise Exception('Some completely unrelated error occurs but the test still passes.")
+}}}
+
+
+If you include multiple "#pragma out" directives, then each of the strings you specify must appear somewhere in the output, in the order you specified them!
+
+Example 5: This test fails because the specified strings don't all appear and in the same order. 
+
+{{{
+#pragma out Roses are red.
+#pragma out Violets are blue.
+#pragma out Sugar is sweet.
+
+print 'Roses are red.'
+print 'Sugar is sweet.'
+print 'Violets are blue.'
+}}}
+
+Example 6: If no output is specified as an argument to the directive, UTF will ignore all output to standard out or standard error, depending on which pragma directive you used.
+
+{{{
+#pragma out
+
+print 'This passes because standard out is completely ignored.'
+}}}
 
 [[BR]]
 == Setup/Shutdown Scripts ==
