@@ -839,10 +839,10 @@ In this example, we'll manually send a NTP (time) lookup message and print the r
 
 # this unpacks the data from the packet and changes it to a float
 def convert_timestamp_to_float(timestamp):   
-  integerpart = (ord(timestamp[0])<<24) + (ord(timestamp[1])<<16)
-                 + (ord(timestamp[2])<<8) + (ord(timestamp[3]))
-  floatpart = (ord(timestamp[4])<<24) + (ord(timestamp[5])<<16)
-               + (ord(timestamp[6])<<8) + (ord(timestamp[7]))
+  integerpart = (ord(timestamp[0])<<24) + (ord(timestamp[1])<<16) + \
+      (ord(timestamp[2])<<8) + (ord(timestamp[3]))
+  floatpart = (ord(timestamp[4])<<24) + (ord(timestamp[5])<<16) + \
+      (ord(timestamp[6])<<8) + (ord(timestamp[7]))
   return integerpart + floatpart / float(2**32)
 
 def decode_NTP_packet(ip, port, mess, ch):
@@ -853,11 +853,12 @@ def decode_NTP_packet(ip, port, mess, ch):
 
 if callfunc == 'initialize':
   ip = getmyip()
-  timeservers = ["time-a.nist.gov", "time-b.nist.gov", "time-a.timefreq.bldrdoc.gov", 
-                 "time-b.timefreq.bldrdoc.gov", "time-c.timefreq.bldrdoc.gov", 
-                 "utcnist.colorado.edu", "time.nist.gov", "time-nw.nist.gov", 
-                 "nist1.symmetricom.com", "nist1-dc.WiTime.net", "nist1-ny.WiTime.net", 
-                 "nist1-sj.WiTime.net", "nist.expertsmi.com", "nist.netservicesgroup.com"]
+  timeservers = ["time-a.nist.gov", "time-b.nist.gov",
+      "time-a.timefreq.bldrdoc.gov", "time-b.timefreq.bldrdoc.gov", 
+      "time-c.timefreq.bldrdoc.gov", "utcnist.colorado.edu", "time.nist.gov", 
+      "time-nw.nist.gov", "nist1.symmetricom.com", "nist1-dc.WiTime.net", 
+      "nist1-ny.WiTime.net", "nist1-sj.WiTime.net", "nist.expertsmi.com", 
+      "nist.netservicesgroup.com"]
 
   # choose a random time server from the list
   servername = timeservers[int(randomfloat()*len(timeservers))]
