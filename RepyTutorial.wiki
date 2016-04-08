@@ -21,7 +21,7 @@ You can download Repy [https://seattleclearinghouse.poly.edu/download/flibble/ h
 If you want you can look at the installer options using the {{{--usage}}} option.   You can also simply install the software using the defaults.
 
 There is the link to file used in each section next to the title and also at the bottom of this tutorial.
-Here is [raw-attachment:examples.zip link] to the zip file containing all files used in this tutorial.
+Here is [raw-attachment:example.zip link] to the zip file containing all files used in this tutorial.
 All attached files work on Windows systems.
 
 [[BR]]
