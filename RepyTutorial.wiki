@@ -598,17 +598,21 @@ We can avoid race conditions by the following changes:
 {{{
 #!python
 def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
-  httpheader = sockobj.recv(512) # Receive HTTP header, but we'll ignore it
+  sockobj.recv(512) # Receive HTTP header
   mycontext['pagecount'] = mycontext['pagecount'] + 1
-  sockobj.send("<html><head><title>Hello World</title></head>\
-                <body><h1> Hello World!</h1>\
-                <p>You are visitor "+str(mycontext['pagecount'])+"</body></html>")
+
+  htmlresponse = "<html><head><title>Hello World</title></head>" + \
+    "<body><h1> Hello World!</h1><p>You are visitor " + \
+    str(mycontext['pagecount']) + "</p></body></html>"
+
+  sockobj.send("HTTP/1.1 200 OK\r\nContent-type: text/html\r\n" + \
+    "Content-length: %i\r\n\r\n%s" % (len(htmlresponse), htmlresponse))
   stopcomm(thiscommhandle)   # close my connection with this user
 
   mycontext['stoplock'].acquire() # acquire the lock
 
   canceltimer(mycontext['stopevent'])
-  
+
   # wait 10 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
@@ -627,7 +631,7 @@ if callfunc == 'initialize':
     raise Exception("Too many call arguments")
 
   # Running remotely:
-  # whenever this VM gets a connection on its IPaddress:Clearinghouseport it'll call hello
+  # whenever this vessel gets a connection on its IPaddress:GENIport it'll call hello
   elif len(callargs) == 1:
     port = int(callargs[0])
     ip = getmyip()
@@ -639,7 +643,7 @@ if callfunc == 'initialize':
     ip = '127.0.0.1'
   listencommhandle = waitforconn(ip,port,hello)
   
-  # wait 60 seconds, then call stop_listening with listencommhandle
+  # wait 10 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
