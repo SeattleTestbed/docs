@@ -553,25 +553,20 @@ def hello(ip,port,sockobj, thiscommhandle,listencommhandle):
   sockobj.send("HTTP/1.1 200 OK\r\nContent-type: text/html\r\n" + \
     "Content-length: %i\r\n\r\n%s" % (len(htmlresponse), htmlresponse))
   stopcomm(thiscommhandle)   # close my connection with this user
-
-  mycontext['stoplock'].acquire() # acquire the lock
-
   canceltimer(mycontext['stopevent'])
+  sleep(5)   # give me 5 seconds to trigger the race
 
   # wait 10 seconds, then call stop_listening with listencommhandle
   eventhandle = settimer(10, stop_listening, (listencommhandle,)) 
   
   mycontext['stopevent'] = eventhandle
-
-  mycontext['stoplock'].release() # release the lock
  
 def stop_listening(commhandle):
   stopcomm(commhandle)   # this will deregister hello
 
 if callfunc == 'initialize':
   mycontext['pagecount'] = 0
-  mycontext['stoplock'] = getlock()
-  
+
   if len(callargs) > 1:
     raise Exception("Too many call arguments")
 
