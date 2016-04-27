@@ -1,34 +1,49 @@
-1. <a href="#Intro">Introduction</a>
-1. <a href="#Setup">Setup</a>
-1. <a href="#Config">Configuration</a>
-1.  - <a href="#ConfigTravis">Configuration for Travis</a>
-1.  - <a href="#ConfigAppVeyor">Configuration for AppVeyor</a>
-1. <a href="#Workflow">Workflow</a>
+1. <a href="#intro">Introduction</a>
+1. <a href="#config">Configuration and Usage</a>
+   - <a href="#travis">Travis-CI</a>
+   - <a href="#appveyor">AppVeyor</a>
+1. <a href="#further">Further Readings</a>
 
-<a name="Intro" />
-## Introduction - Continuous Integration
-Continuous Integration is the process of automating the build and unit testing of the various projects for The Seattle Test Bed. Applications that The Seattle Test Bed will take advantage of are Travis-CI and Appveyor, both of which maintain a variety of operating systems (Linux and Mac OSX for Travis-CI and Windows for Appveyor) with flexible installation of applications, such as python. 
+<a name="intro" />
+## Introduction
+Seattle Testbed [components](https://seattle.poly.edu/wiki/BuildInstructions) can be built and tested automatically on multiple operating systems using different versions of Python. This document describes how to configure Travis-CI and AppVeyor, two continuous integration web tools, in order to perform automated building and unit testing.
 
-<a name="Setup" />
-## Setup For Continuous Integration
-Given a GitHub repo for which you want to enable continuous integration using AppVeyor, Travis-CI, or both:
+<a name="config" />
+## Configuration and Usage
+Given a GitHub repo for which you want to enable continuous integration using Travis-CI and/or AppVeyor:
 
-### Setting Up Travis-CI
-1.	Go to [Travis-CI](https://travis-ci.org) and login with your GitHub User ID and Password
-1.	In Travis: Press the Sync button to sync with GitHub
-1.	In Travis: Switch on the repos on the Travis-CI home page which you want to build and test
-1.	In Travis: Press the Sync button
-1.	Write .travis.yml. In the absence of a .travis.yml file in your repo, Travis-CI will simply run a build with default settings, for every commit, whenever there is a push to the repo. The defaults are unlikely to be of use to us, so you will have to write a .travis.yml file (if it is not present already) in your repo. <a href="#ConfigTravis">See section below</a> for sample .travis.yml file. The [general Travis-CI yml reference is here](https://docs.travis-ci.com/user/customizing-the-build/).
-1.	Commit & push the .travis.yml file to your repo and Travis-CI should detect the new commit and start a build for it within a few minutes. At travis-ci.org/[user]/[repo]/builds, you should see the build in the list along with the results.
-1.	In GitHub: Modify the readme file of the fork to include the badge from Travis-CI. See [here for Travis-CI badges](https://docs.travis-ci.com/user/status-images/).
+<a name="travis" />
+### Travis-CI
+1.	Go to [Travis-CI Website](https://travis-ci.org) and sign in with your GitHub user-ID and password
+  1.  Authorize application to access your GitHub account
+  1.  Go to your profile page
+  1.	Flick on the repo switch for the repo you want to build and test
+1. Download [.travis.yml](https://raw.githubusercontent.com/awwad/repy_v2/add_travis_and_appveyor/.travis.yml) config file to branch of repo you want to build and test. _(XXX: This part has to be updated once the file has moved to [SeattleTestbed/common](https://github.com/SeattleTestbed/common )_
+1. Add, commit and push .travis.yml file to GitHub. Travis-CI will automatically detect the change in your GitHub repo and start building and testing on the systems configured in .travis.yml. _(Note: if .travis.yml was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change to trigger the building and testing process)_
+1.  Go to travis-ci.org/\<GitHub user\>/\<repo\>/ to see build and test results
+1.  (optional) Add [Travis-CI Build Status Badges](https://docs.travis-ci.com/user/status-images/) to your readme file on GitHub
 
-### Setting Up AppVeyor:
-1.	Go to [AppVeyor](https://ci.appveyor.com) and login with your GitHub User ID and Password
-1.	In Appveyor: Click on New Project and select the desired repo from the list of your repos available on GitHub.
-1.	Write appveyor.yml. In the absence of an appveyor.yml file in your repo, AppVeyor will simply run a build with default settings, for every commit, whenever there is a push to the repo. The defaults are unlikely to be of use to us, so you will have to write an appveyor.yml file (if it is not present already) in your repo. The [general AppVeyor reference for appveyor.yml is here](https://www.appveyor.com/docs/appveyor-yml).
-1.	Commit & push the appveyor.yml file to your repo and AppVeyor should detect the new commit and start a build for it within a few minutes. At ci.appveyor.com/project/[user]/[repo], you should see the build in the list along with the results.
-1.	In GitHub: Modify the readme file of the fork to include the badge from AppVeyor. See [here for AppVeyor badges](http://www.appveyor.com/docs/status-badges).
+<a name="appveyor" />
+### AppVeyor:
+1.  Go to [AppVeyor Website](https://ci.appveyor.com) and log in with your GitHub developer account
+  1.  Authorize application to access your GitHub account
+  1.  Click on ``NEW PROJECT''
+  1.  Authorize application to access your GitHub repositories 
+  1.  Add the repo you want to build and test
+1.	Download [appveyor.yml](https://raw.githubusercontent.com/awwad/repy_v2/add_travis_and_appveyor/appveyor.yml) config file to branch of repo you want to build and test. _(This part has to be updated once the file has moved to [SeattleTestbed/common](https://github.com/SeattleTestbed/common )_
+1.	Add, commit and push appveyor.yml file to GitHub. AppVeyor will automatically detect the change in your GitHub repo and start building and testing on the systems configured in appveyor.yml. (_Note:_ if appveyor.yml was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change. Alternatively click ``NEW BUILD'' on the AppVeyor web interface to trigger the building and testing process)
+1.  Go to ci.appveyor.com/project/\<GitHub user\>/\<repo\>/ to see your test and build results
+1. (optional)	Add [AppVeyor Build Status Badges](http://www.appveyor.com/docs/status-badges) to your readme file on GitHub
 
+###Tips:
+- Once you the config files in your repo/branch, you only have to commit and push a change to trigger building and testing
+- To avoid a specific commit automatically triggering a new build, add ``[ci skip]'' to your commit message
+
+
+
+
+<a name="further" />
+## Further Readings
 
 
 <a name="Workflow" />
@@ -36,10 +51,6 @@ Given a GitHub repo for which you want to enable continuous integration using Ap
 1.	Starting builds: whenever a commit is pushed to the repo that AppVeyor or Travis are connected to, a build will automatically be started. AppVeyor also allows you to manually start builds from the project page with the "New Build" or "Rebuild commit" buttons.
 1.	Verify the build status badges in a few minutes and click on them if they are showing as failed (Note: Badge in readme is optional).
 1.	If build is shown as passing, submit pull request to merge your code to main branch *((Not sure what the intention is here - unless we're writing instructions for contributors on how to get code into Seattle projects... but that's not here. Just leaving it for now....))*
-
-
-####Tips:
-- To avoid a specific commit automatically triggering a new build, include "[ci skip]" in the commit message.
 
 
 <a name="Config" />
@@ -50,7 +61,7 @@ Travis's default configuration is unlikely to provide meaningful results. A .tra
 
 ```
 matrix:                         # Matrix-include is essential to specify specific VM entries
-  include:                              
+  include:
     - language: python			# Language to initiate linux VM
       python: '2.7'				# Type of python to use		
       os: linux					# The OS of the VM
@@ -69,7 +80,7 @@ The "install:" block for every Linux VM can install any tools required for runni
 
 
 The "scripts:" block at the end will run for every configuration listed in the matrix above. Generally, you can run whatever you like in the scripts section at the bottom of your .travis.yml file, to be executed during the testing phase of the build. **Seattle employs [a unit test framework that is described in detail here](https://seattle.poly.edu/wiki/BuildInstructions).** Here are just a few examples:
-For example, in the “scripts:” (Travis-CI) or “test_script:” (Appveyor) block of the YML file unit test can run individually or with a module. 
+For example, in the “scripts:” (Travis-CI) or “test_script:” (AppVeyor) block of the YML file unit test can run individually or with a module. 
 
 ```
 script:
@@ -128,7 +139,7 @@ script:
 
 <a name="ConfigAppVeyor" />
 ### Configuring AppVeyor: Writing appveyor.yml
-Here's a basic sample for any Seattle project that includes buildscripts. The example below will run the unit testing framework on one version of python - 2.7 - on a windows 64 bit system on a Appveyor VM after performing basic OS installation
+Here's a basic sample for any Seattle project that includes buildscripts. The example below will run the unit testing framework on one version of python - 2.7 - on a windows 64 bit system on a AppVeyor VM after performing basic OS installation
 
 ```
 build: false                #defaults to the cloned repository
@@ -147,8 +158,8 @@ test_script:
   - cd ../RUNNABLE
   - python utf.py -a
 ```
-##### Appveyor: Multiple VMs / Environments
-When adding multiple python version under the **enviroments - matrix** set or multiple windows bit architectures under **platforms** set Appveyor will perform the cartesian product, thus resulting in multiple VMs. The example below shows that the Appveyor will run 4 VMs in serial.
+##### AppVeyor: Multiple VMs / Environments
+When adding multiple python version under the **enviroments - matrix** set or multiple windows bit architectures under **platforms** set AppVeyor will perform the cartesian product, thus resulting in multiple VMs. The example below shows that the AppVeyor will run 4 VMs in serial.
 
 ```
 build: false
