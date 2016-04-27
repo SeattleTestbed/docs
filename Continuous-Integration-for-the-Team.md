@@ -36,10 +36,8 @@ Given a GitHub repo for which you want to enable continuous integration using Tr
 1. (optional)	Add [AppVeyor Build Status Badges](http://www.appveyor.com/docs/status-badges) to your readme file on GitHub
 
 ###Tips:
-- Once you the config files in your repo/branch, you only have to commit and push a change to trigger building and testing
-- To avoid a specific commit automatically triggering a new build, add ``[ci skip]'' to your commit message
-
-
+- Once you have the config files in your repo/branch, you only have to commit and push a change to trigger building and testing
+- To avoid a specific commit automatically triggering building and testing, add ``[ci skip]'' to your commit message
 
 
 <a name="further" />
