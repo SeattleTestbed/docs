@@ -1,0 +1,598 @@
+"""
+
+<Program Name>
+  controller.repy
+
+<Started>
+  December 2010
+
+<Author>
+  Marcel Groﬂmann
+
+<Purpose>
+  A better implementation for measuring the Round-Trip-Times with Seattle.
+  It avoids the overlapping of measurements and calculates the Round-Trip-Times on more than one try.
+  Therefore it uses a modified Divide-And-Conquer-Algorithm to recursively avoid duplicated and overlapping measuments.
+  controller.repy depends on the usage of node.repy, where both programs must interact.
+  
+  The Controller therefore is only needed once to administrate, how the nodes (should be more than one) interact and measure the RTT.
+  Therefore the Controller needs a list of all IPs that should be tested.
+  
+  The Controller gets started by the call controller.repy [port] [ipfile] [measures] [waittime]:
+    - port is Your specific port for Seattle
+    - ipfile is a file You uploaded to the Controller-Node before, with all IPs that should be measured
+    - measures is the number of measurements, that should be performed
+    - waittime is the time waited between the measurements
+
+  It returns the results via:
+    - Console log, where a short overview is given
+    - HTTP response, where structured tables are shown
+    - Data-Spreadsheat, where all information collected is represented
+    - LaTeX-File for the table representation
+    - and TikzGraphics for a graphical representation of the algorithm
+
+"""
+
+
+# ---------- Start-Sequence ----------
+# checks, which IPs are available
+def probe_ips(waittime):
+    mycontext['int_measured'] = 0
+    for ip in mycontext['list_allips']:
+        sendmess(ip, mycontext['int_port'], 'exist' + str(mycontext['int_tries']) + ' - ' + str(waittime), getmyip(), mycontext['int_port'])
+    settimer(10, run, [waittime])
+    
+# initiates the divide and conquer run
+def run(waittime=1):
+    iplist = []
+    iplist = list(mycontext['list_availableips'])
+    if len(iplist) > 1:
+        print "Starting run on: " + str(iplist)
+        divide(iplist, mycontext['int_tries'] * waittime)
+    else:
+        probe_ips(waittime)
+
+# ---------- Divide and Conquer ----------
+# dividing the "iplist" in two
+def divide(iplist, waittime):
+    listI = []
+    listII = []
+    while len(iplist) > 0:
+        firstip = iplist.pop()
+        listI.append(firstip)
+        if(len(iplist) > 0):
+            secondip = iplist.pop()
+            listII.append(secondip)
+    if len(listI) > 0 and len(listII) > 0:
+        conquer(listI, listII, waittime)       
+
+# conquering iplistI and iplistII, such that the nodes from iplistI will measure the ones form iplistII
+def conquer(iplistI, iplistII, waittime, roundcount=1, both=True):
+    mycontext['string_graphics'].append(graphicalrepresentation(iplistI, iplistII, 0.75, 0.6))
+    rounds = len(iplistII)
+    if len(iplistI) < len(iplistII):
+        size = len(iplistII)
+    else:
+        size = len(iplistI)
+      
+    for i in range(size):
+        ipI = ''
+        ipII = ''
+        if i < len(iplistI):
+            ipI = iplistI[i]
+        if i < len(iplistII):
+            ipII = iplistII[i]
+        else:
+            ipII = iplistII[i - 1]
+            sleep(waittime)
+        if (ipI is not '' and ipII is not ''):
+            sendmess(ipI, mycontext['int_port'], 'measure ' + ipII, getmyip(), mycontext['int_port'])
+    ipcurrent = iplistII.pop()
+    iplistII.insert(0, ipcurrent)
+    # call me again, with switched list-orders
+    if roundcount < rounds:            
+        settimer(waittime, conquer, [iplistI, iplistII, waittime, roundcount + 1, both])
+    elif both:
+        settimer(waittime, conquer, [iplistII, iplistI, waittime, 1, False])
+    else:
+        # recursively divide iplistI again
+        if len(iplistI) >= 2:
+            divide(iplistI, waittime)
+        else:
+            # recursion is done, if only one node remains in the list
+            ip = iplistI.pop()
+            print 'Recursion done ' + ip
+            settimer(waittime, finished, [ip])
+        # recursively divide iplistII again
+        if len(iplistII) >= 2:
+            divide(iplistII, waittime)
+        else:
+            #recursion is done, if only one node remains in the list
+            ip = iplistII.pop()
+            print 'Recursion done ' + ip
+            settimer(waittime, finished, [ip])
+
+# ---------- Graphical Representation ---
+# to graphicly show, how the algorithm works with tikzgraphics
+def graphicalrepresentation(listI, listII, x=1, y=1):
+    list1 = []
+    list2 = []
+    ipcount = 1
+    for ip in listI:
+        if ip not in mycontext['map_ipforgraphics']:
+            mycontext['map_ipforgraphics'][ip] = "IP-" + str(ipcount)
+            ipcount += 1        
+        list1.append(mycontext['map_ipforgraphics'][ip])
+        
+    for ip in listII:
+        if ip not in mycontext['map_ipforgraphics']:
+            mycontext['map_ipforgraphics'][ip] = "IP-" + str(ipcount)
+            ipcount += 1        
+        list2.append(mycontext['map_ipforgraphics'][ip])
+        
+    retstring = "\\begin{tikzpicture}\n"
+    if len(list1) < len(list2):
+        len1 = (len(list1) * 2) - 1
+        len2 = (len(list2) * 2) - 2
+        maxlen = len2
+    elif len(list1) > len(list2):
+        len1 = (len(list1) * 2) - 2
+        len2 = (len(list2) * 2) - 1
+        maxlen = len1
+    else:
+        len1 = (len(list1) * 2) - 2
+        len2 = (len(list2) * 2) - 2 
+        maxlen = len1 
+    
+    retstring += addnode(0, (maxlen / 2) * y, "IP-C")
+    for ip in list1:
+        retstring += addnode(3 * x, len1 * y, ip, addedge("IP-C"))
+        len1 -= 2
+    for i in range(len(list2)):
+        if i < len(list1):
+            if len(list2) < len(list1) and i >= (len(list2) - 1):
+                retstring += addnode(6 * x, len2 * y, list2[i], addedge(list1[i]) + addedge(list1[i + 1]))
+            else:
+                retstring += addnode(6 * x, len2 * y, list2[i], addedge(list1[i]))
+            len2 -= 2           
+        else:
+            retstring += addnode(6 * x, len2 * y, list2[i])
+    retstring += "\\begin{pgfonlayer}{background}\n"
+    retstring += "\\begin{scope}[opacity=.2, transparency group]\n"
+    retstring += "\\node[rectangle, fill=blue, fit=(" + list1[0]
+    if len(list1) > 1:
+        retstring += ") (" + list1[len(list1) - 1] 
+    retstring += "), rounded corners=2mm]{};\n"
+    retstring += "\\node[rectangle, fill=green, fit=(" + list2[0]
+    if len(list2) > 1:
+        retstring += ") (" + list2[len(list2) - 1]
+    retstring += "), rounded corners=2mm]{};\n"
+    retstring += "\\end{scope}\n\\end{pgfonlayer}{background}\n"
+    retstring += "\\end{tikzpicture}\n" 
+    return retstring  
+    
+def addnode(x, y, name, edge=''):
+    node = "\\node[ipnode](" + name + ")at(" + str(x) + "," + str(y) + "){\\small " + name + "}"
+    node += edge + ";\n"
+    return node
+
+def addedge(predecessor):
+    edge = "\nedge[<-](" + predecessor + ")"
+    return edge           
+    
+               
+# ---------- Finish-Sequence ----------
+# call all nodes to report the results
+def finished(ip):
+    iplist = list(mycontext['list_availableips'])
+    iplist.remove(ip)
+    sendmess(ip, mycontext['int_port'], 'finished ' + str(iplist), getmyip(), mycontext['int_port'])
+    handler = settimer(10, finished, [ip])
+    mycontext['map_eventhandler'][ip] = handler 
+        
+# ---------- Report-Sequence ----------
+# generating the report files
+def report():     
+    settimer(2, display, [0])
+    settimer(3, generate_tikz, [])
+    settimer(5, generate_csv, [False])
+    settimer(10, generate_csv, [True, 'resultssorted'])
+    settimer(15, generate_tex, [1])
+
+# -------- Handle Incoming Messages ----------
+def got_message(srcip, srcport, mess, ch):
+    # if one node is exisiting, it should be in the list available IPs
+    if mess.startswith('existing'):
+        if srcip in mycontext['list_availableips']:
+            mycontext['list_availableips'].remove(srcip)
+        mycontext['list_availableips'].append(srcip)
+    # this represents the message for the result strings coming from the nodes
+    if mess.startswith('RTT:'):
+        mycontext['int_measured'] += 1
+        saveresult(srcip, mess[5:])
+        canceltimer(mycontext['map_eventhandler'][srcip])
+        if len(mycontext['list_availableips']) is mycontext['int_measured']:
+            report()
+
+# ---------- Decoding ----------
+# simply decoding a string containing a list to a list of strings
+def decodestringlist(string):
+    result = []
+    string = string.replace('\'', '')
+    result = string[1:-1].split(', ')
+    return result
+
+# simply decoding a string containing a list to a list of floats
+def decodefloatlist(string):
+    stringlist = []
+    stringlist = decodestringlist(string)
+    result = []
+    for entry in stringlist:
+        if entry is not '':
+            result.append(float(entry))
+    return result
+
+# ---------- Result-Saving ----------
+# internal data structure to represent the results
+def saveresult(ip, string):
+    currentip = ''
+    measures = []
+    while string.count('P') != 0:
+        string = string[string.index('P') + 1:]
+        currentip = string[:string.index('L') - 1].strip()        
+        stringlist = string[string.index('['):string.index(']')]        
+        measures = decodefloatlist(stringlist)
+        mycontext['map_results'][ip + ' to ' + currentip] = measures        
+
+# ---------- Calculations ----------
+# calculating the mean of a list of floats
+def calcmean(floatlist):
+    result = 0.0
+    for f in floatlist:
+        result += f
+    if len(floatlist) > 0:
+        result /= len(floatlist)
+    return result
+
+# calculating a variance estimate of a list of floats
+def calcestimate(floatlist):
+    result = 0.0
+    mean = calcmean(floatlist)
+    for f in floatlist:
+        result += (f - mean) ** 2
+    if len(floatlist) > 1:
+        result /= (len(floatlist) - 1)
+    else:
+        result = 0
+    return result
+
+# calculating the estimated deviation of a list of floats
+def calcdeviation(floatlist):
+    result = calcestimate(floatlist)
+    result = result ** .5
+    return result
+
+#calculating the quantils of a list of floats
+def calcquantil(sortedfloatlist, quantil=0.25):
+    result = 0
+    n = len(sortedfloatlist)
+    datapoint = n * quantil
+    if int(datapoint) is not 0:
+        if datapoint % int(datapoint) > 0:
+            datapoint = int(datapoint)
+            result = sortedfloatlist[int(datapoint)]
+        else:
+            result = (sortedfloatlist[int(datapoint - 1)] + sortedfloatlist[int(datapoint)]) / 2
+    return result
+
+# ---------- Remove-Operators ----------
+# for simply filtering measurement failures
+def removequantils(floatlist, quantil=0.25, left=True, right=True):
+    result = list(floatlist)
+    result.sort()
+    if left:
+        quantilleft = calcquantil(result, quantil)
+        result = removesmallervalues(result, quantilleft)
+    if right:
+        quantilright = calcquantil(result, 1 - quantil)
+        result = removegreatervalues(result, quantilright)   
+    return result
+
+def removegreatervalues(floatlist, value):
+    result = list(floatlist)
+    removed = 0
+    for i in range(len(floatlist)):
+        if value <= floatlist[i]:
+            result.pop(i - removed)
+            removed += 1
+    return result
+
+def removesmallervalues(floatlist, value):
+    result = list(floatlist)
+    removed = 0
+    for i in range(len(floatlist)):
+        if value >= floatlist[i]:
+            result.pop(i - removed)
+            removed += 1
+    return result
+
+# ---------- List to measure ----------
+# function to get a resultlist from the internal result datastructure
+def getlist(fromip, toip):
+    currentlist = []
+    if fromip is not toip:
+        mapstring = fromip + " to " + toip
+        if mapstring in mycontext['map_results']:
+            currentlist = list(mycontext['map_results'][mapstring])
+        else:
+            currentlist.append(0.0)
+    return currentlist
+
+# function to get a sorted resultlist from the internal result datastructure
+def getsortedlist(fromip, toip):
+    currentlist = getlist(fromip, toip)
+    currentlist.sort()
+    return currentlist
+
+# ---------- Measurements ----------
+# giving all available measurements for a list back as string representation
+def getmeasure(currentlist, measure, length=5):
+    retstring = ''
+    if measure is 0:
+        retstring = str(calcmean(currentlist))[:length] + "s"
+    elif measure is 1:
+        retstring = str(calcestimate(currentlist))[:length] + "s$^2$"
+    elif measure is 2:
+        retstring = str(calcdeviation(currentlist))[:length] + "s"
+    elif measure is 3:
+        retstring = str(calcmean(removequantils(currentlist, 0.4, False, True)))[:length] + "s"
+    elif measure is 4:
+        retstring = str(calcestimate(removequantils(currentlist, 0.4, False, True)))[:length] + "s$^2$"
+    elif measure is 5:
+        retstring = str(calcdeviation(removequantils(currentlist, 0.4, False, True)))[:length] + "s"
+    elif measure is 6:
+        retstring = str(calcquantil(currentlist))[:length] + "s"
+    elif measure is 7:
+        retstring = str(calcquantil(currentlist, 0.5))[:length] + "s"
+    elif measure is 8:
+        retstring = str(calcquantil(currentlist, 0.75))[:length] + "s"
+    elif measure is 10:
+        retstring = str(currentlist)
+    elif measure is 11:
+        retstring = str(removequantils(currentlist))
+    else:
+        retstring = "No measure found"
+    return retstring
+
+# giving back a label for each measurment
+def getmeasurelabel(measure):
+    retstring = ''
+    if measure is 0:
+        retstring = "mean"
+    elif measure is 1:
+        retstring = "estimated variance"
+    elif measure is 2:
+        retstring = "estimated deviation"
+    elif measure is 3:
+        retstring = "quantile shortened mean"
+    elif measure is 4:
+        retstring = "quantile shortened estimated variance"
+    elif measure is 5:
+        retstring = "quantile shortened estimated deviation"
+    elif measure is 6:
+        retstring = "0.25 quantile"
+    elif measure is 7:
+        retstring = "0.5 quantile (median)"
+    elif measure is 8:
+        retstring = "0.75 quantile"
+    elif measure is 10:
+        retstring = "list of measurements"
+    elif measure is 11:
+        retstring = "quantile shortened list of measurements"
+    else:
+        retstring = "No measure found"
+    retstring += " about " + str(mycontext['int_tries']) + " measurements"
+    return retstring
+
+# ------- Console -------
+# displaying the results on the console log
+def display(measure=0):
+    currentlist = []
+    for fromip in mycontext['list_availableips']:
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                currentlist = getsortedlist(fromip, toip)
+                print fromip + ' to ' + toip + " " + getmeasurelabel(measure) + ": " + getmeasure(currentlist, measure, length=5)
+
+# ---------- HTML ----------
+# displaying the results as html table
+def generatetable(measure=0):
+    table = '<table border="1">'    
+    table += "<tr><th>From - To</th><th>" + "</th><th>".join(mycontext['list_availableips']) + "</th></tr>"
+    for fromip in mycontext['list_availableips']:
+        table += "<tr><th>" + fromip + "</th>"
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                currentlist = getsortedlist(fromip, toip) 
+                table += "<td>" + getmeasure(currentlist, measure, 7) + "</td>"
+            else:
+                table += "<td> -- </td>"          
+        table += "</tr>"    
+    table += '</table>'
+    return table
+
+# Displays a web page with the latency information
+def show_status(srcip, srcport, connobj, ch, mainch):
+    webpage = "<html><head><title>RoundTripTime</title></head><body><h1>RoundTripTimes measured by " + getmyip() + '</h1>'
+    if mycontext['int_measured'] < len(mycontext['list_availableips']):
+        print "Html in progress"
+        webpage += "<b>Still in Progress...</b>"
+    else:
+        for i in range(9):
+            webpage += "<h2>"
+            webpage += getmeasurelabel(i)
+            webpage += "</h2>"
+            webpage += generatetable(i)
+    
+    webpage += '</html>'
+    # send the header and page
+    connobj.send('HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: ' + str(len(webpage)) + '\nServer: Seattle Testbed\n\n' + webpage)
+    # and we're done, so let's close this connection...
+    connobj.close()
+
+# ---------- CSV ----------
+# generating a csv file with the results
+def generate_csv(sorted=False, file="results"):
+    filestring = file + ".csv"
+    myfileobject = open(filestring, "w")
+    writestring = "From; To;"
+    for i in range(mycontext['int_tries']):
+        writestring += str(i + 1) + "; "
+    writestring += "\n"
+    for fromip in mycontext['list_availableips']:        
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                writestring += fromip + "; "
+                writestring += toip + "; "                
+                if sorted:
+                    currentlist = getsortedlist(fromip, toip)
+                else:
+                    currentlist = getlist(fromip, toip)                    
+                for value in currentlist:
+                    writestring += str(value) + "; "
+                if len(currentlist) < mycontext['int_tries']:
+                    writestring += addsemicolon(mycontext['int_tries'] - len(currentlist))
+                writestring += "\n"            
+        writestring += "\n"                    
+    
+    myfileobject.write(writestring);
+    #print "csv generated:" + writestring
+    myfileobject.close() 
+    
+def addsemicolon(count):
+    retstring = ''
+    for i in range(count):
+        retstring += '; '
+    return retstring 
+
+# ---------- LaTeX ----------  
+# generating the tikzgraphics-file for the algorithmic representation 
+def generate_tikz(file="tikzgraphics"):
+    filestring = file + ".tex"
+    myfileobject = open(filestring, "w")
+    writestring = "\\textbf{Caption:}\n"
+    writestring += "\\begin{tabbing}\n"
+    writestring += "IP-1000 \= " + getmyip() + "\\kill\n"
+    writestring += "IP-C" + "\\> " + getmyip() + "\\\\\n"
+    for ip in mycontext['map_ipforgraphics']:
+        writestring += mycontext['map_ipforgraphics'][ip] + "\\> " + ip + "\\\\\n" 
+    writestring += "\\end{tabbing}\n"
+    writestring += "\\tikzstyle{ipnode}=[circle, fill=gray!20 ,draw,thick]\n"
+    for i in range(len(mycontext['string_graphics'])):
+        writestring += "\\begin{figure}[H]\n\\centering\n"
+        writestring += mycontext['string_graphics'][i]
+        writestring += "\\caption{Conquer-Measure " + str(i + 1) + "}\n\\label{img:conq" + str(i + 1) + "}\n"
+        writestring += "\\end{figure}\n\n"
+    myfileobject.write(writestring)
+    myfileobject.close()
+
+# generating a LaTeX-file for the results
+def generate_tex(size=0, file="results"):
+    filestring = file + ".tex"
+    myfileobject = open(filestring, "w")
+    writestring = "\\begin{landscape}\n"
+    writestring += "\\section{Results of the measurements of controller " + getmyip().replace(".", ".\"\"") + "}\n"
+    if size is 0:
+        writestring += "\\normalsize\n"
+    elif size is 1:
+        writestring += "\\small\n"
+    elif size is 2:
+        writestring += "\\footnotesize\n"
+    elif size is 3:
+        writestring += "\\tiny\n"
+    else:
+        writestring += ""
+    
+    writestring += generate_longtable(0)
+    writestring += generate_longtable(1)
+    writestring += generate_longtable(2)
+    writestring += generate_longtable(3)
+    writestring += generate_longtable(4)
+    writestring += generate_longtable(5)
+    writestring += generate_longtable(6)
+    writestring += generate_longtable(7)
+    writestring += generate_longtable(8)
+    writestring += "\\end{landscape}\n\\normalsize"
+    myfileobject.write(writestring);
+    #print "tex generated:" + writestring
+    myfileobject.close()
+
+# generating the longtables for the LateX-file
+def generate_longtable(measure=0):
+    columnwidth = str(1.0 / len(mycontext['list_availableips'])) + " \\textheight"
+    writestring = "\\begin{longtable}{|p{" + columnwidth + "}||"  
+    for i in range(len(mycontext['list_availableips'])):
+        writestring += "p{" + columnwidth + "}|"
+    writestring += "}\n\\hline \n"
+    writestring += "\\quad To $\\rightarrow$ \\quad $\\downarrow$ From "
+    for ip in mycontext['list_availableips']:
+        writestring += " & " + ip.replace(".", ".\"\"")
+    writestring += "\\\\\n\\hline\n\\firsthline\n\\endhead\n\\hline\n\\multicolumn{"
+    writestring += str(len(mycontext['list_availableips']) + 1) + "}{|r|}{Continue on the next page...}\\\\\n\\hline\n\\endfoot\n\\endlastfoot\n"
+    for fromip in mycontext['list_availableips']:
+        # replace for using two lines per ip in latex
+        writestring += fromip.replace(".", ".\"\"")
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                currentlist = getsortedlist(fromip, toip)   
+                writestring += " & " + getmeasure(currentlist, measure, 7)            
+            else:
+                writestring += " & --"   
+        writestring += "\\\\\n\hline\n"
+    writestring += "\\caption{"
+    writestring += getmeasurelabel(measure)
+    writestring += "}\n\\label{tab:"
+    writestring += getmeasurelabel(measure)
+    writestring += "}\n\\end{longtable}\n"
+    return writestring                                  
+      
+# ---------- Start Sequence ----------
+if callfunc == 'initialize':
+           
+    if len(callargs) != 4:
+        raise Exception, "Must specify the port to use, the IP-List file, number of tries and waittime between the tries"    
+    
+    # time between the probes
+    waittime = float(callargs[3])
+    # number of measures between the nodes
+    measures = int(callargs[2])
+    
+    mycontext['list_availableips'] = []
+    mycontext['list_allips'] = []
+    mycontext['int_measured'] = 0
+    mycontext['int_tries'] = measures
+    mycontext['map_results'] = {}
+    mycontext['map_ipforgraphics'] = {}
+    mycontext['string_graphics'] = []
+    
+    neighbors = []
+    
+    for line in file(callargs[1]):
+        ip = line.strip()
+        neighbors.append(ip)
+        
+    ip = getmyip() 
+    
+    if ip in neighbors:
+        neighbors.remove(ip)
+    
+    mycontext['list_allips'] = neighbors
+    mycontext['int_port'] = int(callargs[0])
+    
+    # call gotmessage whenever receiving a message
+    recvmess(ip, mycontext['int_port'], got_message)
+    
+    probe_ips(waittime)
+    
+    # we want to register a function to show a status webpage (TCP port)
+    waitforconn(ip, mycontext['int_port'], show_status)  

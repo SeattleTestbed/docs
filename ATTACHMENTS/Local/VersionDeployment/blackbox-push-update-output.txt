@@ -1,0 +1,4 @@
+jsamuel@blackbox:/home/release$ ./push_update_to_all_clients.sh
+[sudo] password for jsamuel:
+Backing up /var/www/updatesite to /var/www/updatesite.backups/1254849680
+Done.

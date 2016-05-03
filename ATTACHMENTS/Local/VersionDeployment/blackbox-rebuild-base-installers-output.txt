@@ -1,0 +1,20 @@
+jsamuel@blackbox:/home/release$ ./rebuild_base_installers_for_seattlegeni.sh 0.1m
+Archiving old base installers to /var/www/dist/old_base_installers
+Warning: failure after this point may leave seattlegeni with no base installers!
+Building new base installers at /var/www/dist
+Creating installer(s) - this may take a few moments....
+Preparing all general non-OS-specific files....
+Complete.
+Customizing installer(s) for the specified operating system(s)....
+
+Finished.
+
+The following base installers have been placed in /var/www/dist:
+seattle0.1m_win.zip
+seattle0.1m_linux.tgz
+seattle0.1m_mac.tgz
+seattle0.1m_winmob.zip
+Changing base installer symlinks used by seattlegeni.
+/var/www/dist /home/release
+/home/release
+New base installers created and installed for seattlegeni.

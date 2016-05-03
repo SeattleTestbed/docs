@@ -1,0 +1,57 @@
+e_testmemoryallocwithexceptions: Memory / disk checking is slower on mobile (purposely)
+rn_restrictions.loose_testtoomanymess.py: Bad file descriptor? It looks like the socket is being closed. We expect errno 9 for this, but 6 is used on mobile, so we fail to catch etc.
+rn_restrictions.loose_testtoomanyconn.py: Relies on timing for the test. Expected finish time is too short, the phone is too slow.
+rz_restrictions.veryslowwrite_test.py: Relies on timer to exit test. Timer fails to fire at the expected time on the phone, and the test fails.
+rz_restrictions.veryslowread_test.py: Same as above
+rz_restrictions.veryslownetsend_testsend.py: exitall works too slowly?
+rz_restrictions.veryslownetrecv_testrecv.py: Hard to tell, but if sleep overslept, and exitall was slow, then this might fail. Also depends on the CPU scheduling one thread over the other.
+rz_restrictions.veryslowloopsend_testsend.py: Detection of wrong error no (9 vs 6), kills our recv socket so exitall is never triggered
+rz_restrictions.veryslowlooprecv_testrecv.py: Hard to tell, but if sleep overslept, and exitall was slow, then this might fail. Also depends on the CPU scheduling one thread over the other.
+rz_restrictions.slowrandom_test.py: Relies on settimer, which if fired too late would break the test. Two tracebacks in the log?
+rz_restrictions.fewevents_selectorstops.py: Test relies on timers. Most likely a timing issue / CPU scheduling / slow exitall.
+re_restrictions.nolog_test.py: Print appears to be working? Even with it disabled. This is probably a bug with restrictions or something.
+
+### START: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+### We use a special repy flag to log to a file, and since these errors disrupt a normal repy start, there are no logs
+### Since all these look for exceptions, they fail
+re_restrictions.missing_test.py: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+re_restrictions.firsttoken_test.py: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+re_restrictions.empty_testrequiredresources.py: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+re_restrictions.dup_test.py: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+re_restrictions.commentedout_test.py: Due to the way we do logging on WinCE, this test is impossible since repy is not supposed to start...
+re_restrictions.badresourceval_test.py       
+re_restrictions.badresource_test.py          
+re_restrictions.badresource2_test.py         
+re_restrictions.badcallrulenoargval_test.py  
+re_restrictions.badcallrulenoargnum_test.py  
+re_restrictions.badcallrulenoargis_test.py   
+re_restrictions.badcallruleargval_test.py    
+re_restrictions.badcallruleargnum_test.py    
+re_restrictions.badcallruleargis_test.py     
+re_restrictions.badcallname_test.py          
+### END
+
+rl_restrictions.looselog_testlogging4.py: Test is unique and requires run_tests to do some strange checks which are not performed on WinCE
+n_testsleep3.p: Timing dependent, relies on times and threads. CPU scheduler probably allowed the timer to oversleep and scheduled the main thread.
+n_testprint.py: See above.
+n_testinterruptsockets.py: Seems to have passed, but there are two random trace backs in the log, which may have caused the test to fail.
+n_slowwritetest.py: Appears to have worked, but has two random tracebacks...
+n_slowreadtest.py: Appears to have worked, but then Exception (with type 'exceptions.SystemError'): error return without exception set
+n_selectorstops.py:  Appears to have worked, two random exceptions which seem to be the same as above
+n_randomratetest.py: Same as above
+
+z_testnet*: Unknown, gaierror but phone *most likely* has disconnected from the internet, since it has been over an hour of unit tests
+z_testgetmyip.py
+z_testgethostbyname_ex.py
+# The phone will only use wifi when not plugged into a computer via USB, and thus it drains battery. When battery gets low, wifi is turned off.
+
+z_testinterruptsockets.py: I don't even understand the test... Its such a complicated test, its hard to tell what went wrong.
+
+z_testexit: Timer dependent and slow exitall.
+
+l_testlogging2.py: Circular logging doesn't work with the way we capture output for mobile unit tests.
+
+
+## NOTE: Random Exceptions: It looks like the exit method we use on WinCE os._exit is slow enough that Python catches 2 exceptions and can occasionally print it
+# It seems that we get the SystemError, error return without exception set which also raises an Exception in that timer thread
+# I don't know if we can do anything about this, and it doesn't really effect us

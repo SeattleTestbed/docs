@@ -1,0 +1,107 @@
+"""
+
+<Program Name>
+  node.repy
+
+<Started>
+  December 2010
+
+<Author>
+  Marcel Groﬂmann
+
+<Purpose>
+  A better implementation for measuring the Round-Trip-Time with Seattle.
+  node.repy depends on the usage of controller.repy, where both programs must interact.
+
+  The Nodes therefore are needed to do all the Round-Trip-Time measurements.
+  They get most of their Setup-Parameters from the Controller.
+  
+  node.repy gets started by the call node.repy [port]:
+    - port is Your specific port for Seattle
+
+  It returns only the IPs it is measuring per console log, all results are sent to the controller.
+
+"""
+
+
+# -------- Setup Paramters ----------
+# start to measure a specific IP
+def measure(ip, timer=2, tries=1):
+    print 'Measuring ' + ip
+    mycontext['map_rtt'][ip] = []
+    rtt(ip, timer, tries)
+
+# -------- RTT-Measurement ----------
+# measure an IP with x tries and timer difference between each
+def rtt(ip, timer, tries):
+    if tries > 0:
+        mapstring = str(tries) + ip
+        mycontext['map_sendtime'][mapstring] = getruntime()
+        sendmess(ip, mycontext['int_port'], 'p' + str(tries), getmyip(), mycontext['int_port'])
+        settimer(timer, rtt, [ip, timer, tries - 1])    
+
+# -------- Encoding ----------
+# encode the resulting list of RTT-Measures of an IP
+def report(iplist):
+    mess = 'RTT: '
+    for ip in iplist:
+        if ip in mycontext['map_rtt']:
+            mess += 'IP ' + ip + ' L: ' + str(mycontext['map_rtt'][ip]) + ' '
+        else:
+            mess += 'IP ' + ip + ' L: [] '
+    print 'Reported ' + mess
+    sendmess(mycontext['string_controllerip'], mycontext['int_port'], mess, getmyip(), mycontext['int_port'])
+
+# -------- Decoding ----------
+def decodestringlist(string):
+    list = []
+    string = string.replace('\'', '')
+    list = string[1:-1].split(', ')
+    return list
+
+# -------- Handle Incoming Messages ----------
+def got_message(srcip, srcport, mess, ch):
+    # report that I am existing and save the parameters from the controller
+    if mess.startswith('exist'):
+        mycontext['map_rtt'] = {} 
+        mycontext['int_tries'] = int(mess[5:mess.index('-') - 1])
+        mycontext['float_waittime'] = float(mess[mess.index('-') + 1:])
+        mycontext['string_controllerip'] = srcip
+        sendmess(srcip, srcport, 'existing', getmyip(), mycontext['int_port'])
+    # send the report, when getting the finished-message
+    elif mess.startswith('finished'):
+        iplist = []
+        iplist = decodestringlist(mess[8:].strip())
+        report(iplist)
+    # start a measurement, when called
+    elif mess.startswith('measure'):
+        measure(mess[8:].strip(), mycontext['float_waittime'], mycontext['int_tries'])
+    # getting a ping-message send the return-message back
+    elif mess.startswith('p'):
+        trie = int(mess[1:])
+        sendmess(srcip, srcport, 'r' + str(trie), getmyip(), mycontext['int_port'])
+    # getting a reurn message, calculate the corresponding round-trip-time
+    elif mess.startswith('r'):
+        tries = int(mess[1:])
+        mapstring = str(tries) + srcip
+        rtt = getruntime() - mycontext['map_sendtime'][mapstring]
+        mycontext['map_rtt'][srcip].insert(tries, rtt)              
+      
+# -------- Start Sequence ----------
+if callfunc == 'initialize':
+  if len(callargs) != 1:
+    raise Exception, "Must specify the port to use"
+   
+  ip = getmyip() 
+  
+  mycontext['int_port'] = int(callargs[0])
+  mycontext['string_controllerip'] = ''
+  mycontext['map_sendtime'] = {}
+  mycontext['int_tries'] = 3
+  mycontext['float_waittime'] = 0.5
+  mycontext['map_rtt'] = {}
+  # call gotmessage whenever receiving a message
+  recvmess(ip, mycontext['int_port'], got_message)
+
+  
+

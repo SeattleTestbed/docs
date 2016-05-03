@@ -1,0 +1,2936 @@
+"""
+o3gm_pickup.py -- Open3GMap Pickup (sensor frontend)
+
+Call with any call arg to make it browse for sensors/methods.
+
+Output file is "o3gm_readings.txt". Fields are separated by one space.
+To parse into Lukas' "daten.csv" format, use something like
+awk '{ print $3 "-" $4 "," $6 "," $9 "," $10 "," $7 ",data" }' o3gm_readings.txt
+
+Field names and descriptions:
+getruntime()...local vessel runtime since this script started
+timestamp......network or GPS timestamp in milliseconds, see loc_source
+mcc............mobile country code
+mnc............mobile network code
+cell_id........Cell ID (no less!)
+nw_type........GSM, GPRS, EDGE, UMTS, HS[,U,D]PA[,P]
+rssi...........Signal strength
+loc_source.....Source of location data, ['GPS'|'network']
+lat, lon.......Latitude and longitude acoording to loc_source
+alt............Altitude as per loc_source. loc_source=='network' => alt=-99999.0
+accuracy.......Location accuracy
+battery_level
+  .............Charge level in percent. We voluntarily stop if we reach <16%.
+tac, vendor, model
+   ............Data about the phone model
+
+
+
+Version history:
+
+v 0.0.4, 2012-11-02 0952 AR
+  Yet another XML-RPC interface update
+
+v 0.0.3, 2012-10-02 1607 AR
+  Yet another XMLRPC interface update
+
+v 0.0.2, 2012-10-02 0947 AR
+  SeattleSensors "lattitude" has proper spelling now.
+
+v 0.0.1, 2012-10-01 2209 AR
+  It's all comments, really!
+
+
+P.S.: Check out this fun 3G mapping stuff:
+http://www.erodocdb.dk/docs/doc98/official/pdf/ECCRep103.pdf
+"""
+
+#begin include xmlrpc_client.repy
+"""
+<Program Name>
+  xmlrpc_client.py
+
+<Started>
+  May 3, 2009
+
+<Author>
+  Michael Phan-Ba
+
+<Purpose>
+  Implements the client-side XML-RPC protocol.
+
+"""
+
+
+#begin include urlparse.repy
+"""
+<Program Name>
+  urlparse.repy
+
+<Started>
+  May 15, 2009
+
+<Author>
+  Michael Phan-Ba
+
+<Purpose>
+  Provides utilities for parsing URLs, based on the Python 2.6.1 module urlparse.
+
+"""
+
+
+def urlparse_urlsplit(urlstring, default_scheme="", allow_fragments=True):
+  """
+  <Purpose>
+    Parse a URL into five components, returning a dictionary.  This corresponds
+    to the general structure of a URL:
+    scheme://netloc/path;parameters?query#fragment.  The parameters are not
+    split from the URL and individual componenets are not separated.
+
+    Only absolute server-based URIs are currently supported (all URLs will be
+    parsed into the components listed, regardless of the scheme).
+
+  <Arguments>
+    default_scheme:
+      Optional: defaults to the empty string.  If specified, gives the default
+      addressing scheme, to be used only if the URL does not specify one.
+
+    allow_fragments:
+      Optional: defaults to True.  If False, fragment identifiers are not
+      allowed, even if the URL's addressing scheme normally does support them.
+
+  <Exceptions>
+    ValueError on parsing a non-numeric port value.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    A dictionary containing:
+
+    Key         Value                               Value if not present
+    ============================================================================
+    scheme      URL scheme specifier                empty string
+    netloc      Network location part               empty string
+    path        Hierarchical path                   empty string
+    query       Query component                     empty string
+    fragment    Fragment identifier                 empty string
+    username    User name                           None
+    password    Password                            None
+    hostname    Host name (lower case)              None
+    port        Port number as integer, if present  None
+
+  """
+
+  components = {"scheme": default_scheme, "netloc": "", "path": "", "query": "",
+    "fragment": "", "username": None, "password": None, "hostname": None,
+    "port": None }
+
+  # Extract the scheme, if present.
+  (lpart, rpart) = _urlparse_splitscheme(urlstring)
+  if lpart:
+    components["scheme"] = lpart
+
+  # Extract the server information, if present.
+  if rpart.startswith("//"):
+    (lpart, rpart) = _urlparse_splitnetloc(rpart, 2)
+    components["netloc"] = lpart
+
+    (components["username"], components["password"], components["hostname"],
+      components["port"]) = _urlparse_splitauthority(lpart)
+
+  # Extract the fragment.
+  if allow_fragments:
+    (rpart, components["fragment"]) = _urlparse_splitfragment(rpart)
+
+
+  # Extract the query.
+  (components["path"], components["query"]) = _urlparse_splitquery(rpart)
+
+  return components
+
+
+def _urlparse_splitscheme(url):
+  """Parse the scheme portion of the URL"""
+  # The scheme is valid only if it contains these characters.
+  scheme_chars = \
+    "abcdefghijklmnopqrstuvwxyz0123456789+-."
+
+  scheme = ""
+  rest = url
+
+  spart = url.split(":", 1)
+  if len(spart) == 2:
+
+    # Normalize the scheme.
+    spart[0] = spart[0].lower()
+
+    # A scheme is valid only if it starts with an alpha character.
+    if spart[0] and spart[0][0].isalpha():
+      for char in spart[0]:
+        if char not in scheme_chars:
+          break
+      (scheme, rest) = spart
+
+  return scheme, rest
+
+
+def _urlparse_splitnetloc(url, start=0):
+  """Parse the netloc portion of the URL"""
+
+  # By default, the netloc is delimited by the end of the URL.
+  delim = len(url)
+
+  # Find the left-most delimiter.
+  for char in "/?#":
+    xdelim = url.find(char, start)
+    if xdelim >= 0:
+      delim = min(delim, xdelim)
+
+  # Return the netloc and the rest of the URL.
+  return url[start:delim], url[delim:]
+
+
+def _urlparse_splitauthority(netloc):
+  """Parse the authority portion of the netloc"""
+
+  # The authority can have a userinfo portion delimited by "@".
+  authority = netloc.split("@", 1)
+
+  # Default values.
+  username = None
+  password = None
+  hostname = None
+  port = None
+
+  # Is there a userinfo portion?
+  if len(authority) == 2:
+
+    # userinfo can be split into username:password
+    userinfo = authority[0].split(":", 1)
+
+    # hostport can be split into hostname:port
+    hostport = authority[1].split(":", 1)
+
+    if userinfo[0]:
+      username = userinfo[0]
+    if len(userinfo) == 2:
+      password = userinfo[1]
+
+  # No userinfo portion found.
+  else:
+
+    # hostport can be split into hostname:port
+    hostport = netloc.split(":", 1)
+
+  # Is there a port value?
+  if hostport[0]:
+    hostname = hostport[0]
+  if len(hostport) == 2:
+    port = int(hostport[1], 10)
+
+  # Return the values.
+  return username, password, hostname, port
+
+
+def _urlparse_splitquery(url):
+  """Parse the query portion of the url"""
+
+  qpart = url.split("?", 1)
+  if len(qpart) == 2:
+    query = qpart[1]
+  else:
+    query = ""
+
+  return qpart[0], query
+
+
+def _urlparse_splitfragment(url):
+  """Parse the query portion of the url"""
+
+  fpart = url.split("#", 1)
+  if len(fpart) == 2:
+    fragment = fpart[1]
+  else:
+    fragment = ""
+
+  return fpart[0], fragment
+
+#end include urlparse.repy
+#begin include httpretrieve.repy
+"""
+<Program Name>
+  httpretrieve.repy
+
+<Started>
+  August 19, 2009
+
+<Authors>
+  Yafete Yemuru
+  Conrad Meyer
+  
+<Purpose>
+  Provides a method for retrieving content from web servers using the HTTP
+  protocol. The content can be accessed as a file like object, or saved to
+  a file or returned as a string.
+"""
+
+
+
+#begin include urlparse.repy
+#already included urlparse.repy
+#end include urlparse.repy
+#begin include sockettimeout.repy
+"""
+<Author>
+  Justin Cappos, Armon Dadgar
+  This is a rewrite of the previous version by Richard Jordan
+
+<Start Date>
+  26 Aug 2009
+
+<Description>
+  A library that causes sockets to timeout if a recv / send call would
+  block for more than an allotted amount of time.
+
+"""
+
+
+class SocketTimeoutError(Exception):
+  """The socket timed out before receiving a response"""
+
+
+class _timeout_socket():
+  """
+  <Purpose>
+    Provides a socket like object which supports custom timeouts
+    for send() and recv().
+  """
+
+  # Initialize with the socket object and a default timeout
+  def __init__(self,socket,timeout=10, checkintv='fibonacci'):
+    """
+    <Purpose>
+      Initializes a timeout socket object.
+
+    <Arguments>
+      socket:
+              A socket like object to wrap. Must support send,recv,close, and willblock.
+
+      timeout:
+              The default timeout for send() and recv().
+
+      checkintv:
+              How often socket operations (send,recv) should check if
+              they can run. The smaller the interval the more time is
+              spent busy waiting.
+    """
+    # Store the socket, timeout and check interval
+    self.socket = socket
+    self.timeout = timeout
+    self.checkintv = checkintv
+
+
+  # Allow changing the default timeout
+  def settimeout(self,timeout=10):
+    """
+    <Purpose>
+      Allows changing the default timeout interval.
+
+    <Arguments>
+      timeout:
+              The new default timeout interval. Defaults to 10.
+              Use 0 for no timeout. Given in seconds.
+
+    """
+    # Update
+    self.timeout = timeout
+  
+  
+  # Wrap willblock
+  def willblock(self):
+    """
+    See socket.willblock()
+    """
+    return self.socket.willblock()
+
+
+  # Wrap close
+  def close(self):
+    """
+    See socket.close()
+    """
+    return self.socket.close()
+
+
+  # Provide a recv() implementation
+  def recv(self,bytes,timeout=None):
+    """
+    <Purpose>
+      Allows receiving data from the socket object with a custom timeout.
+
+    <Arguments>
+      bytes:
+          The maximum amount of bytes to read
+
+      timeout:
+          (Optional) Defaults to the value given at initialization, or by settimeout.
+          If provided, the socket operation will timeout after this amount of time (sec).
+          Use 0 for no timeout.
+
+    <Exceptions>
+      As with socket.recv(), socket.willblock(). Additionally, SocketTimeoutError is
+      raised if the operation times out.
+
+    <Returns>
+      The data received from the socket.
+    """
+
+    # It's worth noting that this fibonacci backoff begins with a 2ms poll rate, and 
+    # provides a simple exponential backoff scheme.
+
+    fibonacci_backoff = False
+    backoff_cap = 100 # Never use more than 100ms poll rate.
+
+    pre_value = 1.0     # Our iterators for Fibonacci sequence.
+    pre_pre_value = 1.0 # 
+
+    # Since we want to be able to initialize with static poll rates (backwards 
+    # compatibility) we specify a string if we're using the fibonacci backoff.
+    if type(self.checkintv) is str:
+      if self.checkintv == 'fibonacci':
+        fibonacci_backoff = True
+
+    # Set the timeout if None
+    if timeout is None:
+      timeout = self.timeout
+
+    # Get the start time
+    starttime = getruntime()
+
+    # Block until we can read
+    rblock, wblock = self.socket.willblock()
+    while rblock:
+      # Check if we should break
+      if timeout > 0:
+        # Get the elapsed time
+        diff = getruntime() - starttime
+
+        # Raise an exception
+        if diff > timeout:
+          raise SocketTimeoutError,"recv() timed out!"
+
+      if fibonacci_backoff:
+        # Iterate the sequence once
+        sleep_length = pre_value + pre_pre_value
+        pre_pre_value = pre_value
+        pre_value = sleep_length
+
+        # Make sure we don't exceed maximum backoff.
+        if sleep_length > backoff_cap:
+          sleep_length = backoff_cap
+
+        # Unit conversion to seconds
+        sleep_length = sleep_length / 1000.0
+
+        # Sleep
+        sleep(sleep_length)
+      else: # Classic functionality.
+        # Sleep
+        try:
+          sleep(float(self.checkintv))
+        except:
+          sleep(0.1)
+
+      # If available, move to the next value of checkintv.
+      
+
+      # Update rblock
+      rblock, wblock = self.socket.willblock()
+
+    # Do the recv
+    return self.socket.recv(bytes)
+
+
+  # Provide a send() implementation
+  def send(self,data,timeout=None):
+    """
+    <Purpose>
+      Allows sending data with the socket object with a custom timeout.
+
+    <Arguments>
+      data:
+          The data to send
+
+      timeout:
+          (Optional) Defaults to the value given at initialization, or by settimeout.
+          If provided, the socket operation will timeout after this amount of time (sec).
+          Use 0 for no timeout.
+
+    <Exceptions>
+      As with socket.send(), socket.willblock(). Additionally, SocketTimeoutError is
+      raised if the operation times out.
+
+    <Returns>
+      The number of bytes sent.
+    """
+    # Set the timeout if None
+    if timeout is None:
+      timeout = self.timeout
+
+    # Get the start time
+    starttime = getruntime()
+
+    # Block until we can write
+    rblock, wblock = self.socket.willblock()
+    while wblock:
+      # Check if we should break
+      if timeout > 0:
+        # Get the elapsed time
+        diff = getruntime() - starttime
+
+        # Raise an exception
+        if diff > timeout:
+          raise SocketTimeoutError,"send() timed out!"
+
+      # Sleep
+      # Since switching to the fibonacci backoff, the nature of 
+      # this field has changed. Rather than implement the backoff 
+      # for checking block status (seems wasteful) we'll just use 
+      # a constant value. Ten ms seems appropriate.
+      sleep(0.010)
+
+      # Update rblock
+      rblock, wblock = self.socket.willblock()
+
+    # Do the recv
+    return self.socket.send(data) 
+
+
+
+
+def timeout_openconn(desthost, destport, localip=None, localport=None, timeout=5):
+  """
+  <Purpose> 
+    Wrapper for openconn.   Very, very similar
+
+  <Args>
+    Same as Repy openconn
+
+  <Exception>
+    Raises the same exceptions as openconn.
+
+  <Side Effects>
+    Creates a socket object for the user
+
+  <Returns>
+    socket obj on success
+  """
+
+  realsocketlikeobject = openconn(desthost, destport, localip, localport, timeout)
+
+  thissocketlikeobject = _timeout_socket(realsocketlikeobject, timeout)
+  return thissocketlikeobject
+
+
+
+
+
+def timeout_waitforconn(localip, localport, function, timeout=5):
+  """
+  <Purpose> 
+    Wrapper for waitforconn.   Essentially does the same thing...
+
+  <Args>
+    Same as Repy waitforconn with the addition of a timeout argument.
+
+  <Exceptions> 
+    Same as Repy waitforconn
+
+  <Side Effects>
+    Sets up event listener which calls function on messages.
+
+  <Returns>
+    Handle to listener.
+  """
+
+  # We use a closure for the callback we pass to waitforconn so that we don't
+  # have to map mainch's to callback functions or deal with potential race
+  # conditions if we did maintain such a mapping. 
+  def _timeout_waitforconn_callback(localip, localport, sockobj, ch, mainch):
+    # 'timeout' is the free variable 'timeout' that was the argument to
+    #  timeout_waitforconn.
+    thissocketlikeobject = _timeout_socket(sockobj, timeout)
+
+    # 'function' is the free variable 'function' that was the argument to
+    #  timeout_waitforconn.
+    return function(localip, localport, thissocketlikeobject, ch, mainch)
+
+  return waitforconn(localip, localport, _timeout_waitforconn_callback)
+
+  
+  
+
+
+# a wrapper for stopcomm
+def timeout_stopcomm(commhandle):
+  """
+    Wrapper for stopcomm.   Does the same thing...
+  """
+
+  return stopcomm(commhandle)
+  
+    
+
+
+#end include sockettimeout.repy
+#begin include urllib.repy
+def urllib_quote(inputstring, safestring="/"):
+  """
+  <Purpose>
+    Encode an inputstring such that it can be used safely in a URL or XML
+    document.
+
+  <Arguments>
+    inputstring:
+           The string to urlencode.
+
+    safestring (optional):
+           Specifies additional characters that should not be quoted --
+           defaults to "/".
+
+  <Exceptions>
+    TypeError if the inputstring or safestring parameters aren't strings.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    Urlencoded version of the passed string.
+  """
+
+  if type(inputstring) is not str:
+    raise TypeError("urllib_quote's inputstring parameter must be a string, not '"+str(type(inputstring))+"'")
+  if type(safestring) is not str:
+    raise TypeError("urllib_quote's safestring parameter must be a string, not '"+str(type(safestring))+"'")
+  
+
+  resultstr = ""
+
+  # We go through each character in the string; if it's not in [0-9a-zA-Z]
+  # we wrap it.
+
+  safeset = set(safestring)
+
+  for char in inputstring:
+    asciicode = ord(char)
+    if (asciicode >= ord("0") and asciicode <= ord("9")) or \
+        (asciicode >= ord("A") and asciicode <= ord("Z")) or \
+        (asciicode >= ord("a") and asciicode <= ord("z")) or \
+        asciicode == ord("_") or asciicode == ord(".") or \
+        asciicode == ord("-") or char in safeset:
+      resultstr += char
+    else:
+      resultstr += "%%%02X" % asciicode
+
+  return resultstr
+
+
+
+
+def urllib_quote_plus(inputstring, safestring=""):
+  """
+  <Purpose>
+    Encode a string to go in the query fragment of a URL.
+
+  <Arguments>
+    inputstring:
+           The string to urlencode.
+
+    safestring (optional):
+           Specifies additional characters that should not be quoted --
+           defaults to the empty string.
+
+  <Exceptions>
+    TypeError if the inputstring or safestring parameters aren't strings.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    Urlencoded version of the passed string.
+  """
+
+  if type(inputstring) is not str:
+    raise TypeError("urllib_quote_plus' inputstring parameter must be a string, not '"+str(type(inputstring))+"'")
+  if type(safestring) is not str:
+    raise TypeError("urllib_quote_plus' safestring parameter must be a string, not '"+str(type(safestring))+"'")
+  
+
+  return urllib_quote(inputstring, safestring + " ").replace(" ", "+")
+
+
+
+
+def urllib_unquote(inputstring):
+  """
+  <Purpose>
+    Unquote a urlencoded string.
+
+  <Arguments>
+    inputstring:
+           The string to unquote.
+
+  <Exceptions>
+    TypeError if the inputstring isn't a string
+    ValueError thrown if the last wrapped octet isn't a valid wrapped octet
+    (i.e. if the string ends in "%" or "%x" rather than "%xx". Also throws
+    ValueError if the nibbles aren't valid hex digits.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The decoded string.
+  """
+
+  if type(inputstring) is not str:
+    raise TypeError("urllib_unquote's inputstring parameter must be a string, not '"+str(type(inputstring))+"'")
+  
+
+  resultstr = ""
+
+  # We go through the inputstring from end to beginning, looking for wrapped
+  # octets. When one is found we add it (unwrapped) and the following
+  # string to the resultant string, and shorten the original inputstring.
+
+  while True:
+    lastpercentlocation = inputstring.rfind("%")
+    if lastpercentlocation < 0:
+      break
+
+    wrappedoctetstr = inputstring[lastpercentlocation+1:lastpercentlocation+3]
+    if len(wrappedoctetstr) != 2:
+      raise ValueError("Quoted string is poorly formed")
+
+    resultstr = \
+        chr(int(wrappedoctetstr, 16)) + \
+        inputstring[lastpercentlocation+3:] + \
+        resultstr
+    inputstring = inputstring[:lastpercentlocation]
+
+  resultstr = inputstring + resultstr
+  return resultstr
+
+
+
+
+def urllib_unquote_plus(inputstring):
+  """
+  <Purpose>
+    Unquote the urlencoded query fragment of a URL.
+
+  <Arguments>
+    inputstring:
+           The string to unquote.
+
+  <Exceptions>
+    TypeError if the inputstring isn't a string
+    ValueError thrown if the last wrapped octet isn't a valid wrapped octet
+    (i.e. if the inputstring ends in "%" or "%x" rather than "%xx". Also throws
+    ValueError if the nibbles aren't valid hex digits.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The decoded string.
+  """
+  if type(inputstring) is not str:
+    raise TypeError("urllib_unquote_plus' inputstring parameter must be a string, not '"+str(type(inputstring))+"'")
+
+  return urllib_unquote(inputstring.replace("+", " "))
+
+
+
+
+def urllib_quote_parameters(inputdictionary):
+  """
+  <Purpose>
+    Encode a dictionary of (key, value) pairs into an HTTP query string or
+    POST body (same form).
+
+  <Arguments>
+    dictionary:
+           The dictionary to quote.
+
+  <Exceptions>
+    TypeError if the inputdictionary isn't a dict.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The quoted dictionary.
+  """
+  if type(inputdictionary) is not dict:
+    raise TypeError("urllib_quote_parameters' inputstringdictionary parameter must be a dict, not '"+str(type(inputstring))+"'")
+
+  quoted_keyvals = []
+  for key, val in inputdictionary.items():
+    quoted_keyvals.append("%s=%s" % (urllib_quote(key), urllib_quote(val)))
+
+  return "&".join(quoted_keyvals)
+
+
+
+
+def urllib_unquote_parameters(inputstring):
+  """
+  <Purpose>
+    Decode a urlencoded query string or POST body.
+
+  <Arguments>
+    inputstring:
+           The string to decode.
+
+  <Exceptions>
+    TypeError if the inputstring isn't a string
+    ValueError if the inputstring is poorly formed.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    A dictionary mapping keys to values.
+  """
+
+  if type(inputstring) is not str:
+    raise TypeError("urllib_unquote_parameters' inputstring parameter must be a string, not '"+str(type(inputstring))+"'")
+
+  keyvalpairs = inputstring.split("&")
+  res = {}
+
+  for quotedkeyval in keyvalpairs:
+    # Throw ValueError if there is more or less than one '='.
+    quotedkey, quotedval = quotedkeyval.split("=")
+    key = urllib_unquote_plus(quotedkey)
+    val = urllib_unquote_plus(quotedval)
+    res[key] = val
+
+  return res
+
+#end include urllib.repy
+
+
+
+class HttpConnectionError(Exception):
+  """
+  Error indicating that the web server has unexpectedly dropped the
+  connection.
+  """
+
+
+
+
+class HttpBrokenServerError(Exception):
+  """
+  Error indicating that the web server has sent us complete garbage instead
+  of something resembling HTTP.
+  """
+
+
+
+
+def httpretrieve_open(url, querydata=None, postdata=None,\
+    httpheaders=None, proxy=None, timeout=None):
+  """
+  <Purpose>
+     Returns a file-like object that can be used to read the content from
+     an HTTP server. Follows 3xx redirects.
+
+  <Arguments>
+    url:
+           The URL to perform a GET or POST request on.
+    postdata (optional):
+           A dictionary of form data or a string to POST to the server.
+           Passing a non-None value results in a POST request being sent
+           to the server.
+    querydata (optional):
+           A dictionary of form data or a string to send as the query
+           string to the server.
+
+           If postdata is omitted, the URL is retrieved with GET. If
+           both postdata and querydata are omitted, there is no query
+           string sent in the request.
+
+           For both querydata and postdata, strings are sent *unmodified*.
+           This means you probably should encode them first, with
+           urllib_quote().
+    httpheaders (optional):
+           A dictionary of supplemental HTTP request headers to add to the
+           request.
+    proxy (optional):
+           A proxy server 2-tuple to bind to: ('host', port).       
+    timeout (optional):
+           A timeout for establishing a connection to the web server,
+           sending headers, and reading the response headers.
+
+           If excluded or None, never times out.
+
+  <Exceptions>
+    ValueError if given an invalid URL, or malformed limit or timeout
+      values. This is also raised if the user attempts to call a method
+      on the file-like object after closing it.
+
+    HttpConnectionError if opening the connection fails, or if the
+      connection is closed by the server before we expect.
+
+    SocketTimeoutError if the timeout is exceeded.
+
+    HttpBrokenServerError if the response or the Location response header
+      is malformed.
+
+  <Side Effects>
+    None
+
+  <Returns>
+    Returns a file-like object which can be used to read the body of
+    the response from the web server. The protocol version spoken by the
+    server, status code, and response headers are available as members of
+    the object.
+  """
+
+  starttimefloat = getruntime()
+
+  # Check if the URL is valid and get host, path, port and query
+  parsedurldict = urlparse_urlsplit(url)
+  hoststr = parsedurldict['hostname']
+  pathstr = parsedurldict['path']
+  portint = parsedurldict.get('port')
+  portint = portint or 80
+
+  if parsedurldict['scheme'] != 'http':
+    raise ValueError("URL doesn't seem to be for the HTTP protocol.")
+  if hoststr is None:
+    raise ValueError("Missing hostname.")
+  if parsedurldict['query'] is not None and parsedurldict['query'] != "":
+    raise ValueError("URL cannot include a query string.")
+
+  # Typical HTTP sessions consist of (optionally, a series of pairs of) HTTP
+  # requests followed by HTTP responses. These happen serially.
+
+  # JAC: Set this up so that we can raise the right error if the 
+  # timeout_openconn doesn't work.
+  sockobj = None
+
+  # Open connection to the web server
+  try:
+    if proxy is not None:
+      # if there is a proxy, open a connection with the proxy instead of the actual server
+      # use the timeout we are given (or none)
+      sockobj = timeout_openconn(proxy[0], proxy[1], timeout=timeout)  
+    else:
+      # if there is no proxy open a connection with server directly
+      # use the timeout we are given (or none)
+      sockobj = timeout_openconn(hoststr, portint, timeout=timeout)
+
+  except Exception, e:
+    # If a socket object was created, we want to clean in up.
+    if sockobj:
+      sockobj.close()
+
+    if repr(e).startswith("timeout("):
+      raise HttpConnectionError("Socket timed out connecting to host/port.")
+    raise
+
+  try:
+    # Builds the HTTP request:
+    httprequeststr = _httpretrieve_build_request(hoststr, portint, pathstr, \
+        querydata, postdata, httpheaders, proxy)
+
+    # Send the full HTTP request to the web server.
+    _httpretrieve_sendall(sockobj, httprequeststr)
+
+    # Now, we're done with the HTTP request part of the session, and we need
+    # to get the HTTP response.
+
+    # Check if we've timed out (if the user requested a timeout); update the
+    # socket timeout to reflect the time taken sending the request.
+    if timeout is None:
+      sockobj.settimeout(0)
+    elif getruntime() - starttimefloat >= timeout:
+      raise SocketTimeoutError("Timed out")
+    else:
+      sockobj.settimeout(timeout - (getruntime() - starttimefloat))
+
+    # Receive the header lines from the web server (a series of CRLF-terminated
+    # lines, terminated by an empty line, or by the server closing the
+    # connection.
+    headersstr = ""
+    while not headersstr.endswith("\r\n\r\n"):
+      try:
+        # This should probably be replaced with page-sized reads in the future,
+        # but for now, the behavior is at least correct.
+        headersstr += sockobj.recv(1)
+      except Exception, e:
+        if str(e) == "Socket closed":
+          break
+        else:
+          raise
+
+    httpheaderlist = headersstr.split("\r\n")
+    # Ignore (a) trailing blank line(s) (for example, the response header-
+    # terminating blank line).
+    while len(httpheaderlist) > 0 and httpheaderlist[-1] == "":
+      httpheaderlist = httpheaderlist[:-1]
+
+    # Get the status code and status message from the HTTP response.
+    statuslinestr, httpheaderlist = httpheaderlist[0], httpheaderlist[1:]
+
+    # The status line should be in the form: "HTTP/1.X NNN SSSSS", where
+    # X is 0 or 1, NNN is a 3-digit status code, and SSSSS is a 'user-friendly'
+    # string representation of the status code (may contain spaces).
+    statuslinelist = statuslinestr.split(' ', 2)
+
+    if len(statuslinelist) < 3:
+      raise HttpBrokenServerError("Server returned garbage for HTTP " + \
+        "response (status line missing one or more fields).")
+
+    if not statuslinelist[0].startswith('HTTP'):
+      raise HttpBrokenServerError("Server returned garbage for HTTP " + \
+          "response (invalid response protocol in status line).")
+
+    friendlystatusstr = statuslinelist[2]
+    try:
+      statusint = int(statuslinelist[1])
+    except ValueError, e:
+      raise HttpBrokenServerError("Server returned garbage for HTTP " + \
+        "response (status code isn't integer).")
+
+    httpheaderdict = _httpretrieve_parse_responseheaders(httpheaderlist)
+
+    # If we got any sort of redirect response, follow the redirect. Note: we
+    # do *not* handle the 305 status code (use the proxy as specified in the
+    # Location header) at all; I think this is best handled at a higher layer
+    # anyway.
+    if statusint in (301, 302, 303, 307):
+      sockobj.close()
+      try:
+        redirecturlstr = httpheaderdict["Location"][0]
+      except (KeyError, IndexError), ke:
+        # When a server returns a redirect status code (3xx) but no Location
+        # header, some clients, e.g. Firefox, just show the response body
+        # as they would normally for a 2xx or 4xx response. So, I think we
+        # should ignore a missing Location header and just return the page
+        # to the caller.
+        pass
+      else:
+        # If the server did send a redirect location, let's go there.
+        return httpretrieve_open(redirecturlstr)
+
+    # If we weren't requested to redirect, and we didn't, return a read-only
+    # file-like object (representing the response body) to the caller.
+    return _httpretrieve_filelikeobject(sockobj, httpheaderdict, \
+        (statuslinelist[0], statusint, friendlystatusstr))
+  
+  except:
+    # If any exception occured after the socket was open, we want to make
+    # sure that the socket is cleaned up if it is still open before we
+    # raise the exception.
+    if sockobj:
+      sockobj.close()
+
+    raise
+
+
+
+def httpretrieve_save_file(url, filename, querydata=None, postdata=None, \
+    httpheaders=None, proxy=None, timeout=None):
+  """
+  <Purpose>
+    Perform an HTTP request, and save the content of the response to a
+    file.
+
+  <Arguments>
+    filename:
+           The file name to save the response to.
+    Other arguments:
+           See documentation for httpretrieve_open().
+
+  <Exceptions>
+    This function will raise any exception raised by Repy file objects
+    in opening, writing to, and closing the file.
+
+    This function will all also raise any exception raised by
+    httpretrieve_open(), for the same reasons.
+
+  <Side Effects>
+    Writes the body of the response to 'filename'.
+
+  <Returns>
+    None
+  """
+
+  # Open the output file object and http file-like object.
+  outfileobj = open(filename, 'w')
+  httpobj = httpretrieve_open(url, querydata=querydata, postdata=postdata, \
+      httpheaders=httpheaders, proxy=proxy, timeout=timeout)
+
+  # Repeatedly read from the file-like HTTP object into our file, until the
+  # response is finished.
+  responsechunkstr = None
+  while responsechunkstr != '':
+    responsechunkstr = httpobj.read(4096)
+    outfileobj.write(responsechunkstr)
+
+  outfileobj.close()
+  httpobj.close()
+
+
+
+
+def httpretrieve_get_string(url, querydata=None, postdata=None, \
+    httpheaders=None, proxy=None, timeout=30):
+  """
+  <Purpose>
+    Performs an HTTP request on the given URL, using POST or GET,
+    returning the content of the response as a string. Uses
+    httpretrieve_open.
+
+  <Arguments>
+    See httpretrieve_open.
+
+  <Exceptions>
+    See httpretrieve_open.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    Returns the body of the HTTP response (no headers).
+  """
+
+  # Open a read-only file-like object for the HTTP request.
+  httpobj = httpretrieve_open(url, querydata=querydata, postdata=postdata, \
+      httpheaders=httpheaders, proxy=proxy, timeout=timeout)
+
+  # Read all of the response and return it.
+  try:
+    return httpobj.read()
+  finally:
+    httpobj.close()
+
+
+
+
+class _httpretrieve_filelikeobject:
+  # This class implements a file-like object used for performing HTTP
+  # requests and retrieving responses.
+
+  def __init__(self, sock, headers, httpstatus):
+    # The socket-like object connected to the HTTP server. Headers have
+    # already been read.
+    self._sockobj = sock
+
+    # If this is set, the close() method has already been called, so we
+    # don't accept future reads.
+    self._fileobjclosed = False
+
+    # This flag is set if we've finished recieving the entire response
+    # from the server.
+    self._totalcontentisreceived = False
+
+    # This integer represents the number of bytes read so far.
+    self._totalread = 0
+
+    # This is the dictionary of HTTP response headers associated with this
+    # file-like object.
+    self.headers = headers
+
+    # The HTTP status tuple of this response, e.g. ("HTTP/1.0", 200, "OK")
+    self.httpstatus = httpstatus
+
+
+
+  def read(self, limit=None, timeout=None):
+    """
+    <Purpose>
+      Behaves like Python's file.read(), with the potential to raise
+      additional informative exceptions.
+
+    <Arguments>
+      limit (optional):
+            The maximum amount of data to read. If omitted or None, this
+            reads all available data.
+
+    <Exceptions>
+      See file.read()'s documentation, as well as that of
+      httpretrieve_open().
+
+    <Side Effects>
+      None.
+
+    <Returns>
+      See file.read().
+    """
+
+    # Raise an error if the caller has already close()d this object.
+    if self._fileobjclosed:
+      raise ValueError("I/O operation on closed file")
+
+    # If we've finished reading everything we can from the server, return the
+    # empty string.
+    if self._totalcontentisreceived:
+      return ''
+
+    lefttoread = None
+    if limit is not None:
+      lefttoread = limit
+
+      # Sanity check type/value of limit.
+      if type(limit) is not int:
+        raise TypeError("Expected an integer or None for read() limit")
+      elif limit < 0:
+        raise ValueError("Expected a non-negative integer for read() limit")
+
+    if timeout is None:
+      self._sockobj.settimeout(0)
+    else:
+      self._sockobj.settimeout(timeout)
+
+    # Try to read up to limit, or until there is nothing left.
+    httpcontentstr = ''
+    while True:
+      try:
+        contentchunkstr = self._sockobj.recv(lefttoread or 4096)
+      except Exception, e:
+        if str(e) == "Socket closed":
+          self._totalcontentisreceived = True
+          break
+        else:
+          raise
+      
+      httpcontentstr += contentchunkstr
+      self._totalread += len(contentchunkstr)
+      if limit is not None:
+        if len(contentchunkstr) == lefttoread:
+          break
+        else:
+          lefttoread -= len(contentchunkstr)
+      if contentchunkstr == "":
+        self._totalcontentisreceived = True
+        break
+
+    return httpcontentstr
+
+
+
+  def close(self):
+    """
+    <Purpose>
+      Close the file-like object.
+
+    <Arguments>
+      None
+
+    <Exceptions>
+      None
+
+    <Side Effects>
+      Disconnects from the HTTP server.
+
+    <Returns>
+      Nothing
+    """
+    self._fileobjclosed = True
+    self._sockobj.close()
+
+
+
+
+def _httpserver_put_in_headerdict(res, lastheader, lastheader_str):
+  # Helper function that tries to put the header into a dictionary of lists,
+  # 'res'.
+  if lastheader is not None:
+    if lastheader not in res:
+      res[lastheader] = []
+    res[lastheader].append(lastheader_str.strip())
+
+
+
+
+def _httpretrieve_parse_responseheaders(headerlines):
+  # Parse rfc822-style headers (this could be abstracted out to an rfc822
+  # library that would be quite useful for internet protocols). Returns
+  # a dictionary mapping headers to arrays of values. E.g.:
+  #
+  # Foo: a
+  # Bar:
+  #   b
+  # Bar: c
+  #
+  # Becomes: {"Foo": ["a"], "Bar": ["b", "c"]}
+
+  # These variables represent the key and value of the last header we found,
+  # unless we are parsing the very first header. E.g., if we've just read:
+  #   Content-Type: text/html
+  # Then, lastheaderkeystr == "Content-Type",
+  # lastheadervaluestr == "text/html"
+
+  lastheaderkeystr = None
+  lastheadervaluestr = ""
+
+  resdict = {}
+  
+  if len(headerlines) == 0:
+    return {}
+
+  try:
+    # Iterate over the request header lines:
+    for i in range(len(headerlines)):
+      # Lines with leading non-CRLF whitespace characters are part of the
+      # previous line (see rfc822 for details).
+      if headerlines[i][0] in (" ", "\t") and lastheaderkeystr is not None:
+        lastheadervaluestr += headerlines[i]
+      else:
+        _httpserver_put_in_headerdict(resdict, lastheaderkeystr, lastheadervaluestr)
+        lastheaderkeystr, lastheadervaluestr = headerlines[i].split(":", 1)
+
+    # Add the last line to the result dictionary.
+    _httpserver_put_in_headerdict(resdict, lastheaderkeystr, lastheadervaluestr)
+
+    return resdict
+
+  except IndexError, idx:
+    raise HttpBrokenServerError("Server returned garbage for HTTP" + \
+        " response. Bad headers.")
+
+
+
+
+def _httpretrieve_build_request(host, port, path, querydata, postdata, \
+    httpheaders, proxy):
+  # Builds an HTTP request from these parameters, returning it as
+  # a string.
+
+  # Sanity checks:
+  if path == "":
+    raise ValueError("Invalid path -- empty string.")
+  if postdata is not None and type(postdata) not in (str, dict):
+    raise TypeError("Postdata should be a dict of form-data or a string")
+  if querydata is not None and type(querydata) not in (str, dict):
+    raise TypeError("Querydata should be a dict of form-data or a string")
+  if httpheaders is not None and type(httpheaders) is not dict:
+    raise TypeError("Expected HTTP headers as a dictionary.")
+
+  # Type-conversions:
+  if type(querydata) is dict:
+    querydata = urllib_quote_parameters(querydata)
+  elif querydata is None:
+    querydata = ""
+
+  if type(postdata) is dict:
+    postdata = urllib_quote_parameters(postdata)
+
+  # Default to GET, unless the caller specifies a message body to send.
+  methodstr = "GET"
+  if postdata is not None:
+    methodstr = "POST"
+
+  # Encode the path and querystring part of the request.
+  resourcestr = querydata
+  if querydata != "":
+    resourcestr = "?" + resourcestr
+
+  # Encode the HTTP request line and headers:
+  if proxy is not None:
+    # proxy exists thus the request header should include the original requested url  
+    requeststr = methodstr + ' http://' + host + ':' + str(port) + path + resourcestr + ' HTTP/1.0\r\n'
+  else:
+    # there is no proxy; send normal http request   
+    requeststr = methodstr + ' ' + path + resourcestr + ' HTTP/1.0\r\n'
+    
+  if httpheaders is not None:
+    # Most servers require a 'Host' header for normal functionality
+    # (especially in the case of multiple domains being hosted on a
+    # single server).
+    if "Host" not in httpheaders:
+      requeststr += "Host: " + host + ':' + str(port) + "\r\n"
+
+    for key, val in httpheaders.items():
+      requeststr += key + ": " + val + '\r\n'
+
+  # Affix post-data related headers and content:
+  if methodstr == "POST":
+    requeststr += 'Content-Length: ' + str(len(postdata)) + '\r\n'
+
+  # The empty line terminates HTTP headers.
+  requeststr += '\r\n'
+
+  # If we're a POST request, affix any requested data to the message body.
+  if methodstr == "POST":
+    requeststr += postdata
+
+  return requeststr
+
+
+
+
+def _httpretrieve_sendall(sockobj, datastr):
+  # Helper function that attempts to dump all of the data in datastr to the
+  # socket sockobj (data is any arbitrary bytes).
+  while len(datastr) > 0:
+    datastr = datastr[sockobj.send(datastr):]
+
+#end include httpretrieve.repy
+#begin include xmlrpc_common.repy
+"""
+<Program Name>
+  $Id: xmlrpc_common.repy 3260 2009-12-09 18:26:31Z cemeyer $
+
+<Started>
+  April 26, 2009
+
+<Author>
+  Michael Phan-Ba
+
+<Purpose>
+  Provides common methods related to XML-RPC.
+
+  Encoding dateTime.iso8601 are not currently supported.
+
+<Changes>
+
+  2009-04-26  Michael Phan-Ba  <mdphanba@gmail.com>
+
+  * Initial release
+
+  2009-05-24  Michael Phan-Ba  <mdphanba@gmail.com>
+
+  * Added change log
+  * Fixed base64 name error
+  * Set property svn:keyword to "Id" 
+
+"""
+
+
+#begin include base64.repy
+"""
+<Program Name>
+  $Id: base64.repy 2527 2009-07-26 22:48:38Z cemeyer $
+
+<Started>
+  April 12, 2009
+
+<Author>
+  Michael Phan-Ba
+
+<Purpose>
+  Provides data encoding and decoding as specified in RFC 3548. This
+  module implements a subset of the Python module base64 interface.
+
+  b32encode(), b32decode(), b16encode(), b16decode(), decode(),
+  decodestring(), encode(), and encodestring() are not currently
+  implemented.
+
+<Changes>
+
+  2009-04-12  Michael Phan-Ba  <mdphanba@gmail.com>
+
+  * Initial release
+
+  2009-05-23  Michael Phan-Ba  <mdphanba@gmail.com>
+
+  * (b64encode, b64decode, standard_b64encode, standard_b64decode,
+    urlsafe_encode, urlsafe_decode): Renamed functions with base64 prefix
+
+  2009-05-24  Michael Phan-Ba  <mdphanba@gmail.com>
+
+  * Set property svn:keyword to "Id" 
+
+"""
+
+# The Base64 for use in encoding
+BASE64_ALPHABET = \
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+def base64_b64encode(s, altchars=None):
+  """
+  <Purpose>
+    Encode a string using Base64.
+
+  <Arguments>
+    s:
+      The string to encode.
+
+    altchars:
+      An optional string of at least length 2 (additional characters are
+      ignored) which specifies an alternative alphabet for the + and /
+      characters.  The default is None, for which the standard Base64
+      alphabet is used.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The encoded string.
+
+  """
+  # Build the local alphabet.
+  if altchars is None:
+    base64_alphabet = BASE64_ALPHABET
+  else:
+    base64_alphabet = BASE64_ALPHABET[:62] + altchars
+
+  # Change from characters to integers for binary operations.
+  bytes = []
+  for x in s:
+    bytes.append(ord(x))
+
+  # Encode the 8-bit words into 6-bit words.
+  x6bit_words = []
+  index = 0
+  while True:
+
+    # Encode the first 6 bits from three 8-bit values.
+    try:
+      x8bits = bytes[index]
+    except IndexError:
+      break
+    else:
+      x6bits = x8bits >> 2
+      leftover_bits = x8bits & 3
+      x6bit_words.append(base64_alphabet[x6bits])
+
+    # Encode the next 8 bits.
+    try:
+      x8bits = bytes[index + 1]
+    except IndexError:
+      x6bits = leftover_bits << 4
+      x6bit_words.extend([base64_alphabet[x6bits], "=="])
+      break
+    else:
+      x6bits = (leftover_bits << 4) | (x8bits >> 4)
+      leftover_bits = x8bits & 15
+      x6bit_words.append(base64_alphabet[x6bits])
+
+    # Encode the final 8 bits.
+    try:
+      x8bits = bytes[index + 2]
+    except IndexError:
+      x6bits = leftover_bits << 2
+      x6bit_words.extend([base64_alphabet[x6bits], "="])
+      break
+    else:
+      x6bits = (leftover_bits << 2) | (x8bits >> 6)
+      x6bit_words.append(base64_alphabet[x6bits])
+      x6bits = x8bits & 63
+      x6bit_words.append(base64_alphabet[x6bits])
+
+    index += 3
+
+  return "".join(x6bit_words)
+
+def base64_b64decode(s, altchars=None):
+  """
+  <Purpose>
+    Decode a Base64 encoded string.  The decoder ignores all non
+    characters not in the Base64 alphabet for compatibility with the
+    Python library.  However, this introduces a security loophole in
+    which covert or malicious data may be passed.
+
+  <Arguments>
+    s:
+      The string to decode.
+
+    altchars:
+      An optional string of at least length 2 (additional characters are
+      ignored) which specifies an alternative alphabet for the + and /
+      characters.  The default is None, for which the standard Base64
+      alphabet is used.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    TypeError on decoding error.
+
+  <Returns>
+    The decoded string.
+
+  """
+  # Build the local alphabet.
+  if altchars is None:
+    base64_alphabet = BASE64_ALPHABET
+  else:
+    base64_alphabet = BASE64_ALPHABET[:62] + altchars
+
+  # Generate the translation maps for decoding a Base64 string.
+  translate_chars = []
+  for x in xrange(256):
+    char = chr(x)
+    translate_chars.append(char)
+
+  # Build the strings of characters to delete.
+  delete_chars = []
+  for x in translate_chars:
+    if x not in base64_alphabet:
+      delete_chars.append(x)
+  delete_chars = "".join(delete_chars)
+
+  # Insert the 6-bit Base64 values into the translation string.
+  k = 0
+  for v in base64_alphabet:
+    translate_chars[ord(v)] = chr(k)
+    k += 1
+  translate_chars = "".join(translate_chars)
+
+  # Count the number of padding characters at the end of the string.
+  num_pad = 0
+  i = len(s) - 1
+  while i >= 0:
+    if s[i] == "=":
+      num_pad += 1
+    else:
+      break
+    i -= 1
+
+  # Translate the string into 6-bit characters and delete extraneous
+  # characters.
+  s = s.translate(translate_chars, delete_chars)
+
+  # Determine correct alignment by calculating the number of padding
+  # characters needed for compliance to the specification.
+  align = (4 - (len(s) & 3)) & 3
+  if align == 3:
+    raise TypeError("Incorrectly encoded base64 data (has 6 bits of trailing garbage)")
+  if align > num_pad:
+    # Technically, this isn't correctly padded. But it's recoverable, so let's
+    # not care.
+    pass
+
+  # Change from characters to integers for binary operations.
+  x6bit_words = []
+  for x in s:
+    x6bit_words.append(ord(x))
+  for x in xrange(align):
+    x6bit_words.append(-1)
+
+  # Decode the 6-bit words into 8-bit words.
+  bytes = []
+  index = 0
+  while True:
+
+    # Work on four 6-bit quantities at a time.  End when no more data is
+    # available.
+    try:
+      (x6bits1, x6bits2, x6bits3, x6bits4) = x6bit_words[index:index + 4]
+    except ValueError:
+      break
+
+    # Save an 8-bit quantity.
+    bytes.append((x6bits1 << 2) | (x6bits2 >> 4))
+
+    # End of valid data.
+    if x6bits3 < 0:
+      break
+
+    # Save an 8-bit quantity.
+    bytes.append(((x6bits2 & 15) << 4) | (x6bits3 >> 2))
+
+    # End of valid data.
+    if x6bits4 < 0:
+      break
+
+    # Save an 8-bit quantity.
+    bytes.append(((x6bits3 & 3) << 6) | x6bits4)
+
+    # Next four 6-bit quantities.
+    index += 4
+
+  return "".join([chr(x) for x in bytes])
+
+def base64_standard_b64encode(s):
+  """
+  <Purpose>
+    Encode a string using the standard Base64 alphabet.
+
+  <Arguments>
+    s:
+      The string to encode.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The encoded string.
+
+  """
+  return base64_b64encode(s)
+
+def base64_standard_b64decode(s):
+  """
+  <Purpose>
+    Decode a Base64 encoded string using the standard Base64 alphabet.
+
+  <Arguments>
+    s:
+      The string to decode.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    TypeError on decoding error.
+
+  <Returns>
+    The decoded string.
+
+  """
+  return base64_b64decode(s)
+
+
+def base64_urlsafe_b64encode(s):
+  """
+  <Purpose>
+    Encode a string using a URL-safe alphabet, which substitutes -
+    instead of + and _ instead of / in the standard Base64 alphabet.
+
+  <Arguments>
+    s:
+      The string to encode.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The encoded string.
+
+  """
+  return base64_b64encode(s, "-_")
+
+
+def base64_urlsafe_b64decode(s):
+  """
+  <Purpose>
+    Decode a Base64 encoded string using a URL-safe alphabet, which
+    substitutes - instead of + and _ instead of / in the standard Base64
+    alphabet.
+
+  <Arguments>
+    s:
+      The string to decode.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    TypeError on decoding error.
+
+  <Returns>
+    The decoded string.
+
+  """
+  return base64_b64decode(s, "-_")
+
+#end include base64.repy
+#begin include xmlparse.repy
+"""
+<Program Name>
+  xmlparse.repy
+
+<Started>
+  April 2009
+
+<Author>
+  Conrad Meyer <cemeyer@u.washington.edu>
+
+<Purpose>
+  Provide a relatively simplistic but usable xml parsing library for
+  RePy.
+"""
+
+class xmlparse_XMLParseError(Exception):
+  """Exception raised when an error is encountered parsing the XML."""
+  pass
+
+
+
+
+class xmlparse_XMLTreeNode:
+  """
+  <Purpose>
+    Provide a simple tree structure for XML data.
+
+  <Exceptions>
+    None.
+
+  <Example Use>
+    node = xmlparse_parse("<Some><xml><data></data></xml></Some>")
+  """   
+
+
+  def __init__(self, tag_name):
+    self.tag_name = tag_name
+    self.children = None
+    self.content = None
+    self.attributes = {}
+
+
+  def __repr__(self):
+    """Provide a pretty representation of an XML tree."""
+
+    if self.content is not None:
+      return "%s:\"%s\"" % (self.tag_name, self.content)
+    else:
+      return "%s:%s" % (self.tag_name, str(self.children))
+
+
+  def to_string(self):
+    result = "<" + self.tag_name
+    for attribute_name in self.attributes.keys():
+      attribute_value_escaped = \
+          self.attributes[attribute_name].replace("\"", "\\\"")
+      result += " " + attribute_name + "=\"" + attribute_value_escaped + "\""
+    
+    if self.content is None:
+      result += ">"
+      for childnode in self.children:
+        result += childnode.to_string()
+      result += "</" + self.tag_name + ">"
+    else:
+      if len(self.content) == 0:
+        result += "/>"
+      else:
+        result += ">" + self.content + "</" + self.tag_name + ">"
+
+    return result
+
+
+
+
+def xmlparse_parse(data):
+  """
+  <Purpose>
+    Parses an XML string into an xmlparse_XMLTreeNode containing the root
+    item.
+
+  <Arguments>
+    data:
+           The data to parse.
+
+  <Exceptions>
+    xmlparse_XMLParseError if parsing fails.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    An xmlparse_XMLTreeNode tree.
+  """
+
+  data = data.lstrip()
+  if data.startswith("<?xml"):
+    data = data[data.find("?>")+2:]
+  
+  # Well-formed XML Documents have exactly one root node
+  parsed_elements = _xmlparse_parse(data)
+  if len(parsed_elements) != 1:
+    raise xmlparse_XMLParseError("XML response from server contained more than one root node")
+
+  return parsed_elements[0]
+
+
+
+
+def _xmlparse_read_attributes(string):
+  # Returns a pair containing the dictionary of attributes and remainder
+  # of the string on success; excepts on failure.
+
+  # Q_n corresponds to the state_* constant of the same value. The starting
+  # node is Q_1.
+  #
+  #  [ Done ]
+  #     ^
+  #     |
+  #     | (>, /)
+  #     |
+  #     \--------\ 
+  #              |
+  #        ,-.   | v-----------------------------------\
+  # space (   [ Q_1 ]                                  |
+  #        `->   | ^-----------------------\ (')       |
+  #              |                         |           |
+  #              |                (')      |   <-.     | (")
+  #              | non-space   /------->[ Q_4 ]   )    |
+  #              |             |               `-'     |
+  #  (space)     v     (=)     |             (other)   |
+  #     /-----[ Q_2 ]------>[ Q_3 ]-------->[ Q_5 ]----/
+  #     |      ^   )           |      (")    ^   )
+  #     |       `-'            |              `-'
+  #     |     (other)   (other)|             (other)
+  #     |                      |
+  #     v                      |
+  #[Exception]<----------------/
+
+  # Basically the state machine is used to read a list of attribute-pairs,
+  # terminated by a '/' or '>'. Attribute pairs either look like:
+  #   name='value'
+  # or:
+  #   name="value"
+  # Single-quoted attributes can contain double-quotes, and vice-versa, but
+  # single-quotes in single-quoted attributes must be escaped.
+  # 
+  # To do this we start in Q_1, which consumes input until we arrive at
+  # something that looks like an attribute name. In Q_2 we consume characters
+  # for the attribute name until it looks like the attribute name is finished.
+  # In Q_3 we read a single character to determine what type of quoting is
+  # used for the attribute value. In Q_4 or Q_5, we read the attribute's value
+  # until the string is closed, then go back to Q_1 (saving the attribute name
+  # and value into the dictionary). We decide we are done when we encounter a
+  # '>' or '/' in Q_1.
+
+  # Constant states:
+  state_EXPECTING_ATTRNAME = 1
+  state_READING_ATTRNAME = 2
+  state_EXPECTING_ATTRVALUE = 3
+  state_READING_ATTRVALUE_SINGLEQUOTE = 4
+  state_READING_ATTRVALUE_DOUBLEQUOTE = 5
+
+  current_position = 0
+  current_state = 1
+  current_attrname = ""
+  current_attrvalue = ""
+  attributes = {}
+
+  while True:
+    if current_position >= len(string):
+      raise xmlparse_XMLParseError(
+          "Failed to parse element attribute list -- input ran out " + \
+              "before we found a closing '>' or '/'")
+
+    current_character = string[current_position]
+
+    if current_state == state_EXPECTING_ATTRNAME:
+      if current_character.isspace():
+        pass    # We stay in this state
+      elif current_character == '>' or current_character == '/':
+        # We're finished reading attributes
+        return (attributes, string[current_position:])
+      else:
+        current_attrname += current_character
+        current_state = state_READING_ATTRNAME
+
+    elif current_state == state_READING_ATTRNAME:
+      if current_character.isspace():
+        raise xmlparse_XMLParseError(
+            "Failed to parse element attribute list -- attribute " + \
+                "ended unexpectedly with a space")
+      elif current_character == "=":
+        current_state = state_EXPECTING_ATTRVALUE
+      else:
+        current_attrname += current_character
+
+    elif current_state == state_EXPECTING_ATTRVALUE:
+      if current_character == '\'':
+        current_state = state_READING_ATTRVALUE_SINGLEQUOTE
+      elif current_character == '"':
+        current_state = state_READING_ATTRVALUE_DOUBLEQUOTE
+      else:
+        raise xmlparse_XMLParseError(
+            "Failed to parse element attribute list -- attribute " + \
+                "values must be quoted")
+
+    elif current_state == state_READING_ATTRVALUE_SINGLEQUOTE:
+      if current_character == '\'':
+        attributes[current_attrname] = current_attrvalue
+        current_state = state_EXPECTING_ATTRNAME
+        current_attrname = ""
+        current_attrvalue = ""
+      else:
+        current_attrvalue += current_character
+
+    elif current_state == state_READING_ATTRVALUE_DOUBLEQUOTE:
+      if current_character == '"':
+        attributes[current_attrname] = current_attrvalue
+        current_state = state_EXPECTING_ATTRNAME
+        current_attrname = ""
+        current_attrvalue = ""
+      else:
+        current_attrvalue += current_character
+
+    current_position += 1
+
+
+
+
+def _xmlparse_node_from_string(string):
+  # string:
+  #   <tag attr1="value" attr2='value'>content</tag>
+  # Content may be a string or a list of children nodes depending on if the
+  # first non-space character is a '<' or not.
+
+  string = string.lstrip()
+  if not string.startswith("<"):
+    raise xmlparse_XMLParseError("Error parsing XML -- doesn't " + \
+        "start with '<'")
+
+  string = string[1:]
+
+  read_pos = 0
+  while True:
+    if read_pos >= len(string):
+      raise xmlparse_XMLParseError("Error parsing XML -- parser " + \
+          "ran out of input trying to read a tag")
+
+    # The tag name is ended with a space or a closing angle-brace or
+    # a "/".
+    curchar = string[read_pos]
+    if curchar.isspace() or curchar == ">" or curchar == "/":
+      break
+
+    read_pos += 1
+
+  tag = string[0:read_pos]
+  string = string[read_pos:]
+
+  # Get the attribute dictionary and remaining string (which will be
+  # "> ... [ inner stuff ] </[tag_name]>" or "/>" for well-formed XML).
+  attributes, string = _xmlparse_read_attributes(string)
+
+  # "Empty" elements look like: "<[tag_name] [... maybe attributes] />" and
+  # not "Empty" elements look like:
+  # "<[tag_name] [... maybe attributes]> [inner content] </[tag_name]>".
+  empty_element = False
+  if string.startswith(">"):
+    string = string[1:]
+  elif string.startswith("/>"):
+    string = string[2:]
+    empty_element = True
+
+  xmlnode = xmlparse_XMLTreeNode(tag)
+  xmlnode.attributes = attributes
+
+  if empty_element:
+    xmlnode.content = ""
+
+  else:
+    # Locate the end-boundary of the inner content of this element.
+    ending_tag_position = string.rfind("</")
+    if ending_tag_position < 0:
+      raise xmlparse_XMLParseError("XML parse error -- could not " + \
+          "locate closing tag")
+
+    # If this elements starting and closing tag names do not match, this XML
+    # is not well-formed.
+    if not string.startswith("</" + tag, ending_tag_position):
+      raise xmlparse_XMLParseError("XML parse error -- different " + \
+          "opening / closing tags at the same nesting level")
+
+    # If the inner content starts with another element, this element has
+    # children.  Otherwise, it has content, which is just a string containing
+    # the inner content.
+    tag_body = string[:ending_tag_position]
+    if tag_body.lstrip().startswith("<"):
+      xmlnode.children = _xmlparse_parse(tag_body.lstrip())
+    else:
+      xmlnode.content = tag_body
+
+  return xmlnode
+
+
+
+
+def _xmlparse_find_next_tag(xmldata):
+  # Finds the position of the start of the next same-level tag in this XML
+  # document.
+
+  read_position = 0
+  nested_depth = 0
+
+  original_length = len(xmldata)
+  xmldata = xmldata.lstrip()
+  length_difference = original_length - len(xmldata)
+
+  # Seek to another XML tag at the same depth.
+  while True:
+    if xmldata.startswith("</", read_position) or \
+        xmldata.startswith("/>", read_position):
+      nested_depth -= 1
+    elif xmldata.startswith("<", read_position):
+      nested_depth += 1
+
+    read_position += 1
+
+    if read_position >= len(xmldata):
+      return read_position + length_difference
+
+    if nested_depth == 0:
+      nexttagposition = xmldata.find("<", read_position)
+
+      if nexttagposition < 0:
+        return original_length
+      else:
+        return nexttagposition + length_difference
+
+
+
+
+def _xmlparse_parse(xmldata):
+  # Takes a raw XML stream and returns a list of XMLTreeNodes.
+
+  nodelist = []
+
+  while True:
+    # Whitespace between tags isn't important to the content of
+    # an XML document.
+    xmldata = xmldata.strip()
+
+    # Strip out XML comments.
+    if xmldata.startswith("<!--"):
+      commentendloc = xmldata.find("-->", 4)
+      if commentendloc < 0:
+        raise xmlparse_XMLParseError("XML parse error -- comment " + \
+            "missing close tag ('-->')")
+      xmldata = xmldata[commentendloc+3:]
+      continue
+
+    # Find the end of the current tag.
+    nexttagend = _xmlparse_find_next_tag(xmldata)
+
+    thisnode_str = xmldata[0:nexttagend]
+    xmldata = xmldata[nexttagend:]
+
+    # Parse a tag out of the string we just found.
+    thisnode = _xmlparse_node_from_string(thisnode_str)
+    nodelist.append(thisnode)
+
+    if not xmldata.strip().startswith("<"):
+      break
+
+  return nodelist
+
+#end include xmlparse.repy
+
+
+
+
+
+class xmlrpc_common_Binary(object):
+  """
+  <Purpose>
+    Wrapper class for base64-encoded binary data in XML-RPC requests and
+    responses.  This class is used when sending and receiving binary
+    data through XML-RPC.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    blob = xmlrpc_common_Binary("\x00\x01\x00")
+
+  """
+
+  def __init__(self, data=""):
+    """
+    <Purpose>
+      Create a new Binary wrapper object for use with the XML-RPC
+      libraries.
+
+    <Arguments>
+      data:
+        The unencoded binary data.
+
+    <Exceptions>
+      None.
+
+    """
+    self.data = data
+
+
+
+
+
+class xmlrpc_common_Fault(ValueError):
+  """
+  <Purpose>
+    Exception representing a XML-RPC Fault.  The exception is returned
+    by the parsing functions when a XML-RPC server returns a fault.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    raise xmlrpc_common_Fault("An error occurred", -1)
+
+  """
+
+  def __init__(self, message, code):
+    """
+    <Purpose>
+      Create a new Fault exception.
+
+    <Arguments>
+      message:
+        A string describing the fault.
+
+      code:
+        The integer code associated with the fault.
+
+    <Exceptions>
+      None.
+
+    """
+    self.strerror = message
+    self.code = code
+    ValueError.__init__(self, message)
+
+
+
+
+
+class xmlrpc_common_Timeout(Exception):
+  """
+  <Purpose>
+    Exception representing a normal timeout occuring.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    raise xmlrpc_common_Timeout()
+
+  """
+
+
+
+
+
+class xmlrpc_common_XMLParseError(ValueError):
+  """
+  <Purpose>
+    Exception representing an error in parsing XML-RPC data.  The
+    exception is thrown when bad XML data is encountered.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    raise xmlrpc_common_XMLParseError()
+
+  """
+
+
+
+
+
+class xmlrpc_common_ConnectionError(ValueError):
+  """
+  <Purpose>
+    Exception representing an error in the connection to an XMLRPC server.
+    Thrown when the server closes the connection unexpectedly.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    raise xmlrpc_common_ConnectionError()
+
+  """
+
+
+
+
+
+def xmlrpc_common_call2xml(method_name, params):
+  """
+  <Purpose>
+    Build a XML-RPC method call to send to a XML-RPC server.
+
+  <Arguments>
+    method_name:
+      The method name.
+
+    params:
+      A sequence type of XML-RPC parameters.  A dictionary may also be
+      passed, but the keys are ignored.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The XML-RPC method call string.
+
+  """
+  xml_string = ['<?xml version="1.0"?>',
+    "<methodCall><methodName>%s</methodName>" % method_name,
+    _xmlrpc_common_params2xml(params),
+    "</methodCall>"]
+
+  return "".join(xml_string)
+
+
+def xmlrpc_common_response2xml(param):
+  """
+  <Purpose>
+    Build a XML-RPC method response to send to a XML-RPC client.  This
+    is the XML document that represents the return values or fault from
+    a XML-RPC call.
+
+  <Arguments>
+    param:
+      The value to be returned.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The XML-RPC method response string.
+
+  """
+  xml_string = ['<?xml version="1.0"?><methodResponse>',
+    _xmlrpc_common_params2xml((param,)),
+    "</methodResponse>"]
+
+  return "".join(xml_string)
+
+
+def xmlrpc_common_fault2xml(message, code):
+  """
+  <Purpose>
+    Build a XML-RPC fault response to send to a XML-RPC client.  A fault
+    response can occur from a server failure, an incorrectly generated
+    XML request, or bad program arguments.
+
+  <Arguments>
+    message:
+      A string describing the fault.
+
+    code:
+      The integer code associated with the fault.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The XML-RPC fault response string.
+
+  """
+  struct = {"faultCode": code, "faultString": message}
+  xml_string = ['<?xml version="1.0"?><methodResponse><fault>',
+    _xmlrpc_common_value2xml(struct),
+    "</fault></methodResponse>"]
+
+  return "".join(xml_string)
+
+
+def _xmlrpc_common_params2xml(params):
+  """
+  <Purpose>
+    Translate Python parameter values to XML-RPC for use in building a
+    XML-RPC request or response.
+
+  <Arguments>
+    params:
+      A sequence type of XML-RPC parameters.  A dictionary may also be
+      passed, but the keys are ignored.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The XML-RPC parameters string.
+
+  """
+  if params is None or params is ():
+    return ""
+
+  xml_string = ["<params>"]
+
+  for param in params:
+    xml_string.append("<param>%s</param>" % _xmlrpc_common_value2xml(param))
+
+  xml_string.append("</params>")
+
+  return "".join(xml_string)
+
+
+def _xmlrpc_common_value2xml(obj):
+  """
+  <Purpose>
+    Translate a Python value to XML-RPC for use in building the params
+    portion of a request or response.
+
+  <Arguments>
+    obj:
+      The Python object to convert.
+
+  <Exceptions>
+    None.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The XML-RPC value string.
+
+  """
+  object_type = type(obj)
+
+  xml_string = ["<value>"]
+
+  if obj is None:
+    xml_string.append("<nil/>")
+
+  elif object_type is bool:
+    xml_string.append("<boolean>%d</boolean>" % int(obj))
+
+  elif object_type in (int, long):
+    xml_string.append("<int>%d</int>" % obj)
+
+  elif object_type is float:
+    xml_string.append("<double>%f</double>" % obj)
+
+  elif object_type in (str, unicode, basestring):
+    xml_string.append("<string>%s</string>" % obj)
+
+  elif object_type in (list, tuple, xrange, set, frozenset):
+    xml_string.append("<array><data>")
+    for value in obj:
+      xml_string.append(_xmlrpc_common_value2xml(value))
+    xml_string.append("</data></array>")
+
+  elif object_type is dict:
+    xml_string.append("<struct>")
+    for key, value in obj.iteritems():
+      xml_string.append("<member><name>%s</name>" % key)
+      xml_string.append(_xmlrpc_common_value2xml(value))
+      xml_string.append("</member>")
+    xml_string.append("</struct>")
+
+  # This requires the new object inheritance model to be used. e.g. do
+  #   class Foo(object): pass
+  # rather than
+  #   class Foo: pass
+  elif object_type is xmlrpc_common_Binary:
+    xml_string.append("<base64>%s</base64>" % base64_standard_b64encode(obj.data))
+
+  else:
+    raise ValueError("Marshaller: Unsupported type '%s'" % type(obj))
+
+  xml_string.append("</value>")
+
+  return "".join(xml_string)
+
+
+def xmlrpc_common_call2python(xml):
+  """
+  <Purpose>
+    Convert a XML-RPC method call to its Python equivalent.
+
+    The request from a XML-RPC client is parsed into native Python
+    types so that the server may use the data to execute a method, as
+    appropriate.
+
+  <Arguments>
+    xml:
+      The XML-RPC string to convert.
+
+  <Exceptions>
+    xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
+    xmlparse_XMLParseError on a general XML parse error.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    A tuple containing (1) the method name and (2) a list of the
+    parameters.
+
+  """
+  xml_node = xmlparse_parse(xml)
+
+  if xml_node.tag_name != "methodCall":
+    message = "Unexpected root node: %s" % xml_node.tag_name
+    raise xmlrpc_common_XMLParseError(message)
+  elif xml_node.children is None:
+    raise xmlrpc_common_XMLParseError("No parameters found")
+  elif len(xml_node.children) > 2:
+    raise xmlrpc_common_XMLParseError("Too many children for 'methodCall'")
+
+  try:
+    method_name_node = xml_node.children[0]
+    if method_name_node.tag_name != "methodName":
+      message = "Unexpected XML node: %s" % method_name_node.tag_name
+      raise xmlrpc_common_XMLParseError(message)
+    method_name = method_name_node.content
+  except IndexError:
+    raise xmlrpc_common_XMLParseError("No method name found")
+
+  try:
+    params = _xmlrpc_common_params2python(xml_node.children[1])
+  except IndexError:
+    return (method_name, ())
+
+  if not params:
+    raise xmlrpc_common_XMLParseError("No parameters found")
+
+  return (method_name, params)
+
+
+def xmlrpc_common_response2python(xml):
+  """
+  <Purpose>
+    Convert a XML-RPC method response to its Python equivalent.
+
+    The response from a XML-RPC server is parsed into native Python
+    types so that the client may use the data as appropriate.
+
+  <Arguments>
+    xml:
+      The XML-RPC string to convert.
+
+  <Exceptions>
+    xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
+    xmlparse_XMLParseError on a general XML parse error.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The method results or a xmlrpc_common_Fault on reading a fault.
+
+  """
+  xml_node = xmlparse_parse(xml)
+
+  if xml_node.tag_name != "methodResponse":
+    message = "Unexpected root node: %s" % xml_node.tag_name
+    raise xmlrpc_common_XMLParseError(message)
+  elif xml_node.children is None:
+    raise xmlrpc_common_XMLParseError("No parameters found")
+  elif len(xml_node.children) > 1:
+    raise xmlrpc_common_XMLParseError("Too many children for 'methodCall'")
+
+  fault_node = xml_node.children[0]
+  if fault_node.tag_name == "fault":
+    if fault_node.children is None:
+      raise xmlrpc_common_XMLParseError("No children found for 'fault'")
+    elif len(fault_node.children) != 1:
+      raise xmlrpc_common_XMLParseError("Too many children for 'fault'")
+    params = _xmlrpc_common_value2python(fault_node.children[0])
+    try:
+      return xmlrpc_common_Fault(params["faultString"], params["faultCode"])
+    except KeyError:
+      raise xmlrpc_common_XMLParseError("Invalid fault object")
+
+  try:
+    params = _xmlrpc_common_params2python(xml_node.children[0])
+  except KeyError:
+    raise xmlrpc_common_XMLParseError("No parameters found")
+
+  if len(params) != 1:
+    raise xmlrpc_common_XMLParseError("Too many children for 'params'")
+
+  return params[0]
+
+
+def _xmlrpc_common_params2python(xml_node):
+  """
+  <Purpose>
+    Convert XML-RPC params the Python equivalent.
+
+    The parameters portion of a XML-RPC request or response is parsed
+    into Python equivalents so that the method request and response
+    parsing functions can return the relevant data.
+
+  <Arguments>
+    xml_node:
+      The XML node to consider.
+
+  <Exceptions>
+    xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The method results.
+
+  """
+  if xml_node.tag_name != "params":
+    message = "Unexpected XML node: %s" % xml_node.tag_name
+    raise xmlrpc_common_XMLParseError(message)
+
+  if xml_node.children is None or len(xml_node.children) < 1:
+    return []
+
+  params = []
+
+  for param_node in xml_node.children:
+    if param_node.tag_name != "param":
+      message = "Unexpected XML node: %s" % param_node.tag_name
+      raise xmlrpc_common_XMLParseError(message)
+    elif param_node.children is None:
+      raise xmlrpc_common_XMLParseError("Unexpected empty param node")
+    elif len(param_node.children) > 1:
+      raise xmlrpc_common_XMLParseError("Too many children for 'param'")
+    params.append(_xmlrpc_common_value2python(param_node.children[0]))
+
+  return params
+
+
+def _xmlrpc_common_value2python(xml_node):
+  """
+  <Purpose>
+    Convert a XML-RPC value the Python equivalent.
+
+    A XML-RPC value is converted to its Python equivalent for use in the
+    parameters parser.
+
+  <Arguments>
+    xml_node:
+      The XML node to consider.
+
+  <Exceptions>
+    xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
+
+  <Side Effects>
+    None.
+
+  <Returns>
+    The method results.
+
+  """
+
+  if xml_node.tag_name not in ("value",):
+    message = "Unexpected XML node: %s" % xml_node.tag_name
+    raise xmlrpc_common_XMLParseError(message)
+
+  # The values that XMLRPC can encode have an optional type-specifier.
+  # If the type-specifier is not included, the data is simply a string
+  # and doesn't need any other special interpretation. Additionally, there
+  # is an optional <string> type specifier, but e.g. openDHT doesn't use
+  # it. If xml_node.children is None here, the data lacks a type-specifying
+  # tag, so it is to be interpreted as a string.
+  elif xml_node.children is not None and len(xml_node.children) > 1:
+    raise xmlrpc_common_XMLParseError("Too many children for 'value'")
+
+  value_node = xml_node
+
+  # Assume string by default, as explained earlier.
+  tag = "string"
+  if xml_node.children is not None:
+    # If the xml specifies a type, override the default.
+    value_node = xml_node.children[0]
+    tag = value_node.tag_name
+
+  # The string contents of the <value> tag (or of the type-specifying tag
+  # inside <value>, if one exists).
+  value = value_node.content
+
+  if tag == "nil":
+    return None
+
+  elif tag == "boolean":
+    return bool(int(value))
+
+  elif tag in ("i4", "i8", "int"): ### AR hack to include i8. Could be "long".
+    return int(value)
+
+  elif tag == "double":
+    return float(value)
+
+  elif tag == "string":
+    return value
+
+  elif tag == "array":
+    if len(value_node.children) > 1:
+      raise xmlrpc_common_XMLParseError("Too many children for 'array'")
+    # Arrays are encoded as:  <array><data>
+    #                           <value>...</value>
+    #                           ...
+    #                         </data></array>
+    data_node = value_node.children[0]
+    result = []
+    if data_node.children:
+      for item_node in data_node.children:
+        result.append(_xmlrpc_common_value2python(item_node))
+    return result
+
+  elif tag == "struct":
+    result = {}
+
+    # Structs are encoded as: <struct>
+    #                           <member><name>...</name><value>...</value></member>
+    #                           ...
+    #                         </struct>
+    # Keys (<name>) do not contain type information, so they are strings
+    # as far as XMLRPC is concerned.
+    for member_node in value_node.children:
+      if len(member_node.children) != 2:
+        message = "Incorrect number of children for 'member'"
+        raise xmlrpc_common_XMLParseError(message)
+
+      key = member_node.children[0].content
+      value = _xmlrpc_common_value2python(member_node.children[1])
+
+      result[key] = value
+
+    return result
+
+  elif tag == "base64":
+    return xmlrpc_common_Binary(base64_standard_b64decode(value_node.content))
+
+  else:
+    message = "Demarshaller: Unsupported value type: %s" % value_node.tag_name
+    raise xmlrpc_common_XMLParseError(message)
+
+#end include xmlrpc_common.repy
+
+
+class xmlrpc_client_Client(object):
+  """
+  <Purpose>
+    XML-RPC client implementation.
+
+  <Side Effects>
+    None.
+
+  <Example Use>
+    client = xmlrpc_client_Client("http://phpxmlrpc.sourceforge.net/server.php")
+    print client.send_request("examples.getStateName", (1,))
+
+  """
+
+
+  USER_AGENT = "seattlelib/1.0.0"
+
+
+  def __init__(self, url):
+    """
+    <Purpose>
+      Create a new XML-RPC Client object to do RPC calls to the given
+      server.
+
+    <Arguments>
+      url:
+        A url containing the hostname, port, and path of the xmlrpc
+        server. For example, "http://phpxmlrpc.soureforge.net/server.php".
+
+    <Exceptions>
+      None.
+
+    """
+
+    if not isinstance(url, (str, unicode)):
+      raise ValueError("Invalid argument: url must be a URL string")
+
+    urlcomponents = urlparse_urlsplit(url, "http", False)
+
+    self.server_host = urlcomponents["hostname"]
+    self.server_port = urlcomponents["port"] or 80
+    self.server_path = urlcomponents["path"] or "/"
+    if urlcomponents["query"]:
+      self.server_path += "?" + urlcomponents["query"]
+
+    if not self.server_host:
+      raise ValueError("Invalid argument: url must have a valid host")
+
+
+  def send_request(self, method_name, params, timeout=None):
+    """
+    <Purpose>
+      Send a XML-RPC request to a XML-RPC server to do a RPC call.
+
+    <Arguments>
+      method_name:
+        The method name.
+
+      params:
+        The method parameters.
+
+    <Exceptions>
+      socket.error on socket errors, including server timeouts.
+      xmlrpc_common_Fault on a XML-RPC response fault.
+      xmlrpc_common_XMLParseError on a XML-RPC structural parse error.
+      xmlparse_XMLParseError on a general XML parse error.
+      xmlrpc_common_ConnectionError on unexpected disconnects.
+      xmlrpc_common_Timeout if the time limit is exceeded.
+
+    <Side Effects>
+      None.
+
+    <Returns>
+      The XML-RPC method return values.
+
+    """
+
+    starttime = getruntime()
+
+    # Prepare the XML request.
+    request_xml = xmlrpc_common_call2xml(method_name, params)
+
+    response = httpretrieve_get_string("http://%s:%s%s" % (self.server_host, \
+        self.server_port, self.server_path), postdata=request_xml, \
+        timeout=timeout, httpheaders={\
+        "User-Agent": self.USER_AGENT, "Content-Type": "text/xml"})
+
+    # Timeout if the POST took too long.
+    if timeout is not None and getruntime() - starttime > timeout:
+      raise xmlrpc_common_Timeout()
+
+    # Parse the XML response body into Python values.
+    response_value = xmlrpc_common_response2python(response)
+
+    # If a fault was decoded, raise the exception.
+    if isinstance(response_value, xmlrpc_common_Fault):
+      raise response_value
+
+    # Otherwise, return the results.
+    return response_value
+
+#end include xmlrpc_client.repy
+
+
+
+
+
+def find_available_sensors_and_methods(xmlrpc_socket):
+  s = xmlrpc_socket
+  # Get the list of available methods
+  methodlist = s.send_request("system.listMethods", ())
+
+  # Make sure it is a list, not a single string
+  if not isinstance(methodlist, list):
+    methodlist = [methodlist]
+
+  print methodlist
+
+  for methodname in methodlist:
+    # NOTE: Wrap the methodname string inside a tuple, otherwise
+    # xmlrpc_common will treat the string's characters as separate params
+    thissignature = s.send_request("system.methodSignature", (methodname,))
+
+    # BUG: This is true for all signatures, but shouldn't be.
+    if thissignature == 'signatures not supported':
+      print 'Method:', methodname, 'has an unknown signature.'
+    else:  
+      print 'Method:',methodname,'has the signature', thissignature
+
+    if thissignature == ():
+      print 'Empty call returns:', s.send_request(methodname, ())
+
+
+
+
+
+if callfunc=="initialize":
+  print "*** Hello!!"
+  for sensorport in [63090, 63096, 63097, 63098, 63099, 63095, 
+    63091, 63092, 63093, 63094]:
+    try:
+      s = xmlrpc_client_Client('http://localhost:'+str(sensorport))
+    except socket.error:
+      print 'port:', sensorport, 'failed.   Trying backup port...' 
+      continue
+    print "*** Connected to port", sensorport
+    break
+  else:
+    print 'Could not locate a port!'
+    exitall()
+
+
+  # Sometimes the XML-RPC interface changes. Give o3gm_pickup 
+  # any call arg to make it browse the sensor methods.
+  if len(callargs) > 1:
+    print "*** Browsing for sensors and methods...."
+    find_available_sensors_and_methods(s)
+    "*** Done finding sensor methods, exiting."
+    exitall()
+
+
+
+  # should check the error status...
+  try: 
+    if not s.send_request("isSeattleSensor", []):
+      print 'something other than a Seattle sensor was bound to the port...'
+      exitall()
+  except Exception, e:
+    print 'Got an error when checking if this is a Seattle sensor:', str(e)
+    exitall()
+
+
+  # Collect device vendor/name/tac once, and radio mcc/mnc/cid/nwtype/rssi, 
+  # gps data, and network location (in case gps fails) regularly.
+
+  vendor = s.send_request("DeviceInfoSensor.vendorname", ())
+  model = s.send_request("DeviceInfoSensor.modelname", ())
+  tac = s.send_request("DeviceInfoSensor.tac", ())
+  print "*** This is a", model, "by", vendor, "with TAC", tac
+
+  results_file = open("o3gm_readings.txt", "a")
+
+  gps_last_timestamp = 0L
+
+  while True:
+    try:
+      # Back off if we're running low on battery
+      BATTERY_LOW_LEVEL = 15
+      battery_level = s.send_request("BatterySensor.level", ())
+      while battery_level < BATTERY_LOW_LEVEL:
+        pause = (BATTERY_LOW_LEVL - battery_level) * 120
+        print "*** We've been draining the battery. Let's sleep", pause, "seconds."
+        sleep(pause)
+        battery_level = s.send_request("BatterySensor.level", ())
+
+      gps_timestamp = s.send_request("GPSLocationSensor.timestamp", ())
+      if gps_last_timestamp == gps_timestamp:
+        # This GPS datum is stale. Let's use NW locations instead...
+        loc_source = "network"
+        timestamp = s.send_request("RadioSensor.timestamp", ())
+        lat = s.send_request("NetworkLocationSensor.latitude", ())
+        lon = s.send_request("NetworkLocationSensor.longitude", ())
+        alt = -99999.
+        accuracy = s.send_request("NetworkLocationSensor.accuracy", ())
+      else: # We have current GPS data
+        loc_source = "GPS"
+        timestamp = gps_last_timestamp = gps_timestamp
+        lat = s.send_request("GPSLocationSensor.latitude", ())
+        lon = s.send_request("GPSLocationSensor.longitude", ())
+        alt = s.send_request("GPSLocationSensor.altitude", ())
+        accuracy = s.send_request("GPSLocationSensor.accuracy", ())
+
+      print "Time: ", getruntime()
+      print "Location Source: ", loc_source
+      print "Location: (%f, %f), Accuracy: %f " % (lat, lon, accuracy)
+      print "Battery level: %d percent, Tac: %s, Vendor: %s, Model: %s" % (battery_level, tac, vendor, model)
+      print
+
+    except Exception, e:
+      print "*** Oops,", str(e)
+      pause = 15
+      print "*** Sleeping", pause, "seconds, will continue..."
+      sleep(pause)
+
