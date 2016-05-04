@@ -1,9 +1,0 @@
- = Known Bugs for the Seattle project =
-
-This page is used to track and list known bugs from the various components of Seattle.
-
-== Repy ==
-
-Network Related Bugs
- * There exists a potential race condition while repy attempts to cleanup a network socket.
-    * Assume repy is bound to the IP/Port tuple (X,Y) and it closes the socket. If another process binds to (X,Y) while repy is waiting for the cleanup to occur it will appear as if the OS has not yet cleaned up the socket, and repy will block indefinitely. This is a very rare bug, and is hard to trigger since repy checks 5 times per second for the socket cleanup.
