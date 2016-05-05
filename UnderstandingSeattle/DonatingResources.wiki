@@ -85,4 +85,4 @@ applicable).   You can then safely delete the folder you installed Seattle in to
 ----
 
 We would also like to know about your experiences with Seattle. If you
-have any questions or comments please drop a message to the [https://mailman.cs.washington.edu/mailman/listinfo/seattle-users Seattle user list]! We're always striving to make a better experience for all.
+have any questions or comments please drop a message to the Seattle user list at seattle-users@googlegroups.com! We're always striving to make a better experience for all.
