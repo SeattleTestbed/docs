@@ -34,10 +34,10 @@ If you would like to contribute to Seattle, please head over to
 * Non-intrusive and safe for end users.
 * Already installed on tens of thousands of computers around the world.
 * Provides access to systems behind a wide array of network technologies.
-* Easy to learn, based on a subset of [http://www.python.org/ Python].
+* Easy to learn, based on a subset of [Python](https://www.python.org/).
 * Simple and clean programs:
   * A UDP ping client is just six lines of code. A UDP ping server is just four lines.
-   * A [http://pdos.csail.mit.edu/chord/faq.html Chord] implementation requires about 300 lines of code.
+   * A [Chord](https://github.com/sit/dht/wiki) implementation requires about 300 lines of code.
 * Cross-platform support:
    * Windows (XP or newer)
    * Mac OS X
@@ -68,14 +68,14 @@ There is a wide variety of other platforms and testbeds readily available,
 each with an equally expansive set of project goals. Related projects 
 include the following:
  
- * [PlanetLab](http://www.planet-lab.org/) is similar to Seattle in that it offers a platform composed of donated resources from around the world. However, PlanetLab nodes are dedicated to PlanetLab, while Seattle computers are not dedicated to the platform. In addition, PlanetLab's computers and network connectivity are very homogeneous. Seattle aims to be more widely distributed and to support broader resource diversity.
+ * [PlanetLab](https://www.planet-lab.org/) is similar to Seattle in that it offers a platform composed of donated resources from around the world. However, PlanetLab nodes are dedicated to PlanetLab, while Seattle computers are not dedicated to the platform. In addition, PlanetLab's computers and network connectivity are very homogeneous. Seattle aims to be more widely distributed and to support broader resource diversity.
  * [SatelliteLab](http://satellitelab.mpi-sws.mpg.de/) is useful for studying network characteristics and aims to bring heterogeneity to PlanetLab. However, due to the reliance on PlanetLab nodes for forwarding traffic, SatelliteLab has fidelity limitations and is not able to scale to the diversity and size of Seattle.
  * [Emulab](http://www.emulab.net/) provides emulated network environments for researchers to conduct experiments. While emulation allows more control of network hardware and topology, it does not capture the behavior of the Internet. Running Seattle allows more realistic experimentation at larger scales by running on the Internet.
  * [BOINC](http://boinc.berkeley.edu/) and [HTCondor](http://www.cs.wisc.edu/htcondor/) also allow users to donate resources. However, the emphasis is on computational power, with a preference toward using a few supercomputers rather than a large group of cheaper PCs. Seattle places more emphasis on the diversity of the networks and systems used, as computational power is not the main goal.
  * [Amazon's EC2](http://aws.amazon.com/ec2/) is a paid service that provides operating-system virtual machines. Seattle instead relies on donated resources and provides programming-language virtual machines. 
  * [Google's AppEngine](http://code.google.com/appengine/) executes programs written in a constrained version of Python and supports high-level abstractions (such as global non-relational storage). It is useful for building locality-oblivious web applications that fit the HTTP request/response protocol model. However, its transparent handling of scalability and locality make it unsuitable for those wishing to teach or otherwise address these fundamental topics of distributed systems. AppEngine is run on Google-controlled resources instead of donated resources.
  * [The Tor Project](https://www.torproject.org/) is a widely used platform that protects users from Internet surveillance.   While some users have built Seattle applications for this purpose, simply installing Seattle does not provide any direct privacy benefits.   
- * ...and many others: [FIWARE](https://www.fiware.org/) [Splay](https://github.com/splay-project/splay), [Reservoir](http://www.reservoir-fp7.eu/), [OpenNebula](http://www.opennebula.org/), [Eucalyptus](http://open.eucalyptus.com/), [Fabric](http://www.cs.cornell.edu/projects/fabric/index.html), ...
+ * ...and many others: [FIWARE](https://www.fiware.org/), [Splay](https://github.com/splay-project/splay), [Reservoir](http://www.reservoir-fp7.eu/), [OpenNebula](http://www.opennebula.org/), [Eucalyptus](http://open.eucalyptus.com/), [Fabric](http://www.cs.cornell.edu/projects/fabric/index.html), ...
 
 
 # How do I learn more?
