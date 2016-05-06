@@ -3,11 +3,14 @@
 == Introduction and Purpose ==
 ----
 
-This document describes the narrow API available to Repy programs.   This 
-document includes all of the calls that are available to a Repy program and 
-the use and meaning of these calls.   For items built into the Python 
-programming language (like list operations, etc.) see the appropriate 
-Python documentation.   
+This document describes the current, production version of the narrow 
+API available to Repy programs, '''Repy V1'''. (The upcoming API, Repy V2, 
+is documented here: https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.wiki )
+
+This document includes all of the calls that are available to a Repy 
+program and the use and meaning of these calls.   For items built into 
+the Python programming language (like list operations, etc.) see the 
+appropriate Python documentation.   
 
 
 
