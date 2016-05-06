@@ -10,7 +10,8 @@ the following:
 
  1. Start by reading the [Seattle docs](../README.md). This will give you a 
  better sense of what Seattle is and how its structured, and contains pointers 
- to the programming documentation as well.
+ to the programming documentation as well. The [Contributor's Page](ContributorsPage.wiki) 
+has even more reading material and links.
 
  2. Join our [mailing list](https://groups.google.com/forum/?hl=en#!forum/seattle-devel)!
  This is where you can find help and look for interesting news relating to 
