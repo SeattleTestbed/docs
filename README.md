@@ -109,5 +109,6 @@ Check out the portal pages for in-depth information:
  * [Educator Portal](EducationalAssignments/EducatorsPage.wiki): Example assignments for students using Seattle.
  * [Contributors Portal](ContributorsPage.wiki): Detailed information about how to contribute to the project.
 
-If you have questions about Seattle, send an email to jcappos@poly.edu 
-or visit the Seattle-users google group (seattle-users@googlegroups.com).
+If you have questions about Seattle, send an email to jcappos@nyu.edu 
+or visit the Seattle-users Google group (seattle-users@googlegroups.com, 
+https://groups.google.com/forum/#!forum/seattle-users).
