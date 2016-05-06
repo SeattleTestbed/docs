@@ -1,7 +1,22 @@
 # Welcome to Seattle Testbed!
 
-Seattle Testbed is a platform for networking and distributed systems research. 
-It's free, community-driven, and offers a large deployment of computers 
+Seattle Testbed is a free, open-source platform for networking and 
+distributed systems research. 
+This repository contains the Seattle documentation, including
+
+* [High-level overviews of all parts of Seattle Testbed](UnderstandingSeattle/),
+* [Programming tutorials and API docs](Programming/), 
+* [Educational assignments for class and home use](EducationalAssignments/),
+* [Documentation for running Seattle infrastructure services](Operating/), and
+* [Information for contributors](Contributing/).
+
+An introduction to Seattle Testbed follows below. For Seattle source code, 
+please visit our organization page at https://github.com/SeattleTestbed
+
+# What is Seattle Testbed?
+
+Seattle Testbed is a free, community-driven network testbed for  
+education and research. It offers a large deployment of computers 
 spread across the world. You can use our [Clearinghouse](https://seattleclearinghouse.poly.edu/) 
 website to share resources with other users, or obtain resources for your own 
 project.  Seattle operates on resources donated by users and institutions. 
