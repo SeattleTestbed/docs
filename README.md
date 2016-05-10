@@ -15,7 +15,7 @@ please visit our organization page at https://github.com/SeattleTestbed
 
 # What is Seattle Testbed?
 
-Seattle Testbed is a free, community-driven network testbed for  
+Seattle Testbed is a free, community-driven network testbed for 
 education and research. It offers a large deployment of computers 
 spread across the world. You can use our [Clearinghouse](https://seattleclearinghouse.poly.edu/) 
 website to share resources with other users, or obtain resources for your own 
