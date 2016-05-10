@@ -25,14 +25,13 @@ appreciated.
 Following trac syntac elements are ignored: 
  - discussion
  - citation
- - macros
+ - macros (it does strip TOC)
  - macro lists
  - list escaping
- - headings without closing `=`
+ - headings and font markup without closing tag
  - bold italic
  - color
  - underline (because there is no underline in md)
- - escaping with preceding !
  - monospace escaping: `{{{` or {{{`}}}
  - list continuation
  - table headers
@@ -68,8 +67,11 @@ def main(argv):
           line = re.sub(r'!([A-Z])', r'\1', line)
 
           # EMPHASIS
-          line = re.sub(r' \'\'\'(.*?)\'\'\' ', r' **\1** ', line) # bold
-          line = re.sub(r' //(.*?)// ', r' *\1* ', line) # italic
+          line = re.sub(r'\'\'\'(.*?)\'\'\'', r'**\1**', line) # bold
+          # Messy Magic:
+          # (?<!:) is a `negative lookbehind assertion` that ensures that the ...
+          # between two urls on a line (http:// ... http://) is not italicezed
+          line = re.sub(r'(?<!:)//(.*?)//', r'*\1*', line) # italic
           line = re.sub(r'\^(.*?)\^', r'<sup>\1</sup>', line) # superscript
           line = re.sub(r',,(.*?),,', r'<sub>\1</sub>', line) # subscript
 
