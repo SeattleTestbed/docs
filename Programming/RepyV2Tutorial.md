@@ -1,12 +1,12 @@
 # Repy V2 Tutorial
 
 ## Introduction
-This guide provides an introduction to using the Repy V2 sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write Repy programs, manage the restrictions on programs, and understand whether Repy is appropriate for a specific task or program.
+This guide provides an introduction to using the [Repy V2](RepyV2API.md) sandbox environment.  It describes what restrictions are placed upon the sandboxed code with examples. At the end of reading this document you should be able to write Repy programs, manage the restrictions on programs, and understand whether Repy is appropriate for a specific task or program.
 
 It is assumed that you have a basic understanding of network programming such as socket, ports, IP addresses, and etc.  Also, a basic understanding of HTML is useful but not required.  Lastly, you need a basic understanding of the Python programming language.  If not, you might want to first read through the Python tutorial at http://www.python.org/doc/. You do not need to be a Python expert to use Repy, but as Repy is a subset of Python, being able to write a simple Python program is essential.
 
-## Installing Repy V2
-You have to install Repy V2 before starting the tutorial. Make sure you have a Git client and Python installed on your machine (Mac and many Linux boxes already ship with that).
+## Building Repy V2
+You have to build Repy V2 before starting the tutorial. Make sure you have a Git client and Python installed on your machine (Mac and many Linux boxes already ship with that). For more details, please refer to the [Seattle Build Instructions](../Contributing/BuildInstructions.md).
 
 1. First, clone the newest version of Repy V2 from GitHub: ```git clone https://github.com/SeattleTestbed/repy_v2```
 2. Create a directory of your choosing, inside of which Repy V2 will live. Unix example: ```mkdir ~/testv2```
@@ -275,8 +275,6 @@ Then open a web browser and in the address bar type: http://127.0.0.1:12345  (th
 To stop the program, press CTRL-C.
 
 **Running remotely**
-
-*Todo: Use Sensibility Custom Installer?*
 
 <!---
 Open seash the same as in the previous example but choose a single VM.
@@ -925,4 +923,4 @@ The restrictions lines (with call information) is obsolete for Repy V2 and is ig
 
 ## Conclusion
 
-This concludes a brief tour of the Repy V2 functionality.   This guide has covered all of the API calls for Repy V2.   For more detailed information see the Library Reference and the Resources and Restrictions guide.   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
+This concludes a brief tour of the Repy V2 functionality.   This guide has covered most of the API calls for Repy V2.   For more detailed information see the [Repy V2 API Reference](RepyV2API.md).   You should now be able to build your own Repy applications that can run on hundreds of computers.   Good luck!
