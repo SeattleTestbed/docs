@@ -23,7 +23,7 @@ If you are testing locally, you will use ```http://127.0.0.1:PORT/``` for the `B
 Ensure that the environment variable `PYTHONPATH` includes both the parent directory of your deployed `clearinghouse` and the Repy runtime directory, and `DJANGO_SETTINGS_MODULE` points to your local settings file:
 
 ```sh
-$ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/custominstallerbuilder/repy_runtime
+$ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/repy_runtime
 $ export DJANGO_SETTINGS_MODULE='custominstallerbuilder.local.settings'
 ```
 
