@@ -81,7 +81,7 @@ BASE_INSTALLER_DIRECTORY=/var/www/dist
 BASE_INSTALLER_ARCHIVE_DIR=/var/www/dist/old_base_installers
 ```
 
-to where you would like the base installers located. Just **make sure that the paths exist**.
+to where you would like the base installers located. Just **make sure that the paths exist and that your `cib` user has write access**!
 
 Also change the user name to your Custom Installer Builder user:
 ```sh
