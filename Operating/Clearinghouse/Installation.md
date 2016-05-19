@@ -199,7 +199,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
 1. Add `clearinghouse` and `seattle` to the `PYTHONPATH` to ensure that the django app and the Repy runtime work. Also create an environment variable pointing at the django setting file, which will be needed in the WSGI script:
 
   ```sh
-  echo "export PYTHONPATH=$PYTHONPATH:/home/lukas/ch/deployment:/home/lukas/ch/deployment/seattle" >> ~/.bashrc
+  echo "export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle" >> ~/.bashrc
   echo "export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'" >> ~/.bashrc
   source ~/.bashrc
   ```
