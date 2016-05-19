@@ -382,6 +382,9 @@ components in the correct order, and also start Apache.
 Before running the script, make sure to edit the start script and change `CLEARINGHOUSE_USER`, `CLEARINGHOUSE_DIR`, `PYTHONPATH`,
 and `LOG_DIR` to the correct locations for your deployment. Also, create `LOG_DIR` if it doesn't already exist.
 
+Note: If you are using virtualenvs like explained above, also add them to the `PYTHONPATH` in the script, e.g. 
+`/home/ch/.virtualenvs/ch/lib/python2.7/site-packages`.
+
 If one or more of the backend scripts (called `transition_STATEX_to_STATEY.py` for different state names) are already running, kill them before running `start_clearinghouse_components.sh`. 
 
 To run the script, run the following commands with the correct directory substituted for your deployment directory. This will start the script in a new `screen` session running as root.
