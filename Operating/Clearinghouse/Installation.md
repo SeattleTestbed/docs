@@ -3,20 +3,23 @@
 This document explains how to do a fresh install of the Seattle Clearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
-You might want to take a look at the [Seattle infrastructure architecture](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture) documentation before proceeding. This also mentions the other two infrastructure components of Seattle Testbed, the Custom Installer Builder and the software update server, and talk about their interfacing with the Clearinghouse. Also note there are different [deployment paths](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths) to the functionality you want.
+You might want to take a look at the [Seattle Infrastructure Architecture](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture) documentation before proceeding. This also mentions the other two infrastructure components of Seattle Testbed, the Custom Installer Builder and the software update server, and talk about their interfacing with the Clearinghouse. ~~Also note there are different [deployment paths](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths) to the functionality you want.~~
 
 ## Setting up a non-privileged user account
 First of all, on the server or VM you will be using for the clearinghouse, we recommend to set up a user account specific to the Clearinghouse instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
 
 The user *should not be granted interactive login* for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user *should not have root privileges* or be able to acquire them.
 
-Any user name will be fine. We'll use `ch` in the instructions.
+Any user name will be fine. We'll use `ch` in the instructions:
+
+```sh
+$ sudo adduser ch
+```
 
 
 ## Install Dependencies
 
 Clearinghouse requires at least the following software to be installed:
- 
  * [Python](http://www.python.org/) in version 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
  * [Pip](https://pypi.python.org/pypi/pip) -- Recommended tool for installing python packages.
  * [mysqlclient](https://pypi.python.org/pypi/mysqlclient) -- the python mysql interface
@@ -40,13 +43,16 @@ $ sudo apt-get install ntp
 $ sudo apt-get install openssl
 ```
 
-### Use virtualenvironment (optional but highly recommended)
+### Setup python virtualenvironment
 A convenient way to isolate your Python installations from each other is to use `virtualenv`, e.g. if you have specific version requirements for one project, but don't want to apply them system-wide or for other projects. [Virtualenv](https://virtualenv.pypa.io/en/latest/index.html) creates a separate environment that has its own installation directory and that doesn’t share libraries with other virtualenv environments. The [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) makes usage of virtualenv even easier. With the following instructions you can install and setup virtualenv and virtualenvwrapper and create a virtualenv called `ch` which can be used to install your Seattle Clearinghouse django installation.
 
 ```sh
 $ # Install virtualenv and virtualenvwrapper
 $ sudo pip install virtualenv
 $ sudo pip install virtualenvwrapper
+
+$ # Login as user above created
+$ sudo -i -u ch
 
 $ # Create a directory in your home folder where all your virtualenvs will live
 $ mkdir ~/.virtualenvs
@@ -78,7 +84,7 @@ $ pip install django==1.8.3
 [Mysqlclient](https://pypi.python.org/pypi/mysqlclient) is the [recommended](https://docs.djangoproject.com/en/1.9/ref/databases/#mysql-db-api-drivers) choice for using MySQL with Django.
 
 ```sh
-pip install mysqlclient
+$ pip install mysqlclient
 ```
 
 ### Install Django Social Auth
@@ -119,14 +125,16 @@ mysql> GRANT ALL PRIVILEGES
 ON keydb.* 
 TO 'keydb'@'localhost'
 IDENTIFIED BY 'desired password for keydb';
+
+mysql> \q
 ```
-where you would replace the password strings with suitable ones. Afterwards, type `q` to leave the MySQL prompt.
+where you would replace the password strings with suitable ones.
 
 ## Deploying and running Clearinghouse
 In this section, we will deploy and run a copy of the Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a separate user account, and following the steps below as this user.
 
 <!-- * **Initial preparation** -->
-1. Change to the clearinghouse user account: `sudo -i -u ch`
+1. Make sure you are logged in with your clearinghouse account: `sudo -i -u ch`
 1. Clone the Clearinghouse repository into `ch`'s home directory, and let the initialize script fetch dependencies:
 
     ```sh
@@ -199,15 +207,17 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
 1. Add `clearinghouse` and `seattle` to the `PYTHONPATH` to ensure that the django app and the Repy runtime work. Also create an environment variable pointing at the django setting file, which will be needed in the WSGI script:
 
   ```sh
-  echo "export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle" >> ~/.bashrc
-  echo "export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'" >> ~/.bashrc
-  source ~/.bashrc
+  $ echo "export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle" >> ~/.bashrc
+  $ echo "export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'" >> ~/.bashrc
+  $ source ~/.bashrc
+  $ # Sourcing .bashrc kicks you out of your virtualenv, so you have to re-actiavte
+  $ workon ch
   ```
 1. Create the database structure. You may want to create a Django administrator account when asked (but you don't have to). Note that this user will be able to log in over the web using the Django `admin` page. Use a *strong password*, and update it frequently! (The password can be changed on the command line using `manage.py changepassword` followed by the user account name). You may get an `OperationalError` from django about being unable to create a table and may need to run this command twice.
 
   ```sh
-  cd ~/deployment/clearinghouse
-  python website/manage.py syncdb
+  $ cd ~/deployment/clearinghouse
+  $ python website/manage.py syncdb
   ```
   * (Please note that Django 1.7+ has migrated to a migration-based model from start to finish, and that syncdb is deprecated entirely and will be removed in Django 1.9. For Django 1.7 and 1.8, syncdb for initial setup may still work, but should really be replaced by the following. You may need to run migrate twice if an error occurs the first time.
 
@@ -257,48 +267,52 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
 To provide encryption and keep passwords etc. safe in transit between a user's web browser and the Clearinghouse, it relies on SSL. Therefore you will need to set up one `VirtualHost` entry for connections to port 443 (SSL) at the minimum.
 
 For a production launch, follow the instructions at [this page](http://slacksite.com/apache/certificate.php) to understand Certificate Signing Requests and dealing with Certificate Authorities in greater detail. For testing purposes, you will want to generate a temporary self-signed certificate. Here's how (we'll assume `openssl` is available on your clearinghouse machine).
+**Note:** some of the below steps require `sudo`, so you might want to use a user who is in the `sudoers` file.
 
-1. Generate a server private key. **Warning:** The key does not have a passphrase! If this is a production key, make sure it's not readable by any user but `root`!
+1. Generate a server private key:
   ```sh
-  $ openssl genrsa -out server.key 4096
+  $ openssl genrsa -out ch.key 4096
   ```
 
 1. Generate a Certificate Signing request, and sign it yourself using the server key:
   ```sh
-  $ openssl req -new -key server.key -out server.csr
+  $ openssl req -new -key ch.key -out ch.csr
   # Follow the interactive dialog. For a testing key, you can use default values for all fields.
 
-  $ openssl x509 -req -in server.csr -signkey server.key -out server.crt
+  $ openssl x509 -req -in ch.csr -signkey ch.key -out ch.crt
   ```
 
-1. Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`.
+1. Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`. **Warning:** The key does not have a passphrase! If this is a production key, make sure it's not readable by any user but `root`.
+  ```sh
+  $ sudo mv /home/ch/ch.* /etc/apache2/ssl/
+  $ sudo chown root /etc/apache2/ssl/ch.crt /etc/apache2/ssl/ch.csr /etc/apache2/ssl/ch.key
+  $ sudo chmod 600 /etc/apache2/ssl/ch.crt /etc/apache2/ssl/ch.csr /etc/apache2/ssl/ch.key
+  ```
 
 Next up, we configure Apache.
 -----
 
-This is a minimal exemplary configuration to serve the Clearinghouse website from`https://mysite/ch/`. Note that in this snippet, the second
+This is a minimal exemplary configuration to serve the Clearinghouse website from `https://ch.loc/`. Note that in this snippet, the second
 VirtualHost entry assumes that you have a server certificate and key file setup, and the `Location` directive assumes that your Clearinghouse
 installation lives in `/home/ch/deployment/clearinghouse` and that your Django settings module is `clearinghouse.website.settings`.
 
-This config contains two `VirtualHost`s actually, the first providing redirects all connections to **http**://mysite/ch/* to use
-**https**://mysite/ch/*.
-
-Depending on you configuration of Apache, you may want to add the below code to `/etc/apache2/sites-available/default`.
+Depending on you configuration of Apache, you may want to put below code in a file called `/etc/apache2/sites-available/ch.conf`.
 
 ```sh
-# In /etc/apache2/sites-available/default
+# In /etc/apache2/sites-available/ch.conf
 # Run the Django app as the clearinghouse user
-WSGIDaemonProcess chdjango user=ch processes=5 threads=10
-# WSGIDaemonProcess chdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
+# Use python-path option of the `WSGIDaemonProcess` directiv to tell
+# WSGI where your virtualenv is at
+
+WSGIDaemonProcess chdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
 WSGIProcessGroup chdjango
 
 # HTTP
 <VirtualHost *:80>
-    # Redirect requests for the server index page or that are 
-    # clearinghouse-related to the HTTPS site.
-    RedirectMatch ^/$ https://mysite/ch/html/login
-    RedirectMatch ^/ch https://mysite/ch/html/login
+    ServerName ch.loc
+    Redirect / https://ch.loc/
 </VirtualHost>
+
 
 # SSL
 <VirtualHost *:443>
@@ -306,11 +320,11 @@ WSGIProcessGroup chdjango
 
     # Enable SSL
     SSLEngine on
-    SSLCertificateFile /etc/apache2/ssl/server.crt
-    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+    SSLCertificateFile /etc/apache2/ssl/ch.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/ch.key
     # You can add intermediate certificates here.
 
-    # Point Apache to the clearinghouse's static images/CSS/JavaScript
+    # Point Apache to the clearinghouse's static image:wqZZs/CSS/JavaScript
     Alias /site_media /home/ch/deployment/clearinghouse/website/html/media
     <Directory /home/ch/deployment/clearinghouse/website/html/media>
         Require all granted
@@ -319,8 +333,8 @@ WSGIProcessGroup chdjango
     # XXX We should configure the Django admin page static files too!
     # XXX See https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/
 
-    # Point the URL https://mysite/ch to the Django app
-    WSGIScriptAlias /ch /home/ch/deployment/clearinghouse/wsgi/wsgi.py
+    # Point the URL https://ch.loc/ to the Django app
+    WSGIScriptAlias / /home/ch/deployment/clearinghouse/wsgi/wsgi.py
 
     <Directory /home/ch/deployment/clearinghouse/wsgi>
         <Files wsgi.py>
@@ -331,21 +345,24 @@ WSGIProcessGroup chdjango
 </VirtualHost>
 ```
 
-**Virtualenvironment and Python path**
 
-If you are using virtualenvironments, tell WSGI where to find the libraries installed to your virtualenvironment by using the python-path option of the `WSGIDaemonProcess` directive (see comment below first `WSGIDaemonProcess` in above `VirtualHost` sample) 
+Enable your clearinghouse configuration:
+```sh
+$ sudo a2ensite ch.conf
+```
+
+You maybe want to add `ServerName` to your `/etc/hosts` file:
+```sh
+# In /etc/hosts add the following line
+127.0.0.1       ch.loc
+```
 
 To use this configuration for your Seattle Clearinghouse installation, change
-* `mysite` to your domain name (or IP address in case you performing tests),
-* the `ch` in the URL to the desired root of the URL path of your clearinghouse,
+* `ch.loc` to your domain name (or IP address in case you performing tests),
 * `/home/ch/deployment/` in the site media location, and
 * `WSGIScriptAlias` directive to the directory where you deployed Seattle Clearinghouse;
 *  also, make sure `"/admin_media"` is aliased to a valid directory, as the exact location will vary depending on the version of Python installed and how you installed Django.
 
-You can place the configuration in a file like `/etc/apache2/sites-enabled/clearinghouse.conf` and then enable it by calling:
-```sh
-$ sudo a2ensite clearinghouse.conf
-```
 
 To configure SSL you will probably need to install openssl to generate a private key/CSR
 (Certificate Signing Request), and then possibly purchase a certificate for your site.
@@ -374,7 +391,7 @@ If you try to access your Seattle Clearinghouse installation's website now, then
 
 ## Running start_clearinghouse_components.sh
 
-The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](https://seattle.poly.edu/wiki/SeattleBackend). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
+The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](https://seattle.poly.edu/wiki/SeattleBackend). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
 components in the correct order, and also start Apache.
 
 **Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [ Deleopers' Notes](https://seattle.poly.edu/wiki/ClearinghouseDevelopersNotes) for details.**
@@ -382,8 +399,17 @@ components in the correct order, and also start Apache.
 Before running the script, make sure to edit the start script and change `CLEARINGHOUSE_USER`, `CLEARINGHOUSE_DIR`, `PYTHONPATH`,
 and `LOG_DIR` to the correct locations for your deployment. Also, create `LOG_DIR` if it doesn't already exist.
 
-Note: If you are using virtualenvs like explained above, also add them to the `PYTHONPATH` in the script, e.g. 
-`/home/ch/.virtualenvs/ch/lib/python2.7/site-packages`.
+```sh
+# In /home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh
+CLEARINGHOUSE_USER=ch
+...
+CLEARINGHOUSE_DIR="/home/ch/deployment/clearinghouse"
+...
+export PYTHONPATH="$CLEARINGHOUSE_DIR/..:$REPY_RUNTIME_DIR:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages"
+...
+export DJANGO_SETTINGS_MODULE="clearinghouse.website.settings"
+...
+```
 
 If one or more of the backend scripts (called `transition_STATEX_to_STATEY.py` for different state names) are already running, kill them before running `start_clearinghouse_components.sh`. 
 
@@ -391,7 +417,7 @@ To run the script, run the following commands with the correct directory substit
 ```sh
 $ sudo -i
 $ screen
-$ cd ~ch/deployment/clearinghouse/deploymentscripts
+$ cd /home/ch/deployment/clearinghouse/deploymentscripts
 $ ./start_clearinghouse_components.sh
 ```
 
@@ -403,11 +429,10 @@ $ sudo -i
 $ screen -r
 ```
 
-
 ## Done! (Almost)
 
 Congratulations! You should now have a fully operational Seattle Clearinghouse
-installation that you can access at https://mysite/ch/
+installation that you can access at https://ch.loc
 
 ## Monitoring
 
