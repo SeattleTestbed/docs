@@ -37,7 +37,7 @@ Most of these can be installed through a package manager. For example, on a Debi
 $ sudo apt-get install python-pip
 $ sudo apt-get install python-dev
 $ sudo apt-get install apache2 libapache2-mod-wsgi
-$ sudo apt-get install mysql-server mysql-client
+$ sudo apt-get install mysql-server mysql-client libmysqlclient-dev
 $ # MySQL will prompt you to set a root database password, which you should do.
 $ sudo apt-get install ntp
 $ sudo apt-get install openssl
@@ -204,14 +204,11 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
         SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC = "https://sensibilityclearinghouse.poly.edu/custominstallerbuilder/xmlrpc/"
         ```
   * You can also adapt the clearinghouse `TIME_ZONE`
-1. Add `clearinghouse` and `seattle` to the `PYTHONPATH` to ensure that the django app and the Repy runtime work. Also create an environment variable pointing at the django setting file, which will be needed in the WSGI script:
+1. Add `clearinghouse` and `seattle` to the `PYTHONPATH` to ensure that the django app and the Repy runtime work. Also create an environment variable pointing at the django setting file, which will be needed in the WSGI script. *Note: Consider adding these lines to your `~/.bashrc` file.*
 
   ```sh
-  $ echo "export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle" >> ~/.bashrc
-  $ echo "export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'" >> ~/.bashrc
-  $ source ~/.bashrc
-  $ # Sourcing .bashrc kicks you out of your virtualenv, so you have to re-actiavte
-  $ workon ch
+  $ export PYTHONPATH=$PYTHONPATH:/home/ch/deployment:/home/ch/deployment/seattle
+  $ export DJANGO_SETTINGS_MODULE='clearinghouse.website.settings'
   ```
 1. Create the database structure. You may want to create a Django administrator account when asked (but you don't have to). Note that this user will be able to log in over the web using the Django `admin` page. Use a *strong password*, and update it frequently! (The password can be changed on the command line using `manage.py changepassword` followed by the user account name). You may get an `OperationalError` from django about being unable to create a table and may need to run this command twice.
 
@@ -304,8 +301,8 @@ Depending on you configuration of Apache, you may want to put below code in a fi
 # Use python-path option of the `WSGIDaemonProcess` directiv to tell
 # WSGI where your virtualenv is at
 
-WSGIDaemonProcess chdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
-WSGIProcessGroup chdjango
+WSGIDaemonProcess cibdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
+WSGIProcessGroup cibdjango
 
 # HTTP
 <VirtualHost *:80>
@@ -324,7 +321,7 @@ WSGIProcessGroup chdjango
     SSLCertificateKeyFile /etc/apache2/ssl/ch.key
     # You can add intermediate certificates here.
 
-    # Point Apache to the clearinghouse's static image:wqZZs/CSS/JavaScript
+    # Point Apache to the clearinghouse's static images/CSS/JavaScript
     Alias /site_media /home/ch/deployment/clearinghouse/website/html/media
     <Directory /home/ch/deployment/clearinghouse/website/html/media>
         Require all granted
