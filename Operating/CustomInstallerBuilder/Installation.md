@@ -38,7 +38,7 @@ $ sudo apt-get install openssl
 ```
 
 ### Setup python virtualenvironment
-A convenient way to isolate your Python installations from each other is to use `virtualenv`, e.g. if you have specific version requirements for one project, but don't want to apply them system-wide or for other projects. [Virtualenv](https://virtualenv.pypa.io/en/latest/index.html) creates a separate environment that has its own installation directory and that doesn’t share libraries with other virtualenv environments. The [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) makes usage of virtualenv even easier. With the following instructions you can install and setup virtualenv and virtualenvwrapper and create a virtualenv called `ch` which can be used to install your Seattle Clearinghouse django installation.
+A convenient way to isolate your Python installations from each other is to use `virtualenv`, e.g. if you have specific version requirements for one project, but don't want to apply them system-wide or for other projects. [Virtualenv](https://virtualenv.pypa.io/en/latest/index.html) creates a separate environment that has its own installation directory and that doesn’t share libraries with other virtualenv environments. The [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) makes usage of virtualenv even easier. With the following instructions you can install and setup virtualenv and virtualenvwrapper and create a virtualenv called `cib` which can be used to install your Seattle Custom Installer Builder django installation.
 
 ```sh
 $ # Install virtualenv and virtualenvwrapper
@@ -94,8 +94,7 @@ $ pip install django==1.6.7
   $ cp -R local_template local
   ```
 1. Edit `local/settings.py` to match your local configuration:
-  * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others!
-  * If you are testing locally, using django's built-in webserver, use `http://127.0.0.1:8000/` as `BASE_URL`. This tutorial will show you how to set up a `VirtualHost` using the url http://cib.loc/. Of course you can use your own domain as well.
+  * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others! If you are testing locally, using django's built-in webserver, use `http://127.0.0.1:8000/` as `BASE_URL`. This tutorial will show you how to set up a `VirtualHost` using the url `http://cib.loc/`. Of course you can use your own domain as well.
 
   ```python
   SECRET_KEY = "Don't dare to think using this as your random string"
@@ -107,7 +106,7 @@ $ pip install django==1.6.7
   ...
   PROJECT_URL = BASE_URL
   ```
-1. Add the parent directory of your deployed clearinghouse and the Repy runtime directory to your `PYTHONPATH` and make sure `DJANGO_SETTINGS_MODULE` points to your local settings file.
+1. Add the parent directory of your deployed Custom Installer Builder and the Repy runtime directory to your `PYTHONPATH` and make sure `DJANGO_SETTINGS_MODULE` points to your local settings file.
 
   ```sh
   $ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/repy_runtime
@@ -149,7 +148,7 @@ python generatekeys.py ~/cib 4096
 
 This generates a key pair consisting of files `cib.publickey` and `cib.privatekey` in `cib`'s home directory. 4096 is the minimum recommendable length at the time of writing. 
 
-The script that actually creates the base installer tarballs is in `~/installer-packaging/RUNNABLE/rebuild_base_installers.py`. You have to modify some variables before you can run it.
+The script that actually creates the base installer tarballs is in `~/installer-packaging/RUNNABLE/rebuild_base_installers.py`. You have to modify some variables before you can run it:
 
 ```python
 # In ~/installer-packaging/RUNNABLE/rebuild_base_installers.py
@@ -164,19 +163,19 @@ user = 'cib'
 ```
 
 ### Set nodemanager version
-Edit `~/installer-packaging/DEPENDENCIES/nodemanager/nmmain.py` on the line starting with `version = `.
+Edit `~/installer-packaging/RUNNABLE/seattle_repy/nmmain.py` on the line starting with `version = `.
 
-Change the version string to reflect your project / clearinghouse / Custom Installer Builder name, and also the current build. You will later need this string when launching the build script.
+Change the version string to reflect your project/Clearinghouse/Custom Installer Builder name, and also the current build. You will later need this string when launching the build script.
 
 **NOTE: This string will be used as a part of the base installer's file name. Use only printable, non-whitespace, ASCII characters that do not require escaping!** Avoid tabs and spaces, forward and backslashes (`/
 `), quotes/ticks of all kinds (`'"`), shell glob characters (`?`, `*`), and other characters with special meanings to the shell (`#&><|()[]{}!$;~` etc.).
 
-A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) are fine.
+A-Z, a-z, 0-9, `.` (period), `-` (dash), `_` (underscore) a re fine.
 
 ### Check softwareupdater URL and key pair
 In order for your installers to be able to validate updates that you push, the `softwareupdater` component must include your (or your update site's) public key.
 
-Edit `~/installer-packaging/DEPENDENCIES/softwareupdater/softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first `int` of your public key, and the value of key `'n'` with the second.
+Edit `~/installer-packaging/RUNNABLE/seattle_repy/softwareupdater.py`. On the line starting with `softwareupdatepublickey = `, replace the value under the key `'e'` of the dict with the first `int` of your public key, and the value of key `'n'` with the second.
 
 Furthermore, change the line starting with `softwareurl = ` to contain your softwareupdater's URL.
 ```python
@@ -185,8 +184,8 @@ softwareurl = 'http://seattle.cs.washington.edu/couvb/updatesite/0.1/'
 Done? Great, because that's all of the customization required! Let's build installers now!
 
 ```sh
-$ cd ~/installer-packaging/RUNNABLE/rebuild_base_installers.py
-$ # VERSION STRING needs to match the one in ~/installer-packaging/DEPENDENCIES/nodemanager/nmmain.py
+$ cd ~/installer-packaging/RUNNABLE/
+$ # VERSION STRING needs to match the one in ~/installer-packaging/RUNNABLE/seattle_repy/nmmain.py
 $ python rebuild_base_installers.py <VERSION STRING>
 ```
 
@@ -236,12 +235,6 @@ Depending on you configuration of Apache, you may want to put below code in a fi
 
 ```sh
 # In /etc/apache2/sites-available/cib.conf
-# Run the Django app as the clearinghouse user
-# Use python-path option of the `WSGIDaemonProcess` directiv to tell
-# WSGI where your virtualenv is at
-
-WSGIDaemonProcess chdjango user=cib processes=5 threads=10 python-path=/home/cib/custominstallerbuilder:/home/cib/.virtualenvs/cib/lib/python2.7/site-packages
-WSGIProcessGroup chdjango
 
 # HTTP
 <VirtualHost *:80>
@@ -249,10 +242,10 @@ WSGIProcessGroup chdjango
     Redirect / https://cib.loc/
 </VirtualHost>
 
-
 # SSL
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
+    ServerName cib.loc
 
     # Enable SSL
     SSLEngine on
@@ -265,6 +258,12 @@ WSGIProcessGroup chdjango
     <Directory /home/cib/custominstallerbuilder/html/static>
         Require all granted
     </Directory>
+
+    # Run the Django app as the custom installer builder user
+    # Use python-path option of the `WSGIDaemonProcess` directiv to tell
+    # WSGI where your virtualenv is at
+    WSGIDaemonProcess cibdjango user=cib processes=5 threads=10 python-path=/home/cib/custominstallerbuilder:/home/cib/.virtualenvs/cib/lib/python2.7/site-packages
+    WSGIProcessGroup cibdjango
 
     # Point the root URL of this server to the appropriate Django app
     WSGIScriptAlias / /home/cib/custominstallerbuilder/wsgi/wsgi.py
