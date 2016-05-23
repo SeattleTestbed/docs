@@ -192,7 +192,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
   ```
   * Set `SECRET_KEY` to a long, random string.
   * If this is a production launch, also set `DEBUG` to False, and uncomment and change the fields for sending `ADMINS` email.
-  * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to [set up a Custom Installer Builder](https://seattle.poly.edu/wiki/CustomInstallerBuilderInstallation) and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` to that URL. Currently, there are two existing Custom Installer Builders you can choose from:
+  * If your clearinghouse is supposed to provide installers other than the stock Seattle ones, you need to [set up a Custom Installer Builder](https://github.com/SeattleTestbed/docs/blob/master/Operating/CustomInstallerBuilder/Installation.md) and point `SEATTLECLEARINGHOUSE_INSTALLER_BUILDER_XMLRPC` to that URL. Currently, there are two existing Custom Installer Builders you can choose from:
     * Default CIB, currently providing no repy_v2 compatibility (only repy_v1). This means that, among other things, the seattle installation will not provide NAT traversal, and so you may run into issues if you're testing things on a machine that's behind a router (say).
 
         ```python
@@ -227,7 +227,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
 
   ```sh
   $ # Use this for running on localhost only:
-  $ python website/manage.py runserver 8000
+  $ python website/manage.py runserver
 
   $ # Use this for listening on every interface:
   $ python website/manage.py runserver 0.0.0.0:8000
@@ -281,7 +281,7 @@ For a production launch, follow the instructions at [this page](http://slacksite
 
 1. Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`. **Warning:** The key does not have a passphrase! If this is a production key, make sure it's not readable by any user but `root`.
   ```sh
-  $ sudo mv /home/ch/ch.* /etc/apache2/ssl/
+  $ sudo mv ch.* /etc/apache2/ssl/
   $ sudo chown root /etc/apache2/ssl/ch.crt /etc/apache2/ssl/ch.csr /etc/apache2/ssl/ch.key
   $ sudo chmod 600 /etc/apache2/ssl/ch.crt /etc/apache2/ssl/ch.csr /etc/apache2/ssl/ch.key
   ```
@@ -297,12 +297,6 @@ Depending on you configuration of Apache, you may want to put below code in a fi
 
 ```sh
 # In /etc/apache2/sites-available/ch.conf
-# Run the Django app as the clearinghouse user
-# Use python-path option of the `WSGIDaemonProcess` directiv to tell
-# WSGI where your virtualenv is at
-
-WSGIDaemonProcess cibdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
-WSGIProcessGroup cibdjango
 
 # HTTP
 <VirtualHost *:80>
@@ -310,10 +304,10 @@ WSGIProcessGroup cibdjango
     Redirect / https://ch.loc/
 </VirtualHost>
 
-
 # SSL
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
+    ServerName ch.loc
 
     # Enable SSL
     SSLEngine on
@@ -329,6 +323,12 @@ WSGIProcessGroup cibdjango
 
     # XXX We should configure the Django admin page static files too!
     # XXX See https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/modwsgi/
+
+    # Run the Django app as the clearinghouse user
+    # Use python-path option of the `WSGIDaemonProcess` directiv to tell
+    # WSGI where your virtualenv is at
+    WSGIDaemonProcess chdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
+    WSGIProcessGroup chdjango
 
     # Point the URL https://ch.loc/ to the Django app
     WSGIScriptAlias / /home/ch/deployment/clearinghouse/wsgi/wsgi.py
@@ -391,7 +391,7 @@ If you try to access your Seattle Clearinghouse installation's website now, then
 The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](https://seattle.poly.edu/wiki/SeattleBackend). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
 components in the correct order, and also start Apache.
 
-**Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [ Deleopers' Notes](https://seattle.poly.edu/wiki/ClearinghouseDevelopersNotes) for details.**
+**Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [ Developers' Notes](https://seattle.poly.edu/wiki/ClearinghouseDevelopersNotes) for details.**
 
 Before running the script, make sure to edit the start script and change `CLEARINGHOUSE_USER`, `CLEARINGHOUSE_DIR`, `PYTHONPATH`,
 and `LOG_DIR` to the correct locations for your deployment. Also, create `LOG_DIR` if it doesn't already exist.
@@ -429,7 +429,7 @@ $ screen -r
 ## Done! (Almost)
 
 Congratulations! You should now have a fully operational Seattle Clearinghouse
-installation that you can access at https://ch.loc
+installation that you can access at https://ch.loc/html/login
 
 ## Monitoring
 
