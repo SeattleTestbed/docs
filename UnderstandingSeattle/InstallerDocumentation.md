@@ -1,0 +1,48 @@
+# Formal Installer Documentation
+
+## Linux / Mac Installer
+The Linux and Mac installers are currently identical.
+
+### High-Level
+The main job of the installer is to modify the user's crontab to add an entry for seattle to start seattle at boot. If this fails because cron is not installed or because the user does not have access to use cron, then seattle cannot be configured to run automatically at boot.
+
+### Low-Level
+Below is a step-by-step explanation of exactly what the installer does: 
+
+ * Pre-installation
+   * Process the arguments passed into the installer
+   * Run necessary tests and benchmarking to generate the vessel (or VM) resource files, vessel directories, and the vesseldict file
+ * Installation
+   * Set up the crontab to run seattle at boot
+     * Test that cron is running on the system
+     * Test that the user has permission to use cron
+     * Modify the crontab and print the results of the above two tests to the user if modifying the crontab fails
+   * Generate the keys that will be used by the Node Manager
+   * Start seattle
+ 
+
+## Windows Installer
+
+### High-Level
+The main job of the installer is to setup seattle to run automatically at boot.  This involves modifying the Windows Registry to start seattle at machine boot and at user login.  If this fails, the installer tries to add a script to the Startup folder which will start seattle at user login.  If this fails, then seattle cannot be configured to start automatically at boot or user login.
+
+### Low-Level
+Below is a step-by-step explanation of exactly what the installer does: 
+
+ * Pre-installation
+   * Process the arguments passed into the installer
+   * Run necessary tests and benchmarking to generate the vessel/VM resource files, vessel directories, and the vesseldict file
+ * Installation
+   * Pre-process the **uninstall.bat** batch file to include the full path to the startup script in the startup folder (regardless of whether or not the script will actually be added to the startup folder). This is done because the startup folder is located in different places depending on the version of Windows, and the uninstaller will need to know where to look for this script in order to remove it if it is present.
+   * Pre-process the **start_seattle_shortcut.bat** batch file to include the full file path to the actual **start_seattle.bat** batch file in the seattle directory so that the seattle script in the Startup folder knows where the seattle directory is in order to start seattle.
+   * Add seattle to the Windows Registry
+     * Add the filepath of the **start\_seattle.bat** batch file to HKEY\_CURRENT\_USER\\\Software\\\Microsoft\\\Windows\\\CurrentVersion\\\Run so that seattle will start when the user logs in
+     * Add the filepath of the **start\_seattle.bat** batch file to the HKEY\_LOCAL\_MACHINE\\\Software\\\Microsoft\\\Windows\\\CurrentVersion\\\Run so that seattle will start when the machine boots
+   * Add seattle to the Startup folder if adding to the Windows Registry fails
+     * Move the **start\_seattle\_shortcut.bat** batch file to the Startup folder. This batch file was created to be specifically placed in the Startup folder in case adding to the Windows Registry failed
+   * Generate the keys that will be used by the Node Manager
+   * Start seattle
+
+
+## WindowsCE Installer
+The WindowsCE installer is currently not functional.  There is a basic framework currently in the seattle installer for WindowsCE which may or may not work if a WindowsCE install were attempted.  This framework would need to be thoroughly examined and tested before advertising a WindowsCE installer for seattle.
