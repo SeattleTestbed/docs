@@ -59,15 +59,15 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
      - To remove cached versions of user-build installers from the Custominstallerbuilder, run `manage.py cleaninstallers` from the Custominstallerbuilder's Django project directory.
      - If you are planning on running a version of Seattle Clearinghouse as well, then you need to go through a few more extra steps. Some extra installers need to be created from the ones we just created.
      - Run the following set of commands:
-
-      Assuming that the version of seattle is ```0.1_test_version``` and you are running under the user ```test_user```, you should have the following files in your dir: ```seattle_0.1_test_version_linux.tgz```, ```seattle_0.1_test_version_mac.tgz```, ```seattle_0.1_test_version_winmob.zip```, ```seattle_0.1_test_version_win.zip```. 
-
+      
       ```
       sudo chown test_user.dev seattle_0.1_test_version*
       sudo -u test_user ln -s -f seattle_0.1_test_version_linux.tgz seattle_linux.tgz
       sudo -u test_user ln -s -f seattle_0.1_test_version_mac.tgz seattle_mac.tgz
       sudo -u test_user ln -s -f seattle_0.1_test_version_win.zip seattle_win.zip
-    ```
+      ```
+      Assuming that the version of seattle is ```0.1_test_version``` and you are running under the user ```test_user```, you should have the following files in your dir: ```seattle_0.1_test_version_linux.tgz```, ```seattle_0.1_test_version_mac.tgz```, ```seattle_0.1_test_version_winmob.zip```, ```seattle_0.1_test_version_win.zip```
+
 
 ## Using the base installers to test your code
 You might often want to package up the code nicely so that you can easily test the current contents of your working directories on various systems. In this case, you might not care very much about the keys for the software updater or the VM information. If this is true, then you can quickly and easily build installers by navigating to trunk/dist and running the following: 
