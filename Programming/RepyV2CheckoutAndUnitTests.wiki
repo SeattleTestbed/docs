@@ -1,3 +1,0 @@
-= Checking out Repy V2 and Running the included unit tests = 
-
-'''Page update info:''' Please refer to the updated wiki:BuildInstructions wiki page!
