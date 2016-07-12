@@ -264,7 +264,7 @@ Stops communication on a commhandle.   In the case of a UDP message based commha
 (some of this came from the Python docs)
 Open a file, returning an object of the file type. If the file cannot be opened, IOError is raised.
 
-Filenames may only be in the current directory and contain letters, numbers, the hyphen, underscore, and period character and may not be '.' or '..'.   There is no concept of a directory or a folder in repy.  
+Filenames may only be in the current directory and contain lower-case letters, numbers, the hyphen, underscore, and period character, and may not start with '.'.   There is no concept of a directory or a folder in repy.  
 
 The most commonly-used values of mode are 'r' for reading, 'w' for writing (truncating the file if it already exists), and 'a' for appending. If mode is omitted, it defaults to 'r'.  Modes 'r+', 'w+' and 'a+' open the file for updating (note that 'w+' truncates the file).   The mode must begin with 'r', 'w' or 'a'.
 
