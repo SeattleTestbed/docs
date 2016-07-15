@@ -45,13 +45,27 @@ Following trac syntac elements are ignored:
 
 import sys, os, re
 
-def main(argv):
-  for wiki_filename in argv:
-    if (os.path.isfile(wiki_filename) and wiki_filename.endswith(".wiki")):
-      md_filename = os.path.splitext(wiki_filename)[0] + ".md"
+def main(wiki_filenames_list):
+  for filename in wiki_filenames_list:
+    if (not os.path.isfile(filename) or not filename.endswith(".wiki")):
+      # I cannot convert things that aren't files, and will not 
+      # convert non-".wiki" type files.
+      print "NOTE: Skipping", filename, "-- this is not a '.wiki' file,",
+      print "not a regular file, or does not exist."
+    else:
+      # This is a regular file with ".wiki" extension. Convert it.
+      md_filename = os.path.splitext(filename)[0] + ".md"
+
+      # Don't overwrite existing ".md" files!
+      if os.path.exists(md_filename):
+        print "NOTE: Skipping conversion of", filename, "to", md_filename,
+        print "-- the destination file already exists!"
+        continue
+
+      print "Converting", filename, "to", md_filename
 
       text = ""
-      with open(wiki_filename, "r") as wiki_file:
+      with open(filename, "r") as wiki_file:
         for line in wiki_file:
           # HEADINGS
           line = re.sub(r'(?m)^======\s+(.*?)\s+======\s*$', r'###### \1\n', line)
@@ -111,7 +125,20 @@ def main(argv):
       with open(md_filename, "w") as md_file:
         md_file.write(text)
 
-if __name__ == '__main__':
-  main(sys.argv[1:])
 
+if __name__ == '__main__':
+  if len(sys.argv) > 1:
+    # We seem to have at least one file to convert.
+    main(sys.argv[1:])
+  else:
+    # No file names were supplied. Print usage information.
+    print
+    print sys.argv[0],
+    print """converts files from Trac wiki markup to GitHub Markdown and 
+saves them using a file extension of '.md'. You may supply multiple 
+files for conversion at once.
+
+Usage:"""
+    print "  python " + sys.argv[0] + " TRAC_MARKED_UP_FILE.wiki [...]"
+    print
 
