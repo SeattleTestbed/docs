@@ -5,7 +5,7 @@ Explains how to go about building the base installers (everything you need to di
 __NOTE:__ In order to build the Windows GUI installer, NSIS must be properly installed and configured on the system building the base installers. Click [here](https://github.com/SeattleTestbed/docs/blob/master/Operating/NsisSystemSetup.wiki) for quick detailed instructions on how to do this.
 
 ## Sample Usage
-Running from trunk/dist directory: 
+Running from `trunk/dist` directory: 
 
 ```
 python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/updater.privatekey outputdir [version]
@@ -13,7 +13,7 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
 
 ## Step by Step
  1. Make sure you are operating on a Linux system.
- 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning. A common directory would be /var/www/dist/ (The dist folder doesn't exist and must be created.)
+ 1. Choose an output folder for the base installers. Note: If there are already base installers of the same names in this folder, they will be overwritten without warning. A common directory would be `/var/www/dist/` (The dist folder doesn't exist and must be created.)
  1. Checkout the seattle trunk from svn.
 
     ```
@@ -39,11 +39,11 @@ python make_base_installers.py at .. updaterkeys/updater.publickey updaterkeys/u
       ```python
       python generatekey.py softwareupdater_key
       ```
-   1. You can copy these two files over to where you want to store the keys. You can delete the TEMP_FOLDER and all its contents at this point if you want.
-   1. Navigate to the trunk/nodemanager directory.
+   1. You can copy these two files over to where you want to store the keys. You can delete the `TEMP_FOLDER` and all its contents at this point if you want.
+   1. Navigate to the `trunk/nodemanager` directory.
    1. Edit the `nmmain.py` file and change the global variable `version` to whatever version you want to call it.
-   1. Navigate to the trunk/dist directory.
-   1. Run the program (make_base_installers.py) with the following arguments:
+   1. Navigate to the `trunk/dist` directory.
+   1. Run the program (`make_base_installers.py`) with the following arguments:
      - Various flags that will modify the behavior of the program. Include "m" to create a Mac installer, "l" to create a Linux installer, "w" to create a Windows installer, "i" to create a Windows Mobile installer, "a" to create installers for all supported Operating Systems, and "t" (optional) to include the test cases with the installers. Example: "mlt" will build Mac and Linux installers with test cases.
      - The path to trunk; for example, ".." if you are running from the dist directory.
      - The path to the public key that the installation will eventually use to communicate with the software updater.

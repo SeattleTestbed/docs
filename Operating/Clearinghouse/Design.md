@@ -1,12 +1,9 @@
-= !SeattleGeni Design Document/Proposal =
+# SeattleGeni Design Document/Proposal
 
-This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
+This is a proposal for the rewrite of SeattleGeni. Feedback welcome (e.g. comments here, to jsamuel, or to the list).
 
-[[TOC(inline)]]
 
-----
-
-== Design Goals ==
+## Design Goals
 
   * Greater understandability and maintainability.
     * Current design is more difficult than necessary for new people to understand.
@@ -19,23 +16,22 @@ This is a proposal for the rewrite of !SeattleGeni. Feedback welcome (e.g. comme
   * Improve security.
     * Minimize the impact of website/webserver compromise.
 
-----
 
-== New Design Plan ==
+## New Design Plan
 
 At a high level, the idea will be to:
   * Redesign the data model to more accurately represent the current (and likely future) data to be stored.
   * Implement a Lockserver that will be used by all other components of the system to ensure mutual exclusion in modification of data as well as node communication.
-  * Move all private keys used by !SeattleGeni to a separate Key DB that the Website cannot access.
+  * Move all private keys used by SeattleGeni to a separate Key DB that the Website cannot access.
   * Rewrite/refactor code for readability, ease of testing, locking, logging, etc.
   * Keep the existing separate Backend server and give it the responsibility for privileged operations requiring the usage of private keys.
     * The Backend will be formally called the Privileged Operation Backend.
   * All nodemanager communication the Website needs done will go through the Backend.
     * Such communication requires signing by keys stored in the Key DB, to which the Website does not have access.
 
-=== Website ===
+### Website
 
-[[Image(seattlegeni_website.gif)]]
+![seattlegeni_website](../../ATTACHMENTS/SeattleGeniDesign/seattlegeni_website.gif)
 
 Overview:
   * End clients communicate with the Website through either XML-RPC or HTTP.
@@ -62,9 +58,9 @@ APIs used:
   * Main DB API
     * This performs any required database operations involving the Main DB.
 
-=== Privileged Operation Backend ===
+### Privileged Operation Backend
 
-[[Image(seattlegeni_backend.gif)]]
+![seattlegeni_backend](../../ATTACHMENTS/SeattleGeniDesign/seattlegeni_backend.gif)
 
 Overview:
   * The Privileged Operation Backend (a.k.a. "the Backend") performs fundamentally the same purpose as the current backend implementation, which is the performing of nodemanager communication indirectly resulting from user requests.
@@ -89,7 +85,7 @@ APIs used:
   * Main DB API
     * This performs any required database operations involving the Main DB.
 
-=== Lockserver ===
+### Lockserver
 
 The Lockserver exposes a private XML-RPC interface for use by other code within the system,
 including the Website, Backend, and Polling Daemons. The purpose is to allow client code
@@ -134,7 +130,7 @@ to be guaranteed exclusive access to some parts of the system.
       reasons, the Lockserver can be extended to allow client code to perform more advanced requests, such as
       non-blocking lock requests that will return a lock acquisition failure if the lock can't be granted immediately.
 
-=== Polling Daemons ===
+### Polling Daemons
 
 Polling Daemons are any processes or scripts that perform general monitoring of nodes
 as well as node state transition functionality. These processes communicate with nodes
@@ -145,9 +141,7 @@ APIs used:
   * If Polling Daemons do not perform node communication through the Backend, they use the same APIs as the Backend.
   * If Polling Daemons use the Backend for node communication and thus can be run as unprivileged (or less-privileged) code, then they would not use the Geni Nodemanager API or the Key DB API but rather the Privileged Operation API.
 
-----
-
-== An Example Request Being Handled ==
+## An Example Request Being Handled
 
 A user requests new VMs/vessel through the website (either through HTTP or XML-RPC).
 
@@ -171,11 +165,11 @@ The Backend obtains a lock for the node that the VM is on through the Lockserver
 
 Now that the Backend has a lock for the VM's node, it uses the Database API to determine if the VM is available for assignment to a user (that is, ensure it is not assigned to another user, ensures the correct port for the user exists on the VM, ensures that the node the VM is on is considered active, etc.). If the VM is not available for assignment, the node lock is released and a proper response is returned (which in this case is a response to the Controller).
 
-The Backend uses the Geni Nodemanager API to perform a !ChangeUser on the VM. If the call fails, the Backend releases the node lock and returns a proper response.
+The Backend uses the Geni Nodemanager API to perform a ChangeUser on the VM. If the call fails, the Backend releases the node lock and returns a proper response.
 
 (The Geni Nodemanager API is used in combination with the Key DB API to perform signed nodemanager communication.)
 
-Once the !ChangeUser call to the nodemanager is complete, the Backend uses the Database API to update the database to indicate this VM's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the VM but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
+Once the ChangeUser call to the nodemanager is complete, the Backend uses the Database API to update the database to indicate this VM's assignment to the user. (If the system crashes before this is complete, the user's key will have been set on the VM but there will be no record of this in the database, so the vessel will retain the user's key until it is assigned to another user, barring cleanup that may take place by outside scripts which detect this issue).
 
 The Backend then releases the lock on the node and responds to the Website that the acquisitions was successful.
 
@@ -185,12 +179,10 @@ The Controller repeats the process of using the Backend to acquire VMs for the u
 
 When the Controller has finished (either by giving up and releasing any acquired VMs or by acquiring the desired VMs), the Controller releases the user lock and returns a proper response to the frontend so that the frontend can give the appropriate response to the request (either HTTP or XML-RPC, however the request came in).
 
-----
-
-== Logging ==
+## Logging
 
 Logging will be available in multiple ways:
-  * Request/Response available via [http://docs.djangoproject.com/en/dev/topics/http/middleware/ django middleware].
+  * Request/Response available via [django middleware](http://docs.djangoproject.com/en/dev/topics/http/middleware/).
   * Logging at the controller interface will be possible (allows logging requests/response, recording time, etc. independent of frontend -- though much of this may be taken care of by the backend when processing the queue).
   * Use of the python logger module (no calls to "print", ever).
   * Email critical errors to developers (include request/response information).
@@ -203,17 +195,15 @@ Ultimately, various logged information should be summarized and available throug
 
 Whether logged to a database or text files, a summarization/visualization of log data helps to identify logic bugs or other problems in the system. For example, there may be no critical exceptions happening but an unusually high percentage of VM acquisition requests are not able to be fulfilled. Such a situation would be better seen through a summary of results of calls that pass through the controller interface rather than waiting for the bug to be noticed directly.
  
-----
-
-== Testing ==
+## Testing
 
   * Unit tests at various locations, for example:
-    * frontends (using [http://docs.djangoproject.com/en/dev/topics/testing/ django test framework])
+    * frontends (using [django test framework](http://docs.djangoproject.com/en/dev/topics/testing/))
     * Controller
     * Lockserver
     * Backend
   * Test data:
-    * make use of [http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading fixtures in django]
+    * make use of [fixtures in django](http://docs.djangoproject.com/en/dev/topics/testing/#fixture-loading)
   * Dependency injection to increase testability using mock objects:
     * the various APIs used by the Website and Backend (as well as other components) should each be able to be mocked out in order to test a component independent of actions performed by the APIs used in the component.
       * for example, the Controller should be able to be tested using a mock Privileged Operation API, mock Keygen API, mock Lockserver API, and mock Main DB API in order to allow testing of only the Controller.
@@ -221,19 +211,17 @@ Whether logged to a database or text files, a summarization/visualization of log
       * monkey patching is ok if code changes for dependency injection don't fit well
       * testability is more important than test code style
 
-----
-
-== Database / Data Models ==
+## Database / Data Models
 
 It is likely that we'll use the django ORM rather than something more full-featured and complex like SQLAlchemy. The benefits of a more complex ORM would largely be for efficiency at the cost of clarity and maintainability. The drawbacks of using django's ORM may be more database round trips as well as more frequently resorting to raw SQL. The benefit of using django's ORM will likely be code that is easier to understand in the common case. The models defined below do not seem to be complex enough such that they will be limited by what django's ORM lacks. Using the django ORM has the benefit of allowing use of the django admin data views, as well.
 
 The details of the models (database schemas) are below.
 
-=== Main Database ===
+### Main Database
 
-  * !GeniUser
+  * GeniUser
     * purpose:
-      * A !GeniUser record represents a !SeattleGeni user. This class extends the django.contrib.auth.models.User class.
+      * A GeniUser record represents a SeattleGeni user. This class extends the django.contrib.auth.models.User class.
     * fields:
       * usable_vessel_port
         * the port which must be assigned to a vessel/VM for the user to be able to acquire that VM.
@@ -247,7 +235,7 @@ The details of the models (database schemas) are below.
           * the user will be encouraged through the Website to download this private key and have us delete our copy of it.
       * api_key
         * this is not a cryptographic key
-        * this is an API key that we generate which can be used with the public !SeattleGeni XML-RPC interface.
+        * this is an API key that we generate which can be used with the public SeattleGeni XML-RPC interface.
         * the purpose is to allow developers to use the XML-RPC interface without requiring them to embed their passphrase in their source code.
       * donor_pubkey
         * the corresponding private key is always stored in the Key DB and is accessible using this public key.
@@ -272,7 +260,7 @@ The details of the models (database schemas) are below.
       * is_active
         * the node gets marked as not active when it becomes inaccessible.
       * owner_pubkey
-        * the !SeattleGeni's owner key for this node.
+        * the SeattleGeni's owner key for this node.
          * the private key is always stored in the Key DB and is accessible using this public key.
       * extra_vessel_name
         * the extra vessel/VM will (at least in the near future) have the node's free resources assigned to it, so the name needs to be known in order to do things with those resources.
@@ -295,7 +283,7 @@ The details of the models (database schemas) are below.
 
   * Vessel
     * purpose:
-      * A vessel record represents a VM that !SeattleGeni has setup on a node. Note that this is '''not''' tied to an individual donation of resources from that node.
+      * A vessel record represents a VM that SeattleGeni has setup on a node. Note that this is **not** tied to an individual donation of resources from that node.
     * fields:
       * node (foreign key to the nodes table)
       * name
@@ -306,23 +294,23 @@ The details of the models (database schemas) are below.
       * date_expires
         * the date after which the VM should be taken away from the user who has acquired it.
 
-  * !VesselPort
+  * VesselPort
     * purpose:
-      * A !VesselPort record represents a port that is assigned to a vessel/VM. A single VM can have multiple ports assigned to it (multiple !VesselPort records).
+      * A VesselPort record represents a port that is assigned to a vessel/VM. A single VM can have multiple ports assigned to it (multiple VesselPort records).
     * fields:
       * vessel (foreign key to vessels table)
       * port
 
-  * !VesselUserAccessMap
+  * VesselUserAccessMap
     * purpose:
-      * A !VesselUserAccessMap record represents user access to VMs. This is a many-to-many relationship. The user who acquired the VM will always have a mapping to that VM. In the future when additional users can be added to a Vessel through !SeattleGeni, the additional users would have records here.
+      * A VesselUserAccessMap record represents user access to VMs. This is a many-to-many relationship. The user who acquired the VM will always have a mapping to that VM. In the future when additional users can be added to a Vessel through SeattleGeni, the additional users would have records here.
     * fields:
       * vessel (foreign key to vessels table)
       * user (foreign key to users table)
 
 There will likely be additional tables for logging.
 
-=== Key Database ===
+### Key Database
 
   * Key
     * purpose:
@@ -333,17 +321,17 @@ There will likely be additional tables for logging.
       * privkey
         * this will always be set for any record, as there is no reason to only store just a public key.
       * usage_identifier
-        * a unique name in the !SeattleGeni system where this key is used.
+        * a unique name in the SeattleGeni system where this key is used.
           * for example, this would identify a given key is a specific user record's donor key ("user:123:donor").
         * this is only for additional consistency checking (e.g. to allow an additional way to look for invalid/unused/missing key mappings) and general informational purposes. 
         * this may end up only being read by separate scripts, never in normal usage, but seems useful to track just in case it's needed.
 
-=== Model Notes ===
+### Model Notes
 
-  * '''Indexing'''
+  * **Indexing**
     * The current database schema does not appear to make use of additional indexes for performance.
     * In the above models I haven't discussed specific indexes to be added to tables, but these won't be forgotten. Indexes will be added where logical and should be tested using a large database with performance profiling.
-  * '''Vessel acquisition''': If a user acquires a VM, the VM counts towards that user's VM limit. In the future, limits may be by resources (e.g. diskspace) rather than number of VMs.
-  * '''Vessel releasing''': Releasing a VM/vessel means to clear the list of users with access to the node and to return the VM credit to the user who had acquired the VM. (The VM may be reset, etc.)
-  * '''Vessel multi-user access''': A VM can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the VM can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the VM, so initial implementation will probably use that approach. (Adding additional users to a VM may not be available through the UI for this version, but the functionality will be easy to implement.)
-  * '''Sharing''': allowing other users to create VMs against your available resources is not re-incorporated in the design at this time.
+  * **Vessel acquisition**: If a user acquires a VM, the VM counts towards that user's VM limit. In the future, limits may be by resources (e.g. diskspace) rather than number of VMs.
+  * **Vessel releasing**: Releasing a VM/vessel means to clear the list of users with access to the node and to return the VM credit to the user who had acquired the VM. (The VM may be reset, etc.)
+  * **Vessel multi-user access**: A VM can be accessible to multiple users even though it is always acquired by a single user. Whether any user with access to the VM can release it is not specified here and can be decided later. The simplest initial implementation is probably to allow any user with access the ability to release the VM, so initial implementation will probably use that approach. (Adding additional users to a VM may not be available through the UI for this version, but the functionality will be easy to implement.)
+  * **Sharing**: allowing other users to create VMs against your available resources is not re-incorporated in the design at this time.
