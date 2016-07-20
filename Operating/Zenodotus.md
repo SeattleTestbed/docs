@@ -1,6 +1,6 @@
-= Zenodotus =
+# Zenodotus
 
-== What is it? ==
+## What is it?
 
 If you've ever wanted to host a network service on a Seattle node, such as a diagnostic web page or similar, you'll no doubt be familiar with their potential instability. If you didn't watch your nodes like a hawk, You might lose one and not know about it for hours, perhaps even a day or more. And even if you can deal with that, your users still have to punch in an IP Address and port combination to navigate to your service! This is a very clumsy way to do things, so zenodotus was built to make the process cleaner.
 
@@ -8,15 +8,14 @@ By adding a few lines of code to the REPY application running in your node, you 
 
 
 
-== How do I use it? ==
+## How do I use it?
 
 General instructions for use are as follows:
 
 The following code snippet is an example of how to implement zenodotus hosting in a REPY node. This code runs in each node hosting the service, so each one autonomously advertises its own existence, meaning that nodes which fail for whatever reason will simply be omitted from the DHT after their advertise expires.
 
 
-{{{
-#!python
+```python
 include	advertise.repy
 
 
@@ -69,10 +68,10 @@ if callfunc == 'initialize':
   # You need to	have your service code in here as well.	This code 
   # alone will terminate before it refreshes even once.
 
-}}}
+```
 
 
-'''To run this code on a Seattle node, you will need to pre-process the code using [wiki:SeattleLib/repypp.py repypp.py]'''
+**To run this code on a Seattle node, you will need to pre-process the code using [wiki:SeattleLib/repypp.py repypp.py]**
 
 
 When running in a node, this will associate helloworld.zenodotus.poly.edu with your node's IP Address for 600 seconds. This number is arbitrary, but it is worth noting that you should not simply place a very large number here, since it might cause confusion for your users if old associations linger after the service has been taken down.
@@ -83,11 +82,11 @@ While this is running in at least one node, your users will no longer have to ty
 
 
 
-'''Zenodotus supports DNS chaining as well'''.
+**Zenodotus supports DNS chaining as well**.
 If you want to use your own DNS service, you can register an advertise value of "CNAME name.zenodotus.poly.edu" : Hostname to indicate that a subserver exists, and RRs known by that server should follow the form "mypage.name.zenodotus.poly.edu", where 'name' is the name of your service.
 
 
 
-== Debugging ==
+## Debugging
 
 It is important to note that we currently only support simple A lookup queries. A functionality expansion is being worked on, and can be expected fairly soon. For now, however, just remember that there is no support for other query types.
