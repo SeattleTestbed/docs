@@ -25,8 +25,8 @@ on your computer:
 Many operating systems (such as Linux and Mac OS X) ship with these installed. 
 On Windows, you will usually need to install Python and Git.
 
-''Note: Please double-check your Python version! We don't support Python 3 
-at the moment.''
+*Note: Please double-check your Python version! We don't support Python 3 
+at the moment.*
 
 
 ## Building components
