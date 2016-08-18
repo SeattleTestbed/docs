@@ -18,21 +18,21 @@ Given a GitHub repo for which you want to enable continuous integration using Tr
   1.  Authorize application to access your GitHub account
   1.  Go to your profile page
   1.	Flick on the repo switch for the repo you want to build and test
-1. Download [.travis.yml](https://raw.githubusercontent.com/awwad/repy_v2/add_travis_and_appveyor/.travis.yml) config file to branch of repo you want to build and test. _(XXX: This part has to be updated once the file has moved to [SeattleTestbed/common](https://github.com/SeattleTestbed/common )_
-1. Add, commit and push .travis.yml file to GitHub. Travis-CI will automatically detect the change in your GitHub repo and start building and testing on the systems configured in .travis.yml. _(Note: if .travis.yml was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change to trigger the building and testing process)_
-1.  Go to travis-ci.org/\<GitHub user\>/\<repo\>/ to see build and test results
+1. Download [`.travis.yml`](https://raw.githubusercontent.com/SeattleTestbed/continuous-integration/master/.travis.yml) config file to branch of repo you want to build and test.
+1. Add, commit and push `.travis.yml` file to GitHub. Travis-CI will automatically detect the change in your GitHub repo and start building and testing on the systems configured in `.travis.yml`. _(Note: if `.travis.yml` was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change to trigger the building and testing process)_
+1.  Go to `travis-ci.org/<GitHub-user>/<repo>/` to see build and test results
 1.  (optional) Add [Travis-CI Build Status Badges](https://docs.travis-ci.com/user/status-images/) to your readme file on GitHub
 
 <a name="appveyor" />
 ### AppVeyor:
 1.  Go to [AppVeyor Website](https://ci.appveyor.com) and log in with your GitHub developer account
   1.  Authorize application to access your GitHub account
-  1.  Click on ``NEW PROJECT''
+  1.  Click on `NEW PROJECT`
   1.  Authorize application to access your GitHub repositories 
   1.  Add the repo you want to build and test
-1.	Download [appveyor.yml](https://raw.githubusercontent.com/awwad/repy_v2/add_travis_and_appveyor/appveyor.yml) config file to branch of repo you want to build and test. _(This part has to be updated once the file has moved to [SeattleTestbed/common](https://github.com/SeattleTestbed/common )_
-1.	Add, commit and push appveyor.yml file to GitHub. AppVeyor will automatically detect the change in your GitHub repo and start building and testing on the systems configured in appveyor.yml. (_Note:_ if appveyor.yml was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change. Alternatively click ``NEW BUILD'' on the AppVeyor web interface to trigger the building and testing process)
-1.  Go to ci.appveyor.com/project/\<GitHub user\>/\<repo\>/ to see your test and build results
+1.	Download [`appveyor.yml`](https://raw.githubusercontent.com/SeattleTestbed/continuous-integration/master/appveyor.yml) config file to branch of repo you want to build and test.
+1.	Add, commit and push `appveyor.yml` file to GitHub. AppVeyor will automatically detect the change in your GitHub repo and start building and testing on the systems configured in `appveyor.yml`. _(Note: if `appveyor.yml` was already in your GitHub repo, i.e. there was nothing to commit, you have to perform, commit and push any other change. Alternatively click `NEW BUILD` on the AppVeyor web interface to trigger the building and testing process)_
+1.  Go to `ci.appveyor.com/project/<GitHub-user>/<repo>/` to see your test and build results
 1. (optional)	Add [AppVeyor Build Status Badges](http://www.appveyor.com/docs/status-badges) to your readme file on GitHub
 
 ###Tips:
@@ -42,8 +42,9 @@ Given a GitHub repo for which you want to enable continuous integration using Tr
 
 <a name="further" />
 ## Further Readings
+*...are currently commented out to make the page less convoluted and they might disappear entirely at some point. If you want to read them now and in the browser click on the raw button on top.*
 
-
+<!---
 <a name="Workflow" />
 ## Working with Continuous Integration
 1.	Starting builds: whenever a commit is pushed to the repo that AppVeyor or Travis are connected to, a build will automatically be started. AppVeyor also allows you to manually start builds from the project page with the "New Build" or "Rebuild commit" buttons.
@@ -179,3 +180,4 @@ test_script:
   - python utf.py -a
 
 ```
+-->
