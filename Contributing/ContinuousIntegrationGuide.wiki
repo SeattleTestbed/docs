@@ -1,3 +1,0 @@
-As this page would be formatted in MarkDown (which this old version of Trac does not support - update Trac for MarkDown support), here instead is a link to it on the seattlelib_v2 project's GitHub wiki:
-
-See https://github.com/SeattleTestbed/seattlelib_v2/wiki/Continuous-Integration-for-the-Team
