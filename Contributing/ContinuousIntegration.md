@@ -2,36 +2,66 @@
 Seattle Testbed [components](https://seattle.poly.edu/wiki/BuildInstructions) can be built and tested automatically on multiple operating systems using different versions of Python. This document describes how to configure Travis-CI and AppVeyor, two continuous integration web tools, in order to perform automated building and unit testing.
 
 ## Configuration and Usage
-Given a GitHub repo for which you want to enable continuous integration using Travis-CI and AppVeyor:
 
-1. The config files (currently `appveyor.yml` and `.travis.yml`) should already be in your `fork/branch`. 
-  - If not, make sure that your [fork is in sync](https://help.github.com/articles/syncing-a-fork/) with the original SeattleTestbed repo, and 
-  - that your *`<feature>`* branch is in sync with your `master` branch *(Hint: `$ git merge master`)*.
-  - If the config files still aren't there, refer to <a href="#sync-config">Sync config changes with SeattleTestbed repos</a>
-1. Link your GitHub account with Travis-CI and Appveyor
-  - **Travis-CI**
-    1. Go to [Travis-CI Website](https://travis-ci.org) and sign in with your GitHub user-ID and password
-    1. Authorize application to access your GitHub account
-    1. Go to your profile page
-    1. Flick on the repo switch for the repo you want to build and test
-    1. Commit and push something to your repo, and
-    1. go to `travis-ci.org/<GitHub-user>/<repo>/` to see build and test results
-    1. *(optional) add [Travis-CI Build Status Badges](https://docs.travis-ci.com/user/status-images/) to your `README.md` file on GitHub*
-  - **AppVeyor**
-    1. Go to [AppVeyor Website](https://ci.appveyor.com) and log in with your GitHub developer account
-    1. Authorize application to access your GitHub account
-    1. Click on `NEW PROJECT`
-    1. Authorize application to access your GitHub repositories 
-    1. Add the repo you want to build and test
-    1. Commit and push something to your repo or click `NEW BUILD` on the AppVeyor web interface, and
-    1. go to `ci.appveyor.com/project/<GitHub-user>/<repo>/` to see your test and build results
-    1. *(optional) add [AppVeyor Build Status Badges](http://www.appveyor.com/docs/status-badges) to your readme file on GitHub*
+First, add the configuration files for Travis-CI and AppVeyor to the repo 
+for which you want to enable continuous integration.
 
-*Note: To avoid a specific commit automatically triggering building and testing, add ``[ci skip]'' to your commit message*
+The config files (currently `appveyor.yml` and `.travis.yml`) should already be 
+in your `fork/branch`. 
+- If not, make sure that your [fork is in sync](https://help.github.com/articles/syncing-a-fork/)
+  with the original SeattleTestbed repo, and 
+- that your *`<feature>`* branch is in sync with your `master` branch *(Hint: `$ git merge master`)*.
+- If the config files still aren't there, add them to your repo <a href="#sync-config">following the instructions below</a>.
+
+Next, link your GitHub user accound with the Countinuous Integration service.
+
+
+### Running on Travis CI
+
+Log in and enable continuous integration for a repo of your choice.
+
+1. Go to [Travis-CI Website](https://travis-ci.org) and sign in with your 
+  GitHub user ID and password
+1. Authorize application to access your GitHub account
+1. Go to your profile page
+1. Flick on the repo switch for the repo you want to build and test.
+
+**Note:** If you are an administrator of the SeattleTestbed GitHub organization, 
+you can also select SeattleTestbed's CI profile page and enable CI for repos there.
+
+To actually trigger a test run,
+
+1. Commit and push something to your repo -- this triggers Travis to run the tests
+1. Go to `travis-ci.org/<GitHub-user>/<repo>/` to see build and test results.
+
+You may contemplate to optionally add [Travis-CI Build Status Badges](https://docs.travis-ci.com/user/status-images/) to your `README.md` file on GitHub.
+
+
+
+### Running on AppVeyor
+
+Again, you need to log in and enable AppVeyor CI for your repo first.
+
+1. Go to [AppVeyor Website](https://ci.appveyor.com) and log in with your GitHub user ID and password
+1. Authorize application to access your GitHub account
+1. Click on `NEW PROJECT`
+1. Authorize application to access your GitHub repositories 
+1. Add the repo you want to build and test
+
+Trigger a test run:
+
+1. Commit and push something to your repo or click `NEW BUILD` on the AppVeyor web interface, and
+1. Go to `ci.appveyor.com/project/<GitHub-user>/<repo>/` to see your test and build results
+
+Optionally add [AppVeyor Build Status Badges](http://www.appveyor.com/docs/status-badges) to your `README.md` file on GitHub*
+
+
+*Note: Both systems can be instructed to skip testing of a commit by adding `[skip ci]` to the commit message.*
+
 
 <a name="sync-config" />
 ## Sync config changes with SeattleTestbed repos
-The CI configuration files are maintained at [SeattleTestbed/continuous-integration](https://github.com/SeattleTestbed/continuous-integration). Different ideas of distributing them across all SeattleTestbed components are discussed in SeattleTestbed/continuous-integration#1. If you want to change the files or add nur configs, please
+The CI configuration files are maintained at [SeattleTestbed/continuous-integration](https://github.com/SeattleTestbed/continuous-integration). Different ideas of distributing them across all SeattleTestbed components are discussed in SeattleTestbed/continuous-integration#1. If you want to change the files or add new configs, please
  1. push the changes to said repo,
  1. use script `git_sync_configs.sh` to distribute files *(maybe you have to modify some hardcoded links/filenames)*,
  1. submit Pull Requests in all affected SeattleTestbed components
