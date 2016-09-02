@@ -87,13 +87,7 @@ $ pip install django==1.6.7
   $ mkdir ~/repy_runtime
   $ python build.py ~/repy_runtime
   ```
-1. Change to the `custominstallerbuilder` directory we checked out earlier and copy the `local_template` folder to `local` (this is where Django will expect the configuration files to live):
-
-  ```sh
-  $ cd ~/custominstallerbuilder
-  $ cp -R local_template local
-  ```
-1. Edit `local/settings.py` to match your local configuration:
+1. Change to the `custominstallerbuilder` directory we checked out earlier and edit `local/settings.py` to match your local configuration:
   * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others! If you are testing locally, using django's built-in webserver, use `http://127.0.0.1:8000/` as `BASE_URL`. This tutorial will show you how to set up a `VirtualHost` using the url `http://cib.loc/`. Of course you can use your own domain as well.
 
   ```python
