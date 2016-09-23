@@ -51,10 +51,9 @@ Now lets add the credentials you just downloaded from the website into seash.  T
 
 Then, type
 
-'''
-#!python
+```
 !> as username
-'''
+```
 
 This will change the prompt to " username@ !> " to indicate that by default, you are now acting with your credentials.  Next, tell seash to search for VMs you control by typing browse:
 
