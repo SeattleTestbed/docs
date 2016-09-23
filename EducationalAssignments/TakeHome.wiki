@@ -51,7 +51,7 @@ Now lets add the credentials you just downloaded from the website into seash.  T
 
 Then, type
 
-```
+```python
 !> as username
 ```
 
