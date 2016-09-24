@@ -3,21 +3,21 @@
 
 [**Using the Clearinghouse website and the Seash**](#clearhouse)
     
-1. [Step 1 : Adding resources](#step1)
-2. [Step 2 : Running Seash](#step2)
-3. [Step 3 : Browsing your resources](#step3)
-4. [Step 4 : Hello World on a single computer](#step4)
-5. [Step 5 : Hello World on many computers](#step5)
-6. [Step 6 : Stopping programs](#step6)
+* [Step 1 : Adding resources](#step1)
+* [Step 2 : Running Seash](#step2)
+* [Step 3 : Browsing your resources](#step3)
+* [Step 4 : Hello World on a single computer](#step4)
+* [Step 5 : Hello World on many computers](#step5)
+* [Step 6 : Stopping programs](#step6)
 
-    [**Measuring Connectivity**](#connectivity)
+[**Measuring Connectivity**](#connectivity)
     
-7. [Step 7 : Sending UDP pings manually](#step7)
-8. [Step 8 : Sending pings between a group of computers](#step8)
-9. [Step 9 : Pinging behavior in the wide-area](#step9)
-10. [Step 10 : Packet forwarding](#step10)
-11. [Step 11 : Observed behavior from your home computer](#step11)
-12. [Conclusion](#conclusion)
+* [Step 7 : Sending UDP pings manually](#step7)
+* [Step 8 : Sending pings between a group of computers](#step8)
+* [Step 9 : Pinging behavior in the wide-area](#step9)
+* [Step 10 : Packet forwarding](#step10)
+* [Step 11 : Observed behavior from your home computer](#step11)
+* [Conclusion](#conclusion)
 
 ----
 
