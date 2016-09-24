@@ -10,7 +10,7 @@
 5.  [Step 5 : Hello World on many computers](#step5)
 6.  [Step 6 : Stopping programs](#step6)
 
-[**Measuring Connectivity**](#connectivity)
+    [**Measuring Connectivity**](#connectivity)
 
 7. [Step 7 : Sending UDP pings manually](#step7)
 8. [Step 8 : Sending pings between a group of computers](#step8)
