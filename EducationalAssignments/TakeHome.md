@@ -1,7 +1,7 @@
 # Table of contents
 [**Seattle Take Home Assignment**](#takehome)
 
-[**Using the Clearinghouse website and the Seash**](#clearhouse)
+	   [**Using the Clearinghouse website and the Seash**](#clearhouse)
 
 1.  [Step 1 : Adding resources](#step1)
 2.  [Step 2 : Running Seash](#step2)
@@ -12,12 +12,12 @@
 
     [**Measuring Connectivity**](#connectivity)
 
-7. [Step 7 : Sending UDP pings manually](#step7)
-8. [Step 8 : Sending pings between a group of computers](#step8)
-9. [Step 9 : Pinging behavior in the wide-area](#step9)
-10. [Step 10 : Packet forwarding](#step10)
-11. [Step 11 : Observed behavior from your home computer](#step11)
-12. [Conclusion](#conclusion)
+7.  [Step 7 : Sending UDP pings manually](#step7)
+8.  [Step 8 : Sending pings between a group of computers](#step8)
+9.  [Step 9 : Pinging behavior in the wide-area](#step9)
+10.  [Step 10 : Packet forwarding](#step10)
+11.  [Step 11 : Observed behavior from your home computer](#step11)
+12.  [Conclusion](#conclusion)
 
 ----
 
