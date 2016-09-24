@@ -1,17 +1,13 @@
 # Table of contents
 [**Seattle Take Home Assignment**](#takehome)
-
     [**Using the Clearinghouse website and the Seash**](#clearhouse)
-
 1.  [Step 1 : Adding resources](#step1)
 2.  [Step 2 : Running Seash](#step2)
 3.  [Step 3 : Browsing your resources](#step3)
 4.  [Step 4 : Hello World on a single computer](#step4)
 5.  [Step 5 : Hello World on many computers](#step5)
 6.  [Step 6 : Stopping programs](#step6)
-
     [**Measuring Connectivity**](#connectivity)
-
 7.  [Step 7 : Sending UDP pings manually](#step7)
 8.  [Step 8 : Sending pings between a group of computers](#step8)
 9.  [Step 9 : Pinging behavior in the wide-area](#step9)
