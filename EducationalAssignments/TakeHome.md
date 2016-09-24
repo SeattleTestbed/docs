@@ -1,7 +1,7 @@
 # Table of contents
 [**Seattle Take Home Assignment**](#takehome)
 
-	   [**Using the Clearinghouse website and the Seash**](#clearhouse)
+    [**Using the Clearinghouse website and the Seash**](#clearhouse)
 
 1.  [Step 1 : Adding resources](#step1)
 2.  [Step 2 : Running Seash](#step2)
