@@ -44,9 +44,16 @@ You will see a prompt like " !> " once seash starts.  Seash will allow you to ea
 
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing ''username'' with the user name you used to log into the Seattle Clearinghouse website)'''
 
+<<<<<<< HEAD
 ```
 !> loadkeys username
 ```
+=======
+<code>
+#!python
+!> loadkeys username
+</code>
+>>>>>>> 6c4ac727653550f5ae6ea0bb60a5e10390b194fb
 
 Then, type
 
