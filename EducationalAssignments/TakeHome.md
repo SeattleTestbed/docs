@@ -341,7 +341,7 @@ Finally, check the result of all of the nodes pinging each other by opening your
 
 What do you observe? Is the connectivity graph complete and do all of the nodes agree on which nodes are alive?  As before, a column which is empty and has a corresponding empty row indicates a down node.   Do you see any nodes that cannot connect to each other but can contact other nodes?   If so you'll see something like the image below.
 
-![alt text](../ATTACHMENTS/EducationalAssignments/TakeHome/Non-transitive%20connectivity%20image.jpg)
+![Non-transitive connectivity image](../ATTACHMENTS/EducationalAssignments/TakeHome/Non-transitive%2520connectivity%2520image.jpg)
 
 Notice that the two computers whose IP addresses are circled cannot talk to each other, however they can talk to other nodes.   If you don't see this, then you can either continue to the next step and pretend you had nodes that could not communicate or you can get a new group of nodes and try again.  (One way of locating non-transitive connectivity quickly is to donate resources to Seattle so you can try 20 VMs at a time.)   If you decide to try again, you should use a different group name than WAN (like WAN2) to refer to the nodes so that seash doesn't try to contact the nodes you aren't using any more.
 
