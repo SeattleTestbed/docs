@@ -1,6 +1,6 @@
 = Seattle Take Home Assignment =
 
-The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet.  For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle demokit.  Once you are comfortable with the demokit, we will run an all-pairs-ping on computers distributed around the world.   The goal of running the all-pairs-ping is to observe non-transitive connectivity (when two computers cannot communicate, but they can both communicate with a third computer).   Following this, we will set up one-hop detour routing to circumvent non-transitive connectivity to allow the computers to communicate through the intermediate node.   The final part of the assignment investigates whether or not a computer is behind a NAT (network address translator) and illustrates the practical issues with communicating with a NATed node.   
+The purpose of this assignment is to illustrate several important networking concepts by measuring the connectivity between computers spread around the Internet.  For this task we will be using Seattle, and in the first part of this assignment you will familiarize yourself with the Seattle demokit.  Once you are comfortable with the demokit, we will run an all-pairs-ping on computers distributed around the world.   The goal of running the all-pairs-ping is to observe non-transitive connectivity (when two computers cannot communicate, but they can both communicate with a third computer).   Following this, we will set up one-hop detour routing to circumvent non-transitive connectivity to allow the computers to communicate through the intermediate node.   The final part of the assignment investigates whether or not a computer is behind a NAT (network address translator) and illustrates the practical issues with communicating with a NATed node.
 
 
 When performing these steps, you are running software on end user machines around the world.   As such it is possible (but unlikely) that you may have a node fail as a user turns off their laptop, loses network connectivity, etc.   If so, you should be able to redo the previous step to continue with the assignment.
@@ -18,7 +18,7 @@ This assignment consists of 11 steps and should take between 30-120 minutes to c
 == Step 1 : Adding resources ==
 ----
 
-Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [https://seattle.poly.edu/geni/ Clearinghouse website].   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources.
 
 In the top pane, select LAN and choose 5 VMs, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
@@ -28,13 +28,13 @@ At this point, you should have VMs  that you can use to run your code!
 == Step 2 : Running Seash ==
 ----
 
-Now click on the Profile tab, and download the demokit linked from this page.   Unpacking the zip file will create a directory that contains a shell called seash.py and a bunch of other files you need to do the take home assignment.   Click to download your Private Key and Public Key (save the files to the directory with seash.py).  This will give you the credentials necessary to run your programs on the computers now at your disposal.     
+Now click on the Profile tab, and download the demokit linked from this page.   Unpacking the zip file will create a directory that contains a shell called seash.py and a bunch of other files you need to do the take home assignment.   Click to download your Private Key and Public Key (save the files to the directory with seash.py).  This will give you the credentials necessary to run your programs on the computers now at your disposal.
 
- * On Windows do start, run, cmd and then cd to the folder where you downloaded the demokit.   
+ * On Windows do start, run, cmd and then cd to the folder where you downloaded the demokit.
 
- * On Mac / Linux, open a terminal window and change to the directory where you downloaded the demokit.   
+ * On Mac / Linux, open a terminal window and change to the directory where you downloaded the demokit.
 
-Then type "python seash.py" or "seash.py".   If these fail, you may need to [http://www.python.org download python].   On Windows systems, you may also need to set your environment path to point to the copy of python you installed by clicking on Control Panel--> Systems--> Advanced Settings-->Environment Variables.   
+Then type "python seash.py" or "seash.py".   If these fail, you may need to [http://www.python.org download python].   On Windows systems, you may also need to set your environment path to point to the copy of python you installed by clicking on Control Panel--> Systems--> Advanced Settings-->Environment Variables.
 
 You will see a prompt like " !> " once seash starts.  Seash will allow you to easily run programs across multiple computers at the same time.
 
@@ -44,10 +44,16 @@ You will see a prompt like " !> " once seash starts.  Seash will allow you to ea
 
 Now lets add the credentials you just downloaded from the website into seash.  Type the following command at the prompt, '''(replacing ''username'' with the user name you used to log into the Seattle Clearinghouse website)'''
 
-{{{
+<<<<<<< HEAD
+```
+!> loadkeys username
+```
+=======
+<code>
 #!python
 !> loadkeys username
-}}}
+</code>
+>>>>>>> 6c4ac727653550f5ae6ea0bb60a5e10390b194fb
 
 Then, type
 
@@ -68,12 +74,12 @@ time for the VM information to propagate).  The output from browse command will 
 
 {{{
 #!python
-username@ !> browse            
+username@ !> browse
 Added targets: %1(IP:port:VMname), %2(IP:port:VMname), %3(IP:port:VMname), ...
-Added group 'browsegood' with X targets      
+Added group 'browsegood' with X targets
 }}}
 
-This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.   
+This tells you that the seash has discovered (at least some of) the computers you selected and verified that they are ready to run your code.
 
 [[BR]]
 == Step 4 : Hello World on a single computer ==
@@ -122,7 +128,7 @@ and then type
 username@%1 !> show log
 }}}
 
-You'll see two "Hello World" lines now because you've run the program twice.  
+You'll see two "Hello World" lines now because you've run the program twice.
 
 [[BR]]
 == Step 5 : Hello World on many computers ==
@@ -191,7 +197,7 @@ The result is that you'll see {{{ Failure 'Node Manager error 'Vessel has alread
 username@LAN !> stop
 }}}
 
-You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).   You may also have some VMs that have not been used (Fresh) or are in an error state (Stale).  
+You'll see a message noting that the program has stopped on your nodes.   To check the status of the program you deployed you can type "list" and it will show you if the program is running (Started), you stopped while it was running (Stopped), or stopped on its own (Terminated).   You may also have some VMs that have not been used (Fresh) or are in an error state (Stale).
 
 It is common when using lots of distributed computers to have a few of them not function correctly, so it is normal to have a few in the wrong state after a command.   You can usually continue the series of operations and ignore the failed VMs or else retry the operation on the failed VMs.
 
@@ -201,7 +207,7 @@ It is common when using lots of distributed computers to have a few of them not 
 == Step 7 : Sending UDP pings manually ==
 ----
 
-Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's VMs. 
+Now we're ready to measure the connectivity between computers!   The first thing we need to do is check which UDP port we should use.   For convenience, Seattle Clearinghouse assigns the same UDP port to all of a user's VMs.
 
 To figure out which port you should use, log into the Seattle Clearinghouse website and on the Profile page, look to see what port number it indicates.   '''You should write down your port number as you'll need this value repeatedly.'''
 
@@ -261,7 +267,7 @@ Instead of manually pinging between each of the computers in the LAN group, you 
 username@LAN !> show ip to neighboriplist.txt
 }}}
 
-This will write the IP addresses into a file called "neighboriplist.txt" on your computer.  
+This will write the IP addresses into a file called "neighboriplist.txt" on your computer.
 
 Now type
 
@@ -279,7 +285,7 @@ username@LAN !> run allpairsping.repy port
 
 You can see the result of all of the nodes pinging each other by opening your web browser and pointing it at one of the computers in your neighboriplist:port.   For example, if 1.2.3.4 is a computer in your list, and your port is 54321 then open your browser and in the address bar type "http://1.2.3.4:54321".   If the node you chose doesn't respond, try another node.
 
-Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).   If a row is completely missing, you'll notice the corresponding column is likely empty as well.   This indicates that the node you are looking at is mostly likely down.   
+Each node reports a matrix showing its connectivity. You will see that every node is able to ping every other node (i.e. the matrix is full of latencies).   If a row is completely missing, you'll notice the corresponding column is likely empty as well.   This indicates that the node you are looking at is mostly likely down.
 
 If you refresh the page occasionally, you'll see that the latencies change as the nodes periodically update.
 
@@ -360,7 +366,7 @@ username@WAN !> stop
 == Step 10 : Packet forwarding ==
 ----
 
-Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity".   Non-transitive connectivity usually happens because of configuration errors or convergence failures in the BGP protocol.   
+Now that you have a connectivity matrix where there are two nodes that can't communicate, notice that other computers can communicate with these nodes, but they can't contact each other directly. This is an effect called "non-transitive connectivity".   Non-transitive connectivity usually happens because of configuration errors or convergence failures in the BGP protocol.
 
 Write down the IP addresses of the two computers that cannot directly communicate and also write down the IP of a node that can communicate with both nodes.   To get packets to flow from two nodes that can't communicate, we can have a node in the middle forward packets.   Find the %number of the node who can talk to both nodes.   Then type (replacing ''node1IP'', ''node2IP'', and ''port'')
 
@@ -404,7 +410,7 @@ username@WAN !> on %node1 show log
 
 The next part of the assignment is best performed from your home computer.  It will try to detect the presence of a network address translator (NAT); a feature that many wireless modems and home routers have.  You will need to download the demokit and keys like you previously did in Step 2.
 
-If you can't run Repy on your home computer, you can also obtain a computer using Seattle Clearinghouse.   If you use Seattle Clearinghouse, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.   
+If you can't run Repy on your home computer, you can also obtain a computer using Seattle Clearinghouse.   If you use Seattle Clearinghouse, choose a node of type NAT.   You will need to change the below directions so that you use seash to run commands on the NAT node instead of running the programs locally.
 
 Either way, run seash from a terminal by typing "python seash.py" or "seash.py".  Load your keys by typing (replacing ''username'' with your Clearinghouse user name)
 
@@ -420,9 +426,9 @@ Then type
 !> as username
 }}}
 
-and you'll see the prompt changes to "username@ !>". 
+and you'll see the prompt changes to "username@ !>".
 
-Check on the Seattle Clearinghouse website to see if you still have nodes to use.   If not, under My VMs, select WAN, choose 1 computer, and click "Get".  
+Check on the Seattle Clearinghouse website to see if you still have nodes to use.   If not, under My VMs, select WAN, choose 1 computer, and click "Get".
 
 Now under seash at the " username@ !>" prompt, type
 
@@ -446,7 +452,7 @@ python repy.py restrictions.allowallports udpping.repy WANIP port
 
 
 
-Now look at the log of the WAN computer.   
+Now look at the log of the WAN computer.
 
 {{{
 #!python
@@ -455,7 +461,7 @@ username@ !> on %WANnode show log
 
 Does it have your computer's IP address listed as the source address?  If not, you have network address translation changing your IP address.
 
-Now try to ping in the opposite direction.  First, stop the pingserver on the WAN node 
+Now try to ping in the opposite direction.  First, stop the pingserver on the WAN node
 
 {{{
 #!python
@@ -478,7 +484,7 @@ username@ !> on %WANnode run udpping.repy localIP port
 
 
 
-Then check the log by running 
+Then check the log by running
 
 {{{
 #!python
@@ -487,9 +493,9 @@ username@ !> on %WANnode show log
 
 Did it work?
 
-If you have a NAT device on your home network your computer can initiate connections out, but the packets will be translated so they have a different IP address than the local IP.   This also typically means that nodes on the outside of the NAT cannot initiate connections to inside nodes (which is why the WAN node could not ping your computer).   
+If you have a NAT device on your home network your computer can initiate connections out, but the packets will be translated so they have a different IP address than the local IP.   This also typically means that nodes on the outside of the NAT cannot initiate connections to inside nodes (which is why the WAN node could not ping your computer).
 
-If you have a firewall, your home computer may not be able to receive incoming connections or packets.   However, a non-NAT firewall will not change your IP address.   
+If you have a firewall, your home computer may not be able to receive incoming connections or packets.   However, a non-NAT firewall will not change your IP address.
 
 
 == Conclusion ==
