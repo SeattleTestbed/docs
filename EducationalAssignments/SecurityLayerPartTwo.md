@@ -1,11 +1,12 @@
 
-= Security layer testing and penetration =  
+# Security layer testing and penetration
 
 In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be you completed after [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
-[[TOC(inline)]]
-[[BR]]
-== Overview ==
+
+
+
+## Overview
 ----
 In this assignment you are a tester.  You have been sent a bunch of reference monitors that need testing before they are deployed.  Your job will be to ensure an attacker cannot circumvent these security layers.  In order to do this, you will attempt to write "MZ" to the first two characters of a file.  If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
 
@@ -30,21 +31,24 @@ After testing, write a report on your findings, including all attacks that succe
 Note: For a full description on MZ executable files see  http://www.fileformat.info/format/exe/corion-mz.htm 
      
 
-[[BR]]
-== Prerequisites ==
+
+
+## Prerequisites
 
 This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/SecurityLayerPartOne#GettingPythonRepy SecurityLayerPartOne] for a tutorial on how to get them.  
-[[BR]]
-=== Helpful links ===
+
+
+### Helpful links
 ----
 The following links will aid students in becoming comfortable with Python, Repy and seattle:
- * Python tutorial: '''[http://docs.python.org/tutorial/]'''
- * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
- * list of RepyV2 syntax: '''[wiki:RepyV2API]'''
-[[BR]]
-== Testing security layers ==
+ * Python tutorial: **[http://docs.python.org/tutorial/]**
+ * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
+ * list of RepyV2 syntax: **[wiki:RepyV2API]**
+
+
+## Testing security layers
 ----
-=== Hypothesis, test case, counter example ===
+### Hypothesis, test case, counter example
 
 The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is well designed."  The questions you will ask when running your test cases will always be the same
        
@@ -58,12 +62,13 @@ Notice that these questions are parallels of the security paradigms: security, e
 
 If we can find a case where the hypothesis is false, then the security layer is not secure.  Such a case is referred to as a counter example.  Hence all test cases should be designed to test for these three types of flaws.
 
-[[BR]]
-=== Examples of tests ===
-Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
-==== Test case 1:  ====
 
-{{{
+
+### Examples of tests
+Test cases are briefly described in [wiki:EducationalAssignments/SecurityLayerPartOne SecurityLayerPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+#### Test case 1:
+
+```
 # Open a file
 myfile=openfile("look.txt",True)
  
@@ -82,23 +87,23 @@ else:
 finally:
   # Close the file after our attempt.
   myfile.close()
-}}}
-==== Code analysis ====
+```
+#### Code analysis
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
 
-{{{
+```
 
 # Open a file
 myfile=openfile("look.txt",True)
 
-}}}
+```
 look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
 
 In this case we are verifying the security of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",0) tries to write "MZ" to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
-==== Test case 2:  ====
+#### Test case 2:
 
-{{{
+```
 # Open a file
 myfile=openfile("look.txt",True)
  
@@ -117,21 +122,21 @@ else:
 finally:
   # Close the file after our attempt.
   myfile.close()
-}}}
-==== Code analysis ====
+```
+#### Code analysis
 
 In this case we are verifying the accuracy of the reference monitor.  This code attempts to write "MZ" to the file directly. First the file is opened using myfile=openfile("look.txt",True). Next myfile.writeat("MZ",1) tries to write "MZ" to the file. The 1 refers to the fact that the characters are placed as the second and third characters in the file. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
 
 If this case produces anything other than "Write okay", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from starting with "MZ", not containing "MZ".
 
-==== More information on: Try, Except, Else, Finally ====
-The try, except, else and finally statements are part of '''exception handling'''.  For more information on exception handling please visit: 
+#### More information on: Try, Except, Else, Finally
+The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit: 
 
  * [http://docs.python.org/tutorial/errors.html]
  * [http://wiki.python.org/moin/HandlingExceptions]
  * [http://www.tutorialspoint.com/python/python_exceptions.htm]
 
-=== Hints and Ideas for testing ===
+### Hints and Ideas for testing
 
 When writing your own tests it is important to test for a complete set of possible penetrations.  Keep in mind, it only takes one test case to break through a security layer.  Some of the things you may want to test for include:
 
@@ -140,25 +145,28 @@ When writing your own tests it is important to test for a complete set of possib
  * writing to both positions at once
  
 And more!  Remember a good security layer can't be broken by anyone!  Which is all part of the fun!  It's about solving a puzzle.  First you make the puzzle - write the security layer, then you solve the puzzle - try to bypass it.  If your puzzle is "good enough", no one will be able to break it, no matter what.  
-[[BR]]
-== Notes and Resources ==
+
+
+## Notes and Resources
 ----
    
  * The following link is an excellent source for information about security layers: http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf
 
- * [https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py] is an empty security layer that doesn't perform any operations.
+ * [repy_v2/benchmarking-support/allnoopsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py) is an empty security layer that doesn't perform any operations.
 
- * [https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py] is security layer that performs logging functions.
+ * [repy_v2/benchmarking-support/all-logsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py) is security layer that performs logging functions.
 
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
 
 
-[[BR]]
-== Extra Credit ==
+
+
+## Extra Credit
 ----
 Write and test a second reference monitor that stops "p0wnd" from being written anywhere in a file.  You should include more test cases in the extra credit!
-[[BR]]
-== What to turn in? ==
+
+
+## What to turn in?
 ----
  
  * Turn in the test cases used to attack a given reference monitor.  

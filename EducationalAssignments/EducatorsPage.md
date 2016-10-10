@@ -1,28 +1,28 @@
-= Educator Portal =
-This page contains information for educators wishing to use Seattle in the classroom.  We would love for you to tell us about your experiences using Seattle in the classroom. For a quick intro you might also want to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo] of Seattle in action! If you have any questions about any of the materials on this page, please contact {{{ jcappos -AT- poly -DOT- edu }}}
+# Educator Portal
+This page contains information for educators wishing to use Seattle in the classroom.  We would love for you to tell us about your experiences using Seattle in the classroom. For a quick intro you might also want to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo] of Seattle in action! If you have any questions about any of the materials on this page, please contact ``` jcappos -AT- poly -DOT- edu ```
 
-[[TOC(inline)]]
 
-== Networking / Distributed Systems Assignments ==
 
-=== Complete Assignments ===
+## Networking / Distributed Systems Assignments
+
+### Complete Assignments
 
 The following set of assignments have complete descriptions, and have fully documented instructor solutions. These assignments are geared toward an undergraduate class in networks or distributed systems.
 
  * The [wiki:EducationalAssignments/TakeHome Take-Home Assignment] introduces [wiki:SeattleShell seash (Seattle Shell)] and teaches about connectivity on the Internet.   This is a great starting point to understand how Seattle can help you in a classroom setting.   It's also a nice demo for classes that don't have programming assignments, but want to illustrate practical networking concepts.
 
- * The [wiki:EducationalAssignments/StopAndWait Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it is simple to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.  For comparison, Part 1 of [http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html this assignment] is a C version of the assignment.
+ * The [wiki:EducationalAssignments/StopAndWait Stop and Wait Assignment] has students implement a reliable messaging protocol on top of UDP.   This is a good first assignment in that it is simple to code, but gets students familiar with Seattle and allows them to measure practical Internet properties.  For comparison, Part 1 of [this assignment](http://www.cs.washington.edu/education/courses/461/06wi/HW/HW2/index.html) is a C version of the assignment.
 
  * The [wiki:EducationalAssignments/SlidingWindow Sliding Window Assignment] is an advanced extension to the Stop and Wait Assignment above.
 
  * The [wiki:EducationalAssignments/LinkState Link State Routing Assignment] has students implement a link state routing protocol over the Internet.   Students implement Dijkstra's shortest path routing and then apply this to route packets in an attempt to minimize latency.
 
- * The [wiki:EducationalAssignments/WebServer Web Server Assignment] (based on [http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html this assignment]) and [wiki:EducationalAssignments/ChatServer Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
+ * The [wiki:EducationalAssignments/WebServer Web Server Assignment] (based on [this assignment](http://www.cs.washington.edu/education/courses/461/08au/projects/proj2.html)) and [wiki:EducationalAssignments/ChatServer Chat Server Assignment] focus on building applications that use the network.   Students build network applications that run on top of Seattle and understand applications like HTTP and layering of network services.
 
  * The [wiki:EducationalAssignments/Chord Distributed Hash Table Assignment] has students build a peer-to-peer routing layer.   Students begin by building an implementation of the popular DHT Chord.   This will work well for routing messages over LAN topologies, but will fail in many WAN scenarios due to non-transitive connectivity.   Students then use one-hop detour routing to route around failures.
 
 
-=== Other Assignment Ideas ===
+### Other Assignment Ideas
 A more complex set of assignments can also be designed for use with Seattle. The following assignment ideas are intended to show the scope of assignments Seattle can support.
 
 
@@ -35,15 +35,15 @@ A more complex set of assignments can also be designed for use with Seattle. The
 
  * Global Data Store
 
-    Some cloud computing models provide an interface to a global, persistent store (like Amazon's S3 or Google's !AppEngine). While Seattle provides local persistent storage, there is no preexisting global store. Such a system can be constructed from a set of nodes that cooperatively replicate and manage data. This project requires that student implementations operate correctly over LAN with multiple readers / writers and gracefully recovers from node failures. For a more difficult project, the global store can be required to run on globally distributed nodes. This extension teaches students to deal with high failure likelihood and to overcome non-transitive connectivity, both of which are typical problems for distributed systems deployed at global scale.
+    Some cloud computing models provide an interface to a global, persistent store (like Amazon's S3 or Google's AppEngine). While Seattle provides local persistent storage, there is no preexisting global store. Such a system can be constructed from a set of nodes that cooperatively replicate and manage data. This project requires that student implementations operate correctly over LAN with multiple readers / writers and gracefully recovers from node failures. For a more difficult project, the global store can be required to run on globally distributed nodes. This extension teaches students to deal with high failure likelihood and to overcome non-transitive connectivity, both of which are typical problems for distributed systems deployed at global scale.
 
 
-=== Project Ideas ===
+### Project Ideas
 Advanced undergraduate and graduate courses in networks and distributed systems can also use Seattle for a class project. Seattle project can involve everything from highly scalable, and complex distributed systems, to measurements of global Internet traffic patterns, to ubiquitous computing topics. The two project ideas below are examples of what such a graduate-level project would entail.
 
   * [wiki:RepyMapReduce A MapReduce service]
 
-    The !MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of !MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their !MapReduce service.  An example use of !MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one !MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple !MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
+    The MapReduce algorithm harnesses the power of a multiple nodes to parallelize those computations that can be functionally decomposed into some number of map and reduce stages.  Once completed, students would be able to use their implementations of MapReduce for practical compute jobs by simply supplying a map(), reduce(), and hash() methods to their MapReduce service.  An example use of MapReduce is to implement a page-rank algorithm on a large subset of Wikipedia pages to find the “most popular” page.  Using a database dump of Wikipedia’s pages, students can use one MapReduce pass to parse out all internal Wikipedia links and to generate a stem and leaf plot of all pages in Wikipedia.  Using this list multiple MapReduce passes with the page rank algorithm will yield the comparative page rank for every Wikipedia page, creating a flat index that can be made accessible to users through a web server.
 
 
   * P2P Data Streaming
@@ -59,7 +59,7 @@ Advanced undergraduate and graduate courses in networks and distributed systems 
 
 
 
-== Security / Operating Systems Assignments ==
+## Security / Operating Systems Assignments
 
 
  * The [wiki:EducationalAssignments/SecurityLayerPartOne Implementing Security Policies] introduces students to constructing a reference monitor.   A student will implement a simple security policy that is meant to restrict access to files on a system.

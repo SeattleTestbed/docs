@@ -1,12 +1,13 @@
-= Secure Turing Complete Sandbox Challenge -- Building the Sandbox =
+# Secure Turing Complete Sandbox Challenge -- Building the Sandbox
 
 The Secure Turing Complete Sandbox Challenge attempts to provide some evidence about whether it is possible to construct a secure sandbox.   The core question is whether it is feasible to build a Turing-complete sandbox that does not possess a security vulnerability using common, off-the-shelf tools.   In the first part of this challenge, you will construct a Turing-complete sandbox that other students will try to discover and expose vulnerabilities in.
 
 
-[[TOC(inline)]]
 
-[[BR]]
-== Turing Completeness ==
+
+
+
+## Turing Completeness
 ----
 
 Put intuitively, a Turing-complete sandbox (with infinite memory) can be used to compute any computable problem.   A Turing-complete sandbox takes a program and data as input.   (The program and data can be stored in the same area or separate ones.)   Any Turing-complete sandbox can compute any problem that can be computed by any other sandbox.
@@ -22,11 +23,12 @@ For our purposes, such a sandbox can make several simplifying assumptions that a
  1. The programming environment of your sandbox must be documented and cannot be so limited as to be completely unusable.   
 
 
-[[BR]]
-== Example Programs For Your Sandbox ==
+
+
+## Example Programs For Your Sandbox
 ----
 
-'''To demonstrate the usability of your sandbox, you must implement several programs within it.'''
+**To demonstrate the usability of your sandbox, you must implement several programs within it.**
  
  1. You must implement a program that computes the powers of two from 1 to 128, either outputting them or placing these numbers into positions in memory that are always printed when the sandbox exits.
  1. You must provide a program computing the first ten fibonacci numbers.   The resulting program should output these numbers or place them in the first ten memory locations when exiting.
@@ -34,20 +36,22 @@ For our purposes, such a sandbox can make several simplifying assumptions that a
 Extra credit:
  1. You can implement a Turing-complete sandbox within your sandbox.   This can be your sandbox or can be a classic Turing machine.   Note that if you are implementing your sandbox, it is fine to have this sandbox have less memory available than your full sandbox.
 
-'''Note: Your sandbox must be able to execute other programs!   It cannot simply execute the above programs and nothing else.'''
+**Note: Your sandbox must be able to execute other programs!   It cannot simply execute the above programs and nothing else.**
 
-[[BR]]
-== Threat Model ==
+
+
+## Threat Model
 ----
 
 You should assume that an adversary will be supplying the program and data to run in your sandbox.   The adversary must not be able to perform actions like write files arbitrarily with the permissions of the sandbox's user (for example, overwriting the sandbox code).   
 
 
-[[BR]]
-== What To Turn In ==
+
+
+## What To Turn In
 ----
 
-You must turn in the URL and SHA1 hash of the head of your !GitHub project.   The project must contain the following:
+You must turn in the URL and SHA1 hash of the head of your GitHub project.   The project must contain the following:
 
  1. Detailed documentation explaining the file format and operations supported by your Turing-complete sandbox.   The example programs must be referenced and their execution explained in the documentation. If you did not do the extra credit, you must explain in the document why you believe your sandbox is Turing-complete.   This must be in PDF format.
  1. The source code for the Turing-complete sandbox

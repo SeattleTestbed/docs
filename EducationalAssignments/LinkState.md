@@ -1,33 +1,35 @@
-= Link State Routing Assignment =
+# Link State Routing Assignment
 
 This assignment will illustrate an important network routing strategy called Link State routing. In this assignment, Seattle nodes will take an initial connectivity map of nodes. They will then implement and run Dijkstra's shortest path algorithm to build their routing tables. Finally, nodes will forward packets using their routing table.
 
-'''NOTE WINDOWS USERS:''' You must have Python2.5 or Python2.6, the programming language, installed on your computer in order to complete this assignment. Follow the instructions [InstallPythonOnWindows here] to check if Python2.5 or Python2.6 is currently installed on your system and to get directions on how to install Python2.6 if it is not installed.
+**NOTE WINDOWS USERS:** You must have Python2.5 or Python2.6, the programming language, installed on your computer in order to complete this assignment. Follow the instructions [InstallPythonOnWindows here] to check if Python2.5 or Python2.6 is currently installed on your system and to get directions on how to install Python2.6 if it is not installed.
 
 ----
-[[TOC(inline)]]
+
 ----
 
-[[BR]]
-== Step 1 : Building an initial connectivity map ==
+
+
+## Step 1 : Building an initial connectivity map
 ----
-First, acquire some number of hosts for your experiment via the [https://seattleclearinghouse.poly.edu Seattle Clearinghouse] website . Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You should run this script locally on your your machine.   You can then save this list to a file, and use seash to upload this file to all of your nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
+First, acquire some number of hosts for your experiment via the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu) website . Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You should run this script locally on your your machine.   You can then save this list to a file, and use seash to upload this file to all of your nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
 
 
 
-[[BR]]
-== Step 2 : Connect hosts using the connectivity map ==
+
+
+## Step 2 : Connect hosts using the connectivity map
 ----
 
 
 
 The output you see from the previous step will look like this:
 
-{{{
+```
 srcip1 destip1
 srcip2 destip2
 ...
-}}}
+```
 
 Each of the links represents that those two routers should be considered to be connected.   All connections in the system are symmetric (that is, if A is connected to B then B is connected to A).   However, you will only see either A B or B A in the output list.   This was done to make it easier for you to decide whether A or B should open the TCP connection to the other.   If you see A B, you should have A open the connection to B.  
 
@@ -39,8 +41,9 @@ Note that you may want to have your program sleep for 10 seconds or so after cal
 
 In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.   You can have your program print the nodes it is connected to and check that you are getting the same connections are are seen in the input file.   Once again, it might be a good idea to sleep after connecting and before printing to allow all nodes to finish initiating connections.
 
-[[BR]]
-== Step 3 : Flood connectivity information ==
+
+
+## Step 3 : Flood connectivity information
 ----
 
 
@@ -56,8 +59,9 @@ Once you have built this, have each router send a packet for each of its links t
 
 
 
-[[BR]]
-== Step 4 : Computing the routing path ==
+
+
+## Step 4 : Computing the routing path
 ----
 
 
@@ -65,8 +69,9 @@ At this point, each node has the complete topology.   Now we need the nodes to c
 packets.
 In addition to building the global map of the network, each router will also need to perform shortest-path calculation using Dijkstra's algorithm. Maintaining an up-to-date routing table computed in this way enables the router to perform next-hop routing to forward a packet towards its destination.
 
-[[BR]]
-== Step 5 : Forwarding packets ==
+
+
+## Step 5 : Forwarding packets
 ----
 
 Finally, each router needs to be able to route packets by using its routing table. To forward a packet, the router looks into its routing table for the destination address on the packet. From the routing table it retrieves the address of the router where it should forward the packet. It then forwards the packet to that router.
@@ -75,8 +80,9 @@ For testing purposes, have each router send a packet to every other router.   Us
 
 Now, you can subtract the send times from the receive times to see the delay.   Since the clocks on the nodes aren't synchronized, you may see large values or negative values.   However, the total sum of these is the overall delay.
 
-[[BR]]
-== Step 6 : Using latency information when forwarding ==
+
+
+## Step 6 : Using latency information when forwarding
 ----
 
 If you measure the latency that packets take when forwarded over your network, you will observe that some links take a much longer time for packets to traverse than others.   For example, you might have a path of two hops that goes from Washington to Korea to San Diego.   This might be slower than a three hop path that goes Washington to Oregon to Berkeley to San Diego.   

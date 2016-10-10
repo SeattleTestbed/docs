@@ -1,16 +1,17 @@
-= Implement a Defensive Security System =
+# Implement a Defensive Security System
 
 This assignment will help you understand security mechanisms. You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2. A reference monitor is an access control concept that refers to an abstract machine that mediates all access to objects by subjects. This can be used to allow, deny, or change the behavior of any set of calls. While not a perfect way of validating your reference monitor, it is useful to create test cases to see whether your security layer will work as expected. (The test cases may be turned in as part of the next assignment.)
 
 This assignment is intended to reinforce concepts about access control and reference monitors in a hands-on manner. 
 
-[[TOC(inline)]]
 
 
-[[BR]]
-== Overview ==
+
+
+
+## Overview
 ----
-In this assignment you will create a reference monitor that will, when asked to do so, protect files starting with private_ (and only those files).  If the contents of a file begin with the characters “INV”, then a listfiles() call '''must not''' show that the file exists.  If the contents of a file begin with the characters “PER” then a removefile() call '''must''' raise a !RepyArgumentError.  In cases not specified above, all calls must work identically to the RepyV2 API.
+In this assignment you will create a reference monitor that will, when asked to do so, protect files starting with private_ (and only those files).  If the contents of a file begin with the characters “INV”, then a listfiles() call **must not** show that the file exists.  If the contents of a file begin with the characters “PER” then a removefile() call **must** raise a RepyArgumentError.  In cases not specified above, all calls must work identically to the RepyV2 API.
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -19,22 +20,24 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
  * Security: The attacker should not be able to circumvent the reference monitor and cause files that should not be displayed to be displayed or files that should not be removed to be removed.
 
 
-[[BR]]
-=== Getting Python ===
+
+
+### Getting Python
 ----
-Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
+Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type ```python```.  Please check its version on the initial prompt.
 
-'''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
+**Note:**If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
 
-[[BR]]
-=== Getting RepyV2 ===
+
+
+### Getting RepyV2
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
 Here's how to do that. Assuming you are running on a Unixoid OS,
 
-{{{
+```
 # Create a directory for the required Git repositories
 mkdir SeattleTestbed
 cd SeattleTestbed
@@ -47,7 +50,7 @@ cd repy_v2/scripts
 mkdir ~/path/to/build/dir
 python initialize.py
 python build.py ~/path/to/build/dir
-}}}
+```
 
 Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
 ----
@@ -58,7 +61,7 @@ Once the build script finished, `~/path/to/build/dir` contains a ready-to-use co
 
 Use the command found below in order to run Repy files:
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}}
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py```
 
 Please note Repy files end in extension `.r2py`.   
 
@@ -70,8 +73,9 @@ In order to test whether or not these steps worked, please copy and paste the co
 If you got an error, please go through the troubleshooting section found below.
 
 
-[[BR]]
-=== Troubleshooting Repy code ===
+
+
+### Troubleshooting Repy code
 ----
 If you can't get Repy files to run, some of the following common errors may have occurred:
 
@@ -81,10 +85,9 @@ If you can't get Repy files to run, some of the following common errors may have
 
  * command line errors:
 
-  '''files are missing:''' In the above command line call, you must have `repy.py`, `restrictions.default`, `encasementlib.r2py`, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to run Repy files.  
+  **files are missing:** In the above command line call, you must have `repy.py`, `restrictions.default`, `encasementlib.r2py`, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to run Repy files.  
 
-{{{
-#!comment
+<!--
 AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
  * Downloading the wrong version of seattle:
 
@@ -96,31 +99,34 @@ Advanced trouble shooting:
 To run the unit test, which will automatically tell you if you have errors with your installation please see:
 
  * [wiki:RepyV2CheckoutAndUnitTests]
-}}}
+-->
 
 
-[[BR]]
-=== Tutorials for Repy and Python ===
+
+
+### Tutorials for Repy and Python
 ----
 Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are excellent sources of information.
 
- * Python tutorial: '''[http://docs.python.org/tutorial/]'''
- * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
- * List of RepyV2 API calls: '''[wiki:RepyV2API]'''
+ * Python tutorial: **[http://docs.python.org/tutorial/]**
+ * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
+ * List of RepyV2 API calls: **[wiki:RepyV2API]**
 
 
-[[BR]]
-== Building the security layer  ==
+
+
+## Building the security layer
 ----
 The following program is a basic and incomplete sample code for you to get an idea about writing security layer. Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  
 
 
-[[BR]]
-=== A basic (and inadequate) defense ===
+
+
+### A basic (and inadequate) defense
 ----
 Time to start coding!  Let's inspect a basic security layer.
 
-{{{
+```
 INVBUFFER = []
 PERBUFFER = []
 
@@ -162,7 +168,8 @@ def secure_openfile(filename, create):
 
 def secure_removefile(filename):
   if filename in PERBUFFER:
-    raise RepyArgumentError("Cannot delete this file!\n")
+    raise RepyArgumentError("Cannot delete this file!
+n")
   removefile(filename)
 
 
@@ -209,17 +216,18 @@ CHILD_CONTEXT_DEF["removefile"] = {"type":"func",
 
 # Execute the user code
 secure_dispatch_module()
-}}}
+```
 
 
-[[BR]]
-=== Testing your security layer ===
+
+
+### Testing your security layer
 ----
 In this part of the assignment you will pretend to be an attacker. Remember the attacker's objective is to bypass the restrictions or cause the security layer to act in a disallowed manner. By understanding how the attacker thinks, you will be able to write better security layers.  
 
 An example of an attack is found below:
 
-{{{
+```
 if "private_testfile.txt" in listfiles():
   removefile("private_testfile.txt")
 
@@ -230,7 +238,8 @@ myfile = openfile("private_testfile.txt", True)
 myfile.writeat("INV", 0)
 
 if "private_testfile.txt" in listfiles():
-  log("ERROR! File not invisible.\n")
+  log("ERROR! File not invisible.
+n")
 
 # Write into the file again
 myfile.writeat("PER", 0)
@@ -243,65 +252,71 @@ try:
 except RepyArgumentError:
   pass # There should be an exception here!
 else:
-  log("ERROR! Allowed me to delete the file.\n")
-}}}
+  log("ERROR! Allowed me to delete the file.
+n")
+```
 
-'''Note:''' All attacks should be written as Repy V2 files, using the .r2py extension.
+**Note:** All attacks should be written as Repy V2 files, using the .r2py extension.
 
 
-[[BR]]
-==== Choice of File Names ====
+
+
+#### Choice of File Names
 ----
 It is important to keep in mind that only lowercase file names are allowed. So in the above code, specifically:
 
-{{{
+```
 # Open a file
 myfile=openfile("look.txt",True)
-}}}
+```
 
 look.txt is a valid file name, however Look.txt is not. Examples of other invalid files names are, look@.txt, look/.txt, and look().txt. Essentially all non-alphanumeric characters are not allowed.
 
 
-[[BR]]
-=== Running your security layer ===
+
+
+### Running your security layer
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py ```
 
 Make sure you went through the "How to get RepyV2" section!
 
 
-[[BR]]
-== Notes and Resources ==
+
+
+## Notes and Resources
 ----
  
- * For a complete list of syntax in Repyv2 please visit: '''[wiki:RepyV2API]'''
+ * For a complete list of syntax in Repyv2 please visit: **[wiki:RepyV2API]**
  
- * The following link is an excellent source for information about security layers: '''[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]'''
+ * The following link is an excellent source for information about security layers: **[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]**
 
  * It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
- {{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
+ ```python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py```
 
- * '''Your security layer should produce no output!! '''
+ * **Your security layer should produce no output!! **
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
 
 
-[[BR]]
-== Extra Credit ==
+
+
+## Extra Credit
 ----
-For extra credit, make a second security layer which will prevent writing to a private_ file when the first and last three characters in the file '''match''' and are either "INV" or "PER". If the first three characters in a private_ file are "INV" and the last three are "PER", you should be able to write to the file.
+For extra credit, make a second security layer which will prevent writing to a private_ file when the first and last three characters in the file **match** and are either "INV" or "PER". If the first three characters in a private_ file are "INV" and the last three are "PER", you should be able to write to the file.
 
 Note: Do not submit this code inside your assignment file. Submit a separate copy for extra credit.
 
 
-[[BR]]
-== What to turn in? ==
+
+
+## What to turn in?
 ----
  * Turn in a repy file called reference_monitor_[netid].r2py with all letters in lowercase.
 
- * '''Never raise unexpected errors or produce any output.'''  Your program must produce no output when run normally.
+ * **Never raise unexpected errors or produce any output.**  Your program must produce no output when run normally.
 
- * For extra credit turn in a second repy file called extra_credit_[netid].r2py  '''You must turn in separate files for the normal assignment and extra credit'''
+ * For extra credit turn in a second repy file called extra_credit_[netid].r2py  **You must turn in separate files for the normal assignment and extra credit**

@@ -1,17 +1,20 @@
-= Fixing your security layer =  
+# Fixing your security layer
 
 In this assignment you will analyze the bugs in your security layer from [wiki:EducationalAssignments/ProtectFilePartOne ProtectFilePartOne] and fix them.  You may want to use test cases from [wiki:EducationalAssignments/ProtectFilePartTwo ProtectFilePartTwo] to help identify these bugs.
 
-[[BR]]
-[[TOC(inline)]]
 
-[[BR]]
-== Overview ==
+
+
+
+
+
+## Overview
 ----
 In this assignment you are fixing your reference monitor.  You have been sent a bunch of test programs that try to compromise your reference monitor.  Your job will be to determine where your reference monitor failed, and fix it to ensure an attacker cannot circumvent the security layer.
 
-[[BR]]
-== Common Bugs ==
+
+
+## Common Bugs
 ----
  * The reference monitor needs to track the state of the information on disk, but cannot re-read it for every access (due to efficiency concerns). A common mistake is when the attacker can cause the reference monitor’s state to diverge from the underlying system’s state, especially in error conditions. The reference monitor and disk's states should be in sync.
 
@@ -21,10 +24,11 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 
  * Many reference monitors had accuracy or security bugs as a result of not properly following the instructions.  
 
-[[BR]]
-== Sample implementation of the writeat function and the security issue ==
+
+
+## Sample implementation of the writeat function and the security issue
 ----
-{{{
+```
   def writeat(self, data, offset):
     if offset == 0 and self.filename.startswith("private_"):
         if data == "INV":
@@ -42,19 +46,21 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
           except ValueError:
             pass
     return self.file.writeat(data, offset)
-}}}
+```
 
-[[BR]]
-=== Code Analysis ===
+
+
+### Code Analysis
 ----
 Let's analyze some of the bugs in this implementation.
 
 According to the specifications in [wiki:EducationalAssignments/ProtectFilePartOne ProtectFilePartOne], a private_ file should not be visible with the listfiles() call if its contents start with "INV". The above code checks whether "INV" is being written at offset 0. What happens when there is a write at offset 1 or 2 which causes the first three characters in the file to become "INV"? This condition is not covered in the above code and will cause a file that may need to be invisible to be listed when listfiles() is called.
 
-Consider another situation where {{{data}}} contains "INVISIBLE" which is to be written at offset 0 to a private_ file. In this case, at {{{if data == "INV":}}}, the condition fails as a result of which the file will not be added to INVBUFFER and would be listed when listfiles() is called even though the first three characters in the file are "INV". The if statement should've compared only the first three characters of {{{data}}} with "INV" instead of the entire string.
+Consider another situation where ```data``` contains "INVISIBLE" which is to be written at offset 0 to a private_ file. In this case, at ```if data == "INV":```, the condition fails as a result of which the file will not be added to INVBUFFER and would be listed when listfiles() is called even though the first three characters in the file are "INV". The if statement should've compared only the first three characters of ```data``` with "INV" instead of the entire string.
 
-[[BR]]
-== What to turn in? ==
+
+
+## What to turn in?
 ----
 
  * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_netid.r2py, e.g. reference_monitor_ab321.r2py. All letters must be lowercase.

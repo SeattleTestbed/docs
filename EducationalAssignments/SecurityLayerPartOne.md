@@ -1,5 +1,5 @@
 
-= Building a Security Layer =  
+# Building a Security Layer
 
 
 This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  A reference monitor is an access control concept that refers to an abstract machine
@@ -9,14 +9,15 @@ One critical aspect of creating a reference monitor is to ensure it cannot be by
 
 This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of information, security and privacy have been embedded into the steps of this assignment.    
 
-[[TOC(inline)]]
 
 
-[[BR]]
-== Overview ==
+
+
+
+## Overview
 ----
 
-In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [http://www.fileformat.info/format/exe/corion-mz.htm old executable format].)  Your goal is to prevent the attacker from succeeding.  Thus you must stop a program from creating a file with "MZ" as the first two characters.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
+In this assignment an attacker attempts to write "MZ" to the first two characters of a file.  (Historically, this is an indicator for an [old executable format](http://www.fileformat.info/format/exe/corion-mz.htm).)  Your goal is to prevent the attacker from succeeding.  Thus you must stop a program from creating a file with "MZ" as the first two characters.  You will do this by adding security rules to the functions available for reading from a file and writing to a file.  The future of the system depends on your ability to write secure code!  
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -24,22 +25,23 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
  * Security: The attacker should not be able to circumvent the security layer.  Hence, if "MZ" can be written two the first two characters, the security is compromised.     
 
-[[BR]]
-=== Getting Python ===
+
+
+### Getting Python
 ----
-Please note you must have Python 2.6 or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type {{{python}}}.  Please check its version on the initial prompt.
+Please note you must have Python 2.6 or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type ```python```.  Please check its version on the initial prompt.
 
-'''Note:'''If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
+**Note:**If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
 
 
 
-=== Getting RepyV2 ===
+### Getting RepyV2
 ----
 The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. ([wiki:BuildInstructions This page] describes the process in greater detail). You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
 
 Here's how to do that. Assuming you are running on a Unixoid OS,
 
-{{{
+```
 # Create a directory for the required Git repositories
 mkdir SeattleTestbed
 cd SeattleTestbed
@@ -52,16 +54,15 @@ cd repy_v2/scripts
 mkdir ~/path/to/build/dir
 python initialize.py
 python build.py ~/path/to/build/dir
-}}}
+```
 
 
-{{{
-#!comment
+<!--
 Albert comments: I think this note below is outdated; the tarball definitely is.
 
 (You will see a few warning messages during building, but they can be ignored for the task at hand.) 
 (If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
-}}}
+-->
 
 The build directory, which can be named whatever you want, is where you will put your security layer code and the programs
 that will test it.
@@ -72,7 +73,7 @@ restrictions.default, encasementlib.r2py, etc.
 
 Use the command found below in order to run Repy files:
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py}}} 
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py``` 
 
 Please note Repy files end in extension `.r2py`.   
 
@@ -83,7 +84,7 @@ In order to test whether or not these steps worked, please copy and paste the co
 
 If you got an error, please go through the troubleshooting section found below.
 
-=== Troubleshooting Repy code ===
+### Troubleshooting Repy code
 If you can't get Repy files to run, some of the following common errors may have occurred:
 
  * using `print` instead of `log`:
@@ -92,10 +93,9 @@ Repy is a subset of Python, but its syntax is slightly different.  For example, 
 
  * command line errors:
 
-'''files are missing:''' In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
+**files are missing:** In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
 
-{{{
-#!comment
+<!--
 AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
  * Downloading the wrong version of seattle:
 
@@ -107,27 +107,30 @@ Advanced troubleshooting:
 To run the unit test, which will automatically tell you if you have errors with your installation please see:
 
  * [wiki:RepyV2CheckoutAndUnitTests]
-}}}
-[[BR]]
-=== Tutorials for Repy and Python ===
+-->
+
+
+### Tutorials for Repy and Python
 ----
 Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are excellent sources of information.
 
- * Python tutorial: '''[http://docs.python.org/tutorial/]'''
- * Seattle tutorial: '''[https://seattle.poly.edu/wiki/PythonVsRepy]'''
- * list of RepyV2 syntax: '''[wiki:RepyV2API]'''
-[[BR]]
+ * Python tutorial: **[http://docs.python.org/tutorial/]**
+ * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
+ * list of RepyV2 syntax: **[wiki:RepyV2API]**
 
-== Building the security layer  ==
+
+
+## Building the security layer
 ----
-'''[wiki:RepyV2SecurityLayers]''' explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
-[[BR]]
+**[wiki:RepyV2SecurityLayers]** explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
 
-== A basic (and inadequate) defense ==
+
+
+## A basic (and inadequate) defense
 
 Time to start coding!  Let's inspect a basic security layer.  
 
-{{{
+```
 """
 This security layer interposes on a textfile 
 and gives it open, close, read and write access.
@@ -194,29 +197,31 @@ sec_file_def = {"obj-type":SecureFile,
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}
 
 secure_dispatch_module()
-}}} 
+``` 
 
-== Using the example layer ==
-
-
-Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [http://en.wikipedia.org/wiki/Thread_safety wiki/Thread_safety].  
+## Using the example layer
 
 
-[[BR]]
-=== Code analysis === 
+Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [wiki/Thread_safety](http://en.wikipedia.org/wiki/Thread_safety).  
+
+
+
+
+### Code analysis
 
 The `writeat()` function attempts follow the design principles of accuracy, efficiency, and security.  However it does so inadequately.  Accuracy is attempted by only blocking "MZ" from being written.  If any other characters are written, the `writeat()` function executes normally.  Efficiency is preserved because the number of test cases is small.  Also security is attempted because "MZ" cannot be written to a file as easily.  It is important to note that no security system is perfect.  It is more important to make a security system that is infeasible to break, rather than impossible to break.  However this security layer does not yet create the necessary infeasibility requirements for most attacks.  Thus we see that there is a grey area of what is an acceptable level of impedance.       
 
 Now let's look at the structure of `writeat()`.  First off, the if-statement contains the mitigation.  If the "alarm" is not tripped then the `writeat()` function is executed normally.  Within the if-statement `data.startswith("MZ")` is used to check for an illegal write.  Specifically, `data` is a variable used to store information which will be written to the file.  And the method `startswith()` checks to see if the file begins with certain characters, in this case "MZ".  
 
 The second condition, `(offset == 0)` determines the starting point of the cursor before it writes to the file.  Thus offset = 0, means we start writing at the beginning of the file.  Similarly if offset =4, the computer would start writing to the 5th position of the file.  Starting with 0 rather than 1 has heuristic meaning in computer science.   
-[[BR]]
 
-== Testing your security layer ==
+
+
+## Testing your security layer
 ----
 In this part of the assignment you will pretend to be an attacker.  Remember the attacker's objective is to write "MZ" to a file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to write "MZ" to a file.  An example of an attack is found below:
 
-{{{
+```
 # Open a file
 myfile=openfile("look.txt",True)
  
@@ -226,77 +231,83 @@ try:
  
 # It raised an Exception (as it was supposed to):
 except ValueError:
-    log("The security layer correctly blocked the write!!!\n")
+    log("The security layer correctly blocked the write!!!
+n")
  
 # No Exception was raise
 else:
-    log("Wrote an MZ!!!\n")
+    log("Wrote an MZ!!!
+n")
  
 finally:
     # Close the file after our attempt.
     myfile.close()
-}}}
+```
 
-'''Note:''' All attacks should be written as Repy files, using the .r2py extension.
+**Note:** All attacks should be written as Repy files, using the .r2py extension.
 
-=== Code Analysis ===
+### Code Analysis
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
 
-{{{
+```
 
 # Open a file
 myfile=openfile("look.txt",True)
 
-}}}
+```
 look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
 
 This code attempts to write "MZ" to the file directly.  First the file is opened using
 `myfile=openfile("look.txt",True)`.  Next `myfile.writeat("MZ",0)` tries to write "MZ" to the file.  The 0 refers to an offset of zero.  The `try:` statement tells the program to "try" this case.  Notice that the `except` is executed if an error is raised.  If the security layer fails the test then the else statement is executed.  The `finally:` statement will always run, closing the file.
-[[BR]]
-=== Running your security layer ===
+
+
+### Running your security layer
 ----
 Finally, type the following commands at the terminal to run your security layer with your attack program
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py }}}
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py ```
 
 '''Make sure you use filenames that are all lowercase letters!
 
-[[BR]]
 
-= Notes and Resources =
+
+
+# Notes and Resources
 ----
    
- * A list of command line utilities for Windows can be found at '''[http://commandwindows.com/command3.htm]'''
+ * A list of command line utilities for Windows can be found at **[http://commandwindows.com/command3.htm]**
 
- * A list of command line utilities for Linux/Mac '''[http://www.pixelbeat.org/cmdline.html]'''
+ * A list of command line utilities for Linux/Mac **[http://www.pixelbeat.org/cmdline.html]**
 
- * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on '''how to test security layers'''. 
+ * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on **how to test security layers**. 
 
- * For a complete list of syntax in Repyv2 please visit: '''[wiki:RepyV2API]'''
+ * For a complete list of syntax in Repyv2 please visit: **[wiki:RepyV2API]**
  
- * The following link is an excellent source for information about security layers: '''[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]'''
+ * The following link is an excellent source for information about security layers: **[http://www.cs.washington.edu/homes/arvind/papers/ccs10.pdf]**
 
- * '''[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py repy_v2/benchmarking-support/allnoopsec.py]''' is an empty security layer that doesn't perform any operations.
+ * **[repy_v2/benchmarking-support/allnoopsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py)** is an empty security layer that doesn't perform any operations.
 
- * '''[https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py repy_v2/benchmarking-support/all-logsec.py]''' is security layer that works for logging functions.
+ * **[repy_v2/benchmarking-support/all-logsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py)** is security layer that works for logging functions.
 
- * '''Note:''' It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
+ * **Note:** It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
 
-{{{python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py}}}
+```python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py```
 
-'''Your security layer should produce no output!!!'''   If it encounters an attempt to write MZ, you should raise a !ValueError and allow execution to continue.
+**Your security layer should produce no output!!!**   If it encounters an attempt to write MZ, you should raise a ValueError and allow execution to continue.
 
 
  * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
-[[BR]]
-= Extra Credit =
+
+
+# Extra Credit
 ----
 For extra credit, make a second security layer which stops an attacker from writing 'p0wnd' anywhere in a file.  This security layer will be similar to the first one you wrote, except now you must handle the case of `offset != 0` as well as a few other things.  You should also write an attack layer which attempts to write 'p0wnd' to a file.  
 
-'''Hint:''' Since this string can be written anywhere in the file, there will most likely be more test cases.  
-[[BR]]
+**Hint:** Since this string can be written anywhere in the file, there will most likely be more test cases.  
 
-= What to turn in? =
+
+
+# What to turn in?
 ----
 
  * Turn in a repy file called reference_monitor_[ name or id number].r2py
