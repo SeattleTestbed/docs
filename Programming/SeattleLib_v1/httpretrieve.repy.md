@@ -1,0 +1,82 @@
+# httpretrieve.repy
+
+Provides a method for retrieving content from web servers using the HTTP protocol. The content can be accessed as a file like object, or saved to a file or returned as a string.
+
+The file like object is described in further details below. Programmers should use this module for communicating with outside HTTP servers. In some ways this module is a crude version of the the Python httplib module. See http://docs.python.org/library/httplib.html for more details.
+
+### Functions
+
+```
+def httpretrieve_open(url, querydata=None, postdata=None, httpheaders=None, proxy=None, timeout=None):
+```
+   Returns a file-like object that can be used to read the content from an HTTP server. Follows 3xx redirects.
+
+   Notes: 
+
+   * url is the URL to perform a GET or POST request on.
+   * postdata (optional) is a dictionary of form data or a string to POST to the server. Passing a non-None value results in a POST request being sent to the server. If postdata is omitted, the URL is retrieved with GET. If both postdata and querydata are omitted, there is no query string sent in the request.
+   * querydata (optional) is a dictionary of form data or a string to send as the query string to the server. For both querydata and postdata, strings are sent *unmodified*. This means you probably should encode them first, with urllib_quote().
+   * httpheaders (optional) is a dictionary of supplemental HTTP request headers to add to the request.
+   * proxy (optional) is a proxy server 2-tuple to bind to: ('host', port).
+   * timeout (optional) is for establishing a connection to the web server, sending headers, and reading the response headers. If this is excluded, the request never times out.
+   * Raises ValueError if given an invalid URL, or malformed limit or timeout values or if the user attempts to call a method on the file-like object after closing it.
+   * Raises HttpConnectionError if opening the connection fails, or if the connection is closed by the server before we expect.
+   * Raises SocketTimeoutError if the timeout is exceeded.
+   * Raises HttpBrokenServerError if the response or the Location response header is malformed.
+   * Returns a file-like object which can be used to read the body of the response from the web server. The protocol version spoken by the
+    server, status code, and response headers are available as members of the object.
+
+
+```
+def httpretrieve_save_file(url, filename, querydata=None, postdata=None, httpheaders=None, proxy=None, timeout=None):
+```
+   Perform an HTTP request, and save the content of the response to a file.
+
+   Notes:
+
+   * filename is the file name to save the response to. Can supply directory here.
+   * See documentation for httpretrieve_open() for other parameters.
+   * See httpretreive_open() for exceptions
+
+
+```
+def httpretrieve_get_string(url, querydata=None, postdata=None, httpheaders=None, proxy=None, timeout=30):
+```
+   Performs an HTTP request on the given URL, using POST or GET,  returning the content of the response as a string. Uses httpretrieve_open.
+
+   Notes: 
+
+   * See the open function for parameters and exception information.
+   * Returns the body of the HTTP response (no headers).
+
+
+```
+class _httpretrieve_filelikeobject:
+```
+
+```
+   def read(self, limit=None, timeout=None):
+```
+   Behaves like Python's file.read(), with the potential to raise additional informative exceptions.
+
+   Notes: 
+
+   * limit (optional) is the maximum amount of data to read. If omitted or None, this reads all available data.
+   * See file.read()'s documentation, as well as that of httpretrieve_open() for more details about exceptions.
+
+```
+   def close(self):
+```
+   Close the file-like object.
+
+
+### Example Usage
+
+?
+
+### Includes
+[wiki:SeattleLib/sockettimeout.repy]
+
+[wiki:SeattleLib/urlparse.repy]
+
+[wiki:SeattleLib/urllib.repy]

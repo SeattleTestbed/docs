@@ -1,0 +1,27 @@
+# xmlparse.repy
+
+Provide a relatively basic but usable XML parsing functionality for repy.
+
+# Functions
+
+```
+def xmlparse_parse(data)
+```
+    Parses an XML string into an xmlparse_XMLTreeNode containing the root item. Returns the xmlparse_XMLTreeNode tree.
+
+    Note:
+
+    * data is the XML data to be parsed.
+    * Throws an xmlparse_XMLParseError if parsing fails.
+
+
+```
+class xmlparse_XMLTreeNode:
+```
+    Provide a simple tree structure for XML data. xmlparse_parse turns XML data 
+
+# Usage
+
+```
+node = xmlparse_parse("<Some><xml><data></data></xml></Some>")
+```

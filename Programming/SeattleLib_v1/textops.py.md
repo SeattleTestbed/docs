@@ -1,0 +1,61 @@
+# textops.py
+
+Provides text-processing utility functions loosely modelled after GNU coreutils. See http://www.gnu.org/software/coreutils/ for more details.
+
+Currently supports a subset of the functionality of grep and wc.
+
+
+### Functions
+
+```
+def textops_rawtexttolines(text, linedelimiter="
+n"):
+```
+   Converts raw text (a string) into lines that can be processed by the functions in this module.
+
+   Notes: 
+
+   * text is the text to convert into lines (basically, a sequence of strings).
+   * linedelimiter (optional, defaults to "
+n"): The string denoting an EOL ("
+n" on Unix, "
+r
+n" on Windows).
+   * Raises TypeError on bad parameters.
+   * Returns a sequence of strings; each element is a line, with newlines removed.
+
+
+```
+def textops_grep(match, lines, exclude=False, case_sensitive=True):
+```
+   Return a subset of lines matching (or not matching) a given string.
+
+   Notes:
+
+   * match is the string to be match.
+   * lines are the lines to filter.
+   * exclude (optional, defaults to false). If false, include lines matching 'match'. If true, include lines not matching 'match'.
+   * case_sensitive (optional, defaults to true). If false, ignore case when comparing 'match' to the lines.
+   * Raises TypeError on bad parameters.
+   * Returns a subset of the original lines.
+
+
+```
+def textops_cut(lines, delimiter="
+t", characters=None, fields=None, complement=False, only_delimited=False, output_delimiter=None):
+```
+   Perform the same operations as GNU coreutils' cut.
+
+   Notes:
+
+   * lines are the lines to perform a cut on.
+   * delimiter (optional). Field delimiter. Defaults to "
+t" (tab).
+   * characters (optional). Characters selector. Used to select some subset of characters in the lines. Should be a sequence argument. Caller must use one of characters or fields; not both.
+   * fields (optional). Fields selector. Used to select some subset of fields in the lines. Should be a sequence argument. Caller must use one of characters or fields; not both.
+   * complement (optional). Invert which characters or fields get selected. Defaults to False.
+   * only_delimited (optional). When selecting fields, only include lines containing the field delimiter.
+   * output_delimiter (optional). When selecting fields, join fields with this (defaults to the input delimiter).
+   * Raises TypeError on bad parameters.
+   * Returns the cut lines.
+
