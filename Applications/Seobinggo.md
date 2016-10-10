@@ -1,10 +1,10 @@
-= Seobinggo =
+# Seobinggo
 
 Seobinggo is P2P backup software for Seattle.   It backs up files on other user machines that run Seobinggo.
 
 This software was developed by Yoon Hong Song: hys235@cs.washington.edu
 
-== LICENSE ==
+## LICENSE
 Legal Statement:
 
 Copyright (c) 2009 The University of Washington
@@ -28,31 +28,31 @@ OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS
 IN THE WORK.
 
 
-== Running Seobinggo ==
+## Running Seobinggo
 1.Install/Setup
 
 
-        a. Download and install Seattle.
-           {{{https://seattleclearinghouse.poly.edu/download/flibble/}}}
+        1. Download and install Seattle.
+           ```https://seattleclearinghouse.poly.edu/download/flibble/```
 
         b. Untar the package
-                {{{tar -zxvf Seobinggo.tar.gz}}}
+                ```tar -zxvf Seobinggo.tar.gz```
 
-        c. Copy the files in Seobinggo to the {{{seattle/seattle_repy}}} directory
+        c. Copy the files in Seobinggo to the ```seattle/seattle_repy``` directory
 
-        d. Enter the {{{seattle/seattle_repy}}} directory
+        d. Enter the ```seattle/seattle_repy``` directory
 
 2. Run Seobinggo
-        {{{python repy.py restrictions.default Seobinggo.repy}}}
+        ```python repy.py restrictions.default Seobinggo.repy```
 
 3. Using Sebinggo
 
-        a. Point your webbrowser at {{{127.0.0.1:12345}}}
+        1. Point your webbrowser at ```127.0.0.1:12345```
 
         b. Now you can use the User Interface to backup local files to peers.
 
 
-== Known Issues & Limitation ==
+## Known Issues & Limitation
 
 1. File size bigger than 3MB will not be stored in peers because recvAll()
    does not work correctly. Once recvAll() works correctly, Seobinggo should
@@ -63,7 +63,7 @@ IN THE WORK.
    current encryption policy does not guarantee full securty of backup files
    in many reasons.
 
-        a. Confidentiality - Before sending backup file to peers, Seobinggo encrypt
+        1. Confidentiality - Before sending backup file to peers, Seobinggo encrypt
            the data with the user's public key(RSA). This way, anyone without matching
            private key will not be able to read the original file.
 
@@ -75,7 +75,7 @@ IN THE WORK.
            public key. Although the file data is encrypted with public key, this is
            not ideal security policy.
 
-== Improvement & Schedule ==
+## Improvement & Schedule
 
 1. Security
    SHA1 will be adopted to improve the security of the system. As before, file data

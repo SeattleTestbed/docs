@@ -1,7 +1,7 @@
-'''Entities and actions'''
+**Entities and actions**
 
-'''Prof'''
-{{{
+**Prof**
+```
 Create/Edit Assignment
   Delete Assignment
   Grade
@@ -11,28 +11,28 @@ Create/Edit Assignment
   Create / Manage students
   Download student submissions
   Log_in
-}}}
+```
 
 
-'''Student'''
-{{{
+**Student**
+```
 Submit / re-submit solution
 Log in
 See previous submissions
-}}}
+```
 
 
-'''Dev'''
-{{{
+**Dev**
+```
 Create prof
 log in
-}}}
+```
 
 
 
-'''Grading Hierchy'''
+**Grading Hierchy**
 
-{{{
+```
 Class D
  	Assign 1
 		Student A (11/12)
@@ -44,12 +44,12 @@ Class D
 					testcase3    not graded
 
 
-}}}
+```
 
 
 
 
-'''Database relations'''
+**Database relations**
 
 
 Prof : email, pws, ''classes'', name
@@ -71,8 +71,8 @@ Test Case:  desc ''nsfile''
 TestCaseNSFileMap:  node, code, student filename,'' test case.''
 
 ToGrade : Solution, status 
-{{{
+```
      "submittted for grading"
      "grading..."
      "grading suite 2/5"
-}}}
+```
