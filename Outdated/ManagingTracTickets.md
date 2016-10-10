@@ -1,17 +1,19 @@
-= Managing Trac Tickets =
+# Managing Trac Tickets
 With so many options, fields, and dropdown boxes, trac tickets can be confusing. This is a description of how to get the most out of the powerful and convenient tools that trac gives you. After the description, there are a few hints and recommended best practices.
 ----
-[[TOC(inline)]]
+
 ----
-[[BR]]
-== Introduction ==
+
+
+## Introduction
 ----
 One of the most important features of trac is its ticketing system. Developers can use this to keep track of tasks to complete and bugs to fix. trac works best when everybody tickets all of their bugs and all of their tasks, including as much metadata as possible. But not all of the fields are self-explanatory, and many of them could allow for multiple interpretations. In order for us to get the most out of it, it helps if we follow certain common practices.
-[[BR]]
-== The life of a ticket ==
+
+
+## The life of a ticket
 ----
 These are the various stages that every ticket should pass through.
- 1. '''Creation:''' Whether you are creating a ticket for yourself or for someone else, it should contain certain information:
+ 1. **Creation:** Whether you are creating a ticket for yourself or for someone else, it should contain certain information:
   1. Summary - a brief but descriptive summary of the ticket which will show up in searches.
   1. Description - a full description of the ticket, ideally including everything that anyone on the project would need to know about the assignment or bug. You can and should use wiki formatting here where it would be helpful.
   1. Assign to - the person for whom the ticket would be most relevant. Tickets that are not assigned will often be orphaned and forgotten, so you should almost always fill in this field. If it turns out that you got the wrong person, they can always reassign it with no harm done.
@@ -25,12 +27,13 @@ These are the various stages that every ticket should pass through.
   1. Severity - used to specify how severe the problem is. By default this is set to 'Medium' but its range is Highest - High - Medium - Low - Lowest.
   1. Blocking and Blocked by -- using these fields you can specify some number of space/comma delimited ticket numbers. Naturally, the Blocking list is a set of tickets that are blocking progress on this ticket, and the Blocked by are the tickets being blocked by the resolution of this ticket. After you do this, the ticket ids will be linked in the summary display for the ticket at the top of the page (and the other tickets will reflect a consistent blocking direction). Additionally in the top right corner you can click on 'Depgraph' to see a visual graph of ticket dependencies. See ticket #103 for an example of these features.
 
- 1. '''Acceptance:''' When you are assigned a ticket, you should as soon as possible either accept it, close it if it is invalid, or reassign it to someone else if it doesn't belong to you. This way the reporter knows that you've at least looked at the ticket.
- 1. '''Modification:''' Actually, the description of a ticket can't be modified, so if you need to make any significant modifications to the ticket, it's usually best to close the old one and open a new one with the modified description, since people are apt to overlook comments when looking at a ticket. Tickets closed for this reason should generally be resolved as invalid.
- 1. '''Closing:''' Once you've fixed the problem or completed the task described in the ticket, you need to close the ticket, marking it as "fixed". If you fixed part of the problem and are not immediately planning to fix the whole thing, you might consider closing the ticket and reopening a new one with the part of the problem that you still have to fix. Anytime you close a ticket you should leave a comment. If you're reopening a new one that is closely related, go ahead and link to it (which you can do in wiki formatting by prefacing the ticket number with a pound sign; !#42 -> #42). If you've completed a task or fixed a bug that involved checking code into the repository, then you should provide a link to the changeset (which you can do in wiki formatting by prefacing the revision number with the letter r: !r1313 -> r1313). That's really handy for people browsing the wiki to quickly see exactly what changes you made.
+ 1. **Acceptance:** When you are assigned a ticket, you should as soon as possible either accept it, close it if it is invalid, or reassign it to someone else if it doesn't belong to you. This way the reporter knows that you've at least looked at the ticket.
+ 1. **Modification:** Actually, the description of a ticket can't be modified, so if you need to make any significant modifications to the ticket, it's usually best to close the old one and open a new one with the modified description, since people are apt to overlook comments when looking at a ticket. Tickets closed for this reason should generally be resolved as invalid.
+ 1. **Closing:** Once you've fixed the problem or completed the task described in the ticket, you need to close the ticket, marking it as "fixed". If you fixed part of the problem and are not immediately planning to fix the whole thing, you might consider closing the ticket and reopening a new one with the part of the problem that you still have to fix. Anytime you close a ticket you should leave a comment. If you're reopening a new one that is closely related, go ahead and link to it (which you can do in wiki formatting by prefacing the ticket number with a pound sign; !#42 -> #42). If you've completed a task or fixed a bug that involved checking code into the repository, then you should provide a link to the changeset (which you can do in wiki formatting by prefacing the revision number with the letter r: !r1313 -> r1313). That's really handy for people browsing the wiki to quickly see exactly what changes you made.
 
-[[BR]]
-== A few hints ==
+
+
+## A few hints
 ----
 The art of ticket management is not a strict art. But there are a few hints that you can use along the way. Here are some of these (feel free to add more!):
 
@@ -50,4 +53,4 @@ The art of ticket management is not a strict art. But there are a few hints that
 
  * Use revision numbers in ticket comments when closing tickets (e.g. fixed in r101) -- the r101 is the format that will cause trac to understand that this refers to a commit.
 
- * Use the Trac [https://seattle.poly.edu/timeline timeline] to track what has been happening recently -- to see new tickets, new commits, etc.
+ * Use the Trac [timeline](https://seattle.poly.edu/timeline) to track what has been happening recently -- to see new tickets, new commits, etc.

@@ -1,50 +1,50 @@
-= Shim Exception Hierarchy =
+# Shim Exception Hierarchy
 
-== Description ==
+## Description
 ----
 This page displays the shim exception hierarchy. It lists all the expected shim exceptions that may be raised and a description of what they are.
 [[br]]
 
-== Exception Hierarchy ==
+## Exception Hierarchy
 ----
 Exception hierarchy:
- * !ShimException
-  * !ShimStackError
-  * !ShimConfigError
-  * !ShimArgumentError
-  * !ShimNotFoundError
-  * !ShimInternalError
+ * ShimException
+  * ShimStackError
+  * ShimConfigError
+  * ShimArgumentError
+  * ShimNotFoundError
+  * ShimInternalError
 [[br]]
 
-== Exception Description ==
+## Exception Description
 ----
-class '''!ShimException''' (Exception): 
+class **ShimException** (Exception): 
   The base shim exception. All other exceptions
   are derived from here.
   
 
-class '''!ShimStackError''' (!ShimStackError):
+class **ShimStackError** (ShimStackError):
   This error will usually be raised if we are unable
   to manipulate the shim stack. For example if we
   are trying to do a pop() or peek() on an empty stack.
 
 
-class '''!ShimConfigError''' (!ShimException):
+class **ShimConfigError** (ShimException):
   This error means that the shim library could not
   properly configure the shims.
 
 
-class '''!ShimArgumentError''' (!ShimException):
+class **ShimArgumentError** (ShimException):
   This indicates that an argument was provided
   that does not match the expected argument for
   a function.
   
 
-class '''!ShimNotFoundError''' (!ShimException):
+class **ShimNotFoundError** (ShimException):
   This error would be raised if a shim name
   is provided that is not found.
 
 
-class '''!ShimInternalError''' (!ShimException):
+class **ShimInternalError** (ShimException):
   This error is raised if an error occurs while
   configuring the shims.

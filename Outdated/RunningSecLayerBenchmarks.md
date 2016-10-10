@@ -1,16 +1,16 @@
-= Running the Security Layer Benchmarks =
+# Running the Security Layer Benchmarks
 
-== Setup ==
+## Setup
 First it is necessary to setup a folder to run the benchmarks. This can be done like so:
 
-{{{
+```
 cd $SEATTLE/branches/repy_v2/
 mkdir bench/
 python preparetest.py bench
 cp benchmarking-support/* bench/
-}}}
+```
 
-== Running the Benchmarks ==
+## Running the Benchmarks
 Each type of benchmark has it's own script to initiate the benchmarks.
  * To run the basic overhead tests, invoke ./benchmark.sh
  * To run the allpairsping test, invoke ./benchmark-allpairs.sh
@@ -22,6 +22,6 @@ Each benchmark file has some configurable settings that can be edited. For examp
 
 All benchmarks can be found at: [browser:seattle/branches/repy_v2/benchmarking-support/ benchmarking-support].
 
-== Instructions for benchmark-blockstore.py ==
+## Instructions for benchmark-blockstore.py
 Change the arguments of blockstore.py to the prefix of your public/private keys and a valid port number (e.g, 12345).
 For example, if your keys are my_name.publickey and my_name.privatekey, the first argument would be my_name.

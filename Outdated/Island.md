@@ -4,12 +4,14 @@ An Island is a construct which is based on a VirtualNamespace. It has the additi
 
 This is a central component of CADET, since it is utilized to determine the performance characteristics of a program to optimize the host machine selection.
 
-[[BR]]
+
+
 ----
-[[TOC(inline)]]
+
 ----
-[[BR]]
-== Components ==
+
+
+## Components
 
 The functionality of the Island is provided across several components.
 The components and their function are listed below:
@@ -18,8 +20,10 @@ The components and their function are listed below:
  * stoptime_logger.repy : Logs the time's repy was stopped, and makes the information available. Used by island_stats for time consumption.
  * prgm_stat.repy : Forces a normal repy program to run within an Island, and prints statistics upon termination.
 
-[[BR]][[BR]]
-== Island Class Implementation Details ==
+
+
+
+## Island Class Implementation Details
 
 
 The Island class is designed to have a minimal overhead, while still collecting all potentially valuable information for later analysis.
@@ -42,8 +46,10 @@ Sockets and files have some additional handling which allows them to track usage
 resource usage scope. This is done by wrapping the file and socket objects returned to the program, and including some additional
 logic on the various function calls.
 
-[[BR]][[BR]]
-== Island Statistics Implementation Details ==
+
+
+
+## Island Statistics Implementation Details
 
 The functions in island_stats are directly related to the implementation of the Island class. They are able to parse the internal
 structures of the Island to provide meaningful data. The basic usage is to simply print information about the island, such
@@ -74,8 +80,10 @@ to return immediately. If repy is stopped during that API call, it is impossible
 that it is due to being stopped. This problem should go away with the transition to Repy V2 since all blocking operations are replaced by non-blocking
 equivalents.
 
-[[BR]][[BR]]
-== Stoptime Logger Module Implementation Details ==
+
+
+
+## Stoptime Logger Module Implementation Details
 
 The stoptime logger module is used by island_stats when determining the time spent doing various activities. The reason it is needed is that
 getresources() will only return the last 100 stoptimes, which may not be enough to span the entire life of an Island. The stoptime logger
@@ -91,8 +99,10 @@ All the data written to the file is "aligned" on a per-entry basis. This causes 
 the module to perform binary searches on the data, enabling much faster retrieval of stoptimes on an interval once there is a substantial
 number of entries logged.
 
-[[BR]][[BR]]
-== Program Stats Implementation Details ==
+
+
+
+## Program Stats Implementation Details
 
 The prgm_stat.repy file is a very simple Dylink module which dispatch's the next module inside of an Island. Once the island terminates,
 or calls exitall() the global resource usage, Island timeline, and time consumption information are calculated and printed.
@@ -100,14 +110,17 @@ or calls exitall() the global resource usage, Island timeline, and time consumpt
 This provides  a simple way to use the functionality of the Island, while bootstrapping existing code which is not designed to directly
 use the Island module, or any of its parsing routines.
 
-[[BR]][[BR]]
-== Examples ==
-[[BR]]
-=== Single threaded program ===
+
+
+
+## Examples
+
+
+### Single threaded program
 
 Here is a simple program, which only uses a single thread of execution:
 
-{{{
+```
 
 def write_data():
     limit, usage, stoptimes = getresources()
@@ -130,7 +143,7 @@ def use_cpu():
 write_data()
 use_cpu()
 
-}}}
+```
 
 The write_data() function determine what about of data can be written in a second,
 and tries to write twice that amount. This should cause the program to block for second,
@@ -143,7 +156,7 @@ then use_cpu().
 I've named this program test_basic.repy, and ran it a 10% CPU restriction,
 allowing 100K bytes to be written per second, with the following command:
 
-{{{
+```
 $ python repy.py restrictions.test dylink.repy prgm_stat.repy test_basic.repy
 
 --- Island Summary ---
@@ -196,14 +209,14 @@ All Threads (Global)
   Total 'stopped': 1.61082721161 (57.66%)
   Total 'cpu': 0.182189460521 (6.52%)
 
-}}}
+```
 
 Now, lets look at the output produced. At the top we have our "Island Summary" and "Global Sum". This shows us that the
 Island has only a single thread over its life, and that the only resources it used were a single file handle, 200K bytes worth
 of filewrite and about ~0.18 seconds of actual CPU time. Since we wrote 2x our filewrite limit (100K) to a single file,
 this all seems consistent.
 
-Next, we see a timeline of activity in the Island. The !MainThread has a "island_create_thread" event which indicates that
+Next, we see a timeline of activity in the Island. The MainThread has a "island_create_thread" event which indicates that
 it has "joined" the Island at a certain time. Then a file is opened, we start the call to file.write() and eventually return from it.
 Notice the difference between the T.O.C and the T.O.R from the file.write of 1 second. This reflects what we expected, since
 we wrote twice our limit. After that, it shows that "ALL" the threads were stopped at 2.87 and 3.67 seconds for 0.70 and 0.91 seconds
@@ -211,7 +224,7 @@ respectively. This corresponds to the call to use_cpu() which is presumably usin
 "island_destroy_thread" which indicates that the thread has left the Island or terminated.
  
 Lastly, we have our thread time consumption. Since we only have a single thread, the Global usage, and the usage of the
-"!MainThread" are the same, so we an just focus on one. The first key entry is the 'live' entry. This indicates the total amount
+"MainThread" are the same, so we an just focus on one. The first key entry is the 'live' entry. This indicates the total amount
 of wall time that this thread was part of the Island. We are reporting about 2.8 seconds, which can be checked by looking at
 the island_create_thread and island_destroy_thread times above. Next, we have the "filewrite" entry. It indicates that 1 second
 was spent writing to a file, which is correct and accounts for about 35% of the life of the program. One might expect the remaining
@@ -222,23 +235,25 @@ Notice that "cpu" / ("cpu" + "stopped") = 0.10 which matches our CPU restriction
 Analyzing this information reveals that the greatest speed-up to this program would be from allocating more CPU, to reduce the amount
 of time spent in the "stopped" state.
 
-[[BR]][[BR]]
-=== Multi-threaded Program ===
+
+
+
+### Multi-threaded Program
 
 I've taken the example program from above, but replaced the last two lines with the following:
 
-{{{
+```
             
 settimer(0.1, write_data, ())
 settimer(0.1, use_cpu, ())
 sleep(0.2)
 
-}}}
+```
 
-This has the affect of running each method in a separate thread, and to make the !MainThread spend most of it's short life sleeping.
+This has the affect of running each method in a separate thread, and to make the MainThread spend most of it's short life sleeping.
 I've also reduced the CPU allocation to 1%. Now, lets look at the output this produces:
 
-{{{
+```
 $ python repy.py restrictions.test dylink.repy prgm_stat.repy test_basic.repy 
 
  
@@ -317,21 +332,21 @@ All Threads (Global)
   Total 'stopped': 19.4621602974 (93.71%)
   Total 'cpu': 0.105699876752 (0.51%)
 
-}}}
+```
 
 Now the information at the top has changed slightly. We now report that the Island had a total
 of 3 threads, and that 2 events were used, which is correct.
 
 The timeline is slightly more complicated now, since we see that several threads are inter-mingled.
-However, we see that the !MainThread first calls settimer twice, and then goes to sleep.
+However, we see that the MainThread first calls settimer twice, and then goes to sleep.
 
 At that point, repy is stopped for 0.29 seconds. Following that, the two other threads are created,
-and the !MainThread wakes up from its sleep and exits. Thread "_EVENT:Thread:2" opens a file and beings
+and the MainThread wakes up from its sleep and exits. Thread "_EVENT:Thread:2" opens a file and beings
 to write, when repy is stopped suddenly for 10 seconds, due to thread "_EVENT:Thread" which is just wasting CPU.
 Afterward, the two threads finish up and exit.
 
 Now we can look at the thread time usage information, which is broken down for each thread,
-and then given globally. The !MainThread is very simple to analyze. All that thread did was
+and then given globally. The MainThread is very simple to analyze. All that thread did was
 call settimer twice, sleep and then exit. So as expected, we see that 0.2 seconds were spent sleeping,
 and essentially the remaining portion of the thread's life was stopped. This seems accurate since the thread
 was stopped during the sleep, which extended the amount of time in the API call.

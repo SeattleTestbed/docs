@@ -1,13 +1,14 @@
-= Running Software Updater Unit Tests =
+# Running Software Updater Unit Tests
 
 The softwareupdater tests start a local webserver and serve update files from there.
 
 ----
-[[TOC(inline)]]
+
 ----
 
-[[BR]]
-== Running the tests ==
+
+
+## Running the tests
   * Linux/Mac/BSD:
     * cd to the same directory preparetest.py is in (that is, trunk)
     * run `./softwareupdater/test/run_local_tests.sh name_of_directory_to_put_tests_in`
@@ -18,10 +19,10 @@ The softwareupdater tests start a local webserver and serve update files from th
     * Go to that directory and run `python utf.py -m softwareupdaters`
     * When running these tests on Windows, ps cannot be used to check process status.  You will have to do this yourself in the task manager.
 
-== Notes ==
+## Notes
   * There cannot be another instance of softwareupdater.py running, or the restart tests will fail.  
 
-== Output ==
+## Output
 
 Output if the test passed is one line indicating whether the test passed or failed (this test will take a while).
 

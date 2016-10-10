@@ -1,70 +1,76 @@
-= Behavior of the Mobility Shim and Related Shims =
+# Behavior of the Mobility Shim and Related Shims
 
 The major issues with the mobility shim and NAT shim are all fixed. We still don't have a shim for handling the server changing IP, though.
 
 ----
-[[TOC(inline)]]
+
 ----
 
 
-[[BR]]
 
-== Shims ==
+
+
+## Shims
 ----
 
-[[BR]]
 
-=== Mobility Shim ===
+
+
+### Mobility Shim
 ----
 The mobility shim is suppose to detect disconnections and reconnect, giving the layer above it the illusion that there was never any disconnection. It also adjusts if the client's IP changes.
 
-==== Behavior ====
+#### Behavior
  * If the client detects that it has been disconnected, it will attempt to reconnect to the server
  * The server with listen for connection, reconnecting disconnected sockets and remembering new connections so they can be returned by getconnection.
  * If the client is disconnected and sees that it's IP has changed, it will use the new IP to reconnect
 
-==== Issues ====
+#### Issues
  * In some cases, such as when the client or server program is terminated, one end of the connection will be closed but the other won't be able to tell that ideally it should consider itself closed remotely
  * When the client is trying to reconnect, it may take awhile since the operating system needs to clean up the old socket before the client can reconnect
  * If the server changes IP, then the client will still try to reconnect to the server's old address since it doesn't know the server has changed IP. The current iteration of the mobility shim isn't actually intended to handle this
 
-[[BR]]
 
-=== NAT Punch Shim ===
+
+
+### NAT Punch Shim
 ----
 The NAT shim allows a server to be behind a NAT by forwarding all traffic through a NAT forwarder.
 
-==== Behavior ====
+#### Behavior
  * When listening for connections, the server connects to and registers itself with a forwarder, and is identified by IP and port the server is using locally
  * Client talks to forwarder to request connection to server, and is identified by the remote IP and remote port the forwarder sees for the client
  * Forwarder relays traffic between server and client
 
-==== Issues ====
+#### Issues
 None that I'm aware of
 
-[[BR]]
 
-=== Coordination Shim ===
+
+
+### Coordination Shim
 ----
 The coordination shim makes sure that the client's shim stack is balanced with the stack of the server it is connecting to, and allows a server to listen on a [wiki:Zenodotus Zenodotus] hostname
 
-==== Behavior ====
+#### Behavior
  * The server advertises the shim stack it is using
  * The client looks up the server's shim stack before connecting, and then connects with the advertised shim stack so the server and client are balanced
  * If the server listens for connections on a Zenodotus hostname, then the coordination shim will advertise that name, allowing a client to find the server though that hostname, even if the server's IP changes
 
-==== Issues ====
+#### Issues
  * Allowing the application to pass a Zenodotus hostname into listenforconnection as the local IP changes semantics, since the local IP is suppose to be an IP
 
 
-[[BR]]
 
-== Situations and Results ==
+
+
+## Situations and Results
 ----
 
-[[BR]]
 
-=== No NATs ===
+
+
+### No NATs
 ----
 
 Disconnection
@@ -77,16 +83,18 @@ Server changes IP
  * When the client reconnects, it won't be able to find the server, so we need something beyond the mobility shim to handle this
  * Using the NAT shim with the mobility shim in the forwarder's shim stack allows us to handle this case (see section on server behind a NAT), but ideally we would have a separate shim that handles this without needing a NAT forwarder
 
-[[BR]]
 
-=== Client behind a NAT ===
+
+
+### Client behind a NAT
 ----
 
 Putting the client behind a NAT doesn't actually make a difference from not having any NATs
 
-[[BR]]
 
-=== Server behind a NAT ===
+
+
+### Server behind a NAT
 ----
 If the server is behind a NAT, then you need to use the NAT shim somewhere in the shim stack. Shims can then either be above the NAT shim or between the NAT shim and the NAT forwarder.
 
@@ -95,27 +103,31 @@ If we put the mobility shim between the NAT shim and the forwarder, then everyth
 If we put the mobility shim above the NAT shim, then I think we run into problems if the server changes IP. Once we have a shim that handles the server changing IP, we should be able to handle this, though.
 
 
-[[BR]]
 
-== Detecting Disconnections ==
+
+
+## Detecting Disconnections
 ----
 
-[[BR]]
 
-=== Intentional Disconnection ===
+
+
+### Intentional Disconnection
 ----
 This is the simple case. Once we have a separate exception for unintentional socket disconnections, this will be trivial to handle, but currently the mobility shim sends a message to the other side of the connection when closing to signal that the disconnection is intentional.
 
-[[BR]]
 
-=== Unintentional Disconnection, Socket Closed Exception Raised ===
+
+
+### Unintentional Disconnection, Socket Closed Exception Raised
 ----
 This is easy to detect. If the socket wasn't closed intentionally and we see that the socket was closed, then we should try to reconnect.
 
-[[BR]]
 
-=== Unintentional Disconnection, Socket Closed Exception Not Raised ===
+
+
+### Unintentional Disconnection, Socket Closed Exception Not Raised
 ----
-I'm not entirely sure when a socket closed exception is raised when there's a disconnection and when we just get !SocketWouldBlock, but it doesn't really matter. If we don't get a socket closed exception then the socket isn't actually closed and we'll be able to send/recv again once we are reconnected. If the other side gets closed intentionally or unintentionally then we'll find out once we get our connectivity back. Regardless, we won't be able to reconnect if we don't have any connectivity, so there's no point in trying to detect the disconnection by doing anything clever.
+I'm not entirely sure when a socket closed exception is raised when there's a disconnection and when we just get SocketWouldBlock, but it doesn't really matter. If we don't get a socket closed exception then the socket isn't actually closed and we'll be able to send/recv again once we are reconnected. If the other side gets closed intentionally or unintentionally then we'll find out once we get our connectivity back. Regardless, we won't be able to reconnect if we don't have any connectivity, so there's no point in trying to detect the disconnection by doing anything clever.
 
 The one caveat is that we can get connectivity back while still being disconnected if our IP changes. Basically, we still don't have connectivity through the network interface we used to open the connection, but we gain connectivity through a different network interface. If this happens then we want to reconnect through the new IP, but the socket may not raise an exception to let us know about the disconnection. To detect this special case, it's sufficient to check if our IP has changed. We only want to have the client do this since the mobility shim by itself isn't intended to handle the server changing it's IP, and the server can accept reconnections from the client even if the server doesn't know it's been disconnected.

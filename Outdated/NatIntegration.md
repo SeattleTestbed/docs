@@ -1,4 +1,4 @@
-== Adding Support for NAT Nodes: ==
+## Adding Support for NAT Nodes:
 
 The Controlled Node Communication feature (CNC) is not currently compatible with NAT nodes. Currently, if a machine registers to receive Seattle traffic, a Seattle node sharing one or more user keys can send traffic to that machine on any port. The question we are trying to address is: Do we want to treat NAT nodes as exceptions and implement a special type of registration where the intermediate node can register to receive traffic on specific ports? Or do we want to change the current registration model to require all machines that wish to receive Seattle traffic to register each port they wish to receive Seattle traffic on?
 

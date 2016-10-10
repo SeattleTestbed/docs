@@ -1,13 +1,14 @@
-= Using Shims =
+# Using Shims
 
 This tutorial illustrates how to use the shims library in your application, as well as how to create your own shims correctly.
 
 ----
-[[TOC(inline)]]
+
 ----
 
-[[BR]]
-== What are shims ==
+
+
+## What are shims
 ----
 
 A shim is a way for a programmer to add or modify network functionality in a way that is completely transparent to the application programmer.   The key word is ''transparent'', since the application (intentionally) cannot tell if a shim is in use or not.   This allows application programmers to focus on their application's logic, while utilizing rich network functionality that may have been added by many different parties.   
@@ -24,16 +25,16 @@ The key features a shim must have:
 3) it must have a small number of required methods necessary for the construction and management of shim stacks
 
 
-[[BR]]
-== Using shims in your application ==
+
+
+## Using shims in your application
 ----
 
 Suppose you're writing an echo server. This server encrypts all traffic on a per-connection basis, and it may be behind a Network Address Translator (NAT). As the application creator, you only need to focus on what is relevant to the core functionalities of the echo server. Encryptions and NAT rerouting are handled by the underlying shim library.
 
-Here is a sample echo server. You need to tell the shim library what shims you would like to use. In this case, you want to encrypt the traffic. Since we're not sure if the network configuration changes, we insert a !NatDeciderShim. It automatically connects to a forwarder if the presence of a NAT is detected.
+Here is a sample echo server. You need to tell the shim library what shims you would like to use. In this case, you want to encrypt the traffic. Since we're not sure if the network configuration changes, we insert a NatDeciderShim. It automatically connects to a forwarder if the presence of a NAT is detected.
 
-{{{
-#!python
+```python
 include ShimStackInterface.repy
 
 mycontext['UsingShims'] = True
@@ -47,14 +48,13 @@ def server_callback(rip, rport, sock, th, lh):
 if callfunc == 'initialize':
   serverip = getmyip()
   server_shim.waitforconn(serverip, 12345, server_callback)
-}}}
+```
 
 In writing the client, you only need to use the CoordinationShim. The CoordinationShim shim library automatically detects the shim stack on the server, and it subsequently inserts the correct shims into the client's stack to communicate with the server. This is known shim stack ''balancing'', which will be explained later.
 
 Here is a simple echo client:
 
-{{{
-#!python
+```python
 include ShimStackInterface.repy
 
 mycontext['UsingShims'] = True
@@ -65,16 +65,16 @@ if callfunc == 'initialize':
   serverport = callargs[1]
   sock = client_shim.openconn(serverip, serverport)
   sock.send('Hello World')
-}}}
+```
 
 
-In both cases involving the server and the client, you only need to initialize the !ShimStackInterface once for every type of shim stack you use. For instance, you decide to do a waitforconn on multiple ports and IPs. All these listeners use the same shim stack structure. You only need to initialize the shim stack once, say, at the top of the module or in the constructor. All subsequent operations can act on this shim stack instance.
+In both cases involving the server and the client, you only need to initialize the ShimStackInterface once for every type of shim stack you use. For instance, you decide to do a waitforconn on multiple ports and IPs. All these listeners use the same shim stack structure. You only need to initialize the shim stack once, say, at the top of the module or in the constructor. All subsequent operations can act on this shim stack instance.
 
 Note that you need to explicitly define `mycontext['UsingShims'] = True` to turn on the shim.
 
-In case you're wondering about the implementation details, the !ShimStackInterface actually creates a new shim stack for each operation. This, of course, has been abstracted away from you. It is one of our objectives to incur minimal changes if we decide to introduce shims to an existing application.
+In case you're wondering about the implementation details, the ShimStackInterface actually creates a new shim stack for each operation. This, of course, has been abstracted away from you. It is one of our objectives to incur minimal changes if we decide to introduce shims to an existing application.
 
-The public interface of the !ShimStackInterface is identical to the network system calls. The following public methods are defined. Their usage can be found in RepyLibrary.
+The public interface of the ShimStackInterface is identical to the network system calls. The following public methods are defined. Their usage can be found in RepyLibrary.
 
  * `ShimStackInterface(shim_stack_string, local_host_name)`: Constructor.
  * `waitforconn`
@@ -95,8 +95,9 @@ When you obtain a reference to a handle or socket, you can manipulate it as if i
 
 
 
-[[BR]]
-== Creating your own shims ==
+
+
+## Creating your own shims
 ----
 
 
@@ -109,29 +110,27 @@ In this section, we will explain the programming framework of the shim library. 
 
 
 
-=== Initialization of a shim ===
+### Initialization of a shim
 
-Your own shim must be a subclass of !BaseShim, the super class of all shims. You don't need to include any special files.
+Your own shim must be a subclass of BaseShim, the super class of all shims. You don't need to include any special files.
 
-{{{
-#!python
+```python
 class MyShim(BaseShim):
-}}}
+```
 
-In your constructor, you should call the super class's constructor anywhere before the constructor returns. The !BaseShim super class takes care of much of the book-keeping, such as wrapping around sockets and duplicating shim states, that you need not worry about.
+In your constructor, you should call the super class's constructor anywhere before the constructor returns. The BaseShim super class takes care of much of the book-keeping, such as wrapping around sockets and duplicating shim states, that you need not worry about.
 
-{{{
-#!python
+```python
   def __init__(self, next_shim=None, optional_args=None):
     # I'm doing something here
     BaseShim.__init__(self, next_shim, optional_args)
     # I'm doing something else here
-}}}
+```
 
 
 
 
-=== Advertisement of shims ===
+### Advertisement of shims
 
 The construction of shims adheres to the publish/subscribe model. In the shim lingo, a shim on the server is ''advertised'' (published), and to build the same shim on the client, the shim library does a ''lookup'' (subscribes) on the global advertisement service. For example, a server decides to encrypt the traffic between all clients and itself. It pushes the RSAShim onto its shim stack. This shim is published on the advertisement service such as the DHT. When a client intends to connect to the server, it first learns, by doing a lookup, the shims required on the client side for the communication to proceed. As a result, the RSAShim is pushed onto the client's shim stack. The shim stacks of the server and the client are now ''balanced''. Messages from the server application is first encrypted when they pass through the RSAShim. The subsequent network calls by the system transmit these encoded data. At the client side, the system network calls pass this information through the RSAShim, where the messages are decrypted before they are returned to the client application. The publish/subscribe, or advertise/lookup, model of the shim framework ensures the balance of shim stacks in the end-to-end communications.
 
@@ -139,22 +138,21 @@ To be precise, our shim model can still function correctly even without the adve
 
 The `get_advertisement_string()` method defines how your shim is advertised. It returns the name of the current shim, along with the shim names in the rest of the stack. Enclose the name of the current shim within a pair of parentheses. If you have any additional arguments to publish, append them to the shim name, separated by commas. These arguments, when subscribed by the client, will become the optional_args in the constructor of the client shim. In the following example, we are publishing the shim along with the public key of the server. In this way, the client can push the same shim to its stack, while the client shim can use the advertised public key for the end-to-end communication.
 
-{{{
-#!python
+```python
   def get_advertisement_string(self):
-    return '(MyShim,' + self._public_key + ')' + \
+    return '(MyShim,' + self._public_key + ')' + 
+
             self.shim_stack.get_advertisement_string()
-}}}
+```
 
 This call is recursive. Remember to append `self.shim_stack.get_advertisement_string()` at the end.
 
 On the other hand, your shim can be private. A decider shim can be private. Its only role is to determine whether a certain shim should be pushed onto the server stack. Thus, a decider shim is transparent to the client. As it is not to be advertised, simply return the advertisement string of the rest of the stack, as illustrated by the alternative version. 
 
-{{{
-#!python
+```python
   def get_advertisement_string(self):
     return self.shim_stack.get_advertisement_string()
-}}}
+```
 
 
 
@@ -162,12 +160,11 @@ On the other hand, your shim can be private. A decider shim can be private. Its 
 
 
 
-=== Customizing network operations ===
+### Customizing network operations
 
 A shim can redefine the functionalities of the basic network operations. You can choose to override any of the following methods which are defined in the super class. If you do not override them, the default definitions in the super class will be used. 
 
-{{{
-#!python
+```python
   def _shim_waitforconn(self, host, port, callback):
     return self.shim_stack.waitforconn(host, port, callback)
 
@@ -194,18 +191,17 @@ A shim can redefine the functionalities of the basic network operations. You can
 
   def _shim_socket_recv(self, socket, bytes): 
     return self.shim_stack.socket_recv(socket, bytes)
-}}}
+```
 
-In your redefinition of the methods above, you don't always need to call the same operations on the shim below. Some shim operations don't involve calling their counterparts on the next shim. For instance, the `waitforconn` operation of the !NatForwardingShim does not invoke the next shim's `waitforconn`. It actually creates an internal shim stack and makes a new connection (`openconn`) to the NAT forwarder. The shim call stack does not necessarily have to terminate on the system network calls.
+In your redefinition of the methods above, you don't always need to call the same operations on the shim below. Some shim operations don't involve calling their counterparts on the next shim. For instance, the `waitforconn` operation of the NatForwardingShim does not invoke the next shim's `waitforconn`. It actually creates an internal shim stack and makes a new connection (`openconn`) to the NAT forwarder. The shim call stack does not necessarily have to terminate on the system network calls.
 
 The `_shim_socket_*` calls redefine the corresponding `socket.*` operations. For instance, you can encrypt all outgoing traffic by customizing the `socket.send()` method as follows:
 
-{{{
-#!python
+```python
 def _shim_socket_send(self, socket, msg):
   cypher = encrypt(msg, self._encryption_key)
   return self.shim_stack.socket_send(socket, cypher)
-}}}
+```
 
 
 
@@ -214,7 +210,7 @@ def _shim_socket_send(self, socket, msg):
 
 
 
-=== State management in server shim ===
+### State management in server shim
 
 Notice, in the section above, that the listener callback is not exactly a part of the public interface of the shim library. This method is invoked whenever there is an incoming connection to the server. Arguably, you can also specify your own listener callback by passing it as a parameter to `waitforconn`, yet the callback function in `waitforconn` and the `_shim_listener_callback` above are different. 
 
@@ -224,8 +220,7 @@ We call the instance of the shim in the first case the ''master instance''. A ne
 
 The following shim snippet illustrates the instantiation of shims. We can see that the constructor, `waitforconn` and the callback specified by `waitforconn` are invoked within the same master instance. The `_shim_listener_callback` method, along with the three socket operations `_shim_socket_*`, is called in the slave instance.
 
-{{{
-#!python
+```python
 class TestShim(BaseShim):
 
   def __init__(self, next_shim=None, optional_args=None):
@@ -256,13 +251,13 @@ class TestShim(BaseShim):
   def _shim_socket_recv(self, socket, bytes): 
     print "DEBUG: _shim_socket_recv. self.getid()=" + str(self.getid())
     ...
-}}}
+```
 
 The `getid()` method, defined in the base shim, returns the instance ID of the current shim. Each subsequent instantiation of the shim increases the ID by one. The first instance, i.e. the master instance, has ID zero.
 
 If you push the shim above to a simple echo server, you will obtain the following printout upon the first incoming connection. You can see that the `_shim_listener_callback` and the socket operations are called in a different instance (whose instance ID is 1) from the master.
 
-{{{
+```
 DEBUG: constructor. self.getid()=0
 DEBUG: _shim_waitforconn. self.getid()=0
 DEBUG: _shim_waitforconn's own callback. self.getid()=0
@@ -271,18 +266,18 @@ DEBUG: _shim_socket_recv. self.getid()=1
 ...
 DEBUG: _shim_socket_send. self.getid()=1
 ...
-}}}
+```
 
 When the server accepts another client, the debug printout looks like the following. Clearly, the master shim is instantiated again upon the second incoming connection, because the ID of the new slave shim is 2.
 
-{{{
+```
 DEBUG: _shim_waitforconn's own callback. self.getid()=0
 DEBUG: _shim_listener_callback. self.getid()=2
 DEBUG: _shim_socket_recv. self.getid()=2
 ...
 DEBUG: _shim_socket_send. self.getid()=2
 ...
-}}}
+```
 
 We do not, however, encourage the use of `waitforconn` callbacks within the master instance. In other words, it is a poor design choice to specify your own callback function as a parameter of `waitforconn`. Instead, always override the `_shim_listener_callback` provided by the base shim.
 
@@ -291,30 +286,28 @@ This approach to shim instantiation facilities the separation of internal states
 The `_shim_socket_*` calls are also unique to each individual connection. They exist in the same slave instance as the listener callback, so the listener callback can share states with the three socket calls. States in the same instance can be easily shared. Sharing of states between instances is discouraged, though it is possible to be achieved by using global variables (i.e. the `mycontext` dictionary).
 
 
-=== Replication of state ===
+### Replication of state
 
 We encourage the replication of state from the master to the slave instances. Upon a new incoming client, the master instance creates a slave instance. During this process, the master's state can be selectively copied to the slave through the `copy()` method, so that the slave instance can "inherit" (in the biological sense) some of the properties of the master. The `copy()` operation is a means by which the shim library knows what master state should be copied to the slaves.
 
 Always override the `copy()` method, or else the shim library will throw an exception. Within this method, specify what internal variables of the master instance should be passed on to the slave. In the following example, the shim generates a public key in the constructor, which is invoked in the same instance as `waitforconn`. For each new connection, the listener callback and the `_shim_socket_*` operations need to use the public key. Here is how you can pass the public key from the master instance to each of the slave instances.
 
-{{{
-#!python
+```python
   def copy(self):
     mycopy = MyShim()
     mycopy._publicKey = self._publicKey
     return mycopy
-}}}
+```
 
 
 
 
 
-=== Sample shim ===
+### Sample shim
 
 Let us put everything together so far, and write a simple encryption shim. It encrypts all TCP traffic.
 
-{{{
-#!python
+```python
 class SimpleEncryptionShim(BaseShim):
 
   # Called in master instance
@@ -353,7 +346,7 @@ class SimpleEncryptionShim(BaseShim):
   def _shim_socket_recv(self, socket, bytes): 
     cypher = self.shim_stack.socket_recv(socket, bytes)
     return decrypt(cypher, self._encryption_key)
-}}}
+```
 
 
 
@@ -362,22 +355,21 @@ class SimpleEncryptionShim(BaseShim):
 
 Finally, you need to register the shim with the shim library. Open `shimstackInterface.repy`. Include your shim at the top and register it.
 
-{{{
-#!python
+```python
 include MyShim.repy
 register_shim('MyShim', MyShim)
-}}}
+```
 
 And now, the application can use your shim!
 
 
 
 
-=== Shim deployment ===
+### Shim deployment
 
-All the shim modules are inter-dependent. The main entry point, !ShimStackInterface, makes references to all the available shims for registration. At the same time, a shim can instantiate the !ShimStackInterface to create an internal shim stack. This would have created circular imports in normal Python. To circumvent this restriction in Python, we can combine all the modules into one giant file before deployment.
+All the shim modules are inter-dependent. The main entry point, ShimStackInterface, makes references to all the available shims for registration. At the same time, a shim can instantiate the ShimStackInterface to create an internal shim stack. This would have created circular imports in normal Python. To circumvent this restriction in Python, we can combine all the modules into one giant file before deployment.
 
-First, check your shim and ensure that it does not `include` any shim-related files. Do not, for instance, `include` other shims or the !ShimStackInterface in your shim, because they are already included within the !ShimStackInterface.
+First, check your shim and ensure that it does not `include` any shim-related files. Do not, for instance, `include` other shims or the ShimStackInterface in your shim, because they are already included within the ShimStackInterface.
 
 Next, locate the repy preprocessor, `repypp.py`. It should be in the `seattlelib` directory of the trunk.
 

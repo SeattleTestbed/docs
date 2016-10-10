@@ -1,44 +1,44 @@
-= !SeattleBot: The Seattle IRC Bot =
-!SeattleBot is an instance of {{{supybot}}} running on {{{seattle.cs}}} which logs the Freenode {{{#seattle}}} channel and provides information from Trac when tickets or changesets are mentioned.
+# SeattleBot: The Seattle IRC Bot
+SeattleBot is an instance of ```supybot``` running on ```seattle.cs``` which logs the Freenode ```#seattle``` channel and provides information from Trac when tickets or changesets are mentioned.
 
-'''Note:''' This service is not related to the IRC messages that will get posted by the [wiki:Local/MonitorProcessService Monitor Process Service] in the event of a service failure.
-
-
-== Log storage ==
-!SeattleBot is configured to log to {{{/home/seattlebot/logs/ChannelLogger/freenode/#seattle/}}} on {{{seattle.cs}}}. The logs can also be [https://seattle.poly.edu/irclogs/ viewed online].
+**Note:** This service is not related to the IRC messages that will get posted by the [wiki:Local/MonitorProcessService Monitor Process Service] in the event of a service failure.
 
 
-== Trac info in IRC ==
-When a user in {{{#seattle}}} mentions ticket numbers or changeset numbers, !SeattleBot tries to grab relevant information from Trac and deliver it to the channel. For example, including the following text in a message should cause !SeattleBot to speak up:
+## Log storage
+SeattleBot is configured to log to ```/home/seattlebot/logs/ChannelLogger/freenode/#seattle/``` on ```seattle.cs```. The logs can also be [viewed online](https://seattle.poly.edu/irclogs/).
 
-{{{
+
+## Trac info in IRC
+When a user in ```#seattle``` mentions ticket numbers or changeset numbers, SeattleBot tries to grab relevant information from Trac and deliver it to the channel. For example, including the following text in a message should cause SeattleBot to speak up:
+
+```
 #100
 ticket 100
 ticket:100
-}}}
+```
 
-{{{
+```
 r200
 changeset 200
 changeset:200
-}}}
+```
 
-See the regular expressions used in !SupyTrac/plugins.py for more specifics. Notably, single-digit tickets as well as single- and double-digit changesets are currently ignored.
+See the regular expressions used in SupyTrac/plugins.py for more specifics. Notably, single-digit tickets as well as single- and double-digit changesets are currently ignored.
 
-== Installation Instructions ==
+## Installation Instructions
 
-A user account on {{{seattle.cs}}} was created which has {{{supybot}}} installed from the Ubuntu repositories. Installation instructions are as follow:
+A user account on ```seattle.cs``` was created which has ```supybot``` installed from the Ubuntu repositories. Installation instructions are as follow:
 
-{{{
+```
 mkdir /home/seattlebot/plugins
 touch /home/seattlebot/plugins/__init__.py
 cd /home/seattlebot/plugins
 svn co http://svn.aminus.net/misc/supybot/plugins/SupyTrac/
-}}}
+```
 
 In order to work with the installed version of Trac, the following changes were made to /home/seattlebot/plugins/SupyTrac/plugins.py:
 
-{{{
+```
 --- plugin.py   (revision 173)
 +++ plugin.py   (working copy)
 @@ -104,10 +104,14 @@
@@ -68,21 +68,22 @@ In order to work with the installed version of Trac, the following changes were 
 +        #p = soup.findAll('dd', attrs={'class': 'message'})[0]
 +        p = soup.findAll('dd')[2]
          message_tags = p.findAll(text=lambda text: isinstance(text, NavigableString))
-         message = ''.join([tag for tag in message_tags]).replace('\n', ' ')
+         message = ''.join([tag for tag in message_tags]).replace('
+n', ' ')
          author = soup.findAll('dd', attrs={'class': 'author'})[0].string
-}}}
+```
 
-All plugins besides !ChannelLog and !SupyTrac were disabled in the {{{/home/seattlebot/seattlebot.conf}}}. 
+All plugins besides ChannelLog and SupyTrac were disabled in the ```/home/seattlebot/seattlebot.conf```. 
 
-The following was added to {{{/etc/rc.local}}} to start {{{supybot}}} on startup:
+The following was added to ```/etc/rc.local``` to start ```supybot``` on startup:
 
-{{{
+```
 sudo -u seattlebot supybot /home/seattlebot/seattlebot.conf >>/home/seattlebot/stdout-stderr.log 2>&1 &
-}}}
+```
 
 To make the logs available through the website, the following was added to /etc/apache2/sites-available/default's https vhost:
 
-{{{
+```
     Alias /irclogs /home/seattlebot/logs/ChannelLogger/freenode/#seattle
     <Location /irclogs>
       SetHandler None
@@ -92,4 +93,4 @@ To make the logs available through the website, the following was added to /etc/
       Order allow,deny
       Allow from all
     </Directory>
-}}}
+```

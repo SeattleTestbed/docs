@@ -1,4 +1,4 @@
-= Future Repy Exception Hierarchy =
+# Future Repy Exception Hierarchy
 This is the planned exception hierarchy for RepyV2, currently in development.
 
  * [wiki:FutureRepyExceptions/InternalRepyError InternalRepyError]
