@@ -1,13 +1,13 @@
 The demokit packages up a set of tools for Seattle users that allow you to 
- * Access VMs on remote machines, for example such assigned to you by the [https://seattleclearinghouse.poly.edu Seattle Clearinghouse]
+ * Access VMs on remote machines, for example such assigned to you by the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu)
  * Run RepyV2 code on your local machine, using a supplied restrictions file, and thusly
  * Develop and debug Repy programs locally.
 
 
-= Building the Demokit =
+# Building the Demokit
 
 Building the demokit is as simple as 
- * Cloning the [https://github.com/SeattleTestbed/demokit demokit repo on GitHub],  
+ * Cloning the [demokit repo on GitHub](https://github.com/SeattleTestbed/demokit),  
  * Running `scripts/initialize.py` inside of it, and lastly 
  * Creating an empty target directory, and lastly 
  * Changing directory into `scripts/dist` in order to run `python build.py` with the full path to the target dir as an argument.
