@@ -1,0 +1,305 @@
+## Exploring the Delay Space with Seattle
+
+
+This work was performed by [Philipp Eittenberger](http://www.uni-bamberg.de/en/ktr/staff/eittenberger-philipp/), [Marcel Großmann](http://www.uni-bamberg.de/en/ktr/staff/grossmann-marcel/) and Udo Krieger from the [Computer Networks Group (KTR)](http://www.uni-bamberg.de/en/ktr/) of Otto-Friedrich University Bamberg, Germany.
+
+Further information can be found in: 
+
+Philipp M. Eittenberger, Marcel Großmann, Udo R. Krieger:
+
+Doubtless in Seattle: Exploring the Internet Delay Space.
+
+8th Euro-NF Conference on Next Generation Internet 2012 (NGI 2012), Karlskrona, Sweden, 25-27 June 2012.
+
+
+### Modified Divide-and-Conquer Algorithm
+[[Image(allpairsping.png, 200px, right, nolink)]]
+The all-pairs-ping algorithm we use is based on a modified divide-and-conquer algorithm. It uses a central coordination instance to avoid interferences between each measurement trial.
+To obtain the latency matrices, we implemented the two following programs: the "controller" program, which is monitoring and controlling the steps of the divide-and-conquer algorithm, and the "node" program, which is responsible for performing the measurements on each tested Seattle VM.
+
+#### Controller
+This program [raw-attachment:controller.repy] is repsonsible for the execution of the divide-and-conquer algorithm and for the coordination of the measurement rounds. It may only be installed on one Seattle VM to coordinate all VMs on which the "node" program is running. For this purpose, it obtains a list ''S'' with the IPs of all Seattle nodes to measure.
+
+In the divide step the list ''S'' is split into two sublists ''S<sub>1</sub>'' and ''S<sub>2</sub>''. If the length of ''S'' is odd, ''S<sub>1</sub>'' receives the last remaining node.
+
+[[Image(conquer.png, 480px, nolink)]]
+
+In the conquer phase, the controller sends a message to each node of the sublist ''S<sub>1</sub>'' to indicate, which node of ''S<sub>2</sub>'' should be measured. Furthermore, by permuting the measured list, the ''controller'' will ensure that all possible pairs are measured. By switching the sublists thereafter and restarting the conquer step, it will perform all measurements bidirectionally.
+
+When the measurements have been performed bidirectionally and the length of one of the remaining sublists is greater than one, the divide-and-conquer algorithm starts with this sublist recursively again.
+The program is started in ''seash.py'' by executing:
+
+```repy 
+controller.repy [port] [ipfile] [measures] [waittime]
+```
+
+    - [port]: Your specific port for Seattle
+    - [ipfile]: A file you uploaded to the controller VM with all IPs that should be measured (You might use ```show ip to ipfile.txt``` in Seash to save the ipfile)
+    - [measures]: The number of measurements that should be performed
+    - [waittime]: A specific waiting time between each measurement
+
+#### Node
+[[Image(measurements.png, 360px, right, nolink)]]
+The program [raw-attachment:node.repy] is responsible for the execution of the measurements. It is executed on all Seattle VMs which should be measured. Being governed by the ''controller'' each node will produce a list of ''n'' measurements with a specific waiting time ''t'' between each try.
+
+The program is started in ''seash.py'' by executing:
+```repy 
+node.repy [port]
+```
+
+    - [port]: Your specific port for Seattle
+
+### Executing the Programs
+To get the programs running, first acquire your VMs and exclude one node from the whole group; then, run "node.repy" on all members of the group, export their IPs to a file and finally, upload the IP file to the node that was removed from the group and run "controller.repy" on it.
+
+### Calculations
+For the statistical analysis of the collected data, the following metrics are provided: the quantiles, the mean value and an estimation of the variance and the deviation.
+
+#### Mean Value
+```repy
+def calcmean(floatlist):
+    result = 0.0
+    for f in floatlist:
+        result += f
+    if len(floatlist) > 0:
+        result /= len(floatlist)
+    return result
+```
+
+#### Estimation of the Variance and Deviation
+```repy
+def calcestimate(floatlist):
+    result = 0.0
+    mean = calcmean(floatlist)
+    for f in floatlist:
+        result += (f - mean) ** 2
+    if len(floatlist) > 1:
+        result /= (len(floatlist) - 1)
+    else:
+        result = 0
+    return result
+```
+
+```repy
+def calcdeviation(floatlist):
+    result = calcestimate(floatlist)
+    result = result ** .5
+    return result
+```
+
+#### Quantiles
+```repy
+def calcquantil(sortedfloatlist, quantil=0.25):
+    result = 0
+    n = len(sortedfloatlist)
+    datapoint = n * quantil
+    if int(datapoint) is not 0:
+        if datapoint % int(datapoint) > 0:
+            datapoint = int(datapoint)
+            result = sortedfloatlist[int(datapoint)]
+        else:
+            result = (sortedfloatlist[int(datapoint - 1)] + sortedfloatlist[int(datapoint)]) / 2
+    return result
+```
+
+### Displaying the Results
+The controller can display the results in several ways:
+
+#### On a Website
+The website is generated after one measurement round is done. You can access it with a Browser using the IP of the dedicated Controller node in conjunction with your Seattle port (e.g. http://1.2.3.4:1234).
+```repy
+def show_status(srcip, srcport, connobj, ch, mainch):
+    webpage = "<html><head><title>RoundTripTime</title></head><body><h1>RoundTripTimes measured by " + getmyip() + '</h1>'
+    if mycontext['int_measured'] < len(mycontext['list_availableips']):
+        print "Html in progress"
+        webpage += "<b>Still in Progress...</b>"
+    else:
+        for i in range(9):
+            webpage += "<h2>"
+            webpage += getmeasurelabel(i)
+            webpage += "</h2>"
+            webpage += generatetable(i)
+   
+    webpage += '</html>'
+    connobj.send('HTTP/1.1 200 OK
+nContent-Type: text/html
+nContent-Length: ' + str(len(webpage)) + '
+nServer: Seattle Testbed
+n
+n' + webpage)
+    connobj.close()
+```
+
+#### In a CSV File
+The Controller generates a CSV file that can be downloaded. It contains all measurement values.
+```repy
+def generate_csv(sorted=False, file="results"):
+    filestring = file + ".csv"
+    myfileobject = open(filestring, "w")
+    writestring = "From; To;"
+    for i in range(mycontext['int_tries']):
+        writestring += str(i + 1) + "; "
+    writestring += "
+n"
+    for fromip in mycontext['list_availableips']:       
+        for toip in mycontext['list_availableips']:
+            if fromip is not toip:
+                writestring += fromip + "; "
+                writestring += toip + "; "               
+                if sorted:
+                    currentlist = getsortedlist(fromip, toip)
+                else:
+                    currentlist = getlist(fromip, toip)                   
+                for value in currentlist:
+                    writestring += str(value) + "; "
+                if len(currentlist) < mycontext['int_tries']:
+                    writestring += addsemicolon(mycontext['int_tries'] - len(currentlist))
+                writestring += "
+n"           
+        writestring += "
+n"                   
+   
+    myfileobject.write(writestring)
+    myfileobject.close() 
+```
+
+#### In a LaTeX Table
+Another possible representation of the results is as a LaTeX file. It contains the all-pairs-matrices as tables of all conducted calculations and can be obtained from the ''controller'' too.
+```repy
+def generate_tex(size=0, file="results"):
+    filestring = file + ".tex"
+    myfileobject = open(filestring, "w")
+    writestring = "
+
+begin{landscape}
+n"
+    writestring += "
+
+section{Results of the measurements of controller " + getmyip().replace(".", ".
+"
+"") + "}
+n"
+    if size is 0:
+        writestring += "
+
+normalsize
+n"
+    elif size is 1:
+        writestring += "
+
+small
+n"
+    elif size is 2:
+        writestring += "
+
+footnotesize
+n"
+    elif size is 3:
+        writestring += "
+
+tiny
+n"
+    else:
+        writestring += ""
+   
+    writestring += generate_longtable(0)
+    writestring += generate_longtable(1)
+    writestring += generate_longtable(2)
+    writestring += generate_longtable(3)
+    writestring += generate_longtable(4)
+    writestring += generate_longtable(5)
+    writestring += generate_longtable(6)
+    writestring += generate_longtable(7)
+    writestring += generate_longtable(8)
+    writestring += "
+
+end{landscape}
+n
+
+normalsize"
+    myfileobject.write(writestring)
+    myfileobject.close()
+```
+
+#### Visualization as TikZ Graphic
+A graphical visualization of the divide-and-conquer algorithm is given as TikZ graphic. It is also generated by the ''controller'' and shows all single steps the algorithm is recursively traversing.
+```repy
+def generate_tikz(file="tikzgraphics"):
+    filestring = file + ".tex"
+    myfileobject = open(filestring, "w")
+    writestring = "
+
+textbf{Caption:}
+n"
+    writestring += "
+
+begin{tabbing}
+n"
+    writestring += "IP-1000 
+= " + getmyip() + "
+
+kill
+n"
+    writestring += "IP-C" + "
+
+> " + getmyip() + "
+
+
+
+
+n"
+    for ip in mycontext['map_ipforgraphics']:
+        writestring += mycontext['map_ipforgraphics'][ip] + "
+
+> " + ip + "
+
+
+
+
+n" 
+    writestring += "
+
+end{tabbing}
+n"
+    writestring += "
+
+tikzstyle{ipnode}=[circle, fill=gray!20 ,draw,thick]
+n"
+    for i in range(len(mycontext['string_graphics'])):
+        writestring += "
+
+begin{figure}[H]
+n
+
+centering
+n"
+        writestring += mycontext['string_graphics'][i]
+        writestring += "
+
+caption{Conquer-Measure " + str(i + 1) + "}
+n
+
+label{img:conq" + str(i + 1) + "}
+n"
+        writestring += "
+
+end{figure}
+n
+n"
+    myfileobject.write(writestring)
+    myfileobject.close()
+```
+
+## Results
+The results of a first test run with 50 nodes is provided in [raw-attachment:latencymap.csv]. This map contains the mean values of the median reduced measurement lists between two nodes
+
+In [raw-attachment:measuremap.csv] all results are presented row wise with the additional information of the distances between the nodes and their location.
+### First Measurement
+The first measurement was conducted with 103 nodes. The results are given in [raw-attachment:first_latencymap.csv] and the row wise presentation of the 10,506 measurement pairs with the additional information of their distances can be found in [raw-attachment:first_measuremap.csv]
+
+### Second Measurement
+The second measurement included 109 nodes. The results are given in [raw-attachment:second_latencymap.csv].
+
+### Third Measurement
+The second measurement included 107 nodes. The results are given in [raw-attachment:third_latencymap.csv].
+

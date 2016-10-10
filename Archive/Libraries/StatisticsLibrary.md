@@ -1,0 +1,129 @@
+## Statistics Library
+This library is used to collect statistics about Seattle nodes/vessels/VMs and then run specific analysis on the group of data. The library primarily deals with a custom data structure called 'node_dicts' which is actually a dictionary of every node (unique key being the 'nodeid').  You can find the [Statistics Library](https://seattle.poly.edu/browser/seattle/trunk/node_stats_and_info/stat_lib) in the 'node_stats_and_info' folder in trunk.
+
+----
+## Structure of 'node_dicts'
+ * Dictionary of Nodes, with keyword of its corresponding unique node id.  Contents of node id keyword is another dictionary with the following keywords:
+   * **timestamp**: a datetime object in the form of "datetime(2010, 2, 1, 22, 38, 21, 965646)", when the data was polled.
+   * **nodelocation**: 'ip:port'
+   * **responsetime**: a number in seconds corresponding to the time it took to run 'browse_node' (from the experiment library) on this specific node
+   * **version**: version of the node
+   * **nodeid**: unique node id of the node
+   * **vessels**: a list of VM dictionaries (output of browse_node on the node) corresponding to the specific node
+     * vesselhandle: 'nodeid:vesselname'
+     * vesselname: name of the VM, ie. "v1"
+     * ownerkey: a dictionary with the the VM's owner key, keys: 'e' and 'n'
+     * nodelocation: 'ip:port'
+     * userkeys: 0, 1 or >1 keys in a list where each key is a dictionary with keywords 'e' and 'n'
+     * nodeid: unique node id of the node
+     * version: version of the corresponding node
+     * status: the status of the VM at the time of polling
+----
+## Methods
+ * **poll_data**()
+   * Stores a collection of data ('node_dicts') relating to nodes/vessels/VMs and stores them into an external pickle also storing a seperate pickle of failed nodes (unparallelized completes in roughly 20min)
+
+ * **import_data**(absolute_path_to_file)
+   * Takes a file name (in pickle form) and returns a node_list
+
+ * **get_versions**(node_dicts)
+   * Returns a dictionary with its keys as versions and its contents as a list of nodes with that specific version 
+
+  * **get_all_vessels**(node_dicts)
+   * Returns a list of all the VM/vessel dictionaries associated to the dictionary of nodes passed in.
+ * **production_beta_key_split**(node_dicts)
+   * Returns a dictionary with 3 keys: production, beta and other nodes; in the form of {'production':node_dicts}. Where each node_dict now has a new key of production, beta or other and its contents being the name of the key.
+     * The actual items in each node_dict are the same as before but they have an added key of 'production, beta or other' and the contents being the name of the key found for that node.
+     * NOTE: Temporarily this method returns a dictionary with 2 keys: 'production_beta_key_dicts' and 'nodes_with_multi_keys' which corresponds to special nodes that have duplicate keys in the nodes VMs userkeys list.
+
+ * **split_lan_nodes**(node_dicts)
+   *     Takes a dictionary of node_dicts and splits them based on their ip addresses (adding NAT nodes to a special NAT category).  If 'node a' and 'node b' are both part of the '10.8.10.X' network they will be grouped together so you can tell how many nodes are part of the same local network.  It returns a dictionary of the form {'10.8.10.X':[node_dicts]}, where '[node_dicts]' is a list of node_dicts that are in the 10.8.10.X network.
+ 
+
+----
+## Example Uses
+Script Contents:
+
+(assumes 'poll_data()' was executed prior)
+```python
+import stat_lib
+
+def main():
+  #location of poll data pickle
+  nodes = stat_lib.import_data("nodedata_2_3_115/nodes_list.dat") 
+  split(nodes)
+  print "------------------"
+  versions(nodes)
+
+def versions(nodes):
+  vers = stat_lib.versions(nodes)
+  node_count = 0
+  for key,nodes in vers.items():
+    print str(key) + ": " + str(len(nodes))
+    node_count = node_count + len(nodes)
+  print "total nodes: " + str(node_count)
+
+def split(nodes):
+  pb_split = stat_lib.prod_beta_split(nodes)
+  prod_nodes = pb_split[0]
+  beta_nodes = pb_split[1]
+  other_notes = pb_split[2]
+  
+  print "prod: " + str(len(prod_nodes))
+  print "beta: " + str(len(beta_nodes))
+  print "other: " + str(len(other_notes))
+  print "total: " + str(len(prod_nodes) + len(beta_nodes) + len(other_notes))
+  print "total nodes:" + str(len(nodes))
+
+if __name__ == '__main__':
+  main()
+```
+Console Output:
+```
+prod: 387
+beta: 30
+other: 2
+total: 419
+total nodes:419
+------------------
+0.1e: 1
+0.1p-beta-r3467: 28
+0.1c: 2
+0.1b: 1
+0.1m: 1
+0.1l: 1
+0.1o: 382
+0.1n: 2
+0.1p-beta-r3373: 1
+total nodes: 419
+```
+
+### Tracking down a node with a certain property
+
+The context of this example is that there is a node with a certain version we know exists (e.g. from the output above) but we want to know its ip address and nodeid. 
+
+The following example demonstrates:
+  * Using a script in one's own directory with the data and stats lib stored in jeffra45's home dir on blackbox.
+  * Iterating over the node data returned by import_data('node_list.dat').
+
+```python
+import os
+import sys
+sys.path.append("/home/jeffra45/stat_lib")
+
+import stat_lib
+
+STATS_DATA_DIR = "/home/jeffra45"
+
+def main():
+  nodes_dat = os.path.join(STATS_DATA_DIR, "nodedata_2_5_610/node_list.dat")
+  nodes = stat_lib.import_data(nodes_dat)
+  for nodeid, nodeinfo in nodes.items():
+    for vesseldict in nodeinfo['vessels']:
+      if vesseldict['version'] == '0.1m':
+        print vesseldict
+        sys.exit(0)
+
+if __name__ == '__main__':
+  main()
+```
