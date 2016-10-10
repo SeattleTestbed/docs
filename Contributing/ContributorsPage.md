@@ -1,26 +1,26 @@
-= Contributor Page =
+# Contributor Page
 
-This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is '''in bold text'''.
+This page contains information useful to developers working on Seattle.   Anything that is essential for each developer to read is **in bold text**.
 
-Note: We've recently moved our VCS and ticket system to !GitHub. Please see our [https://github.com/SeattleTestbed organization's page] for the latest code, to discuss open issues, and to create forks off our code base for your contributions!
+Note: We've recently moved our VCS and ticket system to GitHub. Please see our [organization's page](https://github.com/SeattleTestbed) for the latest code, to discuss open issues, and to create forks off our code base for your contributions!
 
-'''If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.'''
- * Accessing our !GitHub repositories, building components, Github & Git tutorial, and using the wiki
-   * Check out (i.e., {{{git clone}}}) our source code from [https://github.com/SeattleTestbed]
+**If you are a new contributor, please look at our [wiki:GettingStarted Getting Started] page.**
+ * Accessing our GitHub repositories, building components, Github & Git tutorial, and using the wiki
+   * Check out (i.e., ```git clone```) our source code from [https://github.com/SeattleTestbed]
    * [wiki:BuildInstructions Instructions] for building Seattle components
 
    * [wiki:Local/RepoAccess Github and Git] instructions
-   * [http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands Useful Git Commands]
-   * [https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line How to resolve a merge conflict with Git]
+   * [Useful Git Commands](http://zackperdue.com/tutorials/super-useful-need-to-know-git-commands)
+   * [How to resolve a merge conflict with Git](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line)
    * [wiki:SubmittingAPatch How to submit a patch for inclusion if you do not have commit access]
-   * ~~'''[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel'''~~
-   * ~~'''[wiki:ManagingTracTickets Managing Trac tickets]'''~~
+   * ~~**[wiki:ContributorAccounts Getting accounts] for Seattle Wiki, testbed machines, and seattle-devel**~~
+   * ~~**[wiki:ManagingTracTickets Managing Trac tickets]**~~
 
  * Programming in Repy
-   * The [http://docs.python.org/tutorial/ Python Tutorial] from the Python site.
+   * The [Python Tutorial](http://docs.python.org/tutorial/) from the Python site.
    * [wiki:PythonTutorial Subset of Python Tutorial] with basic information about the subset of Python needed to write code in Repy
    * [wiki:PythonVsRepy Python You Need to Forget to Use Repy]
-   * '''[wiki:RepyTutorial Repy Tutorial]'''
+   * **[wiki:RepyTutorial Repy Tutorial]**
    * [wiki:RepyApi Repy Library] reference
    * [wiki:SeattleLib Seattle Standard Library] reference
    * [wiki:PortingPythonToRepy Porting Python to Repy Guide]
@@ -28,8 +28,8 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:RepyV1vsRepyV2 Difference between Repy V1 and Repy V2]
 
  * Testing
-   * '''[wiki:UnitTestFramework Writing Tests for Seattle's Unit Test Framework]'''
-   * '''[wiki:UnitTests Running Repy and / or node manager unit tests]'''
+   * **[wiki:UnitTestFramework Writing Tests for Seattle's Unit Test Framework]**
+   * **[wiki:UnitTests Running Repy and / or node manager unit tests]**
    * [wiki:UnitTestFrameworkRunning Supplemental information about Running Tests with Seattle's Unit Test Framework]
    * [wiki:UpdaterUnitTests Running Software Updater Unit Tests]
    * [wiki:IntegrationTestFramework Writing Integration Tests] 
@@ -37,14 +37,14 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:ClearinghouseInstallation Running a Clearinghouse test server]
    * [wiki:Archive/CustomInstallerBuilderTesting Running a Custom Installer Builder test server]
    * [wiki:RemoteTestingService Running remote tests on seattle testbeds]
-   * '''Continuous Integration via Travis-CI and AppVeyor:'''
-      * [https://github.com/SeattleTestbed/seattlelib_v2/wiki/Continuous-Integration-for-the-Team For team members - managing CI]
-      * [https://github.com/SeattleTestbed/seattlelib_v2/wiki/How-to-Contribute For potential contributors - how to contribute and test]
+   * **Continuous Integration via Travis-CI and AppVeyor:**
+      * [For team members - managing CI](https://github.com/SeattleTestbed/seattlelib_v2/wiki/Continuous-Integration-for-the-Team)
+      * [For potential contributors - how to contribute and test](https://github.com/SeattleTestbed/seattlelib_v2/wiki/How-to-Contribute)
 
  * Style guidelines for documentation, python code, web code
-   * '''[https://github.com/secure-systems-lab/code-style-guidelines Python/Repy style guidelines] for most Seattle programming'''
+   * **[Python/Repy style guidelines](https://github.com/secure-systems-lab/code-style-guidelines) for most Seattle programming**
    * [wiki:WebCodingStyle Web style guidelines] for web programming
-   * '''[wiki:Local/WikiFormatting Documentation format guidelines] for wiki pages'''
+   * **[wiki:Local/WikiFormatting Documentation format guidelines] for wiki pages**
 
  * Installation instructions and documentation
    * [wiki:InstallerDocumentation Formal Installer Documentation]
@@ -77,7 +77,7 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
 
  * Events relevant to Seattle and Seattle team information
    * [wiki:SeattleTalks Upcoming talks] about Seattle
-   * '''[wiki:Local/ContributorContactInfo Project Members] contact information'''
+   * **[wiki:Local/ContributorContactInfo Project Members] contact information**
  
  * Other
    * [wiki:SeattleBackend  Seattle Backend]
@@ -88,4 +88,4 @@ Note: We've recently moved our VCS and ticket system to !GitHub. Please see our 
    * [wiki:Libraries/StatisticsLibrary Statistics Library] for analyzing date regarding nodes & VMs on Seattle.
    * [wiki:Applications/GeoIpServer Running a GeoIP Server]
    * How to run the [wiki:RunningSecLayerBenchmarks security layer benchmarks]
-   * [http://selexor.poly.edu/ SeleXor] for additional control over the VM acquisition process.
+   * [SeleXor](http://selexor.poly.edu/) for additional control over the VM acquisition process.

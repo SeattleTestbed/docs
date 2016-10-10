@@ -1,7 +1,7 @@
-= Contributors =
-[[TOC(inline)]]
+# Contributors
 
-== Core Software ==
+
+## Core Software
 Repy sandbox – Justin Cappos
  * Improved Windows API, CPU Throttling fix – Armon Dadger
  * Improved testing – Brent Couvrette
@@ -14,7 +14,7 @@ Seash – Justin Cappos
 Software updater – Justin Cappos, Brent Couvrette
 
 
-== Web interfaces ==
+## Web interfaces
 Seattle website and wiki – Ivan Beschastnikh
 
 SeattleGENI website
@@ -30,17 +30,17 @@ Custom Installer Builder
   * Version 2 – Alex Hanson
 
 
-== Documentation ==
+## Documentation
 Repy tutorials – Kyungil Kim, Andreas Sekine, Justin Cappos
 
 Repy API – Justin Cappos, Jeff Flatten
 
 
-== Useful add-ons ==
+## Useful add-ons
 Testing framework – Brent Couvrette
 
 
-== External Contributors ==
+## External Contributors
 Patch to fix race conditions in installer – Jake Appelbaum
 
 VIM syntax coloring for Repy – João Moreno
