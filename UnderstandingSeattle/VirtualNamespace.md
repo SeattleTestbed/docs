@@ -1,11 +1,11 @@
-= Virtual Namespaces =
+# Virtual Namespaces
 
-== Description ==
+## Description
 
 A virtual namespace is an abstraction around an arbitrary code string that has been evaluated for safety. A virtual namespace allows for executing code any given global context.
 The code for each virtual namespace is vetted by a static code safety check, and then is an immutable part of the virtual namespace.
 
-== API ==
+## API
 
 A virtual namespace supports the following:
 
@@ -17,14 +17,14 @@ A virtual namespace supports the following:
     complicated interactions between namespaces.
 
 2. evaluate()
-  * Evaluates the code in the namespace with a provided global context. This context must be a !SafeDict or dict object.
-    dict objects are automatically converted to !SafeDict object's, which prevent unsafe global keys from being used.
+  * Evaluates the code in the namespace with a provided global context. This context must be a SafeDict or dict object.
+    dict objects are automatically converted to SafeDict object's, which prevent unsafe global keys from being used.
 
 
-== Examples ==
+## Examples
 
 How to implement "from X import foo":
-{{{
+```
    # Read in the code
    code = open("X.py").read()
 
@@ -34,11 +34,11 @@ How to implement "from X import foo":
    # Evaluate the module in our current global context
    virt.evaluate(_context)
 
-}}}
+```
 
 
 How to emulate python eval():
-{{{
+```
   # Code string to evaluate
   strValue = "result = 123 * 2"
 
@@ -51,15 +51,15 @@ How to emulate python eval():
   # Extract the value of result
   result = virt_context["result"]
 
-}}}
+```
 
 
-== Overriding the default API to provide different behavior ==
+## Overriding the default API to provide different behavior
 
 In this example, we will create 2 virtual namespaces, which call sleep() and then exitall().
 However, we have modified exitall() so that repy will not exit until there are 2 calls to it.
 
-{{{
+```
 
 # Copy our context for virt1 and virt2
 context1 = _context.copy()
@@ -80,8 +80,10 @@ def waitforboth():
 
 if callfunc == "initialize":
   # Create two virtual namespaces to call exitall()
-  virt1 = VirtualNamespace("sleep(0.5)\nexitall()")
-  virt2 = VirtualNamespace("sleep(1.0)\nexitall()")
+  virt1 = VirtualNamespace("sleep(0.5)
+nexitall()")
+  virt2 = VirtualNamespace("sleep(1.0)
+nexitall()")
 
   # Re-map exitall to call waitforboth, then evaluate
   context1["exitall"] = waitforboth
@@ -93,17 +95,17 @@ if callfunc == "initialize":
   # We should never get here
   print "Not here!"
 
-}}}
+```
 
 
 So although the new virtual namespaces (virt1, virt2) have a function which looks the same as exitall() provided by repy, its behavior has been changed by the main namespace. This allows for chaining of namespaces that alter and improve behavior, as well as providing functionality such as logging and performance monitoring.
 
 
-== Executing different code in the same context ==
+## Executing different code in the same context
 
 It is possible to execute different code strings while sharing the same context. This might be useful for evaluating dynamic code strings in the current namespace as is done in this example:
 
-{{{
+```
 
 if callfunc == "initialize":
   # Set RESULT = 1
@@ -117,14 +119,14 @@ if callfunc == "initialize":
   virt1.evaluate(_context) # Evaluate in our context
   print RESULT
 
-}}}
+```
 
 The output here is:
 
-{{{
+```
 1
 5
-}}}
+```
 
 In this example, we create a new virtual namespace with a different code string from what is currently executing, but sharing our same context.
 This allows the new namespace to manipulate our globals as its own.

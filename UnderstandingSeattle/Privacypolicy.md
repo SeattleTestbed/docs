@@ -1,4 +1,4 @@
-= Seattle Privacy Policy =
+# Seattle Privacy Policy
 
 
 This privacy policy sets out how Seattle uses your private information.   The Seattle program does not view your private information from other applications in any way.   Since the Seattle programs run in the background (without your interaction), you do not provide private information to Seattle.

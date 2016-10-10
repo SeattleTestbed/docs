@@ -1,15 +1,16 @@
-= Node Manager Design Document =
+# Node Manager Design Document
 
 This document details the design and implementation of the Node manager.   The purpose of the node manager is to manage the different sandboxed programs (called VMs) that are running on a computer.   The node manager stores information about the VMs it controls and allows VMs to be started, stopped, combined, split, and changed.   This document describes VMs, the node manager interface for manipulating them, advertisement of VMs, and how secure communication is provided.
 
 There are several issues that are punted to V0.2.   These include communication when behind a firewall or NAT, malicious users overwriting advertisement information, transfer / translation of restrictions when splitting and merging VMs, and the hooks necessary to build a resource trading system (Bellagio, SHARP, BACKS, Tycoon, etc.) on top of this.   I believe it's best to get the basics working and solve any problems there.
 
 
-[[TOC(inline)]]
 
 
-[[BR]]
-== VMs ==
+
+
+
+## VMs
 ----
 
 A VM( also known as vessel ) is a controlled environment for running code (implemented using the repy sandbox).   Programs that run in VMs are prevented from performing unsafe actions or consuming undue resources.   A single node manager typically manages (i.e. controls the resources assigned to) many VMs at the same time.   VMs have well defined boundaries that prevent them from interfering with one another (for example, different VMs may be provided their own disjoint set of network ports).   Each vessel has a restrictions file, a stop file, and a log associated with it.   The restrictions file lists what the vessel can and cannot do (enforced by repy).   The stop file allows the node manager to stop the vessel (by creating a file with that name).   The log is a circular logging buffer that the vessel writes to which can be read.
@@ -18,11 +19,12 @@ A common use of VMs would be that a researcher obtains a VM (let's suppose upon 
 
 A more complex example is that a party (let's say an instructor) begins with a VM on a node and decides to split it into separate VMs (so as to allow different students to run programs).   They split the VM (perhaps multiple times) and assign the VMs to different students in the class.   The students are allowed to work in groups and so some of the students decide (once groups are formed) to combine their VMs on the node so as to get more resources in a single VM (note that there is nothing parallel or distributed about the node manager, it only worries about the node it runs on).
 
-However, there are different levels of access to a VM.   The VM '''owner''' has complete control of the VM and may do things like transfer ownership, split a VM into smaller VMs, etc.   A VM '''user''' can do things like run programs in the VM, but may not transfer ownership or other actions.   In the previous example, the instructor may instead decide that students shouldn't own resources since the instructor loses control of them.   The students would be unable to join their VMs without instructor interaction.
+However, there are different levels of access to a VM.   The VM **owner** has complete control of the VM and may do things like transfer ownership, split a VM into smaller VMs, etc.   A VM **user** can do things like run programs in the VM, but may not transfer ownership or other actions.   In the previous example, the instructor may instead decide that students shouldn't own resources since the instructor loses control of them.   The students would be unable to join their VMs without instructor interaction.
 
 
-[[BR]]
-== Node Manager Interface ==
+
+
+## Node Manager Interface
 ----
 
 The node manager provides an interface that allows manipulation of VMs and information gathering about the host computer.   The node manager keeps a list of the VMs it manages.   Each VM has the following information:
@@ -65,68 +67,69 @@ There is also a special set of resources called the offcut resources.   The offc
 
 The interface is:  
 
-    !GetVessels()   -- public
+    GetVessels()   -- public
         Returns the vesselname, owner key, advertise flag, status, user key(s), and ownerinformation for every VM (including VM which do not advertise in OpenDHT)
 
-    !GetVesselResources(vesselname)   -- public
+    GetVesselResources(vesselname)   -- public
         Returns the resource file for a VM
 
-    !GetOffcutResources()    -- public
+    GetOffcutResources()    -- public
         Returns the offcut resources
 
-    !StartVessel(vesselname, args) '''(obsolete use !StartVesselEx)'''  -- private to owner, user
+    StartVessel(vesselname, args) **(obsolete use StartVesselEx)**  -- private to owner, user
         Begins executing a VM with a set of arguments (including the command name).
 
-    !StartVesselEx(vesselname, program_platform, args)   -- private to owner, user
+    StartVesselEx(vesselname, program_platform, args)   -- private to owner, user
         Begins executing a vessel with a set of arguments (including the command name) on a given programming platform (RepyV1/RepyV2).
 
-    !StopVessel(vesselname)   -- private to owner, user
+    StopVessel(vesselname)   -- private to owner, user
         Stops the execution of a VM.   Does not clean up the state for the VM.
 
-    !AddFileToVessel(vesselname, filename, filedata)   -- private to owner, user
+    AddFileToVessel(vesselname, filename, filedata)   -- private to owner, user
         Create (overwrite if it exists) a file called "filename" in the VM with contents "filedata".   This operation can fail if the file system of the VM is too small.
 
-    !RetrieveFileFromVessel(vesselname, filename)   -- private to owner, user
+    RetrieveFileFromVessel(vesselname, filename)   -- private to owner, user
         Returns the contents of a file in the VM.
 
-    !DeleteFileInVessel(vesselname, filename)   -- private to owner, user
+    DeleteFileInVessel(vesselname, filename)   -- private to owner, user
         Deletes a file in a VM.
 
-    !ReadVesselLog(vesselname)   -- private to owner, user
+    ReadVesselLog(vesselname)   -- private to owner, user
         Returns the VM's log.
 
 
-    !ListFilesInVessel(vesselname)  -- private to owner, user
+    ListFilesInVessel(vesselname)  -- private to owner, user
         Returns a list of files (space separated) in the VM.
 
-    !ResetVessel(vesselname) -- private to owner, user
+    ResetVessel(vesselname) -- private to owner, user
         Removes all files in a VM's file system, resets the log, and stops the VM if it's running. The advertise status is not changed.
 
-    !ChangeOwner(vesselname, newpublickey)    -- private to owner
+    ChangeOwner(vesselname, newpublickey)    -- private to owner
         Change the owner of a VM to a different key.   Also resets the ownerinformation to the empty string.   
 
-    !ChangeUsers(vesselname, listofpublickeys)    -- private to owner
+    ChangeUsers(vesselname, listofpublickeys)    -- private to owner
         Change the list of public keys selected for the VM (the list may only have a small number of entries)   
    
-    !ChangeOwnerInformation(vesselname, informationstring)    -- private to owner
+    ChangeOwnerInformation(vesselname, informationstring)    -- private to owner
         Sets the information string to a specific value.   There is a limit on the value and longer strings will be truncated.
 
-    !ChangeAdvertise(vesselname, boolean)    -- private to owner
+    ChangeAdvertise(vesselname, boolean)    -- private to owner
         Should this VM be advertised in OpenDHT?
 
-    !SplitVessel(vesselname, resourcedata)     -- private to owner
+    SplitVessel(vesselname, resourcedata)     -- private to owner
         Splits a VM into two smaller vessels.   The resource data determines the size of one of the new VMs (the other is the original - the offcut).   Both VMs are considered new and are given new vesselnames.   The owner key is copied from the existing VM.   The restrictions are all removed and must be readded by the owner.   The vesselname, filesystems and logs of the VMs are newly created.   Returns the names of the new VMs (separated by a space).
 
-    !JoinVessels(vesselname1, vesselname2)     -- private to owner
+    JoinVessels(vesselname1, vesselname2)     -- private to owner
         Merge two VMs into two one larger VM.   The resource information is determined by adding the resources in the two VMs along with the offcut resources.   A new VM is created with a new vesselname.   The restrictions are written so that any action that either could have performed can be performed by the created VM.   The created VM is considered new and is given a new vesselname.   The owner key must have previously been identical on both vessels and will be copied to the new VM.   The filesystem and log of the new VM is freshly made.   Returns the new vesselname.
 
-    !SetRestrictions(vesselname, restrictiondata) '''(obsolete use [wiki:SecurityLayers])'''  -- private to owner
+    SetRestrictions(vesselname, restrictiondata) **(obsolete use [wiki:SecurityLayers])**  -- private to owner
         Sets the restrictions for a VM.   The restrictions may only contain "deny" entries.
 
 
 
-[[BR]]
-== Advertising VMs ==
+
+
+## Advertising VMs
 ----
 
 Every minute, the node manager inserts a key / value pair into OpenDHT in order to allow parties to find the nodes where they control VMs.   The key that is inserted is the owner's public key and the value is the local computer's IP address.   This means that a party can lookup their public key and find the nodes with VMs they control without needing to search for nodes.
@@ -140,8 +143,9 @@ However, there exist several unsolved problems that are punted to v0.2:
     This seems easy to fix but may require changes to openDHT
 
 
-[[BR]]
-== Secure Communication ==
+
+
+## Secure Communication
 ----
 
-After digging into this, I decided to "roll my own" because an XMLRPC client is going to be a huge headache to port to the sandbox (although we're starting to do this).   I've already ported [https://seattle.poly.edu/browser/seattle/trunk/seattlelib/rsa.repy RSA] and [https://seattle.poly.edu/browser/seattle/trunk/seattlelib/sha.repy SHA] so I'm not too far away.   I've also built a [https://seattle.poly.edu/browser/seattle/trunk/seattlelib/signeddata.repy signeddata module] that handles many types of attacks (replay, freeze, misdelivery, and out of order).
+After digging into this, I decided to "roll my own" because an XMLRPC client is going to be a huge headache to port to the sandbox (although we're starting to do this).   I've already ported [RSA](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/rsa.repy) and [SHA](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/sha.repy) so I'm not too far away.   I've also built a [signeddata module](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/signeddata.repy) that handles many types of attacks (replay, freeze, misdelivery, and out of order).

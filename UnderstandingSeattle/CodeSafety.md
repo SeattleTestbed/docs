@@ -1,4 +1,4 @@
-= Code Safety =
+# Code Safety
 
 Maintaining a safe environment for execution of untrusted Repy code is fundamental to Seattle.
 Seattle securely isolates Repy programs in multiple ways, including performing analysis of the
@@ -6,7 +6,7 @@ program's abstract syntax tree, maintaining a small and secure API through which
 interact with the outside world, and implementing strong isolation between untrusted code and the
 rest of the execution environment.
 
-== Program Analysis ==
+## Program Analysis
 
 When Seattle runs any Repy program, the program is first parsed and its syntax tree analyzed.
 As Repy is largely a subset of Python, we leverage the Python interpreter but disallow anything in
@@ -14,7 +14,7 @@ Python that could allow the program direct access system resources. We therefore
 the program's syntax tree to ensure that only the Python functionality we have specifically allowed exists
 in the program. If Seattle encounters anything forbidden, it refuses to run the program.
 
-== Secure API ==
+## Secure API
 
 As we've stripped away any other method by which the program can access resources such as the
 computer's hard drive and networking, in order to make Repy a useful programming environment we
@@ -23,7 +23,7 @@ a restricted subset of the computer's resources. As all access to these resource
 our API, we can ensure that only allowed resources are accessed as well as limit the frequency
 and quantity of any resource that a program uses.
 
-== Code Isolation ==
+## Code Isolation
 
 As our safe API runs in the same Python interpreter as the untrusted program code, we must ensure that
 the untrusted code has no way to manipulate the trusted code or access privileged functionality

@@ -1,24 +1,26 @@
-= Advertise Service Design Document =
+# Advertise Service Design Document
 
-This document details the design and implementation of the Advertise Service.  The purpose of the advertise service is to provide the Seattle infrastructure and its users with an easy key-value data store.  Clients can then contact the server to perform lookups on a key, to which the server with respond with the '''list of values''' that have been advertised to a key.  Each key-value pair is kept until it expires.  This document describes the advertise server design, the advertise interface for interaction with the advertise server, and how to setup additional advertise servers.
-
-
-[[TOC(inline)]]
+This document details the design and implementation of the Advertise Service.  The purpose of the advertise service is to provide the Seattle infrastructure and its users with an easy key-value data store.  Clients can then contact the server to perform lookups on a key, to which the server with respond with the **list of values** that have been advertised to a key.  Each key-value pair is kept until it expires.  This document describes the advertise server design, the advertise interface for interaction with the advertise server, and how to setup additional advertise servers.
 
 
-[[BR]]
-== Advertise Server ==
+
+
+
+
+
+## Advertise Server
 ----
 
-The Advertise server is a key-value data store that anyone can access.  A single advertise server can maintain key-value pairs from a multitude of clients.  A user can advertise a {{{(key, value)}}} pair with a user defined timeout.  The same key can be used to advertise different values.  Other users can then request a lookup on the same key, and '''all values that the key is mapped to will be returned'''.  A key will only remain in memory so long as its timeout has not expired.  If a {{{(key, value)}}} pair already exists, then the later of the two expiration times will be kept.
+The Advertise server is a key-value data store that anyone can access.  A single advertise server can maintain key-value pairs from a multitude of clients.  A user can advertise a ```(key, value)``` pair with a user defined timeout.  The same key can be used to advertise different values.  Other users can then request a lookup on the same key, and **all values that the key is mapped to will be returned**.  A key will only remain in memory so long as its timeout has not expired.  If a ```(key, value)``` pair already exists, then the later of the two expiration times will be kept.
 
 An example use case for the advertise server is to determine which nodes contain VMs that a user has access to.  For each user that has access to a VM(also known as vessel), the controlling node manager will map the user's public key to the node's IP address, allowing the Clearinghouse and Seash to identify which nodes the user can manipulate.
 
 There can be (and are) multiple advertise servers running.  The advertise repy library (which can be found in seattlelib) provides an API that will contact each server in parallel.  If you are interested in using the advertise service in your client program, it is recommended that you use advertise.repy, as opposed to using the service-specific implementation.  This allows us to set up additional servers transparently without impacting your client program.
 
 
-[[BR]]
-== Advertise Interface ==
+
+
+## Advertise Interface
 ----
 
 The advertise server provides an interface to set and retrieve key-value pairs.   Each entry in the advertise server has the following attributes:
@@ -30,13 +32,13 @@ The advertise server provides an interface to set and retrieve key-value pairs. 
         A value that is mapped to by the specified key.  Its type can also be any basic python type that is serializable by the repy serialize library.  This value will be part of the list of values that is returned when a user performs a lookup based on a key.
 
     ttl
-      This is a number that controls how long a single {{{(key, value)}}} pair lives in the advertise server.  This causes the advertise server to designate an expiration time for the {{{(key, value)}}} pair.  If the same {{{(key, value)}}} pair is re-advertised, then the expiration time is either extended, or left alone.  It is not possible to make a  {{{(key, value)}}} pair expire earlier.
+      This is a number that controls how long a single ```(key, value)``` pair lives in the advertise server.  This causes the advertise server to designate an expiration time for the ```(key, value)``` pair.  If the same ```(key, value)``` pair is re-advertised, then the expiration time is either extended, or left alone.  It is not possible to make a  ```(key, value)``` pair expire earlier.
 
 
 The interface is:
 
     advertise_announce(key, value, ttlval, concurrentevents, graceperiod, timeout)   -- public
-        Advertises a {{{(key, value)}}} pair with a TTL value.
+        Advertises a ```(key, value)``` pair with a TTL value.
 
           key (string)
             The key for our advertise dictionary entry.
@@ -92,8 +94,9 @@ The interface is:
           timeout (optional, defaults to 60):
             After this many seconds (can be a float or int type), give up.
 
-[[BR]]
-== Setting Up New Advertise Servers ==
+
+
+## Setting Up New Advertise Servers
 ----
 
 1. Add an Advertise API.
@@ -105,15 +108,16 @@ Additionally, if you wish to turn this service to be one of the default advertis
 Next, go onto the machine that the server will be deployed on.  Create a new user account for the server, and then deploy the advertise server into that account's home directory.  Do NOT set up a production service in your own home directory.  This will make it difficult for other project members to step in and maintain the service.
 
 In a screen instance, run the advertise server with output redirected:
-{{{
+```
   python advertiseserver.py >> advertiseserver.stdout 2>> advertiseserver.stderr
-}}}
+```
 
 
 You should now talk to any system administrators to get the relevant ports open, if necessary.
 
-[[BR]]
-== Deployed Advertise Instances ==
+
+
+## Deployed Advertise Instances
 ----
  * Centralized Advertise V1 (TCP, Repy): advertiseserver.poly.edu:10102
  * Centralized Advertise V2 (TCP, Python): advertiseserver_v2.poly.edu:10102
