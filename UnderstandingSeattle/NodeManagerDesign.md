@@ -1,0 +1,151 @@
+# Node Manager Design Document
+
+This document details the design and implementation of the Node manager.   The purpose of the node manager is to manage the different sandboxed programs (called VMs) that are running on a computer.   The node manager stores information about the VMs it controls and allows VMs to be started, stopped, combined, split, and changed.   This document describes VMs, the node manager interface for manipulating them, advertisement of VMs, and how secure communication is provided.
+
+There are several issues that are punted to V0.2.   These include communication when behind a firewall or NAT, malicious users overwriting advertisement information, transfer / translation of restrictions when splitting and merging VMs, and the hooks necessary to build a resource trading system (Bellagio, SHARP, BACKS, Tycoon, etc.) on top of this.   I believe it's best to get the basics working and solve any problems there.
+
+
+
+
+
+
+
+## VMs
+----
+
+A VM( also known as vessel ) is a controlled environment for running code (implemented using the repy sandbox).   Programs that run in VMs are prevented from performing unsafe actions or consuming undue resources.   A single node manager typically manages (i.e. controls the resources assigned to) many VMs at the same time.   VMs have well defined boundaries that prevent them from interfering with one another (for example, different VMs may be provided their own disjoint set of network ports).   Each vessel has a restrictions file, a stop file, and a log associated with it.   The restrictions file lists what the vessel can and cannot do (enforced by repy).   The stop file allows the node manager to stop the vessel (by creating a file with that name).   The log is a circular logging buffer that the vessel writes to which can be read.
+
+A common use of VMs would be that a researcher obtains a VM (let's suppose upon the installation of software).   They then may decide to run a program within their VM.   To do this, they add the program they want to run to their VM (along with any data files).   They then may start the program running in the VM.   They can monitor the status of their program by looking at a status indicator (coarse grained monitoring) or by downloading information about the program from its circular log buffer (fine grained monitoring).   They can also stop their VM (if the need arises).   If their VM provides a useful service to other VMs, they can indicate this by entering information into the node manager about the service.   The researcher can locate the VMs they control because their VMs advertise their availability in OpenDHT.   The researcher can also prevent the VMs from advertising as a way to prevent their limited space for advertisements from being overwritten.
+
+A more complex example is that a party (let's say an instructor) begins with a VM on a node and decides to split it into separate VMs (so as to allow different students to run programs).   They split the VM (perhaps multiple times) and assign the VMs to different students in the class.   The students are allowed to work in groups and so some of the students decide (once groups are formed) to combine their VMs on the node so as to get more resources in a single VM (note that there is nothing parallel or distributed about the node manager, it only worries about the node it runs on).
+
+However, there are different levels of access to a VM.   The VM **owner** has complete control of the VM and may do things like transfer ownership, split a VM into smaller VMs, etc.   A VM **user** can do things like run programs in the VM, but may not transfer ownership or other actions.   In the previous example, the instructor may instead decide that students shouldn't own resources since the instructor loses control of them.   The students would be unable to join their VMs without instructor interaction.
+
+
+
+
+## Node Manager Interface
+----
+
+The node manager provides an interface that allows manipulation of VMs and information gathering about the host computer.   The node manager keeps a list of the VMs it manages.   Each VM has the following information:
+
+    vesselname
+        A string that uniquely identifies the VM.   These strings are assigned by the node manager and are unique to the VM.   Splitting and joining VMs result in new VM names, but stopping and starting a VM do not.
+
+    ownerkey
+        A public key that is allowed to change the ownership or use of the VM.   The owner can perform any action on the VM
+
+    userkey(s)
+        A list of public keys that are allowed to issue a subset of the API calls
+
+    ownerinformation
+        This contains opaque data about the VM that the owner defines.   This information is flushed anytime the VM's owner key changes.   The information field is a field that only the current owner could have set and may be used to advertise a service, etc.
+
+    advertise
+        This boolean indicates whether or not the VM should be advertised in announce services like OpenDHT.   It is set to true when the owner changes.
+
+    oldmetadata        
+        This is needed for replay attack, freeze attack, etc. prevention   (this is internally tracked by the node manager and is not externally visible)
+
+    resourcefile
+        This is the resource file for the VM
+
+    status
+        What the execution status of the VM is.   Allowed values are: Fresh (has never been started), Stopped (was running but stopped by NM command), Started (has been started and is running when last checked), Terminated (the VM stopped of its own volition, possibly due to an error), or Stale (it last reported a start of "Started" but significant time has elapsed, likely due to a system crash)
+
+    logfile
+        This is the circular log file that the VM uses
+
+    stopfile
+        This is a file that the VM checks and if it exists, the VM exits.   This is used to stop a VM.
+
+
+
+       
+There is also a special set of resources called the offcut resources.   The offcut resources are the amount of capability lost when a VM is split into two VMs and the amount of capability gained when two VMs are joined.   It accounts for the management overhead of monitoring a VM.
+       
+
+The interface is:  
+
+    GetVessels()   -- public
+        Returns the vesselname, owner key, advertise flag, status, user key(s), and ownerinformation for every VM (including VM which do not advertise in OpenDHT)
+
+    GetVesselResources(vesselname)   -- public
+        Returns the resource file for a VM
+
+    GetOffcutResources()    -- public
+        Returns the offcut resources
+
+    StartVessel(vesselname, args) **(obsolete use StartVesselEx)**  -- private to owner, user
+        Begins executing a VM with a set of arguments (including the command name).
+
+    StartVesselEx(vesselname, program_platform, args)   -- private to owner, user
+        Begins executing a vessel with a set of arguments (including the command name) on a given programming platform (RepyV1/RepyV2).
+
+    StopVessel(vesselname)   -- private to owner, user
+        Stops the execution of a VM.   Does not clean up the state for the VM.
+
+    AddFileToVessel(vesselname, filename, filedata)   -- private to owner, user
+        Create (overwrite if it exists) a file called "filename" in the VM with contents "filedata".   This operation can fail if the file system of the VM is too small.
+
+    RetrieveFileFromVessel(vesselname, filename)   -- private to owner, user
+        Returns the contents of a file in the VM.
+
+    DeleteFileInVessel(vesselname, filename)   -- private to owner, user
+        Deletes a file in a VM.
+
+    ReadVesselLog(vesselname)   -- private to owner, user
+        Returns the VM's log.
+
+
+    ListFilesInVessel(vesselname)  -- private to owner, user
+        Returns a list of files (space separated) in the VM.
+
+    ResetVessel(vesselname) -- private to owner, user
+        Removes all files in a VM's file system, resets the log, and stops the VM if it's running. The advertise status is not changed.
+
+    ChangeOwner(vesselname, newpublickey)    -- private to owner
+        Change the owner of a VM to a different key.   Also resets the ownerinformation to the empty string.   
+
+    ChangeUsers(vesselname, listofpublickeys)    -- private to owner
+        Change the list of public keys selected for the VM (the list may only have a small number of entries)   
+   
+    ChangeOwnerInformation(vesselname, informationstring)    -- private to owner
+        Sets the information string to a specific value.   There is a limit on the value and longer strings will be truncated.
+
+    ChangeAdvertise(vesselname, boolean)    -- private to owner
+        Should this VM be advertised in OpenDHT?
+
+    SplitVessel(vesselname, resourcedata)     -- private to owner
+        Splits a VM into two smaller vessels.   The resource data determines the size of one of the new VMs (the other is the original - the offcut).   Both VMs are considered new and are given new vesselnames.   The owner key is copied from the existing VM.   The restrictions are all removed and must be readded by the owner.   The vesselname, filesystems and logs of the VMs are newly created.   Returns the names of the new VMs (separated by a space).
+
+    JoinVessels(vesselname1, vesselname2)     -- private to owner
+        Merge two VMs into two one larger VM.   The resource information is determined by adding the resources in the two VMs along with the offcut resources.   A new VM is created with a new vesselname.   The restrictions are written so that any action that either could have performed can be performed by the created VM.   The created VM is considered new and is given a new vesselname.   The owner key must have previously been identical on both vessels and will be copied to the new VM.   The filesystem and log of the new VM is freshly made.   Returns the new vesselname.
+
+    SetRestrictions(vesselname, restrictiondata) **(obsolete use [wiki:SecurityLayers])**  -- private to owner
+        Sets the restrictions for a VM.   The restrictions may only contain "deny" entries.
+
+
+
+
+
+## Advertising VMs
+----
+
+Every minute, the node manager inserts a key / value pair into OpenDHT in order to allow parties to find the nodes where they control VMs.   The key that is inserted is the owner's public key and the value is the local computer's IP address.   This means that a party can lookup their public key and find the nodes with VMs they control without needing to search for nodes.
+
+However, there exist several unsolved problems that are punted to v0.2:
+
+1) clients may not be contactable if they are behind a firewall or NAT   
+    A good solution to this is likely to be non-trivial because of the different NAT implementations / quirks
+
+2) preventing a malicious user from overwriting the information in openDHT.  
+    This seems easy to fix but may require changes to openDHT
+
+
+
+
+## Secure Communication
+----
+
+After digging into this, I decided to "roll my own" because an XMLRPC client is going to be a huge headache to port to the sandbox (although we're starting to do this).   I've already ported [RSA](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/rsa.repy) and [SHA](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/sha.repy) so I'm not too far away.   I've also built a [signeddata module](https://seattle.poly.edu/browser/seattle/trunk/seattlelib/signeddata.repy) that handles many types of attacks (replay, freeze, misdelivery, and out of order).

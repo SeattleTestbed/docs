@@ -1,0 +1,60 @@
+**NOTE**: As of r5717, Seattle ceases to support Windows CE. See also #1041 for details.
+
+
+
+
+**Old content:**
+
+# Windows Mobile CE Notes
+
+----
+
+----
+
+
+
+## Critical Issues
+As of June 11th 2009, r2362 switched code safety evaluation to be done in an external process to reduce memory overhead after program startup. However, this process uses subprocesses which is currently not supported on Windows Mobile. A rather slow workaround would be to have the safe_check.py file read in the file itself, and write the output to a file, which the repy process can then read. However, this is not currently implemented due to the slowdown it would cause.
+
+## Unit Test Status
+As of Marth 29th 2009, we are passing approximately 90 tests, and failing 50. (repy tests only).
+See attached test.output file for the log file of which tests passed and failed.
+
+
+
+## Unit Test Evaluation
+See status.txt file for more detail, but essentially the errors of the following type:
+ * We need to check errno 6 as well as errno 9 for a closed socket (Easy Fix)
+ * Some of the tests which explicitly need repy to fail will not work since our logging system requires repy to be working, since there is no stdout or stderr (Impossible to Fix)
+ * The phone disconnects from the internet in the middle of the tests, this messes up the net ones (Unknown, I talk about this in the file)
+ * Slow harshexit / os._exit causes some strange behavior and test failures. (We are at the mercy of the OS once that call is made)
+ * Tests that use timers and sleep to work generally fail because the phone is slow (Impossible to Fix)
+
+
+
+## Main Issues
+As touched on in the Unit test evaluation section, there are some major issues on the WinCE platform.
+
+ * As of r2362, repy uses subprocess for code safety checking, which breaks it entirely on the WinCE platform.
+ * The current unit testing framework relies heavily on features provided by subprocess, which are not available on WinCE
+    * Pipes are used on stdout and stderr to log the test, and these streams are not available on WinCE
+    * Output is logged using a special flag for WinCE which means that if repy fails, then logging fails
+       * Some Repy tests are specifically checking for behavior that should break repy (most e_* class tests) and as a result fail on Mobile.
+ * It is a difficult platform to test on, since its limited resources have many issues
+    * It takes almost 2 hours to run the unit tests, this is incredibly inconvenient for testing code changes
+    * The phone cannot be plugged into a computer (for power) during the unit tests or it will disconnect from Wifi
+    * When low on battery (inevitable since the phone is being taxed for 2 hours straight) it disconnects from the internet
+    * This causes repy test's to fail pre-emptively, since they require network connectivity
+    * Slow CPU causes problems for tests that are timing based or require threads to work
+ *  Some times there is odd behavior with the OS, example being the exit calls
+ * A goal of repy is to use 10% of user resources, however the barebones python interpreter uses 1.7 megs, a simple repy program (e.g. hello world) uses about 2.7 megs of RAM. On my phone, I have only 25 megs available to user programs, meaning hello world is the extent of 10%. It remains to be seen how we can run the NM, a repy VM, and a software updater.
+ * Due to CPU scheduling, sandboxing of CPU works ineffectively meaning it may be possible to temporarily "brick" the device when doing CPU intensive operations.
+ * Installation of Seattle is not extremely friendly, due to the package management used by WinCE, since it requires the user first install Python using a CAB file, then install seattle, and alter the repy_constants file if necessary.
+ * Lack of subprocess and unknown availability of netstat means that we do not support existsListeningNetworkSocket on WinCE.
+
+
+
+
+
+
+

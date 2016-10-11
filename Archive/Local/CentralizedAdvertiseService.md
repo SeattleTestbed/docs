@@ -1,0 +1,46 @@
+# Centralized Advertise Service
+
+The Centralized Advertise daemon implements a hash table abstraction in a centralized manner. This service is used by Seattle nodes in coordination with DOR and OpenDHT. This service runs on seattle.cs, which is also known as satya.cs
+
+----
+
+----
+
+## Configuration
+----
+
+ * The advertise server files reside on the machine seattle.poly.edu and the current version of the central advertise server is located in the directory /home/geni/advertiseserver_deployed.
+
+
+
+## Deployment
+----
+
+There is a deployment script which backs up the current files in the folder advertiseserver_deployed/ and replaces all the files in that directory with the latest files from the trunk. In order to have the latest files, do an svn update and run the script deploy_advertiseserver.sh
+```
+geni@satya:~$ ./deploy_advertiseserver.sh
+```
+This will update all the files, but will not start up the advertise server.
+
+
+
+## Starting/Stopping the Service
+----
+### Starting Central Advertise Server
+To start the advertise server you must first be logged into seattle.poly.edu as the user: geni. Note, that you have to log in as 'geni' rather then sudo into the account. We will deploy the central advertise server in 'SCREEN' mode, that way even if we close the connection to the machine, the central advertise server will keep running. If there was a previous version of SCREEN already running we want to re-open it and then start up the advertise server. Follow the commands below:
+```
+geni@satya:~$ screen -r
+
+[Once in SCREEN mode]
+geni@satya:~/advertiseserver_deployed$ python repy.py restrictions.advertiseserver advertiseserver.repy > log.stdout 2> log.stderr
+```
+
+
+### Stopping Central Advertise Server
+To stop the service, perform a **kill $PID** where $PID is the process id of the command above, which you can find using the following command:
+
+```
+$ ps auwx | grep advertise | grep -v grep
+```
+
+An alternative way to kill the central advertise server would be to reopen the SCREEN mode under the geni account and send a kill signal (ctrl-c), to the terminal that is running the central advertise server.

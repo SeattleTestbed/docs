@@ -1,0 +1,40 @@
+# Testing the Custom Installer Builder
+This page outlines how to deploy the [wiki:CustomInstallerBuilder Custom Installer Builder] using Django's built-in test server on a Linux system. For production-level deployment on a real web server, reference [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython these instructions] instead.
+
+We'll assume that you have completed the previous steps to [wiki:Archive/CustomInstallerBuilderInstallation install], [wiki:CustomInstallerBuilderConfiguration configure], and [wiki:CustomInstallerBuilderCustomizationAndBuild customize] your local Custom Installer Builder already.
+
+----
+
+----
+## Revisit Django settings
+
+Under the Custom Installer Builder's user account, edit `custominstallerbuilder/local/settings.py`  to match your local configuration. Ensure that the following items are set up correctly:
+
+```
+SERVE_STATIC = True
+...
+BASE_URL = 'http://your-actual-custominstallerbuilder-test-url:PORT/'  # Note the trailing slash!
+...
+PROJECT_URL = BASE_URL
+```
+
+If you are testing locally, you will use ```http://127.0.0.1:PORT/``` for the `BASE_URL`. You may use your public facing IP if you want it to be accessible via the Internet. ```PORT``` must be an open port number greater than 1024. For smaller port numbers, administrative privileges are required.
+
+
+
+## Start Django test server
+Ensure that the environment variable `PYTHONPATH` includes the Repy runtime directory. Then, from the `~/custominstallerbuilder/` directory, run the Django test server:
+
+```sh
+$ export PYTHONPATH=$PYTHONPATH:/home/cib/custominstallerbuilder/repy_runtime
+$ cd ~/custominstallerbuilder
+$ ./manage.py runserver 0.0.0.0:PORT   # This will log some information to the prompt
+Validating models...
+
+0 errors found.
+Django version 1.3.5, using settings 'local.settings'
+Development server is running at http://0.0.0.0:8080/
+Quit the server with CONTROL-C.
+```
+
+You should now be able to access your Custom Installer Builder test server at the address specified for `BASE_URL` above. Don't worry if the media files (images, CSS, JavaScript) are missing for the time being. The [wiki:Archive/CustomInstallerBuilderDeploymentWithModPython production deployment guide] will add the missing bits and pieces of configuration to rectify that.

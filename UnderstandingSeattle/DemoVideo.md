@@ -1,0 +1,17 @@
+# Demo Video
+This five-minute demo video should help get you acquainted with the [wiki:WikiStart Seattle project]. If you are unable to watch the video below, you may [download the video](https://seattle.poly.edu/static/demo.mov) to your computer.
+```html
+<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="660" height="500">
+  <param name="src" value="https://seattle.poly.edu/static/demo.mov">
+  <param name="controller" value="true">
+  <param name="autoplay" value="false">
+
+  <object type="video/quicktime" data="https://seattle.poly.edu/static/demo.mov" width="660" height="500">
+    <param name="controller" value="true">
+    <param name="autoplay" value="false">
+    alt : <a href="https://seattle.poly.edu/static/demo.mov">Seattle Demo Video</a>
+  </object>
+
+</object>
+
+```

@@ -1,0 +1,42 @@
+# openDHTadvertise.repy
+Utilizes OpenDHT to advertise availability of nodes.
+
+### Functions
+```
+openDHTadvertise_announce(key, value, ttlval, concurrentevents=5, proxiestocheck=5, timeout=None)
+```
+   Announces a (key, value) pair to OpenDHT.
+   
+   Notes:
+   * ttlval must be a positive integer that describes the amount of time until the value expires.
+   * Exception will be raised if XML-RPC connections fail.
+
+```
+openDHTadvertise_lookup(key, maxvals=100, concurrentevents=5, proxiestocheck=5, timeout=None):
+```
+   Looks up the (key, value) pair from the OpenDHT.
+
+   Notes:
+   * maxvals must be a positive integer that describes how many values to return.
+
+```
+openDHTadvertise_checkserver(servername)
+```
+   Check to see if a server is ready for OpenDHT.
+
+```
+openDHTadvertise_get_proxy_list(maxnumberofattempts=5, concurrentevents=5)
+```
+   Retrieves a list of active OpenDHT proxies.
+
+### Example Usage
+...? only located in .svn directories?
+
+### Includes
+[wiki:SeattleLib/random.repy]
+
+[wiki:include sha.repy]
+
+[wiki:include xmlrpc_client.repy]
+
+[wiki:include parallelize.repy]

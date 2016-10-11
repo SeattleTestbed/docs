@@ -1,0 +1,95 @@
+# Donating Resources
+
+Donating resources with Seattle is a safe and easy way to help students and researchers all around the world.   
+
+
+----
+
+----
+
+
+
+
+## Introduction to Seattle Donation
+----
+
+
+The overall philosophy of the Seattle project is to use donated resources in a way that is safe and secure (including performance-isolation). Seattle has key technical innovations that isolate Seattle programs from other applications you run. This means that donated resources are isolated while running -- a program can't write or read
+files it isn't supposed to or do other bad things to your computer. Seattle leverages technology that ensures fair play by isolating the performance of Seattle programs from other programs you use. Our promise to you is to use no more than 10% of your computer's resources (i.e., RAM, CPU time, network bandwidth, and hard drive space).
+
+
+
+
+## Risk
+----
+Running any software on your system involves a small amount of risk.  A bug in any of the software you run can allow an attacker to do bad things with your computer.   Seattle is designed to make running Seattle code on your system risk free.   Seattle prevents programs from using too many resources, reading your files, or doing other mischief to harm your computer.   
+
+ * **Risk to your system**:   The risk is minimal, but if there were a bug in the Seattle software, it could allow a malicious party to bypass Seattle's security protections and gain access to user privileges via the Seattle account. However, Seattle features a [novel security design](http://portal.acm.org/citation.cfm?id=1866307.1866332) that minimizes the possibility of such a security breach. To further minimize risk, it is possible to run Seattle in from a restricted / non-privileged account, which we suggest you do if you are concerned about this minimal risk.
+
+ If Seattle works correctly, the programs that run on our platform cannot harm your computer.   The program is limited to consume only a small percent of the resources on the computer and cannot interfere with security or performance.
+
+ * **Risk to other Internet hosts**:   However, while the rate and source port of network traffic is restricted, the destination port and destination IP are not. This means there is some small risk they could be used for reflecting traffic, etc. This is a very common feature for lots of different types of software you might install like Tor, most versions of BitTorrent, etc. and so isn't limited to Seattle. You can choose to utilize a policy that further restrict which computers your computer can communicate with.
+
+
+
+
+## Why You Should Donate
+----
+
+By running Seattle on your home computer, workstation, or computer, you
+are helping everyone using Seattle! By making your
+donation available to Seattle users, you are allowing users to try new   topologies of nodes. This enables both more accurate representations of
+Internet (increased and varied latency times) and allows more
+undergraduates, graduate students, and professors to test their
+hypotheses on a Internet-like testbed without charge.   You are helping these people to build the cool advances (like cloud computing) that everyone will benefit from in the future.
+
+
+
+
+
+## Installing Seattle
+----
+
+Installing Seattle on your machine is easy. First you will need to download an installer.   If you were referred to Seattle by a Seattle user, they may give you a link to an installer that credits the donated resources to them.   If not, you can download [download a general installer](https://seattleclearinghouse.poly.edu/download/flibble/) that credits your donations to a general fund for students to use.   
+
+
+Then uncompress the file and start the install script (```install.bat``` on Windows or ```install.sh``` on other OSes).   The installer does three things: 
+
+ 1. start Seattle on your computer
+
+ 2. start the software updater for Seattle.   The software updater will automatically keep Seattle updated to the latest version for you.
+
+ 3. insert Seattle and the software updater into your startup queue (crontab for linux/apple, startup items for windows) so that they run whenever you reboot or login.
+
+And that's it, you're done!
+
+
+
+
+## Pausing Seattle
+----
+
+If you ever want to pause the execution of Seattle, run the python script
+```seattlestopper.py``` (or use the script ```stop_seattle.sh```). To unpause, run
+the python script ```seattlestarter.py``` (or use the script
+```start_seattle.sh```). During the paused period, your computer's resources 
+will not be consumed by student programs.   If you restart after pausing, Seattle will start back up again.
+
+
+
+## Uninstalling Seattle
+----
+
+If you decide to end your donation, Seattle can be uninstalled simply
+by running the python script ```uninstall.py``` (or the script ```uninstall.sh```).
+This process will remove Seattle from the startup queue, deactivate the
+main thread, and remove the execution from the user's crontab (if
+applicable).   You can then safely delete the folder you installed Seattle in to completely remove it from your system.
+
+
+
+## Comments or Questions
+----
+
+We would also like to know about your experiences with Seattle. If you
+have any questions or comments please drop a message to the Seattle user list at seattle-users@googlegroups.com! We're always striving to make a better experience for all.

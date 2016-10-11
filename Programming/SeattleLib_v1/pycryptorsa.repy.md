@@ -1,0 +1,101 @@
+# pycryptorsa.repy
+
+This file provides the encryption functionality for rsa.repy. Essentially, this module is the pycrypto module written by Dwayne C. Litzenberger (See http://www.dlitz.net/software/pycrypto/) ported from Python to RePy code. Please note that this code has been left as close to origional as possible with the notes about changes made to enable for easier modification if pycrypto is updated.
+
+This code essentially contains other functional classes which make this module functional: pubkey.py, RSA.py, and number.py. Note that several portions of this module are not fully functional, those are subsequently left out of this documentation. Some of the functions are also meant to be used as more internal functions, and are not given full descriptions.
+
+
+### Classes & Functions
+
+
+```
+class pubkey_pubkey:
+
+Has the following defined functions:
+
+def encrypt(self, plaintext, K):   encrypt(plaintext:string|long, K:string|long) : tuple
+Encrypt the string or integer plaintext.  K is a random parameter required by some algorithms.
+
+
+def decrypt(self, ciphertext):   decrypt(ciphertext:tuple|string|long): string
+Decrypt 'ciphertext' using this key.
+
+
+def sign(self, M, K):   sign(M : string|long, K:string|long) : tuple
+Return a tuple containing the signature for the message M. K is a random parameter required by some algorithms.
+
+
+def verify(self, signature):
+
+
+def blind(self, M, B):   blind(M : string|long, B : string|long) : string|long
+Blind message M using blinding factor B.
+
+def unblind(self, M, B):    unblind(M : string|long, B : string|long) : string|long
+Unblind message M using blinding factor B.
+
+```
+
+
+```
+RSA_RSAImplementation(object):
+
+This object implements partially the RSA encryption algorithm necessary to run pycryptorsa.repy.
+
+Has the following defined functions:
+
+def generate(self, bits, randfunc=None, progress_func=None):
+        rf = self._get_randfunc(randfunc)
+        obj = _RSA_generate_py(bits, rf, progress_func)
+        key = _slowmath_rsa_construct(obj.n, obj.e, obj.d, obj.p, obj.q, obj.u)
+        return RSA_RSAobj(self, key)
+
+def construct(self, tup):
+        key = _slowmath_rsa_construct(*tup)
+        return RSA_RSAobj(self, key)
+
+```
+
+
+```
+def number_size (N):
+    """size(N:long) : int
+Returns the size of the number N in bits.
+```
+
+
+```
+def number_GCD(x,y):
+    """GCD(x:long, y:long): long
+Return the GCD of x and y.
+```
+
+
+```
+def number_inverse(u, v):
+    """inverse(u:long, u:long):long
+    Return the inverse of u mod v.
+```
+
+```
+def number_getPrime(N, randfunc=None):
+```
+
+
+```
+def number_isPrime(N, randfunc=None):
+```
+
+
+```
+def number_long_to_bytes(n, blocksize=0):
+AND
+def number_bytes_to_long(s):
+```
+
+
+
+
+### Includes
+
+[wiki:SeattleLib/random.repy]

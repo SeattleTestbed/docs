@@ -1,0 +1,80 @@
+# Seattle Standard Library (SeattleLib)
+
+This pages contains documentation about the Seattle standard library (called "SeattleLib"). The libraries are broken up by similar category for convenience. Click on each category for overarching descriptions and more information.
+
+The bolded links are modules are meant for direct usage by the client. They often aggregate multiple services.
+
+ * [wiki:SeattleLib/NodeAdvertising Node Advertising] (click for a description)
+  * **[wiki:SeattleLib/advertise.repy advertise.repy]**
+  * [wiki:SeattleLib/AdvertiseObjects.repy AdvertiseObjects.repy]
+  * [wiki:SeattleLib/centralizedadvertise.repy centralizedadvertise.repy]
+  * [wiki:SeattleLib/DORadvertise.repy DORadvertise.repy]
+  * [wiki:SeattleLib/NAT_advertisement.repy NAT_advertisement.repy]
+  * [wiki:SeattleLib/openDHTadvertise.repy openDHTadvertise.repy]
+ 
+
+ * [wiki:SeattleLib/Cryptography Cryptography] (click for a description)
+  * [wiki:SeattleLib/md5py.repy md5py.repy]
+  * [wiki:SeattleLib/pycryptorsa.repy pycryptorsa.repy]
+  * [wiki:SeattleLib/pyDes.repy pyDes.repy]
+  * [wiki:SeattleLib/rsa.repy rsa.repy]
+  * [wiki:SeattleLib/sha.repy sha.repy]
+  * **[wiki:SeattleLib/sshkey.repy sshkey.repy]**
+  * **[wiki:SeattleLib/sshkey_paramiko.repy sshkey_paramiko.repy]**
+  * [wiki:SeattleLib/signeddata.repy signeddata.repy]
+
+ * [wiki:SeattleLib/Time Time] (click for a description)
+  * [wiki:SeattleLib/ntp_time.repy ntp_time.repy]
+  * [wiki:SeattleLib/tcp_time.repy tcp_time.repy]
+  * **[wiki:SeattleLib/time.repy time.repy]**
+  * [wiki:SeattleLib/time_interface.repy time_interface.repy]
+
+ * [wiki:SeattleLib/DataEncoding Data encoding] (click for a description)
+  * [wiki:SeattleLib/base64.repy base64.repy]
+  * [wiki:SeattleLib/binascii.repy binascii.repy]
+  * **[wiki:SeattleLib/deserialize.repy deserialize.repy]**
+  * **[wiki:SeattleLib/serialize.repy serialize.repy]**
+
+ * [wiki:SeattleLib/UrlParsingAndXml URL parsing / XML] (click for a description)
+  * [wiki:SeattleLib/httpretrieve.repy httpretrieve.repy]
+  * [wiki:SeattleLib/xmlparse.repy xmlparse.repy]
+  * [wiki:SeattleLib/xmlrpc_client.repy xmlrpc_client.repy]
+  * [wiki:SeattleLib/xmlrpc_common.repy xmlrpc_common.repy]
+  * **[wiki:SeattleLib/xmlrpc_server.repy xmlrpc_server.repy]**
+  * [wiki:SeattleLib/urllib.repy urllib.repy]
+
+ * [wiki:SeattleLib/ConcurrencyAndParallelism Concurrency / Parallelism] (click for a description)
+  * [wiki:SeattleLib/cv.repy cv.repy]
+  * [wiki:SeattleLib/parallelize.repy parallelize.repy]
+  * [wiki:SeattleLib/semaphore.repy semaphore.repy]
+  * **[wiki:SeattleLib/uniqueid.repy uniqueid.repy]**
+
+ * [wiki:SeattleLib/DataRetrieval Data retrieval] (click for a description)
+  * [wiki:SeattleLib/domainnameinfo.repy domainnameinfo.repy]
+  * [wiki:SeattleLib/geoip_client.repy geoip_client.repy]
+  * [wiki:SeattleLib/httpserver.repy httpserver.repy]
+  * [wiki:SeattleLib/servicelookup.repy servicelookup.repy]
+
+ * [wiki:SeattleLib/NetworkCommunication Network communication] (click for a description)
+  * [wiki:SeattleLib/getvesselsresources.repy getvesselsresources.repy]
+  * [wiki:SeattleLib/Multiplexer.repy Multiplexer.repy]
+  * [wiki:SeattleLib/nmclient.repy nmclient.repy]
+  * **[wiki:SeattleLib/NATLayer_rpc.repy NATLayer_rpc.repy]**
+  * **[wiki:SeattleLib/sockettimeout.repy sockettimeout.repy]**
+  * **[wiki:SeattleLib/session.repy session.repy]**
+
+ * [wiki:SeattleLib/ProgrammerResources Programmer resources] (click for a description)
+  * [wiki:SeattleLib/argparse.repy argparse.repy]
+  * [wiki:SeattleLib/dylink.repy dylink.repy]
+  * [wiki:SeattleLib/listops.repy listops.repy]
+  * [wiki:SeattleLib/math.repy math.repy]
+  * [wiki:SeattleLib/priority_queue.repy priority_queue.repy]
+  * **[wiki:SeattleLib/repyunit.repy repyunit.repy]**
+  * [wiki:SeattleLib/random.repy random.repy]
+  * [wiki:SeattleLib/repypp.py repypp.py]
+  * [wiki:SeattleLib/safe_eval.repy safe_eval.repy]
+  * [wiki:SeattleLib/strace.py strace.py]
+  * [wiki:SeattleLib/textops.py textops.py]
+  * [wiki:SeattleLib/urlparse.repy urlparse.repy]
+  * [wiki:SeattleLib/dnscommon.repy dnscommon.repy]
+  * [wiki:SeattleLib/bundle.repy bundle.repy]
