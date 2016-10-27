@@ -1,0 +1,67 @@
+# repypp.py
+
+As repy does not allow the use of import statements, the repy preprocessor provides programmers with a means of including code from other modules along with their programs.  After passing through the preprocessor, the resulting file will contain the contents of the included modules, inlined alongside your program code.  From a programming perspective, this is very similar to **from module import ***.
+
+Files needed preprocessing should have a ***.mix** extension, and processed files should have a ***.repy** extension. Note "include" must be the first character on the line. (no indentation allowed!).
+
+Source mycode.mix:
+```repy
+include serialize.repy
+include base64.repy
+
+# Your code here...
+def my_function():
+  """
+  ...
+  """
+```
+
+Then in seattle_repy do:
+
+```python repypp.py mycode.mix mycode.repy```
+
+After this, mycode.repy will be automatically generated for you. And you can now run this in repy. Every time you make any changes to mycode.mix, do the above command again to regenerate updated mycode.repy file. Result mycode.repy looks like this:
+
+```repy
+#begin include serialize.repy
+<Contents of serialize.repy>
+#end include serialize.repy
+#begin include base64.repy
+<Contents of base64.repy>
+#end include base64.repy
+
+# Your code here...
+def my_function():
+  """
+  ...
+  """
+```
+
+### Functions
+
+```
+def processfiledata(stringlist):
+```
+   Scans lines with "include" and retrieves the correct module to be included.
+ 
+ 
+```
+def processfile(filename):
+```
+   Builds the correct file into a dictionary and returns the file's data.
+ 
+ 
+```
+def recursive_build_outdata(filename, includedfiles,filedict):
+```
+   Like above, but recursively builds and returns the data from file to be imported.
+
+ 
+ 
+
+### Usage
+
+To use this module via the command line, simply pass the source file and the output file names:
+```sh
+$ python repypp.py sourcefilefn.mix outputfilefn.repy
+```

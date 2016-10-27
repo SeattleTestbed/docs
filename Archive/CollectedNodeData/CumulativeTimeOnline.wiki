@@ -1,7 +1,0 @@
-= Cumulative Proportion of Time Online =
-
-[[Image(cumulativetimeonline.jpg)]]
-
-This graph shows the cumulative distribution of the proportion of time spent online. This is measured as a fraction of the time from when the node was first seen advertising to the last time recorded in the log since otherwise large numbers of new node coming online would create artifacts in the graph. For reference, the total number of nodes referenced in the graph is 1030. Therefore, about 400 nodes were online almost the entire time, and around 200 nodes were online at most momentarily (87 correspond to IP addresses that were, in fact, never contactable and so aren't necessarily all distinct nodes). Another thing to node is that for the most part, the distributions for time advertising and time contactable are approximately the same, but there were more nodes advertising for short proportions of the time than nodes contactable for the same proportion.
-
-Data collected by sportzer between 2/24/2011 and 4/6/2011

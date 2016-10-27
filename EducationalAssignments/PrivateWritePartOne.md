@@ -1,0 +1,296 @@
+
+# Building a Security Layer
+
+
+This assignment will help you understand security mechanisms.  You will be guided through the steps of creating a reference monitor using the security layer functionality in Repy V2.  A reference monitor is an access control concept that refers to an abstract machine
+that mediates all access to objects by subjects.  This can be used to allow, deny, or change the behavior of any set of calls.
+  
+One critical aspect of creating a reference monitor is to ensure it cannot be bypassed.   While not a perfect solution, it is useful to create test cases to see whether your security layer will work as expected.  (The test cases may be turned in as part of the
+[wiki:EducationalAssignments/PrivateWritePartTwo next assignment])  
+
+This assignment is intended to prepare you for thinking about security paradigms in a functional way.  The ideas of access control and confidentiality have been embedded into the steps of this assignment.    
+
+
+
+
+
+
+## Overview
+----
+
+In this assignment you will create a security layer which stops the attacker from reading data securely written in a file.You will create a function called **privatewrite** which allows the user to write data into a file which cannot be read back from the file.The data can be overwritten but isn't readable under any circumstance. You will do this by adding security rules to the functions available for reading from and writing to a file.Think of this as a method to write some data securely into a file. The future of the system depends on your ability to write secure code!  
+
+Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
+
+ * Accuracy: The security layer should only stop certain actions from being blocked.  All other actions should be allowed.  For example, If a user tries to overwrite the secure data using a normal write this should be allowed and the user should be able to read this data back.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised.   This means you should not do things like re-read the file before each write.
+ * Security: The attacker should not be able to circumvent the security layer.  Hence, if the data written using privatewrite can be read back, the security is compromised.
+
+
+
+### Getting Python
+----
+Please note you must have Python 2.5, 2.6, or 2.7 to complete this assignment. Instructions on how to get Python for Windows can be found [InstallPythonOnWindows here].  If you are using Linux or a Mac it is likely you already have Python. In order to verify this, simply open a terminal and type ```python```.  Please check its version on the initial prompt.
+
+**Note:**If you are using Windows, you will need python in your path variables.  A tutorial on adding variables to your path in Windows can be found at [http://www.computerhope.com/issues/ch000549.htm]
+
+### Getting RepyV2
+----
+The preferred way to get Repy is ''installing from source''. For this, you check out the required Git repositories, and run a build script. You can always update the repos later, and rebuild, so that you get the latest stable version of the Repy runtime.
+
+Here's how to do that. Assuming you are running on a Unixoid OS,
+
+```
+# Create a directory for the required Git repositories
+mkdir SeattleTestbed
+cd SeattleTestbed
+
+# Check out the repos required for building Repy
+git clone https://github.com/SeattleTestbed/repy_v2.git
+
+# Prepare a build directory, and build into it
+cd repy_v2/scripts
+mkdir ~/path/to/build/dir
+python initialize.py
+python build.py ~/path/to/build/dir
+```
+
+Once the build script finished, `~/path/to/build/dir` contains a ready-to-use copy of the RepyV2 runtime!
+----
+(If you cannot install from source, [attachment:repyv2_commit_3499642.zip here] is a tarball including a pre-built runtime.)
+----
+
+
+
+Use the command found below in order to run Repy files:
+
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py``` 
+
+Please note Repy files end in extension `.r2py`.   
+
+In order to test whether or not these steps worked, please copy and paste the code found below for the sample security layer and sample attack.  Where you can find the sample security layer and sample attack:
+
+ * Sample security layer: [wiki:EducationalAssignments/PrivateWritePartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
+ * Sample attack layer:  [wiki:EducationalAssignments/PrivateWritePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
+
+If you got an error, please go through the trouble shooting section found below.
+
+### Trouble shooting Repy code
+If you can't get Repy files to run, some of the following common errors may have occurred:
+
+ * using `print` instead of `log`:
+
+Repy is a subset of Python, but its syntax is slightly different.  For example, Python's `print` statement cannot be used; Repy has `log` for that. For a full list of acceptable syntax please see wiki:RepyV2API.
+
+ * command line errors:
+
+**files are missing:** In the above command line call, you must have `repy.py`, restrictions.default encasementlib.r2py, the security layer and the program you want to run in the current working directory.  If any or all of the above files are not in that directory then you will not be able to repy files.  If this is the case, it is likely you are trying to run repy files from the wrong directory.  Since `repy.py` exists in multiple directories, it is possible to run `.r2py` files from directories other than the the one you are supposed to use.  
+
+<!--
+AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
+ * Downloading the wrong version of seattle:
+
+Seattle is operating system dependent.  If you download the Windows version, you need to use the Windows command line.  For Windows 7 this is PowerShell.  You can open a new terminal by going to start, search, type powershell.  If you downloaded the Linux version you must use a Linux OS and Linux terminal.  
+
+AR: This is obviously outdated.
+Advanced trouble shooting:
+
+To run the unit test, which will automatically tell you if you have errors with your installation please see:
+
+ * [wiki:RepyV2CheckoutAndUnitTests]
+-->
+
+
+### Tutorials for Repy and Python
+----
+Now that you have Repy and Python, you may need a refresher on how to use them.  The following tutorials are excellent sources of information.
+
+ * Python tutorial: **[http://docs.python.org/tutorial/]**
+ * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
+ * list of RepyV2 syntax: **[wiki:RepyV2API]**
+
+
+
+## Building the security layer
+----
+**[wiki:RepyV2SecurityLayers]** explains the syntax used to build a reference monitor.  The general tutorials above will aid in looking up other details about Repy.  Remember, you have no idea how the attacker will try to penetrate your security layer, so it is important that you leave nothing to chance!  Your reference monitor should try to stop every attack you can think of.  Not just one or two.  A good reference monitor will do this and incorporate the design paradigms of accuracy, efficiency and security defined above.
+
+
+### A basic (and inadequate) defense
+
+Time to start coding!  Let's inspect a basic security layer.  
+
+```
+"""
+This security layer interposes on a textfile 
+and gives it open, close, read and write access.
+However, a user cannot read the data written using privatewrite.
+If a user tries to, the security layer will raise an exception.
+Note:
+	This security layer uses encasementlib.r2py, restrictions.default, repy.py and python
+	Also you need to give it an application to run.
+	This security layer never runs explicitedly but instead interposes functions
+	from above layers.
+	
+	"""	
+TYPE="type"
+ARGS="args"
+RETURN="return"
+EXCP="exceptions"
+TARGET="target"
+FUNC="func"
+OBJC="objc"
+
+class SecureFile():
+  def __init__(self,file):
+    # OBVIOUSLY WRONG!!!
+    mycontext['privatedata'] = False
+    self.file = file
+
+  def readat(self,bytes,offset):
+    # OBVIOUSLY WRONG!!! 
+    if mycontext['privatedata']:
+      raise ValueError
+    return self.file.readat(bytes,offset)
+
+  def writeat(self,data,offset):
+    self.file.writeat(data,offset)
+
+  def privatewrite(self,data,offset):
+    # Something in the file was written privately.   Let's block reads.  
+    # THIS IS WRONG BECAUSE IT WILL BLOCK DATA WRITTEN WITH WRITEAT TOO
+    mycontext['privatedata'] = True
+    self.file.writeat(data,offset)
+
+  def close(self):
+    return self.file.close()
+
+sec_file_def = {"obj-type":SecureFile,
+            	"name":"SecureFile",
+                "readat":{TYPE:FUNC,ARGS:((int,long,type(None)),(int,long)),EXCP:Exception,RETURN:str,TARGET:SecureFile.readat},
+                "writeat":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,type(None)),TARGET:SecureFile.writeat},
+             	"privatewrite":{TYPE:FUNC,ARGS:(str,(int,long)),EXCP:Exception,RETURN:(int,type(None)),TARGET:SecureFile.privatewrite},
+                "close":{TYPE:FUNC,ARGS:None,EXCP:None,RETURN:(bool,type(None)),TARGET:SecureFile.close}
+           }
+
+def secure_openfile(filename, create):
+  f = openfile(filename,create)
+  return SecureFile(f)
+
+CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secure_openfile}	
+
+
+secure_dispatch_module()
+``` 
+
+### Using the example layer
+
+
+Keep in mind the above security layer would only stop one kind of attack.  Thus if an attacker doesn't know much about file input/output this will probably stop them.  However there are a bunch of tricks that can be used in order to circumvent this security layer easily.  For instance, the above reference monitor isn't thread safe.  For an introduction to thread safety please read [wiki/Thread_safety](http://en.wikipedia.org/wiki/Thread_safety).  
+
+
+
+
+### Code analysis
+The `privatewrite()` function attempts to follow the design principles of accuracy, efficiency, and security.  However it does so inadequately.For example the data is blocked even if its overwritten using a normal `writeat()` function.
+It is more important to make a security system that is infeasible to break, rather than impossible to break.  However this security layer does not yet create the necessary infeasibility requirements for most attacks.  Thus we see that there is a grey area of what is an acceptable level of impedance.       
+
+Looking at the structure of `privatewrite()`,the flag `privatedata` is set when data is written using `privatewrite()`. During the `readat()` function, the flag is checked against and accordingly the data is either displayed or an exception is raised.   
+
+
+### Testing your security layer
+----
+In this part of the assignment you will pretend to be an attacker.  Remember the attacker's objective is to read the `secure data` written in the file.  By understanding how the attacker thinks, you will be able to write better security layers.  Perhaps while attacking your security layer you will think of a new mitigation that should have been implemented.  Keep in mind attacks are attempts to mitigate a given security protocol.  If even one case succeeds, then your security layer has been compromised.  Thus the attack you write should include several methods of attempting to read the secure data from the file.  An example of an attack is found below:
+```
+myfile=openfile("look.txt",True)  #Open a file
+
+#Write some data to file
+myfile.writeat("The three golden rules to ensure computer security are: do not own a computer; do not power it on; and do not use it",0)
+
+#Write private data to file
+myfile.privatewrite("This is secure ",15)
+
+# This read is in the region written by writeat and should not be blocked...
+x=myfile.readat(10,0)
+log(x)
+
+try:
+  #Try to read the secure data from the file
+  y=myfile.readat(5,15)
+
+except ValueError:
+  #If security layer successful, this should fail
+  pass
+
+else:
+  #If security layer fails
+  log("Secure data compromised!")	
+
+finally:
+  #Close the file
+  myfile.close()
+```
+
+**Note:** All attacks should be written as Repy files, using the `.r2py` extension.
+
+#### Code Analysis
+It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
+
+```
+
+# Open a file
+myfile=openfile("look.txt",True)
+
+```
+look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
+
+This code attempts to read the `This is secure` from the file directly.  First the file is opened using
+`myfile=openfile("look.txt",True)`.  Next `myfile.writeat` writes some data to the file. Then the `privatewrite` function is used to write some data securely to the file. The 0 refers to an offset of zero.  The `try:` statement tells the program to "try" this case.  Notice that the `except` is executed if an error is raised.  If the security layer fails the test then the else statement is executed.  The `finally:` statement will always run, closing the file.
+
+### Running your security layer
+----
+Finally, type the following commands at the terminal to run your security layer with your attack program
+
+```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py ```
+
+Make sure you went through the "How to get RepyV2" section!
+
+
+# Notes and Resources
+----
+   
+ * A list of command line utilities for windows can be found at **[http://commandwindows.com/command3.htm]**
+
+ * A list of command line utilities for linux/apple/powershell **[http://www.pixelbeat.org/cmdline.html]**
+
+ * A tutorial on how to write security layers can be found [wiki:RepyV2SecurityLayers here].  At the end of the tutorial there is a second example on **how to test security layers**. 
+
+ * For a complete list of syntax in Repyv2 please visit: **[wiki:RepyV2API]**
+ 
+ * The following link is an excellent source for information about security layers: **[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]**
+
+ * **[repy_v2/benchmarking-support/allnoopsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py)** is an empty security layer that doesn't perform any operations.
+
+ * **[repy_v2/benchmarking-support/all-logsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py)** is security layer that works for logging functions.
+
+ * **Note:** It is possible to add multiple security layers to Repy, this may be useful for testing different mitigations separately.  This is done with the following command at the terminal:
+
+```python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py```
+
+**Your security layer should produce no output!! **If it encounters an attempt to read the secure data, you should raise a `ValueError` exception and allow execution to continue.
+
+ * In repy log replaces print from python.  This may be helpful when testing if Repy installed correctly.
+
+
+# Extra Credit
+----
+For extra credit - 
+Protect the file against read and write operations involving persistent data. If you close the file and open it again the system should be able to block the future attacks.
+
+
+
+# What to turn in?
+----
+
+ * Turn in a repy file called reference_monitor_[ name or id number].r2py.   Be sure your reference monitor **never produces output**.   It should raise a ValueError if the readat should be blocked, but never, ever call log() to output information or raise unexpected errors.
+ * For extra credit turn in a second repy file called extra_credit_[ name or id number].r2py

@@ -1,0 +1,159 @@
+# Stop-and-Wait Protocol
+In this assignment, you will implement a reliable datagram protocol using the [stop-and-wait](http://en.wikipedia.org/wiki/Stop-and-wait_ARQ) (also known as [alternating bit](http://en.wikipedia.org/wiki/Alternating_bit_protocol)) protocol.  You will write client and server programs that communicate using your library.  The server will listen for messages and send back acknowledgements.  The client will send messages and listen for acknowledgements.  The client will consider a message delivered once it receives an acknowledgment and resend an unacknowledged message after a timeout.  After a finite number of resent messages, the client will give up and report an error.
+
+**NOTE WINDOWS USERS:** You must have Python2.5 or Python2.6, the programming language, installed on your computer in order to complete this assignment. Follow the instructions [InstallPythonOnWindows here] to check if Python2.5 or Python2.6 is currently installed on your system and to get directions on how to install Python2.6 if it is not installed.
+----
+
+----
+
+
+## Overview
+----
+The requirements for the assignment includes a library, a client program, and a server program.  Last, you will write up an evaluation of your implementation.
+
+
+### Repy API
+----
+You will implement your stop-and-wait protocol over Repy's UDP functions.  Specifically, you must extend the ''recvmess'' and ''sendmess'' Repy routines:
+```python   
+recvmess(localip, localport, function) # Returns an event handler
+sendmess(desthost, destport, message, localip=None, localport=None) # Returns the bytes sent
+```
+See the [wiki:RepyApi Repy Library Reference] for more details.
+
+
+
+### Reliable API
+----
+Your protocol should run as a library in a file called **reliable.repy**.  It should extend ''recvmess'' and ''sendmess'' with three new routines:
+```python     
+reliable_recvmess(srcip, srcport, function) # Returns an event handler
+reliable_sendmess(destip, destport, message, srcip=None, srcport=None) # Returns the bytes sent
+reliable_config(maxdgramsize, retries, timeoutinms) # No return
+```
+These first two routines are modelled on the existing sendmess and recvmess functions.  The function ''reliable_recvmess'' should return the handle to the Repy recvmess event.  The function ''reliable_sendmess'' should return the number of characters (bytes) sent and raise a TimeoutError Exception in case of a timeout.
+
+The third routine allows you to parametrize the number of retransmissions that should occur when appropriate acknowledgements are not forthcoming in a window of ''timeoutinms'' milliseconds. By default, your protocol should retransmit 4 times with a timeout of 10 milliseconds. A timeout of 0 ms or retries of 0 disables retransmissions and causes reliable_sendmess to never report an unacknowledged datagram. A ''retries'' setting of 0 also disables retransmissions, but delays at least timeoutinms before returning. Datagrams are never reported as lost.
+
+
+
+### Message Structure
+----
+
+You will need to define a message structure that includes a header field for your alternating bit protocol, and a payload field, which contains the actual data that the protocol is supposed to deliver reliably.  
+
+For automatic grading, your message structure must:
+ 1. Be in the format <header><delimiter><payload> __in that order__.
+ 2. Have a 1 character long header.  The header character must either be a "0" or a "1".
+ 3. Use a constant called ''DELIM'' for any characters to ignore between the header and payload
+ 4. Store the delimiter in mycontext
+
+For example, if you want to use a the delimiter ", " between your header and payload, your packets then would be in the format "0, <payload>" and "1, <payload>".  The code would be:
+```python
+message_structure = header + mycontext["DELIM"] + payload
+```
+
+If you do not follow this format, the auto-grader system will assume your solution is incorrect.
+
+
+
+### Reliable Client and Server
+----
+You must write two programs, a client and server, which include your **reliable.repy** library:
+```
+reliable_client inputfile serverhost serverportnum [srchost srcportnum] [maxdgramsize nretries timeoutms]
+reliable_server repy outfile portnum [timeout]
+```
+You should put the client in a file called **reliable_client.repy** and the server in a file called **reliable_server.repy.**
+
+The client reads data from ''inputfile'' and sends it to the server. The client's non-optional arguments indicate the target address (''serverhost'', ''serverportnum'').  The other arguments should be optional.  The source address (''srchost'', ''srcportnum'') indicates the return address for Repy's ''sendmess'' routine.  The final arguments are the maximum allowable size of a reliable datagram, ''maxdgramsize''; the number of retries for each packet, ''nretries''; and the timeout in milliseconds that should be used to clock a retransmission, ''timeoutinms''.
+
+The server logs the data it receives to ''outfile''. The server's ''portnum'' indicates on which port the server should receive messages.  The ''timeout'' indicates how long the server should wait after receiving the last datagram to stop listening.  The default should be 10 seconds.  See example 1.5 in the [wiki:RepyTutorial#InteractingwithTimersexample1.5 Repy Tutorial]
+
+
+
+## Step 1 : Implementation
+----
+
+Implement the stop-and-wait protocol using the ''recvmess'' and ''sendmess'' Seattle calls. The client will read a data file and send the data to the computer running the server program. The packet size of the data is defined by the user. When the server receives a packet of data, it sends an acknowledgment message to the client. If the acknowledgement message is not received in a user defined amount of milliseconds, the message is resent a user defined number of times until the program moves on to the next packet of data. The server program outputs the data received to a file.
+
+Your protocol should run as a library that is included into a client program, **reliable_client.repy** and a server program, **reliable_server.repy**.  You should put your protocol implementation in a file called **reliable.repy** and include it in the client and server programs. This can be done by putting "include reliable.repy" at the top of your client and server programs. However, you will need to run your server and client code through the repy pre-processor (**repypp.py**) to set up your code. However, you do not need to run your reliable.repy file through the pre-processor.  For example, to pre-process reliable_client.repy to reliable_client:
+```
+python repypp.py reliable_client.repy reliable_client
+```
+
+If after pre-processing reliable_client.repy and reliable_server.repy, your main client program may be called "reliable_client" and your server program may be "reliable_server."  
+Execute them locally using **repy.py**.  For example:
+```
+ $ python repy.py restriction.file reliable_client in.file `hostname -i` 12345 `hostname -i` 12346
+ $ python repy.py restriction.file reliable_server junk_test.out 12345
+```
+Make sure your restriction.file allows the writing to junk_test.out and using these messports.  See [wiki:RepyTutorial#Restrictions Repy Tutorial About Restrictions].
+
+Execute each from different computers using seash:
+```
+ john@ !> on client upload input.file
+ ...
+ john@ !> on client run reliable_client input.file <server_host> <server_portnum>
+ john@ !> on server run reliable_server out.file <my_portnum>
+ ...
+ john@ !> on server download out.file
+```
+
+You may find it helpful to run both on the same computer using local code execution during development.   Additionally, you should test on LAN nodes before moving to WAN nodes.
+
+
+
+## Step 2 : Evaluation
+----
+
+First, measure the underlying reliability of the network by disabling retransmissions and measuring loss (the difference between the number of packets sent on the client and the number received on the server) as a function of the timeout. Use timeouts ranging from 0ms to 2000ms, and datagram sizes of 512 bytes and 8k. Show your measurements on a LOSS graph of packet loss as a function of timeout with one line for each datagram size.   Try this both for LAN and WAN nodes and plot them as different lines on the same graph.
+
+Second, measure throughput as a function of timeout for 5 different datagram sizes: 10 bytes, 512 bytes, 2k, 8k, and 64k. To measure throughput, you should copy a large file from the client to the server to ensure that your timing covers many round trips. Consider timeouts ranging from small to medium to large (10, 50, 500 ms). Show your measurements in two graphs: Include a THROUGHPUT graph with one line for each of the different datagram sizes where the x-axis is your timeout, and the y-axis is your measured throughput. Include a RETRANSMISSION graph, where the y-axis is the total number of retransmissions that the client performed.
+
+Include a thoughtful discussion and analysis of the results of no more than one page. Don't forget to make clear the description of the experimental setup (eg, machine IP addresses, network speed, etc.).
+
+
+
+
+## Hints
+----
+ * Do this assignment in parts. First, get the protocol working. Then, worry about making the measurements. Go from local testing to LAN to WAN.
+
+ * Your programs can use 'print' to create logging, debugging, or error messages. Use this information to help you debug!
+
+ * If the client and server are run on the same IP address and port number, then their UDP connections interfere. One way to solve this is to use two different static ports, one for the server and another for the client.
+
+ * The maximum size of a UDP datagram is 64k. (What happens if you try to exceed it?)
+
+ * Callbacks triggered by socket events run in the context of another thread. This means that the programmer (i.e. you!) are responsible for maintaining consistency and atomicity of access to your variables. The easiest way to accomplish this is to use locks, acquiring them before regions that require atomic access, and releasing them afterwards. See the getlock() function described in the RepyLibrary for more information.
+
+
+
+
+## Notes
+----
+
+ * Your sending code should send the next packet immediately after receiving an ack from the receiver. Your sender should **not** do a sleep() after sending a packet. One possible solution is to use locks: have the sender acquire a lock L before sending the packet, and then have it block in attempting to acquire L again. The timeout timer or the receiver callback can then release L once a timeout occurs or when an ack is received.
+
+ * **IMPORTANT:** If you run the client and server on the same computer, you will see substantially different failure/lost packet behavior than if you run them on different computers. This is because the in the local case, the operating system may take care to slow down the sender if the receiver's buffer is full. On different computers, there's no way for the operating system to do this.
+
+ * Your code should gracefully handle duplicate acks and data packets. That is, it should ignore duplicate packets, and possibly use them as an indicator of the other endpoint's state.
+
+ * Your reliable server will additionally need a final timeout after which the reliable server will exit. This is so that you will not overload your machine with forked processes unknowingly during testing. 
+
+ * **WARNING:** If your code crashes, you may need to kill any remaining processes. In Linux, you can use `ps` to find these processes and if you find rogue "python" threads running, use `killall -9 python` to stop them!
+
+
+
+
+## What to turn in?
+----
+
+Turn in a tar file called "reliable.tar" that contains a directory called Reliable. This directory contains:
+ * reliable.repy
+ * reliable_server.repy
+ * reliable_client.repy
+ * results.pdf
+ * README
+The file results.pdf contains your evaluation. The file called README contains any information we might need in evaluating your solution. For example, bugs and limitations should be included in the README. 

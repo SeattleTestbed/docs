@@ -1,0 +1,40 @@
+# Deploying a New Version
+Explains how to go about deploying a new version of the code, which consists of two main steps: updating the files that the software updaters on each node check for updates, and replacing the base installers that are incorporated in new installations.
+
+**If you only want to make a release candidate build (or one that includes tests) available to the Custom Installer Builder, do not follow any of the steps on this page. Instead, see BaseInstallers and manually copy the created files to /var/www/dist on seattle.cs (but not seattleclearinghouse.poly.edu).**
+
+## Step by Step
+ 1. Make sure the [wiki:Local/ContinuousBuild continuous build] shows all tests passing (aside from any expected, non-critical failures such as new build machines not fully configured or flaky tests).
+ 1. First, we push the release to the betabox testbed and make sure all is well there before pushing it on the main (seattleclearinghouse) testbed.
+  1. Log in to betabox (betabox.cs.washington.edu) as a user who has sudo privileges.
+  1. `cd /home/release`
+  1. Update to the current svn trunk: `svn up trunk`
+  1. If new library files has been added since the last deployment then couple of extra steps need to be taken. 
+    * trunk/preparetest.py needs to be edited to copy over the new library files that are new in this version.
+    * trunk/dist/initial_files.fi and trunk/dist/final_files.fi needs to be modified and the name of the new library files need to be added in. It will be in the form 'req NEW_LIB_FILE_NAME'.
+  1. Edit the file `trunk/nodemanager/nmmain.py` and change the version to whichever version you're releasing (e.g. `version = "0.1m"`)
+  1. At this point, we need to make sure that the only differences between our copy of trunk and what's in svn are the
+     differences of the betabox software updater key and update url embedded in `trunk/softwareupdater/softwareupdater.py` and the version string in `trunk/nodemanager/nmmain.py`. The files trunk/preparetest.py, trunk/dist/initial_files.fi and trunk/dist/final_files.fi may also be different if you had to edit them in step 4.
+    * Check what's different from svn: `svn status trunk`
+    * You should see the following as 'M':
+      * `trunk/softwareupdater/softwareupdater.py`
+      * `trunk/nodemanager/nmmain.py`
+    * If you `svn diff` these files, the output should look like [attachment:blackbox-version-push-svn-diff.txt these diffs].
+  1. Now, we actually deploy the new version. Still from the `/home/release` directory, do the following:
+    1. To update the base installers used by Seattle Clearinghouse on betabox, run the following:
+      1. `./rebuild_repyV2_base_installers_for_seattlegeni.sh VERSION_HERE`
+        * [attachment:blackbox-rebuild-base-installers-output.txt example output]
+      1. Back up the existing betabox installers.  The custom installer builder for betabox is also on betabox, located here: ```/home/custominstallerbuilder/live/custominstallerbuilder/html/static/installers/base```.  Put the old installers in a directory whose name is the version of the installers.
+      1. Copy the newly built installers to the custom installer builder base installers folder.
+        * You may need to rename the installers so that the custom installer builder can find them.  They should be named exactly the same as the old installers were.
+    1. **Important: Make sure that new installations using the new installers behave as expected before proceeding! **
+    1. To update existing clients (that is, to make the updated files available to clients that are checking the update site), run the following: 
+      * `./push_update_to_all_clients.sh`
+      * [attachment:blackbox-push-update-output.txt example output]
+      * **After this point, all nodes on the clearinghouse will have updated to the latest version! **
+ 1. Once the launch appears to have gone well on betabox (all nodes updated, we can acquire and use VMs from betabox's updated nodes), it is time to do a push on production.
+  1. Repeat the entirety of step 2, but on seattle.poly.edu instead. There are a few key differences, however:
+    * In step 2.5, the only differences between our copy of trunk and what's in svn is the version string in `trunk/nodemanager/nmmain.py`. The files trunk/preparetest.py, trunk/dist/initial_files.fi and trunk/dist/final_files.fi may also be different if you had to edit them in step 4.
+      * You should see the following as 'M':
+        * `trunk/nodemanager/nmmain.py`
+    * The custom installer builder for production is on ```custombuilder.poly.edu```, with the base installers here: ```/home/custominstallerbuilder/live/custominstallerbuilder/html/static/installers/base```

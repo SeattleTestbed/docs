@@ -1,8 +1,0 @@
-= Cumulative Time Contactable of Unstable Nodes =
-
-[[Image(cumulativeuptime.jpg)]]
-
-This graph shows cumulative time spent online for each unstable node (as defined as going offline more than 16 time in during the monitoring period). The lines have the slope of the lines on top when the node is contactable and are flat when the node is not contactable. Even the unstable nodes are clustered towards being online most of the time, but a few were rarely online or display odd slopes that indicate the node frequently switched between being contactable and not contactable.
-
-
-Data collected by sportzer between 2/24/2011 and 4/6/2011

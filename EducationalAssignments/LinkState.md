@@ -1,0 +1,90 @@
+# Link State Routing Assignment
+
+This assignment will illustrate an important network routing strategy called Link State routing. In this assignment, Seattle nodes will take an initial connectivity map of nodes. They will then implement and run Dijkstra's shortest path algorithm to build their routing tables. Finally, nodes will forward packets using their routing table.
+
+**NOTE WINDOWS USERS:** You must have Python2.5 or Python2.6, the programming language, installed on your computer in order to complete this assignment. Follow the instructions [InstallPythonOnWindows here] to check if Python2.5 or Python2.6 is currently installed on your system and to get directions on how to install Python2.6 if it is not installed.
+
+----
+
+----
+
+
+
+## Step 1 : Building an initial connectivity map
+----
+First, acquire some number of hosts for your experiment via the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu) website . Once you have acquired resources, make a file containing the IP addresses of all the hosts you would like to include in the experiment, with one IP address per line. Then download, and run [attachment:build_connectivity_map.py build_connectivity_map] python script which will generate and output a list of IP pairs. You should run this script locally on your your machine.   You can then save this list to a file, and use seash to upload this file to all of your nodes in the experiment. All nodes must have the same file to prevent routing loops from forming.
+
+
+
+
+
+## Step 2 : Connect hosts using the connectivity map
+----
+
+
+
+The output you see from the previous step will look like this:
+
+```
+srcip1 destip1
+srcip2 destip2
+...
+```
+
+Each of the links represents that those two routers should be considered to be connected.   All connections in the system are symmetric (that is, if A is connected to B then B is connected to A).   However, you will only see either A B or B A in the output list.   This was done to make it easier for you to decide whether A or B should open the TCP connection to the other.   If you see A B, you should have A open the connection to B.  
+
+Note that once A and B have an open connection, they can each use both send and recv on the connection.
+
+You should write a program that will read the connectivity map file you've uploaded in Step 1.   Your program should then attempt to connect to the hosts with which it is paired with in the file. The connection should be done over TCP, and use the port that was assigned to you (see the User Info page on the Seattle Clearinghouse website to find out your port).   
+
+Note that you may want to have your program sleep for 10 seconds or so after calling waitforconn but before opening connections to make sure that all of the nodes have had a chance to start.
+
+In this step you can check to see that each of the hosts is able to connect to the hosts they are paired with.   If you see that a host cannot connect to a neighbor, this is likely due to either one of the hosts failing, or the Internet failing to correctly route traffic between the hosts.   You can have your program print the nodes it is connected to and check that you are getting the same connections are are seen in the input file.   Once again, it might be a good idea to sleep after connecting and before printing to allow all nodes to finish initiating connections.
+
+
+
+## Step 3 : Flood connectivity information
+----
+
+
+At this point, your nodes are connecting to each other, but will not be forwarding traffic or routing information.  You will want to indicate both where a packet stops and starts within the data stream and also will need to indicate the type of packet.
+
+Routing packets that are sent over a link will need to be flooded to all other routers.  Upon receiving a routing packet, each router forwards this packet to its neighboring routers. One obvious problem with this protocol is that if there is a loop in the graph (which there will be), messages will be sent around forever. To stop messages from propagating, each message can include a time to live (TTL) value. The TTL value must be decremented by each router before the router re-sends the message. Routers that generate initial messages can set the TTL value to be the number of routers in the system. 
+
+A complementary way to deal with the problem of endless flooding is to prohibit routers from sending messages with information which they have already sent. In this way, only the newly updated routers will resend a message to its neighboring routers.
+
+You may choose whichever technique you prefer.   Either way, it is a good idea to keep a count of the number of messages your router receives and forwards.   Assuming you are using a network of size 10, then if you see thousands of messages, then you have a routing loop.
+
+Once you have built this, have each router send a packet for each of its links to its neighbors.   After you have waited for the routers to receive these messages, print the result.   Each router should print a list of links that is the full connectivity map.   If the nodes seem to take a long time to run and don't have complete information then you should check that your flooding algorithm is correctly implemented.
+
+
+
+
+
+## Step 4 : Computing the routing path
+----
+
+
+At this point, each node has the complete topology.   Now we need the nodes to calculate how to send data 
+packets.
+In addition to building the global map of the network, each router will also need to perform shortest-path calculation using Dijkstra's algorithm. Maintaining an up-to-date routing table computed in this way enables the router to perform next-hop routing to forward a packet towards its destination.
+
+
+
+## Step 5 : Forwarding packets
+----
+
+Finally, each router needs to be able to route packets by using its routing table. To forward a packet, the router looks into its routing table for the destination address on the packet. From the routing table it retrieves the address of the router where it should forward the packet. It then forwards the packet to that router.
+
+For testing purposes, have each router send a packet to every other router.   Using getruntime() record the start time of the packets that are sent.   Also record the time that packets are received on the destination.   You should check that every packet was successfully received at its destination.
+
+Now, you can subtract the send times from the receive times to see the delay.   Since the clocks on the nodes aren't synchronized, you may see large values or negative values.   However, the total sum of these is the overall delay.
+
+
+
+## Step 6 : Using latency information when forwarding
+----
+
+If you measure the latency that packets take when forwarded over your network, you will observe that some links take a much longer time for packets to traverse than others.   For example, you might have a path of two hops that goes from Washington to Korea to San Diego.   This might be slower than a three hop path that goes Washington to Oregon to Berkeley to San Diego.   
+
+Instead of using the connectivity map from step 1, measure the latency information using allpairsping.repy (included in the demokit).   You can include all links.   Base the "cost" of routing on the latency instead of TTL / hop count to decide how to forward packets.   A convenient way to do this is to first do the measurement with allpairsping.repy and then copy them into a file which your program reads.   A better way is to have the nodes compute the latency to their neighbors and send this information out with the flooding messages.

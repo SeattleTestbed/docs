@@ -1,0 +1,139 @@
+# random.repy
+
+This module provides the programmer a randomizing utilize. This is almost an direct port of the python module, so one can certainly go to http://docs.python.org/library/random.html for more detailed information.
+
+
+### Functions
+
+
+```
+def random_randombytes(num_bytes, random_float=None):
+```
+   Return a string of length num_bytes, made of random bytes suitable for cryptographic use (because randomfloat draws from a os provided random source).
+
+   Notes:
+
+   * num_bytes is the number of bytes to request from os.urandom. Must be a positive integer value.
+   * random_float does not work yet. Don't use.
+   * Returns a string of num_bytes random bytes suitable for cryptographic use.
+
+
+```
+def random_nbit_int(num_bits): 
+```
+   Returns an random integer that was constructed with num_bits many random bits. The result will be an integer [0, 2**(num_bits) - 1] inclusive.
+     
+   For Example:
+   If a 10bit number is needed, random_nbit_int(10). Min should be greater or equal to 0. Max should be less than or equal to 1023.
+
+   Notes: 
+
+   * num_bits is the number of random bits to be used for construction of the random integer to be returned.
+   * Raises TypeError if non-integer values for num_bits.
+   * Raises ValueError if the num_bits is negative or 0.
+   * Returns a random integer between [0, 2**(num_bits) - 1] inclusive.
+
+
+```
+def random_int_below(upper_bound):
+```
+   Returns an random integer in the range [0,upper_bound)
+    
+   Notes: 
+
+   * The random integer returned will be greater than or equal to zero. 
+   * The random integer returned will be less than the upper_bound.
+   * Handles the case where upper_bound has more bits than returned by a single call to the underlying generator.
+   * Raises TypeError if non-integer values for upper_bound.
+   * Raises ValueError if the upper_bound is negative or 0.
+
+
+```
+def random_randrange(start, stop=None, step=1):
+```
+   Choose a random item from range(start, stop[, step]).
+    
+   Notes: 
+
+   * The random integer returned will be greater than or equal to start. 
+   * The random integer returned will be less than stop.
+   * step determines which elements from the range will be considered.
+   * Raises ValueError if: Non-integer for start or stop argument, Empty range, if start < 0 and stop is None, Empty range, or Zero or non-integer step for range.
+   
+
+
+```
+def random_randint(lower_bound, upper_bound):
+```
+   Return random integer in range [lower_bound, upper_bound], including both end points.
+    
+   Notes: 
+
+   * The random integer returned will be less than or equal to the upper_bound.
+   * The random integer returned will be greater than or equal to the lower_bound.
+
+
+```
+def random_sample(population, k):
+```
+   To return a list containing a random sample from the population.
+   
+   Notes: 
+
+   * population is the elements to be sampled from.
+   * k is the number of elements to sample.
+   * Raises ValueError is sampler larger than population.
+   * Returns a list of len(k) with random elements from the population.
+
+### Usage
+
+```
+random n bit example.
+
+This will be a step by step walk through of the key operations
+    defined in this function, with the largest possible
+    10 bit integer returned.
+    
+    num_bits = 10
+    
+    randstring = random_randombytes(10/8)  for our example we
+    will suppose that the byte returned was '
+xff' (which is the
+    same as chr(255)).
+    
+    odd_bits = 10 % 8 = 2
+    Once again we assume that random_randombytes(1) returns the
+    maximum possible, which is '
+xff'  
+    chr = ord('
+xff') >> (8 - odd_bits)
+    -> chr = 255 >> (8 - 2)
+    -> chr = 255 >> 6 = 3   Note 3 is the largest 2 bit number
+    chr(3) is appended to randstring resulting in
+    randstring = '
+x03
+xff' 
+    
+    value = 0
+    length = 2
+    
+    STEP 1 (i = 0):
+      value = value << 8 
+      -> value = 0
+      value = value + ord(randstring[0])
+      -> value = 3
+    
+    STEP 2 (i = 1):
+      value = value << 8
+      -> value = 768
+      value = value + ord(randstring[1])
+      -> value = 1023
+    
+    return 1023
+    This is the maximum possible 10 bit integer.
+```
+
+
+### Includes
+
+[wiki:SeattleLib/math.repy]

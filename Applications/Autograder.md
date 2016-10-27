@@ -1,0 +1,101 @@
+## What is the autograder?
+The autograder is a convenient auxiliary Seattle feature that allows instructors to collect and grade student submissions via a web interface.  
+We provide fair and repeatable grading of student submissions by installing Seattle and deploying student code and custom test suites on  specified network topologies on Emulab. We collect the test results, run them through grading scripts and store the information for easy viewing. 
+
+
+## What can I do?
+As an instructor…
+  * Grade individual or groups of submissions with the click of a button
+  * View numeric scores and detailed grading results
+  * Download zip files of student submissions
+	
+
+As a student…
+  * Submit assignments with the click of a button
+  * Resubmit assignments
+  * View grading results for all submitted assignments
+  * Download submissions in case you want them later
+
+
+## Components
+  * **website** - contains front end logic dealing with user interactions
+  * **remote_emulab** - contains methods that connect to and interact with emulab
+  * **nm_remote_api** - contains methods that interact with nodes remotely (so once Seattle has been installed on the Emulab machines, you use this to interact with these Seattle nodes)
+  * **data_interface** - contains methods that access and modify the database
+  * **autograder_api** - utilizes remote_emulab, nm_remote_api, and data_interface to form a single simple api for creating testing scripts
+  * **autograder_runner** - runs through the business logic of grading an assignment or group of assignments with specified testing and grading scripts
+
+
+## How does it work?
+[[Image(autograder.png)]]
+
+  1. Student submits assignment.  The assignment is saved in the database as ungraded and the zip file is saved.
+  1. Instructor clicks the grade button for the assignment.  The assignment is marked as 'grading in progress' and the autograder_runner is started.
+  1. autograder_runner locates corresponding test and grade scripts for the assignment and calls a method in it named 'run_testing' from the test script
+  1. autograder_runner takes results from 'run_testing' and passes it as a parameter to a method 'run_grading' 
+  1. autograder_runner takes results from 'run_grading' and stores them into the database
+
+
+## How do I create an assignment solution?
+To create an assignment you must create 4 general components:
+
+1) **ns file(s)** - file(s) specifying the network topology 
+
+These are standard ns files (http://users.emulab.net/trac/emulab/wiki/Tutorial) that will be used in emulab experiments.
+As testing is run through Seattle, every node in the experiment must have Seattle installed on it.
+
+
+To install Seattle, make sure every  node gets the Seattle tar file and runs the 'runner.sh' script to install Seattle:
+
+		
+```
+set dir "/usr/jenn"
+
+tb-set-node-tarfiles $<node_name> $dir /proj/Seattle/tarfiles/temps/auto.tar
+tb-set-node-startcmd $<node_name> "/proj/Seattle/tarfiles/runner.sh <ip_address> >& /proj/Seattle/auto/results/`hostname`.out"
+
+```
+
+
+
+2) **test suite** - a folder of tests to run during testing
+
+The tests must be written in repy as they will be run through Seattle installations on emulab nodes.
+
+
+
+3)** test.py** - python script that sets up the emulab experiment and run tests from the test suite
+
+This script uses autograder_api methods to start an experiment in emulab with a custom ns file (component 1) and to test student code with files from the custom test suite (component 2).
+
+
+It must have a method named 'run_testing' that when called will run everything (eg start the experiment and run the testing).
+
+run_testing: 
+	
+-takes as a parameter an integer id associated with the specific student code to run
+	
+-returns a dictionary with the key-value pairs:
+			{key : value} 
+				key = file name of the test
+				
+value = another dictionary {key' : value'}
+					key'  = long name of emulab node
+					
+value' = log for the node for the specified test
+
+
+
+4)** grade.py** - python script that  specifies how to score and provide readable results from the results logs from testing
+
+This script must have a method named 'run_grading' that when called will process all the raw test results and produce a pair to be stored in the database
+
+
+
+run_grading :
+	-takes as a parameter the dictionary returned from 'run_testing' (see component 3)
+	
+-returns a pair (score, results) where:
+		score = numeric score between 0 and the specified max number of points (eg no negative numbers or extra credit)
+		
+results = string describing the results of the testing (eg 'Test 1: passed  Test 2: failed - couldn't connect to server ...')

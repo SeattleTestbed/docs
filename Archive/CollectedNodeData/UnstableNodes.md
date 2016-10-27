@@ -1,0 +1,7 @@
+# Advertising and Contactability Patterns of Unstable Nodes
+
+[[Image(unstablenodes.jpg)]]
+
+This graph shows the high correlation between advertising nodes and contactable nodes in addition to demonstrating that many of the unstable nodes have trouble advertising. The lines are periods of time online, and the diamonds are endpoints of those periods. The fuzzy black areas are an artifact created by numerous diamonds overlapping each other. Diamonds that occur in the middle of lines are points where the node stopped advertising (and possibly also couldn't be contacted) for a relatively brief period of time. There are noticeably more such points for the advertising data than the contactability data, suggesting that the unstable nodes have some trouble advertising successfully.
+
+Data collected by sportzer between 2/24/2011 and 4/6/2011

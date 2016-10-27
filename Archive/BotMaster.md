@@ -1,0 +1,25 @@
+# BotMaster
+ * Reading remote logs
+ * "service interface" on nodes
+ * backup software update mechanism. 
+
+# Overview
+
+This team focuses on interacting with systems our software is installed on.   It's essential that the operations we perform are not considered "invasive" by the user.
+
+## Reading Remote Logs
+
+Reading remote node manager / software updater logs.
+
+Coding Sprint: Jan 24th
+
+Jan 10th - Jan 17th
+
+Sean: Understand circular logging as used in Repy and try to change the software updater to use it.
+
+Brent: Look to add circular logging to the node manager and look at handling exceptions in a good way.
+
+Jan 17th - Jan 22nd
+
+Both: Ensure logging works for your application and test that files can be retrieved from our "service VM"
+

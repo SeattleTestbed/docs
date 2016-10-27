@@ -1,0 +1,102 @@
+# urllib.repy
+
+This module provides many url modifying functions which allow for urls to be safely used in URL or XML documents.
+
+Please note that although one may include module directly, this module is included by a lot of other files where its needed. See [wiki:SeattleLib/xmlrpc_server.repy]. This means in most cases the programmers should not have to include this module. Only in special cases do clients need to uses this module directly. This wiki page can be used as a reference to what urllib.repy can do.
+
+### Classes & Functions
+```
+def urllib_quote(inputstring, safestring="/"):
+```
+    Encode an inputstring such that it can be used safely in a URL or XML document.
+
+    Notes: 
+
+    * inputstring is the string to be encode.
+    * safestring is an optional parameter which specifies additional characters that should not be quoted - defaults to "/".
+    * Raises TypeError if the inputstring or safestring parameters aren't strings.
+    * Returns the correctly encoded version of the passed string.
+
+```
+def urllib_quote_plus(inputstring, safestring=""):
+```
+    Encode a string to go in the query fragment of a URL.
+
+    Notes: 
+
+    * inputstring is the string to be encode.
+    * safestring is an optional parameter which specifies additional characters that should not be quoted - defaults to "/".
+    * Raises TypeError if the inputstring or safestring parameters aren't strings.
+    * Returns the correctly encoded version of the passed string.
+
+```
+def urllib_unquote(inputstring):
+```
+   Unquote a urlencoded string, i.e. decodes the URL string.
+
+   Notes: 
+
+   * inputstring is the string to unquote.
+   * Raises TypeError if the inputstring isn't a string.
+   * Raises ValueError thrown if the last wrapped octet isn't a valid wrapped octet (i.e. if the string ends in "%" or "%x" rather than "%xx".
+   * Raises ValueError if the nibbles aren't valid hex digits.
+   * Returns the decoded string.
+
+```
+def urllib_unquote_plus(inputstring):
+```
+   Unquote the urlencoded query fragment of a URL. See above for non-fragment version.
+
+   Notes: 
+
+   * inputstring is the string to unquote.
+   * Raises TypeError if the inputstring isn't a string.
+   * Raises ValueError thrown if the last wrapped octet isn't a valid wrapped octet (i.e. if the string ends in "%" or "%x" rather than "%xx".
+   * Raises ValueError if the nibbles aren't valid hex digits.
+   * Returns the decoded string.
+
+```
+def urllib_quote_parameters(inputdictionary):
+```
+   Encodes a dictionary of (key, value) pairs into an HTTP query string or POST body (same form).
+
+   Notes: 
+
+   * dictionary is the dictionary to quote, i.e. encode.
+   * Raises TypeError if the inputdictionary isn't a dictionary.
+   * Returns the quoted dictionary.
+
+```
+def urllib_unquote_parameters(inputstring):
+```
+   Decode a urlencoded query string or POST body.
+
+   Notes: 
+
+   * inputstring is the string to decode.
+   * Raises TypeError if the inputstring isn't a string.
+   * Raises ValueError if the inputstring is poorly formed.
+   * Returns a dictionary mapping keys to values.
+	
+### Example Usage
+
+```
+# We need to make sure the webserver starts up before returning.  Waiting
+# an arbitrary amount of time is just asking for strange and inconsistent
+# errors, so I will actually query the web server until it works.  However,
+# to prevent an infinite loop, I will limit the waiting to 1 minute.  If
+# the webserver has not started by this time, it is probably safe to say
+# it won't start.  In this case we will raise an exception indicating this.
+	 
+# Initialize the update url to just be the ip address of this machine.
+ip = getmyip()
+updateurl = 'http://' + ip + ':12345/'
+	 
+for junk in xrange(60):
+   try:
+      # If we can successfully retrieve the url, we are ready.
+      urllib.urlretrieve(updateurl)
+      break
+   except Exception:
+      time.sleep(1)
+```

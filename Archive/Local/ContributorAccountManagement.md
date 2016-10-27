@@ -1,0 +1,70 @@
+# Contributor Account Management
+This page describes how to create, manage, and delete accounts for contributors to the Seattle project.
+
+
+
+
+## Overview
+When a new developer joins the Seattle project accounts have to be created for the developer. Accounts need to be created so the developer can login to the Trac page, can checkout and commit to our SVN and have access to our several testbed machines. The developer also needs to be added to the developers email list.
+
+## Account creation
+Accounts for developers need to be created for our Trac system, seattle.poly.edu, all the testbed machines and optionally for blackbox.cs.washington.edu and maybe betabox.cs.washington.edu. The initial password assigned to the developers should be random and unique. The password should be a mixture of letters, numbers and symbols. Once the accounts have been created, an email should be sent to the developer with their account info and the email should remind the developer to change the password as soon as possible.
+
+## Creating/Deleting Trac Account
+To create a Trac account, you have to be an admin on our Seattle Trac page. After logging in as an admin, click on the 'Admin' tab on the left side of the page. Then go to the Accounts->Users section under the Administration section. Then fill in the information for the new user in the 'Add Account' box on the right side of the page.
+
+To remove an user, check the box next to the user you want to remove and then click on the 'remove selected accounts' at the bottom of the page.
+
+## Creating accounts on testbed machines
+ * Windows XP and Vista
+  * We have two windows machine currently: testbed-xp2.cs.washington.edu and testbed-vista1.cs.washington.edu.
+  * Click on Start->Control Panel->User Accounts.
+  * Once the User Accounts windows pops up, click on 'Create a new account'
+  * Fill in the account name and create the account.
+  * Remember to restart the SSH daemon. Check out [wiki:Local/SshService SSHService] on how to do this.
+
+ * *NIX machines
+  * Here are the machines that the user will need an account on:
+    * seattle.poly.edu
+    * testbed-opensuse.cs.washington.edu
+    * testbed-freebsd.cs.washington.edu
+  * Optional machines that user may need account on:
+    * betabox.cs.washington.edu
+    * blackbox.cs.washington.edu
+  * To add an user you must log in as a sudo user on these machines.
+  * The command to add user on *nix machines is:
+    ```
+    useradd -d /home/user_name -m user_name
+    ```
+    The -d option is for providing the location for the home folder for the user, and the -m option ensures that a home directory is created. In opensuse, a user's home directory is not created by default.
+  * Some machines may accept the command 'adduser user_name'
+
+ * Mac machines
+  * Coming soon!!
+
+
+## Deleting accounts on testbed machines
+ * Windows XP and Vista
+  * Click on Start->Control Panel->User Accounts.
+  * Click on the account you are planning to remove.
+  * Click on 'Delete the account'.
+  * It then gives you the option to not delete the user file. In most cases you would want to keep the files and only delete the account, just in case the user had some important files or were running a daemon or tests regularly.
+
+ * *NIX machines.
+  * To remove an user account, you must log in as a sudo user on the machine.
+  * The command to delete user accounts on *nix machines is:
+    ```
+    userdel user_name
+    ```
+    This will remove the user account but will not delete the user's home directory. We want to keep the user's files around in case we need them in the future. To remove the home directory as well, use the option -r with the userdel command.
+
+ * Mac machines.
+  * Coming soon!!
+
+
+## SVN access for users
+To give a user access to our SVN so they can commit, they must first have an account on seattle.poly.edu as that is where our SVN resides. Open up the /etc/groups file and add the user to the 'dev:' group. Deleting the user account from seattle.poly.edu will remove their access to the Seattle SVN.
+
+
+## Adding developers to mailing list
+To add a developer to the developers mailing list, you must be an admin for the mailing list. Visit the [seattle-devel administrative page](https://mailman.cs.washington.edu/mailman/admin/seattle-devel) click on the Membership Management->Mass Subscription link. Enter the developers email address and subscribe him. 
