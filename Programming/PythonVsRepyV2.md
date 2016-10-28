@@ -212,7 +212,6 @@ it), the library `seattlelib_v2/time.r2py` provides NTP time.
 
 	
 ### Networking
-----
 
 There are several native Repy functions provided to make common networking operations easier. Many don't have direct Python equivalents, but are convenience functions. See the RepyTutorial for examples of these functions.
 
@@ -223,7 +222,7 @@ use `gethostbyname(name)`. The behaviour is the same, so you can write
 RepyV2 which looks like
 ```python
 ip_address = gethostbyname("www.google.com")
-    ```
+```
 
 
 
