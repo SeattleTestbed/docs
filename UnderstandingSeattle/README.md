@@ -65,4 +65,4 @@ Experiment Manager `seash` (see [code](SeattleTestbed/seash),
 
 
 For more detailed information, see [the nodemanager design doc](NodeManagerDesign.md) 
-and the description of [Seattle Components](UnderstandingSeattle/SeattleComponents.md).
+and the description of [Seattle Components](SeattleComponents.md).

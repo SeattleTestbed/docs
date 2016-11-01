@@ -107,7 +107,7 @@ Check out the portal pages for in-depth information:
 
  * [Programmers Portal](Programming/ProgrammersPage.md): Resources for programmers wanting to learn the platform.
  * [Educator Portal](EducationalAssignments/EducatorsPage.md): Example assignments for students using Seattle.
- * [Contributors Portal](ContributorsPage.md): Detailed information about how to contribute to the project.
+ * [Contributors Portal](Contributing/ContributorsPage.md): Detailed information about how to contribute to the project.
 
 If you have questions about Seattle, send an email to jcappos@nyu.edu 
 or visit the Seattle-users Google group (seattle-users@googlegroups.com, 
