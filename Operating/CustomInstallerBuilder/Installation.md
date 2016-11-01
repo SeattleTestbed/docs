@@ -1,6 +1,6 @@
 # Installing the Seattle Custom Installer Builder
 
-This page outlines how to install the Custom Installer Builder (including its dependencies) on a Linux machine. We recommend you read up on [Seattle Infrastructure Architecture](https://github.com/SeattleTestbed/docs/blob/master/UnderstandingSeattle/SeattleInfrastructureArchitecture.wiki) how the Seattle infrastructure architecture looks like so that you have a good understanding of the components you want to have (and thus need to set up).
+This page outlines how to install the Custom Installer Builder (including its dependencies) on a Linux machine. We recommend you read up on [Seattle Infrastructure Architecture](https://github.com/SeattleTestbed/docs/blob/master/UnderstandingSeattle/SeattleInfrastructureArchitecture.md) how the Seattle infrastructure architecture looks like so that you have a good understanding of the components you want to have (and thus need to set up).
 
 ## Setting up a non-privileged user account
 First of all, on your custominstallerbuilder server or VM, we recommend to set up a new Linux user account specific to the Custom Installer Builder instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.

@@ -99,15 +99,15 @@ Learn the basics:
 
  * For more information, please check out our [ overview movie](http://seattle.poly.edu/static/SeattleMovieFinal.mov).
  * For a demonstration of Seattle, please view our [5-minute video](https://seattle.poly.edu/static/demo.mov).
- * Learn more about [how Seattle works](UnderstandingSeattle/UnderstandingSeattle.wiki).
- * Try [donating resources](UnderstandingSeattle/DonatingResources.wiki) to other users.
- * Complete the [take-home assignment](EducationalAssignments/TakeHome.wiki) to get hands-on experience with Seattle.
+ * Learn more about [how Seattle works](UnderstandingSeattle/UnderstandingSeattle.md).
+ * Try [donating resources](UnderstandingSeattle/DonatingResources.md) to other users.
+ * Complete the [take-home assignment](EducationalAssignments/TakeHome.md) to get hands-on experience with Seattle.
 
 Check out the portal pages for in-depth information:
 
- * [Programmers Portal](Programming/ProgrammersPage.wiki): Resources for programmers wanting to learn the platform.
- * [Educator Portal](EducationalAssignments/EducatorsPage.wiki): Example assignments for students using Seattle.
- * [Contributors Portal](ContributorsPage.wiki): Detailed information about how to contribute to the project.
+ * [Programmers Portal](Programming/ProgrammersPage.md): Resources for programmers wanting to learn the platform.
+ * [Educator Portal](EducationalAssignments/EducatorsPage.md): Example assignments for students using Seattle.
+ * [Contributors Portal](Contributing/ContributorsPage.md): Detailed information about how to contribute to the project.
 
 If you have questions about Seattle, send an email to jcappos@nyu.edu 
 or visit the Seattle-users Google group (seattle-users@googlegroups.com, 
