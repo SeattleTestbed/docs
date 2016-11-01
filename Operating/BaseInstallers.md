@@ -2,7 +2,7 @@
 
 Explains how to go about building the base installers (everything you need to distribute the program except custom VM information).
 
-__NOTE:__ In order to build the Windows GUI installer, NSIS must be properly installed and configured on the system building the base installers. Click [here](https://github.com/SeattleTestbed/docs/blob/master/Operating/NsisSystemSetup.wiki) for quick detailed instructions on how to do this.
+__NOTE:__ In order to build the Windows GUI installer, NSIS must be properly installed and configured on the system building the base installers. Click [here](https://github.com/SeattleTestbed/docs/blob/master/Operating/NsisSystemSetup.md) for quick detailed instructions on how to do this.
 
 ## Sample Usage
 Running from `trunk/dist` directory: 
