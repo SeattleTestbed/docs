@@ -314,6 +314,7 @@ Depending on you configuration of Apache, you may want to put below code in a fi
     SSLCertificateFile /etc/apache2/ssl/ch.crt
     SSLCertificateKeyFile /etc/apache2/ssl/ch.key
     # You can add intermediate certificates here.
+    #SSLCertificateChainFile ...
 
     # Point Apache to the clearinghouse's static images/CSS/JavaScript
     Alias /site_media /home/ch/deployment/clearinghouse/website/html/media
