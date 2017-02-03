@@ -246,6 +246,7 @@ Depending on you configuration of Apache, you may want to put below code in a fi
     SSLCertificateFile /etc/apache2/ssl/cib.crt
     SSLCertificateKeyFile /etc/apache2/ssl/cib.key
     # You can add intermediate certificates here.
+    #SSLCertificateChainFile ...
 
     # Allow access to JavaScript/CSS/images not served by Django
     Alias /static/ /home/cib/custominstallerbuilder/html/static/
