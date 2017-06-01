@@ -4,11 +4,11 @@ Seattle Testbed is a free, open-source platform for networking and
 distributed systems research. 
 This repository contains the Seattle documentation, including
 
-* [High-level overviews of all parts of Seattle Testbed](UnderstandingSeattle/),
+* [High-level overviews of all parts of Seattle Testbed](UnderstandingSeattle/README.md),
 * [Programming tutorials and API docs](Programming/), 
 * [Educational assignments for class and home use](EducationalAssignments/),
 * [Documentation for running Seattle infrastructure services](Operating/), and
-* [Information for contributors](Contributing/).
+* [Information for contributors](Contributing/README.md).
 
 An introduction to Seattle Testbed follows below. For Seattle source code, 
 please visit our organization page at https://github.com/SeattleTestbed
