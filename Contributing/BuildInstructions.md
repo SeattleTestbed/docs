@@ -19,7 +19,7 @@ Seattle Testbed.
 ## Prerequisites
 Before you begin, make sure that you have the following pieces of software 
 on your computer:
-* [Python 2.6 or 2.7](https://www.python.org/downloads/).
+* [Python 2.7](https://www.python.org/downloads/).
 * [Git 1.7](http://www.git-scm.com/download) (or later)
 
 Many operating systems (such as Linux and Mac OS X) ship with these installed. 
@@ -96,13 +96,13 @@ in order to fetch the list of files and directories to copy to target.
 ## Building and Running Unit Tests
 When making changes to the code (or build scripts!) you will want to ensure 
 that the change does not have side effects or breaks functionality that had 
-been working before. In order to ensure this, most components are ''testable'' 
-and come with a set of ''unit tests'' (''Testable'' components have `tests` or 
-`test` directory within their repository) .
+been working before. In order to ensure this, most components are *testable* 
+and come with a set of *unit tests*. These components have a `tests` or 
+`test` directory within their repository.
 
 The steps of the previous section intrinsically downloaded the required 
 unit test files. You just need to run the build script again to create a 
-''testable'' build. Use the `-t` command line option to indicate you want 
+testable build. Use the `-t` command line option to indicate you want 
 the test files to be included. Again, specifying a target directory is optional!
 ```sh
 $ mkdir TEST_TARGET_DIR
@@ -216,7 +216,7 @@ End users do not normally modify nor contribute source code to
 [SeattleTestbed](https://github.com/seattletestbed), but instead build and 
 run specific `SeattleTestbed` components.  For this use case, the build 
 procedure for end users is straightforward and matches the procedure outlined 
-in `How the Build Process Works`:
+in the previous section ("How the Build Process Works"):
 
 1. `git clone` a [SeattleTestbed](https://github.com/seattletestbed) repository
 
