@@ -73,52 +73,52 @@ $ pip install django==1.8.18
 1. Make sure you are logged in with your Custom Installer Builder account: `sudo -i -u cib`
 1. Clone the Custom Installer Builder repository into `cib`'s home directory, and let the initialize script fetch dependencies:
 
-	```sh
-  $ cd ~
-  $ git clone https://github.com/SeattleTestbed/custominstallerbuilder.git
-  $ cd custominstallerbuilder/scripts
-  $ python initialize.py
-	```
+```sh
+$ cd ~
+$ git clone https://github.com/SeattleTestbed/custominstallerbuilder.git
+$ cd custominstallerbuilder/scripts
+$ python initialize.py
+```
 
 1. Create Repy runtime, e.g. in `~/repy_runtime`, which will be needed by the Custom Installer Builder
 
-  ```sh
-  $ # While still in the scripts/ directory
-  $ mkdir ~/repy_runtime
-  $ python build.py ~/repy_runtime
-  ```
+```sh
+$ # While still in the scripts/ directory
+$ mkdir ~/repy_runtime
+$ python build.py ~/repy_runtime
+```
 1. Change to the `custominstallerbuilder` directory we checked out earlier and edit `local/settings.py` to match your local configuration:
   * `SECRET_KEY` should be a random string of your own choosing. Do not share it with others! If you are testing locally, using django's built-in webserver, use `http://127.0.0.1:8000/` as `BASE_URL`. This tutorial will show you how to set up a `VirtualHost` using the url `http://cib.loc/`. Of course you can use your own domain as well.
 
-  ```python
-  SECRET_KEY = "Don't dare to think using this as your random string"
-  ...
-  SERVE_STATIC = True
-  ... 
-  # This tutorial will use cib.loc as BASE_URL 
-  BASE_URL = 'http://cib.loc/'
-  ...
-  PROJECT_URL = BASE_URL
-  ```
+```python
+SECRET_KEY = "Don't dare to think using this as your random string"
+...
+SERVE_STATIC = True
+... 
+# This tutorial will use cib.loc as BASE_URL 
+BASE_URL = 'http://cib.loc/'
+...
+PROJECT_URL = BASE_URL
+```
 1. Add the parent directory of your deployed Custom Installer Builder and the Repy runtime directory to your `PYTHONPATH` and make sure `DJANGO_SETTINGS_MODULE` points to your local settings file.
 
-  ```sh
-  $ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/repy_runtime
-  $ export DJANGO_SETTINGS_MODULE='custominstallerbuilder.local.settings'
-  ```
+```sh
+$ export PYTHONPATH=$PYTHONPATH:/home/cib:/home/cib/repy_runtime
+$ export DJANGO_SETTINGS_MODULE='custominstallerbuilder.local.settings'
+```
 1. *For testing purposes*, start the Django development webserver. This lets you check that your configs etc. have no syntax errors, and the Django app can be started. 
 
-  ```sh
-  $ # Still in ~/custominstallerbuilder
-  $ python manage.py runserver
-  ```
+```sh
+$ # Still in ~/custominstallerbuilder
+$ python manage.py runserver
+```
   You should now be able to access your Custom Installer Builder test server at http://127.0.0.1:8000. If you have specified anything else than `http://127.0.0.1:8000` as `BASE_URL` above, you are not going to see any media files (images, CSS, JavaScript). But don't worry, setting up apache will fix this. Also, your Custom Installer Builder isn't very useful at this moment anyways, because you don't have the necessary base installers yet.
 1. Before we build the base installers. Create the directories where they will be placed into. The directories need to be accessible by your django app, e.g.:
 
-  ```sh
-  $ mkdir -p ~/custominstallerbuilder/html/static/installers/base/
-  $ mkdir ~/custominstallerbuilder/html/static/installers/old_base_installers/
-  ```
+```sh
+$ mkdir -p ~/custominstallerbuilder/html/static/installers/base/
+$ mkdir ~/custominstallerbuilder/html/static/installers/old_base_installers/
+```
 
 ## Building base installers
 
