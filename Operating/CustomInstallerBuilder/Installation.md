@@ -230,7 +230,7 @@ sudo chmod 400 /root/cib.publickey /root/cib.privatekey
 
 1. Move the certificate and key file into a directory where Apache can find them. We suggest to use `/etc/apache2/ssl`. **Warning:** The key does not have a passphrase! If this is a production key, make sure it's not readable by any user but `root`.
   ```sh
-  $ sudo mv /home/cib/cib.* /etc/apache2/ssl/
+  $ sudo mv cib.* /etc/apache2/ssl/
   $ sudo chown root /etc/apache2/ssl/cib.crt /etc/apache2/ssl/cib.csr /etc/apache2/ssl/cib.key
   $ sudo chmod 600 /etc/apache2/ssl/cib.crt /etc/apache2/ssl/cib.csr /etc/apache2/ssl/cib.key
   ```
@@ -242,6 +242,8 @@ This is a minimal exemplary configuration to serve the Custom Installer Builder 
 VirtualHost entry assumes that you have a server certificate and key file setup, and the `Location` directive assumes that your Custom Installer Builder installation lives in `/home/cib/custominstallerbuilder` and that your Django settings module is `custominstallerbuilder.website.settings`.
 
 Depending on you configuration of Apache, you may want to put below code in a file called `/etc/apache2/sites-available/cib.conf`.
+
+Note: You might need to enable Apache's SSL module: `sudo a2enmod ssl`.
 
 ```sh
 # In /etc/apache2/sites-available/cib.conf
