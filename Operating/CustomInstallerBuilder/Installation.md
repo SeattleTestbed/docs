@@ -15,7 +15,7 @@ $ sudo adduser cib
 
 ## Install Dependencies
 The Custom Installer Builder requires a few pieces of software to run:
- * [Python](http://www.python.org/) in version 2.5-2.7 -- the language Custom Installer Builder is written in
+ * [Python](http://www.python.org/) in version 2.7 -- the language Custom Installer Builder is written in
  * [Pip](https://pypi.python.org/pypi/pip) -- recommended tool for installing python packages.
  * [Apache 2.4](http://www.apache.org/) -- the web server
  * [mod_wsgi](http://www.modwsgi.org/) -- necessary for interfacing with Django code
@@ -24,7 +24,7 @@ The Custom Installer Builder requires a few pieces of software to run:
  * [Django](http://www.djangoproject.com/) in version 1.6.x -- necessary to run Django code
 
 
-Python is often available on a typical Linux install. Be sure to check the version though, we need 2.5, 2.6, or 2.7.
+Python is often available on a typical Linux install. Be sure to check the version though, we need 2.7.
 
 To install the other packages, log in as a `sudo`able user and type
 ```sh
