@@ -122,7 +122,34 @@ $ mkdir ~/custominstallerbuilder/html/static/installers/old_base_installers/
 
 ## Building base installers
 
-Use `installer-packaging` to create the base installers for all platforms. Clone the repo into your `cib`'s home directory and run the initialization and build scripts:
+The Custom Installer Builder needs *base installers* so that it can construct
+customized Seattle installers from them. In this section, we first create the
+cryptographic key pair that the `softwareupdater` component will use, then
+clone the required code to package installers, adapt them to the local CIB,
+and then build base installers.
+
+
+### Generate softwareupdater key pair
+You need to generate a key pair, which will be used by both the installer-packaging
+scripts and the custom installer builder. This key pair is used to sign every packaged
+file. The public key is included in every installer so that a Seattle install can
+check for and validate software updates.
+
+Here's how to generate a key pair in the correct format. Change to the `repy_runtime`
+directory previously generated, and run the `generatekeys.py` script:
+```sh
+cd ~/repy_runtime
+python generatekeys.py ~/cib 4096
+```
+
+This generates a key pair consisting of files `cib.publickey` and `cib.privatekey`
+in `cib`'s home directory. 4096 is the minimum recommendable length at the time of writing. 
+
+
+### Clone the installer packaging repo
+
+Use `installer-packaging` to create the base installers for all platforms. Clone the
+repository into your `cib`'s home directory and run the initialization and build scripts:
 ```sh
 $ cd ~
 $ git clone https://github.com/SeattleTestbed/installer-packaging
@@ -130,17 +157,6 @@ $ cd installer-packaging/scripts
 $ python initialize.py
 $ python build.py
 ```
-
-### Generate keypair
-You need to generate a key pair, which will be used by both the installer-packaging scripts and the custom installer builder.
-
-Here's how to generate a key pair in the correct format. Change to the `repy_runtime` directory previously generated, and run the `generatekeys.py` script:
-```sh
-cd ~/repy_runtime
-python generatekeys.py ~/cib 4096
-```
-
-This generates a key pair consisting of files `cib.publickey` and `cib.privatekey` in `cib`'s home directory. 4096 is the minimum recommendable length at the time of writing. 
 
 The script that actually creates the base installer tarballs is in `~/installer-packaging/RUNNABLE/rebuild_base_installers.py`. You have to modify some variables before you can run it:
 
