@@ -21,7 +21,7 @@ The Custom Installer Builder requires a few pieces of software to run:
  * [mod_wsgi](http://www.modwsgi.org/) -- necessary for interfacing with Django code
  * [OpenSSL](http://www.openssl.org/) -- necessary for `https://` support
  * zip -- necessary for packaging window installers and keys 
- * [Django](http://www.djangoproject.com/) in version 1.6.x -- necessary to run Django code
+ * [Django](http://www.djangoproject.com/) in version 1.8.x -- necessary to run Django code
 
 
 Python is often available on a typical Linux install. Be sure to check the version though, we need 2.7.
@@ -62,10 +62,10 @@ $ mkvirtualenv cib
 In the future you just have to issue the shell command `workon cib` to switch to the environment or `deactivate` if you want to leave it. You know that you are *in* the virtualenv when your shell prompt is prefixed by `(cib)`. **Note: This prefix is omitted in the shell snippets in the remainder of the document.**
 
 ### Install Django
-The Custom Installer Builder requires Django, a Python web framework, in version 1.6.5 or greater, which is available at  [https://www.djangoproject.com/download/](https://www.djangoproject.com/download/) or through a package manager.
+The Custom Installer Builder requires Django, a Python web framework, in version 1.8, which is available at  [https://www.djangoproject.com/download/](https://www.djangoproject.com/download/) or through a package manager.
 
 ```sh
-$ pip install django==1.6.7
+$ pip install django==1.8.18
 ```
 
 ## Deploying and running Custom Installer Builder
