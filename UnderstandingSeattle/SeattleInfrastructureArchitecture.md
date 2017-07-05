@@ -1,22 +1,50 @@
 # Seattle Infrastructure Architecture
 ## Overview
 
-This page explains the architecture of the three central _infrastructure_ components for the testbed --- the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu/html/accounts_help#introduction), the [Custom Installer Builder](https://custombuilder.poly.edu/custom_install/), and the [Software Updater](https://github.com/SeattleTestbed/docs/blob/15f11aa86f3b446844e884c2c6f21ea529cacdb2/Operating/SoftwareUpdaterSetup.wiki). For a discussion of the perspective of people participating in the Seattle Testbed by means of donating resources, planning, and running experiments, please see this [wiki page](https://github.com/SeattleTestbed/docs/blob/master/UnderstandingSeattle/SeattleComponents.wiki).
+This page explains the architecture of the three central
+*infrastructure* components for the testbed --- the
+[Seattle Clearinghouse](https://seattleclearinghouse.poly.edu/html/accounts_help#introduction),
+the [Custom Installer Builder](https://custombuilder.poly.edu/custom_install/),
+and the [Software Updater](../Operating/SoftwareUpdaterSetup.md). For a
+discussion of the perspective of people participating in the Seattle
+Testbed by means of donating resources, planning, and running
+experiments, please see [this document](SeattleComponents.md).
 
 
 # Infrastructure Components
 ## Clearinghouse
-The Seattle Testbed consists of a large number of Seattle VMs (virtual machines) running on computing devices provided by volunteers. These donated VMs are made available to registered users through an infrastructure component called the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu/).
+The Seattle Testbed consists of a large number of Seattle VMs (virtual
+machines) running on computing devices provided by volunteers. These
+donated VMs are made available to registered users through an
+infrastructure component called the [Seattle Clearinghouse](https://seattleclearinghouse.poly.edu/).
 
-In addition to handing out resources donated to the general public, the Seattle Clearinghouse can also track donations on behalf of registered users. Every donation on their behalf will grant a user a greater number of resources on other machines in return. This _tit-for-tat_ tactic both enables users to run larger experiments, and helps scale the testbed.
+In addition to handing out resources donated to the general public, the
+Seattle Clearinghouse can also track donations on behalf of registered
+users. Every donation on their behalf will grant a user a greater
+number of resources on other machines in return. This *tit-for-tat*
+tactic both enables users to run larger experiments, and helps scale 
+the testbed.
 
-The Seattle Clearinghouse relies on identifying data included in each install of the Seattle Testbed software to track and credit resource donations: Depending on the user that should be credited (the general public is also treated as a user in this respect), the install announces a user-specific _public key_ on the Seattle advertise services.
+The Seattle Clearinghouse relies on identifying data included in each
+install of the Seattle Testbed software to track and credit resource
+donations: Depending on the user that should be credited (the general
+public is also treated as a user in this respect), the install
+announces a user-specific *public key* on the Seattle advertise
+services.
 
 ## Custom Installer Builder
-The [Custom Installer Builder](https://custombuilder.poly.edu/custom_install/) is the infrastructure component putting together the base Seattle installer with a user's donation-tracking public key. The Seattle installer customized such is provided to users seeking to increase their credit of VMs on the clearinghouse. (The [Seattle Components wiki page](https://github.com/SeattleTestbed/docs/blob/master/UnderstandingSeattle/SeattleComponents.wiki) shows another use case for the Custom Installer Builder).
+The [Custom Installer Builder](https://custombuilder.poly.edu/custom_install/)
+is the infrastructure component putting together the base Seattle installer
+with a user's donation-tracking public key. The Seattle installer customized
+such is provided to users seeking to increase their credit of VMs on the
+clearinghouse. (The [Seattle Components doc](SeattleComponents.md) shows
+another use case for the Custom Installer Builder).
 
 ## Software Update Site
-Lastly, every Seattle install contains information which software update site (URL) to contact for downloading the latest Seattle revision when it becomes available, and also a cryptographic key that is used to check the integrity of updates.
+Lastly, every Seattle install contains information which software update
+site (URL) to contact for downloading the latest Seattle revision when it
+becomes available, and also a cryptographic key that is used to check the
+integrity of updates.
 
 
 
