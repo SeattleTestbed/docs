@@ -242,13 +242,20 @@ sudo chmod 400 /root/cib.publickey /root/cib.privatekey
   $ sudo chmod 600 /etc/apache2/ssl/cib.crt /etc/apache2/ssl/cib.csr /etc/apache2/ssl/cib.key
   ```
 
-Next up, we configure Apache.
------
+### Apache configuration file
 
-This is a minimal exemplary configuration to serve the Custom Installer Builder website from `https://cib.loc/`. Note that in this snippet, the second
-VirtualHost entry assumes that you have a server certificate and key file setup, and the `Location` directive assumes that your Custom Installer Builder installation lives in `/home/cib/custominstallerbuilder` and that your Django settings module is `custominstallerbuilder.website.settings`.
+This is a minimal exemplary configuration to serve the Custom Installer
+Builder website from `https://cib.loc/`. Other deployment paths are
+described [in a separate doc](../../UnderstandingSeattle/SeattleInfrastructureArchitecture.md#deployment-paths).
 
-Depending on you configuration of Apache, you may want to put below code in a file called `/etc/apache2/sites-available/cib.conf`.
+Note that in this snippet, the second `VirtualHost` entry assumes that
+you have a server certificate and key file setup, and the `Location`
+directive assumes that your Custom Installer Builder installation lives
+in `/home/cib/custominstallerbuilder` and that your Django settings module
+is `custominstallerbuilder.website.settings`.
+
+Depending on you configuration of Apache, you may want to put below code in a file
+called `/etc/apache2/sites-available/cib.conf`.
 
 Note: You might need to enable Apache's SSL module: `sudo a2enmod ssl`.
 
