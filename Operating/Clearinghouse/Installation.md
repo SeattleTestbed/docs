@@ -3,12 +3,22 @@
 This document explains how to do a fresh install of the Seattle Clearinghouse portal on
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
-You might want to take a look at the [Seattle Infrastructure Architecture](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture) documentation before proceeding. This also mentions the other two infrastructure components of Seattle Testbed, the Custom Installer Builder and the software update server, and talk about their interfacing with the Clearinghouse. ~~Also note there are different [deployment paths](https://seattle.poly.edu/wiki/UnderstandingSeattle/SeattleInfrastructureArchitecture#DeploymentPaths) to the functionality you want.~~
+You might want to take a look at the [Seattle Infrastructure Architecture](../../UnderstandingSeattle/SeattleInfrastructureArchitecture.md)
+
+documentation before proceeding. This also mentions the other two
+infrastructure components of Seattle Testbed, the Custom Installer
+Builder and the software update server, and talk about their interfacing
+with the Clearinghouse.
 
 ## Setting up a non-privileged user account
-First of all, on the server or VM you will be using for the clearinghouse, we recommend to set up a user account specific to the Clearinghouse instance you are going to set up. This ensures all of the code, config files, etc. remain isolated from that of other services on the same machine.
+First of all, on the server or VM you will be using for the clearinghouse,
+we recommend to set up a user account specific to the Clearinghouse
+instance you are going to set up. This ensures all of the code, config
+files, etc. remain isolated from that of other services on the same machine.
 
-The user *should not be granted interactive login* for security reasons. Use `sudo -i -u theusername` instead to work in their directory. Needless to say, the user *should not have root privileges* or be able to acquire them.
+The user *should not be granted interactive login* for security reasons.
+Use `sudo -i -u theusername` instead to work in their directory. Needless
+to say, the user *should not have root privileges* or be able to acquire them.
 
 Any user name will be fine. We'll use `ch` in the instructions:
 
@@ -20,14 +30,14 @@ $ sudo adduser ch
 ## Install Dependencies
 
 Clearinghouse requires at least the following software to be installed:
- * [Python](http://www.python.org/) in version 2.6, or 2.7 -- the language Seattle Clearinghouse is written in
+ * [Python](http://www.python.org/) in version 2.7 -- the language Seattle Clearinghouse is written in
  * [Pip](https://pypi.python.org/pypi/pip) -- Recommended tool for installing python packages.
  * [mysqlclient](https://pypi.python.org/pypi/mysqlclient) -- the python mysql interface
  * [MySQL](http://www.mysql.com/) -- the database
  * [Apache 2.4](http://www.apache.org/) -- the web server
  * [mod_wsgi](http://www.modwsgi.org/) -- necessary for interfacing with Django code
  * [OpenSSL](http://www.openssl.org/) -- necessary for `https://` support
- * [Django](http://www.djangoproject.com/) in version 1.6.x -- necessary to run Django code
+ * [Django](http://www.djangoproject.com/) in version 1.8.x -- necessary to run Django code
  * [Django Social Auth](https://github.com/omab/django-social-auth) -- for OpenID and Oauth support.
 
 
@@ -43,8 +53,20 @@ $ sudo apt-get install ntp
 $ sudo apt-get install openssl
 ```
 
+
 ### Setup python virtualenvironment
-A convenient way to isolate your Python installations from each other is to use `virtualenv`, e.g. if you have specific version requirements for one project, but don't want to apply them system-wide or for other projects. [Virtualenv](https://virtualenv.pypa.io/en/latest/index.html) creates a separate environment that has its own installation directory and that doesn’t share libraries with other virtualenv environments. The [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) makes usage of virtualenv even easier. With the following instructions you can install and setup virtualenv and virtualenvwrapper and create a virtualenv called `ch` which can be used to install your Seattle Clearinghouse django installation.
+
+A convenient way to isolate your Python installations from each other is
+to use `virtualenv`, e.g. if you have specific version requirements for one
+project, but don't want to apply them system-wide or for other projects.
+[Virtualenv](https://virtualenv.pypa.io/en/latest/index.html) creates a
+separate environment that has its own installation directory and that doesn’t
+share libraries with other virtualenv environments. The
+[virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
+makes usage of virtualenv even easier. With the following instructions you
+can install and setup virtualenv and virtualenvwrapper and create a virtualenv
+called `ch` which can be used to install your Seattle Clearinghouse Django
+installation.
 
 ```sh
 $ # Install virtualenv and virtualenvwrapper
@@ -66,22 +88,27 @@ $ mkvirtualenv ch
 ```
 
 
-In the future you just have to issue the shell command `workon ch` to switch to the environment or `deactivate` if you want to leave it. You know that you are *in* the virtualenv when your shell prompt is prefixed by `(ch)`. **Note: This prefix is omitted in the shell snippets in the remainder of the document.**
+In the future you just have to issue the shell command `workon ch` to
+switch to the environment or `deactivate` if you want to leave it. You
+know that you are *in* the virtualenv when your shell prompt is prefixed by
+`(ch)`.
+**Note: This prefix is omitted in the shell snippets in the remainder of the document.**
+
+
 
 ### Install Django
-Django, the web framework the clearinghouse uses, is available at https://www.djangoproject.com/download/ or through a package manager. Please note that [SeattleTestbed/clearinghouse:master](https://github.com/seattletestbed/clearinghouse/tree/master) currently supports the 1.6 versions of Django only.
+
+Django, the web framework the clearinghouse uses, is available at https://www.djangoproject.com/download/ or through a package manager. Please note that [SeattleTestbed/clearinghouse:master](https://github.com/seattletestbed/clearinghouse/tree/master) currently supports the 1.8 versions of Django only.
 ```sh
-$ pip install django==1.6
+$ pip install django==1.8.18
 ```
 Depending on your actual OS and setup, this command might require `sudo` privileges.
 
-DJANGO 1.8 EXPERIMENTAL - If and only if you are using the experimental branch supporting Django 1.8, execute this instead:
-```sh
-$ pip install django==1.8.3
-```
 
 ### Install Mysqlclient
-[Mysqlclient](https://pypi.python.org/pypi/mysqlclient) is the [recommended](https://docs.djangoproject.com/en/1.9/ref/databases/#mysql-db-api-drivers) choice for using MySQL with Django.
+[Mysqlclient](https://pypi.python.org/pypi/mysqlclient) is the
+[recommended](https://docs.djangoproject.com/en/1.8/ref/databases/#mysql-db-api-drivers)
+choice for using MySQL with Django.
 
 ```sh
 $ pip install mysqlclient
@@ -95,7 +122,7 @@ $ pip install django-social-auth
 ```
 
 ## Setup OpenID and OAuth (optional)
-If you would like your Clearinghouse to support login not only through user accounts it manages itself, but ID/authentication services like OpenID and OAuth, or web services like Google, Facebook, or GitHub, take a look at the [social auth support instructions page](https://seattle.poly.edu/wiki/ClearinghouseSocialAuth).
+If you would like your Clearinghouse to support login not only through user accounts it manages itself, but ID/authentication services like OpenID and OAuth, or web services like Google, Facebook, or GitHub, take a look at the [social auth support instructions page](SocialAuth.md).
 
 ## Create MySQL databases
 
@@ -130,8 +157,14 @@ mysql> \q
 ```
 where you would replace the password strings with suitable ones.
 
+
+
 ## Deploying and running Clearinghouse
-In this section, we will deploy and run a copy of the Clearinghouse from your current user account in a temporary directory. This is mainly useful for testing. For an actual deployment, we recommend setting up a separate user account, and following the steps below as this user.
+
+In this section, we will deploy and run a copy of the Clearinghouse from
+your current user account in a temporary directory. This is mainly useful
+for testing. For an actual deployment, we recommend setting up a separate
+user account, and following the steps below as this user.
 
 <!-- * **Initial preparation** -->
 1. Make sure you are logged in with your clearinghouse account: `sudo -i -u ch`
@@ -155,7 +188,7 @@ In this section, we will deploy and run a copy of the Clearinghouse from your cu
     $ cd ~/clearinghouse/scripts
     $ python build.py ~/deployment/seattle
     ```
-1. The Seattle [backend scripts](https://seattle.poly.edu/wiki/SeattleBackend) require a set of public keys (called ''state keys'') to work. From the `seattle` runtime directory, make key generate script executable and run it:
+1. The Seattle [backend scripts](NodeStatesAndTransitions.md) require a set of public keys (called ''state keys'') to work. From the `seattle` runtime directory, make key generate script executable and run it:
 
     ```sh
     $ cd ~/deployment/seattle
@@ -389,10 +422,10 @@ If you try to access your Seattle Clearinghouse installation's website now, then
 
 ## Running start_clearinghouse_components.sh
 
-The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](https://seattle.poly.edu/wiki/SeattleBackend). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
+The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](NodeStatesAndTransitions.md). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
 components in the correct order, and also start Apache.
 
-**Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [ Developers' Notes](https://seattle.poly.edu/wiki/ClearinghouseDevelopersNotes) for details.**
+**Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [Developers' Notes](DevelopersNotes.md) for details.**
 
 Before running the script, make sure to edit the start script and change `CLEARINGHOUSE_USER`, `CLEARINGHOUSE_DIR`, `PYTHONPATH`,
 and `LOG_DIR` to the correct locations for your deployment. Also, create `LOG_DIR` if it doesn't already exist.
