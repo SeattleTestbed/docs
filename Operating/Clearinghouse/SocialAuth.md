@@ -3,12 +3,10 @@ In addition to its own user management, Clearinghouse can optionally handle Open
 
 ----
 
-----
-
 ## Setup OpenID and OAuth
 For OpenID and OAuth, Clearinghouse requires [Django Social Auth](https://github.com/omab/django-social-auth).  This application depends on:
- * [python-openid ](http://pypi.python.org/pypi/python-openid/)
- * [python-oauth2 ](https://github.com/simplegeo/python-oauth2/)
+ * [python-openid](http://pypi.python.org/pypi/python-openid/)
+ * [python-oauth2](https://github.com/simplegeo/python-oauth2/)
 
 Using something like `easy_install` will install these for you.
 ```sh
@@ -19,7 +17,7 @@ $ easy_install django-social-auth
 By default Gmail and Yahoo login are enabled.  If desired Windows Live, Github and Facebook login can be enabled with some additional steps.
 
  **Facebook**
-  * Register a new application at [Facebook App Creation ](http://developers.facebook.com/setup/)
+  * Register a new application at [Facebook App Creation](http://developers.facebook.com/setup/)
   * set App Domains in Facebook edit App page
 ``` 
 yoursite.com
@@ -36,7 +34,7 @@ FACEBOOK_API_SECRET               = ' your api secret key'
 
 
  **Windows Live**
- * Register a new application at [Live Connect Developer Center ](https://manage.dev.live.com/Applications/Index)
+ * Register a new application at [Live Connect Developer Center](https://manage.dev.live.com/Applications/Index)
  * Set redirect domain 
 ``` 
 https://yoursite.com
@@ -50,7 +48,7 @@ LIVE_CLIENT_SECRET              = ' your api secret key'
 
 
  **Github**
- * Register a new application at [Live GitHub Developers ](https://github.com/settings/applications/new)
+ * Register a new application at [Live GitHub Developers](https://github.com/settings/applications/new)
  * Set URL and callback URL
 ``` 
 https://yoursite.com
