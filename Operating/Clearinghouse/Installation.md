@@ -422,8 +422,15 @@ If you try to access your Seattle Clearinghouse installation's website now, then
 
 ## Running start_clearinghouse_components.sh
 
-The Seattle Clearinghouse includes a scripts that automatically search for, contact, and set up newly installed Seattle nodes. The relevant backend architecture is described [here](NodeStatesAndTransitions.md). If you have all the components of Seattle Clearinghouse (including Apache) configured, the script `/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh` will start up all the individual
-components in the correct order, and also start Apache.
+The Seattle Clearinghouse includes a scripts that automatically
+search for, contact, and set up newly installed Seattle nodes, and
+also synchronize accesses to the Clearinghouse XML-RPC interface
+("lock server"). The relevant backend architecture is described
+[here](NodeStatesAndTransitions.md). If you have all the components
+of Seattle Clearinghouse (including Apache) configured, the script
+`/home/ch/deployment/clearinghouse/deploymentscripts/start_clearinghouse_components.sh`
+will start up all the individual components in the correct order,
+and also start Apache.
 
 **Note to developers: If you are modfifying the Clearinghouse code, you might want to start its individual components manually. See the [Developers' Notes](DevelopersNotes.md) for details.**
 
@@ -442,9 +449,13 @@ export DJANGO_SETTINGS_MODULE="clearinghouse.website.settings"
 ...
 ```
 
-If one or more of the backend scripts (called `transition_STATEX_to_STATEY.py` for different state names) are already running, kill them before running `start_clearinghouse_components.sh`. 
+If one or more of the backend scripts (called `transition_STATEX_to_STATEY.py`
+for different state names, and `lockserver_daemon.py`) are already running,
+kill them before running `start_clearinghouse_components.sh`. 
 
-To run the script, run the following commands with the correct directory substituted for your deployment directory. This will start the script in a new `screen` session running as root.
+To run the script, run the following commands with the correct directory
+substituted for your deployment directory. This will start the script in
+a new `screen` session running as root.
 ```sh
 $ sudo -i
 $ screen
