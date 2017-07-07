@@ -135,7 +135,7 @@ For simplicity, make the database usernames correspond to the database names.
 Here's an example of creating a database and a user:
 
 ```sh
-$ mysql -u root -p
+$ sudo mysql -u root -p
 $ # This requires entering the database root password set during install!
 ```
 ```sql
