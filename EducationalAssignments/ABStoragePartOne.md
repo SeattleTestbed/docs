@@ -108,12 +108,6 @@ python build.py ~/path/to/build/dir
 
 Once the build script finished, `~/path/to/build/dir` contains a
 ready-to-use copy of the RepyV2 runtime!
-----
-(If you cannot install from source,
-[attachment:repyv2_commit_3499642.zip:wiki:EducationalAssignments/SecurityLayerPartOne
-zipfile] is a tarball including a pre-built runtime.)
-----
-
 
 
 Use the command found below in order to run Repy files:
@@ -124,10 +118,6 @@ Please note Repy files end in extension `.r2py`.
 
 In order to test whether or not these steps worked, please copy and paste
 the code found below for the sample security layer and sample attack.
-Where you can find the sample security layer and sample attack:
-
- * Sample security layer: [wiki:EducationalAssignments/ABStoragePartOne#Abasicandinadequatedefense BasicAndInadequateDefense] 
- * Sample attack layer:  [wiki:EducationalAssignments/ABStoragePartOne#Testingyoursecuritylayer Testingyoursecuritylayer]
 
 If you got an error, please go through the troubleshooting section found below.
 
@@ -140,7 +130,8 @@ have occurred:
 
 Repy is a subset of Python, but its syntax is slightly different.  For
 example, Python's `print` statement cannot be used; Repy has `log` for
-that. For a full list of acceptable syntax please see wiki:RepyV2API.
+that. For a full list of acceptable syntax please see
+[https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md]
 
  * command line errors:
 
@@ -160,13 +151,6 @@ PowerShell.  You can open a new terminal by going to start, search, type
 powershell.  If you downloaded the Linux version you must use a Linux OS
 and Linux terminal.  
 
-AR: This is obviously outdated.
-Advanced troubleshooting:
-
-To run the unit test, which will automatically tell you if you have errors
-with your installation please see:
-
- * [wiki:RepyV2CheckoutAndUnitTests]
 -->
 
 
@@ -177,7 +161,7 @@ them.  The following tutorials provide this information.
 
  * Python tutorial: **[http://docs.python.org/tutorial/]**
  * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
- * list of RepyV2 API calls: **[wiki:RepyV2API]**
+ * list of RepyV2 API calls: **[https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md]**
 
 
 
@@ -303,7 +287,7 @@ myfile=openfile("look.txt",True)
 ```
 
 look.txt is a valid file name, however Look.txt and LOOK.TXT are not.
-Examples of other invalid files names are, look@.txt, look/.txt, and 
+Examples of other invalid files names are, _look.txt, look/.txt, and 
 look().txt. Essentially all non-alphanumeric characters are not allowed.
 
 ### Running your security layer
@@ -319,7 +303,8 @@ Make sure you went through the "How to get RepyV2" section!
 # Notes and Resources
 ----
  
- * For a complete list of syntax in Repyv2 please visit: **[wiki:RepyV2API]**
+ * For a complete list of syntax in Repyv2 please visit:
+ * **[https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md]**
  
  * The following link is an excellent source for information about security layers: **[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]**
 
