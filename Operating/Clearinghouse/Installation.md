@@ -30,7 +30,8 @@ $ sudo adduser ch
 ## Install Dependencies
 
 Clearinghouse requires at least the following software to be installed:
- * [Python](http://www.python.org/) in version 2.7 -- the language Seattle Clearinghouse is written in
+ * [Python](http://www.python.org/) in version 2.7 (use the latest release) --
+   the language Seattle Clearinghouse is written in 
  * [Pip](https://pypi.python.org/pypi/pip) -- Recommended tool for installing python packages.
  * [mysqlclient](https://pypi.python.org/pypi/mysqlclient) -- the python mysql interface
  * [MySQL](http://www.mysql.com/) -- the database
