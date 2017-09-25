@@ -362,12 +362,15 @@ Depending on you configuration of Apache, you may want to put below code in a fi
 
     # Run the Django app as the clearinghouse user
     # Use python-path option of the `WSGIDaemonProcess` directiv to tell
-    # WSGI where your virtualenv is at
+    # WSGI where your virtualenv is at.
+    # Add `python-home=....` for you virtualenv if required for the Python bin.
+    # Find the path from within your virtualenv using
+    # `python -c 'import sys; print(sys.prefix)'`
     WSGIDaemonProcess chdjango user=ch processes=5 threads=10 python-path=/home/ch/deployment/clearinghouse:/home/ch/.virtualenvs/ch/lib/python2.7/site-packages
     WSGIProcessGroup chdjango
 
     # Point the URL https://ch.loc/ to the Django app
-    WSGIScriptAlias / /home/ch/deployment/clearinghouse/wsgi/wsgi.py
+    WSGIScriptAlias / /home/ch/deployment/clearinghouse/wsgi/wsgi.py process-group=chdjango
 
     <Directory /home/ch/deployment/clearinghouse/wsgi>
         <Files wsgi.py>
