@@ -257,6 +257,7 @@ user account, and following the steps below as this user.
   python website/manage.py makemigrations
   python website/manage.py migrate
   ```
+  
 1. *For testing purposes*, start the Django development webserver. This lets you check that your configs etc. have no syntax errors, and the Django app can be started. **Note: To be able to further interact with the Clearinghouse (e.g. create user accounts and log in), you must set up Apache web server.**
 
   ```sh
@@ -408,15 +409,6 @@ Be sure to restart Apache after you are done changing the configuration files.
 ```sh
 $ sudo service apache2 restart
 ```
-If Apache gives the error:
-```
-Invalid command 'SSLEngine', perhaps misspelled or defined by a module not included in the server configuration
-```
-
-then you need to enable SSL by running:
-```sh
-$ sudo a2enmod ssl
-```
 
 If you try to access your Seattle Clearinghouse installation's website now, then creating user accounts, logging in etc. will not function correctly. These tasks require a few management scripts to run in the background. We will start them in the next section.
 
@@ -480,3 +472,50 @@ installation that you can access at https://ch.loc/html/login
 ## Monitoring
 
 ## Log rotation
+
+
+------
+
+
+## Troubleshooting
+This section collects a few error messages and typical fixes for issues
+that you might encounter when setting up a Clearinghouse.
+
+### Enable Apache's SSL Engine
+If on a restart Apache gives the error:
+```
+Invalid command 'SSLEngine', perhaps misspelled or defined by a module not included in the server configuration
+```
+
+then you need to enable SSL by running:
+```sh
+$ sudo a2enmod ssl
+```
+
+### UTF-8 Encoding In Terminal Session And Database
+When using `utf-8` as the character encoding in your terminal, the migration scripts
+for the Clearinghouse will also assume UTF-8, but the MySQL/MariaDB databases are still
+created with ASCII encoding. This yields a warning message when running `makemigrations` (1),
+and causes a persistent error when running `migrate`:
+
+```
+(1)
+control.ActionLogVesselDetails.node_port: (fields.W122) 'max_length' is ignored when used with IntegerField
+	HINT: Remove 'max_length' from field
+
+(2)
+django.db.utils.OperationalError: (1071, 'Specified key was too long; max key length is 767 bytes')
+```
+
+Making the databases use UTF-8 character encoding (as suggested [here](https://stackoverflow.com/questions/29782081/django-db-utils-operationalerror-1071-specified-key-was-too-long-max-key-le))
+solves the issue:
+
+```
+MariaDB [clearinghouse]> alter database clearinghouse character set utf8;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [clearinghouse]> alter database keydb character set utf8;
+Query OK, 1 row affected (0.00 sec)
+```
+
+Run `manage.py migrate` twice now, the second pass will succeed.
