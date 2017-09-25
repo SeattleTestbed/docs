@@ -4,7 +4,6 @@ This document explains how to do a fresh install of the Seattle Clearinghouse po
 a machine that is running a Debian-like Linux operating system such as Ubuntu.
 
 You might want to take a look at the [Seattle Infrastructure Architecture](../../UnderstandingSeattle/SeattleInfrastructureArchitecture.md)
-
 documentation before proceeding. This also mentions the other two
 infrastructure components of Seattle Testbed, the Custom Installer
 Builder and the software update server, and talk about their interfacing
