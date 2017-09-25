@@ -189,7 +189,13 @@ Note:
     python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py 
     
     """ 
-
+TYPE="type"
+ARGS="args"
+RETURN="return"
+EXCP="exceptions"
+TARGET="target"
+FUNC="func"
+OBJC="objc"
 
 class ABFile():
   def __init__(self,filename,create):
@@ -201,8 +207,8 @@ class ABFile():
 
     # make the files and add 'SE' to the readat file...
     if create:
-      self.Afile = openfile(self.Afn)
-      self.Bfile = openfile(self.Bfn)
+      self.Afile = openfile(self.Afn,create)
+      self.Bfile = openfile(self.Bfn,create)
       self.Afile.writeat('SE',0)
 
 
