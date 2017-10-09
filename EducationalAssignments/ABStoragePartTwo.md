@@ -1,7 +1,7 @@
 
 # Security layer testing and penetration
 
-In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be completed after [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
+In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be completed after [wiki:EducationalAssignments/ABStoragePartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 
 
@@ -20,11 +20,11 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 
 Within the context of this assignment these design paradigms translate to:
 
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, If a user tries to overwrite data and append new data in the same write, and has permissions to write, but not append, then the corresponding data would be overwritten, but would stop at the end of the file and would not append anything.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, if an app tries to read data from a valid file, this must succeed as per normal and must not be blocked. All situations that are not described above must match that of the underlying API.
 
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. This means you should not do things like re-read the file before each write.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. For example, keeping a complete copy of every file on disk in memory would be forbidden.
 
- * Security: The attacker should not be able to circumvent the security layer. Hence, if the data can be written without permission, the security is compromised.
+ * Security: The attacker should not be able to circumvent the security layer. Hence, if the attacker can cause an invalid file to be read or can write to a valid file, then the security is compromised, for example.
 
 You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is okay if multiple tests of yours breaking a student's reference monitor, but you will not gain additional points.
 
@@ -32,7 +32,7 @@ You will submit a zip file containing all of the tests you have created.   You w
 
 ## Prerequisites
 
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/PermissionsPartOne#GettingPythonRepy PermissionsPartOne] for a tutorial on how to get them.  
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/ABStoragePartOne#GettingPythonRepy ABStoragePartOne] for a tutorial on how to get them.
 
 
 ### Helpful links
@@ -62,7 +62,7 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 
 ### Examples of tests
-Test cases are briefly described in [wiki:EducationalAssignments/PermissionsPartOne PermissionsPartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described in [wiki:EducationalAssignments/ABStoragePartOne ABStoragePartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 #### Test case 1:
 
 ```
