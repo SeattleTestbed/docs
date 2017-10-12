@@ -66,30 +66,24 @@ Test cases are briefly described in [wiki:EducationalAssignments/ABStoragePartOn
 #### Test case 1:
 
 ```
-# Open a file
-myfile=openfile("look.txt",True)
-myfile.setwrite(True)
-myfile.setappend(True)
+# New File Operation
 
- 
-myfile.writeat("SECURITY",0)
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+removefile("testfile.txt.b")
 
-# Attempt to read data from the file
-try:
-  myfile.readat(1,0)
- 
-# It raised an Exception (as it was supposed to):
-except ValueError:
-  # The security layer correctly blocked the read!!!
-  pass
- 
-# No Exception was raised!
-else:
-  log("Read without permission")
- 
-finally:
-  # Close the file after our attempt.
-  myfile.close()
+# Open File Function Call
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+
+# Empty/New File should have contents 'SE' satisfying the requirement
+
+assert('SE' == myfile.readat(2,0))
+
+#Close the file
+myfile.close()
+
 ```
 #### Code analysis
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
@@ -97,12 +91,12 @@ It is important to keep in mind that only lowercase file names are allowed.  So 
 ```
 
 # Open a file
-myfile=openfile("look.txt",True)
+myfile=ABopenfile("testfile.txt",True)
 
 ```
-look.txt is a valid file name, however Look.txt is not.  Examples of other invalid files names are, look@.txt, look/.txt, and look().txt.  Essentially all non-alphanumeric characters are not allowed.  
+testfile.txt is a valid file name, however Testfile.txt is not.  Examples of other invalid files names are, testfile@.txt, testfile/.txt, and testfile().txt.  Essentially all non-alphanumeric characters are not allowed.
 
-In this case we are verifying the security of the reference monitor.  This code attempts to append data without the proper permissions to do so. First the file is opened using `myfile=openfile("look.txt",True)`. Next `myfile.readat(1,0)` tries to read from the file. The 0 refers to an offset of zero and 1 refers to number of characters being read. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+In this case we are verifying the security of the reference monitor. This code attempts to make a new file and write some valid data. The contents of the file is viewed at various instances, one being as soon as a new file is opened and the other being after making a valid write before closing the file. This code attempts to append data without the proper permissions to do so. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True). `Next myfile.readat(2,0) tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned with its call and pass if the statement made is true and false if the statement made is false.Then finally: statement will always run, closing the file.
 
 #### Test case 2:
 
