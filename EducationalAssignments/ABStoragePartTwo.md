@@ -32,7 +32,7 @@ You will submit a zip file containing all of the tests you have created.   You w
 
 ## Prerequisites
 
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [ https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md ] for a tutorial on how to get them.
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] for a tutorial on how to get them.
 
 
 ### Helpful links
