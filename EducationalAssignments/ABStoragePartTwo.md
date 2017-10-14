@@ -77,13 +77,16 @@ removefile("testfile.txt.b")
 # Open File Function Call
 myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 
-# Empty/New File should have contents 'SE' satisfying the requirement
-
-assert('SE' == myfile.readat(2,0))
-
-#Close the file
-myfile.close()
-
+try:
+ # Empty/New File should have contents 'SE' satisfying the requirement
+ assert('SE' == myfile.readat(2,0))
+ # Close the file:
+ myfile.close()
+except:
+ myfile.close()
+ # Error Handle or Failure Condition
+ log("Empty file is not handled properly!")
+ 
 ```
 #### Code analysis
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
@@ -114,7 +117,7 @@ removefile("testfile.txt.b")
 myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 
 # Write valid data to the file
-myfile.writeat("Stest12345E",0)
+myfile.writeat("StestE",0)
 
 #Close the file
 myfile.close()
@@ -124,16 +127,16 @@ myfile.close()
 myfile=ABopenfile("testfile.txt",True)
 
 # Read the file to check the contents
-assert('SE' == myfile.readat(None,0))
+assert('SE' == myfile.readat(6,0))
 
 #Close the file
 myfile.close()
 ```
 #### Code analysis
 
-In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"abcd"` to the file directly.  We assume that secure data is written in the file on the first four offset values. First the file is opened using `myfile=openfile("look.txt",True)`, and the append and read permissions are enabled. Next `myfile.writeat("abcd",0)` tries to write `"abcd"` to the file. The 0 refers to an offset of zero. The try: statement tells the program to "try" this case. Notice that the except is executed if an error is raised. If the security layer fails the test then the else statement is executed. The finally: statement will always run, closing the file.  
+In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"StestE"` to the file and verify the contents.  We assume that valid data is written in the file from the zero offset. First the file is opened using `myfile=ABopenfile("testfile.txt",True)`. Next `myfile.writeat("StestE",0)` tries to write `"StestE"` to the file. Then `myfile.readat(6,0)`  tries to read the contents of the file. The 6 refers to an byte size of 6 characters and 0 refers to the offset 0 in the file. If the security layer fails the test then the assert call raises exception to be caught by except statement to show the error. The final statement which will always run, closing the file.
 
-If this case produces anything other than "Write okay", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from reading the secure data not overwriting it.
+If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from being read or written.
 
 #### More information on: Try, Except, Else, Finally
 The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit: 
