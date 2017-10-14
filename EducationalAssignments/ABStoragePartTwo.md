@@ -32,7 +32,7 @@ You will submit a zip file containing all of the tests you have created.   You w
 
 ## Prerequisites
 
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to [wiki:EducationalAssignments/ABStoragePartOne#GettingPythonRepy ABStoragePartOne] for a tutorial on how to get them.
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [ https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md ] for a tutorial on how to get them.
 
 
 ### Helpful links
@@ -62,7 +62,7 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 
 ### Examples of tests
-Test cases are briefly described in [wiki:EducationalAssignments/ABStoragePartOne ABStoragePartOne] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described in [ github: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md ] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 #### Test case 1:
 
 ```
@@ -99,7 +99,7 @@ myfile=ABopenfile("testfile.txt",True)
 ```
 testfile.txt is a valid file name, however Testfile.txt is not.  Examples of other invalid files names are, testfile@.txt, testfile/.txt, and testfile().txt.  Essentially all non-alphanumeric characters are not allowed.
 
-In this case we are verifying the security of the reference monitor. This code attempts to make a new file and write some valid data. The contents of the file is viewed at various instances, one being as soon as a new file is opened and the other being after making a valid write before closing the file. This code attempts to append data without the proper permissions to do so. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True)`.Next `myfile.readat(2,0)` tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned with its call and pass if the statement made is true and false if the statement made is false.Then finally: statement will always run, closing the file.
+In this case we are verifying the security of the reference monitor. This code attempts to make a new file and write some valid data. The contents of the file is viewed once the new file is opened. This code attempts to check the contents of a new valid file created through reference monitor. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True)`.Next `myfile.readat(2,0)` tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned with its call and pass if the statement made is true and false if the statement made is false.Then finally: statement will always run, closing the file.
 
 #### Test case 2:
 
@@ -136,7 +136,7 @@ myfile.close()
 
 In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"StestE"` to the file and verify the contents.  We assume that valid data is written in the file from the zero offset. First the file is opened using `myfile=ABopenfile("testfile.txt",True)`. Next `myfile.writeat("StestE",0)` tries to write `"StestE"` to the file. Then `myfile.readat(6,0)`  tries to read the contents of the file. The 6 refers to an byte size of 6 characters and 0 refers to the offset 0 in the file. If the security layer fails the test then the assert call raises exception to be caught by except statement to show the error. The final statement which will always run, closing the file.
 
-If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should only stop a file from being read or written.
+If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should not stop a file from being read or written.
 
 #### More information on: Try, Except, Else, Finally
 The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit: 
