@@ -127,10 +127,15 @@ myfile.close()
 myfile=ABopenfile("testfile.txt",True)
 
 # Read the file to check the contents
-assert('SE' == myfile.readat(6,0))
+try:
+ assert('StestE' == myfile.readat(6,0))
+ #Close the file
+ myfile.close()
+except:
+ #Close the file
+ myfile.close()
+ log("Valid Data write to a file is unsuccessfull!")
 
-#Close the file
-myfile.close()
 ```
 #### Code analysis
 
