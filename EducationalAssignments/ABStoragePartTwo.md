@@ -32,7 +32,7 @@ You will submit a zip file containing all of the tests you have created.   You w
 
 ## Prerequisites
 
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] for a tutorial on how to get them.
+This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [ github.com: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] for a tutorial on how to get them.
 
 
 ### Helpful links
@@ -62,7 +62,7 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 
 ### Examples of tests
-Test cases are briefly described in [github: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described at [github: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 #### Test case 1:
 
 ```
