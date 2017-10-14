@@ -96,31 +96,38 @@ myfile=ABopenfile("testfile.txt",True)
 ```
 testfile.txt is a valid file name, however Testfile.txt is not.  Examples of other invalid files names are, testfile@.txt, testfile/.txt, and testfile().txt.  Essentially all non-alphanumeric characters are not allowed.
 
-In this case we are verifying the security of the reference monitor. This code attempts to make a new file and write some valid data. The contents of the file is viewed at various instances, one being as soon as a new file is opened and the other being after making a valid write before closing the file. This code attempts to append data without the proper permissions to do so. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True). `Next myfile.readat(2,0) tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned with its call and pass if the statement made is true and false if the statement made is false.Then finally: statement will always run, closing the file.
+In this case we are verifying the security of the reference monitor. This code attempts to make a new file and write some valid data. The contents of the file is viewed at various instances, one being as soon as a new file is opened and the other being after making a valid write before closing the file. This code attempts to append data without the proper permissions to do so. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True)`.Next `myfile.readat(2,0)` tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned with its call and pass if the statement made is true and false if the statement made is false.Then finally: statement will always run, closing the file.
 
 #### Test case 2:
 
 ```
-# Open a file
-myfile=openfile("look.txt",True)
+# WRITE OPERATION
+# New File Operation
 
-myfile.setappend(True)
-myfile.setread(True) 
-myfile.writeat("abcd",0)
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+removefile("testfile.txt.b")
 
-try:
-  output=myfile.readat(4,0)
-# It raised an Exception :
-except ValueError:
-  log("Security layer not accurate")
- 
-else:
-  # No Exception was raised (as it was supposed to)
-  pass
- 
-finally:
-  # Close the file after our attempt.
-  myfile.close()
+# Open File Function Call
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+
+# Write valid data to the file
+myfile.writeat("Stest12345E",0)
+
+#Close the file
+myfile.close()
+
+# READ OPERATION
+# Reopen file again to read
+myfile=ABopenfile("testfile.txt",True)
+
+# Read the file to check the contents
+assert('SE' == myfile.readat(None,0))
+
+#Close the file
+myfile.close()
 ```
 #### Code analysis
 
