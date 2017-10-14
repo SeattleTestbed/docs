@@ -70,9 +70,9 @@ Test cases are briefly described at [github: SeattleTestbed/docs/blob/master/Edu
 
 # Clean up of existing file
 if "testfile.txt.a" in listfiles():
-removefile("testfile.txt.a")
+ removefile("testfile.txt.a")
 if "testfile.txt.b" in listfiles():
-removefile("testfile.txt.b")
+ removefile("testfile.txt.b")
 
 # Open File Function Call
 myfile=ABopenfile("testfile.txt",True)  #Create an AB file
