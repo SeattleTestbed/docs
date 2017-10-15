@@ -26,7 +26,7 @@ Within the context of this assignment these design paradigms translate to:
 
  * Security: The attacker should not be able to circumvent the security layer. Hence, if the attacker can cause an invalid file to be read or can write to a valid file, then the security is compromised, for example.
 
-You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is okay if multiple tests of yours breaking a student's reference monitor, but you will not gain additional points.
+You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is good if multiple tests of yours break a student's reference monitor, but you gain the same number of tests whether one or more tests break the layer.
 
 
 
@@ -170,6 +170,8 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
  * [repy_v2/benchmarking-support/all-logsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py) is security layer that performs logging functions.
 
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
+ 
+ * Note that you should not assume that any files exist in your directory.  You should create any files (e.g., testfile.txt) yourself in your test program.
 
 
 
