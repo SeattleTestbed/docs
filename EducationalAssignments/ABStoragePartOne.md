@@ -71,16 +71,17 @@ write to a valid file, then the security is compromised, for example.
 
 ### Getting Python
 ----
-Please note you must have Python 2.5, 2.6, or 2.7 to complete this
+Please note you must have Python 2.7 to complete this
 assignment. Instructions on how to get Python for Windows can be found
-[InstallPythonOnWindows here].  If you are using Linux or a Mac it is
+[on the official Python download page](https://www.python.org/downloads/).
+If you are using Linux or a Mac it is
 likely you already have Python. In order to verify this, simply open a
 terminal and type ```python```.  Please check its version on the initial
 prompt.
 
 **Note:**If you are using Windows, you will need python in your path
-variables.  A tutorial on adding variables to your path in Windows can be
-found at [http://www.computerhope.com/issues/ch000549.htm]
+variables.  The Python Windows installer can do this for you.
+
 
 ### Getting RepyV2
 ----
@@ -159,9 +160,9 @@ and Linux terminal.
 Now that you have Repy and Python, you may need a refresher on how to use
 them.  The following tutorials provide this information.
 
- * Python tutorial: **[http://docs.python.org/tutorial/]**
- * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
- * list of RepyV2 API calls: **[https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md]**
+ * Official [Python tutorial](http://docs.python.org/tutorial/)
+ * [Differences between RepyV2 and Python](../Programming/PythonVsRepyV2.md)
+ * List of [RepyV2 API calls](../Programming/RepyV2API.md)
 
 
 
