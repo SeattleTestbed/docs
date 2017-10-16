@@ -1,7 +1,7 @@
 
 # Security layer testing and penetration
 
-In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately however it is recommended that this assignment be completed after [wiki:EducationalAssignments/ABStoragePartOne].  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
+In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately, but it is recommended that this assignment be completed after [Part One](ABStoragePartOne.md).  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 
 
@@ -32,15 +32,17 @@ You will submit a zip file containing all of the tests you have created.   You w
 
 ## Prerequisites
 
-This assignment assumes you have Python2.5 or Python2.6, Repy and RepyV2 installed on your computer.  If you don't already have them please go to #GettingPythonRepy at  [ github.com: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] for a tutorial on how to get them.
+This assignment assumes you have both the latest Python 2.7 and RepyV2
+installed on your computer. See [the previous assignment](ABStoragePartOne.md)
+for information on how to get them.
 
 
 ### Helpful links
 ----
 The following links will aid students in becoming comfortable with Python, Repy and seattle:
- * Python tutorial: **[http://docs.python.org/tutorial/]**
- * Seattle tutorial: **[https://seattle.poly.edu/wiki/PythonVsRepy]**
- * list of RepyV2 syntax: **[wiki:RepyV2API]**
+ * Official [Python tutorial](http://docs.python.org/tutorial/)
+ * [Differences between RepyV2 and Python](../Programming/PythonVsRepyV2.md)
+ * List of [RepyV2 API calls](../Programming/RepyV2API.md)
 
 
 ## Testing security layers
