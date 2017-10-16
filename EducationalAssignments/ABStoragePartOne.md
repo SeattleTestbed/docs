@@ -331,10 +331,8 @@ testing if Repy installed correctly.
 ----
 For extra credit, program that keeps all old versions of files and allows
 read from any of them.  Writing to any old file creates a new version of
-that file.  The
-size limits even if it is closed and reopened again. The file size limit
-should stay after the program is terminated and restarted Do not submit
-this code inside your assignment. Submit a separate copy for extra credit.
+that file.
+Do not submit this code inside your assignment. Submit a separate copy for extra credit.
 
 
 
