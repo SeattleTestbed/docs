@@ -32,7 +32,7 @@ However, you must permit the application to write information into the file.
 The application should not be blocked from performing any writeat() operation, 
 because when it chooses it may later write 'S' at the start and 'E' at the 
 end.  Note that checking if the file starts with 'S' and ends with 'E' is
-only performed at the end.
+only performed when close is called.
 
 You may store two copies of A/B files on disk, one that is the valid backup
 (which is used for reading) and the other that is written to.  When an
