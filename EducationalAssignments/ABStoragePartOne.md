@@ -103,14 +103,21 @@ git clone https://github.com/SeattleTestbed/repy_v2.git
 
 # Prepare a build directory, and build into it
 cd repy_v2/scripts
-mkdir ~/path/to/build/dir
+# Create build target directory; name it as you wish!
+mkdir -p ~/PATH/TO/BUILD/DIR
 python initialize.py
-python build.py ~/path/to/build/dir
+python build.py ~/PATH/TO/BUILD/DIR
 ```
 
-Once the build script finished, `~/path/to/build/dir` contains a
+Once the build script finished, the build target directory contains a
 ready-to-use copy of the RepyV2 runtime!
 
+
+Change into the build target dir,
+
+```
+cd ~/PATH/TO/BUILD/DIR
+```
 
 Use the command found below in order to run Repy files:
 
