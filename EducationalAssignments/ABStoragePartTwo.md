@@ -50,9 +50,9 @@ The following links will aid students in becoming comfortable with Python, Repy 
 ### Hypothesis, test case, counter example
 
 The goal of a good tester is to test hypotheses.  A hypothesis is just a scientific way of asking a question.  The hypothesis of this assignment is "This security layer is well designed."  The questions you will ask when running your test cases will always be the same
-       
+
  * "Is this reference monitor secure?"
- 
+
  * "Does this reference monitor hamper performance?"
 
  * "Does this reference monitor prevent actions that should be allowed?"
@@ -88,7 +88,7 @@ except:
  myfile.close()
  # Error Handle or Failure Condition
  log("Empty file is not handled properly!")
- 
+
 ```
 #### Code analysis
 It is important to keep in mind that only lowercase file names are allowed.  So  in the above code, specifically:
@@ -146,7 +146,7 @@ In this case we are verifying the accuracy of the reference monitor.  This code 
 If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should not stop a file from being read or written.
 
 #### More information on: Try, Except, Else, Finally
-The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit: 
+The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit:
 
  * [http://docs.python.org/tutorial/errors.html]
  * [http://wiki.python.org/moin/HandlingExceptions]
@@ -158,13 +158,13 @@ When writing your own tests it is important to test for a complete set of possib
 
  * threading
  * writing to multiple files
- 
+
 And more!  Remember a good security layer can't be broken by anyone!  Which is all part of the fun!  It's about solving a puzzle.  First you make the puzzle - write the security layer, then you solve the puzzle - try to bypass it.  If your puzzle is "good enough", no one will be able to break it, no matter what.  
 
 
 ## Notes and Resources
 ----
-   
+
  * The following link is an excellent source for information about security layers: http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf
 
  * [repy_v2/benchmarking-support/allnoopsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py) is an empty security layer that doesn't perform any operations.
@@ -172,7 +172,7 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
  * [repy_v2/benchmarking-support/all-logsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/all-logsec.py) is security layer that performs logging functions.
 
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
- 
+
  * Note that you should not assume that any files exist in your directory.  You should create any files (e.g., testfile.txt) yourself in your test program.
 
 
@@ -193,18 +193,22 @@ Create a directory that the security layers will write their files into.   You n
 
 Then you can type the following in the bash shell to execute the testcases with the reference monitors:
 ```
-for referencemonitor in reference_monitor_*; do for testcase in [poy_email_id]_*; do rm testdirectory/*; cp $referencemonitor $testcase encasementlib.repy; python repy.py [path to files and arguments] encasementlib.repy $referencemonitor $testcase; done; done
+for referencemonitor in reference_monitor_*; do for testcase in <net_id>_*; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase; done; done
 ```
-
 This will print out the output from each program.
+
+If you want to spot the referencemonitor that failed during the test run, you could add debug print statements during run as follows,
+```
+for referencemonitor in reference_monitor_*; do echo $referencemonitor under test; for testcase in <net_id>_*; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase; done; done
+```
+This will print out the name of each reference monitor before it starts executing the testcases against it.
 
 If you are a Windows user and you create your own solution that does the same thing, please post it on the forum.
 
 
 
-
 ## What to turn in?
 ----
- 
+
  * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your poly email id in lowercase.   For example: jcappos_securitytest1.repy justincappos_goodaccuracytest.repy are both valid names.
  * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  jcappos_run_twice_metadata_removal.repy jcappos_run_once_threading_hack.repy.
