@@ -31,7 +31,8 @@ the first or last characters, then the file is considered invalid.
 However, you must permit the application to write information into the file.  
 The application should not be blocked from performing any writeat() operation, 
 because when it chooses it may later write 'S' at the start and 'E' at the 
-end.  
+end.  Note that checking if the file starts with 'S' and ends with 'E' is
+only performed when close is called.
 
 You may store two copies of A/B files on disk, one that is the valid backup
 (which is used for reading) and the other that is written to.  When an
@@ -102,14 +103,21 @@ git clone https://github.com/SeattleTestbed/repy_v2.git
 
 # Prepare a build directory, and build into it
 cd repy_v2/scripts
-mkdir ~/path/to/build/dir
+# Create build target directory; name it as you wish!
+mkdir -p ~/PATH/TO/BUILD/DIR
 python initialize.py
-python build.py ~/path/to/build/dir
+python build.py ~/PATH/TO/BUILD/DIR
 ```
 
-Once the build script finished, `~/path/to/build/dir` contains a
+Once the build script finished, the build target directory contains a
 ready-to-use copy of the RepyV2 runtime!
 
+
+Change into the build target dir,
+
+```
+cd ~/PATH/TO/BUILD/DIR
+```
 
 Use the command found below in order to run Repy files:
 
@@ -330,8 +338,8 @@ testing if Repy installed correctly.
 # Extra Credit
 ----
 For extra credit, program that keeps all old versions of files and allows
-read from any of them.  Writing to any old file creates a new version of
-that file.
+read from any of them.  Writing to any old file creates a new (empty) version
+of that file.
 Do not submit this code inside your assignment. Submit a separate copy for extra credit.
 
 
