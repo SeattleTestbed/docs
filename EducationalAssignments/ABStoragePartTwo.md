@@ -189,7 +189,7 @@ Find bugs in the extra credit reference monitors given the altered threat model.
 
 If you are using Mac or Linux, you can do something like the following:
 
-Create a directory that the security layers will write their files into.   You need to run repy with only access to this directory.   You can write a test program that does log(str(listfiles())) to see if you are in the right place.
+Have all the reference monitors to test and the test cases inside the same directory where the repy.py file exists.
 
 Then you can type the following in the bash shell to execute the testcases with the reference monitors:
 ```
