@@ -25,15 +25,16 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 
 
 
-## Sample implementation of the readat function
-```
+## Sample implementation of the close function
 
-  def readat(self,bytes,offset):
-    return self.file.readat(bytes,offset)
+```
+def close(self):
+  self.Afile.close()
+  self.Bfile.close()
 ```
 
 ### Code Analysis
-Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), if a user attempts to read from a file without read permissions, a ValueError should be raised.  In the code above, instead of raising a ValueError when readat is called without read permissions, readat will read the file and return the contents.  This is a security issue.
+Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), When close() is called on the file, if a file is not valid, it is discarded. If both files are valid, the older one is discarded. In the code above, there exists no logic to verify the content of the file and perform validation. Further file read would lead to the invalid file being read or valid file being written to. This is a security issue.
 
 
 
