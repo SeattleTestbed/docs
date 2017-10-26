@@ -189,7 +189,7 @@ Find bugs in the extra credit reference monitors given the altered threat model.
 
 Create a directory that the security layers will write their files into. You need to run repy with only access to this directory. You can write a test program that does `log(str(listfiles()))` to see if you are in the right place.
 
-Then, type the following commands to execute the testcases with the reference monitors. These commands assume that the names of all testcases start with your NetID:
+Have all the reference monitors to test and the test cases inside the same directory where the repy.py file exists.
 
 * In the bash shell on Mac and Linux:
 ```
@@ -227,5 +227,5 @@ This will print out the name of each reference monitor before it starts executin
 ## What to turn in?
 ----
 
- * Turn in the test cases used to attack a given reference monitor in a zip file. The name of each testcase must start with your NetID in lowercase. For example: abc123_securitytest1.repy abc123_goodaccuracytest.repy are both valid names.
- * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file. Note that in this case, you can expect that your code is run more than once. In the name of the file, say if it needs to be run multiple times. For example:  abc123_run_twice_metadata_removal.repy abc123_run_once_threading_hack.repy
+ * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your netid in lowercase.   For example: abc123_securitytest1.r2py abc123_goodaccuracytest.r2py are both valid names.
+ * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  abc123_run_twice_metadata_removal.r2py abc123_run_once_threading_hack.r2py.
