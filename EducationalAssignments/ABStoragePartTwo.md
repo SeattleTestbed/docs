@@ -227,5 +227,5 @@ This will print out the name of each reference monitor before it starts executin
 ## What to turn in?
 ----
 
- * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your poly email id in lowercase.   For example: jcappos_securitytest1.r2py justincappos_goodaccuracytest.r2py are both valid names.
- * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  jcappos_run_twice_metadata_removal.r2py jcappos_run_once_threading_hack.r2py.
+ * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your netid in lowercase.   For example: abc123_securitytest1.r2py abc123_goodaccuracytest.r2py are both valid names.
+ * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  abc123_run_twice_metadata_removal.r2py abc123_run_once_threading_hack.r2py.
