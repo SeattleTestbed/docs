@@ -36,7 +36,7 @@ def close(self):
 ### Code Analysis
 Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), When close() is called on the file, if a file is not valid, it is discarded. If both files are valid, the older one is discarded. In the code above, there exists no logic to verify the content of the file and perform validation. Further file read would lead to the invalid file being read or valid file being written to. This is a security issue.
 
-## Case 2: Sample implementation of the open call - initialize function
+## Case 2: Sample implementation of the open call - initialize function - False flag
 
 ```
 if create:
@@ -47,6 +47,10 @@ if create:
 
 ### Code Analysis
 Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), Any valid operation should not be blocked. When open() is called with flag False, it should be handled. In the code above, there exists no logic to perform file open with flag False. Further file read/write would lead to error thrown as the file handle would not be created. This is an accuracy issue.
+
+## Case 3: Sample implementation of the open call - initialize function - New file 'SE' write
+
+Similarly, when flag is True and the file exists already (Flag would be ignored, look at Repy documentation), every time 'SE' write would be performed to a already existing file. This behavior does not abide to the rules mentioned where 'SE' write should happen only to a file that did not exist before.
 
 
 ## What to turn in?
