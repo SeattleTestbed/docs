@@ -25,7 +25,7 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 
 
 
-## Sample implementation of the close function
+## Case 1: Sample implementation of the close function
 
 ```
 def close(self):
@@ -36,6 +36,17 @@ def close(self):
 ### Code Analysis
 Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), When close() is called on the file, if a file is not valid, it is discarded. If both files are valid, the older one is discarded. In the code above, there exists no logic to verify the content of the file and perform validation. Further file read would lead to the invalid file being read or valid file being written to. This is a security issue.
 
+## Case 2: Sample implementation of the open call - initialize function
+
+```
+if create:
+  self.Afile = openfile(self.Afn,create)
+  self.Bfile = openfile(self.Bfn,create)
+  self.Afile.writeat('SE',0)
+```
+
+### Code Analysis
+Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), Any valid operation should not be blocked. When open() is called with flag False, it should be handled. In the code above, there exists no logic to perform file open with flag False. Further file read/write would lead to error thrown as the file handle would not be created. This is an accuracy issue.
 
 
 ## What to turn in?
