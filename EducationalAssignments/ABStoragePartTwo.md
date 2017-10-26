@@ -187,28 +187,45 @@ Find bugs in the extra credit reference monitors given the altered threat model.
 ## How to run your tests on many reference monitors
 ----
 
-If you are using Mac or Linux, you can do something like the following:
+Create a directory that the security layers will write their files into. You need to run repy with only access to this directory. You can write a test program that does `log(str(listfiles()))` to see if you are in the right place.
 
-Create a directory that the security layers will write their files into.   You need to run repy with only access to this directory.   You can write a test program that does log(str(listfiles())) to see if you are in the right place.
+Then, type the following commands to execute the testcases with the reference monitors. These commands assume that the names of all testcases start with your NetID:
 
-Then you can type the following in the bash shell to execute the testcases with the reference monitors:
+* In the bash shell on Mac and Linux:
 ```
 for referencemonitor in reference_monitor_*; do for testcase in <net_id>_*; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase; done; done
 ```
-This will print out the output from each program.
+* In the Command Prompt on Windows:
+```
+FOR %r IN (reference_monitor_*) DO @FOR %a IN (<net_id>_*) DO @python repy.py restrictions.default encasementlib.r2py %r %a
+```
+* In PowerShell on Windows:
+```
+foreach ($referencemonitor in Get-ChildItem reference_monitor_*) { foreach ($testcase in Get-ChildItem <net_id>_*) { python repy.py restrictions.default encasementlib.r2py $referencemonitor.Name $testcase.Name } }
+```
 
-If you want to spot the referencemonitor that failed during the test run, you could add debug print statements during run as follows,
+This will print out the output from each program. Make sure that you replace `<net_id>` with your NetID.
+
+If you want to spot the referencemonitor that failed during the test run, add echo the name of each referencemonitor before the inner loop, like so:
+
+* In the bash shell on Mac and Linux:
 ```
 for referencemonitor in reference_monitor_*; do echo $referencemonitor under test; for testcase in <net_id>_*; do python repy.py restrictions.default encasementlib.r2py $referencemonitor $testcase; done; done
 ```
+* In the Command Prompt on Windows:
+```
+FOR %r IN (reference_monitor_*) DO @(ECHO %r under test & FOR %a IN (<net_id>_*) DO @python repy.py restrictions.default encasementlib.r2py %r %a)
+```
+* In PowerShell on Windows:
+```
+foreach ($referencemonitor in Get-ChildItem reference_monitor_*) { Write-Host $referencemonitor.Name; foreach ($testcase in Get-ChildItem <net_id>_*) { python repy.py restrictions.default encasementlib.r2py $referencemonitor.Name $testcase.Name } }
+```
+
 This will print out the name of each reference monitor before it starts executing the testcases against it.
-
-If you are a Windows user and you create your own solution that does the same thing, please post it on the forum.
-
 
 
 ## What to turn in?
 ----
 
- * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your poly email id in lowercase.   For example: jcappos_securitytest1.repy justincappos_goodaccuracytest.repy are both valid names.
- * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  jcappos_run_twice_metadata_removal.repy jcappos_run_once_threading_hack.repy.
+ * Turn in the test cases used to attack a given reference monitor in a zip file. The name of each testcase must start with your NetID in lowercase. For example: abc123_securitytest1.repy abc123_goodaccuracytest.repy are both valid names.
+ * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file. Note that in this case, you can expect that your code is run more than once. In the name of the file, say if it needs to be run multiple times. For example:  abc123_run_twice_metadata_removal.repy abc123_run_once_threading_hack.repy
