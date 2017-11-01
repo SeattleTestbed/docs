@@ -15,7 +15,7 @@ bandwidth. Seattle Testbed experiments are confined to Repy sandboxes.
 Repy has a limited API for accessing system resources. This is in order 
 to prevent a malicious user using a bug in the Python libraries to escape 
 from the sandbox. The full API is documented 
-[here](../Programming/RepyV2API.wiki).
+[here](../Programming/RepyV2API.md).
 
 ## Safety Analysis
 Repy disallows code that could allow the program direct access to system 
@@ -48,7 +48,7 @@ amount of the CPU and memory used. If the resource renews over time, like
 CPU usage, Repy pauses the process for a short duration. If it does not renew 
 itself, like memory usage, Repy will kill the process.
 
-For more detailed information, see [code safety](CodeSafety.wiki).
+For more detailed information, see [code safety](CodeSafety.md).
 
 
 # Node Manager
@@ -60,9 +60,9 @@ split, and changed.
 
 Programmers can then connect to the node manager, send a file, and then run 
 that code on the remote VM. The easiest way to do this is with the 
-Experiment Manager `seash` (see [code](SeattleTestbed/seash), 
-[documentation](SeattleShell.wiki)).
+Experiment Manager `seash` (see [code](https://github.com/SeattleTestbed/seash), 
+[documentation](SeattleShell.md)).
 
 
-For more detailed information, see [the nodemanager design doc](NodeManagerDesign.wiki) 
-and the description of [Seattle Components](UnderstandingSeattle/SeattleComponents.wiki).
+For more detailed information, see [the nodemanager design doc](NodeManagerDesign.md) 
+and the description of [Seattle Components](SeattleComponents.md).
