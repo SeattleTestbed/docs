@@ -177,7 +177,7 @@ ID Own       Name          Status          Owner Information
 john@browsegood !> exit
 ```
 
-You can find more practical examples in the [Take home assignment](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/TakeHome.wiki) page.                
+You can find more practical examples in the [Take home assignment](../EducationalAssignments/TakeHome.md) page.                
 
 
 
