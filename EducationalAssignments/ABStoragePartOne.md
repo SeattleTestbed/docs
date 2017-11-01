@@ -70,60 +70,18 @@ write to a valid file, then the security is compromised, for example.
 
 
 
-### Getting Python
-----
-Please note you must have Python 2.7 to complete this
-assignment. Instructions on how to get Python for Windows can be found
-[on the official Python download page](https://www.python.org/downloads/).
-If you are using Linux or a Mac it is
-likely you already have Python. In order to verify this, simply open a
-terminal and type ```python```.  Please check its version on the initial
-prompt.
+### Getting Python and RepyV2
 
-**Note:**If you are using Windows, you will need python in your path
-variables.  The Python Windows installer can do this for you.
+Please refer to the [SeattleTestbed Build Instructions](../Contributing/BuildInstructions.md#prerequisites)
+for details.
 
-
-### Getting RepyV2
-----
-The preferred way to get Repy is ''installing from source''. For this, you
-check out the required Git repositories, and run a build script. You can
-always update the repos later, and rebuild, so that you get the latest
-stable version of the Repy runtime.
-
-Here's how to do that. Assuming you are running on a Unixoid OS,
-
-```
-# Create a directory for the required Git repositories
-mkdir SeattleTestbed
-cd SeattleTestbed
-
-# Check out the repos required for building Repy
-git clone https://github.com/SeattleTestbed/repy_v2.git
-
-# Prepare a build directory, and build into it
-cd repy_v2/scripts
-# Create build target directory; name it as you wish!
-mkdir -p ~/PATH/TO/BUILD/DIR
-python initialize.py
-python build.py ~/PATH/TO/BUILD/DIR
-```
-
-Once the build script finished, the build target directory contains a
-ready-to-use copy of the RepyV2 runtime!
-
-
-Change into the build target dir,
-
-```
-cd ~/PATH/TO/BUILD/DIR
-```
-
-Use the command found below in order to run Repy files:
+Once you have built RepyV2 into a directory of your choice, change into that
+directory. Use the command below in order to run your RepyV2 programs:
 
 ```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py```
 
-Please note Repy files end in extension `.r2py`.   
+(Replace `[security_layer].r2py` and `[program].r2py` by the names of the
+security layers and program that you want to run.) 
 
 In order to test whether or not these steps worked, please copy and paste
 the code found below for the sample security layer and sample attack.
