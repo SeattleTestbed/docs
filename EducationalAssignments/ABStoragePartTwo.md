@@ -33,7 +33,7 @@ You will submit a zip file containing all of the tests you have created.   You w
 ## Prerequisites
 
 This assignment assumes you have both the latest Python 2.7 and RepyV2
-installed on your computer. See [the previous assignment](ABStoragePartOne.md)
+installed on your computer. Please refer to the [SeattleTestbed Build Instructions](../Contributing/BuildInstructions.md#prerequisites)
 for information on how to get them.
 
 
