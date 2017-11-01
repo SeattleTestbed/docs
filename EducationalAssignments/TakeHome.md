@@ -7,9 +7,11 @@ When performing these steps, you are running software on end user machines aroun
 
 This assignment consists of 11 steps and should take between 30-120 minutes to complete.   Let's begin!
 
-**Windows users:** You must have Python installed in order to run Seattle. For help installing the right version of Python, refer to our [wiki:InstallPythonOnWindows Python installation instructions].
 
-----
+
+# Before you begin
+
+You must have [Python 2.7](https://www.python.org/downloads/) installed in order to run Seattle.
 
 ----
 
@@ -20,7 +22,7 @@ This assignment consists of 11 steps and should take between 30-120 minutes to c
 ## Step 1 : Adding resources
 ----
 
-Login to the Seattle [Clearinghouse website](https://seattle.poly.edu/geni/).   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources. 
+Login to the Seattle [Clearinghouse website](https://seattleclearinghouse.poly.edu/).   If you don't already have an account (i.e. your instructor or TA gave you one) go ahead and register for an account.   Click on the My VMs tab and you'll see that you currently aren't using any resources. 
 
 In the top pane, select LAN and choose 5 VMs, and click "Get".  After a few seconds, you will see that five computers have been added for you to use.   If you can't obtain 5 LAN nodes, it is fine to use fewer.
 
