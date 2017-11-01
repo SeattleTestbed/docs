@@ -29,45 +29,41 @@ On Windows, you will usually need to install Python and Git.
 at the moment.*
 
 
-## Building components
-This section describes how to build components from their source repositories 
-on [GitHub](https://github.com/SeattleTestbed), using the command line. We'll 
-use a Unix-like system throughout our examples. Windows users should use 
-Windows PowerShell or Command Prompt.
+## Building RepyV2
+This section describes how to build RepyV2, SeattleTestbed's sandbox,
+from its source repository on [GitHub](https://github.com/SeattleTestbed),
+using the command line.
+We'll use a Unix-like system throughout our examples. Windows users
+should use Windows PowerShell or Command Prompt.
 
-Currently, components that have been set up to be buildable and runnable
-are `seash`, `repy_v2`, `overlord`, and `experimentmanager`. The other 
-components can be built for unit test mode (see below).
-
-
-*Note:* Overlord and Experiment Manager are currently being ported to 
-RepyV2 and do not fully work at the moment.
+*Note: These build instructions apply similarly to all other SeattleTestbed
+components.*
 
 
-1. Clone the repository that you want to build from [
-SeattleTestbed](https://github.com/SeattleTestbed).
+1. Clone the RepyV2 repository from [SeattleTestbed's GitHub](https://github.com/SeattleTestbed).
 
-For example, if you are building [wiki:SeattleShell seash], do: 
 ```sh
-$ git clone https://github.com/SeattleTestbed/seash
+$ git clone https://github.com/SeattleTestbed/repy_v2
 ```
 If you usually use `SSH` instead of `https` to clone your git repos, you can do:
 ```sh
-$ git clone git@github.com:SeattleTestbed/seash.git
+$ git clone git@github.com:SeattleTestbed/repy_v2.git
 ```
-Of course, you will want to replace `seash` with the repository name you 
-are interested in.
+
+(If you want to clone a different repository, replace `repy_v2` with
+the appropriate repository name.)
 
 
 2. This yields a folder named like the repository you cloned. Inside of 
 it, there is a `scripts/` folder which in turn contains a script called 
 `initialize.py` to fetch the dependencies of this component. Continuing 
-with our example `seash`:
+with `repy_v2` for this concrete walkthrough:
 
 ```sh
-$ cd seash/scripts
+$ cd repy_v2/scripts
 $ python initialize.py
 ```
+
 `initialize.py` Git-clones the dependent repositories into `DEPENDENCIES` 
 directory which will be created as a sub-directory inside your main 
 repository. It takes its instructions from `config_initialize.txt` to 
@@ -75,14 +71,15 @@ fetch the dependencies.
 
 3. To build a runnable component from the source dependencies, run the 
 `scripts/build.py` script. You may supply it an optional target folder for 
-the build (which must be created first):
+the build (which must be created first). Name this folder as you like.
 ```sh
 $ mkdir TARGET_FOLDER
 $ python build.py TARGET_FOLDER
 ```
+
 If you don't setup a target directory, `build.py` will itself create a 
 target folder named `RUNNABLE` which will be a sub-directory inside the 
-component's main repository, e.g. `seash/RUNNABLE`.
+component's main repository, e.g. `repy_v2/RUNNABLE`.
 
 `build.py` will copy all the files necessary to build the particular Seattle 
 Component into the target directory. It will indirectly call 
@@ -90,7 +87,8 @@ Component into the target directory. It will indirectly call
 in order to fetch the list of files and directories to copy to target.
 
 
-*Done!* Your target folder now contains a runnable version of the component! 
+*Done!* Your target folder now contains a runnable version of the
+RepyV2 sandbox (or other component you chose)!
 
 
 ## Building and Running Unit Tests
