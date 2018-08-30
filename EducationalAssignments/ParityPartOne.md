@@ -58,7 +58,7 @@ match that of the underlying API.
 so performance is not compromised.  In particular, the security layer may not
 read more 8-byte sequences than are necessary.  
 
-SHOULD I GIVE THEM FILESIZE AS A BUILT IN SECURITY LAYER?
+SHOULD I GIVE THEM FILESIZE AS A BUILT IN A SECURITY LAYER?
 
  * Security: The attacker should not be able to circumvent the security
 layer. Hence, if the attacker can cause a file with a non-even 8-byte sequence
@@ -77,7 +77,7 @@ file.  E.g., bytes 5-17 may be written in a single write.  For that write, the
 first, second, and third 8 byte sequence are all modified.
 
 In terms of parity, each byte has a parity based upon its value when calling 
-chr() in python.  Each byte that has a parity divisible by 2 is considered to
+ord() in python.  Each byte that has a parity divisible by 2 is considered to
 be even.  An 8-byte sequence is considered to be even if there are an even
 number of non-even bytes in the sequence.  In other words, if there are 0,
 2, 4, 6, or 8 non-even bytes, the sequence is considered to be even.  Also,
@@ -180,15 +180,32 @@ class EvenParityFile():
     # local (per object) reference to the underlying file
     self.fn = filename
 
-    # make the file 
+    # create the file on disk 
     if create:
       self.file = openfile(self.fn,create)
 
 
   def writeat(self,data,offset):
-    
+   
     # check the parity of the data written
-    self.file.writeat(data,offset)
+    # NOTE: This is wrong in many ways!!!!
+    thisdata = data
+    while thisdata:
+        eightbytesequence = thisdata[:8]
+        thisdata = thisdata[8:]
+        even = True
+        for thisbyte in eightbytesequence:
+          # for each byte, if it is odd, flip even to be the opposite
+          if ord(thisbyte) % 2:
+            even = not even
+            
+        # actually call write, if we are supposed to...
+        if even:
+          self.file.writeat(eightbytesequence,offset)
+        # ...or error out.
+        else:
+          raise RepyParityError("Non-even parity write to file")
+  
   
   def readat(self,bytes,offset):
     # Read from the file using the sandbox's readat...
@@ -206,8 +223,8 @@ def parityopenfile(filename, create):
 
 # The code here sets up type checking and variable hiding for you.  You
 # should not need to change anything below here.
-sec_file_def = {"obj-type":ABFile,
-                "name":"ABFile",
+sec_file_def = {"obj-type":EvenParityFile,
+                "name":"EvenParityFile",
                 "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(int,type(None)),"target":EvenParityFile.writeat},
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":EvenParityFile.readat},
                 "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":EvenParityFile.close}
@@ -228,24 +245,28 @@ the attacker's objective is to bypass the parity restrictions or cause
 the security layer to act in a disallowed manner. By understanding how the
 attacker thinks, you will be able to write better security layers.  
 
-An example of an attack is found below:
+An example of a test / attack is found below:
 
 ```
-if "testfile.txt.a" in listfiles():
-  removefile("testfile.txt.a")
-if "testfile.txt.b" in listfiles():
-  removefile("testfile.txt.b")
-myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+if "testfile.txt" in listfiles():
+  removefile("testfile.txt")
 
-# I should get 'SE' when reading an empty file...
-assert('SE' == myfile.readat(None,0))
+myfile=openfile("testfile.txt",True)  #Create a parity file
 
 # put some valid data in the file.
-myfile.writeat("Stest12345E",0)
+myfile.writeat("AA",0)
 
-# I should still get 'SE' because the file wasn't closed.
-assert('SE' == myfile.readat(None,0))
+# I should be able to read it out.
+assert('AA' == myfile.readat(None,0))
 
+# However, this write should fail...
+try:
+  myfile.writeat("BCBCBC",2)
+except RepyParityError:
+  pass  # should happen
+else:
+  log("should have been an error instead!")
+  
 #Close the file
 myfile.close()
 
