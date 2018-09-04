@@ -179,10 +179,8 @@ class EvenParityFile():
     mycontext['debug'] = False   
     # local (per object) reference to the underlying file
     self.fn = filename
-
-    # create the file on disk 
-    if create:
-      self.file = openfile(self.fn,create)
+ 
+    self.file = openfile(self.fn,create)
 
 
   def writeat(self,data,offset):
