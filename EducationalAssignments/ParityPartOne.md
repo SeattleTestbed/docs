@@ -94,7 +94,7 @@ for details.
 Once you have built RepyV2 into a directory of your choice, change into that
 directory. Use the command below in order to run your RepyV2 programs:
 
-```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py```
+```python repy.py restrictions.default encasementlib.r2py initialfilelength.r2py [security_layer].r2py [program].r2py```
 
 (Replace `[security_layer].r2py` and `[program].r2py` by the names of the
 security layers and program that you want to run.) 
