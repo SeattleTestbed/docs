@@ -38,7 +38,7 @@ must be blocked by throwing a RepyParityError exception.
 
 Note that in some cases there will be an incomplete sequence (e.g., the last 
 5 bytes of a 13 byte file).  Parity is not checked for an incomplete sequence
-(it is only checked when the sequence is completed).
+(it is only checked when the sequence is completed).  
 
 Note that the behavior of other system calls must not be changed in a way
 that is visible to the running program.  Reading from a file, opening a file, 
@@ -56,7 +56,8 @@ match that of the underlying API.
 
  * Efficiency: The security layer should use a minimum number of resources,
 so performance is not compromised.  In particular, the security layer may not
-read more 8-byte sequences than are necessary.  
+read more 8-byte sequences than are necessary.  Hint: it is *always* possible 
+to read two or fewer 8 byte blocks per writeat().
 
  * Security: The attacker should not be able to circumvent the security
 layer. Hence, if the attacker can cause a file with a non-even 8-byte sequence
