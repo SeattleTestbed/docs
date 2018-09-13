@@ -58,8 +58,6 @@ match that of the underlying API.
 so performance is not compromised.  In particular, the security layer may not
 read more 8-byte sequences than are necessary.  
 
-SHOULD I GIVE THEM FILESIZE AS A BUILT IN A SECURITY LAYER?
-
  * Security: The attacker should not be able to circumvent the security
 layer. Hence, if the attacker can cause a file with a non-even 8-byte sequence
 to be written then the security is compromised, for example.
