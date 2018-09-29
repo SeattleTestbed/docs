@@ -103,8 +103,8 @@ unit test files. You just need to run the build script again to create a
 testable build. Use the `-t` command line option to indicate you want 
 the test files to be included. Again, specifying a target directory is optional!
 ```sh
-$ mkdir TEST_TARGET_DIR
 $ cd COMPONENT/scripts
+$ mkdir TEST_TARGET_DIR
 $ python build.py -t TEST_TARGET_DIR
 ```
 
