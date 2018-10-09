@@ -2,7 +2,7 @@
 
 This assignment will help you understand security mechanisms. You will be
 guided through the steps of creating a reference monitor using the security
-layer functionality in Repy V2. A reference monitor is an access control
+layer functionality in RepyV2. A reference monitor is an access control
 concept that refers to an abstract machine that mediates all access to
 objects by subjects. This can be used to allow, deny, or change the
 behavior of any set of calls. While not a perfect way of validating your
@@ -76,7 +76,7 @@ file.  E.g., bytes 5-17 may be written in a single write.  For that write, the
 first, second, and third 8 byte sequence are all modified.
 
 In terms of parity, each byte has a parity based upon its value when calling 
-ord() in python.  Each byte that has a parity divisible by 2 is considered to
+`ord()` in Python.  Each byte that has a parity divisible by 2 is considered to
 be even.  An 8-byte sequence is considered to be even if there are an even
 number of non-even bytes in the sequence.  In other words, if there are 0,
 2, 4, 6, or 8 non-even bytes, the sequence is considered to be even.  Also,
@@ -173,13 +173,13 @@ Note:
     """ 
 
 class EvenParityFile():
-  def __init__(self,filename,create):
+  def __init__(self, filename, create):
     # globals
     mycontext['debug'] = False   
     # local (per object) reference to the underlying file
     self.fn = filename
  
-    self.file = openfile(self.fn,create)
+    self.file = openfile(self.fn, create)
 
 
   def writeat(self,data,offset):
@@ -198,22 +198,22 @@ class EvenParityFile():
             
         # actually call write, if we are supposed to...
         if even:
-          self.file.writeat(eightbytesequence,offset)
+          self.file.writeat(eightbytesequence, offset)
         # ...or error out.
         else:
           raise RepyParityError("Non-even parity write to file")
   
   
-  def readat(self,bytes,offset):
+  def readat(self, bytes, offset):
     # Read from the file using the sandbox's readat...
-    return self.file.readat(bytes,offset)
+    return self.file.readat(bytes, offset)
 
   def close(self):
     self.file.close()
 
 
 def parityopenfile(filename, create):
-  return EvenParityFile(filename,create)
+  return EvenParityFile(filename, create)
 
 
 
@@ -250,27 +250,27 @@ if "testfile.txt" in listfiles():
 
 myfile=openfile("testfile.txt",True)  #Create a parity file
 
-# put some valid data in the file.
-myfile.writeat("AA",0)
+# Put some valid data in the file.
+myfile.writeat("AA", 0)
 
 # I should be able to read it out.
-assert('AA' == myfile.readat(None,0))
+assert('AA' == myfile.readat(None, 0))
 
 # However, this write should fail...
 try:
-  myfile.writeat("BCBCBC",2)
+  myfile.writeat("BCBCBC", 2)
 except RepyParityError:
   pass  # should happen
 else:
   log("should have been an error instead!")
   
-#Close the file
+# Close the file
 myfile.close()
 
 
 ```
 
-**Note:** All attacks should be written as Repy V2 files, using the .r2py extension.
+**Note:** All attacks should be written as RepyV2 files, using the `.r2py` extension.
 
 #### Choice of File Names
 ----
@@ -279,12 +279,12 @@ So in the above code, specifically:
 
 ```
 # Open a file
-myfile=openfile("look.txt",True)
+myfile=openfile("look.txt", True)
 ```
 
-look.txt is a valid file name, however Look.txt and LOOK.TXT are not.
-Examples of other invalid files names are, _look.txt, look/.txt, and 
-look().txt. Essentially all non-alphanumeric characters are not allowed.
+`look.txt` is a valid file name, however `Look.txt` and `LOOK.TXT` are not.
+Examples of other invalid files names are `.look.txt`, `look/.txt`, and 
+`look().txt`. Essentially all non-alphanumeric characters are not allowed.
 
 ### Running your security layer
 ----
@@ -299,10 +299,11 @@ Make sure you went through the "How to get RepyV2" section!
 # Notes and Resources
 ----
  
- * For a complete list of syntax in Repyv2 please visit:
- * **[https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md]**
+ * For a complete list of syntax in Repyv2 please visit
+   the **[RepyV2 API documentation](https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md)**
  
- * The following link is an excellent source for information about security layers: **[http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf]**
+ * **[This paper](http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf)**
+   is an excellent source for information about security layers
 
  * **Note:** It is possible to add multiple security layers to Repy, this
 may be useful for testing different mitigations separately.  This is
@@ -310,9 +311,9 @@ done with the following command at the terminal:
 
 ```python repy.py restrictions.default encasementlib.r2py [security_layer1].r2py [security_layer2].r2py [security_layer3].r2py [program].r2py```
 
-**Your security layer must produce no output!! **
+**Your security layer must produce no output!!**
 
- * In repy log replaces print from python.  This may be helpful when
+ * In RepyV2, `log` replaces `print` from Python.  This may be helpful when
 testing if Repy installed correctly.
 
 # What to turn in?
