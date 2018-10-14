@@ -171,6 +171,8 @@ Note:
     python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [attack_program].r2py 
     
     """ 
+class RepyParityError(Exception):
+    pass
 
 class EvenParityFile():
   def __init__(self,filename,create):
@@ -228,7 +230,7 @@ sec_file_def = {"obj-type":EvenParityFile,
            }
 
 CHILD_CONTEXT_DEF["openfile"] = {"type":"objc","args":(str,bool),"exceptions":Exception,"return":sec_file_def,"target":parityopenfile}
-
+CHILD_CONTEXT_DEF["RepyParityError"] = {"type":"any","target":RepyParityError}
 # Execute the user code
 secure_dispatch_module()
 ```
