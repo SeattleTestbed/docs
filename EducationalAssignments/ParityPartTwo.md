@@ -149,7 +149,6 @@ The try, except, else and finally statements are part of **exception handling**.
 When writing your own tests it is important to test for a complete set of possible penetrations.  Keep in mind, it only takes one test case to break through a security layer.  Some of the things you may want to test for include:
 
  * threading
- * writing to multiple files????
  * multiple writes
 
 And more!  Remember a good security layer can't be broken by anyone!  Which is all part of the fun!  It's about solving a puzzle.  First you make the puzzle - write the security layer, then you solve the puzzle - try to bypass it.  If your puzzle is "good enough", no one will be able to break it, no matter what.  
