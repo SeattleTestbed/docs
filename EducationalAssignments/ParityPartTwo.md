@@ -1,7 +1,7 @@
 
 # Security layer testing and penetration
 
-In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately, but it is recommended that this assignment be completed after [Part One](ABStoragePartOne.md).  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
+In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately, but it is recommended that this assignment be completed after [Part One](https://github.com/SeattleTestbed/docs/blob/JustinCappos-ParityAssignment/EducationalAssignments/ParityPartOne.md).  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 
 
@@ -20,13 +20,13 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 
 Within the context of this assignment these design paradigms translate to:
 
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, if an app tries to read data from a valid file, this must succeed as per normal and must not be blocked. All situations that are not described above must match that of the underlying API.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, if an app tries to read data or write valid data to a file, this must succeed as per normal and must not be blocked. All situations that are not described above must match that of the underlying API.
 
- * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. For example, keeping a complete copy of every file on disk in memory would be forbidden.
+ * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. For example, reading more blocks of existing data from the file, than necessary, would be forbidden.
 
- * Security: The attacker should not be able to circumvent the security layer. Hence, if the attacker can cause an invalid file to be read or can write to a valid file, then the security is compromised, for example.
+ * Security: The attacker should not be able to circumvent the security layer. Hence, if the attacker can cause an invalid write to a file, then the security is compromised, for example.
 
-You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is good if multiple tests of yours break a student's reference monitor, but you gain the same number of tests whether one or more tests break the layer.
+You will submit a zip file containing all of the tests you have created. You will gain points for every student's reference monitor you find a flaw in. It is good if multiple tests of yours break a student's reference monitor, but you gain the same number of tests whether one or more tests break the layer.
 
 
 
@@ -64,30 +64,30 @@ If we can find a case where the hypothesis is false, then the security layer is 
 
 
 ### Examples of tests
-Test cases are briefly described at [github: SeattleTestbed/docs/blob/master/EducationalAssignments/ABStoragePartOne.md] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for your all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
+Test cases are briefly described at [https://github.com/SeattleTestbed/docs/blob/JustinCappos-ParityAssignment/EducationalAssignments/ParityPartOne.md] and [wiki:RepyV2SecurityLayers]. Below is another example of a test case you may want to consider.  This test case gives the right 'style' for all your test cases, but lacks in the number of test cases.  A good attack will include many test cases.
 #### Test case 1:
 
 ```
-# New File Operation
+# Valid Write Operation on an empty file
 
 # Clean up of existing file
-if "testfile.txt.a" in listfiles():
- removefile("testfile.txt.a")
-if "testfile.txt.b" in listfiles():
- removefile("testfile.txt.b")
+if "testfile.txt" in listfiles():
+ removefile("testfile.txt")
 
 # Open File Function Call
-myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+myfile=openfile("testfile.txt",True)  #Create a file
 
 try:
- # Empty/New File should have contents 'SE' satisfying the requirement
- assert('SE' == myfile.readat(2,0))
+ # write valid data onto the file.
+ myfile.writeat("ABBA",0)
+ # read from the file to see if the write was successful.
+ assert('ABBA' == myfile.readat(4,0))
  # Close the file:
  myfile.close()
 except:
  myfile.close()
  # Error Handle or Failure Condition
- log("Empty file is not handled properly!")
+ log("Valid data not written!")
 
 ```
 #### Code analysis
@@ -96,41 +96,33 @@ It is important to keep in mind that only lowercase file names are allowed.  So 
 ```
 
 # Open a file
-myfile=ABopenfile("testfile.txt",True)
+myfile=openfile("testfile.txt",True)
 
 ```
-testfile.txt is a valid file name, however Testfile.txt is not.  Examples of other invalid files names are, testfile@.txt, testfile/.txt, and testfile().txt.  Essentially all non-alphanumeric characters are not allowed.
+testfile.txt is a valid file name, however Testfile.txt is not.  Examples of other invalid files names are, testfile@.txt, testfile/.txt, and testfile().txt. Essentially all non-alphanumeric characters are not allowed.
 
-In this case we are verifying the security of the reference monitor. This code attempts to check the contents of a new valid file created through reference monitor. First the file is opened using ABopenfile function `myfile=ABopenfile("testfile.txt",True)`. Next `myfile.readat(2,0)` tries to read from the file which has been created. The 0 refers to an offset of zero and 2 refers to number of characters being read. The assert call would look to validate the condition mentioned within its call `Check for valid empty file string "SE"`and pass if the statement made is true or raise exception if the statement made is false which can be caught using exception handlers. Then finally: statement will always run, closing the file.
+In this case we are verifying the security of the reference monitor. This code attempts to write valid data on an empty file and checks if the reference monitor allowed the write. First the existing testfile is removed and a new testfile is created. Next, valid data is written onto the file and then we check if the reference monitor behaved as expected, that is, if it allowed the write. `myfile.readat(4,0)` tries to read from the file which has been created. The 0 refers to an offset of zero and 4 refers to number of characters being read. The assert call would look to validate the condition mentioned within its call `Check for valid data string "ABBA"`and pass if the statement made is true or raise exception if the statement made is false which can be caught using exception handlers. Then finally: statement will always run, closing the file.
 
 #### Test case 2:
 
 ```
-# WRITE OPERATION
-# New File Operation
+# Valid WRITE on a non-empty file
 
-# Clean up of existing file
-if "testfile.txt.a" in listfiles():
-  removefile("testfile.txt.a")
-if "testfile.txt.b" in listfiles():
-  removefile("testfile.txt.b")
+# New File Operation, Clean up of existing file
+if "testfile.txt" in listfiles():
+  removefile("testfile.txt")
 
 # Open File Function Call
-myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+myfile=openfile("testfile.txt",True)  #Create a file
 
 # Write valid data to the file
-myfile.writeat("StestE",0)
-
-#Close the file
-myfile.close()
-
-# READ OPERATION
-# Reopen file again to read
-myfile=ABopenfile("testfile.txt",True)
+myfile.writeat("AAAAAAA",0)
+# Write data over existing data in the file
+myfile.writeat("A",7)
 
 # Read the file to check the contents
 try:
- assert('StestE' == myfile.readat(6,0))
+ assert('AAAAAAAA' == myfile.readat(8,0))
  #Close the file
  myfile.close()
 except:
@@ -141,9 +133,9 @@ except:
 ```
 #### Code analysis
 
-In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"StestE"` to the file and verify the contents.  We assume that valid data is written in the file from the zero offset. First the file is opened using `myfile=ABopenfile("testfile.txt",True)`. Next `myfile.writeat("StestE",0)` tries to write `"StestE"` to the file. Then `myfile.readat(6,0)`  tries to read the contents of the file. The 6 refers to an byte size of 6 characters and 0 refers to the offset 0 in the file. If the security layer fails the test then the assert call raises exception to be caught by except statement to show the error. The final statement which will always run, closing the file.
+In this case we are verifying the accuracy of the reference monitor.  This code attempts to write `"A"` to the file that already has `"AAAAAAA"` and verify the contents. First the file is opened using `myfile=openfile("testfile.txt",True)`. Next `myfile.writeat("A",7)` tries to write `"A"` to the file at offset 7. Then `myfile.readat(8,0)` tries to read the contents of the file. The 8 refers to number of characters to read and 0 refers to the offset 0 in the file. If the security layer fails the test then the assert call raises exception to be caught by except statement to show the error. The final statement which will always run, closing the file.
 
-If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should not stop a file from being read or written.
+If this case produces anything other than "No Output", then this layer fails the accuracy design paradigm.  The security layer should allow valid writes onto the file.
 
 #### More information on: Try, Except, Else, Finally
 The try, except, else and finally statements are part of **exception handling**.  For more information on exception handling please visit:
@@ -157,7 +149,8 @@ The try, except, else and finally statements are part of **exception handling**.
 When writing your own tests it is important to test for a complete set of possible penetrations.  Keep in mind, it only takes one test case to break through a security layer.  Some of the things you may want to test for include:
 
  * threading
- * writing to multiple files
+ * writing to multiple files????
+ * multiple writes
 
 And more!  Remember a good security layer can't be broken by anyone!  Which is all part of the fun!  It's about solving a puzzle.  First you make the puzzle - write the security layer, then you solve the puzzle - try to bypass it.  If your puzzle is "good enough", no one will be able to break it, no matter what.  
 
@@ -175,12 +168,6 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 
  * Note that you should not assume that any files exist in your directory.  You should create any files (e.g., testfile.txt) yourself in your test program.
 
-
-
-
-## Extra Credit
-----
-Find bugs in the extra credit reference monitors given the altered threat model.  You should include more test cases in the extra credit!
 
 
 
@@ -228,4 +215,3 @@ This will print out the name of each reference monitor before it starts executin
 ----
 
  * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your netid in lowercase.   For example: abc123_securitytest1.r2py abc123_goodaccuracytest.r2py are both valid names.
- * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  abc123_run_twice_metadata_removal.r2py abc123_run_once_threading_hack.r2py.
