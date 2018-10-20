@@ -172,6 +172,9 @@ Note:
     
     """ 
 
+class RepyParityError(Exception):
+	pass
+
 class EvenParityFile():
   def __init__(self, filename, create):
     # globals
@@ -228,7 +231,7 @@ sec_file_def = {"obj-type":EvenParityFile,
            }
 
 CHILD_CONTEXT_DEF["openfile"] = {"type":"objc","args":(str,bool),"exceptions":Exception,"return":sec_file_def,"target":parityopenfile}
-
+CHILD_CONTEXT_DEF["RepyParityError"] = {"type":"any","target":RepyParityError}
 # Execute the user code
 secure_dispatch_module()
 ```
