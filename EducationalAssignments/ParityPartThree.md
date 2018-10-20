@@ -1,7 +1,7 @@
 
 # Fixing your security layer
 
-In this assignment you will analyze the bugs in your security layer from [[Part One](ABStoragePartOne.md)] and fix them.  You may want to use test cases from [Part Two](ABStoragePartTwo.md) to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
+In this assignment you will analyze the bugs in your security layer from [[Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartOne.md)] and fix them.  You may want to use test cases from [Part Two](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartTwo.md) to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
 
 
 
@@ -21,36 +21,32 @@ In this assignment you are fixing your reference monitor.  You have been sent a 
 
  * In rare cases, a student’s reference monitor may inappropriately retain state for a file. For example, an attacker may create a file, write some data, then close and delete the file. If the attacker recreates a file with the same name, the state should be cleared.
 
- * Many reference monitors had accuracy or security bugs as a result of not properly following the instructions.  
+ * Many reference monitors had accuracy or security bugs as a result of not properly following the instructions.
+ 
+ * Most common mistakes were, failing to properly evaluate a block that is partially written and failing to handle multiple writes. 
 
 
 
-## Case 1: Sample implementation of the close function
+## Example : Sample implementation of the writeat function
 
 ```
-def close(self):
-  self.Afile.close()
-  self.Bfile.close()
+def writeat(self,data,offset):
+    thisdata = data
+    while thisdata:
+        eightbytesequence = thisdata[:8]
+        thisdata = thisdata[8:]
+        even = True
+        for thisbyte in eightbytesequence:
+          if ord(thisbyte) % 2:
+            even = not even
+        if even:
+          self.file.writeat(eightbytesequence, offset)
+        else:
+          raise RepyParityError("Non-even parity write to file")
 ```
 
 ### Code Analysis
-Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), When close() is called on the file, if a file is not valid, it is discarded. If both files are valid, the older one is discarded. In the code above, there exists no logic to verify the content of the file and perform validation. Further file read would lead to the invalid file being read or valid file being written to. This is a security issue.
-
-## Case 2: Sample implementation of the open call - initialize function - False flag
-
-```
-if create:
-  self.Afile = openfile(self.Afn,create)
-  self.Bfile = openfile(self.Bfn,create)
-  self.Afile.writeat('SE',0)
-```
-
-### Code Analysis
-Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](ABStoragePartOne.md), Any valid operation should not be blocked. When open() is called with flag False, it should be handled. In the code above, there exists no logic to perform file open with flag False. Further file read/write would lead to error thrown as the file handle would not be created. This is an accuracy issue.
-
-## Case 3: Sample implementation of the open call - initialize function - New file 'SE' write
-
-Similarly, when flag is True and the file exists already (Flag would be ignored, look at Repy documentation), every time 'SE' write would be performed to a already existing file. This behavior does not abide to the rules mentioned where 'SE' write should happen only to a file that did not exist before.
+Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartOne.md), if the length of the last block is less than 8, the parity of that block is assumed to be even. But this code does not handle that. Further more, the code does not read any existing data from the file before performing the parity check. This is a security bug and accuracy bug, for reasons, that do not allow writing valid data whose length is less than 8 and failing to evaluate the modified block rather than just the data being written.
 
 
 ## What to turn in?
