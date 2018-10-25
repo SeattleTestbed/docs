@@ -321,8 +321,8 @@ testing if Repy installed correctly.
 
 # What to turn in?
 ----
- * Turn in a repy file called reference_monitor_[ netid ].r2py with all
-letters in lowercase.
+ * Turn in a repy file called `reference_monitor_netid.r2py` with all
+letters in lowercase. For example, if your netId is `jc123`, your reference monitor should be named `reference_monitor_jc123.r2py`
 
 * **Never raise unexpected errors or produce any output.**  Your program
 must produce no output when run normally.
