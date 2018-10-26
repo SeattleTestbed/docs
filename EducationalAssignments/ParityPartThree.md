@@ -1,7 +1,7 @@
 
 # Fixing your security layer
 
-In this assignment you will analyze the bugs in your security layer from [[Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartOne.md)] and fix them.  You may want to use test cases from [Part Two](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartTwo.md) to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
+In this assignment you will analyze the bugs in your security layer from [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartOne.md) and fix them.  You may want to use test cases from [Part Two](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/ParityPartTwo.md) to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
 
 
 
@@ -55,5 +55,5 @@ Let's analyze one of the bugs in this implementation.  According to the specific
  * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_netId.r2py
 e.g. reference_monitor_jcappos.r2py
 All letters must be lowercase.
- * In addition to your reference monitor, submit a one-page PDF document, in which you discuss the different classes of bugs you had in your reference monitors and why.
+ * In addition to your reference monitor, submit the one-time form whose link is shared in the assignments tab, in which you discuss the different classes of bugs you had in your reference monitors and why.
 What kind of bug did you experience, what caused the bug, and what did you do to fix it?
