@@ -28,19 +28,31 @@ recover if the file is written incorrectly.  For this assignment, every
 'E'.  If any other characters (including lowercase 's', 'e', etc.) are
 the first or last characters, then the file is considered invalid. 
 
-However, you must permit the application to write information into the file.  
-The application should not be blocked from performing any writeat() operation, 
-because when it chooses it may later write 'S' at the start and 'E' at the 
-end.  Note that checking if the file starts with 'S' and ends with 'E' is
-only performed when close is called.
+#### The Reference Monitor Must:  
+1. Allow all functionality of each method, per the list of [RepyV2 API calls](../Programming/RepyV2API.md)  
+  *This includes creating new files  
+  *Opening an existing file  
+  *Reading valid file using readat()  
+  *Writing to file using writeat(). The application should not be blocked  
+from performing any writeat() operation, because  'S' and 'E' may later be 
+written to the begining and end of the file respectively.  
+  *Check if the file starts with 'S' and ends with 'E', only when close() is called.
+
+2. Not produce any errors  
+  *Normal operations should not be blocked or produce any output  
+  *Invalid operations should not produce any output to the user
+#### The Reference Monitor Should:  
+1. Store two copies of the same file (filename.a and filename.b ) 
+  *One is a valid backup, and the other that is written to
+2. When an app calls ABopenfile(), this indicates that the A/B files, which 
+ you should name filename.a and filename.b, should be opened.  
+3. When the app calls readat(), all reads must be performed on the valid file
+4. Similarly, when the app calls writeat(), all writes must be performed  
+on the invalid file. 
+
 
 You may store two copies of A/B files on disk, one that is the valid backup
-(which is used for reading) and the other that is written to.  When an
-app calls ABopenfile(), this indicates that the A/B files, which you should
-name filename.a and filename.b, should be opened.  
-When the app calls readat(), all reads must be performed on the valid
-file.  Similarly, when the app calls writeat(), all writes must be 
-performed on the invalid file.  If the app uses ABopenfile() to create a 
+file.   If the app uses ABopenfile() to create a 
 file that does not exist (by setting create=True when calling ABopenfile()), 
 the reference monitor will create a new file 'SE' in filename.a and an empty 
 file called filename.b.  When close() is called on the file, if a file is
