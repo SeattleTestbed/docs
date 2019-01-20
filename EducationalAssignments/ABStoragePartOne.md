@@ -16,52 +16,45 @@ reference monitors in a hands-on manner.
 
 
 
-
-
 ## Overview
 ----
 In this assignment you will create a security layer which keeps a backup
 copy of a file in case it is written incorrectly.  This is a common
 technique for things like firmware images where a system may not be able to
-recover if the file is written incorrectly.  For this assignment, every
-`correct' file must start with the character 'S' and end with the character
+recover if the file is written incorrectly.  For this assignment, a
+valid file must start with the character 'S' and end with the character
 'E'.  If any other characters (including lowercase 's', 'e', etc.) are
 the first or last characters, then the file is considered invalid. 
 
-#### The Reference Monitor Must:  
-1. Allow all functionality of each method, per the list of [RepyV2 API calls](../Programming/RepyV2API.md)  
-  *This includes creating new files  
-  *Opening an existing file  
-  *Reading valid file using readat()  
-  *Writing to file using writeat(). The application should not be blocked  
-from performing any writeat() operation, because  'S' and 'E' may later be 
-written to the begining and end of the file respectively.  
-  *Check if the file starts with 'S' and ends with 'E', only when close() is called.
-
-2. Not produce any errors  
-  *Normal operations should not be blocked or produce any output  
-  *Invalid operations should not produce any output to the user
-#### The Reference Monitor Should:  
-1. Store two copies of the same file (filename.a and filename.b ) 
-  *One is a valid backup, and the other that is written to
-2. When an app calls ABopenfile(), this indicates that the A/B files, which 
- you should name filename.a and filename.b, should be opened.  
-3. When the app calls readat(), all reads must be performed on the valid file
-4. Similarly, when the app calls writeat(), all writes must be performed  
-on the invalid file. 
-
-
-You may store two copies of A/B files on disk, one that is the valid backup
-file.   If the app uses ABopenfile() to create a 
-file that does not exist (by setting create=True when calling ABopenfile()), 
-the reference monitor will create a new file 'SE' in filename.a and an empty 
+Applications use ABopenfile() to create or open a file. Files are created by 
+setting create=True when calling ABopenfile(), the reference 
+monitor will create a new file 'SE' in filename.a and an empty 
 file called filename.b.  When close() is called on the file, if a file is
-not valid, it is discarded.  if both files are valid, the older one is 
-discarded.   
+not valid, it is discarded.  If both files are valid, the older one is 
+discarded.
 
-Note that the behavior of other file system calls should remain unchanged.
-This means listfiles(), removefile(), and calls to files accessed with 
-openfile() instead of ABopenfile() remain unchanged by this reference monitor.
+Write test applications to ensure your reference monitor behaves properly 
+in different cases and to test attacks against your monitor.    
+
+#### The Reference Monitor Must:
+1. Not modify or disable any functionality of any [RepyV2 API calls](../Programming/RepyV2API.md), such as:
+   * Creating new files  
+   * Opening an existing file  
+   * Reading valid file using readat()  
+   * Writing to file using writeat(). This includes invalid writes, because  'S' and 'E'
+may later be written to the begining and end of the file respectively.  
+2. Check if the file starts with 'S' and ends with 'E', only when close() is called.
+3. Not produce any errors  
+   * Normal operations should not be blocked or produce any output  
+   * Invalid operations should not produce any output to the user
+#### The Reference Monitor Should:
+1. Store two copies of the same file (filename.a and filename.b)   
+   * One is a valid backup, and the other is written to
+2. When an app calls ABopenfile(), the method opens the A/B files, which 
+ you should name filename.a and filename.b.
+3. When the app calls readat(), all reads must be performed on the valid file
+4. When the app calls writeat(), all writes must be performed  on the invalid file. 
+
 
 Three design paradigms are at work in this assignment: accuracy,
 efficiency, and security.
@@ -88,12 +81,12 @@ Please refer to the [SeattleTestbed Build Instructions](../Contributing/BuildIns
 for details.
 
 Once you have built RepyV2 into a directory of your choice, change into that
-directory. Use the command below in order to run your RepyV2 programs:
+directory. Use the command below in order to run your RepyV2 applications:
 
-```python repy.py restrictions.default encasementlib.r2py [security_layer].r2py [program].r2py```
+```python2 repy.py restrictions.default encasementlib.r2py [security_layer].r2py [application].r2py```
 
-(Replace `[security_layer].r2py` and `[program].r2py` by the names of the
-security layers and program that you want to run.) 
+(Replace '[security_layer].r2py' and '[application].r2py' by the names of the
+security layers and application that you want to run.) 
 
 In order to test whether or not these steps worked, please copy and paste
 the code found below for the sample security layer and sample attack.
@@ -122,7 +115,7 @@ to run repy files.
 
 <!--
 AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
- * Downloading the wrong version of seattle:
+ * Downloading the wrong version of Seattle:
 
 Seattle is operating system dependent.  If you download the Windows
 version, you need to use the Windows command line.  For Windows 7 this is
@@ -146,8 +139,8 @@ them.  The following tutorials provide this information.
 
 ## Building the security layer
 ----
-The following program is a basic and incomplete sample code for you to get
-an idea about writing security layer. Remember, you have no idea how the
+The following program is a sample security layer, it is not complete and does not 
+handle all cases required by the API. Remember, you have no idea how the
 attacker will try to penetrate your security layer, so it is important that
 you leave nothing to chance!  
 
@@ -259,21 +252,19 @@ myfile.close()
 
 ```
 
+In the example above, a successful attack would cause an error when
+ ```assert('SE'== myfile.readat(None, 0))``` 
+is executed because the newly created valid file did not contain 'SE', meaning an invalid
+read occurred
+
+If the example above executed without error, meaning that the newly created file contained 'SE',
+then the attack was successfully defended.
+
 **Note:** All attacks should be written as Repy V2 files, using the .r2py extension.
 
 #### Choice of File Names
 ----
-It is important to keep in mind that only lowercase file names are allowed.
-So in the above code, specifically:
-
-```
-# Open a file
-myfile=openfile("look.txt",True)
-```
-
-look.txt is a valid file name, however Look.txt and LOOK.TXT are not.
-Examples of other invalid files names are, _look.txt, look/.txt, and 
-look().txt. Essentially all non-alphanumeric characters are not allowed.
+Filenames may only be in the current directory and may only contain lowercase letters, numbers, the hyphen, underscore, and period characters. Also, filenames cannot be '.', '..', the blank string or start with a period. There is no concept of a directory or a folder in repy. Filenames must be no more than 120 characters long.
 
 ### Running your security layer
 ----
@@ -323,3 +314,4 @@ letters in lowercase.
 must produce no output when run normally.
 
  * For extra credit turn in a second repy file called extra_credit_[netid].r2py  **You must turn in separate files for the normal assignment and extra credit**
+
