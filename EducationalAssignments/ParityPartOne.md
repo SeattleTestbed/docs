@@ -305,7 +305,7 @@ Make sure you went through the "How to get RepyV2" section!
  * For a complete list of syntax in Repyv2 please visit
    the **[RepyV2 API documentation](https://github.com/SeattleTestbed/docs/blob/master/Programming/RepyV2API.md)**
  
- * **[This paper](http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf)**
+ * **[This paper](https://ssl.engineering.nyu.edu/papers/cappos_seattle_ccs_10.pdf)**
    is an excellent source for information about security layers
 
  * **Note:** It is possible to add multiple security layers to Repy, this
