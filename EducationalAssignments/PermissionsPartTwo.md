@@ -154,7 +154,7 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 ## Notes and Resources
 ----
    
- * The following link is an excellent source for information about security layers: http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf
+ * The following link is an excellent source for information about security layers: https://ssl.engineering.nyu.edu/papers/cappos_seattle_ccs_10.pdf
 
  * [repy_v2/benchmarking-support/allnoopsec.py](https://seattle.poly.edu/browser/seattle/branches/repy_v2/benchmarking-support/allnoopsec.py) is an empty security layer that doesn't perform any operations.
 
