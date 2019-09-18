@@ -89,7 +89,7 @@ And more!  Remember a good security layer can't be broken by anyone! Which is al
 
 ## Notes and Resources
 ----
- * The following link is an excellent source for information about security layers: http://isis.poly.edu/~jcappos/papers/cappos_seattle_ccs_10.pdf
+ * The following link is an excellent source for information about security layers: https://ssl.engineering.nyu.edu/papers/cappos_seattle_ccs_10.pdf
  * In repy 'log' replaces 'print' from python.  Many students find this to be a stumbling block.
 
 
