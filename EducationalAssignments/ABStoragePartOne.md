@@ -28,10 +28,8 @@ the first or last characters, then the file is considered invalid.
 
 Applications use ABopenfile() to create or open a file. Files are created by 
 setting create=True when calling ABopenfile(), the reference 
-monitor will create a new file 'SE' in filename.a and an empty 
-file called filename.b.  When close() is called on the file, if a file is
-not valid, it is discarded.  If both files are valid, the older one is 
-discarded.
+monitor will create a valid backup file called filename.a and an empty 
+file we will write to called filename.b. When close() is called on the file, if both filename.a and filename.b are valid, the original file's data is replaced with the data of filename.b. If filename.b is not valid, no changes are made. 
 
 Write test applications to ensure your reference monitor behaves properly 
 in different cases and to test attacks against your monitor.    
@@ -40,20 +38,21 @@ in different cases and to test attacks against your monitor.
 1. Not modify or disable any functionality of any [RepyV2 API calls](../Programming/RepyV2API.md), such as:
    * Creating new files  
    * Opening an existing file  
-   * Reading valid file using readat()  
+   * Reading valid backup using readat()  
    * Writing to file using writeat(). This includes invalid writes, because  'S' and 'E'
 may later be written to the begining and end of the file respectively.  
-2. Check if the file starts with 'S' and ends with 'E', only when close() is called.
-3. Not produce any errors  
+2. Check if file contents starts with 'S' and ends with 'E', only when close() is called.
+3. Update the original file with the new data IF the new data is valid on close().
+4. Not produce any errors  
    * Normal operations should not be blocked or produce any output  
    * Invalid operations should not produce any output to the user
 #### The Reference Monitor Should:
-1. Store two copies of the same file (filename.a and filename.b)   
-   * One is a valid backup, and the other is written to
+1. Create two copies of the same file (filename.a and filename.b)   
+   * One is a valid backup to read from, and the other is written to
 2. When an app calls ABopenfile(), the method opens the A/B files, which 
  you should name filename.a and filename.b.
-3. When the app calls readat(), all reads must be performed on the valid file
-4. When the app calls writeat(), all writes must be performed  on the invalid file. 
+3. When the app calls readat(), all reads must be performed on the valid backup.
+4. When the app calls writeat(), all writes must be performed on the written to file. 
 
 
 Three design paradigms are at work in this assignment: accuracy,
@@ -61,7 +60,7 @@ efficiency, and security.
 
  * Accuracy: The security layer should only stop certain actions from being
 blocked. All other actions should be allowed. For example, if an app
-tries to read data from a valid file, this must succeed as per normal and
+tries to read data from the backup file, this must succeed as per normal and
 must not be blocked.  All situations that are not described above *must*
 match that of the underlying API.
 
@@ -70,8 +69,8 @@ so performance is not compromised.  For example, keeping a complete copy of
 every file on disk in memory would be forbidden.
 
  * Security: The attacker should not be able to circumvent the security
-layer. Hence, if the attacker can cause an invalid file to be read or can
-write to a valid file, then the security is compromised, for example.
+layer. For example, if the attacker can cause an invalid file to be saved, read the "write to" file, or can
+write to the backup file we read from, then the security is compromised.
 
 
 
