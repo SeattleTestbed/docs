@@ -12,7 +12,7 @@ LookupCache
 ```
 lookup(self, key, maxvals=100, lookuptype=['central','opendht','DOR'], concurrentevents=2, graceperiod=10, timeout=60)
 ```
-   Exactly the same as [wiki:Advertise.repy].
+   Exactly the same as [advertise.repy](advertise.repy.md).
    Note:
 
    * self refers to its own cache.
@@ -41,4 +41,4 @@ remove(self, handle)
 no examples?
 
 # Includes
-[wiki:Advertise.repy]
+[advertise.repy](advertise.repy.md)
