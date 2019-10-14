@@ -70,6 +70,6 @@ print client.send_request("examples.getStateName", (1,))
 ```
 
 ### Includes
-[wiki:SeattleLibbase64.repy]
+[base64.repy](base64.repy.md)
 
-[wiki:SeattleLib/xmlparse.repy]
+[xmlparse.repy](xmlparse.repy.md)
