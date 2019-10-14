@@ -1,4 +1,4 @@
-Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle VMs.  This will describe how seash is designed.  If you are a user interested in learning how to use Seash, please go to the [SeattleShell main Seattle Shell page].
+Seash (also known as Seattle Shell) is the command line interface for interacting with Seattle VMs.  This will describe how seash is designed.  If you are a user interested in learning how to use Seash, please go to the [SeattleShell main Seattle Shell page](SeattleShell.md).
 
 
 
