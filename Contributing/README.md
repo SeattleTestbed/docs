@@ -10,7 +10,7 @@ the following:
 
  1. Start by reading the [Seattle docs](../README.md). This will give you a 
  better sense of what Seattle is and how its structured, and contains pointers 
- to the programming documentation as well. The [Contributor's Page](ContributorsPage.wiki) 
+ to the programming documentation as well. The [Contributor's Page](ContributorsPage.md) 
 has even more reading material and links.
 
  2. Join our [mailing list](https://groups.google.com/forum/?hl=en#!forum/seattle-devel)!
@@ -24,7 +24,7 @@ has even more reading material and links.
  insights that you may have, and also post any concerns or questions that arise.  
  
  4. When you are done with your issue, make sure your code adheres to our 
- [code style guidelines](../Programming/CodingStyle.wiki).  Have someone else on 
+ [code style guidelines](WebCodingStyle.md).  Have someone else on 
  the team review your code.  When they give you the OK, send a pull request.  
  If your code is good, someone will merge in your changes.
 
