@@ -14,35 +14,36 @@ Make sure you have all the necessary tools installed:
 ## Tutorials
 You can start with several different tutorials depending on your background.
 
- * [wiki:PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)]. Start here if you're new to Python and Repy!
+ * [PythonTutorial All of the Python You Need to Understand Repy (and None You Don't)](PythonTutorial.md) Start here if you're new to Python and Repy!
 
- * [wiki:PythonVsRepy All of the Python You Need to Forget to Use Repy]. Use this tutorial if you already know Python.
+ * [PythonVsRepy All of the Python You Need to Forget to Use Repy](PythonVsRepy.md) Use this tutorial if you already know Python.
+ * [All of the Python You Need to Forget to Use RepyV2](PythonVsRepyV2.md)
 
 After doing one of the above tutorials, do the following tutorial to learn how to use Repy specific features and functionality:
 
- * [wiki:RepyTutorial Repy Tutorial]. Try this tutorial to learn more about Repy features and the language API.
+ * [RepyTutorial Repy Tutorial](RepyTutorial.md) Try this tutorial to learn more about Repy features and the language API.
+ * [RePyV2 Tutorial](RepyV2Tutorial.md)
 
 If you would prefer to use Repy V2, it is worthwhile to read through the following tutorials:
 
- * [wiki:RepyV2CheckoutAndUnitTests Checking out Repy V2 and Running the included unit tests]
-
- * [wiki:RepyV2SecurityLayers How to use Security Layers with Repy V2]
+ * [RepyV2CheckoutAndUnitTests Checking out Repy V2 and Running the included unit tests](../Contributing/BuildInstructions.md)
+ * [RepyV2SecurityLayers How to use Security Layers with Repy V2](RepyV2SecurityLayers.md)
 
 ## Other Resources
- * An easy way to start learning Seattle is to watch our [wiki:UnderstandingSeattle/DemoVideo five-minute demo].
+ * An easy way to start learning Seattle is to watch our [UnderstandingSeattle/DemoVideo five-minute demo](https://seattle.poly.edu/static/demo.mov).
 
- * Use the [wiki:RepyApi Repy API Reference] as a quick guide to Repy's API once you are comfortable with the language.
+ * Use the [RepyApi Repy API Reference](RepyApi.md) as a quick guide to Repy's API once you are comfortable with the language.
 
- * Programmers writing code for Repy V2 may want to read about the [wiki:RepyV1vsRepyV2 differences between Repy V1 and Repy V2].
+ * Programmers writing code for Repy V2 may want to read about the [RepyV1vsRepyV2 differences between Repy V1 and Repy V2](RepyV1vsRepyV2.md).
 
  * There is a growing list of library code you can download and use with Repy (see [seattlelib](http://seattle.poly.edu/svn/seattle/trunk/seattlelib/) in the Seattle repository for examples). Read more about RepyHelper for the details of how to include Repy code in Python programs.
 
- * Documentation about the Seattle Standard Library can be seen at [wiki:SeattleLib]
+ * Documentation about the Seattle Standard Library can be seen at [SeattleLib](SeattleLib_v1/ProgrammerResources.md)
 <!--
 Much of this code uses a Repy Pre-Processor (repypp).  To "include" a repy file in your source file **source.repy**, at the top of your code include ```include filename.repy```.   Then run ```python repypp.py source.repy out.repy```.   The **filename.repy** file does not need to be pre-processed. The file **out.repy** will contain the code for **filename.repy** included inside the code for **source.repy** at the appropriate place.
 -->
 
- * Continuous Integration Guide for Seattle Projects: [wiki:ContinuousIntegrationGuide]
+ * Continuous Integration Guide for Seattle Projects: [ContinuousIntegrationGuide](../Contributing/ContinuousIntegration.md)
 
 ## Editing Repy files
 ### Vim
