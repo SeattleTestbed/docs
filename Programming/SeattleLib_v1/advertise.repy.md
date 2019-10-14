@@ -37,14 +37,14 @@ advertise_announce(advertisekey, str(my_name), adTTL)
 ```
 
 ### Includes
-[wiki:SeattleLib/listops.repy]
+[SeattleLib/listops.repy](listops.repy.md)
 
-[wiki:SeattleLib/openDHTadvertise.repy]
+[SeattleLib/openDHTadvertise.repy](openDHTadvertise.repy.md)
 
-[wiki:SeattleLibcentralizedadvertise.repy]
+[SeattleLibcentralizedadvertise.repy](centralizedadvertise.repy.md)
 
-[wiki:SeattleLib/DORadvertise.repy]
+[SeattleLib/DORadvertise.repy](DORadvertise.repy.md)
 
-[wiki:SeattleLib/parallelize.repy]
+[SeattleLib/parallelize.repy](parallelize.repy.md)
 
-
+[Back to NodeAdvertising](NodeAdvertising.md)
