@@ -236,8 +236,7 @@ n")
  
 # No Exception was raise
 else:
-    log("Wrote an MZ!!!
-n")
+    log("Wrote an MZ!!! \n")
  
 finally:
     # Close the file after our attempt.
