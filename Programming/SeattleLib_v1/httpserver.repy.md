@@ -57,13 +57,13 @@ def httpserver_stopcallback(callbackid):
 
 ### Includes
 
-[wiki:SeattleLib/urllib.repy]
+[wiki:SeattleLib/urllib.repy](urllib.repy.md)
 
-[wiki:SeattleLib/urlparse.repy]
+[wiki:SeattleLib/urlparse.repy](urlparse.repy.md)
 
-[wiki:SeattleLib/uniqueid.repy]
+[wiki:SeattleLib/uniqueid.repy](uniqueid.repy.md)
 
-[wiki:SeattleLib/sockettimeout.repy]
+[wiki:SeattleLib/sockettimeout.repy](sockettimeout.repy.md)
 
-[wiki:SeattleLib/httpretrieve.repy]
+[wiki:SeattleLib/httpretrieve.repy](httpretrieve.repy.md)
 
