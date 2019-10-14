@@ -100,4 +100,4 @@ def sshkey_file_to_publickey(filename):
 
 ### Includes
 
-[wiki:SeattleLib/sshkey_paramiko.repy]
+[sshkey_paramiko.repy](sshkey_paramiko.repy.md)
