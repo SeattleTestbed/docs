@@ -219,6 +219,7 @@ def rsa_matching_keys(privatekey, publickey):
 
 ### Includes
 
-[wiki:SeattleLib/random.repy]
-[wiki:SeattleLib/pycryptorsa.repy]
+[random.repy](random.repy.md)
+
+[pycryptorsa.repy](pycryptorsa.repy.md)
     
