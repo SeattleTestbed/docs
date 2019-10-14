@@ -3,7 +3,7 @@
 
 ## Overview / Purpose
 
-The [wiki:Archive/LipstickOnAPig Lipstick on a Pig] strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
+The [Lipstick on a Pig](LipstickOnAPig.md) strike force is attempting to create a standard exception hierarchy for repy to provide a unified method to allow users to handle exceptions within repy programs.
 
 Currently the Repy library has inconsistent treatment and use of exceptions, which can be confusing and off-putting for new users. Our goal is to come up with a clear, uniform and logical way to present exceptions. The repy library functions have specific needs and goals, and the reflection hierarchy we're proposing reflects this. We are focusing on creating the core exception hierarchy which will be used by the repy library calls themselves; exceptions specific to any seattlelib code will need to augment the hierarchy with their own exceptions. 
 
