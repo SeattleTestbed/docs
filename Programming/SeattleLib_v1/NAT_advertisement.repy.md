@@ -1,6 +1,6 @@
 # NAT_advertisement.repy
 
-Abstracts the task of looking up and advertising servers and forwarders. Allows for those using NAT_layer to advertise. Utilizes [wiki:Advertise.repy] to achieve this.
+Abstracts the task of looking up and advertising servers and forwarders. Allows for those using NAT_layer to advertise. Utilizes [advertise.repy](advertise.repy.md) to achieve this.
 
 ### Functions
 
@@ -41,4 +41,4 @@ nat_toggle_advertisement(enabled, threadRun=True)
 ???
 
 ### Includes
-[wiki:Advertise.repy]
+[advertise.repy](advertise.repy.md)

@@ -112,9 +112,9 @@ def signeddata_shouldtrust(oldsigneddata, newsigneddata, publickey=None, oldsign
 
 ### Includes
 
-[wiki:SeattleLib/sha.repy]
+[wiki:SeattleLib/sha.repy](sha.repy.md)
 
-[wiki:SeattleLib/rsa.repy]
+[wiki:SeattleLib/rsa.repy](rsa.repy.md)
 
-[wiki:SeattleLib/time.repy]
+[wiki:SeattleLib/time.repy](time.repy.md)
 

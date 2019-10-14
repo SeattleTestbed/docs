@@ -44,4 +44,4 @@ def semaphore_down(semaphorehandle):
 
 ### Includes
 
-[wiki:SeattleLib/uniqueid.repy]
+[uniqueid.repy](uniqueid.repy.md)

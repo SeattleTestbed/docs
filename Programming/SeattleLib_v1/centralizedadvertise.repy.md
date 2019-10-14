@@ -33,8 +33,9 @@ centralizedadvertise_announce(mycontext['experiment_name'], my_advetisement_info
 ```
 
 ### Includes
-[wiki:SeattleLib/sockettimeout.repy]
-[wiki:SeattleLib/serialize.repy]
+[sockettimeout.repy](sockettimeout.repy.md)
+
+[serialize.repy](serialize.repy.md)
 
 
 

@@ -4,4 +4,4 @@ The parallelism services offered by Seattle are purely for the client's needs an
 
 Many modules here also have Python equivalents. These are linked appropriately.
 
-[Back to SeattleLibWiki] 
+[Back to SeattleLibWiki](../)

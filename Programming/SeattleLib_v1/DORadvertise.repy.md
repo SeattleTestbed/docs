@@ -25,8 +25,10 @@ DORadvertise_lookup(key, maxvals=100, timeout=None)
 ???couldn't find any?
 
 ### Include
-[wiki:SeattleLib/sockettimeout.repy]
+[SeattleLib/sockettimeout.repy](sockettimeout.repy.md)
 
-[wiki:SeattleLib/httpretrieve.repy]
+[SeattleLib/httpretrieve.repy](httpretrieve.repy.md)
 
-[wiki:SeattleLib/xmlparse.repy]
+[SeattleLib/xmlparse.repy](xmlparse.repy.md)
+
+[Back to NodeAdvertising](NodeAdvertising.md)

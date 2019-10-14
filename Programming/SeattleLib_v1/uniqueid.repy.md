@@ -2,7 +2,7 @@
 
 This is a simple module which provides an unique integer id for each function call. This exists to reduce redundancy in other libraries.
 
-This service can be utilized directly, but is used in contexts like [wiki:SeattleLib/parallelize.repy].
+This service can be utilized directly, but is used in contexts like [parallelize.repy](parallelize.repy.md).
 	
 NOTE: This will give unique ids PER FILE. If you have multiple python modules that include this, they will have the potential to generate the same ID.
 
