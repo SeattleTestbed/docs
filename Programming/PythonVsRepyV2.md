@@ -92,7 +92,7 @@ super, unichr, unicode, vars, yield, __import__
 ----
 
 #### sys.argv
-Programs written in Python use `sys.argv``` to access arguments to
+Programs written in Python use `sys.argv` to access arguments to
 the file. In RepyV2 the variable `callargs` behaves the same as
 `sys.argv[1:]`
 
