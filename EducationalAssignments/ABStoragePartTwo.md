@@ -1,14 +1,12 @@
 
 # Security layer testing and penetration
 
-In this assignment you will learn how to attack a reference monitor.  The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed.  It is possible to do this assignment separately, but it is recommended that this assignment be completed after [Part One](ABStoragePartOne.md).  Either way you should already have a working security layer or access to one.  Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
-
-
+In this assignment you will learn how to attack a reference monitor. The reference monitor you will be testing uses the security layer framework (encasement library, etc.) for the Seattle testbed. It is possible to do this assignment separately, but it is recommended that this assignment be completed after [Part One](ABStoragePartOne.md). Either way you should already have a working security layer or access to one. Testing the security layer is done by running a series of test cases that an adversary may use to circumvent your system. This assignment is intended to prepare you for thinking about security paradigms in a functional way. The ideas of information, security and privacy have been embedded into the steps of this assignment.
 
 
 ## Overview
 ----
-In this assignment you are a tester.  You have been sent a bunch of reference monitors that need testing before they are deployed.  Your job will be to ensure an attacker cannot circumvent these security layers.  In order to do this, you will attempt to read, write, and append data without having the proper missions enabled. If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
+In this assignment you are a tester. You have been sent a bunch of reference monitors that need testing before they are deployed. Your job will be to ensure an attacker cannot circumvent these security layers. In order to do this, you will attempt to read, write, and append invalid data. If you are able to do so, then the security layer is not secure. The future of the system depends on your ability to test code thoroughly!   
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and security.
 
@@ -20,14 +18,13 @@ Three design paradigms are at work in this assignment: accuracy, efficiency, and
 
 Within the context of this assignment these design paradigms translate to:
 
- * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. For example, if an app tries to read data from the backup file, this must succeed as per normal and must not be blocked. All situations that are not described above must match that of the underlying API.
+ * Accuracy: The security layer should only stop certain actions from being blocked. All other actions should be allowed. These actions are defined in [ABStoragePartOne](./ABStoragePartOne.md) For example, if an app tries to read data from the backup file, this must succeed as per normal and must not be blocked. All situations that are not described above must match that of the underlying API.
 
  * Efficiency: The security layer should use a minimum number of resources, so performance is not compromised. For example, keeping a complete copy of every file on disk in memory would be forbidden.
 
- * Security: The attacker should not be able to circumvent the security layer. For example, if the attacker can cause an invalid file to be saved, read the "write to" file, or can write to the backup file we read from, then the security is compromised.
+ * Security: The attacker should not be able to circumvent the security layer. For example, if the security layer is correctly implemented but the attacker can still cause an invalid file to be saved, read the "write to" file, write to the backup file we read from, or read/write out of bounds, then the security is compromised. Note if preventing the aforementioned properties is part of the specification simply testing whether the actions can occur would merely be an Accuracy test. The keyword is circumvention. 
 
-You will submit a zip file containing all of the tests you have created.   You will gain points for every student's reference monitor you find a flaw in.   It is good if multiple tests of yours break a student's reference monitor, but you gain the same number of tests whether one or more tests break the layer.
-
+You will submit a zip file containing all of the tests you have created. You will gain points for every student's reference monitor you find a flaw in. It is good if multiple tests of yours break a student's reference monitor, but you gain the same number of tests whether one or more tests break the layer.
 
 
 ## Prerequisites
