@@ -172,15 +172,6 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 
  * Note that you should not assume that any files exist in your directory.  You should create any files (e.g., testfile.txt) yourself in your test program.
 
-
-
-
-## Extra Credit
-----
-Find bugs in the extra credit reference monitors given the altered threat model.  You should include more test cases in the extra credit!
-
-
-
 ## How to run your tests on many reference monitors
 ----
 
@@ -224,5 +215,4 @@ This will print out the name of each reference monitor before it starts executin
 ## What to turn in?
 ----
 
- * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must start with your netid in lowercase.   For example: abc123_securitytest1.r2py abc123_goodaccuracytest.r2py are both valid names.
- * Optionally turn in the test cases used to attack the extra credit reference monitors in a zip file.   Note that in this case, you can expect that your code is run more than once.   In the name of the file, say if it needs to be run multiple times.   For example:  abc123_run_twice_metadata_removal.r2py abc123_run_once_threading_hack.r2py.
+ * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must match the following format: attackcase1.r2py, attackcase2.r2py, etc.
