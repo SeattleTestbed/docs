@@ -180,7 +180,7 @@ class SecureFile():
 	def writeat(self,data,offset):	
 		#applying hashfunction to data - repy has SHA1 library 
 		temp_data = applyHashFunction(data)
-    block_no = int(offset/100)	
+    		block_no = int(offset/100)	
     
 		if offset%100!=0: #when offset is in between block
 			len_d = (100 - (offset%100))
