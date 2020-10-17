@@ -170,6 +170,7 @@ class SecureFile():
 		# local (per object) reference to the underlying file
 		self.fn = filename
 		self.trackfn = 'trackhash'
+		self.count_reads = 0
 		
 		# make the files
 		if create:
@@ -195,10 +196,15 @@ class SecureFile():
 	def readat(self,bytes,offset):
 		# Read from the file using the sandbox's readat...
 		# read the file only if the block is first written to
+		self.count_reads = self.count_reads + 1
 		return self.file.readat(bytes,offset)
 
 	def close(self):
 		self.file.close()
+	
+	def count_readat(self): 
+		# returns the number of times readat() has been called on a file object
+		return self.count_reads
 
 def secureopenfile(filename, create):
 	return SecureFile(filename,create)
@@ -209,6 +215,7 @@ sec_file_def = {"obj-type":SecureFile,
                 "name":"SecureFile",
                 "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(int,type(None)),"target":SecureFile.writeat},
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
+		"count_readat":{"type":"func","args":None,"exceptions":None,"return":(int,type(None)),"target":SecureFile.count_readat},
                 "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
            }
 
