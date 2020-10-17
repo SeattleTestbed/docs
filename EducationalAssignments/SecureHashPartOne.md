@@ -170,35 +170,23 @@ class SecureFile():
 		# local (per object) reference to the underlying file
 		self.fn = filename
 		self.trackfn = 'trackhash'
-    
-		# make the files only if the filename starts with "trackme"
-		if filename.startswith("trackme"):
-			if create:
-				self.file = openfile(self.fn,create)
-				self.trackfile = openfile(self.trackfn,True)
+		
+		# make the files
+		if create:
+			# ensure to check your filename
+			self.file = openfile(self.fn,create)
+			self.trackfile = openfile(self.trackfn,True)
 
 	def writeat(self,data,offset):	
-		#applying hashfunction to data - repy has SHA1 library 
+		# applying hashfunction to your data - repy supports SHA1 library
 		temp_data = applyHashFunction(data)
-    		block_no = int(offset/100)	
-    
-		if offset%100!=0: #when offset is in between block
-			len_d = (100 - (offset%100))
-			w_data = temp_data[0:len_d]
-			temp_data = temp_data[len_d:]
-			
-			# writing hash data in the trackhash file
-			self.trackfile.writeat(self.fn+" "+str(block_no)+" "+w_data,0)
-			block_no = block_no + 1
-			
-		n = 100
-		if temp_data:
-			for i in range(0, len(temp_data), n):
-				w_data = temp_data[i:i+n]
-				
-				# writing hash data in the trackhash file
-				self.trackfile.writeat(self.fn+" "+str(block_no)+" "+w_data,0)
-				block_no = block_no + 1
+    		block_no = 0
+		
+		# Writing file contents in the "trackhash" file with filename, block no and hashed data
+		# your data may not necessarily be in one entire block or begin from block no 0
+		self.trackfile.writeat(self.fn+" "+str(block_no)+" "+temp_data,0)
+		
+		#close the trackhash file
 		self.trackfile.close()
 
 		# Write the requested data to the file using the sandbox's writeat call
@@ -206,6 +194,7 @@ class SecureFile():
   
 	def readat(self,bytes,offset):
 		# Read from the file using the sandbox's readat...
+		# read the file only if the block is first written to
 		return self.file.readat(bytes,offset)
 
 	def close(self):
