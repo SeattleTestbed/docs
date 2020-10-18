@@ -231,20 +231,22 @@ if "trackme.foo" in listfiles():
 #Create a file
 myfile = secureopenfile("trackme.foo",True)  
 
-# Put some valid data in the file.
-myfile.writeat("AbCd",0)
+# Write data to your file containing more than 400 bytes 
+# Here is an example how to put some valid data in the file.
+myfile.writeat("AbCd",0) 
 
-# I should be able to read it out.
-assert('AbCd' == myfile.readat(None, 0))
+# Try reading block 0, you should be able to read it
+# Below is an example of how you can read data from your file
+myfile.readat(None, 0)
 
-# may read block 1 since it writes to block 1 and "hello" is
+# you may read block 1 since it writes to block 1 and "hello" is
 # contained entirely in that block
-myfile.writeat("hello",123)
+myfile.writeat("hello",123) 
 
-# may read blocks 2 and 3 since it writes to both blocks
+# you may read blocks 2 and 3 since it writes to both blocks
 myfile.writeat("goodbye",298)
 
-# may not read any blocks since 1 and 2 were previously read above
+# you may not read any blocks since 1 and 2 were previously read above
 myfile.writeat("konnichiwa",195)
 
 # Close the file
