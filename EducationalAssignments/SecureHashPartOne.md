@@ -169,40 +169,28 @@ class SecureFile():
 		
 		# local (per object) reference to the underlying file
 		self.fn = filename
-		self.trackfn = 'trackhash'
 		self.count_reads = 0
 		
-		# make the files
-		if create:
-			# ensure to check your filename
-			self.file = openfile(self.fn,create)
-			self.trackfile = openfile(self.trackfn,True)
+		self.file = openfile(self.fn,create)
+		self.readcountlock = createlock()
 
 	def writeat(self,data,offset):	
-		# applying hashfunction to your data - repy supports SHA1 library
-		temp_data = applyHashFunction(data)
-    		block_no = 0
-		
-		# Writing file contents in the "trackhash" file with filename, block no and hashed data
-		# your data may not necessarily be in one entire block or begin from block no 0
-		self.trackfile.writeat(self.fn+" "+str(block_no)+" "+temp_data,0)
-		
-		#close the trackhash file
-		self.trackfile.close()
-
 		# Write the requested data to the file using the sandbox's writeat call
 		self.file.writeat(data, offset)		
   
 	def readat(self,bytes,offset):
 		# Read from the file using the sandbox's readat...
-		# read the file only if the block is first written to
+		retval = self.file.readat(bytes,offset)
+		self.readcountlock.acquire(True)
 		self.count_reads = self.count_reads + 1
-		return self.file.readat(bytes,offset)
+		self.readcountlock.release()
+		return retval
 
 	def close(self):
 		self.file.close()
 	
 	def count_readat(self): 
+		# do not modify this function 
 		# returns the number of times readat() has been called on a file object
 		return self.count_reads
 
@@ -217,7 +205,7 @@ sec_file_def = {"obj-type":SecureFile,
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":SecureFile.readat},
 		"count_readat":{"type":"func","args":None,"exceptions":None,"return":(int,type(None)),"target":SecureFile.count_readat},
                 "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":SecureFile.close}
-           }
+           	}
 
 CHILD_CONTEXT_DEF["secureopenfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:secureopenfile}
 
