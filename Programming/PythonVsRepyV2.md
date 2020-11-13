@@ -112,6 +112,11 @@ if callfunc == "initialize":
   main()
 ```
 
+#### with
+Programs written in Python can use the `with` statement in combination
+with `__enter__` and `__exit__` methods. However, these constructs are 
+not available in RepyV2.
+
 
 
 ## Python Modules
