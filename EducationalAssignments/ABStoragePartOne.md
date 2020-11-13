@@ -27,7 +27,7 @@ valid file must start with the character 'S' and end with the character
 the first or last characters, then the file is considered invalid. 
 
 Applications use ABopenfile() to create or open a file. Files are created by 
-setting create=True when calling ABopenfile(), the reference 
+setting create=True. When calling ABopenfile(), the reference 
 monitor will create a valid backup file called filename.a and an empty 
 file we will write to called filename.b. When close() is called on the file, if both filename.a and filename.b are valid, the original file's data is replaced with the data of filename.b. If filename.b is not valid, the original file should use the data of the backup filename.a file. Afterward both the filename.a and filename.b file should be deleted, and only the original file should remain. 
 
