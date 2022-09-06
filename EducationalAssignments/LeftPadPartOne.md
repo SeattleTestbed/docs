@@ -30,20 +30,18 @@ You should write test applications to ensure your reference monitor behaves prop
 in different cases and to test attacks against your monitor.    
 
 #### The Reference Monitor Must:
-1. Behave identically to a non-sandboxed program [RepyV2 API calls](../Programming/RepyV2API.md), except:
-   * When writing to file using writeat() except when a write strictly appends to a file (as specified 
-        in the next step).
-   * All other calls (writeat()s that do not strictly append, readat()s, etc.) must be performed as
-        they would in a non-sandboxed program!
+1. Behave identically to a non-sandboxed program [RepyV2 API calls](../Programming/RepyV2API.md) for
+   all calls other than a writeat()s that strictly append.  So other writeat()s, readat()s, etc. 
+        must be performed as they would in a non-sandboxed program!
 2. If a writeat() strictly appends to a file, then:
-  a. If it contains no '\n', perform the writeat() operation normally (as a non-sandboxed program)
-  b. If it contains exactly one '\n' character, then perform a writeat() in the 
-     same location, but with four space ' ' characters inserted before the '\n'.
-  c. If it contains more than one '\n' character, raise a RepyArgumentError exception
+   * If it contains no '\n' characters, perform the writeat() operation normally (as a non-sandboxed program)
+   * If it contains exactly one '\n' character, then perform a writeat() that strictly appends, 
+     but with four space ' ' characters inserted before the '\n'.   
+   * If it contains more than one '\n' character, raise a RepyArgumentError exception
 3. Not produce any errors or output for any reason except as mentioned above  
    * Normal operations should not be blocked or produce any output  
    * Invalid operations should not produce any output to the user
-4. Call readat() everytime writeat() is called.  This will be too slow and is forbidden.
+4. Not call readat() everytime writeat() is called.  This will be too slow and is forbidden.
 
 
 Three design paradigms are at work in this assignment: accuracy,
