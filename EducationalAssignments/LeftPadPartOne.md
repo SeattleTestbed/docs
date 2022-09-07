@@ -162,10 +162,13 @@ class LPFile():
   def __init__(self,filename,create):
     # globals
     mycontext['debug'] = False   
-    if create:
-      self.LPfile = openfile(self.filename,create)
-      self.length = 0
+    @ per-object vars
+    self.LPfile = openfile(filename,create)
+    self.length = 0
 
+  def readat(self, bytes, offset):
+    # Read from the file using the sandbox's readat...
+    return self.file.readat(bytes, offset)
 
   def writeat(self,data,offset):
     if not offset == self.length:
