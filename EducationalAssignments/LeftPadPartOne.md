@@ -162,13 +162,12 @@ class LPFile():
   def __init__(self,filename,create):
     # globals
     mycontext['debug'] = False   
-    @ per-object vars
     self.LPfile = openfile(filename,create)
     self.length = 0
 
   def readat(self, bytes, offset):
     # Read from the file using the sandbox's readat...
-    return self.file.readat(bytes, offset)
+    return self.LPfile.readat(bytes, offset)
 
   def writeat(self,data,offset):
     if not offset == self.length:
@@ -179,11 +178,11 @@ class LPFile():
     else:
     
       if '\n' not in data:
-        self.writeat(data,offset)
+        self.LPfile.writeat(data,offset)
       else: # bug?
         loc = data.find('\n')
         # bug?
-        self.writeat(data[:loc]+"    "+data[loc:],offset)
+        self.LPfile.writeat(data[:loc]+"    "+data[loc:],offset)
 
   
   def close(self):
@@ -235,7 +234,7 @@ myfile.writeat("Hi!",0) # writing early in the file
 
 myfile.writeat("Append!\nShould be indented!!!",8) # strictly appending...
 
-assert(' ' == myfile.readat(None,17)) # this location should contain a space...
+assert(' ' == myfile.readat(None,17)[0]) # this location should contain a space...
 
 #Close the file
 myfile.close()
