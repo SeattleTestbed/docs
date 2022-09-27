@@ -36,7 +36,7 @@ in different cases and to test attacks against your monitor.
 2. If a writeat() strictly appends to a file, then:
    * If it contains no '\n' characters, perform the writeat() operation normally (as a non-sandboxed program)
    * If it contains exactly one '\n' character, then perform a writeat() that strictly appends, 
-     but with four space ' ' characters inserted before the '\n'.   
+     but with four space ' ' characters inserted after the '\n'.   
    * If it contains more than one '\n' character, raise a RepyArgumentError exception
 3. Not produce any errors or output for any reason except as mentioned above  
    * Normal operations should not be blocked or produce any output  
@@ -59,7 +59,7 @@ however.
 
  * Security: The attacker should not be able to circumvent the security
 layer. For example, if the attacker can cause a non-strictly appending write to
-have '    ' inserted before '\n' or can cause the reference monitor to incorrectly
+have '    ' inserted after '\n' or can cause the reference monitor to incorrectly
 error or hang, then the security is compromised.
 
 
