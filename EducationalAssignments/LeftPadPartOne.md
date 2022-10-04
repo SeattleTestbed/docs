@@ -80,7 +80,8 @@ security layers and application that you want to run.)
 In order to test whether or not these steps worked, please copy and paste
 the code found below for the sample security layer and sample attack.
 
-If you got an error, please go through the troubleshooting section found below.
+You should get an assertion error when running the test.  If not, please go through the troubleshooting 
+section found below.
 
 ### Troubleshooting Repy code
 ----
