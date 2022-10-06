@@ -69,11 +69,11 @@ directory which will be created as a sub-directory inside your main
 repository. It takes its instructions from `config_initialize.txt` to 
 fetch the dependencies.
 
-Make sure that you are using python2 for initializing and building. To 
-check the python version being sourced you can do:
+Make sure that you are using python 2.7 for initializing and building to
+avoid any errors with building. To use python 2.7, you can do:
 
 ```sh
-$ python -V
+$ python2 initialize.py
 ```
 
 3. To build a runnable component from the source dependencies, run the 
