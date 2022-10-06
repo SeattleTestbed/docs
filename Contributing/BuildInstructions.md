@@ -69,6 +69,13 @@ directory which will be created as a sub-directory inside your main
 repository. It takes its instructions from `config_initialize.txt` to 
 fetch the dependencies.
 
+Make sure that you are using python2 for initializing and building. To 
+check the python version being sourced you can do:
+
+```sh
+$ python -V
+```
+
 3. To build a runnable component from the source dependencies, run the 
 `scripts/build.py` script. You may supply it an optional target folder for 
 the build (which must be created first). Name this folder as you like.
