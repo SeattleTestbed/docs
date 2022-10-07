@@ -281,15 +281,6 @@ done with the following command at the terminal:
 testing if Repy installed correctly.
 
 
-# Extra Credit
-----
-For extra credit, program that keeps all old versions of files and allows
-read from any of them.  Writing to any old file creates a new (empty) version
-of that file.
-Do not submit this code inside your assignment. Submit a separate copy for extra credit.
-
-
-
 # What to turn in?
 ----
  * Turn in a repy file called reference_monitor_[ netid ].r2py with all
@@ -297,5 +288,3 @@ letters in lowercase.
 
 * **Never raise unexpected errors or produce any output.**  Your program
 must produce no output when run normally.
-
- * For extra credit turn in a second repy file called extra_credit_[netid].r2py  **You must turn in separate files for the normal assignment and extra credit**
