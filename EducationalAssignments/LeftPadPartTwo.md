@@ -85,6 +85,8 @@ And more!  Remember a good security layer can't be broken by anyone!  Which is a
 
  * Note that you should not assume that any files exist in your directory.  You should create any files (e.g., testfile.txt) yourself in your test program.
 
+ * It's important to note that if a test has a flaw in any part of it, the entire test will be considered invalid. So, it's advisable to break your tests into different files. 
+
 ## How to run your tests on many reference monitors
 ----
 
@@ -127,5 +129,4 @@ This will print out the name of each reference monitor before it starts executin
 
 ## What to turn in?
 ----
-
  * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must match the following format: attackcase1.r2py, attackcase2.r2py, etc.
