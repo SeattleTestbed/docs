@@ -202,7 +202,7 @@ sec_file_def = {"obj-type":LPFile,
                 "name":"LPFile",
                 "writeat":{"type":"func","args":(str,(int,long)),"exceptions":Exception,"return":(int,type(None)),"target":LPFile.writeat},
                 "readat":{"type":"func","args":((int,long,type(None)),(int,long)),"exceptions":Exception,"return":str,"target":LPFile.readat},
-                "close":{"type":"func","args":None,"exceptions":None,"return":(bool,type(None)),"target":LPFile.close}
+                "close":{"type":"func","args":None,"exceptions":Exception,"return":(bool,type(None)),"target":LPFile.close}
            }
 
 CHILD_CONTEXT_DEF["openfile"] = {TYPE:OBJC,ARGS:(str,bool),EXCP:Exception,RETURN:sec_file_def,TARGET:LPopenfile}
