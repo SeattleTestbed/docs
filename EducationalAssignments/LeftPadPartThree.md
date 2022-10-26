@@ -57,7 +57,7 @@ class LPFile():
 ```
 
 ### Code Analysis
-Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartOne.md), it should return RepyArgumentError if there are two '\n' which isn't implemented in this code, moreover, this code inserts spaces before '\n', as a result you can't see the indentation. Another bug is that it should first update the length and write. Furthermore,  this code doesn't check if len(data) is greater than self.length when offset is less then self.length. It also assumes self.lenght = 0 which means that the file would be empty. Moreover, This example doesn't use any locks so you can introduce race conditions and perform a variety of attacks. 
+Let's analyze one of the bugs in this implementation.  According to the specifications in [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartOne.md), it should return RepyArgumentError if there are two '\n' which isn't implemented in this code, moreover, this code inserts spaces before '\n', as a result you can't see the indentation. Another bug is that it should first update the length and write. Furthermore,  this code doesn't check if len(data) is greater than self.length when offset is less than self.length. It also assumes self.length = 0 which means that the file would be empty. Moreover, This example doesn't use any locks so you can introduce race conditions and perform a variety of attacks. 
 
 
 ## What to turn in?
