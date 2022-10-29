@@ -129,4 +129,5 @@ This will print out the name of each reference monitor before it starts executin
 
 ## What to turn in?
 ----
+ * Never raise unexpected errors or produce any output. Your attack must produce no output when run normally.
  * Turn in the test cases used to attack a given reference monitor in a zip file.   The name of each testcase must match the following format: [ net_id ]_attackcase1.r2py, [ net_id ]_attackcase2.r2py, etc.

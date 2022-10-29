@@ -62,6 +62,6 @@ Let's analyze one of the bugs in this implementation.  According to the specific
 
 ## What to turn in?
 ----
-
+ * Never raise unexpected errors or produce any output. Your program must produce no output when run normally.
  * Turn in the reference monitor that you have fixed.  The name of the reference monitor should be in the form of reference_monitor_[netId].r2py
 All letters must be lowercase.
