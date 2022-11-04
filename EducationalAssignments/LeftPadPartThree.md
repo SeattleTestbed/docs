@@ -1,8 +1,7 @@
 
 # Fixing your security layer
 
-In this assignment you will analyze the bugs in your security layer from [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartOne.md) and fix them.  You may want to use test cases from [Part Two](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartTwo.md) to help identify these bugs.  Finally, you will write a report discussing the different classes of bugs that your code had, and why.
-
+In this assignment you will analyze the bugs in your security layer from [Part One](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartOne.md) and fix them.  You may want to use test cases from [Part Two](https://github.com/SeattleTestbed/docs/blob/master/EducationalAssignments/LeftPadPartTwo.md) to help identify these bugs.  
 
 
 
