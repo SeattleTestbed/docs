@@ -178,8 +178,8 @@ class LPFile():
         self.pending_offset = offset
 
     def undo(self):
-        self.pending_data = data
-        self.pending_offset = offset
+        self.pending_data = None
+        self.pending_offset = None
 
     def close(self):
         self.LPfile.close()
@@ -194,7 +194,7 @@ sec_file_def = {
     "name": "LPFile",
     "writeat": {"type": "func", "args": (str, (int, long)), "exceptions": Exception, "return": (int, type(None)), "target": LPFile.writeat},
     "readat": {"type": "func", "args": ((int, long, type(None)), (int, long)), "exceptions": Exception, "return": str, "target": LPFile.readat},
-    "undo": {"type": "func", "args": None, "exceptions": (), "return": type(None), "target": LPFile.undo},
+    "undo": {"type": "func", "args": None, "exceptions": None, "return": type(None), "target": LPFile.undo},
     "close": {"type": "func", "args": None, "exceptions": Exception, "return": (bool, type(None)), "target": LPFile.close}
 }
 
@@ -244,7 +244,7 @@ assert("12345678" == myfile.readat(8,0))
 myfile.close()
 ```
 
-If the reference monitor is correct, there should be no assertion failure.
+If the reference monitor is correct, there should be no `RepyArgumentError`.
 
 **Note:** All attacks should be written as Repy V2 files, using the `.r2py`
 extension.
