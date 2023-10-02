@@ -83,7 +83,7 @@ security layers and application that you want to run.)
 In order to test whether or not these steps worked, please copy and paste the
 code found below for the sample security layer and sample attack.
 
-You should get an assertion error when running the test.  If not, please go
+You should get an `RepyArgumentError` when running the test.  If not, please go
 through the troubleshooting section found below.
 
 
@@ -129,7 +129,6 @@ The following tutorials provide this information.
  * List of [RepyV2 API calls](../Programming/RepyV2API.md)
 
 
-
 ## Building the security layer
 
 The following program is a sample security layer, it is not complete and does
@@ -140,7 +139,7 @@ leave nothing to chance!
 
 ### A basic (and inadequate) defense
 
-Time to start coding!  Let's inspect a basic security layer.  
+Time to start coding! Let's inspect a basic security layer.
 
 ```py
 """
@@ -162,24 +161,25 @@ OBJC = "objc"
 
 
 class LPFile():
-    def __init__(self,filename,create):
+    def __init__(self, filename, create):
         # globals
-        mycontext['debug'] = False   
-        self.LPfile = openfile(filename,create)
-        self.pending_data = ""
-        self.pending_offset = 0
+        mycontext['debug'] = False
+        self.LPfile = openfile(filename, create)
+        self.pending_data = None
+        self.pending_offset = None
 
     def readat(self, bytes, offset):
         # Read from the file using the sandbox's readat...
         return self.LPfile.readat(bytes, offset)
 
-    def writeat(self,data,offset):
-        self.LPfile.writeat(data, offset)
-        self.pending_data += data
-        self.pending_offset = offset + len(data)
+    def writeat(self, data, offset):
+        self.LPfile.writeat(self.pending_data, self.pending_offset)
+        self.pending_data = data
+        self.pending_offset = offset
 
     def undo(self):
-        self.LPfile.writeat("", self.pending_offset)
+        self.pending_data = data
+        self.pending_offset = offset
 
     def close(self):
         self.LPfile.close()
@@ -192,10 +192,10 @@ def LPopenfile(filename, create):
 sec_file_def = {
     "obj-type": LPFile,
     "name": "LPFile",
-    "writeat": {"type": "func","args": (str, (int, long)),"exceptions": Exception,"return": (int, type(None)),"target": LPFile.writeat},
-    "readat": {"type": "func","args": ((int, long, type(None)), (int, long)),"exceptions": Exception,"return": str,"target": LPFile.readat},
-    "undo": {"type": "func","args": None,"exceptions": (),"return": type(None),"target": LPFile.undo},
-    "close": {"type": "func","args": None,"exceptions": Exception,"return": (bool, type(None)),"target": LPFile.close}
+    "writeat": {"type": "func", "args": (str, (int, long)), "exceptions": Exception, "return": (int, type(None)), "target": LPFile.writeat},
+    "readat": {"type": "func", "args": ((int, long, type(None)), (int, long)), "exceptions": Exception, "return": str, "target": LPFile.readat},
+    "undo": {"type": "func", "args": None, "exceptions": (), "return": type(None), "target": LPFile.undo},
+    "close": {"type": "func", "args": None, "exceptions": Exception, "return": (bool, type(None)), "target": LPFile.close}
 }
 
 CHILD_CONTEXT_DEF["openfile"] = {
