@@ -119,6 +119,14 @@ write the security layer, then you solve the puzzle - try to bypass it.  If your
 puzzle is "good enough", no one will be able to break it, no matter what.  
 
 
+> **Note**: When creating tests, it's best practice to separate them into
+> different files. If there is a flaw in any part of a test, it can invalidate
+> the entire thing. Breaking tests into separate files helps isolate issues and
+> prevent one flawed test from compromising others. This modular approach makes
+> debugging easier and allows you to more efficiently identify and address
+> problems.
+
+
 ## Notes and Resources
 
  * The following link is an excellent source for information about security
