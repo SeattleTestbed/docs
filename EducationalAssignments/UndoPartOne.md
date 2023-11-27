@@ -44,8 +44,6 @@ properly in different cases and to test attacks against your monitor.
    undone.
 4. Aside from the ability to be undone and potentially delayed writes, all
    `writeat` operations should behave the same way as they do in the RepyV2 API.
-   You are expected to keep track of the offset, to make sure the attack is not
-   writing past the EOF.
 5. The `undo` operation raises `FileClosedError` if the file is already closed.
 6. The `readat` cannot read data that has not been committed to the file.
 
