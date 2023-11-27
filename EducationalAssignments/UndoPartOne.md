@@ -45,7 +45,7 @@ properly in different cases and to test attacks against your monitor.
 4. Aside from the ability to be undone and potentially delayed writes, all
    `writeat` operations should behave the same way as they do in the RepyV2 API.
 5. The `undo` operation raises `FileClosedError` if the file is already closed.
-6. The `readat` cannot read data that has not been committed to the file.
+6. `readat` cannot read data that has not been committed to the file.
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and
 security.
