@@ -70,7 +70,7 @@ security layers and application that you want to run.)
 In order to test whether or not these steps worked, please copy and paste the
 code found below for the sample security layer and sample attack.
 
-You should get a `FileNotFoundError` when running the test.  If not, please go
+You should not get any errors (or outputs) when running the test.  If not, please go
 through the troubleshooting section found below.
 
 
@@ -143,10 +143,17 @@ class LPFile():
     def __init__(self, filename, create):
         # globals
         mycontext['debug'] = False
-        self.LPfile = openfile(filename, create)
+
+        if create == False and 'default' in listfiles():
+            default_file = openfile('default', False)
+            content = default_file.readat(None, 0) # Read from the file using the sandbox's readat
+            self.LPfile = openfile(filename, True)
+            self.LPfile.writeat(content, 0)
+            default_file.close()
+        else:
+            self.LPfile = openfile(filename, create)
 
     def readat(self, num_bytes, offset):
-        # Read from the file using the sandbox's readat...
         return self.LPfile.readat(num_bytes, offset)
 
     def writeat(self, data, offset):
@@ -160,6 +167,7 @@ def LPopenfile(filename, create):
 
 def LPremovefile(filename):
     removefile(filename) 
+
 
 # The code below sets up type checking and variable hiding for you.
 # You should not change anything below this point.
@@ -230,7 +238,8 @@ assert myfile.readat(None, 0) == "TEMPLATE"
 myfile.close()
 ```
 
-The sample defense layer will throw a `FileNotFoundError` if used as it is. But once it is implemented correctly, there should be no errors when testing with this attack case. 
+The given defense layer should not output any errors when used with this simple attack case.
+However, you need to modify the reference monitor and the attack case to account for any possible scenario.
 
 **Note:** All attacks should be written as Repy V2 files, using the `.r2py` extension.
 
