@@ -28,10 +28,10 @@ properly in different cases and to test attacks against your monitor.
 
 1. Your defense monitor should incorporate all the standard file operation methods, from opening a file, reading and writing to it, to closing and deleting it. 
 
-2. In addition, a specially named file - `default` - shall be used as a template when opening files without creating them first.
+2. In addition, if a specially named file - `default` - exists, it shall be used as a template when opening files without creating them first.
 Eg: Calling `openfile('foo', True)` should create and open a new empty file called `foo` (assuming it's not present already). However, calling `openfile('foo', False)` should create a new file using `default` as the template. If `default` doesn't exist, throw the relevant error (`FileNotFoundError`).
 
-3. If default is created, written to or deleted, then all closed files that were previously created gets deleted. Any files that are already open must be left unchanged.
+3. If default is created, written to, or deleted, then all closed files that were previously created gets deleted. Any files that are already open must be left unchanged.
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and
 security.
@@ -93,17 +93,6 @@ restrictions.default, encasementlib.r2py, the security layer and the program you
 want to run in the current working directory.  If any or all of the above files
 are not in that directory then you will not be able to run repy files.  
 
-<!--
-AR: This doesn't apply when building from source or getting the runtime tarball only (it does for clearinghouse downloads).
- * Downloading the wrong version of Seattle:
-
-Seattle is operating system dependent.  If you download the Windows
-version, you need to use the Windows command line.  For Windows 7 this is
-PowerShell.  You can open a new terminal by going to start, search, type
-powershell.  If you downloaded the Linux version you must use a Linux OS
-and Linux terminal.  
-
--->
 
 
 ### Tutorials for Repy and Python
