@@ -44,7 +44,8 @@ behavior modified. All situations that are not described in the specifications
 
  * Efficiency: The security layer should use a minimum number of resources, so
 performance is not compromised. For example, it is not permissible to store the 
-contents of `default` in memory all the time, except when it's being copied.
+contents of `default` in memory all the time. However, this is allowed when you're
+copying the contents of default to a new file.
 
  * Security: The defense layer should be robust against tampering and
 circumvention. Attackers must not be able to bypass, disable, or exploit the
@@ -200,3 +201,5 @@ executing the test cases against it.
 * **Never raise unexpected errors or produce any output.**  Your attackcase must not produce any error or output, if the reference monitor is behaving as it should. This applies for error checking as well. If the attackcase tries to trigger an expected error, it should catch and suppress that error if the reference monitor correctly raises that error.
 
 * While you're allowed to test if the correct errors are being raised, you aren't allowed to check the error message for any errors. That means checking for `FileInUseError` is valid, but it's not valid to check the specific error message.
+
+* Attackcases should be independent of each other. This means that you should not try to use any file (or it's contents) across different attackcases.
