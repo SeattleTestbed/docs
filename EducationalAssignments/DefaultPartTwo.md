@@ -17,8 +17,10 @@ embedded into the steps of this assignment.
 In this assignment you are a tester. You have been sent a bunch of reference
 monitors that need testing before they are deployed. Your job will be to ensure
 an attacker cannot circumvent these security layers. In order to do this, you
-will attempt to write, and append invalid data. If you are able to do so, then
-the security layer is not secure. The future of the system depends on your
+will attempt to write testcases that check if the reference monitors behave as
+they should for any valid action that can be taken by a user. These testcases 
+will try to trigger unexpected behaviours in the reference monitor. If they are
+able to do so, then the security layer is not secure. The future of the system depends on your
 ability to test code thoroughly!   
 
 Three design paradigms are at work in this assignment: accuracy, efficiency, and
@@ -36,14 +38,13 @@ security.
 Within the context of this assignment these design paradigms translate to:
 
  * Accuracy: The defense monitor should precisely and consistently manage file
-operations. Only specific operations, such as `writeat`, should have their
+operations. Only specific operations, such as `openfile`, should have their
 behavior modified. All situations that are not described in the specifications
 *must* match that of the underlying API.
 
  * Efficiency: The security layer should use a minimum number of resources, so
-performance is not compromised.  For example, you may not call `readat()`
-everytime `writeat()` is called.  It is permissable to call `readat()` upon
-`fileopen()`, however.
+performance is not compromised. For example, it is not permissible to store the 
+contents of `default` in memory all the time, except when it's being copied.
 
  * Security: The defense layer should be robust against tampering and
 circumvention. Attackers must not be able to bypass, disable, or exploit the
@@ -53,7 +54,7 @@ functionality of file operations.
 You will submit a zip file containing all of the tests you have created. You
 will gain points for every student's reference monitor you find a flaw in. It is
 good if multiple tests of yours break a student's reference monitor, but you
-gain the same number of tests whether one or more tests break the layer.
+gain the same number of points whether one or more tests break the layer.
 
 
 ## Prerequisites
@@ -111,7 +112,8 @@ possible penetrations.  Keep in mind, it only takes one test case to break
 through a security layer.  Some of the things you may want to test for include:
 
  * threading
- * multiple writes 
+ * correct error handling
+ * files being deleted correctly 
 
 And more!  Remember a good security layer can't be broken by anyone!  Which is
 all part of the fun!  It's about solving a puzzle.  First you make the puzzle -
@@ -193,8 +195,8 @@ executing the test cases against it.
 
 ## What to turn in?
 
- * Never raise unexpected errors or produce any output. Your attack must produce
-   no output when run normally.
- * Turn in the test cases used to attack a given reference monitor in a zip
-   file. The name of each testcase must match the following format: `[ net_id
-   ]_attackcase1.r2py`, `[ net_id ]_attackcase2.r2py`, etc.
+* Turn in all the test cases in a zip file. The name of each testcase must match the following format: `<netid>_attackcase<num>.r2py`. For example, if your netid id `abc123`, then the submitted zip files must contain a set of files named as `abc123_attackcase1.r2py`, `abc123_attackcase2.r2py`. There are no restrictions on the number of attackcases that can be submitted.
+
+* **Never raise unexpected errors or produce any output.**  Your attackcase must not produce any error or output, if the reference monitor is behaving as it should. This applies for error checking as well. If the attackcase tries to trigger an expected error, it should catch and suppress that error if the reference monitor correctly raises that error.
+
+* While you're allowed to test if the correct errors are being raised, you aren't allowed to check the error message for any errors. That means checking for `FileInUseError` is valid, but it's not valid to check the specific error message.
