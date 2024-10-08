@@ -42,9 +42,9 @@ behavior modified. All situations that are not described above *must* match that
 of the underlying API.
 
 * Efficiency: The security layer should use a minimum number of resources, so
-performance is not compromised.  For example, you may not call `readat()`
-everytime `writeat()` is called.  It is permissable to call `readat()` upon
-`fileopen()`, however.
+performance is not compromised. For example, it is not permissible to store the 
+contents of `default` in memory all the time. However, this is allowed when you're
+copying the contents of default to a new file.
 
  * Security: The defense layer should be robust against tampering and
 circumvention. Attackers must not be able to bypass, disable, or exploit the
