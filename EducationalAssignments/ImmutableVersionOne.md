@@ -7,7 +7,8 @@ This assignment will help you understand security mechanisms. You will be guided
 One critical aspect of creating a reference monitor is to ensure it cannot be bypassed and handles all cases correctly. While not a perfect way of validating your reference monitor, it is useful to create test cases to see whether your security layer will work as expected (the test cases may be turned in as part of the next assignment).  
 
 
-This assignment is intended to reinforce concepts of immutability, access control, and state consistency. By the end, you should understand how to design a security layer that preserves history and enforces tamper resistance.
+This assignment is intended to reinforce concepts of immutability, access control, and state consistency, where immutability ensures that once data is written, it cannot be changed or deleted; instead, new versions are created to preserve a tamper-proof history for auditing and recovery. By the end, you should understand how to design a security layer that maintains this history and enforces tamper resistance.
+
 
 ## Overview
 
@@ -16,9 +17,9 @@ You should write test applications to ensure your reference monitor behaves prop
 
 ## Specifications
 
-1. Your defense monitor should incorporate all the standard file operation methods, from opening a file, reading and writing to it, to closing it.  All operations must behave identically to RepyV2 (without your security layer) except as mentioned below.
+1. Your defense monitor should incorporate all the standard file operation methods supported in RepyV2, from opening a file, reading and writing to it,listing files, deleting files, and to closing them.  All operations must behave identically to RepyV2 (without your security layer) except as mentioned below.
 2. You can assume that no files exist when your security layer begins running the application.  
-3. When a user calls `openfile(filename, True)`, if `filename` already exists,  your security layer must create a new “version” of the file that can be opened.  This version will be given a new version number and must begin with the contents of the latest version file as its contents.
+3. When a user calls `openfile(filename, True)`, if `filename` already exists, your security layer must create a new “version” — a new file initialized with the contents of the latest version and given a new version number.
 4. Note that a new version cannot be created while the latest version is open. If `openfile()` is called on an already open file, it shall throw the relevant error that it would have done in RepyV2 (`FileInUseError`).
 5. Versioned files can be accessed using `openfile(originalfilename + '.v' + str(num), create)`, where `num` starts from 1. If `create=True` is used on a versioned file, raise `RepyArgumentError("Cannot create explicit version files")`, as manual version creation is not allowed.
 6. As is the case in normal RepyV2, if an `openfile` call with `create=False`, open the file only if that version exists; otherwise, raise `FileNotFoundError`.
@@ -105,10 +106,23 @@ OBJC = "objc"
 
 class VMFile():
     def __init__(self, filename, create):
-        if create:
-            self.VMfile = openfile(filename, True)
+    # If a file with the same 'filename' already exists, this creates a new version 'filename.v1'.
+    # (Incomplete: does not handle further versions like v2, v3, etc.)
+    if create:
+        if filename in listfiles():
+            # File exists → create version 1
+            prev_file = openfile(filename, False)
+            content = prev_file.readat(None, 0)
+
+            new_name = filename + ".v1"
+            self.VMfile = openfile(new_name, True)
+            self.VMfile.writeat(content, 0)
         else:
-            self.VMfile = openfile(filename, False)
+            # File doesn't exist → create filename
+            self.VMfile = openfile(filename, True)
+    else:
+        # Open existing file normally
+        self.VMfile = openfile(filename, False)
 
     def readat(self, num_bytes, offset):
         return self.VMfile.readat(num_bytes, offset)
