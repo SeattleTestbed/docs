@@ -108,21 +108,21 @@ class VMFile():
     def __init__(self, filename, create):
     # If a file with the same 'filename' already exists, this creates a new version 'filename.v1'.
     # (Incomplete: does not handle further versions like v2, v3, etc.)
-    if create:
-        if filename in listfiles():
-            # File exists → create version 1
-            prev_file = openfile(filename, False)
-            content = prev_file.readat(None, 0)
+        if create:
+            if filename in listfiles():
+                # File exists → create version 1
+                prev_file = openfile(filename, False)
+                content = prev_file.readat(None, 0)
 
-            new_name = filename + ".v1"
-            self.VMfile = openfile(new_name, True)
-            self.VMfile.writeat(content, 0)
+                new_name = filename + ".v1"
+                self.VMfile = openfile(new_name, True)
+                self.VMfile.writeat(content, 0)
+            else:
+                # File doesn't exist → create filename
+                self.VMfile = openfile(filename, True)
         else:
-            # File doesn't exist → create filename
-            self.VMfile = openfile(filename, True)
-    else:
-        # Open existing file normally
-        self.VMfile = openfile(filename, False)
+            # Open existing file normally
+            self.VMfile = openfile(filename, False)
 
     def readat(self, num_bytes, offset):
         return self.VMfile.readat(num_bytes, offset)
