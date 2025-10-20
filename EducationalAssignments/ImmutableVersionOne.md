@@ -174,7 +174,7 @@ CHILD_CONTEXT_DEF["listfiles"] = {
     TYPE: FUNC,
     ARGS: None,
     EXCP: Exception,
-    RETURN: [str],
+    RETURN: list,
     TARGET: LPlistfiles
 }
 
